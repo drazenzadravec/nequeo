@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{94D59B95-C7A0-4649-AD74-65B14FE9BC38}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>NequeoIOStreaming</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\..\References\Release_x86\Lib\Components</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\..\..\References\Release_x64\Lib\Components</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\MemoryStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStream.h"
+copy $(ProjectDir)\MemoryStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStreamBuf.h"
+copy $(ProjectDir)\MemoryInputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryInputStream.h"
+copy $(ProjectDir)\MemoryOutputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryOutputStream.h"
+copy $(ProjectDir)\GlobalStreaming.h "..\..\..\..\..\References\Release\Include\Components\IO\GlobalStreaming.h"
+copy $(ProjectDir)\BufferedBidirectionalStream.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedBidirectionalStream.h"
+copy $(ProjectDir)\BufferAllocator.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferAllocator.h"
+copy $(ProjectDir)\BufferedStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedStreamBuf.h"
+copy $(ProjectDir)\Buffer.h "..\..\..\..\..\References\Release\Include\Components\IO\Buffer.h"
+copy $(ProjectDir)\BinaryReader.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryReader.h"
+copy $(ProjectDir)\BinaryWriter.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryWriter.h"
+copy $(ProjectDir)\RandomStream.h "..\..\..\..\..\References\Release\Include\Components\IO\RandomStream.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NequeoIOText.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\MemoryStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStream.h"
+copy $(ProjectDir)\MemoryStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStreamBuf.h"
+copy $(ProjectDir)\MemoryInputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryInputStream.h"
+copy $(ProjectDir)\MemoryOutputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryOutputStream.h"
+copy $(ProjectDir)\GlobalStreaming.h "..\..\..\..\..\References\Release\Include\Components\IO\GlobalStreaming.h"
+copy $(ProjectDir)\BufferedBidirectionalStream.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedBidirectionalStream.h"
+copy $(ProjectDir)\BufferAllocator.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferAllocator.h"
+copy $(ProjectDir)\BufferedStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedStreamBuf.h"
+copy $(ProjectDir)\Buffer.h "..\..\..\..\..\References\Release\Include\Components\IO\Buffer.h"
+copy $(ProjectDir)\BinaryReader.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryReader.h"
+copy $(ProjectDir)\BinaryWriter.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryWriter.h"
+copy $(ProjectDir)\RandomStream.h "..\..\..\..\..\References\Release\Include\Components\IO\RandomStream.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NequeoIOText.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\MemoryStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStream.h"
+copy $(ProjectDir)\MemoryStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStreamBuf.h"
+copy $(ProjectDir)\MemoryInputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryInputStream.h"
+copy $(ProjectDir)\MemoryOutputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryOutputStream.h"
+copy $(ProjectDir)\GlobalStreaming.h "..\..\..\..\..\References\Release\Include\Components\IO\GlobalStreaming.h"
+copy $(ProjectDir)\BufferedBidirectionalStream.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedBidirectionalStream.h"
+copy $(ProjectDir)\BufferAllocator.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferAllocator.h"
+copy $(ProjectDir)\BufferedStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedStreamBuf.h"
+copy $(ProjectDir)\Buffer.h "..\..\..\..\..\References\Release\Include\Components\IO\Buffer.h"
+copy $(ProjectDir)\BinaryReader.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryReader.h"
+copy $(ProjectDir)\BinaryWriter.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryWriter.h"
+copy $(ProjectDir)\RandomStream.h "..\..\..\..\..\References\Release\Include\Components\IO\RandomStream.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NequeoIOText.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\MemoryStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStream.h"
+copy $(ProjectDir)\MemoryStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryStreamBuf.h"
+copy $(ProjectDir)\MemoryInputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryInputStream.h"
+copy $(ProjectDir)\MemoryOutputStream.h "..\..\..\..\..\References\Release\Include\Components\IO\MemoryOutputStream.h"
+copy $(ProjectDir)\GlobalStreaming.h "..\..\..\..\..\References\Release\Include\Components\IO\GlobalStreaming.h"
+copy $(ProjectDir)\BufferedBidirectionalStream.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedBidirectionalStream.h"
+copy $(ProjectDir)\BufferAllocator.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferAllocator.h"
+copy $(ProjectDir)\BufferedStreamBuf.h "..\..\..\..\..\References\Release\Include\Components\IO\BufferedStreamBuf.h"
+copy $(ProjectDir)\Buffer.h "..\..\..\..\..\References\Release\Include\Components\IO\Buffer.h"
+copy $(ProjectDir)\BinaryReader.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryReader.h"
+copy $(ProjectDir)\BinaryWriter.h "..\..\..\..\..\References\Release\Include\Components\IO\BinaryWriter.h"
+copy $(ProjectDir)\RandomStream.h "..\..\..\..\..\References\Release\Include\Components\IO\RandomStream.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NequeoIOText.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BinaryReader.h" />
+    <ClInclude Include="BinaryWriter.h" />
+    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="BufferAllocator.h" />
+    <ClInclude Include="BufferedBidirectionalStream.h" />
+    <ClInclude Include="BufferedStreamBuf.h" />
+    <ClInclude Include="GlobalStreaming.h" />
+    <ClInclude Include="MemoryInputStream.h" />
+    <ClInclude Include="MemoryOutputStream.h" />
+    <ClInclude Include="MemoryStream.h" />
+    <ClInclude Include="MemoryStreamBuf.h" />
+    <ClInclude Include="RandomStream.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BinaryReader.cpp" />
+    <ClCompile Include="BinaryWriter.cpp" />
+    <ClCompile Include="MemoryInputStream.cpp" />
+    <ClCompile Include="MemoryOutputStream.cpp" />
+    <ClCompile Include="MemoryStream.cpp" />
+    <ClCompile Include="RandomStream.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
