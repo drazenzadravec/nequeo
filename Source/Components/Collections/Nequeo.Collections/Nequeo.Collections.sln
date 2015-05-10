@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Collections", "Nequeo.Collections\Nequeo.Collections.csproj", "{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Collections.Pool", "Nequeo.Collections.Pool\Nequeo.Collections.Pool.vcxproj", "{0124F123-4E89-4DC8-803F-0B7A21521170}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Collections\\Nequeo.Collections.csproj
+		SccProjectName1 = Nequeo.Collections
+		SccLocalPath1 = Nequeo.Collections
+		SccProjectUniqueName2 = Nequeo.Collections.Pool\\Nequeo.Collections.Pool.vcxproj
+		SccProjectName2 = Nequeo.Collections.Pool
+		SccLocalPath2 = Nequeo.Collections.Pool
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Debug|Mixed Platforms = Staging Debug|Mixed Platforms
+		Staging Debug|Win32 = Staging Debug|Win32
+		Staging Release|Any CPU = Staging Release|Any CPU
+		Staging Release|Mixed Platforms = Staging Release|Mixed Platforms
+		Staging Release|Win32 = Staging Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Release|Win32.ActiveCfg = Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Debug|Mixed Platforms.ActiveCfg = Staging Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Debug|Mixed Platforms.Build.0 = Staging Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Debug|Win32.ActiveCfg = Staging Debug|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Release|Mixed Platforms.ActiveCfg = Staging Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Release|Mixed Platforms.Build.0 = Staging Release|Any CPU
+		{8A7C1154-3AC0-4F81-9B71-DE9D99C59F9E}.Staging Release|Win32.ActiveCfg = Staging Release|Any CPU
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Debug|Win32.Build.0 = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Release|Any CPU.ActiveCfg = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Release|Win32.ActiveCfg = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Release|Win32.Build.0 = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Debug|Any CPU.ActiveCfg = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Debug|Mixed Platforms.ActiveCfg = Staging Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Debug|Mixed Platforms.Build.0 = Staging Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Debug|Win32.ActiveCfg = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Debug|Win32.Build.0 = Debug|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Release|Any CPU.ActiveCfg = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Release|Mixed Platforms.ActiveCfg = Staging Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Release|Mixed Platforms.Build.0 = Staging Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Release|Win32.ActiveCfg = Release|Win32
+		{0124F123-4E89-4DC8-803F-0B7A21521170}.Staging Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
