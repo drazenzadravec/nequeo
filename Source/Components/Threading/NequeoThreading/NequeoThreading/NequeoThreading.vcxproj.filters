@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Notifications">
+      <UniqueIdentifier>{72368264-d972-4046-9f93-85d42397f947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Notifications\Header Files">
+      <UniqueIdentifier>{c2f81d0e-2543-41d0-935b-2288da2698ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Notifications\Source Files">
+      <UniqueIdentifier>{aff0471f-9175-4a96-861f-29a02be6d89f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{bc7ed45a-5e41-4d84-972a-34ec08583646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Header Files">
+      <UniqueIdentifier>{b4000182-7266-44d1-a134-d7b3248ade5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Source Files">
+      <UniqueIdentifier>{c20a496d-89a7-4a8b-b1a2-649602394af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{fec3d3b1-96e8-4cd9-80a2-07fe4a8ff484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Thread\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveDispatcher.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveMethod.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveResult.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveRunnable.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveStarter.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Activity.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorHandler.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event_WIN32.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mutex.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mutex_WIN32.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Runnable.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RunnableAdapter.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RWLock.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RWLock_WIN32.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopedLock.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopedUnlock.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Semaphore.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Semaphore_WIN32.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SignalHandler.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SynchronizedObject.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread_WIN32.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadLocal.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadTarget.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractObserver.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NObserver.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Notification.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotificationCenter.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotificationQueue.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityNotificationQueue.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedNotificationQueue.h">
+      <Filter>Notifications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractDelegate.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractPriorityDelegate.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultStrategy.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventArgs.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Expire.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FIFOEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FIFOStrategy.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionDelegate.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionPriorityDelegate.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotificationStrategy.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityDelegate.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityExpire.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityStrategy.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonHolder.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalThreading.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Priority.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractObserver.cpp">
+      <Filter>Notifications\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Notification.cpp">
+      <Filter>Notifications\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotificationCenter.cpp">
+      <Filter>Notifications\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotificationQueue.cpp">
+      <Filter>Notifications\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PriorityNotificationQueue.cpp">
+      <Filter>Notifications\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedNotificationQueue.cpp">
+      <Filter>Notifications\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventArgscpp.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveDispatcher.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorHandler.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event_WIN32.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mutex.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mutex_WIN32.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Runnable.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RWLock.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RWLock_WIN32.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Semaphore.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Semaphore_WIN32.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SignalHandler.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SynchronizedObject.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread_WIN32.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadLocal.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadTarget.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

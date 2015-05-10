@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1806A337-1E4F-4A8E-8F53-BEE2A43CA145}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>NequeoThreading</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\..\References\Release_x64\Lib\Components</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\References\Release_x86\Lib\Components</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AbstractDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractDelegate.h"
+copy $(ProjectDir)\AbstractEvent.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractEvent.h"
+copy $(ProjectDir)\AbstractPriorityDelegate.h "..\..\..\..\References\Release\Include\Threading\AbstractPriorityDelegate.h"
+copy $(ProjectDir)\BasicEvent.h "..\..\..\..\References\Release\Include\Components\Threading\BasicEvent.h"
+copy $(ProjectDir)\DefaultStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\DefaultStrategy.h"
+copy $(ProjectDir)\Delegate.h "..\..\..\..\References\Release\Include\Components\Threading\Delegate.h"
+copy $(ProjectDir)\EventArgs.h "..\..\..\..\References\Release\Include\Components\Threading\EventArgs.h"
+copy $(ProjectDir)\Expire.h "..\..\..\..\References\Release\Include\Components\Threading\Expire.h"
+copy $(ProjectDir)\FIFOEvent.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOEvent.h"
+copy $(ProjectDir)\FIFOStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOStrategy.h"
+copy $(ProjectDir)\FunctionDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\Exception.h"
+copy $(ProjectDir)\FunctionPriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\FunctionPriorityDelegate.h"
+copy $(ProjectDir)\NotificationStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationStrategy.h"
+copy $(ProjectDir)\PriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityDelegate.h"
+copy $(ProjectDir)\PriorityEvent.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityEvent.h"
+copy $(ProjectDir)\PriorityExpire.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityExpire.h"
+copy $(ProjectDir)\PriorityStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityStrategy.h"
+copy $(ProjectDir)\AbstractObserver.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractObserver.h"
+copy $(ProjectDir)\NObserver.h "..\..\..\..\References\Release\Include\Components\Threading\NObserver.h"
+copy $(ProjectDir)\Notification.h "..\..\..\..\References\Release\Include\Components\Threading\Notification.h"
+copy $(ProjectDir)\NotificationCenter.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationCenter.h"
+copy $(ProjectDir)\NotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationQueue.h"
+copy $(ProjectDir)\Observer.h "..\..\..\..\References\Release\Include\Components\Threading\Observer.h"
+copy $(ProjectDir)\PriorityNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityNotificationQueue.h"
+copy $(ProjectDir)\TimedNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\TimedNotificationQueue.h"
+copy $(ProjectDir)\ActiveDispatcher.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveDispatcher.h"
+copy $(ProjectDir)\ActiveMethod.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveMethod.h"
+copy $(ProjectDir)\ActiveResult.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveResult.h"
+copy $(ProjectDir)\ActiveRunnable.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveRunnable.h"
+copy $(ProjectDir)\ActiveStarter.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveStarter.h"
+copy $(ProjectDir)\Activity.h "..\..\..\..\References\Release\Include\Components\Threading\Activity.h"
+copy $(ProjectDir)\Condition.h "..\..\..\..\References\Release\Include\Components\Threading\Condition.h"
+copy $(ProjectDir)\ErrorHandler.h "..\..\..\..\References\Release\Include\Components\Threading\ErrorHandler.h"
+copy $(ProjectDir)\Event.h "..\..\..\..\References\Release\Include\Components\Threading\Event.h"
+copy $(ProjectDir)\Event_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Event_WIN32.h"
+copy $(ProjectDir)\GlobalThreading.h "..\..\..\..\References\Release\Include\Components\Threading\GlobalThreading.h"
+copy $(ProjectDir)\Mutex.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex.h"
+copy $(ProjectDir)\Mutex_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex_WIN32.h"
+copy $(ProjectDir)\Runnable.h "..\..\..\..\References\Release\Include\Components\Threading\Runnable.h"
+copy $(ProjectDir)\RunnableAdapter.h "..\..\..\..\References\Release\Include\Components\Threading\RunnableAdapter.h"
+copy $(ProjectDir)\RWLock.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock.h"
+copy $(ProjectDir)\RWLock_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock_WIN32.h"
+copy $(ProjectDir)\ScopedLock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedLock.h"
+copy $(ProjectDir)\ScopedUnlock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedUnlock.h"
+copy $(ProjectDir)\Semaphore.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore.h"
+copy $(ProjectDir)\Semaphore_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore_WIN32.h"
+copy $(ProjectDir)\SignalHandler.h "..\..\..\..\References\Release\Include\Components\Threading\SignalHandler.h"
+copy $(ProjectDir)\SingletonHolder.h "..\..\..\..\References\Release\Include\Components\Threading\SingletonHolder.h"
+copy $(ProjectDir)\SynchronizedObject.h "..\..\..\..\References\Release\Include\Components\Threading\SynchronizedObject.h"
+copy $(ProjectDir)\Thread.h "..\..\..\..\References\Release\Include\Components\Threading\Thread.h"
+copy $(ProjectDir)\Thread_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Thread_WIN32.h"
+copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadLocal.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
+copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
+copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AbstractDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractDelegate.h"
+copy $(ProjectDir)\AbstractEvent.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractEvent.h"
+copy $(ProjectDir)\AbstractPriorityDelegate.h "..\..\..\..\References\Release\Include\Threading\AbstractPriorityDelegate.h"
+copy $(ProjectDir)\BasicEvent.h "..\..\..\..\References\Release\Include\Components\Threading\BasicEvent.h"
+copy $(ProjectDir)\DefaultStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\DefaultStrategy.h"
+copy $(ProjectDir)\Delegate.h "..\..\..\..\References\Release\Include\Components\Threading\Delegate.h"
+copy $(ProjectDir)\EventArgs.h "..\..\..\..\References\Release\Include\Components\Threading\EventArgs.h"
+copy $(ProjectDir)\Expire.h "..\..\..\..\References\Release\Include\Components\Threading\Expire.h"
+copy $(ProjectDir)\FIFOEvent.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOEvent.h"
+copy $(ProjectDir)\FIFOStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOStrategy.h"
+copy $(ProjectDir)\FunctionDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\Exception.h"
+copy $(ProjectDir)\FunctionPriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\FunctionPriorityDelegate.h"
+copy $(ProjectDir)\NotificationStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationStrategy.h"
+copy $(ProjectDir)\PriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityDelegate.h"
+copy $(ProjectDir)\PriorityEvent.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityEvent.h"
+copy $(ProjectDir)\PriorityExpire.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityExpire.h"
+copy $(ProjectDir)\PriorityStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityStrategy.h"
+copy $(ProjectDir)\AbstractObserver.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractObserver.h"
+copy $(ProjectDir)\NObserver.h "..\..\..\..\References\Release\Include\Components\Threading\NObserver.h"
+copy $(ProjectDir)\Notification.h "..\..\..\..\References\Release\Include\Components\Threading\Notification.h"
+copy $(ProjectDir)\NotificationCenter.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationCenter.h"
+copy $(ProjectDir)\NotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationQueue.h"
+copy $(ProjectDir)\Observer.h "..\..\..\..\References\Release\Include\Components\Threading\Observer.h"
+copy $(ProjectDir)\PriorityNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityNotificationQueue.h"
+copy $(ProjectDir)\TimedNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\TimedNotificationQueue.h"
+copy $(ProjectDir)\ActiveDispatcher.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveDispatcher.h"
+copy $(ProjectDir)\ActiveMethod.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveMethod.h"
+copy $(ProjectDir)\ActiveResult.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveResult.h"
+copy $(ProjectDir)\ActiveRunnable.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveRunnable.h"
+copy $(ProjectDir)\ActiveStarter.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveStarter.h"
+copy $(ProjectDir)\Activity.h "..\..\..\..\References\Release\Include\Components\Threading\Activity.h"
+copy $(ProjectDir)\Condition.h "..\..\..\..\References\Release\Include\Components\Threading\Condition.h"
+copy $(ProjectDir)\ErrorHandler.h "..\..\..\..\References\Release\Include\Components\Threading\ErrorHandler.h"
+copy $(ProjectDir)\Event.h "..\..\..\..\References\Release\Include\Components\Threading\Event.h"
+copy $(ProjectDir)\Event_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Event_WIN32.h"
+copy $(ProjectDir)\GlobalThreading.h "..\..\..\..\References\Release\Include\Components\Threading\GlobalThreading.h"
+copy $(ProjectDir)\Mutex.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex.h"
+copy $(ProjectDir)\Mutex_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex_WIN32.h"
+copy $(ProjectDir)\Runnable.h "..\..\..\..\References\Release\Include\Components\Threading\Runnable.h"
+copy $(ProjectDir)\RunnableAdapter.h "..\..\..\..\References\Release\Include\Components\Threading\RunnableAdapter.h"
+copy $(ProjectDir)\RWLock.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock.h"
+copy $(ProjectDir)\RWLock_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock_WIN32.h"
+copy $(ProjectDir)\ScopedLock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedLock.h"
+copy $(ProjectDir)\ScopedUnlock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedUnlock.h"
+copy $(ProjectDir)\Semaphore.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore.h"
+copy $(ProjectDir)\Semaphore_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore_WIN32.h"
+copy $(ProjectDir)\SignalHandler.h "..\..\..\..\References\Release\Include\Components\Threading\SignalHandler.h"
+copy $(ProjectDir)\SingletonHolder.h "..\..\..\..\References\Release\Include\Components\Threading\SingletonHolder.h"
+copy $(ProjectDir)\SynchronizedObject.h "..\..\..\..\References\Release\Include\Components\Threading\SynchronizedObject.h"
+copy $(ProjectDir)\Thread.h "..\..\..\..\References\Release\Include\Components\Threading\Thread.h"
+copy $(ProjectDir)\Thread_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Thread_WIN32.h"
+copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadLocal.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
+copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
+copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AbstractDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractDelegate.h"
+copy $(ProjectDir)\AbstractEvent.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractEvent.h"
+copy $(ProjectDir)\AbstractPriorityDelegate.h "..\..\..\..\References\Release\Include\Threading\AbstractPriorityDelegate.h"
+copy $(ProjectDir)\BasicEvent.h "..\..\..\..\References\Release\Include\Components\Threading\BasicEvent.h"
+copy $(ProjectDir)\DefaultStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\DefaultStrategy.h"
+copy $(ProjectDir)\Delegate.h "..\..\..\..\References\Release\Include\Components\Threading\Delegate.h"
+copy $(ProjectDir)\EventArgs.h "..\..\..\..\References\Release\Include\Components\Threading\EventArgs.h"
+copy $(ProjectDir)\Expire.h "..\..\..\..\References\Release\Include\Components\Threading\Expire.h"
+copy $(ProjectDir)\FIFOEvent.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOEvent.h"
+copy $(ProjectDir)\FIFOStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOStrategy.h"
+copy $(ProjectDir)\FunctionDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\Exception.h"
+copy $(ProjectDir)\FunctionPriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\FunctionPriorityDelegate.h"
+copy $(ProjectDir)\NotificationStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationStrategy.h"
+copy $(ProjectDir)\PriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityDelegate.h"
+copy $(ProjectDir)\PriorityEvent.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityEvent.h"
+copy $(ProjectDir)\PriorityExpire.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityExpire.h"
+copy $(ProjectDir)\PriorityStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityStrategy.h"
+copy $(ProjectDir)\AbstractObserver.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractObserver.h"
+copy $(ProjectDir)\NObserver.h "..\..\..\..\References\Release\Include\Components\Threading\NObserver.h"
+copy $(ProjectDir)\Notification.h "..\..\..\..\References\Release\Include\Components\Threading\Notification.h"
+copy $(ProjectDir)\NotificationCenter.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationCenter.h"
+copy $(ProjectDir)\NotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationQueue.h"
+copy $(ProjectDir)\Observer.h "..\..\..\..\References\Release\Include\Components\Threading\Observer.h"
+copy $(ProjectDir)\PriorityNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityNotificationQueue.h"
+copy $(ProjectDir)\TimedNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\TimedNotificationQueue.h"
+copy $(ProjectDir)\ActiveDispatcher.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveDispatcher.h"
+copy $(ProjectDir)\ActiveMethod.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveMethod.h"
+copy $(ProjectDir)\ActiveResult.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveResult.h"
+copy $(ProjectDir)\ActiveRunnable.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveRunnable.h"
+copy $(ProjectDir)\ActiveStarter.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveStarter.h"
+copy $(ProjectDir)\Activity.h "..\..\..\..\References\Release\Include\Components\Threading\Activity.h"
+copy $(ProjectDir)\Condition.h "..\..\..\..\References\Release\Include\Components\Threading\Condition.h"
+copy $(ProjectDir)\ErrorHandler.h "..\..\..\..\References\Release\Include\Components\Threading\ErrorHandler.h"
+copy $(ProjectDir)\Event.h "..\..\..\..\References\Release\Include\Components\Threading\Event.h"
+copy $(ProjectDir)\Event_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Event_WIN32.h"
+copy $(ProjectDir)\GlobalThreading.h "..\..\..\..\References\Release\Include\Components\Threading\GlobalThreading.h"
+copy $(ProjectDir)\Mutex.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex.h"
+copy $(ProjectDir)\Mutex_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex_WIN32.h"
+copy $(ProjectDir)\Runnable.h "..\..\..\..\References\Release\Include\Components\Threading\Runnable.h"
+copy $(ProjectDir)\RunnableAdapter.h "..\..\..\..\References\Release\Include\Components\Threading\RunnableAdapter.h"
+copy $(ProjectDir)\RWLock.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock.h"
+copy $(ProjectDir)\RWLock_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock_WIN32.h"
+copy $(ProjectDir)\ScopedLock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedLock.h"
+copy $(ProjectDir)\ScopedUnlock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedUnlock.h"
+copy $(ProjectDir)\Semaphore.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore.h"
+copy $(ProjectDir)\Semaphore_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore_WIN32.h"
+copy $(ProjectDir)\SignalHandler.h "..\..\..\..\References\Release\Include\Components\Threading\SignalHandler.h"
+copy $(ProjectDir)\SingletonHolder.h "..\..\..\..\References\Release\Include\Components\Threading\SingletonHolder.h"
+copy $(ProjectDir)\SynchronizedObject.h "..\..\..\..\References\Release\Include\Components\Threading\SynchronizedObject.h"
+copy $(ProjectDir)\Thread.h "..\..\..\..\References\Release\Include\Components\Threading\Thread.h"
+copy $(ProjectDir)\Thread_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Thread_WIN32.h"
+copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadLocal.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
+copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
+copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AbstractDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractDelegate.h"
+copy $(ProjectDir)\AbstractEvent.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractEvent.h"
+copy $(ProjectDir)\AbstractPriorityDelegate.h "..\..\..\..\References\Release\Include\Threading\AbstractPriorityDelegate.h"
+copy $(ProjectDir)\BasicEvent.h "..\..\..\..\References\Release\Include\Components\Threading\BasicEvent.h"
+copy $(ProjectDir)\DefaultStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\DefaultStrategy.h"
+copy $(ProjectDir)\Delegate.h "..\..\..\..\References\Release\Include\Components\Threading\Delegate.h"
+copy $(ProjectDir)\EventArgs.h "..\..\..\..\References\Release\Include\Components\Threading\EventArgs.h"
+copy $(ProjectDir)\Expire.h "..\..\..\..\References\Release\Include\Components\Threading\Expire.h"
+copy $(ProjectDir)\FIFOEvent.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOEvent.h"
+copy $(ProjectDir)\FIFOStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\FIFOStrategy.h"
+copy $(ProjectDir)\FunctionDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\Exception.h"
+copy $(ProjectDir)\FunctionPriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\FunctionPriorityDelegate.h"
+copy $(ProjectDir)\NotificationStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationStrategy.h"
+copy $(ProjectDir)\PriorityDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityDelegate.h"
+copy $(ProjectDir)\PriorityEvent.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityEvent.h"
+copy $(ProjectDir)\PriorityExpire.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityExpire.h"
+copy $(ProjectDir)\PriorityStrategy.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityStrategy.h"
+copy $(ProjectDir)\AbstractObserver.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractObserver.h"
+copy $(ProjectDir)\NObserver.h "..\..\..\..\References\Release\Include\Components\Threading\NObserver.h"
+copy $(ProjectDir)\Notification.h "..\..\..\..\References\Release\Include\Components\Threading\Notification.h"
+copy $(ProjectDir)\NotificationCenter.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationCenter.h"
+copy $(ProjectDir)\NotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\NotificationQueue.h"
+copy $(ProjectDir)\Observer.h "..\..\..\..\References\Release\Include\Components\Threading\Observer.h"
+copy $(ProjectDir)\PriorityNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\PriorityNotificationQueue.h"
+copy $(ProjectDir)\TimedNotificationQueue.h "..\..\..\..\References\Release\Include\Components\Threading\TimedNotificationQueue.h"
+copy $(ProjectDir)\ActiveDispatcher.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveDispatcher.h"
+copy $(ProjectDir)\ActiveMethod.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveMethod.h"
+copy $(ProjectDir)\ActiveResult.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveResult.h"
+copy $(ProjectDir)\ActiveRunnable.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveRunnable.h"
+copy $(ProjectDir)\ActiveStarter.h "..\..\..\..\References\Release\Include\Components\Threading\ActiveStarter.h"
+copy $(ProjectDir)\Activity.h "..\..\..\..\References\Release\Include\Components\Threading\Activity.h"
+copy $(ProjectDir)\Condition.h "..\..\..\..\References\Release\Include\Components\Threading\Condition.h"
+copy $(ProjectDir)\ErrorHandler.h "..\..\..\..\References\Release\Include\Components\Threading\ErrorHandler.h"
+copy $(ProjectDir)\Event.h "..\..\..\..\References\Release\Include\Components\Threading\Event.h"
+copy $(ProjectDir)\Event_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Event_WIN32.h"
+copy $(ProjectDir)\GlobalThreading.h "..\..\..\..\References\Release\Include\Components\Threading\GlobalThreading.h"
+copy $(ProjectDir)\Mutex.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex.h"
+copy $(ProjectDir)\Mutex_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Mutex_WIN32.h"
+copy $(ProjectDir)\Runnable.h "..\..\..\..\References\Release\Include\Components\Threading\Runnable.h"
+copy $(ProjectDir)\RunnableAdapter.h "..\..\..\..\References\Release\Include\Components\Threading\RunnableAdapter.h"
+copy $(ProjectDir)\RWLock.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock.h"
+copy $(ProjectDir)\RWLock_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\RWLock_WIN32.h"
+copy $(ProjectDir)\ScopedLock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedLock.h"
+copy $(ProjectDir)\ScopedUnlock.h "..\..\..\..\References\Release\Include\Components\Threading\ScopedUnlock.h"
+copy $(ProjectDir)\Semaphore.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore.h"
+copy $(ProjectDir)\Semaphore_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Semaphore_WIN32.h"
+copy $(ProjectDir)\SignalHandler.h "..\..\..\..\References\Release\Include\Components\Threading\SignalHandler.h"
+copy $(ProjectDir)\SingletonHolder.h "..\..\..\..\References\Release\Include\Components\Threading\SingletonHolder.h"
+copy $(ProjectDir)\SynchronizedObject.h "..\..\..\..\References\Release\Include\Components\Threading\SynchronizedObject.h"
+copy $(ProjectDir)\Thread.h "..\..\..\..\References\Release\Include\Components\Threading\Thread.h"
+copy $(ProjectDir)\Thread_WIN32.h "..\..\..\..\References\Release\Include\Components\Threading\Thread_WIN32.h"
+copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadLocal.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
+copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
+copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractDelegate.h" />
+    <ClInclude Include="AbstractEvent.h" />
+    <ClInclude Include="AbstractObserver.h" />
+    <ClInclude Include="AbstractPriorityDelegate.h" />
+    <ClInclude Include="ActiveDispatcher.h" />
+    <ClInclude Include="ActiveMethod.h" />
+    <ClInclude Include="ActiveResult.h" />
+    <ClInclude Include="ActiveRunnable.h" />
+    <ClInclude Include="ActiveStarter.h" />
+    <ClInclude Include="Activity.h" />
+    <ClInclude Include="BasicEvent.h" />
+    <ClInclude Include="Condition.h" />
+    <ClInclude Include="DefaultStrategy.h" />
+    <ClInclude Include="Delegate.h" />
+    <ClInclude Include="ErrorHandler.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventArgs.h" />
+    <ClInclude Include="Event_WIN32.h" />
+    <ClInclude Include="Expire.h" />
+    <ClInclude Include="FIFOEvent.h" />
+    <ClInclude Include="FIFOStrategy.h" />
+    <ClInclude Include="FunctionDelegate.h" />
+    <ClInclude Include="FunctionPriorityDelegate.h" />
+    <ClInclude Include="GlobalThreading.h" />
+    <ClInclude Include="Mutex.h" />
+    <ClInclude Include="Mutex_WIN32.h" />
+    <ClInclude Include="NObserver.h" />
+    <ClInclude Include="Notification.h" />
+    <ClInclude Include="NotificationCenter.h" />
+    <ClInclude Include="NotificationQueue.h" />
+    <ClInclude Include="NotificationStrategy.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Priority.h" />
+    <ClInclude Include="PriorityDelegate.h" />
+    <ClInclude Include="PriorityEvent.h" />
+    <ClInclude Include="PriorityExpire.h" />
+    <ClInclude Include="PriorityNotificationQueue.h" />
+    <ClInclude Include="PriorityStrategy.h" />
+    <ClInclude Include="Runnable.h" />
+    <ClInclude Include="RunnableAdapter.h" />
+    <ClInclude Include="RWLock.h" />
+    <ClInclude Include="RWLock_WIN32.h" />
+    <ClInclude Include="ScopedLock.h" />
+    <ClInclude Include="ScopedUnlock.h" />
+    <ClInclude Include="Semaphore.h" />
+    <ClInclude Include="Semaphore_WIN32.h" />
+    <ClInclude Include="SignalHandler.h" />
+    <ClInclude Include="SingletonHolder.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SynchronizedObject.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="ThreadLocal.h" />
+    <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="ThreadTarget.h" />
+    <ClInclude Include="Thread_WIN32.h" />
+    <ClInclude Include="TimedNotificationQueue.h" />
+    <ClInclude Include="Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AbstractObserver.cpp" />
+    <ClCompile Include="ActiveDispatcher.cpp" />
+    <ClCompile Include="Condition.cpp" />
+    <ClCompile Include="ErrorHandler.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventArgscpp.cpp" />
+    <ClCompile Include="Event_WIN32.cpp" />
+    <ClCompile Include="Mutex.cpp" />
+    <ClCompile Include="Mutex_WIN32.cpp" />
+    <ClCompile Include="Notification.cpp" />
+    <ClCompile Include="NotificationCenter.cpp" />
+    <ClCompile Include="NotificationQueue.cpp" />
+    <ClCompile Include="PriorityNotificationQueue.cpp" />
+    <ClCompile Include="Runnable.cpp" />
+    <ClCompile Include="RWLock.cpp" />
+    <ClCompile Include="RWLock_WIN32.cpp" />
+    <ClCompile Include="Semaphore.cpp" />
+    <ClCompile Include="Semaphore_WIN32.cpp" />
+    <ClCompile Include="SignalHandler.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SynchronizedObject.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="ThreadLocal.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="ThreadTarget.cpp" />
+    <ClCompile Include="Thread_WIN32.cpp" />
+    <ClCompile Include="TimedNotificationQueue.cpp" />
+    <ClCompile Include="Timer.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
