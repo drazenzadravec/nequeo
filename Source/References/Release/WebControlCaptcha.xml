@@ -1,0 +1,178 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+WebControlCaptcha
+</name>
+</assembly>
+<members>
+<member name="P:WebControlCaptcha.CaptchaControl.IsDesignMode">
+	<summary>
+ are we in design mode?
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaControl.ValidateCaptcha(System.String)">
+	<summary>
+ Validate the user's text against the CAPTCHA text
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaControl.HtmlColor(System.Drawing.Color)">
+	<summary>
+ returns HTML-ized color strings
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaControl.CssStyle">
+	<summary>
+ returns css "style=" tag for this control
+ based on standard control visual properties
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaControl.Render(System.Web.UI.HtmlTextWriter)">
+	<summary>
+ render raw control HTML to the page
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaControl.GenerateNewCaptcha">
+	<summary>
+ generate a new captcha and store it in the ASP.NET Cache by unique GUID
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaControl.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+	<summary>
+ Retrieve the user's CAPTCHA input from the posted data
+ </summary>
+</member><member name="T:WebControlCaptcha.CaptchaControl">
+	<summary>
+ CAPTCHA ASP.NET 2.0 user control
+ </summary>
+	<remarks>
+ add a reference to this DLL and add the CaptchaControl to your toolbox;
+ then just drag and drop the control on a web form and set properties on it.
+
+ Jeff Atwood
+ http://www.codinghorror.com/
+ </remarks>
+</member><member name="T:WebControlCaptcha.CaptchaImage.FontWarpFactor">
+	<summary>
+ Amount of random font warping to apply to rendered text
+ </summary>
+</member><member name="T:WebControlCaptcha.CaptchaImage.BackgroundNoiseLevel">
+	<summary>
+ Amount of background noise to add to rendered image
+ </summary>
+</member><member name="T:WebControlCaptcha.CaptchaImage.LineNoiseLevel">
+	<summary>
+ Amount of curved line noise to add to rendered image
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.UniqueId">
+	<summary>
+ Returns a GUID that uniquely identifies this Captcha
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.RenderedAt">
+	<summary>
+ Returns the date and time this image was last rendered
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.Font">
+	<summary>
+ Font family to use when drawing the Captcha text. If no font is provided, a random font will be chosen from the font whitelist for each character.
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.FontWarp">
+	<summary>
+ Amount of random warping to apply to the Captcha text.
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.BackgroundNoise">
+	<summary>
+ Amount of background noise to apply to the Captcha image.
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.TextChars">
+	<summary>
+ A string of valid characters to use in the Captcha text. 
+ A random character will be selected from this string for each character.
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.TextLength">
+	<summary>
+ Number of characters to use in the Captcha text. 
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.Text">
+	<summary>
+ Returns the randomly generated Captcha text.
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.Width">
+	<summary>
+ Width of Captcha image to generate, in pixels 
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.Height">
+	<summary>
+ Height of Captcha image to generate, in pixels 
+ </summary>
+</member><member name="P:WebControlCaptcha.CaptchaImage.FontWhitelist">
+	<summary>
+ A semicolon-delimited list of valid fonts to use when no font is provided.
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.RenderImage">
+	<summary>
+ Forces a new Captcha image to be generated using current property value settings.
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.RandomFontFamily">
+	<summary>
+ Returns a random font family from the font whitelist
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.GenerateRandomText">
+	<summary>
+ generate random text for the CAPTCHA
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.RandomPoint(System.Int32,System.Int32,System.Int32@,System.Int32@)">
+	<summary>
+ Returns a random point within the specified x and y ranges
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.RandomPoint(System.Drawing.Rectangle)">
+	<summary>
+ Returns a random point within the specified rectangle
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.TextPath(System.String,System.Drawing.Font,System.Drawing.Rectangle)">
+	<summary>
+ Returns a GraphicsPath containing the specified string and font
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.GetFont">
+	<summary>
+ Returns the CAPTCHA font in an appropriate size 
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.GenerateImagePrivate">
+	<summary>
+ Renders the CAPTCHA image
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.WarpText(System.Drawing.Drawing2D.GraphicsPath,System.Drawing.Rectangle)">
+	<summary>
+ Warp the provided text GraphicsPath by a variable amount
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.AddNoise(System.Drawing.Graphics,System.Drawing.Rectangle)">
+	<summary>
+ Add a variable level of graphic noise to the image
+ </summary>
+</member><member name="M:WebControlCaptcha.CaptchaImage.AddLine(System.Drawing.Graphics,System.Drawing.Rectangle)">
+	<summary>
+ Add variable level of curved lines to the image
+ </summary>
+</member><member name="T:WebControlCaptcha.CaptchaImage">
+	<summary>
+ CAPTCHA image generation class
+ </summary>
+	<remarks>
+ Adapted from the excellent code at 
+ http://www.codeproject.com/aspnet/CaptchaImage.asp
+
+ Jeff Atwood
+ http://www.codinghorror.com/
+ </remarks>
+</member><member name="T:WebControlCaptcha.CaptchaImageHandler">
+	<summary>
+ Captcha image stream HttpModule. Retrieves CAPTCHA objects from cache, renders them to memory, 
+ and streams them to the browser.
+ </summary>
+	<remarks>
+ You *MUST* enable this HttpHandler in your web.config, like so:
+
+	  &lt;httpHandlers&gt;
+		  &lt;add verb="GET" path="CaptchaImage.aspx" type="WebControlCaptcha.CaptchaImageHandler, WebControlCaptcha" /&gt;
+	  &lt;/httpHandlers&gt;
+
+ Jeff Atwood
+ http://www.codinghorror.com/
+</remarks>
+</member>
+</members>
+</doc>

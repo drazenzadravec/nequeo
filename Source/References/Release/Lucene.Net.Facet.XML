@@ -1,0 +1,2619 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lucene.Net.Facet</name>
+    </assembly>
+    <members>
+        <member name="T:Lucene.Net.Facet.DrillDownQuery">
+            <summary>
+            A <seealso cref="T:Lucene.Net.Search.Query"/> for drill-down over facet categories. You
+            should call <seealso cref="!:#add(String, String...)"/> for every group of categories you
+            want to drill-down over.
+            <para>
+            <b>NOTE:</b> if you choose to create your own <seealso cref="T:Lucene.Net.Search.Query"/> by calling
+            <seealso cref="!:#term"/>, it is recommended to wrap it with <seealso cref="T:Lucene.Net.Search.ConstantScoreQuery"/>
+            and set the <seealso cref="!:ConstantScoreQuery#setBoost(float) boost"/> to {@code 0.0f},
+            so that it does not affect the scores of the documents.
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.Term(System.String,System.String,System.String[])">
+            <summary>
+            Creates a drill-down term. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.#ctor(Lucene.Net.Facet.FacetsConfig,Lucene.Net.Search.BooleanQuery,System.Collections.Generic.IDictionary{System.String,System.Nullable{System.Int32}})">
+            <summary>
+            Used by clone() </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.#ctor(Lucene.Net.Facet.FacetsConfig,Lucene.Net.Search.Filter,Lucene.Net.Facet.DrillDownQuery)">
+            <summary>
+            Used by DrillSideways </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.#ctor(Lucene.Net.Facet.FacetsConfig,Lucene.Net.Search.Query,System.Collections.Generic.IList{Lucene.Net.Search.Query},System.Collections.Generic.IDictionary{System.String,System.Nullable{System.Int32}})">
+            <summary>
+            Used by DrillSideways </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.#ctor(Lucene.Net.Facet.FacetsConfig)">
+            <summary>
+            Creates a new {@code DrillDownQuery} without a base query, 
+             to perform a pure browsing query (equivalent to using
+             <seealso cref="T:Lucene.Net.Search.MatchAllDocsQuery"/> as base). 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.#ctor(Lucene.Net.Facet.FacetsConfig,Lucene.Net.Search.Query)">
+            <summary>
+            Creates a new {@code DrillDownQuery} over the given base query. Can be
+             {@code null}, in which case the result <seealso cref="T:Lucene.Net.Search.Query"/> from
+             <seealso cref="!:#rewrite(IndexReader)"/> will be a pure browsing query, filtering on
+             the added categories only. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.Merge(System.String,System.String[])">
+            <summary>
+            Merges (ORs) a new path into an existing AND'd
+             clause. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.Add(System.String,System.String[])">
+            <summary>
+            Adds one dimension of drill downs; if you pass the same
+             dimension more than once it is OR'd with the previous
+             cofnstraints on that dimension, and all dimensions are
+             AND'd against each other and the base query. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.Add(System.String,Lucene.Net.Search.Query)">
+            <summary>
+            Expert: add a custom drill-down subQuery.  Use this
+             when you have a separate way to drill-down on the
+             dimension than the indexed facet ordinals. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillDownQuery.Add(System.String,Lucene.Net.Search.Filter)">
+            <summary>
+            Expert: add a custom drill-down Filter, e.g. when
+             drilling down after range faceting. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.DrillSideways">
+            <summary>
+            Computes drill down and sideways counts for the provided
+            <seealso cref="T:Lucene.Net.Facet.DrillDownQuery"/>.  Drill sideways counts include
+            alternative values/aggregates for the drill-down
+            dimensions so that a dimension does not disappear after
+            the user drills down into it.
+            
+            <para> Use one of the static search
+            methods to do the search, and then get the hits and facet
+            results from the returned <seealso cref="T:Lucene.Net.Facet.DrillSideways.DrillSidewaysResult"/>.
+            
+            </para>
+            <para><b>NOTE</b>: this allocates one {@link
+            FacetsCollector} for each drill-down, plus one.  If your
+            index has high number of facet labels then this will
+            multiply your memory usage.
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.DrillSideways.searcher">
+            <summary>
+            <seealso cref="T:Lucene.Net.Search.IndexSearcher"/> passed to constructor. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.DrillSideways.taxoReader">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/> passed to constructor. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.DrillSideways.state">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState"/> passed to
+             constructor; can be null. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.DrillSideways.config">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.FacetsConfig"/> passed to constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.#ctor(Lucene.Net.Search.IndexSearcher,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.Taxonomy.TaxonomyReader)">
+            <summary>
+            Create a new {@code DrillSideways} instance. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.#ctor(Lucene.Net.Search.IndexSearcher,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState)">
+            <summary>
+            Create a new {@code DrillSideways} instance, assuming the categories were
+             indexed with <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.#ctor(Lucene.Net.Search.IndexSearcher,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState)">
+            <summary>
+            Create a new {@code DrillSideways} instance, where some
+             dimensions were indexed with {@link
+             SortedSetDocValuesFacetField} and others were indexed
+             with <seealso cref="T:Lucene.Net.Facet.FacetField"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.BuildFacetsResult(Lucene.Net.Facet.FacetsCollector,Lucene.Net.Facet.FacetsCollector[],System.String[])">
+            <summary>
+            Subclass can override to customize per-dim Facets
+             impl. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.Search(Lucene.Net.Facet.DrillDownQuery,Lucene.Net.Search.Collector)">
+            <summary>
+            Search, collecting hits with a <seealso cref="T:Lucene.Net.Search.Collector"/>, and
+            computing drill down and sideways counts.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.Search(Lucene.Net.Facet.DrillDownQuery,Lucene.Net.Search.Filter,Lucene.Net.Search.FieldDoc,System.Int32,Lucene.Net.Search.Sort,System.Boolean,System.Boolean)">
+            <summary>
+            Search, sorting by <seealso cref="T:Lucene.Net.Search.Sort"/>, and computing
+            drill down and sideways counts.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.Search(Lucene.Net.Facet.DrillDownQuery,System.Int32)">
+            <summary>
+            Search, sorting by score, and computing
+            drill down and sideways counts.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.Search(Lucene.Net.Search.ScoreDoc,Lucene.Net.Facet.DrillDownQuery,System.Int32)">
+            <summary>
+            Search, sorting by score, and computing
+            drill down and sideways counts.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.ScoreSubDocsAtOnce">
+            <summary>
+            Override this and return true if your collector
+             (e.g., {@code ToParentBlockJoinCollector}) expects all
+             sub-scorers to be positioned on the document being
+             collected.  This will cause some performance loss;
+             default is false.  Note that if you return true from
+             this method (in a subclass) be sure your collector
+             also returns false from {@link
+             Collector#acceptsDocsOutOfOrder}: this will trick
+             {@code BooleanQuery} into also scoring all subDocs at
+             once. 
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.DrillSideways.DrillSidewaysResult" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Facet.DrillSideways.DrillSidewaysResult.Facets" -->
+        <member name="F:Lucene.Net.Facet.DrillSideways.DrillSidewaysResult.Hits">
+            <summary>
+            Hits. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSideways.DrillSidewaysResult.#ctor(Lucene.Net.Facet.Facets,Lucene.Net.Search.TopDocs)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.DrillSidewaysQuery">
+            <summary>
+            Only purpose is to punch through and return a
+             DrillSidewaysScorer 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSidewaysScorer.DoQueryFirstScoring(Lucene.Net.Search.Collector,Lucene.Net.Search.DocIdSetIterator[],Lucene.Net.Search.Collector[],Lucene.Net.Util.Bits[],Lucene.Net.Search.Collector[])">
+            <summary>
+            Used when base query is highly constraining vs the
+             drilldowns, or when the docs must be scored at once
+             (i.e., like BooleanScorer2, not BooleanScorer).  In
+             this case we just .next() on base and .advance() on
+             the dim filters. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.DrillSidewaysScorer.DoDrillDownAdvanceScoring(Lucene.Net.Search.Collector,Lucene.Net.Search.DocIdSetIterator[],Lucene.Net.Search.Collector[])">
+            <summary>
+            Used when drill downs are highly constraining vs
+             baseQuery. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetField">
+            <summary>
+            Add an instance of this to your <seealso cref="T:Lucene.Net.Documents.Document"/> for every facet label.
+            
+            <para>
+            <b>NOTE:</b> you must call <seealso cref="!:FacetsConfig#build(Document)"/> before
+            you add the document to IndexWriter.
+            </para>
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetField.dim">
+            <summary>
+            Dimension for this field. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetField.path">
+            <summary>
+            Path for this field. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetField.#ctor(System.String,System.String[])">
+            <summary>
+            Creates the this from {@code dim} and
+             {@code path}. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetField.VerifyLabel(System.String)">
+            <summary>
+            Verifies the label is not null or empty string.
+            
+             @lucene.internal 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetResult">
+            <summary>
+            Counts or aggregates for a single dimension. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetResult.Dim">
+            <summary>
+            Dimension that was requested. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetResult.Path">
+            <summary>
+            Path whose children were requested. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetResult.Value">
+            <summary>
+            Total value for this path (sum of all child counts, or
+             sum of all child values), even those not included in
+             the topN. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetResult.ChildCount">
+            <summary>
+            How many child labels were encountered. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetResult.LabelValues">
+            <summary>
+            Child counts. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetResult.#ctor(System.String,System.String[],System.Single,Lucene.Net.Facet.LabelAndValue[],System.Int32)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Facets">
+            <summary>
+            Common base class for all facets implementations.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Facets.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Facets.GetTopChildren(System.Int32,System.String,System.String[])">
+            <summary>
+            Returns the topN child labels under the specified
+             path.  Returns null if the specified path doesn't
+             exist or if this dimension was never seen. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Facets.GetSpecificValue(System.String,System.String[])">
+            <summary>
+            Return the count or value
+             for a specific path.  Returns -1 if
+             this path doesn't exist, else the count. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Facets.GetAllDims(System.Int32)">
+            <summary>
+            Returns topN labels for any dimension that had hits,
+             sorted by the number of hits that dimension matched;
+             this is used for "sparse" faceting, where many
+             different dimensions were indexed, for example
+             depending on the type of document. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetsCollector">
+            <summary>
+            Collects hits for subsequent faceting.  Once you've run
+             a search and collect hits into this, instantiate one of
+             the <seealso cref="T:Lucene.Net.Search.Collector"/> subclasses to do the facet
+             counting.  Use the {@code search} utility methods to
+             perform an "ordinary" search but also collect into a
+             <seealso cref="T:Lucene.Net.Facet.Facets"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.#ctor">
+            <summary>
+            Default constructor </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.#ctor(System.Boolean)">
+            <summary>
+            Create this; if {@code keepScores} is true then a
+             float[] is allocated to hold score of all hits. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.CreateDocs(System.Int32)">
+            <summary>
+            Creates a <seealso cref="T:Lucene.Net.Facet.FacetsCollector.Docs"/> to record hits. The default uses <seealso cref="T:Lucene.Net.Util.FixedBitSet"/>
+            to record hits and you can override to e.g. record the docs in your own
+            <seealso cref="T:Lucene.Net.Search.DocIdSet"/>.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.Search(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.Query,System.Int32,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.Search(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.Query,Lucene.Net.Search.Filter,System.Int32,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.Search(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.Query,Lucene.Net.Search.Filter,System.Int32,Lucene.Net.Search.Sort,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.Search(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.Query,Lucene.Net.Search.Filter,System.Int32,Lucene.Net.Search.Sort,System.Boolean,System.Boolean,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.SearchAfter(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.ScoreDoc,Lucene.Net.Search.Query,System.Int32,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.SearchAfter(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.ScoreDoc,Lucene.Net.Search.Query,Lucene.Net.Search.Filter,System.Int32,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.SearchAfter(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.ScoreDoc,Lucene.Net.Search.Query,Lucene.Net.Search.Filter,System.Int32,Lucene.Net.Search.Sort,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.SearchAfter(Lucene.Net.Search.IndexSearcher,Lucene.Net.Search.ScoreDoc,Lucene.Net.Search.Query,Lucene.Net.Search.Filter,System.Int32,Lucene.Net.Search.Sort,System.Boolean,System.Boolean,Lucene.Net.Search.Collector)">
+            <summary>
+            Utility method, to search and also collect all hits
+             into the provided <seealso cref="T:Lucene.Net.Search.Collector"/>. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.FacetsCollector.KeepScores">
+            <summary>
+            True if scores were saved. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.FacetsCollector.GetMatchingDocs">
+            <summary>
+            Returns the documents matched by the query, one <seealso cref="P:Lucene.Net.Facet.FacetsCollector.GetMatchingDocs"/> per
+            visited segment.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetsCollector.Docs">
+            <summary>
+            Used during collection to record matching docs and then return a
+            <seealso cref="P:Lucene.Net.Facet.FacetsCollector.Docs.DocIdSet"/> that contains them.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.Docs.#ctor">
+            <summary>
+            Solr constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.Docs.AddDoc(System.Int32)">
+            <summary>
+            Record the given document. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.FacetsCollector.Docs.DocIdSet">
+            <summary>
+            Return the <seealso cref="P:Lucene.Net.Facet.FacetsCollector.Docs.DocIdSet"/> which contains all the recorded docs. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetsCollector.MatchingDocs">
+            <summary>
+            Holds the documents that were matched in the <seealso cref="T:Lucene.Net.Index.AtomicReaderContext"/>.
+            If scores were required, then {@code scores} is not null.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsCollector.MatchingDocs.context">
+            <summary>
+            Context for this segment. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsCollector.MatchingDocs.bits">
+            <summary>
+            Which documents were seen. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsCollector.MatchingDocs.scores">
+            <summary>
+            Non-sparse scores array. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsCollector.MatchingDocs.totalHits">
+            <summary>
+            Total number of hits </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsCollector.MatchingDocs.#ctor(Lucene.Net.Index.AtomicReaderContext,Lucene.Net.Search.DocIdSet,System.Int32,System.Single[])">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetsConfig">
+            <summary>
+            Records per-dimension configuration.  By default a
+             dimension is flat, single valued and does
+             not require count for the dimension; use
+             the setters in this class to change these settings for
+             each dim.
+            
+             <para><b>NOTE</b>: this configuration is not saved into the
+             index, but it's vital, and up to the application to
+             ensure, that at search time the provided {@code
+             FacetsConfig} matches what was used during indexing.
+            
+             @lucene.experimental 
+            </para>
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsConfig.DEFAULT_INDEX_FIELD_NAME">
+            <summary>
+            Which Lucene field holds the drill-downs and ords (as
+             doc values). 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsConfig.DEFAULT_DIM_CONFIG">
+            <summary>
+            Default per-dimension configuration. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.GetDimConfig(System.String)">
+            <summary>
+            Get the current configuration for a dimension. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.SetHierarchical(System.String,System.Boolean)">
+            <summary>
+            Pass {@code true} if this dimension is hierarchical
+             (has depth > 1 paths). 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.SetMultiValued(System.String,System.Boolean)">
+            <summary>
+            Pass {@code true} if this dimension may have more than
+             one value per document. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.SetRequireDimCount(System.String,System.Boolean)">
+            <summary>
+            Pass {@code true} if at search time you require
+             accurate counts of the dimension, i.e. how many
+             hits have this dimension. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.SetIndexFieldName(System.String,System.String)">
+            <summary>
+            Specify which index field name should hold the
+             ordinals for this dimension; this is only used by the
+             taxonomy based facet methods. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.Build(Lucene.Net.Documents.Document)">
+            <summary>
+            Translates any added <seealso cref="T:Lucene.Net.Facet.FacetField"/>s into normal fields for indexing;
+            only use this version if you did not add any taxonomy-based fields (
+            <seealso cref="T:Lucene.Net.Facet.FacetField"/> or <seealso cref="T:Lucene.Net.Facet.Taxonomy.AssociationFacetField"/>).
+            
+            <para>
+            <b>NOTE:</b> you should add the returned document to IndexWriter, not the
+            input one!
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.Build(Lucene.Net.Facet.Taxonomy.TaxonomyWriter,Lucene.Net.Documents.Document)">
+            <summary>
+            Translates any added <seealso cref="T:Lucene.Net.Facet.FacetField"/>s into normal fields for indexing.
+            
+            <para>
+            <b>NOTE:</b> you should add the returned document to IndexWriter, not the
+            input one!
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.DedupAndEncode(Lucene.Net.Util.IntsRef)">
+            <summary>
+            Encodes ordinals into a BytesRef; expert: subclass can
+             override this to change encoding. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.PathToString(System.String,System.String[])">
+            <summary>
+            Turns a dim + path into an encoded string. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.PathToString(System.String[])">
+            <summary>
+            Turns a dim + path into an encoded string. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.PathToString(System.String[],System.Int32)">
+            <summary>
+            Turns the first {@code length} elements of {@code
+            path} into an encoded string. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.StringToPath(System.String)">
+            <summary>
+            Turns an encoded string (from a previous call to {@link
+             #pathToString}) back into the original {@code
+             String[]}. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.FacetsConfig.DefaultDimConfig">
+            <summary>
+            Get the default configuration for new dimensions.  Useful when
+             the dimension is not known beforehand and may need different 
+             global default settings, like {@code multivalue =
+             true}.
+            </summary>
+             <returns> The default configuration to be used for dimensions that 
+             are not yet set in the <seealso cref="T:Lucene.Net.Facet.FacetsConfig"/>  </returns>
+        </member>
+        <member name="P:Lucene.Net.Facet.FacetsConfig.DimConfigs">
+            <summary>
+            Returns map of field name to <seealso cref="T:Lucene.Net.Facet.FacetsConfig.DimConfig"/>. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.FacetsConfig.DimConfig">
+            <summary>
+            Holds the configuration for one dimension
+            
+            @lucene.experimental 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsConfig.DimConfig.Hierarchical">
+            <summary>
+            True if this dimension is hierarchical. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsConfig.DimConfig.MultiValued">
+            <summary>
+            True if this dimension is multi-valued. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsConfig.DimConfig.RequireDimCount">
+            <summary>
+            True if the count/aggregate for the entire dimension
+             is required, which is unusual (default is false). 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.FacetsConfig.DimConfig.IndexFieldName">
+            <summary>
+            Actual field where this dimension's facet labels
+             should be indexed 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.FacetsConfig.DimConfig.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.LabelAndValue">
+            <summary>
+            Single label and its value, usually contained in a
+             <seealso cref="T:Lucene.Net.Facet.FacetResult"/>. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.LabelAndValue.label">
+            <summary>
+            Facet's label. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.LabelAndValue.value">
+            <summary>
+            Value associated with this label. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.LabelAndValue.#ctor(System.String,System.Single)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.MultiFacets">
+            <summary>
+            Maps specified dims to provided Facets impls; else, uses
+             the default Facets impl. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.MultiFacets.#ctor(System.Collections.Generic.IDictionary{System.String,Lucene.Net.Facet.Facets},Lucene.Net.Facet.Facets)">
+            <summary>
+            Create this, with the specified default <seealso cref="T:Lucene.Net.Facet.Facets"/>
+             for fields not included in {@code dimToFacets}. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.RandomSamplingFacetsCollector">
+            <summary>
+            Collects hits for subsequent faceting, using sampling if needed. Once you've
+            run a search and collect hits into this, instantiate one of the
+            <seealso cref="T:Lucene.Net.Facet.Facets"/> subclasses to do the facet counting. Note that this collector
+            does not collect the scores of matching docs (i.e.
+            <seealso cref="!:FacetsCollector.MatchingDocs#scores"/>) is {@code null}.
+            <para>
+            If you require the original set of hits, you can call
+            <seealso cref="!:#getOriginalMatchingDocs()"/>. Also, since the counts of the top-facets
+            is based on the sampled set, you can amortize the counts by calling
+            <seealso cref="!:#amortizeFacetCounts"/>.
+            </para>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.RandomSamplingFacetsCollector.#ctor(System.Int32)" -->
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.#ctor(System.Int32,System.Int64)">
+            <summary>
+            Constructor with the given sample size and seed.
+            </summary>
+            <param name="sampleSize">
+                     The preferred sample size. If the number of hits is greater than
+                     the size, sampling will be done using a sample ratio of sampling
+                     size / totalN. For example: 1000 hits, sample size = 10 results in
+                     samplingRatio of 0.01. If the number of hits is lower, no sampling
+                     is done at all </param>
+            <param name="seed">
+                     The random seed. If {@code 0} then a seed will be chosen for you. </param>
+        </member>
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.CreateSampledDocs(System.Collections.Generic.IList{Lucene.Net.Facet.FacetsCollector.MatchingDocs})">
+            <summary>
+            Create a sampled copy of the matching documents list. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.CreateSample(Lucene.Net.Facet.FacetsCollector.MatchingDocs)">
+            <summary>
+            Create a sampled of the given hits. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.AmortizeFacetCounts(Lucene.Net.Facet.FacetResult,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Search.IndexSearcher)">
+            <summary>
+            Note: if you use a counting <seealso cref="T:Lucene.Net.Facet.Facets"/> implementation, you can amortize the
+            sampled counts by calling this method. Uses the <seealso cref="T:Lucene.Net.Facet.FacetsConfig"/> and
+            the <seealso cref="T:Lucene.Net.Search.IndexSearcher"/> to determine the upper bound for each facet value.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.RandomSamplingFacetsCollector.GetMatchingDocs">
+            <summary>
+            Returns the sampled list of the matching documents. Note that a
+            <seealso cref="T:Lucene.Net.Facet.FacetsCollector.MatchingDocs"/> instance is returned per segment, even
+            if no hits from that segment are included in the sampled set.
+            <para>
+            Note: One or more of the MatchingDocs might be empty (not containing any
+            hits) as result of sampling.
+            </para>
+            <para>
+            Note: {@code MatchingDocs.totalHits} is copied from the original
+            MatchingDocs, scores is set to {@code null}
+            </para>
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.RandomSamplingFacetsCollector.OriginalMatchingDocs">
+            <summary>
+            Returns the original matching documents. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.RandomSamplingFacetsCollector.SamplingRate">
+            <summary>
+            Returns the sampling rate that was used. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.RandomSamplingFacetsCollector.XORShift64Random">
+            <summary>
+            Faster alternative for java.util.Random, inspired by
+            http://dmurphy747.wordpress.com/2011/03/23/xorshift-vs-random-
+            performance-in-java/
+            <para>
+            Has a period of 2^64-1
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.XORShift64Random.#ctor(System.Int64)">
+            <summary>
+            Creates a xorshift random generator using the provided seed </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.XORShift64Random.RandomLong">
+            <summary>
+            Get the next random long value </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.RandomSamplingFacetsCollector.XORShift64Random.NextInt(System.Int32)">
+            <summary>
+            Get the next random int, between 0 (inclusive) and n (exclusive) </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Range.DoubleRange">
+            <summary>
+            Represents a range over double values.
+            
+            @lucene.experimental 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Range.Range">
+            <summary>
+            Base class for a single labeled range.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.Range.Label">
+            <summary>
+            Label that identifies this range. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.Range.#ctor(System.String)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.Range.GetFilter(Lucene.Net.Search.Filter,Lucene.Net.Queries.Function.ValueSource)">
+            <summary>
+            Returns a new <seealso cref="T:Lucene.Net.Search.Filter"/> accepting only documents
+             in this range.  This filter is not general-purpose;
+             you should either use it with <seealso cref="T:Lucene.Net.Facet.DrillSideways"/> by
+             adding it to <seealso cref="!:DrillDownQuery#add"/>, or pass it to
+             <seealso cref="T:Lucene.Net.Search.FilteredQuery"/> using its {@link
+             FilteredQuery#QUERY_FIRST_FILTER_STRATEGY}.  If the
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> is static, e.g. an indexed numeric
+             field, then it may be more efficient to use {@link
+             NumericRangeFilter}.  The provided fastMatchFilter,
+             if non-null, will first be consulted, and only if
+             that is set for each document will the range then be
+             checked. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.Range.GetFilter(Lucene.Net.Queries.Function.ValueSource)">
+            <summary>
+            Returns a new <seealso cref="T:Lucene.Net.Search.Filter"/> accepting only documents
+             in this range.  This filter is not general-purpose;
+             you should either use it with <seealso cref="T:Lucene.Net.Facet.DrillSideways"/> by
+             adding it to <seealso cref="!:DrillDownQuery#add"/>, or pass it to
+             <seealso cref="T:Lucene.Net.Search.FilteredQuery"/> using its {@link
+             FilteredQuery#QUERY_FIRST_FILTER_STRATEGY}.  If the
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> is static, e.g. an indexed numeric
+             field, then it may be more efficient to use <seealso cref="T:Lucene.Net.Search.NumericRangeFilter"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.Range.FailNoMatch">
+            <summary>
+            Invoke this for a useless range. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.DoubleRange.Min">
+            <summary>
+            Minimum. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.DoubleRange.Max">
+            <summary>
+            Maximum. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.DoubleRange.MinInclusive">
+            <summary>
+            True if the minimum value is inclusive. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.DoubleRange.MaxInclusive">
+            <summary>
+            True if the maximum value is inclusive. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.DoubleRange.#ctor(System.String,System.Double,System.Boolean,System.Double,System.Boolean)">
+            <summary>
+            Create a DoubleRange. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.DoubleRange.accept(System.Double)">
+            <summary>
+            True if this range accepts the provided value. </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.Range.DoubleRangeFacetCounts" -->
+        <member name="T:Lucene.Net.Facet.Range.RangeFacetCounts">
+            <summary>
+            Base class for range faceting.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.RangeFacetCounts.Ranges">
+            <summary>
+            Ranges passed to constructor. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.RangeFacetCounts.Counts">
+            <summary>
+            Counts, initialized in by subclass. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.RangeFacetCounts.FastMatchFilter">
+            <summary>
+            Optional: if specified, we first test this Filter to
+             see whether the document should be checked for
+             matching ranges.  If this is null, all documents are
+             checked. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.RangeFacetCounts.Field">
+            <summary>
+            Our field name. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.RangeFacetCounts.TotCount">
+            <summary>
+            Total number of hits. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.RangeFacetCounts.#ctor(System.String,Lucene.Net.Facet.Range.Range[],Lucene.Net.Search.Filter)">
+            <summary>
+            Create {@code RangeFacetCounts} </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.DoubleRangeFacetCounts.#ctor(System.String,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Facet.Range.DoubleRange[])">
+            <summary>
+            Create {@code RangeFacetCounts}, using {@link
+             DoubleFieldSource} from the specified field. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.DoubleRangeFacetCounts.#ctor(System.String,Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Facet.Range.DoubleRange[])">
+            <summary>
+            Create {@code RangeFacetCounts}, using the provided
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.DoubleRangeFacetCounts.#ctor(System.String,Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Search.Filter,Lucene.Net.Facet.Range.DoubleRange[])">
+            <summary>
+            Create {@code RangeFacetCounts}, using the provided
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>, and using the provided Filter as
+             a fastmatch: only documents passing the filter are
+             checked for the matching ranges.  The filter must be
+             random access (implement <seealso cref="!:DocIdSet#bits"/>). 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Range.LongRange">
+            <summary>
+            Represents a range over long values.
+            
+            @lucene.experimental 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.LongRange.min">
+            <summary>
+            Minimum. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.LongRange.max">
+            <summary>
+            Maximum. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.LongRange.minInclusive">
+            <summary>
+            True if the minimum value is inclusive. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Range.LongRange.maxInclusive">
+            <summary>
+            True if the maximum value is inclusive. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.LongRange.#ctor(System.String,System.Int64,System.Boolean,System.Int64,System.Boolean)">
+            <summary>
+            Create a LongRange. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.LongRange.accept(System.Int64)">
+            <summary>
+            True if this range accepts the provided value. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Range.LongRangeCounter">
+            <summary>
+            Counts how many times each range was seen;
+             per-hit it's just a binary search (<seealso cref="!:#add"/>)
+             against the elementary intervals, and in the end we
+             rollup back to the original ranges. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.LongRangeCounter.fillCounts(System.Int32[])">
+            <summary>
+            Fills counts corresponding to the original input
+             ranges, returning the missing count (how many hits
+             didn't match any ranges). 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Range.LongRangeCounter.LongRangeNode">
+            <summary>
+            Holds one node of the segment tree. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.LongRangeCounter.LongRangeNode.addOutputs(System.Int32,Lucene.Net.Facet.Range.LongRange)">
+            <summary>
+            Recursively assigns range outputs to each node. </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.Range.LongRangeFacetCounts" -->
+        <member name="M:Lucene.Net.Facet.Range.LongRangeFacetCounts.#ctor(System.String,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Facet.Range.LongRange[])">
+            <summary>
+            Create {@code LongRangeFacetCounts}, using {@link
+             LongFieldSource} from the specified field. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.LongRangeFacetCounts.#ctor(System.String,Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Facet.Range.LongRange[])">
+            <summary>
+            Create {@code RangeFacetCounts}, using the provided
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Range.LongRangeFacetCounts.#ctor(System.String,Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Search.Filter,Lucene.Net.Facet.Range.LongRange[])">
+            <summary>
+            Create {@code RangeFacetCounts}, using the provided
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>, and using the provided Filter as
+             a fastmatch: only documents passing the filter are
+             checked for the matching ranges.  The filter must be
+             random access (implement <seealso cref="!:DocIdSet#bits"/>). 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState">
+            <summary>
+            Default implementation of <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetCounts"/>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState">
+            <summary>
+            Wraps a <seealso cref="T:Lucene.Net.Index.IndexReader"/> and resolves ords
+             using existing <seealso cref="T:Lucene.Net.Index.SortedSetDocValues"/> APIs without a
+             separate taxonomy index.  This only supports flat facets
+             (dimension + label), and it makes faceting a bit
+             slower, adds some cost at reopen time, but avoids
+             managing the separate taxonomy index.  It also requires
+             less RAM than the taxonomy index, as it manages the flat
+             (2-level) hierarchy more efficiently.  In addition, the
+             tie-break during faceting is now meaningful (in label
+             sorted order).
+            
+             <para><b>NOTE</b>: creating an instance of this class is
+             somewhat costly, as it computes per-segment ordinal maps,
+             so you should create it once and re-use that one instance
+             for a given <seealso cref="T:Lucene.Net.Index.IndexReader"/>. 
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.#ctor">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.GetOrdRange(System.String)">
+            <summary>
+            Returns the <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange"/> for this dimension. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.DocValues">
+            <summary>
+            Return top-level doc values. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.Field">
+            <summary>
+            Indexed field we are reading. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.PrefixToOrdRange">
+            <summary>
+            Returns mapping from prefix to <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange"/>. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrigReader">
+            <summary>
+            Returns top-level index reader. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.Size">
+            <summary>
+            Number of unique labels. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange">
+            <summary>
+            Holds start/end range of ords, which maps to one
+             dimension (someday we may generalize it to map to
+             hierarchies within one dimension). 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange.Start">
+            <summary>
+            Start of range, inclusive: </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange.End">
+            <summary>
+            End of range, inclusive: </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Start and end are inclusive. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.origReader">
+            <summary>
+            <seealso cref="T:Lucene.Net.Index.IndexReader"/> passed to the constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.#ctor(Lucene.Net.Index.IndexReader,System.String)">
+            <summary>
+            Creates this, pulling doc values from the specified
+             field. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.GetOrdRange(System.String)">
+            <summary>
+            Returns the <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange"/> for this dimension. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.DocValues">
+            <summary>
+            Return top-level doc values. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.PrefixToOrdRange">
+            <summary>
+            Returns mapping from prefix to <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState.OrdRange"/>. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.Field">
+            <summary>
+            Indexed field we are reading. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.SortedSet.DefaultSortedSetDocValuesReaderState.Size">
+            <summary>
+            Number of unique labels. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetCounts">
+            <summary>
+            Compute facets counts from previously
+             indexed <seealso cref="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField"/>,
+             without require a separate taxonomy index.  Faceting is
+             a bit slower (~25%), and there is added cost on every
+             <seealso cref="T:Lucene.Net.Index.IndexReader"/> open to create a new {@link
+             SortedSetDocValuesReaderState}.  Furthermore, this does
+             not support hierarchical facets; only flat (dimension +
+             label) facets, but it uses quite a bit less RAM to do
+             so.
+            
+             <para><b>NOTE</b>: this class should be instantiated and
+             then used from a single thread, because it holds a
+             thread-private instance of <seealso cref="T:Lucene.Net.Index.SortedSetDocValues"/>.
+            
+            </para>
+            <para><b>NOTE:</b>: tie-break is by unicode sort order
+            
+            @lucene.experimental 
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetCounts.#ctor(Lucene.Net.Facet.SortedSet.SortedSetDocValuesReaderState,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Sparse faceting: returns any dimension that had any
+             hits, topCount labels per dimension. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetCounts.Count(System.Collections.Generic.IList{Lucene.Net.Facet.FacetsCollector.MatchingDocs})">
+            <summary>
+            Does all the "real work" of tallying up the counts. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField">
+            <summary>
+            Add an instance of this to your Document for every facet
+             label to be indexed via SortedSetDocValues. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField.TYPE">
+            <summary>
+            Indexed <seealso cref="T:Lucene.Net.Documents.FieldType"/>. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField.Dim">
+            <summary>
+            Dimension. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField.Label">
+            <summary>
+            Label. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.SortedSet.SortedSetDocValuesFacetField.#ctor(System.String,System.String)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.AssociationFacetField">
+            <summary>
+            Add an instance of this to your <seealso cref="T:Lucene.Net.Documents.Document"/> to add
+             a facet label associated with an arbitrary byte[].
+             This will require a custom <seealso cref="T:Lucene.Net.Facet.Facets"/>
+             implementation at search time; see {@link
+             IntAssociationFacetField} and {@link
+             FloatAssociationFacetField} to use existing {@link
+             Facets} implementations.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.AssociationFacetField.TYPE">
+            <summary>
+            Indexed <seealso cref="T:Lucene.Net.Documents.FieldType"/>. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.AssociationFacetField.dim">
+            <summary>
+            Dimension for this field. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.AssociationFacetField.path">
+            <summary>
+            Facet path for this field. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.AssociationFacetField.assoc">
+            <summary>
+            Associated value. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.AssociationFacetField.#ctor(Lucene.Net.Util.BytesRef,System.String,System.String[])">
+            <summary>
+            Creates this from {@code dim} and {@code path} and an
+             association 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader">
+            <summary>
+            A per-segment cache of documents' facet ordinals. Every
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds"/> holds the ordinals in a raw {@code
+            int[]}, and therefore consumes as much RAM as the total
+            number of ordinals found in the segment, but saves the
+            CPU cost of decoding ordinals during facet counting.
+            
+            <para>
+            <b>NOTE:</b> every <seealso cref="T:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds"/> is limited to 2.1B
+            total ordinals. If that is a limitation for you then
+            consider limiting the segment size to fewer documents, or
+            use an alternative cache which pages through the category
+            ordinals.
+            
+            </para>
+            <para>
+            <b>NOTE:</b> when using this cache, it is advised to use
+            a <seealso cref="T:Lucene.Net.Codecs.DocValuesFormat"/> that does not cache the data in
+            memory, at least for the category lists fields, or
+            otherwise you'll be doing double-caching.
+            
+            </para>
+            <para>
+            <b>NOTE:</b> create one instance of this and re-use it
+            for all facet implementations (the cache is per-instance,
+            not static).
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.OrdinalsReader">
+            <summary>
+            Provides per-document ordinals. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.OrdinalsReader.#ctor">
+            <summary>
+            Default constructor. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.OrdinalsReader.GetReader(Lucene.Net.Index.AtomicReaderContext)">
+            <summary>
+            Set current atomic reader. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.OrdinalsReader.IndexFieldName">
+            <summary>
+            Returns the indexed field name this {@code
+             OrdinalsReader} is reading from. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.OrdinalsReader.OrdinalsSegmentReader">
+            <summary>
+            Returns ordinals for documents in one segment. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.OrdinalsReader.OrdinalsSegmentReader.Get(System.Int32,Lucene.Net.Util.IntsRef)">
+            <summary>
+            Get the ordinals for this document.  ordinals.offset
+             must always be 0! 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.OrdinalsReader.OrdinalsSegmentReader.#ctor">
+            <summary>
+            Default constructor. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.#ctor(Lucene.Net.Facet.Taxonomy.OrdinalsReader)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds">
+            <summary>
+            Holds the cached ordinals in two parallel {@code int[]} arrays. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds.offsets">
+            <summary>
+            Index into <seealso cref="!:#ordinals"/> for each document. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds.ordinals">
+            <summary>
+            Holds ords for all docs. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds.#ctor(Lucene.Net.Facet.Taxonomy.OrdinalsReader.OrdinalsSegmentReader,System.Int32)">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Facet.Taxonomy.CachedOrdinalsReader.CachedOrds"/> from the <seealso cref="T:Lucene.Net.Index.BinaryDocValues"/>.
+            Assumes that the <seealso cref="T:Lucene.Net.Index.BinaryDocValues"/> is not {@code null}.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.CategoryPath">
+            <summary>
+            Holds a sequence of string components, specifying the hierarchical name of a
+            category.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.CategoryPath.EMPTY">
+            <summary>
+            An empty <seealso cref="T:Lucene.Net.Facet.Taxonomy.CategoryPath"/> </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.CategoryPath.components">
+            <summary>
+            The components of this <seealso cref="T:Lucene.Net.Facet.Taxonomy.CategoryPath"/>. Note that this array may be
+            shared with other <seealso cref="T:Lucene.Net.Facet.Taxonomy.CategoryPath"/> instances, e.g. as a result of
+            <seealso cref="!:#subpath(int)"/>, therefore you should traverse the array up to
+            <seealso cref="!:#length"/> for this path's components.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.CategoryPath.length">
+            <summary>
+            The number of components of this <seealso cref="T:Lucene.Net.Facet.Taxonomy.CategoryPath"/>. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.#ctor(System.String[])">
+            <summary>
+            Construct from the given path components. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.#ctor(System.String,System.Char)">
+            <summary>
+            Construct from a given path, separating path components with {@code delimiter}. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.FullPathLength">
+            <summary>
+            Returns the number of characters needed to represent the path, including
+            delimiter characters, for using with
+            <seealso cref="!:#copyFullPath(char[], int, char)"/>.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.CompareTo(Lucene.Net.Facet.Taxonomy.CategoryPath)">
+            <summary>
+            Compares this path with another <seealso cref="T:Lucene.Net.Facet.Taxonomy.CategoryPath"/> for lexicographic
+            order.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.CopyFullPath(System.Char[],System.Int32,System.Char)">
+            <summary>
+            Copies the path components to the given {@code char[]}, starting at index
+            {@code start}. {@code delimiter} is copied between the path components.
+            Returns the number of chars copied.
+            
+            <para>
+            <b>NOTE:</b> this method relies on the array being large enough to hold the
+            components and separators - the amount of needed space can be calculated
+            with <seealso cref="!:#fullPathLength()"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.LongHashCode">
+            <summary>
+            Calculate a 64-bit hash function for this path. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.Subpath(System.Int32)">
+            <summary>
+            Returns a sub-path of this path up to {@code length} components. </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.CategoryPath.ToString" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.CategoryPath.ToString(System.Char)">
+            <summary>
+            Returns a string representation of the path, separating components with the
+            given delimiter.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.Directory.Consts">
+            <summary>
+            @lucene.experimental
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader" -->
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.Taxonomy.TaxonomyReader" -->
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyReader.ROOT_ORDINAL">
+            <summary>
+            The root category (the category with the empty path) always has the ordinal
+            0, to which we give a name ROOT_ORDINAL. <seealso cref="!:#getOrdinal(FacetLabel)"/>
+            of an empty path will always return {@code ROOT_ORDINAL}, and
+            <seealso cref="!:#getPath(int)"/> with {@code ROOT_ORDINAL} will return the empty path.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyReader.INVALID_ORDINAL">
+            <summary>
+            Ordinals are always non-negative, so a negative ordinal can be used to
+            signify an error. Methods here return INVALID_ORDINAL (-1) in this case.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.#ctor">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.OpenIfChanged``1(``0)">
+            <summary>
+            If the taxonomy has changed since the provided reader was opened, open and
+            return a new <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/>; else, return {@code null}. The new
+            reader, if not {@code null}, will be the same type of reader as the one
+            given to this method.
+            
+            <para>
+            This method is typically far less costly than opening a fully new
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/> as it shares resources with the provided
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/>, when possible.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.DoClose">
+            <summary>
+            performs the actual task of closing the resources that are used by the
+            taxonomy reader.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.DoOpenIfChanged" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.EnsureOpen">
+            <summary>
+            Throws <seealso cref="T:Lucene.Net.Store.AlreadyClosedException"/> if this IndexReader is closed
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.DecRef">
+            <summary>
+            Expert: decreases the refCount of this TaxonomyReader instance. If the
+            refCount drops to 0 this taxonomy reader is closed.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.GetChildren(System.Int32)">
+            <summary>
+            Returns an iterator over the children of the given ordinal. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.GetOrdinal(Lucene.Net.Facet.Taxonomy.FacetLabel)">
+            <summary>
+            Returns the ordinal of the category given as a path. The ordinal is the
+            category's serial number, an integer which starts with 0 and grows as more
+            categories are added (note that once a category is added, it can never be
+            deleted).
+            </summary>
+            <returns> the category's ordinal or <seealso cref="!:#INVALID_ORDINAL"/> if the category
+                    wasn't foun. </returns>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.GetOrdinal(System.String,System.String[])">
+            <summary>
+            Returns ordinal for the dim + path. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.GetPath(System.Int32)">
+            <summary>
+            Returns the path name of the category with the given ordinal. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.IncRef">
+            <summary>
+            Expert: increments the refCount of this TaxonomyReader instance. RefCounts
+            can be used to determine when a taxonomy reader can be closed safely, i.e.
+            as soon as there are no more references. Be sure to always call a
+            corresponding decRef(), in a finally clause; otherwise the reader may never
+            be closed.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.TryIncRef">
+            <summary>
+            Expert: increments the refCount of this TaxonomyReader
+             instance only if it has not been closed yet.  Returns
+             true on success. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.TaxonomyReader.ParallelTaxonomyArrays">
+            <summary>
+            Returns a <seealso cref="P:Lucene.Net.Facet.Taxonomy.TaxonomyReader.ParallelTaxonomyArrays"/> object which can be used to
+            efficiently traverse the taxonomy tree.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Facet.Taxonomy.TaxonomyReader.CommitUserData" -->
+        <member name="P:Lucene.Net.Facet.Taxonomy.TaxonomyReader.RefCount">
+            <summary>
+            Returns the current refCount for this taxonomy reader. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.TaxonomyReader.Size">
+            <summary>
+            Returns the number of categories in the taxonomy. Note that the number of
+            categories returned is often slightly higher than the number of categories
+            inserted into the taxonomy; This is because when a category is added to the
+            taxonomy, its ancestors are also added automatically (including the root,
+            which always get ordinal 0).
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader.ChildrenIterator">
+            <summary>
+            An iterator over a category's children. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyReader.ChildrenIterator.Next">
+            <summary>
+            Return the next child ordinal, or <seealso cref="!:TaxonomyReader#INVALID_ORDINAL"/>
+            if no more children.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.#ctor(Lucene.Net.Index.DirectoryReader,Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter,Lucene.Net.Facet.Taxonomy.LRUHashMap{Lucene.Net.Facet.Taxonomy.FacetLabel,Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.IntClass},Lucene.Net.Facet.Taxonomy.LRUHashMap{System.Int32,Lucene.Net.Facet.Taxonomy.FacetLabel},Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays)">
+            <summary>
+            Called only from <seealso cref="!:#doOpenIfChanged()"/>. If the taxonomy has been
+            recreated, you should pass {@code null} as the caches and parent/children
+            arrays.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.#ctor(Lucene.Net.Store.Directory)">
+            <summary>
+            Open for reading a taxonomy stored in a given <seealso cref="T:Lucene.Net.Store.Directory"/>.
+            </summary>
+            <param name="directory">
+                     The <seealso cref="T:Lucene.Net.Store.Directory"/> in which the taxonomy resides. </param>
+            <exception cref="T:Lucene.Net.Index.CorruptIndexException">
+                      if the Taxonomy is corrupt. </exception>
+            <exception cref="T:System.IO.IOException">
+                      if another error occurred. </exception>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.#ctor(Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter)">
+            <summary>
+            Opens a <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader"/> over the given
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter"/> (for NRT).
+            </summary>
+            <param name="taxoWriter">
+                     The <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter"/> from which to obtain newly
+                     added categories, in real-time. </param>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.DoOpenIfChanged">
+            <summary>
+            Implements the opening of a new <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader"/> instance if
+            the taxonomy has changed.
+            
+            <para>
+            <b>NOTE:</b> the returned <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader"/> shares the
+            ordinal and category caches with this reader. This is not expected to cause
+            any issues, unless the two instances continue to live. The reader
+            guarantees that the two instances cannot affect each other in terms of
+            correctness of the caches, however if the size of the cache is changed
+            through <seealso cref="!:#setCacheSize(int)"/>, it will affect both reader instances.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.OpenIndexReader(Lucene.Net.Store.Directory)">
+            <summary>
+            Open the <seealso cref="T:Lucene.Net.Index.DirectoryReader"/> from this {@link
+             Directory}. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.OpenIndexReader(Lucene.Net.Index.IndexWriter)">
+            <summary>
+            Open the <seealso cref="T:Lucene.Net.Index.DirectoryReader"/> from this {@link
+             IndexWriter}. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.ToString(System.Int32)">
+            <summary>
+            Returns ordinal -> label mapping, up to the provided
+             max ordinal or number of ordinals, whichever is
+             smaller. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.InternalIndexReader">
+            <summary>
+            Expert: returns the underlying <seealso cref="T:Lucene.Net.Index.DirectoryReader"/> instance that is
+            used by this <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader.CacheSize" -->
+        <member name="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyWriter"/> which uses a <seealso cref="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Directory"/> to store the taxonomy
+            information on disk, and keeps an additional in-memory cache of some or all
+            categories.
+            <para>
+            In addition to the permanently-stored information in the <seealso cref="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Directory"/>,
+            efficiency dictates that we also keep an in-memory cache of <B>recently
+            seen</B> or <B>all</B> categories, so that we do not need to go back to disk
+            for every category addition to see which ordinal this category already has,
+            if any. A <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache"/> object determines the specific caching
+            algorithm used.
+            </para>
+            <para>
+            This class offers some hooks for extending classes to control the
+            <seealso cref="T:Lucene.Net.Index.IndexWriter"/> instance that is used. See <seealso cref="!:#openIndexWriter"/>.
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.Taxonomy.TaxonomyWriter" -->
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.TaxonomyWriter.AddCategory(Lucene.Net.Facet.Taxonomy.FacetLabel)" -->
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.TaxonomyWriter.GetParent(System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Facet.Taxonomy.TaxonomyWriter.Size" -->
+        <member name="P:Lucene.Net.Facet.Taxonomy.TaxonomyWriter.CommitData">
+            <summary>
+            Sets the commit user data map. That method is considered a transaction and
+            will be <seealso cref="!:#commit() committed"/> even if no other changes were made to
+            the writer instance.
+            <para>
+            <b>NOTE:</b> the map is cloned internally, therefore altering the map's
+            contents after calling this method has no effect.
+            </para>
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.INDEX_EPOCH">
+            <summary>
+            Property name of user commit data that contains the index epoch. The epoch
+            changes whenever the taxonomy is recreated (i.e. opened with
+            <seealso cref="!:OpenMode#CREATE"/>.
+            <para>
+            Applications should not use this property in their commit data because it
+            will be overridden by this taxonomy writer.
+            </para>
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.cacheIsComplete">
+            <summary>
+            We call the cache "complete" if we know that every category in our
+            taxonomy is in the cache. When the cache is <B>not</B> complete, and
+            we can't find a category in the cache, we still need to look for it
+            in the on-disk index; Therefore when the cache is not complete, we
+            need to open a "reader" to the taxonomy index.
+            The cache becomes incomplete if it was never filled with the existing
+            categories, or if a put() to the cache ever returned true (meaning
+            that some of the cached data was cleared).
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.ReadCommitData(Lucene.Net.Store.Directory)">
+            <summary>
+            Reads the commit data from a Directory. </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Unlock(Lucene.Net.Store.Directory)" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.#ctor(Lucene.Net.Store.Directory,Lucene.Net.Index.IndexWriterConfig.OpenMode_e,Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache)">
+            <summary>
+            Construct a Taxonomy writer.
+            </summary>
+            <param name="directory">
+               The <seealso cref="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Directory"/> in which to store the taxonomy. Note that
+               the taxonomy is written directly to that directory (not to a
+               subdirectory of it). </param>
+            <param name="openMode">
+               Specifies how to open a taxonomy for writing: <code>APPEND</code>
+               means open an existing index for append (failing if the index does
+               not yet exist). <code>CREATE</code> means create a new index (first
+               deleting the old one if it already existed).
+               <code>APPEND_OR_CREATE</code> appends to an existing index if there
+               is one, otherwise it creates a new index. </param>
+            <param name="cache">
+               A <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache"/> implementation which determines
+               the in-memory caching policy. See for example
+               <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache"/> and <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.Cl2oTaxonomyWriterCache"/>.
+               If null or missing, <seealso cref="!:#defaultTaxonomyWriterCache()"/> is used. </param>
+            <exception cref="T:Lucene.Net.Index.CorruptIndexException">
+                if the taxonomy is corrupted. </exception>
+            <exception cref="T:Lucene.Net.Store.LockObtainFailedException">
+                if the taxonomy is locked by another writer. If it is known
+                that no other concurrent writer is active, the lock might
+                have been left around by an old dead process, and should be
+                removed using <seealso cref="!:#unlock(Directory)"/>. </exception>
+            <exception cref="T:System.IO.IOException">
+                if another error occurred. </exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OpenIndexWriter(Lucene.Net.Store.Directory,Lucene.Net.Index.IndexWriterConfig)" -->
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.CreateIndexWriterConfig(Lucene.Net.Index.IndexWriterConfig.OpenMode_e)" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.InitReaderManager">
+            <summary>
+            Opens a <seealso cref="T:Lucene.Net.Index.ReaderManager"/> from the internal <seealso cref="T:Lucene.Net.Index.IndexWriter"/>. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.#ctor(Lucene.Net.Store.Directory,Lucene.Net.Index.IndexWriterConfig.OpenMode_e)">
+            <summary>
+            Creates a new instance with a default cache as defined by
+            <seealso cref="!:#defaultTaxonomyWriterCache()"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.DefaultTaxonomyWriterCache" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Dispose">
+            <summary>
+            Frees used resources as well as closes the underlying <seealso cref="T:Lucene.Net.Index.IndexWriter"/>,
+            which commits whatever changes made to it to the underlying
+            <seealso cref="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Directory"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.CloseResources" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.FindCategory(Lucene.Net.Facet.Taxonomy.FacetLabel)">
+            <summary>
+            Look up the given category in the cache and/or the on-disk storage,
+            returning the category's ordinal, or a negative number in case the
+            category does not yet exist in the taxonomy.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.InternalAddCategory(Lucene.Net.Facet.Taxonomy.FacetLabel)">
+            <summary>
+            Add a new category into the index (and the cache), and return its new
+            ordinal.
+            <para>
+            Actually, we might also need to add some of the category's ancestors
+            before we can add the category itself (while keeping the invariant that a
+            parent is always added to the taxonomy before its child). We do this by
+            recursion.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.EnsureOpen">
+            <summary>
+            Verifies that this instance wasn't closed, or throws
+            <seealso cref="T:Lucene.Net.Store.AlreadyClosedException"/> if it is.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.AddCategoryDocument(Lucene.Net.Facet.Taxonomy.FacetLabel,System.Int32)">
+            <summary>
+            Note that the methods calling addCategoryDocument() are synchornized, so
+            this method is effectively synchronized as well.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.CombinedCommitData(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Combine original user data with the taxonomy epoch. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.PrepareCommit">
+            <summary>
+            prepare most of the work needed for a two-phase commit.
+            See <seealso cref="!:IndexWriter#prepareCommit"/>.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.AddTaxonomy(Lucene.Net.Store.Directory,Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap)">
+            <summary>
+            Takes the categories from the given taxonomy directory, and adds the
+            missing ones to this taxonomy. Additionally, it fills the given
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap"/> with a mapping from the original ordinal to the new
+            ordinal.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Rollback">
+            <summary>
+            Rollback changes to the taxonomy writer and closes the instance. Following
+            this method the instance becomes unusable (calling any of its API methods
+            will yield an <seealso cref="T:Lucene.Net.Store.AlreadyClosedException"/>).
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.ReplaceTaxonomy(Lucene.Net.Store.Directory)">
+            <summary>
+            Replaces the current taxonomy with the given one. This method should
+            generally be called in conjunction with
+            <seealso cref="!:IndexWriter#addIndexes(Directory...)"/> to replace both the taxonomy
+            as well as the search index content.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.CacheMissesUntilFill">
+            <summary>
+            Set the number of cache misses before an attempt is made to read the entire
+            taxonomy into the in-memory cache.
+            <para>
+            This taxonomy writer holds an in-memory cache of recently seen categories
+            to speed up operation. On each cache-miss, the on-disk index needs to be
+            consulted. When an existing taxonomy is opened, a lot of slow disk reads
+            like that are needed until the cache is filled, so it is more efficient to
+            read the entire taxonomy into memory at once. We do this complete read
+            after a certain number (defined by this method) of cache misses.
+            </para>
+            <para>
+            If the number is set to {@code 0}, the entire taxonomy is read into the
+            cache on first use, without fetching individual categories first.
+            </para>
+            <para>
+            NOTE: it is assumed that this method is called immediately after the
+            taxonomy writer has been created.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Directory">
+            <summary>
+            Returns the <seealso cref="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.Directory"/> of this taxonomy writer. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.InternalIndexWriter">
+            <summary>
+            Used by <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader"/> to support NRT.
+            <para>
+            <b>NOTE:</b> you should not use the obtained <seealso cref="T:Lucene.Net.Index.IndexWriter"/> in any
+            way, other than opening an IndexReader on it, or otherwise, the taxonomy
+            index may become corrupt!
+            </para>
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.TaxonomyEpoch">
+            <summary>
+            Expert: returns current index epoch, if this is a
+            near-real-time reader.  Used by {@link
+            DirectoryTaxonomyReader} to support NRT. 
+            
+            @lucene.internal 
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.SinglePositionTokenStream.Set(System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap.AddMapping(System.Int32,System.Int32)">
+            <summary>
+            Record a mapping. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap.AddDone">
+            <summary>
+            Call addDone() to say that all addMapping() have been done.
+            In some implementations this might free some resources. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap.Size">
+            <summary>
+            Set the size of the map. This MUST be called before addMapping().
+            It is assumed (but not verified) that addMapping() will then be
+            called exactly 'size' times, with different origOrdinals between 0
+            and size-1.  
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap.Map">
+            <summary>
+            Return the map from the taxonomy's original (consecutive) ordinals
+            to the new taxonomy's ordinals. If the map has to be read from disk
+            and ordered appropriately, it is done when getMap() is called.
+            getMap() should only be called once, and only when the map is actually
+            needed. Calling it will also free all resources that the map might
+            be holding (such as temporary disk space), other than the returned int[].
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.MemoryOrdinalMap">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap"/> maintained in memory
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.MemoryOrdinalMap.#ctor">
+            <summary>
+            Sole constructor. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.DiskOrdinalMap">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.OrdinalMap"/> maintained on file system
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter.DiskOrdinalMap.#ctor(System.String)">
+            <summary>
+            Sole constructor. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays">
+            <summary>
+            A <seealso cref="T:Lucene.Net.Facet.Taxonomy.ParallelTaxonomyArrays"/> that are initialized from the taxonomy
+            index.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.ParallelTaxonomyArrays">
+            <summary>
+            Returns 3 arrays for traversing the taxonomy:
+            <ul>
+            <li>{@code parents}: {@code parents[i]} denotes the parent of category
+            ordinal {@code i}.</li>
+            <li>{@code children}: {@code children[i]} denotes a child of category ordinal
+            {@code i}.</li>
+            <li>{@code siblings}: {@code siblings[i]} denotes the sibling of category
+            ordinal {@code i}.</li>
+            </ul>
+            
+            To traverse the taxonomy tree, you typically start with {@code children[0]}
+            (ordinal 0 is reserved for ROOT), and then depends if you want to do DFS or
+            BFS, you call {@code children[children[0]]} or {@code siblings[children[0]]}
+            and so forth, respectively.
+            
+            <para>
+            <b>NOTE:</b> you are not expected to modify the values of the arrays, since
+            the arrays are shared with other threads.
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.ParallelTaxonomyArrays.#ctor">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.ParallelTaxonomyArrays.Parents">
+            <summary>
+            Returns the parents array, where {@code parents[i]} denotes the parent of
+            category ordinal {@code i}.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.ParallelTaxonomyArrays.Children">
+            <summary>
+            Returns the children array, where {@code children[i]} denotes a child of
+            category ordinal {@code i}.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.ParallelTaxonomyArrays.Siblings">
+            <summary>
+            Returns the siblings array, where {@code siblings[i]} denotes the sibling
+            of category ordinal {@code i}.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays.#ctor(System.Int32[])">
+            <summary>
+            Used by <seealso cref="!:#add(int, int)"/> after the array grew. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays.Add(System.Int32,System.Int32)">
+            <summary>
+            Adds the given ordinal/parent info and returns either a new instance if the
+            underlying array had to grow, or this instance otherwise.
+            <para>
+            <b>NOTE:</b> you should call this method from a thread-safe code.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays.Parents">
+            <summary>
+            Returns the parents array, where {@code parents[i]} denotes the parent of
+            category ordinal {@code i}.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays.Children">
+            <summary>
+            Returns the children array, where {@code children[i]} denotes the youngest
+            child of category ordinal {@code i}. The youngest child is defined as the
+            category that was added last to the taxonomy as an immediate child of
+            {@code i}.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.Directory.TaxonomyIndexArrays.Siblings">
+            <summary>
+            Returns the siblings array, where {@code siblings[i]} denotes the sibling
+            of category ordinal {@code i}. The sibling is defined as the previous
+            youngest child of {@code parents[i]}.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.DocValuesOrdinalsReader">
+            <summary>
+            Decodes ordinals previously indexed into a BinaryDocValues field </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.DocValuesOrdinalsReader.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.DocValuesOrdinalsReader.#ctor(System.String)">
+            <summary>
+            Create this, with the specified indexed field name. </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.DocValuesOrdinalsReader.Decode(Lucene.Net.Util.BytesRef,Lucene.Net.Util.IntsRef)" -->
+        <member name="T:Lucene.Net.Facet.Taxonomy.FacetLabel">
+            <summary>
+            Holds a sequence of string components, specifying the hierarchical name of a
+            category.
+            
+            @lucene.internal
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.FacetLabel.MAX_CATEGORY_PATH_LENGTH">
+            <summary>
+            The maximum number of characters a <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/> can have.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.FacetLabel.Components">
+            <summary>
+            The components of this <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/>. Note that this array may be
+            shared with other <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/> instances, e.g. as a result of
+            <seealso cref="!:#subpath(int)"/>, therefore you should traverse the array up to
+            <seealso cref="!:#length"/> for this path's components.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.FacetLabel.Length">
+            <summary>
+            The number of components of this <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/>. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FacetLabel.#ctor(System.String[])">
+            <summary>
+            Construct from the given path components. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FacetLabel.#ctor(System.String,System.String[])">
+            <summary>
+            Construct from the dimension plus the given path components. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FacetLabel.CompareTo(Lucene.Net.Facet.Taxonomy.FacetLabel)">
+            <summary>
+            Compares this path with another <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/> for lexicographic
+            order.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FacetLabel.LongHashCode">
+            <summary>
+            Calculate a 64-bit hash function for this path.  This
+             is necessary for <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.NameHashIntCacheLRU"/> (the
+             default cache impl for {@link
+             LruTaxonomyWriterCache}) to reduce the chance of
+             "silent but deadly" collisions. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FacetLabel.Subpath(System.Int32)">
+            <summary>
+            Returns a sub-path of this path up to {@code length} components. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FacetLabel.ToString">
+            <summary>
+            Returns a string representation of the path.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.FastTaxonomyFacetCounts">
+            <summary>
+            Computes facets counts, assuming the default encoding
+             into DocValues was used.
+            
+            @lucene.experimental 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.IntTaxonomyFacets">
+            <summary>
+            Base class for all taxonomy-based facets that aggregate
+             to a per-ords int[]. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyFacets">
+            <summary>
+            Base class for all taxonomy-based facets impls. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.IndexFieldName">
+            <summary>
+            Index field name provided to the constructor. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.TaxoReader">
+            <summary>
+            {@code TaxonomyReader} provided to the constructor. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.Config">
+            <summary>
+            {@code FacetsConfig} provided to the constructor. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.Children">
+            <summary>
+            Maps parent ordinal to its child, or -1 if the parent
+             is childless. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.Siblings">
+            <summary>
+            Maps an ordinal to its sibling, or -1 if there is no
+             sibling. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.#ctor(System.String,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig)">
+            <summary>
+            Sole constructor. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacets.VerifyDim(System.String)">
+            <summary>
+            Throws {@code IllegalArgumentException} if the
+             dimension is not recognized.  Otherwise, returns the
+             <seealso cref="T:Lucene.Net.Facet.FacetsConfig.DimConfig"/> for this dimension. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.IntTaxonomyFacets.values">
+            <summary>
+            Per-ordinal value. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.IntTaxonomyFacets.#ctor(System.String,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.IntTaxonomyFacets.Rollup">
+            <summary>
+            Rolls up any single-valued hierarchical dimensions. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FastTaxonomyFacetCounts.#ctor(Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code FastTaxonomyFacetCounts}, which also
+             counts all facet labels. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FastTaxonomyFacetCounts.#ctor(System.String,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code FastTaxonomyFacetCounts}, using the
+             specified {@code indexFieldName} for ordinals.  Use
+             this if you had set {@link
+             FacetsConfig#setIndexFieldName} to change the index
+             field name for certain dimensions. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.FloatAssociationFacetField">
+            <summary>
+            Add an instance of this to your <seealso cref="T:Lucene.Net.Documents.Document"/> to add
+             a facet label associated with a float.  Use {@link
+             TaxonomyFacetSumFloatAssociations} to aggregate float values
+             per facet label at search time.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FloatAssociationFacetField.#ctor(System.Single,System.String,System.String[])">
+            <summary>
+            Creates this from {@code dim} and {@code path} and a
+             float association 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FloatAssociationFacetField.floatToBytesRef(System.Single)">
+            <summary>
+            Encodes a {@code float} as a 4-byte <seealso cref="T:Lucene.Net.Util.BytesRef"/>. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FloatAssociationFacetField.bytesRefToFloat(Lucene.Net.Util.BytesRef)">
+            <summary>
+            Decodes a previously encoded {@code float}. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.FloatTaxonomyFacets">
+            <summary>
+            Base class for all taxonomy-based facets that aggregate
+             to a per-ords float[]. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.FloatTaxonomyFacets.values">
+            <summary>
+            Per-ordinal value. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FloatTaxonomyFacets.#ctor(System.String,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.FloatTaxonomyFacets.Rollup">
+            <summary>
+            Rolls up any single-valued hierarchical dimensions. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.IntAssociationFacetField">
+            <summary>
+            Add an instance of this to your <seealso cref="T:Lucene.Net.Documents.Document"/> to add
+             a facet label associated with an int.  Use {@link
+             TaxonomyFacetSumIntAssociations} to aggregate int values
+             per facet label at search time.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.IntAssociationFacetField.#ctor(System.Int32,System.String,System.String[])">
+            <summary>
+            Creates this from {@code dim} and {@code path} and an
+             int association 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.IntAssociationFacetField.intToBytesRef(System.Int32)">
+            <summary>
+            Encodes an {@code int} as a 4-byte <seealso cref="T:Lucene.Net.Util.BytesRef"/>,
+             big-endian. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.IntAssociationFacetField.bytesRefToInt(Lucene.Net.Util.BytesRef)">
+            <summary>
+            Decodes a previously encoded {@code int}. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.LRUHashMap`2">
+            <summary>
+            LRUHashMap is an extension of Java's HashMap, which has a bounded size();
+            When it reaches that size, each time a new element is added, the least
+            recently used (LRU) entry is removed.
+            <para>
+            Java makes it very easy to implement LRUHashMap - all its functionality is
+            already available from <seealso cref="!:java.util.LinkedHashMap"/>, and we just need to
+            configure that properly.
+            </para>
+            <para>
+            Note that like HashMap, LRUHashMap is unsynchronized, and the user MUST
+            synchronize the access to it if used from several threads. Moreover, while
+            with HashMap this is only a concern if one of the threads is modifies the
+            map, with LURHashMap every read is a modification (because the LRU order
+            needs to be remembered) so proper synchronization is always necessary.
+            </para>
+            <para>
+            With the usual synchronization mechanisms available to the user, this
+            unfortunately means that LRUHashMap will probably perform sub-optimally under
+            heavy contention: while one thread uses the hash table (reads or writes), any
+            other thread will be blocked from using it - or even just starting to use it
+            (e.g., calculating the hash function). A more efficient approach would be not
+            to use LinkedHashMap at all, but rather to use a non-locking (as much as
+            possible) thread-safe solution, something along the lines of
+            java.util.concurrent.ConcurrentHashMap (though that particular class does not
+            support the additional LRU semantics, which will need to be added separately
+            using a concurrent linked list or additional storage of timestamps (in an
+            array or inside the entry objects), or whatever).
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.PrintTaxonomyStats">
+            <summary>
+            Prints how many ords are under each dimension. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.PrintTaxonomyStats.#ctor">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.PrintTaxonomyStats.Main(System.String[])">
+            <summary>
+            Command-line tool. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.PrintTaxonomyStats.PrintStats(Lucene.Net.Facet.Taxonomy.TaxonomyReader,System.IO.TextWriter,System.Boolean)">
+            <summary>
+            Recursively prints stats for all ordinals. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager">
+            <summary>
+            Manages near-real-time reopen of both an IndexSearcher
+            and a TaxonomyReader.
+            
+            <para><b>NOTE</b>: If you call {@link
+            DirectoryTaxonomyWriter#replaceTaxonomy} then you must
+            open a new {@code SearcherTaxonomyManager} afterwards.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager.#ctor(Lucene.Net.Index.IndexWriter,System.Boolean,Lucene.Net.Search.SearcherFactory,Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter)">
+            <summary>
+            Creates near-real-time searcher and taxonomy reader
+             from the corresponding writers. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager.#ctor(Lucene.Net.Store.Directory,Lucene.Net.Store.Directory,Lucene.Net.Search.SearcherFactory)">
+            <summary>
+            Creates search and taxonomy readers over the corresponding directories.
+            
+            <para>
+            <b>NOTE:</b> you should only use this constructor if you commit and call
+            <seealso cref="!:#maybeRefresh()"/> in the same thread. Otherwise it could lead to an
+            unsync'd <seealso cref="T:Lucene.Net.Search.IndexSearcher"/> and <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/> pair.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager.SearcherAndTaxonomy">
+            <summary>
+            Holds a matched pair of <seealso cref="T:Lucene.Net.Search.IndexSearcher"/> and
+             <seealso cref="T:Lucene.Net.Facet.Taxonomy.TaxonomyReader"/> 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager.SearcherAndTaxonomy.searcher">
+            <summary>
+            Point-in-time <seealso cref="T:Lucene.Net.Search.IndexSearcher"/>. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager.SearcherAndTaxonomy.taxonomyReader">
+            <summary>
+            Matching point-in-time <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader"/>. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.SearcherTaxonomyManager.SearcherAndTaxonomy.#ctor(Lucene.Net.Search.IndexSearcher,Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyReader)">
+            <summary>
+            Create a SearcherAndTaxonomy </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyFacetCounts">
+            <summary>
+            Reads from any <seealso cref="T:Lucene.Net.Facet.Taxonomy.OrdinalsReader"/>; use {@link
+             FastTaxonomyFacetCounts} if you are using the
+             default encoding from <seealso cref="T:Lucene.Net.Index.BinaryDocValues"/>.
+            
+            @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetCounts.#ctor(Lucene.Net.Facet.Taxonomy.OrdinalsReader,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code TaxonomyFacetCounts}, which also
+             counts all facet labels.  Use this for a non-default
+             <seealso cref="T:Lucene.Net.Facet.Taxonomy.OrdinalsReader"/>; otherwise use {@link
+             FastTaxonomyFacetCounts}. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumFloatAssociations">
+            <summary>
+            Aggregates sum of int values previously indexed with
+             <seealso cref="T:Lucene.Net.Facet.Taxonomy.FloatAssociationFacetField"/>, assuming the default
+             encoding.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumFloatAssociations.#ctor(Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code TaxonomyFacetSumFloatAssociations} against
+             the default index field. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumFloatAssociations.#ctor(System.String,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code TaxonomyFacetSumFloatAssociations} against
+             the specified index field. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumIntAssociations">
+            <summary>
+            Aggregates sum of int values previously indexed with
+             <seealso cref="T:Lucene.Net.Facet.Taxonomy.IntAssociationFacetField"/>, assuming the default
+             encoding.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumIntAssociations.#ctor(Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code TaxonomyFacetSumIntAssociations} against
+             the default index field. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumIntAssociations.#ctor(System.String,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector)">
+            <summary>
+            Create {@code TaxonomyFacetSumIntAssociations} against
+             the specified index field. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumValueSource">
+            <summary>
+            Aggregates sum of values from {@link
+             FunctionValues#doubleVal}, for each facet label.
+            
+             @lucene.experimental 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumValueSource.#ctor(Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Queries.Function.ValueSource)">
+            <summary>
+            Aggreggates float facet values from the provided
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>, pulling ordinals using {@link
+             DocValuesOrdinalsReader} against the default indexed
+             facet field {@link
+             FacetsConfig#DEFAULT_INDEX_FIELD_NAME}. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumValueSource.#ctor(Lucene.Net.Facet.Taxonomy.OrdinalsReader,Lucene.Net.Facet.Taxonomy.TaxonomyReader,Lucene.Net.Facet.FacetsConfig,Lucene.Net.Facet.FacetsCollector,Lucene.Net.Queries.Function.ValueSource)">
+            <summary>
+            Aggreggates float facet values from the provided
+             <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>, and pulls ordinals from the
+             provided <seealso cref="T:Lucene.Net.Facet.Taxonomy.OrdinalsReader"/>. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumValueSource.ScoreValueSource">
+            <summary>
+            <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> that returns the score for each
+             hit; use this to aggregate the sum of all hit scores
+             for each facet label.  
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.TaxonomyFacetSumValueSource.ScoreValueSource.#ctor">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.CategoryPathUtils">
+            <summary>
+            Utilities for use of <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/> by <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal"/>. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CategoryPathUtils.Serialize(Lucene.Net.Facet.Taxonomy.FacetLabel,Lucene.Net.Facet.Taxonomy.WriterCache.CharBlockArray)">
+            <summary>
+            Serializes the given <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/> to the <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CharBlockArray"/>. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CategoryPathUtils.HashCodeOfSerialized(Lucene.Net.Facet.Taxonomy.WriterCache.CharBlockArray,System.Int32)">
+            <summary>
+            Calculates a hash function of a path that was serialized with
+            <seealso cref="!:#serialize(FacetLabel, CharBlockArray)"/>.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CategoryPathUtils.EqualsToSerialized(Lucene.Net.Facet.Taxonomy.FacetLabel,Lucene.Net.Facet.Taxonomy.WriterCache.CharBlockArray,System.Int32)">
+            <summary>
+            Check whether the <seealso cref="T:Lucene.Net.Facet.Taxonomy.FacetLabel"/> is equal to the one serialized in
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CharBlockArray"/>.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.CharBlockArray">
+            <summary>
+            Similar to <seealso cref="T:System.Text.StringBuilder"/>, but with a more efficient growing strategy.
+            This class uses char array blocks to grow.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.Cl2oTaxonomyWriterCache">
+            <summary>
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache"/> using <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal"/>. Although
+            called cache, it maintains in memory all the mappings from category to
+            ordinal, relying on that <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal"/> is an efficient
+            mapping for this purpose.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache">
+            <summary>
+            TaxonomyWriterCache is a relatively simple interface for a cache of
+            category-&gt;ordinal mappings, used in TaxonomyWriter implementations (such as
+            <seealso cref="T:Lucene.Net.Facet.Taxonomy.Directory.DirectoryTaxonomyWriter"/>).
+            <para>
+            It basically has put() methods for adding a mapping, and get() for looking a
+            mapping up the cache. The cache does <B>not</B> guarantee to hold everything
+            that has been put into it, and might in fact selectively delete some of the
+            mappings (e.g., the ones least recently used). This means that if get()
+            returns a negative response, it does not necessarily mean that the category
+            doesn't exist - just that it is not in the cache. The caller can only infer
+            that the category doesn't exist if it knows the cache to be complete (because
+            all the categories were loaded into the cache, and since then no put()
+            returned true).
+            </para>
+            <para>
+            However, if it does so, it should clear out large parts of the cache at once,
+            because the user will typically need to work hard to recover from every cache
+            cleanup (see <seealso cref="!:#put(FacetLabel, int)"/>'s return value).
+            </para>
+            <para>
+            <b>NOTE:</b> the cache may be accessed concurrently by multiple threads,
+            therefore cache implementations should take this into consideration.
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache.Close">
+            <summary>
+            Let go of whatever resources the cache is holding. After a close(),
+            this object can no longer be used.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache.Get(Lucene.Net.Facet.Taxonomy.FacetLabel)" -->
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache.Put(Lucene.Net.Facet.Taxonomy.FacetLabel,System.Int32)" -->
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache.Clear">
+            <summary>
+            Clears the content of the cache. Unlike <seealso cref="!:#close()"/>, the caller can
+            assume that the cache is still operable after this method returns.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache.Full">
+            <summary>
+            Returns true if the cache is full, such that the next <seealso cref="!:#put"/> will
+            evict entries from it, false otherwise.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.Cl2oTaxonomyWriterCache.#ctor(System.Int32,System.Single,System.Int32)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.Cl2oTaxonomyWriterCache.MemoryUsage">
+            <summary>
+            Returns the number of bytes in memory used by this object. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap">
+            <summary>
+            HashMap to store colliding labels. See <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal"/> for
+            details.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.Size">
+            <summary>
+            How many mappings. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.Capacity">
+            <summary>
+            How many slots are allocated. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.Get(Lucene.Net.Facet.Taxonomy.FacetLabel,System.Int32)">
+            <summary>
+            Return the mapping, or {@link
+             LabelToOrdinal#INVALID_ORDINAL} if the label isn't
+             recognized. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.AddLabel(Lucene.Net.Facet.Taxonomy.FacetLabel,System.Int32,System.Int32)">
+            <summary>
+            Add another mapping. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.AddLabelOffset(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This method does not check if the same value is already in the map because
+            we pass in an char-array offset, so so we now that we're in resize-mode
+            here.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.IndexFor(System.Int32,System.Int32)">
+            <summary>
+            Returns index for hash code h. 
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap.MemoryUsage">
+            <summary>
+            Returns an estimate of the memory usage of this CollisionMap. </summary>
+            <returns> The approximate number of bytes used by this structure. </returns>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal">
+            <summary>
+            This is a very efficient LabelToOrdinal implementation that uses a
+            CharBlockArray to store all labels and a configurable number of HashArrays to
+            reference the labels.
+            <para>
+            Since the HashArrays don't handle collisions, a <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap"/> is used
+            to store the colliding labels.
+            </para>
+            <para>
+            This data structure grows by adding a new HashArray whenever the number of
+            collisions in the <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.CollisionMap"/> exceeds {@code loadFactor} * 
+            <seealso cref="!:#getMaxOrdinal()"/>. Growing also includes reinserting all colliding
+            labels into the HashArrays to possibly reduce the number of collisions.
+            
+            For setting the {@code loadFactor} see 
+            <seealso cref="!:#CompactLabelToOrdinal(int, float, int)"/>. 
+            
+            </para>
+            <para>
+            This data structure has a much lower memory footprint (~30%) compared to a
+            Java HashMap&lt;String, Integer&gt;. It also only uses a small fraction of objects
+            a HashMap would use, thus limiting the GC overhead. Ingestion speed was also
+            ~50% faster compared to a HashMap for 3M unique labels.
+            
+            @lucene.experimental
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal">
+            <summary>
+            Abstract class for storing Label->Ordinal mappings in a taxonomy. 
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.INVALID_ORDINAL">
+            <summary>
+            Returned by <seealso cref="!:#getOrdinal"/> when the label isn't
+             recognized. 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.counter">
+            <summary>
+            How many ordinals we've seen. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.AddLabel(Lucene.Net.Facet.Taxonomy.FacetLabel,System.Int32)">
+            <summary>
+            Adds a new label if its not yet in the table.
+            Throws an <seealso cref="!:IllegalArgumentException"/> if the same label with
+            a different ordinal was previoulsy added to this table.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.GetOrdinal(Lucene.Net.Facet.Taxonomy.FacetLabel)">
+            <summary>
+            Returns the ordinal assigned to the given label, 
+            or <seealso cref="!:#INVALID_ORDINAL"/> if the label cannot be found in this table.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.MaxOrdinal">
+            <summary>
+            return the maximal Ordinal assigned so far
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.LabelToOrdinal.NextOrdinal">
+            <summary>
+            Returns the next unassigned ordinal. The default behavior of this method
+            is to simply increment a counter.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal.DefaultLoadFactor">
+            <summary>
+            Default maximum load factor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal.SizeOfMap">
+            <summary>
+            How many labels. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal.#ctor(System.Int32,System.Single,System.Int32)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal.IndexFor(System.Int32,System.Int32)">
+            <summary>
+            Returns index for hash code h. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal.Open(System.String,System.Single,System.Int32)">
+            <summary>
+            Opens the file and reloads the CompactLabelToOrdinal. The file it expects
+            is generated from the <seealso cref="!:#flush(File)"/> command.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.CompactLabelToOrdinal.MemoryUsage">
+            <summary>
+            Returns an estimate of the amount of memory used by this table. Called only in
+            this package. Memory is consumed mainly by three structures: the hash arrays,
+            label repository and collision map.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache">
+            <summary>
+            LRU <seealso cref="T:Lucene.Net.Facet.Taxonomy.WriterCache.TaxonomyWriterCache"/> - good choice for huge taxonomies.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache.#ctor(System.Int32)">
+            <summary>
+            Creates this with <seealso cref="!:LRUType#LRU_HASHED"/> method. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache.#ctor(System.Int32,Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache.LRUType)">
+            <summary>
+            Creates this with the specified method. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache.LRUType">
+            <summary>
+            Determines cache type.
+            For guaranteed correctness - not relying on no-collisions in the hash
+            function, LRU_STRING should be used.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache.LRUType.LRU_HASHED">
+            <summary>
+            Use the label's hash as the key; this can lead to
+             silent conflicts! 
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.Taxonomy.WriterCache.LruTaxonomyWriterCache.LRUType.LRU_STRING">
+            <summary>
+            Use the label as the hash key; this is always
+             correct but will usually use more RAM. 
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.NameHashIntCacheLRU">
+            <summary>
+            An an LRU cache of mapping from name to int.
+            Used to cache Ordinals of category paths.
+            It uses as key, hash of the path instead of the path.
+            This way the cache takes less RAM, but correctness depends on
+            assuming no collisions. 
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.Taxonomy.WriterCache.NameIntCacheLRU">
+            <summary>
+            An an LRU cache of mapping from name to int.
+            Used to cache Ordinals of category paths.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.NameIntCacheLRU.Key(Lucene.Net.Facet.Taxonomy.FacetLabel)">
+            <summary>
+            Subclasses can override this to provide caching by e.g. hash of the string. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.NameIntCacheLRU.Put(Lucene.Net.Facet.Taxonomy.FacetLabel,System.Nullable{System.Int32})">
+            <summary>
+            Add a new value to cache.
+            Return true if cache became full and some room need to be made. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.Taxonomy.WriterCache.NameIntCacheLRU.MakeRoomLRU">
+            <summary>
+            If cache is full remove least recently used entries from cache. Return true
+            if anything was removed, false otherwise.
+            
+            See comment in DirectoryTaxonomyWriter.addToCache(CategoryPath, int) for an
+            explanation why we clean 2/3rds of the cache, and not just one entry.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.NameIntCacheLRU.MaxSize">
+            <summary>
+            Maximum number of cache entries before eviction. </summary>
+        </member>
+        <member name="P:Lucene.Net.Facet.Taxonomy.WriterCache.NameIntCacheLRU.Size">
+            <summary>
+            Number of entries currently in the cache. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.TopOrdAndFloatQueue">
+            <summary>
+            Keeps highest results, first by largest float value,
+             then tie break by smallest ord. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.TopOrdAndFloatQueue.#ctor(System.Int32)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.TopOrdAndFloatQueue.OrdAndValue">
+            <summary>
+            Holds a single entry. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.TopOrdAndFloatQueue.OrdAndValue.ord">
+            <summary>
+            Ordinal of the entry. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.TopOrdAndFloatQueue.OrdAndValue.value">
+            <summary>
+            Value associated with the ordinal. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.TopOrdAndFloatQueue.OrdAndValue.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.TopOrdAndIntQueue">
+            <summary>
+            Keeps highest results, first by largest int value,
+             then tie break by smallest ord. 
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.TopOrdAndIntQueue.#ctor(System.Int32)">
+            <summary>
+            Sole constructor. </summary>
+        </member>
+        <member name="T:Lucene.Net.Facet.TopOrdAndIntQueue.OrdAndValue">
+            <summary>
+            Holds a single entry. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.TopOrdAndIntQueue.OrdAndValue.Ord">
+            <summary>
+            Ordinal of the entry. </summary>
+        </member>
+        <member name="F:Lucene.Net.Facet.TopOrdAndIntQueue.OrdAndValue.Value">
+            <summary>
+            Value associated with the ordinal. </summary>
+        </member>
+        <member name="M:Lucene.Net.Facet.TopOrdAndIntQueue.OrdAndValue.#ctor">
+            <summary>
+            Default constructor. </summary>
+        </member>
+    </members>
+</doc>

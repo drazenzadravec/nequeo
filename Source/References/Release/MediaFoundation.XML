@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediaFoundation</name>
+    </assembly>
+    <members>
+        <member name="T:MediaFoundation.Misc.ConstPropVariant">
+             <summary>
+             ConstPropVariant is used for [In] parameters.  This is important since
+             for [In] parameters, you must *not* clear the PropVariant.  The caller
+             will need to do that himself.
+            
+             Likewise, if you want to store a copy of a ConstPropVariant, you should
+             store it to a PropVariant using the PropVariant constructor that takes a
+             ConstPropVariant.  If you try to store the ConstPropVariant, when the
+             caller frees his copy, yours will no longer be valid.
+             </summary>
+        </member>
+        <member name="T:MediaFoundation.Misc.MFRect">
+            <summary>
+            MFRect is a managed representation of the Win32 RECT structure.
+            </summary>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.#ctor">
+            <summary>
+            Empty contructor. Initialize all fields to 0
+            </summary>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            A parametred constructor. Initialize fields with given values.
+            </summary>
+            <param name="left">the left value</param>
+            <param name="top">the top value</param>
+            <param name="right">the right value</param>
+            <param name="bottom">the bottom value</param>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.#ctor(System.Drawing.Rectangle)">
+            <summary>
+            A parametred constructor. Initialize fields with a given <see cref="T:System.Drawing.Rectangle"/>.
+            </summary>
+            <param name="rectangle">A <see cref="T:System.Drawing.Rectangle"/></param>
+            <remarks>
+            Warning, MFRect define a rectangle by defining two of his corners and <see cref="T:System.Drawing.Rectangle"/> define a rectangle with his upper/left corner, his width and his height.
+            </remarks>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.ToString">
+            <summary>
+            Provide de string representation of this MFRect instance
+            </summary>
+            <returns>A string formated like this : [left, top - right, bottom]</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.IsEmpty">
+            <summary>
+            Checks to see if the rectangle is empty
+            </summary>
+            <returns>Returns true if the rectangle is empty</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.op_Implicit(MediaFoundation.Misc.MFRect)~System.Drawing.Rectangle">
+             <summary>
+             Define implicit cast between MFRect and System.Drawing.Rectangle for languages supporting this feature.
+             VB.Net doesn't support implicit cast. <see cref="M:MediaFoundation.Misc.MFRect.ToRectangle"/> for similar functionality.
+             <code>
+               // Define a new Rectangle instance
+               Rectangle r = new Rectangle(0, 0, 100, 100);
+               // Do implicit cast between Rectangle and MFRect
+               MFRect mfR = r;
+            
+               Console.WriteLine(mfR.ToString());
+             </code>
+             </summary>
+             <param name="r">a MFRect to be cast</param>
+             <returns>A casted System.Drawing.Rectangle</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.op_Implicit(System.Drawing.Rectangle)~MediaFoundation.Misc.MFRect">
+             <summary>
+             Define implicit cast between System.Drawing.Rectangle and MFRect for languages supporting this feature.
+             VB.Net doesn't support implicit cast. <see cref="M:MediaFoundation.Misc.MFRect.FromRectangle(System.Drawing.Rectangle)"/> for similar functionality.
+             <code>
+               // Define a new MFRect instance
+               MFRect mfR = new MFRect(0, 0, 100, 100);
+               // Do implicit cast between MFRect and Rectangle
+               Rectangle r = mfR;
+            
+               Console.WriteLine(r.ToString());
+             </code>
+             </summary>
+             <param name="r">A System.Drawing.Rectangle to be cast</param>
+             <returns>A casted MFRect</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.ToRectangle">
+            <summary>
+            Get the System.Drawing.Rectangle equivalent to this MFRect instance.
+            </summary>
+            <returns>A System.Drawing.Rectangle</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.FromRectangle(System.Drawing.Rectangle)">
+            <summary>
+            Get a new MFRect instance for a given <see cref="T:System.Drawing.Rectangle"/>
+            </summary>
+            <param name="r">The <see cref="T:System.Drawing.Rectangle"/> used to initialize this new MFGuid</param>
+            <returns>A new instance of MFGuid</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFRect.CopyFrom(MediaFoundation.Misc.MFRect)">
+            <summary>
+            Copy the members from an MFRect into this object
+            </summary>
+            <param name="from">The rectangle from which to copy the values.</param>
+        </member>
+        <member name="T:MediaFoundation.Misc.MFGuid">
+            <summary>
+            MFGuid is a wrapper class around a System.Guid value type.
+            </summary>
+            <remarks>
+            This class is necessary to enable null paramters passing.
+            </remarks>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.#ctor">
+            <summary>
+            Empty constructor.
+            Initialize it with System.Guid.Empty
+            </summary>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.#ctor(System.String)">
+            <summary>
+            Constructor.
+            Initialize this instance with a given System.Guid string representation.
+            </summary>
+            <param name="g">A valid System.Guid as string</param>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.#ctor(System.Guid)">
+            <summary>
+            Constructor.
+            Initialize this instance with a given System.Guid.
+            </summary>
+            <param name="g">A System.Guid value type</param>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.ToString">
+            <summary>
+            Get a string representation of this MFGuid Instance.
+            </summary>
+            <returns>A string representing this instance</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.ToString(System.String)">
+            <summary>
+            Get a string representation of this MFGuid Instance with a specific format.
+            </summary>
+            <param name="format"><see cref="M:System.Guid.ToString"/> for a description of the format parameter.</param>
+            <returns>A string representing this instance according to the format parameter</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.op_Implicit(MediaFoundation.Misc.MFGuid)~System.Guid">
+             <summary>
+             Define implicit cast between MFGuid and System.Guid for languages supporting this feature.
+             VB.Net doesn't support implicit cast. <see cref="M:MediaFoundation.Misc.MFGuid.ToGuid"/> for similar functionality.
+             <code>
+               // Define a new MFGuid instance
+               MFGuid mfG = new MFGuid("{33D57EBF-7C9D-435e-A15E-D300B52FBD91}");
+               // Do implicit cast between MFGuid and Guid
+               Guid g = mfG;
+            
+               Console.WriteLine(g.ToString());
+             </code>
+             </summary>
+             <param name="g">MFGuid to be cast</param>
+             <returns>A casted System.Guid</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.op_Implicit(System.Guid)~MediaFoundation.Misc.MFGuid">
+             <summary>
+             Define implicit cast between System.Guid and MFGuid for languages supporting this feature.
+             VB.Net doesn't support implicit cast. <see cref="M:MediaFoundation.Misc.MFGuid.FromGuid(System.Guid)"/> for similar functionality.
+             <code>
+               // Define a new Guid instance
+               Guid g = new Guid("{B9364217-366E-45f8-AA2D-B0ED9E7D932D}");
+               // Do implicit cast between Guid and MFGuid
+               MFGuid mfG = g;
+            
+               Console.WriteLine(mfG.ToString());
+             </code>
+             </summary>
+             <param name="g">System.Guid to be cast</param>
+             <returns>A casted MFGuid</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.ToGuid">
+            <summary>
+            Get the System.Guid equivalent to this MFGuid instance.
+            </summary>
+            <returns>A System.Guid</returns>
+        </member>
+        <member name="M:MediaFoundation.Misc.MFGuid.FromGuid(System.Guid)">
+            <summary>
+            Get a new MFGuid instance for a given System.Guid
+            </summary>
+            <param name="g">The System.Guid to wrap into a MFGuid</param>
+            <returns>A new instance of MFGuid</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MediaFoundation.Misc.MFError.GetErrorText(System.Int32)" -->
+        <member name="M:MediaFoundation.Misc.MFError.ThrowExceptionForHR(System.Int32)">
+            <summary>
+            If hr has a "failed" status code (E_*), throw an exception.  Note that status
+            messages (S_*) are not considered failure codes.  If MediaFoundation error text
+            is available, it is used to build the exception, otherwise a generic com error
+            is thrown.
+            </summary>
+            <param name="hr">The HRESULT to check</param>
+        </member>
+        <member name="T:MediaFoundation.Misc.AMMediaType">
+            <summary>
+            When you are done with an instance of this class,
+            it should be released with FreeAMMediaType() to avoid leaking
+            </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.DvInfo">
+            <summary> FORMAT_DvInfo </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.MFVideoFormat">
+            <summary> FORMAT_MFVideoFormat </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.MPEG2Video">
+            <summary> FORMAT_MPEG2Video </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.MPEGStreams">
+            <summary> FORMAT_MPEGStreams </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.MPEGVideo">
+            <summary> FORMAT_MPEGVideo </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.VideoInfo">
+            <summary> FORMAT_VideoInfo </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.VideoInfo2">
+            <summary> FORMAT_VideoInfo2 </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.WaveFormatEx">
+            <summary> FORMAT_WaveFormatEx </summary>
+        </member>
+        <member name="F:MediaFoundation.MFRepresentation.AMMediaType">
+            <summary> AM_MEDIA_TYPE_REPRESENTATION </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Default">
+            <summary> From MFMediaType_Default </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Audio">
+            <summary> From MFMediaType_Audio </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Video">
+            <summary> From MFMediaType_Video </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Protected">
+            <summary> From MFMediaType_Protected </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.SAMI">
+            <summary> From MFMediaType_SAMI </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Script">
+            <summary> From MFMediaType_Script </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Image">
+            <summary> From MFMediaType_Image </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.HTML">
+            <summary> From MFMediaType_HTML </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Binary">
+            <summary> From MFMediaType_Binary </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.FileTransfer">
+            <summary> From MFMediaType_FileTransfer </summary>
+        </member>
+        <member name="F:MediaFoundation.MFMediaType.Stream">
+            <summary> From MFMediaType_Stream </summary>
+        </member>
+    </members>
+</doc>

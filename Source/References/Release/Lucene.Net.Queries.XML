@@ -1,0 +1,1152 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lucene.Net.Queries</name>
+    </assembly>
+    <members>
+        <member name="T:Lucene.Net.Queries.BooleanFilter">
+            <summary>
+            A container Filter that allows Boolean composition of Filters.
+            Filters are allocated into one of three logical constructs;
+            SHOULD, MUST NOT, MUST
+            The results Filter BitSet is constructed as follows:
+            SHOULD Filters are OR'd together
+            The resulting Filter is NOT'd with the NOT Filters
+            The resulting Filter is AND'd with the MUST Filters
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.BooleanFilter.GetDocIdSet(Lucene.Net.Index.AtomicReaderContext,Lucene.Net.Util.Bits)">
+            <summary>
+            Returns the a DocIdSetIterator representing the Boolean composition
+            of the filters that have been added.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.BooleanFilter.Add(Lucene.Net.Queries.FilterClause)">
+            <summary>
+            Adds a new FilterClause to the Boolean Filter container </summary>
+            <param name="filterClause"> A FilterClause object containing a Filter and an Occur parameter </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.BooleanFilter.GetEnumerator">
+            <summary>
+            Returns an iterator on the clauses in this query. It implements the <seealso cref="!:Iterable"/> interface to
+            make it possible to do:
+            <pre class="prettyprint">for (FilterClause clause : booleanFilter) {}</pre>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.BooleanFilter.ToString">
+            <summary>
+            Prints a user-readable version of this Filter. </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.BooleanFilter.Clauses">
+            <summary>
+            Returns the list of clauses
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.BoostingQuery" -->
+        <member name="T:Lucene.Net.Queries.ChainedFilter">
+            <summary>
+            <para>
+            Allows multiple <seealso cref="T:Lucene.Net.Search.Filter"/>s to be chained.
+            Logical operations such as <b>NOT</b> and <b>XOR</b>
+            are applied between filters. One operation can be used
+            for all filters, or a specific operation can be declared
+            for each filter.
+            </para>
+            <para>
+            Order in which filters are called depends on
+            the position of the filter in the chain. It's probably
+            more efficient to place the most restrictive filters
+            /least computationally-intensive filters first.
+            </para>
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Queries.ChainedFilter.DEFAULT">
+            <summary>
+            Logical operation when none is declared. Defaults to OR.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Queries.ChainedFilter.chain">
+            <summary>
+            The filter chain
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.ChainedFilter.#ctor(Lucene.Net.Search.Filter[])">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="chain"> The chain of filters </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.ChainedFilter.#ctor(Lucene.Net.Search.Filter[],System.Int32[])">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="chain"> The chain of filters </param>
+            <param name="logicArray"> Logical operations to apply between filters </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.ChainedFilter.#ctor(Lucene.Net.Search.Filter[],System.Int32)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="chain"> The chain of filters </param>
+            <param name="logic"> Logical operation to apply to ALL filters </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.ChainedFilter.GetDocIdSet(Lucene.Net.Index.AtomicReaderContext,Lucene.Net.Util.Bits)">
+            <summary>
+            <seealso cref="!:Filter#GetDocIdSet"/>.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.ChainedFilter.GetDocIdSet(Lucene.Net.Index.AtomicReaderContext,System.Int32,System.Int32[])">
+            <summary>
+            Delegates to each filter in the chain.
+            </summary>
+            <param name="context"> AtomicReaderContext </param>
+            <param name="logic"> Logical operation </param>
+            <returns> DocIdSet </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.ChainedFilter.GetDocIdSet(Lucene.Net.Index.AtomicReaderContext,System.Int32[],System.Int32[])">
+            <summary>
+            Delegates to each filter in the chain.
+            </summary>
+            <param name="context"> AtomicReaderContext </param>
+            <param name="logic"> Logical operation </param>
+            <returns> DocIdSet </returns>
+        </member>
+        <member name="T:Lucene.Net.Queries.CommonTermsQuery">
+            <summary>
+            A query that executes high-frequency terms in a optional sub-query to prevent
+            slow queries due to "common" terms like stopwords. This query
+            builds 2 queries off the <seealso cref="!:#add(Term) added"/> terms: low-frequency
+            terms are added to a required boolean clause and high-frequency terms are
+            added to an optional boolean clause. The optional clause is only executed if
+            the required "low-frequency" clause matches. Scores produced by this query
+            will be slightly different than plain <seealso cref="T:Lucene.Net.Search.BooleanQuery"/> scorer mainly due to
+            differences in the <seealso cref="!:Similarity#coord(int,int) number of leaf queries"/>
+            in the required boolean clause. In most cases, high-frequency terms are
+            unlikely to significantly contribute to the document score unless at least
+            one of the low-frequency terms are matched.  This query can improve
+            query execution times significantly if applicable.
+            <para>
+            <seealso cref="T:Lucene.Net.Queries.CommonTermsQuery"/> has several advantages over stopword filtering at
+            index or query time since a term can be "classified" based on the actual
+            document frequency in the index and can prevent slow queries even across
+            domains without specialized stopword files.
+            </para>
+            <para>
+            <b>Note:</b> if the query only contains high-frequency terms the query is
+            rewritten into a plain conjunction query ie. all high-frequency terms need to
+            match in order to match a document.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.CommonTermsQuery.#ctor(Lucene.Net.Search.BooleanClause.Occur,Lucene.Net.Search.BooleanClause.Occur,System.Single)">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Queries.CommonTermsQuery"/>
+            </summary>
+            <param name="highFreqOccur">
+                     <seealso cref="T:Lucene.Net.Search.BooleanClause.Occur"/> used for high frequency terms </param>
+            <param name="lowFreqOccur">
+                     <seealso cref="T:Lucene.Net.Search.BooleanClause.Occur"/> used for low frequency terms </param>
+            <param name="maxTermFrequency">
+                     a value in [0..1) (or absolute number &gt;=1) representing the
+                     maximum threshold of a terms document frequency to be considered a
+                     low frequency term. </param>
+            <exception cref="T:System.ArgumentException">
+                      if <seealso cref="!:BooleanClause.Occur#MUST_NOT"/> is pass as lowFreqOccur or
+                      highFreqOccur </exception>
+        </member>
+        <member name="M:Lucene.Net.Queries.CommonTermsQuery.#ctor(Lucene.Net.Search.BooleanClause.Occur,Lucene.Net.Search.BooleanClause.Occur,System.Single,System.Boolean)">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Queries.CommonTermsQuery"/>
+            </summary>
+            <param name="highFreqOccur">
+                     <seealso cref="T:Lucene.Net.Search.BooleanClause.Occur"/> used for high frequency terms </param>
+            <param name="lowFreqOccur">
+                     <seealso cref="T:Lucene.Net.Search.BooleanClause.Occur"/> used for low frequency terms </param>
+            <param name="maxTermFrequency">
+                     a value in [0..1) (or absolute number &gt;=1) representing the
+                     maximum threshold of a terms document frequency to be considered a
+                     low frequency term. </param>
+            <param name="disableCoord">
+                     disables <seealso cref="!:Similarity#coord(int,int)"/> in scoring for the low
+                     / high frequency sub-queries </param>
+            <exception cref="T:System.ArgumentException">
+                      if <seealso cref="!:BooleanClause.Occur#MUST_NOT"/> is pass as lowFreqOccur or
+                      highFreqOccur </exception>
+        </member>
+        <member name="M:Lucene.Net.Queries.CommonTermsQuery.Add(Lucene.Net.Index.Term)">
+            <summary>
+            Adds a term to the <seealso cref="T:Lucene.Net.Queries.CommonTermsQuery"/>
+            </summary>
+            <param name="term">
+                     the term to add </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.CommonTermsQuery.NewTermQuery(Lucene.Net.Index.Term,Lucene.Net.Index.TermContext)">
+            <summary>
+            Builds a new TermQuery instance.
+            <para>This is intended for subclasses that wish to customize the generated queries.</para> </summary>
+            <param name="term"> term </param>
+            <param name="context"> the TermContext to be used to create the low level term query. Can be <code>null</code>. </param>
+            <returns> new TermQuery instance </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.CommonTermsQuery.CoordDisabled">
+            <summary>
+            Returns true iff <seealso cref="!:Similarity#coord(int,int)"/> is disabled in scoring
+            for the high and low frequency query instance. The top level query will
+            always disable coords.
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.CommonTermsQuery.LowFreqMinimumNumberShouldMatch">
+            <summary>
+            Specifies a minimum number of the low frequent optional BooleanClauses which must be
+            satisfied in order to produce a match on the low frequency terms query
+            part. This method accepts a float value in the range [0..1) as a fraction
+            of the actual query terms in the low frequent clause or a number
+            <tt>&gt;=1</tt> as an absolut number of clauses that need to match.
+            
+            <para>
+            By default no optional clauses are necessary for a match (unless there are
+            no required clauses). If this method is used, then the specified number of
+            clauses is required.
+            </para>
+            </summary>
+            <param name="min">
+                     the number of optional clauses that must match </param>
+        </member>
+        <member name="P:Lucene.Net.Queries.CommonTermsQuery.HighFreqMinimumNumberShouldMatch">
+            <summary>
+            Specifies a minimum number of the high frequent optional BooleanClauses which must be
+            satisfied in order to produce a match on the low frequency terms query
+            part. This method accepts a float value in the range [0..1) as a fraction
+            of the actual query terms in the low frequent clause or a number
+            <tt>&gt;=1</tt> as an absolut number of clauses that need to match.
+            
+            <para>
+            By default no optional clauses are necessary for a match (unless there are
+            no required clauses). If this method is used, then the specified number of
+            clauses is required.
+            </para>
+            </summary>
+            <param name="min">
+                     the number of optional clauses that must match </param>
+        </member>
+        <member name="T:Lucene.Net.Queries.CustomScoreProvider">
+            <summary>
+            An instance of this subclass should be returned by
+            <seealso cref="!:CustomScoreQuery#getCustomScoreProvider"/>, if you want
+            to modify the custom score calculation of a <seealso cref="T:Lucene.Net.Queries.CustomScoreQuery"/>.
+            <para>Since Lucene 2.9, queries operate on each segment of an index separately,
+            so the protected <seealso cref="!:#context"/> field can be used to resolve doc IDs,
+            as the supplied <code>doc</code> ID is per-segment and without knowledge
+            of the IndexReader you cannot access the document or <seealso cref="T:Lucene.Net.Search.IFieldCache"/>.
+            
+            @lucene.experimental
+            @since 2.9.2
+            </para>
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreProvider.#ctor(Lucene.Net.Index.AtomicReaderContext)">
+            <summary>
+            Creates a new instance of the provider class for the given <seealso cref="T:Lucene.Net.Index.IndexReader"/>.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreProvider.CustomScore(System.Int32,System.Single,System.Single[])">
+            <summary>
+            Compute a custom score by the subQuery score and a number of 
+            <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/> scores.
+            <para> 
+            Subclasses can override this method to modify the custom score.  
+            </para>
+            <para>
+            If your custom scoring is different than the default herein you 
+            should override at least one of the two customScore() methods.
+            If the number of <seealso cref="!:FunctionQuery function queries"/> is always &lt; 2 it is 
+            sufficient to override the other 
+            <seealso cref="!:#customScore(int, float, float) customScore()"/> 
+            method, which is simpler. 
+            </para>
+            <para>
+            The default computation herein is a multiplication of given scores:
+            <pre>
+                ModifiedScore = valSrcScore * valSrcScores[0] * valSrcScores[1] * ...
+            </pre>
+            
+            </para>
+            </summary>
+            <param name="doc"> id of scored doc. </param>
+            <param name="subQueryScore"> score of that doc by the subQuery. </param>
+            <param name="valSrcScores"> scores of that doc by the <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/>. </param>
+            <returns> custom score. </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreProvider.CustomScore(System.Int32,System.Single,System.Single)">
+            <summary>
+            Compute a custom score by the subQuery score and the <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/> score.
+            <para> 
+            Subclasses can override this method to modify the custom score.
+            </para>
+            <para>
+            If your custom scoring is different than the default herein you 
+            should override at least one of the two customScore() methods.
+            If the number of <seealso cref="!:FunctionQuery function queries"/> is always &lt; 2 it is 
+            sufficient to override this customScore() method, which is simpler. 
+            </para>
+            <para>
+            The default computation herein is a multiplication of the two scores:
+            <pre>
+                ModifiedScore = subQueryScore * valSrcScore
+            </pre>
+            
+            </para>
+            </summary>
+            <param name="doc"> id of scored doc. </param>
+            <param name="subQueryScore"> score of that doc by the subQuery. </param>
+            <param name="valSrcScore"> score of that doc by the <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/>. </param>
+            <returns> custom score. </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreProvider.CustomExplain(System.Int32,Lucene.Net.Search.Explanation,Lucene.Net.Search.Explanation[])">
+            <summary>
+            Explain the custom score.
+            Whenever overriding <seealso cref="!:#customScore(int, float, float[])"/>, 
+            this method should also be overridden to provide the correct explanation
+            for the part of the custom scoring.
+            </summary>
+            <param name="doc"> doc being explained. </param>
+            <param name="subQueryExpl"> explanation for the sub-query part. </param>
+            <param name="valSrcExpls"> explanation for the value source part. </param>
+            <returns> an explanation for the custom score </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreProvider.CustomExplain(System.Int32,Lucene.Net.Search.Explanation,Lucene.Net.Search.Explanation)">
+            <summary>
+            Explain the custom score.
+            Whenever overriding <seealso cref="!:#customScore(int, float, float)"/>, 
+            this method should also be overridden to provide the correct explanation
+            for the part of the custom scoring.
+            </summary>
+            <param name="doc"> doc being explained. </param>
+            <param name="subQueryExpl"> explanation for the sub-query part. </param>
+            <param name="valSrcExpl"> explanation for the value source part. </param>
+            <returns> an explanation for the custom score </returns>
+        </member>
+        <member name="T:Lucene.Net.Queries.CustomScoreQuery">
+            <summary>
+            Query that sets document score as a programmatic function of several (sub) scores:
+            <ol>
+               <li>the score of its subQuery (any query)</li>
+               <li>(optional) the score of its <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/> (or queries).</li>
+            </ol>
+            Subclasses can modify the computation by overriding <seealso cref="!:#getCustomScoreProvider"/>.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreQuery.#ctor(Lucene.Net.Search.Query)">
+            <summary>
+            Create a CustomScoreQuery over input subQuery. </summary>
+            <param name="subQuery"> the sub query whose scored is being customized. Must not be null.  </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreQuery.#ctor(Lucene.Net.Search.Query,Lucene.Net.Queries.Function.FunctionQuery)">
+            <summary>
+            Create a CustomScoreQuery over input subQuery and a <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/>. </summary>
+            <param name="subQuery"> the sub query whose score is being customized. Must not be null. </param>
+            <param name="scoringQuery"> a value source query whose scores are used in the custom score
+            computation.  This parameter is optional - it can be null. </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreQuery.#ctor(Lucene.Net.Search.Query,Lucene.Net.Queries.Function.FunctionQuery[])">
+            <summary>
+            Create a CustomScoreQuery over input subQuery and a <seealso cref="T:Lucene.Net.Queries.Function.FunctionQuery"/>. </summary>
+            <param name="subQuery"> the sub query whose score is being customized. Must not be null. </param>
+            <param name="scoringQueries"> value source queries whose scores are used in the custom score
+            computation.  This parameter is optional - it can be null or even an empty array. </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreQuery.Equals(System.Object)">
+            <summary>
+            Returns true if <code>o</code> is equal to this. </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreQuery.GetHashCode">
+            <summary>
+            Returns a hash code value for this object. </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.CustomScoreQuery.GetCustomScoreProvider(Lucene.Net.Index.AtomicReaderContext)">
+            <summary>
+            Returns a <seealso cref="T:Lucene.Net.Queries.CustomScoreProvider"/> that calculates the custom scores
+            for the given <seealso cref="T:Lucene.Net.Index.IndexReader"/>. The default implementation returns a default
+            implementation as specified in the docs of <seealso cref="T:Lucene.Net.Queries.CustomScoreProvider"/>.
+            @since 2.9.2
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Queries.CustomScoreQuery.Strict" -->
+        <member name="P:Lucene.Net.Queries.CustomScoreQuery.SubQuery">
+            <summary>
+            The sub-query that CustomScoreQuery wraps, affecting both the score and which documents match. </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.CustomScoreQuery.ScoringQueries">
+            <summary>
+            The scoring queries that only affect the score of CustomScoreQuery. </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.CustomScoreQuery.Name">
+            <summary>
+            A short name of this query, used in <seealso cref="!:#toString(String)"/>.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.CustomScoreQuery.CustomScorer">
+            <summary>
+            A scorer that applies a (callback) function on scores of the subQuery.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.FilterClause">
+            <summary>
+            A Filter that wrapped with an indication of how that filter
+            is used when composed with another filter.
+            (Follows the boolean logic in BooleanClause for composition 
+            of queries.)
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.FilterClause.#ctor(Lucene.Net.Search.Filter,Lucene.Net.Search.BooleanClause.Occur)">
+            <summary>
+            Create a new FilterClause </summary>
+            <param name="filter"> A Filter object containing a BitSet </param>
+            <param name="occur"> A parameter implementation indicating SHOULD, MUST or MUST NOT </param>
+        </member>
+        <member name="P:Lucene.Net.Queries.FilterClause.Filter">
+            <summary>
+            Returns this FilterClause's filter </summary>
+            <returns> A Filter object </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.FilterClause.Occur">
+            <summary>
+            Returns this FilterClause's occur parameter </summary>
+            <returns> An Occur object </returns>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.BoostedQuery">
+            <summary>
+            Query that is boosted by a ValueSource
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.BoolDocValues">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> implementation which supports retrieving boolean values.
+            Implementations can control how the boolean values are loaded through <seealso cref="!:#BoolVal(int)"/>}
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.FunctionValues">
+            <summary>
+            Represents field values as different types.
+            Normally created via a <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> for a particular field and reader.
+            
+            
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionValues.BytesVal(System.Int32,Lucene.Net.Util.BytesRef)">
+            <summary>
+            returns the bytes representation of the str val - TODO: should this return the indexed raw bytes not? </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionValues.ObjectVal(System.Int32)">
+            <summary>
+            Native Java Object representation of the value </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionValues.Exists(System.Int32)">
+            <summary>
+            Returns true if there is a value for this document </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionValues.OrdVal(System.Int32)">
+            <param name="doc"> The doc to retrieve to sort ordinal for </param>
+            <returns> the sort ordinal for the specified doc
+            TODO: Maybe we can just use intVal for this... </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionValues.NumOrd">
+            <returns> the number of unique sort ordinals this instance has </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Function.FunctionValues.ValueFiller">
+            <summary>
+            @lucene.experimental </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.FunctionValues.AbstractValueFiller">
+            <summary>
+            Abstraction of the logic required to fill the value of a specified doc into
+            a reusable <seealso cref="T:Lucene.Net.Util.Mutable.MutableValue"/>.  Implementations of <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/>
+            are encouraged to define their own implementations of ValueFiller if their
+            value is not a float.
+            
+            @lucene.experimental
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionValues.AbstractValueFiller.FillValue(System.Int32)">
+            <summary>
+            MutableValue will be reused across calls.  Returns true if the value exists. </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.Function.FunctionValues.AbstractValueFiller.Value">
+            <summary>
+            MutableValue will be reused across calls </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSourceScorer">
+            <summary>
+            <seealso cref="T:Lucene.Net.Search.Scorer"/> which returns the result of <seealso cref="!:FunctionValues#FloatVal(int)"/> as
+            the score for a document.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.DocTermsIndexDocValues">
+            <summary>
+            Serves as base class for FunctionValues based on DocTermsIndex.
+            @lucene.internal
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.DocTermsIndexDocValues.DocTermsIndexException">
+            <summary>
+            Custom Exception to be thrown when the DocTermsIndex for a field cannot be generated
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.DoubleDocValues">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> implementation which supports retrieving double values.
+            Implementations can control how the double values are loaded through <seealso cref="!:#DoubleVal(int)"/>}
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.FloatDocValues">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> implementation which supports retrieving float values.
+            Implementations can control how the float values are loaded through <seealso cref="!:#FloatVal(int)"/>}
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.IntDocValues">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> implementation which supports retrieving int values.
+            Implementations can control how the int values are loaded through <seealso cref="!:#IntVal(int)"/>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.LongDocValues">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> implementation which supports retrieving long values.
+            Implementations can control how the long values are loaded through <seealso cref="!:#LongVal(int)"/>}
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.DocValues.StrDocValues">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> implementation which supports retrieving String values.
+            Implementations can control how the String values are loaded through <seealso cref="!:#StrVal(int)"/>}
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.FunctionQuery">
+            <summary>
+            Returns a score for each document based on a ValueSource,
+            often some function of the value of a field.
+            
+            <b>Note: This API is experimental and may change in non backward-compatible ways in the future</b>
+            
+            
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionQuery.#ctor(Lucene.Net.Queries.Function.ValueSource)">
+            <param name="func"> defines the function to be used for scoring </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionQuery.ToString(System.String)">
+            <summary>
+            Prints a user-readable version of this query.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionQuery.Equals(System.Object)">
+            <summary>
+            Returns true if <code>o</code> is equal to this. </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.FunctionQuery.GetHashCode">
+            <summary>
+            Returns a hash code value for this object. </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.Function.FunctionQuery.ValueSource">
+            <returns> The associated ValueSource </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Function.ValueSource" -->
+        <member name="M:Lucene.Net.Queries.Function.ValueSource.GetValues(System.Collections.IDictionary,Lucene.Net.Index.AtomicReaderContext)">
+            <summary>
+            Gets the values for this reader and the context that was previously
+            passed to CreateWeight()
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.ValueSource.CreateWeight(System.Collections.IDictionary,Lucene.Net.Search.IndexSearcher)">
+            <summary>
+            Implementations should propagate CreateWeight to sub-ValueSources which can optionally store
+            weight info in the context. The context object will be passed to GetValues()
+            where this info can be retrieved.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.ValueSource.NewContext(Lucene.Net.Search.IndexSearcher)">
+            <summary>
+            Returns a new non-threadsafe context map.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.ValueSource.GetSortField(System.Boolean)">
+            <summary>
+            EXPERIMENTAL: This method is subject to change.
+            <para>
+            Get the SortField for this ValueSource.  Uses the <seealso cref="!:#GetValues(java.util.Map, AtomicReaderContext)"/>
+            to populate the SortField.
+            
+            </para>
+            </summary>
+            <param name="reverse"> true if this is a reverse sort. </param>
+            <returns> The <seealso cref="!:org.apache.lucene.search.SortField"/> for the ValueSource </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Function.ValueSource.Description">
+            <summary>
+            description of field, used in explain()
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSource.ValueSourceComparator">
+            <summary>
+            Implement a <seealso cref="!:org.apache.lucene.search.FieldComparator"/> that works
+            off of the <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> for a ValueSource
+            instead of the normal Lucene FieldComparator that works off of a FieldCache.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.BoolFunction">
+            <summary>
+            Abstract parent class for those <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> implementations which
+            apply boolean logic to their values
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.ByteFieldSource">
+            <summary>
+            Obtains int field values from the <seealso cref="!:org.apache.lucene.search.FieldCache"/>
+            using <code>getInts()</code>
+            and makes those values available as other numeric types, casting as needed. *
+            
+            
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.FieldCacheSource">
+            <summary>
+            A base class for ValueSource implementations that retrieve values for
+            a single field from the <seealso cref="!:org.apache.lucene.search.FieldCache"/>.
+            
+            
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.BytesRefFieldSource">
+            <summary>
+            An implementation for retrieving <seealso cref="T:Lucene.Net.Queries.Function.FunctionValues"/> instances for str based fields.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.ConstNumberSource">
+            <summary>
+            <code>ConstNumberSource</code> is the base class for all constant numbers
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.ConstValueSource">
+            <summary>
+            <code>ConstValueSource</code> returns a constant for all documents
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.DefFunction">
+            <summary>
+            <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> implementation which only returns the values from the provided
+            ValueSources which are available for a particular docId.  Consequently, when combined
+            with a <seealso cref="T:Lucene.Net.Queries.Function.ValueSources.ConstValueSource"/>, this function serves as a way to return a default
+            value when the values for a field are unavailable.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MultiFunction">
+            <summary>
+            Abstract parent class for <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> implementations that wrap multiple
+            ValueSources and apply their own logic.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.DivFloatFunction">
+            <summary>
+            Function to divide "a" by "b"
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.DualFloatFunction">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> implementation which wraps two ValueSources
+            and applies an extendible float function to their values.
+            
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.ValueSources.DualFloatFunction.#ctor(Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Queries.Function.ValueSource)">
+            <param name="a">  the base. </param>
+            <param name="b">  the exponent. </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.ValueSources.DivFloatFunction.#ctor(Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Queries.Function.ValueSource)">
+            <param name="a">  the numerator. </param>
+            <param name="b">  the denominator. </param>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.DocFreqValueSource">
+            <summary>
+            <code>DocFreqValueSource</code> returns the number of documents containing the term.
+            @lucene.internal
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.DoubleConstValueSource">
+            <summary>
+            Function that returns a constant double value for every document.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.DoubleFieldSource">
+            <summary>
+            Obtains double field values from <seealso cref="!:IFieldCache#getDoubles"/> and makes
+            those values available as other numeric types, casting as needed.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.EnumFieldSource">
+            <summary>
+            Obtains int field values from <seealso cref="!:IFieldCache#getInts"/> and makes
+            those values available as other numeric types, casting as needed.
+            StrVal of the value is not the int value, but its str (displayed) value
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.FloatFieldSource">
+            <summary>
+            Obtains float field values from <seealso cref="!:IFieldCache#getFloats"/> and makes those
+            values available as other numeric types, casting as needed.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.IDFValueSource">
+            <summary>
+            Function that returns <seealso cref="!:TFIDFSimilarity #idf(long, long)"/>
+            for every document.
+            <para>
+            Note that the configured Similarity for the field must be
+            a subclass of <seealso cref="T:Lucene.Net.Search.Similarities.TFIDFSimilarity"/>
+            @lucene.internal 
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.IfFunction">
+            <summary>
+            Depending on the boolean value of the <code>ifSource</code> function,
+            returns the value of the <code>trueSource</code> or <code>falseSource</code> function.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.IntFieldSource">
+            <summary>
+            Obtains int field values from <seealso cref="!:FieldCache#getInts"/> and makes those
+            values available as other numeric types, casting as needed.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.JoinDocFreqValueSource">
+            <summary>
+            Use a field value and find the Document Frequency within another field.
+            
+            @since solr 4.0
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Function.ValueSources.LinearFloatFunction" -->
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.LiteralValueSource">
+            <summary>
+            Pass a the field value through as a String, no matter the type // Q: doesn't this mean it's a "str"?
+            
+            
+            </summary>
+        </member>
+        <member name="P:Lucene.Net.Queries.Function.ValueSources.LiteralValueSource.Value">
+            <summary>
+            returns the literal value </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.LongFieldSource">
+            <summary>
+            Obtains long field values from <seealso cref="!:FieldCache#getLongs"/> and makes those
+            values available as other numeric types, casting as needed.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MaxDocValueSource">
+            <summary>
+            Returns the value of <seealso cref="!:IndexReader#maxDoc()"/>
+            for every document. This is the number of documents
+            including deletions.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MaxFloatFunction">
+            <summary>
+            <code>MaxFloatFunction</code> returns the max of it's components.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MultiFloatFunction">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> implementation which wraps multiple ValueSources
+            and applies an extendible float function to their values.
+            
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MinFloatFunction">
+            <summary>
+            <code>MinFloatFunction</code> returns the min of it's components.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MultiBoolFunction">
+            <summary>
+            Abstract <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> implementation which wraps multiple ValueSources
+            and applies an extendible boolean function to their values.
+            
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.MultiValueSource">
+            <summary>
+            A <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/> that abstractly represents <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>s for
+            poly fields, and other things.
+            
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.NormValueSource">
+            <summary>
+            Function that returns <seealso cref="!:TFIDFSimilarity#decodeNormValue(long)"/>
+            for every document.
+            <para>
+            Note that the configured Similarity for the field must be
+            a subclass of <seealso cref="T:Lucene.Net.Search.Similarities.TFIDFSimilarity"/>
+            @lucene.internal 
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.NumDocsValueSource">
+            <summary>
+            Returns the value of <seealso cref="!:IndexReader#numDocs()"/>
+            for every document. This is the number of documents
+            excluding deletions.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Function.ValueSources.OrdFieldSource" -->
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.PowFloatFunction">
+            <summary>
+            Function to raise the base "a" to the power "b"
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Function.ValueSources.PowFloatFunction.#ctor(Lucene.Net.Queries.Function.ValueSource,Lucene.Net.Queries.Function.ValueSource)">
+            <param name="a">  the base. </param>
+            <param name="b">  the exponent. </param>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.ProductFloatFunction">
+            <summary>
+            <code>ProductFloatFunction</code> returns the product of it's components.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.QueryValueSource">
+            <summary>
+            <code>QueryValueSource</code> returns the relevance score of the query
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Function.ValueSources.RangeMapFloatFunction" -->
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Function.ValueSources.ReciprocalFloatFunction" -->
+        <member name="M:Lucene.Net.Queries.Function.ValueSources.ReciprocalFloatFunction.#ctor(Lucene.Net.Queries.Function.ValueSource,System.Single,System.Single,System.Single)">
+            <summary>
+             f(source) = a/(m*float(source)+b)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Function.ValueSources.ReverseOrdFieldSource" -->
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.ScaleFloatFunction">
+            <summary>
+            Scales values to be between min and max.
+            <para>This implementation currently traverses all of the source values to obtain
+            their min and max.
+            </para>
+            <para>This implementation currently cannot distinguish when documents have been
+            deleted or documents that have no value, and 0.0 values will be used for
+            these cases.  This means that if values are normally all greater than 0.0, one can
+            still end up with 0.0 as the min value to map from.  In these cases, an
+            appropriate map() function could be used as a workaround to change 0.0
+            to a value in the real range.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.ShortFieldSource">
+            <summary>
+            Obtains short field values from the <seealso cref="!:org.apache.lucene.search.FieldCache"/>
+            using <code>getShorts()</code>
+            and makes those values available as other numeric types, casting as needed.
+            
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.SimpleBoolFunction">
+            <summary>
+            <seealso cref="T:Lucene.Net.Queries.Function.ValueSources.BoolFunction"/> implementation which applies an extendible boolean
+            function to the values of a single wrapped <seealso cref="T:Lucene.Net.Queries.Function.ValueSource"/>.
+            
+            Functions this can be used for include whether a field has a value or not,
+            or inverting the boolean value of the wrapped ValueSource.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.SimpleFloatFunction">
+            <summary>
+            A simple float function with a single argument
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.SingleFunction">
+            <summary>
+            A function with a single argument
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.SumFloatFunction">
+            <summary>
+            <code>SumFloatFunction</code> returns the sum of it's components.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.SumTotalTermFreqValueSource">
+            <summary>
+            <code>SumTotalTermFreqValueSource</code> returns the number of tokens.
+            (sum of term freqs across all documents, across all terms).
+            Returns -1 if frequencies were omitted for the field, or if 
+            the codec doesn't support this statistic.
+            @lucene.internal
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.TermFreqValueSource">
+            <summary>
+            Function that returns <seealso cref="!:DocsEnum#freq()"/> for the
+            supplied term in every document.
+            <para>
+            If the term does not exist in the document, returns 0.
+            If frequencies are omitted, returns 1.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.TFValueSource">
+            <summary>
+            Function that returns <seealso cref="!:TFIDFSimilarity#tf(float)"/>
+            for every document.
+            <para>
+            Note that the configured Similarity for the field must be
+            a subclass of <seealso cref="T:Lucene.Net.Search.Similarities.TFIDFSimilarity"/>
+            @lucene.internal 
+            </para>
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.TotalTermFreqValueSource">
+            <summary>
+            <code>TotalTermFreqValueSource</code> returns the total term freq 
+            (sum of term freqs across all documents).
+            Returns -1 if frequencies were omitted for the field, or if 
+            the codec doesn't support this statistic.
+            @lucene.internal
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Function.ValueSources.VectorValueSource">
+            <summary>
+            Converts individual ValueSource instances to leverage the FunctionValues *Val functions that work with multiple values,
+            i.e. <seealso cref="!:FunctionValues#DoubleVal(int, double[])"/>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Lucene.Net.Queries.Mlt.MoreLikeThis" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MAX_NUM_TOKENS_PARSED" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MIN_TERM_FREQ" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MIN_DOC_FREQ" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_BOOST" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MIN_WORD_LENGTH" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MAX_WORD_LENGTH" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_STOP_WORDS" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MAX_QUERY_TERMS" -->
+        <!-- Badly formed XML comment ignored for member "F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_MAX_DOC_FREQ" -->
+        <member name="F:Lucene.Net.Queries.Mlt.MoreLikeThis.DEFAULT_FIELD_NAMES">
+            <summary>
+            Default field names. Null is used to specify that the field names should be looked
+            up at runtime from the provided reader.
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Queries.Mlt.MoreLikeThis.ir">
+            <summary>
+            IndexReader to use
+            </summary>
+        </member>
+        <member name="F:Lucene.Net.Queries.Mlt.MoreLikeThis.boostFactor">
+            <summary>
+            Boost factor to use when boosting the terms
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.#ctor(Lucene.Net.Index.IndexReader)">
+            <summary>
+            Constructor requiring an IndexReader.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.Like(System.Int32)">
+            <summary>
+            Return a query that will return docs like the passed lucene document ID.
+            </summary>
+            <param name="docNum"> the documentID of the lucene doc to generate the 'More Like This" query for. </param>
+            <returns> a query that will return docs like the passed lucene document ID. </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.Like(System.IO.TextReader,System.String)">
+            <summary>
+            Return a query that will return docs like the passed Reader.
+            </summary>
+            <returns> a query that will return docs like the passed Reader. </returns>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.CreateQuery(Lucene.Net.Util.PriorityQueue{System.Object[]})">
+            <summary>
+            Create the More like query from a PriorityQueue
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.createQueue(System.Collections.Generic.IDictionary{System.String,Lucene.Net.Queries.Mlt.MoreLikeThis.Int})">
+            <summary>
+            Create a PriorityQueue from a word->tf map.
+            </summary>
+            <param name="words"> a map of words keyed on the word(String) with Int objects as the values. </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.describeParams">
+            <summary>
+            Describe the parameters that control how the "more like this" query is formed.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.RetrieveTerms(System.Int32)">
+            <summary>
+            Find words for a more-like-this query former.
+            </summary>
+            <param name="docNum"> the id of the lucene document from which to find terms </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.AddTermFrequencies(System.Collections.Generic.IDictionary{System.String,Lucene.Net.Queries.Mlt.MoreLikeThis.Int},Lucene.Net.Index.Terms)">
+            <summary>
+            Adds terms and frequencies found in vector into the Map termFreqMap
+            </summary>
+            <param name="termFreqMap"> a Map of terms and their frequencies </param>
+            <param name="vector"> List of terms and their frequencies for a doc/field </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.AddTermFrequencies(System.IO.TextReader,System.Collections.Generic.IDictionary{System.String,Lucene.Net.Queries.Mlt.MoreLikeThis.Int},System.String)">
+            <summary>
+            Adds term frequencies found by tokenizing text from reader into the Map words
+            </summary>
+            <param name="r"> a source of text to be tokenized </param>
+            <param name="termFreqMap"> a Map of terms and their frequencies </param>
+            <param name="fieldName"> Used by analyzer for any special per-field analysis </param>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThis.IsNoiseWord(System.String)">
+            <summary>
+            determines if the passed term is likely to be of interest in "more like" comparisons
+            </summary>
+            <param name="term"> The word being considered </param>
+            <returns> true if should be ignored, false if should be used in further analysis </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Queries.Mlt.MoreLikeThis.RetrieveTerms(System.IO.TextReader,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Queries.Mlt.MoreLikeThis.RetrieveInterestingTerms(System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Lucene.Net.Queries.Mlt.MoreLikeThis.RetrieveInterestingTerms(System.IO.TextReader,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Queries.Mlt.MoreLikeThis.BoostFactor" -->
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.Analyzer">
+            <summary>
+            Returns an analyzer that will be used to parse source doc with. The default analyzer
+            is not set.
+            </summary>
+            <returns> the analyzer that will be used to parse source doc with. </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MinTermFreq">
+            <summary>
+            Returns the frequency below which terms will be ignored in the source doc. The default
+            frequency is the <seealso cref="!:#DEFAULT_MIN_TERM_FREQ"/>.
+            </summary>
+            <returns> the frequency below which terms will be ignored in the source doc. </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MinDocFreq">
+            <summary>
+            Returns the frequency at which words will be ignored which do not occur in at least this
+            many docs. The default frequency is <seealso cref="!:#DEFAULT_MIN_DOC_FREQ"/>.
+            </summary>
+            <returns> the frequency at which words will be ignored which do not occur in at least this
+                    many docs. </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MaxDocFreq">
+            <summary>
+            Returns the maximum frequency in which words may still appear.
+            Words that appear in more than this many docs will be ignored. The default frequency is
+            <seealso cref="!:#DEFAULT_MAX_DOC_FREQ"/>.
+            </summary>
+            <returns> get the maximum frequency at which words are still allowed,
+                    words which occur in more docs than this are ignored. </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MaxDocFreqPct">
+            <summary>
+            Set the maximum percentage in which words may still appear. Words that appear
+            in more than this many percent of all docs will be ignored.
+            </summary>
+            <param name="maxPercentage"> the maximum percentage of documents (0-100) that a term may appear
+            in to be still considered relevant </param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Queries.Mlt.MoreLikeThis.Boost" -->
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.FieldNames">
+            <summary>
+            Returns the field names that will be used when generating the 'More Like This' query.
+            The default field names that will be used is <seealso cref="!:#DEFAULT_FIELD_NAMES"/>.
+            </summary>
+            <returns> the field names that will be used when generating the 'More Like This' query. </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MinWordLen">
+            <summary>
+            Returns the minimum word length below which words will be ignored. Set this to 0 for no
+            minimum word length. The default is <seealso cref="!:#DEFAULT_MIN_WORD_LENGTH"/>.
+            </summary>
+            <returns> the minimum word length below which words will be ignored. </returns>
+        </member>
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MaxWordLen">
+            <summary>
+            Returns the maximum word length above which words will be ignored. Set this to 0 for no
+            maximum word length. The default is <seealso cref="!:#DEFAULT_MAX_WORD_LENGTH"/>.
+            </summary>
+            <returns> the maximum word length above which words will be ignored. </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Queries.Mlt.MoreLikeThis.StopWords" -->
+        <member name="P:Lucene.Net.Queries.Mlt.MoreLikeThis.MaxQueryTerms">
+            <summary>
+            Returns the maximum number of query terms that will be included in any generated query.
+            The default is <seealso cref="!:#DEFAULT_MAX_QUERY_TERMS"/>.
+            </summary>
+            <returns> the maximum number of query terms that will be included in any generated query. </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Lucene.Net.Queries.Mlt.MoreLikeThis.MaxNumTokensParsed" -->
+        <member name="T:Lucene.Net.Queries.Mlt.MoreLikeThis.FreqQ">
+            <summary>
+            PriorityQueue that orders words by score.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Mlt.MoreLikeThis.Int">
+            <summary>
+            Use for frequencies and to avoid renewing Integers.
+            </summary>
+        </member>
+        <member name="T:Lucene.Net.Queries.Mlt.MoreLikeThisQuery">
+            <summary>
+            A simple wrapper for MoreLikeThis for use in scenarios where a Query object is required eg
+            in custom QueryParser extensions. At query.rewrite() time the reader is used to construct the
+            actual MoreLikeThis object and obtain the real Query object.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.Mlt.MoreLikeThisQuery.#ctor(System.String,System.String[],Lucene.Net.Analysis.Analyzer,System.String)">
+            <param name="moreLikeFields"> fields used for similarity measure </param>
+        </member>
+        <member name="T:Lucene.Net.Queries.TermFilter">
+            <summary>
+            A filter that includes documents that match with a specific term.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.TermFilter.#ctor(Lucene.Net.Index.Term)">
+            <param name="term"> The term documents need to have in order to be a match for this filter. </param>
+        </member>
+        <member name="P:Lucene.Net.Queries.TermFilter.Term">
+            <returns> The term this filter includes documents with. </returns>
+        </member>
+        <member name="T:Lucene.Net.Queries.TermsFilter">
+            <summary>
+            Constructs a filter for docs matching any of the terms added to this class.
+            Unlike a RangeFilter this can be used for filtering on multiple terms that are not necessarily in
+            a sequence. An example might be a collection of primary keys from a database query result or perhaps
+            a choice of "category" labels picked by the end user. As a filter, this is much faster than the
+            equivalent query (a BooleanQuery with many "should" TermQueries)
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.TermsFilter.#ctor(System.Collections.Generic.List{Lucene.Net.Index.Term})">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Queries.TermsFilter"/> from the given list. The list
+            can contain duplicate terms and multiple fields.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.TermsFilter.#ctor(System.String,System.Collections.Generic.List{Lucene.Net.Util.BytesRef})">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Queries.TermsFilter"/> from the given <seealso cref="T:Lucene.Net.Util.BytesRef"/> list for
+            a single field.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.TermsFilter.#ctor(System.String,Lucene.Net.Util.BytesRef[])">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Queries.TermsFilter"/> from the given <seealso cref="T:Lucene.Net.Util.BytesRef"/> array for
+            a single field.
+            </summary>
+        </member>
+        <member name="M:Lucene.Net.Queries.TermsFilter.#ctor(Lucene.Net.Index.Term[])">
+            <summary>
+            Creates a new <seealso cref="T:Lucene.Net.Queries.TermsFilter"/> from the given array. The array can
+            contain duplicate terms and multiple fields.
+            </summary>
+        </member>
+    </members>
+</doc>
