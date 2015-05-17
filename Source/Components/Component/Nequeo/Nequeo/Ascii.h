@@ -56,8 +56,8 @@ namespace Nequeo
 	class Ascii
 	{
 	public:
+		/// ASCII character properties.
 		enum CharacterProperties
-			/// ASCII character properties.
 		{
 			ACP_CONTROL = 0x0001,
 			ACP_SPACE = 0x0002,
