@@ -81,6 +81,7 @@
     <Compile Include="base\CircularBuffer.cs" />
     <Compile Include="base\Collection.cs" />
     <Compile Include="base\Dictionary.cs" />
+    <Compile Include="base\HeadersList.cs" />
     <Compile Include="base\Observable.cs" />
     <Compile Include="base\StoreBuffer.cs" />
     <Compile Include="base\StreamBuffer.cs" />
