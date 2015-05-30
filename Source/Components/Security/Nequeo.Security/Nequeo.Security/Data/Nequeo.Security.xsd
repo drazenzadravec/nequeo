@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="NequeoSecurityGroup">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NequeoSecurityHost">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ServerCredentials">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="CertificatePath">
+                                            <xs:complexType>
+                                                <xs:attribute name="path" type="xs:string" use="required" />
+                                                <xs:attribute name="password" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="CertificateStore">
+                                            <xs:complexType>
+                                                <xs:attribute name="findValue" type="xs:string" use="required" />
+                                                <xs:attribute name="storeLocation" type="xs:string" use="required" />
+                                                <xs:attribute name="storeName" type="xs:string" use="required" />
+                                                <xs:attribute name="x509FindType" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="useServerCertificate" type="xs:boolean" use="required" />
+                                    <xs:attribute name="useCertificateStore" type="xs:boolean" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="ServerCredentialsEncoded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="CertificatePath">
+                                            <xs:complexType>
+                                                <xs:attribute name="path" type="xs:string" use="required" />
+                                                <xs:attribute name="password" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NequeoSecurityCredentials">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="UserCredentials">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="AuthorisationCredentials">
+                                            <xs:complexType>
+                                                <xs:attribute name="username" type="xs:string" use="required" />
+                                                <xs:attribute name="password" type="xs:string" use="required" />
+                                                <xs:attribute name="server" type="xs:string" use="required" />
+                                                <xs:attribute name="secureConnection" type="xs:boolean" use="required" />
+                                                <xs:attribute name="containerDN" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="username" type="xs:string" use="required" />
+                                    <xs:attribute name="password" type="xs:string" use="required" />
+                                    <xs:attribute name="domain" type="xs:string" use="required" />
+                                    <xs:attribute name="authorisationType" type="xs:string" use="required" />
+                                    <xs:attribute name="authenticationType" type="xs:string" use="required" />
+                                    <xs:attribute name="applicationName" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NequeoSecurityPassword">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Encoder">
+                                <xs:complexType>
+                                    <xs:attribute name="type" type="xs:string" use="required" />
+                                    <xs:attribute name="passwordFormat" type="xs:string" use="required" />
+                                    <xs:attribute name="authorisationCode" type="xs:string" use="optional" />
+                                    <xs:attribute name="hashcodeType" type="xs:string" use="optional" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NequeoSecurityPermission">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Source">
+                                <xs:complexType>
+                                    <xs:attribute name="type" type="xs:string" use="required" />
+                                    <xs:attribute name="permissionType" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
