@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Nequeo.Wpf.UI.DataGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="241" d:DesignWidth="489" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Row0" Height="150*" />
+            <RowDefinition Name="Row1" Height="35" />
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="True" Name="dataGrid" SelectionChanged="dataGrid_SelectionChanged" SelectionMode="Single" Grid.Row="0" IsTextSearchEnabled="True" ClipboardCopyMode="IncludeHeader" />
+        <Button Content="&lt;&lt;" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="0,6,0,0" Name="btnFirst" VerticalAlignment="Top" Width="43" IsEnabled="False" ToolTip="Move to the first set of records" Click="btnFirst_Click" />
+        <Button Content="&lt;" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="49,6,0,0" Name="btnPrevious" VerticalAlignment="Top" Width="43" IsEnabled="False" ToolTip="Move to the previous set of records" Click="btnPrevious_Click" />
+        <Label Content="" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="98,5,0,0" Name="lblDetails" VerticalAlignment="Top" Width="153" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Button Content="&gt;" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="257,6,0,0" Name="btnNext" VerticalAlignment="Top" Width="43" IsEnabled="False" ToolTip="Move to the next set of records" Click="btnNext_Click" />
+        <Button Content="&gt;&gt;" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="306,6,0,0" Name="btnLast" VerticalAlignment="Top" Width="43" IsEnabled="False" ToolTip="Move to the last set of records" Click="btnLast_Click" />
+        <Label Content="" Grid.Row="1" Height="28" Margin="360,5,0,0" Name="lblTotalRecords" VerticalAlignment="Top" />
+    </Grid>
+</UserControl>
