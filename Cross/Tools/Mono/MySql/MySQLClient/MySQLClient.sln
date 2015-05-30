@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql.Data", "MySql.Data\MySql.Data.csproj", "{7FBC0EE6-0098-4B63-A0D0-06B08654AF06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql.Data.Entity", "MySql.Data.Entity\MySql.Data.Entity.csproj", "{65D9F3AD-FEF1-41AD-B1BB-B7935A47FED7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65D9F3AD-FEF1-41AD-B1BB-B7935A47FED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D9F3AD-FEF1-41AD-B1BB-B7935A47FED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D9F3AD-FEF1-41AD-B1BB-B7935A47FED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D9F3AD-FEF1-41AD-B1BB-B7935A47FED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FBC0EE6-0098-4B63-A0D0-06B08654AF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBC0EE6-0098-4B63-A0D0-06B08654AF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBC0EE6-0098-4B63-A0D0-06B08654AF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBC0EE6-0098-4B63-A0D0-06B08654AF06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = MySql.Data\MySql.Data.csproj
+	EndGlobalSection
+EndGlobal
