@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Drawing.Pdf", "Nequeo.Drawing.Pdf\Nequeo.Drawing.Pdf.csproj", "{ABC0CF66-4452-4D72-8D39-107502270958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Drawing.Pdf", "Test.Drawing.Pdf\Test.Drawing.Pdf.csproj", "{6236D61F-F3BB-4C2D-9717-9559F6F4C206}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E32C455B-333D-49BE-BB37-024BCBF984FC}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Nequeo.Drawing.Pdf.vsmdi = Nequeo.Drawing.Pdf.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Drawing.Pdf\\Nequeo.Drawing.Pdf.csproj
+		SccProjectName1 = Nequeo.Drawing.Pdf
+		SccLocalPath1 = Nequeo.Drawing.Pdf
+		SccProjectUniqueName2 = Test.Drawing.Pdf\\Test.Drawing.Pdf.csproj
+		SccProjectName2 = Test.Drawing.Pdf
+		SccLocalPath2 = Test.Drawing.Pdf
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Debug|x86 = Staging Debug|x86
+		Staging Release|Any CPU = Staging Release|Any CPU
+		Staging Release|x86 = Staging Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Debug|x86.ActiveCfg = Debug|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Debug|x86.Build.0 = Debug|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Release|x86.ActiveCfg = Release|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Release|x86.Build.0 = Release|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Debug|x86.ActiveCfg = Staging Debug|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Debug|x86.Build.0 = Staging Debug|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Release|x86.ActiveCfg = Staging Release|x86
+		{ABC0CF66-4452-4D72-8D39-107502270958}.Staging Release|x86.Build.0 = Staging Release|x86
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Debug|x86.ActiveCfg = Debug|x86
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Debug|x86.Build.0 = Debug|x86
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Release|x86.ActiveCfg = Release|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Release|x86.Build.0 = Release|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Debug|x86.ActiveCfg = Staging Debug|x86
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Debug|x86.Build.0 = Staging Debug|x86
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Release|x86.ActiveCfg = Debug|Any CPU
+		{6236D61F-F3BB-4C2D-9717-9559F6F4C206}.Staging Release|x86.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Nequeo.Drawing.Pdf.vsmdi
+	EndGlobalSection
+EndGlobal
