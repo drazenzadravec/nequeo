@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="NequeoHandlerGroup">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BaseHandlerDefaultSection">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="BaseHandler">
+                                <xs:complexType>
+                                    <xs:attribute name="processLogFilePathIsRelative" type="xs:boolean" use="required" />
+                                    <xs:attribute name="processLogFilePath" type="xs:string" use="required" />
+                                    <xs:attribute name="processLogFileMaxSize" type="xs:int" use="required" />
+                                    <xs:attribute name="errorLogFilePathIsRelative" type="xs:boolean" use="required" />
+                                    <xs:attribute name="errorLogFilePath" type="xs:string" use="required" />
+                                    <xs:attribute name="errorLogFileMaxSize" type="xs:int" use="required" />
+                                    <xs:attribute name="sessionStatePathIsRelative" type="xs:boolean" use="required" />
+                                    <xs:attribute name="sessionStatePath" type="xs:string" use="required" />
+                                    <xs:attribute name="membershipCacheTimeOut" type="xs:int" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="baseHandlerName" type="xs:string" use="required" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="BaseTypeHandlerDefaultSection">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Extension">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="add">
+                                            <xs:complexType>
+                                                <xs:attribute name="name" type="xs:string" use="required" />
+                                                <xs:attribute name="assemblyName" type="xs:string" use="required" />
+                                                <xs:attribute name="typeName" type="xs:string" use="required" />
+                                                <xs:attribute name="typeMemberName" type="xs:string" use="required" />
+                                                <xs:attribute name="writeTo" type="xs:string" use="required" />
+                                                <xs:attribute name="logType" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
