@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B193022-5469-4685-95BF-56E43D365C07}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.IO.Audio</RootNamespace>
+    <AssemblyName>Nequeo.IO.Audio</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoIOKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Nequeo.IO.Audio.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Nequeo.IO.Audio.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Nequeo.IO.Audio.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Nequeo.IO.Audio.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=a8d0fd4d65ef7906, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\AudioFormat.cs" />
+    <Compile Include="Compression\AcmDriverAddFlags.cs" />
+    <Compile Include="Compression\AcmDriverDetails.cs" />
+    <Compile Include="Compression\AcmDriverDetailsSupportFlags.cs" />
+    <Compile Include="Compression\AcmDriverEnumFlags.cs" />
+    <Compile Include="Compression\AcmFormatChoose.cs" />
+    <Compile Include="Compression\AcmFormatChooseStyleFlags.cs" />
+    <Compile Include="Compression\AcmFormatDetails.cs" />
+    <Compile Include="Compression\AcmFormatEnumFlags.cs" />
+    <Compile Include="Compression\AcmFormatSuggestFlags.cs" />
+    <Compile Include="Compression\AcmFormatTagDetails.cs" />
+    <Compile Include="Compression\AcmInterop.cs" />
+    <Compile Include="Compression\AcmMetrics.cs" />
+    <Compile Include="Compression\AcmMp3FrameDecompressor.cs" />
+    <Compile Include="Compression\AcmStream.cs" />
+    <Compile Include="Compression\AcmStreamConvertFlags.cs" />
+    <Compile Include="Compression\AcmStreamHeader.cs" />
+    <Compile Include="Compression\AcmStreamHeaderStatusFlags.cs" />
+    <Compile Include="Compression\AcmStreamHeaderStruct.cs" />
+    <Compile Include="Compression\AcmStreamOpenFlags.cs" />
+    <Compile Include="Compression\AcmStreamSizeFlags.cs" />
+    <Compile Include="Compression\WaveFilter.cs" />
+    <Compile Include="Formats\AiffReader.cs" />
+    <Compile Include="Formats\WaveFileChunkReader.cs" />
+    <Compile Include="Formats\WaveFormatCustomMarshaler.cs" />
+    <Compile Include="Foundation\AudioSubtypes.cs" />
+    <Compile Include="Foundation\Blob.cs" />
+    <Compile Include="Foundation\IMFActivate.cs" />
+    <Compile Include="Foundation\IMFAttributes.cs" />
+    <Compile Include="Foundation\IMFByteStream.cs" />
+    <Compile Include="Foundation\IMFCollection.cs" />
+    <Compile Include="Foundation\IMFMediaBuffer.cs" />
+    <Compile Include="Foundation\IMFMediaType.cs" />
+    <Compile Include="Foundation\IMFSample.cs" />
+    <Compile Include="Foundation\IMFSinkWriter.cs" />
+    <Compile Include="Foundation\IMFSourceReader.cs" />
+    <Compile Include="Foundation\MediaFoundationApi.cs" />
+    <Compile Include="Foundation\MediaFoundationAttributes.cs" />
+    <Compile Include="Foundation\MediaFoundationErrors.cs" />
+    <Compile Include="Foundation\MediaFoundationInterop.cs" />
+    <Compile Include="Foundation\MediaType.cs" />
+    <Compile Include="Foundation\MediaTypes.cs" />
+    <Compile Include="Foundation\MFT_REGISTER_TYPE_INFO.cs" />
+    <Compile Include="Foundation\MF_SINK_WRITER_STATISTICS.cs" />
+    <Compile Include="Foundation\PropVariant.cs" />
+    <Compile Include="Foundation\_MFT_ENUM_FLAG.cs" />
+    <Compile Include="Formats\StreamReader.cs" />
+    <Compile Include="Provider\Pcm16BitToSampleProvider.cs" />
+    <Compile Include="Provider\Pcm24BitToSampleProvider.cs" />
+    <Compile Include="Provider\Pcm32BitToSampleProvider.cs" />
+    <Compile Include="Provider\Pcm8BitToSampleProvider.cs" />
+    <Compile Include="Provider\SampleToWaveProvider.cs" />
+    <Compile Include="Provider\WaveToSampleProvider.cs" />
+    <Compile Include="Provider\WaveToSampleProvider64.cs" />
+    <Compile Include="Utils\BufferHelpers.cs" />
+    <Compile Include="Utils\ByteArrayExtensions.cs" />
+    <Compile Include="Utils\ChunkIdentifier.cs" />
+    <Compile Include="Utils\CircularBuffer.cs" />
+    <Compile Include="Utils\FieldDescriptionAttribute.cs" />
+    <Compile Include="Utils\HResult.cs" />
+    <Compile Include="Formats\Mp3Reader.cs" />
+    <Compile Include="Utils\IEEE.cs" />
+    <Compile Include="Wave\AdpcmWaveFormat.cs" />
+    <Compile Include="Formats\AudioReader.cs" />
+    <Compile Include="Wave\BlockAlignReductionStream.cs" />
+    <Compile Include="Wave\Gsm610WaveFormat.cs" />
+    <Compile Include="Provider\ISampleProvider.cs" />
+    <Compile Include="Wave\Id3v2Tag.cs" />
+    <Compile Include="Compression\IMp3FrameDecompressor.cs" />
+    <Compile Include="Wave\IWaveBuffer.cs" />
+    <Compile Include="Wave\IWaveProvider.cs" />
+    <Compile Include="base\MmTime.cs" />
+    <Compile Include="base\PlaybackState.cs" />
+    <Compile Include="base\StoppedEventArgs.cs" />
+    <Compile Include="Provider\MeteringSampleProvider.cs" />
+    <Compile Include="Provider\MonoToStereoSampleProvider.cs" />
+    <Compile Include="Wave\MediaFoundationReader.cs" />
+    <Compile Include="Wave\Mp3Frame.cs" />
+    <Compile Include="Wave\Mp3WaveFormat.cs" />
+    <Compile Include="Wave\MpegVersion.cs" />
+    <Compile Include="Wave\RiffChunk.cs" />
+    <Compile Include="Wave\SampleChannel.cs" />
+    <Compile Include="Provider\SampleProviderConverterBase.cs" />
+    <Compile Include="Provider\SampleProviderConverters.cs" />
+    <Compile Include="Provider\VolumeSampleProvider.cs" />
+    <Compile Include="Wave\WaveCallbackInfo.cs" />
+    <Compile Include="base\WaveDevices.cs" />
+    <Compile Include="base\MmException.cs" />
+    <Compile Include="base\Volume.cs" />
+    <Compile Include="base\WaveDevice.cs" />
+    <Compile Include="base\WaveFormat.cs" />
+    <Compile Include="Formats\WaveReader.cs" />
+    <Compile Include="Wave\WaveFormatConversionStream.cs" />
+    <Compile Include="Wave\WaveFormatEncoding.cs" />
+    <Compile Include="Wave\WaveFormatExtensible.cs" />
+    <Compile Include="Wave\WaveFormatExtraData.cs" />
+    <Compile Include="Wave\WaveFormatProvider.cs" />
+    <Compile Include="Wave\WaveHeader.cs" />
+    <Compile Include="Wave\WaveInterop.cs" />
+    <Compile Include="base\WavePlayer.cs" />
+    <Compile Include="Wave\WaveOutBuffer.cs" />
+    <Compile Include="Wave\WaveProvider.cs" />
+    <Compile Include="base\WaveStructure.cs" />
+    <Compile Include="Wave\WaveStream.cs" />
+    <Compile Include="Wave\WaveWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wave\WaveWindowNative.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wave\WaveBuffer.cs" />
+    <Compile Include="Wave\XingHeader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NequeoIOKey.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

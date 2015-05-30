@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.IO.Audio", "Nequeo.IO.Audio\Nequeo.IO.Audio.csproj", "{7B193022-5469-4685-95BF-56E43D365C07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioTest", "AudioTest\AudioTest.csproj", "{665CB25E-00E9-49A7-A61D-AC1C28A9438D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.IO.Audio\\Nequeo.IO.Audio.csproj
+		SccProjectName1 = Nequeo.IO.Audio
+		SccLocalPath1 = Nequeo.IO.Audio
+		SccProjectUniqueName2 = AudioTest\\AudioTest.csproj
+		SccProjectName2 = AudioTest
+		SccLocalPath2 = AudioTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B193022-5469-4685-95BF-56E43D365C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{7B193022-5469-4685-95BF-56E43D365C07}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Staging Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Staging Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Staging Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665CB25E-00E9-49A7-A61D-AC1C28A9438D}.Staging Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
