@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Conversion.Csv", "Nequeo.Conversion.Csv\Nequeo.Conversion.Csv.csproj", "{41F53611-ECB5-4386-B1BF-862DE1A54161}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Conversion.Csv\\Nequeo.Conversion.Csv.csproj
+		SccProjectName1 = Nequeo.Conversion.Csv
+		SccLocalPath1 = Nequeo.Conversion.Csv
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Staging Debug|Any CPU.Build.2 = Staging Debug|x64
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{41F53611-ECB5-4386-B1BF-862DE1A54161}.Staging Release|Any CPU.Build.2 = Staging Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

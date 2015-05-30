@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Conversion.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="OneRowPerXmlFile" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OutputXmlPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\Output.xml</Value>
+    </Setting>
+    <Setting Name="DateTimeDataFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ddMMyy</Value>
+    </Setting>
+    <Setting Name="ArchivePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\Archive\</Value>
+    </Setting>
+    <Setting Name="ReadType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Nequeo.Model.Conversion.TransformXmlModel,Nequeo.Model</Value>
+    </Setting>
+    <Setting Name="LengthOfTimeToKeepArchiveFiles" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
