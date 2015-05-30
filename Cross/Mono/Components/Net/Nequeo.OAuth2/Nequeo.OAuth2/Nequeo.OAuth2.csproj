@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CCFB10DF-3DAE-49EB-8899-4862D2959D08}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.OAuth2</RootNamespace>
+    <AssemblyName>Nequeo.OAuth2</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.Collections">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Serialisation">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Serialisation.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.Core">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="base\AuthAgentClient.cs" />
+    <Compile Include="base\AuthWebClient.cs" />
+    <Compile Include="base\Client.cs" />
+    <Compile Include="base\Provider.cs" />
+    <Compile Include="base\Resource.cs" />
+    <Compile Include="base\Designer\Client.cs" />
+    <Compile Include="Consumer\AccessTokenData.cs" />
+    <Compile Include="Consumer\OAuthClientBase.cs" />
+    <Compile Include="Consumer\TokenManager.cs" />
+    <Compile Include="Consumer\Session\AuthorizationServerDescription.cs" />
+    <Compile Include="Consumer\Session\AuthorizationState.cs" />
+    <Compile Include="Consumer\Session\ClientBase.cs" />
+    <Compile Include="Consumer\Session\ClientCredentialApplicator.cs" />
+    <Compile Include="Consumer\Session\ClientStrings.Designer.cs" />
+    <Compile Include="Consumer\Session\IAuthorizationState.cs" />
+    <Compile Include="Consumer\Session\IClientAuthorizationTracker.cs" />
+    <Compile Include="Consumer\Session\UserAgentClient.cs" />
+    <Compile Include="Consumer\Session\WebServerClient.cs" />
+    <Compile Include="Consumer\Session\Authorization\ClientAuthorizationStrings.Designer.cs" />
+    <Compile Include="Consumer\Session\Authorization\ClientType.cs" />
+    <Compile Include="Consumer\Session\Authorization\IClientDescription.cs" />
+    <Compile Include="Consumer\Session\Authorization\TokenEndpointProtocolException.cs" />
+    <Compile Include="Consumer\Session\Authorization\ChannelElements\EndUserAuthorizationResponseTypeEncoder.cs" />
+    <Compile Include="Consumer\Session\Authorization\ChannelElements\GrantTypeEncoder.cs" />
+    <Compile Include="Consumer\Session\Authorization\ChannelElements\OAuth2ChannelBase.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenAuthorizationCodeRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenClientCredentialsRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenFailedResponse.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenRefreshRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenRequestBase.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenResourceOwnerPasswordCredentialsRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenResult.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AccessTokenSuccessResponse.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\AuthenticatedClientRequestBase.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationFailedResponse.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationImplicitRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationResponseType.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationSuccessAccessTokenResponse.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationSuccessAuthCodeResponse.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\EndUserAuthorizationSuccessResponseBase.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\GrantType.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\IAccessTokenIssuingResponse.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\IAccessTokenRequest.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\IAccessTokenRequestInternal.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\IMessageWithClientState.cs" />
+    <Compile Include="Consumer\Session\Authorization\Messages\ScopedAccessTokenRequest.cs" />
+    <Compile Include="Consumer\Session\ChannelElements\IOAuth2ChannelWithClient.cs" />
+    <Compile Include="Consumer\Session\ChannelElements\OAuth2ClientChannel.cs" />
+    <Compile Include="Consumer\Session\Messages\AccessTokenAuthorizationCodeRequestC.cs" />
+    <Compile Include="Consumer\Session\Messages\AccessTokenRefreshRequestC.cs" />
+    <Compile Include="Consumer\Session\Messages\EndUserAuthorizationImplicitRequestC.cs" />
+    <Compile Include="Consumer\Session\Messages\EndUserAuthorizationRequestC.cs" />
+    <Compile Include="Framework\AccessToken.cs" />
+    <Compile Include="Framework\IScopeSatisfiedCheck.cs" />
+    <Compile Include="Framework\OAuthStrings1.Designer.cs" />
+    <Compile Include="Framework\Protocol.cs" />
+    <Compile Include="Framework\StandardScopeSatisfiedCheck.cs" />
+    <Compile Include="Framework\TokenResponseModel.cs" />
+    <Compile Include="Framework\ChannelElements\AuthorizationDataBag.cs" />
+    <Compile Include="Framework\ChannelElements\ClientAuthenticationResult.cs" />
+    <Compile Include="Framework\ChannelElements\IAccessTokenCarryingRequest.cs" />
+    <Compile Include="Framework\ChannelElements\IAuthorizationCarryingRequest.cs" />
+    <Compile Include="Framework\ChannelElements\IAuthorizationDescription.cs" />
+    <Compile Include="Framework\ChannelElements\ScopeEncoder.cs" />
+    <Compile Include="Framework\Messages\AccessProtectedResourceRequest.cs" />
+    <Compile Include="Framework\Messages\MessageBase.cs" />
+    <Compile Include="Framework\Messages\UnauthorizedResponse.cs" />
+    <Compile Include="Framework\Resource\IAccessTokenAnalyzer.cs" />
+    <Compile Include="Framework\Resource\ResourceServer.cs" />
+    <Compile Include="Framework\Resource\ResourceServerStrings.Designer.cs" />
+    <Compile Include="Framework\Resource\StandardAccessTokenAnalyzer.cs" />
+    <Compile Include="Framework\Resource\ChannelElements\OAuth2ResourceServerChannel.cs" />
+    <Compile Include="Framework\Utility\AuthenticationResult.cs" />
+    <Compile Include="Framework\Utility\IAuthenticationClient.cs" />
+    <Compile Include="Framework\Utility\IOpenAuthDataProvider.cs" />
+    <Compile Include="Framework\Utility\JsonHelper.cs" />
+    <Compile Include="Framework\Utility\OAuthIdentity.cs" />
+    <Compile Include="Framework\Utility\OAuthPrincipal.cs" />
+    <Compile Include="Framework\Utility\OAuthUtilities.cs" />
+    <Compile Include="Framework\Utility\OpenAuthAuthenticationTicketHelper.cs" />
+    <Compile Include="Framework\Utility\OpenAuthSecurityManager.cs" />
+    <Compile Include="Framework\Utility\UriHelper.cs" />
+    <Compile Include="Framework\Utility\WebResources.Designer.cs" />
+    <Compile Include="Provider\ClientAuthentication.cs" />
+    <Compile Include="Provider\OAuthAuthorizationServer.cs" />
+    <Compile Include="Provider\Session\AuthServerStrings.Designer.cs" />
+    <Compile Include="Provider\Session\AuthServerUtilities.cs" />
+    <Compile Include="Provider\Session\AuthorizationServer.cs" />
+    <Compile Include="Provider\Session\AuthorizationServerAccessToken.cs" />
+    <Compile Include="Provider\Session\ClientDescription.cs" />
+    <Compile Include="Provider\Session\IAuthorizationServerHost.cs" />
+    <Compile Include="Provider\Session\ChannelElements\AggregatingClientCredentialReader.cs" />
+    <Compile Include="Provider\Session\ChannelElements\AuthServerBindingElementBase.cs" />
+    <Compile Include="Provider\Session\ChannelElements\AuthorizationCode.cs" />
+    <Compile Include="Provider\Session\ChannelElements\ClientAuthenticationModule.cs" />
+    <Compile Include="Provider\Session\ChannelElements\ClientCredentialHttpBasicReader.cs" />
+    <Compile Include="Provider\Session\ChannelElements\ClientCredentialMessagePartReader.cs" />
+    <Compile Include="Provider\Session\ChannelElements\IOAuth2ChannelWithAuthorizationServer.cs" />
+    <Compile Include="Provider\Session\ChannelElements\MessageValidationBindingElement.cs" />
+    <Compile Include="Provider\Session\ChannelElements\OAuth2AuthorizationServerChannel.cs" />
+    <Compile Include="Provider\Session\ChannelElements\RefreshToken.cs" />
+    <Compile Include="Provider\Session\ChannelElements\TokenCodeSerializationBindingElement.cs" />
+    <Compile Include="Provider\Session\Messages\AccessTokenAuthorizationCodeRequestAS.cs" />
+    <Compile Include="Provider\Session\Messages\AccessTokenRefreshRequestAS.cs" />
+    <Compile Include="Provider\Session\Messages\EndUserAuthorizationSuccessAuthCodeResponseAS.cs" />
+    <Compile Include="Provider\Session\Messages\IAuthorizationCodeCarryingRequest.cs" />
+    <Compile Include="Provider\Session\Messages\IRefreshTokenCarryingRequest.cs" />
+    <Compile Include="Storage\IConsumerStore.cs" />
+    <Compile Include="Storage\ICryptographyKeyStore.cs" />
+    <Compile Include="Storage\INonceStore.cs" />
+    <Compile Include="Storage\ITokenStore.cs" />
+    <Compile Include="Storage\Basic\BinaryDataBagFormatter.cs" />
+    <Compile Include="Storage\Basic\CryptoKeyStoreTranslate.cs" />
+    <Compile Include="Storage\Basic\DataBagFormatterBase.cs" />
+    <Compile Include="Storage\Basic\NonceMemoryStore.cs" />
+    <Compile Include="Storage\Basic\UriStyleMessageFormatter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="base\" />
+    <Folder Include="Consumer\" />
+    <Folder Include="Framework\" />
+    <Folder Include="Provider\" />
+    <Folder Include="Storage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\Designer\Client.tt" />
+    <None Include="base\Designer\_AsyncExecuteTypeGeneric.include" />
+    <None Include="Consumer\Session\ClientStrings.resx" />
+    <None Include="Consumer\Session\Authorization\ClientAuthorizationStrings.resx" />
+    <None Include="Framework\OAuthStrings.resx" />
+    <None Include="Framework\Resource\ResourceServerStrings.resx" />
+    <None Include="Framework\Utility\WebResources.resx" />
+    <None Include="Provider\Session\AuthServerStrings.resx" />
+  </ItemGroup>
+</Project>

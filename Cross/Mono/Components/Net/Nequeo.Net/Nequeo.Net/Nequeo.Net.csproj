@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E5E749CA-E870-4673-B3E9-5382CA540C15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Net</RootNamespace>
+    <AssemblyName>Nequeo.Net</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.Collections">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Conversion">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Conversion.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.IO.Stream">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Stream.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="base\Common.cs" />
+    <Compile Include="base\IInteractionContext.cs" />
+    <Compile Include="base\IMemberContext.cs" />
+    <Compile Include="base\IMemberContextManager.cs" />
+    <Compile Include="base\IServerContextManager.cs" />
+    <Compile Include="base\ISingleContextManager.cs" />
+    <Compile Include="base\IStateContextManager.cs" />
+    <Compile Include="base\Member.cs" />
+    <Compile Include="base\Utility.cs" />
+    <Compile Include="Configuration\RemoteHosts.cs" />
+    <Compile Include="Configuration\ServerHosts.cs" />
+    <Compile Include="IP\Common.cs" />
+    <Compile Include="Provider\ClientContext.cs" />
+    <Compile Include="Provider\ClientSocket.cs" />
+    <Compile Include="Provider\Context.cs" />
+    <Compile Include="Provider\NetRequestStream.cs" />
+    <Compile Include="Provider\NetResponseStream.cs" />
+    <Compile Include="Provider\Request.cs" />
+    <Compile Include="Provider\RequestStream.cs" />
+    <Compile Include="Provider\Response.cs" />
+    <Compile Include="Provider\ResponseStream.cs" />
+    <Compile Include="Provider\ServerContext.cs" />
+    <Compile Include="Provider\ServerEndpoint.cs" />
+    <Compile Include="Provider\ServerSingleSocket.cs" />
+    <Compile Include="Provider\ServerSocket.cs" />
+    <Compile Include="Provider\SingleContext.cs" />
+    <Compile Include="Security\Authentication.cs" />
+    <Compile Include="Sockets\Client.cs" />
+    <Compile Include="Sockets\IClient.cs" />
+    <Compile Include="Sockets\IServer.cs" />
+    <Compile Include="Sockets\IServerContext.cs" />
+    <Compile Include="Sockets\Multiplexer.cs" />
+    <Compile Include="Sockets\Server.cs" />
+    <Compile Include="Sockets\ServerActive.cs" />
+    <Compile Include="Sockets\ServerContext.cs" />
+    <Compile Include="Sockets\ServerDynamic.cs" />
+    <Compile Include="Sockets\ServerMultiEndpoint.cs" />
+    <Compile Include="Sockets\ServerSingle.cs" />
+    <Compile Include="Sockets\Designer\Client.cs" />
+    <Compile Include="Web\NetClient.cs" />
+    <Compile Include="Web\NetContext.cs" />
+    <Compile Include="Web\NetRequest.cs" />
+    <Compile Include="Web\NetResponse.cs" />
+    <Compile Include="Web\WebContext.cs" />
+    <Compile Include="Web\WebRequest.cs" />
+    <Compile Include="Web\WebResponse.cs" />
+    <Compile Include="Web\WebServer.cs" />
+    <Compile Include="base\IContextManager.cs" />
+    <Compile Include="Mime\MimeEncoder.cs" />
+    <Compile Include="Mime\MimeType.cs" />
+    <Compile Include="Provider\SendToContainer.cs" />
+    <Compile Include="Provider\UdpSingleServerSocket.cs" />
+    <Compile Include="Provider\UdpServerSocket.cs" />
+    <Compile Include="Server\ProxyServer.cs" />
+    <Compile Include="Server\RemoteServer.cs" />
+    <Compile Include="Server\SingleContextInt.cs" />
+    <Compile Include="Sockets\UdpSingleServer.cs" />
+    <Compile Include="Sockets\UdpServerContext.cs" />
+    <Compile Include="Sockets\UdpServer.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Data\Nequeo.Net.xsd" />
+    <None Include="Sockets\Designer\Client.tt" />
+    <None Include="Sockets\Designer\_AsyncExecuteTypeGeneric.include" />
+    <None Include="Properties\Settings.settings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="base\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Data\" />
+    <Folder Include="IP\" />
+    <Folder Include="Provider\" />
+    <Folder Include="Security\" />
+    <Folder Include="Sockets\" />
+    <Folder Include="Web\" />
+    <Folder Include="Mime\" />
+    <Folder Include="Server\" />
+  </ItemGroup>
+</Project>

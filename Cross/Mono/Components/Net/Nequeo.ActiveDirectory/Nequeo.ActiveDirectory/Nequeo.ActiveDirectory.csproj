@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AAA82712-76B9-4263-8A58-B3987CE29C7D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.ActiveDirectory</RootNamespace>
+    <AssemblyName>Nequeo.ActiveDirectory</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.Security">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="base\ApplicationDirectoryClient.cs" />
+    <Compile Include="base\Common.cs" />
+    <Compile Include="base\DomainDirectoryClient.cs" />
+    <Compile Include="base\IISDirectoryClient.cs" />
+    <Compile Include="base\Designer\ApplicationDirectoryClient.cs" />
+    <Compile Include="base\Designer\DomainDirectoryClient.cs" />
+    <Compile Include="base\Designer\IISDirectoryClient.cs" />
+    <Compile Include="base\Designer\LocalDirectoryClient.cs" />
+    <Compile Include="Model\DirectoryEntryModel.cs" />
+    <Compile Include="base\LocalDirectoryClient.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="base\" />
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\Designer\ApplicationDirectoryClient.tt" />
+    <None Include="base\Designer\DomainDirectoryClient.tt" />
+    <None Include="base\Designer\IISDirectoryClient.tt" />
+    <None Include="base\Designer\LocalDirectoryClient.tt" />
+    <None Include="base\Designer\_AsyncExecuteTypeGeneric.include" />
+  </ItemGroup>
+</Project>

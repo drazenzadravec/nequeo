@@ -1,0 +1,6 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# string Namespace = "Nequeo.Net.Sockets";#>
+<# string TypeName = "Client";#>
+<# string SubName = "";#>
+<#@ include file="_AsyncExecuteTypeGeneric.include" #>

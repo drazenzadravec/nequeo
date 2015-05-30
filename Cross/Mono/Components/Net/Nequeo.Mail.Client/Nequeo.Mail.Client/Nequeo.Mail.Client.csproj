@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E24124FA-4F09-4061-AF53-85FE54180564}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Mail.Client</RootNamespace>
+    <AssemblyName>Nequeo.Mail.Client</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.ComponentModel">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Nequeo.Cryptography">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="base\Common.cs" />
+    <Compile Include="base\Emailer.cs" />
+    <Compile Include="base\Designer\Emailer.cs" />
+    <Compile Include="Extension\SmtpClient.cs" />
+    <Compile Include="Imap\AsyncOperation.cs" />
+    <Compile Include="Imap\Attachment.cs" />
+    <Compile Include="Imap\Client.cs" />
+    <Compile Include="Imap\Common.cs" />
+    <Compile Include="Imap\Message.cs" />
+    <Compile Include="Imap\MessageBody.cs" />
+    <Compile Include="Mime\AsyncOperation.cs" />
+    <Compile Include="Mime\Attachment.cs" />
+    <Compile Include="Mime\Common.cs" />
+    <Compile Include="Mime\MessageBody.cs" />
+    <Compile Include="Mime\Parser.cs" />
+    <Compile Include="Pop\AsyncOperation.cs" />
+    <Compile Include="Pop\Attachment.cs" />
+    <Compile Include="Pop\Client.cs" />
+    <Compile Include="Pop\Common.cs" />
+    <Compile Include="Pop\Message.cs" />
+    <Compile Include="Pop\MessageBody.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="base\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Imap\" />
+    <Folder Include="Mime\" />
+    <Folder Include="Pop\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\Designer\Emailer.tt" />
+    <None Include="base\Designer\_AsyncExecuteTypeGeneric.include" />
+    <None Include="App.config" />
+    <None Include="Data\Nequeo.Mail.Client.xsd" />
+  </ItemGroup>
+</Project>

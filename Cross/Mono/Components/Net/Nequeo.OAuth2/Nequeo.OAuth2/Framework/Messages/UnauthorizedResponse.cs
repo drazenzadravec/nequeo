@@ -1,0 +1,232 @@
+﻿/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2012 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ * 
+ */
+
+#region Nequeo Pty Ltd License
+/*
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+*/
+#endregion
+
+namespace Nequeo.Net.OAuth2.Framework.Messages
+{
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics.Contracts;
+	using System.Globalization;
+	using System.Net;
+	using System.Text;
+
+    using Nequeo.Net.Core.Messaging;
+    using Nequeo.Net.OAuth2.Framework.ChannelElements;
+
+	/// <summary>
+	/// A direct response sent in response to a rejected Bearer access token.
+	/// </summary>
+	/// <remarks>
+	/// This satisfies the spec in: http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authn-header
+	/// </remarks>
+	public class UnauthorizedResponse : MessageBase, IHttpDirectResponse {
+		/// <summary>
+		/// The headers in the response message.
+		/// </summary>
+		private readonly WebHeaderCollection headers = new WebHeaderCollection();
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UnauthorizedResponse"/> class.
+		/// </summary>
+		/// <param name="version">The protocol version.</param>
+		protected UnauthorizedResponse(Version version = null)
+			: base(version ?? Protocol.Default.Version) {
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UnauthorizedResponse"/> class.
+		/// </summary>
+		/// <param name="request">The request.</param>
+		protected UnauthorizedResponse(IDirectedProtocolMessage request)
+			: base(request) {
+		}
+
+		/// <summary>
+		/// Gets or sets the HTTP status code that the direct response should be sent with.
+		/// </summary>
+		public HttpStatusCode HttpStatusCode { get; set; }
+
+		/// <summary>
+		/// Gets the HTTP headers to add to the response.
+		/// </summary>
+		/// <value>May be an empty collection, but must not be <c>null</c>.</value>
+		public WebHeaderCollection Headers {
+			get { return this.headers; }
+		}
+
+		/// <summary>
+		/// Gets or sets the well known error code.
+		/// </summary>
+		/// <value>One of the values from <see cref="Protocol.BearerTokenErrorCodes"/>.</value>
+		[MessagePart(Protocol.BearerTokenUnauthorizedResponseParameters.ErrorCode)]
+		public string ErrorCode { get; set; }
+
+		/// <summary>
+		/// Gets or sets a human-readable explanation for developers that is not meant to be displayed to end users.
+		/// </summary>
+		[MessagePart(Protocol.BearerTokenUnauthorizedResponseParameters.ErrorDescription)]
+		public string ErrorDescription { get; set; }
+
+		/// <summary>
+		/// Gets or sets an absolute URI identifying a human-readable web page explaining the error.
+		/// </summary>
+		[MessagePart(Protocol.BearerTokenUnauthorizedResponseParameters.ErrorUri)]
+		public Uri ErrorUri { get; set; }
+
+		/// <summary>
+		/// Gets or sets the realm.
+		/// </summary>
+		/// <value>The realm.</value>
+		[MessagePart(Protocol.BearerTokenUnauthorizedResponseParameters.Realm)]
+		public string Realm { get; set; }
+
+		/// <summary>
+		/// Gets or sets the scope.
+		/// </summary>
+		/// <value>The scope.</value>
+		[MessagePart(Protocol.BearerTokenUnauthorizedResponseParameters.Scope, Encoder = typeof(ScopeEncoder))]
+		public HashSet<string> Scope { get; set; }
+
+		/// <summary>
+		/// Gets the scheme to use in the WWW-Authenticate header.
+		/// </summary>
+		internal virtual string Scheme {
+			get { return Protocol.BearerHttpAuthorizationScheme; }
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UnauthorizedResponse"/> class
+		/// to inform the client that the request was invalid.
+		/// </summary>
+		/// <param name="exception">The exception.</param>
+		/// <param name="version">The version of OAuth 2 that is in use.</param>
+		/// <returns>The error message.</returns>
+		internal static UnauthorizedResponse InvalidRequest(ProtocolException exception, Version version = null) {
+			
+			var message = new UnauthorizedResponse(version) {
+				ErrorCode = Protocol.BearerTokenErrorCodes.InvalidRequest,
+				ErrorDescription = exception.Message,
+				HttpStatusCode = System.Net.HttpStatusCode.BadRequest,
+			};
+
+			return message;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UnauthorizedResponse"/> class
+		/// to inform the client that the bearer token included in the request was rejected.
+		/// </summary>
+		/// <param name="request">The request.</param>
+		/// <param name="exception">The exception.</param>
+		/// <returns>The error message.</returns>
+		internal static UnauthorizedResponse InvalidToken(IDirectedProtocolMessage request, ProtocolException exception) {
+			
+			var message = new UnauthorizedResponse(request) {
+				ErrorCode = Protocol.BearerTokenErrorCodes.InvalidToken,
+				ErrorDescription = exception.Message,
+				HttpStatusCode = System.Net.HttpStatusCode.Unauthorized,
+			};
+
+			return message;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UnauthorizedResponse"/> class
+		/// to inform the client of the required set of scopes required to perform this operation.
+		/// </summary>
+		/// <param name="request">The request.</param>
+		/// <param name="requiredScopes">The set of scopes required to perform this operation.</param>
+		/// <returns>The error message.</returns>
+		internal static UnauthorizedResponse InsufficientScope(IDirectedProtocolMessage request, HashSet<string> requiredScopes) {
+			
+			var message = new UnauthorizedResponse(request) {
+				HttpStatusCode = System.Net.HttpStatusCode.Forbidden,
+				ErrorCode = Protocol.BearerTokenErrorCodes.InsufficientScope,
+				Scope = requiredScopes,
+			};
+			return message;
+		}
+
+		/// <summary>
+		/// Ensures the message is valid.
+		/// </summary>
+		protected override void EnsureValidMessage() {
+			base.EnsureValidMessage();
+
+			// Make sure the characters used in the supplied parameters satisfy requirements.
+			VerifyErrorCodeOrDescription(this.ErrorCode, Protocol.BearerTokenUnauthorizedResponseParameters.ErrorCode);
+			VerifyErrorCodeOrDescription(this.ErrorDescription, Protocol.BearerTokenUnauthorizedResponseParameters.ErrorDescription);
+			VerifyErrorUri(this.ErrorUri);
+
+			// Ensure that at least one parameter is specified, as required in the spec.
+			ErrorUtilities.VerifyProtocol(
+				this.ErrorCode != null || this.ErrorDescription != null || this.ErrorUri != null || this.Realm != null || this.Scope != null,
+				OAuthStrings.BearerTokenUnauthorizedAtLeastOneParameterRequired);
+		}
+
+		/// <summary>
+		/// Ensures the error or error_description parameters contain only allowed characters.
+		/// </summary>
+		/// <param name="value">The argument.</param>
+		/// <param name="parameterName">The name of the parameter being validated.  Used when errors are reported.</param>
+		private static void VerifyErrorCodeOrDescription(string value, string parameterName) {
+			if (value != null) {
+				for (int i = 0; i < value.Length; i++) {
+					// The allowed set of characters comes from http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authn-header
+					char ch = value[i];
+					if (!((ch >= '\x20' && ch <= '\x21') || (ch >= '\x23' && ch <= '\x5B') || (ch >= '\x5D' && ch <= '\x7E'))) {
+						ErrorUtilities.ThrowProtocol(OAuthStrings.ParameterContainsIllegalCharacters, parameterName, ch);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Ensures the error_uri parameter contains only allowed characters and is an absolute URI.
+		/// </summary>
+		/// <param name="valueUri">The absolute URI.</param>
+		private static void VerifyErrorUri(Uri valueUri) {
+			if (valueUri != null) {
+				ErrorUtilities.VerifyProtocol(valueUri.IsAbsoluteUri, OAuthStrings.AbsoluteUriRequired);
+				string value = valueUri.AbsoluteUri;
+				for (int i = 0; i < value.Length; i++) {
+					// The allowed set of characters comes from http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authn-header
+					char ch = value[i];
+					if (!(ch == '\x21' || (ch >= '\x23' && ch <= '\x5B') || (ch >= '\x5D' && ch <= '\x7E'))) {
+						ErrorUtilities.ThrowProtocol(OAuthStrings.ParameterContainsIllegalCharacters, Protocol.BearerTokenUnauthorizedResponseParameters.ErrorUri, ch);
+					}
+				}
+			}
+		}
+	}
+}

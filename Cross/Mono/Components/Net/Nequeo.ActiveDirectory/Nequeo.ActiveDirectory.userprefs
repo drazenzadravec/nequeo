@@ -1,0 +1,12 @@
+﻿<Properties StartupItem="Nequeo.ActiveDirectory/Nequeo.ActiveDirectory.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Nequeo.ActiveDirectory/base/ApplicationDirectoryClient.cs">
+    <Files>
+      <File FileName="Nequeo.ActiveDirectory/base/ApplicationDirectoryClient.cs" Line="42" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5184D640-A020-4F48-9FD0-2624942A6942}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Data</RootNamespace>
+    <AssemblyName>Nequeo.Data</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.Collections">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Linq">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Serialisation">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Serialisation.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ComponentModel\ConnectionType.cs" />
+    <Compile Include="ComponentModel\ConnectionTypeEditor.cs" />
+    <Compile Include="ComponentModel\DataObjectColumn.cs" />
+    <Compile Include="ComponentModel\DataObjectColumnListEditor.cs" />
+    <Compile Include="ComponentModel\DataObjectEditor.cs" />
+    <Compile Include="ComponentModel\Design\ConnectionTypeControlDesigner.Designer.cs" />
+    <Compile Include="ComponentModel\Design\ConnectionTypeControlDesigner.cs" />
+    <Compile Include="ComponentModel\Design\ConnectionTypeFormDesigner.Designer.cs" />
+    <Compile Include="ComponentModel\Design\ConnectionTypeFormDesigner.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectColumnListControlDesigner.Designer.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectColumnListControlDesigner.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectColumnListFormDesigner.Designer.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectColumnListFormDesigner.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectControlDesigner.Designer.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectControlDesigner.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectFormDesigner.Designer.cs" />
+    <Compile Include="ComponentModel\Design\DataObjectFormDesigner.cs" />
+    <Compile Include="Configuration\ConnectionStringConfiguration.cs" />
+    <Compile Include="Control\AnonymousTypes.cs" />
+    <Compile Include="Control\CommonObjects.cs" />
+    <Compile Include="Control\Operations.cs" />
+    <Compile Include="Custom\Attributes.cs" />
+    <Compile Include="Custom\DataAccess.cs" />
+    <Compile Include="Custom\LoginUserBasePermission.cs" />
+    <Compile Include="DataType\ConnectionDataType.cs" />
+    <Compile Include="DataType\DataTypeConversion.cs" />
+    <Compile Include="DataType\IDataAccess.cs" />
+    <Compile Include="DataType\IMembershipProvider.cs" />
+    <Compile Include="DataType\IProfileProvider.cs" />
+    <Compile Include="DataType\IRoleProvider.cs" />
+    <Compile Include="DataType\ProviderToDataTypes.cs" />
+    <Compile Include="Extension\DataTable.cs" />
+    <Compile Include="Extension\DbCommand.cs" />
+    <Compile Include="Extension\IQueryable.cs" />
+    <Compile Include="Linq\ExpressionTrees.cs" />
+    <Compile Include="Linq\SearchQueryModel.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="ComponentModel\Design\ConnectionTypeControlDesigner.resx" />
+    <None Include="ComponentModel\Design\ConnectionTypeFormDesigner.resx" />
+    <None Include="ComponentModel\Design\DataObjectColumnListControlDesigner.resx" />
+    <None Include="ComponentModel\Design\DataObjectColumnListFormDesigner.resx" />
+    <None Include="ComponentModel\Design\DataObjectControlDesigner.resx" />
+    <None Include="ComponentModel\Design\DataObjectFormDesigner.resx" />
+    <None Include="Data\Nequeo.Data.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ComponentModel\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Control\" />
+    <Folder Include="Custom\" />
+    <Folder Include="Data\" />
+    <Folder Include="DataType\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Linq\" />
+  </ItemGroup>
+</Project>

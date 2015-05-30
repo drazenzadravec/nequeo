@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Security", "Nequeo.Security\Nequeo.Security.csproj", "{B27910CC-C9FE-4918-9F02-CE01A7F87FAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B27910CC-C9FE-4918-9F02-CE01A7F87FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27910CC-C9FE-4918-9F02-CE01A7F87FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27910CC-C9FE-4918-9F02-CE01A7F87FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27910CC-C9FE-4918-9F02-CE01A7F87FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Nequeo.Security\Nequeo.Security.csproj
+	EndGlobalSection
+EndGlobal

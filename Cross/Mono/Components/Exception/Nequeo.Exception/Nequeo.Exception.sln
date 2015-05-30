@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Exception", "Nequeo.Exception\Nequeo.Exception.csproj", "{AD0232D9-7A77-4127-8FE9-48982EDB4490}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD0232D9-7A77-4127-8FE9-48982EDB4490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0232D9-7A77-4127-8FE9-48982EDB4490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0232D9-7A77-4127-8FE9-48982EDB4490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0232D9-7A77-4127-8FE9-48982EDB4490}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Nequeo.Exception\Nequeo.Exception.csproj
+	EndGlobalSection
+EndGlobal

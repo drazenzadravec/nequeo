@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Context">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DatabaseConnection" type="xs:string" />
+        <xs:element name="Database" type="xs:string" />
+        <xs:element name="NamespaceCompanyName" type="xs:string" />
+        <xs:element name="NamespaceExtendedName" type="xs:string"/>
+        <xs:element name="DataBaseConnect" type="xs:string" />
+        <xs:element name="DataBaseOwner" type="xs:string"/>
+        <xs:element name="ConnectionType" type="xs:unsignedByte" />
+        <xs:element name="ConnectionDataType" type="xs:unsignedByte" />
+        <xs:element name="DataAccessProvider" type="xs:string" />
+        <xs:element name="TableListExclusion" type="xs:boolean" />
+        <xs:element name="TableList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="string" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

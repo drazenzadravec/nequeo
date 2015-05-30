@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D38FC1F2-9963-4006-8154-D63C72F7D431}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Cryptography</RootNamespace>
+    <AssemblyName>Nequeo.Cryptography</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Nequeo.Collections">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography.Key">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.Key.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Exception">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Exception.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="base\AdvancedAES.cs" />
+    <Compile Include="base\AdvancedRSA.cs" />
+    <Compile Include="base\AdvancedTripleDES.cs" />
+    <Compile Include="base\Arguments.cs" />
+    <Compile Include="base\Simple.cs" />
+    <Compile Include="base\Designer\AdvancedAES.cs" />
+    <Compile Include="base\Designer\AdvancedRSA.cs" />
+    <Compile Include="Parser\AsnEncoded.cs" />
+    <Compile Include="Parser\AsnKeyParser.cs" />
+    <Compile Include="Signing\IPasswordEncryption.cs" />
+    <Compile Include="Signing\SignatureMethod.cs" />
+    <Compile Include="Signing\SigningContext.cs" />
+    <Compile Include="Signing\SignatureAlgorithm.cs" />
+    <Compile Include="Sha3\HMACSHA3.cs" />
+    <Compile Include="Sha3\SHA3.cs" />
+    <Compile Include="Sha3\SHA3Managed.cs" />
+    <Compile Include="base\Twofish.cs" />
+    <Compile Include="base\Serpent.cs" />
+    <Compile Include="base\Rijndael.cs" />
+    <Compile Include="base\RC6.cs" />
+    <Compile Include="base\RandomPassword.cs" />
+    <Compile Include="base\Pgp.cs" />
+    <Compile Include="base\DataProtection.cs" />
+    <Compile Include="base\Cms.cs" />
+    <Compile Include="base\Blowfish.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="base\" />
+    <Folder Include="Parser\" />
+    <Folder Include="Signing\" />
+    <Folder Include="Sha3\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\Designer\AdvancedAES.tt" />
+    <None Include="base\Designer\AdvancedRSA.tt" />
+    <None Include="base\Designer\_AsyncExecuteTypeGeneric.include" />
+  </ItemGroup>
+</Project>

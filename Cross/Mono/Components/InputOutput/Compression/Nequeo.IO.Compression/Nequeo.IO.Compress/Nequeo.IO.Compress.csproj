@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F25CB05-6198-48C8-AF18-D5A0E2DDCF43}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.IO.Compress</RootNamespace>
+    <AssemblyName>Nequeo.IO.Compress</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="base\Archive.cs" />
+    <Compile Include="base\ArchiveEntry.cs" />
+    <Compile Include="base\FileSystem.cs" />
+    <Compile Include="base\GZipStream.cs" />
+    <Compile Include="base\ZlibStream.cs" />
+    <Compile Include="Common\EncryptionAlgorithm.cs" />
+    <Compile Include="Zlib\Adler32.cs" />
+    <Compile Include="Zlib\Deflate.cs" />
+    <Compile Include="Zlib\InfBlocks.cs" />
+    <Compile Include="Zlib\InfCodes.cs" />
+    <Compile Include="Zlib\InfTree.cs" />
+    <Compile Include="Zlib\Inflate.cs" />
+    <Compile Include="Zlib\JZlib.cs" />
+    <Compile Include="Zlib\StaticTree.cs" />
+    <Compile Include="Zlib\Tree.cs" />
+    <Compile Include="Zlib\ZDeflaterOutputStream.cs" />
+    <Compile Include="Zlib\ZInflaterInputStream.cs" />
+    <Compile Include="Zlib\ZInputStream.cs" />
+    <Compile Include="Zlib\ZOutputStream.cs" />
+    <Compile Include="Zlib\ZStream.cs" />
+    <Compile Include="Common\Compresss.cs" />
+    <Compile Include="Common\CompressionAlgorithm.cs" />
+    <Compile Include="Huffman\BinaryConverter.cs" />
+    <Compile Include="Huffman\BitTree.cs" />
+    <Compile Include="Huffman\CodesTable.cs" />
+    <Compile Include="Huffman\Processor.cs" />
+    <Compile Include="BZip\BZip2Constants.cs" />
+    <Compile Include="BZip\CBZip2InputStream.cs" />
+    <Compile Include="BZip\CBZip2OutputStream.cs" />
+    <Compile Include="BZip\CRC.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="base\" />
+    <Folder Include="Common\" />
+    <Folder Include="Zlib\" />
+    <Folder Include="Huffman\" />
+    <Folder Include="BZip\" />
+  </ItemGroup>
+</Project>

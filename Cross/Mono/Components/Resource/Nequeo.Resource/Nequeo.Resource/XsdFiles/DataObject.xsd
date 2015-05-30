@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" >
+  <xs:element name="Context">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DatabaseConnection" type="xs:string" />
+        <xs:element name="Database" type="xs:string" />
+        <xs:element name="NamespaceExtendedName" type="xs:string" />
+        <xs:element name="NamespaceCompanyName" type="xs:string" />
+        <xs:element name="ConfigKeyDatabaseConnection" type="xs:string" />
+        <xs:element name="ContextName" type="xs:string" />
+        <xs:element name="ExtensionContextName" type="xs:string" />
+        <xs:element name="IncludeContextItems" type="xs:boolean" />
+        <xs:element name="DataBaseConnect" type="xs:string" />
+        <xs:element name="DataBaseOwner" type="xs:string" />
+        <xs:element name="DataSetDataContextName" type="xs:string" />
+        <xs:element name="DataSetUseAnonymousDataEntity" type="xs:boolean" />
+        <xs:element name="EdmDataContextName" type="xs:string" />
+        <xs:element name="EdmUseAnonymousDataEntity" type="xs:boolean" />
+        <xs:element name="LinqDataContextName" type="xs:string" />
+        <xs:element name="LinqUseAnonymousDataEntity" type="xs:boolean" />
+        <xs:element name="ConnectionType" type="xs:unsignedInt" />
+        <xs:element name="ConnectionDataType" type="xs:unsignedInt" />
+        <xs:element name="DataAccessProvider" type="xs:string" />
+        <xs:element name="TableListMaxSize" type="xs:unsignedLong" />
+        <xs:element name="TableListExclusion" type="xs:boolean" />
+        <xs:element name="TableList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="string" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProcedureExtensionClassName" type="xs:string" />
+        <xs:element name="ProcedureFunctionHandler" type="xs:boolean" />
+        <xs:element name="ProcedureListExclusion" type="xs:boolean" />
+        <xs:element name="ProcedureList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="string" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FunctionScalarExtensionClassName" type="xs:string" />
+        <xs:element name="FunctionScalarFunctionHandler" type="xs:boolean" />
+        <xs:element name="FunctionScalarListExclusion" type="xs:boolean" />
+        <xs:element name="FunctionScalarList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="string" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FunctionTableExtensionClassName" type="xs:string" />
+        <xs:element name="FunctionTableFunctionHandler" type="xs:boolean" />
+        <xs:element name="FunctionTableListExclusion" type="xs:boolean" />
+        <xs:element name="FunctionTableList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="string" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

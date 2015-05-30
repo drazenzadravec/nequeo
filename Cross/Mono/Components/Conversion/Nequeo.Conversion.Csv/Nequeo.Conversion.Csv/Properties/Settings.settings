@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Conversion.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="IncludeHeaders" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ColumnDelimiter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">|</Value>
+    </Setting>
+    <Setting Name="RowDelimiter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\r\n</Value>
+    </Setting>
+    <Setting Name="InputCsvPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\Input.csv</Value>
+    </Setting>
+    <Setting Name="IncludeCategoryID" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ReadType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.Collections.Generic.List`1[[Nequeo.Conversion.Model.TransformModel[],Nequeo.Model]]</Value>
+    </Setting>
+    <Setting Name="OutputCsvPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\Output.csv</Value>
+    </Setting>
+    <Setting Name="DateTimeDataFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ddMMyy</Value>
+    </Setting>
+    <Setting Name="ArchivePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\Archive\</Value>
+    </Setting>
+    <Setting Name="OneRowPerCsvFile" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LengthOfTimeToKeepArchiveFiles" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

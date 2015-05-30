@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Model", "Nequeo.Model\Nequeo.Model.csproj", "{55A545A5-FA6B-466C-98FA-A1C272BCFDFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55A545A5-FA6B-466C-98FA-A1C272BCFDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A545A5-FA6B-466C-98FA-A1C272BCFDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A545A5-FA6B-466C-98FA-A1C272BCFDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A545A5-FA6B-466C-98FA-A1C272BCFDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Nequeo.Model\Nequeo.Model.csproj
+	EndGlobalSection
+EndGlobal

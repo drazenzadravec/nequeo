@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{16987CFA-A5FE-462D-AE13-EEF497BA4430}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Primitive</RootNamespace>
+    <AssemblyName>Nequeo.Primitive</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.Exception">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Exception.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.ComponentModel">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Caching\Cache.cs" />
+    <Compile Include="Custom\Arguments.cs" />
+    <Compile Include="Custom\Base64Encoder.cs" />
+    <Compile Include="Custom\Enum.cs" />
+    <Compile Include="Custom\HexEncoder.cs" />
+    <Compile Include="Custom\HexValueEncoder.cs" />
+    <Compile Include="Custom\IEncoder.cs" />
+    <Compile Include="Custom\Operators.cs" />
+    <Compile Include="Custom\TimeoutClock.cs" />
+    <Compile Include="Extension\Byte.cs" />
+    <Compile Include="Extension\GenericArray.cs" />
+    <Compile Include="Extension\IEnumerable.cs" />
+    <Compile Include="Extension\Int32.cs" />
+    <Compile Include="Extension\String.cs" />
+    <Compile Include="Invention\Application.cs" />
+    <Compile Include="Invention\Comparer.cs" />
+    <Compile Include="Invention\Converter.cs" />
+    <Compile Include="Invention\Random.cs" />
+    <Compile Include="Invention\TimeZone.cs" />
+    <Compile Include="Invention\Validation.cs" />
+    <Compile Include="Custom\QuotedPrintable.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Caching\" />
+    <Folder Include="Custom\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Invention\" />
+  </ItemGroup>
+</Project>

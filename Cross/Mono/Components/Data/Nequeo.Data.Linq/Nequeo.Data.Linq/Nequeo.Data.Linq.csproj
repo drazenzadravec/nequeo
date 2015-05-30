@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{98114D68-2450-4E4B-8395-085BC7169BBD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Data.Linq</RootNamespace>
+    <AssemblyName>Nequeo.Data.Linq</AssemblyName>
+    <ReleaseVersion>2014.26.1.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Nequeo.Data">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Linq">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Async\AsyncDeleteOperation.cs" />
+    <Compile Include="Async\AsyncInsertOperation.cs" />
+    <Compile Include="Async\AsyncSelectOperation.cs" />
+    <Compile Include="Async\AsyncUpdateOperation.cs" />
+    <Compile Include="base\DataGeneric.cs" />
+    <Compile Include="base\DataGenericImple.cs" />
+    <Compile Include="base\DataGenericInter.cs" />
+    <Compile Include="base\GenericDataAccess.cs" />
+    <Compile Include="base\Operation.cs" />
+    <Compile Include="Configuration\DataConfiguration.cs" />
+    <Compile Include="Linq\Query.cs" />
+    <Compile Include="Linq\QueryCompiler.cs" />
+    <Compile Include="Linq\QueryProvider.cs" />
+    <Compile Include="Linq\Common\ExecutionBuilder.cs" />
+    <Compile Include="Linq\Common\ImplicitMapping.cs" />
+    <Compile Include="Linq\Common\QueryCommand.cs" />
+    <Compile Include="Linq\Common\QueryLanguage.cs" />
+    <Compile Include="Linq\Common\QueryMapping.cs" />
+    <Compile Include="Linq\Common\QueryPolicy.cs" />
+    <Compile Include="Linq\Common\Expressions\DbExpressionComparer.cs" />
+    <Compile Include="Linq\Common\Expressions\DbExpressionReplacer.cs" />
+    <Compile Include="Linq\Common\Expressions\DbExpressionVisitor.cs" />
+    <Compile Include="Linq\Common\Expressions\DbExpressionWriter.cs" />
+    <Compile Include="Linq\Common\Expressions\DbExpressions.cs" />
+    <Compile Include="Linq\Common\Translation\AggregateChecker.cs" />
+    <Compile Include="Linq\Common\Translation\AggregateRewriter.cs" />
+    <Compile Include="Linq\Common\Translation\ClientJoinedProjectionRewriter.cs" />
+    <Compile Include="Linq\Common\Translation\ColumnMapper.cs" />
+    <Compile Include="Linq\Common\Translation\ColumnProjector.cs" />
+    <Compile Include="Linq\Common\Translation\CrossApplyRewriter.cs" />
+    <Compile Include="Linq\Common\Translation\DeclaredAliasGatherer.cs" />
+    <Compile Include="Linq\Common\Translation\OrderByRewriter.cs" />
+    <Compile Include="Linq\Common\Translation\Parameterizer.cs" />
+    <Compile Include="Linq\Common\Translation\QueryBinder.cs" />
+    <Compile Include="Linq\Common\Translation\QueryDuplicator.cs" />
+    <Compile Include="Linq\Common\Translation\RedundantColumnRemover.cs" />
+    <Compile Include="Linq\Common\Translation\RedundantJoinRemover.cs" />
+    <Compile Include="Linq\Common\Translation\RedundantSubqueryRemover.cs" />
+    <Compile Include="Linq\Common\Translation\ReferencedAliasGatherer.cs" />
+    <Compile Include="Linq\Common\Translation\RelationshipBinder.cs" />
+    <Compile Include="Linq\Common\Translation\RelationshipIncluder.cs" />
+    <Compile Include="Linq\Common\Translation\SelectGatherer.cs" />
+    <Compile Include="Linq\Common\Translation\SingletonProjectionRewriter.cs" />
+    <Compile Include="Linq\Common\Translation\SkipRewriter.cs" />
+    <Compile Include="Linq\Common\Translation\SubqueryRemover.cs" />
+    <Compile Include="Linq\Common\Translation\UnusedColumnRemover.cs" />
+    <Compile Include="Linq\Language\Access\AccessSqlFormatter.cs" />
+    <Compile Include="Linq\Language\Access\AccessSqlLanguage.cs" />
+    <Compile Include="Linq\Language\MySql\MySqlFormatter.cs" />
+    <Compile Include="Linq\Language\MySql\MySqlLanguage.cs" />
+    <Compile Include="Linq\Language\Odbc\OdbcSqlFormatter.cs" />
+    <Compile Include="Linq\Language\Odbc\OdbcSqlLanguage.cs" />
+    <Compile Include="Linq\Language\OleDb\OleDbSqlFormatter.cs" />
+    <Compile Include="Linq\Language\OleDb\OleDbSqlLanguage.cs" />
+    <Compile Include="Linq\Language\Oracle\PLSqlFormatter.cs" />
+    <Compile Include="Linq\Language\Oracle\PLSqlLanguage.cs" />
+    <Compile Include="Linq\Language\PostgreSql\PgSqlFormatter.cs" />
+    <Compile Include="Linq\Language\PostgreSql\PgSqlLanguage.cs" />
+    <Compile Include="Linq\Language\SqlServer\TSqlFormatter.cs" />
+    <Compile Include="Linq\Language\SqlServer\TSqlLanguage.cs" />
+    <Compile Include="Linq\Language\Sqlite\SqliteFormatter.cs" />
+    <Compile Include="Linq\Language\Sqlite\SqliteLanguage.cs" />
+    <Compile Include="Linq\Provider\CompoundKey.cs" />
+    <Compile Include="Linq\Provider\DeferredList.cs" />
+    <Compile Include="Linq\Provider\ExpressionComparer.cs" />
+    <Compile Include="Linq\Provider\ExpressionReplacer.cs" />
+    <Compile Include="Linq\Provider\ExpressionVisitor.cs" />
+    <Compile Include="Linq\Provider\ExpressionWriter.cs" />
+    <Compile Include="Linq\Provider\Grouping.cs" />
+    <Compile Include="Linq\Provider\PartialEvaluator.cs" />
+    <Compile Include="Linq\Provider\QueryProvider.cs" />
+    <Compile Include="Linq\Provider\QueryTranslater.cs" />
+    <Compile Include="Linq\Provider\RootQueryableFinder.cs" />
+    <Compile Include="Linq\Provider\ScopedDictionary.cs" />
+    <Compile Include="Linq\Provider\TypeHelper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Async\" />
+    <Folder Include="base\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Linq\" />
+  </ItemGroup>
+</Project>

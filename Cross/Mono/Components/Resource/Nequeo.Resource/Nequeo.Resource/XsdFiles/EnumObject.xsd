@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" >
+  <xs:element name="Context">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DatabaseConnection" type="xs:string" />
+        <xs:element name="EnumName" type="xs:string" />
+        <xs:element name="Database" type="xs:string" />
+        <xs:element name="TableName" type="xs:string" />
+        <xs:element name="NamespaceCompanyName" type="xs:string" />
+        <xs:element name="NamespaceExtendedName" type="xs:string" />
+        <xs:element name="DataBaseConnect" type="xs:string" />
+        <xs:element name="DataBaseOwner" type="xs:string" />
+        <xs:element name="ConnectionType" type="xs:unsignedByte" />
+        <xs:element name="ConnectionDataType" type="xs:unsignedByte" />
+        <xs:element name="DataAccessProvider" type="xs:string" />
+        <xs:element name="ValueColumnName" type="xs:string" />
+        <xs:element name="IndicatorColumnName" type="xs:string" />
+        <xs:element name="DataFilter" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

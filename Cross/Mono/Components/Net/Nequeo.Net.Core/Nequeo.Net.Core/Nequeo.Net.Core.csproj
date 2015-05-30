@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81916761-12D4-4F1C-A7EA-9FEC6F4FB6EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Nequeo.Net.Core</RootNamespace>
+    <AssemblyName>Nequeo.Net.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Release\Nequeo.Net.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.ServiceModel.Routing" />
+    <Reference Include="System.ServiceModel.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\Assumes.cs" />
+    <Compile Include="Core\IEmbeddedResourceRetrieval.cs" />
+    <Compile Include="Core\Requires.cs" />
+    <Compile Include="Core\StringResource.Designer.cs" />
+    <Compile Include="Core\UriUtil.cs" />
+    <Compile Include="Core\Messaging\Base64WebEncoder.cs" />
+    <Compile Include="Core\Messaging\CachedDirectWebResponse.cs" />
+    <Compile Include="Core\Messaging\Channel.cs" />
+    <Compile Include="Core\Messaging\ChannelContract.cs" />
+    <Compile Include="Core\Messaging\ChannelEventArgs.cs" />
+    <Compile Include="Core\Messaging\DataBag.cs" />
+    <Compile Include="Core\Messaging\DirectWebRequestOptions.cs" />
+    <Compile Include="Core\Messaging\EmptyDictionary.cs" />
+    <Compile Include="Core\Messaging\EmptyEnumerator.cs" />
+    <Compile Include="Core\Messaging\EmptyList.cs" />
+    <Compile Include="Core\Messaging\EnumerableCacheExtensions.cs" />
+    <Compile Include="Core\Messaging\ErrorUtilities.cs" />
+    <Compile Include="Core\Messaging\HostErrorException.cs" />
+    <Compile Include="Core\Messaging\HttpDeliveryMethods.cs" />
+    <Compile Include="Core\Messaging\HttpRequestHeaders.cs" />
+    <Compile Include="Core\Messaging\HttpRequestInfo.cs" />
+    <Compile Include="Core\Messaging\IChannelBindingElement.cs" />
+    <Compile Include="Core\Messaging\IDataBagFormatter.cs" />
+    <Compile Include="Core\Messaging\IDirectResponseProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IDirectWebRequestHandler.cs" />
+    <Compile Include="Core\Messaging\IDirectedProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IExtensionMessage.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectRequest.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectRequestContract.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectResponse.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectResponseContract.cs" />
+    <Compile Include="Core\Messaging\IHttpIndirectResponse.cs" />
+    <Compile Include="Core\Messaging\IMessage.cs" />
+    <Compile Include="Core\Messaging\IMessageFactory.cs" />
+    <Compile Include="Core\Messaging\IMessageOriginalPayload.cs" />
+    <Compile Include="Core\Messaging\IMessageWithBinaryData.cs" />
+    <Compile Include="Core\Messaging\IMessageWithEvents.cs" />
+    <Compile Include="Core\Messaging\IProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IProtocolMessageWithExtensions.cs" />
+    <Compile Include="Core\Messaging\IStreamSerializingDataBag.cs" />
+    <Compile Include="Core\Messaging\ITamperResistantProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IncomingWebResponse.cs" />
+    <Compile Include="Core\Messaging\IncomingWebResponseContract.cs" />
+    <Compile Include="Core\Messaging\InternalErrorException.cs" />
+    <Compile Include="Core\Messaging\KeyedCollectionDelegate.cs" />
+    <Compile Include="Core\Messaging\MessagePartAttribute.cs" />
+    <Compile Include="Core\Messaging\MessageProtections.cs" />
+    <Compile Include="Core\Messaging\MessageReceivingEndpoint.cs" />
+    <Compile Include="Core\Messaging\MessageSerializer.cs" />
+    <Compile Include="Core\Messaging\MessageTransport.cs" />
+    <Compile Include="Core\Messaging\MessagingStrings.Designer.cs" />
+    <Compile Include="Core\Messaging\MessagingUtilities.cs" />
+    <Compile Include="Core\Messaging\MultipartPostPart.cs" />
+    <Compile Include="Core\Messaging\NetworkDirectWebResponse.cs" />
+    <Compile Include="Core\Messaging\OutgoingWebResponse.cs" />
+    <Compile Include="Core\Messaging\OutgoingWebResponseActionResult.cs" />
+    <Compile Include="Core\Messaging\ProtocolException.cs" />
+    <Compile Include="Core\Messaging\ProtocolFaultResponseException.cs" />
+    <Compile Include="Core\Messaging\ReadOnlyDictionary.cs" />
+    <Compile Include="Core\Messaging\StandardMessageFactory.cs" />
+    <Compile Include="Core\Messaging\StandardMessageFactoryChannel.cs" />
+    <Compile Include="Core\Messaging\StandardWebRequestHandler.cs" />
+    <Compile Include="Core\Messaging\TimespanSecondsEncoder.cs" />
+    <Compile Include="Core\Messaging\TimestampEncoder.cs" />
+    <Compile Include="Core\Messaging\UnprotectedMessageException.cs" />
+    <Compile Include="Core\Messaging\Bindings\AsymmetricCryptoKeyStoreWrapper.cs" />
+    <Compile Include="Core\Messaging\Bindings\CryptoKey.cs" />
+    <Compile Include="Core\Messaging\Bindings\CryptoKeyCollisionException.cs" />
+    <Compile Include="Core\Messaging\Bindings\ExpiredMessageException.cs" />
+    <Compile Include="Core\Messaging\Bindings\ICryptoKeyStore.cs" />
+    <Compile Include="Core\Messaging\Bindings\ICryptoKeyStoreContract.cs" />
+    <Compile Include="Core\Messaging\Bindings\IExpiringProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\Bindings\IReplayProtectedProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\Bindings\InvalidSignatureException.cs" />
+    <Compile Include="Core\Messaging\Bindings\MemoryCryptoKeyStore.cs" />
+    <Compile Include="Core\Messaging\Bindings\ReplayedMessageException.cs" />
+    <Compile Include="Core\Messaging\Reflection\DefaultEncoderAttribute.cs" />
+    <Compile Include="Core\Messaging\Reflection\IMessagePartEncoder.cs" />
+    <Compile Include="Core\Messaging\Reflection\IMessagePartNullEncoder.cs" />
+    <Compile Include="Core\Messaging\Reflection\IMessagePartOriginalEncoder.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessageDescription.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessageDescriptionCollection.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessageDictionary.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessagePart.cs" />
+    <Compile Include="Core\Messaging\Reflection\ValueMapping.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Core\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Core\StringResource.resx" />
+    <None Include="Core\Messaging\MessagingStrings.resx" />
+  </ItemGroup>
+</Project>

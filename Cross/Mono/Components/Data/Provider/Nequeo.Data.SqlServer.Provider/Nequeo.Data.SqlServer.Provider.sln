@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data.SqlServer.Provider", "Nequeo.Data.SqlServer.Provider\Nequeo.Data.SqlServer.Provider.csproj", "{1477E8F7-109A-4373-A705-41DD866CE783}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1477E8F7-109A-4373-A705-41DD866CE783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1477E8F7-109A-4373-A705-41DD866CE783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1477E8F7-109A-4373-A705-41DD866CE783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1477E8F7-109A-4373-A705-41DD866CE783}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Nequeo.Data.SqlServer.Provider\Nequeo.Data.SqlServer.Provider.csproj
+	EndGlobalSection
+EndGlobal
