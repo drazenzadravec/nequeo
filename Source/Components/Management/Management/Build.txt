@@ -1,0 +1,5 @@
+Nequeo.Management
+Nequeo.MessageQueue
+Nequeo.NamedPipe
+Nequeo.ServiceModel
+Nequeo.NetTcp

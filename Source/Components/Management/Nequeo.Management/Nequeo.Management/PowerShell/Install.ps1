@@ -1,0 +1,1 @@
+﻿Import-Module "Z:\Development\Version2012\Nequeo\References\Staging\Nequeo.Management.dll"

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Management.MessageQueue.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServerQueueName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FormatName:DIRECT=OS:</Value>
+    </Setting>
+    <Setting Name="QueueName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.\private$\Message</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

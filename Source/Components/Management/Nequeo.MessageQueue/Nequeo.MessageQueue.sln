@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.MessageQueue", "Nequeo.MessageQueue\Nequeo.MessageQueue.csproj", "{192E8D28-2BE9-4162-9C7D-155D73729A6C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.MessageQueue\\Nequeo.MessageQueue.csproj
+		SccProjectName1 = Nequeo.MessageQueue
+		SccLocalPath1 = Nequeo.MessageQueue
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{192E8D28-2BE9-4162-9C7D-155D73729A6C}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

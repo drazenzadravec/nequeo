@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Management", "Nequeo.Management\Nequeo.Management.csproj", "{2C0B9ADE-AFC7-4C52-9A2E-4CDA950A3089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Management", "Test.Management\Test.Management.csproj", "{8E1FFB7F-9D60-49E9-91E1-F2551778E90C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B0CE42D-79C9-4FF6-AFAB-59499FB98394}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Nequeo.Management.vsmdi = Nequeo.Management.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Management\\Nequeo.Management.csproj
+		SccProjectName1 = Nequeo.Management
+		SccLocalPath1 = Nequeo.Management
+		SccProjectUniqueName2 = Test.Management\\Test.Management.csproj
+		SccProjectName2 = Test.Management
+		SccLocalPath2 = Test.Management
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Nequeo.Management.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C0B9ADE-AFC7-4C52-9A2E-4CDA950A3089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0B9ADE-AFC7-4C52-9A2E-4CDA950A3089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0B9ADE-AFC7-4C52-9A2E-4CDA950A3089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0B9ADE-AFC7-4C52-9A2E-4CDA950A3089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E1FFB7F-9D60-49E9-91E1-F2551778E90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E1FFB7F-9D60-49E9-91E1-F2551778E90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E1FFB7F-9D60-49E9-91E1-F2551778E90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E1FFB7F-9D60-49E9-91E1-F2551778E90C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

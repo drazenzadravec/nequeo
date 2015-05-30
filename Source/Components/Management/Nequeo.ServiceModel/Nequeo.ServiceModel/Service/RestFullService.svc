@@ -1,0 +1,6 @@
+﻿<%@ ServiceHost 
+    Language="C#" 
+    Debug="true" 
+    Service="Nequeo.Management.ServiceModel.RestServer, Nequeo.Management.ServiceModel"
+    Factory="Nequeo.Net.ServiceModel.MultipleHttpSchemaWebServiceFactory, Nequeo.Net.ServiceModel" 
+%>

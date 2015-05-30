@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Management.ServiceModel.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServiceAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8732/Design_Time_Addresses/Nequeo.Management.ServiceModel/Server/</Value>
+    </Setting>
+    <Setting Name="RestServiceAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8732/Design_Time_Addresses/Nequeo.Management.ServiceModel/RestServer/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
