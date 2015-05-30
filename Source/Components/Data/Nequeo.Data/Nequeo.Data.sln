@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data", "Nequeo.Data\Nequeo.Data.csproj", "{0D12AA80-B2AD-4523-8BB8-51738308688C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Nequeo.Data", "Test.Nequeo.Data\Test.Nequeo.Data.csproj", "{F98749D0-6A03-458B-9347-6743FC3F644A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5B8D8F8-DED0-47B7-9FAF-4EC9270535B7}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Nequeo.Data.vsmdi = Nequeo.Data.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Data\\Nequeo.Data.csproj
+		SccProjectName1 = Nequeo.Data
+		SccLocalPath1 = Nequeo.Data
+		SccProjectUniqueName2 = Test.Nequeo.Data\\Test.Nequeo.Data.csproj
+		SccProjectName2 = Test.Nequeo.Data
+		SccLocalPath2 = Test.Nequeo.Data
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Nequeo.Data.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Staging Debug|Any CPU.Build.2 = Staging Debug|x64
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{0D12AA80-B2AD-4523-8BB8-51738308688C}.Staging Release|Any CPU.Build.2 = Staging Release|x64
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{F98749D0-6A03-458B-9347-6743FC3F644A}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

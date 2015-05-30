@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data.LinqTo.Xml", "Nequeo.Data.LinqTo.Xml\Nequeo.Data.LinqTo.Xml.csproj", "{E28BF66A-8059-4CE8-B829-21FB84C078FC}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Data.LinqTo.Xml\\Nequeo.Data.LinqTo.Xml.csproj
+		SccProjectName1 = Nequeo.Data.LinqTo.Xml
+		SccLocalPath1 = Nequeo.Data.LinqTo.Xml
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E28BF66A-8059-4CE8-B829-21FB84C078FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28BF66A-8059-4CE8-B829-21FB84C078FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28BF66A-8059-4CE8-B829-21FB84C078FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28BF66A-8059-4CE8-B829-21FB84C078FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

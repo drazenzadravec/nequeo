@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data.SqlServer.Provider", "Nequeo.Data.SqlServer.Provider\Nequeo.Data.SqlServer.Provider.csproj", "{172107BF-174C-4503-A2E8-19347138F8EA}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Data.SqlServer.Provider\\Nequeo.Data.SqlServer.Provider.csproj
+		SccProjectName1 = Nequeo.Data.SqlServer.Provider
+		SccLocalPath1 = Nequeo.Data.SqlServer.Provider
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{172107BF-174C-4503-A2E8-19347138F8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{172107BF-174C-4503-A2E8-19347138F8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{172107BF-174C-4503-A2E8-19347138F8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{172107BF-174C-4503-A2E8-19347138F8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
