@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Nequeo.Cryptography.AdvancedAES" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAgAIAAgAACAAhAKAAAAACCIQAxAAKAIAQAwA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsynchronousAdvancedAES" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAABAAEAAAQAAAAAAABAAAAAAAEBAQAAgAAAAAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncDecryptFromMemoryAES" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAACAEAAAAAgAAEAAAAACAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncEncryptToMemoryAES" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACACAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncDecryptFileAES" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAkAAAAAAQCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncEncryptFileAES" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAABAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AdvancedRSA" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAgAAAAgAQAAAACAAAAAAAAAAAwgACAAAQAAA=</HashCode>
+      <FileName>base\AdvancedRSA.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Cryptography.AdvancedTripleDES" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAgAIAAgAACAAhAKAABAACAIQAxAAKAIAQAgA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsynchronousAdvancedTripleDES" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAABAAEAAAQAAAAAAABAAAAAAAEBAQAAgAAAAAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncDecryptFromMemoryTripleDES" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAACAEAAAAAgAAEAAAAACAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncEncryptToMemoryTripleDES" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACACAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncDecryptFileTripleDES" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAkAAAAAAQCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AsyncEncryptFileTripleDES" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAABAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.SimpleEncryptionArgs" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAEAIAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>base\Arguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.SimpleDecryptionArgs" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAIAAAAAAAAAAAAQAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\Arguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AdvancedTDESEncryptionArgs" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAIAAAAAAEAAAAAAEAIAAAAAQAAAAAAAEAAAQA=</HashCode>
+      <FileName>base\Arguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AdvancedTDESDecryptionArgs" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAIAAAAAAEAAAAAQAAIAAAAAQAAAAAAAAAAAQA=</HashCode>
+      <FileName>base\Arguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AdvancedAESEncryptionArgs" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAIAAAAAAEAAAAAAEAIAAAAAQAAAAAAAEAAAQA=</HashCode>
+      <FileName>base\Arguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.AdvancedAESDecryptionArgs" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAIAAAAAAEAAAAAQAAIAAAAAQAAAAAAAAAAAQA=</HashCode>
+      <FileName>base\Arguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Cryptography.Simple" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAACAEAAAAAAAAQAAAgCAAAAAAABAAAAgAAAAAAAAA=</HashCode>
+      <FileName>base\Simple.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Cryptography.Hashcode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\Simple.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Nequeo.Cryptography.IAdvancedAES" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAIAAAAACAABAAAAAAACAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Cryptography.IAdvancedRSA" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedRSA.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Cryptography.IAdvancedTripleDES" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAIAAAAACAABAAAAAAACAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Nequeo.Cryptography.HashcodeType" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAEAAAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>base\Simple.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Nequeo.Cryptography.AdvancedAESEncryptionHandler" Collapsed="true">
+    <Position X="2.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Nequeo.Cryptography.AdvancedAESDecryptionHandler" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedAES.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Nequeo.Cryptography.AdvancedTDESEncryptionHandler" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Nequeo.Cryptography.AdvancedTDESDecryptionHandler" Collapsed="true">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\AdvancedTripleDES.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Nequeo.Cryptography.SimpleEncryptionHandler" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\Simple.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Nequeo.Cryptography.SimpleDecryptionHandler" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\Simple.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
