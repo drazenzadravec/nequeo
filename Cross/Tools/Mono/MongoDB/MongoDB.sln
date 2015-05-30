@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB.Bson", "MongoDB.Bson\MongoDB.Bson.csproj", "{02198EB1-34AF-4D7B-B48F-2FC6D90F9CB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB.Driver", "MongoDB.Driver\MongoDB.Driver.csproj", "{9BA66757-68DD-485A-851E-A8C67EFBBD70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02198EB1-34AF-4D7B-B48F-2FC6D90F9CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02198EB1-34AF-4D7B-B48F-2FC6D90F9CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02198EB1-34AF-4D7B-B48F-2FC6D90F9CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02198EB1-34AF-4D7B-B48F-2FC6D90F9CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA66757-68DD-485A-851E-A8C67EFBBD70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA66757-68DD-485A-851E-A8C67EFBBD70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA66757-68DD-485A-851E-A8C67EFBBD70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA66757-68DD-485A-851E-A8C67EFBBD70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = MongoDB.Bson\MongoDB.Bson.csproj
+	EndGlobalSection
+EndGlobal
