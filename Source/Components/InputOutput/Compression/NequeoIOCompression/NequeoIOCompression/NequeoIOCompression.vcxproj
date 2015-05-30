@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7665FFC8-7775-420D-BEA7-A3DA1056DD8F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>NequeoIOCompression</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\..\References\Release_x86\Lib\Components</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\..\..\References\Release_x64\Lib\Components</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>BOOST_IOSTREAMS_NO_LIB;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>Nequeo.lib;ZLib.lib;ZipArchive.lib;libbz2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\GlobalIOCompression.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GlobalIOCompression.h"
+copy $(ProjectDir)\Archive.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\Archive.h"
+copy $(ProjectDir)\GZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GZipStream.h"
+copy $(ProjectDir)\ZlibStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZlibStream.h"
+copy $(ProjectDir)\ZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZipStream.h"
+copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\BZip2Stream.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>BOOST_IOSTREAMS_NO_LIB;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>Nequeo.lib;ZLib.lib;ZipArchive.lib;libbz2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\GlobalIOCompression.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GlobalIOCompression.h"
+copy $(ProjectDir)\Archive.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\Archive.h"
+copy $(ProjectDir)\GZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GZipStream.h"
+copy $(ProjectDir)\ZlibStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZlibStream.h"
+copy $(ProjectDir)\ZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZipStream.h"
+copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\BZip2Stream.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>BOOST_IOSTREAMS_NO_LIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\lib;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\Win32\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;ZLib.lib;ZipArchive.lib;libbz2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\GlobalIOCompression.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GlobalIOCompression.h"
+copy $(ProjectDir)\Archive.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\Archive.h"
+copy $(ProjectDir)\GZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GZipStream.h"
+copy $(ProjectDir)\ZlibStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZlibStream.h"
+copy $(ProjectDir)\ZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZipStream.h"
+copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\BZip2Stream.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>BOOST_IOSTREAMS_NO_LIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\x64\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\lib64;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\x64\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;ZLib.lib;ZipArchive.lib;libbz2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\GlobalIOCompression.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GlobalIOCompression.h"
+copy $(ProjectDir)\Archive.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\Archive.h"
+copy $(ProjectDir)\GZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GZipStream.h"
+copy $(ProjectDir)\ZlibStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZlibStream.h"
+copy $(ProjectDir)\ZipStream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\ZipStream.h"
+copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\BZip2Stream.h"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Archive.h" />
+    <ClInclude Include="BZip2Stream.h" />
+    <ClInclude Include="GlobalIOCompression.h" />
+    <ClInclude Include="GZipStream.h" />
+    <ClInclude Include="LibraryLoader.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ZipStream.h" />
+    <ClInclude Include="ZlibStream.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Archive.cpp" />
+    <ClCompile Include="boost_gzip.cpp" />
+    <ClCompile Include="boost_zlib.cpp" />
+    <ClCompile Include="BZip2Stream.cpp" />
+    <ClCompile Include="GZipStream.cpp" />
+    <ClCompile Include="LibraryLoader.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ZipStream.cpp" />
+    <ClCompile Include="ZlibStream.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
