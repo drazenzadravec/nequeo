@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AF27A93A-63BE-42ED-8C19-430391229795}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Npgsql</RootNamespace>
+    <AssemblyName>Npgsql</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Npgsql.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Mono.Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Npgsql\Cache.cs" />
+    <Compile Include="Npgsql\HashAlgorithm.cs" />
+    <Compile Include="Npgsql\MD5.cs" />
+    <Compile Include="Npgsql\MD5CryptoServiceProvider.cs" />
+    <Compile Include="Npgsql\NpgsqlAsciiRow.cs" />
+    <Compile Include="Npgsql\NpgsqlBackEndKeyData.cs" />
+    <Compile Include="Npgsql\NpgsqlBind.cs" />
+    <Compile Include="Npgsql\NpgsqlCancelRequest.cs" />
+    <Compile Include="Npgsql\NpgsqlClosedState.cs" />
+    <Compile Include="Npgsql\NpgsqlCommand.cs" />
+    <Compile Include="Npgsql\NpgsqlCommandBuilder.cs" />
+    <Compile Include="Npgsql\NpgsqlConnectedState.cs" />
+    <Compile Include="Npgsql\NpgsqlConnection.cs" />
+    <Compile Include="Npgsql\NpgsqlConnectionStringBuilder.cs" />
+    <Compile Include="Npgsql\NpgsqlConnector.cs" />
+    <Compile Include="Npgsql\NpgsqlConnectorPool.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyFormat.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyIn.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyInState.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyInStream.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyOut.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyOutState.cs" />
+    <Compile Include="Npgsql\NpgsqlCopyOutStream.cs" />
+    <Compile Include="Npgsql\NpgsqlCopySerializer.cs" />
+    <Compile Include="Npgsql\NpgsqlDataAdapter.cs" />
+    <Compile Include="Npgsql\NpgsqlDataReader.cs" />
+    <Compile Include="Npgsql\NpgsqlDescribe.cs" />
+    <Compile Include="Npgsql\NpgsqlError.cs" />
+    <Compile Include="Npgsql\NpgsqlEventLog.cs" />
+    <Compile Include="Npgsql\NpgsqlException.cs" />
+    <Compile Include="Npgsql\NpgsqlExecute.cs" />
+    <Compile Include="Npgsql\NpgsqlFactory.cs" />
+    <Compile Include="Npgsql\NpgsqlFlush.cs" />
+    <Compile Include="Npgsql\NpgsqlMediator.cs" />
+    <Compile Include="Npgsql\NpgsqlMessageTypes.cs" />
+    <Compile Include="Npgsql\NpgsqlNotificationEventArgs.cs" />
+    <Compile Include="Npgsql\NpgsqlParameter.cs" />
+    <Compile Include="Npgsql\NpgsqlParameterCollection.cs" />
+    <Compile Include="Npgsql\NpgsqlParameterStatus.cs" />
+    <Compile Include="Npgsql\NpgsqlParse.cs" />
+    <Compile Include="Npgsql\NpgsqlPasswordPacket.cs" />
+    <Compile Include="Npgsql\NpgsqlPromotableSinglePhaseNotification.cs" />
+    <Compile Include="Npgsql\NpgsqlProviderManifest.cs" />
+    <Compile Include="Npgsql\NpgsqlQuery.cs" />
+    <Compile Include="Npgsql\NpgsqlReadyState.cs" />
+    <Compile Include="Npgsql\NpgsqlResourceManager.cs" />
+    <Compile Include="Npgsql\NpgsqlRow.cs" />
+    <Compile Include="Npgsql\NpgsqlRowDescription.cs" />
+    <Compile Include="Npgsql\NpgsqlSchema.cs" />
+    <Compile Include="Npgsql\NpgsqlServices.cs" />
+    <Compile Include="Npgsql\NpgsqlStartupPacket.cs" />
+    <Compile Include="Npgsql\NpgsqlStartupState.cs" />
+    <Compile Include="Npgsql\NpgsqlState.cs" />
+    <Compile Include="Npgsql\NpgsqlSync.cs" />
+    <Compile Include="Npgsql\NpgsqlTransaction.cs" />
+    <Compile Include="Npgsql\NpgsqlTransactionCallbacks.cs" />
+    <Compile Include="Npgsql\PGUtil.cs" />
+    <Compile Include="Npgsql\SSPIHandler.cs" />
+    <Compile Include="Npgsql\SqlGenerators\SqlBaseGenerator.cs" />
+    <Compile Include="Npgsql\SqlGenerators\SqlDeleteGenerator.cs" />
+    <Compile Include="Npgsql\SqlGenerators\SqlInsertGenerator.cs" />
+    <Compile Include="Npgsql\SqlGenerators\SqlSelectGenerator.cs" />
+    <Compile Include="Npgsql\SqlGenerators\SqlUpdateGenerator.cs" />
+    <Compile Include="Npgsql\SqlGenerators\VisitedExpression.cs" />
+    <Compile Include="NpgsqlTypes\ArrayHandling.cs" />
+    <Compile Include="NpgsqlTypes\BitString.cs" />
+    <Compile Include="NpgsqlTypes\DateDatatypes.cs" />
+    <Compile Include="NpgsqlTypes\FastPath.cs" />
+    <Compile Include="NpgsqlTypes\FastPathArg.cs" />
+    <Compile Include="NpgsqlTypes\LargeObject.cs" />
+    <Compile Include="NpgsqlTypes\LargeObjectManager.cs" />
+    <Compile Include="NpgsqlTypes\NpgsqlDbType.cs" />
+    <Compile Include="NpgsqlTypes\NpgsqlTypeConverters.cs" />
+    <Compile Include="NpgsqlTypes\NpgsqlTypes.cs" />
+    <Compile Include="NpgsqlTypes\NpgsqlTypesHelper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Npgsql\" />
+    <Folder Include="NpgsqlTypes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Npgsql\Npgsql.snk" />
+    <None Include="Npgsql\NpgsqlClosedState.de.resx" />
+    <None Include="Npgsql\NpgsqlClosedState.fr.resx" />
+    <None Include="Npgsql\NpgsqlClosedState.ja.resx" />
+    <None Include="Npgsql\NpgsqlClosedState.resx" />
+    <None Include="Npgsql\NpgsqlClosedState.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlCommand.de.resx" />
+    <None Include="Npgsql\NpgsqlCommand.es.resx" />
+    <None Include="Npgsql\NpgsqlCommand.fi.resx" />
+    <None Include="Npgsql\NpgsqlCommand.fr.resx" />
+    <None Include="Npgsql\NpgsqlCommand.ja.resx" />
+    <None Include="Npgsql\NpgsqlCommand.resx" />
+    <None Include="Npgsql\NpgsqlCommand.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlCommandBuilder.de.resx" />
+    <None Include="Npgsql\NpgsqlCommandBuilder.fr.resx" />
+    <None Include="Npgsql\NpgsqlCommandBuilder.ja.resx" />
+    <None Include="Npgsql\NpgsqlCommandBuilder.resx" />
+    <None Include="Npgsql\NpgsqlCommandBuilder.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlConnectedState.de.resx" />
+    <None Include="Npgsql\NpgsqlConnectedState.fr.resx" />
+    <None Include="Npgsql\NpgsqlConnectedState.ja.resx" />
+    <None Include="Npgsql\NpgsqlConnectedState.resx" />
+    <None Include="Npgsql\NpgsqlConnectedState.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlConnection.de.resx" />
+    <None Include="Npgsql\NpgsqlConnection.es.resx" />
+    <None Include="Npgsql\NpgsqlConnection.fi.resx" />
+    <None Include="Npgsql\NpgsqlConnection.fr.resx" />
+    <None Include="Npgsql\NpgsqlConnection.ja.resx" />
+    <None Include="Npgsql\NpgsqlConnection.resx" />
+    <None Include="Npgsql\NpgsqlConnection.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlConnectionStringBuilder.de.resx" />
+    <None Include="Npgsql\NpgsqlConnectionStringBuilder.fr.resx" />
+    <None Include="Npgsql\NpgsqlConnectionStringBuilder.ja.resx" />
+    <None Include="Npgsql\NpgsqlConnectionStringBuilder.resx" />
+    <None Include="Npgsql\NpgsqlConnectionStringBuilder.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.de.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.es.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.fi.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.fr.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.ja.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.resx" />
+    <None Include="Npgsql\NpgsqlEventLog.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlException.de.resx" />
+    <None Include="Npgsql\NpgsqlException.fr.resx" />
+    <None Include="Npgsql\NpgsqlException.ja.resx" />
+    <None Include="Npgsql\NpgsqlException.resx" />
+    <None Include="Npgsql\NpgsqlException.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlMetaData.xml" />
+    <None Include="Npgsql\NpgsqlParameter.de.resx" />
+    <None Include="Npgsql\NpgsqlParameter.es.resx" />
+    <None Include="Npgsql\NpgsqlParameter.fi.resx" />
+    <None Include="Npgsql\NpgsqlParameter.fr.resx" />
+    <None Include="Npgsql\NpgsqlParameter.ja.resx" />
+    <None Include="Npgsql\NpgsqlParameter.resx" />
+    <None Include="Npgsql\NpgsqlParameter.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.de.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.es.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.fi.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.fr.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.ja.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.resx" />
+    <None Include="Npgsql\NpgsqlParameterCollection.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlProviderManifest.Manifest.xml" />
+    <None Include="Npgsql\NpgsqlReadyState.de.resx" />
+    <None Include="Npgsql\NpgsqlReadyState.fr.resx" />
+    <None Include="Npgsql\NpgsqlReadyState.ja.resx" />
+    <None Include="Npgsql\NpgsqlReadyState.resx" />
+    <None Include="Npgsql\NpgsqlReadyState.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlRow.de.resx" />
+    <None Include="Npgsql\NpgsqlRow.fr.resx" />
+    <None Include="Npgsql\NpgsqlRow.resx" />
+    <None Include="Npgsql\NpgsqlSchema.msl" />
+    <None Include="Npgsql\NpgsqlSchema.ssdl" />
+    <None Include="Npgsql\NpgsqlState.de.resx" />
+    <None Include="Npgsql\NpgsqlState.fr.resx" />
+    <None Include="Npgsql\NpgsqlState.ja.resx" />
+    <None Include="Npgsql\NpgsqlState.resx" />
+    <None Include="Npgsql\NpgsqlState.zh-CN.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.de.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.es.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.fi.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.fr.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.ja.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.resx" />
+    <None Include="Npgsql\NpgsqlTransaction.zh-CN.resx" />
+    <None Include="Npgsql\PGUtil.de.resx" />
+    <None Include="Npgsql\PGUtil.fr.resx" />
+    <None Include="Npgsql\PGUtil.ja.resx" />
+    <None Include="Npgsql\PGUtil.resx" />
+    <None Include="Npgsql\PGUtil.zh-CN.resx" />
+    <None Include="NpgsqlTypes\NpgsqlTypesHelper.de.resx" />
+    <None Include="NpgsqlTypes\NpgsqlTypesHelper.ja.resx" />
+    <None Include="NpgsqlTypes\NpgsqlTypesHelper.resx" />
+    <None Include="NpgsqlTypes\NpgsqlTypesHelper.zh-CN.resx" />
+  </ItemGroup>
+</Project>
