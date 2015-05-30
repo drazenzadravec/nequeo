@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Ftp", "Nequeo.Ftp\Nequeo.Ftp.csproj", "{B323A095-53D1-48F0-A847-3D3C1CA122DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Nequeo.Ftp", "Test.Nequeo.Ftp\Test.Nequeo.Ftp.csproj", "{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3C7E562-BA8C-462D-A044-07FC989C0992}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Nequeo.Ftp.vsmdi = Nequeo.Ftp.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Ftp\\Nequeo.Ftp.csproj
+		SccProjectName1 = Nequeo.Ftp
+		SccLocalPath1 = Nequeo.Ftp
+		SccProjectUniqueName2 = Test.Nequeo.Ftp\\Test.Nequeo.Ftp.csproj
+		SccProjectName2 = Test.Nequeo.Ftp
+		SccLocalPath2 = Test.Nequeo.Ftp
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Nequeo.Ftp.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Debug|x86.ActiveCfg = Debug|x86
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Debug|x86.Build.0 = Debug|x86
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Release|x86.ActiveCfg = Release|x86
+		{B323A095-53D1-48F0-A847-3D3C1CA122DA}.Release|x86.Build.0 = Release|x86
+		{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3ECCFA-0F62-4AF3-BDA7-1AA4F1C00939}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

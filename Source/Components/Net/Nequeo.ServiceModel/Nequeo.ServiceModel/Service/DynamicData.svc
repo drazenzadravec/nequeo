@@ -1,0 +1,6 @@
+﻿<%@ ServiceHost 
+    Language="C#" 
+    Debug="true" 
+    Service="Nequeo.Net.ServiceModel.Service.DynamicData, Nequeo.Net.ServiceModel"
+    Factory="Nequeo.Net.ServiceModel.MultipleHttpSchemaWebScriptServiceFactory, Nequeo.Net.ServiceModel" 
+%>

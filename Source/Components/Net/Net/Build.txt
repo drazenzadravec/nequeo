@@ -1,0 +1,10 @@
+Nequeo.Net
+Nequeo.ActiveDirectory
+Nequeo.DomianName
+Nequeo.Ftp
+Nequeo.Http
+Nequeo.Mail.Client
+Nequeo.ServiceModel
+Nequeo.WebDav
+Nequeo.OAuth
+Nequeo.OAuth2

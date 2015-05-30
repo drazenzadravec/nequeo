@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73D54F82-2C72-4162-86F3-63C3679319AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Net</RootNamespace>
+    <AssemblyName>Nequeo.Net.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoNetKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\References\Staging\Nequeo.Net.Core.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\References\Staging\Nequeo.Net.Core.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Assumes.cs" />
+    <Compile Include="Core\IEmbeddedResourceRetrieval.cs" />
+    <Compile Include="Core\Messaging\Base64WebEncoder.cs" />
+    <Compile Include="Core\Messaging\Bindings\AsymmetricCryptoKeyStoreWrapper.cs" />
+    <Compile Include="Core\Messaging\Bindings\CryptoKey.cs" />
+    <Compile Include="Core\Messaging\Bindings\CryptoKeyCollisionException.cs" />
+    <Compile Include="Core\Messaging\Bindings\ExpiredMessageException.cs" />
+    <Compile Include="Core\Messaging\Bindings\ICryptoKeyStore.cs" />
+    <Compile Include="Core\Messaging\Bindings\ICryptoKeyStoreContract.cs" />
+    <Compile Include="Core\Messaging\Bindings\IExpiringProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\Bindings\InvalidSignatureException.cs" />
+    <Compile Include="Core\Messaging\Bindings\IReplayProtectedProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\Bindings\MemoryCryptoKeyStore.cs" />
+    <Compile Include="Core\Messaging\Bindings\ReplayedMessageException.cs" />
+    <Compile Include="Core\Messaging\CachedDirectWebResponse.cs" />
+    <Compile Include="Core\Messaging\Channel.cs" />
+    <Compile Include="Core\Messaging\ChannelContract.cs" />
+    <Compile Include="Core\Messaging\ChannelEventArgs.cs" />
+    <Compile Include="Core\Messaging\DataBag.cs" />
+    <Compile Include="Core\Messaging\DirectWebRequestOptions.cs" />
+    <Compile Include="Core\Messaging\EmptyDictionary.cs" />
+    <Compile Include="Core\Messaging\EmptyEnumerator.cs" />
+    <Compile Include="Core\Messaging\EmptyList.cs" />
+    <Compile Include="Core\Messaging\EnumerableCacheExtensions.cs" />
+    <Compile Include="Core\Messaging\ErrorUtilities.cs" />
+    <Compile Include="Core\Messaging\HostErrorException.cs" />
+    <Compile Include="Core\Messaging\HttpDeliveryMethods.cs" />
+    <Compile Include="Core\Messaging\HttpRequestHeaders.cs" />
+    <Compile Include="Core\Messaging\HttpRequestInfo.cs" />
+    <Compile Include="Core\Messaging\IChannelBindingElement.cs" />
+    <Compile Include="Core\Messaging\IDataBagFormatter.cs" />
+    <Compile Include="Core\Messaging\IDirectedProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IDirectResponseProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IDirectWebRequestHandler.cs" />
+    <Compile Include="Core\Messaging\IExtensionMessage.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectRequest.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectRequestContract.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectResponse.cs" />
+    <Compile Include="Core\Messaging\IHttpDirectResponseContract.cs" />
+    <Compile Include="Core\Messaging\IHttpIndirectResponse.cs" />
+    <Compile Include="Core\Messaging\IMessage.cs" />
+    <Compile Include="Core\Messaging\IMessageFactory.cs" />
+    <Compile Include="Core\Messaging\IMessageOriginalPayload.cs" />
+    <Compile Include="Core\Messaging\IMessageWithBinaryData.cs" />
+    <Compile Include="Core\Messaging\IMessageWithEvents.cs" />
+    <Compile Include="Core\Messaging\IncomingWebResponse.cs" />
+    <Compile Include="Core\Messaging\IncomingWebResponseContract.cs" />
+    <Compile Include="Core\Messaging\InternalErrorException.cs" />
+    <Compile Include="Core\Messaging\IProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\IProtocolMessageWithExtensions.cs" />
+    <Compile Include="Core\Messaging\IStreamSerializingDataBag.cs" />
+    <Compile Include="Core\Messaging\ITamperResistantProtocolMessage.cs" />
+    <Compile Include="Core\Messaging\KeyedCollectionDelegate.cs" />
+    <Compile Include="Core\Messaging\MessagePartAttribute.cs" />
+    <Compile Include="Core\Messaging\MessageProtections.cs" />
+    <Compile Include="Core\Messaging\MessageReceivingEndpoint.cs" />
+    <Compile Include="Core\Messaging\MessageSerializer.cs" />
+    <Compile Include="Core\Messaging\MessageTransport.cs" />
+    <Compile Include="Core\Messaging\MessagingStrings.Designer.cs" />
+    <Compile Include="Core\Messaging\MessagingUtilities.cs" />
+    <Compile Include="Core\Messaging\MultipartPostPart.cs" />
+    <Compile Include="Core\Messaging\NetworkDirectWebResponse.cs" />
+    <Compile Include="Core\Messaging\OutgoingWebResponse.cs" />
+    <Compile Include="Core\Messaging\OutgoingWebResponseActionResult.cs" />
+    <Compile Include="Core\Messaging\ProtocolException.cs" />
+    <Compile Include="Core\Messaging\ProtocolFaultResponseException.cs" />
+    <Compile Include="Core\Messaging\ReadOnlyDictionary.cs" />
+    <Compile Include="Core\Messaging\Reflection\DefaultEncoderAttribute.cs" />
+    <Compile Include="Core\Messaging\Reflection\IMessagePartEncoder.cs" />
+    <Compile Include="Core\Messaging\Reflection\IMessagePartNullEncoder.cs" />
+    <Compile Include="Core\Messaging\Reflection\IMessagePartOriginalEncoder.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessageDescription.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessageDescriptionCollection.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessageDictionary.cs" />
+    <Compile Include="Core\Messaging\Reflection\MessagePart.cs" />
+    <Compile Include="Core\Messaging\Reflection\ValueMapping.cs" />
+    <Compile Include="Core\Messaging\StandardMessageFactory.cs" />
+    <Compile Include="Core\Messaging\StandardMessageFactoryChannel.cs" />
+    <Compile Include="Core\Messaging\StandardWebRequestHandler.cs" />
+    <Compile Include="Core\Messaging\TimespanSecondsEncoder.cs" />
+    <Compile Include="Core\Messaging\TimestampEncoder.cs" />
+    <Compile Include="Core\Messaging\UnprotectedMessageException.cs" />
+    <Compile Include="Core\Requires.cs" />
+    <Compile Include="Core\StringResource.Designer.cs" />
+    <Compile Include="Core\UriUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NequeoNetKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Messaging\MessagingStrings.resx" />
+    <EmbeddedResource Include="Core\StringResource.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

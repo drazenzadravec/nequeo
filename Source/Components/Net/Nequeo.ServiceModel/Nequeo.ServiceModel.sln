@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.ServiceModel", "Nequeo.ServiceModel\Nequeo.ServiceModel.csproj", "{37AED920-0DAE-4045-82E8-9E94866BADFB}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.ServiceModel\\Nequeo.ServiceModel.csproj
+		SccProjectName1 = Nequeo.ServiceModel
+		SccLocalPath1 = Nequeo.ServiceModel
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Debug|x86.Build.0 = Debug|Any CPU
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Release|x86.ActiveCfg = Release|x86
+		{37AED920-0DAE-4045-82E8-9E94866BADFB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

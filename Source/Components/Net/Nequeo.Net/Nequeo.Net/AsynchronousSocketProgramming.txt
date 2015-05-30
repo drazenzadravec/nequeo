@@ -1,0 +1,57 @@
+﻿Asynchronous Socket Programming
+What is 'asynchronous socket programming'? 
+a.k.a. event-driven programming or select()-based multiplexing, it's a solution to a network programming problem: 
+How do I talk to bunch of different network connections at once, all within one process/thread?
+
+Let's say you're writing a database server that accepts requests via a tcp connection. If you expect to have many 
+simultaneous requests coming in, you might look at the following options: 
+
+•synchronous: you handle one request at a time, each in turn.
+pros: simple 
+cons: any one request can hold up all the other requests 
+
+•fork: you start a new process to handle each request.
+pros: easy 
+cons: does not scale well, hundreds of connections means hundreds of processes.
+fork() is the Unix programmer's hammer. Because it's available, every problem looks like a nail. It's usually overkill 
+
+•threads: start a new thread to handle each request.
+pros: easy, and kinder to the kernel than using fork, since threads usually have much less overhead
+cons: your machine may not have threads, and threaded programming can get very complicated very fast, with worries about 
+controlling access to shared resources. 
+
+With async, or 'event-driven' programming, you cooperatively schedule the cpu or other resources you wish to apply to 
+each connection. How you do this really depends on the application - and it's not always possible or reasonable to try. 
+But if you can capture the state of any one connection, and divide the work it will do into relatively small pieces, 
+then this solution might work for you. If your connections do not require much (or any) state, then this is an ideal approach.
+
+pros: 
+• efficient and elegant 
+• scales well - hundreds of connections means only hundreds of socket/state objects, not hundreds of threads or processes. 
+• requires no interlocking for access to shared resources. If your database provides no interlocking of its own (as is the 
+case for dbm, dbz, and berkeley db), than the need to serialize access to the database is provided trivially. 
+• integrates easily with event-driven window-system programming. GUI programs that use blocking network calls are not very graceful. 
+cons: • more complex - you may need to build state machines. 
+• requires a fundamentally different approach to programming that can be confusing at first. 
+
+
+
+Writing a single-process multiplexing socket program
+
+Now how do we apply our bucket wisdom to network programming? 
+
+Depending on the operating system, there are several different ways to achieve our 'bucket-trickling' affect. By far the most 
+common, and simplest mechanism uses the select() system call. The select() function takes (in effect) four arguments: three 
+'lists' of sockets, and a timeout. The three socket lists indicate interest in read, write, and exception events for each 
+socket listed. The function will return whenever the indicated socket fires one of these events. If nothing happens within 
+the timeout period, the function simply returns. 
+
+The result of the select() function is three lists telling you which sockets fired which events. 
+
+Your application will have a handler for each expected event type. This handler will perform different tasks depending on your 
+application. If a connection has a need to keep state information, you'll probably end up writing a state machine to handle 
+transitions between different behaviors. Diving back into the bucket [paradigm], these events might be the equivalent of adding 
+little "I'm full now" mailbox-like flags to the buckets. 
+
+Animating the server using select() is easy: A simple event loop will suffice. I usually use a loop with a 30-second timeout. 
+That way, I can do any necessary housekeeping tasks at least every 30 seconds. 
