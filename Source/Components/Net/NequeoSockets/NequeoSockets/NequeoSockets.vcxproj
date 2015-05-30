@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B861C20C-EC59-4242-ACCB-B91087904DBB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>NequeoSockets</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\References\Release_x86\Lib\Components</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\..\References\Release_x64\Lib\Components</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AddressFamily.h "..\..\..\..\References\Release\Include\Components\Sockets\AddressFamily.h"
+copy $(ProjectDir)\DNS.h "..\..\..\..\References\Release\Include\Components\Sockets\DNS.h"
+copy $(ProjectDir)\GlobalSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\GlobalSocket.h"
+copy $(ProjectDir)\HostEntry.h "..\..\..\..\References\Release\Include\Components\Sockets\HostEntry.h"
+copy $(ProjectDir)\IPAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddress.h"
+copy $(ProjectDir)\IPAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddressProvider.h"
+copy $(ProjectDir)\IPv4AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4AddressProvider.h"
+copy $(ProjectDir)\IPv4SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4SocketAddressProvider.h"
+copy $(ProjectDir)\IPv6AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6AddressProvider.h"
+copy $(ProjectDir)\IPv6SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6SocketAddressProvider.h"
+copy $(ProjectDir)\NetworkInterface.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterface.h"
+copy $(ProjectDir)\NetworkInterfaceProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterfaceProvider.h"
+copy $(ProjectDir)\SelectMode.h "..\..\..\..\References\Release\Include\Components\Sockets\SelectMode.h"
+copy $(ProjectDir)\Socket.h "..\..\..\..\References\Release\Include\Components\Sockets\Socket.h"
+copy $(ProjectDir)\SocketAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddress.h"
+copy $(ProjectDir)\SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddressProvider.h"
+copy $(ProjectDir)\SocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketProvider.h"
+copy $(ProjectDir)\SocketStream.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketStream.h"
+copy $(ProjectDir)\StreamSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocket.h"
+copy $(ProjectDir)\StreamSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocketProvider.h"
+copy $(ProjectDir)\RawSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocket.h"
+copy $(ProjectDir)\RawSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocketProvider.h"
+copy $(ProjectDir)\ServerSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocket.h"
+copy $(ProjectDir)\ServerSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocketProvider.h"
+copy $(ProjectDir)\TCPServer.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServer.h"
+copy $(ProjectDir)\TCPServerConnection.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnection.h"
+copy $(ProjectDir)\TCPServerConnectionFactory.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnectionFactory.h"
+copy $(ProjectDir)\TCPServerDispatcher.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerDispatcher.h"
+copy $(ProjectDir)\TCPServerParams.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerParams.h"
+copy $(ProjectDir)\WebSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketProvider.h"
+copy $(ProjectDir)\WebSocketType.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketType.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>NequeoPrimitive.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AddressFamily.h "..\..\..\..\References\Release\Include\Components\Sockets\AddressFamily.h"
+copy $(ProjectDir)\DNS.h "..\..\..\..\References\Release\Include\Components\Sockets\DNS.h"
+copy $(ProjectDir)\GlobalSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\GlobalSocket.h"
+copy $(ProjectDir)\HostEntry.h "..\..\..\..\References\Release\Include\Components\Sockets\HostEntry.h"
+copy $(ProjectDir)\IPAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddress.h"
+copy $(ProjectDir)\IPAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddressProvider.h"
+copy $(ProjectDir)\IPv4AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4AddressProvider.h"
+copy $(ProjectDir)\IPv4SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4SocketAddressProvider.h"
+copy $(ProjectDir)\IPv6AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6AddressProvider.h"
+copy $(ProjectDir)\IPv6SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6SocketAddressProvider.h"
+copy $(ProjectDir)\NetworkInterface.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterface.h"
+copy $(ProjectDir)\NetworkInterfaceProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterfaceProvider.h"
+copy $(ProjectDir)\SelectMode.h "..\..\..\..\References\Release\Include\Components\Sockets\SelectMode.h"
+copy $(ProjectDir)\Socket.h "..\..\..\..\References\Release\Include\Components\Sockets\Socket.h"
+copy $(ProjectDir)\SocketAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddress.h"
+copy $(ProjectDir)\SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddressProvider.h"
+copy $(ProjectDir)\SocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketProvider.h"
+copy $(ProjectDir)\SocketStream.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketStream.h"
+copy $(ProjectDir)\StreamSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocket.h"
+copy $(ProjectDir)\StreamSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocketProvider.h"
+copy $(ProjectDir)\RawSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocket.h"
+copy $(ProjectDir)\RawSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocketProvider.h"
+copy $(ProjectDir)\ServerSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocket.h"
+copy $(ProjectDir)\ServerSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocketProvider.h"
+copy $(ProjectDir)\TCPServer.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServer.h"
+copy $(ProjectDir)\TCPServerConnection.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnection.h"
+copy $(ProjectDir)\TCPServerConnectionFactory.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnectionFactory.h"
+copy $(ProjectDir)\TCPServerDispatcher.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerDispatcher.h"
+copy $(ProjectDir)\TCPServerParams.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerParams.h"
+copy $(ProjectDir)\WebSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketProvider.h"
+copy $(ProjectDir)\WebSocketType.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketType.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>NequeoPrimitive.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AddressFamily.h "..\..\..\..\References\Release\Include\Components\Sockets\AddressFamily.h"
+copy $(ProjectDir)\DNS.h "..\..\..\..\References\Release\Include\Components\Sockets\DNS.h"
+copy $(ProjectDir)\GlobalSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\GlobalSocket.h"
+copy $(ProjectDir)\HostEntry.h "..\..\..\..\References\Release\Include\Components\Sockets\HostEntry.h"
+copy $(ProjectDir)\IPAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddress.h"
+copy $(ProjectDir)\IPAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddressProvider.h"
+copy $(ProjectDir)\IPv4AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4AddressProvider.h"
+copy $(ProjectDir)\IPv4SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4SocketAddressProvider.h"
+copy $(ProjectDir)\IPv6AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6AddressProvider.h"
+copy $(ProjectDir)\IPv6SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6SocketAddressProvider.h"
+copy $(ProjectDir)\NetworkInterface.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterface.h"
+copy $(ProjectDir)\NetworkInterfaceProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterfaceProvider.h"
+copy $(ProjectDir)\SelectMode.h "..\..\..\..\References\Release\Include\Components\Sockets\SelectMode.h"
+copy $(ProjectDir)\Socket.h "..\..\..\..\References\Release\Include\Components\Sockets\Socket.h"
+copy $(ProjectDir)\SocketAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddress.h"
+copy $(ProjectDir)\SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddressProvider.h"
+copy $(ProjectDir)\SocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketProvider.h"
+copy $(ProjectDir)\SocketStream.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketStream.h"
+copy $(ProjectDir)\StreamSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocket.h"
+copy $(ProjectDir)\StreamSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocketProvider.h"
+copy $(ProjectDir)\RawSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocket.h"
+copy $(ProjectDir)\RawSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocketProvider.h"
+copy $(ProjectDir)\ServerSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocket.h"
+copy $(ProjectDir)\ServerSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocketProvider.h"
+copy $(ProjectDir)\TCPServer.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServer.h"
+copy $(ProjectDir)\TCPServerConnection.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnection.h"
+copy $(ProjectDir)\TCPServerConnectionFactory.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnectionFactory.h"
+copy $(ProjectDir)\TCPServerDispatcher.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerDispatcher.h"
+copy $(ProjectDir)\TCPServerParams.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerParams.h"
+copy $(ProjectDir)\WebSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketProvider.h"
+copy $(ProjectDir)\WebSocketType.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketType.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NequeoPrimitive.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\AddressFamily.h "..\..\..\..\References\Release\Include\Components\Sockets\AddressFamily.h"
+copy $(ProjectDir)\DNS.h "..\..\..\..\References\Release\Include\Components\Sockets\DNS.h"
+copy $(ProjectDir)\GlobalSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\GlobalSocket.h"
+copy $(ProjectDir)\HostEntry.h "..\..\..\..\References\Release\Include\Components\Sockets\HostEntry.h"
+copy $(ProjectDir)\IPAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddress.h"
+copy $(ProjectDir)\IPAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPAddressProvider.h"
+copy $(ProjectDir)\IPv4AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4AddressProvider.h"
+copy $(ProjectDir)\IPv4SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv4SocketAddressProvider.h"
+copy $(ProjectDir)\IPv6AddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6AddressProvider.h"
+copy $(ProjectDir)\IPv6SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\IPv6SocketAddressProvider.h"
+copy $(ProjectDir)\NetworkInterface.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterface.h"
+copy $(ProjectDir)\NetworkInterfaceProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\NetworkInterfaceProvider.h"
+copy $(ProjectDir)\SelectMode.h "..\..\..\..\References\Release\Include\Components\Sockets\SelectMode.h"
+copy $(ProjectDir)\Socket.h "..\..\..\..\References\Release\Include\Components\Sockets\Socket.h"
+copy $(ProjectDir)\SocketAddress.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddress.h"
+copy $(ProjectDir)\SocketAddressProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketAddressProvider.h"
+copy $(ProjectDir)\SocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketProvider.h"
+copy $(ProjectDir)\SocketStream.h "..\..\..\..\References\Release\Include\Components\Sockets\SocketStream.h"
+copy $(ProjectDir)\StreamSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocket.h"
+copy $(ProjectDir)\StreamSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\StreamSocketProvider.h"
+copy $(ProjectDir)\RawSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocket.h"
+copy $(ProjectDir)\RawSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\RawSocketProvider.h"
+copy $(ProjectDir)\ServerSocket.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocket.h"
+copy $(ProjectDir)\ServerSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\ServerSocketProvider.h"
+copy $(ProjectDir)\TCPServer.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServer.h"
+copy $(ProjectDir)\TCPServerConnection.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnection.h"
+copy $(ProjectDir)\TCPServerConnectionFactory.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerConnectionFactory.h"
+copy $(ProjectDir)\TCPServerDispatcher.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerDispatcher.h"
+copy $(ProjectDir)\TCPServerParams.h "..\..\..\..\References\Release\Include\Components\Sockets\TCPServerParams.h"
+copy $(ProjectDir)\WebSocketProvider.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketProvider.h"
+copy $(ProjectDir)\WebSocketType.h "..\..\..\..\References\Release\Include\Components\Sockets\WebSocketType.h"</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NequeoPrimitive.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AddressFamily.h" />
+    <ClInclude Include="DNS.h" />
+    <ClInclude Include="GlobalSocket.h" />
+    <ClInclude Include="HostEntry.h" />
+    <ClInclude Include="IPAddress.h" />
+    <ClInclude Include="IPAddressProvider.h" />
+    <ClInclude Include="IPv4AddressProvider.h" />
+    <ClInclude Include="IPv4SocketAddressProvider.h" />
+    <ClInclude Include="IPv6AddressProvider.h" />
+    <ClInclude Include="IPv6SocketAddressProvider.h" />
+    <ClInclude Include="NetworkInterface.h" />
+    <ClInclude Include="NetworkInterfaceProvider.h" />
+    <ClInclude Include="RawSocket.h" />
+    <ClInclude Include="RawSocketProvider.h" />
+    <ClInclude Include="SelectMode.h" />
+    <ClInclude Include="ServerSocket.h" />
+    <ClInclude Include="ServerSocketProvider.h" />
+    <ClInclude Include="Socket.h" />
+    <ClInclude Include="SocketAddress.h" />
+    <ClInclude Include="SocketAddressProvider.h" />
+    <ClInclude Include="SocketProvider.h" />
+    <ClInclude Include="SocketStream.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StreamSocket.h" />
+    <ClInclude Include="StreamSocketProvider.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TCPServer.h" />
+    <ClInclude Include="TCPServerConnection.h" />
+    <ClInclude Include="TCPServerConnectionFactory.h" />
+    <ClInclude Include="TCPServerDispatcher.h" />
+    <ClInclude Include="TCPServerParams.h" />
+    <ClInclude Include="WebSocketProvider.h" />
+    <ClInclude Include="WebSocketType.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DNS.cpp" />
+    <ClCompile Include="HostEntry.cpp" />
+    <ClCompile Include="IPAddress.cpp" />
+    <ClCompile Include="IPAddressProvider.cpp" />
+    <ClCompile Include="NetworkInterface.cpp" />
+    <ClCompile Include="NetworkInterfaceProvider.cpp" />
+    <ClCompile Include="RawSocket.cpp" />
+    <ClCompile Include="RawSocketProvider.cpp" />
+    <ClCompile Include="ServerSocket.cpp" />
+    <ClCompile Include="ServerSocketProvider.cpp" />
+    <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="SocketAddress.cpp" />
+    <ClCompile Include="SocketAddressProvider.cpp" />
+    <ClCompile Include="SocketProvider.cpp" />
+    <ClCompile Include="SocketStream.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="StreamSocket.cpp" />
+    <ClCompile Include="StreamSocketProvider.cpp" />
+    <ClCompile Include="TCPServer.cpp" />
+    <ClCompile Include="TCPServerConnection.cpp" />
+    <ClCompile Include="TCPServerConnectionFactory.cpp" />
+    <ClCompile Include="TCPServerDispatcher.cpp" />
+    <ClCompile Include="TCPServerParams.cpp" />
+    <ClCompile Include="WebSocketProvider.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

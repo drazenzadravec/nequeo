@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoSockets", "NequeoSockets\NequeoSockets.vcxproj", "{B861C20C-EC59-4242-ACCB-B91087904DBB}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NequeoSockets\\NequeoSockets.vcxproj
+		SccProjectName1 = NequeoSockets
+		SccLocalPath1 = NequeoSockets
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Debug|Win32.Build.0 = Debug|Win32
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Debug|x64.ActiveCfg = Debug|x64
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Debug|x64.Build.0 = Debug|x64
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Release|Win32.ActiveCfg = Release|Win32
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Release|Win32.Build.0 = Release|Win32
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Release|x64.ActiveCfg = Release|x64
+		{B861C20C-EC59-4242-ACCB-B91087904DBB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
