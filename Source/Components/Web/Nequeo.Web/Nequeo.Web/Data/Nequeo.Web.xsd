@@ -1,0 +1,54 @@
+﻿<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="HttpHandlerExtensionGroup">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="HttpHandlerDataExtensions">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Extension">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="add">
+                                            <xs:complexType>
+                                                <xs:attribute name="name" type="xs:string" use="required" />
+                                                <xs:attribute name="httpHandlerTypeName" type="xs:string" use="required" />
+                                                <xs:attribute name="dataObjectTypeName" type="xs:string" use="required" />
+                                                <xs:attribute name="dataObjectPropertyName" type="xs:string" use="required" />
+                                                <xs:attribute name="urlQueryTextName" type="xs:string" use="required" />
+                                                <xs:attribute name="childPageGroupExecution" type="xs:string" use="required" />
+                                                <xs:attribute name="referenceLazyLoading" type="xs:boolean" use="required" />
+                                                <xs:attribute name="connectionName" type="xs:string" use="required" />
+                                                <xs:attribute name="connectionType" type="xs:string" use="required" />
+                                                <xs:attribute name="connectionDataType" type="xs:string" use="required" />
+                                                <xs:attribute name="dataAccessProvider" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="HttpHandlerUploadExtensions">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Extension">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="add">
+                                            <xs:complexType>
+                                                <xs:attribute name="name" type="xs:string" use="required" />
+                                                <xs:attribute name="httpHandlerTypeName" type="xs:string" use="required" />
+                                                <xs:attribute name="uploadPath" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

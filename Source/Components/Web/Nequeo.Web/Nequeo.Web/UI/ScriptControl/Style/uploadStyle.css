@@ -1,0 +1,12 @@
+﻿.uploadButton {
+	height: 29px;	
+	width: 133px;
+	background: url(<%=WebResource("Nequeo.Web.UI.ScriptControl.Image.uploadButton.png")%>) 0 0;
+	font-size: 14px; color: #C7D92C; text-align: center; padding-top: 15px;
+	cursor:auto;
+}
+.uploadButton.hover {
+	background: url(<%=WebResource("Nequeo.Web.UI.ScriptControl.Image.uploadButton.png")%>) 0 56px;
+	color: #95A226;	
+	cursor:pointer;
+}

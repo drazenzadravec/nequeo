@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Nequeo.Web.Mvc.ExtensionMvc&lt;TExtension&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\ExtensionMvc.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.ExtensionMvc&lt;TExtension, TExtension1&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\ExtensionMvc.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.HtmlHelperExtensions" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>base\HtmlHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.MvcManager" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>base\MvcManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.ComponentFactory" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAIAAAAAIAAAAIAAEAAAAAEAABAAAIAIAAAA=</HashCode>
+      <FileName>Extended\ComponentFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.CacheBase&lt;TKey, TValue&gt;" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAIAgAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\CacheBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.ClientSideEnumValueAttribute" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\CacheBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.CacheManagerWrapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\CacheManagerWrapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.ClientSideObjectWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQACCAAAAYCAABgBAABAAAAEQEAAAAAAAAAAoQ=</HashCode>
+      <FileName>Extended\Factory\ClientSideObjectWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.ClientSideObjectWriterFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\ClientSideObjectWriterFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.ConfigurationManagerWrapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\ConfigurationManagerWrapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.GlobalizationInfo" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\GlobalizationInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.HttpHandlerBase" Collapsed="true">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\HttpHandlerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.HttpResponseCacher" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\HttpResponseCacher.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.HttpResponseCompressor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\HttpResponseCompressor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.PathResolver" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\PathResolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.UrlEncoder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\UrlEncoder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.UrlResolver" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\UrlResolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.VirtualPathProviderWrapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAQAAABAAAAAAIAAAQAAABEAAEAAAQAAA=</HashCode>
+      <FileName>Extended\Factory\VirtualPathProviderWrapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.Factory.Runtime.ServiceLocator" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\Runtime\ServiceLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ComponentBase" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACoAAAAAAAAAgAAAAAAAQgCAQACCAAABAwIAAAAAA=</HashCode>
+      <FileName>Extended\UI\ComponentBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ComponentBuilderBase&lt;TComponent, TBuilder&gt;" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAQACDAAABBgAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ComponentBuilderBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.JavaScript" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\Script\JavaScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.JavaScriptBuilder" Collapsed="true">
+    <Position X="3.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\Script\JavaScriptBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ScriptRegistrar" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAIAAAARQAAAgAAQABCCBBGoGABAAJSEAIAA=</HashCode>
+      <FileName>Extended\UI\ScriptRegistrar\ScriptRegistrar.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ScriptRegistrarBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAIAABUAAAAAAAAAAQAAAAIEBAgBQAAAAA=</HashCode>
+      <FileName>Extended\UI\ScriptRegistrar\ScriptRegistrarBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ScriptWrapper" Collapsed="true">
+    <Position X="6.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAEAACAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ScriptRegistrar\ScriptWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ScriptWrapperBase" Collapsed="true">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAEAACAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ScriptRegistrar\ScriptWrapperBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ScrollPanel" Collapsed="true">
+    <Position X="5.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ScrollPanel\ScrollPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ScrollPanelBuilder" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ScrollPanel\ScrollPanelBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.StyleSheet" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABAAIAAAAQA=</HashCode>
+      <FileName>Extended\UI\StyleSheet\StyleSheet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.StyleSheetBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAABAAABBAAAAAAQA=</HashCode>
+      <FileName>Extended\UI\StyleSheet\StyleSheetBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.StyleSheetRegistrar" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAARQAAAgAAAAAACAAAAAABAAIAEAIQA=</HashCode>
+      <FileName>Extended\UI\StyleSheetRegistrar\StyleSheetRegistrar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.StyleSheetRegistrarBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAIAABUAAAAAAAAAQAAAAAAABAAAAAAAQA=</HashCode>
+      <FileName>Extended\UI\StyleSheetRegistrar\StyleSheetRegistrarBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.TreeView" Collapsed="true">
+    <Position X="3" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\TreeView\TreeView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.TreeViewBuilder" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\TreeView\TreeViewBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ControlBase.PanelBase&lt;T&gt;" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ControlBase\Panel\PanelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ControlBase.PanelBuilderBase&lt;T, TBuilder&gt;" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Extended\UI\ControlBase\Panel\PanelBuilderBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ControlBase.ScriptBase&lt;T&gt;" Collapsed="true">
+    <Position X="8.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABCAJAAAAAA=</HashCode>
+      <FileName>Extended\UI\ControlBase\Script\ScriptBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ControlBase.ScriptBuilderBase&lt;T, TBuilder&gt;" Collapsed="true">
+    <Position X="3.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAABAAABBABAAAAAE=</HashCode>
+      <FileName>Extended\UI\ControlBase\Script\ScriptBuilderBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ControlBase.TextBoxBase&lt;T&gt;" Collapsed="true">
+    <Position X="0.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ControlBase\TextBox\TextBoxBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.UI.ControlBase.TextBoxBuilderBase&lt;T, TBuilder&gt;" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\UI\ControlBase\TextBox\TextBoxBuilderBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.SharedGroup" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAEAEAEAAAAAABAAAAAAAAAAAAEAAAABAAAAQA=</HashCode>
+      <FileName>Extended\WebAsset\SharedGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.SharedGroupBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAAACAAIAAAA=</HashCode>
+      <FileName>Extended\WebAsset\SharedGroupBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAsset" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAhAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetDefaultSettings" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>sAgAAAAAABAAIAAAAAAAAAAIAAAAACEAAIAEAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetDefaultSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetHttpHandler" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAABACAEAAAAIAAAAAAwAAAAIAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetHttpHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetItem" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetItemCollection" Collapsed="true">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJAAEBAAAAABAAAAACAAAABAAAIAAAAAgAAAIAAAAU=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItemCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetItemCollectionBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAoAAAUAAABAAIAACA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItemCollectionBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetItemGroup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAAAAAABAAKAAAAAAAAAUAAAAAAAEAAgAGAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItemGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetItemGroupBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAJIAAAAABAAAAAAAAAQAAAAAAgAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItemGroupBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetItemMerger" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEQAgAAAAAAAAAAEAAAAAAAQAAAAAAAAACAAE=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItemMerger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetLocator" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAQAEAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetLocator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetRegistry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABABAACBBAAACAwAiAAAgAACDAAAEQAAIAUwUAAAM=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetRegistry.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Nequeo.Web.Mvc.IMvcModelMetadataType&lt;TMvcModel, TDataEntity&gt;" Collapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>base\ExtensionMvc.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.IObjectMembers" Collapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIEAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\IObjectMembers.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.ICacheManager" Collapsed="true">
+    <Position X="11" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\ICacheManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IClientSideObjectWriter" Collapsed="true">
+    <Position X="12.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACCAAAAICAAAAAAABAAAAEQEAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IClientSideObjectWriter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IClientSideObjectWriterFactory" Collapsed="true">
+    <Position X="14.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IClientSideObjectWriterFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IConfigurationManager" Collapsed="true">
+    <Position X="16.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IConfigurationManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IHtmlAttributesContainer" Collapsed="true">
+    <Position X="18" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IHtmlAttributesContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IHttpResponseCacher" Collapsed="true">
+    <Position X="19.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IHttpResponseCacher.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IHttpResponseCompressor" Collapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IHttpResponseCompressor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IPathResolver" Collapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IPathResolver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IScriptableComponent" Collapsed="true">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAgAAAAAAAAACAAACCAAAAAgAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IScriptableComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IScriptableComponentContainer" Collapsed="true">
+    <Position X="19.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IScriptableComponentContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IUrlEncoder" Collapsed="true">
+    <Position X="11" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IUrlEncoder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IUrlResolver" Collapsed="true">
+    <Position X="12.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\Factory\IUrlResolver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.Factory.IVirtualPathProvider" Collapsed="true">
+    <Position X="14.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAABAAAAAAAAAAQAAABEAAEAAAQAAA=</HashCode>
+      <FileName>Extended\Factory\IVirtualPathProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.WebAsset.IWebAssetItem" Collapsed="true">
+    <Position X="16.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.WebAsset.IWebAssetItemMerger" Collapsed="true">
+    <Position X="18" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetItemMerger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.WebAsset.IWebAssetLocator" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetLocator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Nequeo.Web.Mvc.Extended.WebAsset.IWebAssetRegistry" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetRegistry.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Nequeo.Web.Mvc.Extended.WebAsset.WebAssetType" Collapsed="true">
+    <Position X="11" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAAEAAAA=</HashCode>
+      <FileName>Extended\WebAsset\WebAssetType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
