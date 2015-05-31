@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SecureSocket">
+</Property><Property Name="Solution File" Value="C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\SecureSocket.sln">
+</Property><Property Name="Date" Value="Thursday, 17 May 2012">
+</Property><Property Name="Time" Value="18:08 pm">
+</Property></Properties><Event ErrorLevel="0" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Converting project file 'C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\stcpclient\stcpclient.vcproj'.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine could not convert attribute ConfigurationType = 1 under Configuration Debug|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine could not convert attribute CharacterSet = 1 under Configuration Debug|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine could not convert attribute ConfigurationType = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine could not convert attribute CharacterSet = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="VCConvertEngine could not convert attribute WholeProgramOptimization = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="0" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Done converting to new project file 'C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\stcpclient\stcpclient.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="stcpclient" Source="stcpclient\stcpclient.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Converting project file 'C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\stcpserver\stcpserver.vcproj'.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine could not convert attribute ConfigurationType = 1 under Configuration Debug|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine could not convert attribute CharacterSet = 1 under Configuration Debug|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine could not convert attribute ConfigurationType = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine could not convert attribute CharacterSet = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="VCConvertEngine could not convert attribute WholeProgramOptimization = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="0" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Done converting to new project file 'C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\stcpserver\stcpserver.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="stcpserver" Source="stcpserver\stcpserver.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Converting project file 'C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\stcpcommon\stcpcommon.vcproj'.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine could not convert attribute ConfigurationType = 4 under Configuration Debug|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine could not convert attribute CharacterSet = 1 under Configuration Debug|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine.dll encountered an error.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine could not convert attribute ConfigurationType = 4 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine could not convert attribute CharacterSet = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="1" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="VCConvertEngine could not convert attribute WholeProgramOptimization = 1 under Configuration Release|Itanium.">
+</Event><Event ErrorLevel="0" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Done converting to new project file 'C:\Development\VisualStudio2010\Nequeo\Windows\Tools\SecureSocket\stcpcommon\stcpcommon.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="stcpcommon" Source="stcpcommon\stcpcommon.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SecureSocket.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SecureSocket.sln" Description="Converted">
+</Event></UpgradeLog>

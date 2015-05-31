@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ping", "Ping.vcxproj", "{8EC81216-C0A3-45CC-A6DF-A97E19F268DF}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Ping.vcxproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EC81216-C0A3-45CC-A6DF-A97E19F268DF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8EC81216-C0A3-45CC-A6DF-A97E19F268DF}.Debug|Win32.Build.0 = Debug|Win32
+		{8EC81216-C0A3-45CC-A6DF-A97E19F268DF}.Release|Win32.ActiveCfg = Release|Win32
+		{8EC81216-C0A3-45CC-A6DF-A97E19F268DF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

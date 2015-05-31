@@ -1,0 +1,47 @@
+import "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\prsht.idl";
+import "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\mshtml.idl";
+import "c:\program files (x86)\microsoft sdks\windows\v7.0a\include\dimm.idl";
+import "c:\program files (x86)\microsoft sdks\windows\v7.0a\include\dispex.idl";
+import "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\mshtmhst.idl";
+import "c:\program files (x86)\microsoft sdks\windows\v7.0a\include\docobj.idl";
+import "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\exdisp.idl";
+import "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\objsafe.idl";
+
+[
+	object,
+	uuid(9AD3BE25-ABF9-4D0B-BC56-4219FC79BBF8),
+	dual,
+	helpstring("IMeanCalc Interface"),
+	pointer_default(unique)
+] 
+#line 17 "c:\\development\\visualstudio2010\\nequeo\\windows\\tools\\qstat\\server\\meancalc.h"
+interface IMeanCalc : IDispatch {
+#line 19 "c:\\development\\visualstudio2010\\nequeo\\windows\\tools\\qstat\\server\\meancalc.h"
+	[id(1),helpstring("method Initialize")] HRESULT  Initialize([in] short nMaxEntries);
+	[id(2),helpstring("method Clear")] HRESULT  Clear();
+	[id(3),helpstring("method AddDataPoint")] HRESULT  AddDataPoint([in] short i);
+	[id(4),helpstring("method ArithmeticMean")] HRESULT  ArithmeticMean([out,retval] double *pArithmeticMean);
+	[id(5),helpstring("method GeometricMean")] HRESULT  GeometricMean([out,retval] double *pGeometricMean);
+	[id(6),helpstring("method HarmonicMean")] HRESULT  HarmonicMean([out,retval] double *pHarmonicMean);
+	[id(7),helpstring("method QuadraticMean")] HRESULT  QuadraticMean([out,retval] double *pQuadraticMean);
+};
+
+
+[ version(1.0), uuid(B6083577-2AF6-411A-A762-EFF37B6D8152), helpstring("QStat 1.0 Type Library") ]
+library QStat
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(5B8E7812-8AF8-4EC3-A559-5C5011597C6B),
+		helpstring("MeanCalc Class")
+	] 
+#line 42 "c:\\development\\visualstudio2010\\nequeo\\windows\\tools\\qstat\\server\\meancalc.h"
+	coclass CMeanCalc {
+		[default]	interface IMeanCalc;
+	};
+
+}
+

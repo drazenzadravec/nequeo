@@ -1,0 +1,159 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#include "commctrl.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_LARGEICON           ICON                    "large.ico"
+IDI_SMALLICON           ICON                    "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+WINAUDIO DIALOGEX  0, 0, 427, 250
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | DS_SETFONT
+CAPTION "Windows Audio Sample"
+FONT 8, "Arial Rounded MT Bold", 400, 0, 0x0
+BEGIN
+    GROUPBOX        "Player Controls",IDC_STATIC,10,14,94,54
+    PUSHBUTTON      "Play",IDC_BUTTON_PLAY,34,30,47,12
+    PUSHBUTTON      "Stop",IDC_BUTTON_STOP,34,48,47,12
+    GROUPBOX        "Device Sharing",IDC_STATIC,115,14,92,54
+    CONTROL         "Shared Mode",IDC_RADIO_SHARED,"Button",
+                    BS_AUTORADIOBUTTON | WS_DISABLED,129,28,69,12
+    CONTROL         "Exclusive Mode",IDC_RADIO_EXCLUSIVE,"Button",
+                    BS_AUTORADIOBUTTON | WS_DISABLED,129,46,69,12
+    GROUPBOX        "Playback Volume",IDC_STATIC,10,75,197,38
+    CTEXT           "No device selected",IDC_STATIC_MUTE,76,84,70,10
+    RTEXT           "0",IDC_STATIC,22,94,8,10
+    LTEXT           "1",IDC_STATIC,189,94,8,10
+    CONTROL         "",IDC_SLIDER_VOLUME,"msctls_trackbar32",TBS_BOTH |
+                    TBS_NOTICKS | WS_TABSTOP,32,94,155,12
+    GROUPBOX        "Playback Device",IDC_STATIC,10,120,197,84
+    GROUPBOX        "Device Role",IDC_STATIC,15,135,187,31
+    PUSHBUTTON      "Console",IDC_BUTTON_CONSOLE_OUT,22,147,44,12
+    PUSHBUTTON      "Multimedia",IDC_BUTTON_MMEDIA_OUT,72,147,52,12
+    PUSHBUTTON      "Communications",IDC_BUTTON_COMMUN_OUT,130,147,68,12
+    LTEXT           "Device Name",IDC_STATIC,22,171,51,8
+    COMBOBOX        IDC_COMBO_RENDERDEVICE,22,182,176,48,
+                    CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL
+    GROUPBOX        "Audio Source",IDC_STATIC,218,14,197,35
+    CONTROL         "Tone Generator",IDC_RADIO_TONEGEN,"Button",
+                    BS_AUTORADIOBUTTON,226,28,65,12
+    CONTROL         "Wave File",IDC_RADIO_WAVEFILE,"Button",
+                    BS_AUTORADIOBUTTON,294,28,49,12
+    CONTROL         "Capture Device",IDC_RADIO_CAPTUREDEVICE,"Button",
+                    BS_AUTORADIOBUTTON,346,28,63,12
+    GROUPBOX        "Wave File",IDC_STATIC,218,56,197,57
+    LTEXT           "File Name",IDC_STATIC,230,68,37,8
+    EDITTEXT        IDC_EDIT_FILENAME,230,79,176,12,
+                    ES_READONLY | ES_AUTOHSCROLL
+    PUSHBUTTON      "Select File",IDC_BUTTON_SELECTFILE,230,94,50,12
+    CONTROL         "Repeat Mode",IDC_CHECK_REPEAT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,338,94,68,12
+    GROUPBOX        "Capture Device",IDC_STATIC,218,120,197,84
+    GROUPBOX        "Device Role",IDC_STATIC,223,135,187,31
+    PUSHBUTTON      "Console",IDC_BUTTON_CONSOLE_IN,230,147,44,12
+    PUSHBUTTON      "Multimedia",IDC_BUTTON_MMEDIA_IN,280,147,52,12
+    PUSHBUTTON      "Communications",IDC_BUTTON_COMMUN_IN,338,147,68,12
+    LTEXT           "Device Name",IDC_STATIC,230,171,51,8
+    COMBOBOX        IDC_COMBO_CAPTUREDEVICE,230,182,176,48,
+                    CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL
+    GROUPBOX        "Last Action",IDC_STATIC,10,211,405,29
+    LTEXT           "Opened application window",IDC_STATIC_LASTACTION,
+                    25,223,380,10
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#include ""commctrl.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""WinAudio.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE
+BEGIN
+    "WINAUDIO", DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 265
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 180
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
