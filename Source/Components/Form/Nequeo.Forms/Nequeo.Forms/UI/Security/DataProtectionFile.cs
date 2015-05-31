@@ -1,0 +1,513 @@
+﻿/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2010 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ * 
+ */
+
+#region Nequeo Pty Ltd License
+/*
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+*/
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Security.Principal;
+using System.IO;
+
+using Nequeo.Invention;
+using Nequeo.Extension;
+using Nequeo.Security;
+using Nequeo.Cryptography;
+
+namespace Nequeo.Forms.UI.Security
+{
+    /// <summary>
+    /// Data protection file control.
+    /// </summary>
+    public partial class DataProtectionFile : UserControl
+    {
+        /// <summary>
+        /// Data protection control.
+        /// </summary>
+        public DataProtectionFile()
+        {
+            InitializeComponent();
+        }
+
+        private string _currentFile = null;
+        private string _currentPassword = null;
+        private bool _loggedIn = false;
+        private string _cryptoKey = string.Empty;
+
+        /// <summary>
+        /// Sets the Crytography Key.
+        /// </summary>
+        public string CrytographyKey
+        {
+            set { _cryptoKey = value; }
+        }
+
+        /// <summary>
+        /// Application is closing handler.
+        /// </summary>
+        /// <param name="e">Provides data for the System.Windows.Forms.Form.FormClosing event.</param>
+        public void ApplicationClosing(FormClosingEventArgs e)
+        {
+            SaveData(e);
+        }
+
+        /// <summary>
+        /// On load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataProtection_Load(object sender, EventArgs e)
+        {
+            // Get the current login details.
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+
+            // Get the length of the domain.
+            // Get the starting point do not
+            // include the domain.
+            int length = Environment.MachineName.Length + 1;
+            int startIndex = identity.Name.IndexOf(Environment.MachineName) + length;
+
+            // Get the user name of the
+            // current account.
+            string identityName = identity.Name.Substring(startIndex).Replace("\\", "");
+        }
+
+        /// <summary>
+        /// Cancel the operation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            txtEncryptedFilePath.Text = "";
+            txtPassword.Text = "";
+            btnLogin.Text = "Authenticate";
+            btnEncryptedPath.Enabled = true;
+            _loggedIn = false;
+        }
+
+        /// <summary>
+        /// Authenticate the user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        /// <summary>
+        /// Load the encrypted data.
+        /// </summary>
+        private void LoadData()
+        {
+            // Get the current user.
+            _currentPassword = txtPassword.Text.Trim();
+            _currentFile = txtEncryptedFilePath.Text.Trim();
+
+            FileStream file = null;
+
+            try
+            {
+                // if the file dose not
+                // exist then create it.
+                if (!File.Exists(_currentFile))
+                {
+                    file = File.Create(_currentFile);
+                    file.Close();
+
+                    // Enable the data container.
+                    richTextBoxData.Enabled = true;
+                    toolStripRichText.Enabled = true;
+                    btnLogin.Text = "Re-Load";
+
+                    // User has logged in.
+                    _loggedIn = true;
+                    btnCancel.Enabled = false;
+                    btnEncryptedPath.Enabled = false;
+                }
+                else
+                {
+                    // Open the file.
+                    file = new FileStream(_currentFile, FileMode.Open,
+                         FileAccess.Read, FileShare.ReadWrite);
+
+                    // If the file contains data.
+                    if (file.Length > 0)
+                    {
+                        string decryptedData = "";
+
+                        // Create a new cryptography instance.
+                        using (AdvancedAES cryto = new AdvancedAES())
+                        {
+                            // Read the file data into
+                            // the byte array.
+                            Byte[] array = new byte[file.Length];
+                            file.Read(array, 0, array.Length);
+
+                            // if using the key.
+                            if (!String.IsNullOrEmpty(_cryptoKey))
+                            {
+                                // Decrypt with key.
+                                byte[] decryptedInt = cryto.DecryptFromMemory(array, _cryptoKey);
+                                array = new byte[0].Combine(decryptedInt);
+                            }
+
+                            // Decrypt the data.
+                            byte[] decryptedDataBytes = cryto.DecryptFromMemory(array, _currentPassword);
+                            decryptedData = Encoding.Default.GetString(decryptedDataBytes);
+                        }
+
+                        // Was the data decrypted.
+                        if (String.IsNullOrEmpty(decryptedData))
+                            MessageBox.Show("Incorrect file password.");
+                        else
+                        {
+                            // Enable the data container.
+                            richTextBoxData.Enabled = true;
+                            toolStripRichText.Enabled = true;
+                            btnLogin.Text = "Re-Load";
+
+                            // User has logged in.
+                            _loggedIn = true;
+                            btnCancel.Enabled = false;
+                            btnEncryptedPath.Enabled = false;
+
+                            // Load the data into the rich text.
+                            richTextBoxData.Rtf = decryptedData;
+                        }
+                    }
+                    else
+                    {
+                        // Enable the data container.
+                        richTextBoxData.Enabled = true;
+                        toolStripRichText.Enabled = true;
+                        btnLogin.Text = "Re-Load";
+
+                        // User has logged in.
+                        _loggedIn = true;
+                        btnCancel.Enabled = false;
+                        btnEncryptedPath.Enabled = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (file != null)
+                    file.Close();
+            }
+        }
+
+        /// <summary>
+        /// Save the data.
+        /// </summary>
+        /// <param name="e">The closing state.</param>
+        /// <param name="closing">Is the application closing.</param>
+        private void SaveData(FormClosingEventArgs e, bool closing = true)
+        {
+            // Get the current password.
+            _currentPassword = txtPassword.Text.Trim();
+            _currentFile = txtEncryptedFilePath.Text;
+
+            // If no file password has been supplied.
+            if ((String.IsNullOrEmpty(_currentPassword) || String.IsNullOrEmpty(_currentFile)) && (_loggedIn))
+            {
+                // Cancel the close operation.
+                if (closing)
+                    e.Cancel = true;
+
+                MessageBox.Show("A valid file password must be entered.");
+            }
+            else if (_loggedIn)
+            {
+                FileStream file = null;
+
+                try
+                {
+                    // If data exists
+                    if (richTextBoxData.Text.Length > 0)
+                    {
+                        // Create a new file stream
+                        // truncate the file.
+                        file = new FileStream(_currentFile, FileMode.Truncate,
+                             FileAccess.Write, FileShare.ReadWrite);
+
+                        // Get the data in the data test.
+                        string decryptedData = richTextBoxData.Rtf;
+                        byte[] decryptedDataBytes = Encoding.Default.GetBytes(decryptedData);
+
+                        // Create a new cryptography instance.
+                        using (AdvancedAES cryto = new AdvancedAES())
+                        {
+                            // Encrypt the data.
+                            Byte[] encryptedData = cryto.EncryptToMemory(decryptedDataBytes, _currentPassword);
+
+                            // if using the key.
+                            if (!String.IsNullOrEmpty(_cryptoKey))
+                            {
+                                byte[] encrytedInt = new byte[0].Combine(encryptedData);
+                                encryptedData = cryto.EncryptToMemory(encrytedInt, _cryptoKey);
+                            }
+
+                            // Write the data to the file.
+                            file.Write(encryptedData, 0, encryptedData.Length);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                    if (closing)
+                        e.Cancel = true;
+                }
+                finally
+                {
+                    if (file != null)
+                        file.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Text changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtEncryptedFilePath.Text) ||
+                String.IsNullOrEmpty(txtPassword.Text))
+            {
+                btnLogin.Enabled = false;
+            }
+            else
+            {
+                btnLogin.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Text changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtEncryptedFilePath.Text) ||
+                String.IsNullOrEmpty(txtPassword.Text))
+            {
+                btnLogin.Enabled = false;
+            }
+            else
+            {
+                btnLogin.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Password key press.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+                if (btnLogin.Enabled)
+                    LoadData();
+        }
+
+        /// <summary>
+        /// Link clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void richTextBoxData_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
+
+        /// <summary>
+        /// Create a new file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateFile_Click(object sender, EventArgs e)
+        {
+            FileStream fileStream = null;
+            try
+            {
+                // Decrypted file.
+                saveFileDialogMain.Filter = "Text Files (*.txt)|*.txt|All files (*.*)|*.*";
+
+                // Get the file name selected.
+                if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+                    fileStream = System.IO.File.Create(saveFileDialogMain.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Create New File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (fileStream != null)
+                    fileStream.Close();
+            }
+        }
+
+        /// <summary>
+        /// Open an existing encypted file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEncryptedPath_Click(object sender, EventArgs e)
+        {
+            openFileDialogMain.Filter = "Text Files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            // Get the file name selected.
+            if (openFileDialogMain.ShowDialog() == DialogResult.OK)
+                txtEncryptedFilePath.Text = openFileDialogMain.FileName;
+        }
+
+        /// <summary>
+        /// Redo action.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonRedo_Click(object sender, EventArgs e)
+        {
+            richTextBoxData.Redo();
+        }
+
+        /// <summary>
+        /// Undo action.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonUndo_Click(object sender, EventArgs e)
+        {
+            richTextBoxData.Undo();
+        }
+
+        /// <summary>
+        /// Copy text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonCopy_Click(object sender, EventArgs e)
+        {
+            richTextBoxData.Copy();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonCut_Click(object sender, EventArgs e)
+        {
+            richTextBoxData.Cut();
+        }
+
+        /// <summary>
+        /// Paste context.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonPaste_Click(object sender, EventArgs e)
+        {
+            richTextBoxData.Paste();
+        }
+
+        /// <summary>
+        /// Zoom In.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonZoomIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // If the zoom factor is not too big
+                // then zoom in more.
+                if (richTextBoxData.ZoomFactor < 64)
+                    richTextBoxData.ZoomFactor = richTextBoxData.ZoomFactor + 0.5f;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Zoom Out.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonZoomOut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // If the zoom factor is not too small
+                // then zoom out more.
+                if (richTextBoxData.ZoomFactor > (1 / 64))
+                    richTextBoxData.ZoomFactor = richTextBoxData.ZoomFactor - 0.5f;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Select All.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonSelectAll_Click(object sender, EventArgs e)
+        {
+            richTextBoxData.SelectAll();
+        }
+
+        /// <summary>
+        /// Save the data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonSave_Click(object sender, EventArgs e)
+        {
+            SaveData(null, false);
+        }
+    }
+}

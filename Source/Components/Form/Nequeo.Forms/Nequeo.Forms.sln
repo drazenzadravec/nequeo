@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Forms", "Nequeo.Forms\Nequeo.Forms.csproj", "{977B6302-4015-4402-8C5B-004C56F50400}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Forms\\Nequeo.Forms.csproj
+		SccProjectName1 = Nequeo.Forms
+		SccLocalPath1 = Nequeo.Forms
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Debug|x86 = Staging Debug|x86
+		Staging Release|Any CPU = Staging Release|Any CPU
+		Staging Release|x86 = Staging Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{977B6302-4015-4402-8C5B-004C56F50400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Debug|x86.ActiveCfg = Debug|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Debug|x86.Build.0 = Debug|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Release|x86.ActiveCfg = Release|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Release|x86.Build.0 = Release|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Debug|x86.ActiveCfg = Staging Debug|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Debug|x86.Build.0 = Staging Debug|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Release|x86.ActiveCfg = Staging Release|x86
+		{977B6302-4015-4402-8C5B-004C56F50400}.Staging Release|x86.Build.0 = Staging Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
