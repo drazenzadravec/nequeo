@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Cryptography.Openpgp", "Nequeo.Cryptography.Openpgp\Nequeo.Cryptography.Openpgp.csproj", "{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPgp", "TestPgp\TestPgp.csproj", "{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Cryptography.Openpgp\\Nequeo.Cryptography.Openpgp.csproj
+		SccProjectName1 = Nequeo.Cryptography.Openpgp
+		SccLocalPath1 = Nequeo.Cryptography.Openpgp
+		SccProjectUniqueName2 = TestPgp\\TestPgp.csproj
+		SccProjectName2 = TestPgp
+		SccLocalPath2 = TestPgp
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{F6C4A1F6-4D92-4F20-8033-9BD93C934BF2}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Staging Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Staging Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Staging Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D54FC7A-3AD1-4AB4-912E-D2C5D994080D}.Staging Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

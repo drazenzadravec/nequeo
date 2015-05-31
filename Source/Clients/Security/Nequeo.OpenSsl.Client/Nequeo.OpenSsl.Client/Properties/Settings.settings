@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Security.OpenSsl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="OpenSSLExecutable" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Store\Openssl\bin\openssl.exe</Value>
+    </Setting>
+    <Setting Name="OpenSSLConfiguration" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Store\Openssl\bin\openssl.cnf</Value>
+    </Setting>
+    <Setting Name="OpenSSLCACertificate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Store\Openssl\bin\CA\CA_certificate\cacert.pem</Value>
+    </Setting>
+    <Setting Name="OpenSSLCAPrivateKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Store\Openssl\bin\CA\private\cakey.pem</Value>
+    </Setting>
+    <Setting Name="OpenSSLMultiDomainConfiguration" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Store\Openssl\bin\openssl-Multi-Domains.cnf</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
