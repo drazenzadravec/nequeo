@@ -1,0 +1,1368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{dddcc0c6-af65-49b5-b39e-20fbb449edd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\Header Files">
+      <UniqueIdentifier>{080adc3e-2c8d-49c2-b625-96386dc25b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\Source Files">
+      <UniqueIdentifier>{bcf6c037-2535-45de-93e1-ee2daf2668cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson">
+      <UniqueIdentifier>{8376dadb-17a0-4e68-ad9f-c013a02e7138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\Header Files">
+      <UniqueIdentifier>{330877f8-7151-4413-b698-8254325527ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\Source Files">
+      <UniqueIdentifier>{be88a067-165a-4873-9bb6-ff0c0b9262b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\bsondemo">
+      <UniqueIdentifier>{a6fde109-9ca7-4298-bd88-7d46b633822d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\bsondemo\Header Files">
+      <UniqueIdentifier>{8daa0c14-e4bb-4893-8a47-88326a889b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\bsondemo\Source Files">
+      <UniqueIdentifier>{82849c43-56e6-4a70-9939-99a5598121e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\util">
+      <UniqueIdentifier>{09d40cb2-36e3-4b9e-8bf3-ebfe4a76041b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\util\Header Files">
+      <UniqueIdentifier>{f8e640d1-64e7-4b1b-8241-d86da373351d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\util\Source Files">
+      <UniqueIdentifier>{21d52fd3-4125-4b03-8b51-b42f0aab047a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client">
+      <UniqueIdentifier>{b3c0ca7a-f808-4c45-bad7-248aab75b988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\Header Files">
+      <UniqueIdentifier>{3f98c091-54fd-4c91-9944-0450806fa197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\Source Files">
+      <UniqueIdentifier>{aacbc7cd-dda8-4263-bad1-26b0086e7c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\private">
+      <UniqueIdentifier>{5c968cd2-96b8-4518-915f-efb472e92e72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\private\Header Files">
+      <UniqueIdentifier>{8aa948bb-9046-466c-bda2-9808e55bd60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\private\Source Files">
+      <UniqueIdentifier>{58122898-17d8-45b8-91b2-75af8f843702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\examples">
+      <UniqueIdentifier>{a4f472ab-54ac-4346-b665-80b01eda5b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\examples\Header Files">
+      <UniqueIdentifier>{d06eb254-f9b3-4638-8560-260acf6fdc19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client\examples\Source Files">
+      <UniqueIdentifier>{74fa197c-21fc-4623-a11b-2d0e24f6cea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="crypto">
+      <UniqueIdentifier>{3341c29d-8b1b-42f5-8c9a-90f1d7faca5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="crypto\Header Files">
+      <UniqueIdentifier>{62f6fb6b-0119-4818-bd57-498b25c826fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="crypto\Source Files">
+      <UniqueIdentifier>{9adabc2e-f084-4c96-af6f-fcef44c17e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db">
+      <UniqueIdentifier>{22949d2a-adba-4d81-911f-524f56125f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db\Header Files">
+      <UniqueIdentifier>{280da721-1b16-4133-99c3-184def2bfa39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db\Source Files">
+      <UniqueIdentifier>{5ea04676-bfe6-4fc1-845f-835809fe8ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db\repl">
+      <UniqueIdentifier>{445fe81e-222a-472e-82bb-cb5b44751dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db\repl\Header Files">
+      <UniqueIdentifier>{0c9e8972-b47c-4eb6-b60e-93c6500cddf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db\repl\Source Files">
+      <UniqueIdentifier>{3d79e71e-df3f-4994-8589-1f9f86726e0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbtests">
+      <UniqueIdentifier>{d3dc0752-ddae-4eab-9f27-875c9128919e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbtests\Header Files">
+      <UniqueIdentifier>{ba16cb26-00af-4773-99fc-cdf5323d8e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbtests\Source Files">
+      <UniqueIdentifier>{21f5d89d-8e74-412e-a609-0e891a7561bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbtests\mock">
+      <UniqueIdentifier>{a64c6163-06c8-431a-b73b-e80fa6e6a9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbtests\mock\Header Files">
+      <UniqueIdentifier>{8cfd2781-301c-471a-88d4-f07f181b7cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbtests\mock\Source Files">
+      <UniqueIdentifier>{6a612932-76ce-4c78-b20d-255daf560916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geo">
+      <UniqueIdentifier>{b7d96fb9-dd2b-43e1-a08d-612fb2bebd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geo\Header Files">
+      <UniqueIdentifier>{5d767fa0-0672-42f0-9b00-d4b02e0012c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geo\Source Files">
+      <UniqueIdentifier>{bf160824-56b5-4e03-92b0-6fc64fe31985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration">
+      <UniqueIdentifier>{026b24b3-a4c5-4ab9-9276-b8c84d02a69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\Header Files">
+      <UniqueIdentifier>{268d94ec-6bfd-4fa8-9968-b751a2d7c551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\Source Files">
+      <UniqueIdentifier>{3b2731ab-e8be-4caa-bd39-8abd67c0d4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\standalone">
+      <UniqueIdentifier>{c60974be-1d56-49f9-ab00-be64f31f9296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\standalone\Header Files">
+      <UniqueIdentifier>{20fabf6d-e5bd-42a5-8971-bc3d4ca620ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\standalone\Source Files">
+      <UniqueIdentifier>{1f08be00-9d9a-4c4d-bf1b-524f6a681347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\replica_set">
+      <UniqueIdentifier>{29f1484a-a57f-47d4-a31e-84784e46eb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\replica_set\Header Files">
+      <UniqueIdentifier>{e5e4eee0-d016-48fd-93fe-da3e59eedfc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integration\replica_set\Source Files">
+      <UniqueIdentifier>{7dd8b0a9-6324-4380-852c-6be1113640ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{adfdc62b-3aac-4933-9f76-c031d560f578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger\Header Files">
+      <UniqueIdentifier>{2a98028a-c5b6-4742-a5c7-12add730981b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger\Source Files">
+      <UniqueIdentifier>{8c284bbd-1ee2-47e0-bb8b-dd5d37f4e218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="orchestration">
+      <UniqueIdentifier>{d4c1aa22-0a1f-44d7-855e-98748d25130a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="orchestration\Header Files">
+      <UniqueIdentifier>{d6002ffa-f80c-4d4a-b390-4e7c241aac9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="orchestration\Source Files">
+      <UniqueIdentifier>{562a23e3-0bde-42a5-aa1f-73e735746a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform">
+      <UniqueIdentifier>{7f377848-c49f-4c1b-90b1-8b7931935abe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\Header Files">
+      <UniqueIdentifier>{e5086536-7cd3-4513-9ba0-0d3ca3ad95e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\Source Files">
+      <UniqueIdentifier>{603af9ad-bc27-4a60-a345-e64e422c60c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stdx">
+      <UniqueIdentifier>{fa4d5943-4a86-4609-b2dc-332ceeaa50a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stdx\Header Files">
+      <UniqueIdentifier>{91fc9612-089b-4894-b9e4-5cbb3b3bc9ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stdx\Source Files">
+      <UniqueIdentifier>{e6b20ba8-a181-4c64-a0a9-d0a0bf2a0bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unittest">
+      <UniqueIdentifier>{b5a1f366-fc2d-4793-905a-bcd73ef3daba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unittest\Header Files">
+      <UniqueIdentifier>{688e33dc-1ef4-489f-94d7-27be0910e530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unittest\Source Files">
+      <UniqueIdentifier>{f19fea28-3fe3-4fce-bcf8-63fb9b424da2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{74923b82-9599-467f-823d-e0c02873dea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\Header Files">
+      <UniqueIdentifier>{a6fcec15-73bf-4c6d-890e-cf5caa6b3f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\Source Files">
+      <UniqueIdentifier>{b7e893e2-bb5a-4506-b589-0e8b121200aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\concurrency">
+      <UniqueIdentifier>{ad8f3f34-91f5-40b4-8f45-b9170c899129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\concurrency\Header Files">
+      <UniqueIdentifier>{e0304b69-d589-4552-9268-25edf3ecec34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\concurrency\Source Files">
+      <UniqueIdentifier>{ff3872c3-5c71-4dee-82e1-3d71c706f9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\mongoutils">
+      <UniqueIdentifier>{63612a52-77f8-4942-a0a5-059e6feeb1dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\mongoutils\Header Files">
+      <UniqueIdentifier>{a7ba0843-6ffc-4e56-8a6d-de3c4cf2976c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\mongoutils\Source Files">
+      <UniqueIdentifier>{38ba3087-8098-4515-a1c7-1b1fe1659b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\net">
+      <UniqueIdentifier>{5f20008a-1a34-42b8-a92a-ef52fec99002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\net\Header Files">
+      <UniqueIdentifier>{10420ace-2629-44ad-b02e-90f6fc68b14b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\net\Source Files">
+      <UniqueIdentifier>{0a04ca9e-d11c-4f88-8a5f-d1416dadacb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MongoDBGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\compare_numbers.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\data_cursor.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\data_view.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\disallow_copying.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\encoded_value_storage.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\global_initializer.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\global_initializer_registerer.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\init.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\initializer.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\initializer_context.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\initializer_dependency_graph.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\initializer_function.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\initializer_functions.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\make_string_vector.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\owned_pointer_vector.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\parse_number.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\status.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\status_with.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\status-inl.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\string_data.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\string_data-inl.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\base\error_codes.h">
+      <Filter>base\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\util\bson_extract.h">
+      <Filter>bson\util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\util\builder.h">
+      <Filter>bson\util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bson.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bson_db.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bson_field.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bson_validate.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bsonelement.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bson-inl.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bsonmisc.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bsonobj.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bsonobjbuilder.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bsonobjiterator.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\bsontypes.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\inline_decls.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\oid.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\ordering.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\bson\timestamp.h">
+      <Filter>bson\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\autolib.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\bulk_operation_builder.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\bulk_update_builder.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\bulk_upsert_builder.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\command_writer.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\constants.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\cyrus_sasl_client_session.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclient.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclient_rs.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclient_writer.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientcursor.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientcursorshim.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientcursorshimarray.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientcursorshimcursorid.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientcursorshimtransform.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientinterface.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\dbclientmockcursor.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\delete_write_operation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\exceptions.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\export_macros.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\gridfs.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\index_spec.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\init.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\insert_write_operation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\native_sasl_client_session.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\options.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\redef_macros.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\replica_set_monitor.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\replica_set_monitor_internal.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\sasl_client_authenticate.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\sasl_client_conversation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\sasl_client_session.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\sasl_plain_client_conversation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\sasl_scramsha1_client_conversation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\undef_macros.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\update_write_operation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\wire_protocol_writer.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\write_concern.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\write_operation.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\write_operation_base.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\write_options.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\write_result.h">
+      <Filter>client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\client\private\options.h">
+      <Filter>client\private\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\crypto\crypto.h">
+      <Filter>crypto\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\crypto\mechanism_scram.h">
+      <Filter>crypto\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\db\dbmessage.h">
+      <Filter>db\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\db\jsobj.h">
+      <Filter>db\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\db\json.h">
+      <Filter>db\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\db\namespace_string.h">
+      <Filter>db\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\db\namespace_string-inl.h">
+      <Filter>db\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\db\repl\member_state.h">
+      <Filter>db\repl\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\dbtests\mock\mock_conn_registry.h">
+      <Filter>dbtests\mock\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\dbtests\mock\mock_dbclient_connection.h">
+      <Filter>dbtests\mock\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\dbtests\mock\mock_dbclient_cursor.h">
+      <Filter>dbtests\mock\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\dbtests\mock\mock_remote_db_server.h">
+      <Filter>dbtests\mock\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\dbtests\mock\mock_replica_set.h">
+      <Filter>dbtests\mock\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\boundingbox.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\constants.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\coordinates.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\coordinates2d.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\coordinates2dgeographic.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\geometry.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\geometrycollection.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\geoobj.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\interface.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\linestring.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\multilinestring.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\multipoint.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\multipolygon.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\namespaces.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\parser.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\parser-impl.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\point.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\polygon.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\geo\queryutils.h">
+      <Filter>geo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\integration\integration_test.h">
+      <Filter>integration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\appender.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\component_message_log_domain.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\encoder.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\labeled_level.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_component.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_component_settings.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_domain.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_domain-impl.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_manager.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_severity.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_severity-inl.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\log_test.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\logger.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\logstream_builder.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\message_event.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\message_event_utf8_encoder.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\message_log_domain.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\logger\tee.h">
+      <Filter>logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\orchestration\mongo_resource.h">
+      <Filter>orchestration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\orchestration\replica_set.h">
+      <Filter>orchestration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\orchestration\resource.h">
+      <Filter>orchestration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\orchestration\server.h">
+      <Filter>orchestration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\orchestration\service.h">
+      <Filter>orchestration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\orchestration\sharded_cluster.h">
+      <Filter>orchestration\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_intrinsics.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_intrinsics_gcc_atomic.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_intrinsics_gcc_intel.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_intrinsics_gcc_sync.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_intrinsics_win32.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_word.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_word_cxx11.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\atomic_word_intrinsics.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\basic.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\compiler.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\compiler_gcc.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\compiler_msvc.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\cstdint.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\endian.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\float_utils.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\hash_namespace.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\random.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\strnlen.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\strtoll.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\unordered_map.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\unordered_set.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\platform\windows_basic.h">
+      <Filter>platform\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\stdx\functional.h">
+      <Filter>stdx\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\unittest\unittest.h">
+      <Filter>unittest\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\unittest\unittest_helpers.h">
+      <Filter>unittest\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\assert_util.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\background.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\base64.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\debug_util.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\embedded_builder.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\fail_point.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\fail_point_registry.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\fail_point_service.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\hex.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\log.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\map_util.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\md5.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\md5.hpp">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\password_digest.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\scopeguard.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\shared_buffer.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\string_map.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\stringutils.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\text.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\time_support.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\timer.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\timer-generic-inl.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\timer-inl.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\timer-posixclock-inl.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\timer-win32-inl.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\unordered_fast_key_table.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\unordered_fast_key_table_internal.h">
+      <Filter>util\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\concurrency\synchronization.h">
+      <Filter>util\concurrency\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\concurrency\threadlocal.h">
+      <Filter>util\concurrency\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\mongoutils\str.h">
+      <Filter>util\mongoutils\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\hostandport.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\message.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\message_port.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\operation.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\sock.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\socket_poll.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mongo\util\net\ssl_manager.h">
+      <Filter>util\net\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MongoDBGlobal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\data_cursor_test.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\data_view_test.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\encoded_value_storage_test.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\global_initializer.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\global_initializer_registerer.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\init.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\initializer.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\initializer_context.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\initializer_dependency_graph.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\make_string_vector.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\parse_number.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\parse_number_test.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\status.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\string_data.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\base\error_codes.cpp">
+      <Filter>base\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsondemo\bsondemo.cpp">
+      <Filter>bson\bsondemo\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\util\bson_extract.cpp">
+      <Filter>bson\util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\util\bson_extract_test.cpp">
+      <Filter>bson\util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\util\builder_test.cpp">
+      <Filter>bson\util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bson_field_test.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bson_obj_test.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bson_validate.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bson_validate_test.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsonelement.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsonmisc.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsonobj.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsonobjbuilder.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsonobjbuilder_test.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsonobjiterator.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\bsontypes.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\oid.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\bson\oid_test.cpp">
+      <Filter>bson\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\bulk_operation_builder.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\bulk_update_builder.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\bulk_upsert_builder.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\command_writer.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\connection_string_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\cyrus_sasl_client_session.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclient.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclient_rs.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclient_rs_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclientcursor.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclientcursorshimarray.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclientcursorshimcursorid.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\dbclientcursorshimtransform.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\delete_write_operation.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\exceptions.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\gridfs.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\include_bsonh_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\include_dbclienth_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\index_spec.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\index_spec_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\init.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\insert_write_operation.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\insert_write_operation_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\native_sasl_client_session.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\options.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\replica_set_monitor.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\replica_set_monitor_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_client_authenticate.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_client_authenticate_impl.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_client_conversation.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_client_session.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_plain_client_conversation.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_scramsha1_client_conversation.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\sasl_sspi.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\update_write_operation.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\wire_protocol_writer.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\write_concern.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\write_concern_test.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\write_operation_base.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\write_result.cpp">
+      <Filter>client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\aggregation.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\arrayExample.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\authTest.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\clientTest.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\first.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\geojson_demo.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\initializeTest.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\insert_demo.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\loggingTest.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\rs.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\second.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\simple_client_demo.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\tail.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\tutorial.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\client\examples\whereExample.cpp">
+      <Filter>client\examples\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\crypto\crypto_openssl.cpp">
+      <Filter>crypto\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\crypto\crypto_test.cpp">
+      <Filter>crypto\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\crypto\mechanism_scram.cpp">
+      <Filter>crypto\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\db\dbmessage.cpp">
+      <Filter>db\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\db\dbmessage_test.cpp">
+      <Filter>db\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\db\json.cpp">
+      <Filter>db\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\db\namespace_string_test.cpp">
+      <Filter>db\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\jsobjtests.cpp">
+      <Filter>dbtests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\jsontests.cpp">
+      <Filter>dbtests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock_dbclient_conn_test.cpp">
+      <Filter>dbtests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock_replica_set_test.cpp">
+      <Filter>dbtests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\replica_set_monitor_test.cpp">
+      <Filter>dbtests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock\mock_conn_registry.cpp">
+      <Filter>dbtests\mock\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock\mock_dbclient_connection.cpp">
+      <Filter>dbtests\mock\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock\mock_dbclient_cursor.cpp">
+      <Filter>dbtests\mock\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock\mock_remote_db_server.cpp">
+      <Filter>dbtests\mock\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\dbtests\mock\mock_replica_set.cpp">
+      <Filter>dbtests\mock\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\geo\coordinates2d.cpp">
+      <Filter>geo\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\geo\coordinates2dgeographic.cpp">
+      <Filter>geo\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\geo\geo_test.cpp">
+      <Filter>geo\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\integration_test_main.cpp">
+      <Filter>integration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\standalone\bulk_operation_test.cpp">
+      <Filter>integration\standalone\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\standalone\dbclient_test.cpp">
+      <Filter>integration\standalone\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\standalone\dbclient_writer_test.cpp">
+      <Filter>integration\standalone\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\standalone\gridfs_test.cpp">
+      <Filter>integration\standalone\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\standalone\sasl_test.cpp">
+      <Filter>integration\standalone\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\replica_set\basic.cpp">
+      <Filter>integration\replica_set\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\integration\replica_set\read_preference.cpp">
+      <Filter>integration\replica_set\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\component_message_log_domain.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\log_component.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\log_component_settings.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\log_function_test.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\log_manager.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\log_severity.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\log_test.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\logger.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\logstream_builder.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\message_event_utf8_encoder.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\logger\message_log_domain.cpp">
+      <Filter>logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\orchestration\mongo_resource.cpp">
+      <Filter>orchestration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\orchestration\replica_set.cpp">
+      <Filter>orchestration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\orchestration\resource.cpp">
+      <Filter>orchestration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\orchestration\server.cpp">
+      <Filter>orchestration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\orchestration\service.cpp">
+      <Filter>orchestration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\orchestration\sharded_cluster.cpp">
+      <Filter>orchestration\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\platform\atomic_word_test.cpp">
+      <Filter>platform\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\platform\endian_test.cpp">
+      <Filter>platform\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\platform\random.cpp">
+      <Filter>platform\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\platform\random_test.cpp">
+      <Filter>platform\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\platform\strnlen.cpp">
+      <Filter>platform\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\unittest\connection_string_test.cpp">
+      <Filter>unittest\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\unittest\query_test.cpp">
+      <Filter>unittest\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\unittest\unit_test_main.cpp">
+      <Filter>unittest\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\unittest\unittest_helpers.cpp">
+      <Filter>unittest\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\assert_util.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\background.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\base64.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\fail_point.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\fail_point_registry.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\fail_point_service.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\hex.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\log.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\md5.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\password_digest.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\string_map_test.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\stringutils.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\stringutils_test.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\text.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\time_support.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\time_support_test.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\timer.cpp">
+      <Filter>util\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\concurrency\synchronization.cpp">
+      <Filter>util\concurrency\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\mongoutils\str_test.cpp">
+      <Filter>util\mongoutils\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\hostandport.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\hostandport_test.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\message.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\message_port.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\sock.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\sock_test.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\socket_poll.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mongo\util\net\ssl_manager.cpp">
+      <Filter>util\net\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
