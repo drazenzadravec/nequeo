@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="header files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="analyzers">
+      <UniqueIdentifier>{9fcf601c-227d-43e2-9035-09e50ca2922a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common">
+      <UniqueIdentifier>{06fed2ce-b97d-4b6b-b893-f9408989dcd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis">
+      <UniqueIdentifier>{5edddbb9-9edf-40ce-a095-2bad4c8e5124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\reverse">
+      <UniqueIdentifier>{1b306b5b-5393-44d8-9dc0-07e1ea5c7c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\ar">
+      <UniqueIdentifier>{98980385-32b8-4bbe-82c1-f29af7558b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\br">
+      <UniqueIdentifier>{9a31c73d-31b2-44c6-85e7-e1895f95298b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\cjk">
+      <UniqueIdentifier>{635a2540-8a1c-4ec5-80c3-acd36b592172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\cn">
+      <UniqueIdentifier>{850e60c7-216b-4390-9853-859f2dd5e7ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\cz">
+      <UniqueIdentifier>{09f9b924-fe1b-4b25-bc8b-82dcc6bb7def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\de">
+      <UniqueIdentifier>{3223b681-d664-4f8e-a8cd-4647e874a681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\el">
+      <UniqueIdentifier>{0b59a664-ce02-4257-814a-7605742600e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\fa">
+      <UniqueIdentifier>{76b3e13c-3947-4236-8281-c65517bfc78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\fr">
+      <UniqueIdentifier>{0a748dcb-9bf0-4f55-9882-6b11bff2f41c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\nl">
+      <UniqueIdentifier>{b1a42e02-a4f4-4f82-bf30-22e4e3172fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="analyzers\common\analysis\ru">
+      <UniqueIdentifier>{33296d8b-fc34-45d6-adb6-eb3ad61bb31c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snowball">
+      <UniqueIdentifier>{88017304-2649-4a57-a0ca-6541ecc094ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snowball\libstemmer">
+      <UniqueIdentifier>{a1730645-b2ba-4a1d-9665-2ae50e0ba231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snowball\libstemmer\runtime">
+      <UniqueIdentifier>{086a4878-b53e-4dac-9fb8-8dfa9836d2ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snowball\libstemmer\libstemmer">
+      <UniqueIdentifier>{27d61708-2ce1-40c3-a308-c1a29056e0f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snowball\libstemmer\src">
+      <UniqueIdentifier>{752d0330-2441-47ce-a98f-d653cb2e7104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="highlighter">
+      <UniqueIdentifier>{b61b51d3-3368-4c48-b77a-e95f6ee4af75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{75518f12-253e-4843-84a2-463c8681a42c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ContribInc.cpp">
+      <Filter>source files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\reverse\ReverseStringFilter.cpp">
+      <Filter>analyzers\common\analysis\reverse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ar\ArabicAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ar\ArabicLetterTokenizer.cpp">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ar\ArabicNormalizationFilter.cpp">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ar\ArabicNormalizer.cpp">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ar\ArabicStemFilter.cpp">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ar\ArabicStemmer.cpp">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\br\BrazilianAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\br</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\br\BrazilianStemFilter.cpp">
+      <Filter>analyzers\common\analysis\br</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\br\BrazilianStemmer.cpp">
+      <Filter>analyzers\common\analysis\br</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\cjk\CJKAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\cjk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\cjk\CJKTokenizer.cpp">
+      <Filter>analyzers\common\analysis\cjk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\cn\ChineseAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\cn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\cn\ChineseFilter.cpp">
+      <Filter>analyzers\common\analysis\cn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\cn\ChineseTokenizer.cpp">
+      <Filter>analyzers\common\analysis\cn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\cz\CzechAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\cz</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\de\GermanAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\de</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\de\GermanStemFilter.cpp">
+      <Filter>analyzers\common\analysis\de</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\de\GermanStemmer.cpp">
+      <Filter>analyzers\common\analysis\de</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\el\GreekAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\el</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\el\GreekLowerCaseFilter.cpp">
+      <Filter>analyzers\common\analysis\el</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fa\PersianAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\fa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fa\PersianNormalizationFilter.cpp">
+      <Filter>analyzers\common\analysis\fa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fa\PersianNormalizer.cpp">
+      <Filter>analyzers\common\analysis\fa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fr\ElisionFilter.cpp">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fr\FrenchAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fr\FrenchStemFilter.cpp">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\fr\FrenchStemmer.cpp">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\nl\DutchAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\nl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\nl\DutchStemFilter.cpp">
+      <Filter>analyzers\common\analysis\nl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\nl\DutchStemmer.cpp">
+      <Filter>analyzers\common\analysis\nl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ru\RussianAnalyzer.cpp">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ru\RussianLetterTokenizer.cpp">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ru\RussianLowerCaseFilter.cpp">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ru\RussianStemFilter.cpp">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClCompile>
+    <ClCompile Include="..\analyzers\common\analysis\ru\RussianStemmer.cpp">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\SnowballAnalyzer.cpp">
+      <Filter>snowball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\SnowballFilter.cpp">
+      <Filter>snowball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\runtime\api.c">
+      <Filter>snowball\libstemmer\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\runtime\utilities.c">
+      <Filter>snowball\libstemmer\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\libstemmer\libstemmer_utf8.c">
+      <Filter>snowball\libstemmer\libstemmer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_danish.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_dutch.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_english.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_finnish.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_french.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_german.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_hungarian.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_italian.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_norwegian.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_porter.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_portuguese.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_romanian.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_russian.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_spanish.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_swedish.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_turkish.c">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\DefaultEncoder.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\Encoder.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\Formatter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\Fragmenter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\GradientFormatter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\Highlighter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\HighlighterScorer.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\MapWeightedSpanTerm.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\NullFragmenter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\QueryScorer.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\QueryTermExtractor.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\QueryTermScorer.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\SimpleFragmenter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\SimpleHTMLEncoder.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\SimpleHTMLFormatter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\SimpleSpanFragmenter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\SpanGradientFormatter.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\TextFragment.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\TokenGroup.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\TokenSources.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\WeightedSpanTerm.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\WeightedSpanTermExtractor.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\highlighter\WeightedTerm.cpp">
+      <Filter>highlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\memory\MemoryIndex.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\Config.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ContribInc.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Lucene.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LuceneContrib.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\LuceneHeaders.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\LuceneTypes.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\targetver.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ReverseStringFilter.h">
+      <Filter>analyzers\common\analysis\reverse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ArabicAnalyzer.h">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ArabicLetterTokenizer.h">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ArabicNormalizationFilter.h">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ArabicNormalizer.h">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ArabicStemFilter.h">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ArabicStemmer.h">
+      <Filter>analyzers\common\analysis\ar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\BrazilianAnalyzer.h">
+      <Filter>analyzers\common\analysis\br</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\BrazilianStemFilter.h">
+      <Filter>analyzers\common\analysis\br</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\BrazilianStemmer.h">
+      <Filter>analyzers\common\analysis\br</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CJKAnalyzer.h">
+      <Filter>analyzers\common\analysis\cjk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CJKTokenizer.h">
+      <Filter>analyzers\common\analysis\cjk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ChineseAnalyzer.h">
+      <Filter>analyzers\common\analysis\cn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ChineseFilter.h">
+      <Filter>analyzers\common\analysis\cn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ChineseTokenizer.h">
+      <Filter>analyzers\common\analysis\cn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CzechAnalyzer.h">
+      <Filter>analyzers\common\analysis\cz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GermanAnalyzer.h">
+      <Filter>analyzers\common\analysis\de</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GermanStemFilter.h">
+      <Filter>analyzers\common\analysis\de</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GermanStemmer.h">
+      <Filter>analyzers\common\analysis\de</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GreekAnalyzer.h">
+      <Filter>analyzers\common\analysis\el</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GreekLowerCaseFilter.h">
+      <Filter>analyzers\common\analysis\el</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PersianAnalyzer.h">
+      <Filter>analyzers\common\analysis\fa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PersianNormalizationFilter.h">
+      <Filter>analyzers\common\analysis\fa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PersianNormalizer.h">
+      <Filter>analyzers\common\analysis\fa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ElisionFilter.h">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FrenchAnalyzer.h">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FrenchStemFilter.h">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FrenchStemmer.h">
+      <Filter>analyzers\common\analysis\fr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DutchAnalyzer.h">
+      <Filter>analyzers\common\analysis\nl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DutchStemFilter.h">
+      <Filter>analyzers\common\analysis\nl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DutchStemmer.h">
+      <Filter>analyzers\common\analysis\nl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RussianAnalyzer.h">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RussianLetterTokenizer.h">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RussianLowerCaseFilter.h">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RussianStemFilter.h">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RussianStemmer.h">
+      <Filter>analyzers\common\analysis\ru</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SnowballAnalyzer.h">
+      <Filter>snowball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SnowballFilter.h">
+      <Filter>snowball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\runtime\api.h">
+      <Filter>snowball\libstemmer\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\runtime\header.h">
+      <Filter>snowball\libstemmer\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\include\libstemmer.h">
+      <Filter>snowball\libstemmer\libstemmer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\libstemmer\modules_utf8.h">
+      <Filter>snowball\libstemmer\libstemmer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_danish.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_dutch.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_english.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_finnish.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_french.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_german.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_hungarian.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_italian.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_norwegian.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_porter.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_portuguese.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_romanian.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_russian.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_spanish.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_swedish.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\snowball\libstemmer_c\src_c\stem_UTF_8_turkish.h">
+      <Filter>snowball\libstemmer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DefaultEncoder.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Encoder.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Formatter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Fragmenter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GradientFormatter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Highlighter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HighlighterScorer.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MapWeightedSpanTerm.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\NullFragmenter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\QueryScorer.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\QueryTermExtractor.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\QueryTermScorer.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SimpleFragmenter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SimpleHTMLEncoder.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SimpleHTMLFormatter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SimpleSpanFragmenter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SpanGradientFormatter.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TextFragment.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TokenGroup.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TokenSources.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\WeightedSpanTerm.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\WeightedSpanTermExtractor.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\WeightedTerm.h">
+      <Filter>highlighter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MemoryIndex.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
