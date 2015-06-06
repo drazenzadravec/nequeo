@@ -127,6 +127,205 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
+        /// Create the property member access expression.
+        /// </summary>
+        /// <typeparam name="T">The type the property belongs to.</typeparam>
+        /// <param name="propertyName">The property name of the property within the type 'T'.</param>
+        /// <returns>The property member access expression.</returns>
+        public Expression CreatePropertyAccessExpression<T>(string propertyName)
+        {
+            // A parameter for the lambda expression.
+            ParameterExpression param = Expression.Parameter(typeof(T), "u");
+
+            // Get the property info
+            PropertyInfo property = typeof(T).GetProperty(propertyName);
+
+            // Make the member access expression.
+            Expression expression = Expression.MakeMemberAccess(param, property);
+            return expression;
+        }
+
+        /// <summary>
+        /// Create the method member call expression.
+        /// </summary>
+        /// <typeparam name="T">The type the method belongs to.</typeparam>
+        /// <param name="methodName">The name of the method within the type 'T'.</param>
+        /// <param name="arguments">An array of System.Linq.Expressions.Expression objects to use to populate the System.Linq.Expressions.MethodCallExpression.Arguments collection.</param>
+        /// <returns>The method call expression.</returns>
+        public Expression CreateMethodCallExpression<T>(string methodName, params Expression[] arguments)
+        {
+            // Make the call expresion.
+            Expression expression = Expression.Call(typeof(T), methodName, null, arguments);
+            return expression;
+        }
+
+        /// <summary>
+        /// Create the method lambda expression from the property access and the method info.
+        /// </summary>
+        /// <typeparam name="T">The delegate type used in the expression.</typeparam>
+        /// <typeparam name="P">The type the property access expression belongs to.</typeparam>
+        /// <param name="propertyAccessExpression">The property member access expression.</param>
+        /// <param name="methodInfo">The method info for the method to call associated with the property type within the 'P' type.</param>
+        /// <param name="arguments">An array of System.Linq.Expressions.Expression objects to use to populate the System.Linq.Expressions.MethodCallExpression.Arguments collection.</param>
+        /// <returns>The lambda expression.</returns>
+        /// <remarks>
+        /// The type 'T' must be a System.Deleate type, type 'P' is the type the property belongs to; e.g. Func &lt; P, bool &gt; where the first parameter
+        /// is the type the property belongs to and the last parameter type is the method return type.
+        /// </remarks>
+        public Expression<T> CreateMethodLambdaExpression<T, P>(Expression propertyAccessExpression, MethodInfo methodInfo, params Expression[] arguments)
+        {
+            // A parameter for the lambda expression.
+            ParameterExpression param = Expression.Parameter(typeof(P), "u");
+
+            // The method call on the property.
+            MethodCallExpression methodCall = Expression.Call(propertyAccessExpression, methodInfo, arguments);
+
+            // This expression represents a lambda expression 
+            Expression<T> predicate = Expression<T>.Lambda<T>(methodCall, param);
+            return predicate;
+        }
+
+        /// <summary>
+        /// Create a lambda expression from the expression body and parameters.
+        /// </summary>
+        /// <typeparam name="T">The delegate type used in the expression.</typeparam>
+        /// <param name="body">An System.Linq.Expressions.Expression to set the System.Linq.Expressions.LambdaExpression.Body property equal to.</param>
+        /// <param name="parameters">An array of System.Linq.Expressions.ParameterExpression objects to use to populate the System.Linq.Expressions.LambdaExpression.Parameters collection.</param>
+        /// <returns>An System.Linq.Expressions.Expression&lt;TDelegate&gt; that has the System.Linq.Expressions.Expression.NodeType
+        /// property equal to System.Linq.Expressions.ExpressionType.Lambda and the System.Linq.Expressions.LambdaExpression.Body
+        /// and System.Linq.Expressions.LambdaExpression.Parameters properties set to the specified values.</returns>
+        public Expression<T> CreateLambdaExpression<T>(Expression body, params ParameterExpression[] parameters)
+        {
+            // This expression represents a lambda expression 
+            Expression<T> predicate = Expression<T>.Lambda<T>(body, parameters);
+            return predicate;
+        }
+        
+        /// <summary>
+        /// Create a lambda expression from the method and constructor.
+        /// </summary>
+        /// <typeparam name="T">The delegate type used in the expression.</typeparam>
+        /// <param name="methodInfo">The method info used to construct the expression.</param>
+        /// <param name="constructorInfo">The constructor info used when the method is an instance method; else if null then the method must be a static method.</param>
+        /// <returns>The lambda expression.</returns>
+        /// <remarks>
+        /// If the method is an instance method then type 'T' must be a System.Deleate type; e.g. Func &lt; int, int, long, long, bool &gt; where the first
+        /// two parameters are the constructor parameters the next two parameters are the method parameters and the last parameter is the method return type.
+        /// if the method is a static method then type 'T' must be a System.Deleate type; e.g. Func &lt; long, long, bool &gt; where the first two parameters are
+        /// the method parameters and the last parameter is the method return type.
+        /// </remarks>
+        public Expression<T> CreateLambdaExpression<T>(MethodInfo methodInfo, ConstructorInfo constructorInfo = null)
+        {
+            ParameterExpression[] parmsConst = null;
+            ParameterExpression[] parmsMethod = null;
+
+            // Get method parameters.
+            ParameterInfo[] methodParms = methodInfo.GetParameters();
+
+            // Create the instance lambda.
+            if (methodParms != null && methodParms.Length > 0)
+            {
+                // Create the constructor parameters.
+                parmsMethod = new ParameterExpression[methodParms.Length];
+                for (int i = 0; i < methodParms.Length; i++)
+                {
+                    // Assign the parms.
+                    parmsMethod[i] = Expression.Parameter(methodParms[i].ParameterType, "mp" + i.ToString());
+                }
+            }
+
+            // Constructor exist.
+            if (constructorInfo != null)
+            {
+                // Get method parameters.
+                ParameterInfo[] constParms = constructorInfo.GetParameters();
+
+                // Create the instance lambda.
+                if (constParms != null && constParms.Length > 0)
+                {
+                    // Create the constructor parameters.
+                    parmsConst = new ParameterExpression[constParms.Length];
+                    for (int i = 0; i < constParms.Length; i++)
+                    {
+                        // Assign the parms.
+                        parmsConst[i] = Expression.Parameter(constParms[i].ParameterType, "cp" + i.ToString());
+                    }
+                }
+
+                // Parmaters exist.
+                if (parmsConst != null)
+                {
+                    // Parmaters exist.
+                    if (parmsMethod != null)
+                    {
+                        // Combine the parameters.
+                        IEnumerable<ParameterExpression> parms = parmsConst.Concat(parmsMethod);
+
+                        // Create the method call.
+                        MethodCallExpression call = Expression.Call(Expression.New(constructorInfo, parmsConst), methodInfo, parmsMethod);
+
+                        // This expression represents a lambda expression 
+                        Expression<T> predicate = Expression<T>.Lambda<T>(call, parms);
+                        return predicate;
+                    }
+                    else
+                    {
+                        // Create the method call.
+                        MethodCallExpression call = Expression.Call(Expression.New(constructorInfo, parmsConst), methodInfo);
+
+                        // This expression represents a lambda expression 
+                        Expression<T> predicate = Expression<T>.Lambda<T>(call, parmsConst);
+                        return predicate;
+                    }
+                }
+                else
+                {
+                    // Parmaters exist.
+                    if (parmsMethod != null)
+                    {
+                        // Create the method call.
+                        MethodCallExpression call = Expression.Call(Expression.New(constructorInfo), methodInfo, parmsMethod);
+
+                        // This expression represents a lambda expression 
+                        Expression<T> predicate = Expression<T>.Lambda<T>(call, parmsMethod);
+                        return predicate;
+                    }
+                    else
+                    {
+                        // Create the method call.
+                        MethodCallExpression call = Expression.Call(Expression.New(constructorInfo), methodInfo);
+
+                        // This expression represents a lambda expression 
+                        Expression<T> predicate = Expression<T>.Lambda<T>(call);
+                        return predicate;
+                    }
+                }
+            }
+            else
+            {
+                // Parmaters exist.
+                if (parmsMethod != null)
+                {
+                    // Create the method call.
+                    MethodCallExpression call = Expression.Call(null, methodInfo, parmsMethod);
+
+                    // This expression represents a lambda expression 
+                    Expression<T> predicate = Expression<T>.Lambda<T>(call, parmsMethod);
+                    return predicate;
+                }
+                else
+                {
+                    // Create the method call.
+                    MethodCallExpression call = Expression.Call(null, methodInfo);
+
+                    // This expression represents a lambda expression 
+                    Expression<T> predicate = Expression<T>.Lambda<T>(call);
+                    return predicate;
+                }
+            }
+        }
+
+        /// <summary>
         /// Get the sql expression operand string.
         /// </summary>
         /// <param name="exp">The expression to return.</param>
