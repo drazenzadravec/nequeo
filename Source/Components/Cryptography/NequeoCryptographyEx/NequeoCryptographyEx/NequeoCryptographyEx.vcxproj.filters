@@ -27,7 +27,19 @@
     <ClInclude Include="CryptoGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Advanced.h">
+    <ClInclude Include="Aes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RC2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RC4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CipherMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PaddingMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,7 +47,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Advanced.cpp">
+    <ClCompile Include="Aes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RC2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RC4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
