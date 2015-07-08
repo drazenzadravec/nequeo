@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::OpenNetworkUriForm, CDialog)
 	ON_WM_CREATE()
 	ON_BN_CLICKED(IDCANCEL, &OpenNetworkUriForm::OnBnClickedCancel)
 	ON_BN_CLICKED(IDOK, &OpenNetworkUriForm::OnBnClickedOk)
+	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
 namespace Nequeo {
@@ -80,10 +81,24 @@ namespace Nequeo {
 				if (CDialog::OnCreate(lpCreateStruct) == -1)
 					return -1;
 
+				return 0;
+			}
+
+			/// <summary>
+			/// On show window.
+			/// </summary>
+			/// <param name="bShow">Show the window.</param>
+			/// <param name="nStatus">The window status.</param>
+			void OpenNetworkUriForm::OnShowWindow(BOOL bShow, UINT nStatus)
+			{
+				// Show the window.
+				CDialog::OnShowWindow(bShow, nStatus);
+
 				// Create the tool tip control.
 				_toolTip = new CToolTipCtrl();
 				if (_toolTip != NULL)
 				{
+					/*
 					// Assign the tool tips.
 					_toolTip->Create(this, TTS_ALWAYSTIP);
 
@@ -91,16 +106,16 @@ namespace Nequeo {
 					CWnd *pBtnOK = GetDlgItem(IDOK);
 					if (pBtnOK != NULL)
 					{
-						// Add tool tip for our particular button
-						_toolTip->AddTool(pBtnOK, IDS_OPENNETWORKURI_OK_BUTTON);
+					// Add tool tip for our particular button
+					_toolTip->AddTool(pBtnOK, IDS_OPENNETWORKURI_OK_BUTTON);
 					}
 
 					// Get the Cancel button handler.
 					CWnd *pBtnCancel = GetDlgItem(IDCANCEL);
 					if (pBtnCancel != NULL)
 					{
-						// Add tool tip for our particular button
-						_toolTip->AddTool(pBtnCancel, IDS_OPENNETWORKURI_CANCEL_BUTTON);
+					// Add tool tip for our particular button
+					_toolTip->AddTool(pBtnCancel, IDS_OPENNETWORKURI_CANCEL_BUTTON);
 					}
 
 					//activate the tool tip
@@ -117,9 +132,8 @@ namespace Nequeo {
 
 					// When you want to show your tooltip (presumably in OnMouseMove()), use.
 					_toolTip->Pop();
+					*/
 				}
-
-				return 0;
 			}
 
 			/// <summary>
@@ -178,3 +192,4 @@ namespace Nequeo {
 		}
 	}
 }
+

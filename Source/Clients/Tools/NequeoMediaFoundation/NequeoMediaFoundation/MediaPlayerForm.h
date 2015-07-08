@@ -118,6 +118,7 @@ namespace Nequeo {
 				afx_msg void OnBnClickedButtonstop();
 				afx_msg void OnBnClickedButtonmute();
 				afx_msg void OnCbnSelchangeComboopen();
+				afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 			};
 		}
 	}

@@ -146,7 +146,8 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\lib;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\Win32\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Nequeo.lib;ZLib.lib;ZipArchive.lib;libbz2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ZLib.lib;ZipArchive.lib;libbz2.lib;Cabinet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\GlobalIOCompression.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GlobalIOCompression.h"
@@ -177,7 +178,7 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\x64\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\lib64;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\x64\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Nequeo.lib;ZLib.lib;ZipArchive.lib;libbz2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ZLib.lib;ZipArchive.lib;libbz2.lib;Cabinet.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\GlobalIOCompression.h "..\..\..\..\..\References\Release\Include\Components\IO\Compression\GlobalIOCompression.h"
@@ -196,6 +197,9 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
     <ClInclude Include="BZip2Stream.h" />
     <ClInclude Include="GlobalIOCompression.h" />
     <ClInclude Include="GZipStream.h" />
+    <ClInclude Include="Huffman.h" />
+    <ClInclude Include="HuffmanCode.h" />
+    <ClInclude Include="HuffmanNode.h" />
     <ClInclude Include="LibraryLoader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -208,6 +212,9 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
     <ClCompile Include="boost_zlib.cpp" />
     <ClCompile Include="BZip2Stream.cpp" />
     <ClCompile Include="GZipStream.cpp" />
+    <ClCompile Include="Huffman.cpp" />
+    <ClCompile Include="HuffmanCode.cpp" />
+    <ClCompile Include="HuffmanNode.cpp" />
     <ClCompile Include="LibraryLoader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

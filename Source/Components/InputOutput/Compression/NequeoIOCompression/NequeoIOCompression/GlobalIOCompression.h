@@ -36,13 +36,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 #include <windows.h>
+#include <compressapi.h>
 #include <atlbase.h>
 #include <tchar.h>
 #include <string>
 #include <vector>
+#include <queue>
+#include <map>
 #include <iterator>
+#include <algorithm>
+#include <climits>
 
 using namespace std;
+
+const bool T = true;
+const bool F = false;
+const int UniqueSymbols = 1 << CHAR_BIT;
 
 namespace Nequeo {
 	namespace IO

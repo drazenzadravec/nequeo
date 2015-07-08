@@ -278,7 +278,7 @@ namespace Nequeo {
 				MediaPlayer(HWND hVideo, HWND hEvent, HRESULT &hr);
 
 				/// <summary>
-				/// This destructor. call release to cleanup resources.
+				/// This destructor. Call release to cleanup resources.
 				/// </summary>
 				virtual ~MediaPlayer();
 

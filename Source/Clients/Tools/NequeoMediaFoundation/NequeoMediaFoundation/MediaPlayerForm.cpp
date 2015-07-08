@@ -50,6 +50,7 @@ BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::MediaPlayerForm, CDialog)
 	ON_BN_CLICKED(IDC_BUTTONSTOP, &MediaPlayerForm::OnBnClickedButtonstop)
 	ON_BN_CLICKED(IDC_BUTTONMUTE, &MediaPlayerForm::OnBnClickedButtonmute)
 	ON_CBN_SELCHANGE(IDC_COMBOOPEN, &MediaPlayerForm::OnCbnSelchangeComboopen)
+	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
 namespace Nequeo {
@@ -143,13 +144,6 @@ namespace Nequeo {
 				if (CDialog::OnCreate(lpCreateStruct) == -1)
 					return -1;
 
-				// Create the tool tip control.
-				_toolTip = new CToolTipCtrl();
-				if (_toolTip != NULL)
-				{
-
-				}
-
 				// Get the window handlers where the video will be player
 				// and the window the will handle the player evenets.
 				HWND hVideo = lpCreateStruct->hwndParent;
@@ -177,6 +171,23 @@ namespace Nequeo {
 				{
 					// Destroy the window.
 					return -1;  
+				}
+			}
+
+			/// <summary>
+			/// On show window.
+			/// </summary>
+			/// <param name="bShow">Show the window.</param>
+			/// <param name="nStatus">The window status.</param>
+			void MediaPlayerForm::OnShowWindow(BOOL bShow, UINT nStatus)
+			{
+				CDialog::OnShowWindow(bShow, nStatus);
+
+				// Create the tool tip control.
+				_toolTip = new CToolTipCtrl();
+				if (_toolTip != NULL)
+				{
+
 				}
 			}
 
@@ -328,6 +339,9 @@ namespace Nequeo {
 				// Get the volume from the parameter.
 				float newVolume = (float)wParam;
 				BOOL newMute = (BOOL)lParam;
+
+				// Return all is good.
+				return 0;
 			}
 
 			/// <summary>
@@ -512,3 +526,4 @@ namespace Nequeo {
 		}
 	}
 }
+
