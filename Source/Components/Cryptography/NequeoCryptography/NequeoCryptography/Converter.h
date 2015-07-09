@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "CipherMode.h"
 #include "PaddingMode.h"
 
+#include "rsa.h"
 #include "aes.h"
 #include "modes.h"
 #include "files.h"

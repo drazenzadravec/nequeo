@@ -90,7 +90,7 @@ namespace Nequeo {
 			unsigned char _lowercaseLetters[26];
 			unsigned char _special[24];
 
-			string Guid(unsigned int minimum, unsigned int maximum);
+			string Guid();
 			string Number(unsigned int minimum, unsigned int maximum);
 			string Special(unsigned int minimum, unsigned int maximum);
 			string UpperCaseLetters(unsigned int minimum, unsigned int maximum);

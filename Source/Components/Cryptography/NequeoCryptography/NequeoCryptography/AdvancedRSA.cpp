@@ -34,6 +34,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "AdvancedRSA.h"
 #include "Converter.h"
 
+#include "openssl\pem.h"
+#include "openssl\evp.h"
+#include "openssl\rsa.h"
+#include "openssl\x509.h"
+
 using Nequeo::Cryptography::Converter;
 
 namespace Nequeo {
@@ -44,7 +49,6 @@ namespace Nequeo {
 		/// </summary>
 		AdvancedRSA::AdvancedRSA() : _disposed(false)
 		{
-
 		}
 
 		/// <summary>
@@ -58,6 +62,23 @@ namespace Nequeo {
 				// Indicate that dispose has been called.
 				_disposed = true;
 			}
+		}
+
+		RsaParameters& AdvancedRSA::GenerateKey(int keyBitSize, RsaExponent exponent)
+		{
+			RSA* rsa = RSA_generate_key(
+				2048,   /* number of bits for the key - 2048 is a sensible value */
+				RSA_3, /* exponent - RSA_3 is defined as 0x3L */
+				NULL,   /* callback - can be NULL if we aren't displaying progress */
+				NULL    /* callback argument - not needed in this case */
+				);
+
+			return _rsaParm;
+		}
+
+		void AdvancedRSA::GenerateCertificate(RsaParameters& key, string subject, string issuer)
+		{
+			
 		}
 	}
 }

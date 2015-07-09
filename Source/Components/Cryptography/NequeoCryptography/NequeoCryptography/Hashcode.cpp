@@ -109,6 +109,31 @@ namespace Nequeo {
 		/// <summary>
 		/// Get the hashcode from the value.
 		/// </summary>
+		/// <param name="value">The value to generate the hash code for.</param>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetHashcodeRaw(string value, HashcodeType hashcodeType)
+		{
+			switch (hashcodeType)
+			{
+			case Nequeo::Cryptography::MD5:
+				return GetMd5Raw(value);
+			case Nequeo::Cryptography::SHA1:
+				return GetSha1Raw(value);
+			case Nequeo::Cryptography::SHA256:
+				return GetSha256Raw(value);
+			case Nequeo::Cryptography::SHA384:
+				return GetSha384Raw(value);
+			case Nequeo::Cryptography::SHA512:
+				return GetSha512Raw(value);
+			default:
+				return GetSha1Raw(value);
+			}
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
 		/// <param name="filename">The path and file name to generate the hash code for.</param>
 		/// <param name="hashcodeType">The hash name.</param>
 		/// <returns>The generated hash code.</returns>
@@ -128,6 +153,31 @@ namespace Nequeo {
 				return GetSha512File(filename);
 			default:
 				return GetSha1File(filename);
+			}
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="filename">The path and file name to generate the hash code for.</param>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetHashcodeFileRaw(const char *filename, HashcodeType hashcodeType)
+		{
+			switch (hashcodeType)
+			{
+			case Nequeo::Cryptography::MD5:
+				return GetMd5FileRaw(filename);
+			case Nequeo::Cryptography::SHA1:
+				return GetSha1FileRaw(filename);
+			case Nequeo::Cryptography::SHA256:
+				return GetSha256FileRaw(filename);
+			case Nequeo::Cryptography::SHA384:
+				return GetSha384FileRaw(filename);
+			case Nequeo::Cryptography::SHA512:
+				return GetSha512FileRaw(filename);
+			default:
+				return GetSha1FileRaw(filename);
 			}
 		}
 
@@ -244,6 +294,116 @@ namespace Nequeo {
 		/// <summary>
 		/// Get the hashcode from the value.
 		/// </summary>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetMd5Raw(string value)
+		{
+			CryptoPP::MD5 md5Hash;
+			char data[CryptoPP::MD5::DIGESTSIZE];
+			byte digest[CryptoPP::MD5::DIGESTSIZE];
+
+			// calculate the hash.
+			md5Hash.CalculateDigest(digest, (byte*)value.c_str(), value.length());
+
+			// Convert from byte array to char array.
+			for (unsigned int i = 0; i < CryptoPP::MD5::DIGESTSIZE; i++)
+				data[i] = (char)digest[i];
+
+			// return the hashed text.
+			return string(data);
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha1Raw(string value)
+		{
+			CryptoPP::SHA1 sha1Hash;
+			char data[CryptoPP::SHA1::DIGESTSIZE];
+			byte digest[CryptoPP::SHA1::DIGESTSIZE];
+
+			// calculate the hash.
+			sha1Hash.CalculateDigest(digest, (byte*)value.c_str(), value.length());
+
+			// Convert from byte array to char array.
+			for (unsigned int i = 0; i < CryptoPP::SHA1::DIGESTSIZE; i++)
+				data[i] = (char)digest[i];
+
+			// return the hashed text.
+			return string(data);
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha256Raw(string value)
+		{
+			CryptoPP::SHA256 sha256Hash;
+			char data[CryptoPP::SHA256::DIGESTSIZE];
+			byte digest[CryptoPP::SHA256::DIGESTSIZE];
+
+			// calculate the hash.
+			sha256Hash.CalculateDigest(digest, (byte*)value.c_str(), value.length());
+			
+			// Convert from byte array to char array.
+			for (unsigned int i = 0; i < CryptoPP::SHA256::DIGESTSIZE; i++)
+				data[i] = (char)digest[i];
+
+			// return the hashed text.
+			return string(data);
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha384Raw(string value)
+		{
+			CryptoPP::SHA384 sha384Hash;
+			char data[CryptoPP::SHA384::DIGESTSIZE];
+			byte digest[CryptoPP::SHA384::DIGESTSIZE];
+
+			// calculate the hash.
+			sha384Hash.CalculateDigest(digest, (byte*)value.c_str(), value.length());
+			
+			// Convert from byte array to char array.
+			for (unsigned int i = 0; i < CryptoPP::SHA384::DIGESTSIZE; i++)
+				data[i] = (char)digest[i];
+
+			// return the hashed text.
+			return string(data);
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="hashcodeType">The hash name.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha512Raw(string value)
+		{
+			CryptoPP::SHA512 sha512Hash;
+			char data[CryptoPP::SHA512::DIGESTSIZE];
+			byte digest[CryptoPP::SHA512::DIGESTSIZE];
+			
+			// calculate the hash.
+			sha512Hash.CalculateDigest(digest, (byte*)value.c_str(), value.length());
+			
+			// Convert from byte array to char array.
+			for (unsigned int i = 0; i < CryptoPP::SHA512::DIGESTSIZE; i++)
+				data[i] = (char)digest[i];
+
+			// return the hashed text.
+			return string(data);
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
 		/// <param name="filename">The path and file name to generate the hash code for.</param>
 		/// <returns>The generated hash code.</returns>
 		string Hashcode::GetMd5File(const char *filename)
@@ -262,6 +422,7 @@ namespace Nequeo {
 
 			// return the hashed text.
 			hashedText = string((const char*)buffer, 2 * CryptoPP::MD5::DIGESTSIZE);
+			return hashedText;
 		}
 
 		/// <summary>
@@ -285,6 +446,7 @@ namespace Nequeo {
 
 			// return the hashed text.
 			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA1::DIGESTSIZE);
+			return hashedText;
 		}
 
 		/// <summary>
@@ -308,6 +470,7 @@ namespace Nequeo {
 
 			// return the hashed text.
 			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA256::DIGESTSIZE);
+			return hashedText;
 		}
 
 		/// <summary>
@@ -331,6 +494,7 @@ namespace Nequeo {
 
 			// return the hashed text.
 			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA384::DIGESTSIZE);
+			return hashedText;
 		}
 
 		/// <summary>
@@ -354,6 +518,172 @@ namespace Nequeo {
 
 			// return the hashed text.
 			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA512::DIGESTSIZE);
+			return hashedText;
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="filename">The path and file name to generate the hash code for.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetMd5FileRaw(const char *filename)
+		{
+			std::string decoded;
+			std::string hashedText;
+			CryptoPP::MD5 md5Hash;
+			CryptoPP::HexDecoder decoder;
+
+			// Output size of the buffer
+			// Note that the output is encoded as hex which is why the 
+			// output buffer must be two times the size of the MD5 digest
+			byte buffer[2 * CryptoPP::MD5::DIGESTSIZE];
+
+			CryptoPP::FileSource file(filename, true,
+				new CryptoPP::HashFilter(md5Hash,
+				new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer, 2 * CryptoPP::MD5::DIGESTSIZE))));
+
+			// return the hashed text.
+			hashedText = string((const char*)buffer, 2 * CryptoPP::MD5::DIGESTSIZE);
+
+			// Decode the message.
+			decoder.Attach(new CryptoPP::StringSink(decoded));
+			decoder.Put((byte*)hashedText.data(), hashedText.size());
+			decoder.MessageEnd();
+
+			// return the decoded text.
+			return decoded;
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="filename">The path and file name to generate the hash code for.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha1FileRaw(const char *filename)
+		{
+			std::string decoded;
+			std::string hashedText;
+			CryptoPP::SHA1 sha1Hash;
+			CryptoPP::HexDecoder decoder;
+
+			// Output size of the buffer
+			// Note that the output is encoded as hex which is why the 
+			// output buffer must be two times the size of the MD5 digest
+			byte buffer[2 * CryptoPP::SHA1::DIGESTSIZE];
+
+			CryptoPP::FileSource file(filename, true,
+				new CryptoPP::HashFilter(sha1Hash,
+				new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer, 2 * CryptoPP::SHA1::DIGESTSIZE))));
+
+			// return the hashed text.
+			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA1::DIGESTSIZE);
+
+			// Decode the message.
+			decoder.Attach(new CryptoPP::StringSink(decoded));
+			decoder.Put((byte*)hashedText.data(), hashedText.size());
+			decoder.MessageEnd();
+
+			// return the decoded text.
+			return decoded;
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="filename">The path and file name to generate the hash code for.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha256FileRaw(const char *filename)
+		{
+			std::string decoded;
+			std::string hashedText;
+			CryptoPP::SHA256 sha256Hash;
+			CryptoPP::HexDecoder decoder;
+
+			// Output size of the buffer
+			// Note that the output is encoded as hex which is why the 
+			// output buffer must be two times the size of the MD5 digest
+			byte buffer[2 * CryptoPP::SHA256::DIGESTSIZE];
+
+			CryptoPP::FileSource file(filename, true,
+				new CryptoPP::HashFilter(sha256Hash,
+				new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer, 2 * CryptoPP::SHA256::DIGESTSIZE))));
+
+			// return the hashed text.
+			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA256::DIGESTSIZE);
+
+			// Decode the message.
+			decoder.Attach(new CryptoPP::StringSink(decoded));
+			decoder.Put((byte*)hashedText.data(), hashedText.size());
+			decoder.MessageEnd();
+
+			// return the decoded text.
+			return decoded;
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="filename">The path and file name to generate the hash code for.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha384FileRaw(const char *filename)
+		{
+			std::string decoded;
+			std::string hashedText;
+			CryptoPP::SHA384 sha384Hash;
+			CryptoPP::HexDecoder decoder;
+
+			// Output size of the buffer
+			// Note that the output is encoded as hex which is why the 
+			// output buffer must be two times the size of the MD5 digest
+			byte buffer[2 * CryptoPP::SHA384::DIGESTSIZE];
+
+			CryptoPP::FileSource file(filename, true,
+				new CryptoPP::HashFilter(sha384Hash,
+				new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer, 2 * CryptoPP::SHA384::DIGESTSIZE))));
+
+			// return the hashed text.
+			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA384::DIGESTSIZE);
+
+			// Decode the message.
+			decoder.Attach(new CryptoPP::StringSink(decoded));
+			decoder.Put((byte*)hashedText.data(), hashedText.size());
+			decoder.MessageEnd();
+
+			// return the decoded text.
+			return decoded;
+		}
+
+		/// <summary>
+		/// Get the hashcode from the value.
+		/// </summary>
+		/// <param name="filename">The path and file name to generate the hash code for.</param>
+		/// <returns>The generated hash code.</returns>
+		string Hashcode::GetSha512FileRaw(const char *filename)
+		{
+			std::string decoded;
+			std::string hashedText;
+			CryptoPP::SHA512 sha512Hash;
+			CryptoPP::HexDecoder decoder;
+
+			// Output size of the buffer
+			// Note that the output is encoded as hex which is why the 
+			// output buffer must be two times the size of the MD5 digest
+			byte buffer[2 * CryptoPP::SHA512::DIGESTSIZE];
+
+			CryptoPP::FileSource file(filename, true,
+				new CryptoPP::HashFilter(sha512Hash,
+				new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer, 2 * CryptoPP::SHA512::DIGESTSIZE))));
+
+			// return the hashed text.
+			hashedText = string((const char*)buffer, 2 * CryptoPP::SHA512::DIGESTSIZE);
+
+			// Decode the message.
+			decoder.Attach(new CryptoPP::StringSink(decoded));
+			decoder.Put((byte*)hashedText.data(), hashedText.size());
+			decoder.MessageEnd();
+
+			// return the decoded text.
+			return decoded;
 		}
 	}
 }

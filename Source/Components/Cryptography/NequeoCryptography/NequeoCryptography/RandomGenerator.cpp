@@ -312,7 +312,7 @@ namespace Nequeo {
 				result = UpperCaseLettersLowerCaseLetters(minimum, maximum);
 				break;
 			case Nequeo::Cryptography::Guid:
-				result = Guid(minimum, maximum);
+				result = Guid();
 				break;
 			case Nequeo::Cryptography::UpperCaseLetters:
 				result = UpperCaseLetters(minimum, maximum);
@@ -360,12 +360,10 @@ namespace Nequeo {
 		}
 
 		/// <summary>
-		/// Create the random string.
+		/// Create the random GUID string.
 		/// </summary>
-		/// <param name="minimum">The minimum number of characters to create.</param>
-		/// <param name="maximum">The maximum number of characters to create.</param>
 		/// <returns>The random string.</returns>
-		string RandomGenerator::Guid(unsigned int minimum, unsigned int maximum)
+		string RandomGenerator::Guid()
 		{
 			string one = GuidTranslatorA(8, 8);
 			string two = GuidTranslatorA(4, 4);

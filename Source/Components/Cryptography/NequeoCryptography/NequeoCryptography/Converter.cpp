@@ -33,6 +33,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "Converter.h"
 
+#include "aes.h"
+#include "modes.h"
+#include "files.h"
+#include "filters.h"
+#include "cryptlib.h"
+
 namespace Nequeo {
 	namespace Cryptography
 	{

@@ -35,6 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define _ADVANCEDRSA_H
 
 #include "GlobalCryptography.h"
+#include "RsaParameters.h"
+#include "RsaExponent.h"
 #include "CipherMode.h"
 #include "PaddingMode.h"
 
@@ -50,9 +52,12 @@ namespace Nequeo {
 			AdvancedRSA();
 			~AdvancedRSA();
 
+			RsaParameters& GenerateKey(int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
+			void GenerateCertificate(RsaParameters& key, string subject, string issuer);
+
 		private:
 			bool _disposed;
-
+			RsaParameters _rsaParm;
 		};
 	}
 }

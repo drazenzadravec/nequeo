@@ -124,10 +124,26 @@ namespace Nequeo {
 			/// <summary>
 			/// Get the hashcode from the value.
 			/// </summary>
+			/// <param name="value">The value to generate the hash code for.</param>
+			/// <param name="hashcodeType">The hash name.</param>
+			/// <returns>The generated hash code.</returns>
+			string GetHashcodeRaw(string value, HashcodeType hashcodeType);
+
+			/// <summary>
+			/// Get the hashcode from the value.
+			/// </summary>
 			/// <param name="filename">The path and file name to generate the hash code for.</param>
 			/// <param name="hashcodeType">The hash name.</param>
 			/// <returns>The generated hash code.</returns>
 			string GetHashcodeFile(const char *filename, HashcodeType hashcodeType);
+
+			/// <summary>
+			/// Get the hashcode from the value.
+			/// </summary>
+			/// <param name="filename">The path and file name to generate the hash code for.</param>
+			/// <param name="hashcodeType">The hash name.</param>
+			/// <returns>The generated hash code.</returns>
+			string GetHashcodeFileRaw(const char *filename, HashcodeType hashcodeType);
 
 			/// <summary>
 			/// Generate a random salt.
@@ -135,7 +151,7 @@ namespace Nequeo {
 			/// <param name="minimum">The minimum length of the salt.</param>
 			/// <param name="maximum">The minimum length of the salt.</param>
 			/// <returns>The random salt value.</returns>
-			string GenerateSalt(unsigned int minimum = 15, unsigned int maximum = 15);
+			string GenerateSalt(unsigned int minimum = 20, unsigned int maximum = 20);
 
 		private:
 			bool _disposed;
@@ -146,11 +162,23 @@ namespace Nequeo {
 			string GetSha384(string value);
 			string GetSha512(string value);
 
+			string GetMd5Raw(string value);
+			string GetSha1Raw(string value);
+			string GetSha256Raw(string value);
+			string GetSha384Raw(string value);
+			string GetSha512Raw(string value);
+
 			string GetMd5File(const char *filename);
 			string GetSha1File(const char *filename);
 			string GetSha256File(const char *filename);
 			string GetSha384File(const char *filename);
 			string GetSha512File(const char *filename);
+
+			string GetMd5FileRaw(const char *filename);
+			string GetSha1FileRaw(const char *filename);
+			string GetSha256FileRaw(const char *filename);
+			string GetSha384FileRaw(const char *filename);
+			string GetSha512FileRaw(const char *filename);
 		};
 	}
 }

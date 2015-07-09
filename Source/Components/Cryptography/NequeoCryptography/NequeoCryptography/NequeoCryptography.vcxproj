@@ -153,7 +153,7 @@ copy $(ProjectDir)\Simple.h "..\..\..\..\References\Release\Include\Components\C
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x86\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoException.lib;cryptlib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
+      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\AdvancedAES.h "..\..\..\..\References\Release\Include\Components\Cryptography\AdvancedAES.h"
@@ -186,7 +186,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoException.lib;cryptlib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
+      <AdditionalDependencies>cryptlib.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\AdvancedAES.h "..\..\..\..\References\Release\Include\Components\Cryptography\AdvancedAES.h"
@@ -211,6 +211,8 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
     <ClInclude Include="PasswordType.h" />
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="Hashcode.h" />
+    <ClInclude Include="RsaExponent.h" />
+    <ClInclude Include="RsaParameters.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -220,6 +222,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="RandomGenerator.cpp" />
     <ClCompile Include="Hashcode.cpp" />
+    <ClCompile Include="RsaParameters.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
