@@ -96,13 +96,89 @@ namespace Nequeo {
 		void Aes::setCipherMode(CryptCipherMode cipherMode)
 		{
 			_cipherMode = cipherMode;
+
+			// Set the default CBC
+			DWORD dwMode = CRYPT_MODE_CBC;
+
+			// Select the cipher mode.
+			switch (_cipherMode)
+			{
+			case Nequeo::Cryptography::CFB:
+				dwMode = CRYPT_MODE_CFB;
+				break;
+
+			case Nequeo::Cryptography::CTS:
+				dwMode = CRYPT_MODE_CTS;
+				break;
+
+			case Nequeo::Cryptography::ECB:
+				dwMode = CRYPT_MODE_ECB;
+				break;
+
+			case Nequeo::Cryptography::OFB:
+				dwMode = CRYPT_MODE_OFB;
+				break;
+
+			default:
+			case Nequeo::Cryptography::CBC:
+				dwMode = CRYPT_MODE_CBC;
+				break;
+			}
+			
+			//	Return failure if we don't have a context or key.
+			if (_hCryptProv == NULL || _hKey == NULL)
+				return;
+
+			// Attempt to set the cipher mode.
+			if (!CryptSetKeyParam(_hKey, KP_MODE, (BYTE*)&dwMode, 0))
+			{
+				throw exception("Unable to set the cipher mode.");
+			}
 		}
 
 		/// <summary>
 		/// Gets the cipher mode.
 		/// </summary>
-		CryptCipherMode Aes::getCipherMode() const
+		CryptCipherMode Aes::getCipherMode()
 		{
+			DWORD dwCount = sizeof(DWORD);
+			DWORD dwMode;
+
+			// Attempt to get the cipher mode.
+			if (!CryptGetKeyParam(_hKey, KP_MODE, (PBYTE)&dwMode, &dwCount, 0))
+			{
+				throw exception("Unable to get the cipher mode.");
+			}
+			else
+			{
+				// Select the cipher mode.
+				switch (dwMode)
+				{
+				case CRYPT_MODE_CFB:
+					_cipherMode = CryptCipherMode::CFB;
+					break;
+
+				case CRYPT_MODE_CTS:
+					_cipherMode = CryptCipherMode::CTS;
+					break;
+
+				case CRYPT_MODE_ECB:
+					_cipherMode = CryptCipherMode::ECB;
+					break;
+
+				case CRYPT_MODE_OFB:
+					_cipherMode = CryptCipherMode::OFB;
+					break;
+
+				default:
+				case CRYPT_MODE_CBC:
+					_cipherMode = CryptCipherMode::CBC;
+					break;
+
+				}
+			}
+
+			// Return the cipher mode.
 			return _cipherMode;
 		}
 
@@ -112,20 +188,117 @@ namespace Nequeo {
 		void Aes::setPaddingMode(CryptPaddingMode paddingMode)
 		{
 			_padding = paddingMode;
+
+			// Set the default pkcs5.
+			DWORD dwPadding = PKCS5_PADDING;
+
+			// Select the padding mode.
+			switch (_padding)
+			{
+			case Nequeo::Cryptography::Zeros:
+				dwPadding = ZERO_PADDING;
+				break;
+
+			case Nequeo::Cryptography::Random:
+				dwPadding = RANDOM_PADDING;
+				break;
+
+			default:
+			case Nequeo::Cryptography::PKCS5:
+				dwPadding = PKCS5_PADDING;
+				break;
+			}
+
+			//	Return failure if we don't have a context or key.
+			if (_hCryptProv == NULL || _hKey == NULL)
+				return;
+
+			// Attempt to set the padding mode.
+			if (!CryptSetKeyParam(_hKey, KP_PADDING, (BYTE*)&dwPadding, 0))
+			{
+				throw exception("Unable to set the padding mode.");
+			}
 		}
 
 		/// <summary>
 		/// Gets the padding mode.
 		/// </summary>
-		CryptPaddingMode Aes::getPaddingMode() const
+		CryptPaddingMode Aes::getPaddingMode()
 		{
+			DWORD dwCount = sizeof(DWORD);
+			DWORD dwPadding;
+
+			// Attempt to get the cipher mode.
+			if (!CryptGetKeyParam(_hKey, KP_PADDING, (PBYTE)&dwPadding, &dwCount, 0))
+			{
+				throw exception("Unable to get the padding mode.");
+			}
+			else
+			{
+				// Select the padding mode.
+				switch (dwPadding)
+				{
+				case RANDOM_PADDING:
+					_padding = CryptPaddingMode::Random;
+					break;
+
+				case ZERO_PADDING:
+					_padding = CryptPaddingMode::Zeros;
+					break;
+
+				default:
+				case PKCS5_PADDING:
+					_padding = CryptPaddingMode::PKCS5;
+					break;
+				}
+			}
+
+			// Return the padding mode.
 			return _padding;
+		}
+
+		/// <summary>
+		/// Sets the initialization vector.
+		/// </summary>
+		void Aes::setInitializationVector(BYTE iv[16])
+		{
+			// Attempt to set the initialization vector.
+			if (!CryptSetKeyParam(_hKey, KP_IV, iv, 0))
+			{
+				throw exception("Unable to set the initialization vector.");
+			}
+		}
+
+		/// <summary>
+		/// Gets the initialization vector.
+		/// </summary>
+		array<BYTE, 16> Aes::getInitializationVector()
+		{
+			DWORD dwCount = sizeof(DWORD);
+			BYTE iv[16];
+
+			// Attempt to get the initialization vector.
+			if (!CryptGetKeyParam(_hKey, KP_IV, iv, &dwCount, 0))
+			{
+				throw exception("Unable to get the initialization vector.");
+			}
+
+			// Assign the vector.
+			array<BYTE, 16> aIV;
+			for (int i = 0; i < 16; i++)
+			{
+				// Assign the vector values.
+				aIV[i] = iv[i];
+			}
+
+			// Return the vector.
+			return aIV;
 		}
 
 		/// <summary>
 		/// Derive a key from a password.
 		/// </summary>
-		/// <param name="strPassword">The password.</param>
+		/// <param name="strPassword">The password (must be 32 bytes in length).</param>
 		/// <returns>True if derived key; else false.</returns>
 		/// <remarks>
 		///	These functions are essential to using the crypto object- you must
@@ -264,6 +437,187 @@ namespace Nequeo {
 		}
 
 		/// <summary>
+		/// Encrypt the decrypted file.
+		/// </summary>
+		/// <param name="szSource">The decrypted file.</param>
+		/// <param name="szDestination">The encrypted file.</param>
+		/// <param name="szPassword">The password used to encrypt the file.</param>
+		/// <returns>True if encrypted; else false.</returns>
+		bool Aes::Encrypt(PCHAR szSource, PCHAR szDestination, PCHAR szPassword)
+		{
+			FILE *hSource = NULL;
+			FILE *hDestination = NULL;
+			errno_t err;
+			INT eof = 0;
+
+			HCRYPTPROV hProv = 0;
+			HCRYPTKEY hKey = 0;
+			HCRYPTKEY hXchgKey = 0;
+			HCRYPTHASH hHash = 0;
+
+			PBYTE pbKeyBlob = NULL;
+			DWORD dwKeyBlobLen;
+
+			PBYTE pbBuffer = NULL;
+			DWORD dwBlockLen;
+			DWORD dwBufferLen;
+			DWORD dwCount;
+
+			bool status = false;
+
+			// Open source file.
+			err = fopen_s(&hSource, szSource, "rb");
+			if (err != 0) {
+				goto done;
+			}
+
+			// Open destination file.
+			err = fopen_s(&hDestination, szDestination, "wb");
+			if (err != 0){
+				goto done;
+			}
+
+			// Get handle to the CSP. In order to be used with different OSs 
+			// with different default provides, the CSP is explicitly set. 
+			// If the Microsoft Enhanced Provider is not installed, set parameter
+			// three to MS_DEF_PROV 
+
+			if (!CryptAcquireContext(&hProv, NULL, MS_ENHANCED_PROV, PROV_RSA_AES, 0)) {
+				goto done;
+			}
+
+			if (szPassword == NULL) {
+				// Encrypt the file with a random session key.
+
+				// Create a random session key.
+				if (!CryptGenKey(hProv, CALG_AES_256, CRYPT_EXPORTABLE, &hKey)) {
+					goto done;
+				}
+
+				// Get handle to key exchange public key.
+				if (!CryptGetUserKey(hProv, AT_KEYEXCHANGE, &hXchgKey)) {
+					goto done;
+				}
+
+				// Determine size of the key blob and allocate memory.
+				if (!CryptExportKey(hKey, hXchgKey, SIMPLEBLOB, 0, NULL, &dwKeyBlobLen)) {
+					goto done;
+				}
+				if ((pbKeyBlob = (unsigned char *)malloc(dwKeyBlobLen)) == NULL) {
+					goto done;
+				}
+
+				// Export session key into a simple key blob.
+				if (!CryptExportKey(hKey, hXchgKey, SIMPLEBLOB, 0, pbKeyBlob, &dwKeyBlobLen)) {
+					goto done;
+				}
+
+				// Release key exchange key handle.
+				CryptDestroyKey(hXchgKey);
+				hXchgKey = 0;
+
+				// Write size of key blob to destination file.
+				fwrite(&dwKeyBlobLen, sizeof(DWORD), 1, hDestination);
+				if (ferror(hDestination)) {
+					goto done;
+				}
+
+				// Write key blob to destination file.
+				fwrite(pbKeyBlob, 1, dwKeyBlobLen, hDestination);
+				if (ferror(hDestination)) {
+					goto done;
+				}
+
+			}
+			else {
+				// Encrypt the file with a session key derived from a password.
+
+				// Create a hash object.
+				if (!CryptCreateHash(hProv, CALG_SHA_512, 0, 0, &hHash)) {
+					goto done;
+				}
+
+				// Hash in the password data.
+				if (!CryptHashData(hHash, (const unsigned char *)szPassword, (DWORD)strlen(szPassword), 0)) {
+					goto done;
+				}
+
+				// Derive a session key from the hash object.
+				if (!CryptDeriveKey(hProv, CALG_AES_256, hHash, CRYPT_EXPORTABLE, &hKey)) {
+					goto done;
+				}
+
+				// Destroy the hash object.
+				CryptDestroyHash(hHash);
+				hHash = 0;
+			}
+
+			// Determine number of bytes to encrypt at a time. This must be a multiple
+			// of ENCRYPT_BLOCK_SIZE.
+			dwBlockLen = 1000 - 1000 % 1;
+
+			// Determine the block size. If a block cipher is used this must have
+			// room for an extra block.
+#ifdef USE_BLOCK_CIPHER
+			dwBufferLen = dwBlockLen + ENCRYPT_BLOCK_SIZE;
+#else
+			dwBufferLen = dwBlockLen;
+#endif
+
+			// Allocate memory.
+			if ((pbBuffer = (unsigned char *)malloc(dwBufferLen)) == NULL) {
+				goto done;
+			}
+
+			// Encrypt source file and write to Source file.
+			do {
+				// Read up to 'dwBlockLen' bytes from source file.
+				dwCount = (DWORD)fread(pbBuffer, 1, dwBlockLen, hSource);
+				if (ferror(hSource)) {
+					goto done;
+				}
+				eof = feof(hSource);
+
+				// Encrypt data
+				if (!CryptEncrypt(hKey, 0, eof, 0, pbBuffer, &dwCount, dwBufferLen)) {
+					goto done;
+				}
+
+				// Write data to destination file.
+				fwrite(pbBuffer, 1, dwCount, hDestination);
+				if (ferror(hDestination)) {
+					goto done;
+				}
+			} while (!feof(hSource));
+
+			status = true;
+
+		done:
+
+			// Close files.
+			if (hSource) fclose(hSource);
+			if (hDestination) fclose(hDestination);
+
+			// Free memory.
+			if (pbKeyBlob) free(pbKeyBlob);
+			if (pbBuffer) free(pbBuffer);
+
+			// Destroy session key.
+			if (hKey) CryptDestroyKey(hKey);
+
+			// Release key exchange key handle.
+			if (hXchgKey) CryptDestroyKey(hXchgKey);
+
+			// Destroy hash object.
+			if (hHash) CryptDestroyHash(hHash);
+
+			// Release provider handle.
+			if (hProv) CryptReleaseContext(hProv, 0);
+
+			return status;
+		}
+
+		/// <summary>
 		/// Decrypt the encrypted data into the string.
 		/// </summary>
 		/// <param name="arData">The byte array of encrypted data.</param>
@@ -290,6 +644,152 @@ namespace Nequeo {
 
 			//	And we're done.
 			return true;
+		}
+
+		/// <summary>
+		/// Decrypt the encrypted file.
+		/// </summary>
+		/// <param name="szSource">The encrypted file.</param>
+		/// <param name="szDestination">The decrypted file.</param>
+		/// <param name="szPassword">The password used to decrypt the file.</param>
+		/// <returns>True if decrypted; else false.</returns>
+		bool Aes::Decrypt(PCHAR szSource, PCHAR szDestination, PCHAR szPassword)
+		{
+			FILE *hSource = NULL;
+			FILE *hDestination = NULL;
+			errno_t err;
+			INT eof = 0;
+
+			HCRYPTPROV hProv = 0;
+			HCRYPTKEY hKey = 0;
+			HCRYPTHASH hHash = 0;
+
+			PBYTE pbKeyBlob = NULL;
+			DWORD dwKeyBlobLen;
+
+			PBYTE pbBuffer = NULL;
+			DWORD dwBlockLen;
+			DWORD dwBufferLen;
+			DWORD dwCount;
+
+			bool status = false;
+
+			// Open source file.
+			err = fopen_s(&hSource, szSource, "rb");
+			if (err != 0) {
+				goto done;
+			}
+
+			// Open destination file.
+			err = fopen_s(&hDestination, szDestination, "wb");
+			if (err != 0) {
+				goto done;
+			}
+
+			// Get handle to the default provider.
+			if (!CryptAcquireContext(&hProv, NULL, MS_ENHANCED_PROV, PROV_RSA_AES, 0)) {
+				goto done;
+			}
+
+			if (szPassword == NULL) {
+				// Decrypt the file with the saved session key.
+
+				// Read key blob length from source file and allocate memory.
+				fread(&dwKeyBlobLen, sizeof(DWORD), 1, hSource);
+				if (ferror(hSource) || feof(hSource)) {
+					goto done;
+				}
+				if ((pbKeyBlob == malloc(dwKeyBlobLen)) == NULL) {
+					goto done;
+				}
+
+				// Read key blob from source file.
+				fread(pbKeyBlob, 1, dwKeyBlobLen, hSource);
+				if (ferror(hSource) || feof(hSource)) {
+					goto done;
+				}
+
+				// Import key blob into CSP.
+				if (!CryptImportKey(hProv, pbKeyBlob, dwKeyBlobLen, 0, 0, &hKey)) {
+					goto done;
+				}
+			}
+			else {
+				// Decrypt the file with a session key derived from a password.
+
+				// Create a hash object.
+				if (!CryptCreateHash(hProv, CALG_SHA_512, 0, 0, &hHash)) {
+					goto done;
+				}
+
+				// Hash in the password data.
+				if (!CryptHashData(hHash, (PBYTE)szPassword, (DWORD)strlen(szPassword), 0)) {
+					goto done;
+				}
+
+				// Derive a session key from the hash object.
+				if (!CryptDeriveKey(hProv, CALG_AES_256, hHash, CRYPT_EXPORTABLE, &hKey)) {
+					goto done;
+				}
+
+				// Destroy the hash object.
+				CryptDestroyHash(hHash);
+				hHash = 0;
+			}
+
+			// Determine number of bytes to decrypt at a time. This must be a multiple
+			// of ENCRYPT_BLOCK_SIZE.
+			dwBlockLen = 1000 - 1000 % 1;
+			dwBufferLen = dwBlockLen;
+
+			// Allocate memory.
+			if ((pbBuffer == malloc(dwBufferLen)) == NULL) {
+				goto done;
+			}
+
+			// Decrypt source file and write to destination file.
+			do {
+				// Read up to 'dwBlockLen' bytes from source file.
+				dwCount = (DWORD)fread(pbBuffer, 1, dwBlockLen, hSource);
+				if (ferror(hSource)) {
+					goto done;
+				}
+				eof = feof(hSource);
+
+				// Decrypt data
+				if (!CryptDecrypt(hKey, 0, eof, 0, pbBuffer, &dwCount)) {
+					goto done;
+				}
+
+				// Write data to destination file.
+				fwrite(pbBuffer, 1, dwCount, hDestination);
+				if (ferror(hDestination)) {
+					goto done;
+				}
+			} while (!feof(hSource));
+
+			status = true;
+
+		done:
+
+			// Close files.
+			if (hSource) fclose(hSource);
+			if (hDestination) fclose(hDestination);
+
+			// Free memory.
+			if (pbKeyBlob) free(pbKeyBlob);
+			if (pbBuffer) free(pbBuffer);
+
+			// Destroy session key.
+			if (hKey) CryptDestroyKey(hKey);
+
+			// Destroy hash object.
+			if (hHash) CryptDestroyHash(hHash);
+
+			// Release provider handle.
+			if (hProv) CryptReleaseContext(hProv, 0);
+
+			return status;
 		}
 
 		/// <summary>

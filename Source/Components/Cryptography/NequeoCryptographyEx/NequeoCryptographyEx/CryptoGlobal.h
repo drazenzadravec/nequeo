@@ -40,6 +40,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <stdlib.h>
 #include <tchar.h>
 #include <string>
+#include <array>
 
 // SAFE_DELETE macro.
 // Deletes a pointer allocated with new.
@@ -52,6 +53,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #ifndef SAFE_ARRAY_DELETE
 #define SAFE_ARRAY_DELETE(x) if (x != NULL) { delete [] x; x = NULL; }
 #endif
+
+#define NT_SUCCESS(Status)          (((NTSTATUS)(Status)) >= 0)
+#define STATUS_UNSUCCESSFUL         ((NTSTATUS)0xC0000001L)
 
 using namespace std;
 

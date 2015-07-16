@@ -147,6 +147,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Advanced.h" />
     <ClInclude Include="CipherMode.h" />
     <ClInclude Include="PaddingMode.h" />
     <ClInclude Include="RC2.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Advanced.cpp" />
     <ClCompile Include="RC2.cpp" />
     <ClCompile Include="Aes.cpp" />
     <ClCompile Include="RC4.cpp" />

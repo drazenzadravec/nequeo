@@ -62,24 +62,31 @@ namespace Nequeo {
 			/// Gets or sets the cipher mode.
 			/// </summary>
 			void setCipherMode(CryptCipherMode cipherMode);
-			CryptCipherMode getCipherMode() const;
+			CryptCipherMode getCipherMode();
 
 			/// <summary>
 			/// Gets or sets the padding mode.
 			/// </summary>
 			void setPaddingMode(CryptPaddingMode paddingMode);
-			CryptPaddingMode getPaddingMode() const;
+			CryptPaddingMode getPaddingMode();
+
+			/// <summary>
+			/// Gets or sets the initialization vector.
+			/// </summary>
+			/// <remarks>Gets an array of 16 bytes.</remarks>
+			void setInitializationVector(BYTE iv[16]);
+			array<BYTE, 16> getInitializationVector();
 
 			/// <summary>
 			/// Derive a key from a password.
 			/// </summary>
-			/// <param name="strPassword">The password.</param>
+			/// <param name="strPassword">The password (must be 32 bytes in length).</param>
 			/// <returns>True if derived key; else false.</returns>
 			/// <remarks>
 			///	These functions are essential to using the crypto object- you must
 			///	have a key from some source or other.
 			/// </remarks>
-			virtual bool DeriveKey(CString strPassword);
+			bool DeriveKey(CString strPassword);
 
 			/// <summary>
 			/// Encrypt the serializable object.
@@ -87,7 +94,7 @@ namespace Nequeo {
 			/// <param name="serializable">The serializable object that contains the data to encrypt.</param>
 			/// <param name="arData">The byte array where the encrypted data will be stored.</param>
 			/// <returns>True if encrypted; else false.</returns>
-			virtual bool Encrypt(const CObject& serializable, CByteArray& arData);
+			bool Encrypt(const CObject& serializable, CByteArray& arData);
 
 			/// <summary>
 			/// Encrypt the string.
@@ -95,7 +102,16 @@ namespace Nequeo {
 			/// <param name="str">The string that contains the data to encrypt.</param>
 			/// <param name="arData">The byte array where the encrypted data will be stored.</param>
 			/// <returns>True if encrypted; else false.</returns>
-			virtual bool Encrypt(const CString& str, CByteArray& arData);
+			bool Encrypt(const CString& str, CByteArray& arData);
+
+			/// <summary>
+			/// Encrypt the decrypted file.
+			/// </summary>
+			/// <param name="szSource">The decrypted file.</param>
+			/// <param name="szDestination">The encrypted file.</param>
+			/// <param name="szPassword">The password used to encrypt the file.</param>
+			/// <returns>True if encrypted; else false.</returns>
+			bool Encrypt(PCHAR szSource, PCHAR szDestination, PCHAR szPassword);
 
 			/// <summary>
 			/// Decrypt the encrypted data into the object.
@@ -103,7 +119,7 @@ namespace Nequeo {
 			/// <param name="arData">The byte array of encrypted data.</param>
 			/// <param name="serializable">The serializable object that will contains the decrypt data.</param>
 			/// <returns>True if decrypted; else false.</returns>
-			virtual bool Decrypt(const CByteArray& arData, CObject& serializable);
+			bool Decrypt(const CByteArray& arData, CObject& serializable);
 
 			/// <summary>
 			/// Decrypt the encrypted data into the string.
@@ -111,7 +127,16 @@ namespace Nequeo {
 			/// <param name="arData">The byte array of encrypted data.</param>
 			/// <param name="str">The string that will contains the decrypt data.</param>
 			/// <returns>True if decrypted; else false.</returns>
-			virtual bool Decrypt(const CByteArray& arData, CString& str);
+			bool Decrypt(const CByteArray& arData, CString& str);
+
+			/// <summary>
+			/// Decrypt the encrypted file.
+			/// </summary>
+			/// <param name="szSource">The encrypted file.</param>
+			/// <param name="szDestination">The decrypted file.</param>
+			/// <param name="szPassword">The password used to decrypt the file.</param>
+			/// <returns>True if decrypted; else false.</returns>
+			bool Decrypt(PCHAR szSource, PCHAR szDestination, PCHAR szPassword);
 
 		protected:
 			/// <summary>
