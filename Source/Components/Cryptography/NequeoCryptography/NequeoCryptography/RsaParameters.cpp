@@ -54,7 +54,152 @@ namespace Nequeo {
 			{
 				// Indicate that dispose has been called.
 				_disposed = true;
+
+				_D.clear();
+				_DP.clear();
+				_DQ.clear();
+				_InverseQ.clear();
+				_P.clear();
+				_Q.clear();
+				_Modulus.clear();
+				_Exponent.clear();
 			}
+		}
+
+		/// <summary>
+		/// Gets the D parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::D()
+		{
+			return _D;
+		}
+
+		/// <summary>
+		/// Gets the DP parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::DP()
+		{
+			return _DP;
+		}
+
+		/// <summary>
+		/// Gets the DQ parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::DQ()
+		{
+			return _DQ;
+		}
+
+		/// <summary>
+		/// Gets the InverseQ parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::InverseQ()
+		{
+			return _InverseQ;
+		}
+
+		/// <summary>
+		/// Gets the P parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::P()
+		{
+			return _P;
+		}
+
+		/// <summary>
+		/// Gets the Q parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::Q()
+		{
+			return _Q;
+		}
+
+		/// <summary>
+		/// Gets the Modulus parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::Modulus()
+		{
+			return _Modulus;
+		}
+
+		/// <summary>
+		/// Gets the Exponent parameter.
+		/// </summary>
+		std::vector<unsigned char> RsaParameters::Exponent()
+		{
+			return _Exponent;
+		}
+
+		/// <summary>
+		/// Sets the D parameter.
+		/// </summary>
+		/// <param name="key">The D parameter.</param>
+		void RsaParameters::setD(std::vector<unsigned char> bytes)
+		{
+			_D = bytes;
+		}
+
+		/// <summary>
+		/// Sets the DP parameter.
+		/// </summary>
+		/// <param name="key">The DP parameter.</param>
+		void RsaParameters::setDP(std::vector<unsigned char> bytes)
+		{
+			_DP = bytes;
+		}
+
+		/// <summary>
+		/// Sets the DQ parameter.
+		/// </summary>
+		/// <param name="key">The DQ parameter.</param>
+		void RsaParameters::setDQ(std::vector<unsigned char> bytes)
+		{
+			_DQ = bytes;
+		}
+
+		/// <summary>
+		/// Sets the InverseQ parameter.
+		/// </summary>
+		/// <param name="key">The InverseQ parameter.</param>
+		void RsaParameters::setInverseQ(std::vector<unsigned char> bytes)
+		{
+			_InverseQ = bytes;
+		}
+
+		/// <summary>
+		/// Sets the P parameter.
+		/// </summary>
+		/// <param name="key">The P parameter.</param>
+		void RsaParameters::setP(std::vector<unsigned char> bytes)
+		{
+			_P = bytes;
+		}
+
+		/// <summary>
+		/// Sets the Q parameter.
+		/// </summary>
+		/// <param name="key">The Q parameter.</param>
+		void RsaParameters::setQ(std::vector<unsigned char> bytes)
+		{
+			_Q = bytes;
+		}
+
+		/// <summary>
+		/// Sets the Modulus parameter.
+		/// </summary>
+		/// <param name="key">The Modulus parameter.</param>
+		void RsaParameters::setModulus(std::vector<unsigned char> bytes)
+		{
+			_Modulus = bytes;
+		}
+
+		/// <summary>
+		/// Sets the Exponent parameter.
+		/// </summary>
+		/// <param name="key">The Exponent parameter.</param>
+		void RsaParameters::setExponent(std::vector<unsigned char> bytes)
+		{
+			_Exponent = bytes;
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoCryptography", "NequeoCryptography\NequeoCryptography.vcxproj", "{D455A18C-CBEE-488C-8AA2-DE68942EECEB}"
 EndProject
@@ -12,18 +12,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crypto", "Crypto", "{422E99
 		NoteOnCFBMode.html = NoteOnCFBMode.html
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoShared", "..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = NequeoCryptography\\NequeoCryptography.vcxproj
-		SccProjectName1 = NequeoCryptography
-		SccLocalPath1 = NequeoCryptography
-		SccProjectUniqueName2 = TestCryptography\\TestCryptography.vcxproj
-		SccProjectName2 = TestCryptography
-		SccLocalPath2 = TestCryptography
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems*{d455a18c-cbee-488c-8aa2-de68942eeceb}*SharedItemsImports = 4
+		..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32

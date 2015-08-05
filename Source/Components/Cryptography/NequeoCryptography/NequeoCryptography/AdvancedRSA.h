@@ -40,6 +40,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "CipherMode.h"
 #include "PaddingMode.h"
 
+struct bignum_st;
+typedef struct bignum_st BIGNUM;
+
 namespace Nequeo {
 	namespace Cryptography
 	{
@@ -49,15 +52,61 @@ namespace Nequeo {
 		class AdvancedRSA
 		{
 		public:
+			/// <summary>
+			/// Constructor for the current class.
+			/// </summary>
 			AdvancedRSA();
+
+			/// <summary>
+			/// This destructor.
+			/// </summary>
 			~AdvancedRSA();
 
-			RsaParameters& GenerateKey(int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
+			/// <summary>
+			/// Generate the public and private key RSA parameters.
+			/// </summary>
+			/// <param name="keyBitSize">The key bit size.</param>
+			/// <param name="exponent">The RSA exponent size.</param>
+			/// <returns>The RSA parameters.</returns>
+			RsaParameters GenerateKey(int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
+
+			/// <summary>
+			/// Generate the public and private keys.
+			/// </summary>
+			/// <param name="publicKeyFile">The public key path and file name.</param>
+			/// <param name="privateKeyFile">The private key path and file name.</param>
+			/// <param name="privateKeyPassphrase">The private key pass phrase</param>
+			/// <param name="keyBitSize">The key bit size.</param>
+			/// <param name="exponent">The RSA exponent size.</param>
+			void GenerateKey(string& publicKeyFile, string& privateKeyFile, const std::string& privateKeyPassphrase = "", int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
+
+			/// <summary>
+			/// Generate the public and private keys.
+			/// </summary>
+			/// <param name="publicKeyStream">The public key output stream.</param>
+			/// <param name="privateKeyStream">The private key output stream.</param>
+			/// <param name="privateKeyPassphrase">The private key pass phrase</param>
+			/// <param name="keyBitSize">The key bit size.</param>
+			/// <param name="exponent">The RSA exponent size.</param>
+			void GenerateKey(std::ostream* publicKeyStream, std::ostream* privateKeyStream, const std::string& privateKeyPassphrase = "", int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
+			
+			/// <summary>
+			/// Generate the certificate from the key RSA parameters.
+			/// </summary>
+			/// <param name="key">The key RSA parameters.</param>
+			/// <param name="subject">The certificate subject.</param>
+			/// <param name="issuer">The certificate issuer.</param>
 			void GenerateCertificate(RsaParameters& key, string subject, string issuer);
 
 		private:
 			bool _disposed;
-			RsaParameters _rsaParm;
+
+			/// <summary>
+			/// Convert the big number to an array of bytes.
+			/// </summary>
+			/// <param name="bn">The big number.</param>
+			/// <returns>The array of bytes.</returns>
+			std::vector<unsigned char> ConvertToByteArray(const BIGNUM* bn);
 		};
 	}
 }
