@@ -227,6 +227,9 @@ namespace Nequeo.Net.Provider
             // If not connected.
             if (!base.Connected)
             {
+                // Create the reader.
+                _remoteHostReader = new Net.Configuration.Reader();
+
                 // Get the secure connection indicator.
                 if (base.UseSslConnection)
                 {
