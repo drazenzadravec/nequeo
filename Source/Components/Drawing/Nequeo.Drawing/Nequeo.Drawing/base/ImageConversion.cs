@@ -52,4 +52,19 @@ namespace Nequeo.Drawing
         /// </summary>
         Tiff = 1,
     }
+
+    /// <summary>
+    /// The text embedded state.
+    /// </summary>
+    public enum EmbeddedState : int
+    {
+        /// <summary>
+        /// Hiding.
+        /// </summary>
+        Hiding = 0,
+        /// <summary>
+        /// Fill with zeros.
+        /// </summary>
+        Filling_With_Zeros = 1,
+    };
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nequeo.Forms</RootNamespace>
     <AssemblyName>Nequeo.Forms</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -280,6 +280,10 @@
     <Reference Include="Nequeo.Data">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.Drawing, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=7a5ff21c6ca66d6e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Primitive">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Primitive.dll</HintPath>
     </Reference>
@@ -340,6 +344,15 @@
     </Compile>
     <Compile Include="UI\Extender\NumberTextBox.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Extender\PrintRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\RichTextEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RichTextEditor.Designer.cs">
+      <DependentUpon>RichTextEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Input.cs">
       <SubType>Form</SubType>
@@ -443,6 +456,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\KeyboardForm.resx">
       <DependentUpon>KeyboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RichTextEditor.resx">
+      <DependentUpon>RichTextEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Input.resx">
       <DependentUpon>Input.cs</DependentUpon>

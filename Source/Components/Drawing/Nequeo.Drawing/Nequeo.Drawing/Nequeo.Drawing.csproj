@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nequeo.Drawing</RootNamespace>
     <AssemblyName>Nequeo.Drawing</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -302,8 +302,17 @@
     <Compile Include="base\ImageConversion.cs" />
     <Compile Include="base\PdfConversion.cs" />
     <Compile Include="base\Captcha.cs" />
+    <Compile Include="base\TextEmbedding.cs" />
     <Compile Include="Convert\XpsDocument.cs" />
-    <Compile Include="Printing\Document.cs" />
+    <Compile Include="Printing\PreviewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Printing\PreviewDialog.designer.cs">
+      <DependentUpon>PreviewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Printing\Document.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Printing\Preview.cs" />
     <Compile Include="Printing\PreviewControl.cs">
       <SubType>UserControl</SubType>
@@ -311,14 +320,29 @@
     <Compile Include="Printing\PreviewControl.Designer.cs">
       <DependentUpon>PreviewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Printing\RichTextBoxDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NequeoDrawingKey.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Printing\PreviewDialog.resx">
+      <DependentUpon>PreviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Printing\PreviewControl.resx">
       <DependentUpon>PreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

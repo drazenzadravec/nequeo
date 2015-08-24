@@ -1,5 +1,5 @@
 ﻿/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
- *  Copyright :     Copyright © Nequeo Pty Ltd 2010 http://www.nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2015 http://www.nequeo.com.au/
  * 
  *  File :          
  *  Purpose :       
@@ -49,7 +49,155 @@ namespace Nequeo.Drawing.Printing
     /// <summary>
     /// Printing document.
     /// </summary>
-    public class Document
+    public class Document : PrintDocument
     {
+        /// <summary>
+        /// Printing document.
+        /// </summary>
+        public Document()
+        {
+            _case = -1;
+            _line = 0;
+        }
+
+        /// <summary>
+        /// Printing document.
+        /// </summary>
+        /// <param name="reader">The stream reader containing the data to print.</param>
+        /// <param name="font">The font to use when printing stream data.</param>
+        /// <param name="brush">The font colour when printing stream data.</param>
+        public Document(System.IO.StreamReader reader, System.Drawing.Font font, Brush brush)
+        {
+            _case = 0;
+            _reader = reader;
+            _font = font;
+            _brush = brush;
+        }
+
+        /// <summary>
+        /// Printing document.
+        /// </summary>
+        /// <param name="text">The array of text containing the data to print.</param>
+        /// <param name="font">The font to use when printing stream data.</param>
+        /// <param name="brush">The font colour when printing stream data.</param>
+        public Document(string[] text, System.Drawing.Font font, Brush brush)
+        {
+            _case = 1;
+            _line = 0;
+            _text = text;
+            _font = font;
+            _brush = brush;
+        }
+
+        private int _case = -1;
+        private int _line = 0;
+
+        private string[] _text = null;
+        private System.IO.StreamReader _reader = null;
+        private System.Drawing.Font _font;
+        private Brush _brush = Brushes.Black;
+
+        /// <summary>
+        /// Start printing the document
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnBeginPrint(PrintEventArgs e)
+        {
+            // fire event as usual
+            base.OnBeginPrint(e);
+        }
+
+        /// <summary>
+        /// Render a page into the PrintDocument
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnPrintPage(PrintPageEventArgs e)
+        {
+            switch (_case)
+            {
+                case 0:
+                    PrintFromStream(e);
+                    break;
+                case 1:
+                    PrintFromArray(e);
+                    break;
+                default:
+                    break;
+            }
+
+            // fire event as usual
+            base.OnPrintPage(e);
+        }
+
+        /// <summary>
+        /// Print from the stream.
+        /// </summary>
+        /// <param name="e"></param>
+        private void PrintFromStream(PrintPageEventArgs e)
+        {
+            float yPos = 0f;
+            int count = 0;
+            float leftMargin = e.MarginBounds.Left;
+            float topMargin = e.MarginBounds.Top;
+            string line = null;
+            float linesPerPage = e.MarginBounds.Height / _font.GetHeight(e.Graphics);
+
+            // While lines exist.
+            while (count < linesPerPage)
+            {
+                line = _reader.ReadLine();
+                if (line == null)
+                {
+                    break;
+                }
+
+                // Draw each line in the stream.
+                yPos = topMargin + count * _font.GetHeight(e.Graphics);
+                e.Graphics.DrawString(line, _font, _brush, leftMargin, yPos, new StringFormat());
+                count++;
+            }
+
+            // More lines exist.
+            if (line != null)
+            {
+                e.HasMorePages = true;
+            }
+        }
+
+        /// <summary>
+        /// Print from the stream.
+        /// </summary>
+        /// <param name="e"></param>
+        private void PrintFromArray(PrintPageEventArgs e)
+        {
+            float yPos = 0f;
+            int count = 0;
+            float leftMargin = e.MarginBounds.Left;
+            float topMargin = e.MarginBounds.Top;
+            string line = null;
+            float linesPerPage = e.MarginBounds.Height / _font.GetHeight(e.Graphics);
+
+            // While lines exist.
+            while (count < linesPerPage)
+            {
+                line = _text[_line];
+                if (_text.Length >= _line)
+                {
+                    break;
+                }
+
+                // Draw each line in the stream.
+                yPos = topMargin + count * _font.GetHeight(e.Graphics);
+                e.Graphics.DrawString(line, _font, _brush, leftMargin, yPos, new StringFormat());
+                count++;
+                _line++;
+            }
+
+            // More lines exist.
+            if (_text.Length < _line)
+            {
+                e.HasMorePages = true;
+            }
+        }
     }
 }
