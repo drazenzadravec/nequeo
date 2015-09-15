@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nequeo</RootNamespace>
     <AssemblyName>Nequeo</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,6 +79,7 @@
     <Compile Include="Custom\ByteOrder.cs" />
     <Compile Include="Custom\Platform.cs" />
     <Compile Include="Custom\StringValue.cs" />
+    <Compile Include="Extension\TypeExtender.cs" />
     <Compile Include="IO\Directory.cs" />
     <Compile Include="IO\RecycleBin.cs" />
     <Compile Include="IO\SpecialFolders.cs" />
@@ -91,6 +93,7 @@
     <None Include="NequeoKey.snk" />
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\..\NequeoSharedEx\NequeoSharedEx\NequeoSharedEx.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

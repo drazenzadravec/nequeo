@@ -138,8 +138,8 @@ namespace Nequeo.Net.Http2
         private readonly SettingsPair[] _settings = null;
         private readonly Nequeo.Collections.CustomDictionary<int, ContextStream> _contextStreamDictionary = null;
 
-        private const string lowerCasePattern = "^((?![A-Z]).)*$";
-        private readonly Regex _matcher = new Regex(lowerCasePattern);
+        private const string _lowerCasePattern = "^((?![A-Z]).)*$";
+        private readonly Regex _matcher = new Regex(_lowerCasePattern);
 
         /// <summary>
         /// Gets or sets the session window size.

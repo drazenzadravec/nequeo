@@ -279,7 +279,7 @@ namespace Nequeo.Collections
         }
 
         /// <summary>
-        /// Removes the value from the dictionary fro the
+        /// Removes the value from the dictionary for the
         /// specified key.
         /// </summary>
         /// <param name="key">The key to remove.</param>
@@ -290,7 +290,7 @@ namespace Nequeo.Collections
         }
 
         /// <summary>
-        /// Removes the value from the dictionary fro the
+        /// Removes the value from the dictionary for the
         /// specified key.
         /// </summary>
         /// <param name="key">The key to remove.</param>
@@ -301,7 +301,7 @@ namespace Nequeo.Collections
         }
 
         /// <summary>
-        /// Removes the value from the dictionary fro the
+        /// Removes the value from the dictionary for the
         /// specified key value pair item.
         /// </summary>
         /// <param name="item">The key value pair to remove.</param>

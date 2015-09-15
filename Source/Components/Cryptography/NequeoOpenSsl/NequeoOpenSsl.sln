@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoOpenSsl", "NequeoOpenSsl\NequeoOpenSsl.vcxproj", "{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NequeoOpenSsl\\NequeoOpenSsl.vcxproj
+		SccProjectName1 = NequeoOpenSsl
+		SccLocalPath1 = NequeoOpenSsl
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+		Staging Debug|Win32 = Staging Debug|Win32
+		Staging Debug|x64 = Staging Debug|x64
+		Staging Release|Win32 = Staging Release|Win32
+		Staging Release|x64 = Staging Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Debug|Win32.Build.0 = Debug|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Debug|Win32.Deploy.0 = Debug|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Debug|x64.ActiveCfg = Debug|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Debug|x64.Build.0 = Debug|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Release|Win32.ActiveCfg = Release|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Release|Win32.Build.0 = Release|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Release|Win32.Deploy.0 = Release|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Release|x64.ActiveCfg = Release|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Release|x64.Build.0 = Release|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Debug|Win32.ActiveCfg = Staging Debug|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Debug|Win32.Build.0 = Staging Debug|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Debug|Win32.Deploy.0 = Staging Debug|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Debug|x64.ActiveCfg = Staging Debug|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Debug|x64.Build.0 = Staging Debug|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Release|Win32.ActiveCfg = Staging Release|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Release|Win32.Build.0 = Staging Release|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Release|Win32.Deploy.0 = Staging Release|Win32
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Release|x64.ActiveCfg = Staging Release|x64
+		{E84AEFB1-7FBD-4D9E-A43C-28CC55860E08}.Staging Release|x64.Build.0 = Staging Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

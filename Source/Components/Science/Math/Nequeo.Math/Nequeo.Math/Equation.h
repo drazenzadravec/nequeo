@@ -39,6 +39,8 @@
 #include "PolynomialJenkinsTraub.h"
 
 using namespace System;
+using namespace System::Collections;
+using namespace System::Collections::Generic;
 using namespace System::Numerics;
 using namespace System::Security;
 using namespace System::Security::Cryptography;

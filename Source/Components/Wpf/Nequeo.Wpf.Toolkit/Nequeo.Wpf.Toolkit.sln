@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Wpf.Toolkit", "Nequeo.Wpf.Toolkit\Nequeo.Wpf.Toolkit.csproj", "{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{F5B3E2EB-0451-4E6E-BE89-8369A696FC63}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

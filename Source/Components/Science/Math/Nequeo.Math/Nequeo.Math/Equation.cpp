@@ -159,7 +159,7 @@ double Nequeo::Math::Equation::Differential(Nequeo::Math::FunctionHandler^ funct
 		// Return the differential.
 		return differential;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -233,7 +233,7 @@ double Nequeo::Math::Equation::Integral(Nequeo::Math::FunctionHandler^ function,
 		// Return the integral.
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -301,7 +301,7 @@ double Nequeo::Math::Equation::IntegralSimpsonAdaptive(
 		integral = approx;
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -384,7 +384,7 @@ double Nequeo::Math::Equation::IntegralGaussian2(Nequeo::Math::FunctionHandler^ 
 		// Return the integral.
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -452,7 +452,7 @@ double Nequeo::Math::Equation::IntegralGaussian2Adaptive(Nequeo::Math::FunctionH
 		integral = approx;
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -540,7 +540,7 @@ double Nequeo::Math::Equation::IntegralGaussian3(Nequeo::Math::FunctionHandler^ 
 		// Return the integral.
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -609,7 +609,7 @@ double Nequeo::Math::Equation::IntegralGaussian3Adaptive(Nequeo::Math::FunctionH
 		integral = approx;
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -675,7 +675,7 @@ double Nequeo::Math::Equation::PolynomialDifferential(array<double>^ coefficient
 		// Return the differential.
 		return Differential(handler, x, differentialOrder, delta);
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -746,7 +746,7 @@ double Nequeo::Math::Equation::PolynomialIntegral(array<double>^ coefficients, d
 		// Return the integral.
 		return Integral(handler, upperLimit, lowerLimit, intervalFactor);
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -794,7 +794,7 @@ double Nequeo::Math::Equation::EvaluatePolynomial(array<double>^ coefficients, d
 		// The evaluated polynomial.
 		return result;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -941,16 +941,16 @@ array<String^>^ Nequeo::Math::Equation::Polynomial(array<double>^ coefficients, 
 
 		// Get the current error, throw the exception
 		// if an error has occurred.
-		string retError = pjt->GetError();
+		std::string retError = pjt->GetError();
 		if(!retError.empty())
 		{
-			throw new exception(retError.c_str());
+			throw new std::exception(retError.c_str());
 		}
 
 		// Degrees if zero or less, therefore calculation failed.
 		if(deg <= 0)
 		{
-			throw new exception("Degree had a value <= 0. Thus caculation has failed.");
+			throw new std::exception("Degree had a value <= 0. Thus caculation has failed.");
 		}
 		else
 		{
@@ -1002,7 +1002,7 @@ array<String^>^ Nequeo::Math::Equation::Polynomial(array<double>^ coefficients, 
 		// Return the roots.
 		return roots;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -1088,7 +1088,7 @@ array<double>^ Nequeo::Math::Equation::PolynomialRegression(array<Nequeo::Math::
 		// Return the array of A coefficients.
 		return coeACol;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -1189,7 +1189,7 @@ array<double>^ Nequeo::Math::Equation::SystemLinear(array<array<double>^>^ aMatr
 		// Return the array of X coefficients.
 		return coeXCol;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -1277,7 +1277,7 @@ double Nequeo::Math::Equation::StandardNormalDistribution(double upperLimit)
 		// Return the integral.
 		return integral;
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -1359,7 +1359,7 @@ void Nequeo::Math::Equation::CalculateSum(double* xPoint, double* yPoint, double
 		// Calculate the matrix using Guassian reduction.
 		CalculateMatrix(sumMatrix, coeB, coeA);
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		const char* errMessage = ex.what();

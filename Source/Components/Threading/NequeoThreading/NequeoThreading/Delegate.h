@@ -40,7 +40,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "FunctionDelegate.h"
 #include "Expire.h"
 #include "Mutex.h"
-#include "Timestamp.h"
+#include "Base\Timestamp.h"
 
 namespace Nequeo {
 	namespace Threading {

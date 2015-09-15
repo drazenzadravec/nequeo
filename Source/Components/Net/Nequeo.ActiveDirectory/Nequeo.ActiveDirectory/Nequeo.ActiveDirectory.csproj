@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nequeo.Net.ActiveDirectory</RootNamespace>
     <AssemblyName>Nequeo.Net.ActiveDirectory</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -268,8 +268,9 @@
     <Reference Include="Accessibility">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Nequeo.Security">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Security.dll</HintPath>
+    <Reference Include="Nequeo.Security, Version=2011.26.1.1, Culture=neutral, PublicKeyToken=89168d1925a63492, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Threading, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=d8c99fcd48433f43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

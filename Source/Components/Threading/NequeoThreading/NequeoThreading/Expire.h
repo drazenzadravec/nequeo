@@ -37,7 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "GlobalThreading.h"
 
 #include "AbstractDelegate.h"
-#include "Timestamp.h"
+#include "Base\Timestamp.h"
 
 namespace Nequeo {
 	namespace Threading {

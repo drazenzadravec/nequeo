@@ -151,8 +151,7 @@ namespace Nequeo.IO.Stream
             base.Write(buffer, offset, count);
 
             // Trigger the write complete action.
-            if (_writeComplete != null)
-                _writeComplete(count);
+            _writeComplete?.Invoke(count);
         }
 
         /// <summary>
@@ -177,8 +176,7 @@ namespace Nequeo.IO.Stream
             int bytesRead = base.Read(buffer, offset, count);
 
             // Trigger the write complete action.
-            if (_readComplete != null)
-                _readComplete(bytesRead);
+            _readComplete?.Invoke(bytesRead);
 
             // Return the bytes read.
             return bytesRead;

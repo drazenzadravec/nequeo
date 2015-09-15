@@ -146,6 +146,10 @@ namespace Nequeo.Forms.UI
                     FileStream file = null;
                     try
                     {
+                        // Create the file.
+                        file = File.Create(dlg.FileName);
+                        file.Close();
+
                         // If the file is rtf.
                         if (System.IO.Path.GetExtension(dlg.FileName).Equals(".rtf"))
                         {

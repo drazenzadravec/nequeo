@@ -106,6 +106,13 @@ namespace Nequeo.Security
         /// <summary>
         /// Constructor.
         /// </summary>
+        public ServiceX509CertificateValidator()
+        {
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         /// <param name="validateValue">The validation value to match.</param>
         /// <param name="validationLevel">The validation enum to match with.</param>
         public ServiceX509CertificateValidator(object validateValue,

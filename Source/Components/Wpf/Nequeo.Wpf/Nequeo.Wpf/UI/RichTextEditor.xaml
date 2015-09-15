@@ -1,0 +1,15 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nequeo.Wpf.UI"
+        xmlns:Text="clr-namespace:Nequeo.Wpf.UI.Text" x:Class="Nequeo.Wpf.UI.RichTextEditor"
+        mc:Ignorable="d"
+        Title="Rich Text Editor" Height="667.335" Width="1054.359" WindowStartupLocation="CenterScreen" Icon="/Nequeo.Wpf;component/Themes/Images/Page.png">
+    <Grid>
+
+        <Text:RichTextEditorControl Text="{Binding Text, Mode=TwoWay}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" />
+
+    </Grid>
+</Window>

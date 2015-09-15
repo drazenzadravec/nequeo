@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Security", "Nequeo.Security\Nequeo.Security.csproj", "{5590B1B2-11D0-4E67-953D-9531653656A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Security", "Test.Security\Test.Security.csproj", "{3E315DAE-BAD7-446B-873F-0C457F025675}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Nequeo.Security\\Nequeo.Security.csproj
-		SccProjectName1 = Nequeo.Security
-		SccLocalPath1 = Nequeo.Security
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -40,6 +35,22 @@ Global
 		{5590B1B2-11D0-4E67-953D-9531653656A8}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
 		{5590B1B2-11D0-4E67-953D-9531653656A8}.Staging Release|x86.ActiveCfg = Staging Release|x86
 		{5590B1B2-11D0-4E67-953D-9531653656A8}.Staging Release|x86.Build.0 = Staging Release|x86
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Release|x86.Build.0 = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Debug|x86.Build.0 = Debug|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Release|Any CPU.Build.0 = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Release|x86.ActiveCfg = Release|Any CPU
+		{3E315DAE-BAD7-446B-873F-0C457F025675}.Staging Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

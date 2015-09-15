@@ -37,7 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "GlobalThreading.h"
 
 #include "NotificationStrategy.h"
-#include "SharedPtr.h"
+#include "Base\SharedPtr.h"
 #include <vector>
 
 namespace Nequeo {

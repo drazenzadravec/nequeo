@@ -58,7 +58,7 @@ Nequeo::Math::PolynomialJenkinsTraub::~PolynomialJenkinsTraub()
 ///	<summary>
 ///	Get the current error.
 ///	</summary>
-string Nequeo::Math::PolynomialJenkinsTraub::GetError()
+std::string Nequeo::Math::PolynomialJenkinsTraub::GetError()
 {
 	return m_error;
 }
@@ -66,7 +66,7 @@ string Nequeo::Math::PolynomialJenkinsTraub::GetError()
 ///	<summary>
 ///	Set the current error.
 ///	</summary>
-void Nequeo::Math::PolynomialJenkinsTraub::SetError(string error)
+void Nequeo::Math::PolynomialJenkinsTraub::SetError(std::string error)
 {
 	m_error = error;
 	return;
@@ -92,7 +92,7 @@ void Nequeo::Math::PolynomialJenkinsTraub::Calculate(double op[MDP1], int* Degre
  
 	if ((*Degree) > MAXDEGREE)
 	{
-		m_error = "\nThe entered Degree is greater than " + to_string(MAXDEGREE) + ". Exiting rpoly. No further action taken.\n";
+		m_error = "\nThe entered Degree is greater than " + std::to_string(MAXDEGREE) + ". Exiting rpoly. No further action taken.\n";
 		*Degree = -1;
 		return;
 	} 

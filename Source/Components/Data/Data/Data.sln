@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data", "..\Nequeo.Data\Nequeo.Data\Nequeo.Data.csproj", "{0D12AA80-B2AD-4523-8BB8-51738308688C}"
 EndProject
@@ -31,55 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data.Sqlite.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data.MongoDb.Provider", "..\Provider\Nequeo.Data.MongoDb.Provider\Nequeo.Data.MongoDb.Provider\Nequeo.Data.MongoDb.Provider.csproj", "{117F1FB6-50A4-41D7-A652-DF6D4EF07238}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Data.MongoDb.Provider.v1", "..\Provider\Nequeo.Data.MongoDb.Provider\Nequeo.Data.MongoDb.Provider.v1\Nequeo.Data.MongoDb.Provider.v1.csproj", "{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Nequeo.Data\\Nequeo.Data\\Nequeo.Data.csproj
-		SccProjectName1 = ../Nequeo.Data/Nequeo.Data
-		SccLocalPath1 = ..\\Nequeo.Data\\Nequeo.Data
-		SccProjectUniqueName2 = ..\\Nequeo.Data.Linq\\Nequeo.Data.Linq\\Nequeo.Data.Linq.csproj
-		SccProjectName2 = ../Nequeo.Data.Linq/Nequeo.Data.Linq
-		SccLocalPath2 = ..\\Nequeo.Data.Linq\\Nequeo.Data.Linq
-		SccProjectUniqueName3 = ..\\Nequeo.Data.LinqTo.DataSet\\Nequeo.Data.LinqTo.DataSet\\Nequeo.Data.LinqTo.DataSet.csproj
-		SccProjectName3 = ../Nequeo.Data.LinqTo.DataSet/Nequeo.Data.LinqTo.DataSet
-		SccLocalPath3 = ..\\Nequeo.Data.LinqTo.DataSet\\Nequeo.Data.LinqTo.DataSet
-		SccProjectUniqueName4 = ..\\Nequeo.Data.LinqTo.Edm\\Nequeo.Data.LinqTo.Edm\\Nequeo.Data.LinqTo.Edm.csproj
-		SccProjectName4 = ../Nequeo.Data.LinqTo.Edm/Nequeo.Data.LinqTo.Edm
-		SccLocalPath4 = ..\\Nequeo.Data.LinqTo.Edm\\Nequeo.Data.LinqTo.Edm
-		SccProjectUniqueName5 = ..\\Nequeo.Data.LinqTo.SqlServer\\Nequeo.Data.LinqTo.SqlServer\\Nequeo.Data.LinqTo.SqlServer.csproj
-		SccProjectName5 = ../Nequeo.Data.LinqTo.SqlServer/Nequeo.Data.LinqTo.SqlServer
-		SccLocalPath5 = ..\\Nequeo.Data.LinqTo.SqlServer\\Nequeo.Data.LinqTo.SqlServer
-		SccProjectUniqueName6 = ..\\Nequeo.Data.LinqTo.Xml\\Nequeo.Data.LinqTo.Xml\\Nequeo.Data.LinqTo.Xml.csproj
-		SccProjectName6 = ../Nequeo.Data.LinqTo.Xml/Nequeo.Data.LinqTo.Xml
-		SccLocalPath6 = ..\\Nequeo.Data.LinqTo.Xml\\Nequeo.Data.LinqTo.Xml
-		SccProjectUniqueName7 = ..\\Provider\\Nequeo.Data.MySql.Provider\\Nequeo.Data.MySql.Provider\\Nequeo.Data.MySql.Provider.csproj
-		SccProjectName7 = ../Provider/Nequeo.Data.MySql.Provider/Nequeo.Data.MySql.Provider
-		SccLocalPath7 = ..\\Provider\\Nequeo.Data.MySql.Provider\\Nequeo.Data.MySql.Provider
-		SccProjectUniqueName8 = ..\\Provider\\Nequeo.Data.Odbc.Provider\\Nequeo.Data.Odbc.Provider\\Nequeo.Data.Odbc.Provider.csproj
-		SccProjectName8 = ../Provider/Nequeo.Data.Odbc.Provider/Nequeo.Data.Odbc.Provider
-		SccLocalPath8 = ..\\Provider\\Nequeo.Data.Odbc.Provider\\Nequeo.Data.Odbc.Provider
-		SccProjectUniqueName9 = ..\\Provider\\Nequeo.Data.OleDb.Provider\\Nequeo.Data.OleDb.Provider\\Nequeo.Data.OleDb.Provider.csproj
-		SccProjectName9 = ../Provider/Nequeo.Data.OleDb.Provider/Nequeo.Data.OleDb.Provider
-		SccLocalPath9 = ..\\Provider\\Nequeo.Data.OleDb.Provider\\Nequeo.Data.OleDb.Provider
-		SccProjectUniqueName10 = ..\\Provider\\Nequeo.Data.Oracle.Provider\\Nequeo.Data.Oracle.Provider\\Nequeo.Data.Oracle.Provider.csproj
-		SccProjectName10 = ../Provider/Nequeo.Data.Oracle.Provider/Nequeo.Data.Oracle.Provider
-		SccLocalPath10 = ..\\Provider\\Nequeo.Data.Oracle.Provider\\Nequeo.Data.Oracle.Provider
-		SccProjectUniqueName11 = ..\\Provider\\Nequeo.Data.PostgreSql.Provider\\Nequeo.Data.PostgreSql.Provider\\Nequeo.Data.PostgreSql.Provider.csproj
-		SccProjectName11 = ../Provider/Nequeo.Data.PostgreSql.Provider/Nequeo.Data.PostgreSql.Provider
-		SccLocalPath11 = ..\\Provider\\Nequeo.Data.PostgreSql.Provider\\Nequeo.Data.PostgreSql.Provider
-		SccProjectUniqueName12 = ..\\Provider\\Nequeo.Data.SqlServer.Provider\\Nequeo.Data.SqlServer.Provider\\Nequeo.Data.SqlServer.Provider.csproj
-		SccProjectName12 = ../Provider/Nequeo.Data.SqlServer.Provider/Nequeo.Data.SqlServer.Provider
-		SccLocalPath12 = ..\\Provider\\Nequeo.Data.SqlServer.Provider\\Nequeo.Data.SqlServer.Provider
-		SccProjectUniqueName13 = ..\\Provider\\Nequeo.Data.Sqlite.Provider\\Nequeo.Data.Sqlite.Provider\\Nequeo.Data.Sqlite.Provider.csproj
-		SccProjectName13 = ../Provider/Nequeo.Data.Sqlite.Provider/Nequeo.Data.Sqlite.Provider
-		SccLocalPath13 = ..\\Provider\\Nequeo.Data.Sqlite.Provider\\Nequeo.Data.Sqlite.Provider
-		SccProjectUniqueName14 = ..\\Provider\\Nequeo.Data.MongoDb.Provider\\Nequeo.Data.MongoDb.Provider\\Nequeo.Data.MongoDb.Provider.csproj
-		SccProjectName14 = ../Provider/Nequeo.Data.MongoDb.Provider/Nequeo.Data.MongoDb.Provider
-		SccLocalPath14 = ..\\Provider\\Nequeo.Data.MongoDb.Provider\\Nequeo.Data.MongoDb.Provider
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -500,6 +454,36 @@ Global
 		{117F1FB6-50A4-41D7-A652-DF6D4EF07238}.Staging|Any CPU.Build.0 = Staging Release|Any CPU
 		{117F1FB6-50A4-41D7-A652-DF6D4EF07238}.Staging|x64.ActiveCfg = Staging Release|Any CPU
 		{117F1FB6-50A4-41D7-A652-DF6D4EF07238}.Staging|x86.ActiveCfg = Staging Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Debug|x64.Build.0 = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Release|x64.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Release|x86.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Debug|x64.ActiveCfg = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Debug|x64.Build.0 = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Debug|x86.Build.0 = Debug|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Release|x64.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Release|x64.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Release|x86.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging Release|x86.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging|x64.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging|x64.Build.0 = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging|x86.ActiveCfg = Release|Any CPU
+		{2BA0DCB1-3D00-4B1A-A654-875FA66D92F7}.Staging|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

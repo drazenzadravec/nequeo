@@ -44,6 +44,58 @@ using System.IO;
 namespace Nequeo.Cryptography
 {
     /// <summary>
+    /// Cryptographic Random Derived Key Generator (PBKDF2).
+    /// </summary>
+    public class RandomDerivedKey
+    {
+        /// <summary>
+        /// Internal common salt.
+        /// </summary>
+        private static byte[] _salt = Encoding.Default.GetBytes("0Qr=K/6x2Yd-*p9LR%m74E{i?yN8s1+J");
+
+        /// <summary>
+        /// Generate a random salt.
+        /// </summary>
+        /// <param name="minimum">The minimum length of the salt.</param>
+        /// <param name="maximum">The minimum length of the salt.</param>
+        /// <returns>The random salt value.</returns>
+        public static byte[] GenerateSalt(int minimum = 32, int maximum = 32)
+        {
+            // Generate a random salt.
+            Nequeo.Cryptography.RandomPassword salt = new Nequeo.Cryptography.RandomPassword();
+            string saltString = salt.Generate(minimum, maximum);
+            return Encoding.Default.GetBytes(saltString);
+        }
+
+        /// <summary>
+        /// Generate the derived key.
+        /// </summary>
+        /// <param name="sharedKey">The shared key used with the common salt.</param>
+        /// <param name="keySize">The derived key size to generate.</param>
+        /// <returns>The derived key.</returns>
+        public static byte[] Generate(string sharedKey, int keySize = 32)
+        {
+            // Generate the key from the shared secret and the salt
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedKey, _salt);
+            return key.GetBytes(keySize);
+        }
+
+        /// <summary>
+        /// Generate the derived key.
+        /// </summary>
+        /// <param name="sharedKey">The shared key used with the common salt.</param>
+        /// <param name="salt">The common salt used to generate the key.</param>
+        /// <param name="keySize">The derived key size to generate.</param>
+        /// <returns>The derived key.</returns>
+        public static byte[] Generate(string sharedKey, byte[] salt, int keySize = 32)
+        {
+            // Generate the key from the shared secret and the salt
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedKey, salt);
+            return key.GetBytes(keySize);
+        }
+    }
+
+    /// <summary>
     /// Cryptographic Random Number Generator (RNG).
     /// </summary>
     public class RandomNumber
@@ -179,7 +231,7 @@ namespace Nequeo.Cryptography
                 // Create a local array containing supported password characters
                 // grouped by types. You can remove character groups from this
                 // array, but doing so will weaken the password strength.
-                char[][] charGroups = new char[][] 
+                char[][] charGroups = new char[][]
                 {
                     PASSWORD_CHARS_LCASE.ToCharArray(),
                     PASSWORD_CHARS_UCASE.ToCharArray(),

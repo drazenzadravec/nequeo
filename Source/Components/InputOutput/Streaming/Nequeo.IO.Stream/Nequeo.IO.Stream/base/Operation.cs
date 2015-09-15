@@ -66,8 +66,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -106,8 +105,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -178,8 +176,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -224,8 +221,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -341,8 +337,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -391,8 +386,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -537,8 +531,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -583,8 +576,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -723,8 +715,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -763,8 +754,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -835,8 +825,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -881,8 +870,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -998,8 +986,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1048,8 +1035,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1194,8 +1180,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1240,8 +1225,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1380,8 +1364,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1420,8 +1403,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1492,8 +1474,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1538,8 +1519,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1703,8 +1683,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1844,8 +1823,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 
@@ -1890,8 +1868,7 @@ namespace Nequeo.IO.Stream
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCallback != null)
-                        exceptionCallback(ex);
+                    exceptionCallback?.Invoke(ex);
                     return false;
                 }
 

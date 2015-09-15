@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -31,31 +31,34 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+    <Import Project="..\..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -83,7 +86,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -91,7 +94,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\cryptopp562\Win32\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\cryptopp562\Win32\Output\Debug;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;NequeoException.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
@@ -112,7 +115,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +123,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;NequeoException.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
@@ -142,7 +145,7 @@ copy $(ProjectDir)\Simple.h "..\..\..\..\References\Release\Include\Components\C
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -152,8 +155,8 @@ copy $(ProjectDir)\Simple.h "..\..\..\..\References\Release\Include\Components\C
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x86\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x86\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\AdvancedAES.h "..\..\..\..\References\Release\Include\Components\Cryptography\AdvancedAES.h"
@@ -163,7 +166,9 @@ copy $(ProjectDir)\GlobalCryptography.h "..\..\..\..\References\Release\Include\
 copy $(ProjectDir)\PaddingMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\PaddingMode.h"
 copy $(ProjectDir)\PasswordType.h "..\..\..\..\References\Release\Include\Components\Cryptography\PasswordType.h"
 copy $(ProjectDir)\RandomGenerator.h "..\..\..\..\References\Release\Include\Components\Cryptography\RandomGenerator.h"
-copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components\Cryptography\Hashcode.h"</Command>
+copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components\Cryptography\Hashcode.h"
+copy $(ProjectDir)\RsaExponent.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaExponent.h"
+copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaParameters.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -175,7 +180,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -185,17 +190,20 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cryptlib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\AdvancedAES.h "..\..\..\..\References\Release\Include\Components\Cryptography\AdvancedAES.h"
+copy $(ProjectDir)\AdvancedRSA.h "..\..\..\..\References\Release\Include\Components\Cryptography\AdvancedRSA.h"
 copy $(ProjectDir)\CipherMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\CipherMode.h"
 copy $(ProjectDir)\GlobalCryptography.h "..\..\..\..\References\Release\Include\Components\Cryptography\GlobalCryptography.h"
 copy $(ProjectDir)\PaddingMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\PaddingMode.h"
 copy $(ProjectDir)\PasswordType.h "..\..\..\..\References\Release\Include\Components\Cryptography\PasswordType.h"
 copy $(ProjectDir)\RandomGenerator.h "..\..\..\..\References\Release\Include\Components\Cryptography\RandomGenerator.h"
-copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components\Cryptography\Hashcode.h"</Command>
+copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components\Cryptography\Hashcode.h"
+copy $(ProjectDir)\RsaExponent.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaExponent.h"
+copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaParameters.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -215,6 +223,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
     <ClInclude Include="RsaParameters.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="X509Certificate.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AdvancedAES.cpp" />
@@ -229,6 +238,7 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="X509Certificate.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

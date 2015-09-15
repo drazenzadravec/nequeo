@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -31,26 +31,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -136,7 +136,7 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
       <PreprocessorDefinitions>BOOST_IOSTREAMS_NO_LIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,7 +145,7 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\lib;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\Win32\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x86\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\Win32\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ZLib.lib;ZipArchive.lib;libbz2.lib;Cabinet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
@@ -168,7 +168,7 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
       <PreprocessorDefinitions>BOOST_IOSTREAMS_NO_LIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\include;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Zip\include;..\..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -177,7 +177,7 @@ copy $(ProjectDir)\BZip2Stream.h "..\..\..\..\..\References\Release\Include\Comp
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\x64\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\146p4All\lib64;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\x64\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\minizip.1.1\x64\lib;..\..\..\..\..\..\ThirdPartyTools\zlib\bzip2\1.0.6\x64\Release;..\..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib64;..\..\..\..\..\..\ThirdPartyTools\SevenZipSharp\SevenZip\1.1.0\src\Build\x64\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ZLib.lib;ZipArchive.lib;libbz2.lib;Cabinet.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>

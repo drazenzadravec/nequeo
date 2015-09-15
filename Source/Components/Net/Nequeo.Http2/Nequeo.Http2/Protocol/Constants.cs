@@ -84,7 +84,7 @@ namespace Nequeo.Net.Http2.Protocol
         public const int DefaultStreamWeight = 16;
 
 
-        /* see spec 7 -> Appendix B.  Static Table
+        /* HPACK see spec 7 -> Appendix B.  Static Table
           +-------+-----------------------------+--------------+
           | Index | Header Name                 | Header Value |
           +-------+-----------------------------+--------------+
@@ -103,7 +103,7 @@ namespace Nequeo.Net.Http2.Protocol
           | 13    | :status                     | 404          |
           | 14    | :status                     | 500          |
           | 15    | accept-charset              |              |
-          | 16    | accept-encoding             |              |
+          | 16    | accept-encoding             | gzip, deflate|
           | 17    | accept-language             |              |
           | 18    | accept-ranges               |              |
           | 19    | accept                      |              |
@@ -171,7 +171,7 @@ namespace Nequeo.Net.Http2.Protocol
                     new KeyValuePair<string, string>(":status", "404"),                                         //13
                     new KeyValuePair<string, string>(":status", "500"),                                         //14
                     new KeyValuePair<string, string>("accept-charset", String.Empty),                           //15
-                    new KeyValuePair<string, string>("accept-encoding", String.Empty),                          //16
+                    new KeyValuePair<string, string>("accept-encoding", "gzip, deflate"),                       //16
                     new KeyValuePair<string, string>("accept-language", String.Empty),                          //17
                     new KeyValuePair<string, string>("accept-ranges", String.Empty),                            //18
                     new KeyValuePair<string, string>("accept", String.Empty),                                   //19

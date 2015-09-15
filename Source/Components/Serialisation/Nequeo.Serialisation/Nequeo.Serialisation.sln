@@ -1,11 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Serialisation", "Nequeo.Serialisation\Nequeo.Serialisation.csproj", "{78E74345-9343-4C4D-8937-6BA7C04057DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Serialisation.Factor", "Nequeo.Serialisation.Factor\Nequeo.Serialisation.Factor.vcxproj", "{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}"
+EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Serialisation\\Nequeo.Serialisation.csproj
+		SccProjectName1 = Nequeo.Serialisation
+		SccLocalPath1 = Nequeo.Serialisation
+		SccProjectUniqueName2 = Nequeo.Serialisation.Factor\\Nequeo.Serialisation.Factor.vcxproj
+		SccProjectName2 = Nequeo.Serialisation.Factor
+		SccLocalPath2 = Nequeo.Serialisation.Factor
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -69,6 +81,50 @@ Global
 		{78E74345-9343-4C4D-8937-6BA7C04057DD}.Staging Release|x64.Build.0 = Staging Release|x64
 		{78E74345-9343-4C4D-8937-6BA7C04057DD}.Staging Release|x86.ActiveCfg = Staging Release|x86
 		{78E74345-9343-4C4D-8937-6BA7C04057DD}.Staging Release|x86.Build.0 = Staging Release|x86
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Mixed Platforms.Deploy.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Win32.Build.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|Win32.Deploy.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|x64.ActiveCfg = Debug|x64
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|x86.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|x86.Build.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Debug|x86.Deploy.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Any CPU.ActiveCfg = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Mixed Platforms.Deploy.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Win32.ActiveCfg = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Win32.Build.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|Win32.Deploy.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|x64.ActiveCfg = Release|x64
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|x86.ActiveCfg = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|x86.Build.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Release|x86.Deploy.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Mixed Platforms.Deploy.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Win32.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Win32.Build.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|Win32.Deploy.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|x64.ActiveCfg = Staging Debug|x64
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|x86.ActiveCfg = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|x86.Build.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Debug|x86.Deploy.0 = Debug|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Any CPU.ActiveCfg = Staging Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Mixed Platforms.ActiveCfg = Staging Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Mixed Platforms.Build.0 = Staging Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Mixed Platforms.Deploy.0 = Staging Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Win32.ActiveCfg = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Win32.Build.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|Win32.Deploy.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|x64.ActiveCfg = Staging Release|x64
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|x86.ActiveCfg = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|x86.Build.0 = Release|Win32
+		{3640ABAB-E2F2-4199-8CD2-39EE7C8F1A91}.Staging Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

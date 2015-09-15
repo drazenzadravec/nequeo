@@ -270,4 +270,27 @@ namespace Nequeo.Management.Sys
                 ServicepackMajor.ToString() + "." + ServicepackMinor.ToString();
         }
     }
+
+    /// <summary>
+    /// USB device structure.
+    /// </summary>
+    [Serializable]
+    public struct USBDevice
+    {
+        /// <summary>
+        /// Device ID.
+        /// </summary>
+        public string DeviceID;
+
+        /// <summary>
+        /// Device PNP ID.
+        /// </summary>
+        public string PnpDeviceID;
+
+        /// <summary>
+        /// Device description.
+        /// </summary>
+        public string Description;
+
+    }
 }

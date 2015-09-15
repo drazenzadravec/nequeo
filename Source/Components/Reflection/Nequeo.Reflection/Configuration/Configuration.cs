@@ -275,5 +275,30 @@ namespace Nequeo.Configuration
             // Return the provider type.
             return provider;
         }
+
+        /// <summary>
+        /// Create an instance of the reflection provider name.
+        /// </summary>
+        /// <typeparam name="T">The reflection provider type to create.</typeparam>
+        /// <param name="reflectionProvider">The reflection provider type name.</param>
+        /// <returns>The instance of the reflection provider.</returns>
+        public T CreateReflectionProvider<T>(string reflectionProvider)
+            where T : class
+        {
+            T refType = default(T);
+
+            try
+            {
+                // Create an instance of the encoder type.
+                Type providerType = Nequeo.Reflection.TypeAccessor.GetType(reflectionProvider);
+                refType = (T)Nequeo.Reflection.TypeAccessor.CreateInstance(providerType);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return refType;
+        }
     }
 }

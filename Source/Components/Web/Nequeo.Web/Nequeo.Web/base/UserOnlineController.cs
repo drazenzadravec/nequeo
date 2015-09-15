@@ -74,7 +74,7 @@ namespace Nequeo.Web
             _isActive = isActive;
             _userSessionData = userSessionData;
             _userIdentityName = userIdentityName;
-            _uniqueHashcode = Hashcode.GetHashcode(userIdentityName, HashcodeType.SHA1);
+            _uniqueHashcode = Hashcode.GetHashcode(userIdentityName, HashcodeType.SHA512);
         }
         #endregion
 

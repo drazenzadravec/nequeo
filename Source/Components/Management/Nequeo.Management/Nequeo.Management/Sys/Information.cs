@@ -66,11 +66,11 @@ namespace Nequeo.Management.Sys
         /// </summary>
         /// <param name="errStream">The error stream to use</param>
         public Information(System.IO.Stream errStream)
-		{
-			// Note that we use the property to set this as it
-			// does checks on it to make sure it's valid.
+        {
+            // Note that we use the property to set this as it
+            // does checks on it to make sure it's valid.
             _stderr = errStream;
-		}
+        }
 
         private int _extendederror;
         private System.IO.Stream _stderr;
@@ -99,6 +99,7 @@ namespace Nequeo.Management.Sys
         private Processor[] _processors;
 
         private LogicalDrive[] _drives;
+        private USBDevice[] _usbDevices;
 
         /// <summary>
         /// Gets the extended error
@@ -129,6 +130,14 @@ namespace Nequeo.Management.Sys
         public LogicalDrive[] LogicalDrives
         {
             get { return _drives; }
+        }
+
+        /// <summary>
+        /// Gets the USB device collection
+        /// </summary>
+        public USBDevice[] UsbDevices
+        {
+            get { return _usbDevices; }
         }
 
         /// <summary>
@@ -361,6 +370,7 @@ namespace Nequeo.Management.Sys
             GetSystemInformation(scope);
             GetNetworkAddresses(scope);
             GetLogicalDrives(scope);
+            GetUsbDevices(scope);
 
             _extendederror = 0;
             return Status.Success;
@@ -399,7 +409,7 @@ namespace Nequeo.Management.Sys
         private void GetLogicalDrives(ManagementScope scope)
         {
             // Create a management searcher for all logical drives
-            ManagementObjectSearcher moSearch = new ManagementObjectSearcher(scope, 
+            ManagementObjectSearcher moSearch = new ManagementObjectSearcher(scope,
                 new ObjectQuery("Select Name, DriveType, Size, FreeSpace, FileSystem from Win32_LogicalDisk Where DriveType = 3 Or DriveType = 6"));
             ManagementObjectCollection moReturn = moSearch.Get();
 
@@ -477,7 +487,7 @@ namespace Nequeo.Management.Sys
             }
 
             // Create a management searcher for the processor information
-            ManagementObjectSearcher moSearch = new ManagementObjectSearcher(scope, 
+            ManagementObjectSearcher moSearch = new ManagementObjectSearcher(scope,
                 new ObjectQuery("Select Name, CurrentClockSpeed, Architecture, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor"));
             ManagementObjectCollection moReturn = moSearch.Get();
 
@@ -498,7 +508,7 @@ namespace Nequeo.Management.Sys
         }
 
         /// <summary>
-        /// Getnetwork adapter information
+        /// Get network adapter information
         /// </summary>
         /// <param name="scope">The current management scope</param>
         private void GetNetworkAddresses(ManagementScope scope)
@@ -507,7 +517,7 @@ namespace Nequeo.Management.Sys
             ManagementObjectSearcher search = null;
 
             // Create a management searcher for the network adapter information
-            search = new ManagementObjectSearcher(scope, 
+            search = new ManagementObjectSearcher(scope,
                 new ObjectQuery("Select Description, DHCPEnabled, IPAddress, DatabasePath, IPSubnet from Win32_NetworkAdapterConfiguration Where IPEnabled = True"));
             adapters = search.Get();
 
@@ -538,6 +548,31 @@ namespace Nequeo.Management.Sys
                         _adapters[i].NetworkAddress[j].Subnet = IPAddress.Parse(((string[])adapter.Properties["IPSubnet"].Value)[j]);
                     }
                 }
+                i++;
+            }
+        }
+
+        /// <summary>
+        /// Get USB device information.
+        /// </summary>
+        /// <param name="scope">The current management scope</param>
+        private void GetUsbDevices(ManagementScope scope)
+        {
+            // Create a management searcher for all usb devices.
+            ManagementObjectSearcher moSearch = new ManagementObjectSearcher(scope,
+                new ObjectQuery("Select * From Win32_USBHub"));
+            ManagementObjectCollection moReturn = moSearch.Get();
+
+            // Create the usb collection
+            _usbDevices = new USBDevice[moReturn.Count];
+            int i = 0;
+
+            // For each usb found load into usb structure.
+            foreach (ManagementObject mo in moReturn)
+            {
+                _usbDevices[i].DeviceID = mo["DeviceID"].ToString(); ;
+                _usbDevices[i].PnpDeviceID = mo["PNPDeviceID"].ToString();
+                _usbDevices[i].Description = mo["Description"].ToString();
                 i++;
             }
         }

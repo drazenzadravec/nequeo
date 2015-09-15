@@ -1,0 +1,15 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NequeoSharedEx", "NequeoSharedEx\NequeoSharedEx.shproj", "{9197CAD5-C1F3-4E28-8A9C-E23810311AE6}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NequeoSharedEx\NequeoSharedEx.projitems*{9197cad5-c1f3-4e28-8a9c-e23810311ae6}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

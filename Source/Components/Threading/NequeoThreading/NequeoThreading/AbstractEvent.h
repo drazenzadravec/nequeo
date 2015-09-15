@@ -37,7 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "GlobalThreading.h"
 
 #include "SingletonHolder.h"
-#include "SharedPtr.h"
+#include "Base\SharedPtr.h"
 #include "ActiveResult.h"
 #include "ActiveMethod.h"
 #include "Mutex.h"
@@ -225,7 +225,7 @@ namespace Nequeo {
 					/// the notify method is immediately aborted and the exception is propagated
 					/// to the caller.
 				{
-					Poco::ScopedLockWithUnlock<TMutex> lock(_mutex);
+					ScopedLockWithUnlock<TMutex> lock(_mutex);
 
 					if (!_enabled) return;
 

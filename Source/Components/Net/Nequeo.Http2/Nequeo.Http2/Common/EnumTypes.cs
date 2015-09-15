@@ -134,22 +134,22 @@ namespace Nequeo.Net.Http2
         /// <summary>
         /// Host
         /// </summary>
-        public const string Host = "Host";
+        public const string Host = "host";
 
         /// <summary>
         /// Http2 Settings
         /// </summary>
-        public const string Http2Settings = "Http2-Settings";
+        public const string Http2Settings = "http2-settings";
 
         /// <summary>
         /// Connection
         /// </summary>
-        public const string Connection = "Connection";
+        public const string Connection = "connection";
 
         /// <summary>
         /// Upgrade
         /// </summary>
-        public const string Upgrade = "Upgrade";
+        public const string Upgrade = "upgrade";
 
         /// <summary>
         /// Content Length

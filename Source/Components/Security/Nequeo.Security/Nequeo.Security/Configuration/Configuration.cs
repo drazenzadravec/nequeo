@@ -125,6 +125,25 @@ namespace Nequeo.Security.Configuration
         }
 
         /// <summary>
+        /// Constructor with host attributes
+        /// </summary>
+        /// <param name="useServerCertificate">The use server certificate attribute.</param>
+        public ServerCredentialsEncodedElement(Boolean useServerCertificate)
+        {
+            UseServerCertificate = useServerCertificate;
+        }
+
+        /// <summary>
+        /// Gets sets, the use server certificate attribute.
+        /// </summary>
+        [ConfigurationProperty("useServerCertificate", DefaultValue = "false", IsRequired = true)]
+        public Boolean UseServerCertificate
+        {
+            get { return (Boolean)this["useServerCertificate"]; }
+            set { this["useServerCertificate"] = value; }
+        }
+
+        /// <summary>
         /// Gets sets, the certificate path attribute.
         /// </summary>
         [ConfigurationProperty("CertificatePath")]
@@ -969,7 +988,12 @@ namespace Nequeo.Security.Configuration
                     throw new Exception("Configuration element CertificatePath has not been defined.");
 
                 // Create the X509 certificate model.
-                certificate = new X509Certificate2Model() { Path = certificatePath.Path, Password = certificatePath.Password };
+                certificate = new X509Certificate2Model()
+                {
+                    UseServerCertificate = serverCredentials.UseServerCertificate,
+                    Path = certificatePath.Path,
+                    Password = certificatePath.Password
+                };
             }
             catch (Exception)
             {

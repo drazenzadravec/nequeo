@@ -783,6 +783,16 @@ namespace Nequeo.Cryptography
         }
 
         /// <summary>
+        /// Create a RSA crypto service provider.
+        /// </summary>
+        /// <param name="cspParameters">The CSP parameters.</param>
+        /// <returns>RSA crypto service provider.</returns>
+        public static RSACryptoServiceProvider CreateRSACryptoServiceProvider(CspParameters cspParameters)
+        {
+            return new RSACryptoServiceProvider(cspParameters);
+        }
+
+        /// <summary>
         /// Create an RSA service provider with public private keys
         /// </summary>
         /// <param name="dwKeySize">The size of the key to use in bits.</param>

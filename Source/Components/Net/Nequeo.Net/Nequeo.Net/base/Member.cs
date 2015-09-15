@@ -59,6 +59,19 @@ namespace Nequeo.Net
         /// <summary>
         /// Member stream context.
         /// </summary>
+        /// <param name="context">The web context.</param>
+        public Member(Nequeo.Net.WebContext context)
+        {
+            _context = context;
+            _output = _context.WebResponse.Output;
+
+            // Set the initial timeout time.
+            _initialTimeOutTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Member stream context.
+        /// </summary>
         /// <param name="output">The output stream (response) used to write data to the client.</param>
         /// <param name="ipEndPoint">The current client IP end point.</param>
         public Member(System.IO.Stream output, System.Net.IPEndPoint ipEndPoint)
@@ -71,6 +84,7 @@ namespace Nequeo.Net
         }
 
         private System.IO.Stream _output = null;
+        private Nequeo.Net.WebContext _context = null;
 
         private DateTime _initialTimeOutTime;
         private Exception _lastError = null;

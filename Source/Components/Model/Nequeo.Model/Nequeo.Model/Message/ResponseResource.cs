@@ -55,6 +55,12 @@ namespace Nequeo.Model.Message
         public int Code { get; set; }
 
         /// <summary>
+        /// Gets or sets the response status subcode.
+        /// </summary>
+        [DataMember]
+        public int Subcode { get; set; }
+
+        /// <summary>
         /// Gets or sets the response status description.
         /// </summary>
         [DataMember]

@@ -1,5 +1,5 @@
 ﻿/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
- *  Copyright :     Copyright © Nequeo Pty Ltd 2015 http://www.nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2014 http://www.nequeo.com.au/
  * 
  *  File :          
  *  Purpose :       

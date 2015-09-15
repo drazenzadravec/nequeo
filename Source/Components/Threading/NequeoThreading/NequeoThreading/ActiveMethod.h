@@ -39,7 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "ActiveResult.h"
 #include "ActiveRunnable.h"
 #include "ActiveStarter.h"
-#include "AutoPtr.h"
+#include "Base\AutoPtr.h"
 
 namespace Nequeo {
 	namespace Threading

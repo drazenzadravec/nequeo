@@ -62,6 +62,9 @@
 #define nequeo_set_sin_len(pSA)     (void) 0
 #define nequeo_set_sin6_len(pSA)    (void) 0
 
+const int IPv4_Length = sizeof(struct sockaddr_in);
+const int IPv6_Length = sizeof(struct sockaddr_in6);
+
 #define SO_REUSEPORT				0
 #define NEQUEO_INVALID_SOCKET		INVALID_SOCKET
 

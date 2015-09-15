@@ -138,7 +138,7 @@ namespace Nequeo {
 					++frequencies[*value++];
 
 				// Build the tree.
-				INode* root = BuildTree(frequencies);
+				unique_ptr<INode> root(BuildTree(frequencies));
 
 				// Code map.
 				HuffCodeMap codes;
@@ -148,8 +148,7 @@ namespace Nequeo {
 				if (root != nullptr)
 				{
 					// Generate the codes.
-					GenerateCodes(root, code, codes);
-					delete root;
+					GenerateCodes(root.get(), code, codes);
 				}
 
 				// Return the code map.
@@ -505,7 +504,7 @@ namespace Nequeo {
 				std::vector<bool> result(elements);
 
 				// For each byte in bytes.
-				for (int i = 0; i < size; i++)
+				for (unsigned int i = 0; i < size; i++)
 				{
 					// For each bit.
 					for (int j = 0; j < 8; j++)
@@ -527,7 +526,7 @@ namespace Nequeo {
 			std::vector<byte> HuffmanCode::GetBytes(std::vector<bool> bits)
 			{
 				std::vector<byte> result;
-				int i = 0;
+				unsigned int i = 0;
 				int j = 0;
 				bool isEos = true;
 
@@ -686,7 +685,7 @@ namespace Nequeo {
 			void HuffmanCode::LoadCodes()
 			{
 				// End of string.
-				_eos = { T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T };
+				_eos = { T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T };									// |11111111|11111111|11111111|111111
 
 				// Insert all codes.
 				_bitsMap.insert({ (unsigned char)0, { T, T, T, T, T, T, T, T, T, T, F, F, F } });														//'' (0) |11111111|11000

@@ -50,8 +50,8 @@ namespace Nequeo {
 			// The maximum address length.
 			enum AddressLength
 			{
-				IPv4Length = sizeof(struct sockaddr_in),
-				IPv6Length = sizeof(struct sockaddr_in6)
+				IPv4Length = IPv4_Length,
+				IPv6Length = IPv6_Length
 			};
 
 			// The IP version.

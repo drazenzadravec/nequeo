@@ -1,19 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NequeoEx", "NequeoEx\NequeoEx.csproj", "{4DA7D97C-F82C-4CB9-8FE0-4C3EBA582DD2}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NequeoSharedEx", "..\NequeoSharedEx\NequeoSharedEx\NequeoSharedEx.shproj", "{9197CAD5-C1F3-4E28-8A9C-E23810311AE6}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = NequeoEx\\NequeoEx.csproj
-		SccProjectName1 = NequeoEx
-		SccLocalPath1 = NequeoEx
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\NequeoSharedEx\NequeoSharedEx\NequeoSharedEx.projitems*{9197cad5-c1f3-4e28-8a9c-e23810311ae6}*SharedItemsImports = 13
+		..\NequeoSharedEx\NequeoSharedEx\NequeoSharedEx.projitems*{4da7d97c-f82c-4cb9-8fe0-4c3eba582dd2}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

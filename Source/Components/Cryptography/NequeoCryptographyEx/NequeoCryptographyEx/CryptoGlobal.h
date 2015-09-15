@@ -40,6 +40,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <stdlib.h>
 #include <tchar.h>
 #include <string>
+#include <vector>
 #include <array>
 
 // SAFE_DELETE macro.

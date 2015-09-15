@@ -46,8 +46,10 @@ using System.Reflection.Emit;
 using System.Linq;
 using System.ComponentModel;
 using System.Runtime.Remoting;
+using System.Linq.Expressions;
 
 using Nequeo.Runtime;
+using Nequeo.Extension;
 
 namespace Nequeo.Reflection
 {
@@ -391,6 +393,65 @@ namespace Nequeo.Reflection
 
             // Return the collection of properties.
             return methods;
+        }
+
+        /// <summary>
+        /// Get the name of the property within the data model type.
+        /// </summary>
+        /// <typeparam name="T">The data model type.</typeparam>
+        /// <typeparam name="TProperty">The property type.</typeparam>
+        /// <param name="expression">The property expression.</param>
+        /// <returns>The name of the property.</returns>
+        public static string GetPropertyName<T, TProperty>(Expression<Func<T, TProperty>> expression)
+        {
+            var memberExpression = expression.Body as MemberExpression;
+            if (memberExpression == null)
+            {
+                var unaryExpression = expression.Body as UnaryExpression;
+                if (unaryExpression != null)
+                {
+                    memberExpression = unaryExpression.Operand as MemberExpression;
+
+                    if (memberExpression == null)
+                        throw new NotImplementedException();
+                }
+                else
+                    throw new NotImplementedException();
+            }
+
+            // Extract the name of the property from the expression.
+            var propertyName = memberExpression.Member.Name;
+            return propertyName;
+        }
+
+        /// <summary>
+        /// Get the name of the property within the data model type.
+        /// </summary>
+        /// <typeparam name="T">The data model type.</typeparam>
+        /// <param name="expression">The property expression.</param>
+        /// <returns>The name of the property.</returns>
+        public static string GetPropertyName<T>(Expression<Func<T>> expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException("propertyExpression");
+            }
+
+            var body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                throw new ArgumentException("Invalid argument", "propertyExpression");
+            }
+
+            var property = body.Member as PropertyInfo;
+
+            if (property == null)
+            {
+                throw new ArgumentException("Argument is not a property", "propertyExpression");
+            }
+
+            return property.Name;
         }
     }
 }

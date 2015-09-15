@@ -77,18 +77,12 @@ namespace Nequeo.Exceptions
         /// <summary>
         /// Contains the current exception message.
         /// </summary>
-        public string CustomMessage
-        {
-            get { return customMessage; }
-        }
+        public string CustomMessage => customMessage;
 
         /// <summary>
         /// Contains the current inner exception object.
         /// </summary>
-        public System.Exception CustomInnerException
-        {
-            get { return customInnerException; }
-        }
+        public System.Exception CustomInnerException => customInnerException;
         #endregion
     }
 }

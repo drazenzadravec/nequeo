@@ -66,7 +66,7 @@ namespace Nequeo.Extension
             typeof(DateTime),
             typeof(TimeSpan),
             typeof(Guid),
-            typeof(Math),
+            typeof(System.Math),
             typeof(Convert)
         };
 

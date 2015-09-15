@@ -357,7 +357,7 @@ namespace Nequeo.Net.Http2.Protocol
         /// <param name="value"></param>
         public static void SetAsciiAt(byte[] buffer, int offset, string value)
         {
-            // TODO: The spec reallly needs to change the header encoding to UTF8
+            // TODO: The spec really needs to change the header encoding to UTF8
             Contract.Assert(offset >= 0 && offset + value.Length - 1 < buffer.Length);
             Encoding.ASCII.GetBytes(value, 0, value.Length, buffer, offset);
         }

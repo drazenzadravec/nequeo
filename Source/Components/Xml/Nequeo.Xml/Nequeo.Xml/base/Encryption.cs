@@ -74,6 +74,24 @@ namespace Nequeo.Xml
             18, 41, 71, 127, 159, 224, 212, 59};
 
         /// <summary>
+        /// Gets or sets the encryption key.
+        /// </summary>
+        public byte[] Key
+        {
+            get { return _internalKey; }
+            set { _internalKey = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the encryption vector.
+        /// </summary>
+        public byte[] Vector
+        {
+            get { return _internalIV; }
+            set { _internalIV = value; }
+        }
+
+        /// <summary>
         /// Encrypt the element within the xml document.
         /// </summary>
         /// <param name="document">The xml document containing the element to encrypt.</param>

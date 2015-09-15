@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52D4941C-4681-422C-898D-EE23E5B7AAC5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Security</RootNamespace>
+    <AssemblyName>Nequeo.Security.Protocol</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoSecurityKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ASN1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\ASN1Convert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\BitConverterLE.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\PKCS7.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\StrongName.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\ARC4Managed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\CryptoConvert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\CryptoTools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\DHKeyGeneration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\DHParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\DiffieHellman.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\DiffieHellmanManaged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\KeyPairPersistence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\MD2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\MD2Managed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\MD4.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\MD4Managed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\MD5SHA1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\PKCS1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\PKCS8.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\RC4.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\RSAManaged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\SHA224.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\SHA224Managed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\SymmetricTransform.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cryptography\TlsHMAC.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\Tls\Alert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\CipherAlgorithmType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\CipherSuite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\CipherSuiteCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\CipherSuiteFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ClientContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ClientRecordProtocol.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ClientSessionCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ContentType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Context.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\DebugHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ExchangeAlgorithmType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\HandshakeState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\ClientCertificateType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Client\TlsClientFinished.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Client\TlsClientHello.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Client\TlsServerFinished.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Client\TlsServerHello.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\HandshakeMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\HandshakeType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Server\TlsClientFinished.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Server\TlsClientHello.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Server\TlsServerFinished.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\Handshake\Server\TlsServerHello.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\HashAlgorithmType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\HttpsClientStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\RecordProtocol.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\RSASslSignatureDeformatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\RSASslSignatureFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SecurityCompressionType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SecurityParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SecurityProtocolType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ServerContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\ServerRecordProtocol.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SslCipherSuite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SslClientStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SslHandshakeHash.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SslServerStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\SslStreamBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\TlsCipherSuite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\TlsClientSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\TlsException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\TlsServerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Tls\TlsStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\AuthorityKeyIdentifierExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\BasicConstraintsExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\CertificatePoliciesExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\CRLDistributionPointsExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\ExtendedKeyUsageExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\GeneralNames.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\KeyAttributesExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\KeyUsageExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\NetscapeCertTypeExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\PrivateKeyUsagePeriodExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\SubjectAltNameExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\Extensions\SubjectKeyIdentifierExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\PKCS12.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X501Name.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Builder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Certificate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509CertificateBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509CertificateCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Chain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509ChainStatusFlags.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509CRL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Extension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Extensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Store.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509StoreManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X509Stores.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="X509\X520Attributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NequeoSecurityKey.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

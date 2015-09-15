@@ -36,7 +36,7 @@ void Nequeo::Math::Matrix::SystemLinearEquations::Solve(double** aMatrix, double
 	// When out of scope then the resource 'GaussianElimination' is
 	// released from the the heap, no need to delete from the heap.
 	unique_ptr<GaussianElimination> gaussElim(new GaussianElimination());
-
+	
 	// Solve the matrix.
 	gaussElim->Solve(aMatrix, bMatrix, xMatrix, nxnMatrixSize);
 }

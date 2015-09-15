@@ -43,10 +43,6 @@ namespace Nequeo {
 		/// </summary>
 		AdvancedCNG::AdvancedCNG()
 		{
-			_hashCode = NULL;
-			_signedData = NULL;
-			_encryptData = NULL;
-			_decryptData = NULL;
 		}
 
 		/// <summary>
@@ -54,43 +50,14 @@ namespace Nequeo {
 		/// </summary>
 		AdvancedCNG::~AdvancedCNG()
 		{
-			if (_hashCode)
-			{
-				// Release the hash code.
-				HeapFree(GetProcessHeap(), 0, _hashCode);
-			}
-
-			if (_signedData)
-			{
-				// Release the signature.
-				HeapFree(GetProcessHeap(), 0, _signedData);
-			}
-
-			if (_encryptData)
-			{
-				// Release the encrypted data.
-				HeapFree(GetProcessHeap(), 0, _encryptData);
-			}
-
-			if (_decryptData)
-			{
-				// Release the decrypted data.
-				HeapFree(GetProcessHeap(), 0, _decryptData);
-			}
-
-			_hashCode = NULL;
-			_signedData = NULL;
-			_encryptData = NULL;
-			_decryptData = NULL;
 		}
 
 		/// <summary>
 		/// Create a hash code.
 		/// </summary>
 		/// <param name="data">The data to hash.</param>
-		/// <param name="hashSize">The hash size.</param>
 		/// <returns>The resulting hash code.</returns>
-		PBYTE AdvancedCNG::CreateHashCode(BYTE data[], unsigned long* hashSize)
+		vector<BYTE> AdvancedCNG::CreateHashCode(BYTE data[])
 		{
 			BCRYPT_ALG_HANDLE       hAlg = NULL;
 			BCRYPT_HASH_HANDLE      hHash = NULL;
@@ -99,14 +66,8 @@ namespace Nequeo {
 									cbHash = 0,
 									cbHashObject = 0;
 			PBYTE                   pbHashObject = NULL;
-
-			if (_hashCode)
-			{
-				// Release the hash code.
-				HeapFree(GetProcessHeap(), 0, _hashCode);
-			}
-
-			_hashCode = NULL;
+			PBYTE                   hashCode = NULL;
+			vector<BYTE>			result;
 
 			// Open an algorithm handle
 			if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(
@@ -154,13 +115,10 @@ namespace Nequeo {
 			}
 
 			// allocate the hash buffer on the heap
-			_hashCode = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbHash);
-			if (NULL == _hashCode)
+			hashCode = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbHash);
+			if (NULL == hashCode)
 			{
 				// L"**** memory allocation failed\n");
-				// Release the hash code.
-				HeapFree(GetProcessHeap(), 0, _hashCode);
-				_hashCode = NULL;
 				goto Cleanup;
 			}
 
@@ -192,7 +150,7 @@ namespace Nequeo {
 			// close the hash
 			if (!NT_SUCCESS(status = BCryptFinishHash(
 				hHash,
-				_hashCode,
+				hashCode,
 				cbHash,
 				0)))
 			{
@@ -200,9 +158,11 @@ namespace Nequeo {
 				goto Cleanup;
 			}
 
-			// Success.
-			*hashSize = cbHash;
-			return _hashCode;
+			// Add the bytes to the vector.
+			for (unsigned long i = 0; i < cbHash; i++)
+			{
+				result.push_back(hashCode[i]);
+			}
 
 		Cleanup:
 
@@ -220,15 +180,23 @@ namespace Nequeo {
 			{
 				HeapFree(GetProcessHeap(), 0, pbHashObject);
 			}
+
+			if (hashCode)
+			{
+				// Release the hash code.
+				HeapFree(GetProcessHeap(), 0, hashCode);
+			}
+
+			// Success.
+			return result;
 		}
 
 		/// <summary>
 		/// Create the signature for the data.
 		/// </summary>
 		/// <param name="data">The data to sign.</param>
-		/// <param name="signatureSize">The signature size.</param>
 		/// <returns>The resulting signature.</returns>
-		PBYTE AdvancedCNG::SignData(BYTE data[], unsigned long* signatureSize)
+		vector<BYTE> AdvancedCNG::SignData(BYTE data[])
 		{
 			NCRYPT_PROV_HANDLE      hProv = NULL;
 			NCRYPT_KEY_HANDLE       hKey = NULL;
@@ -246,14 +214,8 @@ namespace Nequeo {
 			PBYTE                   pbHashObject = NULL;
 			PBYTE                   pbHash = NULL,
 									pbBlob = NULL;
-
-			if (_signedData)
-			{
-				// Release the signature.
-				HeapFree(GetProcessHeap(), 0, _signedData);
-			}
-
-			_signedData = NULL;
+			PBYTE                   signedData = NULL;
+			vector<BYTE>			result;
 
 			// open an algorithm handle
 			if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(
@@ -401,13 +363,10 @@ namespace Nequeo {
 
 
 			// allocate the signature buffer
-			_signedData = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbSignature);
-			if (NULL == _signedData)
+			signedData = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbSignature);
+			if (NULL == signedData)
 			{
 				// L"**** memory allocation failed\n");
-				// Release the signature.
-				HeapFree(GetProcessHeap(), 0, _signedData);
-				_signedData = NULL;
 				goto Cleanup;
 			}
 
@@ -416,7 +375,7 @@ namespace Nequeo {
 				NULL,
 				pbHash,
 				cbHash,
-				_signedData,
+				signedData,
 				cbSignature,
 				&cbSignature,
 				0)))
@@ -478,7 +437,7 @@ namespace Nequeo {
 				NULL,
 				pbHash,
 				cbHash,
-				_signedData,
+				signedData,
 				cbSignature,
 				0)))
 			{
@@ -486,9 +445,11 @@ namespace Nequeo {
 				goto Cleanup;
 			}
 
-			// Success.
-			*signatureSize = cbSignature;
-			return _signedData;
+			// Add the bytes to the vector.
+			for (unsigned long i = 0; i < cbSignature; i++)
+			{
+				result.push_back(signedData[i]);
+			}
 
 		Cleanup:
 
@@ -536,6 +497,15 @@ namespace Nequeo {
 			{
 				NCryptFreeObject(hProv);
 			}
+
+			if (signedData)
+			{
+				// Release the signature.
+				HeapFree(GetProcessHeap(), 0, signedData);
+			}
+
+			// Success.
+			return result;
 		}
 
 		/// <summary>
@@ -544,9 +514,8 @@ namespace Nequeo {
 		/// <param name="data">The data to encrypt.</param>
 		/// <param name="key">The key used to encrypt the data.</param>
 		/// <param name="iv">The vector used in encryption.</param>
-		/// <param name="encryptSize">The encrypted data size.</param>
 		/// <returns>The resulting encryption.</returns>
-		PBYTE AdvancedCNG::Encrypt(BYTE data[], BYTE key[], BYTE iv[], unsigned long* encryptSize)
+		vector<BYTE> AdvancedCNG::Encrypt(BYTE data[], BYTE key[], BYTE iv[])
 		{
 			BCRYPT_ALG_HANDLE       hAesAlg = NULL;
 			BCRYPT_KEY_HANDLE       hKey = NULL;
@@ -561,14 +530,8 @@ namespace Nequeo {
 									pbKeyObject = NULL,
 									pbIV = NULL,
 									pbBlob = NULL;
-
-			if (_encryptData)
-			{
-				// Release the encrypted data.
-				HeapFree(GetProcessHeap(), 0, _encryptData);
-			}
-
-			_encryptData = NULL;
+			PBYTE                   encryptData = NULL;
+			vector<BYTE>			result;
 
 			// Open an algorithm handle.
 			if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(
@@ -720,13 +683,10 @@ namespace Nequeo {
 				goto Cleanup;
 			}
 
-			_encryptData = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbCipherText);
-			if (NULL == _encryptData)
+			encryptData = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbCipherText);
+			if (NULL == encryptData)
 			{
 				// L"**** memory allocation failed\n");
-				// Release the encrypted data.
-				HeapFree(GetProcessHeap(), 0, _encryptData);
-				_encryptData = NULL;
 				goto Cleanup;
 			}
 
@@ -739,7 +699,7 @@ namespace Nequeo {
 				NULL,
 				pbIV,
 				cbBlockLen,
-				_encryptData,
+				encryptData,
 				cbCipherText,
 				&cbData,
 				BCRYPT_BLOCK_PADDING)))
@@ -748,9 +708,11 @@ namespace Nequeo {
 				goto Cleanup;
 			}
 
-			// Success.
-			*encryptSize = cbCipherText;
-			return _encryptData;
+			// Add the bytes to the vector.
+			for (unsigned long i = 0; i < cbCipherText; i++)
+			{
+				result.push_back(encryptData[i]);
+			}
 
 		Cleanup:
 
@@ -778,6 +740,15 @@ namespace Nequeo {
 			{
 				HeapFree(GetProcessHeap(), 0, pbIV);
 			}
+
+			if (encryptData)
+			{
+				// Release the encrypted data.
+				HeapFree(GetProcessHeap(), 0, encryptData);
+			}
+
+			// Success.
+			return result;
 		}
 
 		/// <summary>
@@ -786,9 +757,8 @@ namespace Nequeo {
 		/// <param name="data">The data to decrypt.</param>
 		/// <param name="key">The key used to decrypt the data.</param>
 		/// <param name="iv">The vector used in decryption.</param>
-		/// <param name="decryptSize">The decrypted data size.</param>
 		/// <returns>The resulting decryption.</returns>
-		PBYTE AdvancedCNG::Decrypt(BYTE data[], BYTE key[], BYTE iv[], unsigned long* decryptSize)
+		vector<BYTE> AdvancedCNG::Decrypt(BYTE data[], BYTE key[], BYTE iv[])
 		{
 			BCRYPT_ALG_HANDLE       hAesAlg = NULL;
 			BCRYPT_KEY_HANDLE       hKey = NULL;
@@ -802,14 +772,8 @@ namespace Nequeo {
 									pbIV = NULL,
 									pbBlob = NULL;
 			DWORD                   cbCipherText = sizeof(data);
-
-			if (_decryptData)
-			{
-				// Release the decrypted data.
-				HeapFree(GetProcessHeap(), 0, _decryptData);
-			}
-
-			_decryptData = NULL;
+			PBYTE                   decryptData = NULL;
+			vector<BYTE>			result;
 
 			// Open an algorithm handle.
 			if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(
@@ -951,13 +915,10 @@ namespace Nequeo {
 				goto Cleanup;
 			}
 
-			_decryptData = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbPlainText);
-			if (NULL == _decryptData)
+			decryptData = (PBYTE)HeapAlloc(GetProcessHeap(), 0, cbPlainText);
+			if (NULL == decryptData)
 			{
 				// L"**** memory allocation failed\n");
-				// Release the decrypted data.
-				HeapFree(GetProcessHeap(), 0, _decryptData);
-				_decryptData = NULL;
 				goto Cleanup;
 			}
 
@@ -968,7 +929,7 @@ namespace Nequeo {
 				NULL,
 				pbIV,
 				cbBlockLen,
-				_decryptData,
+				decryptData,
 				cbPlainText,
 				&cbPlainText,
 				BCRYPT_BLOCK_PADDING)))
@@ -977,9 +938,11 @@ namespace Nequeo {
 				goto Cleanup;
 			}
 
-			// Success.
-			*decryptSize = cbPlainText;
-			return _decryptData;
+			// Add the bytes to the vector.
+			for (unsigned long i = 0; i < cbPlainText; i++)
+			{
+				result.push_back(decryptData[i]);
+			}
 
 		Cleanup:
 
@@ -1002,6 +965,15 @@ namespace Nequeo {
 			{
 				HeapFree(GetProcessHeap(), 0, pbIV);
 			}
+
+			if (decryptData)
+			{
+				// Release the decrypted data.
+				HeapFree(GetProcessHeap(), 0, decryptData);
+			}
+
+			// Success.
+			return result;
 		}
 	}
 }

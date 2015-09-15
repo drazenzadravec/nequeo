@@ -67,6 +67,12 @@ namespace Nequeo.Cryptography
         Nequeo.Cryptography.HashcodeType HashcodeType { get; set; }
 
         /// <summary>
+        /// Get the authorisation code.
+        /// </summary>
+        /// <returns>The authorisation code used for access.</returns>
+        string GetAuthorisationCode();
+
+        /// <summary>
         /// Encode the password.
         /// </summary>
         /// <param name="password">The password to encode.</param>

@@ -16,7 +16,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("Nequeo Pty Ltd")];
 [assembly:AssemblyProductAttribute("Nequeo.Math")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) Nequeo Pty Ltd 2012")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Nequeo Pty Ltd 2015")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 [assembly:AssemblyKeyFileAttribute("NequeoScienceMathKey.snk")];
@@ -32,7 +32,7 @@ using namespace System::Security::Permissions;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("2014.26.1.1")];
+[assembly:AssemblyVersionAttribute("2016.26.1.1")];
 
 [assembly:ComVisible(false)];
 

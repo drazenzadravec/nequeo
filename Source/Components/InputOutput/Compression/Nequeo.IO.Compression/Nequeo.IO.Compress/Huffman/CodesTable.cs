@@ -296,7 +296,7 @@ namespace Nequeo.IO.Compression.Huffman
         private const bool F = false;
 
         /// <summary>
-        /// Gets or sets the size.
+        /// Gets the size.
         /// </summary>
         public int Size
         {
@@ -351,7 +351,7 @@ namespace Nequeo.IO.Compression.Huffman
                 }
             }
 
-            throw new Exception("Symbol is not present in the alphabeth");
+            throw new Exception("Symbol is not present in the character set.");
         }
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace Nequeo.IO.Compression.Huffman
                 }
             }
 
-            throw new Exception("Symbol is not present in the alphabeth");
+            throw new Exception("Symbol is not present in the character set.");
         }
 
         /// <summary>
@@ -397,7 +397,7 @@ namespace Nequeo.IO.Compression.Huffman
             var val = bitsMap.FirstOrDefault(pair => pair.Value == c).Key;
 
             if (val == null)
-                throw new Exception("Symbol is not present in the alphabeth");
+                throw new Exception("Symbol is not present in the character set.");
 
             return val;
         }

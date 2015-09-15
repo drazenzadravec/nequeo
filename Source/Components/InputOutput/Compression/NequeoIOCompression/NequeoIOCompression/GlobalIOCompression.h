@@ -40,6 +40,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <atlbase.h>
 #include <tchar.h>
 #include <string>
+#include <memory>
 #include <vector>
 #include <queue>
 #include <map>

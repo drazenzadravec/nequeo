@@ -35,6 +35,8 @@
 
 using namespace System;
 using namespace System::Numerics;
+using namespace System::Collections;
+using namespace System::Collections::Generic;
 
 namespace Nequeo 
 {

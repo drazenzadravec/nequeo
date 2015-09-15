@@ -68,6 +68,8 @@ namespace Nequeo.Net.Mime
             {
                 _applicationTypes.Add("aspx");
                 _applicationTypes.Add("asp");
+                _applicationTypes.Add("php");
+                _applicationTypes.Add("jsp");
             }
 
             IEnumerable<string> appTypes = _applicationTypes.Where(u => u.ToLower() == extension.Trim(new char[] { '.' }).ToLower());

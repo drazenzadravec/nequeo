@@ -757,7 +757,7 @@ namespace Nequeo.Cryptography
         {
             MemoryStream memoryStream = null;
             CryptoStream cryptoStream = null;
-
+            
             try
             {
                 // Will contain the encrypted data

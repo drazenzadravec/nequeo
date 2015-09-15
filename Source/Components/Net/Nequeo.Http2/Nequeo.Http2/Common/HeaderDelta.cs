@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 using Nequeo.Collections;
 using Nequeo.Extension;
-using Nequeo.IO.Compression.Huffman;
+using Nequeo.IO.Compression;
 
 using Nequeo.Net.Http2.Protocol;
 
@@ -43,7 +43,7 @@ namespace Nequeo.Net.Http2
             _remoteRefSet = new HeadersList();
             _localRefSet = new HeadersList();
 
-            _huffmanProc = new Processor();
+            _huffmanProc = new HuffmanStream();
 
             InitCompressor();
             InitDecompressor();
@@ -54,7 +54,7 @@ namespace Nequeo.Net.Http2
         private HeadersList _localHeadersTable;
         private HeadersList _localRefSet;
 
-        private Processor _huffmanProc;
+        private HuffmanStream _huffmanProc;
         private int _currentOffset;
         private MemoryStream _serializerStream;
         private int _maxHeaderByteSize;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nequeo.Web</RootNamespace>
     <AssemblyName>Nequeo.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -278,6 +278,18 @@
     <Reference Include="Nequeo.Handler">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Handler.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.IO.Stream, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=43b018473d802851, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Stream.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=577bba95b8d30372, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Primitive">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Primitive.dll</HintPath>
     </Reference>
@@ -320,10 +332,12 @@
     <Compile Include="base\ExtensionWebService.cs" />
     <Compile Include="base\UserOnlineController.cs" />
     <Compile Include="base\WebManager.cs" />
+    <Compile Include="base\WebSocketHandler.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\InternalDesignTime.cs" />
     <Compile Include="Common\LiteralTemplate.cs" />
     <Compile Include="Common\UserInfo.cs" />
+    <Compile Include="Common\WebServiceBase.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Conversion\WebControlType.cs" />
     <Compile Include="HttpHandler\Captcha.cs" />

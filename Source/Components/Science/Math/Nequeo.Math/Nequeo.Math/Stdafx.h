@@ -24,8 +24,6 @@
 
 #include <functional>
 
-using namespace std;
-
 #define PI 3.1415926535897932384626433832795
 #define MAXDEGREE 100
 #define MDP1 MAXDEGREE + 1

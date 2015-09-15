@@ -38,6 +38,7 @@
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
+                                    <xs:attribute name="useServerCertificate" type="xs:boolean" use="required" />
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>

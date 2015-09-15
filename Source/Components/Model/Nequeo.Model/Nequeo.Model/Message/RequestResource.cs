@@ -61,9 +61,21 @@ namespace Nequeo.Model.Message
         public string Path { get; set; }
 
         /// <summary>
+        /// Gets or sets the resources scheme.
+        /// </summary>
+        [DataMember]
+        public string Scheme { get; set; }
+
+        /// <summary>
         /// Gets or sets the protocol version
         /// </summary>
         [DataMember]
         public string ProtocolVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets the connection authority.
+        /// </summary>
+        [DataMember]
+        public string Authority { get; set; }
     }
 }

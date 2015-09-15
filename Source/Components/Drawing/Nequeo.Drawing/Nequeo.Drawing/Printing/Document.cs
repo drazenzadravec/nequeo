@@ -63,6 +63,17 @@ namespace Nequeo.Drawing.Printing
         /// <summary>
         /// Printing document.
         /// </summary>
+        /// <param name="image">The image containing the data to print.</param>
+        public Document(System.Drawing.Image image)
+        {
+            _case = 2;
+            _image = image;
+
+        }
+
+        /// <summary>
+        /// Printing document.
+        /// </summary>
         /// <param name="reader">The stream reader containing the data to print.</param>
         /// <param name="font">The font to use when printing stream data.</param>
         /// <param name="brush">The font colour when printing stream data.</param>
@@ -94,8 +105,17 @@ namespace Nequeo.Drawing.Printing
 
         private string[] _text = null;
         private System.IO.StreamReader _reader = null;
+        private System.Drawing.Image _image = null;
         private System.Drawing.Font _font;
         private Brush _brush = Brushes.Black;
+
+        /// <summary>
+        /// Resets the text index to zero start of document when printing the text array.
+        /// </summary>
+        public void ResetTextIndex()
+        {
+            _line = 0;
+        }
 
         /// <summary>
         /// Start printing the document
@@ -120,6 +140,9 @@ namespace Nequeo.Drawing.Printing
                     break;
                 case 1:
                     PrintFromArray(e);
+                    break;
+                case 2:
+                    PrintFromImage(e);
                     break;
                 default:
                     break;
@@ -165,7 +188,7 @@ namespace Nequeo.Drawing.Printing
         }
 
         /// <summary>
-        /// Print from the stream.
+        /// Print from the array.
         /// </summary>
         /// <param name="e"></param>
         private void PrintFromArray(PrintPageEventArgs e)
@@ -198,6 +221,28 @@ namespace Nequeo.Drawing.Printing
             {
                 e.HasMorePages = true;
             }
+        }
+
+        /// <summary>
+        /// Print from the image.
+        /// </summary>
+        /// <param name="e"></param>
+        private void PrintFromImage(PrintPageEventArgs e)
+        {
+            // Adjust the size of the image to the page to print the full image without loosing any part of it
+            Rectangle rectangle = e.MarginBounds;
+
+            if ((double)_image.Width / (double)_image.Height > (double)rectangle.Width / (double)rectangle.Height) // image is wider
+            {
+                rectangle.Height = (int)((double)_image.Height / (double)_image.Width * (double)rectangle.Width);
+            }
+            else
+            {
+                rectangle.Width = (int)((double)_image.Width / (double)_image.Height * (double)rectangle.Height);
+            }
+
+            // Draw the image.
+            e.Graphics.DrawImage(_image, rectangle);
         }
     }
 }

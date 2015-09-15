@@ -124,7 +124,7 @@ namespace Nequeo.Drawing.Pdf
                 // Get the page list.
                 int toPageInt = (toPage > pdfReader.NumberOfPages ? pdfReader.NumberOfPages : (toPage < 1 ? 1 : toPage));
                 int fromPageInt = (fromPage < 1 ? 1 : (toPage < fromPage ? toPage : fromPage));
-                
+
                 // For each page.
                 for (int page = fromPageInt; page <= toPageInt; page++)
                 {
@@ -283,6 +283,178 @@ namespace Nequeo.Drawing.Pdf
         }
 
         /// <summary>
+        /// Checks whether a specified page of a PDF file contains images.
+        /// </summary> 
+        /// <param name="pdf">The PDF stream.</param>
+        /// <param name="pageNumber">The page number to look for images.</param>
+        /// <param name="password">The password used to protect the document.</param>
+        /// <returns>True if the page contains at least one image; false otherwise.</returns> 
+        public bool PageContainsImages(Stream pdf, int pageNumber, string password = "")
+        {
+            bool result = false;
+            ImageRenderListener listener = null;
+
+            byte[] pass = null;
+            iTextSharp.text.pdf.PdfReader pdfReader = null;
+
+            try
+            {
+                // If no password.
+                if (String.IsNullOrEmpty(password))
+                {
+                    pdfReader = new iTextSharp.text.pdf.PdfReader(pdf);
+                }
+                else
+                {
+                    pass = Encoding.Default.GetBytes(password);
+                    pdfReader = new iTextSharp.text.pdf.PdfReader(pdf, pass);
+                }
+
+                // Parse the stream.
+                var parser = new PdfReaderContentParser(pdfReader);
+                parser.ProcessContent(pageNumber, (listener = new ImageRenderListener()));
+                result = (listener.Images.Count > 0 ? true : false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (pdfReader != null)
+                    pdfReader.Close();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Extracts all images from a specified page of a PDF file.
+        /// </summary> 
+        /// <param name="pdf">The PDF stream.</param>
+        /// <param name="password">The password used to protect the document.</param>
+        /// <returns>Returns an array of images
+        /// where the key is a suggested file name, in the format: PDF filename without extension,  
+        /// page number and image index in the page.</returns> 
+        public Dictionary<string, System.Drawing.Image> ExtractImages(Stream pdf, string password = "")
+        {
+            byte[] pass = null;
+            iTextSharp.text.pdf.PdfReader pdfReader = null;
+            var images = new Dictionary<string, System.Drawing.Image>();
+
+            try
+            {
+                // If no password.
+                if (String.IsNullOrEmpty(password))
+                {
+                    pdfReader = new iTextSharp.text.pdf.PdfReader(pdf);
+                }
+                else
+                {
+                    pass = Encoding.Default.GetBytes(password);
+                    pdfReader = new iTextSharp.text.pdf.PdfReader(pdf, pass);
+                }
+
+                // Create the pdf parser.
+                var parser = new PdfReaderContentParser(pdfReader);
+                ImageRenderListener listener = null;
+
+                for (var i = 1; i <= pdfReader.NumberOfPages; i++)
+                {
+                    // Parse the pdf stream.
+                    parser.ProcessContent(i, (listener = new ImageRenderListener()));
+                    var index = 1;
+
+                    // If images exist.
+                    if (listener.Images.Count > 0)
+                    {
+                        // For each image extracted.
+                        foreach (var pair in listener.Images)
+                        {
+                            // Add the image.
+                            images.Add(string.Format("Page_{ 1} Image_{ 2} { 3}", i.ToString("D4"), index.ToString("D4"), pair.Value), pair.Key);
+                            index++;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (pdfReader != null)
+                    pdfReader.Close();
+            }
+
+            // Return the images.
+            return images;
+        }
+
+        /// <summary>
+        /// Extracts all images from a specified page of a PDF file.
+        /// </summary> 
+        /// <param name="pdf">The PDF stream.</param>
+        /// <param name="pageNumber">The page number to look for images.</param>
+        /// <param name="password">The password used to protect the document.</param>
+        /// <returns>Returns an array of images
+        /// where the key is a suggested file name, in the format: PDF filename without extension,  
+        /// page number and image index in the page.</returns> 
+        public Dictionary<string, System.Drawing.Image> ExtractImages(Stream pdf, int pageNumber, string password = "")
+        {
+            byte[] pass = null;
+            iTextSharp.text.pdf.PdfReader pdfReader = null;
+            Dictionary<string, System.Drawing.Image> images = new Dictionary<string, System.Drawing.Image>();
+            
+            try
+            {
+                // If no password.
+                if (String.IsNullOrEmpty(password))
+                {
+                    pdfReader = new iTextSharp.text.pdf.PdfReader(pdf);
+                }
+                else
+                {
+                    pass = Encoding.Default.GetBytes(password);
+                    pdfReader = new iTextSharp.text.pdf.PdfReader(pdf, pass);
+                }
+
+                // Create the content reader.
+                PdfReaderContentParser parser = new PdfReaderContentParser(pdfReader);
+                ImageRenderListener listener = null;
+
+                // Parse the content.
+                parser.ProcessContent(pageNumber, (listener = new ImageRenderListener()));
+                int index = 1;
+
+                // If images have been found.
+                if (listener.Images.Count > 0)
+                {
+                    // Add each image to the list.
+                    foreach (KeyValuePair<System.Drawing.Image, string> pair in listener.Images)
+                    {
+                        // Add the image.
+                        images.Add(string.Format("Page_{ 1} Image_{ 2} { 3}", pageNumber.ToString("D4"), index.ToString("D4"), pair.Value), pair.Key);
+                        index++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (pdfReader != null)
+                    pdfReader.Close();
+            }
+
+            // Return the images.
+            return images;
+        }
+
+        /// <summary>
         /// Create pdf table.
         /// </summary>
         /// <returns>The PDF table.</returns>
@@ -313,5 +485,84 @@ namespace Nequeo.Drawing.Pdf
             // Return the table.
             return table;
         }
+    }
+
+    /// <summary>
+    /// Image Render Listener Helper.
+    /// </summary>
+    internal class ImageRenderListener : IRenderListener
+    {
+        #region Fields 
+
+        Dictionary<System.Drawing.Image, string> images = new Dictionary<System.Drawing.Image, string>();
+        #endregion Fields 
+
+        #region Properties 
+
+        public Dictionary<System.Drawing.Image, string> Images
+        {
+            get { return images; }
+        }
+        #endregion Properties 
+
+        #region Methods 
+
+        #region Public Methods 
+
+        public void BeginTextBlock() { }
+
+        public void EndTextBlock() { }
+
+        public void RenderImage(ImageRenderInfo renderInfo)
+        {
+            PdfImageObject image = renderInfo.GetImage();
+            PdfName filter = (PdfName)image.Get(PdfName.FILTER);
+
+            //int width = Convert.ToInt32(image.Get(PdfName.WIDTH).ToString()); 
+            //int bitsPerComponent = Convert.ToInt32(image.Get(PdfName.BITSPERCOMPONENT).ToString()); 
+            //string subtype = image.Get(PdfName.SUBTYPE).ToString(); 
+            //int height = Convert.ToInt32(image.Get(PdfName.HEIGHT).ToString()); 
+            //int length = Convert.ToInt32(image.Get(PdfName.LENGTH).ToString()); 
+            //string colorSpace = image.Get(PdfName.COLORSPACE).ToString(); 
+
+            /* It appears to be safe to assume that when filter == null, PdfImageObject  
+             * does not know how to decode the image to a System.Drawing.Image. 
+             *  
+             * Uncomment the code above to verify, but when I’ve seen this happen,  
+             * width, height and bits per component all equal zero as well. */
+            if (filter != null)
+            {
+                System.Drawing.Image drawingImage = image.GetDrawingImage();
+
+                string extension = ".";
+
+                if (filter == PdfName.DCTDECODE)
+                {
+                    extension += PdfImageObject.ImageBytesType.JPG.FileExtension;
+                }
+                else if (filter == PdfName.JPXDECODE)
+                {
+                    extension += PdfImageObject.ImageBytesType.JP2.FileExtension;
+                }
+                else if (filter == PdfName.FLATEDECODE)
+                {
+                    extension += PdfImageObject.ImageBytesType.PNG.FileExtension;
+                }
+                else if (filter == PdfName.LZWDECODE)
+                {
+                    extension += PdfImageObject.ImageBytesType.CCITT.FileExtension;
+                }
+
+                /* Rather than struggle with the image stream and try to figure out how to handle  
+                 * BitMapData scan lines in various formats (like virtually every sample I’ve found  
+                 * online), use the PdfImageObject.GetDrawingImage() method, which does the work for us. */
+                this.Images.Add(drawingImage, extension);
+            }
+        }
+        public void RenderText(TextRenderInfo renderInfo) { }
+
+        #endregion Public Methods 
+
+        #endregion Methods 
     }
 }

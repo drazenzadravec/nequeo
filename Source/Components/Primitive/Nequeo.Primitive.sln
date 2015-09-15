@@ -1,13 +1,38 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Primitive", "Nequeo.Primitive\Nequeo.Primitive.csproj", "{557E75FC-1916-401F-A787-F6067D848E51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Nequeo.Primitive", "Test.Nequeo.Primitive\Test.Nequeo.Primitive.csproj", "{A19070E3-D1A7-413A-9793-F8B828C354E5}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C2EC9A5-3B3D-4A62-8FB3-10EF793D6EDC}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Nequeo.Primitive.vsmdi = Nequeo.Primitive.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNequeoPrimitive", "TestNequeoPrimitive\TestNequeoPrimitive.csproj", "{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Primitive\\Nequeo.Primitive.csproj
+		SccProjectName1 = Nequeo.Primitive
+		SccLocalPath1 = Nequeo.Primitive
+		SccProjectUniqueName2 = Test.Nequeo.Primitive\\Test.Nequeo.Primitive.csproj
+		SccProjectName2 = Test.Nequeo.Primitive
+		SccLocalPath2 = Test.Nequeo.Primitive
+		SccProjectUniqueName3 = TestNequeoPrimitive\\TestNequeoPrimitive.csproj
+		SccProjectName3 = TestNequeoPrimitive
+		SccLocalPath3 = TestNequeoPrimitive
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Nequeo.Primitive.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -35,11 +60,32 @@ Global
 		{557E75FC-1916-401F-A787-F6067D848E51}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
 		{557E75FC-1916-401F-A787-F6067D848E51}.Staging Release|x86.ActiveCfg = Staging Release|x86
 		{557E75FC-1916-401F-A787-F6067D848E51}.Staging Release|x86.Build.0 = Staging Release|x86
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Staging Debug|x86.ActiveCfg = Staging Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Staging Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Staging Release|Any CPU.Build.0 = Debug|Any CPU
+		{A19070E3-D1A7-413A-9793-F8B828C354E5}.Staging Release|x86.ActiveCfg = Staging Release|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Release|x86.ActiveCfg = Release|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Staging Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Staging Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Staging Debug|x86.ActiveCfg = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Staging Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Staging Release|Any CPU.Build.0 = Debug|Any CPU
+		{BEABFB4D-56D3-4CA6-B97B-E3B659E4AC48}.Staging Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Nequeo.Primitive.vsmdi
 	EndGlobalSection
 EndGlobal

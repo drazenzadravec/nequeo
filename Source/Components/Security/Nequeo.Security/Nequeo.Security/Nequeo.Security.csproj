@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nequeo.Security</RootNamespace>
     <AssemblyName>Nequeo.Security</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -268,6 +268,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.ComponentModel, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=5bff97510f36166b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Conversion, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=8a861d1811aa83ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.Conversion.dll</HintPath>
@@ -289,6 +293,7 @@
       <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -314,6 +319,7 @@
     <Compile Include="base\IAuthorisationProvider.cs" />
     <Compile Include="base\PasswordEncoding.cs" />
     <Compile Include="base\Principal.cs" />
+    <Compile Include="base\Protection.cs" />
     <Compile Include="base\SecureText.cs" />
     <Compile Include="base\UserName.cs" />
     <Compile Include="base\X509Certificate.cs" />

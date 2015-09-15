@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nequeo Pty Ltd")]
 [assembly: AssemblyProduct("Nequeo.Wpf")]
-[assembly: AssemblyCopyright("Copyright © Nequeo Pty Ltd 2011")]
+[assembly: AssemblyCopyright("Copyright © Nequeo Pty Ltd 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2014.26.1.1")]
-[assembly: AssemblyFileVersion("2014.26.1.1")]
+[assembly: AssemblyVersion("2016.26.1.1")]
+[assembly: AssemblyFileVersion("2016.26.1.1")]

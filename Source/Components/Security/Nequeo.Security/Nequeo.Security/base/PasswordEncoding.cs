@@ -48,12 +48,17 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.ComponentModel.Composition;
+
+using Nequeo.ComponentModel.Composition;
 
 namespace Nequeo.Security
 {
     /// <summary>
     /// Password encoder.
     /// </summary>
+    [Export(typeof(Nequeo.Cryptography.IPasswordEncryption))]
+    [ContentMetadata(Name = "NequeoPasswordEncoding", Index = 0, Description = "Nequeo password default encoder.")]
     public sealed class PasswordEncoding : Nequeo.Cryptography.IPasswordEncryption
     {
         /// <summary>
@@ -83,6 +88,11 @@ namespace Nequeo.Security
             /// Authorisation cryptography key.
             /// </summary>
             public static string _authorisationCryptoKey = "i?7QJ0w+2*Gd$Cz5q=6M4sZ}_3mAb&H1";
+
+            /// <summary>
+            /// Number of derived iterations.
+            /// </summary>
+            public static int _numberOfIterations = 5000;
 
             /// <summary>
             /// The collection of passwords.
@@ -125,7 +135,7 @@ namespace Nequeo.Security
         /// Get the encrypted authorisation code.
         /// </summary>
         /// <returns>The encrypted base64 authorisation code used for access.</returns>
-        public string EncryptedAuthorisationCode()
+        public string GetAuthorisationCode()
         {
             byte[] data = Encoding.Default.GetBytes(_authorisationKey);
             byte[] encryptedData = new Nequeo.Cryptography.AdvancedAES().EncryptToMemory(data, KeyContainer._authorisationCryptoKey);
@@ -195,8 +205,12 @@ namespace Nequeo.Security
                         byte[] saltBaseBytes = Nequeo.Conversion.Context.HexStringToByteArray(saltBase);
                         string salt = Encoding.Default.GetString(saltBaseBytes);
 
+                        // Password - based Key Derivation Functions.
+                        Rfc2898DeriveBytes rfcDerive = new Rfc2898DeriveBytes(originalPassword, saltBaseBytes, KeyContainer._numberOfIterations);
+                        string derivedPassword = Encoding.Default.GetString(rfcDerive.GetBytes(KeyContainer._saltLength * 2));
+
                         // Return the salt for the hash.
-                        string hash = Nequeo.Cryptography.Hashcode.GetHashcode(originalPassword + _authorisationKey + salt, hashcodeType);
+                        string hash = Nequeo.Cryptography.Hashcode.GetHashcode(derivedPassword + _authorisationKey + salt, hashcodeType);
 
                         // Get the hex salt.
                         byte[] saltBase64 = Encoding.Default.GetBytes(salt);
@@ -265,10 +279,14 @@ namespace Nequeo.Security
                     case Cryptography.PasswordFormat.Hashed:
                         // Encode the password to a hash.
                         string salt = Nequeo.Cryptography.Hashcode.GenerateSalt(KeyContainer._saltLength, KeyContainer._saltLength);
-                        string hash = Nequeo.Cryptography.Hashcode.GetHashcode(password + _authorisationKey + salt, hashcodeType);
+                        byte[] saltBase = Encoding.Default.GetBytes(salt);
+
+                        // Password - based Key Derivation Functions.
+                        Rfc2898DeriveBytes rfcDerive = new Rfc2898DeriveBytes(password, saltBase, KeyContainer._numberOfIterations);
+                        string derivedPassword = Encoding.Default.GetString(rfcDerive.GetBytes(KeyContainer._saltLength * 2));
 
                         // Get the hex salt.
-                        byte[] saltBase = Encoding.Default.GetBytes(salt);
+                        string hash = Nequeo.Cryptography.Hashcode.GetHashcode(derivedPassword + _authorisationKey + salt, hashcodeType);
                         return Nequeo.Conversion.Context.ByteArrayToHexString(saltBase) + hash;
 
                     case Cryptography.PasswordFormat.Clear:
@@ -436,43 +454,37 @@ namespace Nequeo.Security
         /// <param name="store">The stream where the password store is read from.</param>
         public void LoadPasswordStore(Stream store)
         {
-            // If authorised.
-            if (IsAuthorised())
+            // If the store contains data.
+            if (store != null && store.Length > 0)
             {
-                // If the store contains data.
-                if (store != null && store.Length > 0)
+                // Go to the start of the stream.
+                store.Position = 0;
+
+                // Decrypt the password store.
+                byte[] passwordStore = new Nequeo.Cryptography.AdvancedAES().DecryptStream(store, KeyContainer._authorisationCryptoKey);
+
+                // Load the password data.
+                string passwordData = Encoding.Unicode.GetString(passwordStore);
+                string[] names = passwordData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                // Load into the name value collection.
+                KeyContainer._passwords = new List<Model.NameValue>(names.Length);
+                for (int i = 0; i < names.Length; i++)
                 {
-                    // Go to the start of the stream.
-                    store.Position = 0;
+                    // Get the name and value.
+                    string[] nameValue = names[i].Split(new char[] { ':' }, StringSplitOptions.None);
+                    string name = nameValue[0];
+                    string value = nameValue[1].Replace("\0", "");
 
-                    // Decrypt the password store.
-                    byte[] passwordStore = new Nequeo.Cryptography.AdvancedAES().DecryptStream(store, KeyContainer._authorisationCryptoKey);
-
-                    // Load the password data.
-                    string passwordData = Encoding.Unicode.GetString(passwordStore);
-                    string[] names = passwordData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-                    // Load into the name value collection.
-                    KeyContainer._passwords = new List<Model.NameValue>(names.Length);
-                    for (int i = 0; i < names.Length; i++)
-                    {
-                        // Get the name and value.
-                        string[] nameValue = names[i].Split(new char[] { ':' }, StringSplitOptions.None);
-                        string name = nameValue[0].Trim();
-                        string value = nameValue[1].Trim();
-
-                        // Add the name and password.
-                        KeyContainer._passwords.Add(new Model.NameValue() { Name = name, Value = value });
-                    }
-                }
-                else
-                {
-                    // Create an empty password store.
-                    KeyContainer._passwords = new List<Model.NameValue>();
+                    // Add the name and password.
+                    KeyContainer._passwords.Add(new Model.NameValue() { Name = name, Value = value });
                 }
             }
             else
-                throw new Exception("Authorisation Failed.");
+            {
+                // Create an empty password store.
+                KeyContainer._passwords = new List<Model.NameValue>();
+            }
         }
 
         /// <summary>
@@ -503,8 +515,8 @@ namespace Nequeo.Security
                         for (int i = 0; i < KeyContainer._passwords.Count; i++)
                         {
                             // Assing the values.
-                            string name = KeyContainer._passwords[i].Name.Trim();
-                            string value = KeyContainer._passwords[i].Value.Trim();
+                            string name = KeyContainer._passwords[i].Name;
+                            string value = KeyContainer._passwords[i].Value;
                             string end = (i == KeyContainer._passwords.Count - 1 ? "" : "\r\n");
 
                             // Create the buffer.
@@ -540,29 +552,23 @@ namespace Nequeo.Security
         /// <returns>The password; else null.</returns>
         public string GetPassword(string storeName)
         {
-            // If authorised.
-            if (IsAuthorised())
+            // Make sure data exists.
+            if (KeyContainer._passwords != null)
             {
-                // Make sure data exists.
-                if (KeyContainer._passwords != null)
+                // Find all.
+                IEnumerable<Nequeo.Model.NameValue> pass = KeyContainer._passwords.Where(u => u.Name.Equals(storeName));
+                if (pass != null && pass.Count() > 0)
                 {
-                    // Find all.
-                    IEnumerable<Nequeo.Model.NameValue> pass = KeyContainer._passwords.Where(u => u.Name.Equals(storeName));
-                    if (pass != null && pass.Count() > 0)
-                    {
-                        // Decrypt the stored password.
-                        byte[] data = Encoding.Unicode.GetBytes(pass.First().Value);
-                        byte[] password = new Nequeo.Cryptography.AdvancedAES().DecryptFromMemory(data, KeyContainer._passwordKey);
-                        return Encoding.Unicode.GetString(password);
-                    }
-                    else
-                        return null;
+                    // Decrypt the stored password.
+                    byte[] data = Convert.FromBase64String(pass.First().Value);
+                    byte[] password = new Nequeo.Cryptography.AdvancedAES().DecryptFromMemory(data, KeyContainer._passwordKey);
+                    return Encoding.Unicode.GetString(password);
                 }
                 else
-                    throw new Exception("Load the password store data first.");
+                    return null;
             }
             else
-                throw new Exception("Authorisation Failed.");
+                throw new Exception("Load the password store data first.");
         }
 
         /// <summary>
@@ -586,37 +592,31 @@ namespace Nequeo.Security
         /// <param name="storePassword">The password to store for the name.</param>
         public void SetPassword(string storeName, string storePassword)
         {
-            // If authorised.
-            if (IsAuthorised())
+            // Make sure data exists.
+            if (KeyContainer._passwords != null)
             {
-                // Make sure data exists.
-                if (KeyContainer._passwords != null)
+                // Find all.
+                IEnumerable<Nequeo.Model.NameValue> pass = KeyContainer._passwords.Where(u => u.Name.Equals(storeName));
+                if (pass != null && pass.Count() > 0)
                 {
-                    // Find all.
-                    IEnumerable<Nequeo.Model.NameValue> pass = KeyContainer._passwords.Where(u => u.Name.Equals(storeName));
-                    if (pass != null && pass.Count() > 0)
-                    {
-                        // Update the password.
-                        byte[] data = Encoding.Unicode.GetBytes(storePassword);
-                        byte[] password = new Nequeo.Cryptography.AdvancedAES().EncryptToMemory(data, KeyContainer._passwordKey);
-                        pass.First().Value = Encoding.Unicode.GetString(password);
-                    }
-                    else
-                    {
-                        // Create a new password.
-                        byte[] data = Encoding.Unicode.GetBytes(storePassword);
-                        byte[] password = new Nequeo.Cryptography.AdvancedAES().EncryptToMemory(data, KeyContainer._passwordKey);
-                        string value = Encoding.Unicode.GetString(password);
-
-                        // Add the password.
-                        KeyContainer._passwords.Add(new Model.NameValue() { Name = storeName.Trim(), Value = value.Trim() });
-                    }
+                    // Update the password.
+                    byte[] data = Encoding.Unicode.GetBytes(storePassword);
+                    byte[] password = new Nequeo.Cryptography.AdvancedAES().EncryptToMemory(data, KeyContainer._passwordKey);
+                    pass.First().Value = Convert.ToBase64String(password);
                 }
                 else
-                    throw new Exception("Load the password store data first.");
+                {
+                    // Create a new password.
+                    byte[] data = Encoding.Unicode.GetBytes(storePassword);
+                    byte[] password = new Nequeo.Cryptography.AdvancedAES().EncryptToMemory(data, KeyContainer._passwordKey);
+                    string value = Convert.ToBase64String(password);
+
+                    // Add the password.
+                    KeyContainer._passwords.Add(new Model.NameValue() { Name = storeName, Value = value });
+                }
             }
             else
-                throw new Exception("Authorisation Failed.");
+                throw new Exception("Load the password store data first.");
         }
 
         /// <summary>

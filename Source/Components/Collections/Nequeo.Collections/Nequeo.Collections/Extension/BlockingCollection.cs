@@ -52,7 +52,7 @@ namespace Nequeo.Collections.Extension
         /// <returns>A partitioner that completely consumes and enumerates the contents of the collection.</returns>
         /// <remarks>
         /// Using this partitioner with a Parallel.ForEach loop or with PLINQ eliminates the need for those
-        /// constructs to do any additional locking. The only synchronization in place is that used by the
+        /// constructs to do any additional locking.  The only synchronization in place is that used by the
         /// BlockingCollection internally.
         /// </remarks>
         public static Partitioner<T> GetConsumingPartitioner<T>(this BlockingCollection<T> collection)

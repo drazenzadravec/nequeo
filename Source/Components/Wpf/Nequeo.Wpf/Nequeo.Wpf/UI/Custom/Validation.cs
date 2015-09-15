@@ -48,12 +48,12 @@ using System.Windows.Shapes;
 namespace Nequeo.Wpf.UI.Custom
 {
     /// <summary>
-    /// 
+    /// Validation control.
     /// </summary>
     public class Validation : Control
     {
         /// <summary>
-        /// 
+        /// Validation control.
         /// </summary>
         static Validation()
         {

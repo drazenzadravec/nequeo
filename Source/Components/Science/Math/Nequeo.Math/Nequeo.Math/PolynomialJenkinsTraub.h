@@ -54,13 +54,13 @@ namespace Nequeo
 
 				// Methods
 				void Calculate(double op[MDP1], int* Degree, double zeror[MAXDEGREE], double zeroi[MAXDEGREE]);
-				string GetError();
-				void SetError(string error);
+				std::string GetError();
+				void SetError(std::string error);
 
 			private:
 				// Fields
 				bool m_disposed;
-				string m_error;
+				std::string m_error;
 
 				// Methods
 				void Fxshfr(int L2, int* NZ, double sr, double v, double K[MDP1], int N, double p[MDP1], int NN, double qp[MDP1], double u, double* lzi, double* lzr, double* szi, double* szr);

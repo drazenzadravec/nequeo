@@ -99,7 +99,7 @@ namespace Nequeo.Web.HttpModule
                     string userIdentityName = context.User.Identity.Name;
 
                     // Generate the hash code from the user identity name.
-                    memberInfo.UniqueHashcode = Hashcode.GetHashcode(userIdentityName, HashcodeType.SHA1);
+                    memberInfo.UniqueHashcode = Hashcode.GetHashcode(userIdentityName, HashcodeType.SHA512);
                     memberInfo.UserIdentityName = userIdentityName;
 
                     // Add the member info to the context collection.
@@ -120,7 +120,7 @@ namespace Nequeo.Web.HttpModule
                     if (String.IsNullOrEmpty(userIdentityName))
                     {
                         LowerUpperCaseGenerator password = new LowerUpperCaseGenerator();
-                        userIdentityName = password.Random(10, 30);
+                        userIdentityName = password.Random(30, 30);
                         memberInfo.IsAnonymousUser = true;
                         memberInfo.HasAnonymousID = false;
                     }
@@ -128,7 +128,7 @@ namespace Nequeo.Web.HttpModule
                         memberInfo.IsAnonymousUser = true;
 
                     // Generate the hash code from the user identity name.
-                    memberInfo.UniqueHashcode = Hashcode.GetHashcode(userIdentityName, HashcodeType.SHA1);
+                    memberInfo.UniqueHashcode = Hashcode.GetHashcode(userIdentityName, HashcodeType.SHA512);
                     memberInfo.UserIdentityName = userIdentityName;
 
                     // Add the member info to the context collection.

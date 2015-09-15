@@ -222,6 +222,11 @@ namespace Nequeo.Security
         public String Password { set; get; }
 
         /// <summary>
+        /// Gets sets, use a server certificate.
+        /// </summary>
+        public Boolean UseServerCertificate { set; get; }
+
+        /// <summary>
         /// Gets or sets the password encryption provider.
         /// </summary>
         public Nequeo.Cryptography.IPasswordEncryption PasswordEncryption { set; get; }
@@ -248,11 +253,15 @@ namespace Nequeo.Security
 
                 // Get the certificate path details and create
                 // the x509 certificate reference.
-                X509Certificate = X509Certificate2Store.GetCertificate(Path, password);
-
-                // Get the certificate path details and create
-                // the x509 certificate reference.
                 SecurePassword = new Nequeo.Security.SecureText().GetSecureText(password);
+
+                // Should the server certificate be used.
+                if (UseServerCertificate)
+                {
+                    // Get the certificate path details and create
+                    // the x509 certificate reference.
+                    X509Certificate = X509Certificate2Store.GetCertificate(Path, password);
+                }
             }
         }
 
@@ -269,11 +278,15 @@ namespace Nequeo.Security
 
                 // Get the certificate path details and create
                 // the x509 certificate reference.
-                X509Certificate = X509Certificate2Store.GetCertificate(Path, password);
-
-                // Get the certificate path details and create
-                // the x509 certificate reference.
                 SecurePassword = new Nequeo.Security.SecureText().GetSecureText(password);
+
+                // Should the server certificate be used.
+                if (UseServerCertificate)
+                {
+                    // Get the certificate path details and create
+                    // the x509 certificate reference.
+                    X509Certificate = X509Certificate2Store.GetCertificate(Path, password);
+                }   
             }
         }
     }

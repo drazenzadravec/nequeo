@@ -320,6 +320,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UI\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\DataObjectForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -338,6 +344,9 @@
     </Compile>
     <Compile Include="UI\Control\KeyboardForm.Designer.cs">
       <DependentUpon>KeyboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Extender\HtmlRichTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Extender\IntegerTextBox.cs">
       <SubType>Component</SubType>
@@ -383,6 +392,12 @@
     </Compile>
     <Compile Include="UI\Net\WebPage.Designer.cs">
       <DependentUpon>WebPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SearchBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SearchBox.Designer.cs">
+      <DependentUpon>SearchBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Security\AesCryptography.cs">
       <SubType>UserControl</SubType>
@@ -448,6 +463,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\DataObjectForm.resx">
       <DependentUpon>DataObjectForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -474,6 +492,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Net\WebPage.resx">
       <DependentUpon>WebPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SearchBox.resx">
+      <DependentUpon>SearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Security\AesCryptography.resx">
       <DependentUpon>AesCryptography.cs</DependentUpon>

@@ -32,8 +32,8 @@ namespace Nequeo.Security
         /// <exception cref="System.ArgumentNullException"></exception>
         public CodeAccess(CodeAccessPermission permission, Nequeo.Security.IPermission source)
         {
-            if (permission == null) throw new ArgumentNullException("permission");
-            if (source == null) throw new ArgumentNullException("source");
+            if (permission == null) throw new ArgumentNullException(nameof(permission));
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             _permission = permission;
             _source = source;

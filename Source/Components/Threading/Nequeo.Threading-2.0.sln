@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Threading", "Nequeo.Threading-FW-2.0\Nequeo.Threading.csproj", "{27AE7B88-6660-4F6D-906A-2FF71090B1E8}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/nequeocollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Threading-FW-2.0\\Nequeo.Threading.csproj
+		SccProjectName1 = Nequeo.Threading-FW-2.0
+		SccLocalPath1 = Nequeo.Threading-FW-2.0
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Debug|x86.ActiveCfg = Debug|x86
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Debug|x86.Build.0 = Debug|x86
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Release|x86.ActiveCfg = Release|x86
+		{27AE7B88-6660-4F6D-906A-2FF71090B1E8}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

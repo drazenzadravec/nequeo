@@ -264,7 +264,7 @@ String^ Nequeo::Math::Random::Number(int minLength, int maxLength)
         // a string and return the result.
 		return gcnew System::String(number, 0, sizeOfNumber);
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();
@@ -334,7 +334,7 @@ void Nequeo::Math::Random::InitialiseArrays()
 			m_totalNumberNumerics += m_numCharNumeric;
 		}
 	}
-	catch(const exception& ex) 
+	catch(const std::exception& ex)
 	{
 		// Get the error thrown
 		errMessage = ex.what();

@@ -38,9 +38,9 @@
         <LinearGradientBrush StartPoint="0.5,0.5"
                         EndPoint="0.5,1"
                         x:Key="backBrush">
-            <GradientStop Color="DarkGray"
+            <GradientStop Color="Black"
                   Offset="0" />
-            <GradientStop Color="Gray"
+            <GradientStop Color="AliceBlue"
                   Offset="1" />
         </LinearGradientBrush>
         <DropShadowEffect x:Key="shadowWindow"
@@ -90,9 +90,9 @@
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1"
                           StartPoint="0.5,0">
-                        <GradientStop Color="#FFC7C2C2"
+                        <GradientStop Color="AliceBlue"
                     Offset="0" />
-                        <GradientStop Color="#FF8D8787"
+                        <GradientStop Color="Black"
                     Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
@@ -130,6 +130,7 @@
           Click="btnCancel_Click"
           IsCancel="True"
           Width="75"
+          Background="AliceBlue"
           Effect="{StaticResource shadowWindow}"
           ToolTipService.ToolTip="Cancel">
                     <Label Content="Cancel" />
@@ -138,6 +139,7 @@
           Click="btnLogin_Click"
           Width="75"
           IsDefault="True"
+          Background="AliceBlue"
           Effect="{StaticResource shadowWindow}"
           ToolTipService.ToolTip="Login">
                     <Label Content="Login" />

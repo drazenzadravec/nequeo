@@ -12,17 +12,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nequeo.IO.Compression.Huffman
+using Nequeo.IO.Compression.Huffman;
+
+namespace Nequeo.IO.Compression
 {
     /// <summary>
     /// Huffman compression processor algorithm.
     /// </summary>
-    public class Processor
+    public class HuffmanStream
     {
         /// <summary>
         /// Huffman compression processor algorithm.
         /// </summary>
-        public Processor()
+        public HuffmanStream()
         {
             _table = new CodesTable();
             _tree = new BitTree(_table);

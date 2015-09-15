@@ -1,0 +1,272 @@
+﻿/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2010 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ * 
+ */
+
+#region Nequeo Pty Ltd License
+/*
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+*/
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
+using System.Diagnostics;
+using System.Windows.Threading;
+using System.Threading;
+
+namespace Nequeo.Wpf.UI.Custom
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EditLabel : Control
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        static EditLabel()
+        {
+            CommandManager.RegisterClassCommandBinding(typeof(MenuItem), new CommandBinding(EditCommand, OnEditLabel));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(EditLabel), new FrameworkPropertyMetadata(typeof(EditLabel)));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EditLabel()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly RoutedCommand EditCommand = new RoutedCommand("Edit", typeof(EditLabel),
+             new InputGestureCollection(new KeyGesture[] { new KeyGesture(Key.F2, ModifierKeys.None, "F2") }));
+
+
+        /// <summary>
+        /// This is a very special command execution that expects the sender to be a MenuItem that is a direct child of ContextMenu which again
+        /// belongs to an EditLabel.
+        /// </summary>
+        private static void OnEditLabel(object sender, ExecutedRoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            if (item != null)
+            {
+
+                EditLabel label = (item.Parent as ContextMenu).PlacementTarget as EditLabel;
+                if (label != null)
+                {
+                    label.EditMode = true;
+                    label.SelectAll();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SelectAll()
+        {
+            TextBox.Focus();
+            TextBox.SelectAll();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Text
+        {
+            get { return (object)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(object), typeof(EditLabel), new UIPropertyMetadata(null));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool EditMode
+        {
+            get { return (bool)GetValue(EditModeProperty); }
+            set { SetValue(EditModeProperty, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly DependencyProperty EditModeProperty =
+            DependencyProperty.Register("EditMode", typeof(bool), typeof(EditLabel), new FrameworkPropertyMetadata(false, OnEditModePropertyChanged));
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnEditModePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            bool newValue = (bool)e.NewValue;
+            if (newValue) (d as EditLabel).FocusTextBox(); else (d as EditLabel).UnfocusTextBox();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UnfocusTextBox()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void FocusTextBox()
+        {
+            TextBox.Focus();
+            TextBox.SelectAll();
+            TextBox.Focus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            TextBox.LostFocus += new RoutedEventHandler(TextBox_LostFocus);
+            base.OnApplyTemplate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            EditMode = false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
+        {
+            EditMode = false;
+            base.OnLostKeyboardFocus(e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnLostFocus(RoutedEventArgs e)
+        {
+            base.OnLostFocus(e);
+            EditMode = false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private TextBox TextBox { get { return GetTemplateChild("PART_TextBox") as TextBox; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
+        {
+            EditMode = true;
+            e.Handled = true;
+            base.OnMouseDoubleClick(e);
+            TextBox.Focus();
+            TextBox.SelectAll();
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            //  if (EditMode)
+            {
+                base.OnMouseDown(e);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.F2:
+                    if (!EditMode)
+                    {
+                        e.Handled = true;
+                        EditMode = true;
+                        //    FocusTextBox();
+                    }
+                    break;
+
+                case Key.Return:
+                    EditMode = false;
+                    e.Handled = true;
+                    break;
+
+                case Key.Escape:
+                    TextBox.Undo();
+                    EditMode = false;
+                    e.Handled = true;
+                    break;
+            }
+            base.OnKeyDown(e);
+        }
+
+    }
+}

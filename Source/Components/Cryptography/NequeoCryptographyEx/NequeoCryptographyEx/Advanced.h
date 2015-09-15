@@ -59,17 +59,15 @@ namespace Nequeo {
 			/// Create a hash code.
 			/// </summary>
 			/// <param name="data">The data to hash.</param>
-			/// <param name="hashSize">The hash size.</param>
 			/// <returns>The resulting hash code.</returns>
-			PBYTE CreateHashCode(BYTE data[], unsigned long* hashSize);
+			vector<BYTE> CreateHashCode(BYTE data[]);
 
 			/// <summary>
 			/// Create the signature for the data.
 			/// </summary>
 			/// <param name="data">The data to sign.</param>
-			/// <param name="signatureSize">The signature size.</param>
 			/// <returns>The resulting signature.</returns>
-			PBYTE SignData(BYTE data[], unsigned long* signatureSize);
+			vector<BYTE> SignData(BYTE data[]);
 
 			/// <summary>
 			/// Encrypt the data.
@@ -77,9 +75,8 @@ namespace Nequeo {
 			/// <param name="data">The data to encrypt.</param>
 			/// <param name="key">The key used to encrypt the data.</param>
 			/// <param name="iv">The vector used in encryption.</param>
-			/// <param name="encryptSize">The encrypted data size.</param>
 			/// <returns>The resulting encryption.</returns>
-			PBYTE Encrypt(BYTE data[], BYTE key[], BYTE iv[], unsigned long* encryptSize);
+			vector<BYTE> Encrypt(BYTE data[], BYTE key[], BYTE iv[]);
 
 			/// <summary>
 			/// Decrypt the data.
@@ -87,15 +84,9 @@ namespace Nequeo {
 			/// <param name="data">The data to decrypt.</param>
 			/// <param name="key">The key used to decrypt the data.</param>
 			/// <param name="iv">The vector used in decryption.</param>
-			/// <param name="decryptSize">The decrypted data size.</param>
 			/// <returns>The resulting decryption.</returns>
-			PBYTE Decrypt(BYTE data[], BYTE key[], BYTE iv[], unsigned long* decryptSize);
+			vector<BYTE> Decrypt(BYTE data[], BYTE key[], BYTE iv[]);
 
-		private:
-			PBYTE _hashCode;
-			PBYTE _signedData;
-			PBYTE _encryptData;
-			PBYTE _decryptData;
 		};
 	}
 }
