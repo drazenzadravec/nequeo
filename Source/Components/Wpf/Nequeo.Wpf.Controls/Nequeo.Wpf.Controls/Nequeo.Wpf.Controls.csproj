@@ -176,6 +176,25 @@
     <Compile Include="Ribbon\Interfaces\IRibbonGallery.cs" />
     <Compile Include="Ribbon\Interfaces\IRibbonLargeControl.cs" />
     <Compile Include="Ribbon\Interfaces\IRibbonStretch.cs" />
+    <Compile Include="UI\DialogResult.cs" />
+    <Compile Include="UI\FolderBrowserDialog.xaml.cs">
+      <DependentUpon>FolderBrowserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MediaPlayer.xaml.cs">
+      <DependentUpon>MediaPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Media\MediaPlayerControl.xaml.cs">
+      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewFolderDialog.xaml.cs">
+      <DependentUpon>NewFolderDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Text\FontListBoxControl.xaml.cs">
+      <DependentUpon>FontListBoxControl.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -190,6 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Effects\GrayscaleEffect.fx" />
+    <Resource Include="Themes\Images\preview.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Skins\BlackSkin.xaml">
@@ -512,7 +532,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI\FolderBrowserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MediaPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Media\MediaPlayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\NewFolderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Text\FontListBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

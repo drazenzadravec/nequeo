@@ -1,0 +1,14 @@
+﻿<Window x:Class="Nequeo.Wpf.UI.NewFolderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="Create A New Folder" Height="114" Width="300" ResizeMode="NoResize" >
+    <Grid>
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,17,12,0" Name="textBoxFolderName" VerticalAlignment="Top" Width="144" TabIndex="1" KeyUp="textBoxFolderName_KeyUp" />
+        <Label Content="Enter a name" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelText" VerticalAlignment="Top" />
+        <Button Content="OK" Click="buttonOK_clicked" x:Name="buttonOK" Margin="96,46,108,0" Height="23" VerticalAlignment="Top" TabIndex="2" />
+        <Button Content="Cancel" Click="buttonCancel_clicked" x:Name="buttonCancel" Margin="191,46,12,0" Height="23" VerticalAlignment="Top" TabIndex="3" />
+    </Grid>
+</Window>

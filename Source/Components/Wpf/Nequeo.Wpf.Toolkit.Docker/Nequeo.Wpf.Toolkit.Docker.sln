@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Wpf.Toolkit.Docker", "Nequeo.Wpf.Toolkit.Docker\Nequeo.Wpf.Toolkit.Docker.csproj", "{E1F1C697-79B2-4967-B26F-62A5E39CA80F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{E1F1C697-79B2-4967-B26F-62A5E39CA80F}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

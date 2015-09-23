@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Wpf.Toolkit.DataGrid", "Nequeo.Wpf.Toolkit.DataGrid\Nequeo.Wpf.Toolkit.DataGrid.csproj", "{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{4BE9CD10-AB22-49A0-B5FA-4FD9D7A7A414}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -348,6 +348,7 @@
     <Compile Include="Common\DesignerPlatformLibrary.cs" />
     <Compile Include="Common\Empty.cs" />
     <Compile Include="Common\FeatureDetection.cs" />
+    <Compile Include="Common\FontCollection.cs" />
     <Compile Include="Common\ICleanup.cs" />
     <Compile Include="Common\IExecuteWithObject.cs" />
     <Compile Include="Common\IExecuteWithObjectAndResult.cs" />
@@ -357,6 +358,8 @@
     <Compile Include="Common\WeakActionGeneric.cs" />
     <Compile Include="Common\WeakFunc.cs" />
     <Compile Include="Common\WeakFuncGeneric.cs" />
+    <Compile Include="Converters\DateTime.cs" />
+    <Compile Include="Converters\ObjectTypeToName.cs" />
     <Compile Include="Ioc\PreferredConstructor.cs" />
     <Compile Include="Ioc\ViewModelLocator.cs" />
     <Compile Include="Messaging\GenericMessage.cs" />
@@ -397,10 +400,14 @@
     <Compile Include="Threading\DispatcherHelper.cs" />
     <Compile Include="Threading\EventToCommand.cs" />
     <Compile Include="Threading\IEventArgsConverter.cs" />
+    <Compile Include="Threading\WorkDispatcher.cs" />
+    <Compile Include="Threading\WorkDispatcherObject.cs" />
     <Compile Include="UI\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Custom\EditLabel.cs" />
+    <Compile Include="UI\Custom\IntegerTextBox.cs" />
+    <Compile Include="UI\Custom\NumberTextBox.cs" />
     <Compile Include="UI\Custom\NumericUpDown.cs" />
     <Compile Include="UI\Custom\Validation.cs" />
     <Compile Include="UI\DataAccess\DataAccess.xaml.cs">

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Nequeo.Wpf.UI.Media.MediaPlayerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nequeo.Wpf.UI.Media"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="730" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Row0" Height="150*" />
+            <RowDefinition Name="Row1" Height="60" />
+        </Grid.RowDefinitions>
+        <MediaElement Grid.Row="0" x:Name="mediaElement" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LoadedBehavior="Manual" 
+                      MediaOpened="mediaElement_MediaOpened" MediaEnded="mediaElement_MediaEnded" />
+        <Slider x:Name="slider" HorizontalAlignment="Stretch"  Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Maximum="100" IsEnabled="False" 
+                ValueChanged="slider_ValueChanged" MouseDown="slider_MouseDown" />
+        <ComboBox x:Name="comboBox" Margin="0,0,0,5" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="105" SelectionChanged="comboBox_SelectionChanged" >
+            <ComboBoxItem Content="None" Selected="ComboBoxItem_Selected" Tag="-1"/>
+            <ComboBoxItem Content="Open File" Selected="ComboBoxItem_Selected" Tag="0"/>
+            <ComboBoxItem Content="Open Network" Selected="ComboBoxItem_Selected" Tag="1"/>
+        </ComboBox>
+        <Button x:Name="btnClose" Content="Close" Margin="112,0,0,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="btnClose_Click" IsEnabled="False"/>
+        <Button x:Name="btnPlay" Content="Play" Margin="250,0,0,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="btnPlay_Click" IsEnabled="False"/>
+        <Button x:Name="btnStop" Content="Stop" Margin="332,0,0,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="btnStop_Click" IsEnabled="False"/>
+        <Button x:Name="btnPause" Content="Pause" Margin="414,0,0,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="btnPause_Click" IsEnabled="False"/>
+        <Button x:Name="btnMute" Content="Mute" Margin="496,0,0,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="btnMute_Click" IsEnabled="False"/>
+        <Label x:Name="labelTime" Content="00:00:00" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="580,0,0,3" Grid.Row="1" />
+        <Label x:Name="labelOf" Content="of" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="640,0,0,3" Grid.Row="1" />
+        <Label x:Name="labelDuration" Content="00:00:00" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="668,0,0,3" Grid.Row="1" />
+    </Grid>
+</UserControl>

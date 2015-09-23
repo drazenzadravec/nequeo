@@ -74,6 +74,7 @@ namespace Nequeo.Wpf.UI
             Previous = 1,
             Next = 2,
             Last = 3,
+            Custom = 4,
         }
 
         /// <summary>
@@ -433,6 +434,11 @@ namespace Nequeo.Wpf.UI
         public event EventHandler OnLast;
 
         /// <summary>
+        /// On last complete
+        /// </summary>
+        public event EventHandler OnCustom;
+
+        /// <summary>
         /// On before first.
         /// </summary>
         public event EventHandler<Nequeo.Custom.OperationArgs> OnBeforeFirst;
@@ -453,6 +459,11 @@ namespace Nequeo.Wpf.UI
         public event EventHandler<Nequeo.Custom.OperationArgs> OnBeforeLast;
 
         /// <summary>
+        /// On before last
+        /// </summary>
+        public event EventHandler<Nequeo.Custom.OperationArgs> OnBeforeCustom;
+
+        /// <summary>
         /// On first error
         /// </summary>
         public event EventHandler<Nequeo.Custom.MessageArgs> OnFirstError;
@@ -471,6 +482,11 @@ namespace Nequeo.Wpf.UI
         /// On last error
         /// </summary>
         public event EventHandler<Nequeo.Custom.MessageArgs> OnLastError;
+
+        /// <summary>
+        /// On last error
+        /// </summary>
+        public event EventHandler<Nequeo.Custom.MessageArgs> OnCustomError;
 
         /// <summary>
         /// User control loaded.
@@ -571,7 +587,7 @@ namespace Nequeo.Wpf.UI
         {
             try
             {
-                switch(operation)
+                switch (operation)
                 {
                     case SelectedOperation.First:
                         // Should the load continue or be cancelled
@@ -621,6 +637,18 @@ namespace Nequeo.Wpf.UI
                                 return;
                         }
                         break;
+                    case SelectedOperation.Custom:
+                        // Should the load continue or be cancelled
+                        if (OnBeforeCustom != null)
+                        {
+                            Nequeo.Custom.OperationArgs op = new Nequeo.Custom.OperationArgs(false);
+                            OnBeforeCustom(this, op);
+
+                            // Cancel operation if true.
+                            if (op.Cancel)
+                                return;
+                        }
+                        break;
                 }
 
                 // Build the current data object type and
@@ -636,9 +664,9 @@ namespace Nequeo.Wpf.UI
 
                 // Add the genric tyoe contructor parameters
                 // and create the generic type instance.
-                object[] parameters = new object[] { 
-                    ConnectionTypeModel.DatabaseConnection, 
-                    ConnectionTypeModel.ConnectionType, 
+                object[] parameters = new object[] {
+                    ConnectionTypeModel.DatabaseConnection,
+                    ConnectionTypeModel.ConnectionType,
                     ConnectionTypeModel.ConnectionDataType,
                     ((Nequeo.Data.DataType.IDataAccess)Activator.CreateInstance(dataAccessProviderType)) };
                 object listGeneric = Activator.CreateInstance(listGenericTypeConstructor, parameters);
@@ -699,30 +727,33 @@ namespace Nequeo.Wpf.UI
                     case SelectedOperation.Last:
                         skip = _totalRecords - take;
                         break;
+                    case SelectedOperation.Custom:
+                        skip = skip * take;
+                        break;
                 }
 
                 // Get the current object.
-                Object[] args = new Object[] 
-                { 
-                    (skip > 0 ? skip : 0), 
-                    (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy) 
+                Object[] args = new Object[]
+                {
+                    (skip > 0 ? skip : 0),
+                    (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy)
                 };
 
                 // If a take count is set.
                 if (take > 0)
-                    args = new Object[] 
-                { 
-                    (skip > 0 ? skip : 0), 
+                    args = new Object[]
+                {
+                    (skip > 0 ? skip : 0),
                     take,
-                    (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy) 
+                    (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy)
                 };
 
                 // If an expression has been created.
                 if (resultExpression != null)
                 {
-                    args = new Object[] 
-                    { 
-                        (skip > 0 ? skip : 0), 
+                    args = new Object[]
+                    {
+                        (skip > 0 ? skip : 0),
                         (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy),
                         resultExpression
                     };
@@ -731,9 +762,9 @@ namespace Nequeo.Wpf.UI
                 {
                     // If the where clause is set.
                     if (!String.IsNullOrEmpty(where))
-                        args = new Object[] 
-                        { 
-                            (skip > 0 ? skip : 0), 
+                        args = new Object[]
+                        {
+                            (skip > 0 ? skip : 0),
                             (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy),
                             where
                         };
@@ -742,9 +773,9 @@ namespace Nequeo.Wpf.UI
                 // If an expression has been created.
                 if (resultExpression != null)
                 {
-                    args = new Object[] 
-                    { 
-                        (skip > 0 ? skip : 0), 
+                    args = new Object[]
+                    {
+                        (skip > 0 ? skip : 0),
                         take,
                         (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy),
                         resultExpression
@@ -754,9 +785,9 @@ namespace Nequeo.Wpf.UI
                 {
                     // If the take count and where clause are set.
                     if ((take > 0) && (!String.IsNullOrEmpty(where)))
-                        args = new Object[] 
-                        { 
-                            (skip > 0 ? skip : 0), 
+                        args = new Object[]
+                        {
+                            (skip > 0 ? skip : 0),
                             take,
                             (String.IsNullOrEmpty(orderBy) ? properties[0].Name : orderBy),
                             where
@@ -773,7 +804,7 @@ namespace Nequeo.Wpf.UI
                 // Return the collection.
                 DataModel = (IEnumerable)ret;
                 dataGrid.ItemsSource = (IEnumerable)DataModel;
-                
+
                 switch (operation)
                 {
                     case SelectedOperation.First:
@@ -791,6 +822,10 @@ namespace Nequeo.Wpf.UI
                     case SelectedOperation.Last:
                         if (OnLast != null)
                             OnLast(this, new EventArgs());
+                        break;
+                    case SelectedOperation.Custom:
+                        if (OnCustom != null)
+                            OnCustom(this, new EventArgs());
                         break;
                 }
             }
@@ -815,6 +850,10 @@ namespace Nequeo.Wpf.UI
                         if (OnLastError != null)
                             OnLastError(this, new Nequeo.Custom.MessageArgs(ex.Message + " " + inner));
                         break;
+                    case SelectedOperation.Custom:
+                        if (OnCustomError != null)
+                            OnCustomError(this, new Nequeo.Custom.MessageArgs(ex.Message + " " + inner));
+                        break;
                 }
             }
         }
@@ -835,6 +874,23 @@ namespace Nequeo.Wpf.UI
         {
             int index = (currentIndex / MaxRecords) + 1;
             int total = (_totalRecords / MaxRecords) + 1;
+
+            index = index < 1 ? 1 : index;
+            index = index > total ? total : index;
+            lblDetails.Content = "Index " + index.ToString() + " of " + total.ToString();
+        }
+
+        /// <summary>
+        /// Set the details content.
+        /// </summary>
+        /// <param name="currentIndex">The number to skip</param>
+        private void SetDetailsContentCustom(int currentIndex = 0)
+        {
+            int index = currentIndex;
+            int total = (_totalRecords / MaxRecords) + 1;
+
+            index = index < 1 ? 1 : index;
+            index = index > total ? total : index;
             lblDetails.Content = "Index " + index.ToString() + " of " + total.ToString();
         }
 
@@ -888,6 +944,66 @@ namespace Nequeo.Wpf.UI
             SetTotalRecordContent();
             EnableButton(0);
             SetDetailsContent(0);
+        }
+
+        /// <summary>
+        /// Goto page index clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGoToPageIndex_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Get the entered text.
+                string text = txtPageIndex.Text;
+
+                // Is valid integer.
+                int indexPage = -1;
+                bool isInt = Int32.TryParse(text, out indexPage);
+
+                // Total number of page indexes.
+                int totalPageIndexes = (_totalRecords / MaxRecords) + 1;
+
+                // If is integer and more than one page index.
+                if (isInt && (indexPage > 0 && indexPage <= totalPageIndexes))
+                {
+                    // Move to the index.
+                    _currentIndex = (indexPage - 1) * MaxRecords;
+                    LoadData(SelectedOperation.Custom, indexPage - 1, MaxRecords);
+                    SetTotalRecordContent();
+                    EnableButton(_currentIndex);
+                    SetDetailsContentCustom(indexPage);
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Goto page index text changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPageIndex_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // if no text then disable.
+            if (String.IsNullOrEmpty(txtPageIndex.Text))
+            {
+                btnGoToPageIndex.IsEnabled = false;
+            }
+            else
+            {
+                btnGoToPageIndex.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Is the current item valid.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataItemValid(object sender, Nequeo.Custom.ValidationArgs e)
+        {
         }
     }
 }

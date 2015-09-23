@@ -52,12 +52,12 @@ using System.Threading;
 namespace Nequeo.Wpf.UI.Custom
 {
     /// <summary>
-    /// 
+    /// Editable label control.
     /// </summary>
     public class EditLabel : Control
     {
         /// <summary>
-        /// 
+        /// Editable label control.
         /// </summary>
         static EditLabel()
         {
@@ -66,7 +66,7 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Editable label control.
         /// </summary>
         public EditLabel()
             : base()
@@ -74,7 +74,7 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Create edit command routed command.
         /// </summary>
         public static readonly RoutedCommand EditCommand = new RoutedCommand("Edit", typeof(EditLabel),
              new InputGestureCollection(new KeyGesture[] { new KeyGesture(Key.F2, ModifierKeys.None, "F2") }));
@@ -84,6 +84,8 @@ namespace Nequeo.Wpf.UI.Custom
         /// This is a very special command execution that expects the sender to be a MenuItem that is a direct child of ContextMenu which again
         /// belongs to an EditLabel.
         /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event arguments.</param>
         private static void OnEditLabel(object sender, ExecutedRoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
@@ -100,7 +102,7 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Select all text.
         /// </summary>
         public void SelectAll()
         {
@@ -109,7 +111,7 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// The label text.
         /// </summary>
         public object Text
         {
@@ -118,13 +120,13 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Create the Text property dependency.
         /// </summary>
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(object), typeof(EditLabel), new UIPropertyMetadata(null));
 
         /// <summary>
-        /// 
+        /// The label edit mode.
         /// </summary>
         public bool EditMode
         {
@@ -133,17 +135,17 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Create the Edit Mode property dependency.
         /// </summary>
         public static readonly DependencyProperty EditModeProperty =
             DependencyProperty.Register("EditMode", typeof(bool), typeof(EditLabel), new FrameworkPropertyMetadata(false, OnEditModePropertyChanged));
 
 
         /// <summary>
-        /// 
+        /// On edit mode property changed event handler.
         /// </summary>
-        /// <param name="d"></param>
-        /// <param name="e"></param>
+        /// <param name="d">The property dependency.</param>
+        /// <param name="e">The property dependency event arguments.</param>
         private static void OnEditModePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             bool newValue = (bool)e.NewValue;
@@ -151,14 +153,14 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Unfocus text box.
         /// </summary>
         private void UnfocusTextBox()
         {
         }
 
         /// <summary>
-        /// 
+        /// Focus text box.
         /// </summary>
         private void FocusTextBox()
         {
@@ -168,28 +170,29 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// On apply template handler.
         /// </summary>
         public override void OnApplyTemplate()
         {
+            // Attach to the lost focus event in the textbox.
             TextBox.LostFocus += new RoutedEventHandler(TextBox_LostFocus);
             base.OnApplyTemplate();
         }
 
         /// <summary>
-        /// 
+        /// Text box lost focus.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The routed event arguments.</param>
         void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             EditMode = false;
         }
 
         /// <summary>
-        /// 
+        /// On lost keyboard focus.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The keyboard focus changed event arguments.</param>
         protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
             EditMode = false;
@@ -197,9 +200,9 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// On lost focus.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The routed event arguments.</param>
         protected override void OnLostFocus(RoutedEventArgs e)
         {
             base.OnLostFocus(e);
@@ -207,14 +210,20 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// Gets the text box template part.
         /// </summary>
-        private TextBox TextBox { get { return GetTemplateChild("PART_TextBox") as TextBox; } }
+        private TextBox TextBox
+        {
+            get
+            {
+                return GetTemplateChild("PART_TextBox") as TextBox;
+            }
+        }
 
         /// <summary>
-        /// 
+        /// On mouse double click event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The mouse button event arguments.</param>
         protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
         {
             EditMode = true;
@@ -226,9 +235,9 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// On mouse down event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The mouse button event arguments.</param>
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             //  if (EditMode)
@@ -238,9 +247,9 @@ namespace Nequeo.Wpf.UI.Custom
         }
 
         /// <summary>
-        /// 
+        /// On key down event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Key event arguments.</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
             switch (e.Key)
