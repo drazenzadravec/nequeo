@@ -4,8 +4,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cmdCustom="clr-namespace:Nequeo.Wpf.UI.Text"
              xmlns:local="clr-namespace:Nequeo.Wpf.UI.Text"
              xmlns:rtba="clr-namespace:Nequeo.Wpf.Extension" >
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.PageSetupCommand}" Executed="DoPageSetupCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.PrintAsyncCommand}" Executed="DoPrintAsyncCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.PrintCommand}" Executed="DoPrintCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.PreviewCommand}" Executed="DoPreviewCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.FindCommand}" Executed="DoFindCommand" CanExecute="CanExecuteFindCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.FindNextCommand}" Executed="DoFindNextCommand" CanExecute="CanExecuteFindCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.ReplaceCommand}" Executed="DoReplaceCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.SpellCheckCommand}" Executed="DoSpellCheckCommand" />
+        <CommandBinding Command="{x:Static cmdCustom:RichTextEditorControl.DateTimeCommand}" Executed="DoTimeDateCommand" />
+        <CommandBinding Command="SelectAll" Executed="DoSelectAllCommand" />
+    </UserControl.CommandBindings>
+
+    <UserControl.InputBindings>
+        <KeyBinding Command="{x:Static cmdCustom:RichTextEditorControl.PrintAsyncCommand}" Gesture="Ctrl+Shift+P" />
+        <KeyBinding Command="{x:Static cmdCustom:RichTextEditorControl.FindCommand}" Gesture="Ctrl+F" />
+        <KeyBinding Command="{x:Static cmdCustom:RichTextEditorControl.FindNextCommand}" Gesture="F3" />
+        <KeyBinding Command="{x:Static cmdCustom:RichTextEditorControl.ReplaceCommand}" Gesture="Ctrl+H" />
+        <KeyBinding Command="{x:Static cmdCustom:RichTextEditorControl.DateTimeCommand}" Gesture="F5" />
+    </UserControl.InputBindings>
+    
     <Grid>
         <!-- Set the styles for the tool bar. -->
         <Grid.Resources>
@@ -24,7 +47,49 @@
 
         <DockPanel Name="mainPanel">
 
-            <!-- This tool bar contains all the editing buttons. -->
+            <Menu Name="mainMenu" DockPanel.Dock="Top">
+                <MenuItem Name="_PrintingMenu">
+                    <MenuItem.Header>_Printing</MenuItem.Header>
+                    <MenuItem  Command="{x:Static cmdCustom:RichTextEditorControl.PageSetupCommand}" >
+                        <MenuItem.Header>Page Set_up</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem  Command="{x:Static cmdCustom:RichTextEditorControl.PrintCommand}" >
+                        <MenuItem.Header>_Print</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem  Command="{x:Static cmdCustom:RichTextEditorControl.PreviewCommand}" >
+                        <MenuItem.Header>Pre_view</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem  Command="{x:Static cmdCustom:RichTextEditorControl.PrintAsyncCommand}" InputGestureText="Ctrl+Shift+P">
+                        <MenuItem.Header>P_rint Async</MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem  Name="_SearchMenu">
+                    <MenuItem.Header>_Searching</MenuItem.Header>
+                    <MenuItem Name="_find" Command="{x:Static cmdCustom:RichTextEditorControl.FindCommand}" InputGestureText="Ctrl+F">
+                        <MenuItem.Header>_Find</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Name="_findNext" Command="{x:Static cmdCustom:RichTextEditorControl.FindNextCommand}" InputGestureText="F3">
+                        <MenuItem.Header>Find _Next</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Name="_replace" Command="{x:Static cmdCustom:RichTextEditorControl.ReplaceCommand}" InputGestureText="Ctrl+H">
+                        <MenuItem.Header>_Replace</MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem  Name="_TextMenu">
+                    <MenuItem.Header>_Text</MenuItem.Header>
+                    <MenuItem Name="_spellChecked" Command="{x:Static cmdCustom:RichTextEditorControl.SpellCheckCommand}" IsEnabled="True" IsCheckable="True" IsChecked="False">
+                        <MenuItem.Header>_Spell Check</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="SelectAll">
+                        <MenuItem.Header>Select _All</MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{x:Static cmdCustom:RichTextEditorControl.DateTimeCommand}" InputGestureText="F5">
+                        <MenuItem.Header>Time/_Date</MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+                <!-- This tool bar contains all the editing buttons. -->
             <ToolBar Height="30" DockPanel.Dock="Top" ToolBarTray.IsLocked="True" >
                 <Button Style="{StaticResource formatImageStyle}" Click="New_Click" ToolTip="New">
                     <Image Source="/Nequeo.Wpf;component/Themes/Images/Page.png"></Image>

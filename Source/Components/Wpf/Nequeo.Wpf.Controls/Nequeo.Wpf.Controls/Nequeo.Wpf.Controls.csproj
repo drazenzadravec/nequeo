@@ -176,6 +176,11 @@
     <Compile Include="Ribbon\Interfaces\IRibbonGallery.cs" />
     <Compile Include="Ribbon\Interfaces\IRibbonLargeControl.cs" />
     <Compile Include="Ribbon\Interfaces\IRibbonStretch.cs" />
+    <Compile Include="UI\Custom\ColorComboBoxItem.cs" />
+    <Compile Include="UI\Custom\ColourListBoxControl.xaml.cs">
+      <DependentUpon>ColourListBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Custom\KnownColor.cs" />
     <Compile Include="UI\DialogResult.cs" />
     <Compile Include="UI\FolderBrowserDialog.xaml.cs">
       <DependentUpon>FolderBrowserDialog.xaml</DependentUpon>
@@ -192,9 +197,17 @@
     <Compile Include="UI\NewFolderDialog.xaml.cs">
       <DependentUpon>NewFolderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Text\FontChooserDialog.xaml.cs">
+      <DependentUpon>FontChooserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Text\FontFamilyListItem.cs" />
     <Compile Include="UI\Text\FontListBoxControl.xaml.cs">
       <DependentUpon>FontListBoxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Text\FontSizeListItem.cs" />
+    <Compile Include="UI\Text\NameDictionaryHelper.cs" />
+    <Compile Include="UI\Text\TypefaceListItem.cs" />
+    <Compile Include="UI\Text\TypographicFeatureListItem.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -532,6 +545,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI\Custom\ColourListBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\FolderBrowserDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -549,6 +566,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\NewFolderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Text\FontChooserDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

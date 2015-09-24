@@ -417,6 +417,7 @@
       <DependentUpon>DataGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Printing\Document.cs" />
+    <Compile Include="UI\Printing\HeaderFooterDocumentPaginator.cs" />
     <Compile Include="UI\Printing\Preview.cs" />
     <Compile Include="UI\Printing\PreviewControl.xaml.cs">
       <DependentUpon>PreviewControl.xaml</DependentUpon>
@@ -424,12 +425,20 @@
     <Compile Include="UI\Printing\PreviewDialog.xaml.cs">
       <DependentUpon>PreviewDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Printing\PrintDocument.cs" />
+    <Compile Include="UI\Printing\PrintProgressWindow.xaml.cs">
+      <DependentUpon>PrintProgressWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Printing\RichTextBoxDocument.cs" />
+    <Compile Include="UI\Printing\VisualContainer.cs" />
     <Compile Include="UI\RichTextEditor.xaml.cs">
       <DependentUpon>RichTextEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Security\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Text\FindDialog.xaml.cs">
+      <DependentUpon>FindDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Text\NumericUpDown.xaml.cs">
       <DependentUpon>NumericUpDown.xaml</DependentUpon>
@@ -507,11 +516,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Printing\PrintProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\RichTextEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Security\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Text\FindDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
