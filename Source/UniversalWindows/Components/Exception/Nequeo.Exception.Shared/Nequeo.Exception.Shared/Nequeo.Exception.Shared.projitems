@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6b347464-834f-4b63-bf4a-2fa88211c415</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Nequeo.Exception.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AsyncException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BerDecodeException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EmptyStringException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ErrorCodeException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InvalidCredentailsException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InvalidFileException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InvalidLengthException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InvalidPathException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PermissionException.cs" />
+  </ItemGroup>
+</Project>

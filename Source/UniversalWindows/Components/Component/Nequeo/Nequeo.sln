@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo", "Nequeo\Nequeo.csproj", "{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Nequeo.Shared", "..\Nequeo.Shared\Nequeo.Shared\Nequeo.Shared.shproj", "{0D9F7E9D-40D8-4942-9668-E383C1A6813E}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Nequeo.Shared\Nequeo.Shared\Nequeo.Shared.projitems*{0d9f7e9d-40d8-4942-9668-e383c1a6813e}*SharedItemsImports = 13
+		..\Nequeo.Shared\Nequeo.Shared\Nequeo.Shared.projitems*{ae44fb78-427f-4ae5-b91e-a3366f1ca2c3}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|ARM.Build.0 = Debug|ARM
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|x64.ActiveCfg = Debug|x64
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|x64.Build.0 = Debug|x64
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|x86.ActiveCfg = Debug|x86
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Debug|x86.Build.0 = Debug|x86
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|ARM.ActiveCfg = Release|ARM
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|ARM.Build.0 = Release|ARM
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|x64.ActiveCfg = Release|x64
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|x64.Build.0 = Release|x64
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|x86.ActiveCfg = Release|x86
+		{AE44FB78-427F-4AE5-B91E-A3366F1CA2C3}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

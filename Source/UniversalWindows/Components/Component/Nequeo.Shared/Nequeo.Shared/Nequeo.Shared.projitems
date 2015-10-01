@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>0d9f7e9d-40d8-4942-9668-e383c1a6813e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Nequeo.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)base\Environment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Custom\ByteOrder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Custom\Platform.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Convertible\" />
+    <Folder Include="$(MSBuildThisFileDirectory)IO\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Math\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Text\" />
+  </ItemGroup>
+</Project>

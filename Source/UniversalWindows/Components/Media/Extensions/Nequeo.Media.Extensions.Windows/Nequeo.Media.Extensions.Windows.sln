@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Media.Extensions.Windows", "Nequeo.Media.Extensions.Windows\Nequeo.Media.Extensions.Windows.vcxproj", "{1F3F3D0C-059A-4872-9854-7BA320507297}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Media.Extensions.Shared", "..\Nequeo.Media.Extensions.Shared\Nequeo.Media.Extensions.Shared\Nequeo.Media.Extensions.Shared.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Nequeo.Media.Extensions.Shared\Nequeo.Media.Extensions.Shared\Nequeo.Media.Extensions.Shared.vcxitems*{1f3f3d0c-059a-4872-9854-7ba320507297}*SharedItemsImports = 4
+		..\Nequeo.Media.Extensions.Shared\Nequeo.Media.Extensions.Shared\Nequeo.Media.Extensions.Shared.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Debug|ARM.Build.0 = Debug|ARM
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Debug|x64.ActiveCfg = Debug|x64
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Debug|x64.Build.0 = Debug|x64
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Debug|x86.ActiveCfg = Debug|Win32
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Debug|x86.Build.0 = Debug|Win32
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Release|ARM.ActiveCfg = Release|ARM
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Release|ARM.Build.0 = Release|ARM
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Release|x64.ActiveCfg = Release|x64
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Release|x64.Build.0 = Release|x64
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Release|x86.ActiveCfg = Release|Win32
+		{1F3F3D0C-059A-4872-9854-7BA320507297}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
