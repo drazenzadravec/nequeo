@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Net.Maps", "Nequeo.Net.Maps\Nequeo.Net.Maps.csproj", "{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.NetMaps", "Test.NetMaps\Test.NetMaps.csproj", "{10F05674-D5F4-4020-A115-24554D8D779C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{83FB204D-EDDA-40D4-8619-5ADF7C5A516E}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Net.Maps.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GoogleMapsTimeZoneServiceURI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://maps.googleapis.com/maps/api/timezone/</Value>
+    </Setting>
+    <Setting Name="GoogleMapsGeocodeServiceURI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://maps.googleapis.com/maps/api/geocode/</Value>
+    </Setting>
+    <Setting Name="MicrosoftMapsGeocodeServiceURI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://dev.virtualearth.net/REST/v1/Locations/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

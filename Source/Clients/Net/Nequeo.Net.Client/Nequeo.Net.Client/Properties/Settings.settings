@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Net.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TransferClientMaxReceivedMessageSize" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">67108864</Value>
+    </Setting>
+    <Setting Name="TransferClientByteMaxReceivedMessageSize" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">67108864</Value>
+    </Setting>
+    <Setting Name="MessageClientMaxReceivedMessageSize" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">67108864</Value>
+    </Setting>
+    <Setting Name="TransferClientBaseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">net.tcp://wcf.nequeo.net.au:8713/ServiceTransfer/Stream/secureBasicWcf</Value>
+    </Setting>
+    <Setting Name="TransferClientByteBaseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">net.tcp://wcf.nequeo.net.au:8718/ServiceTransfer/ByteStream/secureBasicWcf</Value>
+    </Setting>
+    <Setting Name="TransferHandlerBaseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://wcf.nequeo.net.au/transfer/Stream/StreamHandler.ashx</Value>
+    </Setting>
+    <Setting Name="TransferQueryHandlerBaseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://wcf.nequeo.net.au/transfer/Stream/StreamQueryHandler.ashx</Value>
+    </Setting>
+    <Setting Name="MessageClientBaseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">net.tcp://wcf.nequeo.net.au:8723/ServiceMessage/Stream/secureBasicWcf</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

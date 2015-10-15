@@ -1,0 +1,5 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# string Namespace = "Nequeo.Net.OAuth.Client.Version1";#>
+<# string TypeName = "Twitter";#>
+<#@ include file="_AsyncExecuteTypeGeneric.include" #>

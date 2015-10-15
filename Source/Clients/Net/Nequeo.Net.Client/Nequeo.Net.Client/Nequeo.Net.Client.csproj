@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC3330A8-46D0-4D09-8C38-33FE6945AC95}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Net</RootNamespace>
+    <AssemblyName>Nequeo.Net.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoNetClientKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\References\Staging\Client\Net.Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\References\Staging\Client\Net.Client\Nequeo.Net.Client.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\References\Staging\Client\Net.Client\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\References\Staging\Client\Net.Client\Nequeo.Net.Client.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.Exceptions">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.IO.Stream">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Stream.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.Http">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.ServiceModel">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=3b355968680c6ed8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Serialisation, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=60e6b5624b241280, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Serialisation.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Service">
+      <HintPath>..\..\..\..\References\Staging\Service\Common\Nequeo.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\Client.cs" />
+    <Compile Include="base\DataClient.cs" />
+    <Compile Include="base\JsonClient.cs" />
+    <Compile Include="base\XmlClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MessageStream\Reference.cs" />
+    <Compile Include="Service References\TransferByteStream\Reference.cs" />
+    <Compile Include="Service References\TransferStream\Reference.cs" />
+    <Compile Include="ServiceModel\MessageClient.cs" />
+    <Compile Include="ServiceModel\MessageStreamClient.cs" />
+    <Compile Include="base\MessageWebClient.cs" />
+    <Compile Include="ServiceModel\ServiceClient.cs" />
+    <Compile Include="ServiceModel\TransferByteClient.cs" />
+    <Compile Include="ServiceModel\TransferByteStreamClient.cs" />
+    <Compile Include="ServiceModel\TransferClient.cs" />
+    <Compile Include="base\TransferHandler.cs" />
+    <Compile Include="base\TransferQueryHandler.cs" />
+    <Compile Include="ServiceModel\TransferStreamClient.cs" />
+    <Compile Include="base\TransferWebClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="NequeoNetClientKey.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\MessageStream\Nequeo.Model.Message.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageStream\service.wsdl" />
+    <None Include="Service References\MessageStream\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageStream\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferByteStream\service.wsdl" />
+    <None Include="Service References\TransferByteStream\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferByteStream\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferStream\Message.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferStream\service.wsdl" />
+    <None Include="Service References\TransferStream\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferStream\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Service References\MessageStream\configuration.svcinfo" />
+    <Content Include="Service References\MessageStream\configuration91.svcinfo" />
+    <Content Include="Service References\TransferByteStream\configuration.svcinfo" />
+    <Content Include="Service References\TransferByteStream\configuration91.svcinfo" />
+    <Content Include="Service References\TransferStream\configuration.svcinfo" />
+    <Content Include="Service References\TransferStream\configuration91.svcinfo" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Net.Translator.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MicrosoftTranslatorServiceURI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.datamarket.azure.com/Bing/MicrosoftTranslator/</Value>
+    </Setting>
+    <Setting Name="GoogleTranslatorServiceURI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.googleapis.com/language/translate/v2/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

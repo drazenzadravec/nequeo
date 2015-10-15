@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Net.OAuth.Client", "Nequeo.Net.OAuth.Client\Nequeo.Net.OAuth.Client.csproj", "{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Net.OAuth.Client\\Nequeo.Net.OAuth.Client.csproj
+		SccProjectName1 = Nequeo.Net.OAuth.Client
+		SccLocalPath1 = Nequeo.Net.OAuth.Client
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{65AEDC5C-19A6-4A32-801C-9C8B759BA70A}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
