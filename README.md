@@ -1,6 +1,6 @@
 # Nequeo
  
-Nequeo master repo contains component projects wriiten in C++, C, C#, Python and Java.
+Nequeo master repo contains component projects wriiten in C++, C, C#, Python, Java and PHP.
 
 ## Components
 
