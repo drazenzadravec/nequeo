@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+   +----------------------------------------------------------------------------------------------+
+   | Windows Cache for PHP                                                                        |
+   +----------------------------------------------------------------------------------------------+
+   | Copyright (c) 2015, Microsoft Corporation. All rights reserved.                              |
+   |                                                                                              |
+   | Redistribution and use in source and binary forms, with or without modification, are         |
+   | permitted provided that the following conditions are met:                                    |
+   | - Redistributions of source code must retain the above copyright notice, this list of        |
+   | conditions and the following disclaimer.                                                     |
+   | - Redistributions in binary form must reproduce the above copyright notice, this list of     |
+   | conditions and the following disclaimer in the documentation and/or other materials provided |
+   | with the distribution.                                                                       |
+   | - Neither the name of the Microsoft Corporation nor the names of its contributors may be     |
+   | used to endorse or promote products derived from this software without specific prior written|
+   | permission.                                                                                  |
+   |                                                                                              |
+   | THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS  |
+   | OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF              |
+   | MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE   |
+   | COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,    |
+   | EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE|
+   | GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED   |
+   | AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING    |
+   | NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED |
+   | OF THE POSSIBILITY OF SUCH DAMAGE.                                                           |
+   +----------------------------------------------------------------------------------------------+
+   | Module: php_wincache.c                                                                       |
+   +----------------------------------------------------------------------------------------------+
+   | Author:  Eric Stenson <ericsten@microsoft.com>                                               |
+   +----------------------------------------------------------------------------------------------+
+-->
+<instrumentationManifest
+    xmlns="http://schemas.microsoft.com/win/2004/08/events"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    >
+  <instrumentation>
+    <events>
+      <provider
+        name="PHP-Wincache"
+        guid="{F7AD0093-D5C3-46B9-BEEA-A9FCEC7E1408}"
+        symbol="PhpWinCacheEtwProvider"
+        resourceFileName="php_wincache.dll"
+        messageFileName="php_wincache.dll"
+        message="$(string.Provider.Name)"
+        >
+        <keywords>
+          <keyword name="Init" symbol="INIT_KEYWORD" mask="0x1" />
+          <keyword name="Memory" symbol="MEMORY_KEYWORD" mask="0x2" />
+          <keyword name="Locks" symbol="LOCKS_KEYWORD" mask="0x4" />
+          <keyword name="Opcode" symbol="OPCODE_KEYWORD" mask="0x8" />
+          <keyword name="FCache" symbol="FCACHE_KEYWORD" mask="0x10" />
+          <keyword name="ZCache" symbol="ZCACHE_KEYWORD" mask="0x20" />
+          <keyword name="Session" symbol="SESSION_KEYWORD" mask="0x40" />
+        </keywords>
+        <templates>
+          <template tid="ModuleInitErrorTemplate">
+            <data name="Error" inType="win:UInt64" />
+          </template>
+          <template tid="InitMutexErrorTemplate">
+            <data name="Name" inType="win:AnsiString" />
+            <data name="Handle" inType="win:Pointer" outType="win:HexInt64" />
+          </template>
+          <template tid="MemAllocBlockTemplate">
+            <data name="Block" inType="win:Pointer" />
+            <data name="AllocContext" inType="win:Pointer" />
+            <data name="File" inType="win:AnsiString" />
+            <data name="Line" inType="win:UInt32" />
+          </template>
+          <template tid="LockMutexTemplate">
+            <data name="LockName" inType="win:AnsiString" />
+            <data name="LastReaderPid" inType="win:UInt32" />
+            <data name="LastWriterPid" inType="win:UInt32" />
+            <data name="File" inType="win:AnsiString" />
+            <data name="Line" inType="win:UInt32" />
+          </template>
+        </templates>
+        <events>
+          <!-- Init: 1-9 -->
+          <event value="1"
+                 level="win:Error"
+                 template="ModuleInitErrorTemplate"
+                 symbol="ModuleInitErrorEvent"
+                 message="$(string.Event.ModInitError)"
+                 keywords="Init" />
+          <event value="2"
+                 level="win:Error"
+                 template="InitMutexErrorTemplate"
+                 symbol="InitMutexErrorEvent"
+                 message="$(string.Event.InitMutexError)"
+                 keywords="Init" />
+          <event value="3"
+                 level="win:Informational"
+                 symbol="InitOpcacheLocalFallbackEvent"
+                 message="$(string.Event.InitOpcacheLocalFallbackInfo)"
+                 keywords="Init" />
+
+          <!-- Memory: 10-19 -->
+          <event value ="10"
+                 level="win:Error"
+                 template="MemAllocBlockTemplate"
+                 symbol="MemBlockNotInUse"
+                 message="$(string.Event.MemBlockNotInUseError)"
+                 keywords="Memory" />
+          <event value ="11"
+                 level="win:Error"
+                 template="MemAllocBlockTemplate"
+                 symbol="MemFreeAddrNotInSegment"
+                 message="$(string.Event.MemFreeAddrNotInSegmentError)"
+                 keywords="Memory" />
+          <event value ="12"
+                 level="win:Error"
+                 template="MemAllocBlockTemplate"
+                 symbol="MemCombineNonFreeBlock"
+                 message="$(string.Event.MemCombineNonFreeBlockError)"
+                 keywords="Memory" />
+          <event value ="13"
+                 level="win:Error"
+                 template="MemAllocBlockTemplate"
+                 symbol="MemFreeListCorrupt"
+                 message="$(string.Event.MemFreeListCorruptError)"
+                 keywords="Memory" />
+
+          <!-- Locks: 20-29 -->
+          <event value ="20"
+                 level="win:Error"
+                 template="LockMutexTemplate"
+                 symbol="LockAbandonedMutex"
+                 message="$(string.Event.LockAbandonedMutexError)"
+                 keywords="Locks" />
+          <event value ="21"
+                 level="win:Error"
+                 template="LockMutexTemplate"
+                 symbol="LockFailedWaitForLock"
+                 message="$(string.Event.LockFailedWaitForLockError)"
+                 keywords="Locks" />
+          <event value ="22"
+                 level="win:Error"
+                 template="LockMutexTemplate"
+                 symbol="UnlockAbandonedMutex"
+                 message="$(string.Event.UnlockAbandonedMutexError)"
+                 keywords="Locks" />
+          <event value ="23"
+                 level="win:Error"
+                 template="LockMutexTemplate"
+                 symbol="UnlockFailedWaitForLock"
+                 message="$(string.Event.UnlockFailedWaitForLockError)"
+                 keywords="Locks" />
+        </events>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="Provider.Name" value="PHP-WinCache" />
+
+        <string
+          id="Event.ModInitError"
+          value="PHP_MINIT_FUNCTION(Wincache) failed.  Error: %1"
+          />
+        <string
+          id="Event.InitMutexError"
+          value="Failure waiting for INIT mutex %1.  Handle: %2"
+          />
+        <string
+          id="Event.InitOpcacheLocalFallbackInfo"
+          value="Couldn't map opcache at shared address.  Falling back to local opcache."
+          />
+        <string
+          id="Event.MemBlockNotInUseError"
+          value="free_memory: Block %1 in alloc_context %2 not in use.  File: %3, Line: %4"
+          />
+        <string
+          id="Event.MemFreeAddrNotInSegmentError"
+          value="free_memory: Address %1 is not within alloc_context %2.  File: %3, Line: %4"
+          />
+        <string
+          id="Event.MemCombineNonFreeBlockError"
+          value="free_memory: Combining with non-free block %p within alloc_context %2. CORRUPTION IMMINENT  File: %3, Line %4"
+          />
+        <string
+          id="Event.MemFreeListCorruptError"
+          value="alloc_memory: Segment Free-List corrupt in alloc_context %2.  File: %3, Line: %4"
+          />
+        <string
+          id="Event.LockAbandonedMutexError"
+          value="Lock: Acquired abandoned mutex in Lock Name %1.  Last Reader PID: %2, Last Writer PID: %3, File: %4, Line: %5"
+          />
+        <string
+          id="Event.LockFailedWaitForLockError"
+          value="Lock: Failed waiting in Lock Name %1.  Last Reader PID: %2, Last Writer PID: %3, File: %4, Line: %5"
+          />
+        <string
+          id="Event.UnlockAbandonedMutexError"
+          value="Unlock: Acquired abandoned mutex in Lock Name %1.  Last Reader PID: %2, Last Writer PID: %3, File: %4, Line: %5"
+          />
+        <string
+          id="Event.UnlockFailedWaitForLockError"
+          value="Unlock: Failed waiting in Lock Name %1.  Last Reader PID: %2, Last Writer PID: %3, File: %4, Line: %5"
+          />
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>
