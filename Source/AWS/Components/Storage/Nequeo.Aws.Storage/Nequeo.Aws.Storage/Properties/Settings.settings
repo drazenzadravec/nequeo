@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Aws.Storage.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AwsDynamoDBServiceUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://dynamodb.ap-southeast-2.amazonaws.com/</Value>
+    </Setting>
+    <Setting Name="AwsSimpleDBServiceUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://sdb.ap-southeast-2.amazonaws.com/</Value>
+    </Setting>
+    <Setting Name="AwsDynamoDBRegionEndPoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ap-southeast-2</Value>
+    </Setting>
+    <Setting Name="AwsSimpleDBRegionEndPoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ap-southeast-2</Value>
+    </Setting>
+    <Setting Name="AwsS3ServiceUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://s3.ap-southeast-2.amazonaws.com/</Value>
+    </Setting>
+    <Setting Name="AwsS3RegionEndPoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ap-southeast-2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

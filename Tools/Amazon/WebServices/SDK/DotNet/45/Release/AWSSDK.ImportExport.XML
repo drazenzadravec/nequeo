@@ -1,0 +1,2692 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AWSSDK.ImportExport</name>
+    </assembly>
+    <members>
+        <member name="T:Amazon.ImportExport.AmazonImportExportConfig">
+            <summary>
+            Configuration for accessing Amazon ImportExport service
+            </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportConfig.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.AmazonImportExportConfig.RegionEndpointServiceName">
+            <summary>
+            The constant used to lookup in the region hash the endpoint.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.AmazonImportExportConfig.ServiceVersion">
+            <summary>
+            Gets the ServiceVersion property.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.AmazonImportExportConfig.UserAgent">
+            <summary>
+            Gets the value of UserAgent property.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.AmazonImportExportException">
+            <summary>
+             Common exception for the ImportExport service.
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportException.#ctor(System.String)">
+            <summary>
+            Construct instance of AmazonImportExportException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of AmazonImportExportException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of AmazonImportExportException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonImportExportException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonImportExportException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.JobType">
+            <summary>
+            Constants used for properties of type JobType.
+            </summary>
+        </member>
+        <member name="F:Amazon.ImportExport.JobType.Export">
+            <summary>
+            Constant Export for JobType
+            </summary>
+        </member>
+        <member name="F:Amazon.ImportExport.JobType.Import">
+            <summary>
+            Constant Import for JobType
+            </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.JobType.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.JobType.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.JobType.op_Implicit(System.String)~Amazon.ImportExport.JobType">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.AmazonImportExportRequest">
+            <summary>
+            Base class for ImportExport operation requests.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Artifact">
+            <summary>
+            A discrete item that contains the description and URL of an artifact (such as a PDF).
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Artifact.Description">
+            <summary>
+            Gets and sets the property Description.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Artifact.URL">
+            <summary>
+            Gets and sets the property URL.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.BucketPermissionException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.BucketPermissionException.#ctor(System.String)">
+            <summary>
+            Constructs a new BucketPermissionException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.BucketPermissionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of BucketPermissionException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.BucketPermissionException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of BucketPermissionException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.BucketPermissionException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BucketPermissionException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.BucketPermissionException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BucketPermissionException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CanceledJobIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new CanceledJobIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CanceledJobIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of CanceledJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CanceledJobIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of CanceledJobIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CanceledJobIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CanceledJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CanceledJobIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CanceledJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.CancelJobRequest">
+            <summary>
+            Container for the parameters to the CancelJob operation.
+            This operation cancels a specified job. Only the job owner can cancel it. The operation
+            fails if the job has already started or is complete.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CancelJobRequest.APIVersion">
+            <summary>
+            Gets and sets the property APIVersion.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CancelJobRequest.JobId">
+            <summary>
+            Gets and sets the property JobId.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.CancelJobResponse">
+            <summary>
+            Output structure for the CancelJob operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CancelJobResponse.Success">
+            <summary>
+            Gets and sets the property Success.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.CreateJobQuotaExceededException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CreateJobQuotaExceededException.#ctor(System.String)">
+            <summary>
+            Constructs a new CreateJobQuotaExceededException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CreateJobQuotaExceededException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of CreateJobQuotaExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CreateJobQuotaExceededException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of CreateJobQuotaExceededException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CreateJobQuotaExceededException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CreateJobQuotaExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.CreateJobQuotaExceededException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CreateJobQuotaExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.CreateJobRequest">
+            <summary>
+            Container for the parameters to the CreateJob operation.
+            This operation initiates the process of scheduling an upload or download of your data.
+            You include in the request a manifest that describes the data transfer specifics.
+            The response to the request includes a job ID, which you can use in other operations,
+            a signature that you use to identify your storage device, and the address where you
+            should ship your storage device.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobRequest.APIVersion">
+            <summary>
+            Gets and sets the property APIVersion.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobRequest.JobType">
+            <summary>
+            Gets and sets the property JobType.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobRequest.Manifest">
+            <summary>
+            Gets and sets the property Manifest.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobRequest.ManifestAddendum">
+            <summary>
+            Gets and sets the property ManifestAddendum.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobRequest.ValidateOnly">
+            <summary>
+            Gets and sets the property ValidateOnly.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.CreateJobResponse">
+            <summary>
+            Output structure for the CreateJob operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobResponse.ArtifactList">
+            <summary>
+            Gets and sets the property ArtifactList.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobResponse.JobId">
+            <summary>
+            Gets and sets the property JobId.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobResponse.JobType">
+            <summary>
+            Gets and sets the property JobType.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobResponse.Signature">
+            <summary>
+            Gets and sets the property Signature.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobResponse.SignatureFileContents">
+            <summary>
+            Gets and sets the property SignatureFileContents.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.CreateJobResponse.WarningMessage">
+            <summary>
+            Gets and sets the property WarningMessage.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.ExpiredJobIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new ExpiredJobIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.ExpiredJobIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of ExpiredJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.ExpiredJobIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of ExpiredJobIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.ExpiredJobIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ExpiredJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.ExpiredJobIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ExpiredJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.GetShippingLabelRequest">
+            <summary>
+            Container for the parameters to the GetShippingLabel operation.
+            This operation returns information about a job, including where the job is in the
+            processing pipeline, the status of the results, and the signature value associated
+            with the job. You can only return information about jobs you own.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.APIVersion">
+            <summary>
+            Gets and sets the property APIVersion.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.City">
+            <summary>
+            Gets and sets the property City.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.Company">
+            <summary>
+            Gets and sets the property Company.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.Country">
+            <summary>
+            Gets and sets the property Country.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.JobIds">
+            <summary>
+            Gets and sets the property JobIds.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.Name">
+            <summary>
+            Gets and sets the property Name.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.PhoneNumber">
+            <summary>
+            Gets and sets the property PhoneNumber.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.PostalCode">
+            <summary>
+            Gets and sets the property PostalCode.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.StateOrProvince">
+            <summary>
+            Gets and sets the property StateOrProvince.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.Street1">
+            <summary>
+            Gets and sets the property Street1.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.Street2">
+            <summary>
+            Gets and sets the property Street2.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelRequest.Street3">
+            <summary>
+            Gets and sets the property Street3.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.GetShippingLabelResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelResponse.ShippingLabelURL">
+            <summary>
+            Gets and sets the property ShippingLabelURL.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetShippingLabelResponse.Warning">
+            <summary>
+            Gets and sets the property Warning.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.GetStatusRequest">
+            <summary>
+            Container for the parameters to the GetStatus operation.
+            This operation returns information about a job, including where the job is in the
+            processing pipeline, the status of the results, and the signature value associated
+            with the job. You can only return information about jobs you own.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusRequest.APIVersion">
+            <summary>
+            Gets and sets the property APIVersion.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusRequest.JobId">
+            <summary>
+            Gets and sets the property JobId.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.GetStatusResponse">
+            <summary>
+            Output structure for the GetStatus operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.ArtifactList">
+            <summary>
+            Gets and sets the property ArtifactList.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.Carrier">
+            <summary>
+            Gets and sets the property Carrier.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.CreationDate">
+            <summary>
+            Gets and sets the property CreationDate.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.CurrentManifest">
+            <summary>
+            Gets and sets the property CurrentManifest.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.ErrorCount">
+            <summary>
+            Gets and sets the property ErrorCount.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.JobId">
+            <summary>
+            Gets and sets the property JobId.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.JobType">
+            <summary>
+            Gets and sets the property JobType.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.LocationCode">
+            <summary>
+            Gets and sets the property LocationCode.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.LocationMessage">
+            <summary>
+            Gets and sets the property LocationMessage.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.LogBucket">
+            <summary>
+            Gets and sets the property LogBucket.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.LogKey">
+            <summary>
+            Gets and sets the property LogKey.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.ProgressCode">
+            <summary>
+            Gets and sets the property ProgressCode.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.ProgressMessage">
+            <summary>
+            Gets and sets the property ProgressMessage.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.Signature">
+            <summary>
+            Gets and sets the property Signature.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.SignatureFileContents">
+            <summary>
+            Gets and sets the property SignatureFileContents.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.GetStatusResponse.TrackingNumber">
+            <summary>
+            Gets and sets the property TrackingNumber.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAccessKeyIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidAccessKeyIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAccessKeyIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidAccessKeyIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAccessKeyIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidAccessKeyIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAccessKeyIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidAccessKeyIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAccessKeyIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidAccessKeyIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidAddressException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAddressException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidAddressException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAddressException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidAddressException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAddressException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidAddressException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAddressException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidAddressException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidAddressException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidAddressException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidCustomsException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidCustomsException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidCustomsException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidCustomsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidCustomsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidCustomsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidCustomsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidCustomsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidCustomsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidCustomsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidCustomsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidFileSystemException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidFileSystemException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidFileSystemException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidFileSystemException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidFileSystemException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidFileSystemException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidFileSystemException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidFileSystemException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidFileSystemException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidFileSystemException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidFileSystemException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidJobIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidJobIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidJobIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidJobIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidJobIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidJobIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidJobIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidManifestFieldException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidManifestFieldException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidManifestFieldException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidManifestFieldException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidManifestFieldException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidManifestFieldException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidManifestFieldException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidManifestFieldException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidManifestFieldException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidManifestFieldException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidManifestFieldException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidParameterException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidParameterException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidParameterException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidParameterException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidParameterException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidParameterException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidParameterException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidParameterException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidParameterException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidParameterException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidParameterException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.InvalidVersionException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidVersionException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidVersionException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidVersionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidVersionException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidVersionException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidVersionException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidVersionException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidVersionException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.InvalidVersionException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidVersionException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Job">
+            <summary>
+            Representation of a job returned by the ListJobs operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Job.CreationDate">
+            <summary>
+            Gets and sets the property CreationDate.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Job.IsCanceled">
+            <summary>
+            Gets and sets the property IsCanceled.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Job.JobId">
+            <summary>
+            Gets and sets the property JobId.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Job.JobType">
+            <summary>
+            Gets and sets the property JobType.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.ListJobsRequest">
+            <summary>
+            Container for the parameters to the ListJobs operation.
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.ListJobsRequest.APIVersion">
+            <summary>
+            Gets and sets the property APIVersion.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.ListJobsRequest.Marker">
+            <summary>
+            Gets and sets the property Marker.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.ListJobsRequest.MaxJobs">
+            <summary>
+            Gets and sets the property MaxJobs.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.ListJobsResponse">
+            <summary>
+            Output structure for the ListJobs operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.ListJobsResponse.IsTruncated">
+            <summary>
+            Gets and sets the property IsTruncated.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.ListJobsResponse.Jobs">
+            <summary>
+            Gets and sets the property Jobs.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.MalformedManifestException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MalformedManifestException.#ctor(System.String)">
+            <summary>
+            Constructs a new MalformedManifestException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MalformedManifestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MalformedManifestException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MalformedManifestException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MalformedManifestException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MalformedManifestException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MalformedManifestException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MalformedManifestException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MalformedManifestException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.MissingCustomsException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingCustomsException.#ctor(System.String)">
+            <summary>
+            Constructs a new MissingCustomsException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingCustomsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MissingCustomsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingCustomsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MissingCustomsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingCustomsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MissingCustomsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingCustomsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MissingCustomsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.MissingManifestFieldException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingManifestFieldException.#ctor(System.String)">
+            <summary>
+            Constructs a new MissingManifestFieldException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingManifestFieldException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MissingManifestFieldException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingManifestFieldException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MissingManifestFieldException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingManifestFieldException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MissingManifestFieldException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingManifestFieldException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MissingManifestFieldException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.MissingParameterException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingParameterException.#ctor(System.String)">
+            <summary>
+            Constructs a new MissingParameterException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingParameterException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MissingParameterException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingParameterException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MissingParameterException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingParameterException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MissingParameterException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MissingParameterException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MissingParameterException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.MultipleRegionsException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MultipleRegionsException.#ctor(System.String)">
+            <summary>
+            Constructs a new MultipleRegionsException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MultipleRegionsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MultipleRegionsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MultipleRegionsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MultipleRegionsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MultipleRegionsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MultipleRegionsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.MultipleRegionsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MultipleRegionsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.NoSuchBucketException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.NoSuchBucketException.#ctor(System.String)">
+            <summary>
+            Constructs a new NoSuchBucketException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.NoSuchBucketException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of NoSuchBucketException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.NoSuchBucketException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of NoSuchBucketException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.NoSuchBucketException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of NoSuchBucketException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.NoSuchBucketException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of NoSuchBucketException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.UnableToCancelJobIdException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToCancelJobIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new UnableToCancelJobIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToCancelJobIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of UnableToCancelJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToCancelJobIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of UnableToCancelJobIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToCancelJobIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of UnableToCancelJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToCancelJobIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of UnableToCancelJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.UnableToUpdateJobIdException">
+            <summary>
+             ImportExport exception
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToUpdateJobIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new UnableToUpdateJobIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToUpdateJobIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of UnableToUpdateJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToUpdateJobIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of UnableToUpdateJobIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToUpdateJobIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of UnableToUpdateJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.UnableToUpdateJobIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of UnableToUpdateJobIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.UpdateJobRequest">
+            <summary>
+            Container for the parameters to the UpdateJob operation.
+            You use this operation to change the parameters specified in the original manifest
+            file by supplying a new manifest file. The manifest file attached to this request
+            replaces the original manifest file. You can only use the operation after a CreateJob
+            request but before the data transfer starts and you can only use it on jobs you own.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobRequest.APIVersion">
+            <summary>
+            Gets and sets the property APIVersion.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobRequest.JobId">
+            <summary>
+            Gets and sets the property JobId.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobRequest.JobType">
+            <summary>
+            Gets and sets the property JobType.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobRequest.Manifest">
+            <summary>
+            Gets and sets the property Manifest.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobRequest.ValidateOnly">
+            <summary>
+            Gets and sets the property ValidateOnly.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.UpdateJobResponse">
+            <summary>
+            Output structure for the UpateJob operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobResponse.ArtifactList">
+            <summary>
+            Gets and sets the property ArtifactList.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobResponse.Success">
+            <summary>
+            Gets and sets the property Success.
+            </summary>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.UpdateJobResponse.WarningMessage">
+            <summary>
+            Gets and sets the property WarningMessage.
+            </summary>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.ArtifactUnmarshaller">
+            <summary>
+            Response Unmarshaller for Artifact Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.ArtifactUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.ArtifactUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.ArtifactUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobRequestMarshaller">
+            <summary>
+            CancelJob Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobRequestMarshaller.Marshall(Amazon.ImportExport.Model.CancelJobRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for CancelJob operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.CancelJobResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobRequestMarshaller">
+            <summary>
+            CreateJob Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobRequestMarshaller.Marshall(Amazon.ImportExport.Model.CreateJobRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for CreateJob operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.CreateJobResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelRequestMarshaller">
+            <summary>
+            GetShippingLabel Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelRequestMarshaller.Marshall(Amazon.ImportExport.Model.GetShippingLabelRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for GetShippingLabel operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetShippingLabelResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusRequestMarshaller">
+            <summary>
+            GetStatus Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusRequestMarshaller.Marshall(Amazon.ImportExport.Model.GetStatusRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for GetStatus operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.GetStatusResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.JobUnmarshaller">
+            <summary>
+            Response Unmarshaller for Job Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.JobUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.JobUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.JobUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsRequestMarshaller">
+            <summary>
+            ListJobs Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsRequestMarshaller.Marshall(Amazon.ImportExport.Model.ListJobsRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for ListJobs operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.ListJobsResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobRequestMarshaller">
+            <summary>
+            UpdateJob Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobRequestMarshaller.Marshall(Amazon.ImportExport.Model.UpdateJobRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for UpdateJob operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.ImportExport.Model.Internal.MarshallTransformations.UpdateJobResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.ImportExport.AmazonImportExportClient">
+             <summary>
+             Implementation for accessing ImportExport
+            
+             AWS Import/Export Service AWS Import/Export accelerates transferring large amounts
+             of data between the AWS cloud and portable storage devices that you mail to us. AWS
+             Import/Export transfers data directly onto and off of your storage devices using Amazon's
+             high-speed internal network and bypassing the Internet. For large data sets, AWS Import/Export
+             is often faster than Internet transfer and more cost effective than upgrading your
+             connectivity.
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor">
+             <summary>
+             Constructs AmazonImportExportClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(Amazon.RegionEndpoint)">
+             <summary>
+             Constructs AmazonImportExportClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(Amazon.ImportExport.AmazonImportExportConfig)">
+             <summary>
+             Constructs AmazonImportExportClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="config">The AmazonImportExportClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(Amazon.Runtime.AWSCredentials)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.ImportExport.AmazonImportExportConfig)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Credentials and an
+            AmazonImportExportClient Configuration object.
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="clientConfig">The AmazonImportExportClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(System.String,System.String)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(System.String,System.String,Amazon.ImportExport.AmazonImportExportConfig)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonImportExportClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="clientConfig">The AmazonImportExportClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(System.String,System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.#ctor(System.String,System.String,System.String,Amazon.ImportExport.AmazonImportExportConfig)">
+            <summary>
+            Constructs AmazonImportExportClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonImportExportClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="clientConfig">The AmazonImportExportClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.CreateSigner">
+            <summary>
+            Creates the signer for the service.
+            </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the service client.
+            </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.CancelJob(Amazon.ImportExport.Model.CancelJobRequest)">
+            <summary>
+            This operation cancels a specified job. Only the job owner can cancel it. The operation
+            fails if the job has already started or is complete.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CancelJob service method.</param>
+            
+            <returns>The response from the CancelJob service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.UnableToCancelJobIdException">
+            AWS Import/Export cannot cancel the job
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.CancelJobAsync(Amazon.ImportExport.Model.CancelJobRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CancelJob operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CancelJob operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.CreateJob(Amazon.ImportExport.Model.CreateJobRequest)">
+            <summary>
+            This operation initiates the process of scheduling an upload or download of your data.
+            You include in the request a manifest that describes the data transfer specifics.
+            The response to the request includes a job ID, which you can use in other operations,
+            a signature that you use to identify your storage device, and the address where you
+            should ship your storage device.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateJob service method.</param>
+            
+            <returns>The response from the CreateJob service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.BucketPermissionException">
+            The account specified does not have the appropriate bucket permissions.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.CreateJobQuotaExceededException">
+            Each account can create only a certain number of jobs per day. If you need to create
+            more than this, please contact awsimportexport@amazon.com to explain your particular
+            use case.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAddressException">
+            The address specified in the manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidCustomsException">
+            One or more customs parameters was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidFileSystemException">
+            File system specified in export manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidManifestFieldException">
+            One or more manifest fields was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MalformedManifestException">
+            Your manifest is not well-formed.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingCustomsException">
+            One or more required customs parameters was missing from the manifest.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingManifestFieldException">
+            One or more required fields were missing from the manifest file. Please correct and
+            resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingParameterException">
+            One or more required parameters was missing from the request.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MultipleRegionsException">
+            Your manifest file contained buckets from multiple regions. A job is restricted to
+            buckets from one region. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.NoSuchBucketException">
+            The specified bucket does not exist. Create the specified bucket or change the manifest's
+            bucket, exportBucket, or logBucket field to a bucket that the account, as specified
+            by the manifest's Access Key ID, has write permissions to.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.CreateJobAsync(Amazon.ImportExport.Model.CreateJobRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateJob operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateJob operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.GetShippingLabel(Amazon.ImportExport.Model.GetShippingLabelRequest)">
+            <summary>
+            This operation returns information about a job, including where the job is in the
+            processing pipeline, the status of the results, and the signature value associated
+            with the job. You can only return information about jobs you own.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetShippingLabel service method.</param>
+            
+            <returns>The response from the GetShippingLabel service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAddressException">
+            The address specified in the manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.GetShippingLabelAsync(Amazon.ImportExport.Model.GetShippingLabelRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetShippingLabel operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetShippingLabel operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.GetStatus(Amazon.ImportExport.Model.GetStatusRequest)">
+            <summary>
+            This operation returns information about a job, including where the job is in the
+            processing pipeline, the status of the results, and the signature value associated
+            with the job. You can only return information about jobs you own.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetStatus service method.</param>
+            
+            <returns>The response from the GetStatus service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.GetStatusAsync(Amazon.ImportExport.Model.GetStatusRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetStatus operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetStatus operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.ListJobs">
+            <summary>
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+            
+            <returns>The response from the ListJobs service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.ListJobs(Amazon.ImportExport.Model.ListJobsRequest)">
+            <summary>
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListJobs service method.</param>
+            
+            <returns>The response from the ListJobs service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.ListJobsAsync(System.Threading.CancellationToken)">
+            <summary>
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+            <param name="cancellationToken"> ttd1
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            
+            <returns>The response from the ListJobs service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.ListJobsAsync(Amazon.ImportExport.Model.ListJobsRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListJobs operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListJobs operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.UpdateJob(Amazon.ImportExport.Model.UpdateJobRequest)">
+            <summary>
+            You use this operation to change the parameters specified in the original manifest
+            file by supplying a new manifest file. The manifest file attached to this request
+            replaces the original manifest file. You can only use the operation after a CreateJob
+            request but before the data transfer starts and you can only use it on jobs you own.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateJob service method.</param>
+            
+            <returns>The response from the UpdateJob service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.BucketPermissionException">
+            The account specified does not have the appropriate bucket permissions.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAddressException">
+            The address specified in the manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidCustomsException">
+            One or more customs parameters was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidFileSystemException">
+            File system specified in export manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidManifestFieldException">
+            One or more manifest fields was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MalformedManifestException">
+            Your manifest is not well-formed.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingCustomsException">
+            One or more required customs parameters was missing from the manifest.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingManifestFieldException">
+            One or more required fields were missing from the manifest file. Please correct and
+            resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingParameterException">
+            One or more required parameters was missing from the request.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MultipleRegionsException">
+            Your manifest file contained buckets from multiple regions. A job is restricted to
+            buckets from one region. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.NoSuchBucketException">
+            The specified bucket does not exist. Create the specified bucket or change the manifest's
+            bucket, exportBucket, or logBucket field to a bucket that the account, as specified
+            by the manifest's Access Key ID, has write permissions to.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.UnableToUpdateJobIdException">
+            AWS Import/Export cannot update the job
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.AmazonImportExportClient.UpdateJobAsync(Amazon.ImportExport.Model.UpdateJobRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateJob operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateJob operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Amazon.ImportExport.IAmazonImportExport">
+             <summary>
+             Interface for accessing ImportExport
+            
+             AWS Import/Export Service AWS Import/Export accelerates transferring large amounts
+             of data between the AWS cloud and portable storage devices that you mail to us. AWS
+             Import/Export transfers data directly onto and off of your storage devices using Amazon's
+             high-speed internal network and bypassing the Internet. For large data sets, AWS Import/Export
+             is often faster than Internet transfer and more cost effective than upgrading your
+             connectivity.
+             </summary>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.CancelJob(Amazon.ImportExport.Model.CancelJobRequest)">
+            <summary>
+            This operation cancels a specified job. Only the job owner can cancel it. The operation
+            fails if the job has already started or is complete.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CancelJob service method.</param>
+            
+            <returns>The response from the CancelJob service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.UnableToCancelJobIdException">
+            AWS Import/Export cannot cancel the job
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.CancelJobAsync(Amazon.ImportExport.Model.CancelJobRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CancelJob operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CancelJob operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.CreateJob(Amazon.ImportExport.Model.CreateJobRequest)">
+            <summary>
+            This operation initiates the process of scheduling an upload or download of your data.
+            You include in the request a manifest that describes the data transfer specifics.
+            The response to the request includes a job ID, which you can use in other operations,
+            a signature that you use to identify your storage device, and the address where you
+            should ship your storage device.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateJob service method.</param>
+            
+            <returns>The response from the CreateJob service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.BucketPermissionException">
+            The account specified does not have the appropriate bucket permissions.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.CreateJobQuotaExceededException">
+            Each account can create only a certain number of jobs per day. If you need to create
+            more than this, please contact awsimportexport@amazon.com to explain your particular
+            use case.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAddressException">
+            The address specified in the manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidCustomsException">
+            One or more customs parameters was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidFileSystemException">
+            File system specified in export manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidManifestFieldException">
+            One or more manifest fields was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MalformedManifestException">
+            Your manifest is not well-formed.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingCustomsException">
+            One or more required customs parameters was missing from the manifest.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingManifestFieldException">
+            One or more required fields were missing from the manifest file. Please correct and
+            resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingParameterException">
+            One or more required parameters was missing from the request.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MultipleRegionsException">
+            Your manifest file contained buckets from multiple regions. A job is restricted to
+            buckets from one region. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.NoSuchBucketException">
+            The specified bucket does not exist. Create the specified bucket or change the manifest's
+            bucket, exportBucket, or logBucket field to a bucket that the account, as specified
+            by the manifest's Access Key ID, has write permissions to.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.CreateJobAsync(Amazon.ImportExport.Model.CreateJobRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateJob operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateJob operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.GetShippingLabel(Amazon.ImportExport.Model.GetShippingLabelRequest)">
+            <summary>
+            This operation returns information about a job, including where the job is in the
+            processing pipeline, the status of the results, and the signature value associated
+            with the job. You can only return information about jobs you own.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetShippingLabel service method.</param>
+            
+            <returns>The response from the GetShippingLabel service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAddressException">
+            The address specified in the manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.GetShippingLabelAsync(Amazon.ImportExport.Model.GetShippingLabelRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetShippingLabel operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetShippingLabel operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.GetStatus(Amazon.ImportExport.Model.GetStatusRequest)">
+            <summary>
+            This operation returns information about a job, including where the job is in the
+            processing pipeline, the status of the results, and the signature value associated
+            with the job. You can only return information about jobs you own.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetStatus service method.</param>
+            
+            <returns>The response from the GetStatus service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.GetStatusAsync(Amazon.ImportExport.Model.GetStatusRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetStatus operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetStatus operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.ListJobs">
+            <summary>
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+            
+            <returns>The response from the ListJobs service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.ListJobs(Amazon.ImportExport.Model.ListJobsRequest)">
+            <summary>
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListJobs service method.</param>
+            
+            <returns>The response from the ListJobs service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.ListJobsAsync(System.Threading.CancellationToken)">
+            <summary>
+            This operation returns the jobs associated with the requester. AWS Import/Export lists
+            the jobs in reverse chronological order based on the date of creation. For example
+            if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation
+            would return Test2 followed by Test1.
+            </summary>
+            <param name="cancellationToken"> ttd1
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            
+            <returns>The response from the ListJobs service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.ListJobsAsync(Amazon.ImportExport.Model.ListJobsRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListJobs operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListJobs operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.UpdateJob(Amazon.ImportExport.Model.UpdateJobRequest)">
+            <summary>
+            You use this operation to change the parameters specified in the original manifest
+            file by supplying a new manifest file. The manifest file attached to this request
+            replaces the original manifest file. You can only use the operation after a CreateJob
+            request but before the data transfer starts and you can only use it on jobs you own.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateJob service method.</param>
+            
+            <returns>The response from the UpdateJob service method, as returned by ImportExport.</returns>
+            <exception cref="T:Amazon.ImportExport.Model.BucketPermissionException">
+            The account specified does not have the appropriate bucket permissions.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.CanceledJobIdException">
+            The specified job ID has been canceled and is no longer valid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.ExpiredJobIdException">
+            Indicates that the specified job has expired out of the system.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAccessKeyIdException">
+            The AWS Access Key ID specified in the request did not match the manifest's accessKeyId
+            value. The manifest and the request authentication must use the same AWS Access Key
+            ID.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidAddressException">
+            The address specified in the manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidCustomsException">
+            One or more customs parameters was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidFileSystemException">
+            File system specified in export manifest is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidJobIdException">
+            The JOBID was missing, not found, or not associated with the AWS account.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidManifestFieldException">
+            One or more manifest fields was invalid. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidParameterException">
+            One or more parameters had an invalid value.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.InvalidVersionException">
+            The client tool version is invalid.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MalformedManifestException">
+            Your manifest is not well-formed.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingCustomsException">
+            One or more required customs parameters was missing from the manifest.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingManifestFieldException">
+            One or more required fields were missing from the manifest file. Please correct and
+            resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MissingParameterException">
+            One or more required parameters was missing from the request.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.MultipleRegionsException">
+            Your manifest file contained buckets from multiple regions. A job is restricted to
+            buckets from one region. Please correct and resubmit.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.NoSuchBucketException">
+            The specified bucket does not exist. Create the specified bucket or change the manifest's
+            bucket, exportBucket, or logBucket field to a bucket that the account, as specified
+            by the manifest's Access Key ID, has write permissions to.
+            </exception>
+            <exception cref="T:Amazon.ImportExport.Model.UnableToUpdateJobIdException">
+            AWS Import/Export cannot update the job
+            </exception>
+        </member>
+        <member name="M:Amazon.ImportExport.IAmazonImportExport.UpdateJobAsync(Amazon.ImportExport.Model.UpdateJobRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateJob operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateJob operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>

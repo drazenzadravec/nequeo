@@ -1,0 +1,3682 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AWSSDK.CodeCommit</name>
+    </assembly>
+    <members>
+        <member name="T:Amazon.CodeCommit.AmazonCodeCommitConfig">
+            <summary>
+            Configuration for accessing Amazon CodeCommit service
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitConfig.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.AmazonCodeCommitConfig.RegionEndpointServiceName">
+            <summary>
+            The constant used to lookup in the region hash the endpoint.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.AmazonCodeCommitConfig.ServiceVersion">
+            <summary>
+            Gets the ServiceVersion property.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.AmazonCodeCommitConfig.UserAgent">
+            <summary>
+            Gets the value of UserAgent property.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.AmazonCodeCommitException">
+            <summary>
+             Common exception for the CodeCommit service.
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitException.#ctor(System.String)">
+            <summary>
+            Construct instance of AmazonCodeCommitException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of AmazonCodeCommitException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of AmazonCodeCommitException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonCodeCommitException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonCodeCommitException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.OrderEnum">
+            <summary>
+            Constants used for properties of type OrderEnum.
+            </summary>
+        </member>
+        <member name="F:Amazon.CodeCommit.OrderEnum.Ascending">
+            <summary>
+            Constant Ascending for OrderEnum
+            </summary>
+        </member>
+        <member name="F:Amazon.CodeCommit.OrderEnum.Descending">
+            <summary>
+            Constant Descending for OrderEnum
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.OrderEnum.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.OrderEnum.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.OrderEnum.op_Implicit(System.String)~Amazon.CodeCommit.OrderEnum">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.SortByEnum">
+            <summary>
+            Constants used for properties of type SortByEnum.
+            </summary>
+        </member>
+        <member name="F:Amazon.CodeCommit.SortByEnum.LastModifiedDate">
+            <summary>
+            Constant LastModifiedDate for SortByEnum
+            </summary>
+        </member>
+        <member name="F:Amazon.CodeCommit.SortByEnum.RepositoryName">
+            <summary>
+            Constant RepositoryName for SortByEnum
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.SortByEnum.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.SortByEnum.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.SortByEnum.op_Implicit(System.String)~Amazon.CodeCommit.SortByEnum">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.AmazonCodeCommitRequest">
+            <summary>
+            Base class for CodeCommit operation requests.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.BatchGetRepositoriesRequest">
+            <summary>
+            Container for the parameters to the BatchGetRepositories operation.
+            Gets information about one or more repositories.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.BatchGetRepositoriesRequest.RepositoryNames">
+            <summary>
+            Gets and sets the property RepositoryNames. 
+            <para>
+            The names of the repositories to get information about.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.BatchGetRepositoriesResponse">
+            <summary>
+            Represents the output of a batch get repositories operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.BatchGetRepositoriesResponse.Repositories">
+            <summary>
+            Gets and sets the property Repositories. 
+            <para>
+            A list of repositories returned by the batch get repositories operation.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.BatchGetRepositoriesResponse.RepositoriesNotFound">
+            <summary>
+            Gets and sets the property RepositoriesNotFound. 
+            <para>
+            Returns a list of repository names for which information could not be found.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.BranchDoesNotExistException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchDoesNotExistException.#ctor(System.String)">
+            <summary>
+            Constructs a new BranchDoesNotExistException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchDoesNotExistException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of BranchDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchDoesNotExistException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of BranchDoesNotExistException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchDoesNotExistException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BranchDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchDoesNotExistException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BranchDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.BranchInfo">
+            <summary>
+            Returns information about a branch.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.BranchInfo.BranchName">
+            <summary>
+            Gets and sets the property BranchName. 
+            <para>
+            The name of the branch.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.BranchInfo.CommitId">
+            <summary>
+            Gets and sets the property CommitId. 
+            <para>
+            The ID of the last commit made to the branch.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.BranchNameExistsException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameExistsException.#ctor(System.String)">
+            <summary>
+            Constructs a new BranchNameExistsException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of BranchNameExistsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameExistsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of BranchNameExistsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameExistsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BranchNameExistsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameExistsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BranchNameExistsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameRequiredException.#ctor(System.String)">
+            <summary>
+            Constructs a new BranchNameRequiredException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameRequiredException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of BranchNameRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameRequiredException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of BranchNameRequiredException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameRequiredException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BranchNameRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.BranchNameRequiredException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of BranchNameRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.CommitDoesNotExistException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitDoesNotExistException.#ctor(System.String)">
+            <summary>
+            Constructs a new CommitDoesNotExistException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitDoesNotExistException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of CommitDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitDoesNotExistException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of CommitDoesNotExistException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitDoesNotExistException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CommitDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitDoesNotExistException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CommitDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.CommitIdRequiredException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitIdRequiredException.#ctor(System.String)">
+            <summary>
+            Constructs a new CommitIdRequiredException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitIdRequiredException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of CommitIdRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitIdRequiredException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of CommitIdRequiredException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitIdRequiredException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CommitIdRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.CommitIdRequiredException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of CommitIdRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.CreateBranchRequest">
+            <summary>
+            Container for the parameters to the CreateBranch operation.
+            Creates a new branch in a repository and points the branch to a commit.
+            
+             <note>Calling the create branch operation does not set a repository's default branch.
+            To do this, call the update default branch operation.</note>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.CreateBranchRequest.BranchName">
+            <summary>
+            Gets and sets the property BranchName. 
+            <para>
+            The name of the new branch to create.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.CreateBranchRequest.CommitId">
+            <summary>
+            Gets and sets the property CommitId. 
+            <para>
+            The ID of the commit to point the new branch to.
+            </para>
+             <note>If this commit ID is not specified, the new branch will point to the commit
+            that is pointed to by the repository's default branch.</note>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.CreateBranchRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the repository in which you want to create the new branch.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.CreateBranchResponse">
+            <summary>
+            Empty class reserved for future use.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.CreateRepositoryRequest">
+            <summary>
+            Container for the parameters to the CreateRepository operation.
+            Creates a new, empty repository.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.CreateRepositoryRequest.RepositoryDescription">
+            <summary>
+            Gets and sets the property RepositoryDescription. 
+            <para>
+            A comment or description about the new repository.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.CreateRepositoryRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the new repository to be created.
+            </para>
+             <note>The repository name must be unique across the calling AWS account. In addition,
+            repository names are restricted to alphanumeric characters. The suffix ".git" is prohibited.</note>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.CreateRepositoryResponse">
+            <summary>
+            Represents the output of a create repository operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.CreateRepositoryResponse.RepositoryMetadata">
+            <summary>
+            Gets and sets the property RepositoryMetadata. 
+            <para>
+            Information about the newly created repository.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.DeleteRepositoryRequest">
+            <summary>
+            Container for the parameters to the DeleteRepository operation.
+            Deletes a repository. If a specified repository was already deleted, a null repository
+            ID will be returned.
+            
+             <important>Deleting a repository also deletes all associated objects and metadata.
+            After a repository is deleted, all future push calls to the deleted repository will
+            fail.</important>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.DeleteRepositoryRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the repository to delete.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.DeleteRepositoryResponse">
+            <summary>
+            Represents the output of a delete repository operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.DeleteRepositoryResponse.RepositoryId">
+            <summary>
+            Gets and sets the property RepositoryId. 
+            <para>
+            The ID of the repository that was deleted.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException.#ctor(System.String)">
+            <summary>
+            Constructs a new EncryptionIntegrityChecksFailedException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of EncryptionIntegrityChecksFailedException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of EncryptionIntegrityChecksFailedException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionIntegrityChecksFailedException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionIntegrityChecksFailedException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException.#ctor(System.String)">
+            <summary>
+            Constructs a new EncryptionKeyAccessDeniedException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyAccessDeniedException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyAccessDeniedException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyAccessDeniedException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyAccessDeniedException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyDisabledException.#ctor(System.String)">
+            <summary>
+            Constructs a new EncryptionKeyDisabledException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyDisabledException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyDisabledException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyDisabledException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyDisabledException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyDisabledException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyDisabledException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyDisabledException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyDisabledException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException.#ctor(System.String)">
+            <summary>
+            Constructs a new EncryptionKeyNotFoundException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyNotFoundException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyNotFoundException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyNotFoundException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyNotFoundException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException.#ctor(System.String)">
+            <summary>
+            Constructs a new EncryptionKeyUnavailableException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyUnavailableException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of EncryptionKeyUnavailableException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyUnavailableException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of EncryptionKeyUnavailableException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.GetBranchRequest">
+            <summary>
+            Container for the parameters to the GetBranch operation.
+            Retrieves information about a repository branch, including its name and the last commit
+            ID.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.GetBranchRequest.BranchName">
+            <summary>
+            Gets and sets the property BranchName. 
+            <para>
+            The name of the branch for which you want to retrieve information.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.GetBranchRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.GetBranchResponse">
+            <summary>
+            Represents the output of a get branch operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.GetBranchResponse.Branch">
+            <summary>
+            Gets and sets the property Branch. 
+            <para>
+            The name of the branch.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.GetRepositoryRequest">
+            <summary>
+            Container for the parameters to the GetRepository operation.
+            Gets information about a repository.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.GetRepositoryRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the repository to get information about.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.GetRepositoryResponse">
+            <summary>
+            Represents the output of a get repository operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.GetRepositoryResponse.RepositoryMetadata">
+            <summary>
+            Gets and sets the property RepositoryMetadata. 
+            <para>
+            Information about the repository.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidBranchNameException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidBranchNameException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidBranchNameException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidBranchNameException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidBranchNameException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidBranchNameException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidBranchNameException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidBranchNameException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidBranchNameException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidBranchNameException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidCommitIdException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidCommitIdException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidCommitIdException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidCommitIdException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidCommitIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidCommitIdException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidCommitIdException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidCommitIdException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidCommitIdException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidCommitIdException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidCommitIdException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidContinuationTokenException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidContinuationTokenException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidContinuationTokenException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidContinuationTokenException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidContinuationTokenException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidContinuationTokenException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidContinuationTokenException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidContinuationTokenException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidContinuationTokenException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidContinuationTokenException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidContinuationTokenException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidOrderException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidOrderException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidOrderException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidOrderException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidOrderException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidOrderException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidOrderException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidOrderException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidOrderException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidOrderException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidOrderException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidRepositoryDescriptionException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidRepositoryDescriptionException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidRepositoryDescriptionException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidRepositoryDescriptionException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidRepositoryDescriptionException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryNameException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidRepositoryNameException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryNameException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidRepositoryNameException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryNameException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidRepositoryNameException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryNameException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidRepositoryNameException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidRepositoryNameException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidRepositoryNameException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.InvalidSortByException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidSortByException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidSortByException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidSortByException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidSortByException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidSortByException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidSortByException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidSortByException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidSortByException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.InvalidSortByException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidSortByException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.ListBranchesRequest">
+            <summary>
+            Container for the parameters to the ListBranches operation.
+            Gets information about one or more branches in a repository.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListBranchesRequest.NextToken">
+            <summary>
+            Gets and sets the property NextToken. 
+            <para>
+            An enumeration token that allows the operation to batch the results. 
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListBranchesRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the repository that contains the branches.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.ListBranchesResponse">
+            <summary>
+            Represents the output of a list branches operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListBranchesResponse.Branches">
+            <summary>
+            Gets and sets the property Branches. 
+            <para>
+            The list of branch names.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListBranchesResponse.NextToken">
+            <summary>
+            Gets and sets the property NextToken. 
+            <para>
+            An enumeration token that returns the batch of the results. 
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.ListRepositoriesRequest">
+            <summary>
+            Container for the parameters to the ListRepositories operation.
+            Gets information about one or more repositories.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListRepositoriesRequest.NextToken">
+            <summary>
+            Gets and sets the property NextToken. 
+            <para>
+            An enumeration token that allows the operation to batch the results of the operation.
+            Batch sizes are 1,000 for list repository operations. When the client sends the token
+            back to AWS CodeCommit, another page of 1,000 records is retrieved.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListRepositoriesRequest.Order">
+            <summary>
+            Gets and sets the property Order. 
+            <para>
+            The order in which to sort the results of a list repositories operation.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListRepositoriesRequest.SortBy">
+            <summary>
+            Gets and sets the property SortBy. 
+            <para>
+            The criteria used to sort the results of a list repositories operation.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.ListRepositoriesResponse">
+            <summary>
+            Represents the output of a list repositories operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListRepositoriesResponse.NextToken">
+            <summary>
+            Gets and sets the property NextToken. 
+            <para>
+            An enumeration token that allows the operation to batch the results of the operation.
+            Batch sizes are 1,000 for list repository operations. When the client sends the token
+            back to AWS CodeCommit, another page of 1,000 records is retrieved.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.ListRepositoriesResponse.Repositories">
+            <summary>
+            Gets and sets the property Repositories. 
+            <para>
+            Lists the repositories called by the list repositories operation.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException.#ctor(System.String)">
+            <summary>
+            Constructs a new MaximumRepositoryNamesExceededException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MaximumRepositoryNamesExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MaximumRepositoryNamesExceededException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MaximumRepositoryNamesExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MaximumRepositoryNamesExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryDoesNotExistException.#ctor(System.String)">
+            <summary>
+            Constructs a new RepositoryDoesNotExistException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryDoesNotExistException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of RepositoryDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryDoesNotExistException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of RepositoryDoesNotExistException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryDoesNotExistException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryDoesNotExistException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryDoesNotExistException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryLimitExceededException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryLimitExceededException.#ctor(System.String)">
+            <summary>
+            Constructs a new RepositoryLimitExceededException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryLimitExceededException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of RepositoryLimitExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryLimitExceededException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of RepositoryLimitExceededException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryLimitExceededException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryLimitExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryLimitExceededException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryLimitExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryMetadata">
+            <summary>
+            Information about a repository.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.AccountId">
+            <summary>
+            Gets and sets the property AccountId. 
+            <para>
+            The ID of the AWS account associated with the repository.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.Arn">
+            <summary>
+            Gets and sets the property Arn. 
+            <para>
+            The Amazon Resource Name (ARN) of the repository.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.CloneUrlHttp">
+            <summary>
+            Gets and sets the property CloneUrlHttp. 
+            <para>
+            The URL to use for cloning the repository over HTTPS.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.CloneUrlSsh">
+            <summary>
+            Gets and sets the property CloneUrlSsh. 
+            <para>
+            The URL to use for cloning the repository over SSH.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.CreationDate">
+            <summary>
+            Gets and sets the property CreationDate. 
+            <para>
+            The date and time the repository was created, in timestamp format.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.DefaultBranch">
+            <summary>
+            Gets and sets the property DefaultBranch. 
+            <para>
+            The repository's default branch name.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.LastModifiedDate">
+            <summary>
+            Gets and sets the property LastModifiedDate. 
+            <para>
+            The date and time the repository was last modified, in timestamp format.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.RepositoryDescription">
+            <summary>
+            Gets and sets the property RepositoryDescription. 
+            <para>
+            A comment or description about the repository.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.RepositoryId">
+            <summary>
+            Gets and sets the property RepositoryId. 
+            <para>
+            The ID of the repository.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryMetadata.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The repository's name.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryNameExistsException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameExistsException.#ctor(System.String)">
+            <summary>
+            Constructs a new RepositoryNameExistsException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of RepositoryNameExistsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameExistsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of RepositoryNameExistsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameExistsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryNameExistsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameExistsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryNameExistsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryNameIdPair">
+            <summary>
+            Information about a repository name and ID.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryNameIdPair.RepositoryId">
+            <summary>
+            Gets and sets the property RepositoryId. 
+            <para>
+            The ID associated with the repository name.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.RepositoryNameIdPair.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameRequiredException.#ctor(System.String)">
+            <summary>
+            Constructs a new RepositoryNameRequiredException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameRequiredException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of RepositoryNameRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameRequiredException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of RepositoryNameRequiredException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameRequiredException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryNameRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNameRequiredException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryNameRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.RepositoryNamesRequiredException">
+            <summary>
+             CodeCommit exception
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNamesRequiredException.#ctor(System.String)">
+            <summary>
+            Constructs a new RepositoryNamesRequiredException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNamesRequiredException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of RepositoryNamesRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNamesRequiredException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of RepositoryNamesRequiredException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNamesRequiredException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryNamesRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.RepositoryNamesRequiredException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of RepositoryNamesRequiredException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.UpdateDefaultBranchRequest">
+            <summary>
+            Container for the parameters to the UpdateDefaultBranch operation.
+            Sets or changes the default branch name for the specified repository.
+            
+             <note>If you use this operation to change the default branch name to the current
+            default branch name, a success message is returned even though the default branch
+            did not change.</note>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.UpdateDefaultBranchRequest.DefaultBranchName">
+            <summary>
+            Gets and sets the property DefaultBranchName. 
+            <para>
+            The name of the branch to set as the default.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.UpdateDefaultBranchRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the repository to set or change the default branch for.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.UpdateDefaultBranchResponse">
+            <summary>
+            Empty class reserved for future use.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest">
+            <summary>
+            Container for the parameters to the UpdateRepositoryDescription operation.
+            Sets or changes the comment or description for a repository.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest.RepositoryDescription">
+            <summary>
+            Gets and sets the property RepositoryDescription. 
+            <para>
+            The new comment or description for the specified repository.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest.RepositoryName">
+            <summary>
+            Gets and sets the property RepositoryName. 
+            <para>
+            The name of the repository to set or change the comment or description for.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.UpdateRepositoryDescriptionResponse">
+            <summary>
+            Empty class reserved for future use.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.UpdateRepositoryNameRequest">
+            <summary>
+            Container for the parameters to the UpdateRepositoryName operation.
+            Renames a repository.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.UpdateRepositoryNameRequest.NewName">
+            <summary>
+            Gets and sets the property NewName.
+            </summary>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.UpdateRepositoryNameRequest.OldName">
+            <summary>
+            Gets and sets the property OldName.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.UpdateRepositoryNameResponse">
+            <summary>
+            Empty class reserved for future use.
+            </summary>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesRequestMarshaller">
+            <summary>
+            BatchGetRepositories Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesRequestMarshaller.Marshall(Amazon.CodeCommit.Model.BatchGetRepositoriesRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for BatchGetRepositories operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BatchGetRepositoriesResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BranchInfoUnmarshaller">
+            <summary>
+            Response Unmarshaller for BranchInfo Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BranchInfoUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#CodeCommit#Model#BranchInfo,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BranchInfoUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.BranchInfoUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchRequestMarshaller">
+            <summary>
+            CreateBranch Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchRequestMarshaller.Marshall(Amazon.CodeCommit.Model.CreateBranchRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for CreateBranch operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateBranchResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryRequestMarshaller">
+            <summary>
+            CreateRepository Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryRequestMarshaller.Marshall(Amazon.CodeCommit.Model.CreateRepositoryRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for CreateRepository operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.CreateRepositoryResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryRequestMarshaller">
+            <summary>
+            DeleteRepository Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryRequestMarshaller.Marshall(Amazon.CodeCommit.Model.DeleteRepositoryRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for DeleteRepository operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.DeleteRepositoryResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchRequestMarshaller">
+            <summary>
+            GetBranch Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchRequestMarshaller.Marshall(Amazon.CodeCommit.Model.GetBranchRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for GetBranch operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetBranchResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryRequestMarshaller">
+            <summary>
+            GetRepository Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryRequestMarshaller.Marshall(Amazon.CodeCommit.Model.GetRepositoryRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for GetRepository operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.GetRepositoryResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesRequestMarshaller">
+            <summary>
+            ListBranches Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesRequestMarshaller.Marshall(Amazon.CodeCommit.Model.ListBranchesRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for ListBranches operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListBranchesResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesRequestMarshaller">
+            <summary>
+            ListRepositories Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesRequestMarshaller.Marshall(Amazon.CodeCommit.Model.ListRepositoriesRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for ListRepositories operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.ListRepositoriesResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryMetadataUnmarshaller">
+            <summary>
+            Response Unmarshaller for RepositoryMetadata Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryMetadataUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#CodeCommit#Model#RepositoryMetadata,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryMetadataUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryMetadataUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryNameIdPairUnmarshaller">
+            <summary>
+            Response Unmarshaller for RepositoryNameIdPair Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryNameIdPairUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#CodeCommit#Model#RepositoryNameIdPair,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryNameIdPairUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.RepositoryNameIdPairUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchRequestMarshaller">
+            <summary>
+            UpdateDefaultBranch Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchRequestMarshaller.Marshall(Amazon.CodeCommit.Model.UpdateDefaultBranchRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for UpdateDefaultBranch operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateDefaultBranchResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionRequestMarshaller">
+            <summary>
+            UpdateRepositoryDescription Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionRequestMarshaller.Marshall(Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for UpdateRepositoryDescription operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryDescriptionResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameRequestMarshaller">
+            <summary>
+            UpdateRepositoryName Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameRequestMarshaller.Marshall(Amazon.CodeCommit.Model.UpdateRepositoryNameRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for UpdateRepositoryName operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.CodeCommit.Model.Internal.MarshallTransformations.UpdateRepositoryNameResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.CodeCommit.AmazonCodeCommitClient">
+             <summary>
+             Implementation for accessing CodeCommit
+            
+             AWS CodeCommit 
+             <para>
+             This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions
+             of the AWS CodeCommit API.
+             </para>
+              
+             <para>
+             You can use the AWS CodeCommit API to work with the following objects:
+             </para>
+              <ul> <li>Repositories</li> <li>Branches</li> <li>Commits</li> </ul> 
+             <para>
+             For information about how to use AWS CodeCommit, see the <i>AWS CodeCommit User Guide</i>.
+             </para>
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor">
+             <summary>
+             Constructs AmazonCodeCommitClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(Amazon.RegionEndpoint)">
+             <summary>
+             Constructs AmazonCodeCommitClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(Amazon.CodeCommit.AmazonCodeCommitConfig)">
+             <summary>
+             Constructs AmazonCodeCommitClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="config">The AmazonCodeCommitClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(Amazon.Runtime.AWSCredentials)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.CodeCommit.AmazonCodeCommitConfig)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Credentials and an
+            AmazonCodeCommitClient Configuration object.
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="clientConfig">The AmazonCodeCommitClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(System.String,System.String)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(System.String,System.String,Amazon.CodeCommit.AmazonCodeCommitConfig)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonCodeCommitClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="clientConfig">The AmazonCodeCommitClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(System.String,System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.#ctor(System.String,System.String,System.String,Amazon.CodeCommit.AmazonCodeCommitConfig)">
+            <summary>
+            Constructs AmazonCodeCommitClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonCodeCommitClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="clientConfig">The AmazonCodeCommitClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.CreateSigner">
+            <summary>
+            Creates the signer for the service.
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the service client.
+            </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.BatchGetRepositories(Amazon.CodeCommit.Model.BatchGetRepositoriesRequest)">
+            <summary>
+            Gets information about one or more repositories.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the BatchGetRepositories service method.</param>
+            
+            <returns>The response from the BatchGetRepositories service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException">
+            The maximum number of allowed repository names was exceeded. Currently, this number
+            is 25.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNamesRequiredException">
+            A repository names object is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.BatchGetRepositoriesAsync(Amazon.CodeCommit.Model.BatchGetRepositoriesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the BatchGetRepositories operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the BatchGetRepositories operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.CreateBranch(Amazon.CodeCommit.Model.CreateBranchRequest)">
+            <summary>
+            Creates a new branch in a repository and points the branch to a commit.
+            
+             <note>Calling the create branch operation does not set a repository's default branch.
+            To do this, call the update default branch operation.</note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateBranch service method.</param>
+            
+            <returns>The response from the CreateBranch service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameExistsException">
+            The specified branch name already exists.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            A branch name is required but was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.CommitDoesNotExistException">
+            The specified commit does not exist or no commit was specified, and the specified
+            repository has no default branch.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.CommitIdRequiredException">
+            A commit ID was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            The specified branch name is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidCommitIdException">
+            The specified commit ID is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.CreateBranchAsync(Amazon.CodeCommit.Model.CreateBranchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateBranch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateBranch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.CreateRepository(Amazon.CodeCommit.Model.CreateRepositoryRequest)">
+            <summary>
+            Creates a new, empty repository.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateRepository service method.</param>
+            
+            <returns>The response from the CreateRepository service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException">
+            The specified repository description is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryLimitExceededException">
+            A repository resource limit was exceeded.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameExistsException">
+            The specified repository name already exists.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.CreateRepositoryAsync(Amazon.CodeCommit.Model.CreateRepositoryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateRepository operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateRepository operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.DeleteRepository(Amazon.CodeCommit.Model.DeleteRepositoryRequest)">
+            <summary>
+            Deletes a repository. If a specified repository was already deleted, a null repository
+            ID will be returned.
+            
+             <important>Deleting a repository also deletes all associated objects and metadata.
+            After a repository is deleted, all future push calls to the deleted repository will
+            fail.</important>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the DeleteRepository service method.</param>
+            
+            <returns>The response from the DeleteRepository service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.DeleteRepositoryAsync(Amazon.CodeCommit.Model.DeleteRepositoryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the DeleteRepository operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the DeleteRepository operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.GetBranch(Amazon.CodeCommit.Model.GetBranchRequest)">
+            <summary>
+            Retrieves information about a repository branch, including its name and the last commit
+            ID.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetBranch service method.</param>
+            
+            <returns>The response from the GetBranch service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchDoesNotExistException">
+            The specified branch does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            A branch name is required but was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            The specified branch name is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.GetBranchAsync(Amazon.CodeCommit.Model.GetBranchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetBranch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetBranch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.GetRepository(Amazon.CodeCommit.Model.GetRepositoryRequest)">
+            <summary>
+            Gets information about a repository.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetRepository service method.</param>
+            
+            <returns>The response from the GetRepository service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.GetRepositoryAsync(Amazon.CodeCommit.Model.GetRepositoryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetRepository operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetRepository operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.ListBranches(Amazon.CodeCommit.Model.ListBranchesRequest)">
+            <summary>
+            Gets information about one or more branches in a repository.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListBranches service method.</param>
+            
+            <returns>The response from the ListBranches service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidContinuationTokenException">
+            The specified continuation token is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.ListBranchesAsync(Amazon.CodeCommit.Model.ListBranchesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListBranches operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListBranches operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.ListRepositories(Amazon.CodeCommit.Model.ListRepositoriesRequest)">
+            <summary>
+            Gets information about one or more repositories.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListRepositories service method.</param>
+            
+            <returns>The response from the ListRepositories service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidContinuationTokenException">
+            The specified continuation token is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidOrderException">
+            The specified sort order is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidSortByException">
+            The specified sort by value is not valid.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.ListRepositoriesAsync(Amazon.CodeCommit.Model.ListRepositoriesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListRepositories operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListRepositories operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.UpdateDefaultBranch(Amazon.CodeCommit.Model.UpdateDefaultBranchRequest)">
+            <summary>
+            Sets or changes the default branch name for the specified repository.
+            
+             <note>If you use this operation to change the default branch name to the current
+            default branch name, a success message is returned even though the default branch
+            did not change.</note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateDefaultBranch service method.</param>
+            
+            <returns>The response from the UpdateDefaultBranch service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchDoesNotExistException">
+            The specified branch does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            A branch name is required but was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            The specified branch name is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.UpdateDefaultBranchAsync(Amazon.CodeCommit.Model.UpdateDefaultBranchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateDefaultBranch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateDefaultBranch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.UpdateRepositoryDescription(Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest)">
+            <summary>
+            Sets or changes the comment or description for a repository.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryDescription service method.</param>
+            
+            <returns>The response from the UpdateRepositoryDescription service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException">
+            The specified repository description is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.UpdateRepositoryDescriptionAsync(Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateRepositoryDescription operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryDescription operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.UpdateRepositoryName(Amazon.CodeCommit.Model.UpdateRepositoryNameRequest)">
+            <summary>
+            Renames a repository.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryName service method.</param>
+            
+            <returns>The response from the UpdateRepositoryName service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameExistsException">
+            The specified repository name already exists.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.AmazonCodeCommitClient.UpdateRepositoryNameAsync(Amazon.CodeCommit.Model.UpdateRepositoryNameRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateRepositoryName operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryName operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Amazon.CodeCommit.IAmazonCodeCommit">
+             <summary>
+             Interface for accessing CodeCommit
+            
+             AWS CodeCommit 
+             <para>
+             This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions
+             of the AWS CodeCommit API.
+             </para>
+              
+             <para>
+             You can use the AWS CodeCommit API to work with the following objects:
+             </para>
+              <ul> <li>Repositories</li> <li>Branches</li> <li>Commits</li> </ul> 
+             <para>
+             For information about how to use AWS CodeCommit, see the <i>AWS CodeCommit User Guide</i>.
+             </para>
+             </summary>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.BatchGetRepositories(Amazon.CodeCommit.Model.BatchGetRepositoriesRequest)">
+            <summary>
+            Gets information about one or more repositories.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the BatchGetRepositories service method.</param>
+            
+            <returns>The response from the BatchGetRepositories service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.MaximumRepositoryNamesExceededException">
+            The maximum number of allowed repository names was exceeded. Currently, this number
+            is 25.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNamesRequiredException">
+            A repository names object is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.BatchGetRepositoriesAsync(Amazon.CodeCommit.Model.BatchGetRepositoriesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the BatchGetRepositories operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the BatchGetRepositories operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.CreateBranch(Amazon.CodeCommit.Model.CreateBranchRequest)">
+            <summary>
+            Creates a new branch in a repository and points the branch to a commit.
+            
+             <note>Calling the create branch operation does not set a repository's default branch.
+            To do this, call the update default branch operation.</note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateBranch service method.</param>
+            
+            <returns>The response from the CreateBranch service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameExistsException">
+            The specified branch name already exists.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            A branch name is required but was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.CommitDoesNotExistException">
+            The specified commit does not exist or no commit was specified, and the specified
+            repository has no default branch.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.CommitIdRequiredException">
+            A commit ID was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            The specified branch name is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidCommitIdException">
+            The specified commit ID is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.CreateBranchAsync(Amazon.CodeCommit.Model.CreateBranchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateBranch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateBranch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.CreateRepository(Amazon.CodeCommit.Model.CreateRepositoryRequest)">
+            <summary>
+            Creates a new, empty repository.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateRepository service method.</param>
+            
+            <returns>The response from the CreateRepository service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException">
+            The specified repository description is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryLimitExceededException">
+            A repository resource limit was exceeded.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameExistsException">
+            The specified repository name already exists.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.CreateRepositoryAsync(Amazon.CodeCommit.Model.CreateRepositoryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateRepository operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateRepository operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.DeleteRepository(Amazon.CodeCommit.Model.DeleteRepositoryRequest)">
+            <summary>
+            Deletes a repository. If a specified repository was already deleted, a null repository
+            ID will be returned.
+            
+             <important>Deleting a repository also deletes all associated objects and metadata.
+            After a repository is deleted, all future push calls to the deleted repository will
+            fail.</important>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the DeleteRepository service method.</param>
+            
+            <returns>The response from the DeleteRepository service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.DeleteRepositoryAsync(Amazon.CodeCommit.Model.DeleteRepositoryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the DeleteRepository operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the DeleteRepository operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.GetBranch(Amazon.CodeCommit.Model.GetBranchRequest)">
+            <summary>
+            Retrieves information about a repository branch, including its name and the last commit
+            ID.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetBranch service method.</param>
+            
+            <returns>The response from the GetBranch service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchDoesNotExistException">
+            The specified branch does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            A branch name is required but was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            The specified branch name is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.GetBranchAsync(Amazon.CodeCommit.Model.GetBranchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetBranch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetBranch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.GetRepository(Amazon.CodeCommit.Model.GetRepositoryRequest)">
+            <summary>
+            Gets information about a repository.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GetRepository service method.</param>
+            
+            <returns>The response from the GetRepository service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.GetRepositoryAsync(Amazon.CodeCommit.Model.GetRepositoryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GetRepository operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GetRepository operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.ListBranches(Amazon.CodeCommit.Model.ListBranchesRequest)">
+            <summary>
+            Gets information about one or more branches in a repository.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListBranches service method.</param>
+            
+            <returns>The response from the ListBranches service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidContinuationTokenException">
+            The specified continuation token is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.ListBranchesAsync(Amazon.CodeCommit.Model.ListBranchesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListBranches operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListBranches operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.ListRepositories(Amazon.CodeCommit.Model.ListRepositoriesRequest)">
+            <summary>
+            Gets information about one or more repositories.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListRepositories service method.</param>
+            
+            <returns>The response from the ListRepositories service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidContinuationTokenException">
+            The specified continuation token is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidOrderException">
+            The specified sort order is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidSortByException">
+            The specified sort by value is not valid.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.ListRepositoriesAsync(Amazon.CodeCommit.Model.ListRepositoriesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListRepositories operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListRepositories operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.UpdateDefaultBranch(Amazon.CodeCommit.Model.UpdateDefaultBranchRequest)">
+            <summary>
+            Sets or changes the default branch name for the specified repository.
+            
+             <note>If you use this operation to change the default branch name to the current
+            default branch name, a success message is returned even though the default branch
+            did not change.</note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateDefaultBranch service method.</param>
+            
+            <returns>The response from the UpdateDefaultBranch service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchDoesNotExistException">
+            The specified branch does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.BranchNameRequiredException">
+            A branch name is required but was not specified.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidBranchNameException">
+            The specified branch name is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.UpdateDefaultBranchAsync(Amazon.CodeCommit.Model.UpdateDefaultBranchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateDefaultBranch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateDefaultBranch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.UpdateRepositoryDescription(Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest)">
+            <summary>
+            Sets or changes the comment or description for a repository.
+            
+             <note>
+            <para>
+            The description field for a repository accepts all HTML characters and all valid Unicode
+            characters. Applications that do not HTML-encode the description and display it in
+            a web page could expose users to potentially malicious code. Make sure that you HTML-encode
+            the description field in any application that uses this API to display the repository
+            description on a web page.
+            </para>
+            </note>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryDescription service method.</param>
+            
+            <returns>The response from the UpdateRepositoryDescription service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionIntegrityChecksFailedException">
+            An encryption integrity check failed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyAccessDeniedException">
+            An encryption key could not be accessed.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyDisabledException">
+            The encryption key is disabled.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyNotFoundException">
+            No encryption key was found.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.EncryptionKeyUnavailableException">
+            The encryption key is not available.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryDescriptionException">
+            The specified repository description is not valid.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.UpdateRepositoryDescriptionAsync(Amazon.CodeCommit.Model.UpdateRepositoryDescriptionRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateRepositoryDescription operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryDescription operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.UpdateRepositoryName(Amazon.CodeCommit.Model.UpdateRepositoryNameRequest)">
+            <summary>
+            Renames a repository.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryName service method.</param>
+            
+            <returns>The response from the UpdateRepositoryName service method, as returned by CodeCommit.</returns>
+            <exception cref="T:Amazon.CodeCommit.Model.InvalidRepositoryNameException">
+            At least one specified repository name is not valid.
+            
+             <note>This exception only occurs when a specified repository name is not valid. Other
+            exceptions occur when a required repository parameter is missing, or when a specified
+            repository does not exist.</note>
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryDoesNotExistException">
+            The specified repository does not exist.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameExistsException">
+            The specified repository name already exists.
+            </exception>
+            <exception cref="T:Amazon.CodeCommit.Model.RepositoryNameRequiredException">
+            A repository name is required but was not specified.
+            </exception>
+        </member>
+        <member name="M:Amazon.CodeCommit.IAmazonCodeCommit.UpdateRepositoryNameAsync(Amazon.CodeCommit.Model.UpdateRepositoryNameRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateRepositoryName operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateRepositoryName operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>

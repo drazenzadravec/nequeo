@@ -1,0 +1,3363 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AWSSDK.KinesisFirehose</name>
+    </assembly>
+    <members>
+        <member name="T:Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig">
+            <summary>
+            Configuration for accessing Amazon KinesisFirehose service
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig.RegionEndpointServiceName">
+            <summary>
+            The constant used to lookup in the region hash the endpoint.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig.ServiceVersion">
+            <summary>
+            Gets the ServiceVersion property.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig.UserAgent">
+            <summary>
+            Gets the value of UserAgent property.
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.AmazonKinesisFirehoseException">
+            <summary>
+             Common exception for the KinesisFirehose service.
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseException.#ctor(System.String)">
+            <summary>
+            Construct instance of AmazonKinesisFirehoseException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of AmazonKinesisFirehoseException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of AmazonKinesisFirehoseException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonKinesisFirehoseException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonKinesisFirehoseException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.CompressionFormat">
+            <summary>
+            Constants used for properties of type CompressionFormat.
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.CompressionFormat.GZIP">
+            <summary>
+            Constant GZIP for CompressionFormat
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.CompressionFormat.Snappy">
+            <summary>
+            Constant Snappy for CompressionFormat
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.CompressionFormat.UNCOMPRESSED">
+            <summary>
+            Constant UNCOMPRESSED for CompressionFormat
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.CompressionFormat.ZIP">
+            <summary>
+            Constant ZIP for CompressionFormat
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.CompressionFormat.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.CompressionFormat.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.CompressionFormat.op_Implicit(System.String)~Amazon.KinesisFirehose.CompressionFormat">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.DeliveryStreamStatus">
+            <summary>
+            Constants used for properties of type DeliveryStreamStatus.
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.DeliveryStreamStatus.ACTIVE">
+            <summary>
+            Constant ACTIVE for DeliveryStreamStatus
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.DeliveryStreamStatus.CREATING">
+            <summary>
+            Constant CREATING for DeliveryStreamStatus
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.DeliveryStreamStatus.DELETING">
+            <summary>
+            Constant DELETING for DeliveryStreamStatus
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.DeliveryStreamStatus.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.DeliveryStreamStatus.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.DeliveryStreamStatus.op_Implicit(System.String)~Amazon.KinesisFirehose.DeliveryStreamStatus">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.NoEncryptionConfig">
+            <summary>
+            Constants used for properties of type NoEncryptionConfig.
+            </summary>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.NoEncryptionConfig.NoEncryption">
+            <summary>
+            Constant NoEncryption for NoEncryptionConfig
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.NoEncryptionConfig.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.NoEncryptionConfig.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.NoEncryptionConfig.op_Implicit(System.String)~Amazon.KinesisFirehose.NoEncryptionConfig">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.AmazonKinesisFirehoseRequest">
+            <summary>
+            Base class for KinesisFirehose operation requests.
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.BufferingHints">
+            <summary>
+            Describes the buffering to perform before delivering data to the destination.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.BufferingHints.IntervalInSeconds">
+            <summary>
+            Gets and sets the property IntervalInSeconds. 
+            <para>
+            Buffer incoming data for the specified period of time, in seconds, before delivering
+            it to the destination. The default value is 300.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.BufferingHints.SizeInMBs">
+            <summary>
+            Gets and sets the property SizeInMBs. 
+            <para>
+            Buffer incoming data to the specified size, in MBs, before delivering it to the destination.
+            The default value is 5.
+            </para>
+             
+            <para>
+            We recommend setting SizeInMBs to a value greater than the amount of data you typically
+            ingest into the delivery stream in 10 seconds. For example, if you typically ingest
+            data at 1 MB/sec set SizeInMBs to be 10 MB or higher.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.ConcurrentModificationException">
+            <summary>
+             KinesisFirehose exception
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ConcurrentModificationException.#ctor(System.String)">
+            <summary>
+            Constructs a new ConcurrentModificationException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ConcurrentModificationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of ConcurrentModificationException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ConcurrentModificationException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of ConcurrentModificationException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ConcurrentModificationException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ConcurrentModificationException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ConcurrentModificationException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ConcurrentModificationException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.CopyCommand">
+            <summary>
+            Describes a <code>COPY</code> command for Amazon Redshift.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CopyCommand.CopyOptions">
+            <summary>
+            Gets and sets the property CopyOptions. 
+            <para>
+            Optional parameters to use with the Amazon Redshift <code>COPY</code> command. For
+            more information, see the "Optional Parameters" section of <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html">Amazon
+            Redshift COPY command</a>. Some possible examples that would apply to Amazon Kinesis
+            Firehose are as follows.
+            </para>
+             
+            <para>
+            <code>delimiter '\t' lzop;</code> - fields are delimited with "\t" (TAB character)
+            and compressed using lzop.
+            </para>
+             
+            <para>
+            <code>delimiter '|</code> - fields are delimited with "|" (this is the default delimiter).
+            </para>
+             
+            <para>
+            <code>delimiter '|' escape</code> - the delimiter should be escaped.
+            </para>
+             
+            <para>
+            <code>fixedwidth 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6'</code>
+            - fields are fixed width in the source, with each width specified after every column
+            in the table.
+            </para>
+             
+            <para>
+             <code>JSON 's3://mybucket/jsonpaths.txt'</code> - data is in JSON format, and the
+            path specified is the format of the data.
+            </para>
+             
+            <para>
+            For more examples, see and <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html">Amazon
+            Redshift COPY command exmaples</a>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CopyCommand.DataTableColumns">
+            <summary>
+            Gets and sets the property DataTableColumns. 
+            <para>
+            A comma-separated list of column names.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CopyCommand.DataTableName">
+            <summary>
+            Gets and sets the property DataTableName. 
+            <para>
+            The name of the target table. The table must already exist in the database.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest">
+            <summary>
+            Container for the parameters to the CreateDeliveryStream operation.
+            Creates a delivery stream.
+            
+             
+            <para>
+            <a>CreateDeliveryStream</a> is an asynchronous operation that immediately returns.
+            The initial status of the delivery stream is <code>CREATING</code>. After the delivery
+            stream is created, its status is <code>ACTIVE</code> and it now accepts data. Attempts
+            to send data to a delivery stream that is not in the <code>ACTIVE</code> state cause
+            an exception. To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.
+            </para>
+             
+            <para>
+            The name of a delivery stream identifies it. You can't have two delivery streams with
+            the same name in the same region. Two delivery streams in different AWS accounts or
+            different regions in the same AWS account can have the same name.
+            </para>
+             
+            <para>
+            By default, you can create up to 5 delivery streams per region.
+            </para>
+             
+            <para>
+            A delivery stream can only be configured with a single destination, Amazon S3 or Amazon
+            Redshift. For correct <a>CreateDeliveryStream</a> request syntax, specify only one
+            destination configuration parameter: either <code>RedshiftDestinationConfiguration</code>
+            or <code>S3DestinationConfiguration</code>
+            </para>
+             
+            <para>
+            As part of <code>S3DestinationConfiguration</code>, optional values <code>BufferingHints</code>,
+            <code>EncryptionConfiguration</code>, and <code>CompressionFormat</code> can be provided.
+            By default, if no <code>BufferingHints</code> value is provided, Amazon Kinesis Firehose
+            buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first.
+            Note that <code>BufferingHints</code> is a hint, so there are some cases where the
+            service cannot adhere to these conditions strictly; for example, record boundaries
+            are such that the size is a little over or under the configured buffering size. By
+            default, no encryption is performed. We strongly recommend that you enable encryption
+            to ensure secure data storage in Amazon S3.
+            </para>
+             
+            <para>
+            A few notes about <code>RedshiftDestinationConfiguration</code>:
+            </para>
+             <ul> <li>An Amazon Redshift destination requires an S3 bucket as intermediate location,
+            as Amazon Kinesis Firehose first delivers data to S3 and then uses <code>COPY</code>
+            syntax to load data into an Amazon Redshift table. This is specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>
+            parameter element.</li> <li>The compression formats <code>SNAPPY</code> or <code>ZIP</code>
+            cannot be specified in <code>RedshiftDestinationConfiguration.S3Configuration</code>
+            because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket
+            doesn't support these compression formats.</li> <li>We strongly recommend that the
+            username and password provided is used exclusively for Amazon Kinesis Firehose purposes,
+            and that the permissions for the account are restricted for Amazon Redshift <code>INSERT</code>
+            permissions.</li> </ul> 
+            <para>
+            Amazon Kinesis Firehose assumes the IAM role that is configured as part of destinations.
+            The IAM role should allow the Amazon Kinesis Firehose principal to assume the role,
+            and the role should have permissions that allows the service to deliver the data.
+            For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Amazon
+            S3 Bucket Access</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest.RedshiftDestinationConfiguration">
+            <summary>
+            Gets and sets the property RedshiftDestinationConfiguration. 
+            <para>
+            The destination in Amazon Redshift. This value cannot be specified if Amazon S3 is
+            the desired destination (see restrictions listed above).
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest.S3DestinationConfiguration">
+            <summary>
+            Gets and sets the property S3DestinationConfiguration. 
+            <para>
+            The destination in Amazon S3. This value must be specified if <code>RedshiftDestinationConfiguration</code>
+            is specified (see restrictions listed above).
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.CreateDeliveryStreamResponse">
+            <summary>
+            Contains the output of <a>CreateDeliveryStream</a>.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.CreateDeliveryStreamResponse.DeliveryStreamARN">
+            <summary>
+            Gets and sets the property DeliveryStreamARN. 
+            <para>
+            The ARN of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest">
+            <summary>
+            Container for the parameters to the DeleteDeliveryStream operation.
+            Deletes a delivery stream and its data.
+            
+             
+            <para>
+            You can delete a delivery stream only if it is in <code>ACTIVE</code> or <code>DELETING</code>
+            state, and not in the <code>CREATING</code> state. While the deletion request is in
+            process, the delivery stream is in the <code>DELETING</code> state.
+            </para>
+             
+            <para>
+            To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.
+            </para>
+             
+            <para>
+            While the delivery stream is <code>DELETING</code> state, the service may continue
+            to accept the records, but the service doesn't make any guarantees with respect to
+            delivering the data. Therefore, as a best practice, you should first stop any applications
+            that are sending records before deleting a delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.DeleteDeliveryStreamResponse">
+            <summary>
+            Contains the output of <a>DeleteDeliveryStream</a>.
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.DeliveryStreamDescription">
+            <summary>
+            Contains information about a delivery stream.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.CreateTimestamp">
+            <summary>
+            Gets and sets the property CreateTimestamp. 
+            <para>
+            The date and time that the delivery stream was created.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.DeliveryStreamARN">
+            <summary>
+            Gets and sets the property DeliveryStreamARN. 
+            <para>
+            The Amazon Resource Name (ARN) of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.DeliveryStreamStatus">
+            <summary>
+            Gets and sets the property DeliveryStreamStatus. 
+            <para>
+            The status of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.Destinations">
+            <summary>
+            Gets and sets the property Destinations. 
+            <para>
+            The destinations.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.HasMoreDestinations">
+            <summary>
+            Gets and sets the property HasMoreDestinations. 
+            <para>
+            Indicates whether there are more destinations available to list.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.LastUpdateTimestamp">
+            <summary>
+            Gets and sets the property LastUpdateTimestamp. 
+            <para>
+            The date and time that the delivery stream was last updated.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DeliveryStreamDescription.VersionId">
+            <summary>
+            Gets and sets the property VersionId. 
+            <para>
+            Used when calling the <a>UpdateDestination</a> operation. Each time the destination
+            is updated for the delivery stream, the VersionId is changed, and the current VersionId
+            is required when updating the destination. This is so that the service knows it is
+            applying the changes to the correct version of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest">
+            <summary>
+            Container for the parameters to the DescribeDeliveryStream operation.
+            Describes the specified delivery stream and gets the status. For example, after your
+            delivery stream is created, call <a>DescribeDeliveryStream</a> to see if the delivery
+            stream is <code>ACTIVE</code> and therefore ready for data to be sent to it.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest.ExclusiveStartDestinationId">
+            <summary>
+            Gets and sets the property ExclusiveStartDestinationId. 
+            <para>
+            Specifies the destination ID to start returning the destination information. Currently
+            Amazon Kinesis Firehose supports one destination per delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest.Limit">
+            <summary>
+            Gets and sets the property Limit. 
+            <para>
+            The limit on the number of destinations to return. Currently, you can have one destination
+            per delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.DescribeDeliveryStreamResponse">
+            <summary>
+            Contains the output of <a>DescribeDeliveryStream</a>.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DescribeDeliveryStreamResponse.DeliveryStreamDescription">
+            <summary>
+            Gets and sets the property DeliveryStreamDescription. 
+            <para>
+            Information about the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.DestinationDescription">
+            <summary>
+            Describes the destination for a delivery stream.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DestinationDescription.DestinationId">
+            <summary>
+            Gets and sets the property DestinationId. 
+            <para>
+            The ID of the destination.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DestinationDescription.RedshiftDestinationDescription">
+            <summary>
+            Gets and sets the property RedshiftDestinationDescription. 
+            <para>
+            The destination in Amazon Redshift.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.DestinationDescription.S3DestinationDescription">
+            <summary>
+            Gets and sets the property S3DestinationDescription. 
+            <para>
+            The Amazon S3 destination.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.EncryptionConfiguration">
+            <summary>
+            Describes the encryption for a destination in Amazon S3.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.EncryptionConfiguration.KMSEncryptionConfig">
+            <summary>
+            Gets and sets the property KMSEncryptionConfig. 
+            <para>
+            The encryption key.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.EncryptionConfiguration.NoEncryptionConfig">
+            <summary>
+            Gets and sets the property NoEncryptionConfig. 
+            <para>
+            Specifically override existing encryption information to ensure no encryption is used.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            <summary>
+             KinesisFirehose exception
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.InvalidArgumentException.#ctor(System.String)">
+            <summary>
+            Constructs a new InvalidArgumentException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.InvalidArgumentException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of InvalidArgumentException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.InvalidArgumentException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of InvalidArgumentException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.InvalidArgumentException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidArgumentException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.InvalidArgumentException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of InvalidArgumentException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.KMSEncryptionConfig">
+            <summary>
+            Describes an encryption key for a destination in Amazon S3.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.KMSEncryptionConfig.AWSKMSKeyARN">
+            <summary>
+            Gets and sets the property AWSKMSKeyARN. 
+            <para>
+            The ARN of the encryption key. Must belong to the same region as the destination Amazon
+            S3 bucket.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.LimitExceededException">
+            <summary>
+             KinesisFirehose exception
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.LimitExceededException.#ctor(System.String)">
+            <summary>
+            Constructs a new LimitExceededException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.LimitExceededException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of LimitExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.LimitExceededException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of LimitExceededException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.LimitExceededException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of LimitExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.LimitExceededException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of LimitExceededException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest">
+            <summary>
+            Container for the parameters to the ListDeliveryStreams operation.
+            Lists your delivery streams.
+            
+             
+            <para>
+            The number of delivery streams might be too large to return using a single call to
+            <a>ListDeliveryStreams</a>. You can limit the number of delivery streams returned,
+            using the <code>Limit</code> parameter. To determine whether there are more delivery
+            streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output.
+            If there are more delivery streams to list, you can request them by specifying the
+            name of the last delivery stream returned in the call in the <code>ExclusiveStartDeliveryStreamName</code>
+            parameter of a subsequent call.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest.ExclusiveStartDeliveryStreamName">
+            <summary>
+            Gets and sets the property ExclusiveStartDeliveryStreamName. 
+            <para>
+            The name of the delivery stream to start the list with.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest.Limit">
+            <summary>
+            Gets and sets the property Limit. 
+            <para>
+            The maximum number of delivery streams to list.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.ListDeliveryStreamsResponse">
+            <summary>
+            Contains the output of <a>ListDeliveryStreams</a>.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.ListDeliveryStreamsResponse.DeliveryStreamNames">
+            <summary>
+            Gets and sets the property DeliveryStreamNames. 
+            <para>
+            The names of the delivery streams.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.ListDeliveryStreamsResponse.HasMoreDeliveryStreams">
+            <summary>
+            Gets and sets the property HasMoreDeliveryStreams. 
+            <para>
+            Indicates whether there are more delivery streams available to list.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.PutRecordBatchRequest">
+            <summary>
+            Container for the parameters to the PutRecordBatch operation.
+            Writes multiple data records into a delivery stream in a single call, which can achieve
+            higher throughput per producer than when writing single records. To write single data
+            records into a delivery stream, use <a>PutRecord</a>. Applications using these operations
+            are referred to as producers.
+            
+             
+            <para>
+            Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the
+            request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB
+            for the entire request. By default, each delivery stream can take in up to 2,000 transactions
+            per second, 5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a>
+            and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations
+            for each delivery stream. For more information about limits and how to request an
+            increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>. 
+            </para>
+             
+            <para>
+            You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>.
+            The data record consists of a data blob that can be up to 1,000 KB in size, and any
+            kind of data, for example, a segment from a log file, geographic location data, web
+            site clickstream data, and so on.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose buffers records before delivering them to the destination.
+            To disambiguate the data blobs at the destination, a common solution is to use delimiters
+            in the data, such as a newline (<code>\n</code>) or some other character unique within
+            the data. This allows the consumer application(s) to parse individual data items when
+            reading the data from the destination.
+            </para>
+             
+            <para>
+            The <a>PutRecordBatch</a> response includes a count of any failed records, <code>FailedPutCount</code>,
+            and an array of responses, <code>RequestResponses</code>. The <code>FailedPutCount</code>
+            value is a count of records that failed. Each entry in the <code>RequestResponses</code>
+            array gives additional information of the processed record. Each entry in <code>RequestResponses</code>
+            directly correlates with a record in the request array using the same ordering, from
+            the top to the bottom of the request and response. <code>RequestResponses</code> always
+            includes the same number of records as the request array. <code>RequestResponses</code>
+            both successfully and unsuccessfully processed records. Amazon Kinesis Firehose attempts
+            to process all records in each <a>PutRecordBatch</a> request. A single record failure
+            does not stop the processing of subsequent records.
+            </para>
+             
+            <para>
+            A successfully processed record includes a <code>RecordId</code> value, which is a
+            unique value identified for the record. An unsuccessfully processed record includes
+            <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code>
+            reflects the type of error and is one of the following values: <code>ServiceUnavailable</code>
+            or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed
+            information about the error.
+            </para>
+             
+            <para>
+            If <code>FailedPutCount</code> is greater than 0 (zero), retry the request. A retry
+            of the entire batch of records is possible; however, we strongly recommend that you
+            inspect the entire response and resend only those records that failed processing.
+            This minimizes duplicate records and also reduces the total bytes sent (and corresponding
+            charges).
+            </para>
+             
+            <para>
+            If the <a>PutRecordBatch</a> operation throws a <code>ServiceUnavailableException</code>,
+            back off and retry. If the exception persists, it is possible that the throughput
+            limits have been exceeded for the delivery stream.
+            </para>
+             
+            <para>
+            Data records sent to Amazon Kinesis Firehose are stored for 24 hours from the time
+            they are added to a delivery stream as it attempts to send the records to the destination.
+            If the destination is unreachable for more than 24 hours, the data is no longer available.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchRequest.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchRequest.Records">
+            <summary>
+            Gets and sets the property Records. 
+            <para>
+            One or more records.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.PutRecordBatchResponse">
+            <summary>
+            Contains the output of <a>PutRecordBatch</a>.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchResponse.FailedPutCount">
+            <summary>
+            Gets and sets the property FailedPutCount. 
+            <para>
+            The number of unsuccessfully written records.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchResponse.RequestResponses">
+            <summary>
+            Gets and sets the property RequestResponses. 
+            <para>
+            The results for the individual records. The index of each element matches the same
+            index in which records were sent.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.PutRecordBatchResponseEntry">
+            <summary>
+            Contains the result for an individual record from a <a>PutRecordBatch</a> request.
+            If the record is successfully added to your delivery stream, it receives a record
+            ID. If the record fails to be added to your delivery stream, the result includes an
+            error code and an error message.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchResponseEntry.ErrorCode">
+            <summary>
+            Gets and sets the property ErrorCode. 
+            <para>
+            The error code for an individual record result.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchResponseEntry.ErrorMessage">
+            <summary>
+            Gets and sets the property ErrorMessage. 
+            <para>
+            The error message for an individual record result.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordBatchResponseEntry.RecordId">
+            <summary>
+            Gets and sets the property RecordId. 
+            <para>
+            The ID of the record.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.PutRecordRequest">
+            <summary>
+            Container for the parameters to the PutRecord operation.
+            Writes a single data record into an Amazon Kinesis Firehose delivery stream. To write
+            multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications
+            using these operations are referred to as producers.
+            
+             
+            <para>
+            By default, each delivery stream can take in up to 2,000 transactions per second,
+            5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a>
+            and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations
+            for each delivery stream. For more information about limits and how to request an
+            increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>. 
+            </para>
+             
+            <para>
+            You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>.
+            The data record consists of a data blob that can be up to 1,000 KB in size, and any
+            kind of data, for example, a segment from a log file, geographic location data, web
+            site clickstream data, etc.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose buffers records before delivering them to the destination.
+            To disambiguate the data blobs at the destination, a common solution is to use delimiters
+            in the data, such as a newline (<code>\n</code>) or some other character unique within
+            the data. This allows the consumer application(s) to parse individual data items when
+            reading the data from the destination.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose does not maintain data record ordering. If the destination
+            data needs to be re-ordered by the consumer application, the producer should include
+            some form of sequence number in each data record. 
+            </para>
+             
+            <para>
+            The <a>PutRecord</a> operation returns a <code>RecordId</code>, which is a unique
+            string assigned to each record. Producer applications can use this ID for purposes
+            such as auditability and investigation.
+            </para>
+             
+            <para>
+            If the <a>PutRecord</a> operation throws a <code>ServiceUnavailableException</code>,
+            back off and retry. If the exception persists, it is possible that the throughput
+            limits have been exceeded for the delivery stream. 
+            </para>
+             
+            <para>
+            Data records sent to Amazon Kinesis Firehose are stored for 24 hours from the time
+            they are added to a delivery stream as it attempts to send the records to the destination.
+            If the destination is unreachable for more than 24 hours, the data is no longer available.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordRequest.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordRequest.Record">
+            <summary>
+            Gets and sets the property Record. 
+            <para>
+            The record.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.PutRecordResponse">
+            <summary>
+            Contains the output of <a>PutRecord</a>.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.PutRecordResponse.RecordId">
+            <summary>
+            Gets and sets the property RecordId. 
+            <para>
+            The ID of the record.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Record">
+            <summary>
+            The unit of data in a delivery stream.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Record.Data">
+            <summary>
+            Gets and sets the property Data. 
+            <para>
+            The data blob, which is base64-encoded when the blob is serialized. The maximum size
+            of the data blob, before base64-encoding, is 1,000 KB.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration">
+            <summary>
+            Describes the configuration of a destination in Amazon Redshift.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration.ClusterJDBCURL">
+            <summary>
+            Gets and sets the property ClusterJDBCURL. 
+            <para>
+            The database connection string.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration.CopyCommand">
+            <summary>
+            Gets and sets the property CopyCommand. 
+            <para>
+            The <code>COPY</code> command.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration.Password">
+            <summary>
+            Gets and sets the property Password. 
+            <para>
+            The user password.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration.RoleARN">
+            <summary>
+            Gets and sets the property RoleARN. 
+            <para>
+            The ARN of the AWS credentials.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration.S3Configuration">
+            <summary>
+            Gets and sets the property S3Configuration. 
+            <para>
+            The S3 configuration for the intermediate location from which Amazon Redshift obtains
+            data. Restrictions are described in the topic for <a>CreateDeliveryStream</a>.
+            </para>
+             
+            <para>
+            The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified
+            in <code>RedshiftDestinationConfiguration.S3Configuration</code> because the Amazon
+            Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support
+            these compression formats.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration.Username">
+            <summary>
+            Gets and sets the property Username. 
+            <para>
+            The name of the user.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.RedshiftDestinationDescription">
+            <summary>
+            Describes a destination in Amazon Redshift.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationDescription.ClusterJDBCURL">
+            <summary>
+            Gets and sets the property ClusterJDBCURL. 
+            <para>
+            The database connection string.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationDescription.CopyCommand">
+            <summary>
+            Gets and sets the property CopyCommand. 
+            <para>
+            The <code>COPY</code> command.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationDescription.RoleARN">
+            <summary>
+            Gets and sets the property RoleARN. 
+            <para>
+            The ARN of the AWS credentials.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationDescription.S3DestinationDescription">
+            <summary>
+            Gets and sets the property S3DestinationDescription. 
+            <para>
+            The Amazon S3 destination.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationDescription.Username">
+            <summary>
+            Gets and sets the property Username. 
+            <para>
+            The name of the user.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate">
+            <summary>
+            Describes an update for a destination in Amazon Redshift.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate.ClusterJDBCURL">
+            <summary>
+            Gets and sets the property ClusterJDBCURL. 
+            <para>
+            The database connection string.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate.CopyCommand">
+            <summary>
+            Gets and sets the property CopyCommand. 
+            <para>
+            The <code>COPY</code> command.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate.Password">
+            <summary>
+            Gets and sets the property Password. 
+            <para>
+            The user password.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate.RoleARN">
+            <summary>
+            Gets and sets the property RoleARN. 
+            <para>
+            The ARN of the AWS credentials.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate.S3Update">
+            <summary>
+            Gets and sets the property S3Update. 
+            <para>
+            The Amazon S3 destination.
+            </para>
+             
+            <para>
+            The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified
+            in <code>RedshiftDestinationUpdate.S3Update</code> because the Amazon Redshift <code>COPY</code>
+            operation that reads from the S3 bucket doesn't support these compression formats.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate.Username">
+            <summary>
+            Gets and sets the property Username. 
+            <para>
+            The name of the user.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            <summary>
+             KinesisFirehose exception
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceInUseException.#ctor(System.String)">
+            <summary>
+            Constructs a new ResourceInUseException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceInUseException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of ResourceInUseException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceInUseException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of ResourceInUseException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceInUseException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ResourceInUseException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceInUseException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ResourceInUseException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            <summary>
+             KinesisFirehose exception
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceNotFoundException.#ctor(System.String)">
+            <summary>
+            Constructs a new ResourceNotFoundException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of ResourceNotFoundException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceNotFoundException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of ResourceNotFoundException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceNotFoundException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ResourceNotFoundException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ResourceNotFoundException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ResourceNotFoundException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.S3DestinationConfiguration">
+            <summary>
+            Describes the configuration of a destination in Amazon S3.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationConfiguration.BucketARN">
+            <summary>
+            Gets and sets the property BucketARN. 
+            <para>
+            The ARN of the S3 bucket.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationConfiguration.BufferingHints">
+            <summary>
+            Gets and sets the property BufferingHints. 
+            <para>
+            The buffering option. If no value is specified, <code>BufferingHints</code> object
+            default values are used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationConfiguration.CompressionFormat">
+            <summary>
+            Gets and sets the property CompressionFormat. 
+            <para>
+            The compression format. If no value is specified, the default is <code>UNCOMPRESSED</code>.
+            </para>
+             
+            <para>
+            The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified
+            for Amazon Redshift destinations because they are not supported by the Amazon Redshift
+            <code>COPY</code> operation that reads from the S3 bucket.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationConfiguration.EncryptionConfiguration">
+            <summary>
+            Gets and sets the property EncryptionConfiguration. 
+            <para>
+            The encryption configuration. If no value is specified, the default is no encryption.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationConfiguration.Prefix">
+            <summary>
+            Gets and sets the property Prefix. 
+            <para>
+            The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files.
+            You can specify an extra prefix to be added in front of the time format prefix. Note
+            that if the prefix ends with a slash, it appears as a folder in the S3 bucket. For
+            more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon
+            S3 Object Name Format</a> in the <a href="http://docs.aws.amazon.com/firehose/latest/dev/">guide-fh-dev</a>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationConfiguration.RoleARN">
+            <summary>
+            Gets and sets the property RoleARN. 
+            <para>
+            The ARN of the AWS credentials.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.S3DestinationDescription">
+            <summary>
+            Describes a destination in Amazon S3.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationDescription.BucketARN">
+            <summary>
+            Gets and sets the property BucketARN. 
+            <para>
+            The ARN of the S3 bucket.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationDescription.BufferingHints">
+            <summary>
+            Gets and sets the property BufferingHints. 
+            <para>
+            The buffering option. If no value is specified, <code>BufferingHints</code> object
+            default values are used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationDescription.CompressionFormat">
+            <summary>
+            Gets and sets the property CompressionFormat. 
+            <para>
+            The compression format. If no value is specified, the default is <code>NOCOMPRESSION</code>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationDescription.EncryptionConfiguration">
+            <summary>
+            Gets and sets the property EncryptionConfiguration. 
+            <para>
+            The encryption configuration. If no value is specified, the default is no encryption.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationDescription.Prefix">
+            <summary>
+            Gets and sets the property Prefix. 
+            <para>
+            The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files.
+            You can specify an extra prefix to be added in front of the time format prefix. Note
+            that if the prefix ends with a slash, it appears as a folder in the S3 bucket. For
+            more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon
+            S3 Object Name Format</a> in the <a href="http://docs.aws.amazon.com/firehose/latest/dev/">guide-fh-dev</a>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationDescription.RoleARN">
+            <summary>
+            Gets and sets the property RoleARN. 
+            <para>
+            The ARN of the AWS credentials.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.S3DestinationUpdate">
+            <summary>
+            Describes an update for a destination in Amazon S3.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationUpdate.BucketARN">
+            <summary>
+            Gets and sets the property BucketARN. 
+            <para>
+            The ARN of the S3 bucket.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationUpdate.BufferingHints">
+            <summary>
+            Gets and sets the property BufferingHints. 
+            <para>
+            The buffering option. If no value is specified, <code>BufferingHints</code> object
+            default values are used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationUpdate.CompressionFormat">
+            <summary>
+            Gets and sets the property CompressionFormat. 
+            <para>
+            The compression format. If no value is specified, the default is <code>NOCOMPRESSION</code>.
+            </para>
+             
+            <para>
+            The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified
+            for Amazon Redshift destinations because they are not supported by the Amazon Redshift
+            <code>COPY</code> operation that reads from the S3 bucket.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationUpdate.EncryptionConfiguration">
+            <summary>
+            Gets and sets the property EncryptionConfiguration. 
+            <para>
+            The encryption configuration. If no value is specified, the default is no encryption.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationUpdate.Prefix">
+            <summary>
+            Gets and sets the property Prefix. 
+            <para>
+            The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files.
+            You can specify an extra prefix to be added in front of the time format prefix. Note
+            that if the prefix ends with a slash, it appears as a folder in the S3 bucket. For
+            more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon
+            S3 Object Name Format</a> in the <a href="http://docs.aws.amazon.com/firehose/latest/dev/">guide-fh-dev</a>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.S3DestinationUpdate.RoleARN">
+            <summary>
+            Gets and sets the property RoleARN. 
+            <para>
+            The ARN of the AWS credentials.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.ServiceUnavailableException">
+            <summary>
+             KinesisFirehose exception
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ServiceUnavailableException.#ctor(System.String)">
+            <summary>
+            Constructs a new ServiceUnavailableException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ServiceUnavailableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of ServiceUnavailableException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ServiceUnavailableException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of ServiceUnavailableException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ServiceUnavailableException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ServiceUnavailableException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.ServiceUnavailableException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of ServiceUnavailableException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.UpdateDestinationRequest">
+            <summary>
+            Container for the parameters to the UpdateDestination operation.
+            Updates the specified destination of the specified delivery stream. 
+            
+             
+            <para>
+            This operation can be used to change the destination type (for example, to replace
+            the Amazon S3 destination with Amazon Redshift) or change the parameters associated
+            with a given destination (for example, to change the bucket name of the Amazon S3
+            destination). The update may not occur immediately. The target delivery stream remains
+            active while the configurations are updated, so data writes to the delivery stream
+            can continue during this process. The updated configurations are normally effective
+            within a few minutes. 
+            </para>
+             
+            <para>
+            If the destination type is the same, Amazon Kinesis Firehose merges the configuration
+            parameters specified in the <a>UpdateDestination</a> request with the destination
+            configuration that already exists on the delivery stream. If any of the parameters
+            are not specified in the update request, then the existing configuration parameters
+            are retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a>
+            is not specified then the existing <a>EncryptionConfiguration</a> is maintained on
+            the destination.
+            </para>
+             
+            <para>
+            If the destination type is not the same, for example, changing the destination from
+            Amazon S3 to Amazon Redshift, Amazon Kinesis Firehose does not merge any parameters.
+            In this case, all parameters must be specified.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose uses the <code>CurrentDeliveryStreamVersionId</code> to avoid
+            race conditions and conflicting merges. This is a required field in every request
+            and the service only updates the configuration if the existing configuration matches
+            the <code>VersionId</code>. After the update is applied successfully, the <code>VersionId</code>
+            is updated, which can be retrieved with the <a>DescribeDeliveryStream</a> operation.
+            The new <code>VersionId</code> should be uses to set <code>CurrentDeliveryStreamVersionId</code>
+            in the next <a>UpdateDestination</a> operation.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.UpdateDestinationRequest.CurrentDeliveryStreamVersionId">
+            <summary>
+            Gets and sets the property CurrentDeliveryStreamVersionId. 
+            <para>
+            Obtain this value from the <code>VersionId</code> result of the <a>DeliveryStreamDescription</a>
+            operation. This value is required, and helps the service to perform conditional operations.
+            For example, if there is a interleaving update and this value is null, then the update
+            destination fails. After the update is successful, the <code>VersionId</code> value
+            is updated. The service then performs a merge of the old configuration with the new
+            configuration.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.UpdateDestinationRequest.DeliveryStreamName">
+            <summary>
+            Gets and sets the property DeliveryStreamName. 
+            <para>
+            The name of the delivery stream.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.UpdateDestinationRequest.DestinationId">
+            <summary>
+            Gets and sets the property DestinationId. 
+            <para>
+            The ID of the destination.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.UpdateDestinationRequest.RedshiftDestinationUpdate">
+            <summary>
+            Gets and sets the property RedshiftDestinationUpdate.
+            </summary>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.UpdateDestinationRequest.S3DestinationUpdate">
+            <summary>
+            Gets and sets the property S3DestinationUpdate.
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.UpdateDestinationResponse">
+            <summary>
+            Contains the output of <a>UpdateDestination</a>.
+            </summary>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsMarshaller">
+            <summary>
+            BufferingHints Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsMarshaller.Marshall(Amazon.KinesisFirehose.Model.BufferingHints,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsUnmarshaller">
+            <summary>
+            Response Unmarshaller for BufferingHints Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#BufferingHints,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.BufferingHintsUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandMarshaller">
+            <summary>
+            CopyCommand Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandMarshaller.Marshall(Amazon.KinesisFirehose.Model.CopyCommand,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandUnmarshaller">
+            <summary>
+            Response Unmarshaller for CopyCommand Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#CopyCommand,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CopyCommandUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamRequestMarshaller">
+            <summary>
+            CreateDeliveryStream Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for CreateDeliveryStream operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.CreateDeliveryStreamResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamRequestMarshaller">
+            <summary>
+            DeleteDeliveryStream Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for DeleteDeliveryStream operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeleteDeliveryStreamResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeliveryStreamDescriptionUnmarshaller">
+            <summary>
+            Response Unmarshaller for DeliveryStreamDescription Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeliveryStreamDescriptionUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#DeliveryStreamDescription,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeliveryStreamDescriptionUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DeliveryStreamDescriptionUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamRequestMarshaller">
+            <summary>
+            DescribeDeliveryStream Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for DescribeDeliveryStream operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DescribeDeliveryStreamResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DestinationDescriptionUnmarshaller">
+            <summary>
+            Response Unmarshaller for DestinationDescription Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DestinationDescriptionUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#DestinationDescription,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DestinationDescriptionUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.DestinationDescriptionUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationMarshaller">
+            <summary>
+            EncryptionConfiguration Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationMarshaller.Marshall(Amazon.KinesisFirehose.Model.EncryptionConfiguration,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationUnmarshaller">
+            <summary>
+            Response Unmarshaller for EncryptionConfiguration Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#EncryptionConfiguration,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.EncryptionConfigurationUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigMarshaller">
+            <summary>
+            KMSEncryptionConfig Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigMarshaller.Marshall(Amazon.KinesisFirehose.Model.KMSEncryptionConfig,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigUnmarshaller">
+            <summary>
+            Response Unmarshaller for KMSEncryptionConfig Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#KMSEncryptionConfig,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.KMSEncryptionConfigUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsRequestMarshaller">
+            <summary>
+            ListDeliveryStreams Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for ListDeliveryStreams operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.ListDeliveryStreamsResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchRequestMarshaller">
+            <summary>
+            PutRecordBatch Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.PutRecordBatchRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseEntryUnmarshaller">
+            <summary>
+            Response Unmarshaller for PutRecordBatchResponseEntry Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseEntryUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#PutRecordBatchResponseEntry,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseEntryUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseEntryUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for PutRecordBatch operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordBatchResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordRequestMarshaller">
+            <summary>
+            PutRecord Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.PutRecordRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for PutRecord operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.PutRecordResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RecordMarshaller">
+            <summary>
+            Record Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RecordMarshaller.Marshall(Amazon.KinesisFirehose.Model.Record,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RecordMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationConfigurationMarshaller">
+            <summary>
+            RedshiftDestinationConfiguration Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationConfigurationMarshaller.Marshall(Amazon.KinesisFirehose.Model.RedshiftDestinationConfiguration,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationConfigurationMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationDescriptionUnmarshaller">
+            <summary>
+            Response Unmarshaller for RedshiftDestinationDescription Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationDescriptionUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#RedshiftDestinationDescription,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationDescriptionUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationDescriptionUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationUpdateMarshaller">
+            <summary>
+            RedshiftDestinationUpdate Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationUpdateMarshaller.Marshall(Amazon.KinesisFirehose.Model.RedshiftDestinationUpdate,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.RedshiftDestinationUpdateMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationConfigurationMarshaller">
+            <summary>
+            S3DestinationConfiguration Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationConfigurationMarshaller.Marshall(Amazon.KinesisFirehose.Model.S3DestinationConfiguration,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationConfigurationMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationDescriptionUnmarshaller">
+            <summary>
+            Response Unmarshaller for S3DestinationDescription Object
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationDescriptionUnmarshaller.Amazon#Runtime#Internal#Transform#IUnmarshaller{Amazon#KinesisFirehose#Model#S3DestinationDescription,Amazon#Runtime#Internal#Transform#XmlUnmarshallerContext}#Unmarshall(Amazon.Runtime.Internal.Transform.XmlUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationDescriptionUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationDescriptionUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationUpdateMarshaller">
+            <summary>
+            S3DestinationUpdate Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationUpdateMarshaller.Marshall(Amazon.KinesisFirehose.Model.S3DestinationUpdate,Amazon.Runtime.Internal.Transform.JsonMarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="requestObject"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.S3DestinationUpdateMarshaller.Instance">
+            <summary>
+            Singleton Marshaller.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationRequestMarshaller">
+            <summary>
+            UpdateDestination Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationRequestMarshaller.Marshall(Amazon.KinesisFirehose.Model.UpdateDestinationRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for UpdateDestination operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.KinesisFirehose.Model.Internal.MarshallTransformations.UpdateDestinationResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient">
+             <summary>
+             Implementation for accessing KinesisFirehose
+            
+             Amazon Kinesis Firehose API Reference 
+             <para>
+             Amazon Kinesis Firehose is a fully-managed service that delivers real-time streaming
+             data to destinations such as Amazon S3 and Amazon Redshift.
+             </para>
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor">
+             <summary>
+             Constructs AmazonKinesisFirehoseClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(Amazon.RegionEndpoint)">
+             <summary>
+             Constructs AmazonKinesisFirehoseClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig)">
+             <summary>
+             Constructs AmazonKinesisFirehoseClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="config">The AmazonKinesisFirehoseClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(Amazon.Runtime.AWSCredentials)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Credentials and an
+            AmazonKinesisFirehoseClient Configuration object.
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="clientConfig">The AmazonKinesisFirehoseClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(System.String,System.String)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(System.String,System.String,Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonKinesisFirehoseClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="clientConfig">The AmazonKinesisFirehoseClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(System.String,System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.#ctor(System.String,System.String,System.String,Amazon.KinesisFirehose.AmazonKinesisFirehoseConfig)">
+            <summary>
+            Constructs AmazonKinesisFirehoseClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonKinesisFirehoseClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="clientConfig">The AmazonKinesisFirehoseClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.CreateSigner">
+            <summary>
+            Creates the signer for the service.
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the service client.
+            </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.CreateDeliveryStream(Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest)">
+            <summary>
+            Creates a delivery stream.
+            
+             
+            <para>
+            <a>CreateDeliveryStream</a> is an asynchronous operation that immediately returns.
+            The initial status of the delivery stream is <code>CREATING</code>. After the delivery
+            stream is created, its status is <code>ACTIVE</code> and it now accepts data. Attempts
+            to send data to a delivery stream that is not in the <code>ACTIVE</code> state cause
+            an exception. To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.
+            </para>
+             
+            <para>
+            The name of a delivery stream identifies it. You can't have two delivery streams with
+            the same name in the same region. Two delivery streams in different AWS accounts or
+            different regions in the same AWS account can have the same name.
+            </para>
+             
+            <para>
+            By default, you can create up to 5 delivery streams per region.
+            </para>
+             
+            <para>
+            A delivery stream can only be configured with a single destination, Amazon S3 or Amazon
+            Redshift. For correct <a>CreateDeliveryStream</a> request syntax, specify only one
+            destination configuration parameter: either <code>RedshiftDestinationConfiguration</code>
+            or <code>S3DestinationConfiguration</code>
+            </para>
+             
+            <para>
+            As part of <code>S3DestinationConfiguration</code>, optional values <code>BufferingHints</code>,
+            <code>EncryptionConfiguration</code>, and <code>CompressionFormat</code> can be provided.
+            By default, if no <code>BufferingHints</code> value is provided, Amazon Kinesis Firehose
+            buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first.
+            Note that <code>BufferingHints</code> is a hint, so there are some cases where the
+            service cannot adhere to these conditions strictly; for example, record boundaries
+            are such that the size is a little over or under the configured buffering size. By
+            default, no encryption is performed. We strongly recommend that you enable encryption
+            to ensure secure data storage in Amazon S3.
+            </para>
+             
+            <para>
+            A few notes about <code>RedshiftDestinationConfiguration</code>:
+            </para>
+             <ul> <li>An Amazon Redshift destination requires an S3 bucket as intermediate location,
+            as Amazon Kinesis Firehose first delivers data to S3 and then uses <code>COPY</code>
+            syntax to load data into an Amazon Redshift table. This is specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>
+            parameter element.</li> <li>The compression formats <code>SNAPPY</code> or <code>ZIP</code>
+            cannot be specified in <code>RedshiftDestinationConfiguration.S3Configuration</code>
+            because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket
+            doesn't support these compression formats.</li> <li>We strongly recommend that the
+            username and password provided is used exclusively for Amazon Kinesis Firehose purposes,
+            and that the permissions for the account are restricted for Amazon Redshift <code>INSERT</code>
+            permissions.</li> </ul> 
+            <para>
+            Amazon Kinesis Firehose assumes the IAM role that is configured as part of destinations.
+            The IAM role should allow the Amazon Kinesis Firehose principal to assume the role,
+            and the role should have permissions that allows the service to deliver the data.
+            For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Amazon
+            S3 Bucket Access</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateDeliveryStream service method.</param>
+            
+            <returns>The response from the CreateDeliveryStream service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.LimitExceededException">
+            You have already reached the limit for a requested resource.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            The resource is already in use and not available for this operation.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.CreateDeliveryStreamAsync(Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateDeliveryStream operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateDeliveryStream operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.DeleteDeliveryStream(Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest)">
+            <summary>
+            Deletes a delivery stream and its data.
+            
+             
+            <para>
+            You can delete a delivery stream only if it is in <code>ACTIVE</code> or <code>DELETING</code>
+            state, and not in the <code>CREATING</code> state. While the deletion request is in
+            process, the delivery stream is in the <code>DELETING</code> state.
+            </para>
+             
+            <para>
+            To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.
+            </para>
+             
+            <para>
+            While the delivery stream is <code>DELETING</code> state, the service may continue
+            to accept the records, but the service doesn't make any guarantees with respect to
+            delivering the data. Therefore, as a best practice, you should first stop any applications
+            that are sending records before deleting a delivery stream.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the DeleteDeliveryStream service method.</param>
+            
+            <returns>The response from the DeleteDeliveryStream service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            The resource is already in use and not available for this operation.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.DeleteDeliveryStreamAsync(Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the DeleteDeliveryStream operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the DeleteDeliveryStream operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.DescribeDeliveryStream(Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest)">
+            <summary>
+            Describes the specified delivery stream and gets the status. For example, after your
+            delivery stream is created, call <a>DescribeDeliveryStream</a> to see if the delivery
+            stream is <code>ACTIVE</code> and therefore ready for data to be sent to it.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the DescribeDeliveryStream service method.</param>
+            
+            <returns>The response from the DescribeDeliveryStream service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.DescribeDeliveryStreamAsync(Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the DescribeDeliveryStream operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the DescribeDeliveryStream operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.ListDeliveryStreams(Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest)">
+            <summary>
+            Lists your delivery streams.
+            
+             
+            <para>
+            The number of delivery streams might be too large to return using a single call to
+            <a>ListDeliveryStreams</a>. You can limit the number of delivery streams returned,
+            using the <code>Limit</code> parameter. To determine whether there are more delivery
+            streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output.
+            If there are more delivery streams to list, you can request them by specifying the
+            name of the last delivery stream returned in the call in the <code>ExclusiveStartDeliveryStreamName</code>
+            parameter of a subsequent call.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListDeliveryStreams service method.</param>
+            
+            <returns>The response from the ListDeliveryStreams service method, as returned by KinesisFirehose.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.ListDeliveryStreamsAsync(Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListDeliveryStreams operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListDeliveryStreams operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.PutRecord(Amazon.KinesisFirehose.Model.PutRecordRequest)">
+            <summary>
+            Writes a single data record into an Amazon Kinesis Firehose delivery stream. To write
+            multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications
+            using these operations are referred to as producers.
+            
+             
+            <para>
+            By default, each delivery stream can take in up to 2,000 transactions per second,
+            5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a>
+            and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations
+            for each delivery stream. For more information about limits and how to request an
+            increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>. 
+            </para>
+             
+            <para>
+            You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>.
+            The data record consists of a data blob that can be up to 1,000 KB in size, and any
+            kind of data, for example, a segment from a log file, geographic location data, web
+            site clickstream data, etc.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose buffers records before delivering them to the destination.
+            To disambiguate the data blobs at the destination, a common solution is to use delimiters
+            in the data, such as a newline (<code>\n</code>) or some other character unique within
+            the data. This allows the consumer application(s) to parse individual data items when
+            reading the data from the destination.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose does not maintain data record ordering. If the destination
+            data needs to be re-ordered by the consumer application, the producer should include
+            some form of sequence number in each data record. 
+            </para>
+             
+            <para>
+            The <a>PutRecord</a> operation returns a <code>RecordId</code>, which is a unique
+            string assigned to each record. Producer applications can use this ID for purposes
+            such as auditability and investigation.
+            </para>
+             
+            <para>
+            If the <a>PutRecord</a> operation throws a <code>ServiceUnavailableException</code>,
+            back off and retry. If the exception persists, it is possible that the throughput
+            limits have been exceeded for the delivery stream. 
+            </para>
+             
+            <para>
+            Data records sent to Amazon Kinesis Firehose are stored for 24 hours from the time
+            they are added to a delivery stream as it attempts to send the records to the destination.
+            If the destination is unreachable for more than 24 hours, the data is no longer available.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the PutRecord service method.</param>
+            
+            <returns>The response from the PutRecord service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ServiceUnavailableException">
+            The service is unavailable, back off and retry the operation. If you continue to see
+            the exception, throughput limits for the delivery stream may have been exceeded. For
+            more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.PutRecordAsync(Amazon.KinesisFirehose.Model.PutRecordRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the PutRecord operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the PutRecord operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.PutRecordBatch(Amazon.KinesisFirehose.Model.PutRecordBatchRequest)">
+            <summary>
+            Writes multiple data records into a delivery stream in a single call, which can achieve
+            higher throughput per producer than when writing single records. To write single data
+            records into a delivery stream, use <a>PutRecord</a>. Applications using these operations
+            are referred to as producers.
+            
+             
+            <para>
+            Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the
+            request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB
+            for the entire request. By default, each delivery stream can take in up to 2,000 transactions
+            per second, 5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a>
+            and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations
+            for each delivery stream. For more information about limits and how to request an
+            increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>. 
+            </para>
+             
+            <para>
+            You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>.
+            The data record consists of a data blob that can be up to 1,000 KB in size, and any
+            kind of data, for example, a segment from a log file, geographic location data, web
+            site clickstream data, and so on.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose buffers records before delivering them to the destination.
+            To disambiguate the data blobs at the destination, a common solution is to use delimiters
+            in the data, such as a newline (<code>\n</code>) or some other character unique within
+            the data. This allows the consumer application(s) to parse individual data items when
+            reading the data from the destination.
+            </para>
+             
+            <para>
+            The <a>PutRecordBatch</a> response includes a count of any failed records, <code>FailedPutCount</code>,
+            and an array of responses, <code>RequestResponses</code>. The <code>FailedPutCount</code>
+            value is a count of records that failed. Each entry in the <code>RequestResponses</code>
+            array gives additional information of the processed record. Each entry in <code>RequestResponses</code>
+            directly correlates with a record in the request array using the same ordering, from
+            the top to the bottom of the request and response. <code>RequestResponses</code> always
+            includes the same number of records as the request array. <code>RequestResponses</code>
+            both successfully and unsuccessfully processed records. Amazon Kinesis Firehose attempts
+            to process all records in each <a>PutRecordBatch</a> request. A single record failure
+            does not stop the processing of subsequent records.
+            </para>
+             
+            <para>
+            A successfully processed record includes a <code>RecordId</code> value, which is a
+            unique value identified for the record. An unsuccessfully processed record includes
+            <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code>
+            reflects the type of error and is one of the following values: <code>ServiceUnavailable</code>
+            or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed
+            information about the error.
+            </para>
+             
+            <para>
+            If <code>FailedPutCount</code> is greater than 0 (zero), retry the request. A retry
+            of the entire batch of records is possible; however, we strongly recommend that you
+            inspect the entire response and resend only those records that failed processing.
+            This minimizes duplicate records and also reduces the total bytes sent (and corresponding
+            charges).
+            </para>
+             
+            <para>
+            If the <a>PutRecordBatch</a> operation throws a <code>ServiceUnavailableException</code>,
+            back off and retry. If the exception persists, it is possible that the throughput
+            limits have been exceeded for the delivery stream.
+            </para>
+             
+            <para>
+            Data records sent to Amazon Kinesis Firehose are stored for 24 hours from the time
+            they are added to a delivery stream as it attempts to send the records to the destination.
+            If the destination is unreachable for more than 24 hours, the data is no longer available.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the PutRecordBatch service method.</param>
+            
+            <returns>The response from the PutRecordBatch service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ServiceUnavailableException">
+            The service is unavailable, back off and retry the operation. If you continue to see
+            the exception, throughput limits for the delivery stream may have been exceeded. For
+            more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.PutRecordBatchAsync(Amazon.KinesisFirehose.Model.PutRecordBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the PutRecordBatch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the PutRecordBatch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.UpdateDestination(Amazon.KinesisFirehose.Model.UpdateDestinationRequest)">
+            <summary>
+            Updates the specified destination of the specified delivery stream. 
+            
+             
+            <para>
+            This operation can be used to change the destination type (for example, to replace
+            the Amazon S3 destination with Amazon Redshift) or change the parameters associated
+            with a given destination (for example, to change the bucket name of the Amazon S3
+            destination). The update may not occur immediately. The target delivery stream remains
+            active while the configurations are updated, so data writes to the delivery stream
+            can continue during this process. The updated configurations are normally effective
+            within a few minutes. 
+            </para>
+             
+            <para>
+            If the destination type is the same, Amazon Kinesis Firehose merges the configuration
+            parameters specified in the <a>UpdateDestination</a> request with the destination
+            configuration that already exists on the delivery stream. If any of the parameters
+            are not specified in the update request, then the existing configuration parameters
+            are retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a>
+            is not specified then the existing <a>EncryptionConfiguration</a> is maintained on
+            the destination.
+            </para>
+             
+            <para>
+            If the destination type is not the same, for example, changing the destination from
+            Amazon S3 to Amazon Redshift, Amazon Kinesis Firehose does not merge any parameters.
+            In this case, all parameters must be specified.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose uses the <code>CurrentDeliveryStreamVersionId</code> to avoid
+            race conditions and conflicting merges. This is a required field in every request
+            and the service only updates the configuration if the existing configuration matches
+            the <code>VersionId</code>. After the update is applied successfully, the <code>VersionId</code>
+            is updated, which can be retrieved with the <a>DescribeDeliveryStream</a> operation.
+            The new <code>VersionId</code> should be uses to set <code>CurrentDeliveryStreamVersionId</code>
+            in the next <a>UpdateDestination</a> operation.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateDestination service method.</param>
+            
+            <returns>The response from the UpdateDestination service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ConcurrentModificationException">
+            Another modification has already happened. Fetch <code>VersionId</code> again and
+            use it to update the destination.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            The resource is already in use and not available for this operation.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.AmazonKinesisFirehoseClient.UpdateDestinationAsync(Amazon.KinesisFirehose.Model.UpdateDestinationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateDestination operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateDestination operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Amazon.KinesisFirehose.IAmazonKinesisFirehose">
+             <summary>
+             Interface for accessing KinesisFirehose
+            
+             Amazon Kinesis Firehose API Reference 
+             <para>
+             Amazon Kinesis Firehose is a fully-managed service that delivers real-time streaming
+             data to destinations such as Amazon S3 and Amazon Redshift.
+             </para>
+             </summary>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.CreateDeliveryStream(Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest)">
+            <summary>
+            Creates a delivery stream.
+            
+             
+            <para>
+            <a>CreateDeliveryStream</a> is an asynchronous operation that immediately returns.
+            The initial status of the delivery stream is <code>CREATING</code>. After the delivery
+            stream is created, its status is <code>ACTIVE</code> and it now accepts data. Attempts
+            to send data to a delivery stream that is not in the <code>ACTIVE</code> state cause
+            an exception. To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.
+            </para>
+             
+            <para>
+            The name of a delivery stream identifies it. You can't have two delivery streams with
+            the same name in the same region. Two delivery streams in different AWS accounts or
+            different regions in the same AWS account can have the same name.
+            </para>
+             
+            <para>
+            By default, you can create up to 5 delivery streams per region.
+            </para>
+             
+            <para>
+            A delivery stream can only be configured with a single destination, Amazon S3 or Amazon
+            Redshift. For correct <a>CreateDeliveryStream</a> request syntax, specify only one
+            destination configuration parameter: either <code>RedshiftDestinationConfiguration</code>
+            or <code>S3DestinationConfiguration</code>
+            </para>
+             
+            <para>
+            As part of <code>S3DestinationConfiguration</code>, optional values <code>BufferingHints</code>,
+            <code>EncryptionConfiguration</code>, and <code>CompressionFormat</code> can be provided.
+            By default, if no <code>BufferingHints</code> value is provided, Amazon Kinesis Firehose
+            buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first.
+            Note that <code>BufferingHints</code> is a hint, so there are some cases where the
+            service cannot adhere to these conditions strictly; for example, record boundaries
+            are such that the size is a little over or under the configured buffering size. By
+            default, no encryption is performed. We strongly recommend that you enable encryption
+            to ensure secure data storage in Amazon S3.
+            </para>
+             
+            <para>
+            A few notes about <code>RedshiftDestinationConfiguration</code>:
+            </para>
+             <ul> <li>An Amazon Redshift destination requires an S3 bucket as intermediate location,
+            as Amazon Kinesis Firehose first delivers data to S3 and then uses <code>COPY</code>
+            syntax to load data into an Amazon Redshift table. This is specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>
+            parameter element.</li> <li>The compression formats <code>SNAPPY</code> or <code>ZIP</code>
+            cannot be specified in <code>RedshiftDestinationConfiguration.S3Configuration</code>
+            because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket
+            doesn't support these compression formats.</li> <li>We strongly recommend that the
+            username and password provided is used exclusively for Amazon Kinesis Firehose purposes,
+            and that the permissions for the account are restricted for Amazon Redshift <code>INSERT</code>
+            permissions.</li> </ul> 
+            <para>
+            Amazon Kinesis Firehose assumes the IAM role that is configured as part of destinations.
+            The IAM role should allow the Amazon Kinesis Firehose principal to assume the role,
+            and the role should have permissions that allows the service to deliver the data.
+            For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Amazon
+            S3 Bucket Access</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the CreateDeliveryStream service method.</param>
+            
+            <returns>The response from the CreateDeliveryStream service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.LimitExceededException">
+            You have already reached the limit for a requested resource.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            The resource is already in use and not available for this operation.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.CreateDeliveryStreamAsync(Amazon.KinesisFirehose.Model.CreateDeliveryStreamRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the CreateDeliveryStream operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the CreateDeliveryStream operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.DeleteDeliveryStream(Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest)">
+            <summary>
+            Deletes a delivery stream and its data.
+            
+             
+            <para>
+            You can delete a delivery stream only if it is in <code>ACTIVE</code> or <code>DELETING</code>
+            state, and not in the <code>CREATING</code> state. While the deletion request is in
+            process, the delivery stream is in the <code>DELETING</code> state.
+            </para>
+             
+            <para>
+            To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.
+            </para>
+             
+            <para>
+            While the delivery stream is <code>DELETING</code> state, the service may continue
+            to accept the records, but the service doesn't make any guarantees with respect to
+            delivering the data. Therefore, as a best practice, you should first stop any applications
+            that are sending records before deleting a delivery stream.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the DeleteDeliveryStream service method.</param>
+            
+            <returns>The response from the DeleteDeliveryStream service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            The resource is already in use and not available for this operation.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.DeleteDeliveryStreamAsync(Amazon.KinesisFirehose.Model.DeleteDeliveryStreamRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the DeleteDeliveryStream operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the DeleteDeliveryStream operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.DescribeDeliveryStream(Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest)">
+            <summary>
+            Describes the specified delivery stream and gets the status. For example, after your
+            delivery stream is created, call <a>DescribeDeliveryStream</a> to see if the delivery
+            stream is <code>ACTIVE</code> and therefore ready for data to be sent to it.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the DescribeDeliveryStream service method.</param>
+            
+            <returns>The response from the DescribeDeliveryStream service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.DescribeDeliveryStreamAsync(Amazon.KinesisFirehose.Model.DescribeDeliveryStreamRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the DescribeDeliveryStream operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the DescribeDeliveryStream operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.ListDeliveryStreams(Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest)">
+            <summary>
+            Lists your delivery streams.
+            
+             
+            <para>
+            The number of delivery streams might be too large to return using a single call to
+            <a>ListDeliveryStreams</a>. You can limit the number of delivery streams returned,
+            using the <code>Limit</code> parameter. To determine whether there are more delivery
+            streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output.
+            If there are more delivery streams to list, you can request them by specifying the
+            name of the last delivery stream returned in the call in the <code>ExclusiveStartDeliveryStreamName</code>
+            parameter of a subsequent call.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the ListDeliveryStreams service method.</param>
+            
+            <returns>The response from the ListDeliveryStreams service method, as returned by KinesisFirehose.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.ListDeliveryStreamsAsync(Amazon.KinesisFirehose.Model.ListDeliveryStreamsRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the ListDeliveryStreams operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the ListDeliveryStreams operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.PutRecord(Amazon.KinesisFirehose.Model.PutRecordRequest)">
+            <summary>
+            Writes a single data record into an Amazon Kinesis Firehose delivery stream. To write
+            multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications
+            using these operations are referred to as producers.
+            
+             
+            <para>
+            By default, each delivery stream can take in up to 2,000 transactions per second,
+            5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a>
+            and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations
+            for each delivery stream. For more information about limits and how to request an
+            increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>. 
+            </para>
+             
+            <para>
+            You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>.
+            The data record consists of a data blob that can be up to 1,000 KB in size, and any
+            kind of data, for example, a segment from a log file, geographic location data, web
+            site clickstream data, etc.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose buffers records before delivering them to the destination.
+            To disambiguate the data blobs at the destination, a common solution is to use delimiters
+            in the data, such as a newline (<code>\n</code>) or some other character unique within
+            the data. This allows the consumer application(s) to parse individual data items when
+            reading the data from the destination.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose does not maintain data record ordering. If the destination
+            data needs to be re-ordered by the consumer application, the producer should include
+            some form of sequence number in each data record. 
+            </para>
+             
+            <para>
+            The <a>PutRecord</a> operation returns a <code>RecordId</code>, which is a unique
+            string assigned to each record. Producer applications can use this ID for purposes
+            such as auditability and investigation.
+            </para>
+             
+            <para>
+            If the <a>PutRecord</a> operation throws a <code>ServiceUnavailableException</code>,
+            back off and retry. If the exception persists, it is possible that the throughput
+            limits have been exceeded for the delivery stream. 
+            </para>
+             
+            <para>
+            Data records sent to Amazon Kinesis Firehose are stored for 24 hours from the time
+            they are added to a delivery stream as it attempts to send the records to the destination.
+            If the destination is unreachable for more than 24 hours, the data is no longer available.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the PutRecord service method.</param>
+            
+            <returns>The response from the PutRecord service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ServiceUnavailableException">
+            The service is unavailable, back off and retry the operation. If you continue to see
+            the exception, throughput limits for the delivery stream may have been exceeded. For
+            more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.PutRecordAsync(Amazon.KinesisFirehose.Model.PutRecordRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the PutRecord operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the PutRecord operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.PutRecordBatch(Amazon.KinesisFirehose.Model.PutRecordBatchRequest)">
+            <summary>
+            Writes multiple data records into a delivery stream in a single call, which can achieve
+            higher throughput per producer than when writing single records. To write single data
+            records into a delivery stream, use <a>PutRecord</a>. Applications using these operations
+            are referred to as producers.
+            
+             
+            <para>
+            Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the
+            request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB
+            for the entire request. By default, each delivery stream can take in up to 2,000 transactions
+            per second, 5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a>
+            and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations
+            for each delivery stream. For more information about limits and how to request an
+            increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>. 
+            </para>
+             
+            <para>
+            You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>.
+            The data record consists of a data blob that can be up to 1,000 KB in size, and any
+            kind of data, for example, a segment from a log file, geographic location data, web
+            site clickstream data, and so on.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose buffers records before delivering them to the destination.
+            To disambiguate the data blobs at the destination, a common solution is to use delimiters
+            in the data, such as a newline (<code>\n</code>) or some other character unique within
+            the data. This allows the consumer application(s) to parse individual data items when
+            reading the data from the destination.
+            </para>
+             
+            <para>
+            The <a>PutRecordBatch</a> response includes a count of any failed records, <code>FailedPutCount</code>,
+            and an array of responses, <code>RequestResponses</code>. The <code>FailedPutCount</code>
+            value is a count of records that failed. Each entry in the <code>RequestResponses</code>
+            array gives additional information of the processed record. Each entry in <code>RequestResponses</code>
+            directly correlates with a record in the request array using the same ordering, from
+            the top to the bottom of the request and response. <code>RequestResponses</code> always
+            includes the same number of records as the request array. <code>RequestResponses</code>
+            both successfully and unsuccessfully processed records. Amazon Kinesis Firehose attempts
+            to process all records in each <a>PutRecordBatch</a> request. A single record failure
+            does not stop the processing of subsequent records.
+            </para>
+             
+            <para>
+            A successfully processed record includes a <code>RecordId</code> value, which is a
+            unique value identified for the record. An unsuccessfully processed record includes
+            <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code>
+            reflects the type of error and is one of the following values: <code>ServiceUnavailable</code>
+            or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed
+            information about the error.
+            </para>
+             
+            <para>
+            If <code>FailedPutCount</code> is greater than 0 (zero), retry the request. A retry
+            of the entire batch of records is possible; however, we strongly recommend that you
+            inspect the entire response and resend only those records that failed processing.
+            This minimizes duplicate records and also reduces the total bytes sent (and corresponding
+            charges).
+            </para>
+             
+            <para>
+            If the <a>PutRecordBatch</a> operation throws a <code>ServiceUnavailableException</code>,
+            back off and retry. If the exception persists, it is possible that the throughput
+            limits have been exceeded for the delivery stream.
+            </para>
+             
+            <para>
+            Data records sent to Amazon Kinesis Firehose are stored for 24 hours from the time
+            they are added to a delivery stream as it attempts to send the records to the destination.
+            If the destination is unreachable for more than 24 hours, the data is no longer available.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the PutRecordBatch service method.</param>
+            
+            <returns>The response from the PutRecordBatch service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ServiceUnavailableException">
+            The service is unavailable, back off and retry the operation. If you continue to see
+            the exception, throughput limits for the delivery stream may have been exceeded. For
+            more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon
+            Kinesis Firehose Limits</a>.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.PutRecordBatchAsync(Amazon.KinesisFirehose.Model.PutRecordBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the PutRecordBatch operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the PutRecordBatch operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.UpdateDestination(Amazon.KinesisFirehose.Model.UpdateDestinationRequest)">
+            <summary>
+            Updates the specified destination of the specified delivery stream. 
+            
+             
+            <para>
+            This operation can be used to change the destination type (for example, to replace
+            the Amazon S3 destination with Amazon Redshift) or change the parameters associated
+            with a given destination (for example, to change the bucket name of the Amazon S3
+            destination). The update may not occur immediately. The target delivery stream remains
+            active while the configurations are updated, so data writes to the delivery stream
+            can continue during this process. The updated configurations are normally effective
+            within a few minutes. 
+            </para>
+             
+            <para>
+            If the destination type is the same, Amazon Kinesis Firehose merges the configuration
+            parameters specified in the <a>UpdateDestination</a> request with the destination
+            configuration that already exists on the delivery stream. If any of the parameters
+            are not specified in the update request, then the existing configuration parameters
+            are retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a>
+            is not specified then the existing <a>EncryptionConfiguration</a> is maintained on
+            the destination.
+            </para>
+             
+            <para>
+            If the destination type is not the same, for example, changing the destination from
+            Amazon S3 to Amazon Redshift, Amazon Kinesis Firehose does not merge any parameters.
+            In this case, all parameters must be specified.
+            </para>
+             
+            <para>
+            Amazon Kinesis Firehose uses the <code>CurrentDeliveryStreamVersionId</code> to avoid
+            race conditions and conflicting merges. This is a required field in every request
+            and the service only updates the configuration if the existing configuration matches
+            the <code>VersionId</code>. After the update is applied successfully, the <code>VersionId</code>
+            is updated, which can be retrieved with the <a>DescribeDeliveryStream</a> operation.
+            The new <code>VersionId</code> should be uses to set <code>CurrentDeliveryStreamVersionId</code>
+            in the next <a>UpdateDestination</a> operation.
+            </para>
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the UpdateDestination service method.</param>
+            
+            <returns>The response from the UpdateDestination service method, as returned by KinesisFirehose.</returns>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ConcurrentModificationException">
+            Another modification has already happened. Fetch <code>VersionId</code> again and
+            use it to update the destination.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.InvalidArgumentException">
+            The specified input parameter has an value that is not valid.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceInUseException">
+            The resource is already in use and not available for this operation.
+            </exception>
+            <exception cref="T:Amazon.KinesisFirehose.Model.ResourceNotFoundException">
+            The specified resource could not be found.
+            </exception>
+        </member>
+        <member name="M:Amazon.KinesisFirehose.IAmazonKinesisFirehose.UpdateDestinationAsync(Amazon.KinesisFirehose.Model.UpdateDestinationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the UpdateDestination operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the UpdateDestination operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>

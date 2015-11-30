@@ -1,0 +1,543 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AWSSDK.AWSMarketplaceCommerceAnalytics</name>
+    </assembly>
+    <members>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig">
+            <summary>
+            Configuration for accessing Amazon AWSMarketplaceCommerceAnalytics service
+            </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig.RegionEndpointServiceName">
+            <summary>
+            The constant used to lookup in the region hash the endpoint.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig.ServiceVersion">
+            <summary>
+            Gets the ServiceVersion property.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig.UserAgent">
+            <summary>
+            Gets the value of UserAgent property.
+            </summary>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsException">
+            <summary>
+             Common exception for the AWSMarketplaceCommerceAnalytics service.
+             </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsException.#ctor(System.String)">
+            <summary>
+            Construct instance of AmazonAWSMarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of AmazonAWSMarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of AmazonAWSMarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonAWSMarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of AmazonAWSMarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType">
+            <summary>
+            Constants used for properties of type DataSetType.
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.CustomerProfileByIndustry">
+            <summary>
+            Constant CustomerProfileByIndustry for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.CustomerProfileByRevenue">
+            <summary>
+            Constant CustomerProfileByRevenue for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.CustomerSubscriberAnnualSubscriptions">
+            <summary>
+            Constant CustomerSubscriberAnnualSubscriptions for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.CustomerSubscriberHourlyMonthlySubscriptions">
+            <summary>
+            Constant CustomerSubscriberHourlyMonthlySubscriptions for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DailyBusinessCanceledProductSubscribers">
+            <summary>
+            Constant DailyBusinessCanceledProductSubscribers for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DailyBusinessFees">
+            <summary>
+            Constant DailyBusinessFees for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DailyBusinessFreeTrialConversions">
+            <summary>
+            Constant DailyBusinessFreeTrialConversions for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DailyBusinessNewInstances">
+            <summary>
+            Constant DailyBusinessNewInstances for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DailyBusinessNewProductSubscribers">
+            <summary>
+            Constant DailyBusinessNewProductSubscribers for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DailyBusinessUsageByInstanceType">
+            <summary>
+            Constant DailyBusinessUsageByInstanceType for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DisbursedAmountByAgeOfDisbursedFunds">
+            <summary>
+            Constant DisbursedAmountByAgeOfDisbursedFunds for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DisbursedAmountByAgeOfUncollectedFunds">
+            <summary>
+            Constant DisbursedAmountByAgeOfUncollectedFunds for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DisbursedAmountByCustomerGeo">
+            <summary>
+            Constant DisbursedAmountByCustomerGeo for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.DisbursedAmountByProduct">
+            <summary>
+            Constant DisbursedAmountByProduct for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.MonthlyRevenueAnnualSubscriptions">
+            <summary>
+            Constant MonthlyRevenueAnnualSubscriptions for DataSetType
+            </summary>
+        </member>
+        <member name="F:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.MonthlyRevenueBillingAndRevenueData">
+            <summary>
+            Constant MonthlyRevenueBillingAndRevenueData for DataSetType
+            </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.#ctor(System.String)">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.FindValue(System.String)">
+            <summary>
+            Finds the constant for the unique value.
+            </summary>
+            <param name="value">The unique value for the constant</param>
+            <returns>The constant for the unique value</returns>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.DataSetType.op_Implicit(System.String)~Amazon.AWSMarketplaceCommerceAnalytics.DataSetType">
+            <summary>
+            Utility method to convert strings to the constant class.
+            </summary>
+            <param name="value">The string value to convert to the constant class.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsRequest">
+            <summary>
+            Base class for AWSMarketplaceCommerceAnalytics operation requests.
+            </summary>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest">
+            <summary>
+            Container for the parameters to the GenerateDataSet operation.
+            Given a data set type and data set publication date, asynchronously publishes the
+            requested data set to the specified S3 bucket and notifies the specified SNS topic
+            once the data is available. Returns a unique request identifier that can be used to
+            correlate requests with notifications from the SNS topic. Data sets will be published
+            in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD.csv.
+            If a file with the same name already exists (e.g. if the same data set is requested
+            twice), the original file will be overwritten by the new file. Requires a Role with
+            an attached permissions policy providing Allow permissions for the following actions:
+            s3:PutObject, s3:getBucketLocation, sns:SetRegion, sns:ListTopics, sns:Publish, iam:GetRolePolicy.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest.DataSetPublicationDate">
+            <summary>
+            Gets and sets the property DataSetPublicationDate.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest.DataSetType">
+            <summary>
+            Gets and sets the property DataSetType.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest.DestinationS3BucketName">
+            <summary>
+            Gets and sets the property DestinationS3BucketName.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest.DestinationS3Prefix">
+            <summary>
+            Gets and sets the property DestinationS3Prefix.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest.RoleNameArn">
+            <summary>
+            Gets and sets the property RoleNameArn.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest.SnsTopicArn">
+            <summary>
+            Gets and sets the property SnsTopicArn.
+            </summary>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetResponse">
+            <summary>
+            Container for the result of the GenerateDataSet operation.
+            </summary>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetResponse.DataSetRequestId">
+            <summary>
+            Gets and sets the property DataSetRequestId.
+            </summary>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException">
+            <summary>
+             AWSMarketplaceCommerceAnalytics exception
+             </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException.#ctor(System.String)">
+            <summary>
+            Constructs a new MarketplaceCommerceAnalyticsException with the specified error
+            message.
+            </summary>
+            <param name="message">
+            Describes the error encountered.
+            </param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct instance of MarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException.#ctor(System.Exception)">
+            <summary>
+            Construct instance of MarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException.#ctor(System.String,System.Exception,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException.#ctor(System.String,Amazon.Runtime.ErrorType,System.String,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Construct instance of MarketplaceCommerceAnalyticsException
+            </summary>
+            <param name="message"></param>
+            <param name="errorType"></param>
+            <param name="errorCode"></param>
+            <param name="requestId"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetRequestMarshaller">
+            <summary>
+            GenerateDataSet Request Marshaller
+            </summary>       
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetRequestMarshaller.Marshall(Amazon.Runtime.AmazonWebServiceRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetRequestMarshaller.Marshall(Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest)">
+            <summary>
+            Marshaller the request object to the HTTP request.
+            </summary>  
+            <param name="publicRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetResponseUnmarshaller">
+            <summary>
+            Response Unmarshaller for GenerateDataSet operation
+            </summary>  
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetResponseUnmarshaller.Unmarshall(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext)">
+            <summary>
+            Unmarshaller the response from the service to the response class.
+            </summary>  
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetResponseUnmarshaller.UnmarshallException(Amazon.Runtime.Internal.Transform.JsonUnmarshallerContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary>
+            Unmarshaller error response to exception.
+            </summary>  
+            <param name="context"></param>
+            <param name="innerException"></param>
+            <param name="statusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Amazon.AWSMarketplaceCommerceAnalytics.Model.Internal.MarshallTransformations.GenerateDataSetResponseUnmarshaller.Instance">
+            <summary>
+            Gets the singleton.
+            </summary>  
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient">
+             <summary>
+             Implementation for accessing AWSMarketplaceCommerceAnalytics
+            
+             Provides AWS Marketplace business intelligence data on-demand.
+             </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor">
+             <summary>
+             Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(Amazon.RegionEndpoint)">
+             <summary>
+             Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig)">
+             <summary>
+             Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with the credentials loaded from the application's
+             default configuration, and if unsuccessful from the Instance Profile service on an EC2 instance.
+             
+             Example App.config with credentials set. 
+             <code>
+             &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+             &lt;configuration&gt;
+                 &lt;appSettings&gt;
+                     &lt;add key="AWSProfileName" value="AWS Default"/&gt;
+                 &lt;/appSettings&gt;
+             &lt;/configuration&gt;
+             </code>
+            
+             </summary>
+             <param name="config">The AmazonAWSMarketplaceCommerceAnalyticsClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(Amazon.Runtime.AWSCredentials)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Credentials
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(Amazon.Runtime.AWSCredentials,Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Credentials and an
+            AmazonAWSMarketplaceCommerceAnalyticsClient Configuration object.
+            </summary>
+            <param name="credentials">AWS Credentials</param>
+            <param name="clientConfig">The AmazonAWSMarketplaceCommerceAnalyticsClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(System.String,System.String)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(System.String,System.String,Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonAWSMarketplaceCommerceAnalyticsClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="clientConfig">The AmazonAWSMarketplaceCommerceAnalyticsClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(System.String,System.String,System.String,Amazon.RegionEndpoint)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Access Key ID and AWS Secret Key
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="region">The region to connect.</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.#ctor(System.String,System.String,System.String,Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsConfig)">
+            <summary>
+            Constructs AmazonAWSMarketplaceCommerceAnalyticsClient with AWS Access Key ID, AWS Secret Key and an
+            AmazonAWSMarketplaceCommerceAnalyticsClient Configuration object. 
+            </summary>
+            <param name="awsAccessKeyId">AWS Access Key ID</param>
+            <param name="awsSecretAccessKey">AWS Secret Access Key</param>
+            <param name="awsSessionToken">AWS Session Token</param>
+            <param name="clientConfig">The AmazonAWSMarketplaceCommerceAnalyticsClient Configuration Object</param>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.CreateSigner">
+            <summary>
+            Creates the signer for the service.
+            </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the service client.
+            </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.GenerateDataSet(Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest)">
+            <summary>
+            Given a data set type and data set publication date, asynchronously publishes the
+            requested data set to the specified S3 bucket and notifies the specified SNS topic
+            once the data is available. Returns a unique request identifier that can be used to
+            correlate requests with notifications from the SNS topic. Data sets will be published
+            in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD.csv.
+            If a file with the same name already exists (e.g. if the same data set is requested
+            twice), the original file will be overwritten by the new file. Requires a Role with
+            an attached permissions policy providing Allow permissions for the following actions:
+            s3:PutObject, s3:getBucketLocation, sns:SetRegion, sns:ListTopics, sns:Publish, iam:GetRolePolicy.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GenerateDataSet service method.</param>
+            
+            <returns>The response from the GenerateDataSet service method, as returned by AWSMarketplaceCommerceAnalytics.</returns>
+            <exception cref="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException">
+            This exception is thrown when an internal service error occurs.
+            </exception>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.AmazonAWSMarketplaceCommerceAnalyticsClient.GenerateDataSetAsync(Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GenerateDataSet operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GenerateDataSet operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Amazon.AWSMarketplaceCommerceAnalytics.IAmazonAWSMarketplaceCommerceAnalytics">
+             <summary>
+             Interface for accessing AWSMarketplaceCommerceAnalytics
+            
+             Provides AWS Marketplace business intelligence data on-demand.
+             </summary>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.IAmazonAWSMarketplaceCommerceAnalytics.GenerateDataSet(Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest)">
+            <summary>
+            Given a data set type and data set publication date, asynchronously publishes the
+            requested data set to the specified S3 bucket and notifies the specified SNS topic
+            once the data is available. Returns a unique request identifier that can be used to
+            correlate requests with notifications from the SNS topic. Data sets will be published
+            in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD.csv.
+            If a file with the same name already exists (e.g. if the same data set is requested
+            twice), the original file will be overwritten by the new file. Requires a Role with
+            an attached permissions policy providing Allow permissions for the following actions:
+            s3:PutObject, s3:getBucketLocation, sns:SetRegion, sns:ListTopics, sns:Publish, iam:GetRolePolicy.
+            </summary>
+            <param name="request">Container for the necessary parameters to execute the GenerateDataSet service method.</param>
+            
+            <returns>The response from the GenerateDataSet service method, as returned by AWSMarketplaceCommerceAnalytics.</returns>
+            <exception cref="T:Amazon.AWSMarketplaceCommerceAnalytics.Model.MarketplaceCommerceAnalyticsException">
+            This exception is thrown when an internal service error occurs.
+            </exception>
+        </member>
+        <member name="M:Amazon.AWSMarketplaceCommerceAnalytics.IAmazonAWSMarketplaceCommerceAnalytics.GenerateDataSetAsync(Amazon.AWSMarketplaceCommerceAnalytics.Model.GenerateDataSetRequest,System.Threading.CancellationToken)">
+            <summary>
+            Initiates the asynchronous execution of the GenerateDataSet operation.
+            </summary>
+            
+            <param name="request">Container for the necessary parameters to execute the GenerateDataSet operation.</param>
+            <param name="cancellationToken">
+                A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+            </param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>
