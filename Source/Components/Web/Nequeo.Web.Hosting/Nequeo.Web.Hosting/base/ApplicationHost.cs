@@ -315,4 +315,155 @@ namespace Nequeo.Web.Hosting
         }
         #endregion
     }
+
+    /// <summary>
+    /// Application host domain singleton.
+    /// </summary>
+    public class ApplicationHostSingleton : IDisposable
+    {
+        /// <summary>
+        /// Application host domain.
+        /// </summary>
+        /// <param name="basePath">The base document path.</param>
+        /// <param name="virtualDir">The virtual path to the application directory; for example, "/app".</param>
+        /// <param name="configurationFile">The application configuration file (e.g. "[application].config").</param>
+        public ApplicationHostSingleton(string basePath, string virtualDir = "/", string configurationFile = null)
+        {
+            _basePath = basePath;
+            _virtualDir = virtualDir;
+            _configurationFile = configurationFile;
+
+            // Create the application host.
+            _applicationHost = new Web.Hosting.ApplicationHost();
+        }
+
+        private object _lockObject = new object();
+        private Nequeo.Web.Hosting.ApplicationHost _applicationHost = null;
+
+        // Make sure that the 'Host' Nequeo.Web.Hosting.dll is placed in the 'bin' folder where the basePath files are placed.
+        // basePath = C:\Temp\Html\ then C:\Temp\Html\bin should contain Nequeo.Web.Hosting.dll.
+        private Nequeo.Web.Hosting.Host _host = null;
+
+        private string _configurationFile = null;
+        private string _basePath = string.Empty;
+        private string _virtualDir = "/";
+
+        /// <summary>
+        /// Create the application host.
+        /// </summary>
+        public void CreateApplicationHost()
+        {
+            lock (_lockObject)
+            {
+                // If null.
+                if (_host == null)
+                {
+                    // Create the application host.
+                    _host = (Nequeo.Web.Hosting.Host)_applicationHost.CreateApplicationHost(typeof(Nequeo.Web.Hosting.Host), _virtualDir, _basePath, configurationFile: _configurationFile);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Process the request.
+        /// </summary>
+        /// <param name="page">The page to load.</param>
+        /// <param name="query">The current http query request.</param>
+        /// <param name="streamWriter">The output stream writer.</param>
+        public void ProcessRequest(string page, string query, System.IO.StreamWriter streamWriter)
+        {
+            lock (_lockObject)
+            {
+                try
+                {
+                    // Execute the host.
+                    _host.ProcessRequest(page, streamWriter, (String.IsNullOrEmpty(query) ? null : query));
+                }
+                catch (System.Runtime.Remoting.RemotingException)
+                {
+                    // Create a new host instance when this one is released.
+                    _host = null;
+
+                    // Create the application host.
+                    CreateApplicationHost();
+                    System.Threading.Thread.Sleep(400);
+
+                    try
+                    {
+                        // Execute the host.
+                        _host.ProcessRequest(page, streamWriter, (String.IsNullOrEmpty(query) ? null : query));
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        #region Dispose Object Methods
+        /// <summary>
+        /// Track whether Dispose has been called.
+        /// </summary>
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Implement IDisposable.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            // This object will be cleaned up by the Dispose method.
+            // Therefore, you should call GC.SuppressFinalize to
+            // take this object off the finalization queue
+            // and prevent finalization code for this object
+            // from executing a second time.
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose(bool disposing) executes in two distinct scenarios.  If disposing
+        /// equals true, the method has been called directly or indirectly by a user's
+        /// code. Managed and unmanaged resources can be disposed.  If disposing equals
+        /// false, the method has been called by the runtime from inside the finalizer
+        /// and you should not reference other objects. Only unmanaged resources can
+        /// be disposed.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+            // Check to see if Dispose has already been called.
+            if (!this._disposed)
+            {
+                // Note disposing has been done.
+                _disposed = true;
+
+                // If disposing equals true, dispose all managed
+                // and unmanaged resources.
+                if (disposing)
+                {
+                    if (_applicationHost != null)
+                        _applicationHost.Dispose();
+                }
+
+                // Call the appropriate methods to clean up
+                // unmanaged resources here.
+                _host = null;
+                _applicationHost = null;
+                _lockObject = null;
+            }
+        }
+
+        /// <summary>
+        /// Use C# destructor syntax for finalization code.
+        /// This destructor will run only if the Dispose method
+        /// does not get called.
+        /// It gives your base class the opportunity to finalize.
+        /// Do not provide destructors in types derived from this class.
+        /// </summary>
+        ~ApplicationHostSingleton()
+        {
+            // Do not re-create Dispose clean-up code here.
+            // Calling Dispose(false) is optimal in terms of
+            // readability and maintainability.
+            Dispose(false);
+        }
+        #endregion
+    }
 }

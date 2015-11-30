@@ -51,6 +51,11 @@ namespace Nequeo.Linq.Common
         private List<TValue> _topNValues;
         private IComparer<TKey> _comparer;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="comparer"></param>
         public SortedTopN(int count, IComparer<TKey> comparer)
         {
             if (count < 1) throw new ArgumentOutOfRangeException("count");
@@ -61,11 +66,22 @@ namespace Nequeo.Linq.Common
             _comparer = comparer;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Add(KeyValuePair<TKey, TValue> item)
         {
             return Add(item.Key, item.Value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Add(TKey key, TValue value)
         {
             int position = _topNKeys.BinarySearch(key, _comparer);
@@ -99,6 +115,9 @@ namespace Nequeo.Linq.Common
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IEnumerable<TValue> Values
         {
             get
@@ -110,6 +129,10 @@ namespace Nequeo.Linq.Common
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
             for (int i = _topNKeys.Count - 1; i >= 0; i--)
@@ -117,6 +140,11 @@ namespace Nequeo.Linq.Common
                 yield return new KeyValuePair<TKey, TValue>(_topNKeys[i], _topNValues[i]);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
     }
 }

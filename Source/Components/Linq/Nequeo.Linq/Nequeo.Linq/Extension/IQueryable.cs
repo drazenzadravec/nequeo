@@ -81,6 +81,37 @@ namespace Nequeo.Linq.Extension
         }
 
         /// <summary>
+        /// Converts the System.Ling.IQueryable type
+        /// to a collection of objects.
+        /// </summary>
+        /// <typeparam name="TSource">The source type within the collection.</typeparam>
+        /// <param name="source">The current IQueryable type.</param>
+        /// <returns>The array of objects for the source type.</returns>
+        /// <exception cref="System.ArgumentNullException">Source object can not be null.</exception>
+        public static TSource[] ToSourceArray<TSource>(this IQueryable<TSource> source)
+        {
+            // If the source object is null.
+            if (source == null)
+                throw new System.ArgumentNullException();
+
+            int i = 0;
+
+            // Create a new object collection.
+            TSource[] objectArray = new TSource[source.Count()];
+
+            // Get the current source enumerator.
+            IEnumerator<TSource> data = source.GetEnumerator();
+
+            // Fore each type in the collection
+            // assign the object array with the type.
+            while (data.MoveNext())
+                objectArray[i++] = data.Current;
+
+            // Return the object collection.
+            return objectArray;
+        }
+
+        /// <summary>
         /// Gets all the items by dynamically creates a predicate query on the specified criteria.
         /// </summary>
         /// <typeparam name="T">The source type within the collection.</typeparam>

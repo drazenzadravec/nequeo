@@ -80,4 +80,24 @@ namespace Nequeo.Model
         [DataMember]
         public byte[] Value { get; set; }
     }
+
+    /// <summary>
+    /// Name oject pair.
+    /// </summary>
+    [DataContract]
+    [Serializable()]
+    public class NameObject
+    {
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        [DataMember]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        [DataMember]
+        public object Value { get; set; }
+    }
 }

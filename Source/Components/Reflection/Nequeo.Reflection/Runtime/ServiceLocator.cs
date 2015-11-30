@@ -90,7 +90,7 @@ namespace Nequeo.Runtime
         private static IServiceLocator _singleton;
 
         /// <summary>
-        /// Get of create the current singleton.
+        /// Get or create the current singleton.
         /// </summary>
         public static IServiceLocator Current
         {

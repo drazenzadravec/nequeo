@@ -337,6 +337,14 @@ namespace Nequeo.Security
         /// User type authentication.
         /// </summary>
         User = 256,
+        /// <summary>
+        /// Bearer type authentication.
+        /// </summary>
+        Bearer = 512,
+        /// <summary>
+        /// Device type authentication.
+        /// </summary>
+        Device = 1024,
     }
 
     /// <summary>

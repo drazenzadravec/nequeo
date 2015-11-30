@@ -379,6 +379,49 @@ namespace Nequeo.Serialisation
             JavaScriptSerializer serialise = new JavaScriptSerializer();
             return serialise.DeserializeObject(serialisedJSon);
         }
+
+        /// <summary>
+        /// Gets the JSON serialized string.
+        /// </summary>
+        /// <param name="data">The data object the serilaise.</param>
+        /// <returns>The string of serialised data.</returns>
+        public static string Serializer(object data)
+        {
+            // Make sure the page reference exists.
+            if (data == null) throw new ArgumentNullException("data");
+
+            // Create a new json Serialiser
+            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+        }
+
+        /// <summary>
+        /// Converts the specified JSON string to an object of type T.
+        /// </summary>
+        /// <typeparam name="T">The type of the resulting object.</typeparam>
+        /// <param name="serialisedJSon">The JSON string to be deserialized.</param>
+        /// <returns>The deserialized object.</returns>
+        public static T Deserializer<T>(string serialisedJSon)
+        {
+            // Make sure the page reference exists.
+            if (serialisedJSon == null) throw new ArgumentNullException("serialisedJSon");
+
+            // Create a new json Serialiser
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serialisedJSon);
+        }
+
+        /// <summary>
+        /// Converts the specified JSON string to an object.
+        /// </summary>
+        /// <param name="serialisedJSon">The JSON string to be deserialized.</param>
+        /// <returns>The deserialized object.</returns>
+        public static object Deserializer(string serialisedJSon)
+        {
+            // Make sure the page reference exists.
+            if (serialisedJSon == null) throw new ArgumentNullException("serialisedJSon");
+
+            // Create a new json Serialiser
+            return Newtonsoft.Json.JsonConvert.DeserializeObject(serialisedJSon);
+        }
         #endregion
 
         #region Private Static Methods

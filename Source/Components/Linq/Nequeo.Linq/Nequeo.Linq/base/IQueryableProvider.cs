@@ -473,6 +473,48 @@ namespace Nequeo.Linq
     }
 
     /// <summary>
+    /// Inner most all finder
+    /// </summary>
+    public class InnermostAllFinder : ExpressionVisitor
+    {
+        #region InnermostAllFinder
+
+        #region Fields
+        private MethodCallExpression innermostAllExpression;
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Get the inner most all.
+        /// </summary>
+        /// <param name="expression">The expression tree.</param>
+        /// <returns>The method call expression.</returns>
+        public MethodCallExpression GetInnermostAll(Expression expression)
+        {
+            Visit(expression);
+            return innermostAllExpression;
+        }
+
+        /// <summary>
+        /// Protected override vist method call expression.
+        /// </summary>
+        /// <param name="expression">The method call expression.</param>
+        /// <returns>The new expression.</returns>
+        protected override Expression VisitMethodCall(MethodCallExpression expression)
+        {
+            if (expression.Method.Name == "All")
+                innermostAllExpression = expression;
+
+            Visit(expression.Arguments[0]);
+
+            return expression;
+        }
+        #endregion
+
+        #endregion
+    }
+
+    /// <summary>
     /// Inner most first finder
     /// </summary>
     public class InnermostFirstFinder : ExpressionVisitor
@@ -504,6 +546,90 @@ namespace Nequeo.Linq
         {
             if (expression.Method.Name == "First")
                 innermostFirstExpression = expression;
+
+            Visit(expression.Arguments[0]);
+
+            return expression;
+        }
+        #endregion
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Inner most last finder
+    /// </summary>
+    public class InnermostLastFinder : ExpressionVisitor
+    {
+        #region InnermostWhereFinder
+
+        #region Fields
+        private MethodCallExpression innermostLastExpression;
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Get the inner most last.
+        /// </summary>
+        /// <param name="expression">The expression tree.</param>
+        /// <returns>The method call expression.</returns>
+        public MethodCallExpression GetInnermostLast(Expression expression)
+        {
+            Visit(expression);
+            return innermostLastExpression;
+        }
+
+        /// <summary>
+        /// Protected override vist method call expression.
+        /// </summary>
+        /// <param name="expression">The method call expression.</param>
+        /// <returns>The new expression.</returns>
+        protected override Expression VisitMethodCall(MethodCallExpression expression)
+        {
+            if (expression.Method.Name == "Last")
+                innermostLastExpression = expression;
+
+            Visit(expression.Arguments[0]);
+
+            return expression;
+        }
+        #endregion
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Inner most single finder
+    /// </summary>
+    public class InnermostSingleFinder : ExpressionVisitor
+    {
+        #region InnermostWhereFinder
+
+        #region Fields
+        private MethodCallExpression innermostSingleExpression;
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Get the inner most single.
+        /// </summary>
+        /// <param name="expression">The expression tree.</param>
+        /// <returns>The method call expression.</returns>
+        public MethodCallExpression GetInnermostSingle(Expression expression)
+        {
+            Visit(expression);
+            return innermostSingleExpression;
+        }
+
+        /// <summary>
+        /// Protected override vist method call expression.
+        /// </summary>
+        /// <param name="expression">The method call expression.</param>
+        /// <returns>The new expression.</returns>
+        protected override Expression VisitMethodCall(MethodCallExpression expression)
+        {
+            if (expression.Method.Name == "Single")
+                innermostSingleExpression = expression;
 
             Visit(expression.Arguments[0]);
 

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nequeo Pty Limited")]
 [assembly: AssemblyProduct("Nequeo.Collections")]
-[assembly: AssemblyCopyright("Copyright © Nequeo Pty Limited 2012")]
+[assembly: AssemblyCopyright("Copyright © Nequeo Pty Limited 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2014.26.1.1")]
-[assembly: AssemblyFileVersion("2014.26.1.1")]
+[assembly: AssemblyVersion("2016.26.1.1")]
+[assembly: AssemblyFileVersion("2016.26.1.1")]

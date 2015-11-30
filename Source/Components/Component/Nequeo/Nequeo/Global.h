@@ -43,6 +43,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <tchar.h>
 #include <string>
 #include <iomanip>
+#include <memory>
 
 using namespace std;
 

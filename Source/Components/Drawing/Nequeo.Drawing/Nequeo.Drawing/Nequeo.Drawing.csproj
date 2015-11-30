@@ -329,6 +329,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Text\FontCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NequeoDrawingKey.snk" />

@@ -745,6 +745,25 @@ namespace Nequeo.Cryptography
     }
 
     /// <summary>
+    /// Security type.
+    /// </summary>
+    public enum SecurityType
+    {
+        /// <summary>
+        /// No security.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Passphase.
+        /// </summary>
+        Passphrase = 1,
+        /// <summary>
+        /// Certificate.
+        /// </summary>
+        Certificate = 2,
+    }
+
+    /// <summary>
     /// Describes the encryption format for storing passwords.
     /// </summary>
     public enum PasswordFormat
@@ -812,5 +831,52 @@ namespace Nequeo.Cryptography
         /// Reserved for Twofish
         /// </summary>
         Twofish = 10,
+    }
+
+    /// <summary>
+    /// The cypher type.
+    /// </summary>
+    public enum CypherType
+    {
+        /// <summary>
+        /// No cypher.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Triple-DES (DES-EDE, as per spec -168 bit key derived from 192).
+        /// </summary>
+        TripleDes = 1,
+        /// <summary>
+        /// Blowfish (128 bit key, 16 rounds) [Blowfish].
+        /// </summary>
+        Blowfish = 2,
+        /// <summary>
+        /// Reserved for Twofish.
+        /// </summary>
+        Twofish = 3,
+        /// <summary>
+        /// Reserved for AES with 256-bit key.
+        /// </summary>
+        Aes256 = 4,
+        /// <summary>
+        /// RC 6 key.
+        /// </summary>
+        RC6 = 5,
+        /// <summary>
+        /// Rijndael with 256-bit key.
+        /// </summary>
+        Rijndael = 6,
+        /// <summary>
+        /// Serpent key.
+        /// </summary>
+        Serpent = 7,
+        /// <summary>
+        /// RSA key.
+        /// </summary>
+        RSA = 8,
+        /// <summary>
+        /// Pretty good privacy cryptography key.
+        /// </summary>
+        PGP = 9,
     }
 }

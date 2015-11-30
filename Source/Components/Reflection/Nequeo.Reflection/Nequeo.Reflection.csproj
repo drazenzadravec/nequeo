@@ -285,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="base\DataType.cs" />
+    <Compile Include="base\TypeConverter.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Manager.cs" />
     <Compile Include="Reflection\AppDomianHost.cs" />

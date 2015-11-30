@@ -65,14 +65,26 @@ namespace Nequeo.Security
         public SecureString GetSecureText(string text)
         {
             // Construct the secure string.
-            SecureString textSecure = new SecureString();
+            SecureString textSecure = null;
 
-            // Append the secure text for each character.
-            foreach (char element in text)
-                textSecure.AppendChar(element);
+            try
+            {
+                textSecure = new SecureString();
 
-            // Return the secure text.
-            return textSecure;
+                // Append the secure text for each character.
+                foreach (char element in text)
+                    textSecure.AppendChar(element);
+
+                // Return the secure text.
+                return textSecure;
+            }
+            catch (Exception)
+            {
+                if (textSecure != null)
+                    textSecure.Dispose();
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -100,6 +112,34 @@ namespace Nequeo.Security
 
             // Return the text.
             return text;
+        }
+    }
+
+    /// <summary>
+    /// Represents text that should be kept confidential. The text is encrypted for
+    /// privacy when being used, and deleted from computer memory when no longer
+    /// needed. This class cannot be inherited.
+    /// </summary>
+    public static class SecureStringExtensions
+    {
+        /// <summary>
+        /// Converts the given string into a secure string.
+        /// </summary>
+        /// <param name="value">The value of the string that's being converted.</param>
+        /// <returns>The secure string of the text.</returns>
+        public static SecureString ToSecureString(this string value)
+        {
+            return new SecureText().GetSecureText(value);
+        }
+
+        /// <summary>
+        /// Converts th secure string back to a string.
+        /// </summary>
+        /// <param name="value">The secure string that's being converted</param>
+        /// <returns>The extracted text.</returns>
+        public static string ConvertToString(this SecureString value)
+        {
+            return new SecureText().GetText(value);
         }
     }
 }

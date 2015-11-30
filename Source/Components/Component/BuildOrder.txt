@@ -41,6 +41,7 @@ Nequeo.DomianName
 Nequeo.Ftp
 Nequeo.SFtp
 Nequeo.Http
+Nequeo.Http2
 Nequeo.WebSockets
 Nequeo.Mail.Client
 Nequeo.ServiceModel (Net)
@@ -58,6 +59,7 @@ Nequeo.Data.LinqTo.Edm
 Nequeo.Data.LinqTo.SqlServer
 Nequeo.Data.LinqTo.Xml
 Nequeo.Data.MongoDb.Provider
+Nequeo.Data.MongoDb.Provider.v1
 Nequeo.Data.MySql.Provider
 Nequeo.Data.Odbc.Provider
 Nequeo.Data.OleDb.Provider

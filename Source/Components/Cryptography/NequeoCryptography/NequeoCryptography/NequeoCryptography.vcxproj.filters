@@ -57,6 +57,9 @@
     <ClInclude Include="RsaParameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="X509Certificate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RsaParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="X509Certificate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

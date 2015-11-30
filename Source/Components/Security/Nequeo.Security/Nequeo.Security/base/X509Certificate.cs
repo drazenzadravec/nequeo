@@ -398,6 +398,82 @@ namespace Nequeo.Security
     {
         #region Public Static x509 Certificate Collection
         /// <summary>
+        /// Install a certificate to the store.
+        /// </summary>
+        /// <param name="certificate">The certificate to install.</param>
+        /// <param name="storeName">Specifies the name of the X.509 certificate store to open.</param>
+        /// <param name="storeLocation">Specifies the location of the X.509 certificate store.</param>
+        public static void InstallCertificate(X509Certificate2 certificate, StoreName storeName, StoreLocation storeLocation)
+        {
+            // Open the store.
+            var store = new X509Store(storeName, storeLocation);
+            store.Open(OpenFlags.ReadWrite);
+
+            try
+            {
+                // Find the certificate.
+                X509Certificate2Collection result = store.Certificates.Find(
+                    X509FindType.FindByThumbprint, certificate.Thumbprint, false);
+
+                if (result.Count > 0)
+                {
+                    Trace.TraceWarning("Certificate with thumbprint '{0}', name '{1}' already in store.",
+                        certificate.Thumbprint, certificate.Subject);
+                }
+                else
+                {
+                    // Add the certificate to the store.
+                    store.Add(certificate);
+                    Trace.TraceInformation("Certificate successfully added to the store.");
+                }
+            }
+            finally
+            {
+                // Close the store.
+                if(store != null)
+                    store.Close();
+            }
+        }
+
+        /// <summary>
+        /// Uninstall a certificate from the store.
+        /// </summary>
+        /// <param name="certificate">The certificate to uninstall.</param>
+        /// <param name="storeName">Specifies the name of the X.509 certificate store to open.</param>
+        /// <param name="storeLocation">Specifies the location of the X.509 certificate store.</param>
+        public static void UninstallCertificate(X509Certificate2 certificate, StoreName storeName, StoreLocation storeLocation)
+        {
+            // Open the store.
+            var store = new X509Store(storeName, storeLocation);
+            store.Open(OpenFlags.ReadWrite);
+
+            try
+            {
+                // Find the certificate.
+                X509Certificate2Collection result = store.Certificates.Find(
+                    X509FindType.FindByThumbprint, certificate.Thumbprint, false);
+
+                if (result.Count > 0)
+                {
+                    // Remove the certificate from the store.
+                    store.Remove(certificate);
+                    Trace.TraceInformation("Certificate successfully removed from the store.");
+                }
+                else
+                {
+                    Trace.TraceWarning("Certificate with thumbprint '{0}', name '{1}' not found in store.",
+                        certificate.Thumbprint, certificate.Subject);
+                }
+            }
+            finally
+            {
+                // Close the store.
+                if (store != null)
+                    store.Close();
+            }
+        }
+
+        /// <summary>
         /// Displays a dialog box that contains the properties of an X.509 certificate
         /// and its associated certificate chain using a handle to a parent window.
         /// </summary>

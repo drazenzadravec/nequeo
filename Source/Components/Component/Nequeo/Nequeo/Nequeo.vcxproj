@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -31,26 +31,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -174,7 +174,7 @@ copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Component
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoException.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\Ascii.h "..\..\..\..\References\Release\Include\Components\Base\Ascii.h"
@@ -192,8 +192,11 @@ copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\B
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
-copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h
-copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"</Command>
+copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h"
+copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"
+copy $(ProjectDir)\ServiceBase.h "..\..\..\..\References\Release\Include\Components\Base\ServiceBase.h"
+copy $(ProjectDir)\ServiceInstaller.h "..\..\..\..\References\Release\Include\Components\Base\ServiceInstaller.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -234,8 +237,11 @@ copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\B
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
-copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h
-copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"</Command>
+copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h"
+copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"
+copy $(ProjectDir)\ServiceBase.h "..\..\..\..\References\Release\Include\Components\Base\ServiceBase.h"
+copy $(ProjectDir)\ServiceInstaller.h "..\..\..\..\References\Release\Include\Components\Base\ServiceInstaller.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -252,10 +258,13 @@ copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Component
     <ClInclude Include="pcre_config.h" />
     <ClInclude Include="pcre_internal.h" />
     <ClInclude Include="RefCountedObject.h" />
+    <ClInclude Include="ServiceBase.h" />
+    <ClInclude Include="ServiceInstaller.h" />
     <ClInclude Include="SharedPtr.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Timespan.h" />
     <ClInclude Include="Timestamp.h" />
     <ClInclude Include="Types.h" />
@@ -268,6 +277,8 @@ copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Component
     <ClCompile Include="ByteOrder.cpp" />
     <ClCompile Include="LibraryLoader.cpp" />
     <ClCompile Include="RefCountedObject.cpp" />
+    <ClCompile Include="ServiceBase.cpp" />
+    <ClCompile Include="ServiceInstaller.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

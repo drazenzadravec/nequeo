@@ -267,8 +267,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nequeo.Model">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Model.dll</HintPath>
+    <Reference Include="Nequeo.Model, Version=2011.26.1.1, Culture=neutral, PublicKeyToken=b9eb31dd8e10589a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Reflection">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Reflection.dll</HintPath>

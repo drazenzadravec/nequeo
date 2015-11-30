@@ -84,4 +84,72 @@ namespace Nequeo.Model
         }
         #endregion
     }
+
+    /// <summary>
+    /// Property model container
+    /// </summary>
+    [Serializable()]
+    public class PropertyModel
+    {
+        #region Private Fields
+        private String _propertyName = null;
+        private Type _propertyType = null;
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Gets sets, the property name.
+        /// </summary>
+        [XmlElement(ElementName = "PropertyName", IsNullable = false)]
+        public String PropertyName
+        {
+            get { return _propertyName; }
+            set { _propertyName = value; }
+        }
+
+        /// <summary>
+        /// Gets sets, the property type.
+        /// </summary>
+        [XmlElement(ElementName = "PropertyType", IsNullable = false)]
+        public Type PropertyType
+        {
+            get { return _propertyType; }
+            set { _propertyType = value; }
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// Property string model container
+    /// </summary>
+    [Serializable()]
+    public class PropertyStringModel
+    {
+        #region Private Fields
+        private String _propertyName = null;
+        private String _propertyType = null;
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Gets sets, the property name.
+        /// </summary>
+        [XmlElement(ElementName = "PropertyName", IsNullable = false)]
+        public String PropertyName
+        {
+            get { return _propertyName; }
+            set { _propertyName = value; }
+        }
+
+        /// <summary>
+        /// Gets sets, the property type.
+        /// </summary>
+        [XmlElement(ElementName = "PropertyType", IsNullable = false)]
+        public String PropertyType
+        {
+            get { return _propertyType; }
+            set { _propertyType = value; }
+        }
+        #endregion
+    }
 }

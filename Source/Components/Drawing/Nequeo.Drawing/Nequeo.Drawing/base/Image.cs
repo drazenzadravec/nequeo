@@ -79,6 +79,119 @@ namespace Nequeo.Drawing
         }
 
         /// <summary>
+        /// Creates an System.Drawing.Image from the specified file.
+        /// </summary>
+        /// <param name="filename">A string that contains the name of the file from which to create the System.Drawing.Image.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Image Load(string filename)
+        {
+            return System.Drawing.Image.FromFile(filename);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified file.
+        /// </summary>
+        /// <param name="filename">A string that contains the name of the file from which to create the System.Drawing.Image.</param>
+        /// <param name="useEmbeddedColorManagement">Set to true to use color management information embedded in the image file; otherwise, false.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Image Load(string filename, bool useEmbeddedColorManagement)
+        {
+            return System.Drawing.Image.FromFile(filename, useEmbeddedColorManagement);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified data stream.
+        /// </summary>
+        /// <param name="stream">A System.IO.Stream that contains the data for this System.Drawing.Image.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Image Load(System.IO.Stream stream)
+        {
+            return System.Drawing.Image.FromStream(stream);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified data stream.
+        /// </summary>
+        /// <param name="stream">A System.IO.Stream that contains the data for this System.Drawing.Image.</param>
+        /// <param name="useEmbeddedColorManagement">True to use color management information embedded in the data stream; otherwise, false.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Image Load(System.IO.Stream stream, bool useEmbeddedColorManagement)
+        {
+            return System.Drawing.Image.FromStream(stream, useEmbeddedColorManagement);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified data stream.
+        /// </summary>
+        /// <param name="stream">A System.IO.Stream that contains the data for this System.Drawing.Image.</param>
+        /// <param name="useEmbeddedColorManagement">True to use color management information embedded in the data stream; otherwise, false.</param>
+        /// <param name="validateImageData">True to validate the image data; otherwise, false.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Image Load(System.IO.Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
+        {
+            return System.Drawing.Image.FromStream(stream, useEmbeddedColorManagement);
+        }
+        
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified file.
+        /// </summary>
+        /// <param name="filename">A string that contains the name of the file from which to create the System.Drawing.Image.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Bitmap Create(string filename)
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromFile(filename);
+            return new Bitmap(image);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified file.
+        /// </summary>
+        /// <param name="filename">A string that contains the name of the file from which to create the System.Drawing.Image.</param>
+        /// <param name="useEmbeddedColorManagement">Set to true to use color management information embedded in the image file; otherwise, false.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Bitmap Create(string filename, bool useEmbeddedColorManagement)
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromFile(filename, useEmbeddedColorManagement);
+            return new Bitmap(image);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified data stream.
+        /// </summary>
+        /// <param name="stream">A System.IO.Stream that contains the data for this System.Drawing.Image.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Bitmap Create(System.IO.Stream stream)
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
+            return new Bitmap(image);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified data stream.
+        /// </summary>
+        /// <param name="stream">A System.IO.Stream that contains the data for this System.Drawing.Image.</param>
+        /// <param name="useEmbeddedColorManagement">True to use color management information embedded in the data stream; otherwise, false.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Bitmap Create(System.IO.Stream stream, bool useEmbeddedColorManagement)
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromStream(stream, useEmbeddedColorManagement);
+            return new Bitmap(image);
+        }
+
+        /// <summary>
+        /// Creates an System.Drawing.Image from the specified data stream.
+        /// </summary>
+        /// <param name="stream">A System.IO.Stream that contains the data for this System.Drawing.Image.</param>
+        /// <param name="useEmbeddedColorManagement">True to use color management information embedded in the data stream; otherwise, false.</param>
+        /// <param name="validateImageData">True to validate the image data; otherwise, false.</param>
+        /// <returns>The System.Drawing.Image this method creates.</returns>
+        public System.Drawing.Bitmap Create(System.IO.Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromStream(stream, useEmbeddedColorManagement);
+            return new Bitmap(image);
+        }
+        
+        /// <summary>
         /// Save the bitmap image.
         /// </summary>
         /// <param name="image">The bitmap image to save.</param>

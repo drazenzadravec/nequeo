@@ -40,10 +40,11 @@ using System.Threading.Tasks;
 namespace Nequeo.IO.File
 {
     /// <summary>
-    /// File cache provider.
+    /// File cache provider (thread-safe)).
     /// </summary>
     public class Cache : Nequeo.Collections.Cache<string, byte[]>
     {
+        private object _lockObject = new object();
         private Dictionary<string, long> _fileSize = new Dictionary<string, long>();
         private Dictionary<string, DateTime> _fileModified = new Dictionary<string, DateTime>();
 
@@ -55,20 +56,23 @@ namespace Nequeo.IO.File
         /// <returns>A list of all cache keys.</returns>
         public List<string> GetKeyGroup(string text)
         {
-            // Search for the specified string.
-            var query = from k in base.Keys
-                        where k.Contains(text) == true
-                        select k;
+            lock(_lockObject)
+            {
+                // Search for the specified string.
+                var query = from k in base.Keys
+                            where k.Contains(text) == true
+                            select k;
 
-            // Create a new instance of the list object.
-            List<string> keys = new List<string>();
+                // Create a new instance of the list object.
+                List<string> keys = new List<string>();
 
-            // Add each result found.
-            foreach (var result in query)
-                keys.Add(result.Trim());
+                // Add each result found.
+                foreach (var result in query)
+                    keys.Add(result.Trim());
 
-            // Return all the keys else null.
-            return keys.Count > 0 ? keys : null;
+                // Return all the keys else null.
+                return keys.Count > 0 ? keys : null;
+            }
         }
 
         /// <summary>
@@ -78,7 +82,10 @@ namespace Nequeo.IO.File
         /// <returns>The file size.</returns>
         public long GetFileSize(string file)
         {
-            return _fileSize[file];
+            lock (_lockObject)
+            {
+                return _fileSize[file];
+            }
         }
 
         /// <summary>
@@ -88,10 +95,13 @@ namespace Nequeo.IO.File
         /// <returns>The modified time; else null.</returns>
         public DateTime? GetModifiedTime(string cacheKey)
         {
-            if (_fileModified.ContainsKey(cacheKey))
-                return _fileModified[cacheKey];
-            else
-                return null;
+            lock (_lockObject)
+            {
+                if (_fileModified.ContainsKey(cacheKey))
+                    return _fileModified[cacheKey];
+                else
+                    return null;
+            }
         }
 
         /// <summary>
@@ -101,10 +111,13 @@ namespace Nequeo.IO.File
         /// <param name="modifiedDate">The modified time.</param>
         public void SetModifiedTime(string cacheKey, DateTime modifiedDate)
         {
-            if (_fileModified.ContainsKey(cacheKey))
-                _fileModified[cacheKey] = modifiedDate;
-            else
-                _fileModified.Add(cacheKey, modifiedDate);
+            lock (_lockObject)
+            {
+                if (_fileModified.ContainsKey(cacheKey))
+                    _fileModified[cacheKey] = modifiedDate;
+                else
+                    _fileModified.Add(cacheKey, modifiedDate);
+            }
         }
 
         /// <summary>
@@ -115,15 +128,18 @@ namespace Nequeo.IO.File
         /// <returns>False if not modified; else true.</returns>
         public bool HasBeenModified(string cacheKey, DateTime modifiedDate)
         {
-            if (_fileModified.ContainsKey(cacheKey))
+            lock (_lockObject)
             {
-                if (_fileModified[cacheKey].Equals(modifiedDate))
-                    return false;
+                if (_fileModified.ContainsKey(cacheKey))
+                {
+                    if (_fileModified[cacheKey].Equals(modifiedDate))
+                        return false;
+                    else
+                        return true;
+                }
                 else
                     return true;
             }
-            else
-                return true;
         }
 
         /// <summary>
@@ -133,8 +149,11 @@ namespace Nequeo.IO.File
         /// <param name="value">The value.</param>
         public override void Set(string cacheKey, byte[] value)
         {
-            base.Set(cacheKey, value);
-            _fileSize[cacheKey] = (long)value.Length;
+            lock (_lockObject)
+            {
+                base.Set(cacheKey, value);
+                _fileSize[cacheKey] = (long)value.Length;
+            }
         }
 
         /// <summary>
@@ -144,8 +163,11 @@ namespace Nequeo.IO.File
         /// <param name="value">The value to add.</param>
         public override void Add(string cacheKey, byte[] value)
         {
-            base.Add(cacheKey, value);
-            _fileSize.Add(cacheKey, (long)value.Length);
+            lock (_lockObject)
+            {
+                base.Add(cacheKey, value);
+                _fileSize.Add(cacheKey, (long)value.Length);
+            }
         }
 
         /// <summary>
@@ -154,12 +176,15 @@ namespace Nequeo.IO.File
         /// <returns>The total cache size.</returns>
         public long GetCacheSize()
         {
-            long size = 0;
-            foreach (byte[] file in base.GetValue())
-                size += (long)file.Length;
+            lock (_lockObject)
+            {
+                long size = 0;
+                foreach (byte[] file in base.GetValue())
+                    size += (long)file.Length;
 
-            // Return the total size.
-            return size;
+                // Return the total size.
+                return size;
+            }
         }
 
         /// <summary>
@@ -177,6 +202,7 @@ namespace Nequeo.IO.File
 
             _fileSize = null;
             _fileModified = null;
+            _lockObject = null;
         }
     }
 }

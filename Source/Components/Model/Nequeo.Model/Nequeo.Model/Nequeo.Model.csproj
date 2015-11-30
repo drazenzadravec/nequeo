@@ -296,8 +296,11 @@
     <Compile Include="base\ExpressionModel.cs" />
     <Compile Include="base\ExpressionTreeModel.cs" />
     <Compile Include="base\FileDetails.cs" />
+    <Compile Include="base\KeyModel.cs" />
     <Compile Include="base\NameValue.cs" />
     <Compile Include="base\QueryModel.cs" />
+    <Compile Include="Language\Translate.cs" />
+    <Compile Include="Language\Translation.cs" />
     <Compile Include="Conversion\ExportBatchModel.cs" />
     <Compile Include="Conversion\PathDetailModel.cs" />
     <Compile Include="base\PropertyInfoModel.cs" />

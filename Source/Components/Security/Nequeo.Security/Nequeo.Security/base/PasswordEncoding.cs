@@ -562,7 +562,7 @@ namespace Nequeo.Security
                     // Decrypt the stored password.
                     byte[] data = Convert.FromBase64String(pass.First().Value);
                     byte[] password = new Nequeo.Cryptography.AdvancedAES().DecryptFromMemory(data, KeyContainer._passwordKey);
-                    return Encoding.Unicode.GetString(password);
+                    return Encoding.Unicode.GetString(password).Replace("\0", "");
                 }
                 else
                     return null;

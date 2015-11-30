@@ -50,12 +50,12 @@ namespace Nequeo.Linq
     public static class DynamicExpression
     {
         /// <summary>
-        /// 
+        /// Parse string to expression.
         /// </summary>
-        /// <param name="resultType"></param>
-        /// <param name="expression"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="resultType">The result type.</param>
+        /// <param name="expression">The string expression.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The expression.</returns>
         public static Expression Parse(Type resultType, string expression, params object[] values)
         {
             ExpressionParser parser = new ExpressionParser(null, expression, values);
@@ -63,26 +63,26 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse string lambda expression.
         /// </summary>
-        /// <param name="itType"></param>
-        /// <param name="resultType"></param>
-        /// <param name="expression"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="itType">Initial type.</param>
+        /// <param name="resultType">Result ype.</param>
+        /// <param name="expression">The string expression.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The lambda expression.</returns>
         public static LambdaExpression ParseLambda(Type itType, Type resultType, string expression, params object[] values)
         {
             return ParseLambda(new ParameterExpression[] { Expression.Parameter(itType, "") }, resultType, expression, values);
         }
 
         /// <summary>
-        /// 
+        /// Parse string lambda expression.
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="resultType"></param>
-        /// <param name="expression"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="parameters">The parameter expressions.</param>
+        /// <param name="resultType">The result ype.</param>
+        /// <param name="expression">The string expression.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The lambda expression.</returns>
         public static LambdaExpression ParseLambda(ParameterExpression[] parameters, Type resultType, string expression, params object[] values)
         {
             ExpressionParser parser = new ExpressionParser(parameters, expression, values);
@@ -90,33 +90,33 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// The string to lambda expression.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="S"></typeparam>
-        /// <param name="expression"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The source type.</typeparam>
+        /// <typeparam name="S">The result type.</typeparam>
+        /// <param name="expression">The string expression.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The lambda expression.</returns>
         public static Expression<Func<T, S>> ParseLambda<T, S>(string expression, params object[] values)
         {
             return (Expression<Func<T, S>>)ParseLambda(typeof(T), typeof(S), expression, values);
         }
 
         /// <summary>
-        /// 
+        /// Create dynamic class type.
         /// </summary>
-        /// <param name="properties"></param>
-        /// <returns></returns>
+        /// <param name="properties">The dynamic properties.</param>
+        /// <returns>The dynamic class type.</returns>
         public static Type CreateClass(params Nequeo.Reflection.DynamicProperty[] properties)
         {
             return Nequeo.Reflection.DynamicClassBuilder.Instance.GetDynamicClass(properties);
         }
 
         /// <summary>
-        /// 
+        /// Create dynamic class type.
         /// </summary>
-        /// <param name="properties"></param>
-        /// <returns></returns>
+        /// <param name="properties">The dynamic properties.</param>
+        /// <returns>The dynamic class type.</returns>
         public static Type CreateClass(IEnumerable<Nequeo.Reflection.DynamicProperty> properties)
         {
             return Nequeo.Reflection.DynamicClassBuilder.Instance.GetDynamicClass(properties);
@@ -124,26 +124,33 @@ namespace Nequeo.Linq
     }
 
     /// <summary>
-    /// 
+    /// Dynamic ordering.
     /// </summary>
     internal class DynamicOrdering
     {
+        /// <summary>
+        /// The slector expression.
+        /// </summary>
         public Expression Selector;
+
+        /// <summary>
+        /// Is ascending.
+        /// </summary>
         public bool Ascending;
     }
 
     /// <summary>
-    /// 
+    /// Parse exception.
     /// </summary>
     public sealed class ParseException : Exception
     {
         int position;
 
         /// <summary>
-        /// 
+        /// Parse exception.
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="position"></param>
+        /// <param name="message">THe message.</param>
+        /// <param name="position">The position.</param>
         public ParseException(string message, int position)
             : base(message)
         {
@@ -151,7 +158,7 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Gets the position.
         /// </summary>
         public int Position
         {
@@ -159,9 +166,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Gets the message.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The message.</returns>
         public override string ToString()
         {
             return string.Format(Res.ParseExceptionFormat, Message, position);
@@ -169,22 +176,33 @@ namespace Nequeo.Linq
     }
 
     /// <summary>
-    /// 
+    /// Expression parser.
     /// </summary>
     internal class ExpressionParser
     {
         /// <summary>
-        /// 
+        /// Token structure.
         /// </summary>
         struct Token
         {
+            /// <summary>
+            /// Token id.
+            /// </summary>
             public TokenId id;
+
+            /// <summary>
+            /// The text.
+            /// </summary>
             public string text;
+
+            /// <summary>
+            /// The position.
+            /// </summary>
             public int pos;
         }
 
         /// <summary>
-        /// 
+        /// Token id.
         /// </summary>
         enum TokenId
         {
@@ -223,141 +241,516 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Logical signatures interface.
         /// </summary>
         interface ILogicalSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(bool x, bool y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(bool? x, bool? y);
         }
 
         /// <summary>
-        /// 
+        /// Arithmetic signatures interface.
         /// </summary>
         interface IArithmeticSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(int x, int y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(uint x, uint y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(long x, long y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(ulong x, ulong y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(float x, float y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(double x, double y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(decimal x, decimal y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(int? x, int? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(uint? x, uint? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(long? x, long? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(ulong? x, ulong? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(float? x, float? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(double? x, double? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(decimal? x, decimal? y);
         }
 
         /// <summary>
-        /// 
+        /// Relational signatures interface.
         /// </summary>
         interface IRelationalSignatures : IArithmeticSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(string x, string y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(char x, char y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(DateTime x, DateTime y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(TimeSpan x, TimeSpan y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(char? x, char? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(DateTime? x, DateTime? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(TimeSpan? x, TimeSpan? y);
         }
 
         /// <summary>
-        /// 
+        /// Equality signatures interface.
         /// </summary>
         interface IEqualitySignatures : IRelationalSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(bool x, bool y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(bool? x, bool? y);
         }
 
         /// <summary>
-        /// 
+        /// Add signatures interface.
         /// </summary>
         interface IAddSignatures : IArithmeticSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(DateTime x, TimeSpan y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(TimeSpan x, TimeSpan y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(DateTime? x, TimeSpan? y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(TimeSpan? x, TimeSpan? y);
         }
 
         /// <summary>
-        /// 
+        /// Subtract signatures interface.
         /// </summary>
         interface ISubtractSignatures : IAddSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(DateTime x, DateTime y);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
+            /// <param name="y">The y value.</param>
             void F(DateTime? x, DateTime? y);
         }
 
         /// <summary>
-        /// 
+        /// Negation signatures interace.
         /// </summary>
         interface INegationSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(int x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(long x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(float x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(double x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(decimal x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(int? x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(long? x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(float? x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(double? x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(decimal? x);
         }
 
         /// <summary>
-        /// 
+        /// Not signatures interface.
         /// </summary>
         interface INotSignatures
         {
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(bool x);
+
+            /// <summary>
+            /// Compare.
+            /// </summary>
+            /// <param name="x">The x value.</param>
             void F(bool? x);
         }
 
         /// <summary>
-        /// 
+        /// Enumerable signatures interface.
         /// </summary>
         interface IEnumerableSignatures
         {
+            /// <summary>
+            /// Where
+            /// </summary>
+            /// <param name="predicate">Predicate.</param>
             void Where(bool predicate);
+
+            /// <summary>
+            /// Any
+            /// </summary>
             void Any();
+
+            /// <summary>
+            /// Any
+            /// </summary>
+            /// <param name="predicate">Predicate.</param>
             void Any(bool predicate);
+
+            /// <summary>
+            /// All
+            /// </summary>
+            /// <param name="predicate">Predicate.</param>
             void All(bool predicate);
+
+            /// <summary>
+            /// Count
+            /// </summary>
             void Count();
+
+            /// <summary>
+            /// Count
+            /// </summary>
+            /// <param name="predicate">Predicate.</param>
             void Count(bool predicate);
+
+            /// <summary>
+            /// Min
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Min(object selector);
+
+            /// <summary>
+            /// Max
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Max(object selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(int selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(int? selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(long selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(long? selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(float selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(float? selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(double selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(double? selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(decimal selector);
+
+            /// <summary>
+            /// Sum
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Sum(decimal? selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(int selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(int? selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(long selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(long? selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(float selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(float? selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(double selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(double? selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(decimal selector);
+
+            /// <summary>
+            /// Average
+            /// </summary>
+            /// <param name="selector">Selector.</param>
             void Average(decimal? selector);
         }
 
         /// <summary>
-        /// 
+        /// Predefined types.
         /// </summary>
         static readonly Type[] predefinedTypes = {
             typeof(Object),
@@ -397,6 +790,7 @@ namespace Nequeo.Linq
         IDictionary<string, object> externals;
         Dictionary<Expression, string> literals;
         ParameterExpression it;
+
         string text;
         int textPos;
         int textLen;
@@ -404,11 +798,11 @@ namespace Nequeo.Linq
         Token token;
 
         /// <summary>
-        /// 
+        /// Expression Parser.
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="expression"></param>
-        /// <param name="values"></param>
+        /// <param name="parameters">The expression parameters.</param>
+        /// <param name="expression">The string expression.</param>
+        /// <param name="values">The values.</param>
         public ExpressionParser(ParameterExpression[] parameters, string expression, object[] values)
         {
             if (expression == null) throw new ArgumentNullException("expression");
@@ -424,9 +818,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Process parameters.
         /// </summary>
-        /// <param name="parameters"></param>
+        /// <param name="parameters">The expression parameters.</param>
         void ProcessParameters(ParameterExpression[] parameters)
         {
             foreach (ParameterExpression pe in parameters)
@@ -437,9 +831,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Process values.
         /// </summary>
-        /// <param name="values"></param>
+        /// <param name="values">The values.</param>
         void ProcessValues(object[] values)
         {
             for (int i = 0; i < values.Length; i++)
@@ -457,10 +851,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Add symbol
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">The name.</param>
+        /// <param name="value">The value.</param>
         void AddSymbol(string name, object value)
         {
             if (symbols.ContainsKey(name))
@@ -469,10 +863,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse.
         /// </summary>
-        /// <param name="resultType"></param>
-        /// <returns></returns>
+        /// <param name="resultType">Result type.</param>
+        /// <returns>The expression.</returns>
         public Expression Parse(Type resultType)
         {
             int exprPos = token.pos;
@@ -486,9 +880,9 @@ namespace Nequeo.Linq
 
 #pragma warning disable 0219
         /// <summary>
-        /// 
+        /// Parse ordering.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Dynamic ordering list.</returns>
         public IEnumerable<DynamicOrdering> ParseOrdering()
         {
             List<DynamicOrdering> orderings = new List<DynamicOrdering>();
@@ -515,9 +909,9 @@ namespace Nequeo.Linq
 #pragma warning restore 0219
 
         /// <summary>
-        /// ?: operator
+        /// Parse expression.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseExpression()
         {
             int errorPos = token.pos;
@@ -535,9 +929,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// ||, or operator
+        /// Parse logical Or.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseLogicalOr()
         {
             Expression left = ParseLogicalAnd();
@@ -553,9 +947,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse logical And.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseLogicalAnd()
         {
             //&&, and operator
@@ -572,9 +966,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse comparison.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseComparison()
         {
             // =, ==, !=, <>, >, >=, <, <= operators
@@ -659,9 +1053,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse additive.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseAdditive()
         {
             // +, -, & operators
@@ -693,9 +1087,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// *, /, %, mod operators
+        /// Parse multiplicative.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseMultiplicative()
         {
             Expression left = ParseUnary();
@@ -724,9 +1118,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// -, !, not unary operators
+        /// Parse -, !, not unary operators
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseUnary()
         {
             if (token.id == TokenId.Minus || token.id == TokenId.Exclamation ||
@@ -758,9 +1152,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse primary.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParsePrimary()
         {
             Expression expr = ParsePrimaryStart();
@@ -784,9 +1178,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse primary start.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParsePrimaryStart()
         {
             switch (token.id)
@@ -807,9 +1201,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse string literal.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseStringLiteral()
         {
             ValidateToken(TokenId.StringLiteral);
@@ -835,9 +1229,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse integer literal.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseIntegerLiteral()
         {
             ValidateToken(TokenId.IntegerLiteral);
@@ -866,9 +1260,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse real literal.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseRealLiteral()
         {
             ValidateToken(TokenId.RealLiteral);
@@ -891,11 +1285,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Create literal.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="value">The value.</param>
+        /// <param name="text">The text.</param>
+        /// <returns>The expression.</returns>
         Expression CreateLiteral(object value, string text)
         {
             ConstantExpression expr = Expression.Constant(value);
@@ -904,9 +1298,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse paren expression.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseParenExpression()
         {
             ValidateToken(TokenId.OpenParen, Res.OpenParenExpected);
@@ -918,9 +1312,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse identifier.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseIdentifier()
         {
             ValidateToken(TokenId.Identifier);
@@ -955,9 +1349,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse It.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseIt()
         {
             if (it == null)
@@ -967,9 +1361,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse Iif.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseIif()
         {
             int errorPos = token.pos;
@@ -981,13 +1375,13 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate conditional.
         /// </summary>
-        /// <param name="test"></param>
-        /// <param name="expr1"></param>
-        /// <param name="expr2"></param>
-        /// <param name="errorPos"></param>
-        /// <returns></returns>
+        /// <param name="test">The test expression.</param>
+        /// <param name="expr1">Expression</param>
+        /// <param name="expr2">Expression</param>
+        /// <param name="errorPos">Error position.</param>
+        /// <returns>The expression.</returns>
         Expression GenerateConditional(Expression test, Expression expr1, Expression expr2, int errorPos)
         {
             if (test.Type != typeof(bool))
@@ -1017,9 +1411,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse new.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseNew()
         {
             NextToken();
@@ -1059,10 +1453,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse lambda invocation.
         /// </summary>
         /// <param name="lambda"></param>
-        /// <returns></returns>
+        /// <returns>The expression.</returns>
         Expression ParseLambdaInvocation(LambdaExpression lambda)
         {
             int errorPos = token.pos;
@@ -1075,10 +1469,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse type access.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>The expression.</returns>
         Expression ParseTypeAccess(Type type)
         {
             int errorPos = token.pos;
@@ -1112,12 +1506,12 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate conversion.
         /// </summary>
-        /// <param name="expr"></param>
-        /// <param name="type"></param>
-        /// <param name="errorPos"></param>
-        /// <returns></returns>
+        /// <param name="expr">Expression.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="errorPos">Error position.</param>
+        /// <returns>The expression.</returns>
         Expression GenerateConversion(Expression expr, Type type, int errorPos)
         {
             Type exprType = expr.Type;
@@ -1139,11 +1533,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse member access.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="instance"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <param name="instance">Expression.</param>
+        /// <returns>The expression.</returns>
         Expression ParseMemberAccess(Type type, Expression instance)
         {
             if (instance != null) type = instance.Type;
@@ -1194,11 +1588,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Find generic type.
         /// </summary>
-        /// <param name="generic"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="generic">The generic type.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>The type.</returns>
         static Type FindGenericType(Type generic, Type type)
         {
             while (type != null && type != typeof(object))
@@ -1218,13 +1612,13 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse aggregate.
         /// </summary>
-        /// <param name="instance"></param>
-        /// <param name="elementType"></param>
-        /// <param name="methodName"></param>
-        /// <param name="errorPos"></param>
-        /// <returns></returns>
+        /// <param name="instance">Expression.</param>
+        /// <param name="elementType">The element ype.</param>
+        /// <param name="methodName">The method name.</param>
+        /// <param name="errorPos">Error position.</param>
+        /// <returns>The expression.</returns>
         Expression ParseAggregate(Expression instance, Type elementType, string methodName, int errorPos)
         {
             ParameterExpression outerIt = it;
@@ -1256,9 +1650,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse argument list.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expressions.</returns>
         Expression[] ParseArgumentList()
         {
             ValidateToken(TokenId.OpenParen, Res.OpenParenExpected);
@@ -1270,9 +1664,9 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse arguments.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The expressions.</returns>
         Expression[] ParseArguments()
         {
             List<Expression> argList = new List<Expression>();
@@ -1286,10 +1680,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse element access.
         /// </summary>
-        /// <param name="expr"></param>
-        /// <returns></returns>
+        /// <param name="expr">Expression.</param>
+        /// <returns>The expression.</returns>
         Expression ParseElementAccess(Expression expr)
         {
             int errorPos = token.pos;
@@ -1325,10 +1719,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is predefined type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>True if predfined type; else false.</returns>
         static bool IsPredefinedType(Type type)
         {
             foreach (Type t in predefinedTypes) if (t == type) return true;
@@ -1336,30 +1730,30 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is nullable type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>True if nullable type; else false.</returns>
         static bool IsNullableType(Type type)
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         /// <summary>
-        /// 
+        /// Get non nullable type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>The type.</returns>
         static Type GetNonNullableType(Type type)
         {
             return IsNullableType(type) ? type.GetGenericArguments()[0] : type;
         }
 
         /// <summary>
-        /// 
+        /// Get type name.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>The type name.</returns>
         static string GetTypeName(Type type)
         {
             Type baseType = GetNonNullableType(type);
@@ -1369,40 +1763,40 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is numeric type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>True if numeric type; else false.</returns>
         static bool IsNumericType(Type type)
         {
             return GetNumericTypeKind(type) != 0;
         }
 
         /// <summary>
-        /// 
+        /// Is signed integral type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>True if signed integral type; else false.</returns>
         static bool IsSignedIntegralType(Type type)
         {
             return GetNumericTypeKind(type) == 2;
         }
 
         /// <summary>
-        /// 
+        /// Is unsigned integral type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>True if unsigned integral type; else false.</returns>
         static bool IsUnsignedIntegralType(Type type)
         {
             return GetNumericTypeKind(type) == 3;
         }
 
         /// <summary>
-        /// 
+        /// Get numeric type kind.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>The numeric kind value.</returns>
         static int GetNumericTypeKind(Type type)
         {
             type = GetNonNullableType(type);
@@ -1430,22 +1824,22 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is enum type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>True if enum type; else false.</returns>
         static bool IsEnumType(Type type)
         {
             return GetNonNullableType(type).IsEnum;
         }
 
         /// <summary>
-        /// 
+        /// Check and promote operand.
         /// </summary>
-        /// <param name="signatures"></param>
-        /// <param name="opName"></param>
-        /// <param name="expr"></param>
-        /// <param name="errorPos"></param>
+        /// <param name="signatures">The signatures type.</param>
+        /// <param name="opName">OP name.</param>
+        /// <param name="expr">Expression.</param>
+        /// <param name="errorPos">Error position.</param>
         void CheckAndPromoteOperand(Type signatures, string opName, ref Expression expr, int errorPos)
         {
             Expression[] args = new Expression[] { expr };
@@ -1457,13 +1851,13 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Check and promote operands.
         /// </summary>
-        /// <param name="signatures"></param>
-        /// <param name="opName"></param>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <param name="errorPos"></param>
+        /// <param name="signatures">The signatures type.</param>
+        /// <param name="opName">OP name.</param>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <param name="errorPos">Error position.</param>
         void CheckAndPromoteOperands(Type signatures, string opName, ref Expression left, ref Expression right, int errorPos)
         {
             Expression[] args = new Expression[] { left, right };
@@ -1475,13 +1869,13 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Incompatible operands error.
         /// </summary>
-        /// <param name="opName"></param>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <param name="pos"></param>
-        /// <returns></returns>
+        /// <param name="opName">OP name.</param>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <param name="pos">The position.</param>
+        /// <returns>The exception.</returns>
         Exception IncompatibleOperandsError(string opName, Expression left, Expression right, int pos)
         {
             return ParseError(pos, Res.IncompatibleOperands,
@@ -1489,12 +1883,12 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Find property or field.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="memberName"></param>
-        /// <param name="staticAccess"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <param name="memberName">Member name.</param>
+        /// <param name="staticAccess">Static access.</param>
+        /// <returns>The member info.</returns>
         MemberInfo FindPropertyOrField(Type type, string memberName, bool staticAccess)
         {
             BindingFlags flags = BindingFlags.Public | BindingFlags.DeclaredOnly |
@@ -1509,14 +1903,14 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Find method.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="methodName"></param>
-        /// <param name="staticAccess"></param>
-        /// <param name="args"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <param name="methodName">Method name.</param>
+        /// <param name="staticAccess">Static access.</param>
+        /// <param name="args">Expression arguments.</param>
+        /// <param name="method">Method base.</param>
+        /// <returns>The method index.</returns>
         int FindMethod(Type type, string methodName, bool staticAccess, Expression[] args, out MethodBase method)
         {
             BindingFlags flags = BindingFlags.Public | BindingFlags.DeclaredOnly |
@@ -1533,12 +1927,12 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Find indexer.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="args"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <param name="args">Expression arguments.</param>
+        /// <param name="method">Method base.</param>
+        /// <returns>The indexer.</returns>
         int FindIndexer(Type type, Expression[] args, out MethodBase method)
         {
             foreach (Type t in SelfAndBaseTypes(type))
@@ -1559,10 +1953,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Self and base types.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>Array of types.</returns>
         static IEnumerable<Type> SelfAndBaseTypes(Type type)
         {
             if (type.IsInterface)
@@ -1575,10 +1969,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Self and base classes.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns>Array of types.</returns>
         static IEnumerable<Type> SelfAndBaseClasses(Type type)
         {
             while (type != null)
@@ -1589,10 +1983,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Add interface.
         /// </summary>
-        /// <param name="types"></param>
-        /// <param name="type"></param>
+        /// <param name="types">The array of types.</param>
+        /// <param name="type">The type.</param>
         static void AddInterface(List<Type> types, Type type)
         {
             if (!types.Contains(type))
@@ -1603,22 +1997,33 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Method data.
         /// </summary>
         class MethodData
         {
+            /// <summary>
+            /// Mathod base.
+            /// </summary>
             public MethodBase MethodBase;
+
+            /// <summary>
+            /// Parameters.
+            /// </summary>
             public ParameterInfo[] Parameters;
+
+            /// <summary>
+            /// Expression arguments.
+            /// </summary>
             public Expression[] Args;
         }
 
         /// <summary>
-        /// 
+        /// Find best method.
         /// </summary>
-        /// <param name="methods"></param>
-        /// <param name="args"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
+        /// <param name="methods">Methods.</param>
+        /// <param name="args">Expression arguments.</param>
+        /// <param name="method">Method base.</param>
+        /// <returns>The method index.</returns>
         int FindBestMethod(IEnumerable<MethodBase> methods, Expression[] args, out MethodBase method)
         {
             MethodData[] applicable = methods.
@@ -1645,11 +2050,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is applicable.
         /// </summary>
-        /// <param name="method"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
+        /// <param name="method">Method data.</param>
+        /// <param name="args">Expression arguments.</param>
+        /// <returns>True if applicable; else false.</returns>
         bool IsApplicable(MethodData method, Expression[] args)
         {
             if (method.Parameters.Length != args.Length) return false;
@@ -1667,12 +2072,12 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Promote expression.
         /// </summary>
-        /// <param name="expr"></param>
-        /// <param name="type"></param>
-        /// <param name="exact"></param>
-        /// <returns></returns>
+        /// <param name="expr">Expression</param>
+        /// <param name="type">The type.</param>
+        /// <param name="exact">Exact.</param>
+        /// <returns>The expression.</returns>
         Expression PromoteExpression(Expression expr, Type type, bool exact)
         {
             if (expr.Type == type) return expr;
@@ -1720,11 +2125,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse number.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="text">The text.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>The object value.</returns>
         static object ParseNumber(string text, Type type)
         {
             switch (Type.GetTypeCode(GetNonNullableType(type)))
@@ -1778,11 +2183,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Parse enum.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="name">The name.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>The object value.</returns>
         static object ParseEnum(string name, Type type)
         {
             if (type.IsEnum)
@@ -1796,11 +2201,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is compatible with.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
+        /// <param name="source">The source type.</param>
+        /// <param name="target">The target type.</param>
+        /// <returns>True if compatible with; else false.</returns>
         static bool IsCompatibleWith(Type source, Type target)
         {
             if (source == target) return true;
@@ -1926,12 +2331,12 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Is better than.
         /// </summary>
-        /// <param name="args"></param>
-        /// <param name="m1"></param>
-        /// <param name="m2"></param>
-        /// <returns></returns>
+        /// <param name="args">Expression arguments.</param>
+        /// <param name="m1">Method data.</param>
+        /// <param name="m2">Method data.</param>
+        /// <returns>True if is better than; else false.</returns>
         static bool IsBetterThan(Expression[] args, MethodData m1, MethodData m2)
         {
             bool better = false;
@@ -1951,10 +2356,10 @@ namespace Nequeo.Linq
         /// Return -1 if s -> t2 is a better conversion than s -> t1
         /// Return 0 if neither conversion is better
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="t1"></param>
-        /// <param name="t2"></param>
-        /// <returns></returns>
+        /// <param name="s">The s type.</param>
+        /// <param name="t1">The type.</param>
+        /// <param name="t2">The type.</param>
+        /// <returns>The conversion index.</returns>
         static int CompareConversions(Type s, Type t1, Type t2)
         {
             if (t1 == t2) return 0;
@@ -1970,33 +2375,33 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate equal.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateEqual(Expression left, Expression right)
         {
             return Expression.Equal(left, right);
         }
 
         /// <summary>
-        /// 
+        /// Generate not equal.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateNotEqual(Expression left, Expression right)
         {
             return Expression.NotEqual(left, right);
         }
 
         /// <summary>
-        /// 
+        /// Generate greater than.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateGreaterThan(Expression left, Expression right)
         {
             if (left.Type == typeof(string))
@@ -2010,11 +2415,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate greater than equal.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateGreaterThanEqual(Expression left, Expression right)
         {
             if (left.Type == typeof(string))
@@ -2028,11 +2433,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate less than.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateLessThan(Expression left, Expression right)
         {
             if (left.Type == typeof(string))
@@ -2046,11 +2451,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate less than equal.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateLessThanEqual(Expression left, Expression right)
         {
             if (left.Type == typeof(string))
@@ -2064,11 +2469,11 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate add.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateAdd(Expression left, Expression right)
         {
             if (left.Type == typeof(string) && right.Type == typeof(string))
@@ -2079,22 +2484,22 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Generate subtract.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateSubtract(Expression left, Expression right)
         {
             return Expression.Subtract(left, right);
         }
 
         /// <summary>
-        /// 
+        /// Generate string concat.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateStringConcat(Expression left, Expression right)
         {
             return Expression.Call(
@@ -2104,33 +2509,33 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Get static method.
         /// </summary>
-        /// <param name="methodName"></param>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="methodName">Method name.</param>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         MethodInfo GetStaticMethod(string methodName, Expression left, Expression right)
         {
             return left.Type.GetMethod(methodName, new[] { left.Type, right.Type });
         }
 
         /// <summary>
-        /// 
+        /// Generate static method call.
         /// </summary>
-        /// <param name="methodName"></param>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <param name="methodName">Method name.</param>
+        /// <param name="left">Expression</param>
+        /// <param name="right">Expression</param>
+        /// <returns>The expression.</returns>
         Expression GenerateStaticMethodCall(string methodName, Expression left, Expression right)
         {
             return Expression.Call(null, GetStaticMethod(methodName, left, right), new[] { left, right });
         }
 
         /// <summary>
-        /// 
+        /// Set text position.
         /// </summary>
-        /// <param name="pos"></param>
+        /// <param name="pos">The position.</param>
         void SetTextPos(int pos)
         {
             textPos = pos;
@@ -2138,7 +2543,7 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Next char.
         /// </summary>
         void NextChar()
         {
@@ -2147,7 +2552,7 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Next token.
         /// </summary>
         void NextToken()
         {
@@ -2352,19 +2757,19 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Token identifier is.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier id.</param>
+        /// <returns>True if token identifier is; else false.</returns>
         bool TokenIdentifierIs(string id)
         {
             return token.id == TokenId.Identifier && String.Equals(id, token.text, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
-        /// 
+        /// Get identifier.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The identifier.</returns>
         string GetIdentifier()
         {
             ValidateToken(TokenId.Identifier, Res.IdentifierExpected);
@@ -2374,7 +2779,7 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Validate digit.
         /// </summary>
         void ValidateDigit()
         {
@@ -2382,51 +2787,51 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Validate token.
         /// </summary>
-        /// <param name="t"></param>
-        /// <param name="errorMessage"></param>
+        /// <param name="t">The token id.</param>
+        /// <param name="errorMessage">Error message.</param>
         void ValidateToken(TokenId t, string errorMessage)
         {
             if (token.id != t) throw ParseError(errorMessage);
         }
 
         /// <summary>
-        /// 
+        /// Validate token.
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="t">The token id.</param>
         void ValidateToken(TokenId t)
         {
             if (token.id != t) throw ParseError(Res.SyntaxError);
         }
 
         /// <summary>
-        /// 
+        /// Parse error.
         /// </summary>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
+        /// <param name="format">The format.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>Exception</returns>
         Exception ParseError(string format, params object[] args)
         {
             return ParseError(token.pos, format, args);
         }
 
         /// <summary>
-        /// 
+        /// Parse error.
         /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
+        /// <param name="pos">The position.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>Exception</returns>
         Exception ParseError(int pos, string format, params object[] args)
         {
             return new ParseException(string.Format(System.Globalization.CultureInfo.CurrentCulture, format, args), pos);
         }
 
         /// <summary>
-        /// 
+        /// Create keywords.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The list of keywords.</returns>
         static Dictionary<string, object> CreateKeywords()
         {
             Dictionary<string, object> d = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
@@ -2442,53 +2847,185 @@ namespace Nequeo.Linq
     }
 
     /// <summary>
-    /// 
+    /// REsource string.
     /// </summary>
     internal static class Res
     {
+        /// <summary>
+        /// DuplicateIdentifier
+        /// </summary>
         public const string DuplicateIdentifier = "The identifier '{0}' was defined more than once";
+        /// <summary>
+        /// ExpressionTypeMismatch
+        /// </summary>
         public const string ExpressionTypeMismatch = "Expression of type '{0}' expected";
+        /// <summary>
+        /// ExpressionExpected
+        /// </summary>
         public const string ExpressionExpected = "Expression expected";
+        /// <summary>
+        /// InvalidCharacterLiteral
+        /// </summary>
         public const string InvalidCharacterLiteral = "Character literal must contain exactly one character";
+        /// <summary>
+        /// InvalidIntegerLiteral
+        /// </summary>
         public const string InvalidIntegerLiteral = "Invalid integer literal '{0}'";
+        /// <summary>
+        /// InvalidRealLiteral
+        /// </summary>
         public const string InvalidRealLiteral = "Invalid real literal '{0}'";
+        /// <summary>
+        /// UnknownIdentifier
+        /// </summary>
         public const string UnknownIdentifier = "Unknown identifier '{0}'";
+        /// <summary>
+        /// NoItInScope
+        /// </summary>
         public const string NoItInScope = "No 'it' is in scope";
+        /// <summary>
+        /// IifRequiresThreeArgs
+        /// </summary>
         public const string IifRequiresThreeArgs = "The 'iif' function requires three arguments";
+        /// <summary>
+        /// FirstExprMustBeBool
+        /// </summary>
         public const string FirstExprMustBeBool = "The first expression must be of type 'Boolean'";
+        /// <summary>
+        /// BothTypesConvertToOther
+        /// </summary>
         public const string BothTypesConvertToOther = "Both of the types '{0}' and '{1}' convert to the other";
+        /// <summary>
+        /// NeitherTypeConvertsToOther
+        /// </summary>
         public const string NeitherTypeConvertsToOther = "Neither of the types '{0}' and '{1}' converts to the other";
+        /// <summary>
+        /// MissingAsClause
+        /// </summary>
         public const string MissingAsClause = "Expression is missing an 'as' clause";
+        /// <summary>
+        /// ArgsIncompatibleWithLambda
+        /// </summary>
         public const string ArgsIncompatibleWithLambda = "Argument list incompatible with lambda expression";
+        /// <summary>
+        /// TypeHasNoNullableForm
+        /// </summary>
         public const string TypeHasNoNullableForm = "Type '{0}' has no nullable form";
+        /// <summary>
+        /// NoMatchingConstructor
+        /// </summary>
         public const string NoMatchingConstructor = "No matching constructor in type '{0}'";
+        /// <summary>
+        /// AmbiguousConstructorInvocation
+        /// </summary>
         public const string AmbiguousConstructorInvocation = "Ambiguous invocation of '{0}' constructor";
+        /// <summary>
+        /// CannotConvertValue
+        /// </summary>
         public const string CannotConvertValue = "A value of type '{0}' cannot be converted to type '{1}'";
+        /// <summary>
+        /// NoApplicableMethod
+        /// </summary>
         public const string NoApplicableMethod = "No applicable method '{0}' exists in type '{1}'";
+        /// <summary>
+        /// MethodsAreInaccessible
+        /// </summary>
         public const string MethodsAreInaccessible = "Methods on type '{0}' are not accessible";
+        /// <summary>
+        /// MethodIsVoid
+        /// </summary>
         public const string MethodIsVoid = "Method '{0}' in type '{1}' does not return a value";
+        /// <summary>
+        /// AmbiguousMethodInvocation
+        /// </summary>
         public const string AmbiguousMethodInvocation = "Ambiguous invocation of method '{0}' in type '{1}'";
+        /// <summary>
+        /// UnknownPropertyOrField
+        /// </summary>
         public const string UnknownPropertyOrField = "No property or field '{0}' exists in type '{1}'";
+        /// <summary>
+        /// NoApplicableAggregate
+        /// </summary>
         public const string NoApplicableAggregate = "No applicable aggregate method '{0}' exists";
+        /// <summary>
+        /// CannotIndexMultiDimArray
+        /// </summary>
         public const string CannotIndexMultiDimArray = "Indexing of multi-dimensional arrays is not supported";
+        /// <summary>
+        /// InvalidIndex
+        /// </summary>
         public const string InvalidIndex = "Array index must be an integer expression";
+        /// <summary>
+        /// NoApplicableIndexer
+        /// </summary>
         public const string NoApplicableIndexer = "No applicable indexer exists in type '{0}'";
+        /// <summary>
+        /// AmbiguousIndexerInvocation
+        /// </summary>
         public const string AmbiguousIndexerInvocation = "Ambiguous invocation of indexer in type '{0}'";
+        /// <summary>
+        /// IncompatibleOperand
+        /// </summary>
         public const string IncompatibleOperand = "Operator '{0}' incompatible with operand type '{1}'";
+        /// <summary>
+        /// IncompatibleOperands
+        /// </summary>
         public const string IncompatibleOperands = "Operator '{0}' incompatible with operand types '{1}' and '{2}'";
+        /// <summary>
+        /// UnterminatedStringLiteral
+        /// </summary>
         public const string UnterminatedStringLiteral = "Unterminated string literal";
+        /// <summary>
+        /// InvalidCharacter
+        /// </summary>
         public const string InvalidCharacter = "Syntax error '{0}'";
+        /// <summary>
+        /// DigitExpected
+        /// </summary>
         public const string DigitExpected = "Digit expected";
+        /// <summary>
+        /// SyntaxError
+        /// </summary>
         public const string SyntaxError = "Syntax error";
+        /// <summary>
+        /// TokenExpected
+        /// </summary>
         public const string TokenExpected = "{0} expected";
+        /// <summary>
+        /// ParseExceptionFormat
+        /// </summary>
         public const string ParseExceptionFormat = "{0} (at index {1})";
+        /// <summary>
+        /// ColonExpected
+        /// </summary>
         public const string ColonExpected = "':' expected";
+        /// <summary>
+        /// OpenParenExpected
+        /// </summary>
         public const string OpenParenExpected = "'(' expected";
+        /// <summary>
+        /// CloseParenOrOperatorExpected
+        /// </summary>
         public const string CloseParenOrOperatorExpected = "')' or operator expected";
+        /// <summary>
+        /// CloseParenOrCommaExpected
+        /// </summary>
         public const string CloseParenOrCommaExpected = "')' or ',' expected";
+        /// <summary>
+        /// DotOrOpenParenExpected
+        /// </summary>
         public const string DotOrOpenParenExpected = "'.' or '(' expected";
+        /// <summary>
+        /// OpenBracketExpected
+        /// </summary>
         public const string OpenBracketExpected = "'[' expected";
+        /// <summary>
+        /// CloseBracketOrCommaExpected
+        /// </summary>
         public const string CloseBracketOrCommaExpected = "']' or ',' expected";
+        /// <summary>
+        /// IdentifierExpected
+        /// </summary>
         public const string IdentifierExpected = "Identifier expected";
     }
 }

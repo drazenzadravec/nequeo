@@ -44,22 +44,22 @@ using System.Threading;
 namespace Nequeo.Linq
 {
     /// <summary>
-    /// 
+    /// Expression visitor.
     /// </summary>
     public abstract class ExpressionVisitor
     {
         /// <summary>
-        /// 
+        /// Expression visitor.
         /// </summary>
         protected ExpressionVisitor()
         {
         }
 
         /// <summary>
-        /// 
+        /// Vist defined expression.
         /// </summary>
-        /// <param name="exp"></param>
-        /// <returns></returns>
+        /// <param name="exp">The current expression.</param>
+        /// <returns>The new expression.</returns>
         protected virtual Expression Visit(Expression exp)
         {
             if (exp == null)
@@ -130,10 +130,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit type property bindings.
         /// </summary>
-        /// <param name="binding"></param>
-        /// <returns></returns>
+        /// <param name="binding">The member binding.</param>
+        /// <returns>The member binding.</returns>
         protected virtual MemberBinding VisitBinding(MemberBinding binding)
         {
             switch (binding.BindingType)
@@ -150,10 +150,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit element initializer.
         /// </summary>
-        /// <param name="initializer"></param>
-        /// <returns></returns>
+        /// <param name="initializer">The element initializer.</param>
+        /// <returns>The element initializer.</returns>
         protected virtual ElementInit VisitElementInitializer(ElementInit initializer)
         {
             ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments);
@@ -165,10 +165,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit unary expression.
         /// </summary>
-        /// <param name="u"></param>
-        /// <returns></returns>
+        /// <param name="u">The unary expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitUnary(UnaryExpression u)
         {
             Expression operand = this.Visit(u.Operand);
@@ -180,10 +180,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit binaty expression.
         /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
+        /// <param name="b">The binary expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitBinary(BinaryExpression b)
         {
             Expression left = this.Visit(b.Left);
@@ -200,10 +200,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit type binaty expression.
         /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
+        /// <param name="b">The type binary expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitTypeIs(TypeBinaryExpression b)
         {
             Expression expr = this.Visit(b.Expression);
@@ -215,20 +215,20 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit constant expression.
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="c">The constant expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitConstant(ConstantExpression c)
         {
             return c;
         }
 
         /// <summary>
-        /// 
+        /// Visit conditional expression.
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="c">The conditional expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitConditional(ConditionalExpression c)
         {
             Expression test = this.Visit(c.Test);
@@ -242,20 +242,20 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit parameter expression.
         /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
+        /// <param name="p">The parameter expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitParameter(ParameterExpression p)
         {
             return p;
         }
 
         /// <summary>
-        /// 
+        /// Visit member expression.
         /// </summary>
-        /// <param name="m"></param>
-        /// <returns></returns>
+        /// <param name="m">The member expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitMemberAccess(MemberExpression m)
         {
             Expression exp = this.Visit(m.Expression);
@@ -267,10 +267,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit method call expression.
         /// </summary>
-        /// <param name="m"></param>
-        /// <returns></returns>
+        /// <param name="m">The method call expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitMethodCall(MethodCallExpression m)
         {
             Expression obj = this.Visit(m.Object);
@@ -283,10 +283,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit expression list.
         /// </summary>
-        /// <param name="original"></param>
-        /// <returns></returns>
+        /// <param name="original">The original expressions.</param>
+        /// <returns>The new expressions.</returns>
         protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
         {
             List<Expression> list = null;
@@ -315,10 +315,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit member assignment. 
         /// </summary>
-        /// <param name="assignment"></param>
-        /// <returns></returns>
+        /// <param name="assignment">The member assignment.</param>
+        /// <returns>The member assignment.</returns>
         protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment)
         {
             Expression e = this.Visit(assignment.Expression);
@@ -330,10 +330,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit member member binding.
         /// </summary>
-        /// <param name="binding"></param>
-        /// <returns></returns>
+        /// <param name="binding">The member member binding.</param>
+        /// <returns>The member member binding.</returns>
         protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding)
         {
             IEnumerable<MemberBinding> bindings = this.VisitBindingList(binding.Bindings);
@@ -345,10 +345,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit member list binding.
         /// </summary>
-        /// <param name="binding"></param>
-        /// <returns></returns>
+        /// <param name="binding">The member list binding.</param>
+        /// <returns>The member list binding.</returns>
         protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
         {
             IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(binding.Initializers);
@@ -360,10 +360,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit binding list.
         /// </summary>
-        /// <param name="original"></param>
-        /// <returns></returns>
+        /// <param name="original">The original member bindings.</param>
+        /// <returns>The list of member bindings.</returns>
         protected virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original)
         {
             List<MemberBinding> list = null;
@@ -390,10 +390,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit element initializer list.
         /// </summary>
-        /// <param name="original"></param>
-        /// <returns></returns>
+        /// <param name="original">The original initializer elements.</param>
+        /// <returns>The initializer elements.</returns>
         protected virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original)
         {
             List<ElementInit> list = null;
@@ -420,10 +420,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit lambda expression.
         /// </summary>
-        /// <param name="lambda"></param>
-        /// <returns></returns>
+        /// <param name="lambda">The lambda expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitLambda(LambdaExpression lambda)
         {
             Expression body = this.Visit(lambda.Body);
@@ -435,10 +435,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit new expression.
         /// </summary>
-        /// <param name="nex"></param>
-        /// <returns></returns>
+        /// <param name="nex">The new expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual NewExpression VisitNew(NewExpression nex)
         {
             IEnumerable<Expression> args = this.VisitExpressionList(nex.Arguments);
@@ -453,10 +453,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit member initialser expression.
         /// </summary>
-        /// <param name="init"></param>
-        /// <returns></returns>
+        /// <param name="init">The member initialser expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitMemberInit(MemberInitExpression init)
         {
             NewExpression n = this.VisitNew(init.NewExpression);
@@ -469,10 +469,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit list initialser expression.
         /// </summary>
-        /// <param name="init"></param>
-        /// <returns></returns>
+        /// <param name="init">The list initialser expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitListInit(ListInitExpression init)
         {
             NewExpression n = this.VisitNew(init.NewExpression);
@@ -485,10 +485,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit new array expression.
         /// </summary>
-        /// <param name="na"></param>
-        /// <returns></returns>
+        /// <param name="na">The new array expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitNewArray(NewArrayExpression na)
         {
             IEnumerable<Expression> exprs = this.VisitExpressionList(na.Expressions);
@@ -507,10 +507,10 @@ namespace Nequeo.Linq
         }
 
         /// <summary>
-        /// 
+        /// Visit invocation expression.
         /// </summary>
-        /// <param name="iv"></param>
-        /// <returns></returns>
+        /// <param name="iv">The invocation expression.</param>
+        /// <returns>The expression.</returns>
         protected virtual Expression VisitInvocation(InvocationExpression iv)
         {
             IEnumerable<Expression> args = this.VisitExpressionList(iv.Arguments);
@@ -520,6 +520,20 @@ namespace Nequeo.Linq
                 return Expression.Invoke(expr, args);
             }
             return iv;
+        }
+
+        /// <summary>
+        /// Visit strip quotes.
+        /// </summary>
+        /// <param name="exp">The quoted expression.</param>
+        /// <returns>The expression.</returns>
+        protected virtual Expression StripQuotes(Expression exp)
+        {
+            while (exp.NodeType == ExpressionType.Quote)
+            {
+                exp = ((UnaryExpression)exp).Operand;
+            }
+            return exp;
         }
     }
 }

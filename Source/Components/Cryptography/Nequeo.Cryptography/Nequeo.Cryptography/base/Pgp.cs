@@ -48,12 +48,12 @@ using Nequeo.Cryptography.Key;
 namespace Nequeo.Cryptography
 {
     /// <summary>
-    /// Pretty good privacy cryptographic.
+    /// Pretty good privacy cryptography.
     /// </summary>
     public class Pgp
     {
         /// <summary>
-        /// Pretty good privacy cryptographic.
+        /// Pretty good privacy cryptography.
         /// </summary>
         public Pgp() { }
 
