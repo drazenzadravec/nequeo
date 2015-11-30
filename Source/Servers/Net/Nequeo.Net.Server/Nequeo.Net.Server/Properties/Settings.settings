@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Net.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HttpStaticSingleServerListeningPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8800</Value>
+    </Setting>
+    <Setting Name="HttpStaticServerListeningPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8801</Value>
+    </Setting>
+    <Setting Name="HttpStaticSingleServerListeningPortSecure" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8802</Value>
+    </Setting>
+    <Setting Name="HttpStaticServerListeningPortSecure" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8803</Value>
+    </Setting>
+    <Setting Name="HttpStaticMaxCacheSize" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">1000000000</Value>
+    </Setting>
+    <Setting Name="LoadBalanceServerXmlPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\LoadBalanceServer.xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

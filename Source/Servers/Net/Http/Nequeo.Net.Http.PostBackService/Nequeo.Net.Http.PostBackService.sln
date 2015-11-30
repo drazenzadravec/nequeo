@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Net.Http.PostBackService", "Nequeo.Net.Http.PostBackService\Nequeo.Net.Http.PostBackService.csproj", "{569BF977-BB40-499C-A413-506221E8A2D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Net.Http.PostBackExport", "Nequeo.Net.Http.PostBackExport\Nequeo.Net.Http.PostBackExport.csproj", "{44682AC1-8FD9-41EC-A7F6-0F7F3FFCFC5E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Net.Http.PostBackExport\\Nequeo.Net.Http.PostBackExport.csproj
+		SccProjectName1 = Nequeo.Net.Http.PostBackExport
+		SccLocalPath1 = Nequeo.Net.Http.PostBackExport
+		SccProjectUniqueName2 = Nequeo.Net.Http.PostBackService\\Nequeo.Net.Http.PostBackService.csproj
+		SccProjectName2 = Nequeo.Net.Http.PostBackService
+		SccLocalPath2 = Nequeo.Net.Http.PostBackService
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{569BF977-BB40-499C-A413-506221E8A2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569BF977-BB40-499C-A413-506221E8A2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569BF977-BB40-499C-A413-506221E8A2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569BF977-BB40-499C-A413-506221E8A2D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44682AC1-8FD9-41EC-A7F6-0F7F3FFCFC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44682AC1-8FD9-41EC-A7F6-0F7F3FFCFC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44682AC1-8FD9-41EC-A7F6-0F7F3FFCFC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44682AC1-8FD9-41EC-A7F6-0F7F3FFCFC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

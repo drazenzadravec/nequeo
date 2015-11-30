@@ -1,0 +1,19 @@
+﻿Build started 28/11/2015 1:57:30 PM.
+     1>Project "D:\Development\Version2015\Nequeo\Servers\Net\Http\NequeoAsyncCppBase\NequeoAsyncHttpServer\NequeoAsyncHttpServer\NequeoAsyncHttpServer.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\NequeoAsyncHttpServer.pdb" /Gd /TP /analyze- /errorReport:prompt Handler.cpp Listener.cpp Main.cpp stdafx.cpp
+         Handler.cpp
+         Listener.cpp
+         Main.cpp
+         stdafx.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\Development\Version2015\Nequeo\Servers\Net\Http\NequeoAsyncCppBase\NequeoAsyncHttpServer\Release\NequeoAsyncHttpServer.lib" /NOLOGO /LTCG Release\Handler.obj
+         Release\Listener.obj
+         Release\Main.obj
+         Release\stdafx.obj
+         NequeoAsyncHttpServer.vcxproj -> D:\Development\Version2015\Nequeo\Servers\Net\Http\NequeoAsyncCppBase\NequeoAsyncHttpServer\Release\NequeoAsyncHttpServer.lib
+     1>Done Building Project "D:\Development\Version2015\Nequeo\Servers\Net\Http\NequeoAsyncCppBase\NequeoAsyncHttpServer\NequeoAsyncHttpServer\NequeoAsyncHttpServer.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.60

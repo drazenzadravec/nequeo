@@ -1,0 +1,68 @@
+﻿<!--<#@ template language="C#" #>-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>Nequeo Custom Notes</title>
+        <link href="http://www.nequeo.net.au/jquery/jquery-ui-1.8.23/css/overcast/jquery-ui-1.8.23.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="http://www.nequeo.net.au/jquery/jquery-ui-1.8.23/js/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript" src="http://www.nequeo.net.au/jquery/jquery-ui-1.8.23/js/jquery-ui-1.8.23.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#NoteDate").datepicker
+                ( 
+                    { 
+                        dateFormat: 'dd/mm/yy',
+                        showButtonPanel: true,
+                        changeMonth: true,
+                        changeYear: true,
+                        showWeek: true,
+                        firstDay: 1,
+                        showAnim: 'show'
+                    }
+                );
+            });
+        </script>
+        <style type="text/css" >
+            /*input.date_style { font-size:200%; }*/
+            input.submit_style { width:150px; }
+            div.ui-datepicker { font-size:12px; } 
+        </style>
+	</head>
+	<body>
+        <form name="NotesForm" action="notes.htm" enctype="multipart/form-data" method="post">
+            <div style="display:block;width:600px;">
+                <div style="display:inline-block;width:550px;height:30px;">
+                    <span style="display:inline-block;width:520px;">
+                        <span style="display:inline-block;width:200px;float:left;vertical-align:bottom;">Note Name :</span>
+                        <input type="text" id="NoteName" name="NoteName" value="NoteName" style="display:inline-block;width:300px;float:left;vertical-align:bottom;" />
+                    </span>
+                </div>
+                <div style="display:inline-block;width:550px;height:30px;">
+                    <span style="display:inline-block;width:520px;">
+                        <span style="display:inline-block;width:200px;float:left;vertical-align:bottom;">Date :</span>
+                        <input class="date_style" type="text" id="NoteDate" name="NoteDate" value="01/01/01" style="display:inline-block;width:100px;float:left;vertical-align:bottom;" />
+                    </span>
+                </div>
+                <div style="display:inline-block;width:550px;height:30px;">
+                    <span style="display:inline-block;width:520px;">
+                        <span style="display:inline-block;width:200px;float:left;vertical-align:bottom;">Context :</span>
+                        <input type="text" id="ContextName" name="ContextName" value="ContextName" style="display:inline-block;width:200px;float:left;vertical-align:bottom;" />
+                    </span>
+                </div>
+                <div style="display:inline-block;width:550px;">
+                    <span style="display:inline-block;width:520px;">
+                        <span style="display:inline-block;width:200px;float:left;vertical-align:bottom;">Note :</span>
+                        <textarea id="NoteData" name="NoteData" cols="20" rows="10" style="display:inline-block;width:300px;float:left;vertical-align:bottom;">value="NoteData"</textarea>
+                    </span>
+                </div>
+            </div>
+            <div style="display:block;width:600px;">
+                <div style="display:inline-block;height:30px; width:200px">
+                    <input class="submit_style" type="submit" value="Send Note" >
+        	    </div>
+                <div style="display:inline-block;height:30px;">
+                </div>
+            </div>
+        </form>
+	</body>
+</html>

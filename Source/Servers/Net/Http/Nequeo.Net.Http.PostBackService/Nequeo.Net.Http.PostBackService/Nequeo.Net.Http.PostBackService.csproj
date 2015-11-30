@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{569BF977-BB40-499C-A413-506221E8A2D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Net.Http.PostBackService</RootNamespace>
+    <AssemblyName>Nequeo.Net.Http.PostBackService</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoHttpPostBackServiceKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.ComponentModel">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Composite">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.Http.Base">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.Http.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.Http.Page">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.Http.Page.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\NotesForm.cs" />
+    <Compile Include="Common\ActiveProcessing.cs" />
+    <Compile Include="Data\NotesFormService\default.cs" />
+    <Compile Include="Data\NotesFormService\notes.cs" />
+    <Compile Include="Data\NotesFormService\uploadfile.cs" />
+    <Compile Include="Data\NotesFormService\uploadfilelist.cs" />
+    <Compile Include="Pages\NotesService\Default.cs" />
+    <Compile Include="Pages\NotesService\Notes.cs" />
+    <Compile Include="Pages\NotesService\UploadFile.cs" />
+    <Compile Include="Pages\NotesService\UploadFileList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="NequeoHttpPostBackServiceKey.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\NotesFormService\default.htm" />
+    <Content Include="Data\NotesFormService\notes.htm" />
+    <Content Include="Data\NotesFormService\uploadfile.htm" />
+    <Content Include="Data\NotesFormService\uploadfilelist.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Scripts\" />
+    <Folder Include="Data\Styles\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

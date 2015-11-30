@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Net.Server", "Nequeo.Net.Server\Nequeo.Net.Server.csproj", "{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "TestServer\TestServer.csproj", "{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Net.Server\\Nequeo.Net.Server.csproj
+		SccProjectName1 = Nequeo.Net.Server
+		SccLocalPath1 = Nequeo.Net.Server
+		SccProjectUniqueName2 = TestServer\\TestServer.csproj
+		SccProjectName2 = TestServer
+		SccLocalPath2 = TestServer
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{E775CE59-4CC0-4A5D-B9E4-EE2BAE1EF6F0}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Staging Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Staging Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Staging Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E0AB3A-57E7-4692-BACF-71EE9B0ADB83}.Staging Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

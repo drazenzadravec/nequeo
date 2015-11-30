@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="context">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="uploadFiles">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" name="uploadFile">
+                                <xs:complexType>
+                                    <xs:attribute name="fileUploader" type="xs:string" use="required" />
+                                    <xs:attribute name="uploadedFilesList" type="xs:string" use="required" />
+                                    <xs:attribute name="basePath" type="xs:string" use="required" />
+                                    <xs:attribute name="savePath" type="xs:string" use="required" />
+                                    <xs:attribute name="maxUploadFileSize" type="xs:long" use="required" />
+                                </xs:complexType>
+                                <xs:unique name="UniqueUploaderAttribute">
+                                    <xs:selector xpath="uploadFile"/>
+                                    <xs:field xpath="@basePath" />
+                                </xs:unique>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="fileExtensionAllowList" type="xs:string" />
+                <xs:element name="mimeTypes">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" name="mimeType">
+                                <xs:complexType>
+                                    <xs:attribute name="ext" type="xs:string" use="required" />
+                                    <xs:attribute name="mime" type="xs:string" use="required" />
+                                </xs:complexType>
+                                <xs:unique name="UniqueExtensionAttribute">
+                                    <xs:selector xpath="mimeType"/>
+                                    <xs:field xpath="@ext" />
+                                </xs:unique>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

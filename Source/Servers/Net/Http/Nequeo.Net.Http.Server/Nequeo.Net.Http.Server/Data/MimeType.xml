@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<context>
+    <uploadFiles>
+        <uploadFile fileUploader="uploadfile.htm" uploadedFilesList="uploadfilelist.htm" basePath="C:\BaseDirectory\htmlprovider\One\" savePath="C:\BaseDirectory\htmlprovider\download\" maxUploadFileSize="100000000" />
+        <uploadFile fileUploader="uploadfile.htm" uploadedFilesList="uploadfilelist.htm" basePath="C:\BaseDirectory\htmlprovider\Two\" savePath="C:\BaseDirectory\htmlprovider\set\" maxUploadFileSize="100000000" />
+    </uploadFiles>
+    <fileExtensionAllowList>htm;html;txt;log;xml;xslt;xsl;wsdl;xsd;xsf,jpg;jpeg;jpe;gif;png;pnz;bmp;tif;tiff;css;js;java</fileExtensionAllowList>
+    <mimeTypes>
+        <mimeType ext="css" mime="text/css" />
+        <mimeType ext="htm" mime="text/html" />
+        <mimeType ext="html" mime="text/html" />
+        <mimeType ext="txt" mime="text/plain" />
+        <mimeType ext="log" mime="text/plain" />
+        <mimeType ext="xml" mime="text/xml" />
+        <mimeType ext="xslt" mime="text/xml" />
+        <mimeType ext="wsdl" mime="text/xml" />
+        <mimeType ext="xsd" mime="text/xml" />
+        <mimeType ext="xsf" mime="text/xml" />
+        <mimeType ext="xsl" mime="text/xml" />
+        <mimeType ext="zip" mime="application/x-zip-compressed" />
+        <mimeType ext="jpe" mime="image/jpeg" />
+        <mimeType ext="jpg" mime="image/jpeg" />
+        <mimeType ext="jpeg" mime="image/jpeg" />
+        <mimeType ext="gif" mime="image/gif" />
+        <mimeType ext="png" mime="image/png" />
+        <mimeType ext="pnz" mime="image/png" />
+        <mimeType ext="bmp" mime="image/bmp" />
+        <mimeType ext="tif" mime="image/tiff" />
+        <mimeType ext="tiff" mime="image/tiff" />
+        <mimeType ext="ico" mime="image/x-icon" />
+        <mimeType ext="jfif" mime="image/pjpeg" />
+        <mimeType ext="avi" mime="video/x-msvideo" />
+        <mimeType ext="js" mime="application/x-javascript" />
+        <mimeType ext="jsx" mime="text/jscript" />
+        <mimeType ext="java" mime="application/octet-stream" />
+        <mimeType ext="mid" mime="audio/mid" />
+        <mimeType ext="midi" mime="audio/mid" />
+        <mimeType ext="wav" mime="audio/wav" />
+        <mimeType ext="wmv" mime="video/x-ms-wmv" />
+        <mimeType ext="mov" mime="video/quicktime" />
+        <mimeType ext="movie" mime="video/x-sgi-movie" />
+        <mimeType ext="mp2" mime="video/mpeg" />
+        <mimeType ext="mp3" mime="video/mpeg" />
+        <mimeType ext="mpa" mime="video/mpeg" />
+        <mimeType ext="mpe" mime="video/mpeg" />
+        <mimeType ext="mpeg" mime="video/mpeg" />
+        <mimeType ext="mpg" mime="video/mpeg" />
+        <mimeType ext="mpv2" mime="video/mpeg" />
+    </mimeTypes>
+</context>

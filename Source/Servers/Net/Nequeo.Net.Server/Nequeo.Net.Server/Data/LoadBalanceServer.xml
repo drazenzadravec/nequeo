@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<context>
+    <servers>
+        <server name="loadBalancer1" host="nequeompc" port="80" secure="false" count="0" weight="50.0" />
+        <server name="loadBalancer1" host="nequeompc" port="80" secure="false" count="0" weight="50.0" />
+    </servers>
+</context>
