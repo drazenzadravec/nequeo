@@ -49,6 +49,113 @@ using System.ComponentModel;
 namespace Nequeo.Runtime
 {
     /// <summary>
+    /// Generic singleton factory.
+    /// </summary>
+    /// <typeparam name="T">The singleton type.</typeparam>
+    public sealed class SingletonFactory<T> : IDisposable where T : new()
+    {
+        /// <summary>
+        /// Generic singleton factory.
+        /// </summary>
+        private SingletonFactory() { }
+
+        private T _instance = default(T);
+        private object _syncRoot = new Object();
+
+        /// <summary>
+        /// Gets the current instance of the type T.
+        /// </summary>
+        public T Instance
+        {
+            get
+            {
+                // If no instance.
+                if (_instance == null)
+                {
+                    lock (_syncRoot)
+                    {
+                        // Create a new instance.
+                        if (_instance == null)
+                            _instance = new T();
+                    }
+                }
+
+                // Return the singleton.
+                return _instance;
+            }
+        }
+
+        #region Dispose Object Methods
+
+        private bool _disposed = false; // To detect redundant calls
+
+        /// <summary>
+        /// Implement IDisposable.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            // This object will be cleaned up by the Dispose method.
+            // Therefore, you should call GC.SuppressFinalize to
+            // take this object off the finalization queue
+            // and prevent finalization code for this object
+            // from executing a second time.
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose(bool disposing) executes in two distinct scenarios.
+        /// If disposing equals true, the method has been called directly
+        /// or indirectly by a user's code. Managed and unmanaged resources
+        /// can be disposed.
+        /// </summary>
+        /// <param name="disposing">Is disposing.</param>
+        private void Dispose(bool disposing)
+        {
+            // Check to see if Dispose has already been called.
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    // Dispose managed state (managed objects).
+                    if (_instance != null)
+                    {
+                        // If the current state context
+                        // implements IDisposable then
+                        // dispose of the resources.
+                        if (_instance is IDisposable)
+                        {
+                            IDisposable disposable = (IDisposable)_instance;
+                            disposable.Dispose();
+                        }
+                    }
+                }
+
+                // Free unmanaged resources (unmanaged objects) and override a finalizer below.
+                _disposed = true;
+                _syncRoot = null;
+                _instance = default(T);
+            }
+        }
+
+        /// <summary>
+        /// /// Use C# destructor syntax for finalization code.
+        /// This destructor will run only if the Dispose method
+        /// does not get called.
+        /// It gives your base class the opportunity to finalize.
+        /// Do not provide destructors in types derived from this class.
+        /// </summary>
+        ~SingletonFactory()
+        {
+            // Do not re-create Dispose clean-up code here.
+            // Calling Dispose(false) is optimal in terms of
+            // readability and maintainability.
+            Dispose(false);
+        }
+        #endregion
+    }
+
+    /// <summary>
     /// Service locator interface type.
     /// </summary>
     public interface IServiceLocator : IDisposable
