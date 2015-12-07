@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <DatabaseConnection>Integrated Security=True;Initial Catalog=ApplicationLogin;Data Source=NEQUEOMPCX64\MSSQL2012</DatabaseConnection>
+     <ExtensionClassName>User</ExtensionClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <ConnectionType>1</ConnectionType>
+     <ConnectionDataType>1</ConnectionDataType>
+     <FunctionHandler>1</FunctionHandler>
+     <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+     <ProcedureListExclusion>0</ProcedureListExclusion>
+     <ProcedureList>
+          <string>GetUserScreenAccess</string>
+          <string>InsertTableType_NText</string>
+          <string>InsertTableType_Byte</string>
+          <string>InsertErrorLog</string>
+          <string>GetColumnValues</string>
+     </ProcedureList>
+</Context>

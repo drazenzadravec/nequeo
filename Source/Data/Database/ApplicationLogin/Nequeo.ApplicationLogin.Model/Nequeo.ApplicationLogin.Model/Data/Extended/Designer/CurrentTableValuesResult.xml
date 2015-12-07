@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>CurrentTableValuesResult</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>ChangeValue</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.String</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>

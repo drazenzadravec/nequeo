@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>UserScreenAccess</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>Suspended</string>
+          <string>ScreenCode</string>
+          <string>AccessCode</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.Boolean</string>
+          <string>System.Int64</string>
+          <string>System.Int64</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>true</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>

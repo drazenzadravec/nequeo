@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Department] (
+    [DepartmentID]          BIGINT        IDENTITY (1, 1) NOT NULL,
+    [CompanyID]             BIGINT        NOT NULL,
+    [DepartmentName]        VARCHAR (500) NOT NULL,
+    [DepartmentDescription] VARCHAR (MAX) NULL,
+    [ContactName]           VARCHAR (200) NULL,
+    [ContactPosition]       VARCHAR (200) NULL,
+    [Address1]              VARCHAR (500) NULL,
+    [Address2]              VARCHAR (500) NULL,
+    [Suburb]                VARCHAR (50)  NULL,
+    [StateID]               BIGINT        NULL,
+    [PostCode]              VARCHAR (5)   NULL,
+    [CountryID]             BIGINT        NULL,
+    [PhoneNumber]           VARCHAR (50)  NULL,
+    [FaxNumber]             VARCHAR (50)  NULL,
+    [EmailAddress]          VARCHAR (500) NULL,
+    [WebSite]               VARCHAR (500) NULL,
+    [ModifiedDate]          DATETIME      NULL,
+    [RowVersionData]        ROWVERSION    NULL,
+    CONSTRAINT [PK_Department] PRIMARY KEY CLUSTERED ([DepartmentID] ASC),
+    CONSTRAINT [FK_Department_Company] FOREIGN KEY ([CompanyID]) REFERENCES [dbo].[Company] ([CompanyID]),
+    CONSTRAINT [FK_Department_Country] FOREIGN KEY ([CountryID]) REFERENCES [dbo].[Country] ([CountryID]),
+    CONSTRAINT [FK_Department_State] FOREIGN KEY ([StateID]) REFERENCES [dbo].[State] ([StateID])
+);
+

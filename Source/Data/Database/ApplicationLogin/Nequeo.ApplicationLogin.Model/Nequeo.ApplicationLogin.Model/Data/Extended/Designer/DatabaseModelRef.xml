@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>TableEntityReference</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>Name</string>
+          <string>ColumnName</string>
+          <string>ColumnType</string>
+          <string>Length</string>
+          <string>IsNullable</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.String</string>
+          <string>System.String</string>
+          <string>System.String</string>
+          <string>System.Int64</string>
+          <string>System.Boolean</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>

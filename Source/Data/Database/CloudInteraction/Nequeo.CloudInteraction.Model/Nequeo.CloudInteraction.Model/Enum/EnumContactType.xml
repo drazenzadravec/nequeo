@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Data Source=NEQUEOMPCX64\MSSQL2012;Initial Catalog=CloudInteraction;Integrated Security=True</DatabaseConnection>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <EnumName>EnumContactType</EnumName>
+  <Database>CloudInteraction</Database>
+  <TableName>ContactType</TableName>
+  <ValueColumnName>CodeID</ValueColumnName>
+  <IndicatorColumnName>Name</IndicatorColumnName>
+  <DataFilter></DataFilter>
+</Context>

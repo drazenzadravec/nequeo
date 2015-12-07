@@ -1,0 +1,641 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FEE8DDCE-5447-4B24-AF0B-0A221A6877A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.DataAccess.ApplicationLogin</RootNamespace>
+    <AssemblyName>Nequeo.ApplicationLogin.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\References\Staging\Data\ApplicationLogin\Model\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Data\ApplicationLogin\Model\Nequeo.ApplicationLogin.Model.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoApplicationLoginModelKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.ComponentModel">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Composite">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=058191c6ae32205d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Common">
+      <HintPath>..\..\..\..\..\References\Staging\Data\Common\Nequeo.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.DataSet">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.Edm">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.SqlServer">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.SqlServer.Provider">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.SqlServer.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.ServiceModel">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=3b355968680c6ed8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=2d222aa2794dadca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\MembershipProvider.cs" />
+    <Compile Include="base\PasswordAuthorisationCode.cs" />
+    <Compile Include="Data\Database.Schema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Schema.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DatabaseContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseContext.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\ApplicationList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\CountryList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CountryList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\CurrentTableValuesResult.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrentTableValuesResult.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\DatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\DatabaseModelData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModelData.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\DatabaseModelFK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModelFK.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\DatabaseModelItem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModelItem.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\DatabaseModelRef.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModelRef.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\DepartmentList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartmentList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\LanguageList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LanguageList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\RoleTypeList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleTypeList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\ScreenList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScreenList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\StateList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StateList.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\Designer\UserScreenAccess.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserScreenAccess.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Common\Application.cs" />
+    <Compile Include="Data\Extension\Common\Country.cs" />
+    <Compile Include="Data\Extension\Common\Department.cs" />
+    <Compile Include="Data\Extension\Common\Language.cs" />
+    <Compile Include="Data\Extension\Common\State.cs" />
+    <Compile Include="Data\Extension\ContextOverride.cs" />
+    <Compile Include="Data\Extension\Designer\AccessType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccessType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Application.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Application.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ApplicationUser.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationUser.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ChangeLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeLog.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Company.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Company.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Continent.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Continent.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Country.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Country.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Department.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Department.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ErrorLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorLog.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Country.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Country.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\User.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\InternationalTimeZone.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InternationalTimeZone.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\LoginHistory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoginHistory.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\UserProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\RoleType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Screen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Screen.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ScreenAccess.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScreenAccess.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\State.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\StateTimeZone.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StateTimeZone.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\TableType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\UserAddress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAddress.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Extension.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extension.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\UserControl\RoleType.cs" />
+    <Compile Include="Data\Extension\UserControl\Screen.cs" />
+    <Compile Include="Data\Extension\UserControl\User.cs" />
+    <Compile Include="Data\Extension\UserControl\UserAddress.cs" />
+    <Compile Include="Data\Extension\UserControl\UserOverride.cs" />
+    <Compile Include="Enum\Access\EnumAccessType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumAccessType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Access\EnumScreen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumScreen.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Application\EnumApplication.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumApplication.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Application\EnumApplicationLoginControlScreen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumApplicationLoginControlScreen.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Application\EnumEngineerigApplication.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumEngineerigApplication.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Common\EnumCountry.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumCountry.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Common\EnumLanguage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumLanguage.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Common\EnumTimeZone.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumTimeZone.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\Common\EnumTimeZoneName.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumTimeZoneName.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\State\EnumAustraliaLongState.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumAustraliaLongState.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\State\EnumAustraliaShortState.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumAustraliaShortState.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\State\EnumUnitedStatesLongState.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumUnitedStatesLongState.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\State\EnumUnitedStatesShortState.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumUnitedStatesShortState.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Data\Database.xsd">
+      <SubType>Designer</SubType>
+      <Generator>DatabaseXmlObjectCodeGenerator</Generator>
+      <LastGenOutput>Database.Schema.xml</LastGenOutput>
+    </None>
+    <None Include="Data\DatabaseContext.xsd">
+      <SubType>Designer</SubType>
+      <Generator>DatabaseContextCodeGenerator</Generator>
+      <LastGenOutput>DatabaseContext.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Country.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Country.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\User.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>User.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\_DataExtensionGeneric.include" />
+    <None Include="NequeoApplicationLoginModelKey.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\Database.Schema.xml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.xsd</DependentUpon>
+      <Generator>DatabaseXmlModelObjectCodeGenerator</Generator>
+      <LastGenOutput>Database.Schema.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\ApplicationList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>ApplicationList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\CountryList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>CountryList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\CurrentTableValuesResult.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>CurrentTableValuesResult.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\DatabaseModel.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\DatabaseModelData.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModelData.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\DatabaseModelFK.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModelFK.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\DatabaseModelItem.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModelItem.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\DatabaseModelRef.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModelRef.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\DepartmentList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>DepartmentList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\LanguageList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>LanguageList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\RoleTypeList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>RoleTypeList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\ScreenList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>ScreenList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\StateList.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>StateList.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extended\Designer\UserScreenAccess.xml">
+      <Generator>DataObjectCodeGenerator</Generator>
+      <LastGenOutput>UserScreenAccess.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\AccessType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>AccessType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Application.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ApplicationUser.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ApplicationUser.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ChangeLog.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ChangeLog.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Company.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Company.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Continent.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Continent.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Country.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Country.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Department.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Department.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ErrorLog.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ErrorLog.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\InternationalTimeZone.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>InternationalTimeZone.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Language.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\LoginHistory.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>LoginHistory.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\UserProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>UserProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\RoleType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>RoleType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Screen.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Screen.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ScreenAccess.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ScreenAccess.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\State.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>State.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\StateTimeZone.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>StateTimeZone.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\TableType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>TableType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\User.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\UserAddress.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>UserAddress.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Extension.xml">
+      <Generator>DataExtensionContextObjectCodeGenerator</Generator>
+      <LastGenOutput>Extension.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Access\EnumAccessType.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumAccessType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Access\EnumScreen.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumScreen.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Application\EnumApplication.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumApplication.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Application\EnumApplicationLoginControlScreen.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumApplicationLoginControlScreen.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Application\EnumEngineerigApplication.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumEngineerigApplication.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Common\EnumCountry.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumCountry.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Common\EnumLanguage.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumLanguage.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Common\EnumTimeZone.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumTimeZone.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\Common\EnumTimeZoneName.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumTimeZoneName.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\State\EnumAustraliaLongState.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumAustraliaLongState.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\State\EnumAustraliaShortState.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumAustraliaShortState.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\State\EnumUnitedStatesLongState.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumUnitedStatesLongState.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\State\EnumUnitedStatesShortState.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumUnitedStatesShortState.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="GenerationConfig\GlobalDataConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

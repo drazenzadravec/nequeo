@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Integrated Security=True;Initial Catalog=CloudInteraction;Data Source=NEQUEOMPCX64\MSSQL2012</DatabaseConnection>
+  <ContextName>DataContext</ContextName>
+  <Database>CloudInteraction</Database>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <IncludeContextItems>true</IncludeContextItems>
+  <ConfigKeyDatabaseConnection>Nequeo.DataAccess.CloudInteraction.Properties.Settings.CloudInteractionDatabaseConnection</ConfigKeyDatabaseConnection>
+  <TableListExclusion>true</TableListExclusion>
+  <TableList>
+    <string>sysdiagrams</string>
+  </TableList>
+</Context>

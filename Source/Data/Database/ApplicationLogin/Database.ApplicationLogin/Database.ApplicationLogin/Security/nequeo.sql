@@ -1,0 +1,2 @@
+﻿CREATE USER [nequeo] WITHOUT LOGIN;
+

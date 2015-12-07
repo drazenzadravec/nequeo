@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <DatabaseConnection>Integrated Security=True;Initial Catalog=ApplicationLogin;Data Source=NEQUEOMPCX64\MSSQL2012</DatabaseConnection>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <ConnectionType>1</ConnectionType>
+     <ConnectionDataType>1</ConnectionDataType>
+      <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+     <EnumName>EnumUnitedStatesLongState</EnumName>
+     <Database>ApplicationLogin</Database>
+     <TableName>State</TableName>
+     <ValueColumnName>StateCodeID</ValueColumnName>
+     <IndicatorColumnName>StateLongName</IndicatorColumnName>
+     <DataFilter>CountryID = 106</DataFilter>
+</Context>

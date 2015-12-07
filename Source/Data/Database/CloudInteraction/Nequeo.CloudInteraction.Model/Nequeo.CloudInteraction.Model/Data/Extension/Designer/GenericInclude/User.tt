@@ -1,0 +1,8 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# string CompanyNamespace = "Nequeo";#>
+<# string DatabaseName = "CloudInteraction";#>
+<# string EntityTableName = "User";#>
+<# string ReferenceNamespace = "Nequeo";#>
+<# string DataAccessProvider = "Nequeo.Data.SqlServer.DataAccess";#>
+<#@ include file="_DataExtensionGeneric.include" #>

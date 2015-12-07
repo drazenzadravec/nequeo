@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <TableName>Contact</TableName>
+  <Database>CloudInteraction</Database>
+  <DataContextName>DataContext</DataContextName>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <DataBaseOwner></DataBaseOwner>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <ConfigKeyDatabaseConnection>Nequeo.DataAccess.CloudInteraction.Properties.Settings.CloudInteractionDatabaseConnection</ConfigKeyDatabaseConnection>
+</Context>

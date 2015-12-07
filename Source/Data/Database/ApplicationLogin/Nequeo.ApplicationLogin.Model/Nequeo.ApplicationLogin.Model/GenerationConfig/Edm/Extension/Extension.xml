@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Integrated Security=True;Initial Catalog=ApplicationLogin;Data Source=DEVELOP\SQL2005DEV</DatabaseConnection>
+  <Database>ApplicationLogin</Database>
+  <DataContextName>CommonEntityContext</DataContextName>
+  <ContextName>Extension</ContextName>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <DataBaseConnect></DataBaseConnect>
+  <DataBaseOwner></DataBaseOwner>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <TableListExclusion>true</TableListExclusion>
+  <TableList>
+    <string>sysdiagrams</string>
+    <string>sysdiagrams</string>
+  </TableList>
+</Context>

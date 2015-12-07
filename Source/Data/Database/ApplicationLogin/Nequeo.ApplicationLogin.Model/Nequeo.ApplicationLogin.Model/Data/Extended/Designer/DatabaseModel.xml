@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>DatabaseModel</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>CompanyNameSpace</string>
+          <string>Database</string>
+          <string>TableEntity</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.String</string>
+          <string>System.String</string>
+          <string>Data.Extended.TableEntity[]</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>

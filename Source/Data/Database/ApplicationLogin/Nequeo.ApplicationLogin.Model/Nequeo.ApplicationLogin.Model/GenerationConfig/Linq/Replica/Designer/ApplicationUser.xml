@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <TableName>ApplicationUser</TableName>
+  <Database>ApplicationLogin</Database>
+  <LinqDataContextName>CommonDataContext</LinqDataContextName>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <DataBaseOwner></DataBaseOwner>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <ConfigKeyDatabaseConnection>Nequeo.DataAccess.ApplicationLogin.Properties.Settings.ApplicationLoginDatabaseConnection</ConfigKeyDatabaseConnection>
+  <UseAnonymousDataEntity>false</UseAnonymousDataEntity>
+</Context>

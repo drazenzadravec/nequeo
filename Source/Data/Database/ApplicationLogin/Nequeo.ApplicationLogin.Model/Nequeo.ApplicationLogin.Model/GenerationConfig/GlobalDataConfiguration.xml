@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <DatabaseConnection>Integrated Security=True;Initial Catalog=ApplicationLogin;Data Source=NEQUEOMPCX64\MSSQL2012</DatabaseConnection>
+     <Database>ApplicationLogin</Database>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <ConfigKeyDatabaseConnection>Nequeo.DataAccess.ApplicationLogin.Properties.Settings.ApplicationLoginDatabaseConnection</ConfigKeyDatabaseConnection>
+     <ContextName>DataContext</ContextName>
+     <ExtensionContextName>Extension</ExtensionContextName>
+     <IncludeContextItems>true</IncludeContextItems>
+     <DataBaseConnect></DataBaseConnect>
+     <DataBaseOwner></DataBaseOwner>
+     <DataSetDataContextName>Common</DataSetDataContextName>
+     <DataSetUseAnonymousDataEntity>false</DataSetUseAnonymousDataEntity>
+     <EdmDataContextName>CommonEntityContext</EdmDataContextName>
+     <EdmUseAnonymousDataEntity>false</EdmUseAnonymousDataEntity>
+     <LinqDataContextName>CommonDataContext</LinqDataContextName>
+     <LinqUseAnonymousDataEntity>false</LinqUseAnonymousDataEntity>
+     <ConnectionType>1</ConnectionType>
+     <ConnectionDataType>1</ConnectionDataType>
+     <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+     <TableListMaxSize>0</TableListMaxSize>
+     <TableListExclusion>true</TableListExclusion>
+     <TableList>
+          <string>sysdiagrams</string>
+     </TableList>
+     <ProcedureExtensionClassName>User</ProcedureExtensionClassName>
+     <ProcedureFunctionHandler>true</ProcedureFunctionHandler>
+     <ProcedureListExclusion>true</ProcedureListExclusion>
+     <ProcedureList>
+          <string>sysdiagrams</string>
+     </ProcedureList>
+     <FunctionScalarExtensionClassName>User</FunctionScalarExtensionClassName>
+     <FunctionScalarFunctionHandler>true</FunctionScalarFunctionHandler>
+     <FunctionScalarListExclusion>true</FunctionScalarListExclusion>
+     <FunctionScalarList>
+          <string>sysdiagrams</string>
+     </FunctionScalarList>
+     <FunctionTableExtensionClassName>User</FunctionTableExtensionClassName>
+     <FunctionTableFunctionHandler>true</FunctionTableFunctionHandler>
+     <FunctionTableListExclusion>true</FunctionTableListExclusion>
+     <FunctionTableList>
+          <string>sysdiagrams</string>
+     </FunctionTableList>
+</Context>

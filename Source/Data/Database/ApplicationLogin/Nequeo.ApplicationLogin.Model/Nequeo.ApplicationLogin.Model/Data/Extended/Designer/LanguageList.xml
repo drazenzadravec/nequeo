@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>LanguageList</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>LanguageID</string>
+          <string>LanguageName</string>
+          <string>LanguageCode</string>
+          <string>LanguageCountryCode</string>
+          <string>CountryName</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.Int64</string>
+          <string>System.String</string>
+          <string>System.String</string>
+          <string>System.String</string>
+          <string>System.String</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+        <string>0</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>

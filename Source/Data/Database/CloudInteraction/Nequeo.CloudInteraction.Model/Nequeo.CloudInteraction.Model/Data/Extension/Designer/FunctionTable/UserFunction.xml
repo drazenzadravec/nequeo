@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Integrated Security=True;Initial Catalog=CloudInteraction;Data Source=NEQUEOMPCX64\MSSQL2012</DatabaseConnection>
+  <ExtensionClassName>User</ExtensionClassName>
+  <Database>CloudInteraction</Database>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <FunctionHandler>1</FunctionHandler>
+  <FunctionListExclusion>0</FunctionListExclusion>
+  <FunctionList>
+    <string>GetUserContacts</string>
+    <string>GetUniqueUserContacts</string>
+  </FunctionList>
+</Context>

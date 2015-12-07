@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <TableName>Screen</TableName>
+  <Database>ApplicationLogin</Database>
+  <DataContextName>DataContext</DataContextName>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <DataBaseOwner></DataBaseOwner>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <ConfigKeyDatabaseConnection>Nequeo.DataAccess.ApplicationLogin.Properties.Settings.ApplicationLoginDatabaseConnection</ConfigKeyDatabaseConnection>
+</Context>

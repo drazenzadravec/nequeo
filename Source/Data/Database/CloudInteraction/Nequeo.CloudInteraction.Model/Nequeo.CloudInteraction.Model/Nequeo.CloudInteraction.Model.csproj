@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37407CFC-2B9D-4EB1-BFE1-EA56F86F394D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.DataAccess.CloudInteraction</RootNamespace>
+    <AssemblyName>Nequeo.CloudInteraction.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\References\Staging\Data\CloudInteraction\Model\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Data\CloudInteraction\Model\Nequeo.CloudInteraction.Model.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoCloudInteractionModelKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.ComponentModel">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Composite">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Conversion">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Conversion.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=058191c6ae32205d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Common">
+      <HintPath>..\..\..\..\..\References\Staging\Data\Common\Nequeo.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.DataSet">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.Edm">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.SqlServer">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.SqlServer.Provider">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.SqlServer.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.Core">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.OAuth">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.OAuth2">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.OAuth2.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.ServiceModel">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Web">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\MembershipProvider.cs" />
+    <Compile Include="base\OAuth2\OAuthConsumerProvider.cs" />
+    <Compile Include="base\OAuth2\OAuthContextBase.cs" />
+    <Compile Include="base\OAuth2\OAuthNonceProvider.cs" />
+    <Compile Include="base\OAuth2\OAuthTokenProvider.cs" />
+    <Compile Include="base\OAuthBase.cs" />
+    <Compile Include="base\OAuth\OAuthConsumerProvider.cs" />
+    <Compile Include="base\OAuth\OAuthContextBase.cs" />
+    <Compile Include="base\OAuth\OAuthNonceProvider.cs" />
+    <Compile Include="base\OAuth\OAuthTokenProvider.cs" />
+    <Compile Include="base\PasswordAuthorisationCode.cs" />
+    <Compile Include="base\ProfileProvider.cs" />
+    <Compile Include="base\RoleProvider.cs" />
+    <Compile Include="Data\Database.Schema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Schema.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DatabaseContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseContext.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\ContextOverride.cs" />
+    <Compile Include="Data\Extension\Designer\Client.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Client.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ClientAuthorization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientAuthorization.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Contact.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Contact.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ContactType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\FunctionTable\UserFunction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFunction.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\User.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Nonce.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nonce.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\OAuthConsumer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OAuthConsumer.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\OAuthToken.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OAuthToken.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\UserProcedure.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserProcedure.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Profile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Profile.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ProfileValue.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProfileValue.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Role.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Role.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\SymmetricCryptoKey.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SymmetricCryptoKey.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Extension.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extension.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\UserControl\Client.cs" />
+    <Compile Include="Data\Extension\UserControl\User.cs" />
+    <Compile Include="Data\Extension\UserControl\UserOverride.cs" />
+    <Compile Include="Enum\EnumContactType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumContactType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Data\Database.xsd">
+      <SubType>Designer</SubType>
+      <Generator>DatabaseXmlObjectCodeGenerator</Generator>
+      <LastGenOutput>Database.Schema.xml</LastGenOutput>
+    </None>
+    <None Include="Data\DatabaseContext.xsd">
+      <SubType>Designer</SubType>
+      <Generator>DatabaseContextCodeGenerator</Generator>
+      <LastGenOutput>DatabaseContext.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\User.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>User.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\_DataExtensionGeneric.include" />
+    <None Include="NequeoCloudInteractionModelKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Database.Schema.xml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.xsd</DependentUpon>
+      <Generator>DatabaseXmlModelObjectCodeGenerator</Generator>
+      <LastGenOutput>Database.Schema.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Client.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Client.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ClientAuthorization.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ClientAuthorization.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Contact.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Contact.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ContactType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ContactType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\FunctionTable\UserFunction.xml">
+      <Generator>FunctionTableExtensionCodeGenerator</Generator>
+      <LastGenOutput>UserFunction.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Nonce.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Nonce.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\OAuthConsumer.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>OAuthConsumer.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\OAuthToken.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>OAuthToken.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\UserProcedure.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>UserProcedure.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Profile.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Profile.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ProfileValue.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ProfileValue.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Role.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Role.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\SymmetricCryptoKey.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>SymmetricCryptoKey.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\User.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Extension.xml">
+      <Generator>DataExtensionContextObjectCodeGenerator</Generator>
+      <LastGenOutput>Extension.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumContactType.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumContactType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="GenerationConfig\GlobalDataConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

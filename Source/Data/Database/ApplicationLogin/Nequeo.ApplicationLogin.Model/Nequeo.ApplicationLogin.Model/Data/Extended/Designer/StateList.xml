@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>StateList</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>StateID</string>
+          <string>StateName</string>
+          <string>StateCodeID</string>
+          <string>CountryID</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.Int64</string>
+          <string>System.String</string>
+          <string>System.Int64</string>
+          <string>System.Int64</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>

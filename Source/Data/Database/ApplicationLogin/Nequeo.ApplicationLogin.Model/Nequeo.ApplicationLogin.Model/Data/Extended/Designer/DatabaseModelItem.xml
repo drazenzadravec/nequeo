@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+     <ClassName>TableEntity</ClassName>
+     <Database>ApplicationLogin</Database>
+     <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+     <NamespaceExtendedName></NamespaceExtendedName>
+     <PropertyName>
+          <string>TableName</string>
+          <string>TableOwner</string>
+          <string>TableEntityDataColumn</string>
+          <string>TableEntityForeignKey</string>
+          <string>TableEntityReference</string>
+     </PropertyName>
+     <PropertyType>
+          <string>System.String</string>
+          <string>System.String</string>
+          <string>Data.Extended.TableEntityDataColumn[]</string>
+          <string>Data.Extended.TableEntityForeignKey[]</string>
+          <string>Data.Extended.TableEntityReference[]</string>
+     </PropertyType>
+     <PropertyIsNullable>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>true</boolean>
+          <boolean>true</boolean>
+     </PropertyIsNullable>
+     <!-->PropertyDefaultValue>
+        <string>0</string>
+        <string>"System.String"</string>
+        <string>0</string>
+    </PropertyDefaultValue-->
+</Context>
