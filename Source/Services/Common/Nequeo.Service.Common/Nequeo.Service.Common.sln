@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Service.Common", "Nequeo.Service.Common\Nequeo.Service.Common.csproj", "{8AE5C174-892A-4BC6-857D-CBC19A5E761C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Service", "Nequeo.Service\Nequeo.Service.csproj", "{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Service.Common\\Nequeo.Service.Common.csproj
+		SccProjectName1 = Nequeo.Service.Common
+		SccLocalPath1 = Nequeo.Service.Common
+		SccProjectUniqueName2 = Nequeo.Service\\Nequeo.Service.csproj
+		SccProjectName2 = Nequeo.Service
+		SccLocalPath2 = Nequeo.Service
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{8AE5C174-892A-4BC6-857D-CBC19A5E761C}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{B70F0ACC-A987-4A85-9FF8-C0BCF9C3BF1B}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

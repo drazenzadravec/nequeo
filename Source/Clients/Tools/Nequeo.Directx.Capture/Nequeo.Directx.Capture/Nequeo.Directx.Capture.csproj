@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1820B37D-1A5A-40CE-BAB9-FCFF0C931587}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Directx</RootNamespace>
+    <AssemblyName>Nequeo.Directx.Capture</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoDirectxCaptureKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production Release|AnyCPU'">
+    <OutputPath>..\..\..\..\..\References\Nequeo\Client-Servers\Client\Nequeo.Directx.Capture\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Nequeo.Directx.Capture.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>..\..\..\..\..\References\Nequeo\Client-Servers\Client\Nequeo.Directx.Capture\Nequeo.Directx.Capture.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\References\Nequeo\Client-Servers\Client\Nequeo.Directx.Capture\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Nequeo.Directx.Capture.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>..\..\..\..\..\References\Nequeo\Client-Servers\Client\Nequeo.Directx.Capture\Nequeo.Directx.Capture.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\References\Staging\Nequeo.Directx.Capture.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\References\Staging\Nequeo.Directx.Capture.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib">
+      <HintPath>..\..\..\..\References\Release\DirectShowLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Collections">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Conversion, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=8a861d1811aa83ce" />
+    <Reference Include="Nequeo.Cryptography, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=058191c6ae32205d" />
+    <Reference Include="Nequeo.Data, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=731a1445b7d27437" />
+    <Reference Include="Nequeo.Forms, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=ca3d7291d4bd9e0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.IO.Audio">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.IO.Compress, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=43b018473d802851, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Compress.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Media, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=d0404a8fed290f0f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=605226a0b789a2b2" />
+    <Reference Include="Nequeo.Security, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=2d222aa2794dadca" />
+    <Reference Include="Nequeo.Serialisation, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=60e6b5624b241280" />
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\Capture.cs" />
+    <Compile Include="base\CaptureImageSample.cs" />
+    <Compile Include="base\CaptureSoundSample.cs" />
+    <Compile Include="base\Designer\ImageCapture.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImageCapture.tt</DependentUpon>
+    </Compile>
+    <Compile Include="base\Designer\SoundCapture.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoundCapture.tt</DependentUpon>
+    </Compile>
+    <Compile Include="base\GraphState.cs" />
+    <Compile Include="base\ImageCapture.cs" />
+    <Compile Include="base\MediaPlayer.cs" />
+    <Compile Include="base\SampleCapture.cs" />
+    <Compile Include="base\SoundCapture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\CaptureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\CaptureControl.Designer.cs">
+      <DependentUpon>CaptureControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DetailsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DetailsWindow.Designer.cs">
+      <DependentUpon>DetailsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MediaPlayerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MediaPlayerControl.Designer.cs">
+      <DependentUpon>MediaPlayerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\AudioCapabilities.cs" />
+    <Compile Include="Utility\AudioSource.cs" />
+    <Compile Include="Utility\CaptureBuffer.cs" />
+    <Compile Include="Utility\CrossbarSource.cs" />
+    <Compile Include="Utility\Device.cs" />
+    <Compile Include="Utility\DeviceCollection.cs" />
+    <Compile Include="Utility\DeviceInUseException.cs" />
+    <Compile Include="Utility\Devices.cs" />
+    <Compile Include="Utility\DirectShowPropertyPage.cs" />
+    <Compile Include="Utility\PropertyPage.cs" />
+    <Compile Include="Utility\PropertyPageCollection.cs" />
+    <Compile Include="Utility\Source.cs" />
+    <Compile Include="Utility\SourceCollection.cs" />
+    <Compile Include="Utility\Tuner.cs" />
+    <Compile Include="Utility\TVFineTune.cs" />
+    <Compile Include="Utility\VfwCompressorPropertyPage.cs" />
+    <Compile Include="Utility\VideoCapabilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\Designer\SoundCapture.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SoundCapture.cs</LastGenOutput>
+    </None>
+    <None Include="base\Designer\_AsyncExecuteTypeGeneric.include" />
+    <None Include="base\Designer\ImageCapture.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ImageCapture.cs</LastGenOutput>
+    </None>
+    <None Include="NequeoDirectxCaptureKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\CaptureControl.resx">
+      <DependentUpon>CaptureControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DetailsWindow.resx">
+      <DependentUpon>DetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MediaPlayerControl.resx">
+      <DependentUpon>MediaPlayerControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

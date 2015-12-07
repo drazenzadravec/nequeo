@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>Z:\Development\Version2013\Nequeo\References\Release\Service\HttpChat</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Nequeo.Authorisation.Client.dll">
+      <publishTime>07/22/2014 10:48:48</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Client.Common.dll">
+      <publishTime>07/22/2014 10:48:22</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Collections.dll">
+      <publishTime>07/22/2014 10:21:09</publishTime>
+    </File>
+    <File Include="bin/Nequeo.ComponentModel.dll">
+      <publishTime>07/22/2014 10:21:35</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Composite.dll">
+      <publishTime>07/22/2014 10:21:48</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Conversion.dll">
+      <publishTime>07/22/2014 10:23:11</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Cryptography.dll">
+      <publishTime>07/22/2014 10:24:48</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Data.Common.dll">
+      <publishTime>07/22/2014 10:42:14</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Data.dll">
+      <publishTime>07/22/2014 10:32:47</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Data.Linq.dll">
+      <publishTime>07/22/2014 10:32:52</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Exceptions.dll">
+      <publishTime>07/22/2014 10:19:48</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Handler.dll">
+      <publishTime>07/22/2014 10:29:35</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Interact.Server.dll">
+      <publishTime>07/22/2014 11:05:02</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Interaction.Client.dll">
+      <publishTime>07/22/2014 10:49:02</publishTime>
+    </File>
+    <File Include="bin/Nequeo.IO.Stream.dll">
+      <publishTime>07/22/2014 10:28:05</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Linq.dll">
+      <publishTime>07/22/2014 10:25:45</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Maintenance.Timing.dll">
+      <publishTime>07/22/2014 10:31:21</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Model.dll">
+      <publishTime>07/22/2014 10:20:09</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.Client.dll">
+      <publishTime>07/22/2014 10:54:16</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.dll">
+      <publishTime>07/22/2014 10:34:01</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.Http.dll">
+      <publishTime>07/22/2014 10:33:40</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.ServiceModel.dll">
+      <publishTime>07/22/2014 10:33:58</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Primitive.dll">
+      <publishTime>07/22/2014 10:22:50</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Reflection.dll">
+      <publishTime>07/22/2014 10:22:32</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Resource.dll">
+      <publishTime>07/22/2014 10:19:29</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Security.dll">
+      <publishTime>07/22/2014 10:25:08</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Serialisation.dll">
+      <publishTime>07/22/2014 10:23:45</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Server.Common.dll">
+      <publishTime>07/22/2014 11:03:29</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Service.Common.dll">
+      <publishTime>07/22/2014 11:27:39</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Service.dll">
+      <publishTime>07/22/2014 11:27:37</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Service.HttpChat.dll">
+      <publishTime>07/22/2014 11:39:28</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Threading.dll">
+      <publishTime>07/22/2014 10:22:11</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Web.dll">
+      <publishTime>07/22/2014 10:39:26</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Xml.dll">
+      <publishTime>07/22/2014 10:24:04</publishTime>
+    </File>
+    <File Include="Chat/HttpChat.ashx">
+      <publishTime>04/09/2014 13:28:10</publishTime>
+    </File>
+    <File Include="Chat/WebSocketChat.ashx">
+      <publishTime>02/08/2014 11:29:14</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>02/08/2014 11:16:39</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/22/2014 11:39:40</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
