@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\AccountHeader">
+      <UniqueIdentifier>{98a458c2-ef74-48d0-8705-75316fbd7ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AccountSource">
+      <UniqueIdentifier>{bb0db067-806d-462e-952c-e2742b2f5628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CallHeader">
+      <UniqueIdentifier>{3aa36a99-ffb9-467d-8ac7-dcb602063328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CallSource">
+      <UniqueIdentifier>{eb5ac31e-0fba-48a4-8bd6-28f92b86935d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MediaHeader">
+      <UniqueIdentifier>{d85df534-d8e4-4ef3-bfb8-10866dbb7749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MediaSource">
+      <UniqueIdentifier>{b2991ce6-6859-45da-93e8-982373fcd853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ContactHeader">
+      <UniqueIdentifier>{3ccdfabc-0e87-4103-b069-25c60d9d3530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ContactSource">
+      <UniqueIdentifier>{04c4ce52-0862-4f99-bf66-b1269935a9f9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountCallback.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountConnection.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountInfo.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthCredInfo.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthenticateCredentials.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="BuddyStatus.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionMapper.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="IPv6_Use.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnIncomingCallParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnIncomingSubscribeParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnInstantMessageParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnInstantMessageStatusParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnMwiInfoParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnRegStartedParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnRegStateParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnTypingIndicationParam.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="PresenceState.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="RpidActivity.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SipRxData.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SRTP_SecureSignaling.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SRTP_Use.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusCode.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SubscriptionState.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Call.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SipTxOption.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SipMediaType.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaManager.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaType.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaFormat.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioDeviceInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioMedia.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CodecInfo.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactCallback.h">
+      <Filter>Header Files\ContactHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactMapper.h">
+      <Filter>Header Files\ContactHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactConnection.h">
+      <Filter>Header Files\ContactHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactInfo.h">
+      <Filter>Header Files\ContactHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SendInstantMessage.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SendTypingIndication.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Contact.h">
+      <Filter>Header Files\ContactHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallCallback.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallMapper.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallSetting.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallFlag.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VidReqKeyframeMethod.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallOpParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallRole.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="InviteSessionState.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaDirection.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallMediaStatus.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Account.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountCallback.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountConnection.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountInfo.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthCredInfo.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthenticateCredentials.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionMapper.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnIncomingCallParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnIncomingSubscribeParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnInstantMessageParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnInstantMessageStatusParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnMwiInfoParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnRegStartedParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnRegStateParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnTypingIndicationParam.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="PresenceState.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SipRxData.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Call.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SipTxOption.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SipMediaType.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaManager.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaFormat.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioDeviceInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioMedia.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CodecInfo.cpp">
+      <Filter>Source Files\AccountSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactCallback.cpp">
+      <Filter>Source Files\ContactSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactMapper.cpp">
+      <Filter>Source Files\ContactSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactConnection.cpp">
+      <Filter>Source Files\ContactSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactInfo.cpp">
+      <Filter>Source Files\ContactSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>Source Files\ContactSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SendInstantMessage.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SendTypingIndication.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallCallback.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallMapper.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallSetting.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallOpParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

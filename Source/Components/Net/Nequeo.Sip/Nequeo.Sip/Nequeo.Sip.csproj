@@ -56,6 +56,44 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>NequeoNetKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Staging Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\..\References\Staging\Nequeo.Net.Sip.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|x64'">
+    <OutputPath>..\..\..\..\References\Staging_x64\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\..\References\Staging\Nequeo.Net.Sip.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LumiSoft.Net">
       <HintPath>..\..\..\..\References\Release\LumiSoft.Net.dll</HintPath>
@@ -63,6 +101,9 @@
     <Reference Include="Nequeo.Net, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="pjsua2_net">
+      <HintPath>..\..\..\..\..\ThirdPartyTools\PjSIP\Wrapper\pjsua2_net\bin\x64\Release\pjsua2_net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,13 +117,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="base\Account.cs" />
+    <Compile Include="base\AccountConnection.cs" />
+    <Compile Include="base\AccountInfo.cs" />
+    <Compile Include="base\AudioDevInfo.cs" />
+    <Compile Include="base\AudioMedia.cs" />
+    <Compile Include="base\AuthCredInfoVector.cs" />
+    <Compile Include="base\Call.cs" />
+    <Compile Include="base\Contact.cs" />
+    <Compile Include="base\ContactConnection.cs" />
+    <Compile Include="base\ContactInfo.cs" />
+    <Compile Include="base\MediaFormat.cs" />
+    <Compile Include="base\MediaManager.cs" />
+    <Compile Include="base\OnIncomingCallParam.cs" />
+    <Compile Include="base\OnIncomingSubscribeParam.cs" />
+    <Compile Include="base\OnInstantMessageParam.cs" />
+    <Compile Include="base\OnInstantMessageStatusParam.cs" />
+    <Compile Include="base\OnMwiInfoParam.cs" />
+    <Compile Include="base\OnRegStartedParam.cs" />
+    <Compile Include="base\OnRegStateParam.cs" />
+    <Compile Include="base\OnTypingIndicationParam.cs" />
+    <Compile Include="base\PresenceStatus.cs" />
+    <Compile Include="base\RpidActivity.cs" />
+    <Compile Include="base\SendInstantMessage.cs" />
+    <Compile Include="base\SendTypingIndication.cs" />
+    <Compile Include="base\CodecInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NequeoNetKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="base\" />
+    <Content Include="..\..\..\..\..\ThirdPartyTools\PjSIP\Wrapper\PjSIPWrapper\x64\Release\pjsua2.dll">
+      <Link>pjsua2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

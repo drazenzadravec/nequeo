@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AFD22342-AB36-44DD-B921-E5D58F74D8F6}</ProjectGuid>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>NequeoPjSip</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjnath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>pjsua-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjsua2-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-util-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-core-i386-Win32-vc8-Debug-Dynamic.lib;pjnath-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-audiodev-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-simple-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-ua-i386-Win32-vc8-Debug-Dynamic.lib;libspeex-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-codec-i386-Win32-vc8-Debug-Dynamic.lib;libsrtp-i386-Win32-vc8-Debug-Dynamic.lib;libgsmcodec-i386-Win32-vc8-Debug-Dynamic.lib;libresample-i386-Win32-vc8-Debug-Dynamic.lib;libilbccodec-i386-Win32-vc8-Debug-Dynamic.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Xdcmake>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Xdcmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjnath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjsua2-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-util-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-core-x86_64-x64-vc8-Debug-Dynamic.lib;pjnath-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-audiodev-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-simple-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-ua-x86_64-x64-vc8-Debug-Dynamic.lib;libspeex-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-codec-x86_64-x64-vc8-Debug-Dynamic.lib;libsrtp-x86_64-x64-vc8-Debug-Dynamic.lib;libgsmcodec-x86_64-x64-vc8-Debug-Dynamic.lib;libresample-x86_64-x64-vc8-Debug-Dynamic.lib;libilbccodec-x86_64-x64-vc8-Debug-Dynamic.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjnath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>pjsua-lib-i386-Win32-vc8-Release.lib;pjsua2-lib-i386-Win32-vc8-Release.lib;pjlib-i386-Win32-vc8-Release.lib;pjlib-util-i386-Win32-vc8-Release.lib;pjsip-core-i386-Win32-vc8-Release.lib;pjnath-i386-Win32-vc8-Release.lib;pjmedia-i386-Win32-vc8-Release.lib;pjmedia-audiodev-i386-Win32-vc8-Release.lib;pjsip-simple-i386-Win32-vc8-Release.lib;pjsip-ua-i386-Win32-vc8-Release.lib;libspeex-i386-Win32-vc8-Release.lib;pjmedia-codec-i386-Win32-vc8-Release.lib;libsrtp-i386-Win32-vc8-Release.lib;libgsmcodec-i386-Win32-vc8-Release.lib;libresample-i386-Win32-vc8-Release.lib;libilbccodec-i386-Win32-vc8-Release.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\release\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjnath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Release.lib;pjsua2-lib-x86_64-x64-vc8-Release.lib;pjlib-x86_64-x64-vc8-Release.lib;pjlib-util-x86_64-x64-vc8-Release.lib;pjsip-core-x86_64-x64-vc8-Release.lib;pjnath-x86_64-x64-vc8-Release.lib;pjmedia-x86_64-x64-vc8-Release.lib;pjmedia-audiodev-x86_64-x64-vc8-Release.lib;pjsip-simple-x86_64-x64-vc8-Release.lib;pjsip-ua-x86_64-x64-vc8-Release.lib;libspeex-x86_64-x64-vc8-Release.lib;pjmedia-codec-x86_64-x64-vc8-Release.lib;libsrtp-x86_64-x64-vc8-Release.lib;libgsmcodec-x86_64-x64-vc8-Release.lib;libresample-x86_64-x64-vc8-Release.lib;libilbccodec-x86_64-x64-vc8-Release.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\release\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="AccountCallback.h" />
+    <ClInclude Include="AccountConnection.h" />
+    <ClInclude Include="AccountInfo.h" />
+    <ClInclude Include="AudioDeviceInfo.h" />
+    <ClInclude Include="AudioMedia.h" />
+    <ClInclude Include="AuthCredInfo.h" />
+    <ClInclude Include="AuthenticateCredentials.h" />
+    <ClInclude Include="BuddyStatus.h" />
+    <ClInclude Include="Call.h" />
+    <ClInclude Include="CallCallback.h" />
+    <ClInclude Include="CallFlag.h" />
+    <ClInclude Include="CallMapper.h" />
+    <ClInclude Include="CallMediaStatus.h" />
+    <ClInclude Include="CallOpParam.h" />
+    <ClInclude Include="CallRole.h" />
+    <ClInclude Include="CallSetting.h" />
+    <ClInclude Include="CodecInfo.h" />
+    <ClInclude Include="ConnectionMapper.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="ContactCallback.h" />
+    <ClInclude Include="ContactConnection.h" />
+    <ClInclude Include="ContactInfo.h" />
+    <ClInclude Include="ContactMapper.h" />
+    <ClInclude Include="InviteSessionState.h" />
+    <ClInclude Include="IPv6_Use.h" />
+    <ClInclude Include="MediaDirection.h" />
+    <ClInclude Include="MediaFormat.h" />
+    <ClInclude Include="MediaManager.h" />
+    <ClInclude Include="MediaType.h" />
+    <ClInclude Include="OnIncomingSubscribeParam.h" />
+    <ClInclude Include="OnInstantMessageParam.h" />
+    <ClInclude Include="OnInstantMessageStatusParam.h" />
+    <ClInclude Include="OnMwiInfoParam.h" />
+    <ClInclude Include="OnRegStartedParam.h" />
+    <ClInclude Include="OnRegStateParam.h" />
+    <ClInclude Include="OnTypingIndicationParam.h" />
+    <ClInclude Include="PresenceState.h" />
+    <ClInclude Include="RpidActivity.h" />
+    <ClInclude Include="OnIncomingCallParam.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SendInstantMessage.h" />
+    <ClInclude Include="SendTypingIndication.h" />
+    <ClInclude Include="SipMediaType.h" />
+    <ClInclude Include="SipRxData.h" />
+    <ClInclude Include="SipTxOption.h" />
+    <ClInclude Include="SRTP_SecureSignaling.h" />
+    <ClInclude Include="SRTP_Use.h" />
+    <ClInclude Include="StatusCode.h" />
+    <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="SubscriptionState.h" />
+    <ClInclude Include="VidReqKeyframeMethod.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="AccountCallback.cpp" />
+    <ClCompile Include="AccountConnection.cpp" />
+    <ClCompile Include="AccountInfo.cpp" />
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="AudioDeviceInfo.cpp" />
+    <ClCompile Include="AudioMedia.cpp" />
+    <ClCompile Include="AuthCredInfo.cpp" />
+    <ClCompile Include="AuthenticateCredentials.cpp" />
+    <ClCompile Include="Call.cpp" />
+    <ClCompile Include="CallCallback.cpp" />
+    <ClCompile Include="CallMapper.cpp" />
+    <ClCompile Include="CallOpParam.cpp" />
+    <ClCompile Include="CallSetting.cpp" />
+    <ClCompile Include="CodecInfo.cpp" />
+    <ClCompile Include="ConnectionMapper.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="ContactCallback.cpp" />
+    <ClCompile Include="ContactConnection.cpp" />
+    <ClCompile Include="ContactInfo.cpp" />
+    <ClCompile Include="ContactMapper.cpp" />
+    <ClCompile Include="MediaFormat.cpp" />
+    <ClCompile Include="MediaManager.cpp" />
+    <ClCompile Include="OnIncomingCallParam.cpp" />
+    <ClCompile Include="OnIncomingSubscribeParam.cpp" />
+    <ClCompile Include="OnInstantMessageParam.cpp" />
+    <ClCompile Include="OnInstantMessageStatusParam.cpp" />
+    <ClCompile Include="OnMwiInfoParam.cpp" />
+    <ClCompile Include="OnRegStartedParam.cpp" />
+    <ClCompile Include="OnRegStateParam.cpp" />
+    <ClCompile Include="OnTypingIndicationParam.cpp" />
+    <ClCompile Include="PresenceState.cpp" />
+    <ClCompile Include="SendInstantMessage.cpp" />
+    <ClCompile Include="SendTypingIndication.cpp" />
+    <ClCompile Include="SipMediaType.cpp" />
+    <ClCompile Include="SipRxData.cpp" />
+    <ClCompile Include="SipTxOption.cpp" />
+    <ClCompile Include="Stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
