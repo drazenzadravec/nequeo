@@ -88,7 +88,7 @@ namespace Nequeo.Net.Sip
         public void MakeCall()
         {
             pjsua2.CallOpParam callParam = new pjsua2.CallOpParam(true);
-            _pjCallCallback.makeCall("sip:0282794795@58.96.1.2", callParam);
+            _pjCallCallback.makeCall("", callParam);
         }
 
         public string dump(bool with_media, string indent)
