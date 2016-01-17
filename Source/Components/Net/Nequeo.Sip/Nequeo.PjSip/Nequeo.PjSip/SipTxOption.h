@@ -37,6 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "SipMediaType.h"
+#include "SipHeader.h"
 
 #include "pjsua2.hpp"
 
@@ -106,11 +107,21 @@ namespace Nequeo
 					void set(SipMediaType^ value);
 				}
 
+				/// <summary>
+				/// Gets or sets additional message headers to be included in the outgoing message.
+				/// </summary>
+				property array<SipHeader^>^ Headers
+				{
+					array<SipHeader^>^ get();
+					void set(array<SipHeader^>^ value);
+				}
+
 			private:
 				String^ _contentType;
 				String^ _msgBody;
 				String^ _targetUri;
 				SipMediaType^ _multipartContentType;
+				array<SipHeader^>^ _headers;
 			};
 		}
 	}

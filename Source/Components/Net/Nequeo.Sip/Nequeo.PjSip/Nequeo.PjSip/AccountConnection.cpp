@@ -39,10 +39,11 @@ using namespace Nequeo::Net::PjSip;
 ///	Account connection configuration.
 ///	</summary>
 AccountConnection::AccountConnection() :
-	_disposed(false), _accountName(nullptr), _spHost(nullptr), _spPort(5060), _priority(1), _dropCallsOnFail(true), _registerOnAdd(false), _retryIntervalSec(10),
-	_timeoutSec(300), _firstRetryIntervalSec(10), _unregWaitSec(30), _delayBeforeRefreshSec(10), _timerMinSESec(90), _timerSessExpiresSec(1800),
+	_disposed(false), _isDefault(true), _accountName(nullptr), _spHost(nullptr), _spPort(5060), _priority(1), _dropCallsOnFail(true), _registerOnAdd(false), _retryIntervalSec(10),
+	_timeoutSec(300), _firstRetryIntervalSec(10), _unregWaitSec(30), _delayBeforeRefreshSec(10), _timerMinSESec(90), _timerSessExpiresSec(1800), _noIceRtcp(false), _iceEnabled(false),
 	_ipv6_Use(Nequeo::Net::PjSip::IPv6_Use::IPV6_DISABLED), _srtp_Use(Nequeo::Net::PjSip::SRTP_Use::SRTP_DISABLED), _srtp_SecureSignaling(Nequeo::Net::PjSip::SRTP_SecureSignaling::SRTP_SECURESIGNALING_DISABLED),
-	_mediaTransportPort(0), _mediaTransportPortRange(0), _messageWaitingIndication(true), _mwiExpirationSec(3600), _publishEnabled(false), _publishQueue(true), _publishShutdownWaitMsec(2000)
+	_mediaTransportPort(0), _mediaTransportPortRange(0), _messageWaitingIndication(true), _mwiExpirationSec(3600), _publishEnabled(false), _publishQueue(true), _publishShutdownWaitMsec(2000),
+	_videoRateControlBandwidth(0)
 {
 }
 
@@ -54,10 +55,11 @@ AccountConnection::AccountConnection() :
 /// <param name="username">The sip username.</param>
 /// <param name="password">The sip password.</param>
 AccountConnection::AccountConnection(String^ accountName, String^ spHost, String^ username, String^ password) :
-	_disposed(false), _spPort(5060), _priority(1), _dropCallsOnFail(true), _registerOnAdd(false), _retryIntervalSec(10),
-	_timeoutSec(300), _firstRetryIntervalSec(10), _unregWaitSec(30), _delayBeforeRefreshSec(10), _timerMinSESec(90), _timerSessExpiresSec(1800),
+	_disposed(false), _isDefault(true), _spPort(5060), _priority(1), _dropCallsOnFail(true), _registerOnAdd(false), _retryIntervalSec(10),
+	_timeoutSec(300), _firstRetryIntervalSec(10), _unregWaitSec(30), _delayBeforeRefreshSec(10), _timerMinSESec(90), _timerSessExpiresSec(1800), _noIceRtcp(false), _iceEnabled(false),
 	_ipv6_Use(Nequeo::Net::PjSip::IPv6_Use::IPV6_DISABLED), _srtp_Use(Nequeo::Net::PjSip::SRTP_Use::SRTP_DISABLED), _srtp_SecureSignaling(Nequeo::Net::PjSip::SRTP_SecureSignaling::SRTP_SECURESIGNALING_DISABLED),
-	_mediaTransportPort(0), _mediaTransportPortRange(0), _messageWaitingIndication(true), _mwiExpirationSec(3600), _publishEnabled(false), _publishQueue(true), _publishShutdownWaitMsec(2000)
+	_mediaTransportPort(0), _mediaTransportPortRange(0), _messageWaitingIndication(true), _mwiExpirationSec(3600), _publishEnabled(false), _publishQueue(true), _publishShutdownWaitMsec(2000),
+	_videoRateControlBandwidth(0)
 {
 	_accountName = accountName;
 	_spHost = spHost;
@@ -526,4 +528,70 @@ AuthenticateCredentials^ AccountConnection::AuthCredentials::get()
 void AccountConnection::AuthCredentials::set(AuthenticateCredentials^ value)
 {
 	_authCreds = value;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying this account is the default.
+/// </summary>
+bool AccountConnection::IsDefault::get()
+{
+	return _isDefault;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying this account is the default.
+/// </summary>
+void AccountConnection::IsDefault::set(bool value)
+{
+	_isDefault = value;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that ice RTCP should not be used: default false.
+/// </summary>
+bool AccountConnection::NoIceRtcp::get()
+{
+	return _noIceRtcp;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that ice RTCP should not be used: default false.
+/// </summary>
+void AccountConnection::NoIceRtcp::set(bool value)
+{
+	_noIceRtcp = value;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that ice is enabled: default false.
+/// </summary>
+bool AccountConnection::IceEnabled::get()
+{
+	return _iceEnabled;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that ice is enabled: default false.
+/// </summary>
+void AccountConnection::IceEnabled::set(bool value)
+{
+	_iceEnabled = value;
+}
+
+/// <summary>
+/// Gets or sets specify the Upstream/outgoing bandwidth. If this is set to zero, the video stream
+/// will use codec maximum bitrate setting. Default : 0.
+/// </summary>
+unsigned AccountConnection::VideoRateControlBandwidth::get()
+{
+	return _videoRateControlBandwidth;
+}
+
+/// <summary>
+/// Gets or sets specify the Upstream/outgoing bandwidth. If this is set to zero, the video stream
+/// will use codec maximum bitrate setting. Default : 0.
+/// </summary>
+void AccountConnection::VideoRateControlBandwidth::set(unsigned value)
+{
+	_videoRateControlBandwidth = value;
 }

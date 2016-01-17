@@ -38,7 +38,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "MediaType.h"
 #include "AudioDeviceInfo.h"
+#include "VideoDeviceInfo.h"
 #include "AudioMedia.h"
+#include "CallMapper.h"
 
 #include "pjsua2\media.hpp"
 #include "pjsua2.hpp"
@@ -71,12 +73,39 @@ namespace Nequeo
 				array<AudioDeviceInfo^>^ GetAllAudioDevices();
 
 				/// <summary>
+				/// Get all video devices installed in the system.
+				/// </summary>
+				/// <returns>The array of video devices installed in the system.</returns>
+				array<VideoDeviceInfo^>^ GetAllVideoDevices();
+
+				/// <summary>
+				/// Get the number of video devices installed in the system.
+				/// </summary>
+				/// <returns>The number of video devices installed in the system.</returns>
+				int GetVideoDeviceCount();
+
+				/// <summary>
+				/// Is the video capture active.
+				/// </summary>
+				/// <param name="deviceID">Device ID of the capture device.< / param>
+				/// <returns>True if the video capture is active: else false.</returns>
+				bool IsVideoCaptureActive(int deviceID);
+
+				/// <summary>
 				/// Get device index based on the driver and device name.
 				/// </summary>
 				/// <param name="driverName">The driver name.</param>
 				/// <param name="deviceName">The device name.</param>
 				/// <returns>The device ID. If the device is not found, error will be thrown.</returns>
 				int GetAudioDeviceID(String^ driverName, String^ deviceName);
+
+				/// <summary>
+				/// Get device index based on the driver and device name.
+				/// </summary>
+				/// <param name="driverName">The driver name.</param>
+				/// <param name="deviceName">The device name.</param>
+				/// <returns>The device ID. If the device is not found, error will be thrown.</returns>
+				int GetVideoDeviceID(String^ driverName, String^ deviceName);
 
 				/// <summary>
 				/// Get currently active capture sound devices. If sound devices has not been
@@ -123,11 +152,13 @@ namespace Nequeo
 				/// Sip media manager.
 				/// </summary>
 				/// <param name="pjAudDevManager">Audio device manager.</param>
-				MediaManager(pj::AudDevManager& pjAudDevManager);
+				/// <param name="pjVidDevManager">Video device manager.</param>
+				MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager);
 
 			private:
 				bool _disposed;
 				pj::AudDevManager& _pjAudDevManager;
+				pj::VidDevManager& _pjVidDevManager;
 
 				void MarshalString(String^ s, std::string& os);
 				void MarshalString(String^ s, std::wstring& os);

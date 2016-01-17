@@ -55,3 +55,66 @@ CallCallback::~CallCallback()
 		_disposed = true;
 	}
 }
+
+/// <summary>
+/// Notify application when call state has changed.
+/// Application may then query the call info to get the
+/// detail call states by calling getInfo() function.
+/// </summary>
+/// <param name="prm">Callback parameter.</param>
+void CallCallback::onCallState(pj::OnCallStateParam &prm)
+{
+	_onCallState_function_internal(prm);
+}
+
+/// <summary>
+/// Notify application when media state in the call has changed.
+/// Normal application would need to implement this callback, e.g.
+/// to connect the call's media to sound device. When ICE is used,
+/// this callback will also be called to report ICE negotiation failure.
+/// </summary>
+/// <param name="prm">Callback parameter.</param>
+void CallCallback::onCallMediaState(pj::OnCallMediaStateParam &prm)
+{
+	_onCallMediaState_function_internal(prm);
+}
+
+/// <summary>
+/// This is a general notification callback which is called whenever
+/// a transaction within the call has changed state.Application can
+/// implement this callback for example to monitor the state of
+/// outgoing requests, or to answer unhandled incoming requests
+/// (such as INFO) with a final response.
+/// </summary>
+/// <param name="prm">Callback parameter.</param>
+void CallCallback::onCallTsxState(pj::OnCallTsxStateParam &prm)
+{
+	_onCallTsxState_function_internal(prm);
+}
+
+///	<summary>
+///	Set the on call state function callback.
+///	</summary>
+/// <param name="onCallMediaStateCallBack">The on call state function callback.</param>
+void CallCallback::Set_OnCallState_Function(OnCallState_Function onCallStateCallBack)
+{
+	_onCallState_function_internal = onCallStateCallBack;
+}
+
+///	<summary>
+///	Set the on call media state function callback.
+///	</summary>
+/// <param name="onCallMediaStateCallBack">The on call media state function callback.</param>
+void CallCallback::Set_OnCallMediaState_Function(OnCallMediaState_Function onCallMediaStateCallBack)
+{
+	_onCallMediaState_function_internal = onCallMediaStateCallBack;
+}
+
+///	<summary>
+///	Set the on call tsx state function callback.
+///	</summary>
+/// <param name="onCallTsxStateCallBack">The on call tsx state function callback.</param>
+void CallCallback::Set_OnCallTsxState_Function(OnCallTsxState_Function onCallTsxStateCallBack)
+{
+	_onCallTsxState_function_internal = onCallTsxStateCallBack;
+}

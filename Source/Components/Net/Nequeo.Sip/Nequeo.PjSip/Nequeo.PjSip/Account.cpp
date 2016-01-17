@@ -174,14 +174,19 @@ List<Contact^>^ Account::Contacts::get()
 /// <param name="connectionMapper">Account connection mapping configuration.</param>
 void Account::SetConnectionMappings(AccountConnection^ accountConnection, ConnectionMapper& connectionMapper)
 {
-	std::string accountName = "";
+	std::string accountName;
 	MarshalString(accountConnection->AccountName, accountName);
 	connectionMapper.SetAccountName(accountName);
 
-	std::string spHost = "";
+	std::string spHost;
 	MarshalString(accountConnection->SpHost, spHost);
 	connectionMapper.SetSpHost(spHost);
 
+	connectionMapper.SetIceEnabled(accountConnection->IceEnabled);
+	connectionMapper.SetNoIceRtcp(accountConnection->NoIceRtcp);
+	connectionMapper.SetVideoRateControlBandwidth(accountConnection->VideoRateControlBandwidth);
+
+	connectionMapper.SetIsDefault(accountConnection->IsDefault);
 	connectionMapper.SetSpPort(accountConnection->SpPort);
 	connectionMapper.SetPriority(accountConnection->Priority);
 	connectionMapper.SetDropCallsOnFail(accountConnection->DropCallsOnFail);
@@ -221,23 +226,22 @@ void Account::SetConnectionMappings(AccountConnection^ accountConnection, Connec
 			// Create the credetial.
 			AuthCredInfo^ current = (AuthCredInfo^)(accountConnection->AuthCredentials->AuthCredentials[i]);
 
-			std::string userName = "";
+			std::string userName;
 			MarshalString(current->Username, userName);
 
-			std::string data = "";
+			std::string data;
 			MarshalString(current->Data, data);
 
-			std::string realm = "";
+			std::string realm;
 			MarshalString(current->Realm, realm);
 
-			std::string schema = "";
+			std::string schema;
 			MarshalString(current->Scheme, schema);
 
 			pj::AuthCredInfo authCredInfo(schema, realm, userName, current->DataType, data);
 
 			// Add the auth cred info to the list.
 			authCredInfoVector.push_back(authCredInfo);
-			bool stop = true;
 		}
 	}
 
@@ -252,10 +256,13 @@ void Account::SetConnectionMappings(AccountConnection^ accountConnection, Connec
 /// <param name="os">The native string.</param>
 void Account::MarshalString(String^ s, std::string& os)
 {
-	using namespace Runtime::InteropServices;
-	const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
-	os = chars;
-	Marshal::FreeHGlobal(IntPtr((void*)chars));
+	if (!String::IsNullOrEmpty(s))
+	{
+		using namespace Runtime::InteropServices;
+		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
 }
 
 ///	<summary>
@@ -265,10 +272,13 @@ void Account::MarshalString(String^ s, std::string& os)
 /// <param name="os">The native string.</param>
 void Account::MarshalString(String^ s, std::wstring& os)
 {
-	using namespace Runtime::InteropServices;
-	const wchar_t* chars = (const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
-	os = chars;
-	Marshal::FreeHGlobal(IntPtr((void*)chars));
+	if (!String::IsNullOrEmpty(s))
+	{
+		using namespace Runtime::InteropServices;
+		const wchar_t* chars = (const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
 }
 
 /// <summary>
@@ -517,13 +527,13 @@ void Account::SetOnlineStatus(PresenceState^ presenceState)
 		// Set the online state.
 		pj::PresenceStatus pjPresenceStatus;
 
-		std::string note = "";
+		std::string note;
 		MarshalString(presenceState->Note, note);
 
-		std::string rpidId = "";
+		std::string rpidId;
 		MarshalString(presenceState->RpidId, rpidId);
 
-		std::string statusText = "";
+		std::string statusText;
 		MarshalString(presenceState->StatusText, statusText);
 
 		// Set the presence.
@@ -550,8 +560,9 @@ MediaManager^ Account::GetMediaManager()
 	if (_created)
 	{
 		// Get the audio device manager.
-		pj::AudDevManager& pjAudDevManager = _accountCallback->GetAudDevManager();
-		MediaManager^ mediaManager = gcnew MediaManager(pjAudDevManager);
+		pj::AudDevManager& pjAudDevManager = _accountCallback->GetAudioDevManager();
+		pj::VidDevManager& pjVidDevManager = _accountCallback->GetVideoDevManager();
+		MediaManager^ mediaManager = gcnew MediaManager(pjAudDevManager, pjVidDevManager);
 		return mediaManager;
 	}
 	else
@@ -562,13 +573,49 @@ MediaManager^ Account::GetMediaManager()
 /// Get all supported codecs in the system.
 /// </summary>
 /// <returns>The supported codecs in the system.</returns>
-array<CodecInfo^>^ Account::GetCodecInfo()
+array<CodecInfo^>^ Account::GetAudioCodecInfo()
 {
 	// If account created.
 	if (_created)
 	{
 		List<CodecInfo^>^ codecList = gcnew List<CodecInfo^>();
-		const pj::CodecInfoVector& codecs = _accountCallback->GetCodecInfo();
+		const pj::CodecInfoVector& codecs = _accountCallback->GetAudioCodecInfo();
+
+		// Get the vector size.
+		size_t vectorSize = codecs.size();
+
+		// If devices exist.
+		if (vectorSize > 0)
+		{
+			// For each code found.
+			for (int i = 0; i < vectorSize; i++)
+			{
+				CodecInfo^ codec = gcnew CodecInfo();
+				codec->CodecId = gcnew String(codecs[i]->codecId.c_str());
+				codec->Description = gcnew String(codecs[i]->desc.c_str());
+				codec->Priority = codecs[i]->priority;
+				codecList->Add(codec);
+			}
+		}
+
+		// Return the code list.
+		return codecList->ToArray();
+	}
+	else
+		throw gcnew Exception(CreateAccount());
+}
+
+/// <summary>
+/// Get all supported video codecs in the system.
+/// </summary>
+/// <returns>The supported video codecs in the system.</returns>
+array<CodecInfo^>^ Account::GetVideoCodecInfo()
+{
+	// If account created.
+	if (_created)
+	{
+		List<CodecInfo^>^ codecList = gcnew List<CodecInfo^>();
+		const pj::CodecInfoVector& codecs = _accountCallback->GetVideoCodecInfo();
 
 		// Get the vector size.
 		size_t vectorSize = codecs.size();
@@ -756,7 +803,7 @@ Contact^ Account::FindContact(String^ uri)
 	{
 		Contact^ contact;
 
-		std::string uriBuddy = "";
+		std::string uriBuddy;
 		MarshalString(uri, uriBuddy);
 
 		// Find the buddy.
@@ -829,6 +876,26 @@ void Account::OnIncomingSubscribe_Handler(pj::OnIncomingSubscribeParam &prm)
 	param->RxData->Info = gcnew String(prm.rdata.info.c_str());
 	param->RxData->SrcAddress = gcnew String(prm.rdata.srcAddress.c_str());
 	param->RxData->WholeMsg = gcnew String(prm.rdata.wholeMsg.c_str());
+
+	// Get the sip headers.
+	pj::SipHeaderVector sipHeaders = prm.txOption.headers;
+
+	// Get the vector size.
+	size_t vectorSize = sipHeaders.size();
+	param->TxOption->Headers = gcnew array<SipHeader^>((int)vectorSize);
+
+	// If devices exist.
+	if (vectorSize > 0)
+	{
+		// For each code found.
+		for (int i = 0; i < vectorSize; i++)
+		{
+			SipHeader^ sipHeader = gcnew SipHeader();
+			sipHeader->Name = gcnew String(sipHeaders[i].hName.c_str());
+			sipHeader->Value = gcnew String(sipHeaders[i].hValue.c_str());
+			param->TxOption->Headers[i] = sipHeader;
+		}
+	}
 
 	// Call the event handler.
 	OnIncomingSubscribe(this, param);

@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "AudioMedia.h"
+#include "MediaType.h"
 
 using namespace Nequeo::Net::PjSip;
 
@@ -39,7 +40,8 @@ using namespace Nequeo::Net::PjSip;
 /// Audio media.
 /// </summary>
 /// <param name="pjAudioMedia">The pj audio media.</param>
-AudioMedia::AudioMedia(pj::AudioMedia& pjAudioMedia) : _disposed(false), _pjAudioMedia(pjAudioMedia)
+AudioMedia::AudioMedia(pj::AudioMedia& pjAudioMedia) :
+	MediaBase(MediaType::PJMEDIA_TYPE_AUDIO), _disposed(false), _pjAudioMedia(pjAudioMedia)
 {
 }
 
@@ -55,6 +57,79 @@ AudioMedia::~AudioMedia()
 }
 
 /// <summary>
+/// Get the pj audio media.
+/// </summary>
+/// <returns>The pj audio media.</returns>
+pj::AudioMedia& AudioMedia::GetAudioMedia()
+{
+	return _pjAudioMedia;
+}
+
+/// <summary>
+/// Gets or sets the conference port Id.
+/// </summary>
+int AudioMedia::Id::get()
+{
+	return _id;
+}
+
+/// <summary>
+/// Gets or sets the conference port Id.
+/// </summary>
+void AudioMedia::Id::set(int value)
+{
+	_id = value;
+}
+
+/// <summary>
+/// Get information about the specified conference port.
+/// </summary>
+/// <returns>The conference port.</returns>
+ConfPortInfo^ AudioMedia::GetPortInfo()
+{
+	// Get the config
+	pj::ConfPortInfo info = _pjAudioMedia.getPortInfo();
+
+	ConfPortInfo^ confPortInfo = gcnew ConfPortInfo();
+	confPortInfo->Format = gcnew MediaFormatAudio();
+	confPortInfo->Format->AvgBps = info.format.avgBps;
+	confPortInfo->Format->BitsPerSample = info.format.bitsPerSample;
+	confPortInfo->Format->ChannelCount = info.format.channelCount;
+	confPortInfo->Format->ClockRate = info.format.clockRate;
+	confPortInfo->Format->FrameTimeUsec = info.format.frameTimeUsec;
+	confPortInfo->Format->Id = info.format.id;
+	confPortInfo->Format->MaxBps = info.format.maxBps;
+	confPortInfo->Format->Type = MediaFormat::GetMediaTypeEx(info.format.type);
+
+	confPortInfo->Name = gcnew String(info.name.c_str());
+	confPortInfo->PortId = info.portId;
+	confPortInfo->RxLevelAdj = info.rxLevelAdj;
+	confPortInfo->TxLevelAdj = info.txLevelAdj;
+
+	pj::IntVector ports = info.listeners;
+
+	// Get the vector size.
+	size_t vectorSize = ports.size();
+	array<int>^ listeners = gcnew array<int>((int)vectorSize);
+
+	// If devices exist.
+	if (vectorSize > 0)
+	{
+		// For each code found.
+		for (int i = 0; i < vectorSize; i++)
+		{
+			int port = ports[i];
+			listeners[i] = port;
+		}
+	}
+
+	confPortInfo->Listeners = listeners;
+
+	// Return the config port info.
+	return confPortInfo;
+}
+
+/// <summary>
 /// Get port id.
 /// </summary>
 /// <returns>The port id.</returns>
@@ -64,10 +139,144 @@ int AudioMedia::GetPortId()
 }
 
 /// <summary>
-/// Get the pj audio media.
+/// Get information about the specified conference port.
 /// </summary>
-/// <returns>The pj audio media.</returns>
-pj::AudioMedia& AudioMedia::GetAudioMedia()
+/// <param name="portId">The port id.</param>
+/// <returns>The conference port.</returns>
+ConfPortInfo^ AudioMedia::GetPortInfoFromId(int portId)
 {
-	return _pjAudioMedia;
+	// Get the config
+	pj::ConfPortInfo info = pj::AudioMedia::getPortInfoFromId(portId);
+
+	ConfPortInfo^ confPortInfo = gcnew ConfPortInfo();
+	confPortInfo->Format = gcnew MediaFormatAudio();
+	confPortInfo->Format->AvgBps = info.format.avgBps;
+	confPortInfo->Format->BitsPerSample = info.format.bitsPerSample;
+	confPortInfo->Format->ChannelCount = info.format.channelCount;
+	confPortInfo->Format->ClockRate = info.format.clockRate;
+	confPortInfo->Format->FrameTimeUsec = info.format.frameTimeUsec;
+	confPortInfo->Format->Id = info.format.id;
+	confPortInfo->Format->MaxBps = info.format.maxBps;
+	confPortInfo->Format->Type = MediaFormat::GetMediaTypeEx(info.format.type);
+
+	confPortInfo->Name = gcnew String(info.name.c_str());
+	confPortInfo->PortId = info.portId;
+	confPortInfo->RxLevelAdj = info.rxLevelAdj;
+	confPortInfo->TxLevelAdj = info.txLevelAdj;
+
+	pj::IntVector ports = info.listeners;
+
+	// Get the vector size.
+	size_t vectorSize = ports.size();
+	array<int>^ listeners = gcnew array<int>((int)vectorSize);
+
+	// If devices exist.
+	if (vectorSize > 0)
+	{
+		// For each code found.
+		for (int i = 0; i < vectorSize; i++)
+		{
+			int port = ports[i];
+			listeners[i] = port;
+		}
+	}
+
+	confPortInfo->Listeners = listeners;
+
+	// Return the config port info.
+	return confPortInfo;
+}
+
+/// <summary>
+/// Establish unidirectional media flow to sink. This media port
+/// will act as a source, and it may transmit to multiple destinations / sink.
+/// And if multiple sources are transmitting to the same sink, the media
+/// will be mixed together.Source and sink may refer to the same Media,
+/// effectively looping the media.
+///
+/// If bidirectional media flow is desired, application needs to call
+/// this method twice, with the second one called from the opposite source
+/// media.
+/// </summary>
+/// <param name="sink">The destination media.</param>
+void AudioMedia::StartTransmit(AudioMedia^ sink)
+{
+	pj::AudioMedia& media = sink->GetAudioMedia();
+	_pjAudioMedia.startTransmit(media);
+}
+
+/// <summary>
+/// Stop media flow to destination/sink port.
+/// </summary>
+/// <param name="sink">The destination media.</param>
+void AudioMedia::StopTransmit(AudioMedia^ sink)
+{
+	pj::AudioMedia& media = sink->GetAudioMedia();
+	_pjAudioMedia.stopTransmit(media);
+}
+
+/// <summary>
+/// Adjust the signal level to be transmitted from the bridge to this
+/// media port by making it louder or quieter.
+/// </summary>
+/// <param name="level">Signal level adjustment. Value 1.0 means no level 
+/// adjustment, while value 0 means to mute the port.</param>
+void AudioMedia::AdjustRxLevel(float level)
+{
+	_pjAudioMedia.adjustRxLevel(level);
+}
+
+/// <summary>
+/// Adjust the signal level to be received from this media port (to
+/// the bridge) by making it louder or quieter.
+/// </summary>
+/// <param name="level">Signal level adjustment. Value 1.0 means no level 
+/// adjustment, while value 0 means to mute the port.</param>
+void AudioMedia::AdjustTxLevel(float level)
+{
+	_pjAudioMedia.adjustTxLevel(level);
+}
+
+/// <summary>
+/// Get the last received signal level.
+/// </summary>
+/// <returns>Signal level in percent.</returns>
+unsigned AudioMedia::GetRxLevel()
+{
+	return _pjAudioMedia.getRxLevel();
+}
+
+/// <summary>
+/// Get the last transmitted signal level.
+/// </summary>
+/// <returns>Signal level in percent.</returns>
+unsigned AudioMedia::GetTxLevel()
+{
+	return _pjAudioMedia.getTxLevel();
+}
+
+/// <summary>
+/// Typecast from base class MediaBase.
+/// </summary>
+/// <param name="media">The object to be downcasted.</param>
+/// <returns>The object as AudioMedia instance.</returns>
+AudioMedia^ AudioMedia::TypecastFromMedia(MediaBase^ media)
+{
+	// Upcast media.
+	AudioMedia^ audio = safe_cast<AudioMedia^>(media);
+
+	// Create the new call audio media.
+	std::unique_ptr<CallAudioMedia> callAudioMedia = std::make_unique<CallAudioMedia>();
+
+	// Assign the values.
+	callAudioMedia->SetPortId(audio->GetPortId());
+	callAudioMedia->adjustRxLevel(audio->GetRxLevel());
+	callAudioMedia->adjustTxLevel(audio->GetTxLevel());
+	pj::AudioMedia* audioMedia = pj::AudioMedia::typecastFromMedia(callAudioMedia.get());
+
+	// Cleanup.
+	delete audioMedia;
+	
+	// Return
+	return audio;
 }

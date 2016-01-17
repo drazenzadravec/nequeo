@@ -245,6 +245,31 @@ namespace Nequeo
 				pj::AuthCredInfoVector GetAuthCredentials();
 
 				/// <summary>
+				/// Gets or sets an indicator specifying this account is the default.
+				/// </summary>
+				void SetIsDefault(bool value);
+				bool GetIsDefault();
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that ice RTCP should not be used: default false.
+				/// </summary>
+				void SetNoIceRtcp(bool value);
+				bool GetNoIceRtcp();
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that ice is enabled: default false.
+				/// </summary>
+				void SetIceEnabled(bool value);
+				bool GetIceEnabled();
+
+				/// <summary>
+				/// Gets or sets specify the Upstream/outgoing bandwidth. If this is set to zero, the video stream
+				/// will use codec maximum bitrate setting. Default : 0.
+				/// </summary>
+				void SetVideoRateControlBandwidth(unsigned value);
+				unsigned GetVideoRateControlBandwidth();
+
+				/// <summary>
 				/// Get ip v6 use.
 				/// </summary>
 				/// <param name="ipv6Use">The current ipv6 use.</param>
@@ -271,6 +296,13 @@ namespace Nequeo
 				/// <param name="statusCode">The current status code.</param>
 				/// <returns>The status code.</returns>
 				static StatusCode GetStatusCodeEx(pjsip_status_code statusCode);
+
+				/// <summary>
+				/// Get the status code.
+				/// </summary>
+				/// <param name="statusCode">The current status code.</param>
+				/// <returns>The status code.</returns>
+				static pjsip_status_code GetStatusCodeEx(StatusCode statusCode);
 
 				/// <summary>
 				/// Get the activity.
@@ -310,10 +342,14 @@ namespace Nequeo
 			private:
 				bool _disposed;
 
+				bool _isDefault;
 				std::string _accountName;
 				std::string _spHost;
 				int _spPort;
 				int _priority;
+				bool _noIceRtcp;
+				bool _iceEnabled;
+				unsigned _videoRateControlBandwidth;
 
 				bool _dropCallsOnFail;
 				bool _registerOnAdd;

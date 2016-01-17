@@ -120,3 +120,19 @@ void SipTxOption::MultipartContentType::set(SipMediaType^ value)
 {
 	_multipartContentType = value;
 }
+
+/// <summary>
+/// Gets or sets additional message headers to be included in the outgoing message.
+/// </summary>
+array<SipHeader^>^ SipTxOption::Headers::get()
+{
+	return _headers;
+}
+
+/// <summary>
+/// Gets or sets additional message headers to be included in the outgoing message.
+/// </summary>
+void SipTxOption::Headers::set(array<SipHeader^>^ value)
+{
+	_headers = value;
+}

@@ -195,6 +195,96 @@
     <ClInclude Include="CallMediaStatus.h">
       <Filter>Header Files\CallHeader</Filter>
     </ClInclude>
+    <ClInclude Include="Media.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoMedia.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationMedia.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="UnknownMedia.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="NoMedia.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaFormatAudio.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaFormatVideo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfPortInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallAudioMedia.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogCapStatus.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderType.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="StunNatType.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SipHeader.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallInfo.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallMediaInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeVal.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="RedirectResponseType.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallSendRequest.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoStreamOperation.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallSetVideoStream.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaStreamInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaTransportProtocol.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaTransportInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaStreamStat.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="CallMethodData.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoDeviceInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallMediaStateParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SipEventType.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallStateParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallTsxStateParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -309,6 +399,75 @@
       <Filter>Source Files\CallSource</Filter>
     </ClCompile>
     <ClCompile Include="CallOpParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Media.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoMedia.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationMedia.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="UnknownMedia.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="NoMedia.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaFormatAudio.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaFormatVideo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfPortInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallAudioMedia.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SipHeader.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallMediaInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeVal.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallInfo.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallSendRequest.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallSetVideoStream.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaStreamInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaTransportInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaStreamStat.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="CallMethodData.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoDeviceInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallMediaStateParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallStateParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallTsxStateParam.cpp">
       <Filter>Source Files\CallSource</Filter>
     </ClCompile>
   </ItemGroup>

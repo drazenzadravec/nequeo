@@ -53,7 +53,7 @@ namespace Nequeo
 			/// <summary>
 			/// This structure contains all the information needed to completely describe a media.
 			/// </summary>
-			public ref class MediaFormat sealed
+			public ref class MediaFormat
 			{
 			public:
 				/// <summary>

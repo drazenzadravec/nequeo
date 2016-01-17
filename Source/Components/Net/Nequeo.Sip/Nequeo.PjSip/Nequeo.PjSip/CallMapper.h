@@ -36,6 +36,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
+#include "CallRole.h"
+#include "InviteSessionState.h"
+#include "CallFlag.h"
+#include "MediaDirection.h"
+#include "CallMediaStatus.h"
+#include "VidReqKeyframeMethod.h"
+#include "DialogCapStatus.h"
+#include "StunNatType.h"
+#include "RedirectResponseType.h"
+#include "VideoStreamOperation.h"
+#include "MediaTransportProtocol.h"
+#include "SipEventType.h"
+
 #include "pjsua2.hpp"
 
 namespace Nequeo
@@ -59,6 +72,83 @@ namespace Nequeo
 				///	Call connection mapper.
 				///	</summary>
 				~CallMapper();
+
+				/// <summary>
+				/// Get call role.
+				/// </summary>
+				/// <param name="callRole">The current call role.</param>
+				/// <returns>The call role.</returns>
+				static CallRole GetCallRoleEx(pjsip_role_e callRole);
+
+				/// <summary>
+				/// Get InviteSessionState.
+				/// </summary>
+				/// <param name="inviteSessionState">The current InviteSessionState.</param>
+				/// <returns>The InviteSessionState.</returns>
+				static InviteSessionState GetInviteSessionStateEx(pjsip_inv_state inviteSessionState);
+
+				/// <summary>
+				/// Get MediaDirection.
+				/// </summary>
+				/// <param name="mediaDirection">The current MediaDirection.</param>
+				/// <returns>The MediaDirection.</returns>
+				static MediaDirection GetMediaDirectionEx(pjmedia_dir mediaDirection);
+
+				/// <summary>
+				/// Get MediaDirection.
+				/// </summary>
+				/// <param name="mediaDirection">The current MediaDirection.</param>
+				/// <returns>The MediaDirection.</returns>
+				static pjmedia_dir GetMediaDirectionEx(MediaDirection mediaDirection);
+
+				/// <summary>
+				/// Get CallMediaStatus.
+				/// </summary>
+				/// <param name="callMediaStatus">The current CallMediaStatus.</param>
+				/// <returns>The CallMediaStatus.</returns>
+				static CallMediaStatus GetCallMediaStatusEx(pjsua_call_media_status callMediaStatus);
+
+				///	<summary>
+				///	Get the dialog cap status.
+				///	</summary>
+				/// <param name="capStatus">The dialog cap status.</param>
+				/// <returns>The dialog cap status.</returns>
+				static DialogCapStatus GetDialogCapStatusEx(pjsip_dialog_cap_status capStatus);
+
+				///	<summary>
+				///	Get the stun nat type.
+				///	</summary>
+				/// <param name="natType">The stun nat type.</param>
+				/// <returns>The stun nat type.</returns>
+				static StunNatType GetStunNatTypeEx(pj_stun_nat_type natType);
+
+				///	<summary>
+				///	Get the RedirectResponseType.
+				///	</summary>
+				/// <param name="redirectResponseType">The RedirectResponseType.</param>
+				/// <returns>The RedirectResponseType.</returns>
+				static pjsip_redirect_op GetRedirectResponseTypeEx(RedirectResponseType redirectResponseType);
+
+				///	<summary>
+				///	Get the VideoStreamOperation.
+				///	</summary>
+				/// <param name="videoStreamOperation">The VideoStreamOperation.</param>
+				/// <returns>The VideoStreamOperation.</returns>
+				static pjsua_call_vid_strm_op GetVideoStreamOperationEx(VideoStreamOperation videoStreamOperation);
+
+				///	<summary>
+				///	Get the MediaTransportProtocol.
+				///	</summary>
+				/// <param name="mediaTransportProtocol">The MediaTransportProtocol.</param>
+				/// <returns>The MediaTransportProtocol.</returns>
+				static MediaTransportProtocol GetMediaTransportProtocolEx(pjmedia_tp_proto mediaTransportProtocol);
+
+				///	<summary>
+				///	Get the SipEventType.
+				///	</summary>
+				/// <param name="sipEventType">The SipEventType.</param>
+				/// <returns>The SipEventType.</returns>
+				static SipEventType GetSipEventTypeEx(pjsip_event_id_e sipEventType);
 
 			private:
 				bool _disposed;

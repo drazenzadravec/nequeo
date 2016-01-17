@@ -44,6 +44,8 @@ AccountCallback::AccountCallback() :
 	_endpoint = std::make_unique<pj::Endpoint>();
 	_epConfig = std::make_unique<pj::EpConfig>();
 
+	_accountVideoConfig = std::make_unique<pj::AccountVideoConfig>();
+	_accountNatConfig = std::make_unique<pj::AccountNatConfig>();
 	_accountConfig = std::make_unique<pj::AccountConfig>();
 	_accountRegConfig = std::make_unique<pj::AccountRegConfig>();
 	_accountSipConfig = std::make_unique<pj::AccountSipConfig>();
@@ -57,6 +59,8 @@ AccountCallback::AccountCallback() :
 	_transportConfig_UDP6 = std::make_unique<pj::TransportConfig>();
 	_transportConfig_TCP = std::make_unique<pj::TransportConfig>();
 	_transportConfig_TCP6 = std::make_unique<pj::TransportConfig>();
+	_transportConfig_TLS = std::make_unique<pj::TransportConfig>();
+	_transportConfig_TLS6 = std::make_unique<pj::TransportConfig>();
 }
 
 ///	<summary>
@@ -92,11 +96,24 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 	_endpoint->libCreate();
 	_endpoint->libInit(*(_epConfig.get()));
 
+	_transportConfig_TLS->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
+	_transportConfig_TLS->tlsConfig.verifyServer = false;
+	_transportConfig_TLS->tlsConfig.verifyClient = false;
+
+	_transportConfig_TLS6->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
+	_transportConfig_TLS6->tlsConfig.verifyServer = false;
+	_transportConfig_TLS6->tlsConfig.verifyClient = false;
+
 	// Create the client transport.
 	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP, *(_transportConfig_UDP.get()));
 	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP6, *(_transportConfig_UDP6.get()));
 	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP, *(_transportConfig_TCP.get()));
 	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP6, *(_transportConfig_TCP6.get()));
+
+	// Has not been implemented must change pjlib.config.PJ_HAS_SSL_SOCK = 1
+	// then recompile the pjproject and copy all the libs then then recomiple this project.
+	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS, *(_transportConfig_TLS.get()));
+	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS6, *(_transportConfig_TLS6.get()));
 
 	// Start.
 	_endpoint->libStart();
@@ -142,6 +159,17 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 	_accountPresConfig->publishQueue = mapper.GetPublishQueue();
 	_accountPresConfig->publishShutdownWaitMsec = mapper.GetPublishShutdownWaitMsec();
 
+	// Set the nat options.
+	_accountNatConfig->iceNoRtcp = mapper.GetNoIceRtcp();
+	_accountNatConfig->iceEnabled = mapper.GetIceEnabled();
+
+	// Set the video options.
+	_accountVideoConfig->defaultCaptureDevice = pjmedia_vid_dev_std_index::PJMEDIA_VID_DEFAULT_CAPTURE_DEV;
+	_accountVideoConfig->defaultRenderDevice = pjmedia_vid_dev_std_index::PJMEDIA_VID_DEFAULT_RENDER_DEV;
+	_accountVideoConfig->windowFlags = pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_BORDER | pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_RESIZABLE;
+	_accountVideoConfig->rateControlBandwidth = mapper.GetVideoRateControlBandwidth();
+	_accountVideoConfig->autoTransmitOutgoing = true;
+
 	// Assign the account config.
 	_accountConfig->regConfig = *(_accountRegConfig.get());
 	_accountConfig->sipConfig = *(_accountSipConfig.get());
@@ -149,18 +177,29 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 	_accountConfig->mediaConfig = *(_accountMediaConfig.get());
 	_accountConfig->mwiConfig = *(_accountMwiConfig.get());
 	_accountConfig->presConfig = *(_accountPresConfig.get());
+	_accountConfig->natConfig = *(_accountNatConfig.get());
+	_accountConfig->videoConfig = *(_accountVideoConfig.get());
 
 	// Create the account.
-	create(*(_accountConfig.get()), true);
+	create(*(_accountConfig.get()), mapper.GetIsDefault());
 }
 
 /// <summary>
 /// Get the audio deveice manager.
 /// </summary>
 /// <returns>The audio device manager.</returns>
-pj::AudDevManager& AccountCallback::GetAudDevManager()
+pj::AudDevManager& AccountCallback::GetAudioDevManager()
 {
 	return _endpoint->audDevManager();
+}
+
+/// <summary>
+/// Get the video deveice manager.
+/// </summary>
+/// <returns>The video device manager.</returns>
+pj::VidDevManager& AccountCallback::GetVideoDevManager()
+{
+	return _endpoint->vidDevManager();
 }
 
 /// <summary>
@@ -173,12 +212,21 @@ unsigned AccountCallback::MediaActivePorts()
 }
 
 /// <summary>
-/// Get all supported codecs in the system.
+/// Get all supported audio codecs in the system.
 /// </summary>
-/// <returns>The supported codecs in the system.</returns>
-const pj::CodecInfoVector& AccountCallback::GetCodecInfo()
+/// <returns>The supported audio codecs in the system.</returns>
+const pj::CodecInfoVector& AccountCallback::GetAudioCodecInfo()
 {
 	return _endpoint->codecEnum();
+}
+
+/// <summary>
+/// Get all supported video codecs in the system.
+/// </summary>
+/// <returns>The supported video codecs in the system.</returns>
+const pj::CodecInfoVector& AccountCallback::GetVideoCodecInfo()
+{
+	return _endpoint->videoCodecEnum();
 }
 
 /// <summary>

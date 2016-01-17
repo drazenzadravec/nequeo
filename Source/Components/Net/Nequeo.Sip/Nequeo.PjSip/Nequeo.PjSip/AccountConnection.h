@@ -327,13 +327,54 @@ namespace Nequeo
 					void set(AuthenticateCredentials^ value);
 				}
 
+				/// <summary>
+				/// Gets or sets an indicator specifying this account is the default.
+				/// </summary>
+				property bool IsDefault
+				{
+					bool get();
+					void set(bool value);
+				}
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that ice RTCP should not be used: default false.
+				/// </summary>
+				property bool NoIceRtcp
+				{
+					bool get();
+					void set(bool value);
+				}
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that ice is enabled: default false.
+				/// </summary>
+				property bool IceEnabled
+				{
+					bool get();
+					void set(bool value);
+				}
+
+				/// <summary>
+				/// Gets or sets specify the Upstream/outgoing bandwidth. If this is set to zero, the video stream
+				/// will use codec maximum bitrate setting. Default : 0.
+				/// </summary>
+				property unsigned VideoRateControlBandwidth
+				{
+					unsigned get();
+					void set(unsigned value);
+				}
+
 			private:
 				bool _disposed;
 
+				bool _isDefault;
 				String^ _accountName;
 				String^ _spHost;
 				int _spPort;
 				int _priority;
+				bool _noIceRtcp;
+				bool _iceEnabled;
+				unsigned _videoRateControlBandwidth;
 
 				bool _dropCallsOnFail;
 				bool _registerOnAdd;

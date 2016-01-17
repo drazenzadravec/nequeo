@@ -82,7 +82,13 @@ namespace Nequeo
 				/// Get the audio deveice manager.
 				/// </summary>
 				/// <returns>The audio device manager.</returns>
-				pj::AudDevManager& GetAudDevManager();
+				pj::AudDevManager& GetAudioDevManager();
+
+				/// <summary>
+				/// Get the video deveice manager.
+				/// </summary>
+				/// <returns>The video device manager.</returns>
+				pj::VidDevManager& GetVideoDevManager();
 
 				/// <summary>
 				/// Get the number of active media ports.
@@ -91,10 +97,16 @@ namespace Nequeo
 				unsigned MediaActivePorts();
 
 				/// <summary>
-				/// Get all supported codecs in the system.
+				/// Get all supported audio codecs in the system.
 				/// </summary>
-				/// <returns>The supported codecs in the system.</returns>
-				const pj::CodecInfoVector& GetCodecInfo();
+				/// <returns>The supported audio codecs in the system.</returns>
+				const pj::CodecInfoVector& GetAudioCodecInfo();
+
+				/// <summary>
+				/// Get all supported video codecs in the system.
+				/// </summary>
+				/// <returns>The supported video codecs in the system.</returns>
+				const pj::CodecInfoVector& GetVideoCodecInfo();
 
 				/// <summary>
 				/// Add audio media device to the application.
@@ -249,11 +261,15 @@ namespace Nequeo
 				std::unique_ptr<pj::AccountMwiConfig> _accountMwiConfig;
 				std::unique_ptr<pj::AccountPresConfig> _accountPresConfig;
 				std::unique_ptr<pj::TransportConfig> _transportConfig;
+				std::unique_ptr<pj::AccountNatConfig> _accountNatConfig;
+				std::unique_ptr<pj::AccountVideoConfig> _accountVideoConfig;
 
 				std::unique_ptr<pj::TransportConfig> _transportConfig_UDP;
 				std::unique_ptr<pj::TransportConfig> _transportConfig_UDP6;
 				std::unique_ptr<pj::TransportConfig> _transportConfig_TCP;
 				std::unique_ptr<pj::TransportConfig> _transportConfig_TCP6;
+				std::unique_ptr<pj::TransportConfig> _transportConfig_TLS;
+				std::unique_ptr<pj::TransportConfig> _transportConfig_TLS6;
 
 				OnIncomingCall_Function _onIncomingCall_function_internal;
 				OnIncomingSubscribe_Function _onIncomingSubscribe_function_internal;

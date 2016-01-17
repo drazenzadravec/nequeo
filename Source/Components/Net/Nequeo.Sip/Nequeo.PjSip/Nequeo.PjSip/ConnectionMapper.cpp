@@ -375,6 +375,55 @@ pj::AuthCredInfoVector ConnectionMapper::GetAuthCredentials()
 }
 
 /// <summary>
+/// Gets or sets an indicator specifying this account is the default.
+/// </summary>
+void ConnectionMapper::SetIsDefault(bool value)
+{
+	_isDefault = value;
+}
+bool ConnectionMapper::GetIsDefault()
+{
+	return _isDefault;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that ice RTCP should not be used: default false.
+/// </summary>
+void ConnectionMapper::SetNoIceRtcp(bool value)
+{
+	_noIceRtcp = value;
+}
+bool ConnectionMapper::GetNoIceRtcp()
+{
+	return _noIceRtcp;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that ice is enabled: default false.
+/// </summary>
+void ConnectionMapper::SetIceEnabled(bool value)
+{
+	_iceEnabled = value;
+}
+bool ConnectionMapper::GetIceEnabled()
+{
+	return _iceEnabled;
+}
+
+/// <summary>
+/// Gets or sets specify the Upstream/outgoing bandwidth. If this is set to zero, the video stream
+/// will use codec maximum bitrate setting. Default : 0.
+/// </summary>
+void ConnectionMapper::SetVideoRateControlBandwidth(unsigned value)
+{
+	_videoRateControlBandwidth = value;
+}
+unsigned ConnectionMapper::GetVideoRateControlBandwidth()
+{
+	return _videoRateControlBandwidth;
+}
+
+/// <summary>
 /// Get ip v6 use.
 /// </summary>
 /// <param name="ipv6Use">The current ipv6 use.</param>
@@ -663,5 +712,135 @@ StatusCode ConnectionMapper::GetStatusCodeEx(pjsip_status_code statusCode)
 		return StatusCode::SC__force_32bit;
 	default:
 		return StatusCode::SC__force_32bit;
+	}
+}
+
+/// <summary>
+/// Get the status code.
+/// </summary>
+/// <param name="statusCode">The current status code.</param>
+/// <returns>The status code.</returns>
+pjsip_status_code ConnectionMapper::GetStatusCodeEx(StatusCode statusCode)
+{
+	switch (statusCode)
+	{
+	case Nequeo::Net::PjSip::StatusCode::SC_TRYING:
+		return pjsip_status_code::PJSIP_SC_TRYING;
+	case Nequeo::Net::PjSip::StatusCode::SC_RINGING:
+		return pjsip_status_code::PJSIP_SC_RINGING;
+	case Nequeo::Net::PjSip::StatusCode::SC_CALL_BEING_FORWARDED:
+		return pjsip_status_code::PJSIP_SC_CALL_BEING_FORWARDED;
+	case Nequeo::Net::PjSip::StatusCode::SC_QUEUED:
+		return pjsip_status_code::PJSIP_SC_QUEUED;
+	case Nequeo::Net::PjSip::StatusCode::SC_PROGRESS:
+		return pjsip_status_code::PJSIP_SC_PROGRESS;
+	case Nequeo::Net::PjSip::StatusCode::SC_OK:
+		return pjsip_status_code::PJSIP_SC_OK;
+	case Nequeo::Net::PjSip::StatusCode::SC_ACCEPTED:
+		return pjsip_status_code::PJSIP_SC_ACCEPTED;
+	case Nequeo::Net::PjSip::StatusCode::SC_MULTIPLE_CHOICES:
+		return pjsip_status_code::PJSIP_SC_MULTIPLE_CHOICES;
+	case Nequeo::Net::PjSip::StatusCode::SC_MOVED_PERMANENTLY:
+		return pjsip_status_code::PJSIP_SC_MOVED_PERMANENTLY;
+	case Nequeo::Net::PjSip::StatusCode::SC_MOVED_TEMPORARILY:
+		return pjsip_status_code::PJSIP_SC_MOVED_TEMPORARILY;
+	case Nequeo::Net::PjSip::StatusCode::SC_USE_PROXY:
+		return pjsip_status_code::PJSIP_SC_USE_PROXY;
+	case Nequeo::Net::PjSip::StatusCode::SC_ALTERNATIVE_SERVICE:
+		return pjsip_status_code::PJSIP_SC_ALTERNATIVE_SERVICE;
+	case Nequeo::Net::PjSip::StatusCode::SC_BAD_REQUEST:
+		return pjsip_status_code::PJSIP_SC_BAD_REQUEST;
+	case Nequeo::Net::PjSip::StatusCode::SC_UNAUTHORIZED:
+		return pjsip_status_code::PJSIP_SC_UNAUTHORIZED;
+	case Nequeo::Net::PjSip::StatusCode::SC_PAYMENT_REQUIRED:
+		return pjsip_status_code::PJSIP_SC_PAYMENT_REQUIRED;
+	case Nequeo::Net::PjSip::StatusCode::SC_FORBIDDEN:
+		return pjsip_status_code::PJSIP_SC_FORBIDDEN;
+	case Nequeo::Net::PjSip::StatusCode::SC_NOT_FOUND:
+		return pjsip_status_code::PJSIP_SC_NOT_FOUND;
+	case Nequeo::Net::PjSip::StatusCode::SC_METHOD_NOT_ALLOWED:
+		return pjsip_status_code::PJSIP_SC_METHOD_NOT_ALLOWED;
+	case Nequeo::Net::PjSip::StatusCode::SC_NOT_ACCEPTABLE:
+		return pjsip_status_code::PJSIP_SC_NOT_ACCEPTABLE;
+	case Nequeo::Net::PjSip::StatusCode::SC_PROXY_AUTHENTICATION_REQUIRED:
+		return pjsip_status_code::PJSIP_SC_PROXY_AUTHENTICATION_REQUIRED;
+	case Nequeo::Net::PjSip::StatusCode::SC_REQUEST_TIMEOUT:
+		return pjsip_status_code::PJSIP_SC_REQUEST_TIMEOUT;
+	case Nequeo::Net::PjSip::StatusCode::SC_TSX_TIMEOUT:
+		return pjsip_status_code::PJSIP_SC_TSX_TIMEOUT;
+	case Nequeo::Net::PjSip::StatusCode::SC_GONE:
+		return pjsip_status_code::PJSIP_SC_GONE;
+	case Nequeo::Net::PjSip::StatusCode::SC_REQUEST_ENTITY_TOO_LARGE:
+		return pjsip_status_code::PJSIP_SC_REQUEST_ENTITY_TOO_LARGE;
+	case Nequeo::Net::PjSip::StatusCode::SC_REQUEST_URI_TOO_LONG:
+		return pjsip_status_code::PJSIP_SC_REQUEST_URI_TOO_LONG;
+	case Nequeo::Net::PjSip::StatusCode::SC_UNSUPPORTED_MEDIA_TYPE:
+		return pjsip_status_code::PJSIP_SC_UNSUPPORTED_MEDIA_TYPE;
+	case Nequeo::Net::PjSip::StatusCode::SC_UNSUPPORTED_URI_SCHEME:
+		return pjsip_status_code::PJSIP_SC_UNSUPPORTED_URI_SCHEME;
+	case Nequeo::Net::PjSip::StatusCode::SC_BAD_EXTENSION:
+		return pjsip_status_code::PJSIP_SC_BAD_EXTENSION;
+	case Nequeo::Net::PjSip::StatusCode::SC_EXTENSION_REQUIRED:
+		return pjsip_status_code::PJSIP_SC_EXTENSION_REQUIRED;
+	case Nequeo::Net::PjSip::StatusCode::SC_SESSION_TIMER_TOO_SMALL:
+		return pjsip_status_code::PJSIP_SC_SESSION_TIMER_TOO_SMALL;
+	case Nequeo::Net::PjSip::StatusCode::SC_INTERVAL_TOO_BRIEF:
+		return pjsip_status_code::PJSIP_SC_INTERVAL_TOO_BRIEF;
+	case Nequeo::Net::PjSip::StatusCode::SC_TEMPORARILY_UNAVAILABLE:
+		return pjsip_status_code::PJSIP_SC_TEMPORARILY_UNAVAILABLE;
+	case Nequeo::Net::PjSip::StatusCode::SC_CALL_TSX_DOES_NOT_EXIST:
+		return pjsip_status_code::PJSIP_SC_CALL_TSX_DOES_NOT_EXIST;
+	case Nequeo::Net::PjSip::StatusCode::SC_LOOP_DETECTED:
+		return pjsip_status_code::PJSIP_SC_LOOP_DETECTED;
+	case Nequeo::Net::PjSip::StatusCode::SC_TOO_MANY_HOPS:
+		return pjsip_status_code::PJSIP_SC_TOO_MANY_HOPS;
+	case Nequeo::Net::PjSip::StatusCode::SC_ADDRESS_INCOMPLETE:
+		return pjsip_status_code::PJSIP_SC_ADDRESS_INCOMPLETE;
+	case Nequeo::Net::PjSip::StatusCode::AC_AMBIGUOUS:
+		return pjsip_status_code::PJSIP_AC_AMBIGUOUS;
+	case Nequeo::Net::PjSip::StatusCode::SC_BUSY_HERE:
+		return pjsip_status_code::PJSIP_SC_BUSY_HERE;
+	case Nequeo::Net::PjSip::StatusCode::SC_REQUEST_TERMINATED:
+		return pjsip_status_code::PJSIP_SC_REQUEST_TERMINATED;
+	case Nequeo::Net::PjSip::StatusCode::SC_NOT_ACCEPTABLE_HERE:
+		return pjsip_status_code::PJSIP_SC_NOT_ACCEPTABLE_HERE;
+	case Nequeo::Net::PjSip::StatusCode::SC_BAD_EVENT:
+		return pjsip_status_code::PJSIP_SC_BAD_EVENT;
+	case Nequeo::Net::PjSip::StatusCode::SC_REQUEST_UPDATED:
+		return pjsip_status_code::PJSIP_SC_REQUEST_UPDATED;
+	case Nequeo::Net::PjSip::StatusCode::SC_REQUEST_PENDING:
+		return pjsip_status_code::PJSIP_SC_REQUEST_PENDING;
+	case Nequeo::Net::PjSip::StatusCode::SC_UNDECIPHERABLE:
+		return pjsip_status_code::PJSIP_SC_UNDECIPHERABLE;
+	case Nequeo::Net::PjSip::StatusCode::SC_INTERNAL_SERVER_ERROR:
+		return pjsip_status_code::PJSIP_SC_INTERNAL_SERVER_ERROR;
+	case Nequeo::Net::PjSip::StatusCode::SC_NOT_IMPLEMENTED:
+		return pjsip_status_code::PJSIP_SC_NOT_IMPLEMENTED;
+	case Nequeo::Net::PjSip::StatusCode::SC_BAD_GATEWAY:
+		return pjsip_status_code::PJSIP_SC_BAD_GATEWAY;
+	case Nequeo::Net::PjSip::StatusCode::SC_SERVICE_UNAVAILABLE:
+		return pjsip_status_code::PJSIP_SC_SERVICE_UNAVAILABLE;
+	case Nequeo::Net::PjSip::StatusCode::SC_TSX_TRANSPORT_ERROR:
+		return pjsip_status_code::PJSIP_SC_TSX_TRANSPORT_ERROR;
+	case Nequeo::Net::PjSip::StatusCode::SC_SERVER_TIMEOUT:
+		return pjsip_status_code::PJSIP_SC_SERVER_TIMEOUT;
+	case Nequeo::Net::PjSip::StatusCode::SC_VERSION_NOT_SUPPORTED:
+		return pjsip_status_code::PJSIP_SC_VERSION_NOT_SUPPORTED;
+	case Nequeo::Net::PjSip::StatusCode::SC_MESSAGE_TOO_LARGE:
+		return pjsip_status_code::PJSIP_SC_MESSAGE_TOO_LARGE;
+	case Nequeo::Net::PjSip::StatusCode::SC_PRECONDITION_FAILURE:
+		return pjsip_status_code::PJSIP_SC_PRECONDITION_FAILURE;
+	case Nequeo::Net::PjSip::StatusCode::SC_BUSY_EVERYWHERE:
+		return pjsip_status_code::PJSIP_SC_BUSY_EVERYWHERE;
+	case Nequeo::Net::PjSip::StatusCode::SC_DECLINE:
+		return pjsip_status_code::PJSIP_SC_DECLINE;
+	case Nequeo::Net::PjSip::StatusCode::SC_DOES_NOT_EXIST_ANYWHERE:
+		return pjsip_status_code::PJSIP_SC_DOES_NOT_EXIST_ANYWHERE;
+	case Nequeo::Net::PjSip::StatusCode::SC_NOT_ACCEPTABLE_ANYWHERE:
+		return pjsip_status_code::PJSIP_SC_NOT_ACCEPTABLE_ANYWHERE;
+	case Nequeo::Net::PjSip::StatusCode::SC__force_32bit:
+		return pjsip_status_code::PJSIP_SC__force_32bit;
+	default:
+		return pjsip_status_code::PJSIP_SC__force_32bit;
 	}
 }

@@ -207,10 +207,16 @@ namespace Nequeo
 				MediaManager^ GetMediaManager();
 
 				/// <summary>
-				/// Get all supported codecs in the system.
+				/// Get all supported audio codecs in the system.
 				/// </summary>
-				/// <returns>The supported codecs in the system.</returns>
-				array<CodecInfo^>^ GetCodecInfo();
+				/// <returns>The supported audio codecs in the system.</returns>
+				array<CodecInfo^>^ GetAudioCodecInfo();
+
+				/// <summary>
+				/// Get all supported video codecs in the system.
+				/// </summary>
+				/// <returns>The supported video codecs in the system.</returns>
+				array<CodecInfo^>^ GetVideoCodecInfo();
 
 				/// <summary>
 				/// Add audio media device to the application.

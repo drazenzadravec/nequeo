@@ -39,7 +39,9 @@ using namespace Nequeo::Net::PjSip;
 /// Sip media manager.
 /// </summary>
 /// <param name="pjAudDevManager">Audio device manager.</param>
-MediaManager::MediaManager(pj::AudDevManager& pjAudDevManager) : _disposed(false), _pjAudDevManager(pjAudDevManager)
+/// <param name="pjVidDevManager">Video device manager.</param>
+MediaManager::MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager) : 
+	_disposed(false), _pjAudDevManager(pjAudDevManager), _pjVidDevManager(pjVidDevManager)
 {
 }
 
@@ -62,7 +64,7 @@ array<AudioDeviceInfo^>^ MediaManager::GetAllAudioDevices()
 {
 	List<AudioDeviceInfo^>^ audioDeviceInfo = gcnew List<AudioDeviceInfo^>();
 	const pj::AudioDevInfoVector& audioDevices = _pjAudDevManager.enumDev();
-
+	
 	// Get the vector size.
 	size_t vectorSize = audioDevices.size();
 
@@ -117,6 +119,85 @@ array<AudioDeviceInfo^>^ MediaManager::GetAllAudioDevices()
 }
 
 /// <summary>
+/// Get all video devices installed in the system.
+/// </summary>
+/// <returns>The array of video devices installed in the system.</returns>
+array<VideoDeviceInfo^>^ MediaManager::GetAllVideoDevices()
+{
+	List<VideoDeviceInfo^>^ videoDeviceInfo = gcnew List<VideoDeviceInfo^>();
+	const pj::VideoDevInfoVector& videoDevices = _pjVidDevManager.enumDev();
+	
+	// Get the vector size.
+	size_t vectorSize = videoDevices.size();
+
+	// If devices exist.
+	if (vectorSize > 0)
+	{
+		// For each device.
+		for (int i = 0; i < vectorSize; i++)
+		{
+			VideoDeviceInfo^ videoDevice = gcnew VideoDeviceInfo();
+			videoDevice->Id = videoDevices[i]->id;
+			videoDevice->Caps = videoDevices[i]->caps;
+			videoDevice->Driver = gcnew String(videoDevices[i]->driver.c_str());
+			videoDevice->Name = gcnew String(videoDevices[i]->name.c_str());
+			videoDevice->Direction = CallMapper::GetMediaDirectionEx(videoDevices[i]->dir);
+
+			// Get the media format list.
+			pj::MediaFormatVector mediaFormats = videoDevices[i]->fmt;
+
+			// Get the vector size format.
+			size_t vectorSizeFormat = mediaFormats.size();
+
+			// if media format exists.
+			if (vectorSizeFormat > 0)
+			{
+				List<MediaFormat^>^ formats = gcnew List<MediaFormat^>();
+
+				// For each format.
+				for (int j = 0; j < vectorSizeFormat; j++)
+				{
+					MediaFormat^ mediaFormat = gcnew MediaFormat();
+					mediaFormat->Id = mediaFormats[j]->id;
+					mediaFormat->Type = MediaFormat::GetMediaTypeEx(mediaFormats[j]->type);
+
+					// Add the media formats.
+					formats->Add(mediaFormat);
+				}
+
+				// Add the list of media formats.
+				videoDevice->MediaFormats = formats->ToArray();
+			}
+
+			// Add the video device.
+			videoDeviceInfo->Add(videoDevice);
+		}
+	}
+
+	// Return the list of devices.
+	return videoDeviceInfo->ToArray();
+}
+
+/// <summary>
+/// Get the number of video devices installed in the system.
+/// </summary>
+/// <returns>The number of video devices installed in the system.</returns>
+int MediaManager::GetVideoDeviceCount()
+{
+	return _pjVidDevManager.getDevCount();
+}
+
+/// <summary>
+/// Is the video capture active.
+/// </summary>
+/// <param name="deviceID">Device ID of the capture device.</param>
+/// <returns>True if the video capture is active: else false.</returns>
+bool MediaManager::IsVideoCaptureActive(int deviceID)
+{
+	return _pjVidDevManager.isCaptureActive(deviceID);
+}
+
+/// <summary>
 /// Get device index based on the driver and device name.
 /// </summary>
 /// <param name="driverName">The driver name.</param>
@@ -131,6 +212,23 @@ int MediaManager::GetAudioDeviceID(String^ driverName, String^ deviceName)
 	MarshalString(deviceName, device_Name);
 
 	return _pjAudDevManager.lookupDev(driver_Name, device_Name);
+}
+
+/// <summary>
+/// Get device index based on the driver and device name.
+/// </summary>
+/// <param name="driverName">The driver name.</param>
+/// <param name="deviceName">The device name.</param>
+/// <returns>The device ID. If the device is not found, error will be thrown.</returns>
+int MediaManager::GetVideoDeviceID(String^ driverName, String^ deviceName)
+{
+	std::string driver_Name = "";
+	MarshalString(driverName, driver_Name);
+
+	std::string device_Name = "";
+	MarshalString(deviceName, device_Name);
+
+	return _pjVidDevManager.lookupDev(driver_Name, device_Name);
 }
 
 /// <summary>

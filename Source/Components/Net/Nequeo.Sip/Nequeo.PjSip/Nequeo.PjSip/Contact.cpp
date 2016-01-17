@@ -264,10 +264,10 @@ void Contact::SendInstantMessage(SendInstantMessageParam^ sendInstantMessagePara
 	// If account created.
 	if (_created)
 	{
-		std::string content = "";
+		std::string content;
 		MarshalString(sendInstantMessageParam->Content, content);
 
-		std::string contentType = "";
+		std::string contentType;
 		MarshalString(sendInstantMessageParam->ContentType, contentType);
 
 		pj::SendInstantMessageParam prm;
@@ -276,13 +276,13 @@ void Contact::SendInstantMessage(SendInstantMessageParam^ sendInstantMessagePara
 
 		if (sendInstantMessageParam->TxOption != nullptr)
 		{
-			std::string txContentType = "";
+			std::string txContentType;
 			MarshalString(sendInstantMessageParam->TxOption->ContentType, txContentType);
 
-			std::string txMsgBody = "";
+			std::string txMsgBody;
 			MarshalString(sendInstantMessageParam->TxOption->MsgBody, txMsgBody);
 
-			std::string txTargetUri = "";
+			std::string txTargetUri;
 			MarshalString(sendInstantMessageParam->TxOption->TargetUri, txTargetUri);
 
 			prm.txOption.contentType = txContentType;
@@ -291,14 +291,43 @@ void Contact::SendInstantMessage(SendInstantMessageParam^ sendInstantMessagePara
 
 			if (sendInstantMessageParam->TxOption->MultipartContentType != nullptr)
 			{
-				std::string txSubType = "";
+				std::string txSubType;
 				MarshalString(sendInstantMessageParam->TxOption->MultipartContentType->SubType, txSubType);
 
-				std::string txType = "";
+				std::string txType;
 				MarshalString(sendInstantMessageParam->TxOption->MultipartContentType->Type, txType);
 
 				prm.txOption.multipartContentType.subType = txSubType;
 				prm.txOption.multipartContentType.type = txType;
+			}
+
+			// If call settings.
+			if (sendInstantMessageParam->TxOption->Headers != nullptr)
+			{
+				pj::SipHeaderVector headers;
+
+				// For each header
+				for (int i = 0; i < sendInstantMessageParam->TxOption->Headers->Length; i++)
+				{
+					// Get the current header.
+					SipHeader^ sipHeader = (SipHeader^)(sendInstantMessageParam->TxOption->Headers[i]);
+
+					std::string name;
+					MarshalString(sipHeader->Name, name);
+
+					std::string value;
+					MarshalString(sipHeader->Value, value);
+
+					pj::SipHeader header;
+					header.hName = name;
+					header.hValue = value;
+
+					// Add the sip header.
+					headers.push_back(header);
+				}
+
+				// Ass the headers.
+				prm.txOption.headers = headers;
 			}
 		}
 
@@ -325,13 +354,13 @@ void Contact::SendTypingIndication(SendTypingIndicationParam^ sendTypingIndicati
 
 		if (sendTypingIndicationParam->TxOption != nullptr)
 		{
-			std::string txContentType = "";
+			std::string txContentType;
 			MarshalString(sendTypingIndicationParam->TxOption->ContentType, txContentType);
 
-			std::string txMsgBody = "";
+			std::string txMsgBody;
 			MarshalString(sendTypingIndicationParam->TxOption->MsgBody, txMsgBody);
 
-			std::string txTargetUri = "";
+			std::string txTargetUri;
 			MarshalString(sendTypingIndicationParam->TxOption->TargetUri, txTargetUri);
 
 			prm.txOption.contentType = txContentType;
@@ -340,14 +369,43 @@ void Contact::SendTypingIndication(SendTypingIndicationParam^ sendTypingIndicati
 
 			if (sendTypingIndicationParam->TxOption->MultipartContentType != nullptr)
 			{
-				std::string txSubType = "";
+				std::string txSubType;
 				MarshalString(sendTypingIndicationParam->TxOption->MultipartContentType->SubType, txSubType);
 
-				std::string txType = "";
+				std::string txType;
 				MarshalString(sendTypingIndicationParam->TxOption->MultipartContentType->Type, txType);
 
 				prm.txOption.multipartContentType.subType = txSubType;
 				prm.txOption.multipartContentType.type = txType;
+			}
+
+			// If call settings.
+			if (sendTypingIndicationParam->TxOption->Headers != nullptr)
+			{
+				pj::SipHeaderVector headers;
+
+				// For each header
+				for (int i = 0; i < sendTypingIndicationParam->TxOption->Headers->Length; i++)
+				{
+					// Get the current header.
+					SipHeader^ sipHeader = (SipHeader^)(sendTypingIndicationParam->TxOption->Headers[i]);
+
+					std::string name;
+					MarshalString(sipHeader->Name, name);
+
+					std::string value;
+					MarshalString(sipHeader->Value, value);
+
+					pj::SipHeader header;
+					header.hName = name;
+					header.hValue = value;
+
+					// Add the sip header.
+					headers.push_back(header);
+				}
+
+				// Ass the headers.
+				prm.txOption.headers = headers;
 			}
 		}
 
@@ -383,7 +441,7 @@ String^ Contact::ContactUri::get()
 /// <param name="contactMapper">Contact connection mapping configuration.</param>
 void Contact::SetConnectionMappings(ContactConnection^ contactConnection, ContactMapper& contactMapper)
 {
-	std::string uri = "";
+	std::string uri;
 	MarshalString(contactConnection->Uri, uri);
 	contactMapper.SetUri(uri);
 
@@ -397,10 +455,13 @@ void Contact::SetConnectionMappings(ContactConnection^ contactConnection, Contac
 /// <param name="os">The native string.</param>
 void Contact::MarshalString(String^ s, std::string& os)
 {
-	using namespace Runtime::InteropServices;
-	const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
-	os = chars;
-	Marshal::FreeHGlobal(IntPtr((void*)chars));
+	if (!String::IsNullOrEmpty(s))
+	{
+		using namespace Runtime::InteropServices;
+		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
 }
 
 ///	<summary>
@@ -410,10 +471,13 @@ void Contact::MarshalString(String^ s, std::string& os)
 /// <param name="os">The native string.</param>
 void Contact::MarshalString(String^ s, std::wstring& os)
 {
-	using namespace Runtime::InteropServices;
-	const wchar_t* chars = (const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
-	os = chars;
-	Marshal::FreeHGlobal(IntPtr((void*)chars));
+	if (!String::IsNullOrEmpty(s))
+	{
+		using namespace Runtime::InteropServices;
+		const wchar_t* chars = (const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
 }
 
 ///	<summary>

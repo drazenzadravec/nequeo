@@ -60,23 +60,23 @@ namespace Nequeo
 				///	</summary>
 				PJSIP_INV_STATE_CALLING,
 				///	<summary>
-				/// After INVITE is received..
+				/// After INVITE is received.
 				///	</summary>
 				PJSIP_INV_STATE_INCOMING,
 				///	<summary>
-				/// After response with To tag..
+				/// After response with To tag.
 				///	</summary>
 				PJSIP_INV_STATE_EARLY,
 				///	<summary>
-				/// After 2xx is sent/received..
+				/// After 2xx is sent/received.
 				///	</summary>
 				PJSIP_INV_STATE_CONNECTING,
 				///	<summary>
-				/// After ACK is sent/received..
+				/// After ACK is sent/received.
 				///	</summary>
 				PJSIP_INV_STATE_CONFIRMED,
 				///	<summary>
-				/// Session is terminated..
+				/// Session is terminated.
 				///	</summary>
 				PJSIP_INV_STATE_DISCONNECTED,
 
