@@ -43,7 +43,7 @@ AccountConnection::AccountConnection() :
 	_timeoutSec(300), _firstRetryIntervalSec(10), _unregWaitSec(30), _delayBeforeRefreshSec(10), _timerMinSESec(90), _timerSessExpiresSec(1800), _noIceRtcp(false), _iceEnabled(false),
 	_ipv6_Use(Nequeo::Net::PjSip::IPv6_Use::IPV6_DISABLED), _srtp_Use(Nequeo::Net::PjSip::SRTP_Use::SRTP_DISABLED), _srtp_SecureSignaling(Nequeo::Net::PjSip::SRTP_SecureSignaling::SRTP_SECURESIGNALING_DISABLED),
 	_mediaTransportPort(0), _mediaTransportPortRange(0), _messageWaitingIndication(true), _mwiExpirationSec(3600), _publishEnabled(false), _publishQueue(true), _publishShutdownWaitMsec(2000),
-	_videoRateControlBandwidth(0)
+	_videoAutoTransmit(false), _videoAutoShow(false), _videoRateControlBandwidth(0)
 {
 }
 
@@ -59,7 +59,7 @@ AccountConnection::AccountConnection(String^ accountName, String^ spHost, String
 	_timeoutSec(300), _firstRetryIntervalSec(10), _unregWaitSec(30), _delayBeforeRefreshSec(10), _timerMinSESec(90), _timerSessExpiresSec(1800), _noIceRtcp(false), _iceEnabled(false),
 	_ipv6_Use(Nequeo::Net::PjSip::IPv6_Use::IPV6_DISABLED), _srtp_Use(Nequeo::Net::PjSip::SRTP_Use::SRTP_DISABLED), _srtp_SecureSignaling(Nequeo::Net::PjSip::SRTP_SecureSignaling::SRTP_SECURESIGNALING_DISABLED),
 	_mediaTransportPort(0), _mediaTransportPortRange(0), _messageWaitingIndication(true), _mwiExpirationSec(3600), _publishEnabled(false), _publishQueue(true), _publishShutdownWaitMsec(2000),
-	_videoRateControlBandwidth(0)
+	_videoAutoTransmit(false), _videoAutoShow(false), _videoRateControlBandwidth(0)
 {
 	_accountName = accountName;
 	_spHost = spHost;
@@ -594,4 +594,36 @@ unsigned AccountConnection::VideoRateControlBandwidth::get()
 void AccountConnection::VideoRateControlBandwidth::set(unsigned value)
 {
 	_videoRateControlBandwidth = value;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video capture is done automatically.
+/// </summary>
+bool AccountConnection::VideoAutoTransmit::get()
+{
+	return _videoAutoTransmit;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video capture is done automatically.
+/// </summary>
+void AccountConnection::VideoAutoTransmit::set(bool value)
+{
+	_videoAutoTransmit = value;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video is shown automatically.
+/// </summary>
+bool AccountConnection::VideoAutoShow::get()
+{
+	return _videoAutoShow;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video is shown automatically.
+/// </summary>
+void AccountConnection::VideoAutoShow::set(bool value)
+{
+	_videoAutoShow = value;
 }

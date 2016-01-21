@@ -240,7 +240,7 @@ pjsip_redirect_op CallMapper::GetRedirectResponseTypeEx(RedirectResponseType red
 	case Nequeo::Net::PjSip::RedirectResponseType::PJSIP_REDIRECT_STOP:
 		return pjsip_redirect_op::PJSIP_REDIRECT_STOP;
 	default:
-		return pjsip_redirect_op::PJSIP_REDIRECT_REJECT;
+		return pjsip_redirect_op::PJSIP_REDIRECT_STOP;
 	}
 }
 
@@ -321,5 +321,63 @@ SipEventType CallMapper::GetSipEventTypeEx(pjsip_event_id_e sipEventType)
 		return SipEventType::PJSIP_EVENT_USER;
 	default:
 		return SipEventType::PJSIP_EVENT_UNKNOWN;
+	}
+}
+
+///	<summary>
+///	Get the MediaEventType.
+///	</summary>
+/// <param name="mediaEventType">The MediaEventType.</param>
+/// <returns>The MediaEventType.</returns>
+MediaEventType CallMapper::GetMediaEventTypeEx(pjmedia_event_type mediaEventType)
+{
+	switch (mediaEventType)
+	{
+	case PJMEDIA_EVENT_NONE:
+		return MediaEventType::PJMEDIA_EVENT_NONE;
+	case PJMEDIA_EVENT_FMT_CHANGED:
+		return MediaEventType::PJMEDIA_EVENT_FMT_CHANGED;
+	case PJMEDIA_EVENT_WND_CLOSING:
+		return MediaEventType::PJMEDIA_EVENT_WND_CLOSING;
+	case PJMEDIA_EVENT_WND_CLOSED:
+		return MediaEventType::PJMEDIA_EVENT_WND_CLOSED;
+	case PJMEDIA_EVENT_WND_RESIZED:
+		return MediaEventType::PJMEDIA_EVENT_WND_RESIZED;
+	case PJMEDIA_EVENT_MOUSE_BTN_DOWN:
+		return MediaEventType::PJMEDIA_EVENT_MOUSE_BTN_DOWN;
+	case PJMEDIA_EVENT_KEYFRAME_FOUND:
+		return MediaEventType::PJMEDIA_EVENT_KEYFRAME_FOUND;
+	case PJMEDIA_EVENT_KEYFRAME_MISSING:
+		return MediaEventType::PJMEDIA_EVENT_KEYFRAME_MISSING;
+	case PJMEDIA_EVENT_ORIENT_CHANGED:
+		return MediaEventType::PJMEDIA_EVENT_ORIENT_CHANGED;
+	default:
+		return MediaEventType::PJMEDIA_EVENT_NONE;
+	}
+}
+
+///	<summary>
+///	Get the MediaTransportState.
+///	</summary>
+/// <param name="mediaTransportState">The MediaTransportState.</param>
+/// <returns>The MediaTransportState.</returns>
+MediaTransportState CallMapper::GetMediaTransportStateEx(pjsua_med_tp_st mediaTransportState)
+{
+	switch (mediaTransportState)
+	{
+	case PJSUA_MED_TP_NULL:
+		return MediaTransportState::PJSUA_MED_TP_NULL;
+	case PJSUA_MED_TP_CREATING:
+		return MediaTransportState::PJSUA_MED_TP_CREATING;
+	case PJSUA_MED_TP_IDLE:
+		return MediaTransportState::PJSUA_MED_TP_IDLE;
+	case PJSUA_MED_TP_INIT:
+		return MediaTransportState::PJSUA_MED_TP_INIT;
+	case PJSUA_MED_TP_RUNNING:
+		return MediaTransportState::PJSUA_MED_TP_RUNNING;
+	case PJSUA_MED_TP_DISABLED:
+		return MediaTransportState::PJSUA_MED_TP_DISABLED;
+	default:
+		return MediaTransportState::PJSUA_MED_TP_NULL;
 	}
 }

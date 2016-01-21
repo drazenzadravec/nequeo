@@ -91,6 +91,12 @@ namespace Nequeo
 				pj::VidDevManager& GetVideoDevManager();
 
 				/// <summary>
+				/// Get the account video configration.
+				/// </summary>
+				/// <returns>The account video configuration.</returns>
+				pj::AccountVideoConfig& GetAccountVideoConfig();
+
+				/// <summary>
 				/// Get the number of active media ports.
 				/// </summary>
 				/// <returns>The number of active ports.</returns>

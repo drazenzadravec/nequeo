@@ -168,7 +168,8 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 	_accountVideoConfig->defaultRenderDevice = pjmedia_vid_dev_std_index::PJMEDIA_VID_DEFAULT_RENDER_DEV;
 	_accountVideoConfig->windowFlags = pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_BORDER | pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_RESIZABLE;
 	_accountVideoConfig->rateControlBandwidth = mapper.GetVideoRateControlBandwidth();
-	_accountVideoConfig->autoTransmitOutgoing = true;
+	_accountVideoConfig->autoTransmitOutgoing = mapper.GetVideoAutoTransmit();
+	_accountVideoConfig->autoShowIncoming = mapper.GetVideoAutoShow();
 
 	// Assign the account config.
 	_accountConfig->regConfig = *(_accountRegConfig.get());
@@ -200,6 +201,15 @@ pj::AudDevManager& AccountCallback::GetAudioDevManager()
 pj::VidDevManager& AccountCallback::GetVideoDevManager()
 {
 	return _endpoint->vidDevManager();
+}
+
+/// <summary>
+/// Get the account video configration.
+/// </summary>
+/// <returns>The account video configuration.</returns>
+pj::AccountVideoConfig& AccountCallback::GetAccountVideoConfig()
+{
+	return *(_accountVideoConfig.get());
 }
 
 /// <summary>

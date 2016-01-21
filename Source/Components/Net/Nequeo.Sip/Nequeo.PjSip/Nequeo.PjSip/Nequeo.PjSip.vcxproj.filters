@@ -285,6 +285,63 @@
     <ClInclude Include="OnCallTsxStateParam.h">
       <Filter>Header Files\CallHeader</Filter>
     </ClInclude>
+    <ClInclude Include="MediaTransportState.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaEvent.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaEventData.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaFmtChangedEvent.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaEventType.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="SdpSession.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallMediaTransportStateParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallMediaEventParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCreateMediaTransportParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallRedirectedParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallRxOfferParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallReplacedParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallSdpCreatedParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallReplaceRequestParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallTransferStatusParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCallTransferRequestParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnDtmfDigitParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnStreamDestroyedParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnStreamCreatedParam.h">
+      <Filter>Header Files\CallHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -468,6 +525,57 @@
       <Filter>Source Files\CallSource</Filter>
     </ClCompile>
     <ClCompile Include="OnCallTsxStateParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaEvent.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaEventData.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaFmtChangedEvent.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="SdpSession.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallMediaTransportStateParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallMediaEventParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCreateMediaTransportParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallRedirectedParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallRxOfferParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallReplacedParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallSdpCreatedParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallReplaceRequestParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallTransferStatusParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnCallTransferRequestParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnDtmfDigitParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnStreamDestroyedParam.cpp">
+      <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnStreamCreatedParam.cpp">
       <Filter>Source Files\CallSource</Filter>
     </ClCompile>
   </ItemGroup>

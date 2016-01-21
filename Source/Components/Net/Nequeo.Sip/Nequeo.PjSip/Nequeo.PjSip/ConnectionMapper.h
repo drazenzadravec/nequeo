@@ -270,6 +270,18 @@ namespace Nequeo
 				unsigned GetVideoRateControlBandwidth();
 
 				/// <summary>
+				/// Gets or sets an indicator specifying that any video capture is done automatically.
+				/// </summary>
+				void SetVideoAutoTransmit(bool value);
+				bool GetVideoAutoTransmit();
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that any video is shown automatically.
+				/// </summary>
+				void SetVideoAutoShow(bool value);
+				bool GetVideoAutoShow();
+
+				/// <summary>
 				/// Get ip v6 use.
 				/// </summary>
 				/// <param name="ipv6Use">The current ipv6 use.</param>
@@ -350,6 +362,8 @@ namespace Nequeo
 				bool _noIceRtcp;
 				bool _iceEnabled;
 				unsigned _videoRateControlBandwidth;
+				bool _videoAutoTransmit;
+				bool _videoAutoShow;
 
 				bool _dropCallsOnFail;
 				bool _registerOnAdd;

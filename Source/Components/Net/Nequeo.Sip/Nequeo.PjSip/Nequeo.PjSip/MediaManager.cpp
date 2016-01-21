@@ -40,8 +40,9 @@ using namespace Nequeo::Net::PjSip;
 /// </summary>
 /// <param name="pjAudDevManager">Audio device manager.</param>
 /// <param name="pjVidDevManager">Video device manager.</param>
-MediaManager::MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager) : 
-	_disposed(false), _pjAudDevManager(pjAudDevManager), _pjVidDevManager(pjVidDevManager)
+/// <param name = "videoConfig">Video configuration.< / param>
+MediaManager::MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager, pj::AccountVideoConfig& videoConfig) :
+	_disposed(false), _pjAudDevManager(pjAudDevManager), _pjVidDevManager(pjVidDevManager), _videoConfig(videoConfig)
 {
 }
 
@@ -287,6 +288,33 @@ AudioMedia^ MediaManager::GetCaptureDeviceMedia()
 AudioMedia^ MediaManager::GetPlaybackDeviceMedia()
 {
 	return gcnew AudioMedia(_pjAudDevManager.getPlaybackDevMedia());
+}
+
+/// <summary>
+/// Set the video capture device.
+/// </summary>
+/// <param name="deviceID">Device ID of the capture device.</param>
+void MediaManager::SetVideoCaptureDeviceID(int deviceID)
+{
+	_videoConfig.defaultCaptureDevice = deviceID;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video capture is done automatically.
+/// </summary>
+/// <param name="value">True to enable video capture is done automatically.</param>
+void MediaManager::SetVideoAutoTransmit(bool value)
+{
+	_videoConfig.autoTransmitOutgoing = value;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video is shown automatically.
+/// </summary>
+/// <param name="value">True to enable video is shown automatically.</param>
+void MediaManager::SetVideoAutoShow(bool value)
+{
+	_videoConfig.autoShowIncoming = value;
 }
 
 ///	<summary>

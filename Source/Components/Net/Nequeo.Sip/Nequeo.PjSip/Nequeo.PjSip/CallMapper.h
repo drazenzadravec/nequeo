@@ -48,6 +48,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "VideoStreamOperation.h"
 #include "MediaTransportProtocol.h"
 #include "SipEventType.h"
+#include "MediaEventType.h"
+#include "MediaTransportState.h"
 
 #include "pjsua2.hpp"
 
@@ -149,6 +151,20 @@ namespace Nequeo
 				/// <param name="sipEventType">The SipEventType.</param>
 				/// <returns>The SipEventType.</returns>
 				static SipEventType GetSipEventTypeEx(pjsip_event_id_e sipEventType);
+
+				///	<summary>
+				///	Get the MediaEventType.
+				///	</summary>
+				/// <param name="mediaEventType">The MediaEventType.</param>
+				/// <returns>The MediaEventType.</returns>
+				static MediaEventType GetMediaEventTypeEx(pjmedia_event_type mediaEventType);
+
+				///	<summary>
+				///	Get the MediaTransportState.
+				///	</summary>
+				/// <param name="mediaTransportState">The MediaTransportState.</param>
+				/// <returns>The MediaTransportState.</returns>
+				static MediaTransportState GetMediaTransportStateEx(pjsua_med_tp_st mediaTransportState);
 
 			private:
 				bool _disposed;

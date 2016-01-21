@@ -56,6 +56,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "MediaStreamStat.h"
 #include "MediaTransportInfo.h"
 #include "SipEventType.h"
+#include "MediaEvent.h"
+#include "MediaEventData.h"
+#include "MediaFmtChangedEvent.h"
+#include "MediaTransportState.h"
 
 #include "pjsua2.hpp"
 
@@ -72,10 +76,42 @@ namespace Nequeo
 			ref class OnCallStateParam;
 			ref class OnCallMediaStateParam;
 			ref class OnCallTsxStateParam;
+			ref class OnCallSdpCreatedParam;
+			ref class OnStreamCreatedParam;
+			ref class OnStreamDestroyedParam;
+			ref class OnDtmfDigitParam;
+			ref class OnCallTransferRequestParam;
+			ref class OnCallTransferStatusParam;
+			ref class OnCallReplaceRequestParam;
+			ref class OnCallReplacedParam;
+			ref class OnCallRxOfferParam;
+			ref class OnInstantMessageParam;
+			ref class OnInstantMessageStatusParam;
+			ref class OnTypingIndicationParam;
+			ref class OnCallRedirectedParam;
+			ref class OnCallMediaTransportStateParam;
+			ref class OnCallMediaEventParam;
+			ref class OnCreateMediaTransportParam;
 
 			delegate void OnCallStateCallback(pj::OnCallStateParam&);
 			delegate void OnCallMediaStateCallback(pj::OnCallMediaStateParam&);
 			delegate void OnCallTsxStateCallback(pj::OnCallTsxStateParam&);
+			delegate void OnCallSdpCreatedCallback(pj::OnCallSdpCreatedParam&);
+			delegate void OnStreamCreatedCallback(pj::OnStreamCreatedParam&);
+			delegate void OnStreamDestroyedCallback(pj::OnStreamDestroyedParam&);
+			delegate void OnDtmfDigitCallback(pj::OnDtmfDigitParam&);
+			delegate void OnCallTransferRequestCallback(pj::OnCallTransferRequestParam&);
+			delegate void OnCallTransferStatusCallback(pj::OnCallTransferStatusParam&);
+			delegate void OnCallReplaceRequestCallback(pj::OnCallReplaceRequestParam&);
+			delegate void OnCallReplacedCallback(pj::OnCallReplacedParam&);
+			delegate void OnCallRxOfferCallback(pj::OnCallRxOfferParam&);
+			delegate void OnCallInstantMessageCallback(pj::OnInstantMessageParam&);
+			delegate void OnCallInstantMessageStatusCallback(pj::OnInstantMessageStatusParam&);
+			delegate void OnCallTypingIndicationCallback(pj::OnTypingIndicationParam&);
+			delegate pjsip_redirect_op OnCallRedirectedCallback(pj::OnCallRedirectedParam&);
+			delegate void OnCallMediaTransportStateCallback(pj::OnCallMediaTransportStateParam&);
+			delegate void OnCallMediaEventCallback(pj::OnCallMediaEventParam&);
+			delegate void OnCreateMediaTransportCallback(pj::OnCreateMediaTransportParam&);
 
 			/// <summary>
 			/// Sip call.
@@ -123,6 +159,132 @@ namespace Nequeo
 				/// (such as INFO) with a final response.
 				/// </summary>
 				event System::EventHandler<OnCallTsxStateParam^>^ OnCallTsxState;
+
+				/// <summary>
+				/// Notify application when a call has just created a local SDP (for
+				/// initial or subsequent SDP offer / answer).Application can implement
+				/// this callback to modify the SDP, before it is being sent and / or
+				/// negotiated with remote SDP, for example to apply per account / call
+				/// basis codecs priority or to add custom / proprietary SDP attributes.
+				/// </summary>
+				event System::EventHandler<OnCallSdpCreatedParam^>^ OnCallSdpCreated;
+
+				/// <summary>
+				/// Notify application when media session is created and before it is
+				/// registered to the conference bridge.Application may return different
+				/// media port if it has added media processing port to the stream.This
+				/// media port then will be added to the conference bridge instead.
+				/// </summary>
+				event System::EventHandler<OnStreamCreatedParam^>^ OnStreamCreated;
+
+				/// <summary>
+				/// Notify application when media session has been unregistered from the
+				/// conference bridge and about to be destroyed.
+				/// </summary>
+				event System::EventHandler<OnStreamDestroyedParam^>^ OnStreamDestroyed;
+
+				/// <summary>
+				/// Notify application upon incoming DTMF digits.
+				/// </summary>
+				event System::EventHandler<OnDtmfDigitParam^>^ OnDtmfDigit;
+
+				/// <summary>
+				/// Notify application on call being transferred (i.e. REFER is received).
+				/// Application can decide to accept / reject transfer request
+				/// by setting the code(default is 202).When this callback
+				/// is not implemented, the default behavior is to accept the
+				/// transfer.
+				/// </summary>
+				event System::EventHandler<OnCallTransferRequestParam^>^ OnCallTransferRequest;
+
+				/// <summary>
+				/// Notify application of the status of previously sent call
+				/// transfer request.Application can monitor the status of the
+				/// call transfer request, for example to decide whether to
+				/// terminate existing call.
+				/// </summary>
+				event System::EventHandler<OnCallTransferStatusParam^>^ OnCallTransferStatus;
+
+				/// <summary>
+				/// Notify application about incoming INVITE with Replaces header.
+				/// Application may reject the request by setting non - 2xx code.
+				/// </summary>
+				event System::EventHandler<OnCallReplaceRequestParam^>^ OnCallReplaceRequest;
+
+				/// <summary>
+				/// Notify application that an existing call has been replaced with
+				/// a new call.This happens when PJSUA - API receives incoming INVITE
+				/// request with Replaces header.
+				/// After this callback is called, normally PJSUA - API will disconnect
+				/// this call and establish a new call \a newCallId.
+				/// </summary>
+				event System::EventHandler<OnCallReplacedParam^>^ OnCallReplaced;
+
+				/// <summary>
+				/// Notify application when call has received new offer from remote
+				/// (i.e.re - INVITE / UPDATE with SDP is received).Application can
+				/// decide to accept / reject the offer by setting the code(default
+				/// is 200).If the offer is accepted, application can update the
+				/// call setting to be applied in the answer.When this callback is
+				/// not implemented, the default behavior is to accept the offer using
+				/// current call setting.
+				/// </summary>
+				event System::EventHandler<OnCallRxOfferParam^>^ OnCallRxOffer;
+
+				/// <summary>
+				/// Notify application on incoming MESSAGE request.
+				/// </summary>
+				event System::EventHandler<OnInstantMessageParam^>^ OnInstantMessage;
+
+				/// <summary>
+				/// Notify application about the delivery status of outgoing MESSAGE request.
+				/// </summary>
+				event System::EventHandler<OnInstantMessageStatusParam^>^ OnInstantMessageStatus;
+
+				/// <summary>
+				/// Notify application about typing indication.
+				/// </summary>
+				event System::EventHandler<OnTypingIndicationParam^>^ OnTypingIndication;
+
+				/// <summary>
+				/// This callback is called when the call is about to resend the
+				/// INVITE request to the specified target, following the previously
+				/// received redirection response.
+				/// Application may accept the redirection to the specified target,
+				/// reject this target only and make the session continue to try the next
+				/// target in the list if such target exists, stop the whole
+				/// redirection process altogether and cause the session to be
+				/// disconnected, or defer the decision to ask for user confirmation.
+				/// This callback is optional,
+				/// the default behavior is to NOT follow the redirection response.
+				/// </summary>
+				event System::EventHandler<OnCallRedirectedParam^>^ OnCallRedirected;
+
+				/// <summary>
+				/// This callback is called when media transport state is changed.
+				/// </summary>
+				event System::EventHandler<OnCallMediaTransportStateParam^>^ OnCallMediaTransportState;
+
+				/// <summary>
+				/// Notification about media events such as video notifications. This
+				/// callback will most likely be called from media threads, thus
+				/// application must not perform heavy processing in this callback.
+				/// Especially, application must not destroy the call or media in this
+				/// callback.If application needs to perform more complex tasks to
+				/// handle the event, it should post the task to another thread.
+				/// </summary>
+				event System::EventHandler<OnCallMediaEventParam^>^ OnCallMediaEvent;
+
+				/// <summary>
+				/// This callback can be used by application to implement custom media
+				/// transport adapter for the call, or to replace the media transport
+				/// with something completely new altogether.
+				/// This callback is called when a new call is created.The library has
+				/// created a media transport for the call, and it is provided as the
+				/// \a mediaTp argument of this callback.The callback may change it
+				/// with the instance of media transport to be used by the call.
+				/// </summary>
+				event System::EventHandler<OnCreateMediaTransportParam^>^ OnCreateMediaTransport;
 
 				///	<summary>
 				///	Get detail information about this call.
@@ -421,6 +583,54 @@ namespace Nequeo
 
 				GCHandle _gchOnCallTsxState;
 				void OnCallTsxState_Handler(pj::OnCallTsxStateParam &prm);
+				
+				GCHandle _gchOnCallSdpCreated;
+				void OnCallSdpCreated_Handler(pj::OnCallSdpCreatedParam &prm);
+
+				GCHandle _gchOnStreamCreated;
+				void OnStreamCreated_Handler(pj::OnStreamCreatedParam &prm);
+
+				GCHandle _gchOnStreamDestroyed;
+				void OnStreamDestroyed_Handler(pj::OnStreamDestroyedParam &prm);
+
+				GCHandle _gchOnDtmfDigit;
+				void OnDtmfDigit_Handler(pj::OnDtmfDigitParam &prm);
+
+				GCHandle _gchOnCallTransferRequest;
+				void OnCallTransferRequest_Handler(pj::OnCallTransferRequestParam &prm);
+
+				GCHandle _gchOnCallTransferStatus;
+				void OnCallTransferStatus_Handler(pj::OnCallTransferStatusParam &prm);
+
+				GCHandle _gchOnCallReplaceRequest;
+				void OnCallReplaceRequest_Handler(pj::OnCallReplaceRequestParam &prm);
+
+				GCHandle _gchOnCallReplaced;
+				void OnCallReplaced_Handler(pj::OnCallReplacedParam &prm);
+
+				GCHandle _gchOnCallRxOffer;
+				void OnCallRxOffer_Handler(pj::OnCallRxOfferParam &prm);
+
+				GCHandle _gchOnInstantMessage;
+				void OnInstantMessage_Handler(pj::OnInstantMessageParam &prm);
+
+				GCHandle _gchOnInstantMessageStatus;
+				void OnInstantMessageStatus_Handler(pj::OnInstantMessageStatusParam &prm);
+
+				GCHandle _gchOnTypingIndication;
+				void OnTypingIndication_Handler(pj::OnTypingIndicationParam &prm);
+
+				GCHandle _gchOnCallRedirected;
+				pjsip_redirect_op OnCallRedirected_Handler(pj::OnCallRedirectedParam &prm);
+
+				GCHandle _gchOnCallMediaTransportState;
+				void OnCallMediaTransportState_Handler(pj::OnCallMediaTransportStateParam &prm);
+
+				GCHandle _gchOnCallMediaEvent;
+				void OnCallMediaEvent_Handler(pj::OnCallMediaEventParam &prm);
+
+				GCHandle _gchOnCreateMediaTransport;
+				void OnCreateMediaTransport_Handler(pj::OnCreateMediaTransportParam &prm);
 			};
 		}
 	}

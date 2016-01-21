@@ -364,6 +364,24 @@ namespace Nequeo
 					void set(unsigned value);
 				}
 
+				/// <summary>
+				/// Gets or sets an indicator specifying that any video capture is done automatically.
+				/// </summary>
+				property bool VideoAutoTransmit
+				{
+					bool get();
+					void set(bool value);
+				}
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that any video is shown automatically.
+				/// </summary>
+				property bool VideoAutoShow
+				{
+					bool get();
+					void set(bool value);
+				}
+
 			private:
 				bool _disposed;
 
@@ -375,6 +393,8 @@ namespace Nequeo
 				bool _noIceRtcp;
 				bool _iceEnabled;
 				unsigned _videoRateControlBandwidth;
+				bool _videoAutoTransmit;
+				bool _videoAutoShow;
 
 				bool _dropCallsOnFail;
 				bool _registerOnAdd;

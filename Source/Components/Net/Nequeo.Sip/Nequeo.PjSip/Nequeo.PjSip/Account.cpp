@@ -185,6 +185,8 @@ void Account::SetConnectionMappings(AccountConnection^ accountConnection, Connec
 	connectionMapper.SetIceEnabled(accountConnection->IceEnabled);
 	connectionMapper.SetNoIceRtcp(accountConnection->NoIceRtcp);
 	connectionMapper.SetVideoRateControlBandwidth(accountConnection->VideoRateControlBandwidth);
+	connectionMapper.SetVideoAutoTransmit(accountConnection->VideoAutoTransmit);
+	connectionMapper.SetVideoAutoShow(accountConnection->VideoAutoShow);
 
 	connectionMapper.SetIsDefault(accountConnection->IsDefault);
 	connectionMapper.SetSpPort(accountConnection->SpPort);
@@ -562,7 +564,8 @@ MediaManager^ Account::GetMediaManager()
 		// Get the audio device manager.
 		pj::AudDevManager& pjAudDevManager = _accountCallback->GetAudioDevManager();
 		pj::VidDevManager& pjVidDevManager = _accountCallback->GetVideoDevManager();
-		MediaManager^ mediaManager = gcnew MediaManager(pjAudDevManager, pjVidDevManager);
+		pj::AccountVideoConfig& pjAccountVideoConfig = _accountCallback->GetAccountVideoConfig();
+		MediaManager^ mediaManager = gcnew MediaManager(pjAudDevManager, pjVidDevManager, pjAccountVideoConfig);
 		return mediaManager;
 	}
 	else

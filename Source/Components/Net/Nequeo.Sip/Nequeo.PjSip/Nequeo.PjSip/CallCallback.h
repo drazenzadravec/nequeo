@@ -114,10 +114,155 @@ namespace Nequeo
 				/// <param name="prm">Callback parameter.</param>
 				void onCallTsxState(pj::OnCallTsxStateParam &prm);
 
+				/// <summary>
+				/// Notify application when a call has just created a local SDP (for
+				/// initial or subsequent SDP offer / answer).Application can implement
+				/// this callback to modify the SDP, before it is being sent and / or
+				/// negotiated with remote SDP, for example to apply per account / call
+				/// basis codecs priority or to add custom / proprietary SDP attributes.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallSdpCreated(pj::OnCallSdpCreatedParam &prm);
+
+				/// <summary>
+				/// Notify application when media session is created and before it is
+				/// registered to the conference bridge.Application may return different
+				/// media port if it has added media processing port to the stream.This
+				/// media port then will be added to the conference bridge instead.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onStreamCreated(pj::OnStreamCreatedParam &prm);
+
+				/// <summary>
+				/// Notify application when media session has been unregistered from the
+				/// conference bridge and about to be destroyed.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onStreamDestroyed(pj::OnStreamDestroyedParam &prm);
+
+				/// <summary>
+				/// Notify application upon incoming DTMF digits.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onDtmfDigit(pj::OnDtmfDigitParam &prm);
+
+				/// <summary>
+				/// Notify application on call being transferred (i.e. REFER is received).
+				/// Application can decide to accept / reject transfer request
+				/// by setting the code(default is 202).When this callback
+				/// is not implemented, the default behavior is to accept the
+				/// transfer.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallTransferRequest(pj::OnCallTransferRequestParam &prm);
+
+				/// <summary>
+				/// Notify application of the status of previously sent call
+				/// transfer request.Application can monitor the status of the
+				/// call transfer request, for example to decide whether to
+				/// terminate existing call.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallTransferStatus(pj::OnCallTransferStatusParam &prm);
+
+				/// <summary>
+				/// Notify application about incoming INVITE with Replaces header.
+				/// Application may reject the request by setting non - 2xx code.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallReplaceRequest(pj::OnCallReplaceRequestParam &prm);
+
+				/// <summary>
+				/// Notify application that an existing call has been replaced with
+				/// a new call.This happens when PJSUA - API receives incoming INVITE
+				/// request with Replaces header.
+				/// After this callback is called, normally PJSUA - API will disconnect
+				/// this call and establish a new call newCallId.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallReplaced(pj::OnCallReplacedParam &prm);
+
+				/// <summary>
+				/// Notify application when call has received new offer from remote
+				/// (i.e.re - INVITE / UPDATE with SDP is received).Application can
+				/// decide to accept / reject the offer by setting the code(default
+				/// is 200).If the offer is accepted, application can update the
+				/// call setting to be applied in the answer.When this callback is
+				/// not implemented, the default behavior is to accept the offer using
+				/// current call setting.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallRxOffer(pj::OnCallRxOfferParam &prm);
+
+				/// <summary>
+				/// Notify application on incoming MESSAGE request.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onInstantMessage(pj::OnInstantMessageParam &prm);
+
+				/// <summary>
+				/// Notify application about the delivery status of outgoing MESSAGE request.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onInstantMessageStatus(pj::OnInstantMessageStatusParam &prm);
+
+				/// <summary>
+				/// Notify application about typing indication.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onTypingIndication(pj::OnTypingIndicationParam &prm);
+
+				/// <summary>
+				/// This callback is called when the call is about to resend the
+				/// INVITE request to the specified target, following the previously
+				/// received redirection response.
+				///
+				/// Application may accept the redirection to the specified target,
+				/// reject this target only and make the session continue to try the next
+				/// target in the list if such target exists, stop the whole
+				/// redirection process altogether and cause the session to be
+				/// disconnected, or defer the decision to ask for user confirmation.
+				///
+				/// This callback is optional, the default behavior is to NOT follow the redirection response.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				/// <returns>Redirection options.</returns>
+				pjsip_redirect_op onCallRedirected(pj::OnCallRedirectedParam &prm);
+
+				/// <summary>
+				/// This callback is called when media transport state is changed.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallMediaTransportState(pj::OnCallMediaTransportStateParam &prm);
+
+				/// <summary>
+				/// Notification about media events such as video notifications. This
+				/// callback will most likely be called from media threads, thus
+				/// application must not perform heavy processing in this callback.
+				/// Especially, application must not destroy the call or media in this
+				/// callback.If application needs to perform more complex tasks to
+				/// handle the event, it should post the task to another thread.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCallMediaEvent(pj::OnCallMediaEventParam &prm);
+
+				/// <summary>
+				/// This callback can be used by application to implement custom media
+				/// transport adapter for the call, or to replace the media transport
+				/// with something completely new altogether.
+				///
+				/// This callback is called when a new call is created.The library has
+				/// created a media transport for the call, and it is provided as the
+				/// mediaTp argument of this callback.The callback may change it
+				/// with the instance of media transport to be used by the call.
+				/// </summary>
+				/// <param name="prm">Callback parameter.</param>
+				void onCreateMediaTransport(pj::OnCreateMediaTransportParam &prm);
+
 				///	<summary>
 				///	Set the on call state function callback.
 				///	</summary>
-				/// <param name="onCallMediaStateCallBack">The on call state function callback.</param>
+				/// <param name="onCallStateCallBack">The on call state function callback.</param>
 				void Set_OnCallState_Function(OnCallState_Function onCallStateCallBack);
 
 				///	<summary>
@@ -131,6 +276,102 @@ namespace Nequeo
 				///	</summary>
 				/// <param name="onCallTsxStateCallBack">The on call tsx state function callback.</param>
 				void Set_OnCallTsxState_Function(OnCallTsxState_Function onCallTsxStateCallBack);
+
+				///	<summary>
+				///	Set the CallSdpCreated function callback.
+				///	</summary>
+				/// <param name="onCallSdpCreatedCallBack">The CallSdpCreated function callback.</param>
+				void Set_OnCallSdpCreated_Function(OnCallSdpCreated_Function onCallSdpCreatedCallBack);
+
+				///	<summary>
+				///	Set the StreamCreated function callback.
+				///	</summary>
+				/// <param name="onStreamCreatedCallBack">The StreamCreated function callback.</param>
+				void Set_OnStreamCreated_Function(OnStreamCreated_Function onStreamCreatedCallBack);
+
+				///	<summary>
+				///	Set the StreamDestroyed function callback.
+				///	</summary>
+				/// <param name="onStreamDestroyedCallBack">The StreamDestroyed function callback.</param>
+				void Set_OnStreamDestroyed_Function(OnStreamDestroyed_Function onStreamDestroyedCallBack);
+
+				///	<summary>
+				///	Set the DtmfDigit function callback.
+				///	</summary>
+				/// <param name="onDtmfDigitCallBack">The DtmfDigit function callback.</param>
+				void Set_OnDtmfDigit_Function(OnDtmfDigit_Function onDtmfDigitCallBack);
+
+				///	<summary>
+				///	Set the CallTransferRequest function callback.
+				///	</summary>
+				/// <param name="onCallTransferRequestCallBack">The CallTransferRequest function callback.</param>
+				void Set_OnCallTransferRequest_Function(OnCallTransferRequest_Function onCallTransferRequestCallBack);
+
+				///	<summary>
+				///	Set the CallTransferStatus function callback.
+				///	</summary>
+				/// <param name="onCallTransferStatusCallBack">The CallTransferStatus function callback.</param>
+				void Set_OnCallTransferStatus_Function(OnCallTransferStatus_Function onCallTransferStatusCallBack);
+
+				///	<summary>
+				///	Set the CallReplaceRequest function callback.
+				///	</summary>
+				/// <param name="onCallReplaceRequestCallBack">The CallReplaceRequest function callback.</param>
+				void Set_OnCallReplaceRequest_Function(OnCallReplaceRequest_Function onCallReplaceRequestCallBack);
+
+				///	<summary>
+				///	Set the CallReplaced function callback.
+				///	</summary>
+				/// <param name="onCallReplacedCallBack">The CallReplaced function callback.</param>
+				void Set_OnCallReplaced_Function(OnCallReplaced_Function onCallReplacedCallBack);
+
+				///	<summary>
+				///	Set the CallRxOffer function callback.
+				///	</summary>
+				/// <param name="onCallRxOfferCallBack">The CallRxOffer function callback.</param>
+				void Set_OnCallRxOffer_Function(OnCallRxOffer_Function onCallRxOfferCallBack);
+
+				///	<summary>
+				///	Set the InstantMessage function callback.
+				///	</summary>
+				/// <param name="onInstantMessageCallBack">The InstantMessage function callback.</param>
+				void Set_OnInstantMessage_Function(OnInstantMessage_Function onInstantMessageCallBack);
+
+				///	<summary>
+				///	Set the InstantMessageStatus function callback.
+				///	</summary>
+				/// <param name="onInstantMessageStatusCallBack">The InstantMessageStatus function callback.</param>
+				void Set_OnInstantMessageStatus_Function(OnInstantMessageStatus_Function onInstantMessageStatusCallBack);
+
+				///	<summary>
+				///	Set the TypingIndication function callback.
+				///	</summary>
+				/// <param name="onTypingIndicationCallBack">The TypingIndication function callback.</param>
+				void Set_OnTypingIndication_Function(OnTypingIndication_Function onTypingIndicationCallBack);
+
+				///	<summary>
+				///	Set the CallRedirected function callback.
+				///	</summary>
+				/// <param name="onCallRedirectedCallBack">The CallRedirected function callback.</param>
+				void Set_OnCallRedirected_Function(OnCallRedirected_Function onCallRedirectedCallBack);
+
+				///	<summary>
+				///	Set the CallMediaTransportState function callback.
+				///	</summary>
+				/// <param name="onCallMediaTransportStateCallBack">The CallMediaTransportState function callback.</param>
+				void Set_OnCallMediaTransportState_Function(OnCallMediaTransportState_Function onCallMediaTransportStateCallBack);
+
+				///	<summary>
+				///	Set the CallMediaEvent function callback.
+				///	</summary>
+				/// <param name="onCallMediaEventCallBack">The CallMediaEvent function callback.</param>
+				void Set_OnCallMediaEvent_Function(OnCallMediaEvent_Function onCallMediaEventCallBack);
+
+				///	<summary>
+				///	Set the CreateMediaTransport function callback.
+				///	</summary>
+				/// <param name="onCreateMediaTransportCallBack">The CreateMediaTransport function callback.</param>
+				void Set_OnCreateMediaTransport_Function(OnCreateMediaTransport_Function onCreateMediaTransportCallBack);
 
 			private:
 				bool _disposed;

@@ -87,7 +87,7 @@ namespace Nequeo
 				/// <summary>
 				/// Is the video capture active.
 				/// </summary>
-				/// <param name="deviceID">Device ID of the capture device.< / param>
+				/// <param name="deviceID">Device ID of the capture device.</param>
 				/// <returns>True if the video capture is active: else false.</returns>
 				bool IsVideoCaptureActive(int deviceID);
 
@@ -106,6 +106,24 @@ namespace Nequeo
 				/// <param name="deviceName">The device name.</param>
 				/// <returns>The device ID. If the device is not found, error will be thrown.</returns>
 				int GetVideoDeviceID(String^ driverName, String^ deviceName);
+
+				/// <summary>
+				/// Set the video capture device.
+				/// </summary>
+				/// <param name="deviceID">Device ID of the capture device.</param>
+				void SetVideoCaptureDeviceID(int deviceID);
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that any video capture is done automatically.
+				/// </summary>
+				/// <param name="value">True to enable video capture is done automatically.</param>
+				void SetVideoAutoTransmit(bool value);
+
+				/// <summary>
+				/// Gets or sets an indicator specifying that any video is shown automatically.
+				/// </summary>
+				/// <param name="value">True to enable video is shown automatically.</param>
+				void SetVideoAutoShow(bool value);
 
 				/// <summary>
 				/// Get currently active capture sound devices. If sound devices has not been
@@ -153,12 +171,14 @@ namespace Nequeo
 				/// </summary>
 				/// <param name="pjAudDevManager">Audio device manager.</param>
 				/// <param name="pjVidDevManager">Video device manager.</param>
-				MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager);
+				/// <param name="videoConfig">Video configuration.</param>
+				MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager, pj::AccountVideoConfig& videoConfig);
 
 			private:
 				bool _disposed;
 				pj::AudDevManager& _pjAudDevManager;
 				pj::VidDevManager& _pjVidDevManager;
+				pj::AccountVideoConfig& _videoConfig;
 
 				void MarshalString(String^ s, std::string& os);
 				void MarshalString(String^ s, std::wstring& os);

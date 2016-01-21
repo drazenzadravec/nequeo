@@ -41,6 +41,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "OnCallStateParam.h"
 #include "OnCallMediaStateParam.h"
 #include "OnCallTsxStateParam.h"
+#include "OnCreateMediaTransportParam.h"
+#include "OnCallMediaEventParam.h"
+#include "OnCallMediaTransportStateParam.h"
+#include "OnCallRedirectedParam.h"
+#include "OnTypingIndicationParam.h"
+#include "OnInstantMessageParam.h"
+#include "OnInstantMessageStatusParam.h"
+#include "OnCallRxOfferParam.h"
+#include "OnCallReplacedParam.h"
+#include "OnCallSdpCreatedParam.h"
+#include "OnCallReplaceRequestParam.h"
+#include "OnCallTransferStatusParam.h"
+#include "OnCallTransferRequestParam.h"
+#include "OnDtmfDigitParam.h"
+#include "OnStreamDestroyedParam.h"
+#include "OnStreamCreatedParam.h"
 
 #include "pjsua2\call.hpp"
 #include "pjsua-lib\pjsua_internal.h"
@@ -75,6 +91,22 @@ Call::~Call()
 		_gchOnCallState.Free();
 		_gchOnCallMediaState.Free();
 		_gchOnCallTsxState.Free();
+		_gchOnCallSdpCreated.Free();
+		_gchOnStreamCreated.Free();
+		_gchOnStreamDestroyed.Free();
+		_gchOnDtmfDigit.Free();
+		_gchOnCallTransferRequest.Free();
+		_gchOnCallTransferStatus.Free();
+		_gchOnCallReplaceRequest.Free();
+		_gchOnCallReplaced.Free();
+		_gchOnCallRxOffer.Free();
+		_gchOnInstantMessage.Free();
+		_gchOnInstantMessageStatus.Free();
+		_gchOnTypingIndication.Free();
+		_gchOnCallRedirected.Free();
+		_gchOnCallMediaTransportState.Free();
+		_gchOnCallMediaEvent.Free();
+		_gchOnCreateMediaTransport.Free();
 	}
 }
 
@@ -155,6 +187,212 @@ void Call::Create()
 
 
 
+	// Assign the handler and allocate memory.
+	OnCallRedirectedCallback^ onCallRedirectedCallback = gcnew OnCallRedirectedCallback(this, &Call::OnCallRedirected_Handler);
+	_gchOnCallRedirected = GCHandle::Alloc(onCallRedirectedCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallRedirected = Marshal::GetFunctionPointerForDelegate(onCallRedirectedCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallRedirected_Function onCallRedirectedFunction = static_cast<OnCallRedirected_Function>(iponCallRedirected.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCreateMediaTransportCallback^ onCreateMediaTransportCallback = gcnew OnCreateMediaTransportCallback(this, &Call::OnCreateMediaTransport_Handler);
+	_gchOnCreateMediaTransport = GCHandle::Alloc(onCreateMediaTransportCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCreateMediaTransport = Marshal::GetFunctionPointerForDelegate(onCreateMediaTransportCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCreateMediaTransport_Function onCreateMediaTransportFunction = static_cast<OnCreateMediaTransport_Function>(iponCreateMediaTransport.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallMediaEventCallback^ onCallMediaEventCallback = gcnew OnCallMediaEventCallback(this, &Call::OnCallMediaEvent_Handler);
+	_gchOnCallMediaEvent = GCHandle::Alloc(onCallMediaEventCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallMediaEvent = Marshal::GetFunctionPointerForDelegate(onCallMediaEventCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallMediaEvent_Function onCallMediaEventFunction = static_cast<OnCallMediaEvent_Function>(iponCallMediaEvent.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallMediaTransportStateCallback^ onCallMediaTransportStateCallback = gcnew OnCallMediaTransportStateCallback(this, &Call::OnCallMediaTransportState_Handler);
+	_gchOnCallMediaTransportState = GCHandle::Alloc(onCallMediaTransportStateCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallMediaTransportState = Marshal::GetFunctionPointerForDelegate(onCallMediaTransportStateCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallMediaTransportState_Function onCallMediaTransportStateFunction = static_cast<OnCallMediaTransportState_Function>(iponCallMediaTransportState.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallSdpCreatedCallback^ onCallSdpCreatedCallback = gcnew OnCallSdpCreatedCallback(this, &Call::OnCallSdpCreated_Handler);
+	_gchOnCallSdpCreated = GCHandle::Alloc(onCallSdpCreatedCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallSdpCreated = Marshal::GetFunctionPointerForDelegate(onCallSdpCreatedCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallSdpCreated_Function onCallSdpCreatedFunction = static_cast<OnCallSdpCreated_Function>(iponCallSdpCreated.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnStreamCreatedCallback^ onStreamCreatedCallback = gcnew OnStreamCreatedCallback(this, &Call::OnStreamCreated_Handler);
+	_gchOnStreamCreated = GCHandle::Alloc(onStreamCreatedCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponStreamCreated = Marshal::GetFunctionPointerForDelegate(onStreamCreatedCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnStreamCreated_Function onStreamCreatedFunction = static_cast<OnStreamCreated_Function>(iponStreamCreated.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnStreamDestroyedCallback^ onStreamDestroyedCallback = gcnew OnStreamDestroyedCallback(this, &Call::OnStreamDestroyed_Handler);
+	_gchOnStreamDestroyed = GCHandle::Alloc(onStreamDestroyedCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponStreamDestroyed = Marshal::GetFunctionPointerForDelegate(onStreamDestroyedCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnStreamDestroyed_Function onStreamDestroyedFunction = static_cast<OnStreamDestroyed_Function>(iponStreamDestroyed.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnDtmfDigitCallback^ onDtmfDigitCallback = gcnew OnDtmfDigitCallback(this, &Call::OnDtmfDigit_Handler);
+	_gchOnDtmfDigit = GCHandle::Alloc(onDtmfDigitCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponDtmfDigit = Marshal::GetFunctionPointerForDelegate(onDtmfDigitCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnDtmfDigit_Function onDtmfDigitFunction = static_cast<OnDtmfDigit_Function>(iponDtmfDigit.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallTransferRequestCallback^ onCallTransferRequestCallback = gcnew OnCallTransferRequestCallback(this, &Call::OnCallTransferRequest_Handler);
+	_gchOnCallTransferRequest = GCHandle::Alloc(onCallTransferRequestCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallTransferRequest = Marshal::GetFunctionPointerForDelegate(onCallTransferRequestCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallTransferRequest_Function onCallTransferRequestFunction = static_cast<OnCallTransferRequest_Function>(iponCallTransferRequest.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallTransferStatusCallback^ onCallTransferStatusCallback = gcnew OnCallTransferStatusCallback(this, &Call::OnCallTransferStatus_Handler);
+	_gchOnCallTransferStatus = GCHandle::Alloc(onCallTransferStatusCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallTransferStatus = Marshal::GetFunctionPointerForDelegate(onCallTransferStatusCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallTransferStatus_Function onCallTransferStatusFunction = static_cast<OnCallTransferStatus_Function>(iponCallTransferStatus.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallReplaceRequestCallback^ onCallReplaceRequestCallback = gcnew OnCallReplaceRequestCallback(this, &Call::OnCallReplaceRequest_Handler);
+	_gchOnCallReplaceRequest = GCHandle::Alloc(onCallReplaceRequestCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallReplaceRequest = Marshal::GetFunctionPointerForDelegate(onCallReplaceRequestCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallReplaceRequest_Function onCallReplaceRequestFunction = static_cast<OnCallReplaceRequest_Function>(iponCallReplaceRequest.ToPointer());
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallReplacedCallback^ onCallReplacedCallback = gcnew OnCallReplacedCallback(this, &Call::OnCallReplaced_Handler);
+	_gchOnCallReplaced = GCHandle::Alloc(onCallReplacedCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallReplaced = Marshal::GetFunctionPointerForDelegate(onCallReplacedCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallReplaced_Function onCallReplacedFunction = static_cast<OnCallReplaced_Function>(iponCallReplaced.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallRxOfferCallback^ onCallRxOfferCallback = gcnew OnCallRxOfferCallback(this, &Call::OnCallRxOffer_Handler);
+	_gchOnCallRxOffer = GCHandle::Alloc(onCallRxOfferCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallRxOffer = Marshal::GetFunctionPointerForDelegate(onCallRxOfferCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnCallRxOffer_Function onCallRxOfferFunction = static_cast<OnCallRxOffer_Function>(iponCallRxOffer.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallInstantMessageCallback^ onCallInstantMessageCallback = gcnew OnCallInstantMessageCallback(this, &Call::OnInstantMessage_Handler);
+	_gchOnInstantMessage = GCHandle::Alloc(onCallInstantMessageCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponCallInstantMessage = Marshal::GetFunctionPointerForDelegate(onCallInstantMessageCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnInstantMessage_Function onCallInstantMessageFunction = static_cast<OnInstantMessage_Function>(iponCallInstantMessage.ToPointer());
+
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallInstantMessageStatusCallback^ onInstantMessageStatusCallback = gcnew OnCallInstantMessageStatusCallback(this, &Call::OnInstantMessageStatus_Handler);
+	_gchOnInstantMessageStatus = GCHandle::Alloc(onInstantMessageStatusCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponInstantMessageStatus = Marshal::GetFunctionPointerForDelegate(onInstantMessageStatusCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnInstantMessageStatus_Function onInstantMessageStatusFunction = static_cast<OnInstantMessageStatus_Function>(iponInstantMessageStatus.ToPointer());
+
+
+
+	// Assign the handler and allocate memory.
+	OnCallTypingIndicationCallback^ onTypingIndicationCallback = gcnew OnCallTypingIndicationCallback(this, &Call::OnTypingIndication_Handler);
+	_gchOnTypingIndication = GCHandle::Alloc(onTypingIndicationCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponTypingIndication = Marshal::GetFunctionPointerForDelegate(onTypingIndicationCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnTypingIndication_Function onTypingIndicationFunction = static_cast<OnTypingIndication_Function>(iponTypingIndication.ToPointer());
+
+
+
+
 	// Set the native function handler.
 	_callCallback->Set_OnCallState_Function(onCallStateFunction);
 
@@ -163,6 +401,54 @@ void Call::Create()
 
 	// Set the native function handler.
 	_callCallback->Set_OnCallTsxState_Function(onCallTsxStateFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnTypingIndication_Function(onTypingIndicationFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnInstantMessageStatus_Function(onInstantMessageStatusFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnInstantMessage_Function(onCallInstantMessageFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallRxOffer_Function(onCallRxOfferFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallReplaced_Function(onCallReplacedFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallReplaceRequest_Function(onCallReplaceRequestFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallTransferStatus_Function(onCallTransferStatusFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallTransferRequest_Function(onCallTransferRequestFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnDtmfDigit_Function(onDtmfDigitFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnStreamDestroyed_Function(onStreamDestroyedFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnStreamCreated_Function(onStreamCreatedFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallSdpCreated_Function(onCallSdpCreatedFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallRedirected_Function(onCallRedirectedFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallMediaTransportState_Function(onCallMediaTransportStateFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCallMediaEvent_Function(onCallMediaEventFunction);
+
+	// Set the native function handler.
+	_callCallback->Set_OnCreateMediaTransport_Function(onCreateMediaTransportFunction);
 }
 
 ///	<summary>
@@ -172,72 +458,81 @@ void Call::Create()
 CallInfo^ Call::GetInfo()
 {
 	CallInfo^ callInfo = gcnew CallInfo();
-	pj::CallInfo info = _callCallback->getInfo();
 
-	callInfo->AccountId = info.accId;
-	callInfo->CallIdString = gcnew String(info.callIdString.c_str());
-	callInfo->Id = info.id;
-	callInfo->LastReason = gcnew String(info.lastReason.c_str());
-	callInfo->LocalContact = gcnew String(info.localContact.c_str());
-	callInfo->LocalUri = gcnew String(info.localUri.c_str());
-	callInfo->RemAudioCount = info.remAudioCount;
-	callInfo->RemOfferer = info.remOfferer;
-	callInfo->RemoteContact = gcnew String(info.remoteContact.c_str());
-	callInfo->RemoteUri = gcnew String(info.remoteUri.c_str());
-	callInfo->RemVideoCount = info.remVideoCount;
-	callInfo->StateText = gcnew String(info.stateText.c_str());
-	callInfo->LastStatusCode = ConnectionMapper::GetStatusCodeEx(info.lastStatusCode);
-	callInfo->Role = CallMapper::GetCallRoleEx(info.role);
-	callInfo->State = CallMapper::GetInviteSessionStateEx(info.state);
-
-	callInfo->ConnectDuration = gcnew TimeVal();
-	callInfo->TotalDuration = gcnew TimeVal();
-	callInfo->ConnectDuration->Milliseconds = info.connectDuration.msec;
-	callInfo->ConnectDuration->Seconds = info.connectDuration.sec;
-	callInfo->TotalDuration->Milliseconds = info.totalDuration.msec;
-	callInfo->TotalDuration->Seconds = info.totalDuration.sec;
-
-	callInfo->Setting = gcnew CallSetting();
-	callInfo->Setting->AudioCount = info.setting.audioCount;
-	callInfo->Setting->Flag = (CallFlag)info.setting.flag;
-	callInfo->Setting->VideoCount = info.setting.videoCount;
-	callInfo->Setting->ReqKeyframeMethod = (VidReqKeyframeMethod)info.setting.reqKeyframeMethod;
-
-	size_t mediaSize = info.media.size();
-	size_t provMediaSize = info.provMedia.size();
-
-	if (mediaSize > 0)
+	try
 	{
-		callInfo->Media = gcnew array<CallMediaInfo^>((int)mediaSize);
-		for (int i = 0; i < mediaSize; i++)
+		pj::CallInfo info = _callCallback->getInfo();
+
+		callInfo->AccountId = info.accId;
+		callInfo->CallIdString = gcnew String(info.callIdString.c_str());
+		callInfo->Id = info.id;
+		callInfo->LastReason = gcnew String(info.lastReason.c_str());
+		callInfo->LocalContact = gcnew String(info.localContact.c_str());
+		callInfo->LocalUri = gcnew String(info.localUri.c_str());
+		callInfo->RemAudioCount = info.remAudioCount;
+		callInfo->RemOfferer = info.remOfferer;
+		callInfo->RemoteContact = gcnew String(info.remoteContact.c_str());
+		callInfo->RemoteUri = gcnew String(info.remoteUri.c_str());
+		callInfo->RemVideoCount = info.remVideoCount;
+		callInfo->StateText = gcnew String(info.stateText.c_str());
+		callInfo->LastStatusCode = ConnectionMapper::GetStatusCodeEx(info.lastStatusCode);
+		callInfo->Role = CallMapper::GetCallRoleEx(info.role);
+		callInfo->State = CallMapper::GetInviteSessionStateEx(info.state);
+
+		callInfo->ConnectDuration = gcnew TimeVal();
+		callInfo->TotalDuration = gcnew TimeVal();
+		callInfo->ConnectDuration->Milliseconds = info.connectDuration.msec;
+		callInfo->ConnectDuration->Seconds = info.connectDuration.sec;
+		callInfo->TotalDuration->Milliseconds = info.totalDuration.msec;
+		callInfo->TotalDuration->Seconds = info.totalDuration.sec;
+
+		callInfo->Setting = gcnew CallSetting();
+		callInfo->Setting->AudioCount = info.setting.audioCount;
+		callInfo->Setting->Flag = (CallFlag)info.setting.flag;
+		callInfo->Setting->VideoCount = info.setting.videoCount;
+		callInfo->Setting->ReqKeyframeMethod = (VidReqKeyframeMethod)info.setting.reqKeyframeMethod;
+
+		size_t mediaSize = info.media.size();
+		size_t provMediaSize = info.provMedia.size();
+
+		if (mediaSize > 0)
 		{
-			CallMediaInfo^ mediaInfo = gcnew CallMediaInfo();
-			mediaInfo->AudioConfSlot = info.media[i].audioConfSlot;
-			mediaInfo->Direction = CallMapper::GetMediaDirectionEx(info.media[i].dir);
-			mediaInfo->Index = info.media[i].index;
-			mediaInfo->VideoCapDev = info.media[i].videoCapDev;
-			mediaInfo->VideoIncomingWindowId = info.media[i].videoIncomingWindowId;
-			mediaInfo->Status = CallMapper::GetCallMediaStatusEx(info.media[i].status);
-			mediaInfo->Type = MediaFormat::GetMediaTypeEx(info.media[i].type);
-			callInfo->Media[i] = mediaInfo;
+			callInfo->Media = gcnew array<CallMediaInfo^>((int)mediaSize);
+			for (int i = 0; i < mediaSize; i++)
+			{
+				CallMediaInfo^ mediaInfo = gcnew CallMediaInfo();
+				mediaInfo->AudioConfSlot = info.media[i].audioConfSlot;
+				mediaInfo->Direction = CallMapper::GetMediaDirectionEx(info.media[i].dir);
+				mediaInfo->Index = info.media[i].index;
+				mediaInfo->VideoCapDev = info.media[i].videoCapDev;
+				mediaInfo->VideoIncomingWindowId = info.media[i].videoIncomingWindowId;
+				mediaInfo->Status = CallMapper::GetCallMediaStatusEx(info.media[i].status);
+				mediaInfo->Type = MediaFormat::GetMediaTypeEx(info.media[i].type);
+				callInfo->Media[i] = mediaInfo;
+			}
+		}
+
+		if (provMediaSize > 0)
+		{
+			callInfo->ProvMedia = gcnew array<CallMediaInfo^>((int)provMediaSize);
+			for (int i = 0; i < provMediaSize; i++)
+			{
+				CallMediaInfo^ mediaInfo = gcnew CallMediaInfo();
+				mediaInfo->AudioConfSlot = info.provMedia[i].audioConfSlot;
+				mediaInfo->Direction = CallMapper::GetMediaDirectionEx(info.provMedia[i].dir);
+				mediaInfo->Index = info.provMedia[i].index;
+				mediaInfo->VideoCapDev = info.provMedia[i].videoCapDev;
+				mediaInfo->VideoIncomingWindowId = info.provMedia[i].videoIncomingWindowId;
+				mediaInfo->Status = CallMapper::GetCallMediaStatusEx(info.provMedia[i].status);
+				mediaInfo->Type = MediaFormat::GetMediaTypeEx(info.provMedia[i].type);
+				callInfo->ProvMedia[i] = mediaInfo;
+			}
 		}
 	}
-
-	if (provMediaSize > 0)
+	catch (const std::exception&)
 	{
-		callInfo->ProvMedia = gcnew array<CallMediaInfo^>((int)provMediaSize);
-		for (int i = 0; i < provMediaSize; i++)
-		{
-			CallMediaInfo^ mediaInfo = gcnew CallMediaInfo();
-			mediaInfo->AudioConfSlot = info.provMedia[i].audioConfSlot;
-			mediaInfo->Direction = CallMapper::GetMediaDirectionEx(info.provMedia[i].dir);
-			mediaInfo->Index = info.provMedia[i].index;
-			mediaInfo->VideoCapDev = info.provMedia[i].videoCapDev;
-			mediaInfo->VideoIncomingWindowId = info.provMedia[i].videoIncomingWindowId;
-			mediaInfo->Status = CallMapper::GetCallMediaStatusEx(info.provMedia[i].status);
-			mediaInfo->Type = MediaFormat::GetMediaTypeEx(info.provMedia[i].type);
-			callInfo->ProvMedia[i] = mediaInfo;
-		}
+		// Some error.
+		callInfo = nullptr;
 	}
 
 	// Return the call info.
@@ -1074,4 +1369,334 @@ void Call::OnCallTsxState_Handler(pj::OnCallTsxStateParam &prm)
 
 	// Call the event handler.
 	OnCallTsxState(this, param);
+}
+
+///	<summary>
+///	On Call sdp created function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallSdpCreated_Handler(pj::OnCallSdpCreatedParam &prm)
+{
+	// Convert the type.
+	OnCallSdpCreatedParam^ param = gcnew OnCallSdpCreatedParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+
+	param->Sdp = gcnew SdpSession();
+	param->Sdp->WholeSdp = gcnew String(prm.sdp.wholeSdp.c_str());
+
+	param->RemoteSdp = gcnew SdpSession();
+	param->RemoteSdp->WholeSdp = gcnew String(prm.remSdp.wholeSdp.c_str());
+
+	// Call the event handler.
+	OnCallSdpCreated(this, param);
+}
+
+///	<summary>
+///	On Call Stream Created function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnStreamCreated_Handler(pj::OnStreamCreatedParam &prm)
+{
+	// Convert the type.
+	OnStreamCreatedParam^ param = gcnew OnStreamCreatedParam();
+	param->CurrentCall = this;
+	param->StreamIndex = prm.streamIdx;
+
+	// Call the event handler.
+	OnStreamCreated(this, param);
+}
+
+///	<summary>
+///	On Call Stream Destroyed function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnStreamDestroyed_Handler(pj::OnStreamDestroyedParam &prm)
+{
+	// Convert the type.
+	OnStreamDestroyedParam^ param = gcnew OnStreamDestroyedParam();
+	param->CurrentCall = this;
+	param->StreamIndex = prm.streamIdx;
+
+	// Call the event handler.
+	OnStreamDestroyed(this, param);
+}
+
+///	<summary>
+///	On Call Dtmf Digit function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnDtmfDigit_Handler(pj::OnDtmfDigitParam &prm)
+{
+	// Convert the type.
+	OnDtmfDigitParam^ param = gcnew OnDtmfDigitParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->Digit = gcnew String(prm.digit.c_str());
+
+	// Call the event handler.
+	OnDtmfDigit(this, param);
+}
+
+///	<summary>
+///	On Call Transfer Request function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallTransferRequest_Handler(pj::OnCallTransferRequestParam &prm)
+{
+	// Convert the type.
+	OnCallTransferRequestParam^ param = gcnew OnCallTransferRequestParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->Code = ConnectionMapper::GetStatusCodeEx(prm.statusCode);
+	param->DestinationUri = gcnew String(prm.dstUri.c_str());
+
+	param->Setting = gcnew CallSetting(true);
+	param->Setting->AudioCount = prm.opt.audioCount;
+	param->Setting->Flag = (CallFlag)prm.opt.flag;
+	param->Setting->VideoCount = prm.opt.videoCount;
+	param->Setting->ReqKeyframeMethod = (VidReqKeyframeMethod)prm.opt.reqKeyframeMethod;
+
+	// Call the event handler.
+	OnCallTransferRequest(this, param);
+}
+
+///	<summary>
+///	On Call Transfer Status function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallTransferStatus_Handler(pj::OnCallTransferStatusParam &prm)
+{
+	// Convert the type.
+	OnCallTransferStatusParam^ param = gcnew OnCallTransferStatusParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->Code = ConnectionMapper::GetStatusCodeEx(prm.statusCode);
+	param->Reason = gcnew String(prm.reason.c_str());
+	param->FinalNotify = prm.finalNotify;
+	param->Continue = prm.cont;
+
+	// Call the event handler.
+	OnCallTransferStatus(this, param);
+
+	// Reset the continue.
+	prm.cont = param->Continue;
+}
+
+///	<summary>
+///	On Call Replace Request function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallReplaceRequest_Handler(pj::OnCallReplaceRequestParam &prm)
+{
+	// Convert the type.
+	OnCallReplaceRequestParam^ param = gcnew OnCallReplaceRequestParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->Code = ConnectionMapper::GetStatusCodeEx(prm.statusCode);
+	param->Reason = gcnew String(prm.reason.c_str());
+
+	param->Setting = gcnew CallSetting(true);
+	param->Setting->AudioCount = prm.opt.audioCount;
+	param->Setting->Flag = (CallFlag)prm.opt.flag;
+	param->Setting->VideoCount = prm.opt.videoCount;
+	param->Setting->ReqKeyframeMethod = (VidReqKeyframeMethod)prm.opt.reqKeyframeMethod;
+
+	param->RxData = gcnew SipRxData();
+	param->RxData->Info = gcnew String(prm.rdata.info.c_str());
+	param->RxData->SrcAddress = gcnew String(prm.rdata.srcAddress.c_str());
+	param->RxData->WholeMsg = gcnew String(prm.rdata.wholeMsg.c_str());
+
+	// Call the event handler.
+	OnCallReplaceRequest(this, param);
+}
+
+///	<summary>
+///	On Call Replaced function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallReplaced_Handler(pj::OnCallReplacedParam &prm)
+{
+	// Convert the type.
+	OnCallReplacedParam^ param = gcnew OnCallReplacedParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->CallID = prm.newCallId;
+
+	// Call the event handler.
+	OnCallReplaced(this, param);
+}
+
+///	<summary>
+///	On Call Rx Offer function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallRxOffer_Handler(pj::OnCallRxOfferParam &prm)
+{
+	// Convert the type.
+	OnCallRxOfferParam^ param = gcnew OnCallRxOfferParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->Code = ConnectionMapper::GetStatusCodeEx(prm.statusCode);
+
+	param->Offer = gcnew SdpSession();
+	param->Offer->WholeSdp = gcnew String(prm.offer.wholeSdp.c_str());
+
+	param->Setting = gcnew CallSetting(true);
+	param->Setting->AudioCount = prm.opt.audioCount;
+	param->Setting->Flag = (CallFlag)prm.opt.flag;
+	param->Setting->VideoCount = prm.opt.videoCount;
+	param->Setting->ReqKeyframeMethod = (VidReqKeyframeMethod)prm.opt.reqKeyframeMethod;
+
+	// Call the event handler.
+	OnCallRxOffer(this, param);
+}
+
+///	<summary>
+///	On Call Instant Message function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnInstantMessage_Handler(pj::OnInstantMessageParam &prm)
+{
+	// Convert the type.
+	OnInstantMessageParam^ param = gcnew OnInstantMessageParam();
+	param->RxData = gcnew SipRxData();
+
+	param->ContactUri = gcnew String(prm.contactUri.c_str());
+	param->ContentType = gcnew String(prm.contentType.c_str());
+	param->FromUri = gcnew String(prm.fromUri.c_str());
+	param->MsgBody = gcnew String(prm.msgBody.c_str());
+	param->ToUri = gcnew String(prm.toUri.c_str());
+
+	param->RxData->Info = gcnew String(prm.rdata.info.c_str());
+	param->RxData->SrcAddress = gcnew String(prm.rdata.srcAddress.c_str());
+	param->RxData->WholeMsg = gcnew String(prm.rdata.wholeMsg.c_str());
+
+	// Call the event handler.
+	OnInstantMessage(this, param);
+}
+
+///	<summary>
+///	On Call Instant Message Status function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnInstantMessageStatus_Handler(pj::OnInstantMessageStatusParam &prm)
+{
+	// Convert the type.
+	OnInstantMessageStatusParam^ param = gcnew OnInstantMessageStatusParam();
+	param->RxData = gcnew SipRxData();
+
+	param->Code = ConnectionMapper::GetStatusCodeEx(prm.code);
+	param->Reason = gcnew String(prm.reason.c_str());
+	param->MsgBody = gcnew String(prm.msgBody.c_str());
+	param->ToUri = gcnew String(prm.toUri.c_str());
+
+	param->RxData->Info = gcnew String(prm.rdata.info.c_str());
+	param->RxData->SrcAddress = gcnew String(prm.rdata.srcAddress.c_str());
+	param->RxData->WholeMsg = gcnew String(prm.rdata.wholeMsg.c_str());
+
+	// Call the event handler.
+	OnInstantMessageStatus(this, param);
+}
+
+///	<summary>
+///	On Call Typing Indication function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnTypingIndication_Handler(pj::OnTypingIndicationParam &prm)
+{
+	// Convert the type.
+	OnTypingIndicationParam^ param = gcnew OnTypingIndicationParam();
+	param->RxData = gcnew SipRxData();
+
+	param->ContactUri = gcnew String(prm.contactUri.c_str());
+	param->FromUri = gcnew String(prm.fromUri.c_str());
+	param->IsTyping = prm.isTyping;
+	param->ToUri = gcnew String(prm.toUri.c_str());
+
+	param->RxData->Info = gcnew String(prm.rdata.info.c_str());
+	param->RxData->SrcAddress = gcnew String(prm.rdata.srcAddress.c_str());
+	param->RxData->WholeMsg = gcnew String(prm.rdata.wholeMsg.c_str());
+	
+	// Call the event handler.
+	OnTypingIndication(this, param);
+}
+
+///	<summary>
+///	On Call Redirected function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+pjsip_redirect_op Call::OnCallRedirected_Handler(pj::OnCallRedirectedParam &prm)
+{
+	// Convert the type.
+	OnCallRedirectedParam^ param = gcnew OnCallRedirectedParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->TargetUri = gcnew String(prm.targetUri.c_str());
+	param->EventType = CallMapper::GetSipEventTypeEx(prm.e.type);
+	param->Redirect = RedirectResponseType::PJSIP_REDIRECT_STOP;
+
+	// Call the event handler.
+	OnCallRedirected(this, param);
+
+	// Return the redirection.
+	return CallMapper::GetRedirectResponseTypeEx(param->Redirect);
+}
+
+///	<summary>
+///	On Call Media Transport State function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallMediaTransportState_Handler(pj::OnCallMediaTransportStateParam &prm)
+{
+	// Convert the type.
+	OnCallMediaTransportStateParam^ param = gcnew OnCallMediaTransportStateParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->MediaIndex = prm.medIdx;
+	param->Status = prm.status;
+	param->SipErrorCode = prm.sipErrorCode;
+	param->State = CallMapper::GetMediaTransportStateEx(prm.state);
+
+	// Call the event handler.
+	OnCallMediaTransportState(this, param);
+}
+
+///	<summary>
+///	On Call Media Event function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCallMediaEvent_Handler(pj::OnCallMediaEventParam &prm)
+{
+	// Convert the type.
+	OnCallMediaEventParam^ param = gcnew OnCallMediaEventParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->MediaIndex = prm.medIdx;
+	param->Event = gcnew MediaEvent();
+	param->Event->Type = CallMapper::GetMediaEventTypeEx(prm.ev.type);
+	param->Event->Data = gcnew MediaEventData();
+	param->Event->Data->FormatChanged = gcnew MediaFmtChangedEvent();
+	param->Event->Data->FormatChanged->Height = prm.ev.data.fmtChanged.newHeight;
+	param->Event->Data->FormatChanged->Width = prm.ev.data.fmtChanged.newWidth;
+
+	// Call the event handler.
+	OnCallMediaEvent(this, param);
+}
+
+///	<summary>
+///	On Call Media Transport function callback.
+///	</summary>
+/// <param name="prm">The on incoming call parameters.</param>
+void Call::OnCreateMediaTransport_Handler(pj::OnCreateMediaTransportParam &prm)
+{
+	// Convert the type.
+	OnCreateMediaTransportParam^ param = gcnew OnCreateMediaTransportParam();
+	param->CurrentCall = this;
+	param->Info = GetInfo();
+	param->MediaIndex = prm.mediaIdx;
+	param->Flags = prm.flags;
+
+	// Call the event handler.
+	OnCreateMediaTransport(this, param);
 }

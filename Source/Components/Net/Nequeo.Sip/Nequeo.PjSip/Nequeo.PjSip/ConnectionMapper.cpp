@@ -424,6 +424,30 @@ unsigned ConnectionMapper::GetVideoRateControlBandwidth()
 }
 
 /// <summary>
+/// Gets or sets an indicator specifying that any video capture is done automatically.
+/// </summary>
+void ConnectionMapper::SetVideoAutoTransmit(bool value)
+{
+	_videoAutoTransmit = value;
+}
+bool ConnectionMapper::GetVideoAutoTransmit()
+{
+	return _videoAutoTransmit;
+}
+
+/// <summary>
+/// Gets or sets an indicator specifying that any video is shown automatically.
+/// </summary>
+void ConnectionMapper::SetVideoAutoShow(bool value)
+{
+	_videoAutoShow = value;
+}
+bool ConnectionMapper::GetVideoAutoShow()
+{
+	return _videoAutoShow;
+}
+
+/// <summary>
 /// Get ip v6 use.
 /// </summary>
 /// <param name="ipv6Use">The current ipv6 use.</param>
