@@ -342,6 +342,12 @@
     <ClInclude Include="OnStreamCreatedParam.h">
       <Filter>Header Files\CallHeader</Filter>
     </ClInclude>
+    <ClInclude Include="AudioMediaRecorder.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioMediaPlayer.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -577,6 +583,12 @@
     </ClCompile>
     <ClCompile Include="OnStreamCreatedParam.cpp">
       <Filter>Source Files\CallSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioMediaRecorder.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioMediaPlayer.cpp">
+      <Filter>Source Files\MediaSource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
