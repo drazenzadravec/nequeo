@@ -122,6 +122,15 @@ namespace Nequeo
 					void set(SipTxOption^ value);
 				}
 
+			internal:
+				///	<summary>
+				///	Gets the use default values.
+				///	</summary>
+				property bool UseDefaultCallSetting
+				{
+					bool get();
+				}
+
 			private:
 				bool _disposed;
 				bool _useDefaultCallSetting;

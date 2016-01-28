@@ -194,3 +194,31 @@ void AudioMediaPlayer::Stop(AudioMedia^ playbackMedia)
 	pj::AudioMedia& media = playbackMedia->GetAudioMedia();
 	_pjAudioMediaPlayer->stopTransmit(media);
 }
+
+/// <summary>
+/// Start playing audio to each call.
+/// </summary>
+/// <param name="conferenceCalls">Array of remote conference calls.</param>
+void AudioMediaPlayer::StartPlayingConversation(array<AudioMedia^>^ conferenceCalls)
+{
+	// For each call.
+	for (int i = 0; i < conferenceCalls->Length; i++)
+	{
+		pj::AudioMedia& media = conferenceCalls[i]->GetAudioMedia();
+		_pjAudioMediaPlayer->startTransmit(media);
+	}
+}
+
+/// <summary>
+/// Stop playing audio to each call.
+/// </summary>
+/// <param name="conferenceCalls">Array of remote conference calls.</param>
+void AudioMediaPlayer::StoptPlayingConversation(array<AudioMedia^>^ conferenceCalls)
+{
+	// For each call.
+	for (int i = 0; i < conferenceCalls->Length; i++)
+	{
+		pj::AudioMedia& media = conferenceCalls[i]->GetAudioMedia();
+		_pjAudioMediaPlayer->stopTransmit(media);
+	}
+}

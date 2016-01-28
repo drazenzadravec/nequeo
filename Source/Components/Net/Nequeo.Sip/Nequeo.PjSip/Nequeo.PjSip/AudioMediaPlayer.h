@@ -122,6 +122,18 @@ namespace Nequeo
 				/// <param name="playbackMedia">The audio playback media.</param>
 				void Stop(AudioMedia^ playbackMedia);
 
+				/// <summary>
+				/// Start playing audio to each call.
+				/// </summary>
+				/// <param name="conferenceCalls">Array of remote conference calls.</param>
+				void StartPlayingConversation(array<AudioMedia^>^ conferenceCalls);
+
+				/// <summary>
+				/// Stop playing audio to each call.
+				/// </summary>
+				/// <param name="conferenceCalls">Array of remote conference calls.</param>
+				void StoptPlayingConversation(array<AudioMedia^>^ conferenceCalls);
+
 			private:
 				bool _disposed;
 

@@ -342,3 +342,59 @@ void MediaManager::MarshalString(String^ s, std::wstring& os)
 	os = chars;
 	Marshal::FreeHGlobal(IntPtr((void*)chars));
 }
+
+/// <summary>
+/// Start conference call between remote parties; allow each party to talk to each other.
+/// </summary>
+/// <param name="conferenceCalls">Array of remote conference calls.</param>
+void MediaManager::StartConferenceCall(array<AudioMedia^>^ conferenceCalls)
+{
+	// For each call.
+	for (int i = 0; i < conferenceCalls->Length; i++)
+	{
+		// Get first group.
+		pj::AudioMedia& mediaCall_1 = conferenceCalls[i]->GetAudioMedia();
+
+		// For each call.
+		for (int j = 0; j < conferenceCalls->Length; j++)
+		{
+			// Get second group.
+			pj::AudioMedia& mediaCall_2 = conferenceCalls[j]->GetAudioMedia();
+
+			// If the two audio media are not equal.
+			if (mediaCall_1.getPortId() != mediaCall_2.getPortId())
+			{
+				// Allow these two calls to communicate.
+				mediaCall_1.startTransmit(mediaCall_2);
+			}
+		}
+	}
+}
+
+/// <summary>
+/// Stop conference call between remote parties; allow each party to talk to each other.
+/// </summary>
+/// <param name="conferenceCalls">Array of remote conference calls.</param>
+void MediaManager::StoptConferenceCall(array<AudioMedia^>^ conferenceCalls)
+{
+	// For each call.
+	for (int i = 0; i < conferenceCalls->Length; i++)
+	{
+		// Get first group.
+		pj::AudioMedia& mediaCall_1 = conferenceCalls[i]->GetAudioMedia();
+
+		// For each call.
+		for (int j = 0; j < conferenceCalls->Length; j++)
+		{
+			// Get second group.
+			pj::AudioMedia& mediaCall_2 = conferenceCalls[j]->GetAudioMedia();
+
+			// If the two audio media are not equal.
+			if (mediaCall_1.getPortId() != mediaCall_2.getPortId())
+			{
+				// Stop these two calls from communicating.
+				mediaCall_1.stopTransmit(mediaCall_2);
+			}
+		}
+	}
+}

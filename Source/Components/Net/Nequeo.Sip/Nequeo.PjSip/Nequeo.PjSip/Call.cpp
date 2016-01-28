@@ -674,7 +674,7 @@ void Call::MakeCall(String^ uri, CallOpParam^ callOpParam)
 	std::string dst_uri;
 	MarshalString(uri, dst_uri);
 
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Make the call.
@@ -697,7 +697,7 @@ void Call::MakeCall(String^ uri, CallOpParam^ callOpParam)
 /// <param name="callOpParam">Optional call setting. callOpParam.statusCode Status code, (100-699).</param>
 void Call::Answer(CallOpParam^ callOpParam)
 {
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Answer the call.
@@ -714,7 +714,7 @@ void Call::Answer(CallOpParam^ callOpParam)
 /// <param name="callOpParam">Optional call setting. incoming call. If the value is zero, "603/Decline" will be sent.</param>
 void Call::Hangup(CallOpParam^ callOpParam)
 {
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Hangup the call.
@@ -733,7 +733,7 @@ void Call::Hangup(CallOpParam^ callOpParam)
 /// only the flag PJSUA_CALL_UPDATE_CONTACT can be used.</param>
 void Call::SetHold(CallOpParam^ callOpParam)
 {
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Hold the call.
@@ -751,7 +751,7 @@ void Call::SetHold(CallOpParam^ callOpParam)
 /// PJSUA_CALL_UNHOLD here will release call hold.</param>
 void Call::Reinvite(CallOpParam^ callOpParam)
 {
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Reinvite the call.
@@ -764,7 +764,7 @@ void Call::Reinvite(CallOpParam^ callOpParam)
 /// <param name="callOpParam">Optional call setting.</param>
 void Call::Update(CallOpParam^ callOpParam)
 {
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Update the call.
@@ -788,7 +788,7 @@ void Call::Transfer(String^ destination, CallOpParam^ callOpParam)
 	std::string dst_uri;
 	MarshalString(destination, dst_uri);
 
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
 	// Transfer the call.
@@ -811,11 +811,11 @@ void Call::Transfer(String^ destination, CallOpParam^ callOpParam)
 /// the outgoing INVITE request created by the REFER request.</param>
 void Call::TransferReplaces(Call^ destination, CallOpParam^ callOpParam)
 {
-	pj::CallOpParam prm;
+	pj::CallOpParam prm(callOpParam->UseDefaultCallSetting);
 	GetCallOpParam(callOpParam, prm);
 
-	// Get the call refence.
-	CallCallback& call = this->GetCallCallback();
+	// Get the call reference.
+	CallCallback& call = destination->GetCallCallback();
 
 	// Transfer replace the call.
 	_callCallback->xferReplaces(call, prm);
@@ -1245,7 +1245,7 @@ void Call::MarshalString(String^ s, std::wstring& os)
 ///	Get the pj call options.
 ///	</summary>
 /// <param name="callOpParam">Optional call setting.</param>
-/// <param name="callOpParam">Optional pj call setting.</param>
+/// <param name="prm">Optional pj call setting.</param>
 void Call::GetCallOpParam(CallOpParam^ callOpParam, pj::CallOpParam& prm)
 {
 	// If call settings.

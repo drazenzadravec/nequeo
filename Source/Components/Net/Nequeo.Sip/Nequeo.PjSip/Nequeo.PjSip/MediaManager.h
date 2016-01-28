@@ -165,6 +165,18 @@ namespace Nequeo
 				/// <returns>Audio media for the speaker/playback device.</returns>
 				AudioMedia^ GetPlaybackDeviceMedia();
 
+				/// <summary>
+				/// Start conference call between remote parties; allow each party to talk to each other.
+				/// </summary>
+				/// <param name="conferenceCalls">Array of remote conference calls.</param>
+				void StartConferenceCall(array<AudioMedia^>^ conferenceCalls);
+
+				/// <summary>
+				/// Stop conference call between remote parties; allow each party to talk to each other.
+				/// </summary>
+				/// <param name="conferenceCalls">Array of remote conference calls.</param>
+				void StoptConferenceCall(array<AudioMedia^>^ conferenceCalls);
+
 			internal:
 				/// <summary>
 				/// Sip media manager.

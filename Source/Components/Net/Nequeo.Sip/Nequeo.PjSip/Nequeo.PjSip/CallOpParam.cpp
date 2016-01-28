@@ -148,3 +148,11 @@ void CallOpParam::TxOption::set(SipTxOption^ value)
 {
 	_txOption = value;
 }
+
+///	<summary>
+///	Gets the use default values.
+///	</summary>
+bool CallOpParam::UseDefaultCallSetting::get()
+{
+	return _useDefaultCallSetting;
+}

@@ -87,7 +87,7 @@ namespace Nequeo
 				///	compress the media, if the file can support different
 				///	encodings.This value must be zero for now.</param>
 				/// <param name="maxSize">Maximum file size. Specify zero or -1 to remove size
-				///	limitation.This value must be zero or -1 for now.</param>
+				///	limitation. This value must be zero or -1 for now.</param>
 				/// <param name="options">Optional options, which can be used to specify the
 				/// recording file format. Default is zero or PJMEDIA_FILE_WRITE_PCM.</param>
 				void CreateRecorder(String^ filename, unsigned encoderType, long maxSize, unsigned options);
@@ -103,6 +103,27 @@ namespace Nequeo
 				/// </summary>
 				/// <param name="captureMedia">The audio capture media.</param>
 				void Stop(AudioMedia^ captureMedia);
+
+				/// <summary>
+				/// Start recoding a conversation between one or more calls.
+				/// </summary>
+				/// <param name="captureMedia">The capture media; e.g the local microphone.</param>
+				/// <param name="conferenceCalls">Array of remote conference calls.</param>
+				void StartRecordingConversation(AudioMedia^ captureMedia, array<AudioMedia^>^ conferenceCalls);
+
+				/// <summary>
+				/// Stop recoding a conversation between one or more calls.
+				/// </summary>
+				/// <param name="captureMedia">The capture media; e.g the local microphone.</param>
+				/// <param name="conferenceCalls">Array of remote conference calls.</param>
+				void StopRecordingConversation(AudioMedia^ captureMedia, array<AudioMedia^>^ conferenceCalls);
+
+			internal:
+				/// <summary>
+				/// Get the audio media recorder reference.
+				/// </summary>
+				/// <returns>The audio media recorder reference.</returns>
+				pj::AudioMediaRecorder& GetAudioMediaRecorder();
 
 			private:
 				bool _disposed;

@@ -133,3 +133,11 @@ void CallSetting::VideoCount::set(unsigned value)
 {
 	_videoCount = value;
 }
+
+///	<summary>
+///	Gets the use default values.
+///	</summary>
+bool CallSetting::UseDefaultValues::get()
+{
+	return _useDefaultValues;
+}

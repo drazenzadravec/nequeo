@@ -112,6 +112,15 @@ namespace Nequeo
 					void set(unsigned value);
 				}
 
+			internal:
+				///	<summary>
+				///	Gets the use default values.
+				///	</summary>
+				property bool UseDefaultValues
+				{
+					bool get();
+				}
+
 			private:
 				bool _disposed;
 				bool _useDefaultValues;

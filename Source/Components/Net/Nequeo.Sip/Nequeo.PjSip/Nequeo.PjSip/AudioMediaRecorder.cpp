@@ -151,3 +151,48 @@ void AudioMediaRecorder::Stop(AudioMedia^ captureMedia)
 	pj::AudioMedia& media = captureMedia->GetAudioMedia();
 	media.stopTransmit(*_pjAudioMediaRecorder);
 }
+
+/// <summary>
+/// Get the audio media recorder reference.
+/// </summary>
+/// <returns>The audio media recorder reference.</returns>
+pj::AudioMediaRecorder& AudioMediaRecorder::GetAudioMediaRecorder()
+{
+	return *_pjAudioMediaRecorder;
+}
+
+/// <summary>
+/// Start recoding a conversation between one or more calls.
+/// </summary>
+/// <param name="captureMedia">The capture media; e.g the local microphone.</param>
+/// <param name="conferenceCalls">Array of remote conference calls.</param>
+void AudioMediaRecorder::StartRecordingConversation(AudioMedia^ captureMedia, array<AudioMedia^>^ conferenceCalls)
+{
+	pj::AudioMedia& media = captureMedia->GetAudioMedia();
+	media.startTransmit(*_pjAudioMediaRecorder);
+
+	// For each call.
+	for (int i = 0; i < conferenceCalls->Length; i++)
+	{
+		pj::AudioMedia& mediaCall = conferenceCalls[i]->GetAudioMedia();
+		mediaCall.startTransmit(*_pjAudioMediaRecorder);
+	}
+}
+
+/// <summary>
+/// Stop recoding a conversation between one or more calls.
+/// </summary>
+/// <param name="captureMedia">The capture media; e.g the local microphone.</param>
+/// <param name="conferenceCalls">Array of remote conference calls.</param>
+void AudioMediaRecorder::StopRecordingConversation(AudioMedia^ captureMedia, array<AudioMedia^>^ conferenceCalls)
+{
+	pj::AudioMedia& media = captureMedia->GetAudioMedia();
+	media.stopTransmit(*_pjAudioMediaRecorder);
+
+	// For each call.
+	for (int i = 0; i < conferenceCalls->Length; i++)
+	{
+		pj::AudioMedia& mediaCall = conferenceCalls[i]->GetAudioMedia();
+		mediaCall.stopTransmit(*_pjAudioMediaRecorder);
+	}
+}

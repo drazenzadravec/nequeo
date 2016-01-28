@@ -614,6 +614,15 @@ namespace Nequeo.Net.Sip
             private pjsua2.TransportConfig _pjTransportConfig = null;
             private pjsua2.AccountMwiConfig _pjAccountMwiConfig = null;
             private pjsua2.AccountPresConfig _pjAccountPresConfig = null;
+            private pjsua2.AccountNatConfig _pjAccountNatConfig = null;
+            private pjsua2.AccountVideoConfig _pjAccountVideoConfig = null;
+
+            private pjsua2.TransportConfig _transportConfig_UDP = null;
+            private pjsua2.TransportConfig _transportConfig_UDP6 = null;
+            private pjsua2.TransportConfig _transportConfig_TCP = null;
+            private pjsua2.TransportConfig _transportConfig_TCP6 = null;
+            private pjsua2.TransportConfig _transportConfig_TLS = null;
+            private pjsua2.TransportConfig _transportConfig_TLS6 = null;
 
             /// <summary>
             /// Notify application on incoming call.
@@ -673,11 +682,29 @@ namespace Nequeo.Net.Sip
             /// <param name="accountConnection">The account connection configuration.</param>
             public void Create(AccountConnection accountConnection)
             {
+                _transportConfig_UDP = new pjsua2.TransportConfig();
+                _transportConfig_UDP6 = new pjsua2.TransportConfig();
+                _transportConfig_TCP = new pjsua2.TransportConfig();
+                _transportConfig_TCP6 = new pjsua2.TransportConfig();
+                _transportConfig_TLS = new pjsua2.TransportConfig();
+                _transportConfig_TLS6 = new pjsua2.TransportConfig();
+
+                // Assign the transport.
+                _transportConfig_TLS.tlsConfig.method = pjsua2.pjsip_ssl_method.PJSIP_TLSV1_METHOD;
+                _transportConfig_TLS.tlsConfig.verifyServer = false;
+                _transportConfig_TLS.tlsConfig.verifyClient = false;
+
+                _transportConfig_TLS6.tlsConfig.method = pjsua2.pjsip_ssl_method.PJSIP_TLSV1_METHOD;
+                _transportConfig_TLS6.tlsConfig.verifyServer = false;
+                _transportConfig_TLS6.tlsConfig.verifyClient = false;
+
                 // Create the client transport.
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP, new pjsua2.TransportConfig());
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP6, new pjsua2.TransportConfig());
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP, new pjsua2.TransportConfig());
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP6, new pjsua2.TransportConfig());
+                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP, _transportConfig_UDP);
+                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP6, _transportConfig_UDP6);
+                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP, _transportConfig_TCP);
+                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP6, _transportConfig_TCP6);
+                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TLS, _transportConfig_TLS);
+                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TLS6, _transportConfig_TLS6);
 
                 // Start.
                 _pjEndpoint.libStart();
@@ -691,7 +718,9 @@ namespace Nequeo.Net.Sip
                 _pjAccountMwiConfig = new pjsua2.AccountMwiConfig();
                 _pjAccountPresConfig = new pjsua2.AccountPresConfig();
                 _pjTransportConfig = new pjsua2.TransportConfig();
-                
+                _pjAccountNatConfig = new pjsua2.AccountNatConfig();
+                _pjAccountVideoConfig = new pjsua2.AccountVideoConfig();
+
                 // Set the account options.
                 _pjAccountConfig.idUri = "sip:" + accountConnection.AccountName + "@" + accountConnection.SpHost + ":" + accountConnection.SpPort.ToString();
                 _pjAccountConfig.priority = accountConnection.Priority;
@@ -733,6 +762,17 @@ namespace Nequeo.Net.Sip
                 _pjAccountPresConfig.publishQueue = accountConnection.PublishQueue;
                 _pjAccountPresConfig.publishShutdownWaitMsec = accountConnection.PublishShutdownWaitMsec;
 
+                // Set the nat options.
+                _pjAccountNatConfig.iceNoRtcp = accountConnection.NoIceRtcp;
+                _pjAccountNatConfig.iceEnabled = accountConnection.IceEnabled;
+
+                // Set the video options.
+                _pjAccountVideoConfig.defaultCaptureDevice = (int)pjsua2.pjmedia_vid_dev_std_index.PJMEDIA_VID_DEFAULT_CAPTURE_DEV;
+                _pjAccountVideoConfig.defaultRenderDevice = (int)pjsua2.pjmedia_vid_dev_std_index.PJMEDIA_VID_DEFAULT_RENDER_DEV;
+                _pjAccountVideoConfig.rateControlBandwidth = accountConnection.VideoRateControlBandwidth;
+                _pjAccountVideoConfig.autoTransmitOutgoing = accountConnection.VideoAutoTransmit;
+                _pjAccountVideoConfig.autoShowIncoming = accountConnection.VideoAutoShow;
+
                 // Assign the account config.
                 _pjAccountConfig.regConfig = _pjAccountRegConfig;
                 _pjAccountConfig.sipConfig = _pjAccountSipConfig;
@@ -740,9 +780,11 @@ namespace Nequeo.Net.Sip
                 _pjAccountConfig.mediaConfig = _pjAccountMediaConfig;
                 _pjAccountConfig.mwiConfig = _pjAccountMwiConfig;
                 _pjAccountConfig.presConfig = _pjAccountPresConfig;
+                _pjAccountConfig.natConfig = _pjAccountNatConfig;
+                _pjAccountConfig.videoConfig = _pjAccountVideoConfig;
 
                 // Create the account.
-                create(_pjAccountConfig, true);
+                create(_pjAccountConfig, accountConnection.IsDefault);
             }
 
             /// <summary>
@@ -1118,8 +1160,32 @@ namespace Nequeo.Net.Sip
                     if (_pjAccountPresConfig != null)
                         _pjAccountPresConfig.Dispose();
 
+                    if (_pjAccountNatConfig != null)
+                        _pjAccountNatConfig.Dispose();
+
+                    if (_pjAccountVideoConfig != null)
+                        _pjAccountVideoConfig.Dispose();
+
                     if (_pjAccountConfig != null)
                         _pjAccountConfig.Dispose();
+
+                    if (_transportConfig_UDP != null)
+                        _transportConfig_UDP.Dispose();
+
+                    if (_transportConfig_UDP6 != null)
+                        _transportConfig_UDP6.Dispose();
+
+                    if (_transportConfig_TCP != null)
+                        _transportConfig_TCP.Dispose();
+
+                    if (_transportConfig_TCP6 != null)
+                        _transportConfig_TCP6.Dispose();
+
+                    if (_transportConfig_TLS != null)
+                        _transportConfig_TLS.Dispose();
+
+                    if (_transportConfig_TLS6 != null)
+                        _transportConfig_TLS6.Dispose();
 
                     try
                     {
