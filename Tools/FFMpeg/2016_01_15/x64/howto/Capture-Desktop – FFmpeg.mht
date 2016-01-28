@@ -1,0 +1,2719 @@
+From: "Saved by Internet Explorer 11"
+Subject: =?Windows-1252?Q?Capture/Desktop_=96_FFmpeg?=
+Date: Sun, 17 Jan 2016 16:49:06 +1100
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01D15146.FAF006D0"
+X-MimeOLE: Produced By Microsoft MimeOLE V10.0.10011.16384
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://trac.ffmpeg.org/wiki/Capture/Desktop
+
+=EF=BB=BF<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" =
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><HTML=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><META =
+content=3D"IE=3D11.0000"=20
+http-equiv=3D"X-UA-Compatible">
+     <TITLE>      Capture/Desktop =E2=80=93 FFmpeg     </TITLE>      =20
+<META http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3DUTF-8">      =20
+<META http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">     <!--[if =
+IE]><script type=3D"text/javascript">=0A=
+      if (/^#__msie303:/.test(window.location.hash))=0A=
+        =
+window.location.replace(window.location.hash.replace(/^#__msie303:/, =
+'#'));=0A=
+    </script><![endif]-->=20
+        <LINK href=3D"/search" rel=3D"search">         <LINK =
+href=3D"/wiki/TracGuide"=20
+rel=3D"help">         <LINK title=3D"Plain Text" =
+href=3D"/wiki/Capture/Desktop?format=3Dtxt"=20
+rel=3D"alternate" type=3D"text/x-trac-wiki">         <LINK title=3D"View =
+parent page"=20
+href=3D"/wiki/Capture" rel=3D"up">         <LINK href=3D"/wiki" =
+rel=3D"start">        =20
+<LINK href=3D"http://trac.ffmpeg.org/chrome/common/css/trac.css" =
+rel=3D"stylesheet"=20
+type=3D"text/css"><LINK =
+href=3D"http://trac.ffmpeg.org/chrome/common/css/wiki.css"=20
+rel=3D"stylesheet" type=3D"text/css"><LINK =
+href=3D"http://trac.ffmpeg.org/chrome/vote/css/tracvote.css"=20
+rel=3D"stylesheet" type=3D"text/css"><LINK =
+href=3D"http://trac.ffmpeg.org/chrome/tags/css/tractags.css"=20
+rel=3D"stylesheet" type=3D"text/css">         <LINK =
+href=3D"/chrome/common/trac.ico"=20
+rel=3D"shortcut icon" type=3D"image/x-icon">         <LINK =
+href=3D"/chrome/common/trac.ico"=20
+rel=3D"icon" type=3D"image/x-icon">       <LINK title=3D"Search FFmpeg" =
+href=3D"/search/opensearch"=20
+rel=3D"search" type=3D"application/opensearchdescription+xml">      =20
+<SCRIPT src=3D"/chrome/common/js/jquery.js" type=3D"text/javascript" =
+charset=3D"utf-8"></SCRIPT>
+      =20
+<SCRIPT src=3D"/chrome/common/js/babel.js" type=3D"text/javascript" =
+charset=3D"utf-8"></SCRIPT>
+      =20
+<SCRIPT src=3D"/chrome/common/js/trac.js" type=3D"text/javascript" =
+charset=3D"utf-8"></SCRIPT>
+      =20
+<SCRIPT src=3D"/chrome/common/js/search.js" type=3D"text/javascript" =
+charset=3D"utf-8"></SCRIPT>
+      =20
+<SCRIPT src=3D"/chrome/common/js/folding.js" type=3D"text/javascript" =
+charset=3D"utf-8"></SCRIPT>
+    =20
+<SCRIPT type=3D"text/javascript">=0A=
+      jQuery(document).ready(function($) {=0A=
+        $("#content").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to =
+this section"));=0A=
+        $("#content").find(".wikianchor").each(function() {=0A=
+          $(this).addAnchor(babel.format(_("Link to #%(id)s"), {id: =
+$(this).attr('id')}));=0A=
+        });=0A=
+        $(".foldable").enableFolding(true, true);=0A=
+      });=0A=
+    </SCRIPT>
+  =20
+<META name=3D"GENERATOR" content=3D"MSHTML 11.00.10586.35"></HEAD>  =20
+<BODY>
+<DIV id=3D"banner">
+<DIV id=3D"header"><A id=3D"logo" href=3D"https://ffmpeg.org/"><IMG =
+alt=3D"FFmpeg" src=3D"http://trac.ffmpeg.org/ffmpeg-logo.png"></A>=20
+      </DIV>
+<FORM id=3D"search" action=3D"/search" method=3D"get">
+<DIV><LABEL for=3D"proj-search">Search:</LABEL>           <INPUT =
+name=3D"q" id=3D"proj-search" type=3D"text" size=3D"18">=20
+          <INPUT type=3D"submit" value=3D"Search">         </DIV></FORM>
+<DIV class=3D"nav" id=3D"metanav">
+<UL>
+  <LI class=3D"first"><A =
+href=3D"http://trac.ffmpeg.org/login">Login</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/prefs">Preferences</A></LI>
+  <LI><A =
+href=3D"http://trac.ffmpeg.org/wiki/TracGuide">Help/Guide</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/about">About Trac</A></LI>
+  <LI class=3D"last"><A=20
+href=3D"http://trac.ffmpeg.org/register">Register</A></LI></UL></DIV></DI=
+V>
+<DIV class=3D"nav" id=3D"mainnav">
+<UL>
+  <LI class=3D"first active"><A =
+href=3D"http://trac.ffmpeg.org/wiki">Wiki</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/timeline">Timeline</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/report">View Tickets</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/search">Search</A></LI>
+  <LI class=3D"last"><A =
+href=3D"http://trac.ffmpeg.org/tags">Tags</A></LI></UL></DIV>
+<DIV id=3D"main">
+<DIV class=3D"noprint" id=3D"pagepath">
+<H1 style=3D"display: inline;"><A title=3D"View WikiStart" =
+class=3D"pathentry first"=20
+href=3D"http://trac.ffmpeg.org/wiki">wiki:</A></H1>
+<H1 style=3D"color: rgb(187, 0, 0); display: inline;"><A title=3D"View =
+Capture"=20
+class=3D"pathentry"=20
+href=3D"http://trac.ffmpeg.org/wiki/Capture">Capture</A></H1><SPAN =
+class=3D"pathentry sep">/</SPAN>
+<H1 style=3D"color: rgb(187, 0, 0); display: inline;"><A title=3D"View =
+Capture/Desktop"=20
+class=3D"pathentry"=20
+href=3D"http://trac.ffmpeg.org/wiki/Capture/Desktop">Desktop</A></H1> =
+</DIV>
+<DIV class=3D"nav" id=3D"ctxtnav">
+<H2>Context Navigation</H2>
+<UL>
+  <LI class=3D"first"><SPAN title=3D"Vote count" id=3D"vote"><IMG =
+alt=3D"Up-vote" =
+src=3D"http://trac.ffmpeg.org/chrome/vote/aupgray.png"><SPAN=20
+  id=3D"votes">+0</SPAN><IMG alt=3D"Down-vote" =
+src=3D"http://trac.ffmpeg.org/chrome/vote/adowngray.png"></SPAN></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/wiki/Capture">Up</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/wiki/WikiStart">Start =
+Page</A></LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/wiki/TitleIndex">Index</A></LI>
+  <LI class=3D"last"><A =
+href=3D"http://trac.ffmpeg.org/wiki/Capture/Desktop?action=3Dhistory">His=
+tory</A></LI></UL>
+<HR>
+       </DIV>
+<DIV class=3D"wiki" id=3D"content">
+<DIV class=3D"wikipage searchable">
+<DIV class=3D"trac-content" id=3D"wikipage">
+<H2 id=3D"Linux">Linux</H2>
+<P>Use the <A =
+href=3D"https://ffmpeg.org/ffmpeg-devices.html#x11grab">x11grab</A>=20
+device: </P>
+<PRE class=3D"wiki">ffmpeg -video_size 1024x768 -framerate 25 -f x11grab =
+-i :0.0+100,200 output.mp4=0A=
+</PRE>
+<P>This will grab the image from desktop, starting with the upper-left =
+corner at=20
+(x=3D100, y=3D200) with the width and height of 1024x768. </P>
+<P>If you need audio too you can use <A =
+href=3D"https://ffmpeg.org/ffmpeg-devices.html#alsa-1">ALSA</A>=20
+(see <A class=3D"wiki"=20
+href=3D"http://trac.ffmpeg.org/wiki/Capture/ALSA">Capture/ALSA</A> for =
+more info):=20
+</P>
+<PRE class=3D"wiki">ffmpeg -video_size 1024x768 -framerate 25 -f x11grab =
+-i :0.0+100,200 -f alsa -ac 2 -i hw:0 output.mkv=0A=
+</PRE>
+<P>Or the <A =
+href=3D"https://ffmpeg.org/ffmpeg-devices.html#pulse">pulse</A> input=20
+device: </P>
+<PRE class=3D"wiki">ffmpeg -video_size 1024x768 -framerate 25 -f x11grab =
+-i :0.0+100,200 -f pulse -ac 2 -i default output.mkv=0A=
+</PRE>
+<H2 id=3D"OSX">OS X</H2>
+<P>Use the <A=20
+href=3D"https://ffmpeg.org/ffmpeg-devices.html#avfoundation">avfoundation=
+</A>=20
+device: </P>
+<PRE class=3D"wiki">ffmpeg -f avfoundation -list_devices true -i ""=0A=
+</PRE>
+<P>This will enumerate all the available input devices including screens =
+ready=20
+to be captured. </P>
+<P>Once you've figured out the device index corresponding to the screen =
+to be=20
+captured use: </P>
+<PRE class=3D"wiki">ffmpeg -f avfoundation -i "&lt;screen device =
+index&gt;:&lt;audio device index&gt;" out.mov=0A=
+</PRE>
+<P>This will capture the screen from <TT>&lt;screen device =
+index&gt;</TT> and=20
+audio from <TT>&lt;audio device index&gt;</TT> into the output file=20
+<TT>out.mov</TT>. </P>
+<H2 id=3D"Windows">Windows</H2>
+<P>Use a <A class=3D"ext-link"=20
+href=3D"http://ffmpeg.org/ffmpeg-devices.html#dshow"><SPAN=20
+class=3D"icon">=E2=80=8B</SPAN>dshow</A> <A class=3D"ext-link" =
+href=3D"https://github.com/rdp/screen-capture-recorder-to-video-windows-f=
+ree"><SPAN=20
+class=3D"icon">=E2=80=8B</SPAN>device</A>: </P>
+<PRE class=3D"wiki">ffmpeg -f dshow -i video=3D"screen-capture-recorder" =
+output.flv=0A=
+</PRE>
+<P>This will grab the image from entire desktop. You can refer to a <A =
+class=3D"ext-link"=20
+href=3D"http://betterlogic.com/roger/2010/07/list-of-available-directshow=
+-screen-capture-filters/"><SPAN=20
+class=3D"icon">=E2=80=8B</SPAN>list of alternative devices</A>. </P>
+<P>If you need audio too: </P>
+<PRE class=3D"wiki">ffmpeg -f dshow -i =
+video=3D"UScreenCapture":audio=3D"Microphone" output.flv=0A=
+</PRE>
+<P>If you want to capture the audio that is playing from your speakers =
+you may=20
+also need to configure so-called "Stereo Mix" device. </P>
+<P>or </P>
+<PRE class=3D"wiki">ffmpeg -f dshow -i video=3D"UScreenCapture" -f dshow =
+-i audio=3D"Microphone" output.flv=0A=
+</PRE>
+<P>You can list your devices with: </P>
+<PRE class=3D"wiki">ffmpeg -list_devices true -f dshow -i dummy=0A=
+</PRE>
+<P>There is also the <A=20
+href=3D"https://ffmpeg.org/ffmpeg-devices.html#gdigrab">gdigrab</A> =
+input device=20
+you can use to grab video from the screen in Windows. </P>
+<H2 id=3D"Generalnotes">General notes</H2>
+<P>If you have a slow computer, it will not be smart to grab and encode =
+your=20
+video at the same time, because slow CPU will not be able to do this. In =
+that=20
+case, first grab all you need and save it as uncompressed video/audio =
+and when=20
+you finish the grabbing process then start converting it to whatever you =
+need:=20
+</P>
+<P>Linux: </P>
+<PRE class=3D"wiki">ffmpeg -framerate 25 -video_size 1024x768 -f x11grab =
+-i :0.0+100,200 -f alsa -ac 2 -i pulse -vcodec libx264 -crf 0 -preset =
+ultrafast -acodec pcm_s16le output.mkv=0A=
+ffmpeg -i output.mkv -acodec ... -vcodec ... final.mkv=0A=
+</PRE>
+<P>Windows: </P>
+<PRE class=3D"wiki">ffmpeg -f dshow -i =
+video=3D"screen-capture-recorder":audio=3D"Microphone" -vcodec libx264 =
+-crf 0 -preset ultrafast -acodec pcm_s16le output.mkv=0A=
+ffmpeg -i output.flv -acodec ... -vcodec ... final.mkv=0A=
+</PRE>
+<H2 id=3D"Losslessrecording">Lossless recording</H2>
+<P>If you want a perfect recording of your desktop, x264 can help. Use =
+lossless=20
+encoding, e.g.: </P>
+<PRE class=3D"wiki">ffmpeg -video_size 1920x1080 -framerate 30 -f =
+x11grab -i :0.0 -c:v libx264 -qp 0 -preset ultrafast capture.mkv=0A=
+</PRE>
+<P><TT>-qp 0</TT> tells x264 to encode in lossless mode, <TT>-preset=20
+ultrafast</TT> advises it to do so fast. </P>
+<P>The encoder should be fast enough on most modern hardware to record =
+without=20
+any framedrop, and even leave enough CPU headroom for other =
+applications. </P>
+<P>If you're going to archive the recording or are concerned about file =
+size,=20
+re-encode it losslessly again but with a slower preset. Note that since =
+the=20
+initial recording was lossless, and the re-encode is lossless too, no =
+quality=20
+loss is introduced in this process in any way. </P>
+<PRE class=3D"wiki">ffmpeg -i capture.mkv -c:v libx264 -qp 0 -preset =
+veryslow capture_smaller.mkv=0A=
+</PRE>
+<P>See <A class=3D"wiki"=20
+href=3D"http://trac.ffmpeg.org/wiki/Encode/H.264">Encode/H.264</A> for =
+more info=20
+and examples. </P></DIV>
+<DIV class=3D"trac-modifiedby"><SPAN><A title=3D"Version 15 by llogan: =
+make x11grab examples completely copy and pasteable for trac #4436"=20
+href=3D"http://trac.ffmpeg.org/wiki/Capture/Desktop?action=3Ddiff&amp;ver=
+sion=3D15">Last=20
+modified</A> <A title=3D"See timeline at 04/06/15 23:57:32" =
+class=3D"timeline" =
+href=3D"http://trac.ffmpeg.org/timeline?from=3D2015-04-06T23%3A57%3A32%2B=
+01%3A00&amp;precision=3Dsecond">10=20
+months ago</A></SPAN>             <SPAN class=3D"trac-print">Last =
+modified on=20
+04/06/15 23:57:32</SPAN>           </DIV></DIV>
+<UL class=3D"tags">
+  <LI class=3D"header">Tags</LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/tags?q=3Davfoundation"=20
+  rel=3D"tag">avfoundation</A> </LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/tags?q=3Ddshow" =
+rel=3D"tag">dshow</A> </LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/tags?q=3Dgdigrab" =
+rel=3D"tag">gdigrab</A>=20
+</LI>
+  <LI><A href=3D"http://trac.ffmpeg.org/tags?q=3Dx11grab" =
+rel=3D"tag">x11grab</A>=20
+</LI></UL></DIV>
+<DIV id=3D"altlinks">
+<H3>Download in other formats:</H3>
+<UL>
+  <LI class=3D"last first"><A =
+href=3D"http://trac.ffmpeg.org/wiki/Capture/Desktop?format=3Dtxt"=20
+  rel=3D"nofollow">Plain Text</A>         </LI>       </UL></DIV></DIV>
+<DIV id=3D"footer" lang=3D"en" lang=3D"en" xml:lang=3D"en">
+<HR>
+       <A id=3D"tracpowered" href=3D"http://trac.edgewall.org/"><IMG =
+width=3D"107"=20
+height=3D"30" alt=3D"Trac Powered" =
+src=3D"http://trac.ffmpeg.org/chrome/common/trac_logo_mini.png"></A>=20
+     =20
+<P class=3D"left">Powered by <A =
+href=3D"http://trac.ffmpeg.org/about"><STRONG>Trac=20
+1.0.1</STRONG></A><BR>        By <A =
+href=3D"http://www.edgewall.org/">Edgewall=20
+Software</A>.</P>
+<P class=3D"right">Visit the Trac open source project at<BR><A =
+href=3D"http://trac.edgewall.org/">http://trac.edgewall.org/</A></P></DIV=
+></BODY></HTML>
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://trac.ffmpeg.org/ffmpeg-logo.png
+
+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
+TkSuQmCC
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://trac.ffmpeg.org/chrome/vote/aupgray.png
+
+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
+O3xcmnsAAAAASUVORK5CYII=
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://trac.ffmpeg.org/chrome/vote/adowngray.png
+
+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
+3v6r/w4ARne0LCfvQl8AAAAASUVORK5CYII=
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://trac.ffmpeg.org/chrome/common/trac_logo_mini.png
+
+iVBORw0KGgoAAAANSUhEUgAAAGsAAAAeCAMAAAAcjhBMAAADAFBMVEUAAQAQEg8bHRopKigxMzA+
+Pz2tJSRdX13GZGSHh4eXmZbUjIqrq6vcpKXkuLfRysfOzs7v5eT9//z///8AAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAADlVrIXAAABAHRSTlP///////////////////////8A////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////r46s5AAA
+AkZJREFUeJy1louSgyAMRcEHsFihgf//10VIkIe47U6bGZWGluNNQihzQ9thPPcvY+MpIS6coKX+
+Csu0LjszxuQXWLvogqjZR1mgbtL0YZYRCke7EFtNkuvBmqWUNlwhcaBXruPEzKe1yGTwTHyR2t6y
+gFgB1cAky5YSB/GueXavKSZ6IkdVR32+jNliTaiDdaTMUFA7VnRIfbrZ3HyvykfP2kQqwIgSexiQ
+uJK1hFt6ewmMhWhpSUKIHaa5u2VBRGTWVuwzsKk2rLWw4oKB4jArNgLSg01H9GyVrp61kZwUw6BQ
+qTx51uGKmvIrWp30JPXTVTEPWIoG7kjgiDWj28qzPOzU1cSQZQTqgZOZhTUsXLHIY2D1NTFghX6r
+SNgekQYjOWYhis9RnH6ZFRigKHi7MhhKqsQrVhTCNaAv6aqL4pqlBC6vTk/LWmqWzKMl7zy2vsBy
+xu2mKgeFZemyhhigk5VHqEg2FTpmHaJQhdk3QBb9EFJmltk2uiZtsTFZSDXJQ8Oc/+gbWQZCTNUV
+F6q2k1W2qOgrHbe9F2gHY+2Dg704Mm3PctRCOPmKZnzbe6HeymFYH84UqX5/LdaSD2hvT/d9nlhK
+kNWHmAvNyDaJDw3qwqWbdjjoGxu1Xtpq0fzz8fOePZ7e37AiDHIIK1ZAee/jKunh6fLnvfrwuGfF
+3WUKlKlYGZAePvPKufzhT5bL2VLbVvwjLXS1rAtdL7PoEKsMdV2x0JkD+w7rOEi6LlOwfny9vC8D
++06+DoOLfvb5Ovye/QLtUaaD3NuV0gAAAABJRU5ErkJggg==
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://trac.ffmpeg.org/chrome/common/css/trac.css
+
+html {
+	-ms-overflow-y: scroll;
+}
+body {
+	background: rgb(255, 255, 255); margin: 10px; padding: 0px; color: =
+rgb(0, 0, 0);
+}
+body {
+	font: 13px/normal Verdana, Arial, "Bitstream Vera Sans", Helvetica, =
+sans-serif; font-size-adjust: none; font-stretch: normal;
+}
+th {
+	font: 13px/normal Verdana, Arial, "Bitstream Vera Sans", Helvetica, =
+sans-serif; font-size-adjust: none; font-stretch: normal;
+}
+tr {
+	font: 13px/normal Verdana, Arial, "Bitstream Vera Sans", Helvetica, =
+sans-serif; font-size-adjust: none; font-stretch: normal;
+}
+h1 {
+	letter-spacing: -0.01em; font-family: Arial,Verdana,"Bitstream Vera =
+Sans",Helvetica,sans-serif; font-weight: bold; page-break-after: avoid;
+}
+h2 {
+	letter-spacing: -0.01em; font-family: Arial,Verdana,"Bitstream Vera =
+Sans",Helvetica,sans-serif; font-weight: bold; page-break-after: avoid;
+}
+h3 {
+	letter-spacing: -0.01em; font-family: Arial,Verdana,"Bitstream Vera =
+Sans",Helvetica,sans-serif; font-weight: bold; page-break-after: avoid;
+}
+h4 {
+	letter-spacing: -0.01em; font-family: Arial,Verdana,"Bitstream Vera =
+Sans",Helvetica,sans-serif; font-weight: bold; page-break-after: avoid;
+}
+h1 {
+	margin: 0.15em 1em 0.5em 0px; font-size: 19px;
+}
+h2 {
+	font-size: 16px;
+}
+h3 {
+	font-size: 14px;
+}
+hr {
+	border-width: 1px medium medium; border-style: solid none none; =
+border-color: rgb(204, 204, 187) currentColor currentColor; margin: 2em =
+0px; border-image: none;
+}
+address {
+	font-style: normal;
+}
+img {
+	border: currentColor; border-image: none;
+}
+.underline {
+	text-decoration: underline;
+}
+ol.loweralpha {
+	list-style-type: lower-alpha;
+}
+ol.upperalpha {
+	list-style-type: upper-alpha;
+}
+ol.lowerroman {
+	list-style-type: lower-roman;
+}
+ol.upperroman {
+	list-style-type: upper-roman;
+}
+ol.arabic {
+	list-style-type: decimal;
+}
+:link {
+	color: rgb(187, 0, 0); text-decoration: none; border-bottom-color: =
+rgb(187, 187, 187); border-bottom-width: 1px; border-bottom-style: =
+dotted;
+}
+:visited {
+	color: rgb(187, 0, 0); text-decoration: none; border-bottom-color: =
+rgb(187, 187, 187); border-bottom-width: 1px; border-bottom-style: =
+dotted;
+}
+:hover:link {
+	color: rgb(85, 85, 85); background-color: rgb(238, 238, 238);
+}
+:hover:visited {
+	color: rgb(85, 85, 85); background-color: rgb(238, 238, 238);
+}
+h1 :link {
+	color: inherit;
+}
+h1 :visited {
+	color: inherit;
+}
+h2 :link {
+	color: inherit;
+}
+h2 :visited {
+	color: inherit;
+}
+h3 :link {
+	color: inherit;
+}
+h3 :visited {
+	color: inherit;
+}
+h4 :link {
+	color: inherit;
+}
+h4 :visited {
+	color: inherit;
+}
+h5 :link {
+	color: inherit;
+}
+h5 :visited {
+	color: inherit;
+}
+h6 :link {
+	color: inherit;
+}
+h6 :visited {
+	color: inherit;
+}
+.anchor:link {
+	border: currentColor; border-image: none; color: rgb(215, 215, 215); =
+font-size: 0.8em; vertical-align: text-top;
+}
+.anchor:visited {
+	border: currentColor; border-image: none; color: rgb(215, 215, 215); =
+font-size: 0.8em; vertical-align: text-top;
+}
+* > .anchor:link {
+	visibility: hidden;
+}
+* > .anchor:visited {
+	visibility: hidden;
+}
+h1:hover .anchor {
+	visibility: visible;
+}
+h2:hover .anchor {
+	visibility: visible;
+}
+h3:hover .anchor {
+	visibility: visible;
+}
+h4:hover .anchor {
+	visibility: visible;
+}
+h5:hover .anchor {
+	visibility: visible;
+}
+h6:hover .anchor {
+	visibility: visible;
+}
+span:hover .anchor {
+	visibility: visible;
+}
+h1:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+h2:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+h3:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+h4:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+h5:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+h6:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+span:target {
+	background: rgb(255, 255, 187); border-radius: 0.2em; box-shadow: 0.1em =
+0.1em 0.4em 0.1em #dda;
+}
+@media screen
+{
+a.ext-link .icon {
+	background: url("../extlink.gif") no-repeat left; padding-left: 15px;
+}
+a.mail-link .icon {
+	background: url("../envelope.png") no-repeat left; padding-left: 16px;
+}
+a.trac-rawlink {
+	background: url("../download.png") no-repeat right; padding-right: =
+16px; border-bottom-color: currentColor; border-bottom-width: medium; =
+border-bottom-style: none;
+}
+a.trac-ziplink {
+	background: url("../download.png") no-repeat right; padding-right: =
+16px; border-bottom-color: currentColor; border-bottom-width: medium; =
+border-bottom-style: none;
+}
+}
+input {
+	margin: 2px;
+}
+textarea {
+	margin: 2px;
+}
+select {
+	margin: 2px;
+}
+input {
+	vertical-align: middle;
+}
+select {
+	vertical-align: middle;
+}
+input[type=3Dbutton] {
+=09
+}
+input[type=3Dsubmit] {
+=09
+}
+input[type=3Dreset] {
+=09
+}
+button {
+=09
+}
+input[type=3Dbutton] {
+	background: rgb(238, 238, 238); padding: 0.1em 0.5em 0.2em; =
+border-radius: 0.3em; border: 1px outset rgb(238, 238, 238); =
+border-image: none; color: rgb(34, 34, 34); cursor: pointer; box-shadow: =
+0.1em 0.1em 0.4em 0px #888; text-shadow: 0.1em 0.1em #ddd;
+}
+input[type=3Dsubmit] {
+	background: rgb(238, 238, 238); padding: 0.1em 0.5em 0.2em; =
+border-radius: 0.3em; border: 1px outset rgb(238, 238, 238); =
+border-image: none; color: rgb(34, 34, 34); cursor: pointer; box-shadow: =
+0.1em 0.1em 0.4em 0px #888; text-shadow: 0.1em 0.1em #ddd;
+}
+input[type=3Dreset] {
+	background: rgb(238, 238, 238); padding: 0.1em 0.5em 0.2em; =
+border-radius: 0.3em; border: 1px outset rgb(238, 238, 238); =
+border-image: none; color: rgb(34, 34, 34); cursor: pointer; box-shadow: =
+0.1em 0.1em 0.4em 0px #888; text-shadow: 0.1em 0.1em #ddd;
+}
+input[type=3Dbutton]:hover {
+	background: rgb(246, 246, 246); box-shadow: 0.1em 0.1em 0.6em 0px #999; =
+text-shadow: 0.1em 0.1em #fcfcfc;
+}
+input[type=3Dsubmit]:hover {
+	background: rgb(246, 246, 246); box-shadow: 0.1em 0.1em 0.6em 0px #999; =
+text-shadow: 0.1em 0.1em #fcfcfc;
+}
+input[type=3Dreset]:hover {
+	background: rgb(246, 246, 246); box-shadow: 0.1em 0.1em 0.6em 0px #999; =
+text-shadow: 0.1em 0.1em #fcfcfc;
+}
+input[type=3Dbutton]:active {
+	left: 0.1em; top: 0.1em; position: relative;
+}
+input[type=3Dsubmit]:active {
+	left: 0.1em; top: 0.1em; position: relative;
+}
+input[type=3Dreset]:active {
+	left: 0.1em; top: 0.1em; position: relative;
+}
+input[type=3Dbutton][disabled] {
+	background: rgb(246, 246, 246); border-style: solid; color: rgb(153, =
+153, 153);
+}
+input[type=3Dsubmit][disabled] {
+	background: rgb(246, 246, 246); border-style: solid; color: rgb(153, =
+153, 153);
+}
+input[type=3Dreset][disabled] {
+	background: rgb(246, 246, 246); border-style: solid; color: rgb(153, =
+153, 153);
+}
+input[type=3Dtext] {
+	border-radius: 0.3em; border: 1px solid rgb(215, 215, 215); =
+border-image: none;
+}
+input.textwidget {
+	border-radius: 0.3em; border: 1px solid rgb(215, 215, 215); =
+border-image: none;
+}
+textarea {
+	border-radius: 0.3em; border: 1px solid rgb(215, 215, 215); =
+border-image: none;
+}
+input[type=3Dtext] {
+	padding: 0.25em 0.5em;
+}
+input.textwidget {
+	padding: 0.25em 0.5em;
+}
+input[type=3Dtext]:focus {
+	border: 1px solid rgb(136, 136, 102); border-image: none;
+}
+input.textwidget:focus {
+	border: 1px solid rgb(136, 136, 102); border-image: none;
+}
+textarea:focus {
+	border: 1px solid rgb(136, 136, 102); border-image: none;
+}
+option {
+	border-bottom-color: rgb(215, 215, 215); border-bottom-width: 1px; =
+border-bottom-style: dotted;
+}
+fieldset {
+	background: rgb(247, 247, 240); margin: 1em 0px; padding: 1em; =
+border-radius: 0.4em; border: 1px solid rgb(215, 215, 215); =
+border-image: none; box-shadow: inset 0.1em 0.1em 1em 0px #e7e7e7;
+}
+p.hint {
+	margin: 0.5em 0px; color: rgb(102, 102, 102); padding-left: 1em; =
+font-size: 85%; font-style: italic;
+}
+span.hint {
+	margin: 0.5em 0px; color: rgb(102, 102, 102); padding-left: 1em; =
+font-size: 85%; font-style: italic;
+}
+legend {
+	padding: 0px 0.25em; color: rgb(153, 153, 153); font-size: 90%; =
+font-weight: bold; margin-left: 0.6em;
+}
+label.disabled {
+	color: rgb(215, 215, 215);
+}
+.buttons {
+	margin: 0.5em 0.5em 0.5em 0px;
+}
+.buttons form {
+	display: inline;
+}
+.buttons form div {
+	display: inline;
+}
+.buttons input {
+	margin: 1em 0.5em 0.1em 0px;
+}
+.inlinebuttons input {
+	background: none; margin: 0px 0.1em 0.1em; padding: 0px 0.4em 0.1em; =
+border-radius: 1em; border: 1px solid rgb(221, 221, 221); border-image: =
+none; height: 1.6em; color: rgb(128, 128, 128); font-size: 70%; cursor: =
+pointer; box-shadow: none;
+}
+.uisymbols .inlinebuttons input[type=3Dbutton] {
+	font-size: 100%;
+}
+.uisymbols .inlinebuttons input[type=3Dsubmit] {
+	font-size: 100%;
+}
+.inlinebuttons input[type=3Dbutton]:hover {
+	background: rgb(246, 246, 246); color: rgb(51, 51, 51); box-shadow: =
+0.1em 0.1em 0.6em 0px #999; text-shadow: 0.1em 0.1em #fcfcfc;
+}
+.inlinebuttons input[type=3Dsubmit]:hover {
+	background: rgb(246, 246, 246); color: rgb(51, 51, 51); box-shadow: =
+0.1em 0.1em 0.6em 0px #999; text-shadow: 0.1em 0.1em #fcfcfc;
+}
+input[type=3Dbutton].trac-delete {
+	color: rgb(211, 19, 19);
+}
+input[type=3Dsubmit].trac-delete {
+	color: rgb(211, 19, 19);
+}
+input[type=3Dbutton].trac-delete:hover {
+	color: rgb(227, 19, 19);
+}
+input[type=3Dsubmit].trac-delete:hover {
+	color: rgb(227, 19, 19);
+}
+#header hr {
+	display: none;
+}
+#header h1 {
+	margin: 1.5em 0px -1.5em; padding: 0px;
+}
+#header img {
+	margin: 0px 0px -3em; border: currentColor; border-image: none;
+}
+#header :link {
+	background: none; padding: 0px; border: currentColor; border-image: =
+none; color: rgb(85, 85, 85); margin-bottom: 2px;
+}
+#header :visited {
+	background: none; padding: 0px; border: currentColor; border-image: =
+none; color: rgb(85, 85, 85); margin-bottom: 2px;
+}
+#header :hover:link {
+	background: none; padding: 0px; border: currentColor; border-image: =
+none; color: rgb(85, 85, 85); margin-bottom: 2px;
+}
+#header :hover:visited {
+	background: none; padding: 0px; border: currentColor; border-image: =
+none; color: rgb(85, 85, 85); margin-bottom: 2px;
+}
+#header h1 :hover:link {
+	color: rgb(0, 0, 0);
+}
+#header h1 :hover:visited {
+	color: rgb(0, 0, 0);
+}
+#search {
+	margin: 0px 0px 1em; height: 2.2em; text-align: right; clear: both; =
+font-size: 10px;
+}
+#search input {
+	font-size: 10px;
+}
+#search label {
+	display: none;
+}
+.nav h2 {
+	display: none;
+}
+.nav hr {
+	display: none;
+}
+.nav ul {
+	list-style: none; margin: 0px; padding: 0px; text-align: right; =
+font-size: 10px;
+}
+.nav li {
+	padding: 0px 0.75em; border-right-color: rgb(215, 215, 215); =
+border-right-width: 1px; border-right-style: solid; display: =
+inline-block; white-space: nowrap; -ms-zoom: 1;
+}
+.nav li.last {
+	border-right-color: currentColor; border-right-width: medium; =
+border-right-style: none;
+}
+#metanav {
+	padding-top: 0.3em;
+}
+#mainnav {
+	font: 10px/normal verdana, "Bitstream Vera Sans", helvetica, arial, =
+sans-serif; margin: 0.66em 0px 0.33em; border-radius: 0.5em; border: 1px =
+solid rgb(228, 228, 228); border-image: none; font-size-adjust: none; =
+font-stretch: normal; box-shadow: 0px 0.5em 1.5em #eee;
+}
+#mainnav li {
+	background: url("../topbar_gradient.png") 0px 0px white; margin: -1px =
+0.3em 0px -0.4em; padding: 0.3em 0px; border: 1px solid rgb(228, 228, =
+228); border-image: none;
+}
+#mainnav .first {
+	border-top-left-radius: 0.5em; border-bottom-left-radius: 0.5em;
+}
+#mainnav .first :link {
+	border-top-left-radius: 0.5em; border-bottom-left-radius: 0.5em;
+}
+#mainnav .last {
+	margin-right: 0px; border-top-right-radius: 0.5em; =
+border-bottom-right-radius: 0.5em;
+}
+#mainnav .last :link {
+	margin-right: 0px; border-top-right-radius: 0.5em; =
+border-bottom-right-radius: 0.5em;
+}
+#mainnav :link {
+	padding: 0.3em 20px; color: rgb(0, 0, 0); border-bottom-color: =
+currentColor; border-bottom-width: medium; border-bottom-style: none; =
+box-shadow: 0px 0.1em 0.3em 0px #999;
+}
+#mainnav :visited {
+	padding: 0.3em 20px; color: rgb(0, 0, 0); border-bottom-color: =
+currentColor; border-bottom-width: medium; border-bottom-style: none; =
+box-shadow: 0px 0.1em 0.3em 0px #999;
+}
+#mainnav li:hover {
+	border: 1px solid rgb(102, 102, 102); border-image: none;
+}
+#mainnav :hover:link {
+	background: url("../topbar_gradient2.png") repeat-x 0px 0px rgb(0, 0, =
+0); color: rgb(238, 238, 238); box-shadow: 0px 0.1em 0.6em 0px #666;
+}
+#mainnav :hover:visited {
+	background: url("../topbar_gradient2.png") repeat-x 0px 0px rgb(0, 0, =
+0); color: rgb(238, 238, 238); box-shadow: 0px 0.1em 0.6em 0px #666;
+}
+#mainnav .active {
+	border: 1px solid rgb(102, 102, 102); border-image: none;
+}
+#mainnav .active :link {
+	background: url("../topbar_gradient2.png") repeat-x 0px 0px rgb(0, 0, =
+0); color: rgb(238, 238, 238); text-shadow: 1px 0px #eee;
+}
+#mainnav .active :visited {
+	background: url("../topbar_gradient2.png") repeat-x 0px 0px rgb(0, 0, =
+0); color: rgb(238, 238, 238); text-shadow: 1px 0px #eee;
+}
+#ctxtnav {
+	padding: 0.4em 0px; min-height: 1em;
+}
+#ctxtnav li ul {
+	background: rgb(247, 247, 247); margin: 0px; padding: 0px; border: 1px =
+solid currentColor; border-image: none; color: rgb(204, 204, 204); =
+display: inline;
+}
+#ctxtnav li li {
+	padding: 0px;
+}
+#ctxtnav li li :link {
+	padding: 0px 1em;
+}
+#ctxtnav li li :visited {
+	padding: 0px 1em;
+}
+#ctxtnav li li :hover:link {
+	background: rgb(187, 187, 170); color: rgb(255, 255, 255);
+}
+#ctxtnav li li :hover:visited {
+	background: rgb(187, 187, 170); color: rgb(255, 255, 255);
+}
+.trac-nav {
+	font-size: 80%; float: right;
+}
+.trac-topnav {
+	font-size: 80%; float: right;
+}
+.trac-topnav {
+	margin-top: 14px;
+}
+#altlinks {
+	text-align: center; clear: both; margin-top: 0.4em;
+}
+#altlinks h3 {
+	margin: 0px; letter-spacing: normal; font-size: 12px;
+}
+#altlinks ul {
+	list-style: none; margin: 0px;
+}
+#altlinks li {
+	padding: 0px 1em; line-height: 1.5; font-size: 11px; =
+border-right-color: rgb(215, 215, 215); border-right-width: 1px; =
+border-right-style: solid; display: inline; white-space: nowrap;
+}
+#altlinks li.last {
+	border-right-color: currentColor; border-right-width: medium; =
+border-right-style: none;
+}
+#altlinks li :link {
+	padding: 0px 0px 2px; border: currentColor; border-image: none; color: =
+rgb(102, 102, 102); background-repeat: no-repeat;
+}
+#altlinks li :visited {
+	padding: 0px 0px 2px; border: currentColor; border-image: none; color: =
+rgb(102, 102, 102); background-repeat: no-repeat;
+}
+#altlinks li a.ics {
+	background: url("../ics.png") no-repeat left; padding-left: 22px;
+}
+#altlinks li a.rss {
+	background: url("../feed.png") no-repeat left; padding-left: 20px;
+}
+#footer {
+	padding: 0.25em 0px; height: 31px; color: rgb(187, 187, 187); clear: =
+both; font-size: 10px;
+}
+#footer :link {
+	color: rgb(187, 187, 187);
+}
+#footer :visited {
+	color: rgb(187, 187, 187);
+}
+#footer hr {
+	display: none;
+}
+#footer #tracpowered {
+	border: 0px currentColor; border-image: none; float: left;
+}
+#footer #tracpowered:hover {
+	background: none;
+}
+#footer p {
+	margin: 0px;
+}
+#footer p.left {
+	padding: 0px 1em; margin-left: 1em; border-right-color: rgb(215, 215, =
+215); border-left-color: rgb(215, 215, 215); border-right-width: 1px; =
+border-left-width: 1px; border-right-style: solid; border-left-style: =
+solid; float: left;
+}
+#footer p.right {
+	text-align: right; float: right;
+}
+#content {
+	position: relative;
+}
+div.trac-content {
+	margin: 0.3em auto; padding: 0.5em 1em; border-radius: 0.5em; border: =
+1px solid rgb(228, 228, 228); border-image: none; box-shadow: 0.2em =
+0.3em 1.5em #eee;
+}
+.uinohelp #help {
+	display: none;
+}
+#help {
+	margin: 1em; text-align: right; color: rgb(153, 153, 153); clear: both; =
+font-size: 90%;
+}
+#help :link {
+	cursor: help;
+}
+#help :visited {
+	cursor: help;
+}
+#help hr {
+	display: none;
+}
+.foldable :link {
+	background: url("../expanded.png") no-repeat 4px 50%; padding: 0.3em =
+0.5em 0.3em 20px; border-radius: 0.3em; border: currentColor; =
+border-image: none; color: rgb(34, 34, 34); box-shadow: 0.1em 0.1em =
+0.3em 0px #bbb; text-shadow: 0.1em 0.1em #fcfcfc;
+}
+.foldable :visited {
+	background: url("../expanded.png") no-repeat 4px 50%; padding: 0.3em =
+0.5em 0.3em 20px; border-radius: 0.3em; border: currentColor; =
+border-image: none; color: rgb(34, 34, 34); box-shadow: 0.1em 0.1em =
+0.3em 0px #bbb; text-shadow: 0.1em 0.1em #fcfcfc;
+}
+.foldable :hover:link {
+	background-color: transparent;
+}
+.foldable :hover:visited {
+	background-color: transparent;
+}
+.collapsed > .foldable :link {
+	background-image: url("../collapsed.png");
+}
+.collapsed > .foldable :visited {
+	background-image: url("../collapsed.png");
+}
+.collapsed > div {
+	display: none;
+}
+.collapsed > table {
+	display: none;
+}
+.collapsed > ul {
+	display: none;
+}
+.collapsed > dl {
+	display: none;
+}
+fieldset > legend.foldable :link {
+	color: rgb(102, 102, 102); font-size: 110%; text-shadow: 0.1em 0.1em =
+#ddd;
+}
+fieldset > legend.foldable :visited {
+	color: rgb(102, 102, 102); font-size: 110%; text-shadow: 0.1em 0.1em =
+#ddd;
+}
+.collapsed legend.foldable {
+	background: white;
+}
+h2 .trac-count {
+	color: rgb(153, 153, 153); font-size: 90%; font-weight: normal; =
+margin-left: 0.2em; vertical-align: baseline;
+}
+h3 .trac-count {
+	color: rgb(153, 153, 153); font-size: 90%; font-weight: normal; =
+margin-left: 0.2em; vertical-align: baseline;
+}
+#prefs {
+	background: rgb(247, 247, 240); margin: 0px 1em 1em; padding: 0.8em; =
+border-radius: 1em; border: 1px outset rgb(238, 238, 238); border-image: =
+none; font-size: 9px; float: right; position: relative; box-shadow: =
+0.2em 0.2em 0.7em 0px #777;
+}
+* html #prefs {
+	width: 26em;
+}
+#prefs input {
+	font-size: 9px; vertical-align: middle;
+}
+#prefs select {
+	font-size: 9px; vertical-align: middle;
+}
+#prefs fieldset {
+	background: none; margin: 0.5em; padding: 0px; border: currentColor; =
+border-image: none; box-shadow: none;
+}
+#prefs fieldset legend {
+	background: none; margin: 0px 0px 0px -1.5em; padding: 0px; color: =
+rgb(0, 0, 0); font-size: 9px; font-weight: normal;
+}
+#prefs .buttons {
+	text-align: right;
+}
+#info {
+	background: rgb(247, 247, 240); margin: 1em 0px 0px; border: 1px solid =
+rgb(215, 215, 215); border-image: none; width: 100%; clear: both; =
+border-collapse: collapse; border-spacing: 0;
+}
+#info th {
+	padding: 2px 0.5em; font-size: 85%; vertical-align: top;
+}
+#info td {
+	padding: 2px 0.5em; font-size: 85%; vertical-align: top;
+}
+#info th {
+	text-align: left; font-weight: bold;
+}
+#info td.message {
+	width: 100%;
+}
+#info .message ul {
+	margin: 0px 2em; padding: 0px;
+}
+#info .message p {
+	margin: 0px; padding: 0px;
+}
+a.trac-diff::after {
+	content: "?";
+}
+.wikipage {
+	padding-left: 18px;
+}
+.wikipage h1 {
+	margin-left: -18px;
+}
+.wikipage h2 {
+	margin-left: -18px;
+}
+.wikipage h3 {
+	margin-left: -18px;
+}
+.wikipage table h1 {
+	margin-left: 0px;
+}
+.wikipage table h2 {
+	margin-left: 0px;
+}
+.wikipage table h3 {
+	margin-left: 0px;
+}
+div.compact > p:first-child {
+	margin-top: 0px;
+}
+div.compact > p:last-child {
+	margin-bottom: 0px;
+}
+a.missing:link {
+	color: rgb(153, 153, 136);
+}
+a.missing:visited {
+	color: rgb(153, 153, 136);
+}
+a.missing {
+	color: rgb(153, 153, 136);
+}
+span.missing {
+	color: rgb(153, 153, 136);
+}
+a.forbidden {
+	color: rgb(153, 153, 136);
+}
+span.forbidden {
+	color: rgb(153, 153, 136);
+}
+a.missing:hover {
+	color: rgb(0, 0, 0);
+}
+a.closed:link {
+	text-decoration: line-through;
+}
+a.closed:visited {
+	text-decoration: line-through;
+}
+span.closed {
+	text-decoration: line-through;
+}
+.important {
+	background: rgb(255, 204, 187); margin: 0.5em; padding: 0px 0.5em; =
+border: 1px dotted rgb(221, 0, 0); border-image: none; color: rgb(85, 0, =
+0);
+}
+dl.wiki dt {
+	font-weight: bold;
+}
+dl.compact dt {
+	padding-right: 0.5em; float: left;
+}
+dl.compact dd {
+	margin: 0px; padding: 0px;
+}
+pre.wiki {
+	background: rgb(247, 247, 247); margin: 1em 1.75em; padding: 0.25em; =
+border-radius: 0.3em; border: 1px solid rgb(215, 215, 215); =
+border-image: none; overflow: auto; box-shadow: 0px 0px 1em #eee;
+}
+pre.literal-block {
+	background: rgb(247, 247, 247); margin: 1em 1.75em; padding: 0.25em; =
+border-radius: 0.3em; border: 1px solid rgb(215, 215, 215); =
+border-image: none; overflow: auto; box-shadow: 0px 0px 1em #eee;
+}
+tt {
+	background: rgb(250, 250, 250); padding: 0px 0.3em; border-radius: =
+0.25em; border: 1px solid rgb(238, 221, 204); border-image: none; color: =
+rgb(102, 0, 0);
+}
+blockquote.citation {
+	border-width: 0px 0px 0px 2px; border-style: solid; border-color: =
+rgb(187, 68, 68); margin: -0.6em 0px; padding-left: 0.5em;
+}
+.citation blockquote.citation {
+	border-color: rgb(68, 187, 68);
+}
+.citation .citation blockquote.citation {
+	border-color: rgb(68, 68, 187);
+}
+.citation .citation .citation blockquote.citation {
+	border-color: rgb(204, 85, 85);
+}
+table.wiki {
+	border: 1px solid rgb(204, 204, 204); border-image: none; =
+border-collapse: collapse; border-spacing: 0; box-shadow: 0px 0px 1em =
+#eee;
+}
+table.wiki td {
+	padding: 0.1em 0.25em; border: 1px solid rgb(204, 204, 204); =
+border-image: none;
+}
+table.wiki th {
+	padding: 0.1em 0.25em; border: 1px solid rgb(187, 187, 187); =
+border-image: none; background-color: rgb(247, 247, 247);
+}
+.wikitoolbar {
+	border-width: 1px 1px 1px 0px; border-style: solid; border-color: =
+rgb(215, 215, 215); border-image: none; width: 234px; height: 18px; =
+margin-top: 0.3em; margin-left: 2px;
+}
+.wikitoolbar :link {
+	background: url("../edit_toolbar.png") no-repeat; border-width: 1px; =
+border-style: solid; border-color: rgb(255, 255, 255) rgb(255, 255, 255) =
+rgb(255, 255, 255) rgb(215, 215, 215); border-image: none; width: 24px; =
+height: 16px; float: left; display: block; cursor: default;
+}
+.wikitoolbar :visited {
+	background: url("../edit_toolbar.png") no-repeat; border-width: 1px; =
+border-style: solid; border-color: rgb(255, 255, 255) rgb(255, 255, 255) =
+rgb(255, 255, 255) rgb(215, 215, 215); border-image: none; width: 24px; =
+height: 16px; float: left; display: block; cursor: default;
+}
+.wikitoolbar :hover:link {
+	border: 1px solid rgb(255, 187, 34); border-image: none; =
+background-color: transparent;
+}
+.wikitoolbar :hover:visited {
+	border: 1px solid rgb(255, 187, 34); border-image: none; =
+background-color: transparent;
+}
+.wikitoolbar a#em {
+	background-position: 0px 0px;
+}
+.wikitoolbar a#strong {
+	background-position: 0px -16px;
+}
+.wikitoolbar a#heading {
+	background-position: 0px -32px;
+}
+.wikitoolbar a#link {
+	background-position: 0px -48px;
+}
+.wikitoolbar a#code {
+	background-position: 0px -64px;
+}
+.wikitoolbar a#hr {
+	background-position: 0px -80px;
+}
+.wikitoolbar a#np {
+	background-position: 0px -96px;
+}
+.wikitoolbar a#br {
+	background-position: 0px -112px;
+}
+.wikitoolbar a#img {
+	background-position: 0px -128px;
+}
+div.trac-resizable {
+	width: 1px; display: table;
+}
+div.trac-resizable > div {
+	display: table-cell;
+}
+div.trac-resizable textarea {
+	margin-bottom: 0px; display: block;
+}
+div.trac-grip {
+	background: url("../grip.png") no-repeat center 1px rgb(238, 238, 238); =
+border-width: 0px 1px 1px; border-style: solid; border-color: rgb(221, =
+221, 221); border-image: none; height: 5px; overflow: hidden; cursor: =
+s-resize;
+}
+#attachment .field {
+	margin-top: 1.3em;
+}
+#attachment label {
+	padding-left: 0.2em;
+}
+#attachment fieldset {
+	margin-top: 2em;
+}
+#attachment fieldset .field {
+	margin: 0px 1em 0.5em 0px; float: left;
+}
+#attachment .options {
+	padding: 0px 0px 1em 1em; float: left;
+}
+#attachment br {
+	clear: left;
+}
+.attachment #preview {
+	margin-top: 1em;
+}
+#attachments > div.attachments {
+	padding: 0px 0px 1em 1em;
+}
+#attachments dl.attachments {
+	padding: 0px; margin-left: 2em;
+}
+#attachments dt {
+	list-style: square; display: list-item;
+}
+#attachments dd {
+	padding-left: 0px; font-style: italic; margin-left: 0px;
+}
+#attachments p {
+	color: rgb(102, 102, 102); font-size: 90%; margin-left: 2em;
+}
+#attachments > div.attachments > p {
+	margin: 0.4em 0px; float: right;
+}
+table.listing {
+	width: 100%; clear: both; margin-top: 1em; border-bottom-color: =
+rgb(215, 215, 215); border-bottom-width: 1px; border-bottom-style: =
+solid; border-collapse: collapse; border-spacing: 0; box-shadow: 0.2em =
+0.3em 1.5em #eee;
+}
+table.listing th {
+	padding: 0px 1em 0.1em 0px; text-align: left; font-size: 12px;
+}
+table.listing th.sel {
+	width: 1%; text-align: center;
+}
+table.listing td.sel {
+	width: 1%; text-align: center;
+}
+table.listing thead tr {
+	background: rgb(247, 247, 240);
+}
+table.listing thead th {
+	border-width: 1px; border-style: solid; border-color: rgb(215, 215, =
+215) rgb(215, 215, 215) rgb(153, 153, 153); padding: 2px 0.5em; =
+border-image: none; font-size: 11px; font-weight: bold; vertical-align: =
+bottom; white-space: nowrap;
+}
+table.listing thead th :hover:link {
+	background-color: transparent;
+}
+table.listing thead th :hover:visited {
+	background-color: transparent;
+}
+table.listing thead th a {
+	border: currentColor; border-image: none; padding-right: 12px;
+}
+table.listing th.asc a {
+	background-position: 100% 50%; font-weight: bold; background-repeat: =
+no-repeat;
+}
+table.listing th.desc a {
+	background-position: 100% 50%; font-weight: bold; background-repeat: =
+no-repeat;
+}
+table.listing th.asc a {
+	background-image: url("../asc.png");
+}
+table.listing th.desc a {
+	background-image: url("../desc.png");
+}
+table.listing tbody td {
+	padding: 0.3em 0.5em; border: 1px dotted rgb(221, 221, 221); =
+border-image: none; vertical-align: top;
+}
+table.listing tbody th {
+	padding: 0.3em 0.5em; border: 1px dotted rgb(221, 221, 221); =
+border-image: none; vertical-align: top;
+}
+table.listing tbody td a:hover {
+	background-color: transparent;
+}
+table.listing tbody th a:hover {
+	background-color: transparent;
+}
+table.listing tbody tr {
+	border-top-color: rgb(221, 221, 221); border-top-width: 1px; =
+border-top-style: solid;
+}
+table.listing tbody tr.even {
+	background-color: rgb(252, 252, 252);
+}
+table.listing tbody tr.odd {
+	background-color: rgb(247, 247, 247);
+}
+table.listing tbody tr:hover {
+	background: rgb(238, 238, 221) !important;
+}
+table.listing tbody tr.focus {
+	background: rgb(221, 221, 255) !important;
+}
+table.listing pre {
+	white-space: pre-wrap;
+}
+#fieldhist td {
+	padding: 0px 0.5em;
+}
+#fieldhist td.date {
+	white-space: nowrap;
+}
+#fieldhist td.diff {
+	white-space: nowrap;
+}
+#fieldhist td.version {
+	white-space: nowrap;
+}
+#fieldhist td.author {
+	white-space: nowrap;
+}
+#fieldhist td.version {
+	text-align: center;
+}
+#fieldhist td.comment {
+	width: 100%;
+}
+.suggestions {
+	background: rgb(255, 255, 255); border: 1px solid rgb(136, 136, 102); =
+border-image: none; color: rgb(34, 34, 34);
+}
+.suggestions ul {
+	list-style: none; margin: 0px; padding: 0px; width: 440px; overflow: =
+auto; font-family: sans-serif; min-height: 3em; max-height: 20em;
+}
+* html .suggestions ul {
+	height: 10em;
+}
+.suggestions li {
+	background: rgb(255, 255, 255); padding: 2px 5px; cursor: pointer;
+}
+.suggestions li.selected {
+	background: rgb(185, 185, 185);
+}
+.error#content .message {
+	background: rgb(255, 221, 204); margin: 1em 0px; padding: 0.5em; =
+border: 2px solid rgb(221, 0, 0); border-image: none; color: rgb(85, 0, =
+0);
+}
+div.system-message {
+	background: rgb(255, 221, 204); margin: 1em 0px; padding: 0.5em; =
+border: 2px solid rgb(221, 0, 0); border-image: none; color: rgb(85, 0, =
+0);
+}
+.error#content div.message pre {
+	overflow: hidden; margin-left: 1em; white-space: normal;
+}
+div.system-message pre {
+	overflow: hidden; margin-left: 1em; white-space: normal;
+}
+div.system-message p {
+	margin: 0px;
+}
+div.system-message p.system-message-title {
+	font-weight: bold;
+}
+span.system-message {
+	background: rgb(255, 221, 204); margin: 1px; padding: 0.2em; =
+border-radius: 0.25em; float: left;
+}
+div.system-message {
+	border-radius: 0.5em; box-shadow: 0.2em 0.2em 0.7em 0px #777;
+}
+.system-message#warning {
+	background: rgb(255, 255, 187); border: 1px solid rgb(85, 0, 0); =
+border-image: none;
+}
+.warning.system-message {
+	background: rgb(255, 255, 187); border: 1px solid rgb(85, 0, 0); =
+border-image: none;
+}
+.system-message#warning li {
+	list-style-type: square;
+}
+.system-message#notice {
+	background: rgb(221, 255, 221); border: 1px solid rgb(85, 0, 0); =
+border-image: none;
+}
+.notice.system-message {
+	background: rgb(221, 255, 221); border: 1px solid rgb(85, 0, 0); =
+border-image: none;
+}
+.system-message#notice li {
+	list-style-type: square;
+}
+div.system-message .trac-close-msg {
+	background: none; margin: 0px 0.1em 0.1em 0px; padding: 0px 0.4em =
+0.1em; border-radius: 1em; border: 1px solid rgb(221, 221, 221); =
+border-image: none; height: 1.4em; color: rgb(211, 19, 19); font-size: =
+80%; float: right; display: none; box-shadow: none;
+}
+div.system-message .trac-close-msg:hover {
+	background: rgb(246, 246, 246); color: rgb(51, 51, 51); box-shadow: =
+0.1em 0.1em 0.6em 0px #999; text-shadow: 0.1em 0.1em #fcfcfc;
+}
+.uisymbols div.system-message .trac-close-msg > span {
+	display: none;
+}
+.uisymbols div.system-message .trac-close-msg::after {
+	content: "x";
+}
+.error#content form.newticket {
+	display: inline;
+}
+.error#content form.newticket textarea {
+	display: none;
+}
+.error#content #systeminfo {
+	margin: 1em; width: auto;
+}
+.error#content #plugins {
+	margin: 1em; width: auto;
+}
+.error#content #systeminfo th {
+	font-size: 90%;
+}
+.error#content #systeminfo td {
+	font-size: 90%;
+}
+.error#content #plugins th {
+	font-size: 90%;
+}
+.error#content #plugins td {
+	font-size: 90%;
+}
+.error#content #systeminfo th {
+	background: rgb(247, 247, 247); font-weight: bold;
+}
+.error#content #plugins th {
+	background: rgb(247, 247, 247); font-weight: bold;
+}
+.error#content #traceback {
+	margin-left: 1em;
+}
+.error#content #traceback :link {
+	border: currentColor; border-image: none;
+}
+.error#content #traceback :visited {
+	border: currentColor; border-image: none;
+}
+.error#content #tbtoggle {
+	font-size: 80%;
+}
+.error#content #traceback div {
+	margin-left: 1em;
+}
+.error#content #traceback h3 {
+	margin: 0.5em 0px 0px; font-size: 95%;
+}
+.error#content #traceback :link var {
+	font-family: monospace; font-style: normal; font-weight: bold;
+}
+.error#content #traceback :visited var {
+	font-family: monospace; font-style: normal; font-weight: bold;
+}
+.error#content #traceback span.file {
+	color: rgb(102, 102, 102); font-size: 85%;
+}
+.error#content #traceback ul {
+	list-style: none; margin: 0.5em 0px; padding: 0px;
+}
+.error#content #traceback table.code td {
+	font-size: 90%; white-space: pre;
+}
+.error#content #traceback table.code tr.current td {
+	background: rgb(230, 230, 230);
+}
+.error#content #traceback table {
+	margin: 0.5em 0px 1em;
+}
+.error#content #traceback th {
+	padding: 1px; font-size: 85%;
+}
+.error#content #traceback td {
+	padding: 1px; font-size: 85%;
+}
+.error#content #traceback th var {
+	font-family: monospace; font-style: normal;
+}
+.error#content #traceback td code {
+	white-space: pre;
+}
+.error#content #traceback pre {
+	font-size: 95%;
+}
+.error#content #plugins td.file {
+	color: rgb(102, 102, 102);
+}
+#content .paging {
+	margin: 0px 0px 2em; padding: 0.5em 0px 0px; text-align: center; =
+line-height: 2em; font-size: 85%;
+}
+#content .paging .current {
+	background: rgb(153, 153, 153); padding: 0.1em 0.3em; border: 1px solid =
+rgb(51, 51, 51); border-image: none; color: rgb(255, 255, 255);
+}
+#content .paging :link {
+	background: none; padding: 0.1em 0.3em; border: 1px solid rgb(102, 102, =
+102); border-image: none; color: rgb(102, 102, 102);
+}
+#content .paging :visited {
+	background: none; padding: 0.1em 0.3em; border: 1px solid rgb(102, 102, =
+102); border-image: none; color: rgb(102, 102, 102);
+}
+#content .paging :hover:link {
+	background: rgb(153, 153, 153); border-color: rgb(51, 51, 51); color: =
+rgb(255, 255, 255);
+}
+#content .paging :hover:visited {
+	background: rgb(153, 153, 153); border-color: rgb(51, 51, 51); color: =
+rgb(255, 255, 255);
+}
+#content .paging .previous a {
+	border: currentColor; border-image: none; font-size: 150%; font-weight: =
+bold;
+}
+#content .paging .next a {
+	border: currentColor; border-image: none; font-size: 150%; font-weight: =
+bold;
+}
+#content .paging .previous a:hover {
+	background: none; color: rgb(102, 102, 102);
+}
+#content .paging .next a:hover {
+	background: none; color: rgb(102, 102, 102);
+}
+#content h2 .numresults {
+	color: rgb(102, 102, 102); font-size: 90%;
+}
+@media screen
+{
+.searchword0 {
+	background: rgb(255, 255, 153);
+}
+.searchword1 {
+	background: rgb(204, 255, 204);
+}
+.searchword2 {
+	background: rgb(204, 255, 255);
+}
+.searchword3 {
+	background: rgb(204, 204, 255);
+}
+.searchword4 {
+	background: rgb(255, 204, 255);
+}
+}
+@media print
+{
+#header {
+	display: none;
+}
+#altlinks {
+	display: none;
+}
+#footer {
+	display: none;
+}
+#help {
+	display: none;
+}
+#warning {
+	display: none;
+}
+#notice {
+	display: none;
+}
+.nav {
+	display: none;
+}
+form {
+	display: none;
+}
+.buttons form {
+	display: none;
+}
+form .buttons {
+	display: none;
+}
+form .inlinebuttons {
+	display: none;
+}
+.noprint {
+	display: none;
+}
+.trac-nav {
+	display: none;
+}
+.trac-topnav {
+	display: none;
+}
+#attachments > div.attachments > p {
+	display: none;
+}
+form.printableform {
+	display: block;
+}
+div.code pre {
+	white-space: pre-wrap;
+}
+:link {
+	border-bottom-color: currentColor; border-bottom-width: medium; =
+border-bottom-style: none;
+}
+:visited {
+	border-bottom-color: currentColor; border-bottom-width: medium; =
+border-bottom-style: none;
+}
+div.trac-content {
+	box-shadow: none;
+}
+.foldable :link {
+	box-shadow: none; text-shadow: none;
+}
+.foldable :visited {
+	box-shadow: none; text-shadow: none;
+}
+}
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://trac.ffmpeg.org/wiki/Capture/code.css
+
+div.code {
+	background: rgb(247, 247, 247); margin: 1em 1.75em; padding: 0.25em; =
+border-radius: 0.3em; border: 1px solid rgb(215, 215, 215); =
+border-image: none; overflow: auto;
+}
+div.code pre {
+	margin: 0px; overflow: auto;
+}
+table.code {
+	border-width: 0px 1px 1px; border-style: none solid solid; =
+border-color: currentColor rgb(221, 221, 221) rgb(221, 221, 221); =
+margin: 0px auto; padding: 0px; border-image: none; width: 100%; =
+line-height: 130%; font-size: 12px; border-collapse: collapse; =
+table-layout: fixed; border-spacing: 0; empty-cells: show;
+}
+table.code th {
+	font-size: 11px; border-right-color: rgb(215, 215, 215); =
+border-bottom-color: rgb(153, 153, 136); border-right-width: 1px; =
+border-bottom-width: 1px; border-right-style: solid; =
+border-bottom-style: solid;
+}
+table.code th.lineno {
+	width: 4em;
+}
+table.code thead th {
+	background: rgb(238, 238, 238); padding: 0px 0.25em; text-align: =
+center; color: rgb(153, 153, 153); border-top-color: rgb(215, 215, 215); =
+border-top-width: 1px; border-top-style: solid; white-space: nowrap;
+}
+table.code thead th.content {
+	text-align: left;
+}
+table.code thead th.content span.recover {
+	background: rgb(247, 247, 247); margin: 0px 1em 0px 0px; padding: 0px =
+0.5em; border-right-color: currentColor; border-left-color: =
+currentColor; border-right-width: 1px; border-left-width: 1px; =
+border-right-style: solid; border-left-style: solid; cursor: pointer;
+}
+table.code tbody th {
+	background: rgb(238, 238, 221); padding: 0px 0.5em; text-align: right; =
+color: rgb(136, 136, 102); font-weight: normal; vertical-align: top;
+}
+table.code tbody th :link {
+	border: currentColor; border-image: none; color: rgb(136, 136, 102); =
+text-decoration: none;
+}
+table.code tbody th :visited {
+	border: currentColor; border-image: none; color: rgb(136, 136, 102); =
+text-decoration: none;
+}
+table.code tbody th :hover:link {
+	color: rgb(0, 0, 0);
+}
+table.code tbody th :hover:visited {
+	color: rgb(0, 0, 0);
+}
+table.code td {
+	font: 11px/normal monospace; padding: 1px 2px; overflow: hidden; =
+vertical-align: top; font-size-adjust: none; font-stretch: normal;
+}
+table.code tr.hilite th {
+	background: rgb(204, 204, 255);
+}
+table.code tr.hilite td {
+	background: rgb(221, 221, 255);
+}
+.image-file {
+	background: rgb(238, 238, 238); padding: 0.3em;
+}
+.image-file img {
+	background: url("../imggrid.png");
+}
+.code-block span {
+	font-family: monospace;
+}
+.code-comment {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.css_comment {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.c_comment {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.c_commentdoc {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.c_commentline {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.c_commentlinedoc {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.h_comment {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.pl_commentline {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.p_commentblock {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.p_commentline {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.hphp_comment {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.hphp_commentblock {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.hphp_commentline {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.yaml_comment {
+	color: rgb(153, 153, 136); font-style: italic;
+}
+.code-keyword {
+	color: rgb(119, 136, 153); font-weight: bold;
+}
+.pl_word {
+	color: rgb(119, 136, 153); font-weight: bold;
+}
+.code-type {
+	color: rgb(68, 102, 136); font-weight: bold;
+}
+.c_word {
+	color: rgb(68, 102, 136); font-weight: bold;
+}
+.c_word2 {
+	color: rgb(68, 102, 136); font-weight: bold;
+}
+.p_classname {
+	color: rgb(68, 102, 136); font-weight: bold;
+}
+.hphp_classname {
+	color: rgb(68, 102, 136); font-weight: bold;
+}
+.code-func {
+	color: rgb(153, 0, 0); font-weight: bold; border-bottom-color: =
+currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.p_defname {
+	color: rgb(153, 0, 0); font-weight: bold; border-bottom-color: =
+currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.code-prep {
+	color: rgb(153, 153, 153); font-weight: bold;
+}
+.c_preprocessor {
+	color: rgb(153, 153, 153); font-weight: bold;
+}
+.pl_preprocessor {
+	color: rgb(153, 153, 153); font-weight: bold;
+}
+.yaml_identifier {
+	color: rgb(153, 153, 153); font-weight: bold;
+}
+.code-lang {
+	color: rgb(0, 0, 0); font-weight: bold;
+}
+.p_word {
+	color: rgb(0, 0, 0); font-weight: bold;
+}
+.code-string {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.c_string {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.c_stringeol {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.css_doublestring {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.css_singlestring {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.h_singlestring {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.h_doublestring {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_string {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_string_q {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_string_qq {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_string_qr {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_string_qw {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_string_qx {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_backticks {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.pl_character {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.p_string {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.p_stringeol {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.hphp_string {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.hphp_stringeol {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.hphp_triple {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.hphp_tripledouble {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.p_character {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.p_triple {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.p_tripledouble {
+	color: rgb(187, 136, 68); font-weight: normal;
+}
+.code-var {
+	color: rgb(255, 153, 255);
+}
+.css_id {
+	color: rgb(144, 0, 0);
+}
+.css_class {
+	color: rgb(144, 0, 0);
+}
+.css_pseudoclass {
+	color: rgb(144, 0, 0);
+}
+.css_tag {
+	color: rgb(144, 0, 0);
+}
+.css_directive {
+	color: rgb(0, 144, 0); font-weight: bold;
+}
+.css_important {
+	color: blue;
+}
+.css_operator {
+	color: rgb(0, 0, 144); font-weight: bold;
+}
+.css_tag {
+	font-weight: bold;
+}
+.css_unknown_identifier {
+	color: red;
+}
+.css_unknown_pseudoclass {
+	color: red;
+}
+.css_value {
+	color: navy;
+}
+.c_commentdockeyword {
+	color: navy; font-weight: bold;
+}
+.c_commentdockeyworderror {
+	color: red; font-weight: bold;
+}
+.c_character {
+	color: olive;
+}
+.c_regex {
+	color: olive;
+}
+.c_uuid {
+	color: olive;
+}
+.c_verbatim {
+	color: olive;
+}
+.c_number {
+	color: rgb(0, 153, 153);
+}
+.h_asp {
+	color: rgb(255, 255, 0);
+}
+.h_aspat {
+	color: rgb(255, 223, 0);
+}
+.h_attribute {
+	color: teal;
+}
+.h_attributeunknown {
+	color: red;
+}
+.h_cdata {
+	color: rgb(51, 119, 51);
+}
+.h_entity {
+	color: purple;
+}
+.h_number {
+	color: rgb(0, 153, 153);
+}
+.h_other {
+	color: purple;
+}
+.h_script {
+	color: navy;
+}
+.h_tag {
+	color: navy;
+}
+.h_tagend {
+	color: navy;
+}
+.h_tagunknown {
+	color: red;
+}
+.h_xmlend {
+	color: blue;
+}
+.h_xmlstart {
+	color: blue;
+}
+.pl_datasection {
+	color: olive;
+}
+.pl_error {
+	color: red; font-weight: bold;
+}
+.pl_hash {
+	color: rgb(0, 0, 0);
+}
+.pl_here_delim {
+	color: olive;
+}
+.pl_here_q {
+	color: olive;
+}
+.pl_here_qq {
+	color: olive;
+}
+.pl_here_qx {
+	color: olive;
+}
+.pl_longquote {
+	color: olive;
+}
+.pl_number {
+	color: rgb(0, 153, 153);
+}
+.pl_pod {
+	font-style: italic;
+}
+.pl_regex {
+	color: olive;
+}
+.pl_regsubst {
+	color: olive;
+}
+.p_number {
+	color: rgb(0, 153, 153);
+}
+.hphp_character {
+	color: olive;
+}
+.hphp_defname {
+	color: rgb(0, 153, 153); font-weight: bold;
+}
+.hphp_number {
+	color: rgb(0, 153, 153);
+}
+.hphp_word {
+	color: navy; font-weight: bold;
+}
+.yaml_document {
+	color: gray; font-style: italic;
+}
+.yaml_keyword {
+	color: rgb(136, 0, 136);
+}
+.yaml_number {
+	color: rgb(136, 0, 0);
+}
+.yaml_reference {
+	color: rgb(0, 136, 136);
+}
+.v_comment {
+	color: gray; font-style: italic;
+}
+.v_commentline {
+	color: red; font-style: italic;
+}
+.v_commentlinebang {
+	color: red; font-style: italic;
+}
+.v_number {
+	color: rgb(0, 153, 153);
+}
+.v_preprocessor {
+	color: rgb(0, 153, 153);
+}
+.v_string {
+	color: olive;
+}
+.v_stringeol {
+	color: olive;
+}
+.v_user {
+	color: blue; font-weight: bold;
+}
+.v_word {
+	color: navy; font-weight: bold;
+}
+.v_word3 {
+	color: navy; font-weight: bold;
+}
+.v_word2 {
+	color: green; font-weight: bold;
+}
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://trac.ffmpeg.org/chrome/common/css/wiki.css
+
+@import url( code.css );
+#info {
+	margin: 0px 0px 1em;
+}
+#wikipage {
+	clear: both;
+}
+.wikipage h2 {
+	padding: 0.2em 0.3em 0.1em; border-bottom-color: rgb(221, 221, 221); =
+border-bottom-width: 1px; border-bottom-style: solid; box-shadow: 0.1em =
+0.4em 0.7em 0px #f2f2f2;
+}
+@media print
+{
+.wikipage h2 {
+	box-shadow: none;
+}
+}
+.wikipage h3 {
+	border-bottom-color: rgb(221, 221, 221); border-bottom-width: 1px; =
+border-bottom-style: dashed;
+}
+.wikipage .trac-content {
+	padding-left: 28px; margin-left: -18px;
+}
+#pagepath {
+	padding: 0.4em 0px; font-size: 10px; float: left;
+}
+#pagepath :link {
+	margin: 0px 0.2em;
+}
+#pagepath :visited {
+	margin: 0px 0.2em;
+}
+#pagepath .first:link {
+	color: rgb(153, 153, 136);
+}
+#pagepath .first:visited {
+	color: rgb(153, 153, 136);
+}
+#pagepath .sep {
+	padding: 0px 0.1em; color: rgb(102, 102, 102);
+}
+#pagepath .pathentry {
+	float: left;
+}
+.preview-right {
+	margin: 0px 0px 0px 1em; width: 50%; float: right; display: block;
+}
+.sidebyside > h2 {
+	margin: 0.4em 0px;
+}
+.sidebyside #preview {
+	margin: 0px;
+}
+.sidebyside #text {
+	overflow: hidden;
+}
+#edit {
+	margin-top: 0.5em;
+}
+#edit #rows {
+	margin: 0.4em 0px 0px; font-size: 80%; float: right;
+}
+#edit #rows select {
+	font-size: 90%;
+}
+#edit fieldset {
+	margin-right: 1px; margin-left: 1px;
+}
+#edit #text {
+	padding: 0px; width: 100%; clear: both; margin-right: -1px; =
+margin-left: -1px; min-height: 10em; resize: vertical;
+}
+#edit .wikitoolbar {
+	margin-left: -1px; float: left;
+}
+#edit div.trac-resizable {
+	width: 100%; clear: both;
+}
+#edit + #info {
+	margin-top: 1em;
+}
+#edit + #attachments {
+	margin-top: 1.5em;
+}
+#changeinfo {
+	padding: 0.5em;
+}
+#changeinfo .field {
+	margin: 0px 1em 0.5em 0px; float: left;
+}
+#changeinfo {
+	clear: both;
+}
+#changeinfo br {
+	clear: left;
+}
+#changeinfo .options {
+	padding: 0px 0px 1em 1em;
+}
+#changeinfo .options {
+	clear: left;
+}
+#changeinfo .buttons {
+	clear: left;
+}
+#delete {
+	margin-left: 3em;
+}
+#rename {
+	margin-left: 3em;
+}
+#save {
+	margin-left: 3em;
+}
+#preview {
+	background: url("../draft.png") rgb(248, 248, 248); margin: 1em 0px =
+2em; overflow: auto;
+}
+#template {
+	padding-top: 1em; vertical-align: middle;
+}
+#overview .multi {
+	color: rgb(153, 153, 153);
+}
+#overview .ipnr {
+	color: rgb(153, 153, 153); font-size: 80%;
+}
+#overview .comment {
+	padding: 1em 0px 0px;
+}
+@media print
+{
+th.diff {
+	display: none;
+}
+td.diff {
+	display: none;
+}
+}
+.wiki-toc {
+	background: rgb(255, 255, 221); margin: 0px 0px 2em 1em; padding: 0.5em =
+1em; border: 1px outset rgb(221, 221, 204); border-image: none; clear: =
+right; font-size: 85%; float: right; position: relative;
+}
+.wiki-toc h4 {
+	margin: 0px; font-size: 12px;
+}
+.wiki-toc ul {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.wiki-toc ol {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.wiki-toc ul ul {
+	padding-left: 1.2em;
+}
+.wiki-toc ol ol {
+	padding-left: 1.2em;
+}
+.wiki-toc li {
+	margin: 0px; padding: 0px;
+}
+.wiki-toc .active {
+	background: rgb(255, 255, 153); position: relative;
+}
+.wiki-toc-un ul {
+	list-style: none;
+}
+.wiki-toc-un ol {
+	list-style: none;
+}
+div.trac-modifiedby {
+	margin: 0.3em 0.5em; text-align: right; color: rgb(136, 136, 136); =
+font-size: 80%; font-style: italic; float: right;
+}
+div.trac-modifiedby :link {
+	color: inherit;
+}
+div.trac-modifiedby :visited {
+	color: inherit;
+}
+div.trac-modifiedby span.trac-print {
+	display: none;
+}
+@media print
+{
+div.trac-modifiedby span {
+	display: none;
+}
+div.trac-modifiedby span.trac-print {
+	display: block;
+}
+}
+.rtl {
+	direction: rtl;
+}
+.rtl div.wiki-toc {
+	float: left;
+}
+.rtl .wiki-toc ul ul {
+	padding-right: 1.2em;
+}
+.wiki-toc ol ol {
+	padding-right: 1.2em;
+}
+div.tracini td.default {
+	font-size: 90%;
+}
+div.tracini td.nodefault {
+	color: rgb(119, 119, 119); font-size: 85%; font-style: italic; =
+white-space: nowrap;
+}
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Location: http://trac.ffmpeg.org/chrome/vote/css/tracvote.css
+
+#vote :link {
+	border: currentColor; border-image: none;
+}
+#vote :visited {
+	border: currentColor; border-image: none;
+}
+#vote img {
+	vertical-align: middle;
+}
+#votes {
+	font-weight: bold;
+}
+
+------=_NextPart_000_0000_01D15146.FAF006D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://trac.ffmpeg.org/chrome/tags/css/tractags.css
+
+.listtagged li.header {
+	font-weight: bold; text-decoration: underline;
+}
+.listtags .listtagged li.header {
+	font-weight: normal;
+}
+.listtags .listtagged ul {
+	margin: 0px; padding: 0px;
+}
+#content ul.tags {
+	list-style: none; text-align: center; float: right; max-width: 20em;
+}
+#content .tags li {
+	text-align: center; display: inline;
+}
+#content .tags li.header {
+	text-align: center; color: rgb(204, 204, 204); text-transform: =
+lowercase; letter-spacing: 0.5em; font-size: large; font-weight: bold; =
+display: block;
+}
+ul.tagcloud {
+	list-style: none;
+}
+.tagcloud li {
+	display: inline;
+}
+.tagcloud li::after {
+	content: ", ";
+}
+.tagcloud li.last::after {
+	content: "";
+}
+#query {
+	text-align: left; clear: both; font-size: 10px; float: right;
+}
+#query ul {
+	list-style: none; padding: 0px 0px 0px 2em;
+}
+#query input {
+	font-size: 10px;
+}
+#query-error {
+	margin: 0.3em 0px; color: rgb(170, 0, 0); font-size: 11px;
+}
+
+------=_NextPart_000_0000_01D15146.FAF006D0--
