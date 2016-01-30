@@ -53,12 +53,183 @@ namespace Nequeo.Net.Sip
         {
             _callId = callId;
             _account = account;
-            _pjCall = new CallCallback(account.PjAccount, callId);
+            _pjCall = new CallCallback(this, account.PjAccount, callId);
+
+            // Attach to events.
+            _pjCall.OnCallState += _pjCall_OnCallState;
+            _pjCall.OnCallMediaState += _pjCall_OnCallMediaState;
+            _pjCall.OnCallTsxState += _pjCall_OnCallTsxState;
+            _pjCall.OnCallSdpCreated += _pjCall_OnCallSdpCreated;
+            _pjCall.OnStreamCreated += _pjCall_OnStreamCreated;
+            _pjCall.OnStreamDestroyed += _pjCall_OnStreamDestroyed;
+            _pjCall.OnDtmfDigit += _pjCall_OnDtmfDigit;
+            _pjCall.OnCallTransferRequest += _pjCall_OnCallTransferRequest;
+            _pjCall.OnCallTransferStatus += _pjCall_OnCallTransferStatus;
+            _pjCall.OnCallReplaceRequest += _pjCall_OnCallReplaceRequest;
+            _pjCall.OnCallReplaced += _pjCall_OnCallReplaced;
+            _pjCall.OnCallRxOffer += _pjCall_OnCallRxOffer;
+            _pjCall.OnInstantMessage += _pjCall_OnInstantMessage;
+            _pjCall.OnInstantMessageStatus += _pjCall_OnInstantMessageStatus;
+            _pjCall.OnTypingIndication += _pjCall_OnTypingIndication;
+            _pjCall.OnCallRedirected += _pjCall_OnCallRedirected;
+            _pjCall.OnCallMediaTransportState += _pjCall_OnCallMediaTransportState;
+            _pjCall.OnCallMediaEvent += _pjCall_OnCallMediaEvent;
+            _pjCall.OnCreateMediaTransport += _pjCall_OnCreateMediaTransport;
         }
 
         private int _callId = 0;
         private Account _account = null;
         private CallCallback _pjCall = null;
+
+        /// <summary>
+        /// Notify application when call state has changed.
+        /// Application may then query the call info to get the
+        /// detail call states by calling getInfo() function.
+        /// </summary>
+        public event System.EventHandler<OnCallStateParam> OnCallState;
+
+        /// <summary>
+        /// Notify application when media state in the call has changed.
+        /// Normal application would need to implement this callback, e.g.
+        /// to connect the call's media to sound device. When ICE is used,
+        /// this callback will also be called to report ICE negotiation failure.
+        /// </summary>
+        public event System.EventHandler<OnCallMediaStateParam> OnCallMediaState;
+
+        /// <summary>
+        /// This is a general notification callback which is called whenever
+        /// a transaction within the call has changed state.Application can
+        /// implement this callback for example to monitor the state of
+        /// outgoing requests, or to answer unhandled incoming requests
+        /// (such as INFO) with a final response.
+        /// </summary>
+        public event System.EventHandler<OnCallTsxStateParam> OnCallTsxState;
+
+        /// <summary>
+        /// Notify application when a call has just created a local SDP (for
+        /// initial or subsequent SDP offer / answer).Application can implement
+        /// this callback to modify the SDP, before it is being sent and / or
+        /// negotiated with remote SDP, for example to apply per account / call
+        /// basis codecs priority or to add custom / proprietary SDP attributes.
+        /// </summary>
+        public event System.EventHandler<OnCallSdpCreatedParam> OnCallSdpCreated;
+
+        /// <summary>
+        /// Notify application when media session is created and before it is
+        /// registered to the conference bridge.Application may return different
+        /// media port if it has added media processing port to the stream.This
+        /// media port then will be added to the conference bridge instead.
+        /// </summary>
+        public event System.EventHandler<OnStreamCreatedParam> OnStreamCreated;
+
+        /// <summary>
+        /// Notify application when media session has been unregistered from the
+        /// conference bridge and about to be destroyed.
+        /// </summary>
+        public event System.EventHandler<OnStreamDestroyedParam> OnStreamDestroyed;
+
+        /// <summary>
+        /// Notify application upon incoming DTMF digits.
+        /// </summary>
+        public event System.EventHandler<OnDtmfDigitParam> OnDtmfDigit;
+
+        /// <summary>
+        /// Notify application on call being transferred (i.e. REFER is received).
+        /// Application can decide to accept / reject transfer request
+        /// by setting the code(default is 202).When this callback
+        /// is not implemented, the default behavior is to accept the
+        /// transfer.
+        /// </summary>
+        public event System.EventHandler<OnCallTransferRequestParam> OnCallTransferRequest;
+
+        /// <summary>
+        /// Notify application of the status of previously sent call
+        /// transfer request.Application can monitor the status of the
+        /// call transfer request, for example to decide whether to
+        /// terminate existing call.
+        /// </summary>
+        public event System.EventHandler<OnCallTransferStatusParam> OnCallTransferStatus;
+
+        /// <summary>
+        /// Notify application about incoming INVITE with Replaces header.
+        /// Application may reject the request by setting non - 2xx code.
+        /// </summary>
+        public event System.EventHandler<OnCallReplaceRequestParam> OnCallReplaceRequest;
+
+        /// <summary>
+        /// Notify application that an existing call has been replaced with
+        /// a new call.This happens when PJSUA - API receives incoming INVITE
+        /// request with Replaces header.
+        /// After this callback is called, normally PJSUA - API will disconnect
+        /// this call and establish a new call \a newCallId.
+        /// </summary>
+        public event System.EventHandler<OnCallReplacedParam> OnCallReplaced;
+
+        /// <summary>
+        /// Notify application when call has received new offer from remote
+        /// (i.e.re - INVITE / UPDATE with SDP is received).Application can
+        /// decide to accept / reject the offer by setting the code(default
+        /// is 200).If the offer is accepted, application can update the
+        /// call setting to be applied in the answer.When this callback is
+        /// not implemented, the default behavior is to accept the offer using
+        /// current call setting.
+        /// </summary>
+        public event System.EventHandler<OnCallRxOfferParam> OnCallRxOffer;
+
+        /// <summary>
+        /// Notify application on incoming MESSAGE request.
+        /// </summary>
+        public event System.EventHandler<OnInstantMessageParam> OnInstantMessage;
+
+        /// <summary>
+        /// Notify application about the delivery status of outgoing MESSAGE request.
+        /// </summary>
+        public event System.EventHandler<OnInstantMessageStatusParam> OnInstantMessageStatus;
+
+        /// <summary>
+        /// Notify application about typing indication.
+        /// </summary>
+        public event System.EventHandler<OnTypingIndicationParam> OnTypingIndication;
+
+        /// <summary>
+        /// This callback is called when the call is about to resend the
+        /// INVITE request to the specified target, following the previously
+        /// received redirection response.
+        /// Application may accept the redirection to the specified target,
+        /// reject this target only and make the session continue to try the next
+        /// target in the list if such target exists, stop the whole
+        /// redirection process altogether and cause the session to be
+        /// disconnected, or defer the decision to ask for user confirmation.
+        /// This callback is optional,
+        /// the default behavior is to NOT follow the redirection response.
+        /// </summary>
+        public event System.EventHandler<OnCallRedirectedParam> OnCallRedirected;
+
+        /// <summary>
+        /// This callback is called when media transport state is changed.
+        /// </summary>
+        public event System.EventHandler<OnCallMediaTransportStateParam> OnCallMediaTransportState;
+
+        /// <summary>
+        /// Notification about media events such as video notifications. This
+        /// callback will most likely be called from media threads, thus
+        /// application must not perform heavy processing in this callback.
+        /// Especially, application must not destroy the call or media in this
+        /// callback.If application needs to perform more complex tasks to
+        /// handle the event, it should post the task to another thread.
+        /// </summary>
+        public event System.EventHandler<OnCallMediaEventParam> OnCallMediaEvent;
+
+        /// <summary>
+        /// This callback can be used by application to implement custom media
+        /// transport adapter for the call, or to replace the media transport
+        /// with something completely new altogether.
+        /// This callback is called when a new call is created.The library has
+        /// created a media transport for the call, and it is provided as the
+        /// \a mediaTp argument of this callback.The callback may change it
+        /// with the instance of media transport to be used by the call.
+        /// </summary>
+        public event System.EventHandler<OnCreateMediaTransportParam> OnCreateMediaTransport;
 
         /// <summary>
         /// Gets the internal pj call.
@@ -205,7 +376,7 @@ namespace Nequeo.Net.Sip
                 switch (mediaType)
                 {
                     case pjsua2.pjmedia_type.PJMEDIA_TYPE_AUDIO:
-                        audioMedia = (pjsua2.AudioMedia)media;
+                        audioMedia = pjsua2.AudioMedia.typecastFromMedia(media);
                         mdiaBase = new AudioMedia(audioMedia);
                         break;
 
@@ -537,6 +708,7 @@ namespace Nequeo.Net.Sip
         {
             pjsua2.SendTypingIndicationParam prm = new pjsua2.SendTypingIndicationParam();
             prm.isTyping = sendTypingIndicationParam.IsTyping;
+
             if (sendTypingIndicationParam.TxOption != null)
             {
                 prm.txOption.contentType = sendTypingIndicationParam.TxOption.ContentType;
@@ -597,6 +769,214 @@ namespace Nequeo.Net.Sip
             _pjCall.sendTypingIndication(prm);
         }
 
+        /// <summary>
+        /// Send arbitrary request with the call. This is useful for example to send
+        /// INFO request.Note that application should not use this function to send
+        /// requests which would change the invite session's state, such as
+        /// re - INVITE, UPDATE, PRACK, and BYE.
+        /// </summary>
+        /// <param name="callSendRequestParam">Sending call request parameter.</param>
+        public void SendRequest(CallSendRequestParam callSendRequestParam)
+        {
+            pjsua2.CallSendRequestParam prm = new pjsua2.CallSendRequestParam();
+            prm.method = callSendRequestParam.Method;
+
+            if (callSendRequestParam.TxOption != null)
+            {
+                prm.txOption.contentType = callSendRequestParam.TxOption.ContentType;
+                prm.txOption.msgBody = callSendRequestParam.TxOption.MsgBody;
+                prm.txOption.targetUri = callSendRequestParam.TxOption.TargetUri;
+
+                if (callSendRequestParam.TxOption.Headers != null && callSendRequestParam.TxOption.Headers.SipHeaders != null)
+                {
+                    prm.txOption.headers = new pjsua2.SipHeaderVector();
+                    for (int i = 0; i < callSendRequestParam.TxOption.Headers.Count; i++)
+                    {
+                        pjsua2.SipHeader header = new pjsua2.SipHeader();
+                        header.hName = callSendRequestParam.TxOption.Headers.SipHeaders[i].Name;
+                        header.hValue = callSendRequestParam.TxOption.Headers.SipHeaders[i].Value;
+                        prm.txOption.headers.Add(header);
+                    }
+                }
+
+                if (callSendRequestParam.TxOption.MultipartContentType != null)
+                {
+                    prm.txOption.multipartContentType = new pjsua2.SipMediaType();
+                    prm.txOption.multipartContentType.subType = callSendRequestParam.TxOption.MultipartContentType.SubType;
+                    prm.txOption.multipartContentType.type = callSendRequestParam.TxOption.MultipartContentType.Type;
+                }
+
+                if (callSendRequestParam.TxOption.MultipartParts != null && callSendRequestParam.TxOption.MultipartParts.SipMultipartParts != null)
+                {
+                    prm.txOption.multipartParts = new pjsua2.SipMultipartPartVector();
+                    for (int i = 0; i < callSendRequestParam.TxOption.MultipartParts.Count; i++)
+                    {
+                        pjsua2.SipMultipartPart mulPart = new pjsua2.SipMultipartPart();
+                        mulPart.body = callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].Body;
+
+                        SipMediaType mediaType = callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].ContentType;
+                        mulPart.contentType = new pjsua2.SipMediaType();
+                        mulPart.contentType.subType = mediaType.SubType;
+                        mulPart.contentType.type = mediaType.Type;
+
+                        if (callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].Headers != null &&
+                            callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].Headers.SipHeaders != null)
+                        {
+                            mulPart.headers = new pjsua2.SipHeaderVector();
+                            for (int j = 0; j < callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].Headers.Count; j++)
+                            {
+                                pjsua2.SipHeader header = new pjsua2.SipHeader();
+                                header.hName = callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].Headers.SipHeaders[j].Name;
+                                header.hValue = callSendRequestParam.TxOption.MultipartParts.SipMultipartParts[i].Headers.SipHeaders[j].Value;
+                                mulPart.headers.Add(header);
+                            }
+                        }
+
+                        prm.txOption.multipartParts.Add(mulPart);
+                    }
+                }
+            }
+
+            // Send arbitrary request with the call.
+            _pjCall.sendRequest(prm);
+        }
+
+        /// <summary>
+        /// Dump call and media statistics to string.
+        /// </summary>
+        /// <param name="withMedia">True to include media information too.</param>
+        /// <param name="indent">Spaces for left indentation.</param>
+        /// <returns>Call dump and media statistics string.</returns>
+        public string Dump(bool withMedia, string indent)
+        {
+            return _pjCall.dump(withMedia, indent);
+        }
+
+        /// <summary>
+        /// Get the media stream index of the default video stream in the call.
+        /// Typically this will just retrieve the stream index of the first
+        /// activated video stream in the call.If none is active, it will return
+        /// the first inactive video stream.
+        /// </summary>
+        /// <returns>The media stream index or -1 if no video stream is present in the call.</returns>
+        public int GetVideoStreamIndex()
+        {
+            return _pjCall.vidGetStreamIdx();
+        }
+
+        /// <summary>
+        /// Determine if video stream for the specified call is currently running
+        /// (i.e.has been created, started, and not being paused) for the specified
+        /// direction.
+        /// </summary>
+        /// <param name="mediaIndex">Media stream index, or -1 to specify default video media.</param>
+        /// <param name="mediaDirection">The direction to be checked.</param>
+        /// <returns>True if stream is currently running for the specified direction.</returns>
+        public bool VideoStreamIsRunning(int mediaIndex, MediaDirection mediaDirection)
+        {
+            pjsua2.pjmedia_dir dir = CallInfo.GetMediaDirection(mediaDirection);
+            return _pjCall.vidStreamIsRunning(mediaIndex, dir);
+        }
+
+        /// <summary>
+        /// Add, remove, modify, and/or manipulate video media stream for the
+        /// specified call. This may trigger a re - INVITE or UPDATE to be sent
+        /// for the call.
+        /// </summary>
+        /// <param name="videoStreamOperation">The video stream operation to be performed.</param>
+        /// <param name="callSetVideoStreamParam">The parameters for the video stream operation.</param>
+        public void SetVideoStream(VideoStreamOperation videoStreamOperation, CallSetVideoStreamParam callSetVideoStreamParam)
+        {
+            pjsua2.CallVidSetStreamParam callVideo = new pjsua2.CallVidSetStreamParam();
+
+            if (callSetVideoStreamParam != null)
+            {
+                callVideo.capDev = callSetVideoStreamParam.CaptureDevice;
+                callVideo.medIdx = callSetVideoStreamParam.MediaIndex;
+                callVideo.dir = CallInfo.GetMediaDirection(callSetVideoStreamParam.Direction);
+            }
+
+            pjsua2.pjsua_call_vid_strm_op op = CallInfo.GetVideoStreamOperation(videoStreamOperation);
+            _pjCall.vidSetStream(op, callVideo);
+        }
+
+        /// <summary>
+        /// Get media stream info for the specified media index.
+        /// </summary>
+        /// <param name="mediaIndex">Media stream index.</param>
+        /// <returns>The stream info.</returns>
+        public MediaStreamInfo GetStreamInfo(uint mediaIndex)
+        {
+            MediaStreamInfo mediaStreamInfo = new MediaStreamInfo();
+            pjsua2.StreamInfo info = _pjCall.getStreamInfo(mediaIndex);
+
+            mediaStreamInfo.CodecClockRate = info.codecClockRate;
+            mediaStreamInfo.CodecName = info.codecName;
+            mediaStreamInfo.Direction = CallInfo.GetMediaDirectionEx(info.dir);
+            mediaStreamInfo.RemoteRtcpAddress = info.remoteRtcpAddress;
+            mediaStreamInfo.RemoteRtpAddress = info.remoteRtpAddress;
+            mediaStreamInfo.RxPayloadType = info.rxPt;
+            mediaStreamInfo.TxPayloadType = info.txPt;
+            mediaStreamInfo.Type = MediaFormat.GetMediaTypeEx(info.type);
+            mediaStreamInfo.TransportProtocol = CallInfo.GetMediaTransportProtocolEx(info.proto);
+
+            // Return the stream info.
+            return mediaStreamInfo;
+        }
+
+        /// <summary>
+        /// Get media stream statistic for the specified media index.
+        /// </summary>
+        /// <param name="mediaIndex">Media stream index.</param>
+        /// <returns>The stream statistic.</returns>
+        public MediaStreamStat GetStreamStat(uint mediaIndex)
+        {
+            MediaStreamStat mediaStreamStat = new MediaStreamStat();
+            pjsua2.StreamStat info = _pjCall.getStreamStat(mediaIndex);
+
+            TimeVal start = new TimeVal();
+            start.Seconds = info.rtcp.start.sec;
+            start.Milliseconds = info.rtcp.start.msec;
+
+            mediaStreamStat.Start = start;
+            mediaStreamStat.AvgBurst = info.jbuf.avgBurst;
+            mediaStreamStat.AvgDelayMsec = info.jbuf.avgDelayMsec;
+            mediaStreamStat.Burst = info.jbuf.burst;
+            mediaStreamStat.DevDelayMsec = info.jbuf.devDelayMsec;
+            mediaStreamStat.Discard = info.jbuf.discard;
+            mediaStreamStat.Empty = info.jbuf.empty;
+            mediaStreamStat.FrameSize = info.jbuf.frameSize;
+            mediaStreamStat.Lost = info.jbuf.lost;
+            mediaStreamStat.MaxDelayMsec = info.jbuf.maxDelayMsec;
+            mediaStreamStat.MaxPrefetch = info.jbuf.maxPrefetch;
+            mediaStreamStat.MinDelayMsec = info.jbuf.minDelayMsec;
+            mediaStreamStat.MinPrefetch = info.jbuf.minPrefetch;
+            mediaStreamStat.Prefetch = info.jbuf.prefetch;
+            mediaStreamStat.Size = info.jbuf.size;
+            mediaStreamStat.RtpTxLastSeq = info.rtcp.rtpTxLastSeq;
+            mediaStreamStat.RtpTxLastTs = info.rtcp.rtpTxLastTs;
+
+            // Return the stream statistics.
+            return mediaStreamStat;
+        }
+
+        /// <summary>
+        /// Get media transport info for the specified media index.
+        /// </summary>
+        /// <param name="mediaIndex">Media stream index.</param>
+        /// <returns>The transport info.</returns>
+        public MediaTransportInfo GetMedTransportInfo(uint mediaIndex)
+        {
+            MediaTransportInfo mediaTransportInfo = new MediaTransportInfo();
+            pjsua2.MediaTransportInfo info = _pjCall.getMedTransportInfo(mediaIndex);
+
+            mediaTransportInfo.RemoteRtcpName = info.srcRtcpName;
+            mediaTransportInfo.RemoteRtpName = info.srcRtpName;
+
+            // Return the transport info.
+            return mediaTransportInfo;
+        }
+
         ///	<summary>
         ///	Get the pj call options.
         ///	</summary>
@@ -615,23 +995,23 @@ namespace Nequeo.Net.Sip
             }
 
             prm.options = callOpParam.Options;
-            prm.reason = callOpParam.Reason;
+            prm.reason = (!String.IsNullOrEmpty(callOpParam.Reason) ? callOpParam.Reason : "");
             prm.statusCode = AccountInfo.GetStatusCode(callOpParam.Code);
 
             // If call settings.
             if (callOpParam.TxOption != null)
             {
                 prm.txOption = new pjsua2.SipTxOption();
-                prm.txOption.contentType = callOpParam.TxOption.ContentType;
-                prm.txOption.msgBody = callOpParam.TxOption.MsgBody;
-                prm.txOption.targetUri = callOpParam.TxOption.TargetUri;
+                prm.txOption.contentType = (!String.IsNullOrEmpty(callOpParam.TxOption.ContentType) ? callOpParam.TxOption.ContentType : "");
+                prm.txOption.msgBody = (!String.IsNullOrEmpty(callOpParam.TxOption.MsgBody) ? callOpParam.TxOption.MsgBody : "");
+                prm.txOption.targetUri = (!String.IsNullOrEmpty(callOpParam.TxOption.TargetUri) ? callOpParam.TxOption.TargetUri : "");
 
                 // If call settings.
                 if (callOpParam.TxOption.MultipartContentType != null)
                 {
                     prm.txOption.multipartContentType = new pjsua2.SipMediaType();
-                    prm.txOption.multipartContentType.subType = callOpParam.TxOption.MultipartContentType.SubType;
-                    prm.txOption.multipartContentType.type = callOpParam.TxOption.MultipartContentType.Type;
+                    prm.txOption.multipartContentType.subType = (!String.IsNullOrEmpty(callOpParam.TxOption.MultipartContentType.SubType) ? callOpParam.TxOption.MultipartContentType.SubType : "");
+                    prm.txOption.multipartContentType.type = (!String.IsNullOrEmpty(callOpParam.TxOption.MultipartContentType.Type) ? callOpParam.TxOption.MultipartContentType.Type : "");
                 }
 
                 // If call settings.
@@ -647,8 +1027,8 @@ namespace Nequeo.Net.Sip
 
                         // Add the sip header.
                         pjsua2.SipHeader header = new pjsua2.SipHeader();
-                        header.hName = sipHeader.Name;
-                        header.hValue = sipHeader.Value;
+                        header.hName = (!String.IsNullOrEmpty(sipHeader.Name) ? sipHeader.Name : "");
+                        header.hValue = (!String.IsNullOrEmpty(sipHeader.Value) ? sipHeader.Value : "");
                         headers.Add(header);
                     }
 
@@ -659,6 +1039,251 @@ namespace Nequeo.Net.Sip
         }
 
         /// <summary>
+        /// Notify application when call state has changed.
+        /// Application may then query the call info to get the
+        /// detail call states by calling getInfo() function.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallState(object sender, OnCallStateParam e)
+        {
+            OnCallState?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application when media state in the call has changed.
+        /// Normal application would need to implement this callback, e.g.
+        /// to connect the call's media to sound device. When ICE is used,
+        /// this callback will also be called to report ICE negotiation failure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallMediaState(object sender, OnCallMediaStateParam e)
+        {
+            OnCallMediaState?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// This is a general notification callback which is called whenever
+        /// a transaction within the call has changed state.Application can
+        /// implement this callback for example to monitor the state of
+        /// outgoing requests, or to answer unhandled incoming requests
+        /// (such as INFO) with a final response.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallTsxState(object sender, OnCallTsxStateParam e)
+        {
+            OnCallTsxState?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application when a call has just created a local SDP (for
+        /// initial or subsequent SDP offer / answer).Application can implement
+        /// this callback to modify the SDP, before it is being sent and / or
+        /// negotiated with remote SDP, for example to apply per account / call
+        /// basis codecs priority or to add custom / proprietary SDP attributes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallSdpCreated(object sender, OnCallSdpCreatedParam e)
+        {
+            OnCallSdpCreated?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application when media session is created and before it is
+        /// registered to the conference bridge.Application may return different
+        /// media port if it has added media processing port to the stream.This
+        /// media port then will be added to the conference bridge instead.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnStreamCreated(object sender, OnStreamCreatedParam e)
+        {
+            OnStreamCreated?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application when media session has been unregistered from the
+        /// conference bridge and about to be destroyed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnStreamDestroyed(object sender, OnStreamDestroyedParam e)
+        {
+            OnStreamDestroyed?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application upon incoming DTMF digits.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnDtmfDigit(object sender, OnDtmfDigitParam e)
+        {
+            OnDtmfDigit?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application on call being transferred (i.e. REFER is received).
+        /// Application can decide to accept / reject transfer request
+        /// by setting the code(default is 202).When this callback
+        /// is not implemented, the default behavior is to accept the
+        /// transfer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallTransferRequest(object sender, OnCallTransferRequestParam e)
+        {
+            OnCallTransferRequest?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application of the status of previously sent call
+        /// transfer request.Application can monitor the status of the
+        /// call transfer request, for example to decide whether to
+        /// terminate existing call.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallTransferStatus(object sender, OnCallTransferStatusParam e)
+        {
+            OnCallTransferStatus?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application about incoming INVITE with Replaces header.
+        /// Application may reject the request by setting non - 2xx code.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallReplaceRequest(object sender, OnCallReplaceRequestParam e)
+        {
+            OnCallReplaceRequest?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application that an existing call has been replaced with
+        /// a new call.This happens when PJSUA - API receives incoming INVITE
+        /// request with Replaces header.
+        /// After this callback is called, normally PJSUA - API will disconnect
+        /// this call and establish a new call \a newCallId.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallReplaced(object sender, OnCallReplacedParam e)
+        {
+            OnCallReplaced?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application when call has received new offer from remote
+        /// (i.e.re - INVITE / UPDATE with SDP is received).Application can
+        /// decide to accept / reject the offer by setting the code(default
+        /// is 200).If the offer is accepted, application can update the
+        /// call setting to be applied in the answer.When this callback is
+        /// not implemented, the default behavior is to accept the offer using
+        /// current call setting.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallRxOffer(object sender, OnCallRxOfferParam e)
+        {
+            OnCallRxOffer?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application on incoming MESSAGE request.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnInstantMessage(object sender, OnInstantMessageParam e)
+        {
+            OnInstantMessage?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application about the delivery status of outgoing MESSAGE request.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnInstantMessageStatus(object sender, OnInstantMessageStatusParam e)
+        {
+            OnInstantMessageStatus?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notify application about typing indication.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnTypingIndication(object sender, OnTypingIndicationParam e)
+        {
+            OnTypingIndication?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// This callback is called when the call is about to resend the
+        /// INVITE request to the specified target, following the previously
+        /// received redirection response.
+        /// Application may accept the redirection to the specified target,
+        /// reject this target only and make the session continue to try the next
+        /// target in the list if such target exists, stop the whole
+        /// redirection process altogether and cause the session to be
+        /// disconnected, or defer the decision to ask for user confirmation.
+        /// This callback is optional,
+        /// the default behavior is to NOT follow the redirection response.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallRedirected(object sender, OnCallRedirectedParam e)
+        {
+            OnCallRedirected?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// This callback is called when media transport state is changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallMediaTransportState(object sender, OnCallMediaTransportStateParam e)
+        {
+            OnCallMediaTransportState?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Notification about media events such as video notifications. This
+        /// callback will most likely be called from media threads, thus
+        /// application must not perform heavy processing in this callback.
+        /// Especially, application must not destroy the call or media in this
+        /// callback.If application needs to perform more complex tasks to
+        /// handle the event, it should post the task to another thread.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCallMediaEvent(object sender, OnCallMediaEventParam e)
+        {
+            OnCallMediaEvent?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// This callback can be used by application to implement custom media
+        /// transport adapter for the call, or to replace the media transport
+        /// with something completely new altogether.
+        /// This callback is called when a new call is created.The library has
+        /// created a media transport for the call, and it is provided as the
+        /// \a mediaTp argument of this callback.The callback may change it
+        /// with the instance of media transport to be used by the call.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjCall_OnCreateMediaTransport(object sender, OnCreateMediaTransportParam e)
+        {
+            OnCreateMediaTransport?.Invoke(this, e);
+        }
+
+        /// <summary>
         /// Call callbacks.
         /// </summary>
         internal class CallCallback : pjsua2.Call
@@ -666,17 +1291,176 @@ namespace Nequeo.Net.Sip
             /// <summary>
             /// Call callbacks.
             /// </summary>
+            /// <param name="currentCall">The Sip call.</param>
             /// <param name="account">The Sip account.</param>
-            public CallCallback(pjsua2.Account account) : base(account) { }
+            public CallCallback(Call currentCall, pjsua2.Account account) : base(account)
+            {
+                _currentCall = currentCall;
+            }
 
             /// <summary>
             /// Call callbacks.
             /// </summary>
+            /// <param name="currentCall">The Sip call.</param>
             /// <param name="account">The Sip account.</param>
             /// <param name="callId">An index call id (0 - 3).</param>
-            public CallCallback(pjsua2.Account account, int callId) : base(account, callId) { }
+            public CallCallback(Call currentCall, pjsua2.Account account, int callId) : base(account, callId)
+            {
+                _currentCall = currentCall;
+            }
 
+            private Call _currentCall = null;
             private bool _disposed = false;
+
+            /// <summary>
+            /// Notify application when call state has changed.
+            /// Application may then query the call info to get the
+            /// detail call states by calling getInfo() function.
+            /// </summary>
+            public event System.EventHandler<OnCallStateParam> OnCallState;
+
+            /// <summary>
+            /// Notify application when media state in the call has changed.
+            /// Normal application would need to implement this callback, e.g.
+            /// to connect the call's media to sound device. When ICE is used,
+            /// this callback will also be called to report ICE negotiation failure.
+            /// </summary>
+            public event System.EventHandler<OnCallMediaStateParam> OnCallMediaState;
+
+            /// <summary>
+            /// This is a general notification callback which is called whenever
+            /// a transaction within the call has changed state.Application can
+            /// implement this callback for example to monitor the state of
+            /// outgoing requests, or to answer unhandled incoming requests
+            /// (such as INFO) with a final response.
+            /// </summary>
+            public event System.EventHandler<OnCallTsxStateParam> OnCallTsxState;
+
+            /// <summary>
+            /// Notify application when a call has just created a local SDP (for
+            /// initial or subsequent SDP offer / answer).Application can implement
+            /// this callback to modify the SDP, before it is being sent and / or
+            /// negotiated with remote SDP, for example to apply per account / call
+            /// basis codecs priority or to add custom / proprietary SDP attributes.
+            /// </summary>
+            public event System.EventHandler<OnCallSdpCreatedParam> OnCallSdpCreated;
+
+            /// <summary>
+            /// Notify application when media session is created and before it is
+            /// registered to the conference bridge.Application may return different
+            /// media port if it has added media processing port to the stream.This
+            /// media port then will be added to the conference bridge instead.
+            /// </summary>
+            public event System.EventHandler<OnStreamCreatedParam> OnStreamCreated;
+
+            /// <summary>
+            /// Notify application when media session has been unregistered from the
+            /// conference bridge and about to be destroyed.
+            /// </summary>
+            public event System.EventHandler<OnStreamDestroyedParam> OnStreamDestroyed;
+
+            /// <summary>
+            /// Notify application upon incoming DTMF digits.
+            /// </summary>
+            public event System.EventHandler<OnDtmfDigitParam> OnDtmfDigit;
+
+            /// <summary>
+            /// Notify application on call being transferred (i.e. REFER is received).
+            /// Application can decide to accept / reject transfer request
+            /// by setting the code(default is 202).When this callback
+            /// is not implemented, the default behavior is to accept the
+            /// transfer.
+            /// </summary>
+            public event System.EventHandler<OnCallTransferRequestParam> OnCallTransferRequest;
+
+            /// <summary>
+            /// Notify application of the status of previously sent call
+            /// transfer request.Application can monitor the status of the
+            /// call transfer request, for example to decide whether to
+            /// terminate existing call.
+            /// </summary>
+            public event System.EventHandler<OnCallTransferStatusParam> OnCallTransferStatus;
+
+            /// <summary>
+            /// Notify application about incoming INVITE with Replaces header.
+            /// Application may reject the request by setting non - 2xx code.
+            /// </summary>
+            public event System.EventHandler<OnCallReplaceRequestParam> OnCallReplaceRequest;
+
+            /// <summary>
+            /// Notify application that an existing call has been replaced with
+            /// a new call.This happens when PJSUA - API receives incoming INVITE
+            /// request with Replaces header.
+            /// After this callback is called, normally PJSUA - API will disconnect
+            /// this call and establish a new call \a newCallId.
+            /// </summary>
+            public event System.EventHandler<OnCallReplacedParam> OnCallReplaced;
+
+            /// <summary>
+            /// Notify application when call has received new offer from remote
+            /// (i.e.re - INVITE / UPDATE with SDP is received).Application can
+            /// decide to accept / reject the offer by setting the code(default
+            /// is 200).If the offer is accepted, application can update the
+            /// call setting to be applied in the answer.When this callback is
+            /// not implemented, the default behavior is to accept the offer using
+            /// current call setting.
+            /// </summary>
+            public event System.EventHandler<OnCallRxOfferParam> OnCallRxOffer;
+
+            /// <summary>
+            /// Notify application on incoming MESSAGE request.
+            /// </summary>
+            public event System.EventHandler<OnInstantMessageParam> OnInstantMessage;
+
+            /// <summary>
+            /// Notify application about the delivery status of outgoing MESSAGE request.
+            /// </summary>
+            public event System.EventHandler<OnInstantMessageStatusParam> OnInstantMessageStatus;
+
+            /// <summary>
+            /// Notify application about typing indication.
+            /// </summary>
+            public event System.EventHandler<OnTypingIndicationParam> OnTypingIndication;
+
+            /// <summary>
+            /// This callback is called when the call is about to resend the
+            /// INVITE request to the specified target, following the previously
+            /// received redirection response.
+            /// Application may accept the redirection to the specified target,
+            /// reject this target only and make the session continue to try the next
+            /// target in the list if such target exists, stop the whole
+            /// redirection process altogether and cause the session to be
+            /// disconnected, or defer the decision to ask for user confirmation.
+            /// This callback is optional,
+            /// the default behavior is to NOT follow the redirection response.
+            /// </summary>
+            public event System.EventHandler<OnCallRedirectedParam> OnCallRedirected;
+
+            /// <summary>
+            /// This callback is called when media transport state is changed.
+            /// </summary>
+            public event System.EventHandler<OnCallMediaTransportStateParam> OnCallMediaTransportState;
+
+            /// <summary>
+            /// Notification about media events such as video notifications. This
+            /// callback will most likely be called from media threads, thus
+            /// application must not perform heavy processing in this callback.
+            /// Especially, application must not destroy the call or media in this
+            /// callback.If application needs to perform more complex tasks to
+            /// handle the event, it should post the task to another thread.
+            /// </summary>
+            public event System.EventHandler<OnCallMediaEventParam> OnCallMediaEvent;
+
+            /// <summary>
+            /// This callback can be used by application to implement custom media
+            /// transport adapter for the call, or to replace the media transport
+            /// with something completely new altogether.
+            /// This callback is called when a new call is created.The library has
+            /// created a media transport for the call, and it is provided as the
+            /// \a mediaTp argument of this callback.The callback may change it
+            /// with the instance of media transport to be used by the call.
+            /// </summary>
+            public event System.EventHandler<OnCreateMediaTransportParam> OnCreateMediaTransport;
 
             /// <summary>
             /// Notify application when call state has changed.
@@ -686,7 +1470,17 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallState(pjsua2.OnCallStateParam prm)
             {
-                
+                OnCallStateParam param = new OnCallStateParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.EventType = CallInfo.GetSipEventTypeEx((prm.e != null ? prm.e.type : pjsua2.pjsip_event_id_e.PJSIP_EVENT_UNKNOWN));
+                }
+
+                // Invoke the call back event.
+                OnCallState?.Invoke(this, param);
             }
 
             /// <summary>
@@ -698,7 +1492,16 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallMediaState(pjsua2.OnCallMediaStateParam prm)
             {
-                
+                OnCallMediaStateParam param = new OnCallMediaStateParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                }
+
+                // Invoke the call back event.
+                OnCallMediaState?.Invoke(this, param);
             }
 
             /// <summary>
@@ -711,7 +1514,17 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallTsxState(pjsua2.OnCallTsxStateParam prm)
             {
-                
+                OnCallTsxStateParam param = new OnCallTsxStateParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.EventType = CallInfo.GetSipEventTypeEx((prm.e != null ? prm.e.type : pjsua2.pjsip_event_id_e.PJSIP_EVENT_UNKNOWN));
+                }
+
+                // Invoke the call back event.
+                OnCallTsxState?.Invoke(this, param);
             }
 
             /// <summary>
@@ -724,7 +1537,20 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallSdpCreated(pjsua2.OnCallSdpCreatedParam prm)
             {
-                
+                OnCallSdpCreatedParam param = new OnCallSdpCreatedParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.RemoteSdp = new SdpSession();
+                    param.RemoteSdp.WholeSdp = prm.remSdp.wholeSdp;
+                    param.Sdp = new SdpSession();
+                    param.Sdp.WholeSdp = prm.sdp.wholeSdp;
+                }
+
+                // Invoke the call back event.
+                OnCallSdpCreated?.Invoke(this, param);
             }
 
             /// <summary>
@@ -736,7 +1562,16 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onStreamCreated(pjsua2.OnStreamCreatedParam prm)
             {
-                
+                OnStreamCreatedParam param = new OnStreamCreatedParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.StreamIndex = prm.streamIdx;
+                }
+
+                // Invoke the call back event.
+                OnStreamCreated?.Invoke(this, param);
             }
 
             /// <summary>
@@ -746,7 +1581,16 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onStreamDestroyed(pjsua2.OnStreamDestroyedParam prm)
             {
-                
+                OnStreamDestroyedParam param = new OnStreamDestroyedParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.StreamIndex = prm.streamIdx;
+                }
+
+                // Invoke the call back event.
+                OnStreamDestroyed?.Invoke(this, param);
             }
 
             /// <summary>
@@ -755,7 +1599,17 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onDtmfDigit(pjsua2.OnDtmfDigitParam prm)
             {
-                
+                OnDtmfDigitParam param = new OnDtmfDigitParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.Digit = prm.digit;
+                }
+
+                // Invoke the call back event.
+                OnDtmfDigit?.Invoke(this, param);
             }
 
             /// <summary>
@@ -768,7 +1622,24 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallTransferRequest(pjsua2.OnCallTransferRequestParam prm)
             {
-                
+                OnCallTransferRequestParam param = new OnCallTransferRequestParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.Code = AccountInfo.GetStatusCodeEx(prm.statusCode);
+                    param.DestinationUri = prm.dstUri;
+
+                    param.Setting = new CallSetting(true);
+                    param.Setting.AudioCount = prm.opt.audioCount;
+                    param.Setting.Flag = (CallFlag)prm.opt.flag;
+                    param.Setting.VideoCount = prm.opt.videoCount;
+                    param.Setting.ReqKeyframeMethod = (VidReqKeyframeMethod)prm.opt.reqKeyframeMethod;
+                }
+
+                // Invoke the call back event.
+                OnCallTransferRequest?.Invoke(this, param);
             }
 
             /// <summary>
@@ -780,7 +1651,20 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallTransferStatus(pjsua2.OnCallTransferStatusParam prm)
             {
-                
+                OnCallTransferStatusParam param = new OnCallTransferStatusParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.Code = AccountInfo.GetStatusCodeEx(prm.statusCode);
+                    param.Continue = prm.cont;
+                    param.FinalNotify = prm.finalNotify;
+                    param.Reason = prm.reason;
+                }
+
+                // Invoke the call back event.
+                OnCallTransferStatus?.Invoke(this, param);
             }
 
             /// <summary>
@@ -790,7 +1674,29 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallReplaceRequest(pjsua2.OnCallReplaceRequestParam prm)
             {
-                
+                OnCallReplaceRequestParam param = new OnCallReplaceRequestParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.Code = AccountInfo.GetStatusCodeEx(prm.statusCode);
+                    param.Reason = prm.reason;
+
+                    param.Setting = new CallSetting(true);
+                    param.Setting.AudioCount = prm.opt.audioCount;
+                    param.Setting.Flag = (CallFlag)prm.opt.flag;
+                    param.Setting.VideoCount = prm.opt.videoCount;
+                    param.Setting.ReqKeyframeMethod = (VidReqKeyframeMethod)prm.opt.reqKeyframeMethod;
+
+                    param.RxData = new SipRxData();
+                    param.RxData.Info = prm.rdata.info;
+                    param.RxData.SrcAddress = prm.rdata.srcAddress;
+                    param.RxData.WholeMsg = prm.rdata.wholeMsg;
+                }
+
+                // Invoke the call back event.
+                OnCallReplaceRequest?.Invoke(this, param);
             }
 
             /// <summary>
@@ -803,7 +1709,17 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallReplaced(pjsua2.OnCallReplacedParam prm)
             {
-                
+                OnCallReplacedParam param = new OnCallReplacedParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.CallID = prm.newCallId;
+                }
+
+                // Invoke the call back event.
+                OnCallReplaced?.Invoke(this, param);
             }
 
             /// <summary>
@@ -818,7 +1734,26 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallRxOffer(pjsua2.OnCallRxOfferParam prm)
             {
-                
+                OnCallRxOfferParam param = new OnCallRxOfferParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.Code = AccountInfo.GetStatusCodeEx(prm.statusCode);
+
+                    param.Offer = new SdpSession();
+                    param.Offer.WholeSdp = prm.offer.wholeSdp;
+
+                    param.Setting = new CallSetting(true);
+                    param.Setting.AudioCount = prm.opt.audioCount;
+                    param.Setting.Flag = (CallFlag)prm.opt.flag;
+                    param.Setting.VideoCount = prm.opt.videoCount;
+                    param.Setting.ReqKeyframeMethod = (VidReqKeyframeMethod)prm.opt.reqKeyframeMethod;
+                }
+
+                // Invoke the call back event.
+                OnCallRxOffer?.Invoke(this, param);
             }
 
             /// <summary>
@@ -827,7 +1762,24 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onInstantMessage(pjsua2.OnInstantMessageParam prm)
             {
-                
+                OnInstantMessageParam param = new OnInstantMessageParam();
+
+                if (prm != null)
+                {
+                    param.ContactUri = prm.contactUri;
+                    param.ContentType = prm.contentType;
+                    param.FromUri = prm.fromUri;
+                    param.MsgBody = prm.msgBody;
+                    param.ToUri = prm.toUri;
+
+                    param.RxData = new SipRxData();
+                    param.RxData.Info = prm.rdata.info;
+                    param.RxData.SrcAddress = prm.rdata.srcAddress;
+                    param.RxData.WholeMsg = prm.rdata.wholeMsg;
+                }
+
+                // Invoke the call back event.
+                OnInstantMessage?.Invoke(this, param);
             }
 
             /// <summary>
@@ -836,7 +1788,23 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onInstantMessageStatus(pjsua2.OnInstantMessageStatusParam prm)
             {
-                
+                OnInstantMessageStatusParam param = new OnInstantMessageStatusParam();
+
+                if (prm != null)
+                {
+                    param.Code = AccountInfo.GetStatusCodeEx(prm.code);
+                    param.MsgBody = prm.msgBody;
+                    param.Reason = prm.reason;
+                    param.ToUri = prm.toUri;
+
+                    param.RxData = new SipRxData();
+                    param.RxData.Info = prm.rdata.info;
+                    param.RxData.SrcAddress = prm.rdata.srcAddress;
+                    param.RxData.WholeMsg = prm.rdata.wholeMsg;
+                }
+
+                // Invoke the call back event.
+                OnInstantMessageStatus?.Invoke(this, param);
             }
 
             /// <summary>
@@ -845,7 +1813,23 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onTypingIndication(pjsua2.OnTypingIndicationParam prm)
             {
-                
+                OnTypingIndicationParam param = new OnTypingIndicationParam();
+
+                if (prm != null)
+                {
+                    param.ContactUri = prm.contactUri;
+                    param.FromUri = prm.fromUri;
+                    param.IsTyping = prm.isTyping;
+                    param.ToUri = prm.toUri;
+
+                    param.RxData = new SipRxData();
+                    param.RxData.Info = prm.rdata.info;
+                    param.RxData.SrcAddress = prm.rdata.srcAddress;
+                    param.RxData.WholeMsg = prm.rdata.wholeMsg;
+                }
+
+                // Invoke the call back event.
+                OnTypingIndication?.Invoke(this, param);
             }
 
             /// <summary>
@@ -865,7 +1849,22 @@ namespace Nequeo.Net.Sip
             /// <returns>Redirection options.</returns>
             public override pjsua2.pjsip_redirect_op onCallRedirected(pjsua2.OnCallRedirectedParam prm)
             {
-                return pjsua2.pjsip_redirect_op.PJSIP_REDIRECT_STOP;
+                OnCallRedirectedParam param = new OnCallRedirectedParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.TargetUri = prm.targetUri;
+                    param.EventType = CallInfo.GetSipEventTypeEx((prm.e != null ? prm.e.type : pjsua2.pjsip_event_id_e.PJSIP_EVENT_UNKNOWN));
+                    param.Redirect = RedirectResponseType.PJSIP_REDIRECT_STOP;
+                }
+
+                // Invoke the call back event.
+                OnCallRedirected?.Invoke(this, param);
+
+                // Return the redirection.
+                return CallInfo.GetRedirectResponseType(param.Redirect);
             }
 
             /// <summary>
@@ -874,7 +1873,20 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallMediaTransportState(pjsua2.OnCallMediaTransportStateParam prm)
             {
-                
+                OnCallMediaTransportStateParam param = new OnCallMediaTransportStateParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.MediaIndex = prm.medIdx;
+                    param.SipErrorCode = prm.sipErrorCode;
+                    param.Status = prm.status;
+                    param.State = CallInfo.GetMediaTransportStateEx(prm.state);
+                }
+
+                // Invoke the call back event.
+                OnCallMediaTransportState?.Invoke(this, param);
             }
 
             /// <summary>
@@ -888,14 +1900,27 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCallMediaEvent(pjsua2.OnCallMediaEventParam prm)
             {
-                
+                OnCallMediaEventParam param = new OnCallMediaEventParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.MediaIndex = prm.medIdx;
+                    param.Event = new MediaEvent();
+                    param.Event.Type = CallInfo.GetMediaEventTypeEx(prm.ev.type);
+                    param.Event.Data = new MediaEventData();
+                    param.Event.Data.FormatChanged = new MediaFmtChangedEvent();
+                }
+
+                // Invoke the call back event.
+                OnCallMediaEvent?.Invoke(this, param);
             }
 
             /// <summary>
             /// This callback can be used by application to implement custom media
             /// transport adapter for the call, or to replace the media transport
             /// with something completely new altogether.
-            ///
             /// This callback is called when a new call is created.The library has
             /// created a media transport for the call, and it is provided as the
             /// mediaTp argument of this callback.The callback may change it
@@ -904,7 +1929,18 @@ namespace Nequeo.Net.Sip
             /// <param name="prm">Callback parameter.</param>
             public override void onCreateMediaTransport(pjsua2.OnCreateMediaTransportParam prm)
             {
-                
+                OnCreateMediaTransportParam param = new OnCreateMediaTransportParam();
+
+                if (prm != null)
+                {
+                    param.CurrentCall = _currentCall;
+                    param.Info = _currentCall.GetInfo();
+                    param.MediaIndex = prm.mediaIdx;
+                    param.Flags = prm.flags;
+                }
+
+                // Invoke the call back event.
+                OnCreateMediaTransport?.Invoke(this, param);
             }
 
             /// <summary>

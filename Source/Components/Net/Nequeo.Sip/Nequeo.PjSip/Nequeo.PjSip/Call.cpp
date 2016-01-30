@@ -1171,6 +1171,27 @@ MediaStreamStat^ Call::GetStreamStat(unsigned mediaIndex)
 	MediaStreamStat^ mediaStreamStat = gcnew MediaStreamStat();
 	pj::StreamStat info = _callCallback->getStreamStat(mediaIndex);
 
+	TimeVal^ start = gcnew TimeVal();
+	start->Seconds = info.rtcp.start.sec;
+	start->Milliseconds = info.rtcp.start.msec;
+
+	mediaStreamStat->Start = start;
+	mediaStreamStat->AvgBurst = info.jbuf.avgBurst;
+	mediaStreamStat->AvgDelayMsec = info.jbuf.avgDelayMsec;
+	mediaStreamStat->Burst = info.jbuf.burst;
+	mediaStreamStat->DevDelayMsec = info.jbuf.devDelayMsec;
+	mediaStreamStat->Discard = info.jbuf.discard;
+	mediaStreamStat->Empty = info.jbuf.empty;
+	mediaStreamStat->FrameSize = info.jbuf.frameSize;
+	mediaStreamStat->Lost = info.jbuf.lost;
+	mediaStreamStat->MaxDelayMsec = info.jbuf.maxDelayMsec;
+	mediaStreamStat->MaxPrefetch = info.jbuf.maxPrefetch;
+	mediaStreamStat->MinDelayMsec = info.jbuf.minDelayMsec;
+	mediaStreamStat->MinPrefetch = info.jbuf.minPrefetch;
+	mediaStreamStat->Prefetch = info.jbuf.prefetch;
+	mediaStreamStat->Size = info.jbuf.size;
+	mediaStreamStat->RtpTxLastSeq = info.rtcp.rtpTxLastSeq;
+	mediaStreamStat->RtpTxLastTs = info.rtcp.rtpTxLastTs;
 
 	// Return the stream statistics.
 	return mediaStreamStat;

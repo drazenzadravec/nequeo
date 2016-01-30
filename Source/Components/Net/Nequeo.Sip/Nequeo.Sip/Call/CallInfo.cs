@@ -223,6 +223,29 @@ namespace Nequeo.Net.Sip
         }
 
         /// <summary>
+        /// Get MediaDirection.
+        /// </summary>
+        /// <param name="mediaDirection">The current MediaDirection.</param>
+        /// <returns>The MediaDirection.</returns>
+        internal static pjsua2.pjmedia_dir GetMediaDirection(MediaDirection mediaDirection)
+        {
+            // Select the srtp signaling.
+            switch (mediaDirection)
+            {
+                case MediaDirection.PJMEDIA_DIR_DECODING:
+                    return pjsua2.pjmedia_dir.PJMEDIA_DIR_DECODING;
+                case MediaDirection.PJMEDIA_DIR_ENCODING:
+                    return pjsua2.pjmedia_dir.PJMEDIA_DIR_ENCODING;
+                case MediaDirection.PJMEDIA_DIR_ENCODING_DECODING:
+                    return pjsua2.pjmedia_dir.PJMEDIA_DIR_ENCODING_DECODING;
+                case MediaDirection.PJMEDIA_DIR_NONE:
+                    return pjsua2.pjmedia_dir.PJMEDIA_DIR_NONE;
+                default:
+                    return pjsua2.pjmedia_dir.PJMEDIA_DIR_NONE;
+            }
+        }
+
+        /// <summary>
         /// Get CallMediaStatus.
         /// </summary>
         /// <param name="callMediaStatus">The current CallMediaStatus.</param>
@@ -323,6 +346,149 @@ namespace Nequeo.Net.Sip
                     return pjsua2.pjsip_redirect_op.PJSIP_REDIRECT_STOP;
                 default:
                     return pjsua2.pjsip_redirect_op.PJSIP_REDIRECT_STOP;
+            }
+        }
+
+        /// <summary>
+        /// Get VideoStreamOperation.
+        /// </summary>
+        /// <param name="videoStreamOperation">The current VideoStreamOperation.</param>
+        /// <returns>The VideoStreamOperation.</returns>
+        internal static pjsua2.pjsua_call_vid_strm_op GetVideoStreamOperation(VideoStreamOperation videoStreamOperation)
+        {
+            // Select the srtp signaling.
+            switch (videoStreamOperation)
+            {
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_ADD:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_ADD;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_CHANGE_CAP_DEV:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_CHANGE_CAP_DEV;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_CHANGE_DIR:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_CHANGE_DIR;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_NO_OP:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_NO_OP;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_REMOVE:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_REMOVE;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_SEND_KEYFRAME:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_SEND_KEYFRAME;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_START_TRANSMIT:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_START_TRANSMIT;
+                case VideoStreamOperation.PJSUA_CALL_VID_STRM_STOP_TRANSMIT:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_STOP_TRANSMIT;
+                default:
+                    return pjsua2.pjsua_call_vid_strm_op.PJSUA_CALL_VID_STRM_NO_OP;
+            }
+        }
+
+        /// <summary>
+        /// Get MediaTransportProtocol.
+        /// </summary>
+        /// <param name="mediaTransportProtocol">The current MediaTransportProtocol.</param>
+        /// <returns>The MediaTransportProtocol.</returns>
+        internal static MediaTransportProtocol GetMediaTransportProtocolEx(pjsua2.pjmedia_tp_proto mediaTransportProtocol)
+        {
+            // Select the srtp signaling.
+            switch (mediaTransportProtocol)
+            {
+                case pjsua2.pjmedia_tp_proto.PJMEDIA_TP_PROTO_NONE:
+                    return MediaTransportProtocol.PJMEDIA_TP_PROTO_NONE;
+                case pjsua2.pjmedia_tp_proto.PJMEDIA_TP_PROTO_RTP_AVP:
+                    return MediaTransportProtocol.PJMEDIA_TP_PROTO_RTP_AVP;
+                case pjsua2.pjmedia_tp_proto.PJMEDIA_TP_PROTO_RTP_SAVP:
+                    return MediaTransportProtocol.PJMEDIA_TP_PROTO_RTP_SAVP;
+                case pjsua2.pjmedia_tp_proto.PJMEDIA_TP_PROTO_UNKNOWN:
+                    return MediaTransportProtocol.PJMEDIA_TP_PROTO_UNKNOWN;
+                default:
+                    return MediaTransportProtocol.PJMEDIA_TP_PROTO_NONE;
+            }
+        }
+
+        /// <summary>
+        /// Get SipEventType.
+        /// </summary>
+        /// <param name="sipEventType">The current SipEventType.</param>
+        /// <returns>The SipEventType.</returns>
+        internal static SipEventType GetSipEventTypeEx(pjsua2.pjsip_event_id_e sipEventType)
+        {
+            // Select the srtp signaling.
+            switch (sipEventType)
+            {
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_RX_MSG:
+                    return SipEventType.PJSIP_EVENT_RX_MSG;
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_TIMER:
+                    return SipEventType.PJSIP_EVENT_TIMER;
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_TRANSPORT_ERROR:
+                    return SipEventType.PJSIP_EVENT_TRANSPORT_ERROR;
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_TSX_STATE:
+                    return SipEventType.PJSIP_EVENT_TSX_STATE;
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_TX_MSG:
+                    return SipEventType.PJSIP_EVENT_TX_MSG;
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_UNKNOWN:
+                    return SipEventType.PJSIP_EVENT_UNKNOWN;
+                case pjsua2.pjsip_event_id_e.PJSIP_EVENT_USER:
+                    return SipEventType.PJSIP_EVENT_USER;
+                default:
+                    return SipEventType.PJSIP_EVENT_UNKNOWN;
+            }
+        }
+
+        /// <summary>
+        /// Get MediaTransportState.
+        /// </summary>
+        /// <param name="mediaTransportState">The current MediaTransportState.</param>
+        /// <returns>The MediaTransportState.</returns>
+        internal static MediaTransportState GetMediaTransportStateEx(pjsua2.pjsua_med_tp_st mediaTransportState)
+        {
+            // Select the srtp signaling.
+            switch (mediaTransportState)
+            {
+                case pjsua2.pjsua_med_tp_st.PJSUA_MED_TP_CREATING:
+                    return MediaTransportState.PJSUA_MED_TP_CREATING;
+                case pjsua2.pjsua_med_tp_st.PJSUA_MED_TP_DISABLED:
+                    return MediaTransportState.PJSUA_MED_TP_DISABLED;
+                case pjsua2.pjsua_med_tp_st.PJSUA_MED_TP_IDLE:
+                    return MediaTransportState.PJSUA_MED_TP_IDLE;
+                case pjsua2.pjsua_med_tp_st.PJSUA_MED_TP_INIT:
+                    return MediaTransportState.PJSUA_MED_TP_INIT;
+                case pjsua2.pjsua_med_tp_st.PJSUA_MED_TP_NULL:
+                    return MediaTransportState.PJSUA_MED_TP_NULL;
+                case pjsua2.pjsua_med_tp_st.PJSUA_MED_TP_RUNNING:
+                    return MediaTransportState.PJSUA_MED_TP_RUNNING;
+                default:
+                    return MediaTransportState.PJSUA_MED_TP_NULL;
+            }
+        }
+
+        /// <summary>
+        /// Get MediaEventType.
+        /// </summary>
+        /// <param name="mediaEventType">The current MediaEventType.</param>
+        /// <returns>The MediaEventType.</returns>
+        internal static MediaEventType GetMediaEventTypeEx(pjsua2.pjmedia_event_type mediaEventType)
+        {
+            // Select the srtp signaling.
+            switch (mediaEventType)
+            {
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_FMT_CHANGED:
+                    return MediaEventType.PJMEDIA_EVENT_FMT_CHANGED;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_KEYFRAME_FOUND:
+                    return MediaEventType.PJMEDIA_EVENT_KEYFRAME_FOUND;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_KEYFRAME_MISSING:
+                    return MediaEventType.PJMEDIA_EVENT_KEYFRAME_MISSING;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_MOUSE_BTN_DOWN:
+                    return MediaEventType.PJMEDIA_EVENT_MOUSE_BTN_DOWN;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_NONE:
+                    return MediaEventType.PJMEDIA_EVENT_NONE;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_ORIENT_CHANGED:
+                    return MediaEventType.PJMEDIA_EVENT_ORIENT_CHANGED;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_WND_CLOSED:
+                    return MediaEventType.PJMEDIA_EVENT_WND_CLOSED;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_WND_CLOSING:
+                    return MediaEventType.PJMEDIA_EVENT_WND_CLOSING;
+                case pjsua2.pjmedia_event_type.PJMEDIA_EVENT_WND_RESIZED:
+                    return MediaEventType.PJMEDIA_EVENT_WND_RESIZED;
+                default:
+                    return MediaEventType.PJMEDIA_EVENT_NONE;
             }
         }
     }
