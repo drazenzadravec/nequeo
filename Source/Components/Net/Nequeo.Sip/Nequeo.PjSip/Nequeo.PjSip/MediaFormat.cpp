@@ -97,3 +97,27 @@ MediaType MediaFormat::GetMediaTypeEx(pjmedia_type mediaType)
 		return MediaType::PJMEDIA_TYPE_NONE;
 	}
 }
+
+/// <summary>
+/// Get the media type.
+/// </summary>
+/// <param name="mediaType">The current media type.</param>
+/// <returns>The media type.</returns>
+pjmedia_type MediaFormat::GetMediaType(MediaType mediaType)
+{
+	switch (mediaType)
+	{
+	case Nequeo::Net::PjSip::MediaType::PJMEDIA_TYPE_NONE:
+		return pjmedia_type::PJMEDIA_TYPE_NONE;
+	case Nequeo::Net::PjSip::MediaType::PJMEDIA_TYPE_AUDIO:
+		return pjmedia_type::PJMEDIA_TYPE_AUDIO;
+	case Nequeo::Net::PjSip::MediaType::PJMEDIA_TYPE_VIDEO:
+		return pjmedia_type::PJMEDIA_TYPE_VIDEO;
+	case Nequeo::Net::PjSip::MediaType::PJMEDIA_TYPE_APPLICATION:
+		return pjmedia_type::PJMEDIA_TYPE_APPLICATION;
+	case Nequeo::Net::PjSip::MediaType::PJMEDIA_TYPE_UNKNOWN:
+		return pjmedia_type::PJMEDIA_TYPE_UNKNOWN;
+	default:
+		return pjmedia_type::PJMEDIA_TYPE_NONE;
+	}
+}

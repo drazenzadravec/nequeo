@@ -508,6 +508,19 @@ CallInfo^ Call::GetInfo()
 				mediaInfo->VideoIncomingWindowId = info.media[i].videoIncomingWindowId;
 				mediaInfo->Status = CallMapper::GetCallMediaStatusEx(info.media[i].status);
 				mediaInfo->Type = MediaFormat::GetMediaTypeEx(info.media[i].type);
+
+				// If media type is video.
+				if (mediaInfo->Type == MediaType::PJMEDIA_TYPE_VIDEO && mediaInfo->VideoIncomingWindowId >= 0)
+				{
+					// Get the video window.
+					mediaInfo->VideoWindowEx = gcnew VideoWindow(info.media[i].videoWindow);
+				}
+				else
+				{
+					mediaInfo->VideoWindowEx = nullptr;
+				}
+
+				// Assign the media.
 				callInfo->Media[i] = mediaInfo;
 			}
 		}
@@ -525,9 +538,27 @@ CallInfo^ Call::GetInfo()
 				mediaInfo->VideoIncomingWindowId = info.provMedia[i].videoIncomingWindowId;
 				mediaInfo->Status = CallMapper::GetCallMediaStatusEx(info.provMedia[i].status);
 				mediaInfo->Type = MediaFormat::GetMediaTypeEx(info.provMedia[i].type);
+
+				// If media type is video.
+				if (mediaInfo->Type == MediaType::PJMEDIA_TYPE_VIDEO && mediaInfo->VideoIncomingWindowId >= 0)
+				{
+					// Get the video window.
+					mediaInfo->VideoWindowEx = gcnew VideoWindow(info.provMedia[i].videoWindow);
+				}
+				else
+				{
+					mediaInfo->VideoWindowEx = nullptr;
+				}
+
+				// Assign the media.
 				callInfo->ProvMedia[i] = mediaInfo;
 			}
 		}
+	}
+	catch (const pj::Error&)
+	{
+		// Some error.
+		callInfo = nullptr;
 	}
 	catch (const std::exception&)
 	{

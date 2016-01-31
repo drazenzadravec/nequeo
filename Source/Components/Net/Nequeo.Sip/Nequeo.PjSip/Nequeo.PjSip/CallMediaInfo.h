@@ -39,6 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "MediaType.h"
 #include "MediaDirection.h"
 #include "CallMediaStatus.h"
+#include "VideoWindow.h"
 
 #include "pjsua2.hpp"
 
@@ -133,13 +134,16 @@ namespace Nequeo
 					void set(int value);
 				}
 
-				/**
-				* The video window instance for incoming video. Only valid if
-				* videoIncomingWindowId is not PJSUA_INVALID_ID and
-				* the media type is video.
-				*/
-				/// TODO : Implement video window latter.
-				///VideoWindow	videoWindow;
+				///	<summary>
+				/// The video window instance for incoming video. Only valid if
+				/// videoIncomingWindowId is not PJSUA_INVALID_ID and
+				/// the media type is video.
+				///	</summary>
+				property VideoWindow^ VideoWindowEx
+				{
+					VideoWindow^ get();
+					void set(VideoWindow^ value);
+				}
 
 			private:
 				bool _disposed;
@@ -151,6 +155,7 @@ namespace Nequeo
 				int _audioConfSlot;
 				int _videoIncomingWindowId;
 				int _videoCapDev;
+				VideoWindow^ _videoWindowEx;
 			};
 		}
 	}

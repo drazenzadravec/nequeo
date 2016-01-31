@@ -169,3 +169,23 @@ void CallMediaInfo::VideoCapDev::set(int value)
 {
 	_videoCapDev = value;
 }
+
+///	<summary>
+/// The video window instance for incoming video. Only valid if
+/// videoIncomingWindowId is not PJSUA_INVALID_ID and
+/// the media type is video.
+///	</summary>
+VideoWindow^ CallMediaInfo::VideoWindowEx::get()
+{
+	return _videoWindowEx;
+}
+
+///	<summary>
+/// The video window instance for incoming video. Only valid if
+/// videoIncomingWindowId is not PJSUA_INVALID_ID and
+/// the media type is video.
+///	</summary>
+void CallMediaInfo::VideoWindowEx::set(VideoWindow^ value)
+{
+	_videoWindowEx = value;
+}

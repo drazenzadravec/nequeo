@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2015 http://www.nequeo.com.au/
 *
-*  File :          MediaFormat.h
-*  Purpose :       SIP MediaFormat class.
+*  File :          MediaCoordinate.h
+*  Purpose :       SIP MediaCoordinate class.
 *
 */
 
@@ -31,12 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _MEDIAFORMAT_H
-#define _MEDIAFORMAT_H
+#ifndef _MEDIACOORDINATE_H
+#define _MEDIACOORDINATE_H
 
 #include "stdafx.h"
-
-#include "MediaType.h"
 
 #include "pjsua2.hpp"
 
@@ -51,52 +49,43 @@ namespace Nequeo
 		namespace PjSip
 		{
 			/// <summary>
-			/// This structure contains all the information needed to completely describe a media.
+			/// Representation of media coordinate.
 			/// </summary>
-			public ref class MediaFormat
+			public ref class MediaCoordinate sealed
 			{
 			public:
 				/// <summary>
-				/// This structure contains all the information needed to completely describe a media.
+				/// Representation of media coordinate.
 				/// </summary>
-				MediaFormat();
+				MediaCoordinate();
+
+				///	<summary>
+				///	Representation of media coordinate.
+				///	</summary>
+				~MediaCoordinate();
 
 				/// <summary>
-				/// Gets or sets the media format id.
+				/// Gets or sets the X position of the coordinate.
 				/// </summary>
-				property unsigned Id
+				property int X
 				{
-					unsigned get();
-					void set(unsigned value);
+					int get();
+					void set(int value);
 				}
 
 				/// <summary>
-				/// Gets or sets the media type.
+				/// Gets or sets the Y position of the coordinate.
 				/// </summary>
-				property MediaType Type
+				property int Y
 				{
-					MediaType get();
-					void set(MediaType value);
+					int get();
+					void set(int value);
 				}
-
-			internal:
-				/// <summary>
-				/// Get the media type.
-				/// </summary>
-				/// <param name="mediaType">The current media type.</param>
-				/// <returns>The media type.</returns>
-				static MediaType GetMediaTypeEx(pjmedia_type mediaType);
-
-				/// <summary>
-				/// Get the media type.
-				/// </summary>
-				/// <param name="mediaType">The current media type.</param>
-				/// <returns>The media type.</returns>
-				static pjmedia_type GetMediaType(MediaType mediaType);
 
 			private:
-				unsigned _id;
-				MediaType _type;
+				bool _disposed;
+				int _x;
+				int _y;
 			};
 		}
 	}

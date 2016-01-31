@@ -348,6 +348,30 @@
     <ClInclude Include="AudioMediaPlayer.h">
       <Filter>Header Files\MediaHeader</Filter>
     </ClInclude>
+    <ClInclude Include="VideoWindow.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoWindowInfo.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoDeviceHandleType.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoWindowHandle.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaCoordinate.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaSize.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoPreviewOpParam.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoPreview.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -588,6 +612,27 @@
       <Filter>Source Files\MediaSource</Filter>
     </ClCompile>
     <ClCompile Include="AudioMediaPlayer.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoWindow.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoWindowInfo.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoWindowHandle.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaCoordinate.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaSize.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPreviewOpParam.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPreview.cpp">
       <Filter>Source Files\MediaSource</Filter>
     </ClCompile>
   </ItemGroup>

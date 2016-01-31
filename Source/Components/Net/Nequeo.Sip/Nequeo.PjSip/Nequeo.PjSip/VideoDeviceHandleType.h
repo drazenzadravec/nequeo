@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2015 http://www.nequeo.com.au/
 *
-*  File :          MediaFormat.h
-*  Purpose :       SIP MediaFormat class.
+*  File :          VideoDeviceHandleType.h
+*  Purpose :       SIP VideoDeviceHandleType class.
 *
 */
 
@@ -31,12 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _MEDIAFORMAT_H
-#define _MEDIAFORMAT_H
+#ifndef _VIDEODEVICEHANDLETYPE_H
+#define _VIDEODEVICEHANDLETYPE_H
 
 #include "stdafx.h"
-
-#include "MediaType.h"
 
 #include "pjsua2.hpp"
 
@@ -51,52 +49,29 @@ namespace Nequeo
 		namespace PjSip
 		{
 			/// <summary>
-			/// This structure contains all the information needed to completely describe a media.
+			/// Enumeration of window handle type.
 			/// </summary>
-			public ref class MediaFormat
+			public enum class VideoDeviceHandleType : unsigned
 			{
-			public:
 				/// <summary>
-				/// This structure contains all the information needed to completely describe a media.
+				/// Type none.
 				/// </summary>
-				MediaFormat();
+				PJMEDIA_VID_DEV_HWND_TYPE_NONE,
 
 				/// <summary>
-				/// Gets or sets the media format id.
+				/// Native window handle on Windows.
 				/// </summary>
-				property unsigned Id
-				{
-					unsigned get();
-					void set(unsigned value);
-				}
+				PJMEDIA_VID_DEV_HWND_TYPE_WINDOWS,
 
 				/// <summary>
-				/// Gets or sets the media type.
+				/// Native view on iOS.
 				/// </summary>
-				property MediaType Type
-				{
-					MediaType get();
-					void set(MediaType value);
-				}
-
-			internal:
-				/// <summary>
-				/// Get the media type.
-				/// </summary>
-				/// <param name="mediaType">The current media type.</param>
-				/// <returns>The media type.</returns>
-				static MediaType GetMediaTypeEx(pjmedia_type mediaType);
+				PJMEDIA_VID_DEV_HWND_TYPE_IOS,
 
 				/// <summary>
-				/// Get the media type.
+				/// Native window handle on Android.
 				/// </summary>
-				/// <param name="mediaType">The current media type.</param>
-				/// <returns>The media type.</returns>
-				static pjmedia_type GetMediaType(MediaType mediaType);
-
-			private:
-				unsigned _id;
-				MediaType _type;
+				PJMEDIA_VID_DEV_HWND_TYPE_ANDROID
 			};
 		}
 	}

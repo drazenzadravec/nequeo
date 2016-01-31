@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2015 http://www.nequeo.com.au/
 *
-*  File :          MediaFormat.h
-*  Purpose :       SIP MediaFormat class.
+*  File :          VideoPreview.h
+*  Purpose :       SIP VideoPreview class.
 *
 */
 
@@ -31,12 +31,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _MEDIAFORMAT_H
-#define _MEDIAFORMAT_H
+#ifndef _VIDEOPREVIEW_H
+#define _VIDEOPREVIEW_H
 
 #include "stdafx.h"
 
-#include "MediaType.h"
+#include "VideoWindow.h"
+#include "VideoPreviewOpParam.h"
+#include "MediaFormat.h"
 
 #include "pjsua2.hpp"
 
@@ -51,52 +53,57 @@ namespace Nequeo
 		namespace PjSip
 		{
 			/// <summary>
-			/// This structure contains all the information needed to completely describe a media.
+			/// Video preview.
 			/// </summary>
-			public ref class MediaFormat
+			public ref class VideoPreview sealed
 			{
 			public:
 				/// <summary>
-				/// This structure contains all the information needed to completely describe a media.
+				/// Video preview.
 				/// </summary>
-				MediaFormat();
+				/// <param name="captureDeviceID">The video capture device id.</param>
+				VideoPreview(int captureDeviceID);
+
+				///	<summary>
+				///	Video preview. deconstructor.
+				///	</summary>
+				~VideoPreview();
+
+				///	<summary>
+				///	Video preview.
+				///	</summary>
+				!VideoPreview();
 
 				/// <summary>
-				/// Gets or sets the media format id.
+				/// Determine if the specified video input device has built-in native
+				/// preview capability.This is a convenience function that is equal to
+				/// querying device's capability for PJMEDIA_VID_DEV_CAP_INPUT_PREVIEW
+				/// capability.
 				/// </summary>
-				property unsigned Id
-				{
-					unsigned get();
-					void set(unsigned value);
-				}
+				/// <returns>True if it has.</returns>
+				bool HasNative();
 
 				/// <summary>
-				/// Gets or sets the media type.
+				/// Start video preview window for the specified capture device.
 				/// </summary>
-				property MediaType Type
-				{
-					MediaType get();
-					void set(MediaType value);
-				}
-
-			internal:
-				/// <summary>
-				/// Get the media type.
-				/// </summary>
-				/// <param name="mediaType">The current media type.</param>
-				/// <returns>The media type.</returns>
-				static MediaType GetMediaTypeEx(pjmedia_type mediaType);
+				/// <param name="param">Video preview parameters.</param>
+				void Start(VideoPreviewOpParam^ param);
 
 				/// <summary>
-				/// Get the media type.
+				/// Stop video preview.
 				/// </summary>
-				/// <param name="mediaType">The current media type.</param>
-				/// <returns>The media type.</returns>
-				static pjmedia_type GetMediaType(MediaType mediaType);
+				void Stop();
+
+				/// <summary>
+				/// Get the preview window handle associated with the capture device, if any.
+				/// </summary>
+				/// <returns>Video window.</returns>
+				VideoWindow^ GetVideoWindow();
 
 			private:
-				unsigned _id;
-				MediaType _type;
+				bool _disposed;
+
+				pj::VideoPreview* _pjVideoPreview;
 			};
 		}
 	}

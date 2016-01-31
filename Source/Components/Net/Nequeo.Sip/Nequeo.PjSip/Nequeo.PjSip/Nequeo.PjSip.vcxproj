@@ -96,8 +96,8 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>pjsua-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjsua2-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-util-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-core-i386-Win32-vc8-Debug-Dynamic.lib;pjnath-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-audiodev-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-simple-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-ua-i386-Win32-vc8-Debug-Dynamic.lib;libspeex-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-codec-i386-Win32-vc8-Debug-Dynamic.lib;libsrtp-i386-Win32-vc8-Debug-Dynamic.lib;libgsmcodec-i386-Win32-vc8-Debug-Dynamic.lib;libresample-i386-Win32-vc8-Debug-Dynamic.lib;libilbccodec-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-videodev-i386-Win32-vc8-Debug-Dynamic.lib;libg7221codec-i386-Win32-vc8-Debug-Dynamic.lib;libmilenage-i386-Win32-vc8-Debug-Dynamic.lib;libpjproject-i386-Win32-vc8-Debug-Dynamic.lib;libportaudio-i386-Win32-vc8-Debug-Dynamic.lib;libbaseclasses-i386-Win32-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pjsua-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjsua2-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-util-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-core-i386-Win32-vc8-Debug-Dynamic.lib;pjnath-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-audiodev-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-simple-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-ua-i386-Win32-vc8-Debug-Dynamic.lib;libspeex-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-codec-i386-Win32-vc8-Debug-Dynamic.lib;libsrtp-i386-Win32-vc8-Debug-Dynamic.lib;libgsmcodec-i386-Win32-vc8-Debug-Dynamic.lib;libresample-i386-Win32-vc8-Debug-Dynamic.lib;libilbccodec-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-videodev-i386-Win32-vc8-Debug-Dynamic.lib;libg7221codec-i386-Win32-vc8-Debug-Dynamic.lib;libmilenage-i386-Win32-vc8-Debug-Dynamic.lib;libpjproject-i386-Win32-vc8-Debug-Dynamic.lib;libportaudio-i386-Win32-vc8-Debug-Dynamic.lib;libbaseclasses-i386-Win32-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Xdcmake>
       <AdditionalOptions>
@@ -114,8 +114,8 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjsua2-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-util-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-core-x86_64-x64-vc8-Debug-Dynamic.lib;pjnath-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-audiodev-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-simple-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-ua-x86_64-x64-vc8-Debug-Dynamic.lib;libspeex-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-codec-x86_64-x64-vc8-Debug-Dynamic.lib;libsrtp-x86_64-x64-vc8-Debug-Dynamic.lib;libgsmcodec-x86_64-x64-vc8-Debug-Dynamic.lib;libresample-x86_64-x64-vc8-Debug-Dynamic.lib;libilbccodec-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-videodev-x86_64-x64-vc8-Debug-Dynamic.lib;libg7221codec-x86_64-x64-vc8-Debug-Dynamic.lib;libmilenage-x86_64-x64-vc8-Debug-Dynamic.lib;libpjproject-x86_64-x64-vc8-Debug-Dynamic.lib;libportaudio-x86_64-x64-vc8-Debug-Dynamic.lib;libbaseclasses-x86_64-x64-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjsua2-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-util-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-core-x86_64-x64-vc8-Debug-Dynamic.lib;pjnath-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-audiodev-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-simple-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-ua-x86_64-x64-vc8-Debug-Dynamic.lib;libspeex-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-codec-x86_64-x64-vc8-Debug-Dynamic.lib;libsrtp-x86_64-x64-vc8-Debug-Dynamic.lib;libgsmcodec-x86_64-x64-vc8-Debug-Dynamic.lib;libresample-x86_64-x64-vc8-Debug-Dynamic.lib;libilbccodec-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-videodev-x86_64-x64-vc8-Debug-Dynamic.lib;libg7221codec-x86_64-x64-vc8-Debug-Dynamic.lib;libmilenage-x86_64-x64-vc8-Debug-Dynamic.lib;libpjproject-x86_64-x64-vc8-Debug-Dynamic.lib;libportaudio-x86_64-x64-vc8-Debug-Dynamic.lib;libbaseclasses-x86_64-x64-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,8 +127,8 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>pjsua-lib-i386-Win32-vc8-Release.lib;pjsua2-lib-i386-Win32-vc8-Release.lib;pjlib-i386-Win32-vc8-Release.lib;pjlib-util-i386-Win32-vc8-Release.lib;pjsip-core-i386-Win32-vc8-Release.lib;pjnath-i386-Win32-vc8-Release.lib;pjmedia-i386-Win32-vc8-Release.lib;pjmedia-audiodev-i386-Win32-vc8-Release.lib;pjsip-simple-i386-Win32-vc8-Release.lib;pjsip-ua-i386-Win32-vc8-Release.lib;libspeex-i386-Win32-vc8-Release.lib;pjmedia-codec-i386-Win32-vc8-Release.lib;libsrtp-i386-Win32-vc8-Release.lib;libgsmcodec-i386-Win32-vc8-Release.lib;libresample-i386-Win32-vc8-Release.lib;libilbccodec-i386-Win32-vc8-Release.lib;pjmedia-videodev-i386-Win32-vc8-Release.lib;libg7221codec-i386-Win32-vc8-Release.lib;libmilenage-i386-Win32-vc8-Release.lib;libpjproject-i386-Win32-vc8-Release.lib;libportaudio-i386-Win32-vc8-Release.lib;libbaseclasses-i386-Win32-vc8-Release.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\release\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pjsua-lib-i386-Win32-vc8-Release.lib;pjsua2-lib-i386-Win32-vc8-Release.lib;pjlib-i386-Win32-vc8-Release.lib;pjlib-util-i386-Win32-vc8-Release.lib;pjsip-core-i386-Win32-vc8-Release.lib;pjnath-i386-Win32-vc8-Release.lib;pjmedia-i386-Win32-vc8-Release.lib;pjmedia-audiodev-i386-Win32-vc8-Release.lib;pjsip-simple-i386-Win32-vc8-Release.lib;pjsip-ua-i386-Win32-vc8-Release.lib;libspeex-i386-Win32-vc8-Release.lib;pjmedia-codec-i386-Win32-vc8-Release.lib;libsrtp-i386-Win32-vc8-Release.lib;libgsmcodec-i386-Win32-vc8-Release.lib;libresample-i386-Win32-vc8-Release.lib;libilbccodec-i386-Win32-vc8-Release.lib;pjmedia-videodev-i386-Win32-vc8-Release.lib;libg7221codec-i386-Win32-vc8-Release.lib;libmilenage-i386-Win32-vc8-Release.lib;libpjproject-i386-Win32-vc8-Release.lib;libportaudio-i386-Win32-vc8-Release.lib;libbaseclasses-i386-Win32-vc8-Release.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\release\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -141,8 +141,8 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Release.lib;pjsua2-lib-x86_64-x64-vc8-Release.lib;pjlib-x86_64-x64-vc8-Release.lib;pjlib-util-x86_64-x64-vc8-Release.lib;pjsip-core-x86_64-x64-vc8-Release.lib;pjnath-x86_64-x64-vc8-Release.lib;pjmedia-x86_64-x64-vc8-Release.lib;pjmedia-audiodev-x86_64-x64-vc8-Release.lib;pjsip-simple-x86_64-x64-vc8-Release.lib;pjsip-ua-x86_64-x64-vc8-Release.lib;libspeex-x86_64-x64-vc8-Release.lib;pjmedia-codec-x86_64-x64-vc8-Release.lib;libsrtp-x86_64-x64-vc8-Release.lib;libgsmcodec-x86_64-x64-vc8-Release.lib;libresample-x86_64-x64-vc8-Release.lib;libilbccodec-x86_64-x64-vc8-Release.lib;pjmedia-videodev-x86_64-x64-vc8-Release.lib;libg7221codec-x86_64-x64-vc8-Release.lib;libmilenage-x86_64-x64-vc8-Release.lib;libpjproject-x86_64-x64-vc8-Release.lib;libportaudio-x86_64-x64-vc8-Release.lib;libbaseclasses-x86_64-x64-vc8-Release.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\release\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Release.lib;pjsua2-lib-x86_64-x64-vc8-Release.lib;pjlib-x86_64-x64-vc8-Release.lib;pjlib-util-x86_64-x64-vc8-Release.lib;pjsip-core-x86_64-x64-vc8-Release.lib;pjnath-x86_64-x64-vc8-Release.lib;pjmedia-x86_64-x64-vc8-Release.lib;pjmedia-audiodev-x86_64-x64-vc8-Release.lib;pjsip-simple-x86_64-x64-vc8-Release.lib;pjsip-ua-x86_64-x64-vc8-Release.lib;libspeex-x86_64-x64-vc8-Release.lib;pjmedia-codec-x86_64-x64-vc8-Release.lib;libsrtp-x86_64-x64-vc8-Release.lib;libgsmcodec-x86_64-x64-vc8-Release.lib;libresample-x86_64-x64-vc8-Release.lib;libilbccodec-x86_64-x64-vc8-Release.lib;pjmedia-videodev-x86_64-x64-vc8-Release.lib;libg7221codec-x86_64-x64-vc8-Release.lib;libmilenage-x86_64-x64-vc8-Release.lib;libpjproject-x86_64-x64-vc8-Release.lib;libportaudio-x86_64-x64-vc8-Release.lib;libbaseclasses-x86_64-x64-vc8-Release.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\release\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -190,6 +190,7 @@
     <ClInclude Include="InviteSessionState.h" />
     <ClInclude Include="IPv6_Use.h" />
     <ClInclude Include="Media.h" />
+    <ClInclude Include="MediaCoordinate.h" />
     <ClInclude Include="MediaDirection.h" />
     <ClInclude Include="MediaEvent.h" />
     <ClInclude Include="MediaEventData.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="MediaFormatAudio.h" />
     <ClInclude Include="MediaFormatVideo.h" />
     <ClInclude Include="MediaManager.h" />
+    <ClInclude Include="MediaSize.h" />
     <ClInclude Include="MediaStreamInfo.h" />
     <ClInclude Include="MediaStreamStat.h" />
     <ClInclude Include="MediaTransportInfo.h" />
@@ -250,9 +252,15 @@
     <ClInclude Include="SubscriptionState.h" />
     <ClInclude Include="TimeVal.h" />
     <ClInclude Include="UnknownMedia.h" />
+    <ClInclude Include="VideoDeviceHandleType.h" />
     <ClInclude Include="VideoDeviceInfo.h" />
     <ClInclude Include="VideoMedia.h" />
+    <ClInclude Include="VideoPreview.h" />
+    <ClInclude Include="VideoPreviewOpParam.h" />
     <ClInclude Include="VideoStreamOperation.h" />
+    <ClInclude Include="VideoWindow.h" />
+    <ClInclude Include="VideoWindowHandle.h" />
+    <ClInclude Include="VideoWindowInfo.h" />
     <ClInclude Include="VidReqKeyframeMethod.h" />
   </ItemGroup>
   <ItemGroup>
@@ -288,6 +296,7 @@
     <ClCompile Include="ContactInfo.cpp" />
     <ClCompile Include="ContactMapper.cpp" />
     <ClCompile Include="Media.cpp" />
+    <ClCompile Include="MediaCoordinate.cpp" />
     <ClCompile Include="MediaEvent.cpp" />
     <ClCompile Include="MediaEventData.cpp" />
     <ClCompile Include="MediaFmtChangedEvent.cpp" />
@@ -295,6 +304,7 @@
     <ClCompile Include="MediaFormatAudio.cpp" />
     <ClCompile Include="MediaFormatVideo.cpp" />
     <ClCompile Include="MediaManager.cpp" />
+    <ClCompile Include="MediaSize.cpp" />
     <ClCompile Include="MediaStreamInfo.cpp" />
     <ClCompile Include="MediaStreamStat.cpp" />
     <ClCompile Include="MediaTransportInfo.cpp" />
@@ -341,6 +351,11 @@
     <ClCompile Include="UnknownMedia.cpp" />
     <ClCompile Include="VideoDeviceInfo.cpp" />
     <ClCompile Include="VideoMedia.cpp" />
+    <ClCompile Include="VideoPreview.cpp" />
+    <ClCompile Include="VideoPreviewOpParam.cpp" />
+    <ClCompile Include="VideoWindow.cpp" />
+    <ClCompile Include="VideoWindowHandle.cpp" />
+    <ClCompile Include="VideoWindowInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

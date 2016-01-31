@@ -60,6 +60,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "MediaEventData.h"
 #include "MediaFmtChangedEvent.h"
 #include "MediaTransportState.h"
+#include "VideoWindow.h"
 
 #include "pjsua2.hpp"
 
