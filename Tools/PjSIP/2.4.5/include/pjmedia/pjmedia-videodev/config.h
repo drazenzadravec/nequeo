@@ -137,7 +137,7 @@ PJ_BEGIN_DECL
  * Default: 0 (or detected by configure)
  */
 #ifndef PJMEDIA_VIDEO_DEV_HAS_SDL
-#   define PJMEDIA_VIDEO_DEV_HAS_SDL		0
+#   define PJMEDIA_VIDEO_DEV_HAS_SDL		1
 #   define PJMEDIA_VIDEO_DEV_SDL_HAS_OPENGL	0
 #endif
 
