@@ -62,7 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="base\VoIPCall.cs" />
     <Compile Include="base\VoIPManager.cs" />
+    <Compile Include="Param\OnIncomingCallParam.cs" />
+    <Compile Include="Param\OnInstantMessageParam.cs" />
+    <Compile Include="Param\OnRegStartedParam.cs" />
+    <Compile Include="Param\OnRegStateParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

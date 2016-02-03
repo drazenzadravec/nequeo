@@ -70,6 +70,7 @@ namespace Nequeo.VoIP.Sip
             _accountConnection = new AccountConnection(accountName, spHost, username, password);
             _account = new Account(_accountConnection);
         }
+
         private bool _created = false;
         private Account _account = null;
         private AccountConnection _accountConnection = null;
@@ -131,6 +132,14 @@ namespace Nequeo.VoIP.Sip
         public AccountConnection AccountConnection
         {
             get { return _accountConnection; }
+        }
+
+        /// <summary>
+        /// Gets the media manager.
+        /// </summary>
+        public MediaManager MediaManager
+        {
+            get { return _mediaManager; }
         }
 
         /// <summary>
@@ -314,14 +323,32 @@ namespace Nequeo.VoIP.Sip
         }
 
         /// <summary>
+        /// Set the audio capture device.
+        /// </summary>
+        /// <param name="audioCaptureDeviceID">The audio capture device id.</param>
+        public void SetAudioCaptureDevice(int audioCaptureDeviceID)
+        {
+            _mediaManager.SetCaptureDevice(audioCaptureDeviceID);
+            _account.AddAudioCaptureDevice(_mediaManager.GetCaptureDeviceMedia());
+        }
+
+        /// <summary>
+        /// Set the audio playback device.
+        /// </summary>
+        /// <param name="audioPlaybackDeviceID">The audio playback device id.</param>
+        public void SetAudioPlaybackDevice(int audioPlaybackDeviceID)
+        {
+            _mediaManager.SetPlaybackDevice(audioPlaybackDeviceID);
+            _account.AddAudioPlaybackDevice(_mediaManager.GetPlaybackDeviceMedia());
+        }
+
+        /// <summary>
         /// Make outgoing call to the specified URI.
         /// </summary>
         /// <param name="callId">An index call id (0 - 3).</param>
         /// <param name="uri">URI to be put in the To header (normally is the same as the target URI).</param>
-        /// <param name="audioCaptureDeviceID">The audio capture device id.</param>
-        /// <param name="audioPlaybackDeviceID">The audio playback device id.</param>
         /// <param name="recordFilename">The path and filename where the conversation is to be recorded to. Currently ".wav" is supported on all platforms.</param>
-        public void MakeCall(int callId, string uri, int audioCaptureDeviceID, int audioPlaybackDeviceID, string recordFilename = null)
+        public void MakeCall(int callId, string uri, string recordFilename = null)
         {
             // If created.
             if (_created)
@@ -331,17 +358,9 @@ namespace Nequeo.VoIP.Sip
                 call.OnCallState += Call_OnCallState;
                 call.OnCallMediaState += Call_OnCallMediaState;
 
-                // Get the media manager.
-                _mediaManager.SetCaptureDevice(audioCaptureDeviceID);
-                _mediaManager.SetPlaybackDevice(audioPlaybackDeviceID);
-
-                // Assign the audio devices.
-                _account.AddAudioCaptureDevice(_mediaManager.GetCaptureDeviceMedia());
-                _account.AddAudioPlaybackDevice(_mediaManager.GetPlaybackDeviceMedia());
-
                 // Create the call settings.
-                Nequeo.Net.Sip.CallSetting setting = new Nequeo.Net.Sip.CallSetting(true);
-                Nequeo.Net.Sip.CallOpParam parm = new Nequeo.Net.Sip.CallOpParam(true);
+                CallSetting setting = new CallSetting(true);
+                CallOpParam parm = new CallOpParam(true);
                 setting.AudioCount = 1;
                 parm.Setting = setting;
 
@@ -606,6 +625,8 @@ namespace Nequeo.VoIP.Sip
 
                 // Call the appropriate methods to clean up
                 // unmanaged resources here.
+                _mediaManager = null;
+                _recorder = null;
                 _account = null;
             }
         }
