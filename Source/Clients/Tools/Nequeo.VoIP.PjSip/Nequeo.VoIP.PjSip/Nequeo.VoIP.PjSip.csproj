@@ -48,12 +48,20 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoVoIPPjSipKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nequeo.PjSip">
       <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,11 +72,24 @@
   <ItemGroup>
     <Compile Include="base\VoIPCall.cs" />
     <Compile Include="base\VoIPManager.cs" />
+    <Compile Include="Param\CallParam.cs" />
     <Compile Include="Param\OnIncomingCallParam.cs" />
     <Compile Include="Param\OnInstantMessageParam.cs" />
     <Compile Include="Param\OnRegStartedParam.cs" />
     <Compile Include="Param\OnRegStateParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VoIPControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VoIPControl.Designer.cs">
+      <DependentUpon>VoIPControl.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\bin\avcodec-57.dll">
@@ -109,7 +130,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UI\" />
+    <None Include="NequeoVoIPPjSipKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VoIPControl.resx">
+      <DependentUpon>VoIPControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

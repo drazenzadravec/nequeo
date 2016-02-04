@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B8AB117-3FDE-4261-8212-8E828116E8A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Net.Sip</RootNamespace>
+    <AssemblyName>Nequeo.Net.Sip</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\..\..\..\References\Staging_x86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging_x86\Nequeo.Net.Sip.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoNetKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.Net">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="pjsua2_net">
+      <HintPath>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Wrapper\pjsua2_net\bin\x86\Release\pjsua2_net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\AccountConnection.cs" />
+    <Compile Include="Account\AccountInfo.cs" />
+    <Compile Include="Account\OnIncomingCallParam.cs" />
+    <Compile Include="Account\OnIncomingSubscribeParam.cs" />
+    <Compile Include="Account\OnMwiInfoParam.cs" />
+    <Compile Include="Account\OnRegStartedParam.cs" />
+    <Compile Include="Account\OnRegStateParam.cs" />
+    <Compile Include="Account\PresenceStatus.cs" />
+    <Compile Include="Account\RpidActivity.cs" />
+    <Compile Include="base\Account.cs" />
+    <Compile Include="base\Call.cs" />
+    <Compile Include="base\Contact.cs" />
+    <Compile Include="Call\CallFlag.cs" />
+    <Compile Include="Call\CallInfo.cs" />
+    <Compile Include="Call\CallOpParam.cs" />
+    <Compile Include="Call\CallRole.cs" />
+    <Compile Include="Call\CallSendRequestParam.cs" />
+    <Compile Include="Call\CallSetting.cs" />
+    <Compile Include="Call\CallSetVideoStreamParam.cs" />
+    <Compile Include="Call\DialogCapStatus.cs" />
+    <Compile Include="Call\HeaderType.cs" />
+    <Compile Include="Call\InviteSessionState.cs" />
+    <Compile Include="Call\OnCallMediaEventParam.cs" />
+    <Compile Include="Call\OnCallMediaStateParam.cs" />
+    <Compile Include="Call\OnCallMediaTransportStateParam.cs" />
+    <Compile Include="Call\OnCallRedirectedParam.cs" />
+    <Compile Include="Call\OnCallReplacedParam.cs" />
+    <Compile Include="Call\OnCallReplaceRequestParam.cs" />
+    <Compile Include="Call\OnCallRxOfferParam.cs" />
+    <Compile Include="Call\OnCallSdpCreatedParam.cs" />
+    <Compile Include="Call\OnCallStateParam.cs" />
+    <Compile Include="Call\OnCallTransferRequestParam.cs" />
+    <Compile Include="Call\OnCallTransferStatusParam.cs" />
+    <Compile Include="Call\OnCallTsxStateParam.cs" />
+    <Compile Include="Call\OnCreateMediaTransportParam.cs" />
+    <Compile Include="Call\OnDtmfDigitParam.cs" />
+    <Compile Include="Call\OnInstantMessageParam.cs" />
+    <Compile Include="Call\OnInstantMessageStatusParam.cs" />
+    <Compile Include="Call\OnStreamCreatedParam.cs" />
+    <Compile Include="Call\OnStreamDestroyedParam.cs" />
+    <Compile Include="Call\OnTypingIndicationParam.cs" />
+    <Compile Include="Call\RedirectResponseType.cs" />
+    <Compile Include="Call\SdpSession.cs" />
+    <Compile Include="Call\SendInstantMessage.cs" />
+    <Compile Include="Call\SendTypingIndication.cs" />
+    <Compile Include="Call\SipEventType.cs" />
+    <Compile Include="Call\StunNatType.cs" />
+    <Compile Include="Call\TimeVal.cs" />
+    <Compile Include="Call\VidReqKeyframeMethod.cs" />
+    <Compile Include="Contact\ContactConnection.cs" />
+    <Compile Include="Contact\ContactInfo.cs" />
+    <Compile Include="Media\ApplicationMedia.cs" />
+    <Compile Include="Media\AudioDevInfo.cs" />
+    <Compile Include="Media\AudioMedia.cs" />
+    <Compile Include="Media\AudioMediaPlayer.cs" />
+    <Compile Include="Media\AudioMediaRecorder.cs" />
+    <Compile Include="Media\AuthCredInfoVector.cs" />
+    <Compile Include="Media\CallMediaInfo.cs" />
+    <Compile Include="Media\CallMediaStatus.cs" />
+    <Compile Include="Media\CodecInfo.cs" />
+    <Compile Include="Media\ConfPortInfo.cs" />
+    <Compile Include="Media\MediaBase.cs" />
+    <Compile Include="Media\MediaDirection.cs" />
+    <Compile Include="Media\MediaEvent.cs" />
+    <Compile Include="Media\MediaEventData.cs" />
+    <Compile Include="Media\MediaEventType.cs" />
+    <Compile Include="Media\MediaFmtChangedEvent.cs" />
+    <Compile Include="Media\MediaFormat.cs" />
+    <Compile Include="Media\MediaFormatAudio.cs" />
+    <Compile Include="Media\MediaManager.cs" />
+    <Compile Include="Media\MediaStreamInfo.cs" />
+    <Compile Include="Media\MediaStreamStat.cs" />
+    <Compile Include="Media\MediaTransportInfo.cs" />
+    <Compile Include="Media\MediaTransportProtocol.cs" />
+    <Compile Include="Media\MediaTransportState.cs" />
+    <Compile Include="Media\NoMedia.cs" />
+    <Compile Include="Media\PjSizeType.cs" />
+    <Compile Include="Media\UnknownMedia.cs" />
+    <Compile Include="Media\VideoMedia.cs" />
+    <Compile Include="Media\VideoStreamOperation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NequeoNetKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\..\..\ThirdPartyTools\PjSIP\Wrapper\PjSIPWrapper\Win32\Release\pjsua2.dll">
+      <Link>pjsua2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
