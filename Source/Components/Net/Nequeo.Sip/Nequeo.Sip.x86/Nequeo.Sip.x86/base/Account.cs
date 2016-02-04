@@ -413,16 +413,10 @@ namespace Nequeo.Net.Sip
         /// <returns>The media manager.</returns>
         public MediaManager GetMediaManager()
         {
-            // If account created.
-            if (_created)
-            {
-                // Get the audio device manager.
-                pjsua2.AudDevManager pjAudDevManager = _pjAccount.GetAudDevManager();
-                MediaManager mediaManager = new MediaManager(pjAudDevManager);
-                return mediaManager;
-            }
-            else
-                throw new Exception(CreateAccount);
+            // Get the audio device manager.
+            pjsua2.AudDevManager pjAudDevManager = _pjAccount.GetAudDevManager();
+            MediaManager mediaManager = new MediaManager(pjAudDevManager);
+            return mediaManager;
         }
 
         /// <summary>

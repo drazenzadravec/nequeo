@@ -558,18 +558,12 @@ void Account::SetOnlineStatus(PresenceState^ presenceState)
 /// <returns>The media manager.</returns>
 MediaManager^ Account::GetMediaManager()
 {
-	// If account created.
-	if (_created)
-	{
-		// Get the audio device manager.
-		pj::AudDevManager& pjAudDevManager = _accountCallback->GetAudioDevManager();
-		pj::VidDevManager& pjVidDevManager = _accountCallback->GetVideoDevManager();
-		pj::AccountVideoConfig& pjAccountVideoConfig = _accountCallback->GetAccountVideoConfig();
-		MediaManager^ mediaManager = gcnew MediaManager(pjAudDevManager, pjVidDevManager, pjAccountVideoConfig);
-		return mediaManager;
-	}
-	else
-		throw gcnew Exception(CreateAccount());
+	// Get the audio device manager.
+	pj::AudDevManager& pjAudDevManager = _accountCallback->GetAudioDevManager();
+	pj::VidDevManager& pjVidDevManager = _accountCallback->GetVideoDevManager();
+	pj::AccountVideoConfig& pjAccountVideoConfig = _accountCallback->GetAccountVideoConfig();
+	MediaManager^ mediaManager = gcnew MediaManager(pjAudDevManager, pjVidDevManager, pjAccountVideoConfig);
+	return mediaManager;
 }
 
 /// <summary>

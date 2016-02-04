@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.VoIP.Sip", "Nequeo.V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.VoIP.Sip.x86", "Nequeo.VoIP.Sip.x86\Nequeo.VoIP.Sip.x86.csproj", "{A9180226-AB31-4C03-9D18-85991D2605F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.VoIP.Sip.Controls", "Nequeo.VoIP.Sip.Controls\Nequeo.VoIP.Sip.Controls.csproj", "{400A7887-9896-4C2E-8744-3FF83D33480C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{A9180226-AB31-4C03-9D18-85991D2605F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9180226-AB31-4C03-9D18-85991D2605F6}.Release|x64.ActiveCfg = Release|x86
 		{A9180226-AB31-4C03-9D18-85991D2605F6}.Release|x64.Build.0 = Release|x86
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Debug|x64.Build.0 = Debug|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Release|x64.ActiveCfg = Release|Any CPU
+		{400A7887-9896-4C2E-8744-3FF83D33480C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

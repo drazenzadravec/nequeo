@@ -49,6 +49,15 @@ namespace Nequeo.VoIP.Sip
         /// <summary>
         /// VoIP call.
         /// </summary>
+        public VoIPCall()
+        {
+            // Create the voip manager.
+            _voipManager = new VoIPManager();
+        }
+
+        /// <summary>
+        /// VoIP call.
+        /// </summary>
         /// <param name="accountConnection">Account connection configuration.</param>
         public VoIPCall(AccountConnection accountConnection)
         {
@@ -153,7 +162,17 @@ namespace Nequeo.VoIP.Sip
             _voipManager.OnRegStarted += _voipManager_OnRegStarted;
             _voipManager.OnRegState += _voipManager_OnRegState;
             _voipManager.Create();
-            _voipManager.Registration(true);
+        }
+
+        /// <summary>
+        /// Update registration or perform unregistration. Application normally
+        /// only needs to call this function if it wants to manually update the
+        /// registration or to unregister from the server.
+        /// </summary>
+        /// <param name="renew">If False, this will start unregistration process.</param>
+        public void Registration(bool renew = true)
+        {
+            _voipManager.Registration(renew);
         }
 
         /// <summary>

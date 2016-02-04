@@ -72,6 +72,11 @@ namespace Nequeo
 				///	</summary>
 				virtual ~AccountCallback();
 
+				/// <summary>
+				/// Start the application.
+				/// </summary>
+				void StartUp();
+
 				///	<summary>
 				///	Initialise all setting.
 				///	</summary>

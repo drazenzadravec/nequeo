@@ -114,6 +114,12 @@ namespace Nequeo
 				void SetVideoCaptureDeviceID(int deviceID);
 
 				/// <summary>
+				/// Set the video render device.
+				/// </summary>
+				/// <param name="deviceID">Device ID of the render device.</param>
+				void SetVideoRenderDeviceID(int deviceID);
+
+				/// <summary>
 				/// Gets or sets an indicator specifying that any video capture is done automatically.
 				/// </summary>
 				/// <param name="value">True to enable video capture is done automatically.</param>

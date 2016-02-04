@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9180226-AB31-4C03-9D18-85991D2605F6}</ProjectGuid>
+    <ProjectGuid>{400A7887-9896-4C2E-8744-3FF83D33480C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nequeo.VoIP.Sip</RootNamespace>
-    <AssemblyName>Nequeo.VoIP.Sip</AssemblyName>
+    <RootNamespace>Nequeo.VoIP.Sip.Controls</RootNamespace>
+    <AssemblyName>Nequeo.VoIP.Sip.Controls</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -24,10 +24,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\References\Staging\Client\VoIPControls\Sip\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\..\References\Staging\Client\VoIPControls\Sip\Nequeo.VoIP.Sip.Controls.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -35,28 +36,10 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>NequeoVoIPSipKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\..\..\..\References\Staging_x86\Client\VoIP\Sip\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\..\..\References\Staging_x86\Client\VoIP\Sip\Nequeo.VoIP.Sip.XML</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nequeo.Net.Sip">
-      <HintPath>..\..\..\..\References\Staging_x86\Nequeo.Net.Sip.dll</HintPath>
+    <Reference Include="Nequeo.Net.Sip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging_x64\Nequeo.Net.Sip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,23 +53,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="base\VoIPCall.cs" />
-    <Compile Include="base\VoIPManager.cs" />
-    <Compile Include="Param\CallParam.cs" />
-    <Compile Include="Param\OnIncomingCallParam.cs" />
-    <Compile Include="Param\OnInstantMessageParam.cs" />
-    <Compile Include="Param\OnRegStartedParam.cs" />
-    <Compile Include="Param\OnRegStateParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VoIPControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VoIPControl.Designer.cs">
+      <DependentUpon>VoIPControl.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NequeoVoIPSipKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\ThirdPartyTools\PjSIP\Wrapper\PjSIPWrapper\Win32\Release\pjsua2.dll">
-      <Link>pjsua2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="UI\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VoIPControl.resx">
+      <DependentUpon>VoIPControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nequeo.VoIP.Sip\Nequeo.VoIP.Sip.csproj">
+      <Project>{ca22e327-c9f0-43a8-a9d2-440025c224ca}</Project>
+      <Name>Nequeo.VoIP.Sip</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

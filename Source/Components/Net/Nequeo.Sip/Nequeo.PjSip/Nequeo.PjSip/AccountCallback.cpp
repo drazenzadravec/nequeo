@@ -61,6 +61,9 @@ AccountCallback::AccountCallback() :
 	_transportConfig_TCP6 = std::make_unique<pj::TransportConfig>();
 	_transportConfig_TLS = std::make_unique<pj::TransportConfig>();
 	_transportConfig_TLS6 = std::make_unique<pj::TransportConfig>();
+
+	// Start the application.
+	StartUp();
 }
 
 ///	<summary>
@@ -86,16 +89,22 @@ AccountCallback::~AccountCallback()
 	}
 }
 
+/// <summary>
+/// Start the application.
+/// </summary>
+void AccountCallback::StartUp()
+{
+	// Create endpoint data.
+	_endpoint->libCreate();
+	_endpoint->libInit(*(_epConfig.get()));
+}
+
 ///	<summary>
 ///	Initialise all setting.
 ///	</summary>
 /// <param name="mapper">Account connection mapper.</param>
 void AccountCallback::Initialise(ConnectionMapper& mapper)
 {
-	// Create endpoint data.
-	_endpoint->libCreate();
-	_endpoint->libInit(*(_epConfig.get()));
-
 	_transportConfig_TLS->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
 	_transportConfig_TLS->tlsConfig.verifyServer = false;
 	_transportConfig_TLS->tlsConfig.verifyClient = false;

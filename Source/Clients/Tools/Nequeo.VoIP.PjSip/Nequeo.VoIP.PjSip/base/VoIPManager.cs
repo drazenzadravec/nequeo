@@ -49,13 +49,26 @@ namespace Nequeo.VoIP.PjSip
         /// <summary>
         /// VoIP manager.
         /// </summary>
+        public VoIPManager()
+        {
+            _account = new Account(new AccountConnection());
+
+            // Get the media manager.
+            _mediaManager = _account.GetMediaManager();
+        }
+
+        /// <summary>
+        /// VoIP manager.
+        /// </summary>
         /// <param name="accountConnection">Account connection configuration.</param>
         public VoIPManager(AccountConnection accountConnection)
         {
             if (accountConnection == null) throw new ArgumentNullException(nameof(accountConnection));
 
-            _accountConnection = accountConnection;
-            _account = new Account(_accountConnection);
+            _account = new Account(accountConnection);
+
+            // Get the media manager.
+            _mediaManager = _account.GetMediaManager();
         }
 
         /// <summary>
@@ -67,13 +80,14 @@ namespace Nequeo.VoIP.PjSip
         /// <param name="password">The sip password.</param>
         public VoIPManager(string accountName, string spHost, string username, string password)
         {
-            _accountConnection = new AccountConnection(accountName, spHost, username, password);
-            _account = new Account(_accountConnection);
+            _account = new Account(new AccountConnection(accountName, spHost, username, password));
+
+            // Get the media manager.
+            _mediaManager = _account.GetMediaManager();
         }
 
         private bool _created = false;
         private Account _account = null;
-        private AccountConnection _accountConnection = null;
         private MediaManager _mediaManager = null;
         private AudioMediaRecorder _recorder = null;
         private string _recordFilename = null;
@@ -131,7 +145,7 @@ namespace Nequeo.VoIP.PjSip
         /// </summary>
         public AccountConnection AccountConnection
         {
-            get { return _accountConnection; }
+            get { return _account.AccountConnConfig; }
         }
 
         /// <summary>
@@ -164,9 +178,6 @@ namespace Nequeo.VoIP.PjSip
 
                 // Create the account.
                 _account.Create();
-
-                // Get the media manager.
-                _mediaManager = _account.GetMediaManager();
             }
         }
 
