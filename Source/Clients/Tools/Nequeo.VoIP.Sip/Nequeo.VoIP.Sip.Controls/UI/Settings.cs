@@ -71,10 +71,150 @@ namespace Nequeo.VoIP.Sip.UI
             Nequeo.Net.Sip.AudioDeviceInfo[] audioDevices = _voipCall.VoIPManager.MediaManager.GetAllAudioDevices();
 
             // For each audio device
-            foreach (Nequeo.Net.Sip.AudioDeviceInfo audieDevice in audioDevices)
+            foreach (Nequeo.Net.Sip.AudioDeviceInfo audioDevice in audioDevices)
             {
-                comboBoxAudioCaptureDevice.Items.Add(audieDevice.Name + " | " + audieDevice.Driver);
-                comboBoxAudioPlaybackDevice.Items.Add(audieDevice.Name + " | " + audieDevice.Driver);
+                comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+                comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+            }
+
+            // Set any initial items.
+            int captureIndex = _voipCall.VoIPManager.MediaManager.GetCaptureDevice();
+            int playbackIndex = _voipCall.VoIPManager.MediaManager.GetPlaybackDevice();
+
+            // Set the selected.
+            if (captureIndex >= 0)
+                comboBoxAudioCaptureDevice.SelectedIndex = captureIndex;
+
+            if (playbackIndex >= 0)
+                comboBoxAudioPlaybackDevice.SelectedIndex = playbackIndex;
+
+            textBoxSipPort.Text = _voipCall.VoIPManager.AccountConnection.SpPort.ToString();
+            checkBoxIsDefault.Checked = _voipCall.VoIPManager.AccountConnection.IsDefault;
+            textBoxPriority.Text = _voipCall.VoIPManager.AccountConnection.Priority.ToString();
+            checkBoxDropCallsOnFail.Checked = _voipCall.VoIPManager.AccountConnection.DropCallsOnFail;
+        }
+
+        /// <summary>
+        /// Capture changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxAudioCaptureDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If item is selected.
+            if (comboBoxAudioCaptureDevice.SelectedIndex >= 0)
+            {
+                // Get the device.
+                string[] device = ((string)comboBoxAudioCaptureDevice.SelectedItem).Split(new char[] { '|' });
+                string name = device[0].Trim();
+                string driver = device[1].Trim();
+
+                // Get the capture index.
+                int captureIndex = _voipCall.VoIPManager.MediaManager.GetAudioDeviceID(driver, name);
+
+                // Set the capture device.
+                _voipCall.SetAudioCaptureDevice(captureIndex);
+            }
+        }
+
+        /// <summary>
+        /// Playback changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxAudioPlaybackDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If item is selected.
+            if (comboBoxAudioPlaybackDevice.SelectedIndex >= 0)
+            {
+                // Get the device.
+                string[] device = ((string)comboBoxAudioPlaybackDevice.SelectedItem).Split(new char[] { '|' });
+                string name = device[0].Trim();
+                string driver = device[1].Trim();
+
+                // Get the playback index.
+                int playbackIndex = _voipCall.VoIPManager.MediaManager.GetAudioDeviceID(driver, name);
+
+                // Set the playback device.
+                _voipCall.SetAudioPlaybackDevice(playbackIndex);
+            }
+        }
+
+        /// <summary>
+        /// Sip port.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxSipPort_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxSipPort.Text))
+            {
+                int sipPort = 0;
+                bool isNumber = Int32.TryParse(textBoxSipPort.Text, out sipPort);
+                if (isNumber)
+                {
+                    // Assign the port.
+                    _voipCall.VoIPManager.AccountConnection.SpPort = sipPort;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Is default.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxIsDefault_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxIsDefault.CheckState)
+            {
+                case CheckState.Checked:
+                    _voipCall.VoIPManager.AccountConnection.IsDefault = true;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _voipCall.VoIPManager.AccountConnection.IsDefault = false;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Priority.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxPriority_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxPriority.Text))
+            {
+                int priority = 0;
+                bool isNumber = Int32.TryParse(textBoxPriority.Text, out priority);
+                if (isNumber)
+                {
+                    // Assign the port.
+                    _voipCall.VoIPManager.AccountConnection.Priority = priority;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Drop Calls On Fail/
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxDropCallsOnFail_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxDropCallsOnFail.CheckState)
+            {
+                case CheckState.Checked:
+                    _voipCall.VoIPManager.AccountConnection.DropCallsOnFail = true;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _voipCall.VoIPManager.AccountConnection.DropCallsOnFail = false;
+                    break;
             }
         }
     }

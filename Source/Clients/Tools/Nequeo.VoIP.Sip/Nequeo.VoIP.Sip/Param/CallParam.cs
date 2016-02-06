@@ -69,8 +69,24 @@ namespace Nequeo.VoIP.Sip.Param
             parm.Setting = setting;
             parm.Code = StatusCode.SC_BUSY_HERE;
 
-            // Hangup the call.
-            _call.Hangup(parm);
+            if (_call != null)
+            {
+                // Hangup the call.
+                _call.Hangup(parm);
+            }
+        }
+
+        /// <summary>
+        /// Send DTMF digits to remote using RFC 2833 payload formats.
+        /// </summary>
+        /// <param name="digits">DTMF string digits to be sent.</param>
+        public void DialDtmf(string digits)
+        {
+            if (_call != null)
+            {
+                // Hangup the call.
+                _call.DialDtmf(digits);
+            }
         }
     }
 }

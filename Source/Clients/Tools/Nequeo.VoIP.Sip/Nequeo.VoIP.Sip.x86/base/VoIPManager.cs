@@ -189,7 +189,29 @@ namespace Nequeo.VoIP.Sip
         /// <param name="renew">If False, this will start unregistration process.</param>
         public void Registration(bool renew = true)
         {
-            _account.Registration(renew);
+            // If created.
+            if (_created)
+            {
+                _account.Registration(renew);
+            }
+            else
+                throw new Exception("Create the account first.");
+        }
+
+        /// <summary>
+        /// Send DTMF digits to remote using RFC 2833 payload formats.
+        /// </summary>
+        /// <param name="call">The current call.</param>
+        /// <param name="digits">DTMF string digits to be sent.</param>
+        public void DialDtmf(Param.CallParam call, string digits)
+        {
+            // If created.
+            if (_created)
+            {
+                call.DialDtmf(digits);
+            }
+            else
+                throw new Exception("Create the account first.");
         }
 
         /// <summary>

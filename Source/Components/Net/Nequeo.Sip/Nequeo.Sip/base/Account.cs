@@ -454,13 +454,7 @@ namespace Nequeo.Net.Sip
         /// <param name="audioMedia">The audio media device.</param>
         public void AddAudioCaptureDevice(AudioMedia audioMedia)
         {
-            // If account created.
-            if (_created)
-            {
-                _pjAccount.AddAudioMedia(audioMedia.PjAudioMedia);
-            }
-            else
-                throw new Exception(CreateAccount);
+            _pjAccount.AddAudioMedia(audioMedia.PjAudioMedia);
         }
 
         /// <summary>
@@ -469,13 +463,7 @@ namespace Nequeo.Net.Sip
         /// <param name="audioMedia">The audio media device.</param>
         public void AddAudioPlaybackDevice(AudioMedia audioMedia)
         {
-            // If account created.
-            if (_created)
-            {
-                _pjAccount.AddAudioMedia(audioMedia.PjAudioMedia);
-            }
-            else
-                throw new Exception(CreateAccount);
+            _pjAccount.AddAudioMedia(audioMedia.PjAudioMedia);
         }
 
         /// <summary>

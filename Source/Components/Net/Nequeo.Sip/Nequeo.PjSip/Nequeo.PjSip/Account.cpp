@@ -644,13 +644,7 @@ array<CodecInfo^>^ Account::GetVideoCodecInfo()
 /// <param name="audioMedia">The audio media device.</param>
 void Account::AddAudioCaptureDevice(AudioMedia^ audioMedia)
 {
-	// If account created.
-	if (_created)
-	{
-		_accountCallback->AddAudioMedia(audioMedia->GetAudioMedia());
-	}
-	else
-		throw gcnew Exception(CreateAccount());
+	_accountCallback->AddAudioMedia(audioMedia->GetAudioMedia());
 }
 
 /// <summary>
@@ -659,13 +653,7 @@ void Account::AddAudioCaptureDevice(AudioMedia^ audioMedia)
 /// <param name="audioMedia">The audio media device.</param>
 void Account::AddAudioPlaybackDevice(AudioMedia^ audioMedia)
 {
-	// If account created.
-	if (_created)
-	{
-		_accountCallback->AddAudioMedia(audioMedia->GetAudioMedia());
-	}
-	else
-		throw gcnew Exception(CreateAccount());
+	_accountCallback->AddAudioMedia(audioMedia->GetAudioMedia());
 }
 
 /// <summary>

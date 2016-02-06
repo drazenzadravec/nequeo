@@ -125,6 +125,16 @@ namespace Nequeo.VoIP.Sip
         }
 
         /// <summary>
+        /// Send DTMF digits to remote using RFC 2833 payload formats.
+        /// </summary>
+        /// <param name="call">The current call.</param>
+        /// <param name="digits">DTMF string digits to be sent.</param>
+        public void DialDtmf(Param.CallParam call, string digits)
+        {
+            call.DialDtmf(digits);
+        }
+
+        /// <summary>
         /// Set the audio capture device.
         /// </summary>
         /// <param name="audioCaptureDeviceID">The audio capture device id.</param>
