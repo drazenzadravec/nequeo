@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VoIPControl));
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
             this.groupBoxDigits = new System.Windows.Forms.GroupBox();
+            this.textBoxDigits = new System.Windows.Forms.TextBox();
             this.buttonHash = new System.Windows.Forms.Button();
             this.buttonStar = new System.Windows.Forms.Button();
             this.buttonZero = new System.Windows.Forms.Button();
@@ -46,21 +49,21 @@
             this.buttonHangup = new System.Windows.Forms.Button();
             this.buttonCall = new System.Windows.Forms.Button();
             this.groupBoxAccount = new System.Windows.Forms.GroupBox();
+            this.buttonLoadContacts = new System.Windows.Forms.Button();
+            this.buttonInstantMessage = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.labelRegistationStatusState = new System.Windows.Forms.Label();
             this.labelRegistationStatus = new System.Windows.Forms.Label();
             this.buttonRegister = new System.Windows.Forms.Button();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.textBoxHost = new System.Windows.Forms.TextBox();
-            this.textBoxAccountName = new System.Windows.Forms.TextBox();
-            this.labelPassword = new System.Windows.Forms.Label();
-            this.labelUsername = new System.Windows.Forms.Label();
-            this.labelHost = new System.Windows.Forms.Label();
-            this.labelAccountName = new System.Windows.Forms.Label();
             this.groupBoxContact = new System.Windows.Forms.GroupBox();
+            this.buttonContactUpdate = new System.Windows.Forms.Button();
+            this.buttonContactDelete = new System.Windows.Forms.Button();
+            this.buttonContactAdd = new System.Windows.Forms.Button();
             this.listViewContact = new System.Windows.Forms.ListView();
+            this.contextMenuStripContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxCall.SuspendLayout();
             this.groupBoxDigits.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
@@ -76,13 +79,14 @@
             this.groupBoxCall.Enabled = false;
             this.groupBoxCall.Location = new System.Drawing.Point(3, 3);
             this.groupBoxCall.Name = "groupBoxCall";
-            this.groupBoxCall.Size = new System.Drawing.Size(248, 221);
+            this.groupBoxCall.Size = new System.Drawing.Size(248, 257);
             this.groupBoxCall.TabIndex = 0;
             this.groupBoxCall.TabStop = false;
             this.groupBoxCall.Text = "Call";
             // 
             // groupBoxDigits
             // 
+            this.groupBoxDigits.Controls.Add(this.textBoxDigits);
             this.groupBoxDigits.Controls.Add(this.buttonHash);
             this.groupBoxDigits.Controls.Add(this.buttonStar);
             this.groupBoxDigits.Controls.Add(this.buttonZero);
@@ -98,13 +102,21 @@
             this.groupBoxDigits.Enabled = false;
             this.groupBoxDigits.Location = new System.Drawing.Point(9, 46);
             this.groupBoxDigits.Name = "groupBoxDigits";
-            this.groupBoxDigits.Size = new System.Drawing.Size(233, 135);
+            this.groupBoxDigits.Size = new System.Drawing.Size(233, 168);
             this.groupBoxDigits.TabIndex = 16;
             this.groupBoxDigits.TabStop = false;
             // 
+            // textBoxDigits
+            // 
+            this.textBoxDigits.Location = new System.Drawing.Point(19, 19);
+            this.textBoxDigits.Name = "textBoxDigits";
+            this.textBoxDigits.ReadOnly = true;
+            this.textBoxDigits.Size = new System.Drawing.Size(195, 20);
+            this.textBoxDigits.TabIndex = 26;
+            // 
             // buttonHash
             // 
-            this.buttonHash.Location = new System.Drawing.Point(153, 102);
+            this.buttonHash.Location = new System.Drawing.Point(153, 136);
             this.buttonHash.Name = "buttonHash";
             this.buttonHash.Size = new System.Drawing.Size(61, 23);
             this.buttonHash.TabIndex = 25;
@@ -114,7 +126,7 @@
             // 
             // buttonStar
             // 
-            this.buttonStar.Location = new System.Drawing.Point(19, 102);
+            this.buttonStar.Location = new System.Drawing.Point(19, 136);
             this.buttonStar.Name = "buttonStar";
             this.buttonStar.Size = new System.Drawing.Size(61, 23);
             this.buttonStar.TabIndex = 24;
@@ -124,7 +136,7 @@
             // 
             // buttonZero
             // 
-            this.buttonZero.Location = new System.Drawing.Point(86, 102);
+            this.buttonZero.Location = new System.Drawing.Point(86, 136);
             this.buttonZero.Name = "buttonZero";
             this.buttonZero.Size = new System.Drawing.Size(61, 23);
             this.buttonZero.TabIndex = 23;
@@ -134,7 +146,7 @@
             // 
             // buttonEight
             // 
-            this.buttonEight.Location = new System.Drawing.Point(86, 73);
+            this.buttonEight.Location = new System.Drawing.Point(86, 107);
             this.buttonEight.Name = "buttonEight";
             this.buttonEight.Size = new System.Drawing.Size(61, 23);
             this.buttonEight.TabIndex = 21;
@@ -144,7 +156,7 @@
             // 
             // buttonSeven
             // 
-            this.buttonSeven.Location = new System.Drawing.Point(19, 73);
+            this.buttonSeven.Location = new System.Drawing.Point(19, 107);
             this.buttonSeven.Name = "buttonSeven";
             this.buttonSeven.Size = new System.Drawing.Size(61, 23);
             this.buttonSeven.TabIndex = 20;
@@ -154,7 +166,7 @@
             // 
             // buttonSix
             // 
-            this.buttonSix.Location = new System.Drawing.Point(153, 44);
+            this.buttonSix.Location = new System.Drawing.Point(153, 78);
             this.buttonSix.Name = "buttonSix";
             this.buttonSix.Size = new System.Drawing.Size(61, 23);
             this.buttonSix.TabIndex = 19;
@@ -164,7 +176,7 @@
             // 
             // buttonFive
             // 
-            this.buttonFive.Location = new System.Drawing.Point(86, 44);
+            this.buttonFive.Location = new System.Drawing.Point(86, 78);
             this.buttonFive.Name = "buttonFive";
             this.buttonFive.Size = new System.Drawing.Size(61, 23);
             this.buttonFive.TabIndex = 18;
@@ -174,7 +186,7 @@
             // 
             // buttonFour
             // 
-            this.buttonFour.Location = new System.Drawing.Point(19, 44);
+            this.buttonFour.Location = new System.Drawing.Point(19, 78);
             this.buttonFour.Name = "buttonFour";
             this.buttonFour.Size = new System.Drawing.Size(61, 23);
             this.buttonFour.TabIndex = 17;
@@ -184,7 +196,7 @@
             // 
             // buttonNine
             // 
-            this.buttonNine.Location = new System.Drawing.Point(153, 73);
+            this.buttonNine.Location = new System.Drawing.Point(153, 107);
             this.buttonNine.Name = "buttonNine";
             this.buttonNine.Size = new System.Drawing.Size(61, 23);
             this.buttonNine.TabIndex = 22;
@@ -194,7 +206,7 @@
             // 
             // buttonThree
             // 
-            this.buttonThree.Location = new System.Drawing.Point(153, 15);
+            this.buttonThree.Location = new System.Drawing.Point(153, 49);
             this.buttonThree.Name = "buttonThree";
             this.buttonThree.Size = new System.Drawing.Size(61, 23);
             this.buttonThree.TabIndex = 16;
@@ -204,7 +216,7 @@
             // 
             // buttonTwo
             // 
-            this.buttonTwo.Location = new System.Drawing.Point(86, 15);
+            this.buttonTwo.Location = new System.Drawing.Point(86, 49);
             this.buttonTwo.Name = "buttonTwo";
             this.buttonTwo.Size = new System.Drawing.Size(61, 23);
             this.buttonTwo.TabIndex = 15;
@@ -214,7 +226,7 @@
             // 
             // buttonOne
             // 
-            this.buttonOne.Location = new System.Drawing.Point(19, 15);
+            this.buttonOne.Location = new System.Drawing.Point(19, 49);
             this.buttonOne.Name = "buttonOne";
             this.buttonOne.Size = new System.Drawing.Size(61, 23);
             this.buttonOne.TabIndex = 14;
@@ -231,11 +243,12 @@
             this.comboBoxCallNumber.TabIndex = 0;
             this.comboBoxCallNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxCallNumber_SelectedIndexChanged);
             this.comboBoxCallNumber.TextChanged += new System.EventHandler(this.comboBoxCallNumber_TextChanged);
+            this.comboBoxCallNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxCallNumber_KeyPress);
             // 
             // buttonHangup
             // 
             this.buttonHangup.Enabled = false;
-            this.buttonHangup.Location = new System.Drawing.Point(45, 187);
+            this.buttonHangup.Location = new System.Drawing.Point(45, 221);
             this.buttonHangup.Name = "buttonHangup";
             this.buttonHangup.Size = new System.Drawing.Size(75, 23);
             this.buttonHangup.TabIndex = 15;
@@ -246,7 +259,7 @@
             // buttonCall
             // 
             this.buttonCall.Enabled = false;
-            this.buttonCall.Location = new System.Drawing.Point(126, 187);
+            this.buttonCall.Location = new System.Drawing.Point(126, 221);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(75, 23);
             this.buttonCall.TabIndex = 14;
@@ -258,30 +271,46 @@
             // 
             this.groupBoxAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxAccount.Controls.Add(this.buttonLoadContacts);
+            this.groupBoxAccount.Controls.Add(this.buttonInstantMessage);
             this.groupBoxAccount.Controls.Add(this.buttonCreate);
             this.groupBoxAccount.Controls.Add(this.buttonSettings);
             this.groupBoxAccount.Controls.Add(this.labelRegistationStatusState);
             this.groupBoxAccount.Controls.Add(this.labelRegistationStatus);
             this.groupBoxAccount.Controls.Add(this.buttonRegister);
-            this.groupBoxAccount.Controls.Add(this.textBoxPassword);
-            this.groupBoxAccount.Controls.Add(this.textBoxUsername);
-            this.groupBoxAccount.Controls.Add(this.textBoxHost);
-            this.groupBoxAccount.Controls.Add(this.textBoxAccountName);
-            this.groupBoxAccount.Controls.Add(this.labelPassword);
-            this.groupBoxAccount.Controls.Add(this.labelUsername);
-            this.groupBoxAccount.Controls.Add(this.labelHost);
-            this.groupBoxAccount.Controls.Add(this.labelAccountName);
-            this.groupBoxAccount.Location = new System.Drawing.Point(3, 230);
+            this.groupBoxAccount.Location = new System.Drawing.Point(3, 266);
             this.groupBoxAccount.Name = "groupBoxAccount";
-            this.groupBoxAccount.Size = new System.Drawing.Size(248, 212);
+            this.groupBoxAccount.Size = new System.Drawing.Size(248, 121);
             this.groupBoxAccount.TabIndex = 1;
             this.groupBoxAccount.TabStop = false;
             this.groupBoxAccount.Text = "Account";
             // 
+            // buttonLoadContacts
+            // 
+            this.buttonLoadContacts.Enabled = false;
+            this.buttonLoadContacts.Location = new System.Drawing.Point(38, 48);
+            this.buttonLoadContacts.Name = "buttonLoadContacts";
+            this.buttonLoadContacts.Size = new System.Drawing.Size(99, 23);
+            this.buttonLoadContacts.TabIndex = 12;
+            this.buttonLoadContacts.Text = "Load Contacts";
+            this.buttonLoadContacts.UseVisualStyleBackColor = true;
+            this.buttonLoadContacts.Click += new System.EventHandler(this.buttonLoadContacts_Click);
+            // 
+            // buttonInstantMessage
+            // 
+            this.buttonInstantMessage.Enabled = false;
+            this.buttonInstantMessage.Location = new System.Drawing.Point(143, 48);
+            this.buttonInstantMessage.Name = "buttonInstantMessage";
+            this.buttonInstantMessage.Size = new System.Drawing.Size(99, 23);
+            this.buttonInstantMessage.TabIndex = 11;
+            this.buttonInstantMessage.Text = "Instant Message";
+            this.buttonInstantMessage.UseVisualStyleBackColor = true;
+            this.buttonInstantMessage.Click += new System.EventHandler(this.buttonInstantMessage_Click);
+            // 
             // buttonCreate
             // 
             this.buttonCreate.Enabled = false;
-            this.buttonCreate.Location = new System.Drawing.Point(86, 126);
+            this.buttonCreate.Location = new System.Drawing.Point(87, 19);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(75, 23);
             this.buttonCreate.TabIndex = 5;
@@ -291,7 +320,7 @@
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(167, 126);
+            this.buttonSettings.Location = new System.Drawing.Point(168, 19);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonSettings.TabIndex = 4;
@@ -303,7 +332,7 @@
             // 
             this.labelRegistationStatusState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelRegistationStatusState.AutoSize = true;
-            this.labelRegistationStatusState.Location = new System.Drawing.Point(6, 193);
+            this.labelRegistationStatusState.Location = new System.Drawing.Point(6, 102);
             this.labelRegistationStatusState.Name = "labelRegistationStatusState";
             this.labelRegistationStatusState.Size = new System.Drawing.Size(78, 13);
             this.labelRegistationStatusState.TabIndex = 10;
@@ -313,7 +342,7 @@
             // 
             this.labelRegistationStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelRegistationStatus.AutoSize = true;
-            this.labelRegistationStatus.Location = new System.Drawing.Point(6, 171);
+            this.labelRegistationStatus.Location = new System.Drawing.Point(6, 80);
             this.labelRegistationStatus.Name = "labelRegistationStatus";
             this.labelRegistationStatus.Size = new System.Drawing.Size(98, 13);
             this.labelRegistationStatus.TabIndex = 9;
@@ -322,7 +351,7 @@
             // buttonRegister
             // 
             this.buttonRegister.Enabled = false;
-            this.buttonRegister.Location = new System.Drawing.Point(5, 126);
+            this.buttonRegister.Location = new System.Drawing.Point(6, 19);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(75, 23);
             this.buttonRegister.TabIndex = 6;
@@ -330,100 +359,91 @@
             this.buttonRegister.UseVisualStyleBackColor = true;
             this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
             // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(83, 100);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(110, 20);
-            this.textBoxPassword.TabIndex = 3;
-            this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
-            // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.Location = new System.Drawing.Point(83, 74);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(110, 20);
-            this.textBoxUsername.TabIndex = 2;
-            this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
-            // 
-            // textBoxHost
-            // 
-            this.textBoxHost.Location = new System.Drawing.Point(83, 48);
-            this.textBoxHost.Name = "textBoxHost";
-            this.textBoxHost.Size = new System.Drawing.Size(159, 20);
-            this.textBoxHost.TabIndex = 1;
-            this.textBoxHost.TextChanged += new System.EventHandler(this.textBoxHost_TextChanged);
-            // 
-            // textBoxAccountName
-            // 
-            this.textBoxAccountName.Location = new System.Drawing.Point(83, 22);
-            this.textBoxAccountName.Name = "textBoxAccountName";
-            this.textBoxAccountName.Size = new System.Drawing.Size(159, 20);
-            this.textBoxAccountName.TabIndex = 0;
-            this.textBoxAccountName.TextChanged += new System.EventHandler(this.textBoxAccountName_TextChanged);
-            // 
-            // labelPassword
-            // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(16, 103);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(59, 13);
-            this.labelPassword.TabIndex = 3;
-            this.labelPassword.Text = "Password :";
-            // 
-            // labelUsername
-            // 
-            this.labelUsername.AutoSize = true;
-            this.labelUsername.Location = new System.Drawing.Point(16, 77);
-            this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(61, 13);
-            this.labelUsername.TabIndex = 2;
-            this.labelUsername.Text = "Username :";
-            // 
-            // labelHost
-            // 
-            this.labelHost.AutoSize = true;
-            this.labelHost.Location = new System.Drawing.Point(16, 51);
-            this.labelHost.Name = "labelHost";
-            this.labelHost.Size = new System.Drawing.Size(35, 13);
-            this.labelHost.TabIndex = 1;
-            this.labelHost.Text = "Host :";
-            // 
-            // labelAccountName
-            // 
-            this.labelAccountName.AutoSize = true;
-            this.labelAccountName.Location = new System.Drawing.Point(16, 25);
-            this.labelAccountName.Name = "labelAccountName";
-            this.labelAccountName.Size = new System.Drawing.Size(41, 13);
-            this.labelAccountName.TabIndex = 0;
-            this.labelAccountName.Text = "Name :";
-            // 
             // groupBoxContact
             // 
             this.groupBoxContact.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContact.Controls.Add(this.buttonContactUpdate);
+            this.groupBoxContact.Controls.Add(this.buttonContactDelete);
+            this.groupBoxContact.Controls.Add(this.buttonContactAdd);
             this.groupBoxContact.Controls.Add(this.listViewContact);
             this.groupBoxContact.Enabled = false;
             this.groupBoxContact.Location = new System.Drawing.Point(257, 3);
             this.groupBoxContact.Name = "groupBoxContact";
-            this.groupBoxContact.Size = new System.Drawing.Size(274, 439);
+            this.groupBoxContact.Size = new System.Drawing.Size(249, 384);
             this.groupBoxContact.TabIndex = 2;
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Text = "Contact";
+            // 
+            // buttonContactUpdate
+            // 
+            this.buttonContactUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonContactUpdate.Enabled = false;
+            this.buttonContactUpdate.Location = new System.Drawing.Point(87, 355);
+            this.buttonContactUpdate.Name = "buttonContactUpdate";
+            this.buttonContactUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonContactUpdate.TabIndex = 5;
+            this.buttonContactUpdate.Text = "Update";
+            this.buttonContactUpdate.UseVisualStyleBackColor = true;
+            this.buttonContactUpdate.Click += new System.EventHandler(this.buttonContactUpdate_Click);
+            // 
+            // buttonContactDelete
+            // 
+            this.buttonContactDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonContactDelete.Enabled = false;
+            this.buttonContactDelete.Location = new System.Drawing.Point(168, 355);
+            this.buttonContactDelete.Name = "buttonContactDelete";
+            this.buttonContactDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonContactDelete.TabIndex = 4;
+            this.buttonContactDelete.Text = "Delete";
+            this.buttonContactDelete.UseVisualStyleBackColor = true;
+            this.buttonContactDelete.Click += new System.EventHandler(this.buttonContactDelete_Click);
+            // 
+            // buttonContactAdd
+            // 
+            this.buttonContactAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonContactAdd.Location = new System.Drawing.Point(6, 355);
+            this.buttonContactAdd.Name = "buttonContactAdd";
+            this.buttonContactAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonContactAdd.TabIndex = 3;
+            this.buttonContactAdd.Text = "Add";
+            this.buttonContactAdd.UseVisualStyleBackColor = true;
+            this.buttonContactAdd.Click += new System.EventHandler(this.buttonContactAdd_Click);
             // 
             // listViewContact
             // 
             this.listViewContact.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewContact.ContextMenuStrip = this.contextMenuStripContacts;
+            this.listViewContact.LargeImageList = this.imageListLarge;
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;
             this.listViewContact.Name = "listViewContact";
-            this.listViewContact.Size = new System.Drawing.Size(262, 414);
+            this.listViewContact.Size = new System.Drawing.Size(237, 330);
+            this.listViewContact.SmallImageList = this.imageListSmall;
             this.listViewContact.TabIndex = 0;
             this.listViewContact.UseCompatibleStateImageBehavior = false;
+            this.listViewContact.View = System.Windows.Forms.View.SmallIcon;
+            this.listViewContact.SelectedIndexChanged += new System.EventHandler(this.listViewContact_SelectedIndexChanged);
+            // 
+            // contextMenuStripContacts
+            // 
+            this.contextMenuStripContacts.Name = "contextMenuStripContacts";
+            this.contextMenuStripContacts.Size = new System.Drawing.Size(61, 4);
+            // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageListLarge.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
             // 
             // VoIPControl
             // 
@@ -433,10 +453,11 @@
             this.Controls.Add(this.groupBoxAccount);
             this.Controls.Add(this.groupBoxCall);
             this.Name = "VoIPControl";
-            this.Size = new System.Drawing.Size(534, 445);
+            this.Size = new System.Drawing.Size(509, 390);
             this.Load += new System.EventHandler(this.VoIPControl_Load);
             this.groupBoxCall.ResumeLayout(false);
             this.groupBoxDigits.ResumeLayout(false);
+            this.groupBoxDigits.PerformLayout();
             this.groupBoxAccount.ResumeLayout(false);
             this.groupBoxAccount.PerformLayout();
             this.groupBoxContact.ResumeLayout(false);
@@ -453,14 +474,6 @@
         private System.Windows.Forms.Label labelRegistationStatusState;
         private System.Windows.Forms.Label labelRegistationStatus;
         private System.Windows.Forms.Button buttonRegister;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.TextBox textBoxUsername;
-        private System.Windows.Forms.TextBox textBoxHost;
-        private System.Windows.Forms.TextBox textBoxAccountName;
-        private System.Windows.Forms.Label labelPassword;
-        private System.Windows.Forms.Label labelUsername;
-        private System.Windows.Forms.Label labelHost;
-        private System.Windows.Forms.Label labelAccountName;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonHangup;
@@ -479,5 +492,14 @@
         private System.Windows.Forms.Button buttonZero;
         private System.Windows.Forms.Button buttonStar;
         private System.Windows.Forms.Button buttonHash;
+        private System.Windows.Forms.TextBox textBoxDigits;
+        private System.Windows.Forms.Button buttonInstantMessage;
+        private System.Windows.Forms.Button buttonLoadContacts;
+        private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.ImageList imageListSmall;
+        private System.Windows.Forms.Button buttonContactDelete;
+        private System.Windows.Forms.Button buttonContactAdd;
+        private System.Windows.Forms.Button buttonContactUpdate;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripContacts;
     }
 }

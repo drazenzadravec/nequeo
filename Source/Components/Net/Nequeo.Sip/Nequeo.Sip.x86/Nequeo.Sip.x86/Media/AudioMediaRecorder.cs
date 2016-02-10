@@ -66,6 +66,23 @@ namespace Nequeo.Net.Sip
         /// <param name="encoderType">Optionally specify the type of encoder to be used to
         ///	compress the media, if the file can support different
         ///	encodings.This value must be zero for now.</param>
+        public void CreateRecorder(string filename, uint encoderType)
+        {
+            _pjAudioMediaRecorder.createRecorder(filename, encoderType);
+        }
+
+        /// <summary>
+        /// Create a file recorder, and automatically connect this recorder to
+        /// the conference bridge.The recorder currently supports recording WAV
+        /// file.The type of the recorder to use is determined by the extension of
+        /// the file(e.g. ".wav").
+        /// </summary>
+        /// <param name="filename">Output file name. The function will determine the
+        ///	default format to be used based on the file extension.
+        ///	Currently ".wav" is supported on all platforms.</param>
+        /// <param name="encoderType">Optionally specify the type of encoder to be used to
+        ///	compress the media, if the file can support different
+        ///	encodings.This value must be zero for now.</param>
         /// <param name="maxSize">Maximum file size. Specify zero or -1 to remove size
         ///	limitation. This value must be zero or -1 for now.</param>
         /// <param name="options">Optional options, which can be used to specify the

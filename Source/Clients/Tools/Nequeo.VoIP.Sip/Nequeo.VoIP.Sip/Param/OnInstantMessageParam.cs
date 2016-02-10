@@ -84,5 +84,10 @@ namespace Nequeo.VoIP.Sip.Param
         /// Gets or sets the to URI of the request.
         /// </summary>
         public string ToUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets who the call is from.
+        /// </summary>
+        public string From { get; set; }
     }
 }

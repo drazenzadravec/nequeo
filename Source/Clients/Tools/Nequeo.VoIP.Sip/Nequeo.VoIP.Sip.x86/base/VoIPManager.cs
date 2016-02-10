@@ -462,7 +462,7 @@ namespace Nequeo.VoIP.Sip
                                 {
                                     // Create the recorder.
                                     _recorder = new AudioMediaRecorder();
-                                    _recorder.CreateRecorder(_recordFilename, 0, 0, 0);
+                                    _recorder.CreateRecorder(_recordFilename, 0);
                                     _recorder.StartRecordingConversation(audioMediaRecord, new AudioMedia[] { audioMedia });
                                 }
                                 catch { }

@@ -77,6 +77,25 @@ namespace Nequeo.VoIP.PjSip.Param
         }
 
         /// <summary>
+        /// Answer the current call.
+        /// </summary>
+        public void Answer()
+        {
+            // Create the call settings.
+            CallSetting setting = new CallSetting(true);
+            CallOpParam parm = new CallOpParam(true);
+            setting.AudioCount = 1;
+            parm.Setting = setting;
+            parm.Code = StatusCode.SC_OK;
+
+            if (_call != null)
+            {
+                // Answer the call.
+                _call.Answer(parm);
+            }
+        }
+
+        /// <summary>
         /// Send DTMF digits to remote using RFC 2833 payload formats.
         /// </summary>
         /// <param name="digits">DTMF string digits to be sent.</param>

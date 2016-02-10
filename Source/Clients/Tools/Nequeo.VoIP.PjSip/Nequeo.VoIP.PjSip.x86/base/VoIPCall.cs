@@ -203,6 +203,7 @@ namespace Nequeo.VoIP.PjSip
             param.FromUri = e.FromUri;
             param.MsgBody = e.MsgBody;
             param.ToUri = e.ToUri;
+            FindContact(param);
 
             // Call the event handler.
             OnInstantMessage?.Invoke(this, param);
@@ -236,27 +237,14 @@ namespace Nequeo.VoIP.PjSip
                 // Send a notification to the call.
                 Param.OnIncomingCallParam param = new Param.OnIncomingCallParam();
                 param.CallID = e.CallId;
-                param.AnswerCall = false;
                 param.Info = e.RxData.Info;
                 param.SrcAddress = e.RxData.SrcAddress;
                 param.WholeMsg = e.RxData.WholeMsg;
                 param.Call = new Param.CallParam(call);
+                param.Contact = FindContact(param);
 
                 // Call the event handler.
                 OnIncomingCall?.Invoke(this, param);
-
-                // Answer call
-                if (param.AnswerCall)
-                {
-                    parm.Code = StatusCode.SC_OK;
-                    call.Answer(parm);
-                }
-                else
-                {
-                    // Hangup.
-                    parm.Code = StatusCode.SC_BUSY_HERE;
-                    call.Hangup(parm);
-                }
             }
         }
 
@@ -393,6 +381,67 @@ namespace Nequeo.VoIP.PjSip
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Find the contact.
+        /// </summary>
+        /// <param name="param">The whole message.</param>
+        /// <returns>The contact; else null.</returns>
+        private Net.PjSip.Contact FindContact(Param.OnIncomingCallParam param)
+        {
+            string from = string.Empty;
+            string contact = string.Empty;
+            Net.PjSip.Contact uriContact = null;
+
+            // Get the whole message.
+            string[] headers = (String.IsNullOrEmpty(param.WholeMsg) ? new string[] { "" } : param.WholeMsg.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+            foreach (string header in headers)
+            {
+                // Extract from.
+                if (header.ToLower().StartsWith("from"))
+                {
+                    // Get from.
+                    string[] fromHeader = header.Split(new char[] { ':' });
+                    string combineFrom = String.Join(":", fromHeader.Skip(1));
+                    fromHeader = combineFrom.Split(new char[] { ';' });
+                    combineFrom = fromHeader[0];
+                    from = combineFrom.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "");
+                    param.From = from;
+                }
+
+                // Extract contact.
+                if (header.ToLower().StartsWith("contact"))
+                {
+                    // Get contact.
+                    string[] contactHeader = header.Split(new char[] { ':' });
+                    string combineContact = String.Join(":", contactHeader.Skip(1));
+                    contactHeader = combineContact.Split(new char[] { ';' });
+                    combineContact = contactHeader[0];
+                    contact = combineContact.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "");
+                    param.FromContact = contact;
+                }
+            }
+
+            try
+            {
+                // Find the contact.
+                uriContact = _voipManager.FindContact(from);
+            }
+            catch { }
+
+            // Return the contact.
+            return uriContact;
+        }
+
+        /// <summary>
+        /// Find the contact.
+        /// </summary>
+        /// <param name="param">The whole message.</param>
+        private void FindContact(Param.OnInstantMessageParam param)
+        {
+            // Get from.
+            param.From = param.FromUri.Replace("<", "").Replace(">", ""); ;
         }
 
         #region Dispose Object Methods

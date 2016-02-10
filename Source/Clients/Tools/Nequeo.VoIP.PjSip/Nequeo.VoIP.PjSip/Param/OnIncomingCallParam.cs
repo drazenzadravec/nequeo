@@ -45,11 +45,6 @@ namespace Nequeo.VoIP.PjSip.Param
     public class OnIncomingCallParam
     {
         /// <summary>
-        /// Gets or sets an indicator specifying if the call should be answered or hangup.
-        /// </summary>
-        public bool AnswerCall { get; set; }
-
-        /// <summary>
         /// Gets or sets the current call id.
         /// </summary>
         public int CallID { get; set; }
@@ -73,5 +68,20 @@ namespace Nequeo.VoIP.PjSip.Param
         /// Gets or sets the current call information.
         /// </summary>
         public CallParam Call { get; set; }
+
+        /// <summary>
+        /// Gets or sets who the call is from.
+        /// </summary>
+        public string From { get; set; }
+
+        /// <summary>
+        /// Gets or sets who the call is from contact.
+        /// </summary>
+        public string FromContact { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contact.
+        /// </summary>
+        public Nequeo.Net.PjSip.Contact Contact { get; set; }
     }
 }
