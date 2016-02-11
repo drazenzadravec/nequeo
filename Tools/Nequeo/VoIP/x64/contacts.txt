@@ -4,6 +4,7 @@
     <name>Fred Smith</name>
     <sipAccount>sip:fredsmith@192.168.0.2</sipAccount>
     <presenceState>true</presenceState>
+    <group>Family</group>
     <numbers>
       <number>Mobile|04567433476776</number>
       <number>Home|123457676</number>
