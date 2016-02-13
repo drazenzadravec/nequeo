@@ -44,14 +44,14 @@
             this.voIPControl1.ContactsFilePath = null;
             this.voIPControl1.Location = new System.Drawing.Point(12, 12);
             this.voIPControl1.Name = "voIPControl1";
-            this.voIPControl1.Size = new System.Drawing.Size(510, 395);
+            this.voIPControl1.Size = new System.Drawing.Size(773, 328);
             this.voIPControl1.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 419);
+            this.ClientSize = new System.Drawing.Size(797, 352);
             this.Controls.Add(this.voIPControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";

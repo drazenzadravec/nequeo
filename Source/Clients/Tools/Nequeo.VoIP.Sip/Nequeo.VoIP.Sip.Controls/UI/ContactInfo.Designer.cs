@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactInfo));
             this.groupBoxContact = new System.Windows.Forms.GroupBox();
+            this.comboBoxGroup = new System.Windows.Forms.ComboBox();
+            this.labelGroup = new System.Windows.Forms.Label();
             this.checkBoxPresenceState = new System.Windows.Forms.CheckBox();
             this.textBoxSipAccount = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -50,6 +52,8 @@
             this.groupBoxContact.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContact.Controls.Add(this.comboBoxGroup);
+            this.groupBoxContact.Controls.Add(this.labelGroup);
             this.groupBoxContact.Controls.Add(this.checkBoxPresenceState);
             this.groupBoxContact.Controls.Add(this.textBoxSipAccount);
             this.groupBoxContact.Controls.Add(this.textBoxName);
@@ -65,13 +69,32 @@
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Enter += new System.EventHandler(this.groupBoxContact_Enter);
             // 
+            // comboBoxGroup
+            // 
+            this.comboBoxGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxGroup.FormattingEnabled = true;
+            this.comboBoxGroup.Location = new System.Drawing.Point(83, 86);
+            this.comboBoxGroup.Name = "comboBoxGroup";
+            this.comboBoxGroup.Size = new System.Drawing.Size(194, 21);
+            this.comboBoxGroup.TabIndex = 3;
+            this.comboBoxGroup.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // labelGroup
+            // 
+            this.labelGroup.AutoSize = true;
+            this.labelGroup.Location = new System.Drawing.Point(6, 89);
+            this.labelGroup.Name = "labelGroup";
+            this.labelGroup.Size = new System.Drawing.Size(42, 13);
+            this.labelGroup.TabIndex = 8;
+            this.labelGroup.Text = "Group :";
+            // 
             // checkBoxPresenceState
             // 
             this.checkBoxPresenceState.AutoSize = true;
             this.checkBoxPresenceState.Location = new System.Drawing.Point(9, 65);
             this.checkBoxPresenceState.Name = "checkBoxPresenceState";
             this.checkBoxPresenceState.Size = new System.Drawing.Size(99, 17);
-            this.checkBoxPresenceState.TabIndex = 7;
+            this.checkBoxPresenceState.TabIndex = 2;
             this.checkBoxPresenceState.Text = "Presence State";
             this.checkBoxPresenceState.UseVisualStyleBackColor = true;
             // 
@@ -80,7 +103,7 @@
             this.textBoxSipAccount.Location = new System.Drawing.Point(83, 39);
             this.textBoxSipAccount.Name = "textBoxSipAccount";
             this.textBoxSipAccount.Size = new System.Drawing.Size(194, 20);
-            this.textBoxSipAccount.TabIndex = 6;
+            this.textBoxSipAccount.TabIndex = 1;
             this.textBoxSipAccount.TextChanged += new System.EventHandler(this.textBoxSipAccount_TextChanged);
             // 
             // textBoxName
@@ -88,7 +111,7 @@
             this.textBoxName.Location = new System.Drawing.Point(83, 13);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(194, 20);
-            this.textBoxName.TabIndex = 5;
+            this.textBoxName.TabIndex = 0;
             this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
             // labelSipAccount
@@ -115,7 +138,7 @@
             this.buttonDelete.Location = new System.Drawing.Point(102, 120);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(90, 23);
-            this.buttonDelete.TabIndex = 2;
+            this.buttonDelete.TabIndex = 5;
             this.buttonDelete.Text = "Delete Number";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
@@ -126,7 +149,7 @@
             this.buttonAdd.Location = new System.Drawing.Point(6, 120);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(90, 23);
-            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.TabIndex = 4;
             this.buttonAdd.Text = "Add Number";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -160,7 +183,7 @@
             this.buttonOk.Location = new System.Drawing.Point(323, 283);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 1;
+            this.buttonOk.TabIndex = 6;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
@@ -171,7 +194,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(242, 283);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 2;
+            this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -213,5 +236,7 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelSipAccount;
         private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.ComboBox comboBoxGroup;
+        private System.Windows.Forms.Label labelGroup;
     }
 }

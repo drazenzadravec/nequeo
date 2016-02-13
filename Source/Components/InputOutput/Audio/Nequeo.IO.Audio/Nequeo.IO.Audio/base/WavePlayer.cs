@@ -60,6 +60,7 @@ namespace Nequeo.IO.Audio
         private float _volume = 1.0F;
         private Device _device;
         private volatile PlaybackState _playbackState = PlaybackState.Stopped;
+        private volatile bool _pressStop = true;
 
         /// <summary>
         /// Indicates playback has stopped automatically
@@ -173,11 +174,13 @@ namespace Nequeo.IO.Audio
         {
             if (_playbackState != PlaybackState.Stopped)
             {
+                _pressStop = true;
 
                 // in the call to waveOutReset with function callbacks
                 // some drivers will block here until OnDone is called
                 // for every buffer
                 _playbackState = PlaybackState.Stopped; // set this here to avoid a problem with some drivers whereby 
+
                 MmResult result;
                 lock (_waveOutLock)
                 {
@@ -203,6 +206,8 @@ namespace Nequeo.IO.Audio
         /// </summary>
         public void Resume()
         {
+            _pressStop = false;
+
             if (_playbackState == PlaybackState.Paused)
             {
                 MmResult result;
@@ -223,6 +228,8 @@ namespace Nequeo.IO.Audio
         /// </summary>
         public void Pause()
         {
+            _pressStop = false;
+
             if (_playbackState == PlaybackState.Playing)
             {
                 MmResult result;
@@ -239,10 +246,20 @@ namespace Nequeo.IO.Audio
         }
 
         /// <summary>
-        /// Start playing the audio from the WaveStream
+        /// Start playing the audio from the WaveStream.
         /// </summary>
         public void Play()
         {
+            PlayEx();
+        }
+
+        /// <summary>
+        /// Play
+        /// </summary>
+        private void PlayEx()
+        {
+            _pressStop = false;
+
             if (_playbackState == PlaybackState.Stopped)
             {
                 // Open the audio reader.
@@ -402,8 +419,9 @@ namespace Nequeo.IO.Audio
                     }
                     else
                     {
-                        _playbackState = PlaybackState.Stopped; // set explicitly for when we reach the end of the audio
-                        RaisePlaybackStoppedEvent(exception);
+                        // set explicitly for when we reach the end of the audio.
+                        _playbackState = PlaybackState.Stopped; 
+                        RaisePlaybackStoppedEvent(exception, (_pressStop ? false : true));
                     }
                 }
             }
@@ -413,18 +431,18 @@ namespace Nequeo.IO.Audio
         /// Raise playback stopped event.
         /// </summary>
         /// <param name="e"></param>
-        private void RaisePlaybackStoppedEvent(Exception e)
+        private void RaisePlaybackStoppedEvent(Exception e, bool audioComplete = false)
         {
             var handler = PlaybackStopped;
             if (handler != null)
             {
                 if (_syncContext == null)
                 {
-                    handler(this, new StoppedEventArgs(e));
+                    handler(this, new StoppedEventArgs(e, audioComplete));
                 }
                 else
                 {
-                    _syncContext.Post(state => handler(this, new StoppedEventArgs(e)), null);
+                    _syncContext.Post(state => handler(this, new StoppedEventArgs(e, audioComplete)), null);
                 }
             }
         }

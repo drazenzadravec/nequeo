@@ -33,12 +33,6 @@
             this.comboBoxAudioCaptureDevice = new System.Windows.Forms.ComboBox();
             this.labelAudioPlaybackDevice = new System.Windows.Forms.Label();
             this.labelAudioCaptureDevice = new System.Windows.Forms.Label();
-            this.groupBoxPublish = new System.Windows.Forms.GroupBox();
-            this.labelPublishShutdownWaitMsec = new System.Windows.Forms.Label();
-            this.textBoxPublishShutdownWait = new System.Windows.Forms.TextBox();
-            this.labelPublishShutdownWait = new System.Windows.Forms.Label();
-            this.checkBoxPublishQueue = new System.Windows.Forms.CheckBox();
-            this.checkBoxPublishEnabled = new System.Windows.Forms.CheckBox();
             this.groupBoxAccount = new System.Windows.Forms.GroupBox();
             this.checkBoxSrtpSecureSignaling = new System.Windows.Forms.CheckBox();
             this.checkBoxUseSrtp = new System.Windows.Forms.CheckBox();
@@ -99,16 +93,34 @@
             this.textBoxContactFilePath = new System.Windows.Forms.TextBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxCredentials = new System.Windows.Forms.GroupBox();
-            this.labelCredentialsName = new System.Windows.Forms.Label();
-            this.labelCredentialsSipHost = new System.Windows.Forms.Label();
-            this.textBoxCredentialsAccountName = new System.Windows.Forms.TextBox();
-            this.textBoxCredentialsSipHost = new System.Windows.Forms.TextBox();
-            this.labelCredentialsUsername = new System.Windows.Forms.Label();
-            this.labelCredentialsPassword = new System.Windows.Forms.Label();
-            this.textBoxCredentialsUsername = new System.Windows.Forms.TextBox();
             this.textBoxCredentialsPassword = new System.Windows.Forms.TextBox();
+            this.textBoxCredentialsUsername = new System.Windows.Forms.TextBox();
+            this.labelCredentialsPassword = new System.Windows.Forms.Label();
+            this.labelCredentialsUsername = new System.Windows.Forms.Label();
+            this.textBoxCredentialsSipHost = new System.Windows.Forms.TextBox();
+            this.textBoxCredentialsAccountName = new System.Windows.Forms.TextBox();
+            this.labelCredentialsSipHost = new System.Windows.Forms.Label();
+            this.labelCredentialsName = new System.Windows.Forms.Label();
+            this.tabControlSettings = new System.Windows.Forms.TabControl();
+            this.tabPageDetails = new System.Windows.Forms.TabPage();
+            this.tabPageConfiguration = new System.Windows.Forms.TabPage();
+            this.groupBoxPublish = new System.Windows.Forms.GroupBox();
+            this.labelPublishShutdownWaitMsec = new System.Windows.Forms.Label();
+            this.textBoxPublishShutdownWait = new System.Windows.Forms.TextBox();
+            this.labelPublishShutdownWait = new System.Windows.Forms.Label();
+            this.checkBoxPublishQueue = new System.Windows.Forms.CheckBox();
+            this.checkBoxPublishEnabled = new System.Windows.Forms.CheckBox();
+            this.tabPageMedia = new System.Windows.Forms.TabPage();
+            this.groupBoxSounds = new System.Windows.Forms.GroupBox();
+            this.buttonSoundsIMPath = new System.Windows.Forms.Button();
+            this.labelSoundsIMPath = new System.Windows.Forms.Label();
+            this.textBoxSoundsIMPath = new System.Windows.Forms.TextBox();
+            this.labelSoundsRingPath = new System.Windows.Forms.Label();
+            this.buttonSoundsRingPath = new System.Windows.Forms.Button();
+            this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
+            this.comboBoxSoundsAudioDevice = new System.Windows.Forms.ComboBox();
+            this.labelSoundsAudioDevice = new System.Windows.Forms.Label();
             this.groupBoxAudioDevice.SuspendLayout();
-            this.groupBoxPublish.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
             this.groupBoxMediaTransport.SuspendLayout();
@@ -117,6 +129,12 @@
             this.groupBoxRecording.SuspendLayout();
             this.groupBoxContacts.SuspendLayout();
             this.groupBoxCredentials.SuspendLayout();
+            this.tabControlSettings.SuspendLayout();
+            this.tabPageDetails.SuspendLayout();
+            this.tabPageConfiguration.SuspendLayout();
+            this.groupBoxPublish.SuspendLayout();
+            this.tabPageMedia.SuspendLayout();
+            this.groupBoxSounds.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -125,7 +143,7 @@
             this.groupBoxAudioDevice.Controls.Add(this.comboBoxAudioCaptureDevice);
             this.groupBoxAudioDevice.Controls.Add(this.labelAudioPlaybackDevice);
             this.groupBoxAudioDevice.Controls.Add(this.labelAudioCaptureDevice);
-            this.groupBoxAudioDevice.Location = new System.Drawing.Point(12, 94);
+            this.groupBoxAudioDevice.Location = new System.Drawing.Point(6, 88);
             this.groupBoxAudioDevice.Name = "groupBoxAudioDevice";
             this.groupBoxAudioDevice.Size = new System.Drawing.Size(475, 84);
             this.groupBoxAudioDevice.TabIndex = 0;
@@ -170,68 +188,6 @@
             this.labelAudioCaptureDevice.TabIndex = 0;
             this.labelAudioCaptureDevice.Text = "Capture :";
             // 
-            // groupBoxPublish
-            // 
-            this.groupBoxPublish.Controls.Add(this.labelPublishShutdownWaitMsec);
-            this.groupBoxPublish.Controls.Add(this.textBoxPublishShutdownWait);
-            this.groupBoxPublish.Controls.Add(this.labelPublishShutdownWait);
-            this.groupBoxPublish.Controls.Add(this.checkBoxPublishQueue);
-            this.groupBoxPublish.Controls.Add(this.checkBoxPublishEnabled);
-            this.groupBoxPublish.Location = new System.Drawing.Point(287, 267);
-            this.groupBoxPublish.Name = "groupBoxPublish";
-            this.groupBoxPublish.Size = new System.Drawing.Size(200, 98);
-            this.groupBoxPublish.TabIndex = 1;
-            this.groupBoxPublish.TabStop = false;
-            this.groupBoxPublish.Text = "Publish";
-            // 
-            // labelPublishShutdownWaitMsec
-            // 
-            this.labelPublishShutdownWaitMsec.AutoSize = true;
-            this.labelPublishShutdownWaitMsec.Location = new System.Drawing.Point(171, 71);
-            this.labelPublishShutdownWaitMsec.Name = "labelPublishShutdownWaitMsec";
-            this.labelPublishShutdownWaitMsec.Size = new System.Drawing.Size(26, 13);
-            this.labelPublishShutdownWaitMsec.TabIndex = 4;
-            this.labelPublishShutdownWaitMsec.Text = "(ms)";
-            // 
-            // textBoxPublishShutdownWait
-            // 
-            this.textBoxPublishShutdownWait.Location = new System.Drawing.Point(105, 68);
-            this.textBoxPublishShutdownWait.Name = "textBoxPublishShutdownWait";
-            this.textBoxPublishShutdownWait.Size = new System.Drawing.Size(60, 20);
-            this.textBoxPublishShutdownWait.TabIndex = 3;
-            this.textBoxPublishShutdownWait.TextChanged += new System.EventHandler(this.textBoxPublishShutdownWait_TextChanged);
-            // 
-            // labelPublishShutdownWait
-            // 
-            this.labelPublishShutdownWait.AutoSize = true;
-            this.labelPublishShutdownWait.Location = new System.Drawing.Point(15, 71);
-            this.labelPublishShutdownWait.Name = "labelPublishShutdownWait";
-            this.labelPublishShutdownWait.Size = new System.Drawing.Size(86, 13);
-            this.labelPublishShutdownWait.TabIndex = 2;
-            this.labelPublishShutdownWait.Text = "Shutdown Wait :";
-            // 
-            // checkBoxPublishQueue
-            // 
-            this.checkBoxPublishQueue.AutoSize = true;
-            this.checkBoxPublishQueue.Location = new System.Drawing.Point(18, 45);
-            this.checkBoxPublishQueue.Name = "checkBoxPublishQueue";
-            this.checkBoxPublishQueue.Size = new System.Drawing.Size(58, 17);
-            this.checkBoxPublishQueue.TabIndex = 1;
-            this.checkBoxPublishQueue.Text = "Queue";
-            this.checkBoxPublishQueue.UseVisualStyleBackColor = true;
-            this.checkBoxPublishQueue.CheckedChanged += new System.EventHandler(this.checkBoxPublishQueue_CheckedChanged);
-            // 
-            // checkBoxPublishEnabled
-            // 
-            this.checkBoxPublishEnabled.AutoSize = true;
-            this.checkBoxPublishEnabled.Location = new System.Drawing.Point(18, 22);
-            this.checkBoxPublishEnabled.Name = "checkBoxPublishEnabled";
-            this.checkBoxPublishEnabled.Size = new System.Drawing.Size(65, 17);
-            this.checkBoxPublishEnabled.TabIndex = 0;
-            this.checkBoxPublishEnabled.Text = "Enabled";
-            this.checkBoxPublishEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxPublishEnabled.CheckedChanged += new System.EventHandler(this.checkBoxPublishEnabled_CheckedChanged);
-            // 
             // groupBoxAccount
             // 
             this.groupBoxAccount.Controls.Add(this.checkBoxSrtpSecureSignaling);
@@ -246,9 +202,9 @@
             this.groupBoxAccount.Controls.Add(this.checkBoxIsDefault);
             this.groupBoxAccount.Controls.Add(this.textBoxSipPort);
             this.groupBoxAccount.Controls.Add(this.labelSipPort);
-            this.groupBoxAccount.Location = new System.Drawing.Point(493, 12);
+            this.groupBoxAccount.Location = new System.Drawing.Point(6, 6);
             this.groupBoxAccount.Name = "groupBoxAccount";
-            this.groupBoxAccount.Size = new System.Drawing.Size(182, 265);
+            this.groupBoxAccount.Size = new System.Drawing.Size(182, 315);
             this.groupBoxAccount.TabIndex = 2;
             this.groupBoxAccount.TabStop = false;
             this.groupBoxAccount.Text = "Account";
@@ -384,9 +340,9 @@
             this.groupBoxMessageWaitingIndication.Controls.Add(this.textBoxMwiExpiration);
             this.groupBoxMessageWaitingIndication.Controls.Add(this.labelMwiExpiration);
             this.groupBoxMessageWaitingIndication.Controls.Add(this.checkBoxMessageWaitingIndicationEnabled);
-            this.groupBoxMessageWaitingIndication.Location = new System.Drawing.Point(493, 364);
+            this.groupBoxMessageWaitingIndication.Location = new System.Drawing.Point(6, 6);
             this.groupBoxMessageWaitingIndication.Name = "groupBoxMessageWaitingIndication";
-            this.groupBoxMessageWaitingIndication.Size = new System.Drawing.Size(182, 146);
+            this.groupBoxMessageWaitingIndication.Size = new System.Drawing.Size(182, 83);
             this.groupBoxMessageWaitingIndication.TabIndex = 3;
             this.groupBoxMessageWaitingIndication.TabStop = false;
             this.groupBoxMessageWaitingIndication.Text = "Message Waiting Indication";
@@ -434,9 +390,9 @@
             this.groupBoxMediaTransport.Controls.Add(this.labelMediaTransportPortRange);
             this.groupBoxMediaTransport.Controls.Add(this.textBoxMediaTransportPort);
             this.groupBoxMediaTransport.Controls.Add(this.labelMediaTransportPort);
-            this.groupBoxMediaTransport.Location = new System.Drawing.Point(493, 283);
+            this.groupBoxMediaTransport.Location = new System.Drawing.Point(194, 6);
             this.groupBoxMediaTransport.Name = "groupBoxMediaTransport";
-            this.groupBoxMediaTransport.Size = new System.Drawing.Size(182, 75);
+            this.groupBoxMediaTransport.Size = new System.Drawing.Size(287, 83);
             this.groupBoxMediaTransport.TabIndex = 4;
             this.groupBoxMediaTransport.TabStop = false;
             this.groupBoxMediaTransport.Text = "Media Transport";
@@ -492,9 +448,9 @@
             this.groupBoxTime.Controls.Add(this.textBoxTimeRetryInterval);
             this.groupBoxTime.Controls.Add(this.labelTimeFirstRetryInterval);
             this.groupBoxTime.Controls.Add(this.labelTimeRetryInterval);
-            this.groupBoxTime.Location = new System.Drawing.Point(12, 184);
+            this.groupBoxTime.Location = new System.Drawing.Point(194, 6);
             this.groupBoxTime.Name = "groupBoxTime";
-            this.groupBoxTime.Size = new System.Drawing.Size(269, 181);
+            this.groupBoxTime.Size = new System.Drawing.Size(287, 157);
             this.groupBoxTime.TabIndex = 5;
             this.groupBoxTime.TabStop = false;
             this.groupBoxTime.Text = "Time";
@@ -637,9 +593,9 @@
             this.groupBoxTimer.Controls.Add(this.labelTimerMinSESec);
             this.groupBoxTimer.Controls.Add(this.textBoxTimerMinSE);
             this.groupBoxTimer.Controls.Add(this.labelTimerMinSE);
-            this.groupBoxTimer.Location = new System.Drawing.Point(287, 184);
+            this.groupBoxTimer.Location = new System.Drawing.Point(194, 169);
             this.groupBoxTimer.Name = "groupBoxTimer";
-            this.groupBoxTimer.Size = new System.Drawing.Size(200, 77);
+            this.groupBoxTimer.Size = new System.Drawing.Size(287, 79);
             this.groupBoxTimer.TabIndex = 6;
             this.groupBoxTimer.TabStop = false;
             this.groupBoxTimer.Text = "Timer";
@@ -704,7 +660,7 @@
             this.groupBoxRecording.Controls.Add(this.checkBoxAudioRecordInCall);
             this.groupBoxRecording.Controls.Add(this.textBoxAudioRecordInCall);
             this.groupBoxRecording.Controls.Add(this.textBoxAudioRecordOutCall);
-            this.groupBoxRecording.Location = new System.Drawing.Point(12, 371);
+            this.groupBoxRecording.Location = new System.Drawing.Point(6, 178);
             this.groupBoxRecording.Name = "groupBoxRecording";
             this.groupBoxRecording.Size = new System.Drawing.Size(475, 81);
             this.groupBoxRecording.TabIndex = 7;
@@ -785,9 +741,9 @@
             this.groupBoxContacts.Controls.Add(this.buttonContactFilePath);
             this.groupBoxContacts.Controls.Add(this.labelContactFilePath);
             this.groupBoxContacts.Controls.Add(this.textBoxContactFilePath);
-            this.groupBoxContacts.Location = new System.Drawing.Point(12, 458);
+            this.groupBoxContacts.Location = new System.Drawing.Point(6, 265);
             this.groupBoxContacts.Name = "groupBoxContacts";
-            this.groupBoxContacts.Size = new System.Drawing.Size(475, 52);
+            this.groupBoxContacts.Size = new System.Drawing.Size(475, 56);
             this.groupBoxContacts.TabIndex = 8;
             this.groupBoxContacts.TabStop = false;
             this.groupBoxContacts.Text = "Contacts";
@@ -835,72 +791,12 @@
             this.groupBoxCredentials.Controls.Add(this.textBoxCredentialsAccountName);
             this.groupBoxCredentials.Controls.Add(this.labelCredentialsSipHost);
             this.groupBoxCredentials.Controls.Add(this.labelCredentialsName);
-            this.groupBoxCredentials.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxCredentials.Location = new System.Drawing.Point(6, 6);
             this.groupBoxCredentials.Name = "groupBoxCredentials";
             this.groupBoxCredentials.Size = new System.Drawing.Size(475, 76);
             this.groupBoxCredentials.TabIndex = 9;
             this.groupBoxCredentials.TabStop = false;
             this.groupBoxCredentials.Text = "Credentials";
-            // 
-            // labelCredentialsName
-            // 
-            this.labelCredentialsName.AutoSize = true;
-            this.labelCredentialsName.Location = new System.Drawing.Point(15, 22);
-            this.labelCredentialsName.Name = "labelCredentialsName";
-            this.labelCredentialsName.Size = new System.Drawing.Size(84, 13);
-            this.labelCredentialsName.TabIndex = 0;
-            this.labelCredentialsName.Text = "Account Name :";
-            // 
-            // labelCredentialsSipHost
-            // 
-            this.labelCredentialsSipHost.AutoSize = true;
-            this.labelCredentialsSipHost.Location = new System.Drawing.Point(15, 48);
-            this.labelCredentialsSipHost.Name = "labelCredentialsSipHost";
-            this.labelCredentialsSipHost.Size = new System.Drawing.Size(81, 13);
-            this.labelCredentialsSipHost.TabIndex = 1;
-            this.labelCredentialsSipHost.Text = "Host Name/IP :";
-            // 
-            // textBoxCredentialsAccountName
-            // 
-            this.textBoxCredentialsAccountName.Location = new System.Drawing.Point(105, 19);
-            this.textBoxCredentialsAccountName.Name = "textBoxCredentialsAccountName";
-            this.textBoxCredentialsAccountName.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsAccountName.TabIndex = 2;
-            this.textBoxCredentialsAccountName.TextChanged += new System.EventHandler(this.textBoxCredentialsAccountName_TextChanged);
-            // 
-            // textBoxCredentialsSipHost
-            // 
-            this.textBoxCredentialsSipHost.Location = new System.Drawing.Point(105, 45);
-            this.textBoxCredentialsSipHost.Name = "textBoxCredentialsSipHost";
-            this.textBoxCredentialsSipHost.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsSipHost.TabIndex = 3;
-            this.textBoxCredentialsSipHost.TextChanged += new System.EventHandler(this.textBoxCredentialsSipHost_TextChanged);
-            // 
-            // labelCredentialsUsername
-            // 
-            this.labelCredentialsUsername.AutoSize = true;
-            this.labelCredentialsUsername.Location = new System.Drawing.Point(272, 22);
-            this.labelCredentialsUsername.Name = "labelCredentialsUsername";
-            this.labelCredentialsUsername.Size = new System.Drawing.Size(61, 13);
-            this.labelCredentialsUsername.TabIndex = 4;
-            this.labelCredentialsUsername.Text = "Username :";
-            // 
-            // labelCredentialsPassword
-            // 
-            this.labelCredentialsPassword.AutoSize = true;
-            this.labelCredentialsPassword.Location = new System.Drawing.Point(272, 48);
-            this.labelCredentialsPassword.Name = "labelCredentialsPassword";
-            this.labelCredentialsPassword.Size = new System.Drawing.Size(59, 13);
-            this.labelCredentialsPassword.TabIndex = 5;
-            this.labelCredentialsPassword.Text = "Password :";
-            // 
-            // textBoxCredentialsUsername
-            // 
-            this.textBoxCredentialsUsername.Location = new System.Drawing.Point(339, 19);
-            this.textBoxCredentialsUsername.Name = "textBoxCredentialsUsername";
-            this.textBoxCredentialsUsername.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsUsername.TabIndex = 6;
-            this.textBoxCredentialsUsername.TextChanged += new System.EventHandler(this.textBoxCredentialsUsername_TextChanged);
             // 
             // textBoxCredentialsPassword
             // 
@@ -911,21 +807,272 @@
             this.textBoxCredentialsPassword.TabIndex = 7;
             this.textBoxCredentialsPassword.TextChanged += new System.EventHandler(this.textBoxCredentialsPassword_TextChanged);
             // 
+            // textBoxCredentialsUsername
+            // 
+            this.textBoxCredentialsUsername.Location = new System.Drawing.Point(339, 19);
+            this.textBoxCredentialsUsername.Name = "textBoxCredentialsUsername";
+            this.textBoxCredentialsUsername.Size = new System.Drawing.Size(120, 20);
+            this.textBoxCredentialsUsername.TabIndex = 6;
+            this.textBoxCredentialsUsername.TextChanged += new System.EventHandler(this.textBoxCredentialsUsername_TextChanged);
+            // 
+            // labelCredentialsPassword
+            // 
+            this.labelCredentialsPassword.AutoSize = true;
+            this.labelCredentialsPassword.Location = new System.Drawing.Point(272, 48);
+            this.labelCredentialsPassword.Name = "labelCredentialsPassword";
+            this.labelCredentialsPassword.Size = new System.Drawing.Size(59, 13);
+            this.labelCredentialsPassword.TabIndex = 5;
+            this.labelCredentialsPassword.Text = "Password :";
+            // 
+            // labelCredentialsUsername
+            // 
+            this.labelCredentialsUsername.AutoSize = true;
+            this.labelCredentialsUsername.Location = new System.Drawing.Point(272, 22);
+            this.labelCredentialsUsername.Name = "labelCredentialsUsername";
+            this.labelCredentialsUsername.Size = new System.Drawing.Size(61, 13);
+            this.labelCredentialsUsername.TabIndex = 4;
+            this.labelCredentialsUsername.Text = "Username :";
+            // 
+            // textBoxCredentialsSipHost
+            // 
+            this.textBoxCredentialsSipHost.Location = new System.Drawing.Point(105, 45);
+            this.textBoxCredentialsSipHost.Name = "textBoxCredentialsSipHost";
+            this.textBoxCredentialsSipHost.Size = new System.Drawing.Size(120, 20);
+            this.textBoxCredentialsSipHost.TabIndex = 3;
+            this.textBoxCredentialsSipHost.TextChanged += new System.EventHandler(this.textBoxCredentialsSipHost_TextChanged);
+            // 
+            // textBoxCredentialsAccountName
+            // 
+            this.textBoxCredentialsAccountName.Location = new System.Drawing.Point(105, 19);
+            this.textBoxCredentialsAccountName.Name = "textBoxCredentialsAccountName";
+            this.textBoxCredentialsAccountName.Size = new System.Drawing.Size(120, 20);
+            this.textBoxCredentialsAccountName.TabIndex = 2;
+            this.textBoxCredentialsAccountName.TextChanged += new System.EventHandler(this.textBoxCredentialsAccountName_TextChanged);
+            // 
+            // labelCredentialsSipHost
+            // 
+            this.labelCredentialsSipHost.AutoSize = true;
+            this.labelCredentialsSipHost.Location = new System.Drawing.Point(15, 48);
+            this.labelCredentialsSipHost.Name = "labelCredentialsSipHost";
+            this.labelCredentialsSipHost.Size = new System.Drawing.Size(81, 13);
+            this.labelCredentialsSipHost.TabIndex = 1;
+            this.labelCredentialsSipHost.Text = "Host Name/IP :";
+            // 
+            // labelCredentialsName
+            // 
+            this.labelCredentialsName.AutoSize = true;
+            this.labelCredentialsName.Location = new System.Drawing.Point(15, 22);
+            this.labelCredentialsName.Name = "labelCredentialsName";
+            this.labelCredentialsName.Size = new System.Drawing.Size(84, 13);
+            this.labelCredentialsName.TabIndex = 0;
+            this.labelCredentialsName.Text = "Account Name :";
+            // 
+            // tabControlSettings
+            // 
+            this.tabControlSettings.Controls.Add(this.tabPageDetails);
+            this.tabControlSettings.Controls.Add(this.tabPageConfiguration);
+            this.tabControlSettings.Controls.Add(this.tabPageMedia);
+            this.tabControlSettings.Location = new System.Drawing.Point(12, 12);
+            this.tabControlSettings.Name = "tabControlSettings";
+            this.tabControlSettings.SelectedIndex = 0;
+            this.tabControlSettings.Size = new System.Drawing.Size(499, 356);
+            this.tabControlSettings.TabIndex = 10;
+            // 
+            // tabPageDetails
+            // 
+            this.tabPageDetails.Controls.Add(this.groupBoxCredentials);
+            this.tabPageDetails.Controls.Add(this.groupBoxContacts);
+            this.tabPageDetails.Controls.Add(this.groupBoxAudioDevice);
+            this.tabPageDetails.Controls.Add(this.groupBoxRecording);
+            this.tabPageDetails.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDetails.Name = "tabPageDetails";
+            this.tabPageDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDetails.Size = new System.Drawing.Size(491, 330);
+            this.tabPageDetails.TabIndex = 0;
+            this.tabPageDetails.Text = "Details";
+            this.tabPageDetails.UseVisualStyleBackColor = true;
+            // 
+            // tabPageConfiguration
+            // 
+            this.tabPageConfiguration.Controls.Add(this.groupBoxPublish);
+            this.tabPageConfiguration.Controls.Add(this.groupBoxAccount);
+            this.tabPageConfiguration.Controls.Add(this.groupBoxTimer);
+            this.tabPageConfiguration.Controls.Add(this.groupBoxTime);
+            this.tabPageConfiguration.Location = new System.Drawing.Point(4, 22);
+            this.tabPageConfiguration.Name = "tabPageConfiguration";
+            this.tabPageConfiguration.Size = new System.Drawing.Size(491, 330);
+            this.tabPageConfiguration.TabIndex = 2;
+            this.tabPageConfiguration.Text = "Configuration";
+            this.tabPageConfiguration.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxPublish
+            // 
+            this.groupBoxPublish.Controls.Add(this.labelPublishShutdownWaitMsec);
+            this.groupBoxPublish.Controls.Add(this.textBoxPublishShutdownWait);
+            this.groupBoxPublish.Controls.Add(this.labelPublishShutdownWait);
+            this.groupBoxPublish.Controls.Add(this.checkBoxPublishQueue);
+            this.groupBoxPublish.Controls.Add(this.checkBoxPublishEnabled);
+            this.groupBoxPublish.Location = new System.Drawing.Point(194, 254);
+            this.groupBoxPublish.Name = "groupBoxPublish";
+            this.groupBoxPublish.Size = new System.Drawing.Size(287, 67);
+            this.groupBoxPublish.TabIndex = 7;
+            this.groupBoxPublish.TabStop = false;
+            this.groupBoxPublish.Text = "Publish";
+            // 
+            // labelPublishShutdownWaitMsec
+            // 
+            this.labelPublishShutdownWaitMsec.AutoSize = true;
+            this.labelPublishShutdownWaitMsec.Location = new System.Drawing.Point(247, 23);
+            this.labelPublishShutdownWaitMsec.Name = "labelPublishShutdownWaitMsec";
+            this.labelPublishShutdownWaitMsec.Size = new System.Drawing.Size(26, 13);
+            this.labelPublishShutdownWaitMsec.TabIndex = 4;
+            this.labelPublishShutdownWaitMsec.Text = "(ms)";
+            // 
+            // textBoxPublishShutdownWait
+            // 
+            this.textBoxPublishShutdownWait.Location = new System.Drawing.Point(181, 19);
+            this.textBoxPublishShutdownWait.Name = "textBoxPublishShutdownWait";
+            this.textBoxPublishShutdownWait.Size = new System.Drawing.Size(60, 20);
+            this.textBoxPublishShutdownWait.TabIndex = 3;
+            // 
+            // labelPublishShutdownWait
+            // 
+            this.labelPublishShutdownWait.AutoSize = true;
+            this.labelPublishShutdownWait.Location = new System.Drawing.Point(89, 22);
+            this.labelPublishShutdownWait.Name = "labelPublishShutdownWait";
+            this.labelPublishShutdownWait.Size = new System.Drawing.Size(86, 13);
+            this.labelPublishShutdownWait.TabIndex = 2;
+            this.labelPublishShutdownWait.Text = "Shutdown Wait :";
+            // 
+            // checkBoxPublishQueue
+            // 
+            this.checkBoxPublishQueue.AutoSize = true;
+            this.checkBoxPublishQueue.Location = new System.Drawing.Point(18, 45);
+            this.checkBoxPublishQueue.Name = "checkBoxPublishQueue";
+            this.checkBoxPublishQueue.Size = new System.Drawing.Size(58, 17);
+            this.checkBoxPublishQueue.TabIndex = 1;
+            this.checkBoxPublishQueue.Text = "Queue";
+            this.checkBoxPublishQueue.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPublishEnabled
+            // 
+            this.checkBoxPublishEnabled.AutoSize = true;
+            this.checkBoxPublishEnabled.Location = new System.Drawing.Point(18, 22);
+            this.checkBoxPublishEnabled.Name = "checkBoxPublishEnabled";
+            this.checkBoxPublishEnabled.Size = new System.Drawing.Size(65, 17);
+            this.checkBoxPublishEnabled.TabIndex = 0;
+            this.checkBoxPublishEnabled.Text = "Enabled";
+            this.checkBoxPublishEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPageMedia
+            // 
+            this.tabPageMedia.Controls.Add(this.groupBoxSounds);
+            this.tabPageMedia.Controls.Add(this.groupBoxMessageWaitingIndication);
+            this.tabPageMedia.Controls.Add(this.groupBoxMediaTransport);
+            this.tabPageMedia.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMedia.Name = "tabPageMedia";
+            this.tabPageMedia.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMedia.Size = new System.Drawing.Size(491, 330);
+            this.tabPageMedia.TabIndex = 1;
+            this.tabPageMedia.Text = "Media";
+            this.tabPageMedia.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxSounds
+            // 
+            this.groupBoxSounds.Controls.Add(this.labelSoundsAudioDevice);
+            this.groupBoxSounds.Controls.Add(this.comboBoxSoundsAudioDevice);
+            this.groupBoxSounds.Controls.Add(this.buttonSoundsIMPath);
+            this.groupBoxSounds.Controls.Add(this.labelSoundsIMPath);
+            this.groupBoxSounds.Controls.Add(this.textBoxSoundsIMPath);
+            this.groupBoxSounds.Controls.Add(this.labelSoundsRingPath);
+            this.groupBoxSounds.Controls.Add(this.buttonSoundsRingPath);
+            this.groupBoxSounds.Controls.Add(this.textBoxSoundsRingPath);
+            this.groupBoxSounds.Location = new System.Drawing.Point(6, 95);
+            this.groupBoxSounds.Name = "groupBoxSounds";
+            this.groupBoxSounds.Size = new System.Drawing.Size(475, 226);
+            this.groupBoxSounds.TabIndex = 5;
+            this.groupBoxSounds.TabStop = false;
+            this.groupBoxSounds.Text = "Sounds";
+            // 
+            // buttonSoundsIMPath
+            // 
+            this.buttonSoundsIMPath.Location = new System.Drawing.Point(429, 74);
+            this.buttonSoundsIMPath.Name = "buttonSoundsIMPath";
+            this.buttonSoundsIMPath.Size = new System.Drawing.Size(30, 21);
+            this.buttonSoundsIMPath.TabIndex = 5;
+            this.buttonSoundsIMPath.Text = "...";
+            this.buttonSoundsIMPath.UseVisualStyleBackColor = true;
+            this.buttonSoundsIMPath.Click += new System.EventHandler(this.buttonSoundsIMPath_Click);
+            // 
+            // labelSoundsIMPath
+            // 
+            this.labelSoundsIMPath.AutoSize = true;
+            this.labelSoundsIMPath.Location = new System.Drawing.Point(15, 77);
+            this.labelSoundsIMPath.Name = "labelSoundsIMPath";
+            this.labelSoundsIMPath.Size = new System.Drawing.Size(91, 13);
+            this.labelSoundsIMPath.TabIndex = 4;
+            this.labelSoundsIMPath.Text = "Instant Message :";
+            // 
+            // textBoxSoundsIMPath
+            // 
+            this.textBoxSoundsIMPath.Location = new System.Drawing.Point(144, 74);
+            this.textBoxSoundsIMPath.Name = "textBoxSoundsIMPath";
+            this.textBoxSoundsIMPath.Size = new System.Drawing.Size(279, 20);
+            this.textBoxSoundsIMPath.TabIndex = 3;
+            this.textBoxSoundsIMPath.TextChanged += new System.EventHandler(this.textBoxSoundsIMPath_TextChanged);
+            // 
+            // labelSoundsRingPath
+            // 
+            this.labelSoundsRingPath.AutoSize = true;
+            this.labelSoundsRingPath.Location = new System.Drawing.Point(15, 49);
+            this.labelSoundsRingPath.Name = "labelSoundsRingPath";
+            this.labelSoundsRingPath.Size = new System.Drawing.Size(79, 13);
+            this.labelSoundsRingPath.TabIndex = 2;
+            this.labelSoundsRingPath.Text = "In coming Call :";
+            // 
+            // buttonSoundsRingPath
+            // 
+            this.buttonSoundsRingPath.Location = new System.Drawing.Point(429, 46);
+            this.buttonSoundsRingPath.Name = "buttonSoundsRingPath";
+            this.buttonSoundsRingPath.Size = new System.Drawing.Size(30, 21);
+            this.buttonSoundsRingPath.TabIndex = 1;
+            this.buttonSoundsRingPath.Text = "...";
+            this.buttonSoundsRingPath.UseVisualStyleBackColor = true;
+            this.buttonSoundsRingPath.Click += new System.EventHandler(this.buttonSoundsRingPath_Click);
+            // 
+            // textBoxSoundsRingPath
+            // 
+            this.textBoxSoundsRingPath.Location = new System.Drawing.Point(144, 46);
+            this.textBoxSoundsRingPath.Name = "textBoxSoundsRingPath";
+            this.textBoxSoundsRingPath.Size = new System.Drawing.Size(279, 20);
+            this.textBoxSoundsRingPath.TabIndex = 0;
+            this.textBoxSoundsRingPath.TextChanged += new System.EventHandler(this.textBoxSoundsRingPath_TextChanged);
+            // 
+            // comboBoxSoundsAudioDevice
+            // 
+            this.comboBoxSoundsAudioDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSoundsAudioDevice.FormattingEnabled = true;
+            this.comboBoxSoundsAudioDevice.Location = new System.Drawing.Point(144, 19);
+            this.comboBoxSoundsAudioDevice.Name = "comboBoxSoundsAudioDevice";
+            this.comboBoxSoundsAudioDevice.Size = new System.Drawing.Size(315, 21);
+            this.comboBoxSoundsAudioDevice.TabIndex = 6;
+            this.comboBoxSoundsAudioDevice.SelectedIndexChanged += new System.EventHandler(this.comboBoxSoundsAudioDevice_SelectedIndexChanged);
+            // 
+            // labelSoundsAudioDevice
+            // 
+            this.labelSoundsAudioDevice.AutoSize = true;
+            this.labelSoundsAudioDevice.Location = new System.Drawing.Point(15, 22);
+            this.labelSoundsAudioDevice.Name = "labelSoundsAudioDevice";
+            this.labelSoundsAudioDevice.Size = new System.Drawing.Size(77, 13);
+            this.labelSoundsAudioDevice.TabIndex = 7;
+            this.labelSoundsAudioDevice.Text = "Audio Device :";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 517);
-            this.Controls.Add(this.groupBoxCredentials);
-            this.Controls.Add(this.groupBoxContacts);
-            this.Controls.Add(this.groupBoxRecording);
-            this.Controls.Add(this.groupBoxTimer);
-            this.Controls.Add(this.groupBoxTime);
-            this.Controls.Add(this.groupBoxMediaTransport);
-            this.Controls.Add(this.groupBoxMessageWaitingIndication);
-            this.Controls.Add(this.groupBoxAccount);
-            this.Controls.Add(this.groupBoxPublish);
-            this.Controls.Add(this.groupBoxAudioDevice);
+            this.ClientSize = new System.Drawing.Size(518, 380);
+            this.Controls.Add(this.tabControlSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -939,8 +1086,6 @@
             this.Load += new System.EventHandler(this.Settings_Load);
             this.groupBoxAudioDevice.ResumeLayout(false);
             this.groupBoxAudioDevice.PerformLayout();
-            this.groupBoxPublish.ResumeLayout(false);
-            this.groupBoxPublish.PerformLayout();
             this.groupBoxAccount.ResumeLayout(false);
             this.groupBoxAccount.PerformLayout();
             this.groupBoxMessageWaitingIndication.ResumeLayout(false);
@@ -957,6 +1102,14 @@
             this.groupBoxContacts.PerformLayout();
             this.groupBoxCredentials.ResumeLayout(false);
             this.groupBoxCredentials.PerformLayout();
+            this.tabControlSettings.ResumeLayout(false);
+            this.tabPageDetails.ResumeLayout(false);
+            this.tabPageConfiguration.ResumeLayout(false);
+            this.groupBoxPublish.ResumeLayout(false);
+            this.groupBoxPublish.PerformLayout();
+            this.tabPageMedia.ResumeLayout(false);
+            this.groupBoxSounds.ResumeLayout(false);
+            this.groupBoxSounds.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -968,7 +1121,6 @@
         private System.Windows.Forms.ComboBox comboBoxAudioCaptureDevice;
         private System.Windows.Forms.Label labelAudioPlaybackDevice;
         private System.Windows.Forms.Label labelAudioCaptureDevice;
-        private System.Windows.Forms.GroupBox groupBoxPublish;
         private System.Windows.Forms.GroupBox groupBoxAccount;
         private System.Windows.Forms.CheckBox checkBoxIsDefault;
         private System.Windows.Forms.TextBox textBoxSipPort;
@@ -982,11 +1134,6 @@
         private System.Windows.Forms.CheckBox checkBoxIceEnabled;
         private System.Windows.Forms.CheckBox checkBoxNoIceRtcp;
         private System.Windows.Forms.CheckBox checkBoxRegisterOnAdd;
-        private System.Windows.Forms.Label labelPublishShutdownWaitMsec;
-        private System.Windows.Forms.TextBox textBoxPublishShutdownWait;
-        private System.Windows.Forms.Label labelPublishShutdownWait;
-        private System.Windows.Forms.CheckBox checkBoxPublishQueue;
-        private System.Windows.Forms.CheckBox checkBoxPublishEnabled;
         private System.Windows.Forms.GroupBox groupBoxMessageWaitingIndication;
         private System.Windows.Forms.Label labelMwiExpirationSec;
         private System.Windows.Forms.TextBox textBoxMwiExpiration;
@@ -1042,5 +1189,24 @@
         private System.Windows.Forms.TextBox textBoxCredentialsAccountName;
         private System.Windows.Forms.Label labelCredentialsSipHost;
         private System.Windows.Forms.Label labelCredentialsName;
+        private System.Windows.Forms.TabControl tabControlSettings;
+        private System.Windows.Forms.TabPage tabPageDetails;
+        private System.Windows.Forms.TabPage tabPageConfiguration;
+        private System.Windows.Forms.TabPage tabPageMedia;
+        private System.Windows.Forms.CheckBox checkBoxPublishEnabled;
+        private System.Windows.Forms.CheckBox checkBoxPublishQueue;
+        private System.Windows.Forms.Label labelPublishShutdownWait;
+        private System.Windows.Forms.TextBox textBoxPublishShutdownWait;
+        private System.Windows.Forms.Label labelPublishShutdownWaitMsec;
+        private System.Windows.Forms.GroupBox groupBoxPublish;
+        private System.Windows.Forms.GroupBox groupBoxSounds;
+        private System.Windows.Forms.TextBox textBoxSoundsRingPath;
+        private System.Windows.Forms.Label labelSoundsRingPath;
+        private System.Windows.Forms.Button buttonSoundsRingPath;
+        private System.Windows.Forms.Button buttonSoundsIMPath;
+        private System.Windows.Forms.Label labelSoundsIMPath;
+        private System.Windows.Forms.TextBox textBoxSoundsIMPath;
+        private System.Windows.Forms.Label labelSoundsAudioDevice;
+        private System.Windows.Forms.ComboBox comboBoxSoundsAudioDevice;
     }
 }

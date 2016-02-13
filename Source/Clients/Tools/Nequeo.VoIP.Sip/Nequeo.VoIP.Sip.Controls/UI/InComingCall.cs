@@ -41,6 +41,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Nequeo.IO.Audio;
+
 namespace Nequeo.VoIP.Sip.UI
 {
     /// <summary>
@@ -53,16 +55,49 @@ namespace Nequeo.VoIP.Sip.UI
         /// </summary>
         /// <param name="inComingCall">In coming call param.</param>
         /// <param name="contactName">The contact name.</param>
-        public InComingCall(Nequeo.VoIP.Sip.Param.OnIncomingCallParam inComingCall, string contactName)
+        /// <param name="ringFilePath">The filename and path of the ringing audio.</param>
+        /// <param name="audioDeviceIndex">The audio device index.</param>
+        public InComingCall(Nequeo.VoIP.Sip.Param.OnIncomingCallParam inComingCall, string contactName, string ringFilePath, int audioDeviceIndex = -1)
         {
             InitializeComponent();
             _inComingCall = inComingCall;
             _contactName = contactName;
+            _ringFilePath = ringFilePath;
+
+            // If a valid audio device has been set.
+            if (audioDeviceIndex >= 0)
+            {
+                // Get the audio device.
+                Nequeo.IO.Audio.Device device = Nequeo.IO.Audio.Devices.GetDevice(audioDeviceIndex);
+                _player = new WavePlayer(device);
+                _player.PlaybackStopped += _player_PlaybackStopped;
+            }
         }
 
         private bool _hasAction = false;
         private string _contactName = null;
         private Nequeo.VoIP.Sip.Param.OnIncomingCallParam _inComingCall = null;
+        private Nequeo.IO.Audio.WavePlayer _player = null;
+        private string _ringFilePath = null;
+
+        /// <summary>
+        /// On playback stopped.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _player_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            try
+            {
+                // If no exception and the audio has completed.
+                if (e.Exception == null && e.AudioComplete)
+                {
+                    // Loop the sound.
+                    _player.Play();
+                }
+            }
+            catch { }
+        }
 
         /// <summary>
         /// Load.
@@ -79,6 +114,24 @@ namespace Nequeo.VoIP.Sip.UI
                     (String.IsNullOrEmpty(_inComingCall.From.Trim()) ? "" : "From : \t" + _inComingCall.From.Trim() + "\r\n") +
                     (String.IsNullOrEmpty(_inComingCall.FromContact.Trim()) ? "" : "Contact : \t" + _inComingCall.FromContact.Trim() + "\r\n\r\n") +
                     (String.IsNullOrEmpty(_contactName) ? "" : "Contact : \t" + _contactName + "\r\n");
+
+                // If player.
+                if (_player != null)
+                {
+                    try
+                    {
+                        // If a file exists.
+                        if (!String.IsNullOrEmpty(_ringFilePath))
+                        {
+                            // Open the file.
+                            _player.Open(_ringFilePath);
+
+                            // Star the wave file.
+                            _player.Play();
+                        }
+                    }
+                    catch { }
+                }
             }
         }
 
@@ -102,6 +155,17 @@ namespace Nequeo.VoIP.Sip.UI
                 }
                 catch { }
             }
+
+            try
+            {
+                // Cleanup the player.
+                if (_player != null)
+                {
+                    _player.Stop();
+                    _player.Dispose();
+                }
+            }
+            catch { }
         }
 
         /// <summary>
@@ -124,6 +188,17 @@ namespace Nequeo.VoIP.Sip.UI
                 }
                 catch { }
             }
+
+            try
+            {
+                // Cleanup the player.
+                if (_player != null)
+                {
+                    _player.Stop();
+                    _player.Dispose();
+                }
+            }
+            catch { }
         }
 
         /// <summary>
@@ -144,6 +219,17 @@ namespace Nequeo.VoIP.Sip.UI
                     catch { }
                 }
             }
+
+            try
+            {
+                // Cleanup the player.
+                if (_player != null)
+                {
+                    _player.Stop();
+                    _player.Dispose();
+                }
+            }
+            catch { }
         }
 
         /// <summary>

@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 using Nequeo.IO.Audio.Wave;
+using Nequeo.IO.Audio.Utils;
+using Nequeo.IO.Audio.Api;
 
 namespace Nequeo.IO.Audio
 {
@@ -53,6 +55,200 @@ namespace Nequeo.IO.Audio
 
             // Set the volume
             WaveInterop.waveOutSetVolume(IntPtr.Zero, newVolumeAllChannels);
+        }
+
+        /// <summary>
+        /// Get the device volume.
+        /// </summary>
+        /// <param name="device">The current device.</param>
+        /// <returns>The device volume.</returns>
+        public static float GetVolume(MMDevice device)
+        {
+            if (device == null) throw new ArgumentNullException(nameof(device));
+            return device.AudioEndpointVolume.MasterVolumeLevel;
+        }
+
+        /// <summary>
+        /// Set the device volume.
+        /// </summary>
+        /// <param name="device">The current device.</param>
+        /// <param name="level">The volume level.</param>
+        public static void SetVolume(MMDevice device, float level)
+        {
+            if (device == null) throw new ArgumentNullException(nameof(device));
+            device.AudioEndpointVolume.MasterVolumeLevel = level;
+        }
+
+        /// <summary>
+        /// Get all the output devices.
+        /// </summary>
+        /// <returns>The list of output devices.</returns>
+        public static MMDevice[] GetAllOutputDevices()
+        {
+            List<MMDevice> mmdevices = new List<MMDevice>();
+
+            // Get the device.
+            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+
+            for (int i = 0; i < devices.Count; i++)
+            {
+                mmdevices.Add(devices[i]);
+            }
+
+            // Return the device list.
+            return mmdevices.ToArray();
+        }
+
+        /// <summary>
+        /// Get all the input devices.
+        /// </summary>
+        /// <returns>The list of input devices.</returns>
+        public static MMDevice[] GetAllInputDevices()
+        {
+            List<MMDevice> mmdevices = new List<MMDevice>();
+
+            // Get the device.
+            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+
+            for (int i = 0; i < devices.Count; i++)
+            {
+                mmdevices.Add(devices[i]);
+            }
+
+            // Return the device list.
+            return mmdevices.ToArray();
+        }
+
+        /// <summary>
+        /// Mute the output device.
+        /// </summary>
+        /// <param name="device">The current device.</param>
+        /// <param name="mute">True to mute; else false.</param>
+        public static void MuteVolume(MMDevice device, bool mute)
+        {
+            if (device == null) throw new ArgumentNullException(nameof(device));
+            device.AudioEndpointVolume.Mute = mute;
+        }
+
+        /// <summary>
+        /// Mute all output devices.
+        /// </summary>
+        /// <param name="mute">True to mute; else false.</param>
+        public static void MuteVolume(bool mute)
+        {
+            // Get the device.
+            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+
+            for (int i = 0; i < devices.Count; i++)
+            {
+                MMDevice deviceAt = devices[i];
+
+                // If device found.
+                if (deviceAt != null)
+                {
+                    try
+                    {
+                        // Mute or un mute the device.
+                        deviceAt.AudioEndpointVolume.Mute = mute;
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Mute all microphones.
+        /// </summary>
+        /// <param name="mute">True to mute; else false.</param>
+        public static void MuteMicrophone(bool mute)
+        {
+            // Get the device.
+            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+
+            for (int i = 0; i < devices.Count; i++)
+            {
+                MMDevice deviceAt = devices[i];
+
+                // Find the device.
+                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                {
+                    // If device found.
+                    if (deviceAt != null)
+                    {
+                        // Mute or un mute the device.
+                        deviceAt.AudioEndpointVolume.Mute = mute;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Mute the microphone.
+        /// </summary>
+        /// <param name="device">The current device.</param>
+        /// <param name="mute">True to mute; else false.</param>
+        public static void MuteMicrophone(MMDevice device, bool mute)
+        {
+            if (device == null) throw new ArgumentNullException(nameof(device));
+            device.AudioEndpointVolume.Mute = mute;
+        }
+
+        /// <summary>
+        /// Get the device volume.
+        /// </summary>
+        /// <param name="device">The current device.</param>
+        /// <returns>The device volume.</returns>
+        public static float GetMicrophoneVolume(MMDevice device)
+        {
+            if (device == null) throw new ArgumentNullException(nameof(device));
+            return device.AudioEndpointVolume.MasterVolumeLevel;
+        }
+
+        /// <summary>
+        /// Set the device volume.
+        /// </summary>
+        /// <param name="device">The current device.</param>
+        /// <param name="level">The volume level.</param>
+        public static void SetMicrophoneVolume(MMDevice device, float level)
+        {
+            if (device == null) throw new ArgumentNullException(nameof(device));
+            device.AudioEndpointVolume.MasterVolumeLevel = level;
+        }
+
+        /// <summary>
+        /// Get the device volume.
+        /// </summary>
+        /// <returns>The device volume of each device.</returns>
+        public static float[] GetMicrophoneVolume()
+        {
+            List<float> volums = new List<float>();
+
+            // Get the device.
+            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+
+            for (int i = 0; i < devices.Count; i++)
+            {
+                MMDevice deviceAt = devices[i];
+
+                // Find the device.
+                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                {
+                    // If device found.
+                    if (deviceAt != null)
+                    {
+                        // Mute or un mute the device.
+                        volums.Add(deviceAt.AudioEndpointVolume.MasterVolumeLevel);
+                    }
+                }
+            }
+
+            // Return the volumes.
+            return volums.ToArray();
         }
     }
 }

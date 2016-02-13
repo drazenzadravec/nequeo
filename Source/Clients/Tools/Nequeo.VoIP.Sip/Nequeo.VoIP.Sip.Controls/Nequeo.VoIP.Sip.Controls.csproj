@@ -37,6 +37,9 @@
     <AssemblyOriginatorKeyFile>NequeoVoIPSipKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.IO.Audio">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Net.Sip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging_x64\Nequeo.Net.Sip.dll</HintPath>
@@ -68,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Common.cs" />
     <Compile Include="Data\Contacts.cs">
       <DependentUpon>Contacts.xsd</DependentUpon>
     </Compile>

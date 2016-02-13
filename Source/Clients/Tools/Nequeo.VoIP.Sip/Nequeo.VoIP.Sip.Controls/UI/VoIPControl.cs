@@ -43,6 +43,7 @@ using System.Windows.Forms;
 
 using Nequeo.Extension;
 using Nequeo.Serialisation;
+using Nequeo.IO.Audio;
 
 namespace Nequeo.VoIP.Sip.UI
 {
@@ -67,6 +68,7 @@ namespace Nequeo.VoIP.Sip.UI
         private Nequeo.VoIP.Sip.VoIPCall _voipCall = null;
         private Param.CallParam _call = null;
         private Data.contacts _contacts = null;
+        private Data.Common _common = null;
 
         private bool _audioRecordingOutCall = false;
         private bool _audioRecordingInCall = false;
@@ -188,11 +190,40 @@ namespace Nequeo.VoIP.Sip.UI
         /// </summary>
         public void Initialize()
         {
+            _common = new Data.Common();
+
+            // Create the voip call.
             _voipCall = new VoIPCall();
             _voipCall.OnIncomingCall += Voipcall_OnIncomingCall;
             _voipCall.OnInstantMessage += Voipcall_OnInstantMessage;
             _voipCall.OnRegStarted += Voipcall_OnRegStarted;
             _voipCall.OnRegState += Voipcall_OnRegState;
+            _voipCall.VoIPManager.OnContactState += VoIPManager_OnContactState;
+        }
+
+        /// <summary>
+        /// On contact state changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void VoIPManager_OnContactState(object sender, Net.Sip.ContactInfo e)
+        {
+            UISync.Execute(() =>
+            {
+                try
+                {
+                    // Get the contact.
+                    ListViewItem item = listViewContact.Items[e.Uri];
+
+                    // If found.
+                    if (item != null)
+                    {
+                        // Set the state.
+                        item.SubItems[2].Text = e.PresenceStatus.Status.ToString().ToLower();
+                    }
+                }
+                catch { }
+            });
         }
 
         /// <summary>
@@ -213,6 +244,8 @@ namespace Nequeo.VoIP.Sip.UI
             buttonInstantMessage.Enabled = true;
             buttonRegister.Enabled = true;
             groupBoxCall.Enabled = true;
+            groupBoxAccOnlineState.Enabled = true;
+            groupBoxAccDetails.Enabled = true;
         }
 
         /// <summary>
@@ -254,7 +287,6 @@ namespace Nequeo.VoIP.Sip.UI
                     _registered = false;
                 }
             });
-            
         }
 
         /// <summary>
@@ -360,7 +392,9 @@ namespace Nequeo.VoIP.Sip.UI
                 }
 
                 // Open the call.
-                Nequeo.VoIP.Sip.UI.InComingCall incomingCall = new InComingCall(e, contactName);
+                string ringFilePath = (_common != null ? _common.IncomingCallRingFilePath : null);
+                int audioDeviceIndex = (_common != null ? _common.AudioDeviceIndex : -1);
+                Nequeo.VoIP.Sip.UI.InComingCall incomingCall = new InComingCall(e, contactName, ringFilePath, audioDeviceIndex);
                 incomingCall.Show(this);
             });
         }
@@ -379,6 +413,7 @@ namespace Nequeo.VoIP.Sip.UI
             settings.AudioRecordingInCallPath = _audioRecordingInCallPath;
             settings.AudioRecordingOutCallPath = _audioRecordingOutCallPath;
             settings.ContactsFilePath = _contactsFilePath;
+            settings.DataCommon = _common;
             settings.ShowDialog(this);
 
             if (!String.IsNullOrEmpty(settings.ContactsFilePath))
@@ -399,6 +434,7 @@ namespace Nequeo.VoIP.Sip.UI
                 string audioRecordingPath = null;
                 if (!String.IsNullOrEmpty(_audioRecordingInCallPath))
                 {
+                    // Create the recording file name and path.
                     DateTime time = DateTime.Now;
                     string audioRecodingExt = System.IO.Path.GetExtension(_audioRecordingInCallPath);
                     string audioRecordingDir = System.IO.Path.GetDirectoryName(_audioRecordingInCallPath).TrimEnd(new char[] { '\\' }) + "\\";
@@ -451,6 +487,13 @@ namespace Nequeo.VoIP.Sip.UI
                 buttonLoadContacts.Enabled = true;
             else
                 buttonLoadContacts.Enabled = false;
+
+            // Load the views;
+            comboBoxContactView.Items.Add(View.Details.ToString());
+            comboBoxContactView.Items.Add(View.LargeIcon.ToString());
+            comboBoxContactView.Items.Add(View.List.ToString());
+            comboBoxContactView.Items.Add(View.SmallIcon.ToString());
+            comboBoxContactView.Items.Add(View.Tile.ToString());
         }
 
         /// <summary>
@@ -581,6 +624,15 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonCall_Click(object sender, EventArgs e)
         {
+            // Make the call.
+            CallContact();
+        }
+
+        /// <summary>
+        /// Make the call.
+        /// </summary>
+        private void CallContact()
+        {
             try
             {
                 // Create the call path.
@@ -591,7 +643,7 @@ namespace Nequeo.VoIP.Sip.UI
                     string audioRecodingExt = System.IO.Path.GetExtension(_audioRecordingOutCallPath);
                     string audioRecordingDir = System.IO.Path.GetDirectoryName(_audioRecordingOutCallPath).TrimEnd(new char[] { '\\' }) + "\\";
                     string audioRecordingFile = System.IO.Path.GetFileNameWithoutExtension(_audioRecordingOutCallPath) + "_" +
-                        time.Day.ToString() + "-" + time.Month.ToString() + "-" + time.Year.ToString() + "_" + 
+                        time.Day.ToString() + "-" + time.Month.ToString() + "-" + time.Year.ToString() + "_" +
                         time.Hour.ToString() + "-" + time.Minute.ToString() + "-" + time.Second.ToString();
 
                     // Create the file name.
@@ -929,7 +981,9 @@ namespace Nequeo.VoIP.Sip.UI
         {
             if (_instantMessage == null)
             {
-                _instantMessage = new InstantMessage(_voipCall, listViewContact);
+                string incomingFilePath = (_common != null ? _common.InstantMessageFilePath : null);
+                int audioDeviceIndex = (_common != null ? _common.AudioDeviceIndex : -1);
+                _instantMessage = new InstantMessage(_voipCall, listViewContact, incomingFilePath, audioDeviceIndex);
                 _instantMessage.OnInstantMessageClosing += _instantMessage_OnClosing;
                 _instantMessage.Show();
                 buttonInstantMessage.Enabled = false;
@@ -954,51 +1008,103 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonLoadContacts_Click(object sender, EventArgs e)
         {
-            // Enable contacts.
-            groupBoxContact.Enabled = true;
-
-            try
+            // Only load if a contacts file path exists.
+            if (!String.IsNullOrEmpty(_contactsFilePath))
             {
-                // Remove all contacts.
-                if (listViewContact.Items.Count > 0)
-                    listViewContact.Items.Clear();
+                // Enable contacts.
+                groupBoxContact.Enabled = true;
 
-                // Deserialise the xml file into
-                GeneralSerialisation serial = new GeneralSerialisation();
-                _contacts = ((Data.contacts)serial.Deserialise(typeof(Data.contacts), _contactsFilePath));
-
-                // Load the contacts.
-                if(_contacts != null && _contacts.contact != null)
+                try
                 {
-                    // For each contact.
-                    foreach (Data.contactsContact contact in _contacts.contact)
-                    {
-                        // Add the contacts.
-                        listViewContact.Items.Add(contact.sipAccount, contact.name, 0);
+                    // Remove all contacts.
+                    if (listViewContact.Items.Count > 0)
+                        listViewContact.Items.Clear();
 
-                        // Create the contact in the account.
-                        Nequeo.Net.Sip.ContactConnection contactConnection = new Net.Sip.ContactConnection(contact.presenceState, contact.sipAccount);
-                        _voipCall.VoIPManager.AddContact(contactConnection);
+                    // Deserialise the xml file into
+                    GeneralSerialisation serial = new GeneralSerialisation();
+                    _contacts = ((Data.contacts)serial.Deserialise(typeof(Data.contacts), _contactsFilePath));
+
+                    // Load the contacts.
+                    if (_contacts != null && _contacts.contact != null)
+                    {
+                        // For each contact.
+                        foreach (Data.contactsContact contact in _contacts.contact)
+                        {
+                            // Create a new list item.
+                            ListViewItem item = new ListViewItem(contact.name, 0);
+                            item.Name = contact.sipAccount;
+                            item.SubItems.Add(item.Name);
+                            item.SubItems.Add("Offline");
+
+                            // Select the group
+                            switch (contact.group.ToLower().Trim())
+                            {
+                                case "friend":
+                                    item.Group = listViewContact.Groups["listViewGroupFriends"];
+                                    break;
+                                case "family":
+                                    item.Group = listViewContact.Groups["listViewGroupFamily"];
+                                    break;
+                                case "work":
+                                    item.Group = listViewContact.Groups["listViewGroupWork"];
+                                    break;
+                                case "business":
+                                    item.Group = listViewContact.Groups["listViewGroupBusiness"];
+                                    break;
+                                case "colleague":
+                                    item.Group = listViewContact.Groups["listViewGroupColleagues"];
+                                    break;
+                                case "misc":
+                                    item.Group = listViewContact.Groups["listViewGroupMisc"];
+                                    break;
+                                case "government":
+                                    item.Group = listViewContact.Groups["listViewGroupGovernment"];
+                                    break;
+                                case "private":
+                                    item.Group = listViewContact.Groups["listViewGroupPrivate"];
+                                    break;
+                                case "public":
+                                    item.Group = listViewContact.Groups["listViewGroupPublic"];
+                                    break;
+                                default:
+                                    item.Group = listViewContact.Groups["listViewGroupMisc"];
+                                    break;
+                            }
+
+                            // Add the contacts.
+                            listViewContact.Items.Add(item);
+                            //listViewContact.Items.Add(contact.sipAccount, contact.name, 0);
+
+                            // Create the contact in the account.
+                            Nequeo.Net.Sip.ContactConnection contactConnection = new Net.Sip.ContactConnection(contact.presenceState, contact.sipAccount);
+                            _voipCall.VoIPManager.AddContact(contactConnection);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    // Ask the used to answer incomming call.
+                    DialogResult result = MessageBox.Show(this, "Unable to load contacts because of an internal error. " + ex.Message,
+                        "Load Contacts", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                // Disable.
+                buttonContactDelete.Enabled = false;
+                buttonContactUpdate.Enabled = false;
+
+                // If not created.
+                if (_contacts == null)
+                {
+                    // Create the contact list.
+                    _contacts = new Data.contacts();
+                    _contacts.contact = new Data.contactsContact[0];
+                }
             }
-            catch (Exception ex)
+            else
             {
                 // Ask the used to answer incomming call.
-                DialogResult result = MessageBox.Show(this, "Unable to load contacts because of an internal error. " + ex.Message,
-                    "Load Contacts", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            // Disable.
-            buttonContactDelete.Enabled = false;
-            buttonContactUpdate.Enabled = false;
-
-            // If not created.
-            if (_contacts == null)
-            {
-                // Create the contact list.
-                _contacts = new Data.contacts();
-                _contacts.contact = new Data.contactsContact[0];
+                DialogResult result = MessageBox.Show(this, "Unable to load contacts because no contacts file has been set.",
+                    "Load Contacts", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -1062,9 +1168,13 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void MenuItem_Click(object sender, EventArgs e)
         {
+            // Get the menu item number.
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             string number = menuItem.Tag.ToString();
             comboBoxCallNumber.Text = number;
+
+            // Make the call.
+            CallContact();
         }
 
         /// <summary>
@@ -1074,7 +1184,7 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonContactAdd_Click(object sender, EventArgs e)
         {
-            UI.ContactInfo contact = new ContactInfo(_voipCall, null, true, _contacts);
+            UI.ContactInfo contact = new ContactInfo(_voipCall, null, true, _contacts, listViewContact);
             contact.ShowDialog(this);
 
             try
@@ -1082,8 +1192,50 @@ namespace Nequeo.VoIP.Sip.UI
                 // If a new contact has been created.
                 if (contact.NewContact)
                 {
+                    // Create a new list item.
+                    ListViewItem item = new ListViewItem(contact.ContactName, 0);
+                    item.Name = contact.SipAccount;
+                    item.SubItems.Add(item.Name);
+                    item.SubItems.Add("Offline");
+
+                    // Select the group
+                    switch (contact.ContactGroup.ToLower().Trim())
+                    {
+                        case "friend":
+                            item.Group = listViewContact.Groups["listViewGroupFriends"];
+                            break;
+                        case "family":
+                            item.Group = listViewContact.Groups["listViewGroupFamily"];
+                            break;
+                        case "work":
+                            item.Group = listViewContact.Groups["listViewGroupWork"];
+                            break;
+                        case "business":
+                            item.Group = listViewContact.Groups["listViewGroupBusiness"];
+                            break;
+                        case "colleague":
+                            item.Group = listViewContact.Groups["listViewGroupColleagues"];
+                            break;
+                        case "misc":
+                            item.Group = listViewContact.Groups["listViewGroupMisc"];
+                            break;
+                        case "government":
+                            item.Group = listViewContact.Groups["listViewGroupGovernment"];
+                            break;
+                        case "private":
+                            item.Group = listViewContact.Groups["listViewGroupPrivate"];
+                            break;
+                        case "public":
+                            item.Group = listViewContact.Groups["listViewGroupPublic"];
+                            break;
+                        default:
+                            item.Group = listViewContact.Groups["listViewGroupMisc"];
+                            break;
+                    }
+
                     // Add the contacts.
-                    listViewContact.Items.Add(contact.SipAccount, contact.ContactName, 0);
+                    listViewContact.Items.Add(item);
+                    //listViewContact.Items.Add(contact.SipAccount, contact.ContactName, 0);
 
                     // Create the contact in the account.
                     Nequeo.Net.Sip.ContactConnection contactConnection = new Net.Sip.ContactConnection(contact.PresenecState, contact.SipAccount);
@@ -1149,20 +1301,294 @@ namespace Nequeo.VoIP.Sip.UI
         private void buttonContactUpdate_Click(object sender, EventArgs e)
         {
             string contactKey = "";
+            string contactName = "";
+            ListViewGroup contactGroup = null;
 
             // Add each contact.
             foreach (ListViewItem item in listViewContact.SelectedItems)
             {
                 // Get the name.
                 contactKey = item.Name;
+                contactName = item.Text;
+                contactGroup = item.Group;
                 break;
             }
 
             // If a key has been selected.
             if (!String.IsNullOrEmpty(contactKey))
             {
-                UI.ContactInfo contact = new ContactInfo(_voipCall, contactKey, false, _contacts);
+                UI.ContactInfo contact = new ContactInfo(_voipCall, contactKey, false, _contacts, listViewContact);
                 contact.ShowDialog(this);
+
+                // If the contact name has changed.
+                if (!String.IsNullOrEmpty(contact.ContactName) && contact.ContactName != contactName)
+                {
+                    // Get the contact.
+                    ListViewItem item = listViewContact.Items[contactKey];
+
+                    // If found.
+                    if (item != null)
+                    {
+                        // Set the state.
+                        item.Text = contact.ContactName;
+                    }
+                }
+
+                // If the contact group has changed.
+                if (contactGroup != null && 
+                    !String.IsNullOrEmpty(contact.ContactGroup) && 
+                    contact.ContactGroup != contactGroup.Header)
+                {
+                    // Get the contact.
+                    ListViewItem item = listViewContact.Items[contactKey];
+
+                    // If found.
+                    if (item != null)
+                    {
+                        // Select the group
+                        switch (contact.ContactGroup.ToLower().Trim())
+                        {
+                            case "friend":
+                                item.Group = listViewContact.Groups["listViewGroupFriends"];
+                                break;
+                            case "family":
+                                item.Group = listViewContact.Groups["listViewGroupFamily"];
+                                break;
+                            case "work":
+                                item.Group = listViewContact.Groups["listViewGroupWork"];
+                                break;
+                            case "business":
+                                item.Group = listViewContact.Groups["listViewGroupBusiness"];
+                                break;
+                            case "colleague":
+                                item.Group = listViewContact.Groups["listViewGroupColleagues"];
+                                break;
+                            case "misc":
+                                item.Group = listViewContact.Groups["listViewGroupMisc"];
+                                break;
+                            case "government":
+                                item.Group = listViewContact.Groups["listViewGroupGovernment"];
+                                break;
+                            case "private":
+                                item.Group = listViewContact.Groups["listViewGroupPrivate"];
+                                break;
+                            case "public":
+                                item.Group = listViewContact.Groups["listViewGroupPublic"];
+                                break;
+                            default:
+                                item.Group = listViewContact.Groups["listViewGroupMisc"];
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Account status.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxAccStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EnableDisableSetStatus();
+        }
+
+        /// <summary>
+        /// Account activity.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxAccActivity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EnableDisableSetStatus();
+        }
+
+        /// <summary>
+        /// Status text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAccStatusText_TextChanged(object sender, EventArgs e)
+        {
+            EnableDisableSetStatus();
+        }
+
+        /// <summary>
+        /// Note.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAccNote_TextChanged(object sender, EventArgs e)
+        {
+            EnableDisableSetStatus();
+        }
+
+        /// <summary>
+        /// Set online status.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAccSetStatus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Create the presence status.
+                Nequeo.Net.Sip.PresenceStatus status = new Nequeo.Net.Sip.PresenceStatus();
+
+                // Select the status.
+                switch (comboBoxAccStatus.SelectedIndex)
+                {
+                    case 0:
+                        status.Status = Nequeo.Net.Sip.ContactStatus.UNKNOWN;
+                        break;
+                    case 1:
+                        status.Status = Nequeo.Net.Sip.ContactStatus.ONLINE;
+                        break;
+                    case 2:
+                        status.Status = Nequeo.Net.Sip.ContactStatus.OFFLINE;
+                        break;
+                    default:
+                        status.Status = Nequeo.Net.Sip.ContactStatus.UNKNOWN;
+                        break;
+                }
+
+                // Select the activity.
+                switch (comboBoxAccActivity.SelectedIndex)
+                {
+                    case 0:
+                        status.Activity = Nequeo.Net.Sip.RpidActivity.UNKNOWN;
+                        break;
+                    case 1:
+                        status.Activity = Nequeo.Net.Sip.RpidActivity.AWAY;
+                        break;
+                    case 2:
+                        status.Activity = Nequeo.Net.Sip.RpidActivity.BUSY;
+                        break;
+                    default:
+                        status.Activity = Nequeo.Net.Sip.RpidActivity.UNKNOWN;
+                        break;
+                }
+
+                // Set the note.
+                status.StatusText = (!String.IsNullOrEmpty(textBoxAccStatusText.Text) ? textBoxAccStatusText.Text : status.Status.ToString());
+                status.Note = (!String.IsNullOrEmpty(textBoxAccNote.Text) ? textBoxAccNote.Text : status.Activity.ToString());
+                status.RpidId = Guid.NewGuid().ToString();
+
+                // Set the online status.
+                _voipCall.VoIPManager.SetOnlineStatus(status);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Enable disable set status.
+        /// </summary>
+        private void EnableDisableSetStatus()
+        {
+            if (comboBoxAccStatus.SelectedIndex >= 0 &&
+                comboBoxAccActivity.SelectedIndex >= 0)
+            {
+                buttonAccSetStatus.Enabled = true;
+            }
+            else
+            {
+                buttonAccSetStatus.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Get account details.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAccDetails_Click(object sender, EventArgs e)
+        {
+            // Get the info.
+            Nequeo.Net.Sip.AccountInfo info = _voipCall.VoIPManager.GetAccountInfo();
+            checkBoxAccDetails.Checked = info.IsDefault;
+            checkBoxAccIsOnline.Checked = info.OnlineStatus;
+            textBoxAccOnlineText.Text = info.OnlineStatusText;
+            textBoxAccRegExpiresSec.Text = info.RegExpiresSec.ToString();
+            checkBoxAccRegIsActive.Checked = info.RegIsActive;
+            checkBoxAccRegIsConfigured.Checked = info.RegIsConfigured;
+            textBoxAccRegStatus.Text = info.RegStatus.ToString();
+            textBoxAccRegStatusText.Text = info.RegStatusText;
+            labelAccAccountUri.Text = info.Uri;
+            checkBoxAccIsValid.Checked = _voipCall.VoIPManager.IsValid();
+        }
+
+        /// <summary>
+        /// Contact view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxContactView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxContactView.SelectedIndex >= 0)
+            {
+                // Select the view.
+                switch (comboBoxContactView.SelectedIndex)
+                {
+                    case 0:
+                        listViewContact.View = View.Details;
+                        break;
+                    case 1:
+                        listViewContact.View = View.LargeIcon;
+                        break;
+                    case 2:
+                        listViewContact.View = View.List;
+                        break;
+                    case 3:
+                        listViewContact.View = View.SmallIcon;
+                        break;
+                    case 4:
+                        listViewContact.View = View.Tile;
+                        break;
+                    default:
+                        listViewContact.View = View.Details;
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Mute volume.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxMuteVolume_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxMuteVolume.CheckState)
+            {
+                case CheckState.Checked:
+                    Nequeo.IO.Audio.Volume.MuteVolume(true);
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    Nequeo.IO.Audio.Volume.MuteVolume(false);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Mute microphone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxMuteMicrophone_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxMuteMicrophone.CheckState)
+            {
+                case CheckState.Checked:
+                    Nequeo.IO.Audio.Volume.MuteMicrophone(true);
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    Nequeo.IO.Audio.Volume.MuteMicrophone(false);
+                    break;
             }
         }
     }

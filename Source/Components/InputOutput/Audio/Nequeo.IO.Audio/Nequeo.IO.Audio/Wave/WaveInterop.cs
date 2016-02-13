@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
+using Nequeo.IO.Audio.Utils;
+
 namespace Nequeo.IO.Audio.Wave
 {
     /// <summary>
@@ -30,7 +32,7 @@ namespace Nequeo.IO.Audio.Wave
         public delegate void WaveCallback(IntPtr hWaveOut, WaveMessage message, IntPtr dwInstance, WaveHeader wavhdr, IntPtr dwReserved);
 
         /// <summary>
-        /// Get the system volum.
+        /// Get the system volume.
         /// </summary>
         /// <param name="hwo"></param>
         /// <param name="dwVolume"></param>
@@ -55,6 +57,13 @@ namespace Nequeo.IO.Audio.Wave
         public static extern Int32 waveOutGetNumDevs();
 
         /// <summary>
+        /// Get the number of audio devices.
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern Int32 waveInGetNumDevs();
+
+        /// <summary>
         /// Get the device capabilities
         /// </summary>
         /// <param name="deviceID"></param>
@@ -63,6 +72,16 @@ namespace Nequeo.IO.Audio.Wave
         /// <returns></returns>
         [DllImport("winmm.dll", CharSet = CharSet.Auto)]
         public static extern MmResult waveOutGetDevCaps(IntPtr deviceID, out DeviceDetails waveOutCaps, int waveOutCapsSize);
+
+        /// <summary>
+        /// Get the device capabilities
+        /// </summary>
+        /// <param name="deviceID"></param>
+        /// <param name="waveInCaps"></param>
+        /// <param name="waveInCapsSize"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Auto)]
+        public static extern MmResult waveInGetDevCaps(IntPtr deviceID, out DeviceDetails waveInCaps, int waveInCapsSize);
 
         /// <summary>
         /// Get the currrent position in the stream.
@@ -188,5 +207,102 @@ namespace Nequeo.IO.Audio.Wave
         [DllImport("winmm.dll", EntryPoint = "waveInOpen")]
         public static extern MmResult waveInOpenWindow(out IntPtr hWaveIn, IntPtr uDeviceID, WaveFormatProvider lpFormat, IntPtr callbackWindowHandle, IntPtr dwInstance, WaveInOutOpenFlags dwFlags);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmx"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerClose(int hmx);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmxobj"></param>
+        /// <param name="pmxcd"></param>
+        /// <param name="fdwDetails"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerGetControlDetailsA(int hmxobj, ref VolumeStructs.MixerDetails pmxcd, int fdwDetails);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uMxId"></param>
+        /// <param name="pmxcaps"></param>
+        /// <param name="cbmxcaps"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerGetDevCapsA(int uMxId, VolumeStructs.MixerCaps pmxcaps, int cbmxcaps);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmxobj"></param>
+        /// <param name="pumxID"></param>
+        /// <param name="fdwId"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerGetID(int hmxobj, int pumxID, int fdwId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmxobj"></param>
+        /// <param name="pmxlc"></param>
+        /// <param name="fdwControls"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerGetLineControlsA(int hmxobj, ref VolumeStructs.LineControls pmxlc, int fdwControls);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmxobj"></param>
+        /// <param name="pmxl"></param>
+        /// <param name="fdwInfo"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerGetLineInfoA(int hmxobj, ref VolumeStructs.MixerLine pmxl, int fdwInfo);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerGetNumDevs();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmx"></param>
+        /// <param name="uMsg"></param>
+        /// <param name="dwParam1"></param>
+        /// <param name="dwParam2"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerMessage(int hmx, int uMsg, int dwParam1, int dwParam2);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="phmx"></param>
+        /// <param name="uMxId"></param>
+        /// <param name="dwCallback"></param>
+        /// <param name="dwInstance"></param>
+        /// <param name="fdwOpen"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerOpen(out int phmx, int uMxId, int dwCallback, int dwInstance, int fdwOpen);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmxobj"></param>
+        /// <param name="pmxcd"></param>
+        /// <param name="fdwDetails"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
+        public static extern int mixerSetControlDetails(int hmxobj, ref VolumeStructs.MixerDetails pmxcd, int fdwDetails);
     }
 }

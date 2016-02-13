@@ -9,6 +9,7 @@
               <xs:element name="name" type="xs:string" />
               <xs:element name="sipAccount" type="xs:string" />
               <xs:element name="presenceState" type="xs:boolean" />
+              <xs:element name="group" type="xs:string" />
               <xs:element name="numbers">
                 <xs:complexType>
                   <xs:sequence>

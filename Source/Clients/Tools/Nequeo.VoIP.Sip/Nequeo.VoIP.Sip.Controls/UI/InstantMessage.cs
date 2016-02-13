@@ -41,6 +41,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Nequeo.IO.Audio;
+
 namespace Nequeo.VoIP.Sip.UI
 {
     /// <summary>
@@ -53,16 +55,29 @@ namespace Nequeo.VoIP.Sip.UI
         /// </summary>
         /// <param name="voipCall">VoIP call.</param>
         /// <param name="contacts">List of contacts.</param>
-        public InstantMessage(Nequeo.VoIP.Sip.VoIPCall voipCall, ListView contacts)
+        /// <param name="incomingFilePath">The filename and path of the incoming audio.</param>
+        /// <param name="audioDeviceIndex">The audio device index.</param>
+        public InstantMessage(Nequeo.VoIP.Sip.VoIPCall voipCall, ListView contacts, string incomingFilePath, int audioDeviceIndex = -1)
         {
             InitializeComponent();
             _voipCall = voipCall;
             _contacts = contacts;
+            _incomingFilePath = incomingFilePath;
+
+            // If a valid audio device has been set.
+            if (audioDeviceIndex >= 0)
+            {
+                // Get the audio device.
+                Nequeo.IO.Audio.Device device = Nequeo.IO.Audio.Devices.GetDevice(audioDeviceIndex);
+                _player = new WavePlayer(device);
+            }
         }
 
         private Nequeo.VoIP.Sip.VoIPCall _voipCall = null;
         private Nequeo.Net.Sip.Contact _contact = null;
         private ListView _contacts = null;
+        private Nequeo.IO.Audio.WavePlayer _player = null;
+        private string _incomingFilePath = null;
 
         /// <summary>
         /// Form is closing.
@@ -97,6 +112,17 @@ namespace Nequeo.VoIP.Sip.UI
             // Scroll to the end.
             richTextBoxMessage.SelectionStart = richTextBoxMessage.Text.Length;
             richTextBoxMessage.ScrollToCaret();
+
+            // If player.
+            if (_player != null)
+            {
+                try
+                {
+                    // Start the wave file.
+                    _player.Play();
+                }
+                catch { }
+            }
         }
 
         /// <summary>
@@ -106,11 +132,38 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void InstantMessage_Load(object sender, EventArgs e)
         {
+            // For each group.
+            foreach (ListViewGroup group in _contacts.Groups)
+            {
+                // Add the group.
+                listViewMessage.Groups.Add(group.Name, group.Header);
+            }
+
             // Add each contact.
             foreach (ListViewItem item in _contacts.Items)
             {
+                // Create a new list item.
+                ListViewItem viewItem = new ListViewItem(item.Text, 0);
+                viewItem.Name = item.Name;
+                viewItem.Group = listViewMessage.Groups[item.Group.Name];
+
                 // Add the item to the list.
-                listViewMessage.Items.Add(item.Name, item.Text, 0);
+                listViewMessage.Items.Add(viewItem);
+            }
+
+            // If player.
+            if (_player != null)
+            {
+                try
+                {
+                    // If a file exists.
+                    if (!String.IsNullOrEmpty(_incomingFilePath))
+                    {
+                        // Open the file.
+                        _player.Open(_incomingFilePath);
+                    }
+                }
+                catch { }
             }
         }
 
@@ -128,6 +181,7 @@ namespace Nequeo.VoIP.Sip.UI
                     DateTime date = DateTime.Now;
                     richTextBoxMessage.Text += date.ToLongDateString() + " " + date.ToLongTimeString() + "\r\n" +
                     "\t" + "From : \t" + "You" + "\r\n" +
+                    "\t" + "To : \t" + (!String.IsNullOrEmpty(labelSendToValue.Text) ? labelSendToValue.Text : "") + "\r\n" +
                     "\t" + "Message : " + textBoxSendMesssage.Text + "\r\n\r\n";
 
                     // Send the message.
@@ -169,6 +223,18 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void InstantMessage_FormClosing(object sender, FormClosingEventArgs e)
         {
+            try
+            {
+                // Cleanup the player.
+                if (_player != null)
+                {
+                    _player.Stop();
+                    _player.Dispose();
+                }
+            }
+            catch { }
+
+            // Send the form closing event.
             OnInstantMessageClosing?.Invoke(this, new EventArgs());
         }
 

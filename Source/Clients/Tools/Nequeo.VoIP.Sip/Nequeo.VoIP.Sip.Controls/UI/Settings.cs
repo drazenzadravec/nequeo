@@ -58,6 +58,7 @@ namespace Nequeo.VoIP.Sip.UI
             _voipCall = voipCall;
         }
 
+        private Data.Common _common = null;
         private Nequeo.VoIP.Sip.VoIPCall _voipCall = null;
 
         private bool _audioRecordingOutCall = false;
@@ -66,6 +67,15 @@ namespace Nequeo.VoIP.Sip.UI
         private string _audioRecordingInCallPath = null;
         private string _contactsFilePath = null;
         private bool _hasCredentials = false;
+
+        /// <summary>
+        /// Gets or sets the data common reference.
+        /// </summary>
+        internal Data.Common DataCommon
+        {
+            get { return _common; }
+            set { _common = value; }
+        }
 
         /// <summary>
         /// Gets or sets has credentials.
@@ -127,6 +137,10 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void Settings_Load(object sender, EventArgs e)
         {
+            // Load sounds
+            textBoxSoundsRingPath.Text = _common.IncomingCallRingFilePath;
+            textBoxSoundsIMPath.Text = _common.InstantMessageFilePath;
+
             // Load settings.
             if (String.IsNullOrEmpty(_voipCall.VoIPManager.AccountConnection.AccountName))
                 textBoxCredentialsAccountName.Text = Nequeo.VoIP.Sip.Controls.Properties.Settings.Default.AccountName;
@@ -169,8 +183,13 @@ namespace Nequeo.VoIP.Sip.UI
             // For each audio device
             foreach (Nequeo.Net.Sip.AudioDeviceInfo audioDevice in audioDevices)
             {
-                comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
-                comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+                // Is capture device.
+                if(audioDevice.InputCount > 0)
+                    comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+
+                // Is playback device.
+                if (audioDevice.OutputCount > 0)
+                    comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
             }
 
             // Set any initial items.
@@ -179,10 +198,20 @@ namespace Nequeo.VoIP.Sip.UI
 
             // Set the selected.
             if (captureIndex >= 0)
-                comboBoxAudioCaptureDevice.SelectedIndex = captureIndex;
+            {
+                // Get capture device.
+                Nequeo.Net.Sip.AudioDeviceInfo captureDevice = audioDevices[captureIndex];
+                int index = comboBoxAudioCaptureDevice.Items.IndexOf(captureDevice.Name + " | " + captureDevice.Driver);
+                comboBoxAudioCaptureDevice.SelectedIndex = index;
+            }
 
             if (playbackIndex >= 0)
-                comboBoxAudioPlaybackDevice.SelectedIndex = playbackIndex;
+            {
+                // Get playback device.
+                Nequeo.Net.Sip.AudioDeviceInfo playbackDevice = audioDevices[playbackIndex];
+                int index = comboBoxAudioPlaybackDevice.Items.IndexOf(playbackDevice.Name + " | " + playbackDevice.Driver);
+                comboBoxAudioPlaybackDevice.SelectedIndex = index;
+            }
 
             textBoxSipPort.Text = _voipCall.VoIPManager.AccountConnection.SpPort.ToString();
             checkBoxIsDefault.Checked = _voipCall.VoIPManager.AccountConnection.IsDefault;
@@ -243,6 +272,32 @@ namespace Nequeo.VoIP.Sip.UI
                 case Net.Sip.SRTP_SecureSignaling.SRTP_REQUIRES_END_TO_END:
                     checkBoxSrtpSecureSignaling.CheckState = CheckState.Indeterminate;
                     break;
+            }
+
+            // List and get the audio device.
+            int audioDeviceCount = Nequeo.IO.Audio.Devices.Count;
+            if (audioDeviceCount > 0)
+            {
+                // Add the None device.
+                comboBoxSoundsAudioDevice.Items.Add("None");
+
+                // For each device.
+                for (int i = 0; i < audioDeviceCount; i++)
+                {
+                    try
+                    {
+                        // Add the audio device.
+                        Nequeo.IO.Audio.Device audioDevice = Nequeo.IO.Audio.Devices.GetDevice(i);
+                        comboBoxSoundsAudioDevice.Items.Add(audioDevice.Details.ProductName);
+                    }
+                    catch { }
+                }
+
+                // Assign the selected device.
+                if (_common.AudioDeviceIndex >= 0)
+                    comboBoxSoundsAudioDevice.SelectedIndex = _common.AudioDeviceIndex + 1;
+                else
+                    comboBoxSoundsAudioDevice.SelectedIndex = -1;
             }
         }
 
@@ -893,7 +948,6 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonContactFilePath_Click(object sender, EventArgs e)
         {
-            // Import from CSV
             // Set the import filter.
             openFileDialog.Filter = "Text File (*.txt)|*.txt";
 
@@ -981,6 +1035,82 @@ namespace Nequeo.VoIP.Sip.UI
                 { new Net.Sip.AuthCredInfo(textBoxCredentialsUsername.Text, textBoxCredentialsPassword.Text) };
             _voipCall.VoIPManager.AccountConnection.AuthenticateCredentials =
                 new Net.Sip.AuthenticateCredentials() { AuthCredentials = AuthCredentials };
+        }
+
+        /// <summary>
+        /// Ring.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxSoundsRingPath_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxSoundsRingPath.Text))
+                _common.IncomingCallRingFilePath = textBoxSoundsRingPath.Text;
+            else
+                _common.IncomingCallRingFilePath = null;
+        }
+
+        /// <summary>
+        /// In coming call ring.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSoundsRingPath_Click(object sender, EventArgs e)
+        {
+            // Set the import filter.
+            openFileDialog.Filter = "Wave Files (*.wav)|*.wav|MP3 Files (*.mp3)|*.mp3";
+
+            // Get the file name selected.
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxSoundsRingPath.Text = openFileDialog.FileName;
+                _common.IncomingCallRingFilePath = textBoxSoundsRingPath.Text;
+            }
+        }
+
+        /// <summary>
+        /// IM ring.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxSoundsIMPath_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxSoundsIMPath.Text))
+                _common.InstantMessageFilePath = textBoxSoundsIMPath.Text;
+            else
+                _common.InstantMessageFilePath = null;
+        }
+
+        /// <summary>
+        /// Instant message.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSoundsIMPath_Click(object sender, EventArgs e)
+        {
+            // Set the import filter.
+            openFileDialog.Filter = "Wave Files (*.wav)|*.wav|MP3 Files (*.mp3)|*.mp3";
+
+            // Get the file name selected.
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxSoundsIMPath.Text = openFileDialog.FileName;
+                _common.InstantMessageFilePath = textBoxSoundsIMPath.Text;
+            }
+        }
+
+        /// <summary>
+        /// Audio device.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxSoundsAudioDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If item is selected.
+            if (comboBoxSoundsAudioDevice.SelectedIndex >= 1)
+            {
+                _common.AudioDeviceIndex = comboBoxSoundsAudioDevice.SelectedIndex - 1;
+            }
         }
     }
 }

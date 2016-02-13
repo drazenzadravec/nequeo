@@ -57,13 +57,16 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="contactKey">The contact key.</param>
         /// <param name="adding">True if adding false if updating.</param>
         /// <param name="contacts">The contact list.</param>
-        public ContactInfo(Nequeo.VoIP.Sip.VoIPCall voipCall, string contactKey, bool adding, Data.contacts contacts)
+        /// <param name="contactsView">The contact list.</param>
+        public ContactInfo(Nequeo.VoIP.Sip.VoIPCall voipCall, string contactKey, 
+            bool adding, Data.contacts contacts, ListView contactsView)
         {
             InitializeComponent();
             _voipCall = voipCall;
             _contactKey = contactKey;
             _adding = adding;
             _contacts = contacts;
+            _contactsView = contactsView;
         }
 
         private bool _adding = true;
@@ -71,11 +74,13 @@ namespace Nequeo.VoIP.Sip.UI
         private Nequeo.VoIP.Sip.VoIPCall _voipCall = null;
         private Data.contacts _contacts = null;
         private List<string> _numbers = null;
+        private ListView _contactsView = null;
 
         private bool _newContact = false;
         private bool _presenecState = false;
         private string _sipAccount = null;
         private string _name = null;
+        private string _group = null;
 
         /// <summary>
         /// Gets an indicator specifying if a new contact has been created.
@@ -110,6 +115,14 @@ namespace Nequeo.VoIP.Sip.UI
         }
 
         /// <summary>
+        /// Gets the contact group.
+        /// </summary>
+        public string ContactGroup
+        {
+            get { return _group; }
+        }
+
+        /// <summary>
         /// OK.
         /// </summary>
         /// <param name="sender"></param>
@@ -125,6 +138,10 @@ namespace Nequeo.VoIP.Sip.UI
                     Data.contactsContact contact = _contacts.contact.First(u => u.sipAccount == _contactKey);
                     contact.name = textBoxName.Text;
                     contact.presenceState = checkBoxPresenceState.Checked;
+                    contact.group = comboBoxGroup.Text;
+                    _name = contact.name;
+                    _group = contact.group;
+                    _presenecState = contact.presenceState;
                 }
             }
             else
@@ -139,6 +156,7 @@ namespace Nequeo.VoIP.Sip.UI
                         sipAccount = textBoxSipAccount.Text,
                         presenceState = checkBoxPresenceState.Checked,
                         numbers = _numbers.ToArray(),
+                        group = comboBoxGroup.Text,
                     };
 
                     // Add the new contact.
@@ -150,6 +168,7 @@ namespace Nequeo.VoIP.Sip.UI
                     _presenecState = contact.presenceState;
                     _sipAccount = contact.sipAccount;
                     _name = contact.name;
+                    _group = contact.group;
                 }
             }
             Close();
@@ -261,7 +280,9 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(textBoxName.Text) && !String.IsNullOrEmpty(textBoxSipAccount.Text))
+            if (!String.IsNullOrEmpty(textBoxName.Text) && 
+                !String.IsNullOrEmpty(textBoxSipAccount.Text) &&
+                comboBoxGroup.SelectedIndex >= 0)
             {
                 buttonOk.Enabled = true;
                 buttonAdd.Enabled = true;
@@ -282,7 +303,9 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void textBoxSipAccount_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(textBoxName.Text) && !String.IsNullOrEmpty(textBoxSipAccount.Text))
+            if (!String.IsNullOrEmpty(textBoxName.Text) && 
+                !String.IsNullOrEmpty(textBoxSipAccount.Text) &&
+                comboBoxGroup.SelectedIndex >= 0)
             {
                 buttonOk.Enabled = true;
                 buttonAdd.Enabled = true;
@@ -315,6 +338,17 @@ namespace Nequeo.VoIP.Sip.UI
             // Numbers list.
             _numbers = new List<string>();
 
+            // Load the group list.
+            if (_contactsView != null)
+            {
+                // For each group.
+                foreach (ListViewGroup group in _contactsView.Groups)
+                {
+                    // Add the group.
+                    comboBoxGroup.Items.Add(group.Header);
+                }
+            }
+
             // If updating.
             if (!_adding)
             {
@@ -325,6 +359,7 @@ namespace Nequeo.VoIP.Sip.UI
                     textBoxName.Text = contact.name;
                     textBoxSipAccount.Text = contact.sipAccount;
                     checkBoxPresenceState.Checked = contact.presenceState;
+                    comboBoxGroup.SelectedIndex = comboBoxGroup.Items.IndexOf(contact.group);
                     textBoxSipAccount.ReadOnly = true;
 
                     // For each number.
@@ -341,6 +376,29 @@ namespace Nequeo.VoIP.Sip.UI
                         catch { }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Group.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxName.Text) &&
+                !String.IsNullOrEmpty(textBoxSipAccount.Text) &&
+                comboBoxGroup.SelectedIndex >= 0)
+            {
+                buttonOk.Enabled = true;
+                buttonAdd.Enabled = true;
+                listViewNumbers.Enabled = true;
+            }
+            else
+            {
+                buttonOk.Enabled = false;
+                buttonAdd.Enabled = false;
+                listViewNumbers.Enabled = false;
             }
         }
     }

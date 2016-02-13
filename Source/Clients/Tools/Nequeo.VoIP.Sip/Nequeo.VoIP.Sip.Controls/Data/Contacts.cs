@@ -59,6 +59,8 @@ namespace Nequeo.VoIP.Sip.Data
 
         private bool presenceStateField;
 
+        private string groupField;
+
         private string[] numbersField;
 
         /// <remarks/>
@@ -97,6 +99,19 @@ namespace Nequeo.VoIP.Sip.Data
             set
             {
                 this.presenceStateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string group
+        {
+            get
+            {
+                return this.groupField;
+            }
+            set
+            {
+                this.groupField = value;
             }
         }
 

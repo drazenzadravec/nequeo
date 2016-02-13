@@ -337,6 +337,54 @@ namespace Nequeo.IO.Audio
         }
 
         /// <summary>
+        /// Play the wave sound file asynchronously.
+        /// </summary>
+        /// <param name="filePath">The full path and file name of the .wav file.</param>
+        public void PlayLoop(string filePath)
+        {
+            if (String.IsNullOrEmpty(filePath)) throw new ArgumentNullException("filePath");
+
+            _soundPlayer = new System.Media.SoundPlayer(filePath);
+            _soundPlayer.PlayLooping();
+        }
+
+        /// <summary>
+        /// Play the wave sound stream asynchronously.
+        /// </summary>
+        /// <param name="stream">The stream .wav format to play.</param>
+        public void PlayLoop(Stream stream)
+        {
+            if (stream == null) throw new ArgumentNullException("stream");
+
+            _soundPlayer = new System.Media.SoundPlayer(stream);
+            _soundPlayer.PlayLooping();
+        }
+
+        /// <summary>
+        /// Play the wave sound file synchronously.
+        /// </summary>
+        /// <param name="filePath">The full path and file name of the .wav file.</param>
+        public void PlaySyncLoop(string filePath)
+        {
+            if (String.IsNullOrEmpty(filePath)) throw new ArgumentNullException("filePath");
+
+            _soundPlayer = new System.Media.SoundPlayer(filePath);
+            _soundPlayer.PlayLooping();
+        }
+
+        /// <summary>
+        /// Play the wave sound stream synchronously.
+        /// </summary>
+        /// <param name="stream">The stream .wav format to play.</param>
+        public void PlaySyncLoop(Stream stream)
+        {
+            if (stream == null) throw new ArgumentNullException("stream");
+
+            _soundPlayer = new System.Media.SoundPlayer(stream);
+            _soundPlayer.PlayLooping();
+        }
+
+        /// <summary>
         /// Stops playback of the sound if playback is occurring.
         /// </summary>
         /// <param name="immediate">Whether to stop playing immediately, or to break out of the loop region and

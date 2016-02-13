@@ -20,14 +20,25 @@ namespace Nequeo.IO.Audio
     public class StoppedEventArgs : EventArgs
     {
         private readonly Exception exception;
+        private bool audioComplete = false;
 
         /// <summary>
         /// Initializes a new instance of StoppedEventArgs
         /// </summary>
         /// <param name="exception">An exception to report (null if no exception)</param>
-        public StoppedEventArgs(Exception exception = null)
+        /// <param name="audioComplete">An indicator specifying the audio has completed.</param>
+        public StoppedEventArgs(Exception exception = null, bool audioComplete = false)
         {
             this.exception = exception;
+            this.audioComplete = audioComplete;
+        }
+
+        /// <summary>
+        /// Gets an indicator specifying the audio has completed.
+        /// </summary>
+        public bool AudioComplete
+        {
+            get { return audioComplete; }
         }
 
         /// <summary>
