@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="accountName" type="xs:string" />
+        <xs:element name="sipHost" type="xs:string" />
+        <xs:element name="sipUsername" type="xs:string" />
+        <xs:element name="sipPassword" type="xs:string" />
+        <xs:element name="captureAudioDeviceIndex" type="xs:int" />
+        <xs:element name="playbackAudioDeviceIndex" type="xs:int" />
+        <xs:element name="outgoingCallAudioRecordingEnabled" type="xs:boolean" />
+        <xs:element name="incomingCallAudioRecordingEnabled" type="xs:boolean" />
+        <xs:element name="outgoingCallPathAudioRecording" type="xs:string" />
+        <xs:element name="incomingCallPathAudioRecording" type="xs:string" />
+        <xs:element name="contactFilePath" type="xs:string" />
+        <xs:element name="accountPort" type="xs:int" />
+        <xs:element name="accountIsDefault" type="xs:boolean" />
+        <xs:element name="accountPriority" type="xs:int" />
+        <xs:element name="accountUseIPv6" type="xs:boolean" />
+        <xs:element name="accountUseSrtp" type="xs:boolean" />
+        <xs:element name="accountSrtpSecureSignaling" type="xs:boolean" />
+        <xs:element name="accountDropCallsOnFail" type="xs:boolean" />
+        <xs:element name="accountRegisterOnAdd" type="xs:boolean" />
+        <xs:element name="accountNoIceRtcp" type="xs:boolean" />
+        <xs:element name="accountIceEnabled" type="xs:boolean" />
+        <xs:element name="accountAutoAnswerEnabled" type="xs:boolean" />
+        <xs:element name="accountAutoAnswerWait" type="xs:int" />
+        <xs:element name="accountMessageBankWait" type="xs:int" />
+        <xs:element name="timeRetryInterval" type="xs:unsignedInt" />
+        <xs:element name="timeFirstRetryInterval" type="xs:unsignedInt" />
+        <xs:element name="timeDelayBeforeRefresh" type="xs:unsignedInt" />
+        <xs:element name="timeTimeout" type="xs:unsignedInt" />
+        <xs:element name="timeUnregisterWait" type="xs:unsignedInt" />
+        <xs:element name="timerMinimumSession" type="xs:unsignedInt" />
+        <xs:element name="timerSessionExpires" type="xs:unsignedInt" />
+        <xs:element name="publishEnabled" type="xs:boolean" />
+        <xs:element name="publishQueue" type="xs:boolean" />
+        <xs:element name="publishShutdownWait" type="xs:unsignedInt" />
+        <xs:element name="mwiEnabled" type="xs:boolean" />
+        <xs:element name="mwiExpiration" type="xs:unsignedInt" />
+        <xs:element name="mediaTransportPort" type="xs:unsignedInt" />
+        <xs:element name="mediaTransportPortRange" type="xs:unsignedInt" />
+        <xs:element name="soundAudioDeviceIndex" type="xs:int" />
+        <xs:element name="soundIncomingCallFilePath" type="xs:string" />
+        <xs:element name="soundInstantMessageFilePath" type="xs:string" />
+        <xs:element name="soundAutoAnswerFilePath" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

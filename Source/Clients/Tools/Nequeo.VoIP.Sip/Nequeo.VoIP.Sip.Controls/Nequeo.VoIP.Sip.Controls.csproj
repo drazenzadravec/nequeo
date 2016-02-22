@@ -72,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Common.cs" />
+    <Compile Include="Data\Configuration.cs">
+      <DependentUpon>Configuration.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Data\Contacts.cs">
       <DependentUpon>Contacts.xsd</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Configuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\Contacts.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -150,6 +156,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Configuration.xml" />
     <Content Include="Data\Contacts.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

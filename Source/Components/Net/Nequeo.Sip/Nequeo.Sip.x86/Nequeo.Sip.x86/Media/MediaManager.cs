@@ -212,7 +212,7 @@ namespace Nequeo.Net.Sip
         /// Stop conference call between remote parties; allow each party to talk to each other.
         /// </summary>
         /// <param name="conferenceCalls">Array of remote conference calls.</param>
-        public void StoptConferenceCall(AudioMedia[] conferenceCalls)
+        public void StopConferenceCall(AudioMedia[] conferenceCalls)
         {
             // For each call.
             for (int i = 0; i < conferenceCalls.Length; i++)

@@ -61,8 +61,6 @@ namespace Nequeo.VoIP.Sip.UI
         private Data.Common _common = null;
         private Nequeo.VoIP.Sip.VoIPCall _voipCall = null;
 
-        private bool _audioRecordingOutCall = false;
-        private bool _audioRecordingInCall = false;
         private string _audioRecordingOutCallPath = null;
         private string _audioRecordingInCallPath = null;
         private string _contactsFilePath = null;
@@ -95,24 +93,6 @@ namespace Nequeo.VoIP.Sip.UI
         }
 
         /// <summary>
-        /// Gets or sets the audio recording outgoing call indicator.
-        /// </summary>
-        public bool AudioRecordingOutCall
-        {
-            get { return _audioRecordingOutCall; }
-            set { _audioRecordingOutCall = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the audio recording incoming call indicator.
-        /// </summary>
-        public bool AudioRecordingInCall
-        {
-            get { return _audioRecordingInCall; }
-            set { _audioRecordingInCall = value; }
-        }
-
-        /// <summary>
         /// Gets or sets the audio recording outgoing call path.
         /// </summary>
         public string AudioRecordingOutCallPath
@@ -140,23 +120,29 @@ namespace Nequeo.VoIP.Sip.UI
             // Load sounds
             textBoxSoundsRingPath.Text = _common.IncomingCallRingFilePath;
             textBoxSoundsIMPath.Text = _common.InstantMessageFilePath;
+            textBoxSoundsAutoAnswer.Text = _common.AutoAnswerFilePath;
+
+            // Auto answer.
+            textBoxAutoAnswerWait.Text = _common.AutoAnswerWait.ToString();
+            checkBoxAutoAnswer.Checked = _common.AutoAnswer;
+            textBoxMessageBankWait.Text = _common.MessageBankWait.ToString();
 
             // Load settings.
             if (String.IsNullOrEmpty(_voipCall.VoIPManager.AccountConnection.AccountName))
-                textBoxCredentialsAccountName.Text = Nequeo.VoIP.Sip.Controls.Properties.Settings.Default.AccountName;
+                textBoxCredentialsAccountName.Text = _common.AccountName;
             else
                 textBoxCredentialsAccountName.Text = _voipCall.VoIPManager.AccountConnection.AccountName;
 
             if (String.IsNullOrEmpty(_voipCall.VoIPManager.AccountConnection.SpHost))
-                textBoxCredentialsSipHost.Text = Nequeo.VoIP.Sip.Controls.Properties.Settings.Default.SipHost;
+                textBoxCredentialsSipHost.Text = _common.SipHost;
             else
                 textBoxCredentialsSipHost.Text = _voipCall.VoIPManager.AccountConnection.SpHost;
 
             // Assign the credentials.
             if (_voipCall.VoIPManager.AccountConnection.AuthenticateCredentials == null)
             {
-                textBoxCredentialsUsername.Text = Nequeo.VoIP.Sip.Controls.Properties.Settings.Default.SipUsername;
-                textBoxCredentialsPassword.Text = Nequeo.VoIP.Sip.Controls.Properties.Settings.Default.SipPassword;
+                textBoxCredentialsUsername.Text = _common.SipUsername;
+                textBoxCredentialsPassword.Text = _common.SipPassword;
             }
             else
             {
@@ -165,8 +151,8 @@ namespace Nequeo.VoIP.Sip.UI
                 textBoxCredentialsPassword.Text = authCredentials[0].Data;
             }
 
-            checkBoxAudioRecordOutCall.Checked = _audioRecordingOutCall;
-            checkBoxAudioRecordInCall.Checked = _audioRecordingInCall;
+            checkBoxAudioRecordOutCall.Checked = _common.OutgoingCallAudioRecordingEnabled;
+            checkBoxAudioRecordInCall.Checked = _common.IncomingCallAudioRecordingEnabled;
 
             if (!String.IsNullOrEmpty(_audioRecordingOutCallPath))
                 textBoxAudioRecordOutCall.Text = _audioRecordingOutCallPath;
@@ -204,6 +190,11 @@ namespace Nequeo.VoIP.Sip.UI
                 int index = comboBoxAudioCaptureDevice.Items.IndexOf(captureDevice.Name + " | " + captureDevice.Driver);
                 comboBoxAudioCaptureDevice.SelectedIndex = index;
             }
+            else
+            {
+                // Get from configuration file.
+                comboBoxAudioCaptureDevice.SelectedIndex = _common.CaptureAudioDeviceIndex;
+            }
 
             if (playbackIndex >= 0)
             {
@@ -211,6 +202,11 @@ namespace Nequeo.VoIP.Sip.UI
                 Nequeo.Net.Sip.AudioDeviceInfo playbackDevice = audioDevices[playbackIndex];
                 int index = comboBoxAudioPlaybackDevice.Items.IndexOf(playbackDevice.Name + " | " + playbackDevice.Driver);
                 comboBoxAudioPlaybackDevice.SelectedIndex = index;
+            }
+            else
+            {
+                // Get from configuration file.
+                comboBoxAudioPlaybackDevice.SelectedIndex = _common.PlaybackAudioDeviceIndex;
             }
 
             textBoxSipPort.Text = _voipCall.VoIPManager.AccountConnection.SpPort.ToString();
@@ -891,13 +887,13 @@ namespace Nequeo.VoIP.Sip.UI
             switch (checkBoxAudioRecordOutCall.CheckState)
             {
                 case CheckState.Checked:
-                    _audioRecordingOutCall = true;
+                    _common.OutgoingCallAudioRecordingEnabled = true;
                     textBoxAudioRecordOutCall.Enabled = true;
                     buttonAudioRecordOutCall.Enabled = true;
                     break;
                 case CheckState.Indeterminate:
                 case CheckState.Unchecked:
-                    _audioRecordingOutCall = false;
+                    _common.OutgoingCallAudioRecordingEnabled = false;
                     textBoxAudioRecordOutCall.Enabled = false;
                     buttonAudioRecordOutCall.Enabled = false;
                     break;
@@ -915,13 +911,13 @@ namespace Nequeo.VoIP.Sip.UI
             switch (checkBoxAudioRecordInCall.CheckState)
             {
                 case CheckState.Checked:
-                    _audioRecordingInCall = true;
+                    _common.IncomingCallAudioRecordingEnabled = true;
                     textBoxAudioRecordInCall.Enabled = true;
                     buttonAudioRecordInCall.Enabled = true;
                     break;
                 case CheckState.Indeterminate:
                 case CheckState.Unchecked:
-                    _audioRecordingInCall = false;
+                    _common.IncomingCallAudioRecordingEnabled = false;
                     textBoxAudioRecordInCall.Enabled = false;
                     buttonAudioRecordInCall.Enabled = false;
                     break;
@@ -1110,6 +1106,101 @@ namespace Nequeo.VoIP.Sip.UI
             if (comboBoxSoundsAudioDevice.SelectedIndex >= 1)
             {
                 _common.AudioDeviceIndex = comboBoxSoundsAudioDevice.SelectedIndex - 1;
+            }
+            else
+            {
+                _common.AudioDeviceIndex = -1;
+            }
+        }
+
+        /// <summary>
+        /// Auto answer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxSoundsAutoAnswer_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxSoundsAutoAnswer.Text))
+                _common.AutoAnswerFilePath = textBoxSoundsAutoAnswer.Text;
+            else
+                _common.AutoAnswerFilePath = null;
+        }
+
+        /// <summary>
+        /// Auto answer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSoundsAutoAnswer_Click(object sender, EventArgs e)
+        {
+            // Set the import filter.
+            openFileDialog.Filter = "Wave Files (*.wav)|*.wav";
+
+            // Get the file name selected.
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxSoundsAutoAnswer.Text = openFileDialog.FileName;
+                _common.AutoAnswerFilePath = textBoxSoundsAutoAnswer.Text;
+            }
+        }
+
+        /// <summary>
+        /// Auto answer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxAutoAnswer_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxAutoAnswer.CheckState)
+            {
+                case CheckState.Checked:
+                    _common.AutoAnswer = true;
+                    textBoxAutoAnswerWait.Enabled = true;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _common.AutoAnswer = false;
+                    textBoxAutoAnswerWait.Enabled = false;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Auto answer wait.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAutoAnswerWait_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxAutoAnswerWait.Text))
+            {
+                int wait = 0;
+                bool isNumber = Int32.TryParse(textBoxAutoAnswerWait.Text, out wait);
+                if (isNumber)
+                {
+                    // Assign the port.
+                    _common.AutoAnswerWait = wait;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Messsage bank.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxMessageBankWait_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxMessageBankWait.Text))
+            {
+                int wait = 0;
+                bool isNumber = Int32.TryParse(textBoxMessageBankWait.Text, out wait);
+                if (isNumber)
+                {
+                    // Assign the port.
+                    _common.MessageBankWait = wait;
+                }
             }
         }
     }

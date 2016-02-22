@@ -22,53 +22,5 @@ namespace Nequeo.VoIP.Sip.Controls.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AccountName {
-            get {
-                return ((string)(this["AccountName"]));
-            }
-            set {
-                this["AccountName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SipHost {
-            get {
-                return ((string)(this["SipHost"]));
-            }
-            set {
-                this["SipHost"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SipUsername {
-            get {
-                return ((string)(this["SipUsername"]));
-            }
-            set {
-                this["SipUsername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SipPassword {
-            get {
-                return ((string)(this["SipPassword"]));
-            }
-            set {
-                this["SipPassword"] = value;
-            }
-        }
     }
 }

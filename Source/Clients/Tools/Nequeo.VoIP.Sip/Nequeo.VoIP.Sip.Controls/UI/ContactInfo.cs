@@ -139,6 +139,7 @@ namespace Nequeo.VoIP.Sip.UI
                     contact.name = textBoxName.Text;
                     contact.presenceState = checkBoxPresenceState.Checked;
                     contact.group = comboBoxGroup.Text;
+                    contact.numbers = _numbers.ToArray();
                     _name = contact.name;
                     _group = contact.group;
                     _presenecState = contact.presenceState;
@@ -249,6 +250,7 @@ namespace Nequeo.VoIP.Sip.UI
                         Data.contactsContact contact = _contacts.contact.First(u => u.sipAccount == _contactKey);
                         string number = contact.numbers.First(u => u == contactKey);
                         contact.numbers = contact.numbers.Remove(u => u.Equals(number));
+                        _numbers.Remove(number);
                     }
                     catch { }
                 }
@@ -367,6 +369,7 @@ namespace Nequeo.VoIP.Sip.UI
                     {
                         // Split the name an number.
                         string[] data = number.Split(new char[] { '|' });
+                        _numbers.Add(number);
 
                         try
                         {

@@ -384,7 +384,7 @@ void MediaManager::StartConferenceCall(array<AudioMedia^>^ conferenceCalls)
 /// Stop conference call between remote parties; allow each party to talk to each other.
 /// </summary>
 /// <param name="conferenceCalls">Array of remote conference calls.</param>
-void MediaManager::StoptConferenceCall(array<AudioMedia^>^ conferenceCalls)
+void MediaManager::StopConferenceCall(array<AudioMedia^>^ conferenceCalls)
 {
 	// For each call.
 	for (int i = 0; i < conferenceCalls->Length; i++)

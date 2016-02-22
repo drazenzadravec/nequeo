@@ -40,8 +40,10 @@ using namespace Nequeo::Net::PjSip;
 /// Audio media player.
 /// </summary>
 AudioMediaPlayer::AudioMediaPlayer() : 
-_disposed(false), _pjAudioMediaPlayer(new pj::AudioMediaPlayer())
+_disposed(false), _pjAudioMediaPlayer(new AudioMediaPlayerCallback())
 {
+	// Create the player.
+	Create();
 }
 
 ///	<summary>
@@ -55,6 +57,8 @@ AudioMediaPlayer::~AudioMediaPlayer()
 		this->!AudioMediaPlayer();
 
 		_disposed = true;
+
+		_gchPlayerEndOfFile.Free();
 	}
 }
 
@@ -221,4 +225,47 @@ void AudioMediaPlayer::StoptPlayingConversation(array<AudioMedia^>^ conferenceCa
 		pj::AudioMedia& media = conferenceCalls[i]->GetAudioMedia();
 		_pjAudioMediaPlayer->stopTransmit(media);
 	}
+}
+
+/// <summary>
+/// Create the player.
+/// </summary>
+void AudioMediaPlayer::Create()
+{
+	// Assign the handler and allocate memory.
+	OnPlayerEndOfFileCallback^ onPlayerEndOfFileCallback = gcnew OnPlayerEndOfFileCallback(this, &AudioMediaPlayer::OnPlayerEndOfFile_Handler);
+	_gchPlayerEndOfFile = GCHandle::Alloc(onPlayerEndOfFileCallback);
+
+	// Get a CLS compliant pointer from our delegate
+	IntPtr iponPlayerEndOfFile = Marshal::GetFunctionPointerForDelegate(onPlayerEndOfFileCallback);
+
+	// Cast the pointer to the proper function ptr signature.
+	OnPlayerEndOfFile_Function onPlayerEndOfFileFunction = static_cast<OnPlayerEndOfFile_Function>(iponPlayerEndOfFile.ToPointer());
+
+
+	// Set the native function handler.
+	_pjAudioMediaPlayer->Set_OnPlayerEndOfFile_Function(onPlayerEndOfFileFunction);
+}
+
+///	<summary>
+///	Register a callback to be called when the file player reading has
+/// reached the end of file, or when the file reading has reached the
+/// end of file of the last file for a playlist.If the file or playlist
+/// is set to play repeatedly, then the callback will be called multiple
+/// times.
+///	</summary>
+/// <returns>If the callback returns false, the playback
+/// will stop. Note that if application destroys
+/// the player in the callback, it must return
+/// false here.</returns>
+bool AudioMediaPlayer::OnPlayerEndOfFile_Handler()
+{
+	// Convert the type.
+	bool eof = true;
+
+	// Call the event handler.
+	OnPlayerEndOfFile(this, eof);
+
+	// Return the value.
+	return eof;
 }

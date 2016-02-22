@@ -89,8 +89,6 @@ namespace Nequeo.VoIP.PjSip
         private bool _created = false;
         private Account _account = null;
         private MediaManager _mediaManager = null;
-        private AudioMediaRecorder _recorder = null;
-        private string _recordFilename = null;
 
         /// <summary>
         /// Notify application when the contact state has changed.
@@ -389,8 +387,6 @@ namespace Nequeo.VoIP.PjSip
             {
                 // Create a new call.
                 Call call = new Call(_account, callId);
-                call.OnCallState += Call_OnCallState;
-                call.OnCallMediaState += Call_OnCallMediaState;
 
                 // Create the call settings.
                 CallSetting setting = new CallSetting(true);
@@ -398,125 +394,15 @@ namespace Nequeo.VoIP.PjSip
                 setting.AudioCount = 1;
                 parm.Setting = setting;
 
-                // Get the recording filename.
-                _recordFilename = recordFilename;
-
-                // If recoder.
-                if (_recorder != null)
-                {
-                    // Cleanup the recoder.
-                    _recorder.Dispose();
-                    _recorder = null;
-                }
-
                 // Make the call.
                 call.MakeCall(uri, parm);
 
                 // return the call information.
-                Param.CallParam callInfo = new Param.CallParam(call);
+                Param.CallParam callInfo = new Param.CallParam(call, _mediaManager, recordFilename);
                 return callInfo;
             }
             else
                 throw new Exception("Create the account first.");
-        }
-
-        /// <summary>
-        /// Notify application when media state in the call has changed.
-        /// Normal application would need to implement this callback, e.g.
-        /// to connect the call's media to sound device. When ICE is used,
-        /// this callback will also be called to report ICE negotiation failure.
-        /// </summary>
-        /// <param name="sender">The current sender.</param>
-        /// <param name="e">The event parameter.</param>
-        private void Call_OnCallMediaState(object sender, OnCallMediaStateParam e)
-        {
-            Nequeo.Net.PjSip.CallInfo ci = e.Info;
-            if (ci != null)
-            {
-                // For each media.
-                for (int i = 0; i < ci.Media.Length; i++)
-                {
-                    bool recoderSet = false;
-
-                    // If objects exist.
-                    if (ci.Media != null && ci.Media[i] != null && e.CurrentCall != null)
-                    {
-                        // If audio type.
-                        if ((ci.Media[i].Type == Nequeo.Net.PjSip.MediaType.PJMEDIA_TYPE_AUDIO) &&
-                            (e.CurrentCall.GetMedia((uint)i) != null))
-                        {
-                            // Get the audio media.
-                            AudioMedia audioMedia = (AudioMedia)e.CurrentCall.GetMedia((uint)i);
-
-                            // Connect the call audio media to sound device.
-                            audioMedia.StartTransmit(_mediaManager.GetPlaybackDeviceMedia());
-                            _mediaManager.GetCaptureDeviceMedia().StartTransmit(audioMedia);
-
-                            // If recording.
-                            if (!recoderSet && !String.IsNullOrEmpty(_recordFilename))
-                            {
-                                // Get the capture audio device.
-                                AudioMedia audioMediaRecord = _mediaManager.GetCaptureDeviceMedia();
-
-                                try
-                                {
-                                    // Create the recorder.
-                                    _recorder = new AudioMediaRecorder();
-                                    _recorder.CreateRecorder(_recordFilename, 0, 0, 0);
-                                    _recorder.StartRecordingConversation(audioMediaRecord, new AudioMedia[] { audioMedia });
-                                }
-                                catch { }
-
-                                // Set one recorder.
-                                recoderSet = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Notify application when call state has changed.
-        /// Application may then query the call info to get the
-        /// detail call states by calling getInfo() function.
-        /// </summary>
-        /// <param name="sender">The current sender.</param>
-        /// <param name="e">The event parameter.</param>
-        private void Call_OnCallState(object sender, OnCallStateParam e)
-        {
-            Nequeo.Net.PjSip.CallInfo ci = e.Info;
-            if (ci != null)
-            {
-                // If call is disconnected.
-                if ((ci.State == InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
-                    (ci.State == InviteSessionState.PJSIP_INV_STATE_NULL))
-                {
-                    // If current call.
-                    if (e.CurrentCall != null)
-                    {
-                        // Cleanup the call.
-                        e.CurrentCall.Dispose();
-                        e.CurrentCall = null;
-                    }
-
-                    // If recoder.
-                    if (_recorder != null)
-                    {
-                        try
-                        {
-                            // Stop the recorder.
-                            AudioMedia audioMedia = _mediaManager.GetCaptureDeviceMedia();
-                            _recorder.Stop(audioMedia);
-                        }
-                        catch { }
-
-                        // Cleanup the recoder.
-                        _recorder.Dispose();
-                        _recorder = null;
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -654,9 +540,6 @@ namespace Nequeo.VoIP.PjSip
                     if (_mediaManager != null)
                         _mediaManager.Dispose();
 
-                    if (_recorder != null)
-                        _recorder.Dispose();
-
                     if (_account != null)
                         _account.Dispose();
                 }
@@ -664,7 +547,6 @@ namespace Nequeo.VoIP.PjSip
                 // Call the appropriate methods to clean up
                 // unmanaged resources here.
                 _mediaManager = null;
-                _recorder = null;
                 _account = null;
             }
         }

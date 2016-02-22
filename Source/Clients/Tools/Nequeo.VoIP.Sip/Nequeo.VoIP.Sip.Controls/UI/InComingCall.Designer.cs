@@ -45,6 +45,10 @@
             this.buttonThree = new System.Windows.Forms.Button();
             this.buttonTwo = new System.Windows.Forms.Button();
             this.buttonOne = new System.Windows.Forms.Button();
+            this.labelIncomingCallAutoAnswer = new System.Windows.Forms.Label();
+            this.buttonSendToMessageBank = new System.Windows.Forms.Button();
+            this.buttonAddToConferenceCall = new System.Windows.Forms.Button();
+            this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
             this.groupBoxDigits.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,11 +232,54 @@
             this.buttonOne.UseVisualStyleBackColor = true;
             this.buttonOne.Click += new System.EventHandler(this.buttonOne_Click);
             // 
+            // labelIncomingCallAutoAnswer
+            // 
+            this.labelIncomingCallAutoAnswer.AutoSize = true;
+            this.labelIncomingCallAutoAnswer.Location = new System.Drawing.Point(12, 181);
+            this.labelIncomingCallAutoAnswer.Name = "labelIncomingCallAutoAnswer";
+            this.labelIncomingCallAutoAnswer.Size = new System.Drawing.Size(0, 13);
+            this.labelIncomingCallAutoAnswer.TabIndex = 18;
+            // 
+            // buttonSendToMessageBank
+            // 
+            this.buttonSendToMessageBank.Location = new System.Drawing.Point(356, 205);
+            this.buttonSendToMessageBank.Name = "buttonSendToMessageBank";
+            this.buttonSendToMessageBank.Size = new System.Drawing.Size(156, 23);
+            this.buttonSendToMessageBank.TabIndex = 19;
+            this.buttonSendToMessageBank.Text = "Send To Messasge Bank";
+            this.buttonSendToMessageBank.UseVisualStyleBackColor = true;
+            this.buttonSendToMessageBank.Click += new System.EventHandler(this.buttonSendToMessageBank_Click);
+            // 
+            // buttonAddToConferenceCall
+            // 
+            this.buttonAddToConferenceCall.Location = new System.Drawing.Point(194, 205);
+            this.buttonAddToConferenceCall.Name = "buttonAddToConferenceCall";
+            this.buttonAddToConferenceCall.Size = new System.Drawing.Size(156, 23);
+            this.buttonAddToConferenceCall.TabIndex = 20;
+            this.buttonAddToConferenceCall.Text = "Add To Conference Call";
+            this.buttonAddToConferenceCall.UseVisualStyleBackColor = true;
+            this.buttonAddToConferenceCall.Click += new System.EventHandler(this.buttonAddToConferenceCall_Click);
+            // 
+            // checkBoxSuspend
+            // 
+            this.checkBoxSuspend.AutoSize = true;
+            this.checkBoxSuspend.Location = new System.Drawing.Point(12, 209);
+            this.checkBoxSuspend.Name = "checkBoxSuspend";
+            this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
+            this.checkBoxSuspend.TabIndex = 21;
+            this.checkBoxSuspend.Text = "Suspend";
+            this.checkBoxSuspend.UseVisualStyleBackColor = true;
+            this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
+            // 
             // InComingCall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 207);
+            this.ClientSize = new System.Drawing.Size(526, 240);
+            this.Controls.Add(this.checkBoxSuspend);
+            this.Controls.Add(this.buttonAddToConferenceCall);
+            this.Controls.Add(this.buttonSendToMessageBank);
+            this.Controls.Add(this.labelIncomingCallAutoAnswer);
             this.Controls.Add(this.groupBoxDigits);
             this.Controls.Add(this.buttonHangup);
             this.Controls.Add(this.buttonAnswer);
@@ -274,5 +321,9 @@
         private System.Windows.Forms.Button buttonTwo;
         private System.Windows.Forms.Button buttonOne;
         private System.Windows.Forms.TextBox textBoxDigits;
+        private System.Windows.Forms.Label labelIncomingCallAutoAnswer;
+        private System.Windows.Forms.Button buttonSendToMessageBank;
+        private System.Windows.Forms.Button buttonAddToConferenceCall;
+        private System.Windows.Forms.CheckBox checkBoxSuspend;
     }
 }

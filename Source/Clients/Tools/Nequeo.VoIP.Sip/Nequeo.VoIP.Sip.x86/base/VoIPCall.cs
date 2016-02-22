@@ -80,8 +80,9 @@ namespace Nequeo.VoIP.Sip
         }
 
         private VoIPManager _voipManager = null;
-        private AudioMediaRecorder _recorder = null;
         private string _recordFilename = null;
+
+        private List<Param.CallParam> _conferenceCall = null;
 
         /// <summary>
         /// Notify application on incoming call.
@@ -105,11 +106,153 @@ namespace Nequeo.VoIP.Sip
         public event System.EventHandler<Param.OnRegStateParam> OnRegState;
 
         /// <summary>
+        /// Gets the list of callers in the conference.
+        /// </summary>
+        public Param.CallParam[] ConferenceCall
+        {
+            get
+            {
+                if (_conferenceCall != null)
+                    return _conferenceCall.ToArray();
+                else
+                    return null;
+            }
+        }
+
+        /// <summary>
         /// Gets the VoIP manager.
         /// </summary>
         public VoIPManager VoIPManager
         {
             get { return _voipManager; }
+        }
+
+        /// <summary>
+        /// Start or stop transmitting media to all conference call contacts.
+        /// </summary>
+        /// <param name="stop">True to stop transmitting; false to start transmitting.</param>
+        public void SuspendConferenceCall(bool stop)
+        {
+            // If the contact.
+            if (_conferenceCall != null)
+            {
+                // Start the conversation between the caller and all other callers.
+                foreach (Param.CallParam call in _conferenceCall)
+                {
+                    try
+                    {
+                        // Stop transmitting.
+                        if (stop)
+                        {
+                            // Stop transmitting.
+                            call.StopTransmitting();
+                        }
+                        else
+                        {
+                            // Start transmitting.
+                            call.StartTransmitting();
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add the conference call contact.
+        /// </summary>
+        /// <param name="caller">The contact to add.</param>
+        public void AddConferenceCallContact(Param.CallParam caller)
+        {
+            if (_conferenceCall == null)
+                _conferenceCall = new List<Param.CallParam>();
+
+            // Add the contact.
+            if (_conferenceCall != null)
+            {
+                // Start the conversation between the caller and all other callers.
+                foreach (Param.CallParam call in _conferenceCall)
+                {
+                    try
+                    {
+                        // The current callers.
+                        caller.StartConversation(call);
+                    }
+                    catch { }
+                }
+
+                // Add the contact.
+                _conferenceCall.Add(caller);
+            }
+        }
+
+        /// <summary>
+        /// Remove the conference call contact.
+        /// </summary>
+        /// <param name="id">The call to remove.</param>
+        public void RemoveConferenceCallContact(string id)
+        {
+            // Remove the contact.
+            if (_conferenceCall != null)
+            {
+                Param.CallParam caller = null;
+                try
+                {
+                    // Find the caller.
+                    caller = _conferenceCall.First(u => u.ID == id);
+                    bool ret = _conferenceCall.Remove(caller);
+                    if (!ret) caller = null;
+                }
+                catch { }
+
+                // If call has been found.
+                if (caller != null)
+                {
+                    // Start the conversation between the caller and all other callers.
+                    foreach (Param.CallParam call in _conferenceCall)
+                    {
+                        try
+                        {
+                            // The current callers.
+                            caller.StopConversation(call);
+                        }
+                        catch { }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove all conference call contacts.
+        /// </summary>
+        public void RemoveAllConferenceCallContacts()
+        {
+            // Remove the contact.
+            if (_conferenceCall != null)
+            {
+                // Start the conversation between the caller and all other callers.
+                foreach (Param.CallParam caller in _conferenceCall)
+                {
+                    // Start the conversation between the caller and all other callers.
+                    foreach (Param.CallParam call in _conferenceCall)
+                    {
+                        try
+                        {
+                            // If not the same call.
+                            if (call.CallID != caller.CallID)
+                            {
+                                // The current callers.
+                                caller.StopConversation(call);
+                            }
+                        }
+                        catch { }
+                    }
+                }
+
+                // Clear all the items.
+                _conferenceCall.Clear();
+                _conferenceCall = null;
+            }
         }
 
         /// <summary>
@@ -221,8 +364,7 @@ namespace Nequeo.VoIP.Sip
             {
                 // Create a new call.
                 Call call = _voipManager.CreateCall(e.CallId);
-                call.OnCallState += Call_OnCallState;
-                call.OnCallMediaState += Call_OnCallMediaState;
+                Param.CallParam callInfo = new Param.CallParam(call, _voipManager.MediaManager, _recordFilename);
 
                 // Create the call settings.
                 CallSetting setting = new CallSetting(true);
@@ -240,7 +382,7 @@ namespace Nequeo.VoIP.Sip
                 param.Info = e.RxData.Info;
                 param.SrcAddress = e.RxData.SrcAddress;
                 param.WholeMsg = e.RxData.WholeMsg;
-                param.Call = new Param.CallParam(call);
+                param.Call = callInfo;
                 param.Contact = FindContact(param);
 
                 // Call the event handler.
@@ -282,105 +424,6 @@ namespace Nequeo.VoIP.Sip
 
             // Call the event handler.
             OnRegStarted?.Invoke(this, param);
-        }
-
-        /// <summary>
-        /// Notify application when media state in the call has changed.
-        /// Normal application would need to implement this callback, e.g.
-        /// to connect the call's media to sound device. When ICE is used,
-        /// this callback will also be called to report ICE negotiation failure.
-        /// </summary>
-        /// <param name="sender">The current sender.</param>
-        /// <param name="e">The event parameter.</param>
-        private void Call_OnCallMediaState(object sender, OnCallMediaStateParam e)
-        {
-            Nequeo.Net.Sip.CallInfo ci = e.Info;
-            if (ci != null)
-            {
-                // For each media.
-                for (int i = 0; i < ci.Media.Length; i++)
-                {
-                    bool recoderSet = false;
-
-                    // If objects exist.
-                    if (ci.Media != null && ci.Media[i] != null && e.CurrentCall != null)
-                    {
-                        // If audio type.
-                        if ((ci.Media[i].Type == Nequeo.Net.Sip.MediaType.PJMEDIA_TYPE_AUDIO) &&
-                            (e.CurrentCall.GetMedia((uint)i) != null))
-                        {
-                            // Get the audio media.
-                            AudioMedia audioMedia = (AudioMedia)e.CurrentCall.GetMedia((uint)i);
-
-                            // Connect the call audio media to sound device.
-                            audioMedia.StartTransmit(_voipManager.MediaManager.GetPlaybackDeviceMedia());
-                            _voipManager.MediaManager.GetCaptureDeviceMedia().StartTransmit(audioMedia);
-
-                            // If recording.
-                            if (!recoderSet && !String.IsNullOrEmpty(_recordFilename))
-                            {
-                                // Get the capture audio device.
-                                AudioMedia audioMediaRecord = _voipManager.MediaManager.GetCaptureDeviceMedia();
-
-                                try
-                                {
-                                    // Create the recorder.
-                                    _recorder = new AudioMediaRecorder();
-                                    _recorder.CreateRecorder(_recordFilename, 0);
-                                    _recorder.StartRecordingConversation(audioMediaRecord, new AudioMedia[] { audioMedia });
-                                }
-                                catch { }
-
-                                // Set one recorder.
-                                recoderSet = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Notify application when call state has changed.
-        /// Application may then query the call info to get the
-        /// detail call states by calling getInfo() function.
-        /// </summary>
-        /// <param name="sender">The current sender.</param>
-        /// <param name="e">The event parameter.</param>
-        private void Call_OnCallState(object sender, OnCallStateParam e)
-        {
-            Nequeo.Net.Sip.CallInfo ci = e.Info;
-            if (ci != null)
-            {
-                // If call is disconnected.
-                if ((ci.State == InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
-                    (ci.State == InviteSessionState.PJSIP_INV_STATE_NULL))
-                {
-                    // If current call.
-                    if (e.CurrentCall != null)
-                    {
-                        // Cleanup the call.
-                        e.CurrentCall.Dispose();
-                        e.CurrentCall = null;
-                    }
-
-                    // If recoder.
-                    if (_recorder != null)
-                    {
-                        try
-                        {
-                            // Stop the recorder.
-                            AudioMedia audioMedia = _voipManager.MediaManager.GetCaptureDeviceMedia();
-                            _recorder.Stop(audioMedia);
-                        }
-                        catch { }
-
-                        // Cleanup the recoder.
-                        _recorder.Dispose();
-                        _recorder = null;
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -483,17 +526,17 @@ namespace Nequeo.VoIP.Sip
                 // and unmanaged resources.
                 if (disposing)
                 {
-                    if (_recorder != null)
-                        _recorder.Dispose();
-
                     if (_voipManager != null)
                         _voipManager.Dispose();
+
+                    if (_conferenceCall != null)
+                        RemoveAllConferenceCallContacts();
                 }
 
                 // Call the appropriate methods to clean up
                 // unmanaged resources here.
-                _recorder = null;
                 _voipManager = null;
+                _conferenceCall = null;
             }
         }
 

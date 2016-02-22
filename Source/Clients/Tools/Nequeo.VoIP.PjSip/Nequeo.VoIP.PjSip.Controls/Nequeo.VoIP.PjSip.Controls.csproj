@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1F7AA88-978D-4FFC-8EEB-82C74AD8012B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.VoIP.PjSip.Controls</RootNamespace>
+    <AssemblyName>Nequeo.VoIP.PjSip.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging\Client\VoIPControls\PjSip\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\..\References\Staging\Client\VoIPControls\PjSip\Nequeo.VoIP.PjSip.Controls.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoVoIPPjSipKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.IO.Audio">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.PjSip">
+      <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Serialisation">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Serialisation.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.VoIP.PjSip">
+      <HintPath>..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Common.cs" />
+    <Compile Include="Data\Configuration.cs">
+      <DependentUpon>Configuration.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Contacts.cs">
+      <DependentUpon>Contacts.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\ContactInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ContactInfo.Designer.cs">
+      <DependentUpon>ContactInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InComingCall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InComingCall.Designer.cs">
+      <DependentUpon>InComingCall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InstantMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InstantMessage.Designer.cs">
+      <DependentUpon>InstantMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NumberInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NumberInfo.Designer.cs">
+      <DependentUpon>NumberInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VoIPControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VoIPControl.Designer.cs">
+      <DependentUpon>VoIPControl.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Configuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\Contacts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NequeoVoIPPjSipKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Configuration.xml" />
+    <Content Include="Data\Contacts.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\ContactInfo.resx">
+      <DependentUpon>ContactInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InComingCall.resx">
+      <DependentUpon>InComingCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InstantMessage.resx">
+      <DependentUpon>InstantMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NumberInfo.resx">
+      <DependentUpon>NumberInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VoIPControl.resx">
+      <DependentUpon>VoIPControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

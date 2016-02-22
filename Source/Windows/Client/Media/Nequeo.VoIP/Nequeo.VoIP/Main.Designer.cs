@@ -28,8 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.voIPControl1 = new Nequeo.VoIP.Sip.UI.VoIPControl();
+            this.voIPControl1 = new Nequeo.VoIP.PjSip.UI.VoIPControl();
+            this.tabControlVoIP = new System.Windows.Forms.TabControl();
+            this.tabPageVoIP1 = new System.Windows.Forms.TabPage();
+            this.tabPageVoIP2 = new System.Windows.Forms.TabPage();
+            this.voIPControl2 = new Nequeo.VoIP.Sip.UI.VoIPControl();
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.addVoIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.voiceVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.voiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStripNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparatorSep = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControlVoIP.SuspendLayout();
+            this.tabPageVoIP1.SuspendLayout();
+            this.tabPageVoIP2.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
+            this.contextMenuStripNotify.SuspendLayout();
             this.SuspendLayout();
             // 
             // voIPControl1
@@ -42,30 +65,209 @@
             this.voIPControl1.AudioRecordingOutCall = false;
             this.voIPControl1.AudioRecordingOutCallPath = null;
             this.voIPControl1.ContactsFilePath = null;
-            this.voIPControl1.Location = new System.Drawing.Point(12, 12);
+            this.voIPControl1.Location = new System.Drawing.Point(3, 3);
             this.voIPControl1.Name = "voIPControl1";
-            this.voIPControl1.Size = new System.Drawing.Size(773, 328);
+            this.voIPControl1.Size = new System.Drawing.Size(640, 346);
             this.voIPControl1.TabIndex = 0;
+            // 
+            // tabControlVoIP
+            // 
+            this.tabControlVoIP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlVoIP.Controls.Add(this.tabPageVoIP1);
+            this.tabControlVoIP.Controls.Add(this.tabPageVoIP2);
+            this.tabControlVoIP.Location = new System.Drawing.Point(12, 27);
+            this.tabControlVoIP.Name = "tabControlVoIP";
+            this.tabControlVoIP.SelectedIndex = 0;
+            this.tabControlVoIP.Size = new System.Drawing.Size(654, 378);
+            this.tabControlVoIP.TabIndex = 1;
+            // 
+            // tabPageVoIP1
+            // 
+            this.tabPageVoIP1.Controls.Add(this.voIPControl1);
+            this.tabPageVoIP1.Location = new System.Drawing.Point(4, 22);
+            this.tabPageVoIP1.Name = "tabPageVoIP1";
+            this.tabPageVoIP1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageVoIP1.Size = new System.Drawing.Size(646, 352);
+            this.tabPageVoIP1.TabIndex = 0;
+            this.tabPageVoIP1.Text = "VoIP Account Voice & Video";
+            this.tabPageVoIP1.UseVisualStyleBackColor = true;
+            // 
+            // tabPageVoIP2
+            // 
+            this.tabPageVoIP2.Controls.Add(this.voIPControl2);
+            this.tabPageVoIP2.Location = new System.Drawing.Point(4, 22);
+            this.tabPageVoIP2.Name = "tabPageVoIP2";
+            this.tabPageVoIP2.Size = new System.Drawing.Size(759, 352);
+            this.tabPageVoIP2.TabIndex = 1;
+            this.tabPageVoIP2.Text = "VoIP Account Voice";
+            this.tabPageVoIP2.UseVisualStyleBackColor = true;
+            // 
+            // voIPControl2
+            // 
+            this.voIPControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.voIPControl2.AudioRecordingInCall = false;
+            this.voIPControl2.AudioRecordingInCallPath = null;
+            this.voIPControl2.AudioRecordingOutCall = false;
+            this.voIPControl2.AudioRecordingOutCallPath = null;
+            this.voIPControl2.ContactsFilePath = null;
+            this.voIPControl2.Location = new System.Drawing.Point(3, 3);
+            this.voIPControl2.Name = "voIPControl2";
+            this.voIPControl2.Size = new System.Drawing.Size(753, 346);
+            this.voIPControl2.TabIndex = 0;
+            // 
+            // menuStripMain
+            // 
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(678, 24);
+            this.menuStripMain.TabIndex = 2;
+            this.menuStripMain.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemClose,
+            this.addVoIPToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // toolStripMenuItemClose
+            // 
+            this.toolStripMenuItemClose.Name = "toolStripMenuItemClose";
+            this.toolStripMenuItemClose.Size = new System.Drawing.Size(122, 22);
+            this.toolStripMenuItemClose.Text = "Close";
+            this.toolStripMenuItemClose.Click += new System.EventHandler(this.toolStripMenuItemClose_Click);
+            // 
+            // addVoIPToolStripMenuItem
+            // 
+            this.addVoIPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.voiceVideoToolStripMenuItem,
+            this.voiceToolStripMenuItem});
+            this.addVoIPToolStripMenuItem.Name = "addVoIPToolStripMenuItem";
+            this.addVoIPToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.addVoIPToolStripMenuItem.Text = "Add VoIP";
+            this.addVoIPToolStripMenuItem.Visible = false;
+            this.addVoIPToolStripMenuItem.Click += new System.EventHandler(this.addVoIPToolStripMenuItem_Click);
+            // 
+            // voiceVideoToolStripMenuItem
+            // 
+            this.voiceVideoToolStripMenuItem.Name = "voiceVideoToolStripMenuItem";
+            this.voiceVideoToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.voiceVideoToolStripMenuItem.Text = "Voice and Video";
+            this.voiceVideoToolStripMenuItem.Click += new System.EventHandler(this.voiceVideoToolStripMenuItem_Click);
+            // 
+            // voiceToolStripMenuItem
+            // 
+            this.voiceToolStripMenuItem.Name = "voiceToolStripMenuItem";
+            this.voiceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.voiceToolStripMenuItem.Text = "Voice";
+            this.voiceToolStripMenuItem.Click += new System.EventHandler(this.voiceToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // notifyIconMain
+            // 
+            this.notifyIconMain.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIconMain.BalloonTipText = "Nequeo voip application capable of voice and video communication.";
+            this.notifyIconMain.BalloonTipTitle = "Nequeo VoIP";
+            this.notifyIconMain.ContextMenuStrip = this.contextMenuStripNotify;
+            this.notifyIconMain.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconMain.Icon")));
+            this.notifyIconMain.Text = "Nequeo VoIP";
+            this.notifyIconMain.Visible = true;
+            // 
+            // contextMenuStripNotify
+            // 
+            this.contextMenuStripNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemOpen,
+            this.toolStripSeparatorSep,
+            this.toolStripMenuItemExit});
+            this.contextMenuStripNotify.Name = "contextMenuStripNotify";
+            this.contextMenuStripNotify.Size = new System.Drawing.Size(104, 54);
+            // 
+            // toolStripMenuItemOpen
+            // 
+            this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
+            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(103, 22);
+            this.toolStripMenuItemOpen.Text = "Open";
+            this.toolStripMenuItemOpen.Click += new System.EventHandler(this.toolStripMenuItemOpen_Click);
+            // 
+            // toolStripSeparatorSep
+            // 
+            this.toolStripSeparatorSep.Name = "toolStripSeparatorSep";
+            this.toolStripSeparatorSep.Size = new System.Drawing.Size(100, 6);
+            // 
+            // toolStripMenuItemExit
+            // 
+            this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(103, 22);
+            this.toolStripMenuItemExit.Text = "Exit";
+            this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 352);
-            this.Controls.Add(this.voIPControl1);
+            this.ClientSize = new System.Drawing.Size(678, 417);
+            this.Controls.Add(this.tabControlVoIP);
+            this.Controls.Add(this.menuStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStripMain;
             this.Name = "Main";
             this.Text = "Nequeo VoIP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            this.Load += new System.EventHandler(this.Main_Load);
+            this.tabControlVoIP.ResumeLayout(false);
+            this.tabPageVoIP1.ResumeLayout(false);
+            this.tabPageVoIP2.ResumeLayout(false);
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
+            this.contextMenuStripNotify.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
 
         #endregion
 
-        private Sip.UI.VoIPControl voIPControl1;
+        private PjSip.UI.VoIPControl voIPControl1;
+        private System.Windows.Forms.TabControl tabControlVoIP;
+        private System.Windows.Forms.TabPage tabPageVoIP1;
+        private System.Windows.Forms.MenuStrip menuStripMain;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addVoIPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem voiceVideoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem voiceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPageVoIP2;
+        private Sip.UI.VoIPControl voIPControl2;
+        private System.Windows.Forms.NotifyIcon notifyIconMain;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripNotify;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemClose;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorSep;
     }
 }
 

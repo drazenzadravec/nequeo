@@ -49,10 +49,20 @@ namespace Nequeo.Net.Sip
         /// </summary>
         public AudioMediaPlayer()
         {
-            _pjAudioMediaPlayer = new pjsua2.AudioMediaPlayer();
+            _pjAudioMediaPlayer = new AudioMediaPlayerCallback();
+            _pjAudioMediaPlayer.OnPlayerEndOfFile += _pjAudioMediaPlayer_OnPlayerEndOfFile;
         }
 
-        private pjsua2.AudioMediaPlayer _pjAudioMediaPlayer = null;
+        private AudioMediaPlayerCallback _pjAudioMediaPlayer = null;
+
+        ///	<summary>
+        ///	Register a callback to be called when the file player reading has
+        /// reached the end of file, or when the file reading has reached the
+        /// end of file of the last file for a playlist.If the file or playlist
+        /// is set to play repeatedly, then the callback will be called multiple
+        /// times.
+        ///	</summary>
+        public event System.EventHandler<bool> OnPlayerEndOfFile;
 
         /// <summary>
         /// Create a file player, and automatically add this 
@@ -148,6 +158,77 @@ namespace Nequeo.Net.Sip
             {
                 pjsua2.AudioMedia media = conferenceCalls[i].PjAudioMedia;
                 _pjAudioMediaPlayer.stopTransmit(media);
+            }
+        }
+
+        ///	<summary>
+        ///	Register a callback to be called when the file player reading has
+        /// reached the end of file, or when the file reading has reached the
+        /// end of file of the last file for a playlist.If the file or playlist
+        /// is set to play repeatedly, then the callback will be called multiple
+        /// times.
+        ///	</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pjAudioMediaPlayer_OnPlayerEndOfFile(object sender, bool e)
+        {
+            OnPlayerEndOfFile?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Audio media player callbacks.
+        /// </summary>
+        internal class AudioMediaPlayerCallback : pjsua2.AudioMediaPlayer
+        {
+            /// <summary>
+            /// Audio media player callbacks.
+            /// </summary>
+            public AudioMediaPlayerCallback() { }
+
+            private bool _disposed = false;
+
+            ///	<summary>
+            ///	Register a callback to be called when the file player reading has
+            /// reached the end of file, or when the file reading has reached the
+            /// end of file of the last file for a playlist.If the file or playlist
+            /// is set to play repeatedly, then the callback will be called multiple
+            /// times.
+            ///	</summary>
+            public event System.EventHandler<bool> OnPlayerEndOfFile;
+
+            ///	<summary>
+            ///	Register a callback to be called when the file player reading has
+            /// reached the end of file, or when the file reading has reached the
+            /// end of file of the last file for a playlist.If the file or playlist
+            /// is set to play repeatedly, then the callback will be called multiple
+            /// times.
+            ///	</summary>
+            /// <returns>If the callback returns false, the playback
+            /// will stop.Note that if application destroys
+            /// the player in the callback, it must return
+            /// false here.</returns>
+            public override bool onEof()
+            {
+                bool eof = true;
+
+                // Invoke the call back event.
+                OnPlayerEndOfFile?.Invoke(this, eof);
+
+                // Return the value.
+                return eof;
+            }
+
+            /// <summary>
+            /// Dispose.
+            /// </summary>
+            public override void Dispose()
+            {
+                if (!_disposed)
+                {
+                    _disposed = true;
+
+                    base.Dispose();
+                }
             }
         }
 

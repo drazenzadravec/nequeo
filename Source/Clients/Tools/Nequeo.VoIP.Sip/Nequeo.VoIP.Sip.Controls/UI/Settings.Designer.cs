@@ -34,6 +34,9 @@
             this.labelAudioPlaybackDevice = new System.Windows.Forms.Label();
             this.labelAudioCaptureDevice = new System.Windows.Forms.Label();
             this.groupBoxAccount = new System.Windows.Forms.GroupBox();
+            this.labelAutoAnswerWaitSec = new System.Windows.Forms.Label();
+            this.textBoxAutoAnswerWait = new System.Windows.Forms.TextBox();
+            this.checkBoxAutoAnswer = new System.Windows.Forms.CheckBox();
             this.checkBoxSrtpSecureSignaling = new System.Windows.Forms.CheckBox();
             this.checkBoxUseSrtp = new System.Windows.Forms.CheckBox();
             this.checkBoxUseIPv6 = new System.Windows.Forms.CheckBox();
@@ -112,14 +115,20 @@
             this.checkBoxPublishEnabled = new System.Windows.Forms.CheckBox();
             this.tabPageMedia = new System.Windows.Forms.TabPage();
             this.groupBoxSounds = new System.Windows.Forms.GroupBox();
+            this.buttonSoundsAutoAnswer = new System.Windows.Forms.Button();
+            this.textBoxSoundsAutoAnswer = new System.Windows.Forms.TextBox();
+            this.labelSoundsAutoAnswer = new System.Windows.Forms.Label();
+            this.labelSoundsAudioDevice = new System.Windows.Forms.Label();
+            this.comboBoxSoundsAudioDevice = new System.Windows.Forms.ComboBox();
             this.buttonSoundsIMPath = new System.Windows.Forms.Button();
             this.labelSoundsIMPath = new System.Windows.Forms.Label();
             this.textBoxSoundsIMPath = new System.Windows.Forms.TextBox();
             this.labelSoundsRingPath = new System.Windows.Forms.Label();
             this.buttonSoundsRingPath = new System.Windows.Forms.Button();
             this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
-            this.comboBoxSoundsAudioDevice = new System.Windows.Forms.ComboBox();
-            this.labelSoundsAudioDevice = new System.Windows.Forms.Label();
+            this.labelMessageBankWait = new System.Windows.Forms.Label();
+            this.textBoxMessageBankWait = new System.Windows.Forms.TextBox();
+            this.labelMessageBankWaitSec = new System.Windows.Forms.Label();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -190,6 +199,12 @@
             // 
             // groupBoxAccount
             // 
+            this.groupBoxAccount.Controls.Add(this.labelMessageBankWaitSec);
+            this.groupBoxAccount.Controls.Add(this.textBoxMessageBankWait);
+            this.groupBoxAccount.Controls.Add(this.labelMessageBankWait);
+            this.groupBoxAccount.Controls.Add(this.labelAutoAnswerWaitSec);
+            this.groupBoxAccount.Controls.Add(this.textBoxAutoAnswerWait);
+            this.groupBoxAccount.Controls.Add(this.checkBoxAutoAnswer);
             this.groupBoxAccount.Controls.Add(this.checkBoxSrtpSecureSignaling);
             this.groupBoxAccount.Controls.Add(this.checkBoxUseSrtp);
             this.groupBoxAccount.Controls.Add(this.checkBoxUseIPv6);
@@ -208,6 +223,34 @@
             this.groupBoxAccount.TabIndex = 2;
             this.groupBoxAccount.TabStop = false;
             this.groupBoxAccount.Text = "Account";
+            // 
+            // labelAutoAnswerWaitSec
+            // 
+            this.labelAutoAnswerWaitSec.AutoSize = true;
+            this.labelAutoAnswerWaitSec.Location = new System.Drawing.Point(158, 260);
+            this.labelAutoAnswerWaitSec.Name = "labelAutoAnswerWaitSec";
+            this.labelAutoAnswerWaitSec.Size = new System.Drawing.Size(18, 13);
+            this.labelAutoAnswerWaitSec.TabIndex = 15;
+            this.labelAutoAnswerWaitSec.Text = "(s)";
+            // 
+            // textBoxAutoAnswerWait
+            // 
+            this.textBoxAutoAnswerWait.Location = new System.Drawing.Point(110, 257);
+            this.textBoxAutoAnswerWait.Name = "textBoxAutoAnswerWait";
+            this.textBoxAutoAnswerWait.Size = new System.Drawing.Size(42, 20);
+            this.textBoxAutoAnswerWait.TabIndex = 14;
+            this.textBoxAutoAnswerWait.TextChanged += new System.EventHandler(this.textBoxAutoAnswerWait_TextChanged);
+            // 
+            // checkBoxAutoAnswer
+            // 
+            this.checkBoxAutoAnswer.AutoSize = true;
+            this.checkBoxAutoAnswer.Location = new System.Drawing.Point(18, 259);
+            this.checkBoxAutoAnswer.Name = "checkBoxAutoAnswer";
+            this.checkBoxAutoAnswer.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxAutoAnswer.TabIndex = 12;
+            this.checkBoxAutoAnswer.Text = "Auto Answer";
+            this.checkBoxAutoAnswer.UseVisualStyleBackColor = true;
+            this.checkBoxAutoAnswer.CheckedChanged += new System.EventHandler(this.checkBoxAutoAnswer_CheckedChanged);
             // 
             // checkBoxSrtpSecureSignaling
             // 
@@ -979,6 +1022,9 @@
             // 
             // groupBoxSounds
             // 
+            this.groupBoxSounds.Controls.Add(this.buttonSoundsAutoAnswer);
+            this.groupBoxSounds.Controls.Add(this.textBoxSoundsAutoAnswer);
+            this.groupBoxSounds.Controls.Add(this.labelSoundsAutoAnswer);
             this.groupBoxSounds.Controls.Add(this.labelSoundsAudioDevice);
             this.groupBoxSounds.Controls.Add(this.comboBoxSoundsAudioDevice);
             this.groupBoxSounds.Controls.Add(this.buttonSoundsIMPath);
@@ -993,6 +1039,52 @@
             this.groupBoxSounds.TabIndex = 5;
             this.groupBoxSounds.TabStop = false;
             this.groupBoxSounds.Text = "Sounds";
+            // 
+            // buttonSoundsAutoAnswer
+            // 
+            this.buttonSoundsAutoAnswer.Location = new System.Drawing.Point(429, 100);
+            this.buttonSoundsAutoAnswer.Name = "buttonSoundsAutoAnswer";
+            this.buttonSoundsAutoAnswer.Size = new System.Drawing.Size(30, 21);
+            this.buttonSoundsAutoAnswer.TabIndex = 10;
+            this.buttonSoundsAutoAnswer.Text = "...";
+            this.buttonSoundsAutoAnswer.UseVisualStyleBackColor = true;
+            this.buttonSoundsAutoAnswer.Click += new System.EventHandler(this.buttonSoundsAutoAnswer_Click);
+            // 
+            // textBoxSoundsAutoAnswer
+            // 
+            this.textBoxSoundsAutoAnswer.Location = new System.Drawing.Point(144, 100);
+            this.textBoxSoundsAutoAnswer.Name = "textBoxSoundsAutoAnswer";
+            this.textBoxSoundsAutoAnswer.Size = new System.Drawing.Size(279, 20);
+            this.textBoxSoundsAutoAnswer.TabIndex = 9;
+            this.textBoxSoundsAutoAnswer.TextChanged += new System.EventHandler(this.textBoxSoundsAutoAnswer_TextChanged);
+            // 
+            // labelSoundsAutoAnswer
+            // 
+            this.labelSoundsAutoAnswer.AutoSize = true;
+            this.labelSoundsAutoAnswer.Location = new System.Drawing.Point(15, 103);
+            this.labelSoundsAutoAnswer.Name = "labelSoundsAutoAnswer";
+            this.labelSoundsAutoAnswer.Size = new System.Drawing.Size(73, 13);
+            this.labelSoundsAutoAnswer.TabIndex = 8;
+            this.labelSoundsAutoAnswer.Text = "Auto Answer :";
+            // 
+            // labelSoundsAudioDevice
+            // 
+            this.labelSoundsAudioDevice.AutoSize = true;
+            this.labelSoundsAudioDevice.Location = new System.Drawing.Point(15, 22);
+            this.labelSoundsAudioDevice.Name = "labelSoundsAudioDevice";
+            this.labelSoundsAudioDevice.Size = new System.Drawing.Size(77, 13);
+            this.labelSoundsAudioDevice.TabIndex = 7;
+            this.labelSoundsAudioDevice.Text = "Audio Device :";
+            // 
+            // comboBoxSoundsAudioDevice
+            // 
+            this.comboBoxSoundsAudioDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSoundsAudioDevice.FormattingEnabled = true;
+            this.comboBoxSoundsAudioDevice.Location = new System.Drawing.Point(144, 19);
+            this.comboBoxSoundsAudioDevice.Name = "comboBoxSoundsAudioDevice";
+            this.comboBoxSoundsAudioDevice.Size = new System.Drawing.Size(315, 21);
+            this.comboBoxSoundsAudioDevice.TabIndex = 6;
+            this.comboBoxSoundsAudioDevice.SelectedIndexChanged += new System.EventHandler(this.comboBoxSoundsAudioDevice_SelectedIndexChanged);
             // 
             // buttonSoundsIMPath
             // 
@@ -1048,24 +1140,31 @@
             this.textBoxSoundsRingPath.TabIndex = 0;
             this.textBoxSoundsRingPath.TextChanged += new System.EventHandler(this.textBoxSoundsRingPath_TextChanged);
             // 
-            // comboBoxSoundsAudioDevice
+            // labelMessageBankWait
             // 
-            this.comboBoxSoundsAudioDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSoundsAudioDevice.FormattingEnabled = true;
-            this.comboBoxSoundsAudioDevice.Location = new System.Drawing.Point(144, 19);
-            this.comboBoxSoundsAudioDevice.Name = "comboBoxSoundsAudioDevice";
-            this.comboBoxSoundsAudioDevice.Size = new System.Drawing.Size(315, 21);
-            this.comboBoxSoundsAudioDevice.TabIndex = 6;
-            this.comboBoxSoundsAudioDevice.SelectedIndexChanged += new System.EventHandler(this.comboBoxSoundsAudioDevice_SelectedIndexChanged);
+            this.labelMessageBankWait.AutoSize = true;
+            this.labelMessageBankWait.Location = new System.Drawing.Point(15, 286);
+            this.labelMessageBankWait.Name = "labelMessageBankWait";
+            this.labelMessageBankWait.Size = new System.Drawing.Size(84, 13);
+            this.labelMessageBankWait.TabIndex = 16;
+            this.labelMessageBankWait.Text = "Message Bank :";
             // 
-            // labelSoundsAudioDevice
+            // textBoxMessageBankWait
             // 
-            this.labelSoundsAudioDevice.AutoSize = true;
-            this.labelSoundsAudioDevice.Location = new System.Drawing.Point(15, 22);
-            this.labelSoundsAudioDevice.Name = "labelSoundsAudioDevice";
-            this.labelSoundsAudioDevice.Size = new System.Drawing.Size(77, 13);
-            this.labelSoundsAudioDevice.TabIndex = 7;
-            this.labelSoundsAudioDevice.Text = "Audio Device :";
+            this.textBoxMessageBankWait.Location = new System.Drawing.Point(110, 283);
+            this.textBoxMessageBankWait.Name = "textBoxMessageBankWait";
+            this.textBoxMessageBankWait.Size = new System.Drawing.Size(42, 20);
+            this.textBoxMessageBankWait.TabIndex = 17;
+            this.textBoxMessageBankWait.TextChanged += new System.EventHandler(this.textBoxMessageBankWait_TextChanged);
+            // 
+            // labelMessageBankWaitSec
+            // 
+            this.labelMessageBankWaitSec.AutoSize = true;
+            this.labelMessageBankWaitSec.Location = new System.Drawing.Point(158, 286);
+            this.labelMessageBankWaitSec.Name = "labelMessageBankWaitSec";
+            this.labelMessageBankWaitSec.Size = new System.Drawing.Size(18, 13);
+            this.labelMessageBankWaitSec.TabIndex = 18;
+            this.labelMessageBankWaitSec.Text = "(s)";
             // 
             // Settings
             // 
@@ -1208,5 +1307,14 @@
         private System.Windows.Forms.TextBox textBoxSoundsIMPath;
         private System.Windows.Forms.Label labelSoundsAudioDevice;
         private System.Windows.Forms.ComboBox comboBoxSoundsAudioDevice;
+        private System.Windows.Forms.Button buttonSoundsAutoAnswer;
+        private System.Windows.Forms.TextBox textBoxSoundsAutoAnswer;
+        private System.Windows.Forms.Label labelSoundsAutoAnswer;
+        private System.Windows.Forms.CheckBox checkBoxAutoAnswer;
+        private System.Windows.Forms.Label labelAutoAnswerWaitSec;
+        private System.Windows.Forms.TextBox textBoxAutoAnswerWait;
+        private System.Windows.Forms.Label labelMessageBankWaitSec;
+        private System.Windows.Forms.TextBox textBoxMessageBankWait;
+        private System.Windows.Forms.Label labelMessageBankWait;
     }
 }

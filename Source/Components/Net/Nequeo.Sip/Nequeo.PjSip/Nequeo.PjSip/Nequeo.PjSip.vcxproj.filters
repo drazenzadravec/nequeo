@@ -372,6 +372,9 @@
     <ClInclude Include="VideoPreview.h">
       <Filter>Header Files\MediaHeader</Filter>
     </ClInclude>
+    <ClInclude Include="AudioMediaPlayerCallback.h">
+      <Filter>Header Files\MediaHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -633,6 +636,9 @@
       <Filter>Source Files\MediaSource</Filter>
     </ClCompile>
     <ClCompile Include="VideoPreview.cpp">
+      <Filter>Source Files\MediaSource</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioMediaPlayerCallback.cpp">
       <Filter>Source Files\MediaSource</Filter>
     </ClCompile>
   </ItemGroup>

@@ -33,6 +33,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,26 @@ namespace Nequeo.VoIP.Sip.Data
     internal class Common
     {
         /// <summary>
+        /// Account name.
+        /// </summary>
+        public string AccountName = "";
+
+        /// <summary>
+        /// Sip host.
+        /// </summary>
+        public string SipHost = "";
+
+        /// <summary>
+        /// Sip username.
+        /// </summary>
+        public string SipUsername = "";
+
+        /// <summary>
+        /// Sip password.
+        /// </summary>
+        public string SipPassword = "";
+
+        /// <summary>
         /// The incoming call ring file path.
         /// </summary>
         public string IncomingCallRingFilePath = null;
@@ -55,8 +76,132 @@ namespace Nequeo.VoIP.Sip.Data
         public string InstantMessageFilePath = null;
 
         /// <summary>
+        /// Auto answer file path.
+        /// </summary>
+        public string AutoAnswerFilePath = null;
+
+        /// <summary>
+        /// Auto answer.
+        /// </summary>
+        public bool AutoAnswer = false;
+
+        /// <summary>
+        /// Auto answer wait time (seconds).
+        /// </summary>
+        public int AutoAnswerWait = 0;
+
+        /// <summary>
+        /// Message bank wait time (seconds).
+        /// </summary>
+        public int MessageBankWait = 0;
+
+        /// <summary>
         /// The audio device index.
         /// </summary>
         public int AudioDeviceIndex = -1;
+
+        /// <summary>
+        /// Capture audio device index.
+        /// </summary>
+        public int CaptureAudioDeviceIndex = -1;
+
+        /// <summary>
+        /// Playback audio device index.
+        /// </summary>
+        public int PlaybackAudioDeviceIndex = -1;
+
+        /// <summary>
+        /// Enable outgoing call audio recording.
+        /// </summary>
+        public bool OutgoingCallAudioRecordingEnabled = false;
+
+        /// <summary>
+        /// Enable incoming call audio recording.
+        /// </summary>
+        public bool IncomingCallAudioRecordingEnabled = false;
+    }
+
+    /// <summary>
+    /// Incomming and outgoing calls.
+    /// </summary>
+    internal class IncomingOutgoingCalls : System.Collections.IEnumerable
+    {
+        /// <summary>
+        /// Incomming and outgoing calls.
+        /// </summary>
+        public IncomingOutgoingCalls()
+        {
+            _callInfoList = new List<Param.CallInfoParam>();
+        }
+
+        private List<Nequeo.VoIP.Sip.Param.CallInfoParam> _callInfoList = null;
+
+        /// <summary>
+        /// Get the count.
+        /// </summary>
+        public int Count
+        {
+            get { return _callInfoList.Count; }
+        }
+
+        /// <summary>
+        /// Add the call information.
+        /// </summary>
+        /// <param name="callInfo">The call information.</param>
+        public void Add(Nequeo.VoIP.Sip.Param.CallInfoParam callInfo)
+        {
+            _callInfoList.Add(callInfo);
+        }
+
+        /// <summary>
+        /// Remove the call information.
+        /// </summary>
+        /// <param name="callInfo">The call information.</param>
+        public void Remove(Nequeo.VoIP.Sip.Param.CallInfoParam callInfo)
+        {
+            _callInfoList.Remove(callInfo);
+        }
+
+        /// <summary>
+        /// Get all the call information.
+        /// </summary>
+        /// <returns>Get the call info</returns>
+        public Nequeo.VoIP.Sip.Param.CallInfoParam Get(int index)
+        {
+            return _callInfoList[index];
+        }
+
+        /// <summary>
+        /// Get all the call information.
+        /// </summary>
+        /// <returns>Get the call info</returns>
+        public Nequeo.VoIP.Sip.Param.CallInfoParam GetCallInfo(int callID)
+        {
+            Nequeo.VoIP.Sip.Param.CallInfoParam callInfo = null;
+            try
+            {
+                callInfo = _callInfoList.First(u => u.CallID == callID);
+            }
+            catch { callInfo = null; }
+            return callInfo;
+        }
+
+        /// <summary>
+        /// Get all the call information.
+        /// </summary>
+        /// <returns>All the call info param.</returns>
+        public Nequeo.VoIP.Sip.Param.CallInfoParam[] GetAll()
+        {
+            return _callInfoList.ToArray();
+        }
+
+        /// <summary>
+		/// Returns an enumerator that iterates through a collection.
+		/// </summary>
+		/// <returns>An System.Collections.IEnumerator object that can be used to iterate through the collection.</returns>
+		public IEnumerator GetEnumerator()
+        {
+            return _callInfoList.GetEnumerator();
+        }
     }
 }

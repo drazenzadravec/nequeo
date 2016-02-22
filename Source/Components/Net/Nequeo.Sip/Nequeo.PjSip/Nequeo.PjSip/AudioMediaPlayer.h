@@ -39,6 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "Media.h"
 #include "AudioMedia.h"
 #include "CallAudioMedia.h"
+#include "AudioMediaPlayerCallback.h"
 
 #include "pjsua2\media.hpp"
 #include "pjsua2.hpp"
@@ -46,6 +47,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using namespace System;
 using namespace System::Collections;
 using namespace System::Collections::Generic;
+using namespace System::Runtime::InteropServices;
 
 namespace Nequeo
 {
@@ -53,6 +55,8 @@ namespace Nequeo
 	{
 		namespace PjSip
 		{
+			delegate bool OnPlayerEndOfFileCallback();
+
 			/// <summary>
 			/// Audio media player.
 			/// </summary>
@@ -73,6 +77,15 @@ namespace Nequeo
 				///	Audio media player.
 				///	</summary>
 				!AudioMediaPlayer();
+
+				///	<summary>
+				///	Register a callback to be called when the file player reading has
+				/// reached the end of file, or when the file reading has reached the
+				/// end of file of the last file for a playlist.If the file or playlist
+				/// is set to play repeatedly, then the callback will be called multiple
+				/// times.
+				///	</summary>
+				event System::EventHandler<bool>^ OnPlayerEndOfFile;
 
 				/// <summary>
 				/// Create a file player, and automatically add this 
@@ -137,10 +150,18 @@ namespace Nequeo
 			private:
 				bool _disposed;
 
-				pj::AudioMediaPlayer* _pjAudioMediaPlayer;
+				AudioMediaPlayerCallback* _pjAudioMediaPlayer;
+
+				/// <summary>
+				/// Create the player.
+				/// </summary>
+				void Create();
 
 				void MarshalString(String^ s, std::string& os);
 				void MarshalString(String^ s, std::wstring& os);
+
+				GCHandle _gchPlayerEndOfFile;
+				bool OnPlayerEndOfFile_Handler();
 			};
 		}
 	}

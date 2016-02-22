@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <accountName></accountName>
+  <sipHost></sipHost>
+  <sipUsername></sipUsername>
+  <sipPassword></sipPassword>
+  <captureAudioDeviceIndex>1</captureAudioDeviceIndex>
+  <playbackAudioDeviceIndex>1</playbackAudioDeviceIndex>
+  <outgoingCallAudioRecordingEnabled>false</outgoingCallAudioRecordingEnabled>
+  <incomingCallAudioRecordingEnabled>false</incomingCallAudioRecordingEnabled>
+  <outgoingCallPathAudioRecording></outgoingCallPathAudioRecording>
+  <incomingCallPathAudioRecording></incomingCallPathAudioRecording>
+  <contactFilePath></contactFilePath>
+  <accountPort>5060</accountPort>
+  <accountIsDefault>true</accountIsDefault>
+  <accountPriority>1</accountPriority>
+  <accountUseIPv6>false</accountUseIPv6>
+  <accountUseSrtp>false</accountUseSrtp>
+  <accountSrtpSecureSignaling>false</accountSrtpSecureSignaling>
+  <accountDropCallsOnFail>true</accountDropCallsOnFail>
+  <accountRegisterOnAdd>false</accountRegisterOnAdd>
+  <accountNoIceRtcp>false</accountNoIceRtcp>
+  <accountIceEnabled>false</accountIceEnabled>
+  <accountAutoAnswerEnabled>false</accountAutoAnswerEnabled>
+  <accountAutoAnswerWait>0</accountAutoAnswerWait>
+  <accountMessageBankWait>0</accountMessageBankWait>
+  <timeRetryInterval>10</timeRetryInterval>
+  <timeFirstRetryInterval>10</timeFirstRetryInterval>
+  <timeDelayBeforeRefresh>10</timeDelayBeforeRefresh>
+  <timeTimeout>3000</timeTimeout>
+  <timeUnregisterWait>30</timeUnregisterWait>
+  <timerMinimumSession>90</timerMinimumSession>
+  <timerSessionExpires>1800</timerSessionExpires>
+  <publishEnabled>false</publishEnabled>
+  <publishQueue>true</publishQueue>
+  <publishShutdownWait>2000</publishShutdownWait>
+  <mwiEnabled>true</mwiEnabled>
+  <mwiExpiration>3600</mwiExpiration>
+  <mediaTransportPort>0</mediaTransportPort>
+  <mediaTransportPortRange>0</mediaTransportPortRange>
+  <soundAudioDeviceIndex>0</soundAudioDeviceIndex>
+  <soundIncomingCallFilePath></soundIncomingCallFilePath>
+  <soundInstantMessageFilePath></soundInstantMessageFilePath>
+  <soundAutoAnswerFilePath></soundAutoAnswerFilePath>
+</configuration>

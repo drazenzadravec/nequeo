@@ -181,7 +181,7 @@ namespace Nequeo
 				/// Stop conference call between remote parties; allow each party to talk to each other.
 				/// </summary>
 				/// <param name="conferenceCalls">Array of remote conference calls.</param>
-				void StoptConferenceCall(array<AudioMedia^>^ conferenceCalls);
+				void StopConferenceCall(array<AudioMedia^>^ conferenceCalls);
 
 			internal:
 				/// <summary>

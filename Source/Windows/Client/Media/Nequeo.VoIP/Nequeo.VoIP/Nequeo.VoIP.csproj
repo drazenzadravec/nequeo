@@ -57,11 +57,8 @@
     <ApplicationIcon>cellphone.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nequeo.VoIP.PjSip">
-      <HintPath>..\..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.dll</HintPath>
-    </Reference>
-    <Reference Include="Nequeo.VoIP.Sip">
-      <HintPath>..\..\..\..\..\References\Staging_x64\Client\VoIP\Sip\Nequeo.VoIP.Sip.dll</HintPath>
+    <Reference Include="Nequeo.VoIP.PjSip.Controls">
+      <HintPath>..\..\..\..\..\References\Staging\Client\VoIPControls\PjSip\Nequeo.VoIP.PjSip.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.VoIP.Sip.Controls">
       <HintPath>..\..\..\..\..\References\Staging\Client\VoIPControls\Sip\Nequeo.VoIP.Sip.Controls.dll</HintPath>

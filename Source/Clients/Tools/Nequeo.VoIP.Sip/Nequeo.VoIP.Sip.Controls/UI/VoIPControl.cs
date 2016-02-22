@@ -68,7 +68,10 @@ namespace Nequeo.VoIP.Sip.UI
         private Nequeo.VoIP.Sip.VoIPCall _voipCall = null;
         private Param.CallParam _call = null;
         private Data.contacts _contacts = null;
+        private Data.configuration _configuration = null;
+
         private Data.Common _common = null;
+        private Data.IncomingOutgoingCalls _inOutCalls = null;
 
         private bool _audioRecordingOutCall = false;
         private bool _audioRecordingInCall = false;
@@ -77,6 +80,9 @@ namespace Nequeo.VoIP.Sip.UI
         private string _contactsFilePath = null;
         private bool _hasCredentials = false;
         private bool _created = false;
+
+        private bool _foundContactName = false;
+        private string _contactName = "";
 
         /// <summary>
         /// Gets or sets the contacts file path.
@@ -170,18 +176,35 @@ namespace Nequeo.VoIP.Sip.UI
                 }
                 catch { }
 
-                // If disposing equals true, dispose all managed
-                // and unmanaged resources.
-                if (_voipCall != null)
-                    _voipCall.Dispose();
+                try
+                {
+                    // The call.
+                    if (_call != null)
+                        _call.Dispose();
+                }
+                catch { }
 
-                if (_instantMessage != null)
-                    _instantMessage.Dispose();
+                try
+                {
+                    // If disposing equals true, dispose all managed
+                    // and unmanaged resources.
+                    if (_voipCall != null)
+                        _voipCall.Dispose();
+                }
+                catch { }
+
+                try
+                {
+                    if (_instantMessage != null)
+                        _instantMessage.Dispose();
+                }
+                catch { }
 
                 // Call the appropriate methods to clean up
                 // unmanaged resources here.
                 _voipCall = null;
                 _instantMessage = null;
+                _call = null;
             }
         }
 
@@ -191,6 +214,7 @@ namespace Nequeo.VoIP.Sip.UI
         public void Initialize()
         {
             _common = new Data.Common();
+            _inOutCalls = new Data.IncomingOutgoingCalls();
 
             // Create the voip call.
             _voipCall = new VoIPCall();
@@ -246,6 +270,8 @@ namespace Nequeo.VoIP.Sip.UI
             groupBoxCall.Enabled = true;
             groupBoxAccOnlineState.Enabled = true;
             groupBoxAccDetails.Enabled = true;
+            groupBoxInOutCalls.Enabled = true;
+            groupBoxConference.Enabled = true;
         }
 
         /// <summary>
@@ -391,11 +417,87 @@ namespace Nequeo.VoIP.Sip.UI
                     catch { }
                 }
 
+                // If no contact name.
+                if (String.IsNullOrEmpty(contactName))
+                {
+                    try
+                    {
+                        // Get the contact number.
+                        string[] splitFrom = e.From.Split(new char[] { '@' });
+                        contactName = splitFrom[0].Replace("sip:", "").Replace("sips:", "");
+                    }
+                    catch (Exception)
+                    {
+                        // Call can not be found.
+                        contactName = "Unknown";
+                    }
+                }
+
                 // Open the call.
                 string ringFilePath = (_common != null ? _common.IncomingCallRingFilePath : null);
                 int audioDeviceIndex = (_common != null ? _common.AudioDeviceIndex : -1);
-                Nequeo.VoIP.Sip.UI.InComingCall incomingCall = new InComingCall(e, contactName, ringFilePath, audioDeviceIndex);
+                bool autoAnswer = (_common != null ? _common.AutoAnswer : false);
+                string autoAnswerFile = (_common != null ? _common.AutoAnswerFilePath : null);
+                int autoAnswerWait = (_common != null ? _common.AutoAnswerWait : 30);
+                int messageBank = (_common != null ? _common.MessageBankWait : 20);
+
+                // Attach to the disconnect event.
+                e.Call.OnCallDisconnected += Call_OnCallDisconnected;
+
+                // Open the window.
+                Nequeo.VoIP.Sip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e, listViewInOutCalls, listViewConference, contactName, 
+                    ringFilePath, audioDeviceIndex, autoAnswer, autoAnswerFile, autoAnswerWait, 
+                    _audioRecordingInCallPath, messageBank);
+
+                // Show the form.
+                incomingCall.IncomingOutgoingCalls = _inOutCalls;
                 incomingCall.Show(this);
+            });
+        }
+
+        /// <summary>
+        /// Incoming call disconnected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The call id.</param>
+        private void Call_OnCallDisconnected(object sender, Param.CallInfoParam e)
+        {
+            UISync.Execute(() =>
+            {
+                Param.CallParam call = null;
+                try
+                {
+                    // Get the reference of the call
+                    call = _voipCall.ConferenceCall.First(u => u.ID == e.Guid);
+                }
+                catch { call = null; }
+
+                // Found the call.
+                if (call != null)
+                {
+                    try
+                    {
+                        // Remove from the conference list.
+                        _voipCall.RemoveConferenceCallContact(e.Guid);
+                    }
+                    catch { }
+
+                    try
+                    {
+                        // Remove from the list view.
+                        string confKey = e.CallID + "|" + e.Guid;
+                        listViewConference.Items.RemoveByKey(confKey);
+                    }
+                    catch { }
+
+                    try
+                    {
+                        // Clean up the current call.
+                        call.Dispose();
+                        call = null;
+                    }
+                    catch { }
+                }
             });
         }
 
@@ -408,8 +510,6 @@ namespace Nequeo.VoIP.Sip.UI
         {
             // Open settings.
             UI.Settings settings = new Settings(_voipCall);
-            settings.AudioRecordingInCall = _audioRecordingInCall;
-            settings.AudioRecordingOutCall = _audioRecordingOutCall;
             settings.AudioRecordingInCallPath = _audioRecordingInCallPath;
             settings.AudioRecordingOutCallPath = _audioRecordingOutCallPath;
             settings.ContactsFilePath = _contactsFilePath;
@@ -422,8 +522,8 @@ namespace Nequeo.VoIP.Sip.UI
                 _contactsFilePath = null;
 
             // Get recording setting.
-            _audioRecordingInCall = settings.AudioRecordingInCall;
-            _audioRecordingOutCall = settings.AudioRecordingOutCall;
+            _audioRecordingInCall = _common.IncomingCallAudioRecordingEnabled;
+            _audioRecordingOutCall = _common.OutgoingCallAudioRecordingEnabled;
 
             // Audio incoming call.
             if (_audioRecordingInCall && !String.IsNullOrEmpty(settings.AudioRecordingInCallPath))
@@ -451,15 +551,13 @@ namespace Nequeo.VoIP.Sip.UI
             }
             else
             {
-                _audioRecordingInCallPath = null;
-                _voipCall.IncomingCallRecordFilename(_audioRecordingInCallPath);
+                if (!_audioRecordingInCall)
+                    _voipCall.IncomingCallRecordFilename(null);
             }
 
             // Audio outgoing call.
-            if (_audioRecordingOutCall && !String.IsNullOrEmpty(settings.AudioRecordingOutCallPath))
+            if (!String.IsNullOrEmpty(settings.AudioRecordingOutCallPath))
                 _audioRecordingOutCallPath = settings.AudioRecordingOutCallPath;
-            else
-                _audioRecordingOutCallPath = null;
 
             // If not created yet.
             if (!_created)
@@ -583,6 +681,8 @@ namespace Nequeo.VoIP.Sip.UI
         private void SetSipUri()
         {
             string uri = comboBoxCallNumber.Text;
+            if (!_foundContactName)
+                _contactName = uri;
 
             // If not sip uri.
             if (!uri.ToLower().Contains("sip"))
@@ -637,7 +737,7 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Create the call path.
                 string audioRecordingPath = null;
-                if (!String.IsNullOrEmpty(_audioRecordingOutCallPath))
+                if (_audioRecordingOutCall && !String.IsNullOrEmpty(_audioRecordingOutCallPath))
                 {
                     DateTime time = DateTime.Now;
                     string audioRecodingExt = System.IO.Path.GetExtension(_audioRecordingOutCallPath);
@@ -652,6 +752,9 @@ namespace Nequeo.VoIP.Sip.UI
 
                 // Make the call.
                 _call = _voipCall.MakeCall(0, _uri, audioRecordingPath);
+                _call.OnCallState += _call_OnCallState;
+                _call.OnCallMediaState += _call_OnCallMediaState;
+                _call.OnCallDisconnected += _call_OnCallDisconnected;
 
                 // If call.
                 if (_call != null)
@@ -667,10 +770,10 @@ namespace Nequeo.VoIP.Sip.UI
                     throw new Exception();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Ask the used to answer incomming call.
-                DialogResult result = MessageBox.Show(this, "Unable to make the call because of an internal error.",
+                DialogResult result = MessageBox.Show(this, "Unable to make the call because of an internal error." + ex.Message,
                     "Make Call?", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // Enable.
@@ -679,8 +782,74 @@ namespace Nequeo.VoIP.Sip.UI
                 groupBoxDigits.Enabled = false;
                 comboBoxCallNumber.Enabled = true;
                 _call = null;
-                _uri = null;
             }
+        }
+
+        /// <summary>
+        /// On outgoing call disconnect.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnCallDisconnected(object sender, Param.CallInfoParam e)
+        {
+            UISync.Execute(() =>
+            {
+                // The call has ended.
+                DialogResult result = MessageBox.Show(this, "The call has ended.",
+                "Make Call", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                EnableHangupCall();
+
+            });
+        }
+
+        /// <summary>
+        /// On call media state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnCallMediaState(object sender, Param.CallMediaStateParam e)
+        {
+            e.Suspend = false;
+        }
+
+        /// <summary>
+        /// On call state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnCallState(object sender, Param.CallStateParam e)
+        {
+            UISync.Execute(() =>
+            {
+                // If call is disconnected.
+                if ((e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
+                    (e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_NULL))
+                {
+                    try
+                    {
+                        // Add the call information.
+                        Param.CallInfoParam info = e.CallInfo;
+                        info.IncomingOutgoing = false;
+                        info.ContactName = _contactName;
+                        _inOutCalls.Add(info);
+
+                        // Add to the in out view.
+                        // Create a new list item.
+                        ListViewItem item = new ListViewItem(info.ContactName, 0);
+                        item.Name = info.FromTo + "|" + _call.ID;
+                        item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
+                        item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
+                        item.SubItems.Add(info.FromTo);
+                        item.SubItems.Add(info.TotalDuration.ToString());
+                        item.SubItems.Add(info.ConnectDuration.ToString());
+
+                        // Add the item.
+                        listViewInOutCalls.Items.Add(item);
+                    }
+                    catch { }
+                }
+            });
         }
 
         /// <summary>
@@ -689,6 +858,15 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonHangup_Click(object sender, EventArgs e)
+        {
+            HangupCall();
+            EnableHangupCall();
+        }
+
+        /// <summary>
+        /// Hangup call.
+        /// </summary>
+        private void HangupCall()
         {
             try
             {
@@ -700,14 +878,19 @@ namespace Nequeo.VoIP.Sip.UI
                 }
             }
             catch (Exception) { }
+        }
 
+        /// <summary>
+        /// Enable hangup call.
+        /// </summary>
+        private void EnableHangupCall()
+        {
             // Enable.
             buttonCall.Enabled = true;
             buttonHangup.Enabled = false;
             groupBoxDigits.Enabled = false;
             comboBoxCallNumber.Enabled = true;
             _call = null;
-            _uri = null;
         }
 
         /// <summary>
@@ -1127,12 +1310,22 @@ namespace Nequeo.VoIP.Sip.UI
                 // For each contact.
                 foreach (ListViewItem item in listViewContact.SelectedItems)
                 {
-                    // Remove from contact file.
-                    Data.contactsContact contact = _contacts.contact.First(u => u.sipAccount == item.Name);
+                    // Find from contact file.
+                    Data.contactsContact contact = null;
+                    try
+                    {
+                        // Find from contact file.
+                        contact = _contacts.contact.First(u => u.sipAccount == item.Name);
+                    }
+                    catch { }
 
                     // Found the contact.
                     if (contact != null)
                     {
+                        // Set the contact name.
+                        _contactName = contact.name;
+                        _foundContactName = true;
+
                         // Add the sip account.
                         ToolStripMenuItem menuItem = new ToolStripMenuItem("Call " + contact.name + "'s sip account");
                         menuItem.Tag = contact.sipAccount;
@@ -1148,6 +1341,11 @@ namespace Nequeo.VoIP.Sip.UI
                             menuItemNumber.Click += MenuItem_Click;
                             contextMenuStripContacts.Items.Add(menuItemNumber);
                         }
+                    }
+                    else
+                    {
+                        // Not found.
+                        _foundContactName = false;
                     }
                 }
             }
@@ -1589,6 +1787,482 @@ namespace Nequeo.VoIP.Sip.UI
                 case CheckState.Unchecked:
                     Nequeo.IO.Audio.Volume.MuteMicrophone(false);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Load configuration.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonConfiguration_Click(object sender, EventArgs e)
+        {
+            // Set the import filter.
+            openFileDialog.Filter = "Xml File (*.xml)|*.xml";
+
+            // Get the file name selected.
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string xml = openFileDialog.FileName;
+
+                try
+                {
+                    // Deserialise the xml file into
+                    GeneralSerialisation serial = new GeneralSerialisation();
+                    _configuration = ((Data.configuration)serial.Deserialise(typeof(Data.configuration), xml));
+
+                    // Assign the configuration.
+                    _common.AccountName = _configuration.accountName;
+                    _common.SipHost = _configuration.sipHost;
+                    _common.SipUsername = _configuration.sipUsername;
+                    _common.SipPassword = _configuration.sipPassword;
+                    _common.IncomingCallRingFilePath = _configuration.soundIncomingCallFilePath;
+                    _common.InstantMessageFilePath = _configuration.soundInstantMessageFilePath;
+                    _common.AudioDeviceIndex = _configuration.soundAudioDeviceIndex;
+                    _common.CaptureAudioDeviceIndex = _configuration.captureAudioDeviceIndex;
+                    _common.PlaybackAudioDeviceIndex = _configuration.playbackAudioDeviceIndex;
+                    _common.IncomingCallAudioRecordingEnabled = _configuration.incomingCallAudioRecordingEnabled;
+                    _common.OutgoingCallAudioRecordingEnabled = _configuration.outgoingCallAudioRecordingEnabled;
+                    _common.AutoAnswerFilePath = _configuration.soundAutoAnswerFilePath;
+                    _common.AutoAnswer = _configuration.accountAutoAnswerEnabled;
+                    _common.AutoAnswerWait = _configuration.accountAutoAnswerWait;
+                    _common.MessageBankWait = _configuration.accountMessageBankWait;
+
+                    _audioRecordingOutCallPath = _configuration.outgoingCallPathAudioRecording;
+                    _audioRecordingInCallPath = _configuration.incomingCallPathAudioRecording;
+                    _contactsFilePath = _configuration.contactFilePath;
+
+                    // Assign the account.
+                    _voipCall.VoIPManager.AccountConnection.DelayBeforeRefreshSec = _configuration.timeDelayBeforeRefresh;
+                    _voipCall.VoIPManager.AccountConnection.DropCallsOnFail = _configuration.accountDropCallsOnFail;
+                    _voipCall.VoIPManager.AccountConnection.FirstRetryIntervalSec = _configuration.timeFirstRetryInterval;
+                    _voipCall.VoIPManager.AccountConnection.IceEnabled = _configuration.accountIceEnabled;
+                    _voipCall.VoIPManager.AccountConnection.IPv6Use = (_configuration.accountUseIPv6 ? Net.Sip.IPv6_Use.IPV6_ENABLED : Net.Sip.IPv6_Use.IPV6_DISABLED);
+                    _voipCall.VoIPManager.AccountConnection.IsDefault = _configuration.accountIsDefault;
+                    _voipCall.VoIPManager.AccountConnection.MediaTransportPort = _configuration.mediaTransportPort;
+                    _voipCall.VoIPManager.AccountConnection.MediaTransportPortRange = _configuration.mediaTransportPortRange;
+                    _voipCall.VoIPManager.AccountConnection.MessageWaitingIndication = _configuration.mwiEnabled;
+                    _voipCall.VoIPManager.AccountConnection.MWIExpirationSec = _configuration.mwiExpiration;
+                    _voipCall.VoIPManager.AccountConnection.NoIceRtcp = _configuration.accountNoIceRtcp;
+                    _voipCall.VoIPManager.AccountConnection.Priority = _configuration.accountPriority;
+                    _voipCall.VoIPManager.AccountConnection.PublishEnabled = _configuration.publishEnabled;
+                    _voipCall.VoIPManager.AccountConnection.PublishQueue = _configuration.publishQueue;
+                    _voipCall.VoIPManager.AccountConnection.PublishShutdownWaitMsec = _configuration.publishShutdownWait;
+                    _voipCall.VoIPManager.AccountConnection.RegisterOnAdd = _configuration.accountRegisterOnAdd;
+                    _voipCall.VoIPManager.AccountConnection.RetryIntervalSec = _configuration.timeRetryInterval;
+                    _voipCall.VoIPManager.AccountConnection.SpPort = _configuration.accountPort;
+                    _voipCall.VoIPManager.AccountConnection.SRTPSecureSignaling = (_configuration.accountSrtpSecureSignaling ? Net.Sip.SRTP_SecureSignaling.SRTP_REQUIRES : Net.Sip.SRTP_SecureSignaling.SRTP_DISABLED);
+                    _voipCall.VoIPManager.AccountConnection.SRTPUse = (_configuration.accountUseSrtp ? Net.Sip.SRTP_Use.SRTP_MANDATORY : Net.Sip.SRTP_Use.SRTP_DISABLED);
+                    _voipCall.VoIPManager.AccountConnection.TimeoutSec = _configuration.timeTimeout;
+                    _voipCall.VoIPManager.AccountConnection.TimerMinSESec = _configuration.timerMinimumSession;
+                    _voipCall.VoIPManager.AccountConnection.TimerSessExpiresSec = _configuration.timerSessionExpires;
+                    _voipCall.VoIPManager.AccountConnection.UnregWaitSec = _configuration.timeUnregisterWait;
+                }
+                catch (Exception ex)
+                {
+                    // Ask the used to answer incomming call.
+                    DialogResult result = MessageBox.Show(this, "Unable to load configuration because of an internal error. " + ex.Message,
+                        "Load Configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                // Disable Enable.
+                buttonSettings.Enabled = true;
+                buttonConfiguration.Enabled = false;
+
+                // If not created.
+                if (_configuration == null)
+                {
+                    // Create the contact list.
+                    _configuration = new Data.configuration();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save calls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonInOutCallsSave_Click(object sender, EventArgs e)
+        {
+            // If items exist.
+            if (listViewInOutCalls.Items.Count > 0)
+            {
+                // Set the audio filter.
+                saveFileDialog.Filter = "Text File (*.txt)|*.txt";
+
+                // Get the file name selected.
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    System.IO.StreamWriter file = null;
+                    try
+                    {
+                        // Write the file data.
+                        file = System.IO.File.CreateText(saveFileDialog.FileName);
+
+                        // For each call.
+                        foreach (Param.CallInfoParam call in _inOutCalls)
+                        {
+                            // Write the call.
+                            file.WriteLine(
+                                call.ContactName + "," +
+                                call.Date.ToShortDateString() + " " + call.Date.ToShortTimeString() + "," +
+                                (call.IncomingOutgoing ? "Incoming" : "Outgoing") + "," +
+                                call.FromTo + "," +
+                                call.TotalDuration.ToString() + "," +
+                                call.ConnectDuration.ToString());
+                        }
+                    }
+                    catch { }
+                    finally
+                    {
+                        if (file != null)
+                            file.Dispose();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// In out calls list view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listViewInOutCalls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // if items selected.
+            if (listViewInOutCalls.SelectedItems.Count > 0)
+            {
+                // Remove the items in the menu strip.
+                contextMenuStripCalls.Items.Clear();
+
+                // For each contact.
+                foreach (ListViewItem item in listViewInOutCalls.SelectedItems)
+                {
+                    textBoxInOutCallsDetails.Text = item.Text + "  " + item.SubItems[3].Text;
+
+                    // Find from contact file.
+                    Data.contactsContact contact = null;
+                    try
+                    {
+                        // Find from contact file.
+                        contact = _contacts.contact.First(u => u.name.ToLower() == item.Text.ToLower());
+                    }
+                    catch { }
+
+                    // Found the contact.
+                    if (contact != null)
+                    {
+                        // Add the sip account.
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem("Call " + contact.name + "'s sip account");
+                        menuItem.Tag = contact.sipAccount;
+                        menuItem.Click += MenuItem_Click;
+                        contextMenuStripCalls.Items.Add(menuItem);
+
+                        // For each numer.
+                        foreach (string number in contact.numbers)
+                        {
+                            string[] numb = number.Split(new char[] { '|' });
+                            ToolStripMenuItem menuItemNumber = new ToolStripMenuItem("Call " + contact.name + "'s " + numb[0]);
+                            menuItemNumber.Tag = numb[1];
+                            menuItemNumber.Click += MenuItem_Click;
+                            contextMenuStripCalls.Items.Add(menuItemNumber);
+                        }
+                    }
+                    else
+                    {
+                        // Split the item name.
+                        string[] itemName = item.Name.Split(new char[] { '|' });
+
+                        // Add the sip account.
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem("Call " + itemName[0] + " sip account");
+                        menuItem.Tag = itemName[0];
+                        menuItem.Click += MenuItem_Click;
+                        contextMenuStripCalls.Items.Add(menuItem);
+
+                        // Split the calling number.
+                        string[] splitFrom = itemName[0].Split(new char[] { '@' });
+                        string number = splitFrom[0].Replace("sip:", "").Replace("sips:", "");
+
+                        // Add the number.
+                        ToolStripMenuItem menuItemNum = new ToolStripMenuItem("Call " + number);
+                        menuItemNum.Tag = number;
+                        menuItemNum.Click += MenuItem_Click;
+                        contextMenuStripCalls.Items.Add(menuItemNum);
+                    }
+
+                    // Add the seperator.
+                    ToolStripSeparator menuItemSep = new ToolStripSeparator();
+                    contextMenuStripCalls.Items.Add(menuItemSep);
+
+                    // Add delete.
+                    ToolStripMenuItem menuItemDelete = new ToolStripMenuItem("Delete " + item.Text);
+                    menuItemDelete.Tag = item.Text + " " + item.SubItems[2].Text + "|" + item.Name;
+                    menuItemDelete.Click += MenuItemDelete_Click;
+                    contextMenuStripCalls.Items.Add(menuItemDelete);
+                }
+            }
+            else
+            {
+                // Remove the items in the menu strip.
+                contextMenuStripCalls.Items.Clear();
+                textBoxInOutCallsDetails.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// On menu item clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemDelete_Click(object sender, EventArgs e)
+        {
+            // Get the menu item number.
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            string tag = menuItem.Tag.ToString();
+
+            // Split the tag.
+            string[] tagName = tag.Split(new char[] { '|' });
+            string sipAccount = tagName[1];
+            string guid = tagName[2];
+
+            // Delete the call.
+            DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete call " + tagName[0] + ".",
+                "Delete Call", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // If delete.
+            if (result == DialogResult.Yes)
+            {
+                // Remove the item.
+                listViewInOutCalls.Items.RemoveByKey(sipAccount + "|" + guid);
+            }
+        }
+
+        /// <summary>
+        /// Conference view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listViewConference_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // if items selected.
+            if (listViewConference.SelectedItems.Count > 0)
+            {
+                contextMenuStripConference.Enabled = true;
+            }
+            else
+            {
+                contextMenuStripConference.Enabled = false;
+            }
+
+            // Enable or disable conference controls.
+            EnableDisableConferenceList();
+        }
+
+        /// <summary>
+        /// Enable or disable conference controls.
+        /// </summary>
+        private void EnableDisableConferenceList()
+        {
+            // If items exist.
+            if (listViewConference.Items.Count > 0)
+            {
+                buttonConferenceHangupAll.Enabled = true;
+                checkBoxConferenceSuspendAll.Enabled = true;
+            }
+            else
+            {
+                buttonConferenceHangupAll.Enabled = false;
+                checkBoxConferenceSuspendAll.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Hangup all.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonConferenceHangupAll_Click(object sender, EventArgs e)
+        {
+            if (listViewConference.Items.Count > 0)
+            {
+                // Ask the used to answer incomming call.
+                DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete all calls.",
+                    "Cancel Conference", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If delete.
+                if (result == DialogResult.Yes)
+                {
+                    // Hangup all calls.
+                    Param.CallParam[] conference = _voipCall.ConferenceCall;
+                    _voipCall.RemoveAllConferenceCallContacts();
+
+                    // Disconnect.
+                    if (conference != null && conference.Length > 0)
+                    {
+                        // For each caller.
+                        foreach (Param.CallParam caller in conference)
+                        {
+                            try
+                            {
+                                // Force hangup.
+                                caller.Hangup();
+                            }
+                            catch { }
+
+                            try
+                            {
+                                // Clean-up.
+                                caller.Dispose();
+                            }
+                            catch { }
+                        }
+                    }
+
+                    // Remove all callers
+                    listViewConference.Items.Clear();
+                    checkBoxConferenceSuspendAll.Enabled = false;
+                }
+            }
+
+            // Enable or disable conference controls.
+            EnableDisableConferenceList();
+        }
+
+        /// <summary>
+        /// Hangup conference caller.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemConferenceHangup_Click(object sender, EventArgs e)
+        {
+            string contactKey = "";
+            string contactName = "";
+
+            // Add each contact.
+            foreach (ListViewItem item in listViewContact.SelectedItems)
+            {
+                // Get the name.
+                contactKey = item.Name;
+                contactName = item.Text;
+                break;
+            }
+
+            // If a key has been selected.
+            if (!String.IsNullOrEmpty(contactKey))
+            {
+                // Ask the used to answer incomming call.
+                DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete caller " + contactName + ".",
+                    "Cancel Conference", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If delete.
+                if (result == DialogResult.Yes)
+                {
+                    // Hangup all calls.
+                    Param.CallParam caller = null;
+
+                    try
+                    {
+                        // Find the caller.
+                        string[] name = contactKey.Split(new char[] { '|' });
+                        string callid = name[0];
+                        string id = name[1];
+                        caller = _voipCall.ConferenceCall.First(u => u.ID == id);
+                    }
+                    catch { caller = null; }
+
+                    // If found.
+                    if (caller != null)
+                    {
+                        // Remove caller.
+                        _voipCall.RemoveConferenceCallContact(caller.ID);
+
+                        try
+                        {
+                            // Force hangup.
+                            caller.Hangup();
+                        }
+                        catch { }
+
+                        try
+                        {
+                            // Clean-up.
+                            caller.Dispose();
+                        }
+                        catch { }
+                    }
+
+                    // Remove the item.
+                    listViewConference.Items.RemoveByKey(contactKey);
+                }
+            }
+
+            // Enable or disable conference controls.
+            EnableDisableConferenceList();
+        }
+
+        /// <summary>
+        /// Suspend all.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxConferenceSuspendAll_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxConferenceSuspendAll.CheckState)
+            {
+                case CheckState.Checked:
+                    _voipCall.SuspendConferenceCall(true);
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _voipCall.SuspendConferenceCall(false);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Suspend.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemConferenceSuspend_Click(object sender, EventArgs e)
+        {
+            string contactKey = "";
+
+            // Add each contact.
+            foreach (ListViewItem item in listViewContact.SelectedItems)
+            {
+                // Get the name.
+                contactKey = item.Name;
+                break;
+            }
+
+            // If a key has been selected.
+            if (!String.IsNullOrEmpty(contactKey))
+            {
+                // Hangup all calls.
+                Param.CallParam caller = null;
+
+                try
+                {
+                    // Find the caller.
+                    string[] name = contactKey.Split(new char[] { '|' });
+                    string callid = name[0];
+                    string id = name[1];
+                    caller = _voipCall.ConferenceCall.First(u => u.ID == id);
+                }
+                catch { caller = null; }
+
+                // If found.
+                if (caller != null)
+                {
+                    // Start or stop transmitting media.
+                    if (caller.IsTransmitting)
+                        caller.StopTransmitting();
+                    else
+                        caller.StartTransmitting();
+                }
             }
         }
     }

@@ -159,6 +159,7 @@
     <ClInclude Include="AudioDeviceInfo.h" />
     <ClInclude Include="AudioMedia.h" />
     <ClInclude Include="AudioMediaPlayer.h" />
+    <ClInclude Include="AudioMediaPlayerCallback.h" />
     <ClInclude Include="AudioMediaRecorder.h" />
     <ClInclude Include="AuthCredInfo.h" />
     <ClInclude Include="AuthenticateCredentials.h" />
@@ -273,6 +274,7 @@
     <ClCompile Include="AudioDeviceInfo.cpp" />
     <ClCompile Include="AudioMedia.cpp" />
     <ClCompile Include="AudioMediaPlayer.cpp" />
+    <ClCompile Include="AudioMediaPlayerCallback.cpp" />
     <ClCompile Include="AudioMediaRecorder.cpp" />
     <ClCompile Include="AuthCredInfo.cpp" />
     <ClCompile Include="AuthenticateCredentials.cpp" />

@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup13 = new System.Windows.Forms.ListViewGroup("Business", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup14 = new System.Windows.Forms.ListViewGroup("Colleague", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup15 = new System.Windows.Forms.ListViewGroup("Misc", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup16 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup17 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup18 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Business", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Colleague", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Misc", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VoIPControl));
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
+            this.checkBoxMuteMicrophone = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuteVolume = new System.Windows.Forms.CheckBox();
             this.groupBoxDigits = new System.Windows.Forms.GroupBox();
             this.textBoxDigits = new System.Windows.Forms.TextBox();
             this.buttonHash = new System.Windows.Forms.Button();
@@ -75,6 +77,7 @@
             this.buttonAccDetails = new System.Windows.Forms.Button();
             this.checkBoxAccDetails = new System.Windows.Forms.CheckBox();
             this.groupBoxAccAccount = new System.Windows.Forms.GroupBox();
+            this.buttonConfiguration = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonRegister = new System.Windows.Forms.Button();
             this.buttonLoadContacts = new System.Windows.Forms.Button();
@@ -106,9 +109,29 @@
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.tabControlVoIP = new System.Windows.Forms.TabControl();
             this.tabPageVoIPCall = new System.Windows.Forms.TabPage();
+            this.tabPageIncomingOutgoingCalls = new System.Windows.Forms.TabPage();
+            this.groupBoxInOutCalls = new System.Windows.Forms.GroupBox();
+            this.textBoxInOutCallsDetails = new System.Windows.Forms.TextBox();
+            this.buttonInOutCallsSave = new System.Windows.Forms.Button();
+            this.listViewInOutCalls = new System.Windows.Forms.ListView();
+            this.columnHeaderInOutCallsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderInOutCallsDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderInOutCallsInOut = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderInOutCallsSipAccount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderInOutCallsTotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderInOutCallsConnect = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripCalls = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tabPageConferenceCall = new System.Windows.Forms.TabPage();
+            this.groupBoxConference = new System.Windows.Forms.GroupBox();
+            this.checkBoxConferenceSuspendAll = new System.Windows.Forms.CheckBox();
+            this.buttonConferenceHangupAll = new System.Windows.Forms.Button();
+            this.listViewConference = new System.Windows.Forms.ListView();
             this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
-            this.checkBoxMuteVolume = new System.Windows.Forms.CheckBox();
-            this.checkBoxMuteMicrophone = new System.Windows.Forms.CheckBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.contextMenuStripConference = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemConferenceHangup = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemConferenceSuspend = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxCall.SuspendLayout();
             this.groupBoxDigits.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
@@ -118,7 +141,12 @@
             this.groupBoxContact.SuspendLayout();
             this.tabControlVoIP.SuspendLayout();
             this.tabPageVoIPCall.SuspendLayout();
+            this.tabPageIncomingOutgoingCalls.SuspendLayout();
+            this.groupBoxInOutCalls.SuspendLayout();
+            this.tabPageConferenceCall.SuspendLayout();
+            this.groupBoxConference.SuspendLayout();
             this.tabPageVoIPAccount.SuspendLayout();
+            this.contextMenuStripConference.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCall
@@ -139,6 +167,28 @@
             this.groupBoxCall.TabStop = false;
             this.groupBoxCall.Text = "Call";
             // 
+            // checkBoxMuteMicrophone
+            // 
+            this.checkBoxMuteMicrophone.AutoSize = true;
+            this.checkBoxMuteMicrophone.Location = new System.Drawing.Point(126, 260);
+            this.checkBoxMuteMicrophone.Name = "checkBoxMuteMicrophone";
+            this.checkBoxMuteMicrophone.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxMuteMicrophone.TabIndex = 18;
+            this.checkBoxMuteMicrophone.Text = "Mute Microphone";
+            this.checkBoxMuteMicrophone.UseVisualStyleBackColor = true;
+            this.checkBoxMuteMicrophone.CheckedChanged += new System.EventHandler(this.checkBoxMuteMicrophone_CheckedChanged);
+            // 
+            // checkBoxMuteVolume
+            // 
+            this.checkBoxMuteVolume.AutoSize = true;
+            this.checkBoxMuteVolume.Location = new System.Drawing.Point(28, 260);
+            this.checkBoxMuteVolume.Name = "checkBoxMuteVolume";
+            this.checkBoxMuteVolume.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxMuteVolume.TabIndex = 17;
+            this.checkBoxMuteVolume.Text = "Mute Volume";
+            this.checkBoxMuteVolume.UseVisualStyleBackColor = true;
+            this.checkBoxMuteVolume.CheckedChanged += new System.EventHandler(this.checkBoxMuteVolume_CheckedChanged);
+            // 
             // groupBoxDigits
             // 
             this.groupBoxDigits.Controls.Add(this.textBoxDigits);
@@ -157,7 +207,7 @@
             this.groupBoxDigits.Enabled = false;
             this.groupBoxDigits.Location = new System.Drawing.Point(9, 46);
             this.groupBoxDigits.Name = "groupBoxDigits";
-            this.groupBoxDigits.Size = new System.Drawing.Size(233, 168);
+            this.groupBoxDigits.Size = new System.Drawing.Size(230, 168);
             this.groupBoxDigits.TabIndex = 16;
             this.groupBoxDigits.TabStop = false;
             // 
@@ -294,7 +344,7 @@
             this.comboBoxCallNumber.FormattingEnabled = true;
             this.comboBoxCallNumber.Location = new System.Drawing.Point(9, 19);
             this.comboBoxCallNumber.Name = "comboBoxCallNumber";
-            this.comboBoxCallNumber.Size = new System.Drawing.Size(233, 21);
+            this.comboBoxCallNumber.Size = new System.Drawing.Size(230, 21);
             this.comboBoxCallNumber.TabIndex = 0;
             this.comboBoxCallNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxCallNumber_SelectedIndexChanged);
             this.comboBoxCallNumber.TextChanged += new System.EventHandler(this.comboBoxCallNumber_TextChanged);
@@ -507,6 +557,7 @@
             // 
             // groupBoxAccAccount
             // 
+            this.groupBoxAccAccount.Controls.Add(this.buttonConfiguration);
             this.groupBoxAccAccount.Controls.Add(this.buttonSettings);
             this.groupBoxAccAccount.Controls.Add(this.buttonRegister);
             this.groupBoxAccAccount.Controls.Add(this.buttonLoadContacts);
@@ -518,8 +569,19 @@
             this.groupBoxAccAccount.TabIndex = 14;
             this.groupBoxAccAccount.TabStop = false;
             // 
+            // buttonConfiguration
+            // 
+            this.buttonConfiguration.Location = new System.Drawing.Point(217, 48);
+            this.buttonConfiguration.Name = "buttonConfiguration";
+            this.buttonConfiguration.Size = new System.Drawing.Size(99, 23);
+            this.buttonConfiguration.TabIndex = 13;
+            this.buttonConfiguration.Text = "Configuration";
+            this.buttonConfiguration.UseVisualStyleBackColor = true;
+            this.buttonConfiguration.Click += new System.EventHandler(this.buttonConfiguration_Click);
+            // 
             // buttonSettings
             // 
+            this.buttonSettings.Enabled = false;
             this.buttonSettings.Location = new System.Drawing.Point(169, 19);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(75, 23);
@@ -777,34 +839,34 @@
             this.columnHeaderContactAccount,
             this.columnHeaderContactState});
             this.listViewContact.ContextMenuStrip = this.contextMenuStripContacts;
-            listViewGroup10.Header = "Friend";
-            listViewGroup10.Name = "listViewGroupFriends";
-            listViewGroup11.Header = "Family";
-            listViewGroup11.Name = "listViewGroupFamily";
-            listViewGroup12.Header = "Work";
-            listViewGroup12.Name = "listViewGroupWork";
-            listViewGroup13.Header = "Business";
-            listViewGroup13.Name = "listViewGroupBusiness";
-            listViewGroup14.Header = "Colleague";
-            listViewGroup14.Name = "listViewGroupColleagues";
-            listViewGroup15.Header = "Misc";
-            listViewGroup15.Name = "listViewGroupMisc";
-            listViewGroup16.Header = "Government";
-            listViewGroup16.Name = "listViewGroupGovernment";
-            listViewGroup17.Header = "Private";
-            listViewGroup17.Name = "listViewGroupPrivate";
-            listViewGroup18.Header = "Public";
-            listViewGroup18.Name = "listViewGroupPublic";
+            listViewGroup1.Header = "Friend";
+            listViewGroup1.Name = "listViewGroupFriends";
+            listViewGroup2.Header = "Family";
+            listViewGroup2.Name = "listViewGroupFamily";
+            listViewGroup3.Header = "Work";
+            listViewGroup3.Name = "listViewGroupWork";
+            listViewGroup4.Header = "Business";
+            listViewGroup4.Name = "listViewGroupBusiness";
+            listViewGroup5.Header = "Colleague";
+            listViewGroup5.Name = "listViewGroupColleagues";
+            listViewGroup6.Header = "Misc";
+            listViewGroup6.Name = "listViewGroupMisc";
+            listViewGroup7.Header = "Government";
+            listViewGroup7.Name = "listViewGroupGovernment";
+            listViewGroup8.Header = "Private";
+            listViewGroup8.Name = "listViewGroupPrivate";
+            listViewGroup9.Header = "Public";
+            listViewGroup9.Name = "listViewGroupPublic";
             this.listViewContact.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup10,
-            listViewGroup11,
-            listViewGroup12,
-            listViewGroup13,
-            listViewGroup14,
-            listViewGroup15,
-            listViewGroup16,
-            listViewGroup17,
-            listViewGroup18});
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3,
+            listViewGroup4,
+            listViewGroup5,
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9});
             this.listViewContact.LargeImageList = this.imageListLarge;
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;
@@ -813,7 +875,7 @@
             this.listViewContact.SmallImageList = this.imageListSmall;
             this.listViewContact.TabIndex = 0;
             this.listViewContact.UseCompatibleStateImageBehavior = false;
-            this.listViewContact.View = System.Windows.Forms.View.Details;
+            this.listViewContact.View = System.Windows.Forms.View.Tile;
             this.listViewContact.SelectedIndexChanged += new System.EventHandler(this.listViewContact_SelectedIndexChanged);
             // 
             // columnHeaderContactName
@@ -851,6 +913,8 @@
             // tabControlVoIP
             // 
             this.tabControlVoIP.Controls.Add(this.tabPageVoIPCall);
+            this.tabControlVoIP.Controls.Add(this.tabPageIncomingOutgoingCalls);
+            this.tabControlVoIP.Controls.Add(this.tabPageConferenceCall);
             this.tabControlVoIP.Controls.Add(this.tabPageVoIPAccount);
             this.tabControlVoIP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlVoIP.Location = new System.Drawing.Point(0, 0);
@@ -871,6 +935,177 @@
             this.tabPageVoIPCall.Text = "Call";
             this.tabPageVoIPCall.UseVisualStyleBackColor = true;
             // 
+            // tabPageIncomingOutgoingCalls
+            // 
+            this.tabPageIncomingOutgoingCalls.Controls.Add(this.groupBoxInOutCalls);
+            this.tabPageIncomingOutgoingCalls.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIncomingOutgoingCalls.Name = "tabPageIncomingOutgoingCalls";
+            this.tabPageIncomingOutgoingCalls.Size = new System.Drawing.Size(747, 300);
+            this.tabPageIncomingOutgoingCalls.TabIndex = 2;
+            this.tabPageIncomingOutgoingCalls.Text = "Incoming Outgoing Calls";
+            this.tabPageIncomingOutgoingCalls.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxInOutCalls
+            // 
+            this.groupBoxInOutCalls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxInOutCalls.Controls.Add(this.textBoxInOutCallsDetails);
+            this.groupBoxInOutCalls.Controls.Add(this.buttonInOutCallsSave);
+            this.groupBoxInOutCalls.Controls.Add(this.listViewInOutCalls);
+            this.groupBoxInOutCalls.Enabled = false;
+            this.groupBoxInOutCalls.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxInOutCalls.Name = "groupBoxInOutCalls";
+            this.groupBoxInOutCalls.Size = new System.Drawing.Size(735, 288);
+            this.groupBoxInOutCalls.TabIndex = 0;
+            this.groupBoxInOutCalls.TabStop = false;
+            this.groupBoxInOutCalls.Text = "Calls";
+            // 
+            // textBoxInOutCallsDetails
+            // 
+            this.textBoxInOutCallsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxInOutCallsDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxInOutCallsDetails.Location = new System.Drawing.Point(87, 264);
+            this.textBoxInOutCallsDetails.Name = "textBoxInOutCallsDetails";
+            this.textBoxInOutCallsDetails.ReadOnly = true;
+            this.textBoxInOutCallsDetails.Size = new System.Drawing.Size(349, 13);
+            this.textBoxInOutCallsDetails.TabIndex = 2;
+            // 
+            // buttonInOutCallsSave
+            // 
+            this.buttonInOutCallsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonInOutCallsSave.Location = new System.Drawing.Point(6, 259);
+            this.buttonInOutCallsSave.Name = "buttonInOutCallsSave";
+            this.buttonInOutCallsSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonInOutCallsSave.TabIndex = 1;
+            this.buttonInOutCallsSave.Text = "Save Calls";
+            this.buttonInOutCallsSave.UseVisualStyleBackColor = true;
+            this.buttonInOutCallsSave.Click += new System.EventHandler(this.buttonInOutCallsSave_Click);
+            // 
+            // listViewInOutCalls
+            // 
+            this.listViewInOutCalls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewInOutCalls.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderInOutCallsName,
+            this.columnHeaderInOutCallsDate,
+            this.columnHeaderInOutCallsInOut,
+            this.columnHeaderInOutCallsSipAccount,
+            this.columnHeaderInOutCallsTotal,
+            this.columnHeaderInOutCallsConnect});
+            this.listViewInOutCalls.ContextMenuStrip = this.contextMenuStripCalls;
+            this.listViewInOutCalls.LargeImageList = this.imageListLarge;
+            this.listViewInOutCalls.Location = new System.Drawing.Point(6, 19);
+            this.listViewInOutCalls.MultiSelect = false;
+            this.listViewInOutCalls.Name = "listViewInOutCalls";
+            this.listViewInOutCalls.Size = new System.Drawing.Size(723, 234);
+            this.listViewInOutCalls.SmallImageList = this.imageListSmall;
+            this.listViewInOutCalls.TabIndex = 0;
+            this.listViewInOutCalls.UseCompatibleStateImageBehavior = false;
+            this.listViewInOutCalls.View = System.Windows.Forms.View.Details;
+            this.listViewInOutCalls.SelectedIndexChanged += new System.EventHandler(this.listViewInOutCalls_SelectedIndexChanged);
+            // 
+            // columnHeaderInOutCallsName
+            // 
+            this.columnHeaderInOutCallsName.Text = "Name";
+            this.columnHeaderInOutCallsName.Width = 180;
+            // 
+            // columnHeaderInOutCallsDate
+            // 
+            this.columnHeaderInOutCallsDate.Text = "Date";
+            this.columnHeaderInOutCallsDate.Width = 150;
+            // 
+            // columnHeaderInOutCallsInOut
+            // 
+            this.columnHeaderInOutCallsInOut.Text = "Direction";
+            // 
+            // columnHeaderInOutCallsSipAccount
+            // 
+            this.columnHeaderInOutCallsSipAccount.Text = "Sip Account";
+            this.columnHeaderInOutCallsSipAccount.Width = 200;
+            // 
+            // columnHeaderInOutCallsTotal
+            // 
+            this.columnHeaderInOutCallsTotal.Text = "Total Duration";
+            this.columnHeaderInOutCallsTotal.Width = 110;
+            // 
+            // columnHeaderInOutCallsConnect
+            // 
+            this.columnHeaderInOutCallsConnect.Text = "Connect Duration";
+            this.columnHeaderInOutCallsConnect.Width = 110;
+            // 
+            // contextMenuStripCalls
+            // 
+            this.contextMenuStripCalls.Name = "contextMenuStripCalls";
+            this.contextMenuStripCalls.Size = new System.Drawing.Size(61, 4);
+            // 
+            // tabPageConferenceCall
+            // 
+            this.tabPageConferenceCall.Controls.Add(this.groupBoxConference);
+            this.tabPageConferenceCall.Location = new System.Drawing.Point(4, 22);
+            this.tabPageConferenceCall.Name = "tabPageConferenceCall";
+            this.tabPageConferenceCall.Size = new System.Drawing.Size(747, 300);
+            this.tabPageConferenceCall.TabIndex = 3;
+            this.tabPageConferenceCall.Text = "Conference Call";
+            this.tabPageConferenceCall.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxConference
+            // 
+            this.groupBoxConference.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxConference.Controls.Add(this.checkBoxConferenceSuspendAll);
+            this.groupBoxConference.Controls.Add(this.buttonConferenceHangupAll);
+            this.groupBoxConference.Controls.Add(this.listViewConference);
+            this.groupBoxConference.Enabled = false;
+            this.groupBoxConference.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxConference.Name = "groupBoxConference";
+            this.groupBoxConference.Size = new System.Drawing.Size(735, 288);
+            this.groupBoxConference.TabIndex = 0;
+            this.groupBoxConference.TabStop = false;
+            this.groupBoxConference.Text = "Conference";
+            // 
+            // checkBoxConferenceSuspendAll
+            // 
+            this.checkBoxConferenceSuspendAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxConferenceSuspendAll.AutoSize = true;
+            this.checkBoxConferenceSuspendAll.Enabled = false;
+            this.checkBoxConferenceSuspendAll.Location = new System.Drawing.Point(87, 263);
+            this.checkBoxConferenceSuspendAll.Name = "checkBoxConferenceSuspendAll";
+            this.checkBoxConferenceSuspendAll.Size = new System.Drawing.Size(82, 17);
+            this.checkBoxConferenceSuspendAll.TabIndex = 3;
+            this.checkBoxConferenceSuspendAll.Text = "Suspend All";
+            this.checkBoxConferenceSuspendAll.UseVisualStyleBackColor = true;
+            this.checkBoxConferenceSuspendAll.CheckedChanged += new System.EventHandler(this.checkBoxConferenceSuspendAll_CheckedChanged);
+            // 
+            // buttonConferenceHangupAll
+            // 
+            this.buttonConferenceHangupAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonConferenceHangupAll.Enabled = false;
+            this.buttonConferenceHangupAll.Location = new System.Drawing.Point(6, 259);
+            this.buttonConferenceHangupAll.Name = "buttonConferenceHangupAll";
+            this.buttonConferenceHangupAll.Size = new System.Drawing.Size(75, 23);
+            this.buttonConferenceHangupAll.TabIndex = 1;
+            this.buttonConferenceHangupAll.Text = "Hangup All";
+            this.buttonConferenceHangupAll.UseVisualStyleBackColor = true;
+            this.buttonConferenceHangupAll.Click += new System.EventHandler(this.buttonConferenceHangupAll_Click);
+            // 
+            // listViewConference
+            // 
+            this.listViewConference.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewConference.LargeImageList = this.imageListLarge;
+            this.listViewConference.Location = new System.Drawing.Point(6, 19);
+            this.listViewConference.MultiSelect = false;
+            this.listViewConference.Name = "listViewConference";
+            this.listViewConference.Size = new System.Drawing.Size(723, 234);
+            this.listViewConference.SmallImageList = this.imageListSmall;
+            this.listViewConference.TabIndex = 0;
+            this.listViewConference.UseCompatibleStateImageBehavior = false;
+            this.listViewConference.SelectedIndexChanged += new System.EventHandler(this.listViewConference_SelectedIndexChanged);
+            // 
             // tabPageVoIPAccount
             // 
             this.tabPageVoIPAccount.Controls.Add(this.groupBoxAccount);
@@ -882,27 +1117,40 @@
             this.tabPageVoIPAccount.Text = "Account";
             this.tabPageVoIPAccount.UseVisualStyleBackColor = true;
             // 
-            // checkBoxMuteVolume
+            // openFileDialog
             // 
-            this.checkBoxMuteVolume.AutoSize = true;
-            this.checkBoxMuteVolume.Location = new System.Drawing.Point(28, 260);
-            this.checkBoxMuteVolume.Name = "checkBoxMuteVolume";
-            this.checkBoxMuteVolume.Size = new System.Drawing.Size(88, 17);
-            this.checkBoxMuteVolume.TabIndex = 17;
-            this.checkBoxMuteVolume.Text = "Mute Volume";
-            this.checkBoxMuteVolume.UseVisualStyleBackColor = true;
-            this.checkBoxMuteVolume.CheckedChanged += new System.EventHandler(this.checkBoxMuteVolume_CheckedChanged);
+            this.openFileDialog.SupportMultiDottedExtensions = true;
+            this.openFileDialog.Title = "Configuration";
             // 
-            // checkBoxMuteMicrophone
+            // saveFileDialog
             // 
-            this.checkBoxMuteMicrophone.AutoSize = true;
-            this.checkBoxMuteMicrophone.Location = new System.Drawing.Point(126, 260);
-            this.checkBoxMuteMicrophone.Name = "checkBoxMuteMicrophone";
-            this.checkBoxMuteMicrophone.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxMuteMicrophone.TabIndex = 18;
-            this.checkBoxMuteMicrophone.Text = "Mute Microphone";
-            this.checkBoxMuteMicrophone.UseVisualStyleBackColor = true;
-            this.checkBoxMuteMicrophone.CheckedChanged += new System.EventHandler(this.checkBoxMuteMicrophone_CheckedChanged);
+            this.saveFileDialog.SupportMultiDottedExtensions = true;
+            this.saveFileDialog.Title = "Save";
+            // 
+            // contextMenuStripConference
+            // 
+            this.contextMenuStripConference.Enabled = false;
+            this.contextMenuStripConference.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemConferenceHangup,
+            this.toolStripMenuItemConferenceSuspend});
+            this.contextMenuStripConference.Name = "contextMenuStripConference";
+            this.contextMenuStripConference.Size = new System.Drawing.Size(120, 48);
+            // 
+            // toolStripMenuItemConferenceHangup
+            // 
+            this.toolStripMenuItemConferenceHangup.Enabled = false;
+            this.toolStripMenuItemConferenceHangup.Name = "toolStripMenuItemConferenceHangup";
+            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItemConferenceHangup.Text = "Hangup";
+            this.toolStripMenuItemConferenceHangup.Click += new System.EventHandler(this.toolStripMenuItemConferenceHangup_Click);
+            // 
+            // toolStripMenuItemConferenceSuspend
+            // 
+            this.toolStripMenuItemConferenceSuspend.Enabled = false;
+            this.toolStripMenuItemConferenceSuspend.Name = "toolStripMenuItemConferenceSuspend";
+            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItemConferenceSuspend.Text = "Suspend";
+            this.toolStripMenuItemConferenceSuspend.Click += new System.EventHandler(this.toolStripMenuItemConferenceSuspend_Click);
             // 
             // VoIPControl
             // 
@@ -926,7 +1174,14 @@
             this.groupBoxContact.ResumeLayout(false);
             this.tabControlVoIP.ResumeLayout(false);
             this.tabPageVoIPCall.ResumeLayout(false);
+            this.tabPageIncomingOutgoingCalls.ResumeLayout(false);
+            this.groupBoxInOutCalls.ResumeLayout(false);
+            this.groupBoxInOutCalls.PerformLayout();
+            this.tabPageConferenceCall.ResumeLayout(false);
+            this.groupBoxConference.ResumeLayout(false);
+            this.groupBoxConference.PerformLayout();
             this.tabPageVoIPAccount.ResumeLayout(false);
+            this.contextMenuStripConference.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1003,5 +1258,28 @@
         private System.Windows.Forms.ComboBox comboBoxContactView;
         private System.Windows.Forms.CheckBox checkBoxMuteMicrophone;
         private System.Windows.Forms.CheckBox checkBoxMuteVolume;
+        private System.Windows.Forms.Button buttonConfiguration;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.TabPage tabPageIncomingOutgoingCalls;
+        private System.Windows.Forms.GroupBox groupBoxInOutCalls;
+        private System.Windows.Forms.ListView listViewInOutCalls;
+        private System.Windows.Forms.ColumnHeader columnHeaderInOutCallsName;
+        private System.Windows.Forms.ColumnHeader columnHeaderInOutCallsDate;
+        private System.Windows.Forms.ColumnHeader columnHeaderInOutCallsInOut;
+        private System.Windows.Forms.ColumnHeader columnHeaderInOutCallsSipAccount;
+        private System.Windows.Forms.ColumnHeader columnHeaderInOutCallsTotal;
+        private System.Windows.Forms.ColumnHeader columnHeaderInOutCallsConnect;
+        private System.Windows.Forms.Button buttonInOutCallsSave;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCalls;
+        private System.Windows.Forms.TextBox textBoxInOutCallsDetails;
+        private System.Windows.Forms.TabPage tabPageConferenceCall;
+        private System.Windows.Forms.GroupBox groupBoxConference;
+        private System.Windows.Forms.ListView listViewConference;
+        private System.Windows.Forms.Button buttonConferenceHangupAll;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripConference;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConferenceHangup;
+        private System.Windows.Forms.CheckBox checkBoxConferenceSuspendAll;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConferenceSuspend;
     }
 }
