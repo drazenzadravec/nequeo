@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VoIPControl));
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
@@ -38,11 +39,13 @@
             System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VoIPControl));
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
+            this.trackBarMicrophone = new System.Windows.Forms.TrackBar();
+            this.trackBarVolume = new System.Windows.Forms.TrackBar();
             this.checkBoxMuteMicrophone = new System.Windows.Forms.CheckBox();
             this.checkBoxMuteVolume = new System.Windows.Forms.CheckBox();
             this.groupBoxDigits = new System.Windows.Forms.GroupBox();
+            this.buttonDigitsClear = new System.Windows.Forms.Button();
             this.textBoxDigits = new System.Windows.Forms.TextBox();
             this.buttonHash = new System.Windows.Forms.Button();
             this.buttonStar = new System.Windows.Forms.Button();
@@ -60,22 +63,8 @@
             this.buttonHangup = new System.Windows.Forms.Button();
             this.buttonCall = new System.Windows.Forms.Button();
             this.groupBoxAccount = new System.Windows.Forms.GroupBox();
-            this.groupBoxAccDetails = new System.Windows.Forms.GroupBox();
-            this.checkBoxAccIsValid = new System.Windows.Forms.CheckBox();
-            this.labelAccAccountUri = new System.Windows.Forms.Label();
-            this.labelAccRegStatusText = new System.Windows.Forms.Label();
-            this.textBoxAccRegStatusText = new System.Windows.Forms.TextBox();
-            this.labelAccRegStatus = new System.Windows.Forms.Label();
-            this.textBoxAccRegStatus = new System.Windows.Forms.TextBox();
-            this.checkBoxAccRegIsConfigured = new System.Windows.Forms.CheckBox();
-            this.checkBoxAccRegIsActive = new System.Windows.Forms.CheckBox();
-            this.labelAccOnlineText = new System.Windows.Forms.Label();
-            this.labelAccRegExpiresSec = new System.Windows.Forms.Label();
-            this.textBoxAccRegExpiresSec = new System.Windows.Forms.TextBox();
-            this.textBoxAccOnlineText = new System.Windows.Forms.TextBox();
-            this.checkBoxAccIsOnline = new System.Windows.Forms.CheckBox();
-            this.buttonAccDetails = new System.Windows.Forms.Button();
-            this.checkBoxAccDetails = new System.Windows.Forms.CheckBox();
+            this.tabControlAccount = new System.Windows.Forms.TabControl();
+            this.tabPageAccountConfig = new System.Windows.Forms.TabPage();
             this.groupBoxAccAccount = new System.Windows.Forms.GroupBox();
             this.buttonConfiguration = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
@@ -93,8 +82,31 @@
             this.comboBoxAccStatus = new System.Windows.Forms.ComboBox();
             this.labelAccActivity = new System.Windows.Forms.Label();
             this.labelAccStatus = new System.Windows.Forms.Label();
+            this.tabPageAccountDetails = new System.Windows.Forms.TabPage();
+            this.groupBoxAccDetails = new System.Windows.Forms.GroupBox();
+            this.checkBoxAccIsValid = new System.Windows.Forms.CheckBox();
+            this.labelAccAccountUri = new System.Windows.Forms.Label();
+            this.labelAccRegStatusText = new System.Windows.Forms.Label();
+            this.textBoxAccRegStatusText = new System.Windows.Forms.TextBox();
+            this.labelAccRegStatus = new System.Windows.Forms.Label();
+            this.textBoxAccRegStatus = new System.Windows.Forms.TextBox();
+            this.checkBoxAccRegIsConfigured = new System.Windows.Forms.CheckBox();
+            this.checkBoxAccRegIsActive = new System.Windows.Forms.CheckBox();
+            this.labelAccOnlineText = new System.Windows.Forms.Label();
+            this.labelAccRegExpiresSec = new System.Windows.Forms.Label();
+            this.textBoxAccRegExpiresSec = new System.Windows.Forms.TextBox();
+            this.textBoxAccOnlineText = new System.Windows.Forms.TextBox();
+            this.checkBoxAccIsOnline = new System.Windows.Forms.CheckBox();
+            this.buttonAccDetails = new System.Windows.Forms.Button();
+            this.checkBoxAccDetails = new System.Windows.Forms.CheckBox();
             this.labelRegistationStatusState = new System.Windows.Forms.Label();
             this.labelRegistationStatus = new System.Windows.Forms.Label();
+            this.contextMenuStripContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.tabControlVoIP = new System.Windows.Forms.TabControl();
+            this.tabPageVoIPCall = new System.Windows.Forms.TabPage();
+            this.tabPageContacts = new System.Windows.Forms.TabPage();
             this.groupBoxContact = new System.Windows.Forms.GroupBox();
             this.comboBoxContactView = new System.Windows.Forms.ComboBox();
             this.buttonContactUpdate = new System.Windows.Forms.Button();
@@ -104,11 +116,6 @@
             this.columnHeaderContactName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderContactAccount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderContactState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStripContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
-            this.tabControlVoIP = new System.Windows.Forms.TabControl();
-            this.tabPageVoIPCall = new System.Windows.Forms.TabPage();
             this.tabPageIncomingOutgoingCalls = new System.Windows.Forms.TabPage();
             this.groupBoxInOutCalls = new System.Windows.Forms.GroupBox();
             this.textBoxInOutCallsDetails = new System.Windows.Forms.TextBox();
@@ -132,15 +139,23 @@
             this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.labelVolumeLevel = new System.Windows.Forms.Label();
+            this.labelMicrophoneLevel = new System.Windows.Forms.Label();
             this.groupBoxCall.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             this.groupBoxDigits.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
-            this.groupBoxAccDetails.SuspendLayout();
+            this.tabControlAccount.SuspendLayout();
+            this.tabPageAccountConfig.SuspendLayout();
             this.groupBoxAccAccount.SuspendLayout();
             this.groupBoxAccOnlineState.SuspendLayout();
-            this.groupBoxContact.SuspendLayout();
+            this.tabPageAccountDetails.SuspendLayout();
+            this.groupBoxAccDetails.SuspendLayout();
             this.tabControlVoIP.SuspendLayout();
             this.tabPageVoIPCall.SuspendLayout();
+            this.tabPageContacts.SuspendLayout();
+            this.groupBoxContact.SuspendLayout();
             this.tabPageIncomingOutgoingCalls.SuspendLayout();
             this.groupBoxInOutCalls.SuspendLayout();
             this.tabPageConferenceCall.SuspendLayout();
@@ -151,8 +166,13 @@
             // 
             // groupBoxCall
             // 
-            this.groupBoxCall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxCall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCall.Controls.Add(this.labelMicrophoneLevel);
+            this.groupBoxCall.Controls.Add(this.labelVolumeLevel);
+            this.groupBoxCall.Controls.Add(this.trackBarMicrophone);
+            this.groupBoxCall.Controls.Add(this.trackBarVolume);
             this.groupBoxCall.Controls.Add(this.checkBoxMuteMicrophone);
             this.groupBoxCall.Controls.Add(this.checkBoxMuteVolume);
             this.groupBoxCall.Controls.Add(this.groupBoxDigits);
@@ -162,15 +182,35 @@
             this.groupBoxCall.Enabled = false;
             this.groupBoxCall.Location = new System.Drawing.Point(6, 6);
             this.groupBoxCall.Name = "groupBoxCall";
-            this.groupBoxCall.Size = new System.Drawing.Size(248, 288);
+            this.groupBoxCall.Size = new System.Drawing.Size(364, 341);
             this.groupBoxCall.TabIndex = 0;
             this.groupBoxCall.TabStop = false;
             this.groupBoxCall.Text = "Call";
             // 
+            // trackBarMicrophone
+            // 
+            this.trackBarMicrophone.LargeChange = 10;
+            this.trackBarMicrophone.Location = new System.Drawing.Point(162, 273);
+            this.trackBarMicrophone.Maximum = 100;
+            this.trackBarMicrophone.Name = "trackBarMicrophone";
+            this.trackBarMicrophone.Size = new System.Drawing.Size(129, 45);
+            this.trackBarMicrophone.TabIndex = 20;
+            this.trackBarMicrophone.Scroll += new System.EventHandler(this.trackBarMicrophone_Scroll);
+            // 
+            // trackBarVolume
+            // 
+            this.trackBarVolume.LargeChange = 10;
+            this.trackBarVolume.Location = new System.Drawing.Point(9, 272);
+            this.trackBarVolume.Maximum = 100;
+            this.trackBarVolume.Name = "trackBarVolume";
+            this.trackBarVolume.Size = new System.Drawing.Size(129, 45);
+            this.trackBarVolume.TabIndex = 19;
+            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
+            // 
             // checkBoxMuteMicrophone
             // 
             this.checkBoxMuteMicrophone.AutoSize = true;
-            this.checkBoxMuteMicrophone.Location = new System.Drawing.Point(126, 260);
+            this.checkBoxMuteMicrophone.Location = new System.Drawing.Point(162, 250);
             this.checkBoxMuteMicrophone.Name = "checkBoxMuteMicrophone";
             this.checkBoxMuteMicrophone.Size = new System.Drawing.Size(109, 17);
             this.checkBoxMuteMicrophone.TabIndex = 18;
@@ -181,7 +221,7 @@
             // checkBoxMuteVolume
             // 
             this.checkBoxMuteVolume.AutoSize = true;
-            this.checkBoxMuteVolume.Location = new System.Drawing.Point(28, 260);
+            this.checkBoxMuteVolume.Location = new System.Drawing.Point(9, 249);
             this.checkBoxMuteVolume.Name = "checkBoxMuteVolume";
             this.checkBoxMuteVolume.Size = new System.Drawing.Size(88, 17);
             this.checkBoxMuteVolume.TabIndex = 17;
@@ -191,6 +231,7 @@
             // 
             // groupBoxDigits
             // 
+            this.groupBoxDigits.Controls.Add(this.buttonDigitsClear);
             this.groupBoxDigits.Controls.Add(this.textBoxDigits);
             this.groupBoxDigits.Controls.Add(this.buttonHash);
             this.groupBoxDigits.Controls.Add(this.buttonStar);
@@ -205,18 +246,28 @@
             this.groupBoxDigits.Controls.Add(this.buttonTwo);
             this.groupBoxDigits.Controls.Add(this.buttonOne);
             this.groupBoxDigits.Enabled = false;
-            this.groupBoxDigits.Location = new System.Drawing.Point(9, 46);
+            this.groupBoxDigits.Location = new System.Drawing.Point(9, 75);
             this.groupBoxDigits.Name = "groupBoxDigits";
             this.groupBoxDigits.Size = new System.Drawing.Size(230, 168);
             this.groupBoxDigits.TabIndex = 16;
             this.groupBoxDigits.TabStop = false;
             // 
+            // buttonDigitsClear
+            // 
+            this.buttonDigitsClear.Location = new System.Drawing.Point(153, 20);
+            this.buttonDigitsClear.Name = "buttonDigitsClear";
+            this.buttonDigitsClear.Size = new System.Drawing.Size(61, 23);
+            this.buttonDigitsClear.TabIndex = 27;
+            this.buttonDigitsClear.Text = "Clear";
+            this.buttonDigitsClear.UseVisualStyleBackColor = true;
+            this.buttonDigitsClear.Click += new System.EventHandler(this.buttonDigitsClear_Click);
+            // 
             // textBoxDigits
             // 
-            this.textBoxDigits.Location = new System.Drawing.Point(19, 19);
+            this.textBoxDigits.Location = new System.Drawing.Point(19, 22);
             this.textBoxDigits.Name = "textBoxDigits";
             this.textBoxDigits.ReadOnly = true;
-            this.textBoxDigits.Size = new System.Drawing.Size(195, 20);
+            this.textBoxDigits.Size = new System.Drawing.Size(128, 20);
             this.textBoxDigits.TabIndex = 26;
             // 
             // buttonHash
@@ -353,7 +404,7 @@
             // buttonHangup
             // 
             this.buttonHangup.Enabled = false;
-            this.buttonHangup.Location = new System.Drawing.Point(45, 221);
+            this.buttonHangup.Location = new System.Drawing.Point(45, 46);
             this.buttonHangup.Name = "buttonHangup";
             this.buttonHangup.Size = new System.Drawing.Size(75, 23);
             this.buttonHangup.TabIndex = 15;
@@ -364,7 +415,7 @@
             // buttonCall
             // 
             this.buttonCall.Enabled = false;
-            this.buttonCall.Location = new System.Drawing.Point(126, 221);
+            this.buttonCall.Location = new System.Drawing.Point(126, 46);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(75, 23);
             this.buttonCall.TabIndex = 14;
@@ -377,20 +428,251 @@
             this.groupBoxAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxAccount.Controls.Add(this.groupBoxAccDetails);
-            this.groupBoxAccount.Controls.Add(this.groupBoxAccAccount);
-            this.groupBoxAccount.Controls.Add(this.groupBoxAccOnlineState);
+            this.groupBoxAccount.Controls.Add(this.tabControlAccount);
             this.groupBoxAccount.Controls.Add(this.labelRegistationStatusState);
             this.groupBoxAccount.Controls.Add(this.labelRegistationStatus);
             this.groupBoxAccount.Location = new System.Drawing.Point(6, 6);
             this.groupBoxAccount.Name = "groupBoxAccount";
-            this.groupBoxAccount.Size = new System.Drawing.Size(735, 288);
+            this.groupBoxAccount.Size = new System.Drawing.Size(364, 341);
             this.groupBoxAccount.TabIndex = 1;
             this.groupBoxAccount.TabStop = false;
             this.groupBoxAccount.Text = "Account";
             // 
+            // tabControlAccount
+            // 
+            this.tabControlAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlAccount.Controls.Add(this.tabPageAccountConfig);
+            this.tabControlAccount.Controls.Add(this.tabPageAccountDetails);
+            this.tabControlAccount.Location = new System.Drawing.Point(6, 19);
+            this.tabControlAccount.Name = "tabControlAccount";
+            this.tabControlAccount.SelectedIndex = 0;
+            this.tabControlAccount.Size = new System.Drawing.Size(352, 263);
+            this.tabControlAccount.TabIndex = 16;
+            // 
+            // tabPageAccountConfig
+            // 
+            this.tabPageAccountConfig.Controls.Add(this.groupBoxAccAccount);
+            this.tabPageAccountConfig.Controls.Add(this.groupBoxAccOnlineState);
+            this.tabPageAccountConfig.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAccountConfig.Name = "tabPageAccountConfig";
+            this.tabPageAccountConfig.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAccountConfig.Size = new System.Drawing.Size(344, 237);
+            this.tabPageAccountConfig.TabIndex = 0;
+            this.tabPageAccountConfig.Text = "Create";
+            this.tabPageAccountConfig.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxAccAccount
+            // 
+            this.groupBoxAccAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAccAccount.Controls.Add(this.buttonConfiguration);
+            this.groupBoxAccAccount.Controls.Add(this.buttonSettings);
+            this.groupBoxAccAccount.Controls.Add(this.buttonRegister);
+            this.groupBoxAccAccount.Controls.Add(this.buttonLoadContacts);
+            this.groupBoxAccAccount.Controls.Add(this.buttonCreate);
+            this.groupBoxAccAccount.Controls.Add(this.buttonInstantMessage);
+            this.groupBoxAccAccount.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxAccAccount.Name = "groupBoxAccAccount";
+            this.groupBoxAccAccount.Size = new System.Drawing.Size(332, 84);
+            this.groupBoxAccAccount.TabIndex = 14;
+            this.groupBoxAccAccount.TabStop = false;
+            // 
+            // buttonConfiguration
+            // 
+            this.buttonConfiguration.Location = new System.Drawing.Point(217, 48);
+            this.buttonConfiguration.Name = "buttonConfiguration";
+            this.buttonConfiguration.Size = new System.Drawing.Size(99, 23);
+            this.buttonConfiguration.TabIndex = 13;
+            this.buttonConfiguration.Text = "Configuration";
+            this.buttonConfiguration.UseVisualStyleBackColor = true;
+            this.buttonConfiguration.Click += new System.EventHandler(this.buttonConfiguration_Click);
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Enabled = false;
+            this.buttonSettings.Location = new System.Drawing.Point(169, 19);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonSettings.TabIndex = 4;
+            this.buttonSettings.Text = "Settings";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
+            // buttonRegister
+            // 
+            this.buttonRegister.Enabled = false;
+            this.buttonRegister.Location = new System.Drawing.Point(7, 19);
+            this.buttonRegister.Name = "buttonRegister";
+            this.buttonRegister.Size = new System.Drawing.Size(75, 23);
+            this.buttonRegister.TabIndex = 6;
+            this.buttonRegister.Text = "Register";
+            this.buttonRegister.UseVisualStyleBackColor = true;
+            this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
+            // 
+            // buttonLoadContacts
+            // 
+            this.buttonLoadContacts.Enabled = false;
+            this.buttonLoadContacts.Location = new System.Drawing.Point(7, 48);
+            this.buttonLoadContacts.Name = "buttonLoadContacts";
+            this.buttonLoadContacts.Size = new System.Drawing.Size(99, 23);
+            this.buttonLoadContacts.TabIndex = 12;
+            this.buttonLoadContacts.Text = "Load Contacts";
+            this.buttonLoadContacts.UseVisualStyleBackColor = true;
+            this.buttonLoadContacts.Click += new System.EventHandler(this.buttonLoadContacts_Click);
+            // 
+            // buttonCreate
+            // 
+            this.buttonCreate.Enabled = false;
+            this.buttonCreate.Location = new System.Drawing.Point(88, 19);
+            this.buttonCreate.Name = "buttonCreate";
+            this.buttonCreate.Size = new System.Drawing.Size(75, 23);
+            this.buttonCreate.TabIndex = 5;
+            this.buttonCreate.Text = "Create";
+            this.buttonCreate.UseVisualStyleBackColor = true;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            // 
+            // buttonInstantMessage
+            // 
+            this.buttonInstantMessage.Enabled = false;
+            this.buttonInstantMessage.Location = new System.Drawing.Point(112, 48);
+            this.buttonInstantMessage.Name = "buttonInstantMessage";
+            this.buttonInstantMessage.Size = new System.Drawing.Size(99, 23);
+            this.buttonInstantMessage.TabIndex = 11;
+            this.buttonInstantMessage.Text = "Instant Message";
+            this.buttonInstantMessage.UseVisualStyleBackColor = true;
+            this.buttonInstantMessage.Click += new System.EventHandler(this.buttonInstantMessage_Click);
+            // 
+            // groupBoxAccOnlineState
+            // 
+            this.groupBoxAccOnlineState.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAccOnlineState.Controls.Add(this.buttonAccSetStatus);
+            this.groupBoxAccOnlineState.Controls.Add(this.labelAccNote);
+            this.groupBoxAccOnlineState.Controls.Add(this.textBoxAccNote);
+            this.groupBoxAccOnlineState.Controls.Add(this.textBoxAccStatusText);
+            this.groupBoxAccOnlineState.Controls.Add(this.labelAccStatusText);
+            this.groupBoxAccOnlineState.Controls.Add(this.comboBoxAccActivity);
+            this.groupBoxAccOnlineState.Controls.Add(this.comboBoxAccStatus);
+            this.groupBoxAccOnlineState.Controls.Add(this.labelAccActivity);
+            this.groupBoxAccOnlineState.Controls.Add(this.labelAccStatus);
+            this.groupBoxAccOnlineState.Enabled = false;
+            this.groupBoxAccOnlineState.Location = new System.Drawing.Point(6, 96);
+            this.groupBoxAccOnlineState.Name = "groupBoxAccOnlineState";
+            this.groupBoxAccOnlineState.Size = new System.Drawing.Size(332, 135);
+            this.groupBoxAccOnlineState.TabIndex = 13;
+            this.groupBoxAccOnlineState.TabStop = false;
+            this.groupBoxAccOnlineState.Text = "Online Status";
+            // 
+            // buttonAccSetStatus
+            // 
+            this.buttonAccSetStatus.Enabled = false;
+            this.buttonAccSetStatus.Location = new System.Drawing.Point(243, 98);
+            this.buttonAccSetStatus.Name = "buttonAccSetStatus";
+            this.buttonAccSetStatus.Size = new System.Drawing.Size(75, 23);
+            this.buttonAccSetStatus.TabIndex = 8;
+            this.buttonAccSetStatus.Text = "Set Status";
+            this.buttonAccSetStatus.UseVisualStyleBackColor = true;
+            this.buttonAccSetStatus.Click += new System.EventHandler(this.buttonAccSetStatus_Click);
+            // 
+            // labelAccNote
+            // 
+            this.labelAccNote.AutoSize = true;
+            this.labelAccNote.Location = new System.Drawing.Point(15, 75);
+            this.labelAccNote.Name = "labelAccNote";
+            this.labelAccNote.Size = new System.Drawing.Size(36, 13);
+            this.labelAccNote.TabIndex = 7;
+            this.labelAccNote.Text = "Note :";
+            // 
+            // textBoxAccNote
+            // 
+            this.textBoxAccNote.Location = new System.Drawing.Point(68, 72);
+            this.textBoxAccNote.Name = "textBoxAccNote";
+            this.textBoxAccNote.Size = new System.Drawing.Size(250, 20);
+            this.textBoxAccNote.TabIndex = 6;
+            this.textBoxAccNote.TextChanged += new System.EventHandler(this.textBoxAccNote_TextChanged);
+            // 
+            // textBoxAccStatusText
+            // 
+            this.textBoxAccStatusText.Location = new System.Drawing.Point(68, 46);
+            this.textBoxAccStatusText.Name = "textBoxAccStatusText";
+            this.textBoxAccStatusText.Size = new System.Drawing.Size(250, 20);
+            this.textBoxAccStatusText.TabIndex = 5;
+            this.textBoxAccStatusText.TextChanged += new System.EventHandler(this.textBoxAccStatusText_TextChanged);
+            // 
+            // labelAccStatusText
+            // 
+            this.labelAccStatusText.AutoSize = true;
+            this.labelAccStatusText.Location = new System.Drawing.Point(15, 49);
+            this.labelAccStatusText.Name = "labelAccStatusText";
+            this.labelAccStatusText.Size = new System.Drawing.Size(43, 13);
+            this.labelAccStatusText.TabIndex = 4;
+            this.labelAccStatusText.Text = "Status :";
+            // 
+            // comboBoxAccActivity
+            // 
+            this.comboBoxAccActivity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAccActivity.FormattingEnabled = true;
+            this.comboBoxAccActivity.Items.AddRange(new object[] {
+            "Unknown",
+            "Away",
+            "Busy"});
+            this.comboBoxAccActivity.Location = new System.Drawing.Point(230, 19);
+            this.comboBoxAccActivity.Name = "comboBoxAccActivity";
+            this.comboBoxAccActivity.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxAccActivity.TabIndex = 3;
+            this.comboBoxAccActivity.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccActivity_SelectedIndexChanged);
+            // 
+            // comboBoxAccStatus
+            // 
+            this.comboBoxAccStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAccStatus.FormattingEnabled = true;
+            this.comboBoxAccStatus.Items.AddRange(new object[] {
+            "Unknown",
+            "Online",
+            "Offline"});
+            this.comboBoxAccStatus.Location = new System.Drawing.Point(68, 19);
+            this.comboBoxAccStatus.Name = "comboBoxAccStatus";
+            this.comboBoxAccStatus.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxAccStatus.TabIndex = 2;
+            this.comboBoxAccStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccStatus_SelectedIndexChanged);
+            // 
+            // labelAccActivity
+            // 
+            this.labelAccActivity.AutoSize = true;
+            this.labelAccActivity.Location = new System.Drawing.Point(177, 22);
+            this.labelAccActivity.Name = "labelAccActivity";
+            this.labelAccActivity.Size = new System.Drawing.Size(47, 13);
+            this.labelAccActivity.TabIndex = 1;
+            this.labelAccActivity.Text = "Activity :";
+            // 
+            // labelAccStatus
+            // 
+            this.labelAccStatus.AutoSize = true;
+            this.labelAccStatus.Location = new System.Drawing.Point(15, 22);
+            this.labelAccStatus.Name = "labelAccStatus";
+            this.labelAccStatus.Size = new System.Drawing.Size(43, 13);
+            this.labelAccStatus.TabIndex = 0;
+            this.labelAccStatus.Text = "Status :";
+            // 
+            // tabPageAccountDetails
+            // 
+            this.tabPageAccountDetails.Controls.Add(this.groupBoxAccDetails);
+            this.tabPageAccountDetails.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAccountDetails.Name = "tabPageAccountDetails";
+            this.tabPageAccountDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAccountDetails.Size = new System.Drawing.Size(344, 237);
+            this.tabPageAccountDetails.TabIndex = 1;
+            this.tabPageAccountDetails.Text = "Details";
+            this.tabPageAccountDetails.UseVisualStyleBackColor = true;
+            // 
             // groupBoxAccDetails
             // 
+            this.groupBoxAccDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxAccDetails.Controls.Add(this.checkBoxAccIsValid);
             this.groupBoxAccDetails.Controls.Add(this.labelAccAccountUri);
             this.groupBoxAccDetails.Controls.Add(this.labelAccRegStatusText);
@@ -407,9 +689,9 @@
             this.groupBoxAccDetails.Controls.Add(this.buttonAccDetails);
             this.groupBoxAccDetails.Controls.Add(this.checkBoxAccDetails);
             this.groupBoxAccDetails.Enabled = false;
-            this.groupBoxAccDetails.Location = new System.Drawing.Point(338, 19);
+            this.groupBoxAccDetails.Location = new System.Drawing.Point(6, 6);
             this.groupBoxAccDetails.Name = "groupBoxAccDetails";
-            this.groupBoxAccDetails.Size = new System.Drawing.Size(234, 220);
+            this.groupBoxAccDetails.Size = new System.Drawing.Size(332, 225);
             this.groupBoxAccDetails.TabIndex = 15;
             this.groupBoxAccDetails.TabStop = false;
             this.groupBoxAccDetails.Text = "Details";
@@ -555,200 +837,11 @@
             this.checkBoxAccDetails.Text = "Is Default";
             this.checkBoxAccDetails.UseVisualStyleBackColor = true;
             // 
-            // groupBoxAccAccount
-            // 
-            this.groupBoxAccAccount.Controls.Add(this.buttonConfiguration);
-            this.groupBoxAccAccount.Controls.Add(this.buttonSettings);
-            this.groupBoxAccAccount.Controls.Add(this.buttonRegister);
-            this.groupBoxAccAccount.Controls.Add(this.buttonLoadContacts);
-            this.groupBoxAccAccount.Controls.Add(this.buttonCreate);
-            this.groupBoxAccAccount.Controls.Add(this.buttonInstantMessage);
-            this.groupBoxAccAccount.Location = new System.Drawing.Point(6, 19);
-            this.groupBoxAccAccount.Name = "groupBoxAccAccount";
-            this.groupBoxAccAccount.Size = new System.Drawing.Size(326, 84);
-            this.groupBoxAccAccount.TabIndex = 14;
-            this.groupBoxAccAccount.TabStop = false;
-            // 
-            // buttonConfiguration
-            // 
-            this.buttonConfiguration.Location = new System.Drawing.Point(217, 48);
-            this.buttonConfiguration.Name = "buttonConfiguration";
-            this.buttonConfiguration.Size = new System.Drawing.Size(99, 23);
-            this.buttonConfiguration.TabIndex = 13;
-            this.buttonConfiguration.Text = "Configuration";
-            this.buttonConfiguration.UseVisualStyleBackColor = true;
-            this.buttonConfiguration.Click += new System.EventHandler(this.buttonConfiguration_Click);
-            // 
-            // buttonSettings
-            // 
-            this.buttonSettings.Enabled = false;
-            this.buttonSettings.Location = new System.Drawing.Point(169, 19);
-            this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonSettings.TabIndex = 4;
-            this.buttonSettings.Text = "Settings";
-            this.buttonSettings.UseVisualStyleBackColor = true;
-            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
-            // 
-            // buttonRegister
-            // 
-            this.buttonRegister.Enabled = false;
-            this.buttonRegister.Location = new System.Drawing.Point(7, 19);
-            this.buttonRegister.Name = "buttonRegister";
-            this.buttonRegister.Size = new System.Drawing.Size(75, 23);
-            this.buttonRegister.TabIndex = 6;
-            this.buttonRegister.Text = "Register";
-            this.buttonRegister.UseVisualStyleBackColor = true;
-            this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
-            // 
-            // buttonLoadContacts
-            // 
-            this.buttonLoadContacts.Enabled = false;
-            this.buttonLoadContacts.Location = new System.Drawing.Point(7, 48);
-            this.buttonLoadContacts.Name = "buttonLoadContacts";
-            this.buttonLoadContacts.Size = new System.Drawing.Size(99, 23);
-            this.buttonLoadContacts.TabIndex = 12;
-            this.buttonLoadContacts.Text = "Load Contacts";
-            this.buttonLoadContacts.UseVisualStyleBackColor = true;
-            this.buttonLoadContacts.Click += new System.EventHandler(this.buttonLoadContacts_Click);
-            // 
-            // buttonCreate
-            // 
-            this.buttonCreate.Enabled = false;
-            this.buttonCreate.Location = new System.Drawing.Point(88, 19);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 23);
-            this.buttonCreate.TabIndex = 5;
-            this.buttonCreate.Text = "Create";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
-            // 
-            // buttonInstantMessage
-            // 
-            this.buttonInstantMessage.Enabled = false;
-            this.buttonInstantMessage.Location = new System.Drawing.Point(112, 48);
-            this.buttonInstantMessage.Name = "buttonInstantMessage";
-            this.buttonInstantMessage.Size = new System.Drawing.Size(99, 23);
-            this.buttonInstantMessage.TabIndex = 11;
-            this.buttonInstantMessage.Text = "Instant Message";
-            this.buttonInstantMessage.UseVisualStyleBackColor = true;
-            this.buttonInstantMessage.Click += new System.EventHandler(this.buttonInstantMessage_Click);
-            // 
-            // groupBoxAccOnlineState
-            // 
-            this.groupBoxAccOnlineState.Controls.Add(this.buttonAccSetStatus);
-            this.groupBoxAccOnlineState.Controls.Add(this.labelAccNote);
-            this.groupBoxAccOnlineState.Controls.Add(this.textBoxAccNote);
-            this.groupBoxAccOnlineState.Controls.Add(this.textBoxAccStatusText);
-            this.groupBoxAccOnlineState.Controls.Add(this.labelAccStatusText);
-            this.groupBoxAccOnlineState.Controls.Add(this.comboBoxAccActivity);
-            this.groupBoxAccOnlineState.Controls.Add(this.comboBoxAccStatus);
-            this.groupBoxAccOnlineState.Controls.Add(this.labelAccActivity);
-            this.groupBoxAccOnlineState.Controls.Add(this.labelAccStatus);
-            this.groupBoxAccOnlineState.Enabled = false;
-            this.groupBoxAccOnlineState.Location = new System.Drawing.Point(6, 109);
-            this.groupBoxAccOnlineState.Name = "groupBoxAccOnlineState";
-            this.groupBoxAccOnlineState.Size = new System.Drawing.Size(326, 130);
-            this.groupBoxAccOnlineState.TabIndex = 13;
-            this.groupBoxAccOnlineState.TabStop = false;
-            this.groupBoxAccOnlineState.Text = "Online Status";
-            // 
-            // buttonAccSetStatus
-            // 
-            this.buttonAccSetStatus.Enabled = false;
-            this.buttonAccSetStatus.Location = new System.Drawing.Point(243, 98);
-            this.buttonAccSetStatus.Name = "buttonAccSetStatus";
-            this.buttonAccSetStatus.Size = new System.Drawing.Size(75, 23);
-            this.buttonAccSetStatus.TabIndex = 8;
-            this.buttonAccSetStatus.Text = "Set Status";
-            this.buttonAccSetStatus.UseVisualStyleBackColor = true;
-            this.buttonAccSetStatus.Click += new System.EventHandler(this.buttonAccSetStatus_Click);
-            // 
-            // labelAccNote
-            // 
-            this.labelAccNote.AutoSize = true;
-            this.labelAccNote.Location = new System.Drawing.Point(15, 75);
-            this.labelAccNote.Name = "labelAccNote";
-            this.labelAccNote.Size = new System.Drawing.Size(36, 13);
-            this.labelAccNote.TabIndex = 7;
-            this.labelAccNote.Text = "Note :";
-            // 
-            // textBoxAccNote
-            // 
-            this.textBoxAccNote.Location = new System.Drawing.Point(68, 72);
-            this.textBoxAccNote.Name = "textBoxAccNote";
-            this.textBoxAccNote.Size = new System.Drawing.Size(250, 20);
-            this.textBoxAccNote.TabIndex = 6;
-            this.textBoxAccNote.TextChanged += new System.EventHandler(this.textBoxAccNote_TextChanged);
-            // 
-            // textBoxAccStatusText
-            // 
-            this.textBoxAccStatusText.Location = new System.Drawing.Point(68, 46);
-            this.textBoxAccStatusText.Name = "textBoxAccStatusText";
-            this.textBoxAccStatusText.Size = new System.Drawing.Size(250, 20);
-            this.textBoxAccStatusText.TabIndex = 5;
-            this.textBoxAccStatusText.TextChanged += new System.EventHandler(this.textBoxAccStatusText_TextChanged);
-            // 
-            // labelAccStatusText
-            // 
-            this.labelAccStatusText.AutoSize = true;
-            this.labelAccStatusText.Location = new System.Drawing.Point(15, 49);
-            this.labelAccStatusText.Name = "labelAccStatusText";
-            this.labelAccStatusText.Size = new System.Drawing.Size(43, 13);
-            this.labelAccStatusText.TabIndex = 4;
-            this.labelAccStatusText.Text = "Status :";
-            // 
-            // comboBoxAccActivity
-            // 
-            this.comboBoxAccActivity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAccActivity.FormattingEnabled = true;
-            this.comboBoxAccActivity.Items.AddRange(new object[] {
-            "Unknown",
-            "Away",
-            "Busy"});
-            this.comboBoxAccActivity.Location = new System.Drawing.Point(230, 19);
-            this.comboBoxAccActivity.Name = "comboBoxAccActivity";
-            this.comboBoxAccActivity.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxAccActivity.TabIndex = 3;
-            this.comboBoxAccActivity.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccActivity_SelectedIndexChanged);
-            // 
-            // comboBoxAccStatus
-            // 
-            this.comboBoxAccStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAccStatus.FormattingEnabled = true;
-            this.comboBoxAccStatus.Items.AddRange(new object[] {
-            "Unknown",
-            "Online",
-            "Offline"});
-            this.comboBoxAccStatus.Location = new System.Drawing.Point(68, 19);
-            this.comboBoxAccStatus.Name = "comboBoxAccStatus";
-            this.comboBoxAccStatus.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxAccStatus.TabIndex = 2;
-            this.comboBoxAccStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccStatus_SelectedIndexChanged);
-            // 
-            // labelAccActivity
-            // 
-            this.labelAccActivity.AutoSize = true;
-            this.labelAccActivity.Location = new System.Drawing.Point(177, 22);
-            this.labelAccActivity.Name = "labelAccActivity";
-            this.labelAccActivity.Size = new System.Drawing.Size(47, 13);
-            this.labelAccActivity.TabIndex = 1;
-            this.labelAccActivity.Text = "Activity :";
-            // 
-            // labelAccStatus
-            // 
-            this.labelAccStatus.AutoSize = true;
-            this.labelAccStatus.Location = new System.Drawing.Point(15, 22);
-            this.labelAccStatus.Name = "labelAccStatus";
-            this.labelAccStatus.Size = new System.Drawing.Size(43, 13);
-            this.labelAccStatus.TabIndex = 0;
-            this.labelAccStatus.Text = "Status :";
-            // 
             // labelRegistationStatusState
             // 
             this.labelRegistationStatusState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelRegistationStatusState.AutoSize = true;
-            this.labelRegistationStatusState.Location = new System.Drawing.Point(6, 269);
+            this.labelRegistationStatusState.Location = new System.Drawing.Point(10, 314);
             this.labelRegistationStatusState.Name = "labelRegistationStatusState";
             this.labelRegistationStatusState.Size = new System.Drawing.Size(78, 13);
             this.labelRegistationStatusState.TabIndex = 10;
@@ -758,11 +851,63 @@
             // 
             this.labelRegistationStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelRegistationStatus.AutoSize = true;
-            this.labelRegistationStatus.Location = new System.Drawing.Point(6, 247);
+            this.labelRegistationStatus.Location = new System.Drawing.Point(10, 291);
             this.labelRegistationStatus.Name = "labelRegistationStatus";
             this.labelRegistationStatus.Size = new System.Drawing.Size(98, 13);
             this.labelRegistationStatus.TabIndex = 9;
             this.labelRegistationStatus.Text = "Registation  None :";
+            // 
+            // contextMenuStripContacts
+            // 
+            this.contextMenuStripContacts.Name = "contextMenuStripContacts";
+            this.contextMenuStripContacts.Size = new System.Drawing.Size(61, 4);
+            // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "cellphone.png");
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
+            // 
+            // tabControlVoIP
+            // 
+            this.tabControlVoIP.Controls.Add(this.tabPageVoIPCall);
+            this.tabControlVoIP.Controls.Add(this.tabPageContacts);
+            this.tabControlVoIP.Controls.Add(this.tabPageIncomingOutgoingCalls);
+            this.tabControlVoIP.Controls.Add(this.tabPageConferenceCall);
+            this.tabControlVoIP.Controls.Add(this.tabPageVoIPAccount);
+            this.tabControlVoIP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlVoIP.Location = new System.Drawing.Point(0, 0);
+            this.tabControlVoIP.Name = "tabControlVoIP";
+            this.tabControlVoIP.SelectedIndex = 0;
+            this.tabControlVoIP.Size = new System.Drawing.Size(384, 379);
+            this.tabControlVoIP.TabIndex = 3;
+            // 
+            // tabPageVoIPCall
+            // 
+            this.tabPageVoIPCall.Controls.Add(this.groupBoxCall);
+            this.tabPageVoIPCall.Location = new System.Drawing.Point(4, 22);
+            this.tabPageVoIPCall.Name = "tabPageVoIPCall";
+            this.tabPageVoIPCall.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageVoIPCall.Size = new System.Drawing.Size(376, 353);
+            this.tabPageVoIPCall.TabIndex = 0;
+            this.tabPageVoIPCall.Text = "Call";
+            this.tabPageVoIPCall.UseVisualStyleBackColor = true;
+            // 
+            // tabPageContacts
+            // 
+            this.tabPageContacts.Controls.Add(this.groupBoxContact);
+            this.tabPageContacts.Location = new System.Drawing.Point(4, 22);
+            this.tabPageContacts.Name = "tabPageContacts";
+            this.tabPageContacts.Size = new System.Drawing.Size(376, 353);
+            this.tabPageContacts.TabIndex = 4;
+            this.tabPageContacts.Text = "Contacts";
+            this.tabPageContacts.UseVisualStyleBackColor = true;
             // 
             // groupBoxContact
             // 
@@ -775,10 +920,10 @@
             this.groupBoxContact.Controls.Add(this.buttonContactAdd);
             this.groupBoxContact.Controls.Add(this.listViewContact);
             this.groupBoxContact.Enabled = false;
-            this.groupBoxContact.Location = new System.Drawing.Point(260, 6);
+            this.groupBoxContact.Location = new System.Drawing.Point(6, 6);
             this.groupBoxContact.Name = "groupBoxContact";
-            this.groupBoxContact.Size = new System.Drawing.Size(481, 288);
-            this.groupBoxContact.TabIndex = 2;
+            this.groupBoxContact.Size = new System.Drawing.Size(364, 341);
+            this.groupBoxContact.TabIndex = 3;
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Text = "Contact";
             // 
@@ -787,7 +932,7 @@
             this.comboBoxContactView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxContactView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContactView.FormattingEnabled = true;
-            this.comboBoxContactView.Location = new System.Drawing.Point(249, 260);
+            this.comboBoxContactView.Location = new System.Drawing.Point(249, 313);
             this.comboBoxContactView.Name = "comboBoxContactView";
             this.comboBoxContactView.Size = new System.Drawing.Size(110, 21);
             this.comboBoxContactView.TabIndex = 6;
@@ -797,7 +942,7 @@
             // 
             this.buttonContactUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonContactUpdate.Enabled = false;
-            this.buttonContactUpdate.Location = new System.Drawing.Point(87, 259);
+            this.buttonContactUpdate.Location = new System.Drawing.Point(87, 312);
             this.buttonContactUpdate.Name = "buttonContactUpdate";
             this.buttonContactUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonContactUpdate.TabIndex = 5;
@@ -809,7 +954,7 @@
             // 
             this.buttonContactDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonContactDelete.Enabled = false;
-            this.buttonContactDelete.Location = new System.Drawing.Point(168, 259);
+            this.buttonContactDelete.Location = new System.Drawing.Point(168, 312);
             this.buttonContactDelete.Name = "buttonContactDelete";
             this.buttonContactDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonContactDelete.TabIndex = 4;
@@ -820,7 +965,7 @@
             // buttonContactAdd
             // 
             this.buttonContactAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonContactAdd.Location = new System.Drawing.Point(6, 259);
+            this.buttonContactAdd.Location = new System.Drawing.Point(6, 312);
             this.buttonContactAdd.Name = "buttonContactAdd";
             this.buttonContactAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonContactAdd.TabIndex = 3;
@@ -871,7 +1016,7 @@
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;
             this.listViewContact.Name = "listViewContact";
-            this.listViewContact.Size = new System.Drawing.Size(469, 234);
+            this.listViewContact.Size = new System.Drawing.Size(352, 287);
             this.listViewContact.SmallImageList = this.imageListSmall;
             this.listViewContact.TabIndex = 0;
             this.listViewContact.UseCompatibleStateImageBehavior = false;
@@ -893,54 +1038,12 @@
             this.columnHeaderContactState.Text = "State";
             this.columnHeaderContactState.Width = 80;
             // 
-            // contextMenuStripContacts
-            // 
-            this.contextMenuStripContacts.Name = "contextMenuStripContacts";
-            this.contextMenuStripContacts.Size = new System.Drawing.Size(61, 4);
-            // 
-            // imageListLarge
-            // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
-            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "cellphone.png");
-            // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
-            // 
-            // tabControlVoIP
-            // 
-            this.tabControlVoIP.Controls.Add(this.tabPageVoIPCall);
-            this.tabControlVoIP.Controls.Add(this.tabPageIncomingOutgoingCalls);
-            this.tabControlVoIP.Controls.Add(this.tabPageConferenceCall);
-            this.tabControlVoIP.Controls.Add(this.tabPageVoIPAccount);
-            this.tabControlVoIP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlVoIP.Location = new System.Drawing.Point(0, 0);
-            this.tabControlVoIP.Name = "tabControlVoIP";
-            this.tabControlVoIP.SelectedIndex = 0;
-            this.tabControlVoIP.Size = new System.Drawing.Size(755, 326);
-            this.tabControlVoIP.TabIndex = 3;
-            // 
-            // tabPageVoIPCall
-            // 
-            this.tabPageVoIPCall.Controls.Add(this.groupBoxContact);
-            this.tabPageVoIPCall.Controls.Add(this.groupBoxCall);
-            this.tabPageVoIPCall.Location = new System.Drawing.Point(4, 22);
-            this.tabPageVoIPCall.Name = "tabPageVoIPCall";
-            this.tabPageVoIPCall.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVoIPCall.Size = new System.Drawing.Size(747, 300);
-            this.tabPageVoIPCall.TabIndex = 0;
-            this.tabPageVoIPCall.Text = "Call";
-            this.tabPageVoIPCall.UseVisualStyleBackColor = true;
-            // 
             // tabPageIncomingOutgoingCalls
             // 
             this.tabPageIncomingOutgoingCalls.Controls.Add(this.groupBoxInOutCalls);
             this.tabPageIncomingOutgoingCalls.Location = new System.Drawing.Point(4, 22);
             this.tabPageIncomingOutgoingCalls.Name = "tabPageIncomingOutgoingCalls";
-            this.tabPageIncomingOutgoingCalls.Size = new System.Drawing.Size(747, 300);
+            this.tabPageIncomingOutgoingCalls.Size = new System.Drawing.Size(376, 353);
             this.tabPageIncomingOutgoingCalls.TabIndex = 2;
             this.tabPageIncomingOutgoingCalls.Text = "Incoming Outgoing Calls";
             this.tabPageIncomingOutgoingCalls.UseVisualStyleBackColor = true;
@@ -956,25 +1059,26 @@
             this.groupBoxInOutCalls.Enabled = false;
             this.groupBoxInOutCalls.Location = new System.Drawing.Point(6, 6);
             this.groupBoxInOutCalls.Name = "groupBoxInOutCalls";
-            this.groupBoxInOutCalls.Size = new System.Drawing.Size(735, 288);
+            this.groupBoxInOutCalls.Size = new System.Drawing.Size(364, 341);
             this.groupBoxInOutCalls.TabIndex = 0;
             this.groupBoxInOutCalls.TabStop = false;
             this.groupBoxInOutCalls.Text = "Calls";
             // 
             // textBoxInOutCallsDetails
             // 
-            this.textBoxInOutCallsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxInOutCallsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxInOutCallsDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxInOutCallsDetails.Location = new System.Drawing.Point(87, 264);
+            this.textBoxInOutCallsDetails.Location = new System.Drawing.Point(87, 317);
             this.textBoxInOutCallsDetails.Name = "textBoxInOutCallsDetails";
             this.textBoxInOutCallsDetails.ReadOnly = true;
-            this.textBoxInOutCallsDetails.Size = new System.Drawing.Size(349, 13);
+            this.textBoxInOutCallsDetails.Size = new System.Drawing.Size(266, 13);
             this.textBoxInOutCallsDetails.TabIndex = 2;
             // 
             // buttonInOutCallsSave
             // 
             this.buttonInOutCallsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonInOutCallsSave.Location = new System.Drawing.Point(6, 259);
+            this.buttonInOutCallsSave.Location = new System.Drawing.Point(6, 312);
             this.buttonInOutCallsSave.Name = "buttonInOutCallsSave";
             this.buttonInOutCallsSave.Size = new System.Drawing.Size(75, 23);
             this.buttonInOutCallsSave.TabIndex = 1;
@@ -999,7 +1103,7 @@
             this.listViewInOutCalls.Location = new System.Drawing.Point(6, 19);
             this.listViewInOutCalls.MultiSelect = false;
             this.listViewInOutCalls.Name = "listViewInOutCalls";
-            this.listViewInOutCalls.Size = new System.Drawing.Size(723, 234);
+            this.listViewInOutCalls.Size = new System.Drawing.Size(352, 287);
             this.listViewInOutCalls.SmallImageList = this.imageListSmall;
             this.listViewInOutCalls.TabIndex = 0;
             this.listViewInOutCalls.UseCompatibleStateImageBehavior = false;
@@ -1045,7 +1149,7 @@
             this.tabPageConferenceCall.Controls.Add(this.groupBoxConference);
             this.tabPageConferenceCall.Location = new System.Drawing.Point(4, 22);
             this.tabPageConferenceCall.Name = "tabPageConferenceCall";
-            this.tabPageConferenceCall.Size = new System.Drawing.Size(747, 300);
+            this.tabPageConferenceCall.Size = new System.Drawing.Size(376, 353);
             this.tabPageConferenceCall.TabIndex = 3;
             this.tabPageConferenceCall.Text = "Conference Call";
             this.tabPageConferenceCall.UseVisualStyleBackColor = true;
@@ -1061,7 +1165,7 @@
             this.groupBoxConference.Enabled = false;
             this.groupBoxConference.Location = new System.Drawing.Point(6, 6);
             this.groupBoxConference.Name = "groupBoxConference";
-            this.groupBoxConference.Size = new System.Drawing.Size(735, 288);
+            this.groupBoxConference.Size = new System.Drawing.Size(364, 341);
             this.groupBoxConference.TabIndex = 0;
             this.groupBoxConference.TabStop = false;
             this.groupBoxConference.Text = "Conference";
@@ -1071,7 +1175,7 @@
             this.checkBoxConferenceSuspendAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxConferenceSuspendAll.AutoSize = true;
             this.checkBoxConferenceSuspendAll.Enabled = false;
-            this.checkBoxConferenceSuspendAll.Location = new System.Drawing.Point(87, 263);
+            this.checkBoxConferenceSuspendAll.Location = new System.Drawing.Point(87, 316);
             this.checkBoxConferenceSuspendAll.Name = "checkBoxConferenceSuspendAll";
             this.checkBoxConferenceSuspendAll.Size = new System.Drawing.Size(82, 17);
             this.checkBoxConferenceSuspendAll.TabIndex = 3;
@@ -1083,7 +1187,7 @@
             // 
             this.buttonConferenceHangupAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonConferenceHangupAll.Enabled = false;
-            this.buttonConferenceHangupAll.Location = new System.Drawing.Point(6, 259);
+            this.buttonConferenceHangupAll.Location = new System.Drawing.Point(6, 312);
             this.buttonConferenceHangupAll.Name = "buttonConferenceHangupAll";
             this.buttonConferenceHangupAll.Size = new System.Drawing.Size(75, 23);
             this.buttonConferenceHangupAll.TabIndex = 1;
@@ -1101,7 +1205,7 @@
             this.listViewConference.Location = new System.Drawing.Point(6, 19);
             this.listViewConference.MultiSelect = false;
             this.listViewConference.Name = "listViewConference";
-            this.listViewConference.Size = new System.Drawing.Size(723, 234);
+            this.listViewConference.Size = new System.Drawing.Size(352, 287);
             this.listViewConference.SmallImageList = this.imageListSmall;
             this.listViewConference.TabIndex = 0;
             this.listViewConference.UseCompatibleStateImageBehavior = false;
@@ -1138,7 +1242,7 @@
             this.tabPageVoIPAccount.Location = new System.Drawing.Point(4, 22);
             this.tabPageVoIPAccount.Name = "tabPageVoIPAccount";
             this.tabPageVoIPAccount.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVoIPAccount.Size = new System.Drawing.Size(747, 300);
+            this.tabPageVoIPAccount.Size = new System.Drawing.Size(376, 353);
             this.tabPageVoIPAccount.TabIndex = 1;
             this.tabPageVoIPAccount.Text = "Account";
             this.tabPageVoIPAccount.UseVisualStyleBackColor = true;
@@ -1153,28 +1257,52 @@
             this.saveFileDialog.SupportMultiDottedExtensions = true;
             this.saveFileDialog.Title = "Save";
             // 
+            // labelVolumeLevel
+            // 
+            this.labelVolumeLevel.AutoSize = true;
+            this.labelVolumeLevel.Location = new System.Drawing.Point(103, 250);
+            this.labelVolumeLevel.Name = "labelVolumeLevel";
+            this.labelVolumeLevel.Size = new System.Drawing.Size(13, 13);
+            this.labelVolumeLevel.TabIndex = 21;
+            this.labelVolumeLevel.Text = "0";
+            // 
+            // labelMicrophoneLevel
+            // 
+            this.labelMicrophoneLevel.AutoSize = true;
+            this.labelMicrophoneLevel.Location = new System.Drawing.Point(277, 251);
+            this.labelMicrophoneLevel.Name = "labelMicrophoneLevel";
+            this.labelMicrophoneLevel.Size = new System.Drawing.Size(13, 13);
+            this.labelMicrophoneLevel.TabIndex = 22;
+            this.labelMicrophoneLevel.Text = "0";
+            // 
             // VoIPControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControlVoIP);
             this.Name = "VoIPControl";
-            this.Size = new System.Drawing.Size(755, 326);
+            this.Size = new System.Drawing.Size(384, 379);
             this.Load += new System.EventHandler(this.VoIPControl_Load);
             this.groupBoxCall.ResumeLayout(false);
             this.groupBoxCall.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             this.groupBoxDigits.ResumeLayout(false);
             this.groupBoxDigits.PerformLayout();
             this.groupBoxAccount.ResumeLayout(false);
             this.groupBoxAccount.PerformLayout();
-            this.groupBoxAccDetails.ResumeLayout(false);
-            this.groupBoxAccDetails.PerformLayout();
+            this.tabControlAccount.ResumeLayout(false);
+            this.tabPageAccountConfig.ResumeLayout(false);
             this.groupBoxAccAccount.ResumeLayout(false);
             this.groupBoxAccOnlineState.ResumeLayout(false);
             this.groupBoxAccOnlineState.PerformLayout();
-            this.groupBoxContact.ResumeLayout(false);
+            this.tabPageAccountDetails.ResumeLayout(false);
+            this.groupBoxAccDetails.ResumeLayout(false);
+            this.groupBoxAccDetails.PerformLayout();
             this.tabControlVoIP.ResumeLayout(false);
             this.tabPageVoIPCall.ResumeLayout(false);
+            this.tabPageContacts.ResumeLayout(false);
+            this.groupBoxContact.ResumeLayout(false);
             this.tabPageIncomingOutgoingCalls.ResumeLayout(false);
             this.groupBoxInOutCalls.ResumeLayout(false);
             this.groupBoxInOutCalls.PerformLayout();
@@ -1191,8 +1319,6 @@
 
         private System.Windows.Forms.GroupBox groupBoxCall;
         private System.Windows.Forms.GroupBox groupBoxAccount;
-        private System.Windows.Forms.GroupBox groupBoxContact;
-        private System.Windows.Forms.ListView listViewContact;
         private System.Windows.Forms.Label labelRegistationStatusState;
         private System.Windows.Forms.Label labelRegistationStatus;
         private System.Windows.Forms.Button buttonRegister;
@@ -1219,16 +1345,10 @@
         private System.Windows.Forms.Button buttonLoadContacts;
         private System.Windows.Forms.ImageList imageListLarge;
         private System.Windows.Forms.ImageList imageListSmall;
-        private System.Windows.Forms.Button buttonContactDelete;
-        private System.Windows.Forms.Button buttonContactAdd;
-        private System.Windows.Forms.Button buttonContactUpdate;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripContacts;
         private System.Windows.Forms.TabControl tabControlVoIP;
         private System.Windows.Forms.TabPage tabPageVoIPCall;
         private System.Windows.Forms.TabPage tabPageVoIPAccount;
-        private System.Windows.Forms.ColumnHeader columnHeaderContactName;
-        private System.Windows.Forms.ColumnHeader columnHeaderContactAccount;
-        private System.Windows.Forms.ColumnHeader columnHeaderContactState;
         private System.Windows.Forms.GroupBox groupBoxAccOnlineState;
         private System.Windows.Forms.ComboBox comboBoxAccActivity;
         private System.Windows.Forms.ComboBox comboBoxAccStatus;
@@ -1256,7 +1376,6 @@
         private System.Windows.Forms.TextBox textBoxAccRegStatusText;
         private System.Windows.Forms.Label labelAccAccountUri;
         private System.Windows.Forms.CheckBox checkBoxAccIsValid;
-        private System.Windows.Forms.ComboBox comboBoxContactView;
         private System.Windows.Forms.CheckBox checkBoxMuteMicrophone;
         private System.Windows.Forms.CheckBox checkBoxMuteVolume;
         private System.Windows.Forms.Button buttonConfiguration;
@@ -1282,5 +1401,23 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConferenceHangup;
         private System.Windows.Forms.CheckBox checkBoxConferenceSuspendAll;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConferenceSuspend;
+        private System.Windows.Forms.Button buttonDigitsClear;
+        private System.Windows.Forms.TabControl tabControlAccount;
+        private System.Windows.Forms.TabPage tabPageAccountConfig;
+        private System.Windows.Forms.TabPage tabPageAccountDetails;
+        private System.Windows.Forms.TabPage tabPageContacts;
+        private System.Windows.Forms.ColumnHeader columnHeaderContactState;
+        private System.Windows.Forms.ColumnHeader columnHeaderContactAccount;
+        private System.Windows.Forms.ColumnHeader columnHeaderContactName;
+        private System.Windows.Forms.ListView listViewContact;
+        private System.Windows.Forms.Button buttonContactAdd;
+        private System.Windows.Forms.Button buttonContactDelete;
+        private System.Windows.Forms.Button buttonContactUpdate;
+        private System.Windows.Forms.ComboBox comboBoxContactView;
+        private System.Windows.Forms.GroupBox groupBoxContact;
+        private System.Windows.Forms.TrackBar trackBarVolume;
+        private System.Windows.Forms.TrackBar trackBarMicrophone;
+        private System.Windows.Forms.Label labelMicrophoneLevel;
+        private System.Windows.Forms.Label labelVolumeLevel;
     }
 }

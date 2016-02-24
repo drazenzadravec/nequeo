@@ -77,6 +77,7 @@
     <Compile Include="Param\CallMediaStateParam.cs" />
     <Compile Include="Param\CallParam.cs" />
     <Compile Include="Param\CallStateParam.cs" />
+    <Compile Include="Param\OnDtmfDigitParam.cs" />
     <Compile Include="Param\OnIncomingCallParam.cs" />
     <Compile Include="Param\OnInstantMessageParam.cs" />
     <Compile Include="Param\OnRegStartedParam.cs" />

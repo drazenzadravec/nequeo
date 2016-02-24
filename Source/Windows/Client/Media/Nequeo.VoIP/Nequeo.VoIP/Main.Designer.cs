@@ -67,7 +67,7 @@
             this.voIPControl1.ContactsFilePath = null;
             this.voIPControl1.Location = new System.Drawing.Point(3, 3);
             this.voIPControl1.Name = "voIPControl1";
-            this.voIPControl1.Size = new System.Drawing.Size(640, 346);
+            this.voIPControl1.Size = new System.Drawing.Size(387, 375);
             this.voIPControl1.TabIndex = 0;
             // 
             // tabControlVoIP
@@ -80,7 +80,7 @@
             this.tabControlVoIP.Location = new System.Drawing.Point(12, 27);
             this.tabControlVoIP.Name = "tabControlVoIP";
             this.tabControlVoIP.SelectedIndex = 0;
-            this.tabControlVoIP.Size = new System.Drawing.Size(654, 378);
+            this.tabControlVoIP.Size = new System.Drawing.Size(401, 407);
             this.tabControlVoIP.TabIndex = 1;
             // 
             // tabPageVoIP1
@@ -89,7 +89,7 @@
             this.tabPageVoIP1.Location = new System.Drawing.Point(4, 22);
             this.tabPageVoIP1.Name = "tabPageVoIP1";
             this.tabPageVoIP1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVoIP1.Size = new System.Drawing.Size(646, 352);
+            this.tabPageVoIP1.Size = new System.Drawing.Size(393, 381);
             this.tabPageVoIP1.TabIndex = 0;
             this.tabPageVoIP1.Text = "VoIP Account Voice & Video";
             this.tabPageVoIP1.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             this.tabPageVoIP2.Controls.Add(this.voIPControl2);
             this.tabPageVoIP2.Location = new System.Drawing.Point(4, 22);
             this.tabPageVoIP2.Name = "tabPageVoIP2";
-            this.tabPageVoIP2.Size = new System.Drawing.Size(759, 352);
+            this.tabPageVoIP2.Size = new System.Drawing.Size(393, 381);
             this.tabPageVoIP2.TabIndex = 1;
             this.tabPageVoIP2.Text = "VoIP Account Voice";
             this.tabPageVoIP2.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             this.voIPControl2.ContactsFilePath = null;
             this.voIPControl2.Location = new System.Drawing.Point(3, 3);
             this.voIPControl2.Name = "voIPControl2";
-            this.voIPControl2.Size = new System.Drawing.Size(753, 346);
+            this.voIPControl2.Size = new System.Drawing.Size(387, 375);
             this.voIPControl2.TabIndex = 0;
             // 
             // menuStripMain
@@ -125,7 +125,7 @@
             this.fileToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
-            this.menuStripMain.Size = new System.Drawing.Size(678, 24);
+            this.menuStripMain.Size = new System.Drawing.Size(425, 24);
             this.menuStripMain.TabIndex = 2;
             this.menuStripMain.Text = "menuStrip1";
             // 
@@ -226,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 417);
+            this.ClientSize = new System.Drawing.Size(425, 446);
             this.Controls.Add(this.tabControlVoIP);
             this.Controls.Add(this.menuStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

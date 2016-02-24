@@ -57,6 +57,7 @@ namespace Nequeo.VoIP.Sip.Param
             _call = call;
             _call.OnCallState += _call_OnCallState;
             _call.OnCallMediaState += _call_OnCallMediaState;
+            _call.OnDtmfDigit += _call_OnDtmfDigit;
             _callID = call.GetId();
 
             _mediaManager = mediaManager;
@@ -98,6 +99,11 @@ namespace Nequeo.VoIP.Sip.Param
         /// Notify application that the call has ended and disconnected.
         /// </summary>
         public event System.EventHandler<Param.CallInfoParam> OnCallDisconnected;
+
+        /// <summary>
+        /// Notify application upon incoming DTMF digits.
+        /// </summary>
+        public event System.EventHandler<Param.OnDtmfDigitParam> OnDtmfDigit;
 
         /// <summary>
         /// Gets the audio media list.
@@ -288,6 +294,27 @@ namespace Nequeo.VoIP.Sip.Param
             {
                 // Answer the call.
                 _call.Answer(parm);
+            }
+        }
+
+        /// <summary>
+        /// Transfer the current call.
+        /// </summary>
+        /// <param name="destination">The URI of new target to be contacted. The URI may be in name address or addr format.</param>
+        public void Transfer(string destination)
+        {
+            // Create the call settings.
+            CallSetting setting = new CallSetting(true);
+            CallOpParam parm = new CallOpParam(true);
+            setting.AudioCount = 1;
+            parm.Setting = setting;
+            parm.Code = StatusCode.SC_OK;
+
+            if (_call != null)
+            {
+                // Answer the call.
+                _call.Answer(parm);
+                _call.Transfer(destination, parm);
             }
         }
 
@@ -646,6 +673,31 @@ namespace Nequeo.VoIP.Sip.Param
                     catch { }
                 }
             }
+        }
+
+        /// <summary>
+        /// Notify application upon incoming DTMF digits.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnDtmfDigit(object sender, Nequeo.Net.Sip.OnDtmfDigitParam e)
+        {
+            Param.OnDtmfDigitParam param = new OnDtmfDigitParam();
+            param.Digit = e.Digit;
+
+            Nequeo.Net.Sip.CallInfo ci = e.Info;
+            if (ci != null)
+            {
+                param.From = ci.RemoteUri;
+                param.FromContact = ci.RemoteContact;
+            }
+
+            try
+            {
+                // Handle the event.
+                OnDtmfDigit?.Invoke(this, param);
+            }
+            catch { }
         }
 
         #region Dispose Object Methods

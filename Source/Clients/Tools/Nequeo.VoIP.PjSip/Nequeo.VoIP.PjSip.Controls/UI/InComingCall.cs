@@ -55,8 +55,10 @@ namespace Nequeo.VoIP.PjSip.UI
         /// </summary>
         /// <param name="voipCall">VoIP call.</param>
         /// <param name="inComingCall">In coming call param.</param>
-        /// <param name="callsView">The calls list view</param>
-        /// <param name="conferenceView">The conference list view</param>
+        /// <param name="contactsView">The contacts list view.</param>
+        /// <param name="callsView">The calls list view.</param>
+        /// <param name="conferenceView">The conference list view.</param>
+        /// <param name="contacts">The contact list.</param>
         /// <param name="contactName">The contact name.</param>
         /// <param name="ringFilePath">The filename and path of the ringing audio.</param>
         /// <param name="audioDeviceIndex">The audio device index.</param>
@@ -65,18 +67,21 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="autoAnswerWait">Auto answer wait time.</param>
         /// <param name="autoAnswerRecordingPath">Auto answer recording file and path.</param>
         /// <param name="messageBankWaitTime">The time to record the message.</param>
-        public InComingCall(Nequeo.VoIP.PjSip.VoIPCall voipCall, Nequeo.VoIP.PjSip.Param.OnIncomingCallParam inComingCall, 
-            ListView callsView, ListView conferenceView, string contactName, string ringFilePath, 
+        public InComingCall(Nequeo.VoIP.PjSip.VoIPCall voipCall, Nequeo.VoIP.PjSip.Param.OnIncomingCallParam inComingCall,
+            ListView contactsView, ListView callsView, ListView conferenceView, Data.contacts contacts, string contactName, string ringFilePath, 
             int audioDeviceIndex = -1, bool autoAnswer = false, string autoAnswerFilePath = null, int autoAnswerWait = 30, 
             string autoAnswerRecordingPath = null, int messageBankWaitTime = 20)
         {
             InitializeComponent();
+
             _contactName = contactName;
             _ringFilePath = ringFilePath;
             _voipCall = voipCall;
             _inComingCall = inComingCall;
             _callsView = callsView;
             _conferenceView = conferenceView;
+            _contactsView = contactsView;
+            _contacts = contacts;
 
             // Auto answer.
             _autoAnswer = autoAnswer;
@@ -118,13 +123,16 @@ namespace Nequeo.VoIP.PjSip.UI
         private Nequeo.IO.Audio.WavePlayer _player = null;
         private string _ringFilePath = null;
 
+        private bool _playerStarted = false;
         private bool _isConferenceCall = false;
         private bool _autoAnswerStarted = false;
         private bool _suspended = false;
         private Data.IncomingOutgoingCalls _inOutCalls = null;
+
         private ListView _callsView = null;
         private ListView _conferenceView = null;
-        private bool _playerStarted = false;
+        private ListView _contactsView = null;
+        private Data.contacts _contacts = null;
 
         private System.Threading.Timer _autoAnswerTimer = null;
         private System.Threading.Timer _autoAnswerRecordingTimer = null;
@@ -134,6 +142,8 @@ namespace Nequeo.VoIP.PjSip.UI
         private string _autoAnswerRecordingPath = null;
         private int _messageBankWaitTime = 20;
 
+        private Action _callEnded = null;
+
         /// <summary>
         /// Gets or sets the incoming outgoing calls reference.
         /// </summary>
@@ -141,6 +151,19 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             get { return _inOutCalls; }
             set { _inOutCalls = value; }
+        }
+
+        /// <summary>
+        /// The call has ended.
+        /// </summary>
+        private void CallEnded()
+        {
+            try
+            {
+                // Close the window.
+                Close();
+            }
+            catch { }
         }
 
         /// <summary>
@@ -169,6 +192,7 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void InComingCall_Load(object sender, EventArgs e)
         {
+            _callEnded = () => CallEnded();
             this.Text = "Incoming Call - From : " + _contactName + " - Source : " + (String.IsNullOrEmpty(_inComingCall.SrcAddress) ? "Unknown" : _inComingCall.SrcAddress.Trim());
 
             UISync.Init(this);
@@ -226,14 +250,28 @@ namespace Nequeo.VoIP.PjSip.UI
                 _inComingCall.Call.OnCallMediaState += Call_OnCallMediaState;
                 _inComingCall.Call.OnCallState += Call_OnCallState;
                 _inComingCall.Call.OnPlayerEndOfFile += Call_OnPlayerEndOfFile;
+                _inComingCall.Call.OnDtmfDigit += Call_OnDtmfDigit;
 
                 // Ask the used to answer incomming call.
                 textBoxDetails.Text =
                     "Source : \t" + (String.IsNullOrEmpty(_inComingCall.SrcAddress) ? "Unknown" : _inComingCall.SrcAddress.Trim()) + "\r\n" +
                     (String.IsNullOrEmpty(_inComingCall.From.Trim()) ? "" : "From : \t" + _inComingCall.From.Trim() + "\r\n") +
                     (String.IsNullOrEmpty(_inComingCall.FromContact.Trim()) ? "" : "Contact : \t" + _inComingCall.FromContact.Trim() + "\r\n\r\n") +
-                    (String.IsNullOrEmpty(_contactName) ? "" : "Contact : \t" + _contactName + "\r\n");
+                    (String.IsNullOrEmpty(_contactName) ? "" : "Contact : \t" + _contactName + "\r\n\r\n");
             }
+        }
+
+        /// <summary>
+        /// On DTMF digits.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Call_OnDtmfDigit(object sender, Param.OnDtmfDigitParam e)
+        {
+            UISync.Execute(() =>
+            {
+                textBoxDetails.Text += (String.IsNullOrEmpty(e.Digit) ? "" : e.Digit);
+            });
         }
 
         /// <summary>
@@ -282,6 +320,9 @@ namespace Nequeo.VoIP.PjSip.UI
                         _callsView.Items.Add(item);
                     }
                     catch { }
+
+                    // Close the window.
+                    _callEnded?.Invoke();
                 }
             });
         }
@@ -451,7 +492,10 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonAnswer.Enabled = false;
             buttonHangup.Enabled = true;
             buttonSendToMessageBank.Enabled = false;
+            buttonAddToConferenceCall.Enabled = false;
+            buttonTransfer.Enabled = false;
             groupBoxDigits.Enabled = true;
+            checkBoxSuspend.Enabled = true;
         }
 
         /// <summary>
@@ -498,7 +542,10 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonAnswer.Enabled = false;
             buttonHangup.Enabled = false;
             buttonSendToMessageBank.Enabled = false;
+            buttonAddToConferenceCall.Enabled = false;
             groupBoxDigits.Enabled = false;
+            buttonTransfer.Enabled = false;
+            checkBoxSuspend.Enabled = false;
         }
 
         /// <summary>
@@ -510,7 +557,10 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonAnswer.Enabled = false;
             buttonHangup.Enabled = true;
             buttonSendToMessageBank.Enabled = false;
+            buttonAddToConferenceCall.Enabled = false;
+            buttonTransfer.Enabled = false;
             groupBoxDigits.Enabled = false;
+            checkBoxSuspend.Enabled = false;
         }
 
         /// <summary>
@@ -973,6 +1023,101 @@ namespace Nequeo.VoIP.PjSip.UI
                     throw;
                 }
             }
+        }
+
+        /// <summary>
+        /// Clear digits.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDigitsClear_Click(object sender, EventArgs e)
+        {
+            textBoxDigits.Text = "";
+        }
+
+        /// <summary>
+        /// Transfer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonTransfer_Click(object sender, EventArgs e)
+        {
+            // Call exists.
+            if (_inComingCall != null && _inComingCall.Call != null)
+            {
+                // Open the transfer window.
+                UI.TransferList transfer = new TransferList(_contacts, _contactsView);
+                transfer.ShowDialog(this);
+
+                // Has a transfer number been selected.
+                if (transfer.ContactSelected)
+                {
+                    // Get the number.
+                    string number = transfer.ContactNumber;
+                    if (!String.IsNullOrEmpty(number))
+                    {
+                        try
+                        {
+                            // Get the transfer number.
+                            string destination = SetSipUri(number);
+
+                            // Transfer.
+                            _inComingCall.Call.Transfer(destination);
+                            _isConferenceCall = true;
+
+                            // Stop the player.
+                            StopPlayer();
+                        }
+                        catch { }
+
+                        // Close
+                        Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Create the sip uri.
+        /// </summary>
+        private string SetSipUri(string number)
+        {
+            string destination = null;
+
+            // If not sip uri.
+            if (!number.ToLower().Contains("sip"))
+            {
+                // If not sip uri.
+                if (!number.ToLower().Contains("@"))
+                {
+                    // Construct the uri
+                    destination = "sip:" + number +
+                        (String.IsNullOrEmpty(_voipCall.VoIPManager.AccountConnection.SpHost) ? "" : "@" + _voipCall.VoIPManager.AccountConnection.SpHost);
+                }
+                else
+                {
+                    // Construct the uri
+                    destination = "sip:" + number;
+                }
+            }
+            else
+            {
+                // If sip uri.
+                if (!number.ToLower().Contains("@"))
+                {
+                    // Construct the uri
+                    destination = number +
+                        (String.IsNullOrEmpty(_voipCall.VoIPManager.AccountConnection.SpHost) ? "" : "@" + _voipCall.VoIPManager.AccountConnection.SpHost);
+                }
+                else
+                {
+                    // Construct the uri
+                    destination = number;
+                }
+            }
+
+            // Return the uri.
+            return destination;
         }
     }
 }

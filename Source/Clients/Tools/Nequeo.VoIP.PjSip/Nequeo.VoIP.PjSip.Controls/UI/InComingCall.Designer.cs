@@ -49,6 +49,8 @@
             this.buttonSendToMessageBank = new System.Windows.Forms.Button();
             this.buttonAddToConferenceCall = new System.Windows.Forms.Button();
             this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
+            this.buttonDigitsClear = new System.Windows.Forms.Button();
+            this.buttonTransfer = new System.Windows.Forms.Button();
             this.groupBoxDigits.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,6 +86,7 @@
             // 
             // groupBoxDigits
             // 
+            this.groupBoxDigits.Controls.Add(this.buttonDigitsClear);
             this.groupBoxDigits.Controls.Add(this.textBoxDigits);
             this.groupBoxDigits.Controls.Add(this.buttonHash);
             this.groupBoxDigits.Controls.Add(this.buttonStar);
@@ -109,7 +112,7 @@
             this.textBoxDigits.Location = new System.Drawing.Point(19, 14);
             this.textBoxDigits.Name = "textBoxDigits";
             this.textBoxDigits.ReadOnly = true;
-            this.textBoxDigits.Size = new System.Drawing.Size(195, 20);
+            this.textBoxDigits.Size = new System.Drawing.Size(128, 20);
             this.textBoxDigits.TabIndex = 2;
             // 
             // buttonHash
@@ -272,11 +275,32 @@
             this.checkBoxSuspend.UseVisualStyleBackColor = true;
             this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
             // 
+            // buttonDigitsClear
+            // 
+            this.buttonDigitsClear.Location = new System.Drawing.Point(153, 12);
+            this.buttonDigitsClear.Name = "buttonDigitsClear";
+            this.buttonDigitsClear.Size = new System.Drawing.Size(61, 23);
+            this.buttonDigitsClear.TabIndex = 15;
+            this.buttonDigitsClear.Text = "Clear";
+            this.buttonDigitsClear.UseVisualStyleBackColor = true;
+            this.buttonDigitsClear.Click += new System.EventHandler(this.buttonDigitsClear_Click);
+            // 
+            // buttonTransfer
+            // 
+            this.buttonTransfer.Location = new System.Drawing.Point(275, 176);
+            this.buttonTransfer.Name = "buttonTransfer";
+            this.buttonTransfer.Size = new System.Drawing.Size(75, 23);
+            this.buttonTransfer.TabIndex = 22;
+            this.buttonTransfer.Text = "Transfer";
+            this.buttonTransfer.UseVisualStyleBackColor = true;
+            this.buttonTransfer.Click += new System.EventHandler(this.buttonTransfer_Click);
+            // 
             // InComingCall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 240);
+            this.Controls.Add(this.buttonTransfer);
             this.Controls.Add(this.checkBoxSuspend);
             this.Controls.Add(this.buttonAddToConferenceCall);
             this.Controls.Add(this.buttonSendToMessageBank);
@@ -326,5 +350,7 @@
         private System.Windows.Forms.Button buttonSendToMessageBank;
         private System.Windows.Forms.Button buttonAddToConferenceCall;
         private System.Windows.Forms.CheckBox checkBoxSuspend;
+        private System.Windows.Forms.Button buttonDigitsClear;
+        private System.Windows.Forms.Button buttonTransfer;
     }
 }

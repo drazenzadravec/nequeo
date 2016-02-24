@@ -272,6 +272,32 @@ namespace Nequeo.VoIP.PjSip.UI
             groupBoxAccDetails.Enabled = true;
             groupBoxInOutCalls.Enabled = true;
             groupBoxConference.Enabled = true;
+
+            try
+            {
+                // Get the volume.
+                float[] microphoneVolume = Nequeo.IO.Audio.Volume.GetMicrophoneVolume();
+                if (microphoneVolume != null && microphoneVolume.Length > 0)
+                {
+                    // Get first.
+                    trackBarMicrophone.Value = (int)(microphoneVolume[0] * 100.0);
+                    labelMicrophoneLevel.Text = trackBarMicrophone.Value.ToString();
+                }
+            }
+            catch { }
+
+            try
+            {
+                // Get the volume.
+                float[] speakerVolume = Nequeo.IO.Audio.Volume.GetSpeakerVolume();
+                if (speakerVolume != null && speakerVolume.Length > 0)
+                {
+                    // Get first.
+                    trackBarVolume.Value = (int)(speakerVolume[0] * 100.0);
+                    labelVolumeLevel.Text = trackBarVolume.Value.ToString();
+                }
+            }
+            catch { }
         }
 
         /// <summary>
@@ -445,7 +471,8 @@ namespace Nequeo.VoIP.PjSip.UI
                 e.Call.OnCallDisconnected += Call_OnCallDisconnected;
 
                 // Open the window.
-                Nequeo.VoIP.PjSip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e, listViewInOutCalls, listViewConference, contactName, 
+                Nequeo.VoIP.PjSip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e,
+                    listViewContact, listViewInOutCalls, listViewConference, _contacts, contactName, 
                     ringFilePath, audioDeviceIndex, autoAnswer, autoAnswerFile, autoAnswerWait, 
                     _audioRecordingInCallPath, messageBank);
 
@@ -2263,6 +2290,48 @@ namespace Nequeo.VoIP.PjSip.UI
                         caller.StartTransmitting();
                 }
             }
+        }
+
+        /// <summary>
+        /// Clear digits.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDigitsClear_Click(object sender, EventArgs e)
+        {
+            textBoxDigits.Text = "";
+        }
+
+        /// <summary>
+        /// Microphone.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void trackBarMicrophone_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                // Set the volume.
+                Nequeo.IO.Audio.Volume.SetMicrophoneVolume((float)(trackBarMicrophone.Value / 100.0));
+                labelMicrophoneLevel.Text = trackBarMicrophone.Value.ToString();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Volume.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void trackBarVolume_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                // Set the volume.
+                Nequeo.IO.Audio.Volume.SetSpeakerVolume((float)(trackBarVolume.Value / 100.0));
+                labelVolumeLevel.Text = trackBarVolume.Value.ToString();
+            }
+            catch { }
         }
     }
 }
