@@ -110,7 +110,7 @@ namespace Nequeo
 				/// Set output window. This operation is valid only when the underlying
 				/// video device supports PJMEDIA_VIDEO_DEV_CAP_OUTPUT_WINDOW capability AND
 				/// allows the output window to be changed on - the - fly, otherwise Error will
-				/// be thrown.Currently it is only supported on Android.
+				/// be thrown. Currently it is only supported on Android.
 				/// </summary>
 				/// <param name="window">The new output window.</param>
 				void SetWindow(VideoWindowHandle^ window);
@@ -121,6 +121,18 @@ namespace Nequeo
 				/// </summary>
 				/// <param name="pjVideoWindow">The video window.</param>
 				VideoWindow(pj::VideoWindow& pjVideoWindow);
+
+				/// <summary>
+				/// Set video preview.
+				/// </summary>
+				/// <param name="pjVideoPreview">The video preview.</param>
+				void SetVideoPreviewRef(pj::VideoPreview* pjVideoPreview);
+
+				/// <summary>
+				/// Set call media info.
+				/// </summary>
+				/// <param name="pjCallMediaInfo">Thecall media info.</param>
+				void SetCallMediaInfoRef(pj::CallMediaInfo* pjCallMediaInfo);
 
 				///	<summary>
 				///	Get the VideoDeviceHandleType.
@@ -138,8 +150,12 @@ namespace Nequeo
 
 			private:
 				bool _disposed;
+				bool _isVideoPreview;
+				bool _isCallMediaInfo;
 
 				pj::VideoWindow& _pjVideoWindow;
+				pj::VideoPreview* _pjVideoPreview;
+				pj::CallMediaInfo* _pjCallMediaInfo;
 			};
 		}
 	}

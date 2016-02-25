@@ -83,5 +83,6 @@ namespace Nequeo.VoIP.PjSip.Param
         /// Gets or sets the contact.
         /// </summary>
         public Nequeo.Net.PjSip.Contact Contact { get; set; }
+
     }
 }

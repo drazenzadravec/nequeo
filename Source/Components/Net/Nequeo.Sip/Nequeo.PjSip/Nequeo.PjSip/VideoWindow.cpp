@@ -40,7 +40,7 @@ using namespace Nequeo::Net::PjSip;
 /// </summary>
 /// <param name="pjVideoWindow">The video window.</param>
 VideoWindow::VideoWindow(pj::VideoWindow& pjVideoWindow) :
-	_pjVideoWindow(pjVideoWindow), _disposed(false)
+	_pjVideoWindow(pjVideoWindow), _disposed(false), _isVideoPreview(false), _isCallMediaInfo(false)
 {
 }
 
@@ -56,6 +56,26 @@ VideoWindow::~VideoWindow()
 }
 
 /// <summary>
+/// Set video preview.
+/// </summary>
+/// <param name="pjVideoPreview">The video preview.</param>
+void VideoWindow::SetVideoPreviewRef(pj::VideoPreview* pjVideoPreview)
+{
+	_isVideoPreview = true;
+	_pjVideoPreview = pjVideoPreview;
+}
+
+/// <summary>
+/// Set call media info.
+/// </summary>
+/// <param name="pjCallMediaInfo">Thecall media info.</param>
+void VideoWindow::SetCallMediaInfoRef(pj::CallMediaInfo* pjCallMediaInfo)
+{
+	_isCallMediaInfo = true;
+	_pjCallMediaInfo = pjCallMediaInfo;
+}
+
+/// <summary>
 /// Get window info.
 /// </summary>
 /// <returns>The video window info.</returns>
@@ -66,7 +86,24 @@ VideoWindowInfo^ VideoWindow::GetInfo()
 
 	try
 	{
-		info = _pjVideoWindow.getInfo();
+		// If is video preview ref.
+		if (_isVideoPreview)
+		{
+			pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
+			info = pjWindow.getInfo();
+		}
+		else if (_isCallMediaInfo)
+		{
+			pj::VideoWindow pjWindowCall = _pjCallMediaInfo->videoWindow;
+			info = pjWindowCall.getInfo();
+		}
+		else
+		{
+			// Use default.
+			info = _pjVideoWindow.getInfo();
+		}
+
+		// Create the video info.
 		videoInfo = gcnew VideoWindowInfo();
 
 		videoInfo->IsNative = info.isNative;
@@ -107,7 +144,22 @@ VideoWindowInfo^ VideoWindow::GetInfo()
 /// <param name="show">Set to true to show the window, false to hide the window.</param>
 void VideoWindow::Show(bool show)
 {
-	_pjVideoWindow.Show(show);
+	// If is video preview ref.
+	if (_isVideoPreview)
+	{
+		pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
+		pjWindow.Show(show);
+	}
+	else if (_isCallMediaInfo)
+	{
+		pj::VideoWindow pjWindowCall = _pjCallMediaInfo->videoWindow;
+		pjWindowCall.Show(show);
+	}
+	else
+	{
+		// Use default.
+		_pjVideoWindow.Show(show);
+	}
 }
 
 /// <summary>
@@ -123,8 +175,22 @@ void VideoWindow::SetPosition(MediaCoordinate^ position)
 	pos.x = position->X;
 	pos.y = position->Y;
 
-	// Set the position.
-	_pjVideoWindow.setPos(pos);
+	// If is video preview ref.
+	if (_isVideoPreview)
+	{
+		pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
+		pjWindow.setPos(pos);
+	}
+	else if (_isCallMediaInfo)
+	{
+		pj::VideoWindow pjWindowCall = _pjCallMediaInfo->videoWindow;
+		pjWindowCall.setPos(pos);
+	}
+	else
+	{
+		// Set the position.
+		_pjVideoWindow.setPos(pos);
+	}
 }
 
 /// <summary>
@@ -140,8 +206,22 @@ void VideoWindow::SetSize(MediaSize^ size)
 	pjSize.h = size->Height;
 	pjSize.w = size->Width;
 
-	// Set the size.
-	_pjVideoWindow.setSize(pjSize);
+	// If is video preview ref.
+	if (_isVideoPreview)
+	{
+		pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
+		pjWindow.setSize(pjSize);
+	}
+	else if (_isCallMediaInfo)
+	{
+		pj::VideoWindow pjWindowCall = _pjCallMediaInfo->videoWindow;
+		pjWindowCall.setSize(pjSize);
+	}
+	else
+	{
+		// Set the size.
+		_pjVideoWindow.setSize(pjSize);
+	}
 }
 
 /// <summary>
@@ -155,7 +235,21 @@ void VideoWindow::SetSize(MediaSize^ size)
 /// negative value for counter - clockwise rotation.</param>
 void VideoWindow::Rotate(int angle)
 {
-	_pjVideoWindow.rotate(angle);
+	// If is video preview ref.
+	if (_isVideoPreview)
+	{
+		pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
+		pjWindow.rotate(angle);
+	}
+	else if (_isCallMediaInfo)
+	{
+		pj::VideoWindow pjWindowCall = _pjCallMediaInfo->videoWindow;
+		pjWindowCall.rotate(angle);
+	}
+	else
+	{
+		_pjVideoWindow.rotate(angle);
+	}
 }
 
 /// <summary>
@@ -171,8 +265,22 @@ void VideoWindow::SetWindow(VideoWindowHandle^ window)
 
 	win.type = GeVideoDeviceHandleType(window->Type);
 
-	// Set the window.
-	_pjVideoWindow.setWindow(win);
+	// If is video preview ref.
+	if (_isVideoPreview)
+	{
+		pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
+		pjWindow.setWindow(win);
+	}
+	else if (_isCallMediaInfo)
+	{
+		pj::VideoWindow pjWindowCall = _pjCallMediaInfo->videoWindow;
+		pjWindowCall.setWindow(win);
+	}
+	else
+	{
+		// Set the window.
+		_pjVideoWindow.setWindow(win);
+	}
 }
 
 ///	<summary>

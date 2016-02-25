@@ -60,5 +60,10 @@ namespace Nequeo.VoIP.PjSip.Param
         /// Gets or sets the call information.
         /// </summary>
         public CallInfoParam CallInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contact name.
+        /// </summary>
+        public string ContactName { get; set; }
     }
 }

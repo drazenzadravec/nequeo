@@ -73,6 +73,8 @@ namespace Nequeo.VoIP.PjSip.Param
         private MediaManager _mediaManager = null;
         private bool _isTransmitting = false;
 
+        private bool _callOnHold = false;
+
         private AudioMediaPlayer _player = null;
         private AudioMediaRecorder _recorder = null;
         private AudioMediaRecorder _recorderAutoAnswer = null;
@@ -111,6 +113,14 @@ namespace Nequeo.VoIP.PjSip.Param
         internal List<AudioMedia> AudioMedia
         {
             get { return _audioMedias; }
+        }
+
+        /// <summary>
+        /// Gets an indicator specifying if the call is on hold.
+        /// </summary>
+        public bool CallOnHold
+        {
+            get { return _callOnHold; }
         }
 
         /// <summary>
@@ -319,6 +329,43 @@ namespace Nequeo.VoIP.PjSip.Param
         }
 
         /// <summary>
+        /// Set the call on hold or re-activate.
+        /// </summary>
+        public void Hold()
+        {
+            if (_call != null)
+            {
+                if (_callOnHold)
+                {
+                    // Create the call settings.
+                    CallSetting setting = new CallSetting(true);
+                    CallOpParam parm = new CallOpParam(true);
+                    setting.AudioCount = 1;
+                    setting.Flag = CallFlag.PJSUA_CALL_UNHOLD;
+                    parm.Setting = setting;
+                    parm.Code = StatusCode.SC_OK;
+
+                    // Reinvite the call.
+                    _call.Reinvite(parm);
+                    _callOnHold = false;
+                }
+                else
+                {
+                    // Create the call settings.
+                    CallSetting setting = new CallSetting(true);
+                    CallOpParam parm = new CallOpParam(true);
+                    setting.AudioCount = 1;
+                    parm.Setting = setting;
+                    parm.Code = StatusCode.SC_OK;
+
+                    // Hold the call.
+                    _call.SetHold(parm);
+                    _callOnHold = true;
+                }
+            }
+        }
+
+        /// <summary>
         /// Send DTMF digits to remote using RFC 2833 payload formats.
         /// </summary>
         /// <param name="digits">DTMF string digits to be sent.</param>
@@ -515,6 +562,7 @@ namespace Nequeo.VoIP.PjSip.Param
                             CallMediaStateParam mediaState = new CallMediaStateParam();
                             mediaState.Suspend = false;
                             mediaState.CallID = ci.Id;
+                            mediaState.CallOnHold = (ci.Media[i].Status == CallMediaStatus.PJSUA_CALL_MEDIA_LOCAL_HOLD ? true : false);
 
                             // Handle the event.
                             OnCallMediaState?.Invoke(this, mediaState);
@@ -586,6 +634,16 @@ namespace Nequeo.VoIP.PjSip.Param
                 callState.State = ci.State;
                 callState.CallInfo = _info;
 
+                try
+                {
+                    // Handle the event.
+                    OnCallState?.Invoke(this, callState);
+
+                    // Set the contact name.
+                    _info.ContactName = callState.ContactName;
+                }
+                catch { }
+
                 // If call is disconnected.
                 if ((ci.State == InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
                     (ci.State == InviteSessionState.PJSIP_INV_STATE_NULL))
@@ -653,13 +711,6 @@ namespace Nequeo.VoIP.PjSip.Param
                         _audioMedias = null;
                     }
                 }
-
-                try
-                {
-                    // Handle the event.
-                    OnCallState?.Invoke(this, callState);
-                }
-                catch { }
 
                 // If call is disconnected.
                 if ((ci.State == InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||

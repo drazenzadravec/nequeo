@@ -32,6 +32,7 @@
             this.buttonAnswer = new System.Windows.Forms.Button();
             this.buttonHangup = new System.Windows.Forms.Button();
             this.groupBoxDigits = new System.Windows.Forms.GroupBox();
+            this.buttonDigitsClear = new System.Windows.Forms.Button();
             this.textBoxDigits = new System.Windows.Forms.TextBox();
             this.buttonHash = new System.Windows.Forms.Button();
             this.buttonStar = new System.Windows.Forms.Button();
@@ -49,8 +50,8 @@
             this.buttonSendToMessageBank = new System.Windows.Forms.Button();
             this.buttonAddToConferenceCall = new System.Windows.Forms.Button();
             this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
-            this.buttonDigitsClear = new System.Windows.Forms.Button();
             this.buttonTransfer = new System.Windows.Forms.Button();
+            this.buttonHold = new System.Windows.Forms.Button();
             this.groupBoxDigits.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,6 +107,16 @@
             this.groupBoxDigits.Size = new System.Drawing.Size(233, 164);
             this.groupBoxDigits.TabIndex = 17;
             this.groupBoxDigits.TabStop = false;
+            // 
+            // buttonDigitsClear
+            // 
+            this.buttonDigitsClear.Location = new System.Drawing.Point(153, 12);
+            this.buttonDigitsClear.Name = "buttonDigitsClear";
+            this.buttonDigitsClear.Size = new System.Drawing.Size(61, 23);
+            this.buttonDigitsClear.TabIndex = 15;
+            this.buttonDigitsClear.Text = "Clear";
+            this.buttonDigitsClear.UseVisualStyleBackColor = true;
+            this.buttonDigitsClear.Click += new System.EventHandler(this.buttonDigitsClear_Click);
             // 
             // textBoxDigits
             // 
@@ -274,16 +285,6 @@
             this.checkBoxSuspend.UseVisualStyleBackColor = true;
             this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
             // 
-            // buttonDigitsClear
-            // 
-            this.buttonDigitsClear.Location = new System.Drawing.Point(153, 12);
-            this.buttonDigitsClear.Name = "buttonDigitsClear";
-            this.buttonDigitsClear.Size = new System.Drawing.Size(61, 23);
-            this.buttonDigitsClear.TabIndex = 15;
-            this.buttonDigitsClear.Text = "Clear";
-            this.buttonDigitsClear.UseVisualStyleBackColor = true;
-            this.buttonDigitsClear.Click += new System.EventHandler(this.buttonDigitsClear_Click);
-            // 
             // buttonTransfer
             // 
             this.buttonTransfer.Location = new System.Drawing.Point(275, 176);
@@ -294,11 +295,23 @@
             this.buttonTransfer.UseVisualStyleBackColor = true;
             this.buttonTransfer.Click += new System.EventHandler(this.buttonTransfer_Click);
             // 
+            // buttonHold
+            // 
+            this.buttonHold.Enabled = false;
+            this.buttonHold.Location = new System.Drawing.Point(194, 176);
+            this.buttonHold.Name = "buttonHold";
+            this.buttonHold.Size = new System.Drawing.Size(75, 23);
+            this.buttonHold.TabIndex = 23;
+            this.buttonHold.Text = "Hold";
+            this.buttonHold.UseVisualStyleBackColor = true;
+            this.buttonHold.Click += new System.EventHandler(this.buttonHold_Click);
+            // 
             // InComingCall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 240);
+            this.Controls.Add(this.buttonHold);
             this.Controls.Add(this.buttonTransfer);
             this.Controls.Add(this.checkBoxSuspend);
             this.Controls.Add(this.buttonAddToConferenceCall);
@@ -351,5 +364,6 @@
         private System.Windows.Forms.CheckBox checkBoxSuspend;
         private System.Windows.Forms.Button buttonDigitsClear;
         private System.Windows.Forms.Button buttonTransfer;
+        private System.Windows.Forms.Button buttonHold;
     }
 }

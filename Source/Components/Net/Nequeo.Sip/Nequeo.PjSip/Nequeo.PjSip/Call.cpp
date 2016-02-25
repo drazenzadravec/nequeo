@@ -514,6 +514,8 @@ CallInfo^ Call::GetInfo()
 				{
 					// Get the video window.
 					mediaInfo->VideoWindowEx = gcnew VideoWindow(info.media[i].videoWindow);
+					pj::CallMediaInfo pjMediaInfo = info.media[i];
+					mediaInfo->VideoWindowEx->SetCallMediaInfoRef(&pjMediaInfo);
 				}
 				else
 				{
@@ -544,6 +546,8 @@ CallInfo^ Call::GetInfo()
 				{
 					// Get the video window.
 					mediaInfo->VideoWindowEx = gcnew VideoWindow(info.provMedia[i].videoWindow);
+					pj::CallMediaInfo pjMediaInfo = info.provMedia[i];
+					mediaInfo->VideoWindowEx->SetCallMediaInfoRef(&pjMediaInfo);
 				}
 				else
 				{

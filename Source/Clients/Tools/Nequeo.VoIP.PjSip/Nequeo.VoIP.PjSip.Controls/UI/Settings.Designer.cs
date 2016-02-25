@@ -34,6 +34,9 @@
             this.labelAudioPlaybackDevice = new System.Windows.Forms.Label();
             this.labelAudioCaptureDevice = new System.Windows.Forms.Label();
             this.groupBoxAccount = new System.Windows.Forms.GroupBox();
+            this.labelMessageBankWaitSec = new System.Windows.Forms.Label();
+            this.textBoxMessageBankWait = new System.Windows.Forms.TextBox();
+            this.labelMessageBankWait = new System.Windows.Forms.Label();
             this.labelAutoAnswerWaitSec = new System.Windows.Forms.Label();
             this.textBoxAutoAnswerWait = new System.Windows.Forms.TextBox();
             this.checkBoxAutoAnswer = new System.Windows.Forms.CheckBox();
@@ -126,9 +129,8 @@
             this.labelSoundsRingPath = new System.Windows.Forms.Label();
             this.buttonSoundsRingPath = new System.Windows.Forms.Button();
             this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
-            this.labelMessageBankWait = new System.Windows.Forms.Label();
-            this.textBoxMessageBankWait = new System.Windows.Forms.TextBox();
-            this.labelMessageBankWaitSec = new System.Windows.Forms.Label();
+            this.tabPageCodec = new System.Windows.Forms.TabPage();
+            this.groupBoxVideoDevice = new System.Windows.Forms.GroupBox();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -144,6 +146,7 @@
             this.groupBoxPublish.SuspendLayout();
             this.tabPageMedia.SuspendLayout();
             this.groupBoxSounds.SuspendLayout();
+            this.tabPageCodec.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -223,6 +226,32 @@
             this.groupBoxAccount.TabIndex = 2;
             this.groupBoxAccount.TabStop = false;
             this.groupBoxAccount.Text = "Account";
+            // 
+            // labelMessageBankWaitSec
+            // 
+            this.labelMessageBankWaitSec.AutoSize = true;
+            this.labelMessageBankWaitSec.Location = new System.Drawing.Point(158, 286);
+            this.labelMessageBankWaitSec.Name = "labelMessageBankWaitSec";
+            this.labelMessageBankWaitSec.Size = new System.Drawing.Size(18, 13);
+            this.labelMessageBankWaitSec.TabIndex = 18;
+            this.labelMessageBankWaitSec.Text = "(s)";
+            // 
+            // textBoxMessageBankWait
+            // 
+            this.textBoxMessageBankWait.Location = new System.Drawing.Point(110, 283);
+            this.textBoxMessageBankWait.Name = "textBoxMessageBankWait";
+            this.textBoxMessageBankWait.Size = new System.Drawing.Size(42, 20);
+            this.textBoxMessageBankWait.TabIndex = 17;
+            this.textBoxMessageBankWait.TextChanged += new System.EventHandler(this.textBoxMessageBankWait_TextChanged);
+            // 
+            // labelMessageBankWait
+            // 
+            this.labelMessageBankWait.AutoSize = true;
+            this.labelMessageBankWait.Location = new System.Drawing.Point(15, 286);
+            this.labelMessageBankWait.Name = "labelMessageBankWait";
+            this.labelMessageBankWait.Size = new System.Drawing.Size(84, 13);
+            this.labelMessageBankWait.TabIndex = 16;
+            this.labelMessageBankWait.Text = "Message Bank :";
             // 
             // labelAutoAnswerWaitSec
             // 
@@ -915,6 +944,7 @@
             this.tabControlSettings.Controls.Add(this.tabPageDetails);
             this.tabControlSettings.Controls.Add(this.tabPageConfiguration);
             this.tabControlSettings.Controls.Add(this.tabPageMedia);
+            this.tabControlSettings.Controls.Add(this.tabPageCodec);
             this.tabControlSettings.Location = new System.Drawing.Point(12, 12);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
@@ -1140,31 +1170,24 @@
             this.textBoxSoundsRingPath.TabIndex = 0;
             this.textBoxSoundsRingPath.TextChanged += new System.EventHandler(this.textBoxSoundsRingPath_TextChanged);
             // 
-            // labelMessageBankWait
+            // tabPageCodec
             // 
-            this.labelMessageBankWait.AutoSize = true;
-            this.labelMessageBankWait.Location = new System.Drawing.Point(15, 286);
-            this.labelMessageBankWait.Name = "labelMessageBankWait";
-            this.labelMessageBankWait.Size = new System.Drawing.Size(84, 13);
-            this.labelMessageBankWait.TabIndex = 16;
-            this.labelMessageBankWait.Text = "Message Bank :";
+            this.tabPageCodec.Controls.Add(this.groupBoxVideoDevice);
+            this.tabPageCodec.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCodec.Name = "tabPageCodec";
+            this.tabPageCodec.Size = new System.Drawing.Size(491, 330);
+            this.tabPageCodec.TabIndex = 3;
+            this.tabPageCodec.Text = "Codec";
+            this.tabPageCodec.UseVisualStyleBackColor = true;
             // 
-            // textBoxMessageBankWait
+            // groupBoxVideoDevice
             // 
-            this.textBoxMessageBankWait.Location = new System.Drawing.Point(110, 283);
-            this.textBoxMessageBankWait.Name = "textBoxMessageBankWait";
-            this.textBoxMessageBankWait.Size = new System.Drawing.Size(42, 20);
-            this.textBoxMessageBankWait.TabIndex = 17;
-            this.textBoxMessageBankWait.TextChanged += new System.EventHandler(this.textBoxMessageBankWait_TextChanged);
-            // 
-            // labelMessageBankWaitSec
-            // 
-            this.labelMessageBankWaitSec.AutoSize = true;
-            this.labelMessageBankWaitSec.Location = new System.Drawing.Point(158, 286);
-            this.labelMessageBankWaitSec.Name = "labelMessageBankWaitSec";
-            this.labelMessageBankWaitSec.Size = new System.Drawing.Size(18, 13);
-            this.labelMessageBankWaitSec.TabIndex = 18;
-            this.labelMessageBankWaitSec.Text = "(s)";
+            this.groupBoxVideoDevice.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxVideoDevice.Name = "groupBoxVideoDevice";
+            this.groupBoxVideoDevice.Size = new System.Drawing.Size(475, 76);
+            this.groupBoxVideoDevice.TabIndex = 0;
+            this.groupBoxVideoDevice.TabStop = false;
+            this.groupBoxVideoDevice.Text = "Video Device";
             // 
             // Settings
             // 
@@ -1209,6 +1232,7 @@
             this.tabPageMedia.ResumeLayout(false);
             this.groupBoxSounds.ResumeLayout(false);
             this.groupBoxSounds.PerformLayout();
+            this.tabPageCodec.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1316,5 +1340,7 @@
         private System.Windows.Forms.Label labelMessageBankWaitSec;
         private System.Windows.Forms.TextBox textBoxMessageBankWait;
         private System.Windows.Forms.Label labelMessageBankWait;
+        private System.Windows.Forms.TabPage tabPageCodec;
+        private System.Windows.Forms.GroupBox groupBoxVideoDevice;
     }
 }

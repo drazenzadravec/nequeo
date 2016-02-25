@@ -40,7 +40,7 @@ using namespace Nequeo::Net::PjSip;
 /// </summary>
 /// <param name="pjAudDevManager">Audio device manager.</param>
 /// <param name="pjVidDevManager">Video device manager.</param>
-/// <param name = "videoConfig">Video configuration.< / param>
+/// <param name="videoConfig">Video configuration.</param>
 MediaManager::MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager, pj::AccountVideoConfig& videoConfig) :
 	_disposed(false), _pjAudDevManager(pjAudDevManager), _pjVidDevManager(pjVidDevManager), _videoConfig(videoConfig)
 {

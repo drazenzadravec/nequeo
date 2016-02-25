@@ -281,8 +281,17 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void Call_OnCallState(object sender, Param.CallStateParam e)
         {
+            // Set the contact name.
+            e.ContactName = _contactName;
+
             UISync.Execute(() =>
             {
+                // If incomming.
+                if ((e.State == Nequeo.Net.PjSip.InviteSessionState.PJSIP_INV_STATE_INCOMING))
+                {
+
+                }
+
                 // If call is disconnected.
                 if ((e.State == Nequeo.Net.PjSip.InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
                     (e.State == Nequeo.Net.PjSip.InviteSessionState.PJSIP_INV_STATE_NULL))
@@ -295,31 +304,6 @@ namespace Nequeo.VoIP.PjSip.UI
                     {
                         StopPlayer();
                     }
-
-                    try
-                    {
-                        // Add the call information.
-                        Param.CallInfoParam info = e.CallInfo;
-                        info.IncomingOutgoing = true;
-                        info.ContactName = _contactName;
-                        info.FromTo = (!String.IsNullOrEmpty(info.FromTo) ? info.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
-                        info.Contact = (!String.IsNullOrEmpty(info.Contact) ? info.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
-                        _inOutCalls.Add(info);
-
-                        // Add to the in out view.
-                        // Create a new list item.
-                        ListViewItem item = new ListViewItem(info.ContactName, 0);
-                        item.Name = info.FromTo + "|" + _inComingCall.Call.ID;
-                        item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
-                        item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
-                        item.SubItems.Add(info.FromTo);
-                        item.SubItems.Add(info.TotalDuration.ToString());
-                        item.SubItems.Add(info.ConnectDuration.ToString());
-
-                        // Add the item.
-                        _callsView.Items.Add(item);
-                    }
-                    catch { }
 
                     // Close the window.
                     _callEnded?.Invoke();
@@ -336,6 +320,20 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             // Suspend?
             e.Suspend = _suspended;
+            if (e.CallOnHold)
+                e.Suspend = true;
+
+            UISync.Execute(() =>
+            {
+                if (e.CallOnHold)
+                    buttonHold.Enabled = true;
+
+                // Get the current state of the call.
+                if (e.CallOnHold)
+                    buttonHold.Text = "Un-Hold";
+                else
+                    buttonHold.Text = "Hold";
+            });
         }
 
         /// <summary>
@@ -496,6 +494,7 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonTransfer.Enabled = false;
             groupBoxDigits.Enabled = true;
             checkBoxSuspend.Enabled = true;
+            buttonHold.Enabled = true;
         }
 
         /// <summary>
@@ -546,6 +545,7 @@ namespace Nequeo.VoIP.PjSip.UI
             groupBoxDigits.Enabled = false;
             buttonTransfer.Enabled = false;
             checkBoxSuspend.Enabled = false;
+            buttonHold.Enabled = false;
         }
 
         /// <summary>
@@ -561,6 +561,7 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonTransfer.Enabled = false;
             groupBoxDigits.Enabled = false;
             checkBoxSuspend.Enabled = false;
+            buttonHold.Enabled = false;
         }
 
         /// <summary>
@@ -1118,6 +1119,37 @@ namespace Nequeo.VoIP.PjSip.UI
 
             // Return the uri.
             return destination;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonHold_Click(object sender, EventArgs e)
+        {
+            if (_inComingCall != null && _inComingCall.Call != null)
+            {
+                // Is the call on hold.
+                if (_inComingCall.Call.CallOnHold)
+                {
+                    try
+                    {
+                        // Un hold the call.
+                        _inComingCall.Call.Hold();
+                    }
+                    catch { }
+                }
+                else
+                {
+                    try
+                    {
+                        // Hold the call.
+                        _inComingCall.Call.Hold();
+                    }
+                    catch { }
+                }
+            }
         }
     }
 }

@@ -40,6 +40,11 @@
             System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
+            this.buttonHold = new System.Windows.Forms.Button();
+            this.trackBarMicrophone = new System.Windows.Forms.TrackBar();
+            this.trackBarVolume = new System.Windows.Forms.TrackBar();
+            this.labelMicrophoneLevel = new System.Windows.Forms.Label();
+            this.labelVolumeLevel = new System.Windows.Forms.Label();
             this.checkBoxMuteMicrophone = new System.Windows.Forms.CheckBox();
             this.checkBoxMuteVolume = new System.Windows.Forms.CheckBox();
             this.groupBoxDigits = new System.Windows.Forms.GroupBox();
@@ -137,11 +142,9 @@
             this.contextMenuStripConference = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemConferenceHangup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemConferenceSuspend = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelVolumeLevel = new System.Windows.Forms.Label();
-            this.labelMicrophoneLevel = new System.Windows.Forms.Label();
-            this.trackBarVolume = new System.Windows.Forms.TrackBar();
-            this.trackBarMicrophone = new System.Windows.Forms.TrackBar();
             this.groupBoxCall.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             this.groupBoxDigits.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.tabControlAccount.SuspendLayout();
@@ -160,8 +163,6 @@
             this.groupBoxConference.SuspendLayout();
             this.tabPageVoIPAccount.SuspendLayout();
             this.contextMenuStripConference.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCall
@@ -169,6 +170,7 @@
             this.groupBoxCall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCall.Controls.Add(this.buttonHold);
             this.groupBoxCall.Controls.Add(this.trackBarMicrophone);
             this.groupBoxCall.Controls.Add(this.trackBarVolume);
             this.groupBoxCall.Controls.Add(this.labelMicrophoneLevel);
@@ -186,6 +188,55 @@
             this.groupBoxCall.TabIndex = 0;
             this.groupBoxCall.TabStop = false;
             this.groupBoxCall.Text = "Call";
+            // 
+            // buttonHold
+            // 
+            this.buttonHold.Enabled = false;
+            this.buttonHold.Location = new System.Drawing.Point(90, 46);
+            this.buttonHold.Name = "buttonHold";
+            this.buttonHold.Size = new System.Drawing.Size(75, 23);
+            this.buttonHold.TabIndex = 23;
+            this.buttonHold.Text = "Hold";
+            this.buttonHold.UseVisualStyleBackColor = true;
+            this.buttonHold.Click += new System.EventHandler(this.buttonHold_Click);
+            // 
+            // trackBarMicrophone
+            // 
+            this.trackBarMicrophone.LargeChange = 10;
+            this.trackBarMicrophone.Location = new System.Drawing.Point(162, 273);
+            this.trackBarMicrophone.Maximum = 100;
+            this.trackBarMicrophone.Name = "trackBarMicrophone";
+            this.trackBarMicrophone.Size = new System.Drawing.Size(129, 45);
+            this.trackBarMicrophone.TabIndex = 22;
+            this.trackBarMicrophone.Scroll += new System.EventHandler(this.trackBarMicrophone_Scroll);
+            // 
+            // trackBarVolume
+            // 
+            this.trackBarVolume.LargeChange = 10;
+            this.trackBarVolume.Location = new System.Drawing.Point(9, 272);
+            this.trackBarVolume.Maximum = 100;
+            this.trackBarVolume.Name = "trackBarVolume";
+            this.trackBarVolume.Size = new System.Drawing.Size(129, 45);
+            this.trackBarVolume.TabIndex = 21;
+            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
+            // 
+            // labelMicrophoneLevel
+            // 
+            this.labelMicrophoneLevel.AutoSize = true;
+            this.labelMicrophoneLevel.Location = new System.Drawing.Point(277, 251);
+            this.labelMicrophoneLevel.Name = "labelMicrophoneLevel";
+            this.labelMicrophoneLevel.Size = new System.Drawing.Size(13, 13);
+            this.labelMicrophoneLevel.TabIndex = 20;
+            this.labelMicrophoneLevel.Text = "0";
+            // 
+            // labelVolumeLevel
+            // 
+            this.labelVolumeLevel.AutoSize = true;
+            this.labelVolumeLevel.Location = new System.Drawing.Point(103, 250);
+            this.labelVolumeLevel.Name = "labelVolumeLevel";
+            this.labelVolumeLevel.Size = new System.Drawing.Size(13, 13);
+            this.labelVolumeLevel.TabIndex = 19;
+            this.labelVolumeLevel.Text = "0";
             // 
             // checkBoxMuteMicrophone
             // 
@@ -228,7 +279,7 @@
             this.groupBoxDigits.Enabled = false;
             this.groupBoxDigits.Location = new System.Drawing.Point(9, 75);
             this.groupBoxDigits.Name = "groupBoxDigits";
-            this.groupBoxDigits.Size = new System.Drawing.Size(230, 168);
+            this.groupBoxDigits.Size = new System.Drawing.Size(237, 168);
             this.groupBoxDigits.TabIndex = 16;
             this.groupBoxDigits.TabStop = false;
             // 
@@ -375,7 +426,7 @@
             this.comboBoxCallNumber.FormattingEnabled = true;
             this.comboBoxCallNumber.Location = new System.Drawing.Point(9, 19);
             this.comboBoxCallNumber.Name = "comboBoxCallNumber";
-            this.comboBoxCallNumber.Size = new System.Drawing.Size(230, 21);
+            this.comboBoxCallNumber.Size = new System.Drawing.Size(237, 21);
             this.comboBoxCallNumber.TabIndex = 0;
             this.comboBoxCallNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxCallNumber_SelectedIndexChanged);
             this.comboBoxCallNumber.TextChanged += new System.EventHandler(this.comboBoxCallNumber_TextChanged);
@@ -384,7 +435,7 @@
             // buttonHangup
             // 
             this.buttonHangup.Enabled = false;
-            this.buttonHangup.Location = new System.Drawing.Point(45, 46);
+            this.buttonHangup.Location = new System.Drawing.Point(9, 46);
             this.buttonHangup.Name = "buttonHangup";
             this.buttonHangup.Size = new System.Drawing.Size(75, 23);
             this.buttonHangup.TabIndex = 15;
@@ -395,7 +446,7 @@
             // buttonCall
             // 
             this.buttonCall.Enabled = false;
-            this.buttonCall.Location = new System.Drawing.Point(126, 46);
+            this.buttonCall.Location = new System.Drawing.Point(171, 46);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(75, 23);
             this.buttonCall.TabIndex = 14;
@@ -1236,44 +1287,6 @@
             this.toolStripMenuItemConferenceSuspend.Text = "Suspend";
             this.toolStripMenuItemConferenceSuspend.Click += new System.EventHandler(this.toolStripMenuItemConferenceSuspend_Click);
             // 
-            // labelVolumeLevel
-            // 
-            this.labelVolumeLevel.AutoSize = true;
-            this.labelVolumeLevel.Location = new System.Drawing.Point(103, 250);
-            this.labelVolumeLevel.Name = "labelVolumeLevel";
-            this.labelVolumeLevel.Size = new System.Drawing.Size(13, 13);
-            this.labelVolumeLevel.TabIndex = 19;
-            this.labelVolumeLevel.Text = "0";
-            // 
-            // labelMicrophoneLevel
-            // 
-            this.labelMicrophoneLevel.AutoSize = true;
-            this.labelMicrophoneLevel.Location = new System.Drawing.Point(277, 251);
-            this.labelMicrophoneLevel.Name = "labelMicrophoneLevel";
-            this.labelMicrophoneLevel.Size = new System.Drawing.Size(13, 13);
-            this.labelMicrophoneLevel.TabIndex = 20;
-            this.labelMicrophoneLevel.Text = "0";
-            // 
-            // trackBarVolume
-            // 
-            this.trackBarVolume.LargeChange = 10;
-            this.trackBarVolume.Location = new System.Drawing.Point(9, 272);
-            this.trackBarVolume.Maximum = 100;
-            this.trackBarVolume.Name = "trackBarVolume";
-            this.trackBarVolume.Size = new System.Drawing.Size(129, 45);
-            this.trackBarVolume.TabIndex = 21;
-            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
-            // 
-            // trackBarMicrophone
-            // 
-            this.trackBarMicrophone.LargeChange = 10;
-            this.trackBarMicrophone.Location = new System.Drawing.Point(162, 273);
-            this.trackBarMicrophone.Maximum = 100;
-            this.trackBarMicrophone.Name = "trackBarMicrophone";
-            this.trackBarMicrophone.Size = new System.Drawing.Size(129, 45);
-            this.trackBarMicrophone.TabIndex = 22;
-            this.trackBarMicrophone.Scroll += new System.EventHandler(this.trackBarMicrophone_Scroll);
-            // 
             // VoIPControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1284,6 +1297,8 @@
             this.Load += new System.EventHandler(this.VoIPControl_Load);
             this.groupBoxCall.ResumeLayout(false);
             this.groupBoxCall.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             this.groupBoxDigits.ResumeLayout(false);
             this.groupBoxDigits.PerformLayout();
             this.groupBoxAccount.ResumeLayout(false);
@@ -1308,8 +1323,6 @@
             this.groupBoxConference.PerformLayout();
             this.tabPageVoIPAccount.ResumeLayout(false);
             this.contextMenuStripConference.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1418,5 +1431,6 @@
         private System.Windows.Forms.TrackBar trackBarVolume;
         private System.Windows.Forms.Label labelMicrophoneLevel;
         private System.Windows.Forms.Label labelVolumeLevel;
+        private System.Windows.Forms.Button buttonHold;
     }
 }

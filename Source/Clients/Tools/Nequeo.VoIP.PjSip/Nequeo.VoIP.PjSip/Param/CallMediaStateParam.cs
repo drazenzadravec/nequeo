@@ -55,5 +55,10 @@ namespace Nequeo.VoIP.PjSip.Param
         /// Gets or sets the suspend state. If true then the media between callers is suspended and control is sent to the event caller.
         /// </summary>
         public bool Suspend { get; set; }
+
+        /// <summary>
+        /// Gets or sets an indicator specifying is the local caller has set the call on hold.
+        /// </summary>
+        public bool CallOnHold { get; set; }
     }
 }

@@ -70,6 +70,7 @@ namespace Nequeo.VoIP.PjSip.UI
         private Data.contacts _contacts = null;
         private Data.configuration _configuration = null;
 
+        private Nequeo.IO.Audio.Volume _volume = null;
         private Data.Common _common = null;
         private Data.IncomingOutgoingCalls _inOutCalls = null;
 
@@ -215,6 +216,7 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             _common = new Data.Common();
             _inOutCalls = new Data.IncomingOutgoingCalls();
+            _volume = new Volume();
 
             // Create the voip call.
             _voipCall = new VoIPCall();
@@ -283,6 +285,13 @@ namespace Nequeo.VoIP.PjSip.UI
                     trackBarMicrophone.Value = (int)(microphoneVolume[0] * 100.0);
                     labelMicrophoneLevel.Text = trackBarMicrophone.Value.ToString();
                 }
+
+                bool[] microphoneMute = Nequeo.IO.Audio.Volume.GetMicrophoneMute();
+                if (microphoneMute != null && microphoneMute.Length > 0)
+                {
+                    // Get first.
+                    checkBoxMuteMicrophone.Checked = microphoneMute[0];
+                }
             }
             catch { }
 
@@ -296,6 +305,56 @@ namespace Nequeo.VoIP.PjSip.UI
                     trackBarVolume.Value = (int)(speakerVolume[0] * 100.0);
                     labelVolumeLevel.Text = trackBarVolume.Value.ToString();
                 }
+
+                bool[] speakerMute = Nequeo.IO.Audio.Volume.GetSpeakerMute();
+                if (speakerMute != null && speakerMute.Length > 0)
+                {
+                    // Get first.
+                    checkBoxMuteVolume.Checked = speakerMute[0];
+                }
+            }
+            catch { }
+
+            try
+            {
+                _volume.OnMicrophoneNotification += _volume_OnMicrophoneNotification;
+                _volume.OnSpeakerNotification += _volume_OnSpeakerNotification;
+                _volume.SetMicrophoneNotification();
+                _volume.SetSpeakerNotification();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Speaker notify.
+        /// </summary>
+        /// <param name="data"></param>
+        private void _volume_OnSpeakerNotification(IO.Audio.Api.AudioVolumeNotificationData data)
+        {
+            try
+            {
+                checkBoxMuteVolume.Checked = data.Muted;
+
+                // Get first.
+                trackBarVolume.Value = (int)(data.MasterVolume * 100.0);
+                labelVolumeLevel.Text = trackBarVolume.Value.ToString();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Microphone notify.
+        /// </summary>
+        /// <param name="data"></param>
+        private void _volume_OnMicrophoneNotification(IO.Audio.Api.AudioVolumeNotificationData data)
+        {
+            try
+            {
+                checkBoxMuteMicrophone.Checked = data.Muted;
+
+                // Get first.
+                trackBarMicrophone.Value = (int)(data.MasterVolume * 100.0);
+                labelMicrophoneLevel.Text = trackBarMicrophone.Value.ToString();
             }
             catch { }
         }
@@ -491,6 +550,36 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             UISync.Execute(() =>
             {
+                try
+                {
+                    // Add the call information.
+                    Param.CallInfoParam info = new Param.CallInfoParam();
+                    info.IncomingOutgoing = true;
+                    info.ContactName = e.ContactName;
+                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.CallID = e.CallID;
+                    info.ConnectDuration = e.ConnectDuration;
+                    info.Date = e.Date;
+                    info.Guid = e.Guid;
+                    info.TotalDuration = e.TotalDuration;
+                    _inOutCalls.Add(info);
+
+                    // Add to the in out view.
+                    // Create a new list item.
+                    ListViewItem item = new ListViewItem(info.ContactName, 0);
+                    item.Name = info.FromTo + "|" + info.Guid;
+                    item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
+                    item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
+                    item.SubItems.Add(info.FromTo);
+                    item.SubItems.Add(info.TotalDuration.ToString());
+                    item.SubItems.Add(info.ConnectDuration.ToString());
+
+                    // Add the item.
+                    listViewInOutCalls.Items.Add(item);
+                }
+                catch { }
+
                 Param.CallParam call = null;
                 try
                 {
@@ -788,6 +877,7 @@ namespace Nequeo.VoIP.PjSip.UI
                 {
                     AddCallList();
                     buttonCall.Enabled = false;
+                    buttonHold.Enabled = true;
                     buttonHangup.Enabled = true;
                     groupBoxDigits.Enabled = true;
                     comboBoxCallNumber.Enabled = false;
@@ -805,6 +895,7 @@ namespace Nequeo.VoIP.PjSip.UI
 
                 // Enable.
                 buttonCall.Enabled = true;
+                buttonHold.Enabled = false;
                 buttonHangup.Enabled = false;
                 groupBoxDigits.Enabled = false;
                 comboBoxCallNumber.Enabled = true;
@@ -821,6 +912,36 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             UISync.Execute(() =>
             {
+                try
+                {
+                    // Add the call information.
+                    Param.CallInfoParam info = new Param.CallInfoParam();
+                    info.IncomingOutgoing = false;
+                    info.ContactName = _contactName;
+                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.CallID = e.CallID;
+                    info.ConnectDuration = e.ConnectDuration;
+                    info.Date = e.Date;
+                    info.Guid = e.Guid;
+                    info.TotalDuration = e.TotalDuration;
+                    _inOutCalls.Add(info);
+
+                    // Add to the in out view.
+                    // Create a new list item.
+                    ListViewItem item = new ListViewItem(info.ContactName, 0);
+                    item.Name = info.FromTo + "|" + info.Guid;
+                    item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
+                    item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
+                    item.SubItems.Add(info.FromTo);
+                    item.SubItems.Add(info.TotalDuration.ToString());
+                    item.SubItems.Add(info.ConnectDuration.ToString());
+
+                    // Add the item.
+                    listViewInOutCalls.Items.Add(item);
+                }
+                catch { }
+
                 // The call has ended.
                 DialogResult result = MessageBox.Show(this, "The call has ended.",
                 "Make Call", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -838,6 +959,20 @@ namespace Nequeo.VoIP.PjSip.UI
         private void _call_OnCallMediaState(object sender, Param.CallMediaStateParam e)
         {
             e.Suspend = false;
+            if (e.CallOnHold)
+                e.Suspend = true;
+
+            UISync.Execute(() =>
+            {
+                if (e.CallOnHold)
+                    buttonHold.Enabled = true;
+
+                // Get the current state of the call.
+                if (e.CallOnHold)
+                    buttonHold.Text = "Un-Hold";
+                else
+                    buttonHold.Text = "Hold";
+            });
         }
 
         /// <summary>
@@ -849,32 +984,10 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             UISync.Execute(() =>
             {
-                // If call is disconnected.
-                if ((e.State == Nequeo.Net.PjSip.InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
-                    (e.State == Nequeo.Net.PjSip.InviteSessionState.PJSIP_INV_STATE_NULL))
+                // If calling
+                if ((e.State == Nequeo.Net.PjSip.InviteSessionState.PJSIP_INV_STATE_CALLING))
                 {
-                    try
-                    {
-                        // Add the call information.
-                        Param.CallInfoParam info = e.CallInfo;
-                        info.IncomingOutgoing = false;
-                        info.ContactName = _contactName;
-                        _inOutCalls.Add(info);
-
-                        // Add to the in out view.
-                        // Create a new list item.
-                        ListViewItem item = new ListViewItem(info.ContactName, 0);
-                        item.Name = info.FromTo + "|" + _call.ID;
-                        item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
-                        item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
-                        item.SubItems.Add(info.FromTo);
-                        item.SubItems.Add(info.TotalDuration.ToString());
-                        item.SubItems.Add(info.ConnectDuration.ToString());
-
-                        // Add the item.
-                        listViewInOutCalls.Items.Add(item);
-                    }
-                    catch { }
+                    
                 }
             });
         }
@@ -914,6 +1027,7 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             // Enable.
             buttonCall.Enabled = true;
+            buttonHold.Enabled = false;
             buttonHangup.Enabled = false;
             groupBoxDigits.Enabled = false;
             comboBoxCallNumber.Enabled = true;
@@ -1975,7 +2089,18 @@ namespace Nequeo.VoIP.PjSip.UI
                         // Find from contact file.
                         contact = _contacts.contact.First(u => u.name.ToLower() == item.Text.ToLower());
                     }
-                    catch { }
+                    catch { contact = null; }
+
+                    // Did not find the contact.
+                    if (contact == null)
+                    {
+                        try
+                        {
+                            // Find from contact file.
+                            contact = _contacts.contact.First(u => u.sipAccount == item.Name);
+                        }
+                        catch { contact = null; }
+                    }
 
                     // Found the contact.
                     if (contact != null)
@@ -2332,6 +2457,34 @@ namespace Nequeo.VoIP.PjSip.UI
                 labelVolumeLevel.Text = trackBarVolume.Value.ToString();
             }
             catch { }
+        }
+
+        /// <summary>
+        /// Hold call.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonHold_Click(object sender, EventArgs e)
+        {
+            // Is the call on hold.
+            if (_call.CallOnHold)
+            {
+                try
+                {
+                    // Un hold the call.
+                    _call.Hold();
+                }
+                catch { }
+            }
+            else
+            {
+                try
+                {
+                    // Hold the call.
+                    _call.Hold();
+                }
+                catch { }
+            }
         }
     }
 }

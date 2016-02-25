@@ -155,6 +155,7 @@ VideoWindow^ VideoPreview::GetVideoWindow()
 {
 	pj::VideoWindow pjWindow = _pjVideoPreview->getVideoWindow();
 	VideoWindow^ window = gcnew VideoWindow(pjWindow);
+	window->SetVideoPreviewRef(_pjVideoPreview);
 
 	// Return the video window.
 	return window;
