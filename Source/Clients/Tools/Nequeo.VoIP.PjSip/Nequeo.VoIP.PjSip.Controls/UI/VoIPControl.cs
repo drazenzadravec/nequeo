@@ -85,6 +85,10 @@ namespace Nequeo.VoIP.PjSip.UI
         private bool _foundContactName = false;
         private string _contactName = "";
 
+        private volatile bool _hasVideo = false;
+        private volatile bool _isVideoValid = false;
+        private bool _isVideoStarted = false;
+
         /// <summary>
         /// Gets or sets the contacts file path.
         /// </summary>
@@ -376,6 +380,10 @@ namespace Nequeo.VoIP.PjSip.UI
                 // Ask the used to answer incomming call.
                 DialogResult result = MessageBox.Show(this, "Unable to register because of an internal error.",
                     "Register", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Not registered.
+                buttonRegister.Text = "Register";
+                _registered = false;
             }
         }
 
@@ -525,6 +533,9 @@ namespace Nequeo.VoIP.PjSip.UI
                 string autoAnswerFile = (_common != null ? _common.AutoAnswerFilePath : null);
                 int autoAnswerWait = (_common != null ? _common.AutoAnswerWait : 30);
                 int messageBank = (_common != null ? _common.MessageBankWait : 20);
+                bool redirectEnable = (_common != null ? _common.EnableRedirect : false);
+                string redirectCallNumber = (_common != null ? _common.RedirectCallNumber : null);
+                int redirectCallAfter = (_common != null ? _common.RedirectCallAfter : -1);
 
                 // Attach to the disconnect event.
                 e.Call.OnCallDisconnected += Call_OnCallDisconnected;
@@ -533,7 +544,8 @@ namespace Nequeo.VoIP.PjSip.UI
                 Nequeo.VoIP.PjSip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e,
                     listViewContact, listViewInOutCalls, listViewConference, _contacts, contactName, 
                     ringFilePath, audioDeviceIndex, autoAnswer, autoAnswerFile, autoAnswerWait, 
-                    _audioRecordingInCallPath, messageBank);
+                    _audioRecordingInCallPath, messageBank, redirectEnable, redirectCallNumber,
+                    redirectCallAfter);
 
                 // Show the form.
                 incomingCall.IncomingOutgoingCalls = _inOutCalls;
@@ -685,6 +697,12 @@ namespace Nequeo.VoIP.PjSip.UI
                 else
                     buttonCreate.Enabled = false;
             }
+
+            // Enable video.
+            if (_common.EnableVideo)
+                groupBoxCallVideo.Enabled = true;
+            else
+                groupBoxCallVideo.Enabled = false;
         }
 
         /// <summary>
@@ -866,8 +884,20 @@ namespace Nequeo.VoIP.PjSip.UI
                     audioRecordingPath = audioRecordingDir + audioRecordingFile + audioRecodingExt;
                 }
 
+                bool includeVideo = false;
+
+                // If a video call should be included.
+                if(_common.EnableVideo)
+                {
+                    if(checkBoxVideoCallAutoInclude.Checked)
+                    {
+                        // Include
+                        includeVideo = true;
+                    }
+                }
+
                 // Make the call.
-                _call = _voipCall.MakeCall(0, _uri, audioRecordingPath);
+                _call = _voipCall.MakeCall(0, _uri, audioRecordingPath, includeVideo);
                 _call.OnCallState += _call_OnCallState;
                 _call.OnCallMediaState += _call_OnCallMediaState;
                 _call.OnCallDisconnected += _call_OnCallDisconnected;
@@ -899,6 +929,10 @@ namespace Nequeo.VoIP.PjSip.UI
                 buttonHangup.Enabled = false;
                 groupBoxDigits.Enabled = false;
                 comboBoxCallNumber.Enabled = true;
+                buttonVideoCall.Enabled = false;
+                _isVideoStarted = false;
+                _isVideoValid = false;
+                _hasVideo = false;
                 _call = null;
             }
         }
@@ -910,6 +944,11 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void _call_OnCallDisconnected(object sender, Param.CallInfoParam e)
         {
+            // Assign the video window.
+            _hasVideo = false;
+            _isVideoValid = false;
+            _isVideoStarted = false;
+
             UISync.Execute(() =>
             {
                 try
@@ -972,6 +1011,30 @@ namespace Nequeo.VoIP.PjSip.UI
                     buttonHold.Text = "Un-Hold";
                 else
                     buttonHold.Text = "Hold";
+
+                // If is video media type.
+                if (e.MediaType == Net.PjSip.MediaType.PJMEDIA_TYPE_VIDEO)
+                {
+                    // If a video exists.
+                    if (e.HasVideo)
+                    {
+                        // Assign the video window.
+                        _hasVideo = e.HasVideo;
+                        buttonVideoRemove.Visible = true;
+
+                        // If is valid.
+                        if (e.IsVideoValid)
+                        {
+                            _isVideoValid = e.IsVideoValid;
+                            buttonVideoCall.Enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        // Can not remove what is not there.
+                        buttonVideoRemove.Visible = false;
+                    }
+                }
             });
         }
 
@@ -1031,6 +1094,10 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonHangup.Enabled = false;
             groupBoxDigits.Enabled = false;
             comboBoxCallNumber.Enabled = true;
+            buttonVideoCall.Enabled = false;
+            _isVideoStarted = false;
+            _isVideoValid = false;
+            _hasVideo = false;
             _call = null;
         }
 
@@ -1968,6 +2035,12 @@ namespace Nequeo.VoIP.PjSip.UI
                     _common.AutoAnswer = _configuration.accountAutoAnswerEnabled;
                     _common.AutoAnswerWait = _configuration.accountAutoAnswerWait;
                     _common.MessageBankWait = _configuration.accountMessageBankWait;
+                    _common.EnableVideo = _configuration.codecVideoEnabled;
+                    _common.VideoCaptureIndex = _configuration.codecVideoCaptureDeviceIndex;
+                    _common.VideoRenderIndex = _configuration.codecVideoRenderDeviceIndex;
+                    _common.EnableRedirect = _configuration.featureRedirectCallEnabled;
+                    _common.RedirectCallNumber = _configuration.featureRedirectCallNumber;
+                    _common.RedirectCallAfter = _configuration.featureRedirectCallAfter;
 
                     _audioRecordingOutCallPath = _configuration.outgoingCallPathAudioRecording;
                     _audioRecordingInCallPath = _configuration.incomingCallPathAudioRecording;
@@ -2466,24 +2539,220 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void buttonHold_Click(object sender, EventArgs e)
         {
-            // Is the call on hold.
-            if (_call.CallOnHold)
+            // If in call.
+            if (_call != null)
             {
-                try
+                // Is the call on hold.
+                if (_call.CallOnHold)
                 {
-                    // Un hold the call.
-                    _call.Hold();
+                    try
+                    {
+                        // Un hold the call.
+                        _call.Hold();
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (_hasVideo)
+                        {
+                            // Start the video.
+                            _call.StartVideoTransmit();
+                        }
+                    }
+                    catch { }
                 }
-                catch { }
+                else
+                {
+                    try
+                    {
+                        // Hold the call.
+                        _call.Hold();
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (_hasVideo)
+                        {
+                            // Stop the video.
+                            _call.StopVideoTransmit();
+                        }
+                    }
+                    catch { }
+                }
             }
-            else
+        }
+
+        /// <summary>
+        /// Video call preview.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonVideoCallPreview_Click(object sender, EventArgs e)
+        {
+            //UI.VideoPreview videoPreview = new VideoPreview(_voipCall);
+
+            // Get the current video capture device id.
+            int videoCapID = _voipCall.VoIPManager.MediaManager.GetVideoCaptureDeviceID();
+            int videoRenID = _voipCall.VoIPManager.MediaManager.GetVideoRenderDeviceID();
+            Net.PjSip.UI.VideoPreviewWindow videoPreview = new Net.PjSip.UI.VideoPreviewWindow(videoCapID, videoRenID);
+
+            // Assign and show.
+            videoPreview.OnVideoPreviewClosing += VideoPreview_OnVideoPreviewClosing;
+            videoPreview.Show(this);
+
+            // Enabled.
+            buttonVideoCallPreview.Enabled = false;
+        }
+
+        /// <summary>
+        /// Video preview closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void VideoPreview_OnVideoPreviewClosing(object sender, EventArgs e)
+        {
+            // Enabled.
+            buttonVideoCallPreview.Enabled = true;
+        }
+
+        /// <summary>
+        /// Video call.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonVideoCall_Click(object sender, EventArgs e)
+        {
+            try
             {
+                // If in call.
+                if (_call != null)
+                {
+                    // If transmitting video.
+                    if (_isVideoStarted)
+                    {
+                        _isVideoStarted = false;
+                        buttonVideoCall.Text = "Start Call";
+
+                        if (_hasVideo)
+                        {
+                            // Stop the video.
+                            _call.StopVideoTransmit();
+                        }
+                    }
+                    else
+                    {
+                        _isVideoStarted = true;
+                        buttonVideoCall.Text = "Stop Call";
+
+                        if (_hasVideo)
+                        {
+                            // Start the video.
+                            _call.StartVideoTransmit();
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Add video stream.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonVideoAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // If in call.
+                if (_call != null)
+                {
+                    // Add the video stream.
+                    _call.AddVideoStream();
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Call video auto include video.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxVideoCallAutoInclude_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxVideoCallAutoInclude.CheckState)
+            {
+                case CheckState.Checked:
+                    buttonVideoAdd.Visible = false;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    buttonVideoAdd.Visible = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Remove video stream.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonVideoRemove_Click(object sender, EventArgs e)
+        {
+            Nequeo.Forms.UI.Input input = new Forms.UI.Input();
+            input.Text = "Input the video index";
+            input.ShowDialog(this);
+
+            // If OK.
+            if (input.InputType == Forms.UI.InputType.OK)
+            {
+                // Get the value.
+                string videoStremValue = input.InputValue;
+
                 try
                 {
-                    // Hold the call.
-                    _call.Hold();
+                    int videoStreamIndex = 1;
+                    bool isNumber = Int32.TryParse(videoStremValue, out videoStreamIndex);
+                    if (!isNumber)
+                    {
+                        // If not a number.
+                        throw new Exception("Video stream index must be a number greater than zero.");
+                    }
+
+                    // The first index is the default audio stream index.
+                    if (videoStreamIndex >= 1)
+                    {
+                        // If in call.
+                        if (_call != null)
+                        {
+                            // Remove the video.
+                            _call.RemoveVideoStream(videoStreamIndex);
+
+                            // If no more video.
+                            if (_call.VideoCount < 1)
+                            {
+                                // Nothing to remove.
+                                buttonVideoRemove.Visible = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Error.
+                        throw new Exception("Video stream index must be greater than zero.");
+                    }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    // Error.
+                    DialogResult result = MessageBox.Show(this, 
+                        "Unable to delete the video stream '" + videoStremValue + "' because of an internal error. " + ex.Message,
+                        "Delete Video", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

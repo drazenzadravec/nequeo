@@ -12,5 +12,6 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
+#include <windows.h>
 #include <vcclr.h>
 #include <msclr\marshal.h>

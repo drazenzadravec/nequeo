@@ -248,6 +248,31 @@ const pj::CodecInfoVector& AccountCallback::GetVideoCodecInfo()
 	return _endpoint->videoCodecEnum();
 }
 
+///	<summary>
+///	Change audio codec priority.
+///	</summary>
+/// <param name="codecID">which is a string that uniquely identify
+///	the codec(such as "speex/8000").</param>
+/// <param name="priority">Codec priority, 0-255, where zero means to disable
+///	the codec.</param>
+void AccountCallback::AudioCodecSetPriority(const std::string &codecID, unsigned char priority)
+{
+	_endpoint->codecSetPriority(codecID, priority);
+}
+
+///	<summary>
+///	Change video codec priority.
+///	</summary>
+/// <param name="codecID">Codec ID, which is a string that uniquely identify
+///	the codec(such as "H263/90000"). Please see pjsua
+/// manual or pjmedia codec reference for details.</param>
+/// <param name="priority">Codec priority, 0-255, where zero means to disable
+///	the codec.</param>
+void AccountCallback::VideoCodecSetPriority(const std::string &codecID, unsigned char priority)
+{
+	_endpoint->videoCodecSetPriority(codecID, priority);
+}
+
 /// <summary>
 /// Add audio media device to the application.
 /// </summary>

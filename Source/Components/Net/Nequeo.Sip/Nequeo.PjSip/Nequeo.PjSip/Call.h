@@ -430,7 +430,7 @@ namespace Nequeo
 				///	<summary>
 				///	Initiate call transfer to the specified address. This function will send
 				/// REFER request to instruct remote call party to initiate a new INVITE
-				/// session to the specified destination / target.
+				/// session to the specified destination target.
 				/// If application is interested to monitor the successfulness and
 				/// the progress of the transfer request, it can implement
 				/// onCallTransferStatus() callback which will report the progress
@@ -454,7 +454,7 @@ namespace Nequeo
 				/// Note that if the application chooses to reject or stop redirection(by
 				/// using PJSIP_REDIRECT_REJECT or PJSIP_REDIRECT_STOP respectively), the
 				/// call disconnection callback will be called before this function returns.
-				/// And if the application rejects the target, the \a onCallRedirected()
+				/// And if the application rejects the target, the a onCallRedirected()
 				/// callback may also be called before this function returns if there is
 				/// another target to try.
 				///	</summary>
@@ -521,7 +521,7 @@ namespace Nequeo
 				bool VideoStreamIsRunning(int mediaIndex, MediaDirection mediaDirection);
 
 				/// <summary>
-				/// Add, remove, modify, and/or manipulate video media stream for the
+				/// Add, remove, modify, and or manipulate video media stream for the
 				/// specified call. This may trigger a re - INVITE or UPDATE to be sent
 				/// for the call.
 				/// </summary>

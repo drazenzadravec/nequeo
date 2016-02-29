@@ -46,13 +46,15 @@
             this.buttonThree = new System.Windows.Forms.Button();
             this.buttonTwo = new System.Windows.Forms.Button();
             this.buttonOne = new System.Windows.Forms.Button();
-            this.labelIncomingCallAutoAnswer = new System.Windows.Forms.Label();
             this.buttonSendToMessageBank = new System.Windows.Forms.Button();
             this.buttonAddToConferenceCall = new System.Windows.Forms.Button();
             this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
             this.buttonTransfer = new System.Windows.Forms.Button();
             this.buttonHold = new System.Windows.Forms.Button();
+            this.statusStripCall = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelAuto = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBoxDigits.SuspendLayout();
+            this.statusStripCall.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDetails
@@ -246,14 +248,6 @@
             this.buttonOne.UseVisualStyleBackColor = true;
             this.buttonOne.Click += new System.EventHandler(this.buttonOne_Click);
             // 
-            // labelIncomingCallAutoAnswer
-            // 
-            this.labelIncomingCallAutoAnswer.AutoSize = true;
-            this.labelIncomingCallAutoAnswer.Location = new System.Drawing.Point(12, 181);
-            this.labelIncomingCallAutoAnswer.Name = "labelIncomingCallAutoAnswer";
-            this.labelIncomingCallAutoAnswer.Size = new System.Drawing.Size(0, 13);
-            this.labelIncomingCallAutoAnswer.TabIndex = 18;
-            // 
             // buttonSendToMessageBank
             // 
             this.buttonSendToMessageBank.Location = new System.Drawing.Point(356, 205);
@@ -306,17 +300,31 @@
             this.buttonHold.UseVisualStyleBackColor = true;
             this.buttonHold.Click += new System.EventHandler(this.buttonHold_Click);
             // 
+            // statusStripCall
+            // 
+            this.statusStripCall.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelAuto});
+            this.statusStripCall.Location = new System.Drawing.Point(0, 238);
+            this.statusStripCall.Name = "statusStripCall";
+            this.statusStripCall.Size = new System.Drawing.Size(526, 22);
+            this.statusStripCall.TabIndex = 24;
+            // 
+            // toolStripStatusLabelAuto
+            // 
+            this.toolStripStatusLabelAuto.Name = "toolStripStatusLabelAuto";
+            this.toolStripStatusLabelAuto.Size = new System.Drawing.Size(0, 17);
+            // 
             // InComingCall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 240);
+            this.ClientSize = new System.Drawing.Size(526, 260);
+            this.Controls.Add(this.statusStripCall);
             this.Controls.Add(this.buttonHold);
             this.Controls.Add(this.buttonTransfer);
             this.Controls.Add(this.checkBoxSuspend);
             this.Controls.Add(this.buttonAddToConferenceCall);
             this.Controls.Add(this.buttonSendToMessageBank);
-            this.Controls.Add(this.labelIncomingCallAutoAnswer);
             this.Controls.Add(this.groupBoxDigits);
             this.Controls.Add(this.buttonHangup);
             this.Controls.Add(this.buttonAnswer);
@@ -334,6 +342,8 @@
             this.Load += new System.EventHandler(this.InComingCall_Load);
             this.groupBoxDigits.ResumeLayout(false);
             this.groupBoxDigits.PerformLayout();
+            this.statusStripCall.ResumeLayout(false);
+            this.statusStripCall.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,12 +368,13 @@
         private System.Windows.Forms.Button buttonTwo;
         private System.Windows.Forms.Button buttonOne;
         private System.Windows.Forms.TextBox textBoxDigits;
-        private System.Windows.Forms.Label labelIncomingCallAutoAnswer;
         private System.Windows.Forms.Button buttonSendToMessageBank;
         private System.Windows.Forms.Button buttonAddToConferenceCall;
         private System.Windows.Forms.CheckBox checkBoxSuspend;
         private System.Windows.Forms.Button buttonDigitsClear;
         private System.Windows.Forms.Button buttonTransfer;
         private System.Windows.Forms.Button buttonHold;
+        private System.Windows.Forms.StatusStrip statusStripCall;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelAuto;
     }
 }

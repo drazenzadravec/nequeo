@@ -121,6 +121,12 @@ namespace Nequeo.VoIP.PjSip.UI
             textBoxSoundsRingPath.Text = _common.IncomingCallRingFilePath;
             textBoxSoundsIMPath.Text = _common.InstantMessageFilePath;
             textBoxSoundsAutoAnswer.Text = _common.AutoAnswerFilePath;
+            checkBoxVideo.Checked = _common.EnableVideo;
+
+            // Redirect call.
+            checkBoxRedirectCallEnabled.Checked = _common.EnableRedirect;
+            textBoxRedirectCallText.Text = _common.RedirectCallNumber;
+            textBoxRedirectCallTime.Text = _common.RedirectCallAfter.ToString();
 
             // Auto answer.
             textBoxAutoAnswerWait.Text = _common.AutoAnswerWait.ToString();
@@ -209,6 +215,55 @@ namespace Nequeo.VoIP.PjSip.UI
                 comboBoxAudioPlaybackDevice.SelectedIndex = _common.PlaybackAudioDeviceIndex;
             }
 
+            // Get the video devices.
+            Nequeo.Net.PjSip.VideoDeviceInfo[] videoDevices = _voipCall.VoIPManager.MediaManager.GetAllVideoDevices();
+
+            // For each video device
+            foreach (Nequeo.Net.PjSip.VideoDeviceInfo videoDevice in videoDevices)
+            {
+                // Is capture device.
+                if ((videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_CAPTURE) ||
+                    (videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_ENCODING))
+                    comboBoxVideoDeviceCapture.Items.Add(videoDevice.Name + " | " + videoDevice.Driver);
+
+                // Is playback device.
+                if ((videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_PLAYBACK) ||
+                    (videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_DECODING))
+                    comboBoxVideoDevicePlayback.Items.Add(videoDevice.Name + " | " + videoDevice.Driver);
+            }
+
+            // Set any initial items.
+            int captureVideoIndex = _voipCall.VoIPManager.MediaManager.GetVideoCaptureDeviceID();
+            int playbackVideoIndex = _voipCall.VoIPManager.MediaManager.GetVideoRenderDeviceID();
+
+            // Set the selected.
+            if (captureVideoIndex >= 0)
+            {
+                // Get capture device.
+                Nequeo.Net.PjSip.VideoDeviceInfo captureVideo = videoDevices[captureVideoIndex];
+                int index = comboBoxVideoDeviceCapture.Items.IndexOf(captureVideo.Name + " | " + captureVideo.Driver);
+                comboBoxVideoDeviceCapture.SelectedIndex = index;
+            }
+            else
+            {
+                // Get from configuration file.
+                comboBoxVideoDeviceCapture.SelectedIndex = _common.VideoCaptureIndex;
+            }
+
+            if (playbackVideoIndex >= 0)
+            {
+                // Get playback device.
+                Nequeo.Net.PjSip.VideoDeviceInfo playbackVideo = videoDevices[playbackVideoIndex];
+                int index = comboBoxVideoDevicePlayback.Items.IndexOf(playbackVideo.Name + " | " + playbackVideo.Driver);
+                comboBoxVideoDevicePlayback.SelectedIndex = index;
+            }
+            else
+            {
+                // Get from configuration file.
+                comboBoxVideoDevicePlayback.SelectedIndex = _common.VideoRenderIndex;
+            }
+
+            // Assign each property.
             textBoxSipPort.Text = _voipCall.VoIPManager.AccountConnection.SpPort.ToString();
             checkBoxIsDefault.Checked = _voipCall.VoIPManager.AccountConnection.IsDefault;
             textBoxPriority.Text = _voipCall.VoIPManager.AccountConnection.Priority.ToString();
@@ -1200,6 +1255,130 @@ namespace Nequeo.VoIP.PjSip.UI
                 {
                     // Assign the port.
                     _common.MessageBankWait = wait;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Enable video.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxVideo_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxVideo.CheckState)
+            {
+                case CheckState.Checked:
+                    _common.EnableVideo = true;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _common.EnableVideo = false;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Video capture device.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxVideoDeviceCapture_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If item is selected.
+            if (comboBoxVideoDeviceCapture.SelectedIndex >= 0)
+            {
+                // Get the device.
+                string[] device = ((string)comboBoxVideoDeviceCapture.SelectedItem).Split(new char[] { '|' });
+                string name = device[0].Trim();
+                string driver = device[1].Trim();
+
+                // Get the capture index.
+                int captureIndex = _voipCall.VoIPManager.MediaManager.GetVideoDeviceID(driver, name);
+
+                // Set the capture device.
+                _voipCall.VoIPManager.MediaManager.SetVideoCaptureDeviceID(captureIndex);
+            }
+        }
+
+        /// <summary>
+        /// Video playback device.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxVideoDevicePlayback_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If item is selected.
+            if (comboBoxVideoDevicePlayback.SelectedIndex >= 0)
+            {
+                // Get the device.
+                string[] device = ((string)comboBoxVideoDevicePlayback.SelectedItem).Split(new char[] { '|' });
+                string name = device[0].Trim();
+                string driver = device[1].Trim();
+
+                // Get the render index.
+                int renderIndex = _voipCall.VoIPManager.MediaManager.GetVideoDeviceID(driver, name);
+
+                // Set the render device.
+                _voipCall.VoIPManager.MediaManager.SetVideoRenderDeviceID(renderIndex);
+            }
+        }
+
+        /// <summary>
+        /// Redirect call.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxRedirectCallEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxRedirectCallEnabled.CheckState)
+            {
+                case CheckState.Checked:
+                    _common.EnableRedirect = true;
+                    textBoxRedirectCallText.ReadOnly = false;
+                    textBoxRedirectCallTime.ReadOnly = false;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _common.EnableRedirect = false;
+                    textBoxRedirectCallText.ReadOnly = true;
+                    textBoxRedirectCallTime.ReadOnly = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Redirect call number.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxRedirectCallText_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxRedirectCallText.Text))
+                _common.RedirectCallNumber = "";
+            else
+                _common.RedirectCallNumber = textBoxRedirectCallText.Text;
+        }
+
+        /// <summary>
+        /// Redirect call time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxRedirectCallTime_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxRedirectCallTime.Text))
+                _common.RedirectCallAfter = -1;
+            else
+            {
+                int wait = 0;
+                bool isNumber = Int32.TryParse(textBoxRedirectCallTime.Text, out wait);
+                if (isNumber)
+                {
+                    // Assign the port.
+                    _common.RedirectCallAfter = wait;
                 }
             }
         }

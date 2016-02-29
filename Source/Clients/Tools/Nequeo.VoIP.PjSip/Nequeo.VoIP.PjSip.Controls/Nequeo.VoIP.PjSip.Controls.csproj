@@ -37,6 +37,13 @@
     <AssemblyOriginatorKeyFile>NequeoVoIPPjSipKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.Drawing, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=7a5ff21c6ca66d6e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Forms">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.IO.Audio">
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
     </Reference>
@@ -111,6 +118,12 @@
     <Compile Include="UI\TransferList.Designer.cs">
       <DependentUpon>TransferList.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\VideoPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\VideoPreview.Designer.cs">
+      <DependentUpon>VideoPreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\VoIPControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TransferList.resx">
       <DependentUpon>TransferList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VideoPreview.resx">
+      <DependentUpon>VideoPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\VoIPControl.resx">
       <DependentUpon>VoIPControl.cs</DependentUpon>

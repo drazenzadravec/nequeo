@@ -261,10 +261,11 @@ namespace Nequeo.VoIP.PjSip
         /// <param name="callId">An index call id (0 - 3).</param>
         /// <param name="uri">URI to be put in the To header (normally is the same as the target URI).</param>
         /// <param name="recordFilename">The path and filename where the conversation is to be recorded to. Currently ".wav" is supported on all platforms.</param>
+        /// <param name="includeVideo">Should that call include video.</param>
         /// <returns>The call information.</returns>
-        public Param.CallParam MakeCall(int callId, string uri, string recordFilename = null)
+        public Param.CallParam MakeCall(int callId, string uri, string recordFilename = null, bool includeVideo = false)
         {
-            return _voipManager.MakeCall(callId, uri, recordFilename);
+            return _voipManager.MakeCall(callId, uri, recordFilename, includeVideo);
         }
 
         /// <summary>

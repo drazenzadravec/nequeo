@@ -40,7 +40,7 @@ using namespace Nequeo::Net::PjSip;
 /// </summary>
 /// <param name="pjVideoWindow">The video window.</param>
 VideoWindow::VideoWindow(pj::VideoWindow& pjVideoWindow) :
-	_pjVideoWindow(pjVideoWindow), _disposed(false), _isVideoPreview(false), _isCallMediaInfo(false)
+	_pjVideoWindow(pjVideoWindow), _disposed(false), _isVideoPreview(false), _isCallMediaInfo(false), _videoWindowID(-1)
 {
 }
 
@@ -281,6 +281,24 @@ void VideoWindow::SetWindow(VideoWindowHandle^ window)
 		// Set the window.
 		_pjVideoWindow.setWindow(win);
 	}
+}
+
+///	<summary>
+///	Get the video window id.
+///	</summary>
+/// <returns>The video window id.</returns>
+int VideoWindow::GetVideoWindowID()
+{
+	return _videoWindowID;
+}
+
+/// <summary>
+/// Set the video window id.
+/// </summary>
+/// <param name="videoWindowID">The video window id.</param>
+void VideoWindow::SetVideoWindowID(int videoWindowID)
+{
+	_videoWindowID = videoWindowID;
 }
 
 ///	<summary>

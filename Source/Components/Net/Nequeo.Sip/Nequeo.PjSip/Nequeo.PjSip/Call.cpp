@@ -516,6 +516,7 @@ CallInfo^ Call::GetInfo()
 					mediaInfo->VideoWindowEx = gcnew VideoWindow(info.media[i].videoWindow);
 					pj::CallMediaInfo pjMediaInfo = info.media[i];
 					mediaInfo->VideoWindowEx->SetCallMediaInfoRef(&pjMediaInfo);
+					mediaInfo->VideoWindowEx->SetVideoWindowID(info.media[i].videoIncomingWindowId);
 				}
 				else
 				{
@@ -548,6 +549,7 @@ CallInfo^ Call::GetInfo()
 					mediaInfo->VideoWindowEx = gcnew VideoWindow(info.provMedia[i].videoWindow);
 					pj::CallMediaInfo pjMediaInfo = info.provMedia[i];
 					mediaInfo->VideoWindowEx->SetCallMediaInfoRef(&pjMediaInfo);
+					mediaInfo->VideoWindowEx->SetVideoWindowID(info.provMedia[i].videoIncomingWindowId);
 				}
 				else
 				{
@@ -867,7 +869,7 @@ void Call::TransferReplaces(Call^ destination, CallOpParam^ callOpParam)
 /// Note that if the application chooses to reject or stop redirection(by
 /// using PJSIP_REDIRECT_REJECT or PJSIP_REDIRECT_STOP respectively), the
 /// call disconnection callback will be called before this function returns.
-/// And if the application rejects the target, the \a onCallRedirected()
+/// And if the application rejects the target, the a onCallRedirected()
 /// callback may also be called before this function returns if there is
 /// another target to try.
 ///	</summary>
@@ -891,11 +893,6 @@ void Call::DialDtmf(String^ digits)
 {
 	std::string digitsN;
 	MarshalString(digits, digitsN);
-
-	//***********************
-	//pjsua_data* hh = pjsua_get_var();
-	//pjsua_call *call = &hh->calls[_callCallback->getId()];
-	//**********************
 
 	// Send DTMF digits to remote using RFC 2833 payload formats.
 	_callCallback->dialDtmf(digitsN);
@@ -1151,7 +1148,7 @@ bool Call::VideoStreamIsRunning(int mediaIndex, MediaDirection mediaDirection)
 }
 
 /// <summary>
-/// Add, remove, modify, and/or manipulate video media stream for the
+/// Add, remove, modify, and or manipulate video media stream for the
 /// specified call. This may trigger a re - INVITE or UPDATE to be sent
 /// for the call.
 /// </summary>
@@ -1690,7 +1687,7 @@ pjsip_redirect_op Call::OnCallRedirected_Handler(pj::OnCallRedirectedParam &prm)
 	param->Info = GetInfo();
 	param->TargetUri = gcnew String(prm.targetUri.c_str());
 	param->EventType = CallMapper::GetSipEventTypeEx(prm.e.type);
-	param->Redirect = RedirectResponseType::PJSIP_REDIRECT_STOP;
+	param->Redirect = RedirectResponseType::PJSIP_REDIRECT_ACCEPT;
 
 	// Call the event handler.
 	OnCallRedirected(this, param);

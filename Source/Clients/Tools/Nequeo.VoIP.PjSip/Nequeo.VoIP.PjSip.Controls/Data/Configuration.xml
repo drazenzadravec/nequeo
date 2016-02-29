@@ -42,4 +42,10 @@
   <soundIncomingCallFilePath></soundIncomingCallFilePath>
   <soundInstantMessageFilePath></soundInstantMessageFilePath>
   <soundAutoAnswerFilePath></soundAutoAnswerFilePath>
+  <codecVideoEnabled>false</codecVideoEnabled>
+  <codecVideoCaptureDeviceIndex>0</codecVideoCaptureDeviceIndex>
+  <codecVideoRenderDeviceIndex>0</codecVideoRenderDeviceIndex>
+  <featureRedirectCallEnabled>false</featureRedirectCallEnabled>
+  <featureRedirectCallNumber></featureRedirectCallNumber>
+  <featureRedirectCallAfter>40</featureRedirectCallAfter>
 </configuration>

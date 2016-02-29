@@ -130,7 +130,19 @@
             this.buttonSoundsRingPath = new System.Windows.Forms.Button();
             this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
             this.tabPageCodec = new System.Windows.Forms.TabPage();
+            this.groupBoxFeatureTransferCall = new System.Windows.Forms.GroupBox();
+            this.labelRedirectCallTimeSec = new System.Windows.Forms.Label();
+            this.textBoxRedirectCallTime = new System.Windows.Forms.TextBox();
+            this.labelRedirectCallTime = new System.Windows.Forms.Label();
+            this.textBoxRedirectCallText = new System.Windows.Forms.TextBox();
+            this.checkBoxRedirectCallEnabled = new System.Windows.Forms.CheckBox();
             this.groupBoxVideoDevice = new System.Windows.Forms.GroupBox();
+            this.checkBoxVideo = new System.Windows.Forms.CheckBox();
+            this.comboBoxVideoDevicePlayback = new System.Windows.Forms.ComboBox();
+            this.comboBoxVideoDeviceCapture = new System.Windows.Forms.ComboBox();
+            this.labelVideoDevicePlayback = new System.Windows.Forms.Label();
+            this.labelVideoDeviceCapture = new System.Windows.Forms.Label();
+            this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -147,6 +159,8 @@
             this.tabPageMedia.SuspendLayout();
             this.groupBoxSounds.SuspendLayout();
             this.tabPageCodec.SuspendLayout();
+            this.groupBoxFeatureTransferCall.SuspendLayout();
+            this.groupBoxVideoDevice.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -1172,22 +1186,148 @@
             // 
             // tabPageCodec
             // 
+            this.tabPageCodec.Controls.Add(this.groupBoxFeatureTransferCall);
             this.tabPageCodec.Controls.Add(this.groupBoxVideoDevice);
             this.tabPageCodec.Location = new System.Drawing.Point(4, 22);
             this.tabPageCodec.Name = "tabPageCodec";
             this.tabPageCodec.Size = new System.Drawing.Size(491, 330);
             this.tabPageCodec.TabIndex = 3;
-            this.tabPageCodec.Text = "Codec";
+            this.tabPageCodec.Text = "Feature";
             this.tabPageCodec.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxFeatureTransferCall
+            // 
+            this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallToNumber);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallTimeSec);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.textBoxRedirectCallTime);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallTime);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.textBoxRedirectCallText);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.checkBoxRedirectCallEnabled);
+            this.groupBoxFeatureTransferCall.Location = new System.Drawing.Point(6, 113);
+            this.groupBoxFeatureTransferCall.Name = "groupBoxFeatureTransferCall";
+            this.groupBoxFeatureTransferCall.Size = new System.Drawing.Size(475, 58);
+            this.groupBoxFeatureTransferCall.TabIndex = 1;
+            this.groupBoxFeatureTransferCall.TabStop = false;
+            this.groupBoxFeatureTransferCall.Text = "Redirect Call";
+            // 
+            // labelRedirectCallTimeSec
+            // 
+            this.labelRedirectCallTimeSec.AutoSize = true;
+            this.labelRedirectCallTimeSec.Location = new System.Drawing.Point(448, 23);
+            this.labelRedirectCallTimeSec.Name = "labelRedirectCallTimeSec";
+            this.labelRedirectCallTimeSec.Size = new System.Drawing.Size(18, 13);
+            this.labelRedirectCallTimeSec.TabIndex = 4;
+            this.labelRedirectCallTimeSec.Text = "(s)";
+            // 
+            // textBoxRedirectCallTime
+            // 
+            this.textBoxRedirectCallTime.Location = new System.Drawing.Point(372, 20);
+            this.textBoxRedirectCallTime.Name = "textBoxRedirectCallTime";
+            this.textBoxRedirectCallTime.ReadOnly = true;
+            this.textBoxRedirectCallTime.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRedirectCallTime.TabIndex = 3;
+            this.textBoxRedirectCallTime.TextChanged += new System.EventHandler(this.textBoxRedirectCallTime_TextChanged);
+            // 
+            // labelRedirectCallTime
+            // 
+            this.labelRedirectCallTime.AutoSize = true;
+            this.labelRedirectCallTime.Location = new System.Drawing.Point(331, 23);
+            this.labelRedirectCallTime.Name = "labelRedirectCallTime";
+            this.labelRedirectCallTime.Size = new System.Drawing.Size(35, 13);
+            this.labelRedirectCallTime.TabIndex = 2;
+            this.labelRedirectCallTime.Text = "After :";
+            // 
+            // textBoxRedirectCallText
+            // 
+            this.textBoxRedirectCallText.Location = new System.Drawing.Point(121, 20);
+            this.textBoxRedirectCallText.Name = "textBoxRedirectCallText";
+            this.textBoxRedirectCallText.ReadOnly = true;
+            this.textBoxRedirectCallText.Size = new System.Drawing.Size(187, 20);
+            this.textBoxRedirectCallText.TabIndex = 1;
+            this.textBoxRedirectCallText.TextChanged += new System.EventHandler(this.textBoxRedirectCallText_TextChanged);
+            // 
+            // checkBoxRedirectCallEnabled
+            // 
+            this.checkBoxRedirectCallEnabled.AutoSize = true;
+            this.checkBoxRedirectCallEnabled.Location = new System.Drawing.Point(18, 22);
+            this.checkBoxRedirectCallEnabled.Name = "checkBoxRedirectCallEnabled";
+            this.checkBoxRedirectCallEnabled.Size = new System.Drawing.Size(65, 17);
+            this.checkBoxRedirectCallEnabled.TabIndex = 0;
+            this.checkBoxRedirectCallEnabled.Text = "Enabled";
+            this.checkBoxRedirectCallEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxRedirectCallEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRedirectCallEnabled_CheckedChanged);
             // 
             // groupBoxVideoDevice
             // 
+            this.groupBoxVideoDevice.Controls.Add(this.checkBoxVideo);
+            this.groupBoxVideoDevice.Controls.Add(this.comboBoxVideoDevicePlayback);
+            this.groupBoxVideoDevice.Controls.Add(this.comboBoxVideoDeviceCapture);
+            this.groupBoxVideoDevice.Controls.Add(this.labelVideoDevicePlayback);
+            this.groupBoxVideoDevice.Controls.Add(this.labelVideoDeviceCapture);
             this.groupBoxVideoDevice.Location = new System.Drawing.Point(6, 6);
             this.groupBoxVideoDevice.Name = "groupBoxVideoDevice";
-            this.groupBoxVideoDevice.Size = new System.Drawing.Size(475, 76);
+            this.groupBoxVideoDevice.Size = new System.Drawing.Size(475, 101);
             this.groupBoxVideoDevice.TabIndex = 0;
             this.groupBoxVideoDevice.TabStop = false;
             this.groupBoxVideoDevice.Text = "Video Device";
+            // 
+            // checkBoxVideo
+            // 
+            this.checkBoxVideo.AutoSize = true;
+            this.checkBoxVideo.Location = new System.Drawing.Point(18, 73);
+            this.checkBoxVideo.Name = "checkBoxVideo";
+            this.checkBoxVideo.Size = new System.Drawing.Size(89, 17);
+            this.checkBoxVideo.TabIndex = 4;
+            this.checkBoxVideo.Text = "Enable Video";
+            this.checkBoxVideo.UseVisualStyleBackColor = true;
+            this.checkBoxVideo.CheckedChanged += new System.EventHandler(this.checkBoxVideo_CheckedChanged);
+            // 
+            // comboBoxVideoDevicePlayback
+            // 
+            this.comboBoxVideoDevicePlayback.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVideoDevicePlayback.FormattingEnabled = true;
+            this.comboBoxVideoDevicePlayback.Location = new System.Drawing.Point(78, 46);
+            this.comboBoxVideoDevicePlayback.Name = "comboBoxVideoDevicePlayback";
+            this.comboBoxVideoDevicePlayback.Size = new System.Drawing.Size(381, 21);
+            this.comboBoxVideoDevicePlayback.TabIndex = 3;
+            this.comboBoxVideoDevicePlayback.SelectedIndexChanged += new System.EventHandler(this.comboBoxVideoDevicePlayback_SelectedIndexChanged);
+            // 
+            // comboBoxVideoDeviceCapture
+            // 
+            this.comboBoxVideoDeviceCapture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVideoDeviceCapture.FormattingEnabled = true;
+            this.comboBoxVideoDeviceCapture.Location = new System.Drawing.Point(78, 19);
+            this.comboBoxVideoDeviceCapture.Name = "comboBoxVideoDeviceCapture";
+            this.comboBoxVideoDeviceCapture.Size = new System.Drawing.Size(381, 21);
+            this.comboBoxVideoDeviceCapture.TabIndex = 2;
+            this.comboBoxVideoDeviceCapture.SelectedIndexChanged += new System.EventHandler(this.comboBoxVideoDeviceCapture_SelectedIndexChanged);
+            // 
+            // labelVideoDevicePlayback
+            // 
+            this.labelVideoDevicePlayback.AutoSize = true;
+            this.labelVideoDevicePlayback.Location = new System.Drawing.Point(15, 49);
+            this.labelVideoDevicePlayback.Name = "labelVideoDevicePlayback";
+            this.labelVideoDevicePlayback.Size = new System.Drawing.Size(57, 13);
+            this.labelVideoDevicePlayback.TabIndex = 1;
+            this.labelVideoDevicePlayback.Text = "Playback :";
+            // 
+            // labelVideoDeviceCapture
+            // 
+            this.labelVideoDeviceCapture.AutoSize = true;
+            this.labelVideoDeviceCapture.Location = new System.Drawing.Point(15, 22);
+            this.labelVideoDeviceCapture.Name = "labelVideoDeviceCapture";
+            this.labelVideoDeviceCapture.Size = new System.Drawing.Size(50, 13);
+            this.labelVideoDeviceCapture.TabIndex = 0;
+            this.labelVideoDeviceCapture.Text = "Capture :";
+            // 
+            // labelRedirectCallToNumber
+            // 
+            this.labelRedirectCallToNumber.AutoSize = true;
+            this.labelRedirectCallToNumber.Location = new System.Drawing.Point(89, 23);
+            this.labelRedirectCallToNumber.Name = "labelRedirectCallToNumber";
+            this.labelRedirectCallToNumber.Size = new System.Drawing.Size(26, 13);
+            this.labelRedirectCallToNumber.TabIndex = 5;
+            this.labelRedirectCallToNumber.Text = "To :";
             // 
             // Settings
             // 
@@ -1233,6 +1373,10 @@
             this.groupBoxSounds.ResumeLayout(false);
             this.groupBoxSounds.PerformLayout();
             this.tabPageCodec.ResumeLayout(false);
+            this.groupBoxFeatureTransferCall.ResumeLayout(false);
+            this.groupBoxFeatureTransferCall.PerformLayout();
+            this.groupBoxVideoDevice.ResumeLayout(false);
+            this.groupBoxVideoDevice.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1342,5 +1486,17 @@
         private System.Windows.Forms.Label labelMessageBankWait;
         private System.Windows.Forms.TabPage tabPageCodec;
         private System.Windows.Forms.GroupBox groupBoxVideoDevice;
+        private System.Windows.Forms.CheckBox checkBoxVideo;
+        private System.Windows.Forms.ComboBox comboBoxVideoDevicePlayback;
+        private System.Windows.Forms.ComboBox comboBoxVideoDeviceCapture;
+        private System.Windows.Forms.Label labelVideoDevicePlayback;
+        private System.Windows.Forms.Label labelVideoDeviceCapture;
+        private System.Windows.Forms.GroupBox groupBoxFeatureTransferCall;
+        private System.Windows.Forms.Label labelRedirectCallTimeSec;
+        private System.Windows.Forms.TextBox textBoxRedirectCallTime;
+        private System.Windows.Forms.Label labelRedirectCallTime;
+        private System.Windows.Forms.TextBox textBoxRedirectCallText;
+        private System.Windows.Forms.CheckBox checkBoxRedirectCallEnabled;
+        private System.Windows.Forms.Label labelRedirectCallToNumber;
     }
 }

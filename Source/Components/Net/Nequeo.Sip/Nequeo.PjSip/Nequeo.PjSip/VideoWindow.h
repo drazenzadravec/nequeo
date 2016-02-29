@@ -115,6 +115,12 @@ namespace Nequeo
 				/// <param name="window">The new output window.</param>
 				void SetWindow(VideoWindowHandle^ window);
 
+				///	<summary>
+				///	Get the video window id.
+				///	</summary>
+				/// <returns>The video window id.</returns>
+				int GetVideoWindowID();
+
 			internal:
 				/// <summary>
 				/// Video window.
@@ -134,6 +140,12 @@ namespace Nequeo
 				/// <param name="pjCallMediaInfo">Thecall media info.</param>
 				void SetCallMediaInfoRef(pj::CallMediaInfo* pjCallMediaInfo);
 
+				/// <summary>
+				/// Set the video window id.
+				/// </summary>
+				/// <param name="videoWindowID">The video window id.</param>
+				void SetVideoWindowID(int videoWindowID);
+
 				///	<summary>
 				///	Get the VideoDeviceHandleType.
 				///	</summary>
@@ -152,6 +164,7 @@ namespace Nequeo
 				bool _disposed;
 				bool _isVideoPreview;
 				bool _isCallMediaInfo;
+				int _videoWindowID;
 
 				pj::VideoWindow& _pjVideoWindow;
 				pj::VideoPreview* _pjVideoPreview;

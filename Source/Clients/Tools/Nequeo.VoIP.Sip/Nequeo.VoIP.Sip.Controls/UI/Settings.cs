@@ -122,6 +122,11 @@ namespace Nequeo.VoIP.Sip.UI
             textBoxSoundsIMPath.Text = _common.InstantMessageFilePath;
             textBoxSoundsAutoAnswer.Text = _common.AutoAnswerFilePath;
 
+            // Redirect call.
+            checkBoxRedirectCallEnabled.Checked = _common.EnableRedirect;
+            textBoxRedirectCallText.Text = _common.RedirectCallNumber;
+            textBoxRedirectCallTime.Text = _common.RedirectCallAfter.ToString();
+
             // Auto answer.
             textBoxAutoAnswerWait.Text = _common.AutoAnswerWait.ToString();
             checkBoxAutoAnswer.Checked = _common.AutoAnswer;
@@ -1200,6 +1205,64 @@ namespace Nequeo.VoIP.Sip.UI
                 {
                     // Assign the port.
                     _common.MessageBankWait = wait;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Redirect call.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxRedirectCallEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxRedirectCallEnabled.CheckState)
+            {
+                case CheckState.Checked:
+                    _common.EnableRedirect = true;
+                    textBoxRedirectCallText.ReadOnly = false;
+                    textBoxRedirectCallTime.ReadOnly = false;
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    _common.EnableRedirect = false;
+                    textBoxRedirectCallText.ReadOnly = true;
+                    textBoxRedirectCallTime.ReadOnly = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Redirect call number.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxRedirectCallText_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxRedirectCallText.Text))
+                _common.RedirectCallNumber = "";
+            else
+                _common.RedirectCallNumber = textBoxRedirectCallText.Text;
+        }
+
+        /// <summary>
+        /// Redirect call time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxRedirectCallTime_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxRedirectCallTime.Text))
+                _common.RedirectCallAfter = -1;
+            else
+            {
+                int wait = 0;
+                bool isNumber = Int32.TryParse(textBoxRedirectCallTime.Text, out wait);
+                if (isNumber)
+                {
+                    // Assign the port.
+                    _common.RedirectCallAfter = wait;
                 }
             }
         }

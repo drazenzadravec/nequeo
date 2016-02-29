@@ -30,16 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VoIPControl));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Business", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Colleague", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Misc", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup13 = new System.Windows.Forms.ListViewGroup("Business", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup14 = new System.Windows.Forms.ListViewGroup("Colleague", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup15 = new System.Windows.Forms.ListViewGroup("Misc", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup16 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup17 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup18 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
+            this.groupBoxCallVideo = new System.Windows.Forms.GroupBox();
+            this.buttonVideoRemove = new System.Windows.Forms.Button();
+            this.buttonVideoAdd = new System.Windows.Forms.Button();
+            this.checkBoxVideoCallAutoInclude = new System.Windows.Forms.CheckBox();
+            this.buttonVideoCall = new System.Windows.Forms.Button();
+            this.buttonVideoCallPreview = new System.Windows.Forms.Button();
             this.buttonHold = new System.Windows.Forms.Button();
             this.labelMicrophoneLevel = new System.Windows.Forms.Label();
             this.labelVolumeLevel = new System.Windows.Forms.Label();
@@ -143,6 +149,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxCall.SuspendLayout();
+            this.groupBoxCallVideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             this.groupBoxDigits.SuspendLayout();
@@ -170,6 +177,7 @@
             this.groupBoxCall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCall.Controls.Add(this.groupBoxCallVideo);
             this.groupBoxCall.Controls.Add(this.buttonHold);
             this.groupBoxCall.Controls.Add(this.labelMicrophoneLevel);
             this.groupBoxCall.Controls.Add(this.labelVolumeLevel);
@@ -188,6 +196,77 @@
             this.groupBoxCall.TabIndex = 0;
             this.groupBoxCall.TabStop = false;
             this.groupBoxCall.Text = "Call";
+            // 
+            // groupBoxCallVideo
+            // 
+            this.groupBoxCallVideo.Controls.Add(this.buttonVideoRemove);
+            this.groupBoxCallVideo.Controls.Add(this.buttonVideoAdd);
+            this.groupBoxCallVideo.Controls.Add(this.checkBoxVideoCallAutoInclude);
+            this.groupBoxCallVideo.Controls.Add(this.buttonVideoCall);
+            this.groupBoxCallVideo.Controls.Add(this.buttonVideoCallPreview);
+            this.groupBoxCallVideo.Enabled = false;
+            this.groupBoxCallVideo.Location = new System.Drawing.Point(252, 75);
+            this.groupBoxCallVideo.Name = "groupBoxCallVideo";
+            this.groupBoxCallVideo.Size = new System.Drawing.Size(106, 168);
+            this.groupBoxCallVideo.TabIndex = 24;
+            this.groupBoxCallVideo.TabStop = false;
+            this.groupBoxCallVideo.Text = "Video";
+            // 
+            // buttonVideoRemove
+            // 
+            this.buttonVideoRemove.Location = new System.Drawing.Point(6, 107);
+            this.buttonVideoRemove.Name = "buttonVideoRemove";
+            this.buttonVideoRemove.Size = new System.Drawing.Size(75, 23);
+            this.buttonVideoRemove.TabIndex = 4;
+            this.buttonVideoRemove.Text = "Remove";
+            this.buttonVideoRemove.UseVisualStyleBackColor = true;
+            this.buttonVideoRemove.Visible = false;
+            this.buttonVideoRemove.Click += new System.EventHandler(this.buttonVideoRemove_Click);
+            // 
+            // buttonVideoAdd
+            // 
+            this.buttonVideoAdd.Location = new System.Drawing.Point(6, 78);
+            this.buttonVideoAdd.Name = "buttonVideoAdd";
+            this.buttonVideoAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonVideoAdd.TabIndex = 3;
+            this.buttonVideoAdd.Text = "Add";
+            this.buttonVideoAdd.UseVisualStyleBackColor = true;
+            this.buttonVideoAdd.Visible = false;
+            this.buttonVideoAdd.Click += new System.EventHandler(this.buttonVideoAdd_Click);
+            // 
+            // checkBoxVideoCallAutoInclude
+            // 
+            this.checkBoxVideoCallAutoInclude.AutoSize = true;
+            this.checkBoxVideoCallAutoInclude.Checked = true;
+            this.checkBoxVideoCallAutoInclude.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxVideoCallAutoInclude.Location = new System.Drawing.Point(6, 142);
+            this.checkBoxVideoCallAutoInclude.Name = "checkBoxVideoCallAutoInclude";
+            this.checkBoxVideoCallAutoInclude.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxVideoCallAutoInclude.TabIndex = 2;
+            this.checkBoxVideoCallAutoInclude.Text = "Auto Include";
+            this.checkBoxVideoCallAutoInclude.UseVisualStyleBackColor = true;
+            this.checkBoxVideoCallAutoInclude.CheckedChanged += new System.EventHandler(this.checkBoxVideoCallAutoInclude_CheckedChanged);
+            // 
+            // buttonVideoCall
+            // 
+            this.buttonVideoCall.Enabled = false;
+            this.buttonVideoCall.Location = new System.Drawing.Point(6, 49);
+            this.buttonVideoCall.Name = "buttonVideoCall";
+            this.buttonVideoCall.Size = new System.Drawing.Size(75, 23);
+            this.buttonVideoCall.TabIndex = 1;
+            this.buttonVideoCall.Text = "Start Call";
+            this.buttonVideoCall.UseVisualStyleBackColor = true;
+            this.buttonVideoCall.Click += new System.EventHandler(this.buttonVideoCall_Click);
+            // 
+            // buttonVideoCallPreview
+            // 
+            this.buttonVideoCallPreview.Location = new System.Drawing.Point(6, 19);
+            this.buttonVideoCallPreview.Name = "buttonVideoCallPreview";
+            this.buttonVideoCallPreview.Size = new System.Drawing.Size(75, 23);
+            this.buttonVideoCallPreview.TabIndex = 0;
+            this.buttonVideoCallPreview.Text = "Preview";
+            this.buttonVideoCallPreview.UseVisualStyleBackColor = true;
+            this.buttonVideoCallPreview.Click += new System.EventHandler(this.buttonVideoCallPreview_Click);
             // 
             // buttonHold
             // 
@@ -282,6 +361,7 @@
             this.groupBoxDigits.Size = new System.Drawing.Size(237, 168);
             this.groupBoxDigits.TabIndex = 16;
             this.groupBoxDigits.TabStop = false;
+            this.groupBoxDigits.Text = "Digits";
             // 
             // buttonDigitsClear
             // 
@@ -1015,34 +1095,34 @@
             this.columnHeaderContactAccount,
             this.columnHeaderContactState});
             this.listViewContact.ContextMenuStrip = this.contextMenuStripContacts;
-            listViewGroup1.Header = "Friend";
-            listViewGroup1.Name = "listViewGroupFriends";
-            listViewGroup2.Header = "Family";
-            listViewGroup2.Name = "listViewGroupFamily";
-            listViewGroup3.Header = "Work";
-            listViewGroup3.Name = "listViewGroupWork";
-            listViewGroup4.Header = "Business";
-            listViewGroup4.Name = "listViewGroupBusiness";
-            listViewGroup5.Header = "Colleague";
-            listViewGroup5.Name = "listViewGroupColleagues";
-            listViewGroup6.Header = "Misc";
-            listViewGroup6.Name = "listViewGroupMisc";
-            listViewGroup7.Header = "Government";
-            listViewGroup7.Name = "listViewGroupGovernment";
-            listViewGroup8.Header = "Private";
-            listViewGroup8.Name = "listViewGroupPrivate";
-            listViewGroup9.Header = "Public";
-            listViewGroup9.Name = "listViewGroupPublic";
+            listViewGroup10.Header = "Friend";
+            listViewGroup10.Name = "listViewGroupFriends";
+            listViewGroup11.Header = "Family";
+            listViewGroup11.Name = "listViewGroupFamily";
+            listViewGroup12.Header = "Work";
+            listViewGroup12.Name = "listViewGroupWork";
+            listViewGroup13.Header = "Business";
+            listViewGroup13.Name = "listViewGroupBusiness";
+            listViewGroup14.Header = "Colleague";
+            listViewGroup14.Name = "listViewGroupColleagues";
+            listViewGroup15.Header = "Misc";
+            listViewGroup15.Name = "listViewGroupMisc";
+            listViewGroup16.Header = "Government";
+            listViewGroup16.Name = "listViewGroupGovernment";
+            listViewGroup17.Header = "Private";
+            listViewGroup17.Name = "listViewGroupPrivate";
+            listViewGroup18.Header = "Public";
+            listViewGroup18.Name = "listViewGroupPublic";
             this.listViewContact.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4,
-            listViewGroup5,
-            listViewGroup6,
-            listViewGroup7,
-            listViewGroup8,
-            listViewGroup9});
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12,
+            listViewGroup13,
+            listViewGroup14,
+            listViewGroup15,
+            listViewGroup16,
+            listViewGroup17,
+            listViewGroup18});
             this.listViewContact.LargeImageList = this.imageListLarge;
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;
@@ -1298,6 +1378,8 @@
             this.Load += new System.EventHandler(this.VoIPControl_Load);
             this.groupBoxCall.ResumeLayout(false);
             this.groupBoxCall.PerformLayout();
+            this.groupBoxCallVideo.ResumeLayout(false);
+            this.groupBoxCallVideo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             this.groupBoxDigits.ResumeLayout(false);
@@ -1433,5 +1515,11 @@
         private System.Windows.Forms.Label labelMicrophoneLevel;
         private System.Windows.Forms.Label labelVolumeLevel;
         private System.Windows.Forms.Button buttonHold;
+        private System.Windows.Forms.GroupBox groupBoxCallVideo;
+        private System.Windows.Forms.Button buttonVideoCallPreview;
+        private System.Windows.Forms.Button buttonVideoCall;
+        private System.Windows.Forms.CheckBox checkBoxVideoCallAutoInclude;
+        private System.Windows.Forms.Button buttonVideoAdd;
+        private System.Windows.Forms.Button buttonVideoRemove;
     }
 }

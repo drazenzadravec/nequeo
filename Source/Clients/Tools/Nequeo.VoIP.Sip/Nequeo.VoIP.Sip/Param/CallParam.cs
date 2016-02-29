@@ -58,6 +58,7 @@ namespace Nequeo.VoIP.Sip.Param
             _call.OnCallState += _call_OnCallState;
             _call.OnCallMediaState += _call_OnCallMediaState;
             _call.OnDtmfDigit += _call_OnDtmfDigit;
+            _call.OnCallTransferStatus += _call_OnCallTransferStatus;
             _callID = call.GetId();
 
             _mediaManager = mediaManager;
@@ -108,6 +109,11 @@ namespace Nequeo.VoIP.Sip.Param
         public event System.EventHandler<Param.OnDtmfDigitParam> OnDtmfDigit;
 
         /// <summary>
+        /// Notify application of the status of previously sent call transfer request.
+        /// </summary>
+        public event System.EventHandler<OnCallTransferStatusParam> OnCallTransferStatus;
+
+        /// <summary>
         /// Gets the audio media list.
         /// </summary>
         internal List<AudioMedia> AudioMedia
@@ -153,6 +159,41 @@ namespace Nequeo.VoIP.Sip.Param
         public Param.CallInfoParam CallInfo
         {
             get { return _info; }
+        }
+
+        /// <summary>
+        /// Gets the total audio count.
+        /// </summary>
+        public int AudioCount
+        {
+            get
+            {
+                int count = 0;
+                if (_call != null)
+                {
+                    // Get the current call info.
+                    Nequeo.Net.Sip.CallInfo ci = _call.GetInfo();
+                    try
+                    {
+                        // For each media.
+                        for (int i = 0; i < ci.Media.Length; i++)
+                        {
+                            // If objects exist.
+                            if (ci.Media != null && ci.Media[i] != null)
+                            {
+                                // If audio type.
+                                if (ci.Media[i].Type == Nequeo.Net.Sip.MediaType.PJMEDIA_TYPE_AUDIO)
+                                {
+                                    // Increment the count.
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                    catch { count = 0; }
+                }
+                return count;
+            }
         }
 
         /// <summary>
@@ -550,6 +591,16 @@ namespace Nequeo.VoIP.Sip.Param
                     // If objects exist.
                     if (ci.Media != null && ci.Media[i] != null && e.CurrentCall != null)
                     {
+                        // Create the call media param.
+                        CallMediaStateParam mediaState = new CallMediaStateParam();
+                        mediaState.Suspend = false;
+                        mediaState.CallID = ci.Id;
+                        mediaState.CallOnHold = (ci.Media[i].Status == CallMediaStatus.PJSUA_CALL_MEDIA_LOCAL_HOLD ? true : false);
+                        mediaState.MediaType = ci.Media[i].Type;
+
+                        // Handle the event.
+                        OnCallMediaState?.Invoke(this, mediaState);
+
                         // If audio type.
                         if ((ci.Media[i].Type == Nequeo.Net.Sip.MediaType.PJMEDIA_TYPE_AUDIO) &&
                             (e.CurrentCall.GetMedia((uint)i) != null))
@@ -557,15 +608,6 @@ namespace Nequeo.VoIP.Sip.Param
                             // Get the audio media.
                             AudioMedia audioMedia = (AudioMedia)e.CurrentCall.GetMedia((uint)i);
                             _audioMedias.Add(audioMedia);
-
-                            // Create the call media param.
-                            CallMediaStateParam mediaState = new CallMediaStateParam();
-                            mediaState.Suspend = false;
-                            mediaState.CallID = ci.Id;
-                            mediaState.CallOnHold = (ci.Media[i].Status == CallMediaStatus.PJSUA_CALL_MEDIA_LOCAL_HOLD ? true : false);
-
-                            // Handle the event.
-                            OnCallMediaState?.Invoke(this, mediaState);
 
                             // If not suspend, normal operations.
                             if (!mediaState.Suspend)
@@ -747,6 +789,21 @@ namespace Nequeo.VoIP.Sip.Param
             {
                 // Handle the event.
                 OnDtmfDigit?.Invoke(this, param);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Transfer call status.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnCallTransferStatus(object sender, OnCallTransferStatusParam e)
+        {
+            try
+            {
+                // Handle the event.
+                OnCallTransferStatus?.Invoke(this, e);
             }
             catch { }
         }

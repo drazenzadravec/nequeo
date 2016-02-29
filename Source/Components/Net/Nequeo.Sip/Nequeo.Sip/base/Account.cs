@@ -448,6 +448,24 @@ namespace Nequeo.Net.Sip
                 throw new Exception(CreateAccount);
         }
 
+        ///	<summary>
+        ///	Change audio codec priority.
+        ///	</summary>
+        /// <param name="codecID">which is a string that uniquely identify
+        ///	the codec(such as "speex/8000").</param>
+        /// <param name="priority">Codec priority, 0-255, where zero means to disable
+        ///	the codec.</param>
+        public void AudioCodecSetPriority(String codecID, byte priority)
+        {
+            // If account created.
+            if (_created)
+            {
+                _pjAccount.AudioCodecSetPriority(codecID, priority);
+            }
+            else
+                throw new Exception(CreateAccount);
+        }
+
         /// <summary>
         /// Add audio media device to the application.
         /// </summary>
@@ -767,6 +785,18 @@ namespace Nequeo.Net.Sip
 
                 // Create the account.
                 create(_pjAccountConfig, accountConnection.IsDefault);
+            }
+
+            ///	<summary>
+            ///	Change audio codec priority.
+            ///	</summary>
+            /// <param name="codecID">which is a string that uniquely identify
+            ///	the codec(such as "speex/8000").</param>
+            /// <param name="priority">Codec priority, 0-255, where zero means to disable
+            ///	the codec.</param>
+            public void AudioCodecSetPriority(String codecID, byte priority)
+            {
+                _pjEndpoint.codecSetPriority(codecID, priority);
             }
 
             /// <summary>

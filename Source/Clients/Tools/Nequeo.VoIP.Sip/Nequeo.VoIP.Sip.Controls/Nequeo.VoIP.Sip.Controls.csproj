@@ -37,6 +37,12 @@
     <AssemblyOriginatorKeyFile>NequeoVoIPSipKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.Drawing">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Forms">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.IO.Audio">
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
     </Reference>

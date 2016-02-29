@@ -38,6 +38,7 @@
             this.buttonSend = new System.Windows.Forms.Button();
             this.labelSendTo = new System.Windows.Forms.Label();
             this.labelSendToValue = new System.Windows.Forms.Label();
+            this.buttonPrint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewMessage
@@ -48,7 +49,7 @@
             this.listViewMessage.Location = new System.Drawing.Point(12, 12);
             this.listViewMessage.MultiSelect = false;
             this.listViewMessage.Name = "listViewMessage";
-            this.listViewMessage.Size = new System.Drawing.Size(188, 375);
+            this.listViewMessage.Size = new System.Drawing.Size(188, 333);
             this.listViewMessage.SmallImageList = this.imageListSmall;
             this.listViewMessage.TabIndex = 0;
             this.listViewMessage.UseCompatibleStateImageBehavior = false;
@@ -75,18 +76,19 @@
             this.richTextBoxMessage.Location = new System.Drawing.Point(206, 12);
             this.richTextBoxMessage.Name = "richTextBoxMessage";
             this.richTextBoxMessage.ReadOnly = true;
-            this.richTextBoxMessage.Size = new System.Drawing.Size(430, 290);
+            this.richTextBoxMessage.Size = new System.Drawing.Size(374, 248);
             this.richTextBoxMessage.TabIndex = 3;
             this.richTextBoxMessage.Text = "";
+            this.richTextBoxMessage.TextChanged += new System.EventHandler(this.richTextBoxMessage_TextChanged);
             // 
             // textBoxSendMesssage
             // 
             this.textBoxSendMesssage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSendMesssage.Location = new System.Drawing.Point(206, 331);
+            this.textBoxSendMesssage.Location = new System.Drawing.Point(206, 289);
             this.textBoxSendMesssage.Multiline = true;
             this.textBoxSendMesssage.Name = "textBoxSendMesssage";
-            this.textBoxSendMesssage.Size = new System.Drawing.Size(368, 56);
+            this.textBoxSendMesssage.Size = new System.Drawing.Size(312, 56);
             this.textBoxSendMesssage.TabIndex = 1;
             this.textBoxSendMesssage.TextChanged += new System.EventHandler(this.textBoxSendMesssage_TextChanged);
             // 
@@ -94,7 +96,7 @@
             // 
             this.buttonSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSend.Enabled = false;
-            this.buttonSend.Location = new System.Drawing.Point(581, 364);
+            this.buttonSend.Location = new System.Drawing.Point(525, 322);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(55, 23);
             this.buttonSend.TabIndex = 2;
@@ -107,7 +109,7 @@
             this.labelSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSendTo.AutoSize = true;
             this.labelSendTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSendTo.Location = new System.Drawing.Point(206, 312);
+            this.labelSendTo.Location = new System.Drawing.Point(206, 270);
             this.labelSendTo.Name = "labelSendTo";
             this.labelSendTo.Size = new System.Drawing.Size(54, 13);
             this.labelSendTo.TabIndex = 4;
@@ -118,16 +120,29 @@
             this.labelSendToValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSendToValue.AutoSize = true;
             this.labelSendToValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSendToValue.Location = new System.Drawing.Point(266, 312);
+            this.labelSendToValue.Location = new System.Drawing.Point(266, 270);
             this.labelSendToValue.Name = "labelSendToValue";
             this.labelSendToValue.Size = new System.Drawing.Size(0, 13);
             this.labelSendToValue.TabIndex = 5;
+            // 
+            // buttonPrint
+            // 
+            this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPrint.Enabled = false;
+            this.buttonPrint.Location = new System.Drawing.Point(525, 293);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(55, 23);
+            this.buttonPrint.TabIndex = 6;
+            this.buttonPrint.Text = "Print";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
             // 
             // InstantMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 399);
+            this.ClientSize = new System.Drawing.Size(592, 357);
+            this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.labelSendToValue);
             this.Controls.Add(this.labelSendTo);
             this.Controls.Add(this.buttonSend);
@@ -158,5 +173,6 @@
         private System.Windows.Forms.Label labelSendToValue;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.Button buttonPrint;
     }
 }

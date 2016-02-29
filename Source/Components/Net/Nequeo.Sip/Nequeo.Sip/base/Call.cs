@@ -1857,7 +1857,7 @@ namespace Nequeo.Net.Sip
                     param.Info = _currentCall.GetInfo();
                     param.TargetUri = prm.targetUri;
                     param.EventType = CallInfo.GetSipEventTypeEx((prm.e != null ? prm.e.type : pjsua2.pjsip_event_id_e.PJSIP_EVENT_UNKNOWN));
-                    param.Redirect = RedirectResponseType.PJSIP_REDIRECT_STOP;
+                    param.Redirect = RedirectResponseType.PJSIP_REDIRECT_ACCEPT;
                 }
 
                 // Invoke the call back event.

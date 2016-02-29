@@ -46,6 +46,7 @@
     <PlatformToolset>v140</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -148,6 +149,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +258,18 @@
     <ClInclude Include="UnknownMedia.h" />
     <ClInclude Include="VideoDeviceHandleType.h" />
     <ClInclude Include="VideoDeviceInfo.h" />
+    <ClInclude Include="VideoIncomingWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="VideoMedia.h" />
     <ClInclude Include="VideoPreview.h" />
+    <ClInclude Include="VideoPreviewForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="VideoPreviewOpParam.h" />
+    <ClInclude Include="VideoPreviewWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="VideoStreamOperation.h" />
     <ClInclude Include="VideoWindow.h" />
     <ClInclude Include="VideoWindowHandle.h" />
@@ -352,9 +364,12 @@
     <ClCompile Include="TimeVal.cpp" />
     <ClCompile Include="UnknownMedia.cpp" />
     <ClCompile Include="VideoDeviceInfo.cpp" />
+    <ClCompile Include="VideoIncomingWindow.cpp" />
     <ClCompile Include="VideoMedia.cpp" />
     <ClCompile Include="VideoPreview.cpp" />
+    <ClCompile Include="VideoPreviewForm.cpp" />
     <ClCompile Include="VideoPreviewOpParam.cpp" />
+    <ClCompile Include="VideoPreviewWindow.cpp" />
     <ClCompile Include="VideoWindow.cpp" />
     <ClCompile Include="VideoWindowHandle.cpp" />
     <ClCompile Include="VideoWindowInfo.cpp" />
@@ -367,6 +382,17 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VideoIncomingWindow.resx">
+      <DependentUpon>VideoIncomingWindow.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VideoPreviewForm.resx">
+      <DependentUpon>VideoPreviewForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VideoPreviewWindow.resx">
+      <DependentUpon>VideoPreviewWindow.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

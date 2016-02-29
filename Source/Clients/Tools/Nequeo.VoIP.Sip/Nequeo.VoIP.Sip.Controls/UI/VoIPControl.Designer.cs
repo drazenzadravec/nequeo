@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VoIPControl));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Business", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Colleague", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Misc", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Friend", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Family", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Work", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup13 = new System.Windows.Forms.ListViewGroup("Business", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup14 = new System.Windows.Forms.ListViewGroup("Colleague", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup15 = new System.Windows.Forms.ListViewGroup("Misc", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup16 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup17 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup18 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
             this.buttonHold = new System.Windows.Forms.Button();
             this.trackBarMicrophone = new System.Windows.Forms.TrackBar();
@@ -282,6 +282,7 @@
             this.groupBoxDigits.Size = new System.Drawing.Size(237, 168);
             this.groupBoxDigits.TabIndex = 16;
             this.groupBoxDigits.TabStop = false;
+            this.groupBoxDigits.Text = "Digits";
             // 
             // buttonDigitsClear
             // 
@@ -1015,34 +1016,34 @@
             this.columnHeaderContactAccount,
             this.columnHeaderContactState});
             this.listViewContact.ContextMenuStrip = this.contextMenuStripContacts;
-            listViewGroup1.Header = "Friend";
-            listViewGroup1.Name = "listViewGroupFriends";
-            listViewGroup2.Header = "Family";
-            listViewGroup2.Name = "listViewGroupFamily";
-            listViewGroup3.Header = "Work";
-            listViewGroup3.Name = "listViewGroupWork";
-            listViewGroup4.Header = "Business";
-            listViewGroup4.Name = "listViewGroupBusiness";
-            listViewGroup5.Header = "Colleague";
-            listViewGroup5.Name = "listViewGroupColleagues";
-            listViewGroup6.Header = "Misc";
-            listViewGroup6.Name = "listViewGroupMisc";
-            listViewGroup7.Header = "Government";
-            listViewGroup7.Name = "listViewGroupGovernment";
-            listViewGroup8.Header = "Private";
-            listViewGroup8.Name = "listViewGroupPrivate";
-            listViewGroup9.Header = "Public";
-            listViewGroup9.Name = "listViewGroupPublic";
+            listViewGroup10.Header = "Friend";
+            listViewGroup10.Name = "listViewGroupFriends";
+            listViewGroup11.Header = "Family";
+            listViewGroup11.Name = "listViewGroupFamily";
+            listViewGroup12.Header = "Work";
+            listViewGroup12.Name = "listViewGroupWork";
+            listViewGroup13.Header = "Business";
+            listViewGroup13.Name = "listViewGroupBusiness";
+            listViewGroup14.Header = "Colleague";
+            listViewGroup14.Name = "listViewGroupColleagues";
+            listViewGroup15.Header = "Misc";
+            listViewGroup15.Name = "listViewGroupMisc";
+            listViewGroup16.Header = "Government";
+            listViewGroup16.Name = "listViewGroupGovernment";
+            listViewGroup17.Header = "Private";
+            listViewGroup17.Name = "listViewGroupPrivate";
+            listViewGroup18.Header = "Public";
+            listViewGroup18.Name = "listViewGroupPublic";
             this.listViewContact.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4,
-            listViewGroup5,
-            listViewGroup6,
-            listViewGroup7,
-            listViewGroup8,
-            listViewGroup9});
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12,
+            listViewGroup13,
+            listViewGroup14,
+            listViewGroup15,
+            listViewGroup16,
+            listViewGroup17,
+            listViewGroup18});
             this.listViewContact.LargeImageList = this.imageListLarge;
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;

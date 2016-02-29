@@ -379,8 +379,9 @@ namespace Nequeo.VoIP.PjSip
         /// <param name="callId">An index call id (0 - 3).</param>
         /// <param name="uri">URI to be put in the To header (normally is the same as the target URI).</param>
         /// <param name="recordFilename">The path and filename where the conversation is to be recorded to. Currently ".wav" is supported on all platforms.</param>
+        /// <param name="includeVideo">Should that call include video.</param>
         /// <returns>The call information.</returns>
-        public Param.CallParam MakeCall(int callId, string uri, string recordFilename = null)
+        public Param.CallParam MakeCall(int callId, string uri, string recordFilename = null, bool includeVideo = false)
         {
             // If created.
             if (_created)
@@ -391,7 +392,8 @@ namespace Nequeo.VoIP.PjSip
                 // Create the call settings.
                 CallSetting setting = new CallSetting(true);
                 CallOpParam parm = new CallOpParam(true);
-                setting.AudioCount = 1;
+                setting.AudioCount = (uint)1;
+                setting.VideoCount = (includeVideo ? (uint)1 : (uint)0);
                 parm.Setting = setting;
 
                 // Make the call.

@@ -38,6 +38,7 @@
             this.buttonSend = new System.Windows.Forms.Button();
             this.labelSendTo = new System.Windows.Forms.Label();
             this.labelSendToValue = new System.Windows.Forms.Label();
+            this.buttonPrint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewMessage
@@ -78,6 +79,7 @@
             this.richTextBoxMessage.Size = new System.Drawing.Size(430, 290);
             this.richTextBoxMessage.TabIndex = 3;
             this.richTextBoxMessage.Text = "";
+            this.richTextBoxMessage.TextChanged += new System.EventHandler(this.richTextBoxMessage_TextChanged);
             // 
             // textBoxSendMesssage
             // 
@@ -123,11 +125,24 @@
             this.labelSendToValue.Size = new System.Drawing.Size(0, 13);
             this.labelSendToValue.TabIndex = 5;
             // 
+            // buttonPrint
+            // 
+            this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPrint.Enabled = false;
+            this.buttonPrint.Location = new System.Drawing.Point(581, 335);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(55, 23);
+            this.buttonPrint.TabIndex = 6;
+            this.buttonPrint.Text = "Print";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
+            // 
             // InstantMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 399);
+            this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.labelSendToValue);
             this.Controls.Add(this.labelSendTo);
             this.Controls.Add(this.buttonSend);
@@ -158,5 +173,6 @@
         private System.Windows.Forms.Label labelSendToValue;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.Button buttonPrint;
     }
 }

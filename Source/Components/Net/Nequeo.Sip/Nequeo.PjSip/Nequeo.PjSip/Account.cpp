@@ -638,6 +638,48 @@ array<CodecInfo^>^ Account::GetVideoCodecInfo()
 		throw gcnew Exception(CreateAccount());
 }
 
+///	<summary>
+///	Change audio codec priority.
+///	</summary>
+/// <param name="codecID">which is a string that uniquely identify
+///	the codec(such as "speex/8000").</param>
+/// <param name="priority">Codec priority, 0-255, where zero means to disable
+///	the codec.</param>
+void Account::AudioCodecSetPriority(String^ codecID, byte priority)
+{
+	// If account created.
+	if (_created)
+	{
+		std::string codecIDNative;
+		MarshalString(codecID, codecIDNative);
+
+		_accountCallback->AudioCodecSetPriority(codecIDNative, priority);
+	}
+	else
+		throw gcnew Exception(CreateAccount());
+}
+
+///	<summary>
+///	Change video codec priority.
+///	</summary>
+/// <param name="codecID">Codec ID, which is a string that uniquely identify
+///	the codec(such as "H263/90000").</param>
+/// <param name="priority">Codec priority, 0-255, where zero means to disable
+///	the codec.</param>
+void Account::VideoCodecSetPriority(String^ codecID, byte priority)
+{
+	// If account created.
+	if (_created)
+	{
+		std::string codecIDNative;
+		MarshalString(codecID, codecIDNative);
+
+		_accountCallback->VideoCodecSetPriority(codecIDNative, priority);
+	}
+	else
+		throw gcnew Exception(CreateAccount());
+}
+
 /// <summary>
 /// Add audio media device to the application.
 /// </summary>

@@ -120,6 +120,18 @@ namespace Nequeo
 				void SetVideoRenderDeviceID(int deviceID);
 
 				/// <summary>
+				/// Get the video capture device.
+				/// </summary>
+				/// <returns>The device ID.</returns>
+				int GetVideoCaptureDeviceID();
+
+				/// <summary>
+				/// Get the video render device.
+				/// </summary>
+				/// <returns>The device ID.</returns>
+				int GetVideoRenderDeviceID();
+
+				/// <summary>
 				/// Gets or sets an indicator specifying that any video capture is done automatically.
 				/// </summary>
 				/// <param name="value">True to enable video capture is done automatically.</param>
@@ -183,6 +195,23 @@ namespace Nequeo
 				/// <param name="conferenceCalls">Array of remote conference calls.</param>
 				void StopConferenceCall(array<AudioMedia^>^ conferenceCalls);
 
+				/// <summary>
+				/// Set the video window flag.
+				/// </summary>
+				/// <param name="withBorder">Window with border.</param>
+				/// <param name="resizable">Window is resizable.</param>
+				void SetVideoWindowFlag(bool withBorder, bool resizable);
+
+				/// <summary>
+				/// Set the video window flag.
+				/// </summary>
+				/// <returns>
+				/// 0 - No border.
+				/// 1 - With border.
+				/// 3 - With border and resizable.
+				/// </returns>
+				int SetVideoWindowFlag();
+
 			internal:
 				/// <summary>
 				/// Sip media manager.
@@ -194,6 +223,10 @@ namespace Nequeo
 
 			private:
 				bool _disposed;
+				int _videoCaptureID;
+				int _videoRenderID;
+				int _videoWindowFlag;
+
 				pj::AudDevManager& _pjAudDevManager;
 				pj::VidDevManager& _pjVidDevManager;
 				pj::AccountVideoConfig& _videoConfig;

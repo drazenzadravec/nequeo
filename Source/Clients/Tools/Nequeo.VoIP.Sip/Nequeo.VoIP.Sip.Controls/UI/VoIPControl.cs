@@ -376,6 +376,10 @@ namespace Nequeo.VoIP.Sip.UI
                 // Ask the used to answer incomming call.
                 DialogResult result = MessageBox.Show(this, "Unable to register because of an internal error.",
                     "Register", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Not registered.
+                buttonRegister.Text = "Register";
+                _registered = false;
             }
         }
 
@@ -525,6 +529,9 @@ namespace Nequeo.VoIP.Sip.UI
                 string autoAnswerFile = (_common != null ? _common.AutoAnswerFilePath : null);
                 int autoAnswerWait = (_common != null ? _common.AutoAnswerWait : 30);
                 int messageBank = (_common != null ? _common.MessageBankWait : 20);
+                bool redirectEnable = (_common != null ? _common.EnableRedirect : false);
+                string redirectCallNumber = (_common != null ? _common.RedirectCallNumber : null);
+                int redirectCallAfter = (_common != null ? _common.RedirectCallAfter : -1);
 
                 // Attach to the disconnect event.
                 e.Call.OnCallDisconnected += Call_OnCallDisconnected;
@@ -533,7 +540,8 @@ namespace Nequeo.VoIP.Sip.UI
                 Nequeo.VoIP.Sip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e,
                     listViewContact, listViewInOutCalls, listViewConference, _contacts, contactName, 
                     ringFilePath, audioDeviceIndex, autoAnswer, autoAnswerFile, autoAnswerWait, 
-                    _audioRecordingInCallPath, messageBank);
+                    _audioRecordingInCallPath, messageBank, redirectEnable, redirectCallNumber,
+                    redirectCallAfter);
 
                 // Show the form.
                 incomingCall.IncomingOutgoingCalls = _inOutCalls;
@@ -1968,6 +1976,12 @@ namespace Nequeo.VoIP.Sip.UI
                     _common.AutoAnswer = _configuration.accountAutoAnswerEnabled;
                     _common.AutoAnswerWait = _configuration.accountAutoAnswerWait;
                     _common.MessageBankWait = _configuration.accountMessageBankWait;
+                    _common.EnableVideo = _configuration.codecVideoEnabled;
+                    _common.VideoCaptureIndex = _configuration.codecVideoCaptureDeviceIndex;
+                    _common.VideoRenderIndex = _configuration.codecVideoRenderDeviceIndex;
+                    _common.EnableRedirect = _configuration.featureRedirectCallEnabled;
+                    _common.RedirectCallNumber = _configuration.featureRedirectCallNumber;
+                    _common.RedirectCallAfter = _configuration.featureRedirectCallAfter;
 
                     _audioRecordingOutCallPath = _configuration.outgoingCallPathAudioRecording;
                     _audioRecordingInCallPath = _configuration.incomingCallPathAudioRecording;

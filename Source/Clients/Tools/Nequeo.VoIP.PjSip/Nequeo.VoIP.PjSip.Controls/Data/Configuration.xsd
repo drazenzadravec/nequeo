@@ -45,6 +45,12 @@
         <xs:element name="soundIncomingCallFilePath" type="xs:string" />
         <xs:element name="soundInstantMessageFilePath" type="xs:string" />
         <xs:element name="soundAutoAnswerFilePath" type="xs:string" />
+        <xs:element name="codecVideoEnabled" type="xs:boolean" />
+        <xs:element name="codecVideoCaptureDeviceIndex" type="xs:int" />
+        <xs:element name="codecVideoRenderDeviceIndex" type="xs:int" />
+        <xs:element name="featureRedirectCallEnabled" type="xs:boolean" />
+        <xs:element name="featureRedirectCallNumber" type="xs:string" />
+        <xs:element name="featureRedirectCallAfter" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -290,5 +290,36 @@ namespace Nequeo.VoIP.Sip.UI
         {
             buttonSend.Enabled = enable;
         }
+
+        /// <summary>
+        /// Text changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void richTextBoxMessage_TextChanged(object sender, EventArgs e)
+        {
+            if (richTextBoxMessage.TextLength > 0)
+                buttonPrint.Enabled = true;
+            else
+                buttonPrint.Enabled = false;
+        }
+
+        /// <summary>
+        /// Print the rich text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+            // create document
+            var doc = new Nequeo.Drawing.Printing.RichTextBoxDocument(richTextBoxMessage);
+
+            // preview the document
+            using (var dlg = new Nequeo.Drawing.Printing.PreviewDialog())
+            {
+                dlg.Document = doc;
+                dlg.ShowDialog(this);
+            }
+        }
     }
 }

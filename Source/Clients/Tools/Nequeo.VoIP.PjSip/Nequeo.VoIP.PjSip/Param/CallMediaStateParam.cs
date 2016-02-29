@@ -60,5 +60,21 @@ namespace Nequeo.VoIP.PjSip.Param
         /// Gets or sets an indicator specifying is the local caller has set the call on hold.
         /// </summary>
         public bool CallOnHold { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current media type.
+        /// </summary>
+        public Nequeo.Net.PjSip.MediaType MediaType { get; set; }
+
+        /// <summary>
+        /// Gets or sets an indicator specifying that the call is a video call.
+        /// </summary>
+        public bool HasVideo { get; set; }
+
+        /// <summary>
+        /// Gets or sets an indicator specifying if the video is actually valid.
+        /// </summary>
+        public bool IsVideoValid { get; set; }
+
     }
 }

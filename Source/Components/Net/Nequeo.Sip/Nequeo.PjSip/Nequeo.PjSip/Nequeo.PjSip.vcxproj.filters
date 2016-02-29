@@ -37,6 +37,9 @@
     <Filter Include="Source Files\ContactSource">
       <UniqueIdentifier>{04c4ce52-0862-4f99-bf66-b1269935a9f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{a1424216-44a3-4e57-a0df-cad44afff6df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -375,6 +378,15 @@
     <ClInclude Include="AudioMediaPlayerCallback.h">
       <Filter>Header Files\MediaHeader</Filter>
     </ClInclude>
+    <ClInclude Include="VideoPreviewForm.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoPreviewWindow.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoIncomingWindow.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -641,6 +653,15 @@
     <ClCompile Include="AudioMediaPlayerCallback.cpp">
       <Filter>Source Files\MediaSource</Filter>
     </ClCompile>
+    <ClCompile Include="VideoPreviewForm.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPreviewWindow.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoIncomingWindow.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -654,5 +675,13 @@
     <Image Include="app.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VideoPreviewForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VideoPreviewWindow.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

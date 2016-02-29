@@ -34,6 +34,9 @@
             this.labelAudioPlaybackDevice = new System.Windows.Forms.Label();
             this.labelAudioCaptureDevice = new System.Windows.Forms.Label();
             this.groupBoxAccount = new System.Windows.Forms.GroupBox();
+            this.labelMessageBankWaitSec = new System.Windows.Forms.Label();
+            this.textBoxMessageBankWait = new System.Windows.Forms.TextBox();
+            this.labelMessageBankWait = new System.Windows.Forms.Label();
             this.labelAutoAnswerWaitSec = new System.Windows.Forms.Label();
             this.textBoxAutoAnswerWait = new System.Windows.Forms.TextBox();
             this.checkBoxAutoAnswer = new System.Windows.Forms.CheckBox();
@@ -126,9 +129,14 @@
             this.labelSoundsRingPath = new System.Windows.Forms.Label();
             this.buttonSoundsRingPath = new System.Windows.Forms.Button();
             this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
-            this.labelMessageBankWait = new System.Windows.Forms.Label();
-            this.textBoxMessageBankWait = new System.Windows.Forms.TextBox();
-            this.labelMessageBankWaitSec = new System.Windows.Forms.Label();
+            this.tabPageCodec = new System.Windows.Forms.TabPage();
+            this.groupBoxFeatureTransferCall = new System.Windows.Forms.GroupBox();
+            this.labelRedirectCallTimeSec = new System.Windows.Forms.Label();
+            this.textBoxRedirectCallTime = new System.Windows.Forms.TextBox();
+            this.labelRedirectCallTime = new System.Windows.Forms.Label();
+            this.textBoxRedirectCallText = new System.Windows.Forms.TextBox();
+            this.checkBoxRedirectCallEnabled = new System.Windows.Forms.CheckBox();
+            this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -144,6 +152,8 @@
             this.groupBoxPublish.SuspendLayout();
             this.tabPageMedia.SuspendLayout();
             this.groupBoxSounds.SuspendLayout();
+            this.tabPageCodec.SuspendLayout();
+            this.groupBoxFeatureTransferCall.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -223,6 +233,32 @@
             this.groupBoxAccount.TabIndex = 2;
             this.groupBoxAccount.TabStop = false;
             this.groupBoxAccount.Text = "Account";
+            // 
+            // labelMessageBankWaitSec
+            // 
+            this.labelMessageBankWaitSec.AutoSize = true;
+            this.labelMessageBankWaitSec.Location = new System.Drawing.Point(158, 286);
+            this.labelMessageBankWaitSec.Name = "labelMessageBankWaitSec";
+            this.labelMessageBankWaitSec.Size = new System.Drawing.Size(18, 13);
+            this.labelMessageBankWaitSec.TabIndex = 18;
+            this.labelMessageBankWaitSec.Text = "(s)";
+            // 
+            // textBoxMessageBankWait
+            // 
+            this.textBoxMessageBankWait.Location = new System.Drawing.Point(110, 283);
+            this.textBoxMessageBankWait.Name = "textBoxMessageBankWait";
+            this.textBoxMessageBankWait.Size = new System.Drawing.Size(42, 20);
+            this.textBoxMessageBankWait.TabIndex = 17;
+            this.textBoxMessageBankWait.TextChanged += new System.EventHandler(this.textBoxMessageBankWait_TextChanged);
+            // 
+            // labelMessageBankWait
+            // 
+            this.labelMessageBankWait.AutoSize = true;
+            this.labelMessageBankWait.Location = new System.Drawing.Point(15, 286);
+            this.labelMessageBankWait.Name = "labelMessageBankWait";
+            this.labelMessageBankWait.Size = new System.Drawing.Size(84, 13);
+            this.labelMessageBankWait.TabIndex = 16;
+            this.labelMessageBankWait.Text = "Message Bank :";
             // 
             // labelAutoAnswerWaitSec
             // 
@@ -915,6 +951,7 @@
             this.tabControlSettings.Controls.Add(this.tabPageDetails);
             this.tabControlSettings.Controls.Add(this.tabPageConfiguration);
             this.tabControlSettings.Controls.Add(this.tabPageMedia);
+            this.tabControlSettings.Controls.Add(this.tabPageCodec);
             this.tabControlSettings.Location = new System.Drawing.Point(12, 12);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
@@ -1140,31 +1177,86 @@
             this.textBoxSoundsRingPath.TabIndex = 0;
             this.textBoxSoundsRingPath.TextChanged += new System.EventHandler(this.textBoxSoundsRingPath_TextChanged);
             // 
-            // labelMessageBankWait
+            // tabPageCodec
             // 
-            this.labelMessageBankWait.AutoSize = true;
-            this.labelMessageBankWait.Location = new System.Drawing.Point(15, 286);
-            this.labelMessageBankWait.Name = "labelMessageBankWait";
-            this.labelMessageBankWait.Size = new System.Drawing.Size(84, 13);
-            this.labelMessageBankWait.TabIndex = 16;
-            this.labelMessageBankWait.Text = "Message Bank :";
+            this.tabPageCodec.Controls.Add(this.groupBoxFeatureTransferCall);
+            this.tabPageCodec.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCodec.Name = "tabPageCodec";
+            this.tabPageCodec.Size = new System.Drawing.Size(491, 330);
+            this.tabPageCodec.TabIndex = 3;
+            this.tabPageCodec.Text = "Feature";
+            this.tabPageCodec.UseVisualStyleBackColor = true;
             // 
-            // textBoxMessageBankWait
+            // groupBoxFeatureTransferCall
             // 
-            this.textBoxMessageBankWait.Location = new System.Drawing.Point(110, 283);
-            this.textBoxMessageBankWait.Name = "textBoxMessageBankWait";
-            this.textBoxMessageBankWait.Size = new System.Drawing.Size(42, 20);
-            this.textBoxMessageBankWait.TabIndex = 17;
-            this.textBoxMessageBankWait.TextChanged += new System.EventHandler(this.textBoxMessageBankWait_TextChanged);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallToNumber);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallTimeSec);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.textBoxRedirectCallTime);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallTime);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.textBoxRedirectCallText);
+            this.groupBoxFeatureTransferCall.Controls.Add(this.checkBoxRedirectCallEnabled);
+            this.groupBoxFeatureTransferCall.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxFeatureTransferCall.Name = "groupBoxFeatureTransferCall";
+            this.groupBoxFeatureTransferCall.Size = new System.Drawing.Size(475, 58);
+            this.groupBoxFeatureTransferCall.TabIndex = 0;
+            this.groupBoxFeatureTransferCall.TabStop = false;
+            this.groupBoxFeatureTransferCall.Text = "Redirect Call";
             // 
-            // labelMessageBankWaitSec
+            // labelRedirectCallTimeSec
             // 
-            this.labelMessageBankWaitSec.AutoSize = true;
-            this.labelMessageBankWaitSec.Location = new System.Drawing.Point(158, 286);
-            this.labelMessageBankWaitSec.Name = "labelMessageBankWaitSec";
-            this.labelMessageBankWaitSec.Size = new System.Drawing.Size(18, 13);
-            this.labelMessageBankWaitSec.TabIndex = 18;
-            this.labelMessageBankWaitSec.Text = "(s)";
+            this.labelRedirectCallTimeSec.AutoSize = true;
+            this.labelRedirectCallTimeSec.Location = new System.Drawing.Point(450, 23);
+            this.labelRedirectCallTimeSec.Name = "labelRedirectCallTimeSec";
+            this.labelRedirectCallTimeSec.Size = new System.Drawing.Size(18, 13);
+            this.labelRedirectCallTimeSec.TabIndex = 9;
+            this.labelRedirectCallTimeSec.Text = "(s)";
+            // 
+            // textBoxRedirectCallTime
+            // 
+            this.textBoxRedirectCallTime.Location = new System.Drawing.Point(374, 20);
+            this.textBoxRedirectCallTime.Name = "textBoxRedirectCallTime";
+            this.textBoxRedirectCallTime.ReadOnly = true;
+            this.textBoxRedirectCallTime.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRedirectCallTime.TabIndex = 8;
+            this.textBoxRedirectCallTime.TextChanged += new System.EventHandler(this.textBoxRedirectCallTime_TextChanged);
+            // 
+            // labelRedirectCallTime
+            // 
+            this.labelRedirectCallTime.AutoSize = true;
+            this.labelRedirectCallTime.Location = new System.Drawing.Point(333, 23);
+            this.labelRedirectCallTime.Name = "labelRedirectCallTime";
+            this.labelRedirectCallTime.Size = new System.Drawing.Size(35, 13);
+            this.labelRedirectCallTime.TabIndex = 7;
+            this.labelRedirectCallTime.Text = "After :";
+            // 
+            // textBoxRedirectCallText
+            // 
+            this.textBoxRedirectCallText.Location = new System.Drawing.Point(123, 20);
+            this.textBoxRedirectCallText.Name = "textBoxRedirectCallText";
+            this.textBoxRedirectCallText.ReadOnly = true;
+            this.textBoxRedirectCallText.Size = new System.Drawing.Size(187, 20);
+            this.textBoxRedirectCallText.TabIndex = 6;
+            this.textBoxRedirectCallText.TextChanged += new System.EventHandler(this.textBoxRedirectCallText_TextChanged);
+            // 
+            // checkBoxRedirectCallEnabled
+            // 
+            this.checkBoxRedirectCallEnabled.AutoSize = true;
+            this.checkBoxRedirectCallEnabled.Location = new System.Drawing.Point(18, 22);
+            this.checkBoxRedirectCallEnabled.Name = "checkBoxRedirectCallEnabled";
+            this.checkBoxRedirectCallEnabled.Size = new System.Drawing.Size(65, 17);
+            this.checkBoxRedirectCallEnabled.TabIndex = 5;
+            this.checkBoxRedirectCallEnabled.Text = "Enabled";
+            this.checkBoxRedirectCallEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxRedirectCallEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRedirectCallEnabled_CheckedChanged);
+            // 
+            // labelRedirectCallToNumber
+            // 
+            this.labelRedirectCallToNumber.AutoSize = true;
+            this.labelRedirectCallToNumber.Location = new System.Drawing.Point(91, 23);
+            this.labelRedirectCallToNumber.Name = "labelRedirectCallToNumber";
+            this.labelRedirectCallToNumber.Size = new System.Drawing.Size(26, 13);
+            this.labelRedirectCallToNumber.TabIndex = 10;
+            this.labelRedirectCallToNumber.Text = "To :";
             // 
             // Settings
             // 
@@ -1209,6 +1301,9 @@
             this.tabPageMedia.ResumeLayout(false);
             this.groupBoxSounds.ResumeLayout(false);
             this.groupBoxSounds.PerformLayout();
+            this.tabPageCodec.ResumeLayout(false);
+            this.groupBoxFeatureTransferCall.ResumeLayout(false);
+            this.groupBoxFeatureTransferCall.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1316,5 +1411,13 @@
         private System.Windows.Forms.Label labelMessageBankWaitSec;
         private System.Windows.Forms.TextBox textBoxMessageBankWait;
         private System.Windows.Forms.Label labelMessageBankWait;
+        private System.Windows.Forms.TabPage tabPageCodec;
+        private System.Windows.Forms.GroupBox groupBoxFeatureTransferCall;
+        private System.Windows.Forms.Label labelRedirectCallTimeSec;
+        private System.Windows.Forms.TextBox textBoxRedirectCallTime;
+        private System.Windows.Forms.Label labelRedirectCallTime;
+        private System.Windows.Forms.TextBox textBoxRedirectCallText;
+        private System.Windows.Forms.CheckBox checkBoxRedirectCallEnabled;
+        private System.Windows.Forms.Label labelRedirectCallToNumber;
     }
 }

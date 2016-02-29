@@ -67,10 +67,14 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="autoAnswerWait">Auto answer wait time.</param>
         /// <param name="autoAnswerRecordingPath">Auto answer recording file and path.</param>
         /// <param name="messageBankWaitTime">The time to record the message.</param>
+        /// <param name="redirectEnabled">The time to record the message.</param>
+        /// <param name="redirectCallNumber">The time to record the message.</param>
+        /// <param name="redirectCallAfter">The time to record the message.</param>
         public InComingCall(Nequeo.VoIP.Sip.VoIPCall voipCall, Nequeo.VoIP.Sip.Param.OnIncomingCallParam inComingCall,
             ListView contactsView, ListView callsView, ListView conferenceView, Data.contacts contacts, string contactName, string ringFilePath, 
             int audioDeviceIndex = -1, bool autoAnswer = false, string autoAnswerFilePath = null, int autoAnswerWait = 30, 
-            string autoAnswerRecordingPath = null, int messageBankWaitTime = 20)
+            string autoAnswerRecordingPath = null, int messageBankWaitTime = 20,
+            bool redirectEnabled = false, string redirectCallNumber = "", int redirectCallAfter = -1)
         {
             InitializeComponent();
 
@@ -89,6 +93,11 @@ namespace Nequeo.VoIP.Sip.UI
             _autoAnswerWait = autoAnswerWait;
             _autoAnswerRecordingPath = autoAnswerRecordingPath;
             _messageBankWaitTime = messageBankWaitTime;
+
+            // Assign redirect call.
+            _redirectEnabled = redirectEnabled;
+            _redirectCallNumber = redirectCallNumber;
+            _redirectCallAfter = redirectCallAfter;
 
             // If auto answer recording path.
             if (!String.IsNullOrEmpty(autoAnswerRecordingPath))
@@ -143,6 +152,11 @@ namespace Nequeo.VoIP.Sip.UI
         private int _messageBankWaitTime = 20;
 
         private Action _callEnded = null;
+
+        private System.Threading.Timer _redirectCallTimer = null;
+        private bool _redirectEnabled = false;
+        private string _redirectCallNumber = "";
+        private int _redirectCallAfter = -1;
 
         /// <summary>
         /// Gets or sets the incoming outgoing calls reference.
@@ -224,12 +238,30 @@ namespace Nequeo.VoIP.Sip.UI
                     if (_autoAnswerWait > 0)
                     {
                         // Auto answer indication.
-                        labelIncomingCallAutoAnswer.Text = "Auto answer in '" + _autoAnswerWait.ToString() + "' seconds.";
+                        toolStripStatusLabelAuto.Text = "Auto answer in '" + _autoAnswerWait.ToString() + "' seconds.";
 
                         // Create the auto answer timer.
                         _autoAnswerTimer = new System.Threading.Timer(AutoAnswerTimeout, null,
                             new TimeSpan(0, 0, _autoAnswerWait),
                             new TimeSpan(0, 0, _autoAnswerWait));
+
+                        // Suspended.
+                        _suspended = true;
+                    }
+                }
+                else if (_redirectEnabled && !String.IsNullOrEmpty(_redirectCallNumber))
+                {
+                    // Auto redirect call.
+                    // If there is a wait time.
+                    if (_redirectCallAfter > 0)
+                    {
+                        // Auto answer indication.
+                        toolStripStatusLabelAuto.Text = "Redirecting to '" + _redirectCallNumber + "' in '" + _redirectCallAfter.ToString() + "' seconds.";
+
+                        // Create the redirect call timer.
+                        _redirectCallTimer = new System.Threading.Timer(RedirectCallTimeout, null,
+                            new TimeSpan(0, 0, _redirectCallAfter),
+                            new TimeSpan(0, 0, _redirectCallAfter));
 
                         // Suspended.
                         _suspended = true;
@@ -251,6 +283,7 @@ namespace Nequeo.VoIP.Sip.UI
                 _inComingCall.Call.OnCallState += Call_OnCallState;
                 _inComingCall.Call.OnPlayerEndOfFile += Call_OnPlayerEndOfFile;
                 _inComingCall.Call.OnDtmfDigit += Call_OnDtmfDigit;
+                _inComingCall.Call.OnCallTransferStatus += Call_OnCallTransferStatus;
 
                 // Ask the used to answer incomming call.
                 textBoxDetails.Text =
@@ -259,6 +292,22 @@ namespace Nequeo.VoIP.Sip.UI
                     (String.IsNullOrEmpty(_inComingCall.FromContact.Trim()) ? "" : "Contact : \t" + _inComingCall.FromContact.Trim() + "\r\n\r\n") +
                     (String.IsNullOrEmpty(_contactName) ? "" : "Contact : \t" + _contactName + "\r\n\r\n");
             }
+        }
+
+        /// <summary>
+        /// On transfer call status.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Call_OnCallTransferStatus(object sender, Net.Sip.OnCallTransferStatusParam e)
+        {
+            e.Continue = false;
+            
+            UISync.Execute(() =>
+            {
+                if (e.FinalNotify)
+                    HangupEx();
+            });
         }
 
         /// <summary>
@@ -284,31 +333,30 @@ namespace Nequeo.VoIP.Sip.UI
             // Set the contact name.
             e.ContactName = _contactName;
 
-            UISync.Execute(() =>
+            // If call is disconnected.
+            if ((e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
+                (e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_NULL))
             {
-                // If incomming.
-                if ((e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_INCOMING))
+                // Stop the play if not already stopped.
+                if (_playerStarted)
                 {
-
+                    StopPlayer();
                 }
 
-                // If call is disconnected.
-                if ((e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_DISCONNECTED) ||
-                    (e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_NULL))
+                // Close the window.
+                _callEnded?.Invoke();
+            }
+            else
+            {
+                UISync.Execute(() =>
                 {
-                    // Hangup.
-                    EnableHangupCall();
-
-                    // Stop the play if not already stopped.
-                    if (_playerStarted)
+                    // If incomming.
+                    if ((e.State == Nequeo.Net.Sip.InviteSessionState.PJSIP_INV_STATE_INCOMING))
                     {
-                        StopPlayer();
-                    }
 
-                    // Close the window.
-                    _callEnded?.Invoke();
-                }
-            });
+                    }
+                });
+            }
         }
 
         /// <summary>
@@ -346,6 +394,30 @@ namespace Nequeo.VoIP.Sip.UI
                     }
                     catch { }
                 });
+            }
+        }
+
+        /// <summary>
+        /// Redirect call timeout.
+        /// </summary>
+        /// <param name="state">The timer state object.</param>
+        private void RedirectCallTimeout(object state)
+        {
+            // Stop the player.
+            StopPlayer();
+
+            // Call exists.
+            if (_inComingCall != null && _inComingCall.Call != null)
+            {
+                try
+                {
+                    _isConferenceCall = true;
+
+                    // Transfer.
+                    _inComingCall.Call.Transfer(_redirectCallNumber);
+
+                }
+                catch { }
             }
         }
 
@@ -574,6 +646,14 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonHangup_Click(object sender, EventArgs e)
         {
+            HangupEx();
+        }
+
+        /// <summary>
+        /// Hangup.
+        /// </summary>
+        private void HangupEx()
+        {
             // Suspended.
             _suspended = false;
 
@@ -654,6 +734,14 @@ namespace Nequeo.VoIP.Sip.UI
             }
             catch { }
 
+            try
+            {
+                // Dispose of the timer.
+                if (_redirectCallTimer != null)
+                    _redirectCallTimer.Dispose();
+            }
+            catch { }
+
             // If auto answer is on.
             if (_autoAnswerStarted)
             {
@@ -671,6 +759,7 @@ namespace Nequeo.VoIP.Sip.UI
             // Stop the answer process.
             _autoAnswerTimer = null;
             _autoAnswerRecordingTimer = null;
+            _redirectCallTimer = null;
         }
 
         /// <summary>
@@ -1029,6 +1118,9 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonTransfer_Click(object sender, EventArgs e)
         {
+            // Stop the player.
+            StopPlayer();
+
             // Call exists.
             if (_inComingCall != null && _inComingCall.Call != null)
             {
@@ -1047,18 +1139,12 @@ namespace Nequeo.VoIP.Sip.UI
                         {
                             // Get the transfer number.
                             string destination = SetSipUri(number);
+                            _isConferenceCall = true;
 
                             // Transfer.
                             _inComingCall.Call.Transfer(destination);
-                            _isConferenceCall = true;
-
-                            // Stop the player.
-                            StopPlayer();
                         }
                         catch { }
-
-                        // Close
-                        Close();
                     }
                 }
             }

@@ -58,6 +58,7 @@ namespace Nequeo.VoIP.PjSip.Param
             _call.OnCallState += _call_OnCallState;
             _call.OnCallMediaState += _call_OnCallMediaState;
             _call.OnDtmfDigit += _call_OnDtmfDigit;
+            _call.OnCallTransferStatus += _call_OnCallTransferStatus;
             _callID = call.GetId();
 
             _mediaManager = mediaManager;
@@ -74,6 +75,9 @@ namespace Nequeo.VoIP.PjSip.Param
         private bool _isTransmitting = false;
 
         private bool _callOnHold = false;
+        private bool _hasVideo = false;
+        private bool _isVideoValid = false;
+        private Nequeo.Net.PjSip.VideoWindow _videoWindow = null;
 
         private AudioMediaPlayer _player = null;
         private AudioMediaRecorder _recorder = null;
@@ -108,11 +112,32 @@ namespace Nequeo.VoIP.PjSip.Param
         public event System.EventHandler<Param.OnDtmfDigitParam> OnDtmfDigit;
 
         /// <summary>
+        /// Notify application of the status of previously sent call transfer request.
+        /// </summary>
+        public event System.EventHandler<OnCallTransferStatusParam> OnCallTransferStatus;
+
+        /// <summary>
         /// Gets the audio media list.
         /// </summary>
         internal List<AudioMedia> AudioMedia
         {
             get { return _audioMedias; }
+        }
+
+        /// <summary>
+        /// Gets an indictor specifying is the call is a video call.
+        /// </summary>
+        public bool HasVideo
+        {
+            get { return _hasVideo; }
+        }
+
+        /// <summary>
+        /// Gets the video window, if any.
+        /// </summary>
+        public Nequeo.Net.PjSip.VideoWindow VideoWindow
+        {
+            get { return _videoWindow; }
         }
 
         /// <summary>
@@ -153,6 +178,212 @@ namespace Nequeo.VoIP.PjSip.Param
         public Param.CallInfoParam CallInfo
         {
             get { return _info; }
+        }
+
+        /// <summary>
+        /// Gets the total video count.
+        /// </summary>
+        public int VideoCount
+        {
+            get
+            {
+                int count = 0;
+                if (_call != null)
+                {
+                    // Get the current call info.
+                    Nequeo.Net.PjSip.CallInfo ci = _call.GetInfo();
+                    try
+                    {
+                        // For each media.
+                        for (int i = 0; i < ci.Media.Length; i++)
+                        {
+                            // If objects exist.
+                            if (ci.Media != null && ci.Media[i] != null)
+                            {
+                                // If video type.
+                                if (ci.Media[i].Type == Nequeo.Net.PjSip.MediaType.PJMEDIA_TYPE_VIDEO)
+                                {
+                                    // Increment the count.
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                    catch { count = 0; }
+                }
+                return count;
+            }
+        }
+
+        /// <summary>
+        /// Gets the total audio count.
+        /// </summary>
+        public int AudioCount
+        {
+            get
+            {
+                int count = 0;
+                if (_call != null)
+                {
+                    // Get the current call info.
+                    Nequeo.Net.PjSip.CallInfo ci = _call.GetInfo();
+                    try
+                    {
+                        // For each media.
+                        for (int i = 0; i < ci.Media.Length; i++)
+                        {
+                            // If objects exist.
+                            if (ci.Media != null && ci.Media[i] != null)
+                            {
+                                // If audio type.
+                                if (ci.Media[i].Type == Nequeo.Net.PjSip.MediaType.PJMEDIA_TYPE_AUDIO)
+                                {
+                                    // Increment the count.
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                    catch { count = 0; }
+                }
+                return count;
+            }
+        }
+
+        /// <summary>
+        /// Start video capture transmit.
+        /// </summary>
+        /// <param name="mediaIndex">The video media index, usually 1 unless a new video has been added.</param>
+        public void StartVideoTransmit(int mediaIndex = 1)
+        {
+            if (_call != null)
+            {
+                if (_hasVideo)
+                {
+                    // Set as tranmit.
+                    VideoStreamOperation videoStreamOperation = VideoStreamOperation.PJSUA_CALL_VID_STRM_START_TRANSMIT;
+
+                    // Set the video stream options.
+                    CallSetVideoStreamParam callSetVideoStreamParam = new CallSetVideoStreamParam();
+                    callSetVideoStreamParam.CaptureDevice = _mediaManager.GetVideoCaptureDeviceID();
+                    callSetVideoStreamParam.Direction = MediaDirection.PJMEDIA_DIR_ENCODING_DECODING;
+                    callSetVideoStreamParam.MediaIndex = mediaIndex;
+
+                    // Start transmitting the capture.
+                    _call.SetVideoStream(videoStreamOperation, callSetVideoStreamParam);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Stop video capture transmit.
+        /// </summary>
+        /// <param name="mediaIndex">The video media index, usually 1 unless a new video has been added.</param>
+        public void StopVideoTransmit(int mediaIndex = 1)
+        {
+            if (_call != null)
+            {
+                if (_hasVideo)
+                {
+                    // Set as tranmit.
+                    VideoStreamOperation videoStreamOperation = VideoStreamOperation.PJSUA_CALL_VID_STRM_STOP_TRANSMIT;
+
+                    // Set the video stream options.
+                    CallSetVideoStreamParam callSetVideoStreamParam = new CallSetVideoStreamParam();
+                    callSetVideoStreamParam.CaptureDevice = _mediaManager.GetVideoCaptureDeviceID();
+                    callSetVideoStreamParam.Direction = MediaDirection.PJMEDIA_DIR_ENCODING_DECODING;
+                    callSetVideoStreamParam.MediaIndex = mediaIndex;
+
+                    // Start transmitting the capture.
+                    _call.SetVideoStream(videoStreamOperation, callSetVideoStreamParam);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set the video capture device id.
+        /// </summary>
+        /// <param name="captureDeviceID">The capture device id; default is -1.</param>
+        /// <param name="mediaIndex">The video media index, usually 1 unless a new video has been added.</param>
+        public void SetVideoCaptureDevice(int captureDeviceID = -1, int mediaIndex = 1)
+        {
+            if (_call != null)
+            {
+                if (_hasVideo)
+                {
+                    // Set as tranmit.
+                    VideoStreamOperation videoStreamOperation = VideoStreamOperation.PJSUA_CALL_VID_STRM_CHANGE_CAP_DEV;
+
+                    // Set the video stream options.
+                    CallSetVideoStreamParam callSetVideoStreamParam = new CallSetVideoStreamParam();
+                    callSetVideoStreamParam.CaptureDevice = captureDeviceID;
+                    callSetVideoStreamParam.Direction = MediaDirection.PJMEDIA_DIR_ENCODING_DECODING;
+                    callSetVideoStreamParam.MediaIndex = mediaIndex;
+
+                    // Start transmitting the capture.
+                    _call.SetVideoStream(videoStreamOperation, callSetVideoStreamParam);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set the video stream direction.
+        /// </summary>
+        /// <param name="direction">The meadia stream direction.</param>
+        /// <param name="mediaIndex">The video media index, usually 1 unless a new video has been added.</param>
+        public void SetVideoStreamDirection(MediaDirection direction, int mediaIndex = 1)
+        {
+            if (_hasVideo)
+            {
+                // Set as tranmit.
+                VideoStreamOperation videoStreamOperation = VideoStreamOperation.PJSUA_CALL_VID_STRM_CHANGE_DIR;
+
+                // Set the video stream options.
+                CallSetVideoStreamParam callSetVideoStreamParam = new CallSetVideoStreamParam();
+                callSetVideoStreamParam.CaptureDevice = _mediaManager.GetVideoCaptureDeviceID();
+                callSetVideoStreamParam.Direction = direction;
+                callSetVideoStreamParam.MediaIndex = mediaIndex;
+
+                // Start transmitting the capture.
+                _call.SetVideoStream(videoStreamOperation, callSetVideoStreamParam);
+            }
+        }
+
+        /// <summary>
+        /// Remove a video stream.
+        /// </summary>
+        /// <param name="mediaIndex">The video media index, usually 1 unless a new video has been added.</param>
+        public void RemoveVideoStream(int mediaIndex = 1)
+        {
+            // Set as tranmit.
+            VideoStreamOperation videoStreamOperation = VideoStreamOperation.PJSUA_CALL_VID_STRM_REMOVE;
+
+            // Set the video stream options.
+            CallSetVideoStreamParam callSetVideoStreamParam = new CallSetVideoStreamParam();
+            callSetVideoStreamParam.CaptureDevice = _mediaManager.GetVideoCaptureDeviceID();
+            callSetVideoStreamParam.Direction = MediaDirection.PJMEDIA_DIR_ENCODING_DECODING;
+            callSetVideoStreamParam.MediaIndex = mediaIndex;
+
+            // Start transmitting the capture.
+            _call.SetVideoStream(videoStreamOperation, callSetVideoStreamParam);
+        }
+
+        /// <summary>
+        /// Add a new video stream.
+        /// </summary>
+        public void AddVideoStream()
+        {
+            // Set as tranmit.
+            VideoStreamOperation videoStreamOperation = VideoStreamOperation.PJSUA_CALL_VID_STRM_ADD;
+
+            // Set the video stream options.
+            CallSetVideoStreamParam callSetVideoStreamParam = new CallSetVideoStreamParam();
+            callSetVideoStreamParam.CaptureDevice = _mediaManager.GetVideoCaptureDeviceID();
+            callSetVideoStreamParam.Direction = MediaDirection.PJMEDIA_DIR_ENCODING_DECODING;
+            callSetVideoStreamParam.MediaIndex = -1;
+
+            // Start transmitting the capture.
+            _call.SetVideoStream(videoStreamOperation, callSetVideoStreamParam);
         }
 
         /// <summary>
@@ -277,7 +508,8 @@ namespace Nequeo.VoIP.PjSip.Param
             // Create the call settings.
             CallSetting setting = new CallSetting(true);
             CallOpParam parm = new CallOpParam(true);
-            setting.AudioCount = 1;
+            setting.AudioCount = (uint)1;
+            setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
             parm.Setting = setting;
             parm.Code = StatusCode.SC_BUSY_HERE;
 
@@ -296,7 +528,8 @@ namespace Nequeo.VoIP.PjSip.Param
             // Create the call settings.
             CallSetting setting = new CallSetting(true);
             CallOpParam parm = new CallOpParam(true);
-            setting.AudioCount = 1;
+            setting.AudioCount = (uint)1;
+            setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
             parm.Setting = setting;
             parm.Code = StatusCode.SC_OK;
 
@@ -316,7 +549,8 @@ namespace Nequeo.VoIP.PjSip.Param
             // Create the call settings.
             CallSetting setting = new CallSetting(true);
             CallOpParam parm = new CallOpParam(true);
-            setting.AudioCount = 1;
+            setting.AudioCount = (uint)1;
+            setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
             parm.Setting = setting;
             parm.Code = StatusCode.SC_OK;
 
@@ -340,7 +574,8 @@ namespace Nequeo.VoIP.PjSip.Param
                     // Create the call settings.
                     CallSetting setting = new CallSetting(true);
                     CallOpParam parm = new CallOpParam(true);
-                    setting.AudioCount = 1;
+                    setting.AudioCount = (uint)1;
+                    setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
                     setting.Flag = CallFlag.PJSUA_CALL_UNHOLD;
                     parm.Setting = setting;
                     parm.Code = StatusCode.SC_OK;
@@ -354,7 +589,8 @@ namespace Nequeo.VoIP.PjSip.Param
                     // Create the call settings.
                     CallSetting setting = new CallSetting(true);
                     CallOpParam parm = new CallOpParam(true);
-                    setting.AudioCount = 1;
+                    setting.AudioCount = (uint)1;
+                    setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
                     parm.Setting = setting;
                     parm.Code = StatusCode.SC_OK;
 
@@ -550,6 +786,34 @@ namespace Nequeo.VoIP.PjSip.Param
                     // If objects exist.
                     if (ci.Media != null && ci.Media[i] != null && e.CurrentCall != null)
                     {
+                        // Create the call media param.
+                        CallMediaStateParam mediaState = new CallMediaStateParam();
+                        mediaState.Suspend = false;
+                        mediaState.CallID = ci.Id;
+                        mediaState.CallOnHold = (ci.Media[i].Status == CallMediaStatus.PJSUA_CALL_MEDIA_LOCAL_HOLD ? true : false);
+                        mediaState.MediaType = ci.Media[i].Type;
+
+                        // If video type.
+                        if (ci.Media[i].Type == Nequeo.Net.PjSip.MediaType.PJMEDIA_TYPE_VIDEO)
+                        {
+                            _hasVideo = true;
+                            _videoWindow = ci.Media[i].VideoWindowEx;
+                            mediaState.HasVideo = _hasVideo;
+                            _isVideoValid = (ci.Media[i].Direction == MediaDirection.PJMEDIA_DIR_NONE ? false : true);
+                            mediaState.IsVideoValid = _isVideoValid;
+                        }
+                        else
+                        {
+                            _hasVideo = false;
+                            _isVideoValid = false;
+                            _videoWindow = null;
+                            mediaState.HasVideo = _hasVideo;
+                            mediaState.IsVideoValid = _isVideoValid;
+                        }
+
+                        // Handle the event.
+                        OnCallMediaState?.Invoke(this, mediaState);
+
                         // If audio type.
                         if ((ci.Media[i].Type == Nequeo.Net.PjSip.MediaType.PJMEDIA_TYPE_AUDIO) &&
                             (e.CurrentCall.GetMedia((uint)i) != null))
@@ -557,15 +821,6 @@ namespace Nequeo.VoIP.PjSip.Param
                             // Get the audio media.
                             AudioMedia audioMedia = (AudioMedia)e.CurrentCall.GetMedia((uint)i);
                             _audioMedias.Add(audioMedia);
-
-                            // Create the call media param.
-                            CallMediaStateParam mediaState = new CallMediaStateParam();
-                            mediaState.Suspend = false;
-                            mediaState.CallID = ci.Id;
-                            mediaState.CallOnHold = (ci.Media[i].Status == CallMediaStatus.PJSUA_CALL_MEDIA_LOCAL_HOLD ? true : false);
-
-                            // Handle the event.
-                            OnCallMediaState?.Invoke(this, mediaState);
 
                             // If not suspend, normal operations.
                             if (!mediaState.Suspend)
@@ -596,6 +851,11 @@ namespace Nequeo.VoIP.PjSip.Param
                                     recoderSet = true;
                                 }
                             }
+                        }
+
+                        // If video type.
+                        if (ci.Media[i].Type == Nequeo.Net.PjSip.MediaType.PJMEDIA_TYPE_VIDEO)
+                        {
                         }
                     }
                 }
@@ -704,6 +964,20 @@ namespace Nequeo.VoIP.PjSip.Param
                         catch { }
                     }
 
+                    // If video window.
+                    if (_videoWindow != null)
+                    {
+                        try
+                        {
+                            _hasVideo = false;
+
+                            // Cleanup the video window.
+                            _videoWindow.Dispose();
+                            _videoWindow = null;
+                        }
+                        catch { }
+                    }
+
                     // Cleanup the audio media.
                     if (_audioMedias != null)
                     {
@@ -747,6 +1021,21 @@ namespace Nequeo.VoIP.PjSip.Param
             {
                 // Handle the event.
                 OnDtmfDigit?.Invoke(this, param);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Transfer call status.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnCallTransferStatus(object sender, OnCallTransferStatusParam e)
+        {
+            try
+            {
+                // Handle the event.
+                OnCallTransferStatus?.Invoke(this, e);
             }
             catch { }
         }
@@ -834,6 +1123,17 @@ namespace Nequeo.VoIP.PjSip.Param
                         catch { }
                     }
 
+                    // If video window.
+                    if (_videoWindow != null)
+                    {
+                        try
+                        {
+                            // Cleanup the video window.
+                            _videoWindow.Dispose();
+                        }
+                        catch { }
+                    }
+
                     // Cleanup the audio media.
                     if (_audioMedias != null)
                     {
@@ -846,6 +1146,7 @@ namespace Nequeo.VoIP.PjSip.Param
                 _player = null;
                 _recorder = null;
                 _recorderAutoAnswer = null;
+                _videoWindow = null;
                 _audioMedias = null;
             }
         }

@@ -119,6 +119,36 @@ namespace Nequeo.VoIP.PjSip.Data
         /// Enable incoming call audio recording.
         /// </summary>
         public bool IncomingCallAudioRecordingEnabled = false;
+
+        /// <summary>
+        /// Enable video.
+        /// </summary>
+        public bool EnableVideo = false;
+
+        /// <summary>
+        /// Video capture index.
+        /// </summary>
+        public int VideoCaptureIndex = -1;
+
+        /// <summary>
+        /// Video render index.
+        /// </summary>
+        public int VideoRenderIndex = -1;
+
+        /// <summary>
+        /// Enable call redirect.
+        /// </summary>
+        public bool EnableRedirect = false;
+
+        /// <summary>
+        /// Redirect call number.
+        /// </summary>
+        public string RedirectCallNumber = "";
+
+        /// <summary>
+        /// Redirect call after.
+        /// </summary>
+        public int RedirectCallAfter = 30;
     }
 
     /// <summary>

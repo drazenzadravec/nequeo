@@ -111,6 +111,18 @@ namespace Nequeo.VoIP.Sip.Data
 
         private string soundAutoAnswerFilePathField;
 
+        private bool codecVideoEnabledField;
+
+        private int codecVideoCaptureDeviceIndexField;
+
+        private int codecVideoRenderDeviceIndexField;
+
+        private bool featureRedirectCallEnabledField;
+
+        private string featureRedirectCallNumberField;
+
+        private int featureRedirectCallAfterField;
+
         /// <remarks/>
         public string accountName
         {
@@ -654,6 +666,84 @@ namespace Nequeo.VoIP.Sip.Data
             set
             {
                 this.soundAutoAnswerFilePathField = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool codecVideoEnabled
+        {
+            get
+            {
+                return this.codecVideoEnabledField;
+            }
+            set
+            {
+                this.codecVideoEnabledField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int codecVideoCaptureDeviceIndex
+        {
+            get
+            {
+                return this.codecVideoCaptureDeviceIndexField;
+            }
+            set
+            {
+                this.codecVideoCaptureDeviceIndexField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int codecVideoRenderDeviceIndex
+        {
+            get
+            {
+                return this.codecVideoRenderDeviceIndexField;
+            }
+            set
+            {
+                this.codecVideoRenderDeviceIndexField = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool featureRedirectCallEnabled
+        {
+            get
+            {
+                return this.featureRedirectCallEnabledField;
+            }
+            set
+            {
+                this.featureRedirectCallEnabledField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string featureRedirectCallNumber
+        {
+            get
+            {
+                return this.featureRedirectCallNumberField;
+            }
+            set
+            {
+                this.featureRedirectCallNumberField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int featureRedirectCallAfter
+        {
+            get
+            {
+                return this.featureRedirectCallAfterField;
+            }
+            set
+            {
+                this.featureRedirectCallAfterField = value;
             }
         }
     }

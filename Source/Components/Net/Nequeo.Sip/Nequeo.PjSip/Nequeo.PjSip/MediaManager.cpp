@@ -42,7 +42,8 @@ using namespace Nequeo::Net::PjSip;
 /// <param name="pjVidDevManager">Video device manager.</param>
 /// <param name="videoConfig">Video configuration.</param>
 MediaManager::MediaManager(pj::AudDevManager& pjAudDevManager, pj::VidDevManager& pjVidDevManager, pj::AccountVideoConfig& videoConfig) :
-	_disposed(false), _pjAudDevManager(pjAudDevManager), _pjVidDevManager(pjVidDevManager), _videoConfig(videoConfig)
+	_disposed(false), _pjAudDevManager(pjAudDevManager), _pjVidDevManager(pjVidDevManager), _videoConfig(videoConfig),
+	_videoCaptureID(-1), _videoRenderID(-2), _videoWindowFlag(1)
 {
 }
 
@@ -296,7 +297,16 @@ AudioMedia^ MediaManager::GetPlaybackDeviceMedia()
 /// <param name="deviceID">Device ID of the capture device.</param>
 void MediaManager::SetVideoCaptureDeviceID(int deviceID)
 {
-	_videoConfig.defaultCaptureDevice = deviceID;
+	if (_videoCaptureID >= 0)
+	{
+		_videoConfig.defaultCaptureDevice = deviceID;
+		_videoCaptureID = deviceID;
+	}
+	else
+	{
+		_videoConfig.defaultCaptureDevice = pjmedia_vid_dev_std_index::PJMEDIA_VID_DEFAULT_CAPTURE_DEV;
+		_videoCaptureID = -1;
+	}
 }
 
 /// <summary>
@@ -305,7 +315,34 @@ void MediaManager::SetVideoCaptureDeviceID(int deviceID)
 /// <param name="deviceID">Device ID of the render device.</param>
 void MediaManager::SetVideoRenderDeviceID(int deviceID)
 {
-	_videoConfig.defaultRenderDevice = deviceID;
+	if (_videoRenderID >= 0)
+	{
+		_videoConfig.defaultRenderDevice = deviceID;
+		_videoRenderID = deviceID;
+	}
+	else
+	{
+		_videoConfig.defaultRenderDevice = pjmedia_vid_dev_std_index::PJMEDIA_VID_DEFAULT_RENDER_DEV;
+		_videoRenderID = -2;
+	}
+}
+
+/// <summary>
+/// Get the video capture device.
+/// </summary>
+/// <returns>The device ID.</returns>
+int MediaManager::GetVideoCaptureDeviceID()
+{
+	return _videoCaptureID;
+}
+
+/// <summary>
+/// Get the video render device.
+/// </summary>
+/// <returns>The device ID.</returns>
+int MediaManager::GetVideoRenderDeviceID()
+{
+	return _videoRenderID;
 }
 
 /// <summary>
@@ -406,4 +443,45 @@ void MediaManager::StopConferenceCall(array<AudioMedia^>^ conferenceCalls)
 			}
 		}
 	}
+}
+
+/// <summary>
+/// Set the video window flag.
+/// </summary>
+/// <param name="withBorder">Window with border.</param>
+/// <param name="resizable">Window is resizable.</param>
+void MediaManager::SetVideoWindowFlag(bool withBorder, bool resizable)
+{
+	// If no border.
+	if (!withBorder)
+	{
+		// Video window without border and not resizable.
+		_videoConfig.windowFlags = 0;
+		_videoWindowFlag = 0;
+	}
+	else if(withBorder && !resizable)
+	{
+		// Video window with border and not resizable.
+		_videoConfig.windowFlags = pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_BORDER;
+		_videoWindowFlag = 1;
+	}
+	else
+	{
+		// Video window with border and resizable.
+		_videoConfig.windowFlags = pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_BORDER | pjmedia_vid_dev_wnd_flag::PJMEDIA_VID_DEV_WND_RESIZABLE;
+		_videoWindowFlag = 3;
+	}
+}
+
+/// <summary>
+/// Set the video window flag.
+/// </summary>
+/// <returns>
+/// 0 - No border.
+/// 1 - With border.
+/// 3 - With border and resizable.
+/// </returns>
+int MediaManager::SetVideoWindowFlag()
+{
+	return _videoWindowFlag;
 }

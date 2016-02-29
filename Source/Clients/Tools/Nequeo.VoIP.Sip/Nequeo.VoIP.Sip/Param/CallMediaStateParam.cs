@@ -60,5 +60,10 @@ namespace Nequeo.VoIP.Sip.Param
         /// Gets or sets an indicator specifying is the local caller has set the call on hold.
         /// </summary>
         public bool CallOnHold { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current media type.
+        /// </summary>
+        public Nequeo.Net.Sip.MediaType MediaType { get; set; }
     }
 }
