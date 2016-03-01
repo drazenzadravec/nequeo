@@ -2011,6 +2011,7 @@ namespace Nequeo.VoIP.PjSip.UI
             // Get the file name selected.
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                bool hasError = false;
                 string xml = openFileDialog.FileName;
 
                 try
@@ -2077,11 +2078,17 @@ namespace Nequeo.VoIP.PjSip.UI
                     // Ask the used to answer incomming call.
                     DialogResult result = MessageBox.Show(this, "Unable to load configuration because of an internal error. " + ex.Message,
                         "Load Configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    hasError = true;
                 }
 
-                // Disable Enable.
-                buttonSettings.Enabled = true;
-                buttonConfiguration.Enabled = false;
+                // If no error.
+                if (!hasError)
+                {
+                    // Disable Enable.
+                    buttonSettings.Enabled = true;
+                    buttonConfiguration.Enabled = false;
+                }
 
                 // If not created.
                 if (_configuration == null)

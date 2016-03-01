@@ -96,6 +96,7 @@ namespace Nequeo.VoIP
         {
             // Initlise the first control.
             voIPControl1.Initialize();
+            voIPControl2.Initialize();
         }
 
         /// <summary>
