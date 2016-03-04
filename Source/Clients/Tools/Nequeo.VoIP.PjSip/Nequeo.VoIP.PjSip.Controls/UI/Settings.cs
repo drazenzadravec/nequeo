@@ -285,6 +285,7 @@ namespace Nequeo.VoIP.PjSip.UI
             textBoxTimeDelayBeforeRefresh.Text = _voipCall.VoIPManager.AccountConnection.DelayBeforeRefreshSec.ToString();
             textBoxTimeTimeout.Text = _voipCall.VoIPManager.AccountConnection.TimeoutSec.ToString();
             textBoxTimeUnregisterWait.Text = _voipCall.VoIPManager.AccountConnection.UnregWaitSec.ToString();
+            textBoxVideoBandwidthRate.Text = _voipCall.VoIPManager.AccountConnection.VideoRateControlBandwidth.ToString();
 
             // Select use ipv6
             switch (_voipCall.VoIPManager.AccountConnection.IPv6Use)
@@ -349,6 +350,67 @@ namespace Nequeo.VoIP.PjSip.UI
                     comboBoxSoundsAudioDevice.SelectedIndex = _common.AudioDeviceIndex + 1;
                 else
                     comboBoxSoundsAudioDevice.SelectedIndex = -1;
+            }
+
+            // Load only once.
+            if (_common.AudioCodecs == null)
+            {
+                // List all the audio codec.
+                _common.AudioCodecs = _voipCall.VoIPManager.GetAudioCodecInfo();
+            }
+
+            // Order the codecs.
+            var orederedAudioCodecs = _common.AudioCodecs.OrderByDescending(u => u.Priority);
+
+            // For each codec.
+            foreach (Nequeo.Net.PjSip.CodecInfo audioCodec in orederedAudioCodecs)
+            {
+                bool enabled = true;
+
+                if (audioCodec.Priority == (byte)0)
+                    enabled = false;
+
+                // Add to list.
+                checkedListBoxAudioCodec.Items.Add(audioCodec.CodecId, enabled);
+            }
+
+            // Load only once.
+            if (_common.VideoCodecs == null)
+            {
+                // List all the audio codec.
+                _common.VideoCodecs = _voipCall.VoIPManager.GetVideoCodecInfo();
+            }
+
+            // Order the codecs.
+            var orederedVideoCodecs = _common.VideoCodecs.OrderByDescending(u => u.Priority);
+
+            // For each codec.
+            foreach (Nequeo.Net.PjSip.CodecInfo videoCodec in orederedVideoCodecs)
+            {
+                bool found = true;
+
+                // For each audio codec
+                foreach (Nequeo.Net.PjSip.CodecInfo audioCodec in orederedAudioCodecs)
+                {
+                    // Found match
+                    if (videoCodec.CodecId.ToLower() == audioCodec.CodecId.ToLower())
+                    {
+                        found = false;
+                        break;
+                    }
+                }
+
+                // If video codec only.
+                if (found)
+                {
+                    bool enabled = true;
+
+                    if (videoCodec.Priority == (byte)0)
+                        enabled = false;
+
+                    // Add to list.
+                    checkedListBoxVideoCodec.Items.Add(videoCodec.CodecId, enabled);
+                }
             }
         }
 
@@ -1379,6 +1441,79 @@ namespace Nequeo.VoIP.PjSip.UI
                 {
                     // Assign the port.
                     _common.RedirectCallAfter = wait;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Video bandwidth rate.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxVideoBandwidthRate_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxVideoBandwidthRate.Text))
+            {
+                int rate = 0;
+                bool isNumber = Int32.TryParse(textBoxVideoBandwidthRate.Text, out rate);
+                if (isNumber)
+                {
+                    // Assign the rate.
+                    _voipCall.VoIPManager.AccountConnection.VideoRateControlBandwidth = (uint)rate;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Audio codec.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkedListBoxAudioCodec_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxAudioCodec.SelectedIndex >= 0)
+            {
+                // Get the selected codec.
+                string audioCodec = (string)checkedListBoxAudioCodec.SelectedItem;
+                Nequeo.Net.PjSip.CodecInfo codecInfo = _common.AudioCodecs.First(u => u.CodecId.ToLower() == audioCodec.ToLower());
+
+                // If item is unchecked.
+                if (e.NewValue == CheckState.Unchecked)
+                {
+                    // Set priorty to zero disable.
+                    _voipCall.VoIPManager.SetPriorityAudioCodec(audioCodec, 0);
+                }
+                else
+                {
+                    // Set priorty to original.
+                    _voipCall.VoIPManager.SetPriorityAudioCodec(audioCodec, codecInfo.Priority);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Video codec.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkedListBoxVideoCodec_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxVideoCodec.SelectedIndex >= 0)
+            {
+                // Get the selected codec.
+                string videoCodec = (string)checkedListBoxVideoCodec.SelectedItem;
+                Nequeo.Net.PjSip.CodecInfo codecInfo = _common.VideoCodecs.First(u => u.CodecId.ToLower() == videoCodec.ToLower());
+
+                // If item is unchecked.
+                if (e.NewValue == CheckState.Unchecked)
+                {
+                    // Set priorty to zero disable.
+                    _voipCall.VoIPManager.SetPriorityVideoCodec(videoCodec, 0);
+                }
+                else
+                {
+                    // Set priorty to original.
+                    _voipCall.VoIPManager.SetPriorityVideoCodec(videoCodec, codecInfo.Priority);
                 }
             }
         }

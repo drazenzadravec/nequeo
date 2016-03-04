@@ -58,11 +58,15 @@ namespace Nequeo
 					/// </summary>
 					/// <param name="videoWindowID">The video window id (>= 0).</param>
 					/// <param name="windowTitle">The video window title.</param>
-					VideoIncomingWindow(int videoWindowID, String^ windowTitle)
+					/// <param name="windowWidth">The video window width.</param>
+					/// <param name="windowHeight">The video window height.</param>
+					VideoIncomingWindow(int videoWindowID, String^ windowTitle, int windowWidth, int windowHeight) : _isActive(true)
 					{
 						InitializeComponent();
 						
 						_videoWindowID = videoWindowID;
+						_windowHeight = windowHeight;
+						_windowWidth = windowWidth;
 						this->Text = windowTitle;
 					}
 
@@ -81,8 +85,23 @@ namespace Nequeo
 					/// </summary>
 					void HideVideoWindow();
 
+					/// <summary>
+					/// Set the window active state.
+					/// </summary>
+					/// <param name="state">The window active state.</param>
+					void SetActiveState(bool state);
+
+					/// <summary>
+					/// Get the window active state.
+					/// </summary>
+					/// <return>The window active state.</return>
+					bool GetActiveState();
+
 				private:
 					int _videoWindowID;
+					int _windowHeight;
+					int _windowWidth;
+					bool _isActive;
 
 					/// <summary>
 					/// Create the preview.
@@ -121,13 +140,14 @@ namespace Nequeo
 						this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 						this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 						this->ClientSize = System::Drawing::Size(239, 171);
-						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 						this->MaximizeBox = false;
 						this->Name = L"VideoIncomingWindow";
+						this->ShowIcon = false;
 						this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 						this->Text = L"Video";
 						this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &VideoIncomingWindow::VideoIncomingWindow_FormClosing);
 						this->Load += gcnew System::EventHandler(this, &VideoIncomingWindow::VideoIncomingWindow_Load);
+						this->ResizeEnd += gcnew System::EventHandler(this, &VideoIncomingWindow::VideoIncomingWindow_ResizeEnd);
 						this->ResumeLayout(false);
 
 					}
@@ -135,7 +155,8 @@ namespace Nequeo
 
 				private: System::Void VideoIncomingWindow_Load(System::Object^  sender, System::EventArgs^  e);
 				private: System::Void VideoIncomingWindow_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-
+				private: System::Void VideoIncomingWindow_ResizeEnd(System::Object^  sender, System::EventArgs^  e);
+				
 				};
 			}
 		}

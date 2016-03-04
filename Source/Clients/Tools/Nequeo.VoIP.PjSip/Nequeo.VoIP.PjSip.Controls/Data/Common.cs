@@ -46,6 +46,16 @@ namespace Nequeo.VoIP.PjSip.Data
     internal class Common
     {
         /// <summary>
+        /// The collection of audio codecs.
+        /// </summary>
+        public Nequeo.Net.PjSip.CodecInfo[] AudioCodecs = null;
+
+        /// <summary>
+        /// The collection of video codecs.
+        /// </summary>
+        public Nequeo.Net.PjSip.CodecInfo[] VideoCodecs = null;
+
+        /// <summary>
         /// Account name.
         /// </summary>
         public string AccountName = "";

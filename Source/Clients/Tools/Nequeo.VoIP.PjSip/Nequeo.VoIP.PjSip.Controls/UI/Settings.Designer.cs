@@ -130,19 +130,26 @@
             this.buttonSoundsRingPath = new System.Windows.Forms.Button();
             this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
             this.tabPageCodec = new System.Windows.Forms.TabPage();
+            this.groupBoxVideoCodec = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxVideoCodec = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxAudioCodec = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxAudioCodec = new System.Windows.Forms.CheckedListBox();
             this.groupBoxFeatureTransferCall = new System.Windows.Forms.GroupBox();
+            this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.labelRedirectCallTimeSec = new System.Windows.Forms.Label();
             this.textBoxRedirectCallTime = new System.Windows.Forms.TextBox();
             this.labelRedirectCallTime = new System.Windows.Forms.Label();
             this.textBoxRedirectCallText = new System.Windows.Forms.TextBox();
             this.checkBoxRedirectCallEnabled = new System.Windows.Forms.CheckBox();
             this.groupBoxVideoDevice = new System.Windows.Forms.GroupBox();
+            this.labelVideoBandwidthRateBits = new System.Windows.Forms.Label();
+            this.textBoxVideoBandwidthRate = new System.Windows.Forms.TextBox();
+            this.labelVideoBandwidthRate = new System.Windows.Forms.Label();
             this.checkBoxVideo = new System.Windows.Forms.CheckBox();
             this.comboBoxVideoDevicePlayback = new System.Windows.Forms.ComboBox();
             this.comboBoxVideoDeviceCapture = new System.Windows.Forms.ComboBox();
             this.labelVideoDevicePlayback = new System.Windows.Forms.Label();
             this.labelVideoDeviceCapture = new System.Windows.Forms.Label();
-            this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -159,6 +166,8 @@
             this.tabPageMedia.SuspendLayout();
             this.groupBoxSounds.SuspendLayout();
             this.tabPageCodec.SuspendLayout();
+            this.groupBoxVideoCodec.SuspendLayout();
+            this.groupBoxAudioCodec.SuspendLayout();
             this.groupBoxFeatureTransferCall.SuspendLayout();
             this.groupBoxVideoDevice.SuspendLayout();
             this.SuspendLayout();
@@ -1186,6 +1195,8 @@
             // 
             // tabPageCodec
             // 
+            this.tabPageCodec.Controls.Add(this.groupBoxVideoCodec);
+            this.tabPageCodec.Controls.Add(this.groupBoxAudioCodec);
             this.tabPageCodec.Controls.Add(this.groupBoxFeatureTransferCall);
             this.tabPageCodec.Controls.Add(this.groupBoxVideoDevice);
             this.tabPageCodec.Location = new System.Drawing.Point(4, 22);
@@ -1194,6 +1205,54 @@
             this.tabPageCodec.TabIndex = 3;
             this.tabPageCodec.Text = "Feature";
             this.tabPageCodec.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxVideoCodec
+            // 
+            this.groupBoxVideoCodec.Controls.Add(this.checkedListBoxVideoCodec);
+            this.groupBoxVideoCodec.Location = new System.Drawing.Point(248, 177);
+            this.groupBoxVideoCodec.Name = "groupBoxVideoCodec";
+            this.groupBoxVideoCodec.Size = new System.Drawing.Size(233, 144);
+            this.groupBoxVideoCodec.TabIndex = 5;
+            this.groupBoxVideoCodec.TabStop = false;
+            this.groupBoxVideoCodec.Text = "Video Codecs";
+            // 
+            // checkedListBoxVideoCodec
+            // 
+            this.checkedListBoxVideoCodec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBoxVideoCodec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxVideoCodec.FormattingEnabled = true;
+            this.checkedListBoxVideoCodec.IntegralHeight = false;
+            this.checkedListBoxVideoCodec.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxVideoCodec.Name = "checkedListBoxVideoCodec";
+            this.checkedListBoxVideoCodec.Size = new System.Drawing.Size(221, 119);
+            this.checkedListBoxVideoCodec.TabIndex = 3;
+            this.checkedListBoxVideoCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxVideoCodec_ItemCheck);
+            // 
+            // groupBoxAudioCodec
+            // 
+            this.groupBoxAudioCodec.Controls.Add(this.checkedListBoxAudioCodec);
+            this.groupBoxAudioCodec.Location = new System.Drawing.Point(6, 177);
+            this.groupBoxAudioCodec.Name = "groupBoxAudioCodec";
+            this.groupBoxAudioCodec.Size = new System.Drawing.Size(233, 144);
+            this.groupBoxAudioCodec.TabIndex = 4;
+            this.groupBoxAudioCodec.TabStop = false;
+            this.groupBoxAudioCodec.Text = "Audio Codecs";
+            // 
+            // checkedListBoxAudioCodec
+            // 
+            this.checkedListBoxAudioCodec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBoxAudioCodec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxAudioCodec.FormattingEnabled = true;
+            this.checkedListBoxAudioCodec.IntegralHeight = false;
+            this.checkedListBoxAudioCodec.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxAudioCodec.Name = "checkedListBoxAudioCodec";
+            this.checkedListBoxAudioCodec.Size = new System.Drawing.Size(221, 119);
+            this.checkedListBoxAudioCodec.TabIndex = 2;
+            this.checkedListBoxAudioCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxAudioCodec_ItemCheck);
             // 
             // groupBoxFeatureTransferCall
             // 
@@ -1209,6 +1268,15 @@
             this.groupBoxFeatureTransferCall.TabIndex = 1;
             this.groupBoxFeatureTransferCall.TabStop = false;
             this.groupBoxFeatureTransferCall.Text = "Redirect Call";
+            // 
+            // labelRedirectCallToNumber
+            // 
+            this.labelRedirectCallToNumber.AutoSize = true;
+            this.labelRedirectCallToNumber.Location = new System.Drawing.Point(89, 23);
+            this.labelRedirectCallToNumber.Name = "labelRedirectCallToNumber";
+            this.labelRedirectCallToNumber.Size = new System.Drawing.Size(26, 13);
+            this.labelRedirectCallToNumber.TabIndex = 5;
+            this.labelRedirectCallToNumber.Text = "To :";
             // 
             // labelRedirectCallTimeSec
             // 
@@ -1259,6 +1327,9 @@
             // 
             // groupBoxVideoDevice
             // 
+            this.groupBoxVideoDevice.Controls.Add(this.labelVideoBandwidthRateBits);
+            this.groupBoxVideoDevice.Controls.Add(this.textBoxVideoBandwidthRate);
+            this.groupBoxVideoDevice.Controls.Add(this.labelVideoBandwidthRate);
             this.groupBoxVideoDevice.Controls.Add(this.checkBoxVideo);
             this.groupBoxVideoDevice.Controls.Add(this.comboBoxVideoDevicePlayback);
             this.groupBoxVideoDevice.Controls.Add(this.comboBoxVideoDeviceCapture);
@@ -1271,10 +1342,36 @@
             this.groupBoxVideoDevice.TabStop = false;
             this.groupBoxVideoDevice.Text = "Video Device";
             // 
+            // labelVideoBandwidthRateBits
+            // 
+            this.labelVideoBandwidthRateBits.AutoSize = true;
+            this.labelVideoBandwidthRateBits.Location = new System.Drawing.Point(279, 76);
+            this.labelVideoBandwidthRateBits.Name = "labelVideoBandwidthRateBits";
+            this.labelVideoBandwidthRateBits.Size = new System.Drawing.Size(39, 13);
+            this.labelVideoBandwidthRateBits.TabIndex = 7;
+            this.labelVideoBandwidthRateBits.Text = "(bits/s)";
+            // 
+            // textBoxVideoBandwidthRate
+            // 
+            this.textBoxVideoBandwidthRate.Location = new System.Drawing.Point(213, 73);
+            this.textBoxVideoBandwidthRate.Name = "textBoxVideoBandwidthRate";
+            this.textBoxVideoBandwidthRate.Size = new System.Drawing.Size(60, 20);
+            this.textBoxVideoBandwidthRate.TabIndex = 6;
+            this.textBoxVideoBandwidthRate.TextChanged += new System.EventHandler(this.textBoxVideoBandwidthRate_TextChanged);
+            // 
+            // labelVideoBandwidthRate
+            // 
+            this.labelVideoBandwidthRate.AutoSize = true;
+            this.labelVideoBandwidthRate.Location = new System.Drawing.Point(118, 76);
+            this.labelVideoBandwidthRate.Name = "labelVideoBandwidthRate";
+            this.labelVideoBandwidthRate.Size = new System.Drawing.Size(89, 13);
+            this.labelVideoBandwidthRate.TabIndex = 5;
+            this.labelVideoBandwidthRate.Text = "Bandwidth Rate :";
+            // 
             // checkBoxVideo
             // 
             this.checkBoxVideo.AutoSize = true;
-            this.checkBoxVideo.Location = new System.Drawing.Point(18, 73);
+            this.checkBoxVideo.Location = new System.Drawing.Point(18, 75);
             this.checkBoxVideo.Name = "checkBoxVideo";
             this.checkBoxVideo.Size = new System.Drawing.Size(89, 17);
             this.checkBoxVideo.TabIndex = 4;
@@ -1320,15 +1417,6 @@
             this.labelVideoDeviceCapture.TabIndex = 0;
             this.labelVideoDeviceCapture.Text = "Capture :";
             // 
-            // labelRedirectCallToNumber
-            // 
-            this.labelRedirectCallToNumber.AutoSize = true;
-            this.labelRedirectCallToNumber.Location = new System.Drawing.Point(89, 23);
-            this.labelRedirectCallToNumber.Name = "labelRedirectCallToNumber";
-            this.labelRedirectCallToNumber.Size = new System.Drawing.Size(26, 13);
-            this.labelRedirectCallToNumber.TabIndex = 5;
-            this.labelRedirectCallToNumber.Text = "To :";
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1373,6 +1461,8 @@
             this.groupBoxSounds.ResumeLayout(false);
             this.groupBoxSounds.PerformLayout();
             this.tabPageCodec.ResumeLayout(false);
+            this.groupBoxVideoCodec.ResumeLayout(false);
+            this.groupBoxAudioCodec.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.PerformLayout();
             this.groupBoxVideoDevice.ResumeLayout(false);
@@ -1498,5 +1588,12 @@
         private System.Windows.Forms.TextBox textBoxRedirectCallText;
         private System.Windows.Forms.CheckBox checkBoxRedirectCallEnabled;
         private System.Windows.Forms.Label labelRedirectCallToNumber;
+        private System.Windows.Forms.Label labelVideoBandwidthRateBits;
+        private System.Windows.Forms.TextBox textBoxVideoBandwidthRate;
+        private System.Windows.Forms.Label labelVideoBandwidthRate;
+        private System.Windows.Forms.CheckedListBox checkedListBoxAudioCodec;
+        private System.Windows.Forms.CheckedListBox checkedListBoxVideoCodec;
+        private System.Windows.Forms.GroupBox groupBoxAudioCodec;
+        private System.Windows.Forms.GroupBox groupBoxVideoCodec;
     }
 }

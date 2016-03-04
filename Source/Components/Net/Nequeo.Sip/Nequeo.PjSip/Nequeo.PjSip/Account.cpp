@@ -572,34 +572,28 @@ MediaManager^ Account::GetMediaManager()
 /// <returns>The supported codecs in the system.</returns>
 array<CodecInfo^>^ Account::GetAudioCodecInfo()
 {
-	// If account created.
-	if (_created)
+	List<CodecInfo^>^ codecList = gcnew List<CodecInfo^>();
+	const pj::CodecInfoVector& codecs = _accountCallback->GetAudioCodecInfo();
+
+	// Get the vector size.
+	size_t vectorSize = codecs.size();
+
+	// If devices exist.
+	if (vectorSize > 0)
 	{
-		List<CodecInfo^>^ codecList = gcnew List<CodecInfo^>();
-		const pj::CodecInfoVector& codecs = _accountCallback->GetAudioCodecInfo();
-
-		// Get the vector size.
-		size_t vectorSize = codecs.size();
-
-		// If devices exist.
-		if (vectorSize > 0)
+		// For each code found.
+		for (int i = 0; i < vectorSize; i++)
 		{
-			// For each code found.
-			for (int i = 0; i < vectorSize; i++)
-			{
-				CodecInfo^ codec = gcnew CodecInfo();
-				codec->CodecId = gcnew String(codecs[i]->codecId.c_str());
-				codec->Description = gcnew String(codecs[i]->desc.c_str());
-				codec->Priority = codecs[i]->priority;
-				codecList->Add(codec);
-			}
+			CodecInfo^ codec = gcnew CodecInfo();
+			codec->CodecId = gcnew String(codecs[i]->codecId.c_str());
+			codec->Description = gcnew String(codecs[i]->desc.c_str());
+			codec->Priority = codecs[i]->priority;
+			codecList->Add(codec);
 		}
-
-		// Return the code list.
-		return codecList->ToArray();
 	}
-	else
-		throw gcnew Exception(CreateAccount());
+
+	// Return the code list.
+	return codecList->ToArray();
 }
 
 /// <summary>
@@ -608,34 +602,28 @@ array<CodecInfo^>^ Account::GetAudioCodecInfo()
 /// <returns>The supported video codecs in the system.</returns>
 array<CodecInfo^>^ Account::GetVideoCodecInfo()
 {
-	// If account created.
-	if (_created)
+	List<CodecInfo^>^ codecList = gcnew List<CodecInfo^>();
+	const pj::CodecInfoVector& codecs = _accountCallback->GetVideoCodecInfo();
+
+	// Get the vector size.
+	size_t vectorSize = codecs.size();
+
+	// If devices exist.
+	if (vectorSize > 0)
 	{
-		List<CodecInfo^>^ codecList = gcnew List<CodecInfo^>();
-		const pj::CodecInfoVector& codecs = _accountCallback->GetVideoCodecInfo();
-
-		// Get the vector size.
-		size_t vectorSize = codecs.size();
-
-		// If devices exist.
-		if (vectorSize > 0)
+		// For each code found.
+		for (int i = 0; i < vectorSize; i++)
 		{
-			// For each code found.
-			for (int i = 0; i < vectorSize; i++)
-			{
-				CodecInfo^ codec = gcnew CodecInfo();
-				codec->CodecId = gcnew String(codecs[i]->codecId.c_str());
-				codec->Description = gcnew String(codecs[i]->desc.c_str());
-				codec->Priority = codecs[i]->priority;
-				codecList->Add(codec);
-			}
+			CodecInfo^ codec = gcnew CodecInfo();
+			codec->CodecId = gcnew String(codecs[i]->codecId.c_str());
+			codec->Description = gcnew String(codecs[i]->desc.c_str());
+			codec->Priority = codecs[i]->priority;
+			codecList->Add(codec);
 		}
-
-		// Return the code list.
-		return codecList->ToArray();
 	}
-	else
-		throw gcnew Exception(CreateAccount());
+
+	// Return the code list.
+	return codecList->ToArray();
 }
 
 ///	<summary>
@@ -647,16 +635,10 @@ array<CodecInfo^>^ Account::GetVideoCodecInfo()
 ///	the codec.</param>
 void Account::AudioCodecSetPriority(String^ codecID, byte priority)
 {
-	// If account created.
-	if (_created)
-	{
-		std::string codecIDNative;
-		MarshalString(codecID, codecIDNative);
+	std::string codecIDNative;
+	MarshalString(codecID, codecIDNative);
 
-		_accountCallback->AudioCodecSetPriority(codecIDNative, priority);
-	}
-	else
-		throw gcnew Exception(CreateAccount());
+	_accountCallback->AudioCodecSetPriority(codecIDNative, priority);
 }
 
 ///	<summary>
@@ -668,16 +650,10 @@ void Account::AudioCodecSetPriority(String^ codecID, byte priority)
 ///	the codec.</param>
 void Account::VideoCodecSetPriority(String^ codecID, byte priority)
 {
-	// If account created.
-	if (_created)
-	{
-		std::string codecIDNative;
-		MarshalString(codecID, codecIDNative);
+	std::string codecIDNative;
+	MarshalString(codecID, codecIDNative);
 
-		_accountCallback->VideoCodecSetPriority(codecIDNative, priority);
-	}
-	else
-		throw gcnew Exception(CreateAccount());
+	_accountCallback->VideoCodecSetPriority(codecIDNative, priority);
 }
 
 /// <summary>

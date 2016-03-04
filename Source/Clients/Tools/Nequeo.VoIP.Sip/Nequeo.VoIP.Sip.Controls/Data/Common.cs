@@ -46,6 +46,11 @@ namespace Nequeo.VoIP.Sip.Data
     internal class Common
     {
         /// <summary>
+        /// The collection of audio codecs.
+        /// </summary>
+        public Nequeo.Net.Sip.CodecInfo[] AudioCodecs = null;
+
+        /// <summary>
         /// Account name.
         /// </summary>
         public string AccountName = "";

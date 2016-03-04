@@ -155,6 +155,7 @@ namespace Nequeo.VoIP.PjSip.UI
 
         private volatile bool _hasVideo = false;
         private volatile bool _isVideoValid = false;
+        private Nequeo.Net.PjSip.UI.VideoIncomingWindow _videoCallWindow = null;
 
         private System.Threading.Timer _redirectCallTimer = null;
         private bool _redirectEnabled = false;
@@ -347,6 +348,18 @@ namespace Nequeo.VoIP.PjSip.UI
                     StopPlayer();
                 }
 
+                try
+                {
+                    // Close the video window if any.
+                    if (_videoCallWindow != null)
+                    {
+                        _videoCallWindow.SetActiveState(false);
+                        _videoCallWindow.Close();
+                    }
+                }
+                catch { }
+                _videoCallWindow = null;
+
                 // Close the window.
                 _callEnded?.Invoke();
             }
@@ -400,6 +413,10 @@ namespace Nequeo.VoIP.PjSip.UI
                         {
                             _isVideoValid = e.IsVideoValid;
                             buttonVideo.Visible = true;
+
+                            // If not on hold.
+                            if (!e.CallOnHold)
+                                buttonVideo.Enabled = true;
                         }
                     }
                 }
@@ -640,6 +657,7 @@ namespace Nequeo.VoIP.PjSip.UI
             buttonTransfer.Enabled = false;
             checkBoxSuspend.Enabled = false;
             buttonHold.Enabled = false;
+            buttonVideo.Enabled = false;
         }
 
         /// <summary>
@@ -1122,7 +1140,7 @@ namespace Nequeo.VoIP.PjSip.UI
                     {
                         case CheckState.Checked:
                             _inComingCall.Call.StopTransmitting();
-                            if(_hasVideo)
+                            if (_isVideoValid)
                             {
                                 // Stop the video.
                                 _inComingCall.Call.StopVideoTransmit();
@@ -1131,7 +1149,7 @@ namespace Nequeo.VoIP.PjSip.UI
                         case CheckState.Indeterminate:
                         case CheckState.Unchecked:
                             _inComingCall.Call.StartTransmitting();
-                            if (_hasVideo)
+                            if (_isVideoValid)
                             {
                                 // Start the video.
                                 _inComingCall.Call.StartVideoTransmit();
@@ -1139,11 +1157,7 @@ namespace Nequeo.VoIP.PjSip.UI
                             break;
                     }
                 }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                catch { }
             }
         }
 
@@ -1257,16 +1271,6 @@ namespace Nequeo.VoIP.PjSip.UI
                         _inComingCall.Call.Hold();
                     }
                     catch { }
-
-                    try
-                    {
-                        if (_hasVideo)
-                        {
-                            // Start the video.
-                            _inComingCall.Call.StartVideoTransmit();
-                        }
-                    }
-                    catch { }
                 }
                 else
                 {
@@ -1274,18 +1278,24 @@ namespace Nequeo.VoIP.PjSip.UI
                     {
                         // Hold the call.
                         _inComingCall.Call.Hold();
+                        
                     }
                     catch { }
 
                     try
                     {
-                        if (_hasVideo)
+                        // Close the video window if any.
+                        if (_videoCallWindow != null)
                         {
-                            // Stop the video.
-                            _inComingCall.Call.StopVideoTransmit();
+                            _videoCallWindow.SetActiveState(false);
+                            _videoCallWindow.Close();
                         }
                     }
                     catch { }
+                    _videoCallWindow = null;
+
+                    // No video.
+                    buttonVideo.Enabled = false;
                 }
             }
         }
@@ -1297,27 +1307,54 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void buttonVideo_Click(object sender, EventArgs e)
         {
-            if (_inComingCall != null && _inComingCall.Call != null)
+            try
             {
-                // If video window exists.
-                if (_inComingCall.Call.VideoWindow != null)
+                // If in call.
+                if (_inComingCall != null && _inComingCall.Call != null)
                 {
-                    // Get the video window id.
-                    int videoWindowID = _inComingCall.Call.VideoWindow.GetVideoWindowID();
-                    if (videoWindowID >= 0)
+                    if (_isVideoValid)
                     {
-                        // Show the incoming video.
-                        Nequeo.Net.PjSip.UI.VideoIncomingWindow videoIncoming = new Net.PjSip.UI.VideoIncomingWindow(videoWindowID, "Video - " + _contactName);
+                        // If video window exists.
+                        if (_inComingCall.Call.VideoWindow != null && _videoCallWindow == null)
+                        {
+                            // Get the video window id.
+                            int videoWindowID = _inComingCall.Call.VideoWindow.GetVideoWindowID();
+                            if (videoWindowID >= 0)
+                            {
+                                // Show the incoming video.
+                                _videoCallWindow = new Net.PjSip.UI.VideoIncomingWindow(videoWindowID, "Remote Video - " + _contactName, 640, 480);
+                                _videoCallWindow.OnVideoIncomingClosing += VideoIncoming_OnVideoIncomingClosing;
+                                _videoCallWindow.Show(this);
+                                
+                                // Enabled.
+                                buttonVideo.Enabled = false;
 
-                        // Assign and show.
-                        videoIncoming.OnVideoIncomingClosing += VideoIncoming_OnVideoIncomingClosing;
-                        videoIncoming.Show(this);
+                                // Start the video.
+                                _inComingCall.Call.StartVideoTransmit();
+                            }
+                        }
+                        else
+                        {
+                            // Window state.
+                            bool windowState = _videoCallWindow.GetActiveState();
 
-                        // Enabled.
-                        buttonVideo.Enabled = false;
+                            // If still active.
+                            if (windowState)
+                            {
+                                // Show the video.
+                                _videoCallWindow.ShowVideoWindow();
+
+                                // Start the video.
+                                _inComingCall.Call.StartVideoTransmit();
+                            }
+
+                            // Enabled.
+                            buttonVideo.Enabled = false;
+                        }
                     }
                 }
             }
+            catch { }
         }
 
         /// <summary>
@@ -1329,6 +1366,37 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             // Enabled.
             buttonVideo.Enabled = true;
+
+            try
+            {
+                // If in call.
+                if (_inComingCall != null && _inComingCall.Call != null)
+                {
+                    if (_isVideoValid)
+                    {
+                        // If video window exists.
+                        if (_inComingCall.Call.VideoWindow != null && _videoCallWindow != null)
+                        {
+                            // Get the video window id.
+                            int videoWindowID = _inComingCall.Call.VideoWindow.GetVideoWindowID();
+                            if (videoWindowID >= 0)
+                            {
+                                // Stop the video.
+                                _inComingCall.Call.StopVideoTransmit();
+
+                                // Window state.
+                                bool windowState = _videoCallWindow.GetActiveState();
+
+                                // If still active.
+                                if (windowState)
+                                    // Show the video.
+                                    _videoCallWindow.HideVideoWindow();
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
         }
     }
 }

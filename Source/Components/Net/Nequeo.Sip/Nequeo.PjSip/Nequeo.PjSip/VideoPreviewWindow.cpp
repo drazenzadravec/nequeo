@@ -103,9 +103,8 @@ void VideoPreviewWindow::Create()
 		return;
 	}
 
-	// Get the window info.
+	// Get the preview window.
 	wid = pjsua_vid_preview_get_win(_videoCaptureIndex);
-	pjsua_vid_win_get_info(wid, &wi);
 
 	// Set the position.
 	pjsua_vid_win_set_pos(wid, &pos);
@@ -117,10 +116,13 @@ void VideoPreviewWindow::Create()
 	/*const pjmedia_rect_size size = { 320, 240 };
 	pjsua_vid_win_set_size(wid, &size);*/
 
+	// Get the window info.
+	pjsua_vid_win_get_info(wid, &wi);
+
 	// Set the window size.
 	pjmedia_rect_size videoSize = wi.size;
-	this->Width = videoSize.w;
-	this->Height = videoSize.h;
+	this->Width = videoSize.w + 16;
+	this->Height = videoSize.h + 38;
 
 	// Set the video catpure handle to this form.
 	HWND videoHandle = (HWND)(wi.hwnd.info.win.hwnd);

@@ -40,6 +40,7 @@
             System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
+            this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
             this.buttonHold = new System.Windows.Forms.Button();
             this.trackBarMicrophone = new System.Windows.Forms.TrackBar();
             this.trackBarVolume = new System.Windows.Forms.TrackBar();
@@ -136,12 +137,12 @@
             this.checkBoxConferenceSuspendAll = new System.Windows.Forms.CheckBox();
             this.buttonConferenceHangupAll = new System.Windows.Forms.Button();
             this.listViewConference = new System.Windows.Forms.ListView();
-            this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStripConference = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemConferenceHangup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemConferenceSuspend = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxCall.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
@@ -161,8 +162,8 @@
             this.groupBoxInOutCalls.SuspendLayout();
             this.tabPageConferenceCall.SuspendLayout();
             this.groupBoxConference.SuspendLayout();
-            this.tabPageVoIPAccount.SuspendLayout();
             this.contextMenuStripConference.SuspendLayout();
+            this.tabPageVoIPAccount.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCall
@@ -170,6 +171,7 @@
             this.groupBoxCall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCall.Controls.Add(this.checkBoxSuspend);
             this.groupBoxCall.Controls.Add(this.buttonHold);
             this.groupBoxCall.Controls.Add(this.trackBarMicrophone);
             this.groupBoxCall.Controls.Add(this.trackBarVolume);
@@ -188,6 +190,18 @@
             this.groupBoxCall.TabIndex = 0;
             this.groupBoxCall.TabStop = false;
             this.groupBoxCall.Text = "Call";
+            // 
+            // checkBoxSuspend
+            // 
+            this.checkBoxSuspend.AutoSize = true;
+            this.checkBoxSuspend.Enabled = false;
+            this.checkBoxSuspend.Location = new System.Drawing.Point(258, 50);
+            this.checkBoxSuspend.Name = "checkBoxSuspend";
+            this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
+            this.checkBoxSuspend.TabIndex = 24;
+            this.checkBoxSuspend.Text = "Suspend";
+            this.checkBoxSuspend.UseVisualStyleBackColor = true;
+            this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
             // 
             // buttonHold
             // 
@@ -1243,27 +1257,6 @@
             this.listViewConference.UseCompatibleStateImageBehavior = false;
             this.listViewConference.SelectedIndexChanged += new System.EventHandler(this.listViewConference_SelectedIndexChanged);
             // 
-            // tabPageVoIPAccount
-            // 
-            this.tabPageVoIPAccount.Controls.Add(this.groupBoxAccount);
-            this.tabPageVoIPAccount.Location = new System.Drawing.Point(4, 22);
-            this.tabPageVoIPAccount.Name = "tabPageVoIPAccount";
-            this.tabPageVoIPAccount.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVoIPAccount.Size = new System.Drawing.Size(376, 353);
-            this.tabPageVoIPAccount.TabIndex = 1;
-            this.tabPageVoIPAccount.Text = "Account";
-            this.tabPageVoIPAccount.UseVisualStyleBackColor = true;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.SupportMultiDottedExtensions = true;
-            this.openFileDialog.Title = "Configuration";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.SupportMultiDottedExtensions = true;
-            this.saveFileDialog.Title = "Save";
-            // 
             // contextMenuStripConference
             // 
             this.contextMenuStripConference.Enabled = false;
@@ -1288,6 +1281,27 @@
             this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(119, 22);
             this.toolStripMenuItemConferenceSuspend.Text = "Suspend";
             this.toolStripMenuItemConferenceSuspend.Click += new System.EventHandler(this.toolStripMenuItemConferenceSuspend_Click);
+            // 
+            // tabPageVoIPAccount
+            // 
+            this.tabPageVoIPAccount.Controls.Add(this.groupBoxAccount);
+            this.tabPageVoIPAccount.Location = new System.Drawing.Point(4, 22);
+            this.tabPageVoIPAccount.Name = "tabPageVoIPAccount";
+            this.tabPageVoIPAccount.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageVoIPAccount.Size = new System.Drawing.Size(376, 353);
+            this.tabPageVoIPAccount.TabIndex = 1;
+            this.tabPageVoIPAccount.Text = "Account";
+            this.tabPageVoIPAccount.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.SupportMultiDottedExtensions = true;
+            this.openFileDialog.Title = "Configuration";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.SupportMultiDottedExtensions = true;
+            this.saveFileDialog.Title = "Save";
             // 
             // VoIPControl
             // 
@@ -1323,8 +1337,8 @@
             this.tabPageConferenceCall.ResumeLayout(false);
             this.groupBoxConference.ResumeLayout(false);
             this.groupBoxConference.PerformLayout();
-            this.tabPageVoIPAccount.ResumeLayout(false);
             this.contextMenuStripConference.ResumeLayout(false);
+            this.tabPageVoIPAccount.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1434,5 +1448,6 @@
         private System.Windows.Forms.Label labelMicrophoneLevel;
         private System.Windows.Forms.Label labelVolumeLevel;
         private System.Windows.Forms.Button buttonHold;
+        private System.Windows.Forms.CheckBox checkBoxSuspend;
     }
 }

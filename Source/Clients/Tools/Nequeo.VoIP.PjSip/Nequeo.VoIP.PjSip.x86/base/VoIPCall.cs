@@ -371,6 +371,7 @@ namespace Nequeo.VoIP.PjSip
                 CallSetting setting = new CallSetting(true);
                 CallOpParam parm = new CallOpParam(true);
                 setting.AudioCount = 1;
+                setting.VideoCount = 1;
                 parm.Setting = setting;
 
                 // Continue ringing.

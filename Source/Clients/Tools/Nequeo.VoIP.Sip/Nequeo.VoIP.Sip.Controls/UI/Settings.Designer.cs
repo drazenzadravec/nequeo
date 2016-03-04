@@ -130,13 +130,15 @@
             this.buttonSoundsRingPath = new System.Windows.Forms.Button();
             this.textBoxSoundsRingPath = new System.Windows.Forms.TextBox();
             this.tabPageCodec = new System.Windows.Forms.TabPage();
+            this.groupBoxAudioCodec = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxAudioCodec = new System.Windows.Forms.CheckedListBox();
             this.groupBoxFeatureTransferCall = new System.Windows.Forms.GroupBox();
+            this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.labelRedirectCallTimeSec = new System.Windows.Forms.Label();
             this.textBoxRedirectCallTime = new System.Windows.Forms.TextBox();
             this.labelRedirectCallTime = new System.Windows.Forms.Label();
             this.textBoxRedirectCallText = new System.Windows.Forms.TextBox();
             this.checkBoxRedirectCallEnabled = new System.Windows.Forms.CheckBox();
-            this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -153,6 +155,7 @@
             this.tabPageMedia.SuspendLayout();
             this.groupBoxSounds.SuspendLayout();
             this.tabPageCodec.SuspendLayout();
+            this.groupBoxAudioCodec.SuspendLayout();
             this.groupBoxFeatureTransferCall.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1179,6 +1182,7 @@
             // 
             // tabPageCodec
             // 
+            this.tabPageCodec.Controls.Add(this.groupBoxAudioCodec);
             this.tabPageCodec.Controls.Add(this.groupBoxFeatureTransferCall);
             this.tabPageCodec.Location = new System.Drawing.Point(4, 22);
             this.tabPageCodec.Name = "tabPageCodec";
@@ -1186,6 +1190,31 @@
             this.tabPageCodec.TabIndex = 3;
             this.tabPageCodec.Text = "Feature";
             this.tabPageCodec.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxAudioCodec
+            // 
+            this.groupBoxAudioCodec.Controls.Add(this.checkedListBoxAudioCodec);
+            this.groupBoxAudioCodec.Location = new System.Drawing.Point(6, 70);
+            this.groupBoxAudioCodec.Name = "groupBoxAudioCodec";
+            this.groupBoxAudioCodec.Size = new System.Drawing.Size(475, 251);
+            this.groupBoxAudioCodec.TabIndex = 5;
+            this.groupBoxAudioCodec.TabStop = false;
+            this.groupBoxAudioCodec.Text = "Audio Codecs";
+            // 
+            // checkedListBoxAudioCodec
+            // 
+            this.checkedListBoxAudioCodec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBoxAudioCodec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxAudioCodec.FormattingEnabled = true;
+            this.checkedListBoxAudioCodec.IntegralHeight = false;
+            this.checkedListBoxAudioCodec.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxAudioCodec.Name = "checkedListBoxAudioCodec";
+            this.checkedListBoxAudioCodec.Size = new System.Drawing.Size(463, 226);
+            this.checkedListBoxAudioCodec.TabIndex = 2;
+            this.checkedListBoxAudioCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxAudioCodec_ItemCheck);
+            this.checkedListBoxAudioCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxAudioCodec_SelectedIndexChanged);
             // 
             // groupBoxFeatureTransferCall
             // 
@@ -1201,6 +1230,15 @@
             this.groupBoxFeatureTransferCall.TabIndex = 0;
             this.groupBoxFeatureTransferCall.TabStop = false;
             this.groupBoxFeatureTransferCall.Text = "Redirect Call";
+            // 
+            // labelRedirectCallToNumber
+            // 
+            this.labelRedirectCallToNumber.AutoSize = true;
+            this.labelRedirectCallToNumber.Location = new System.Drawing.Point(91, 23);
+            this.labelRedirectCallToNumber.Name = "labelRedirectCallToNumber";
+            this.labelRedirectCallToNumber.Size = new System.Drawing.Size(26, 13);
+            this.labelRedirectCallToNumber.TabIndex = 10;
+            this.labelRedirectCallToNumber.Text = "To :";
             // 
             // labelRedirectCallTimeSec
             // 
@@ -1249,15 +1287,6 @@
             this.checkBoxRedirectCallEnabled.UseVisualStyleBackColor = true;
             this.checkBoxRedirectCallEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRedirectCallEnabled_CheckedChanged);
             // 
-            // labelRedirectCallToNumber
-            // 
-            this.labelRedirectCallToNumber.AutoSize = true;
-            this.labelRedirectCallToNumber.Location = new System.Drawing.Point(91, 23);
-            this.labelRedirectCallToNumber.Name = "labelRedirectCallToNumber";
-            this.labelRedirectCallToNumber.Size = new System.Drawing.Size(26, 13);
-            this.labelRedirectCallToNumber.TabIndex = 10;
-            this.labelRedirectCallToNumber.Text = "To :";
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1302,6 +1331,7 @@
             this.groupBoxSounds.ResumeLayout(false);
             this.groupBoxSounds.PerformLayout();
             this.tabPageCodec.ResumeLayout(false);
+            this.groupBoxAudioCodec.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.PerformLayout();
             this.ResumeLayout(false);
@@ -1419,5 +1449,7 @@
         private System.Windows.Forms.TextBox textBoxRedirectCallText;
         private System.Windows.Forms.CheckBox checkBoxRedirectCallEnabled;
         private System.Windows.Forms.Label labelRedirectCallToNumber;
+        private System.Windows.Forms.GroupBox groupBoxAudioCodec;
+        private System.Windows.Forms.CheckedListBox checkedListBoxAudioCodec;
     }
 }

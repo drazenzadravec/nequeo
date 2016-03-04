@@ -258,12 +258,21 @@ namespace Nequeo.VoIP.PjSip
         }
 
         /// <summary>
-        /// Get all supported codecs in the system.
+        /// Get all supported audio codecs in the system.
         /// </summary>
-        /// <returns>The supported codecs in the system.</returns>
-        public CodecInfo[] GetCodecInfo()
+        /// <returns>The supported audio codecs in the system.</returns>
+        public CodecInfo[] GetAudioCodecInfo()
         {
             return _account.GetAudioCodecInfo();
+        }
+
+        /// <summary>
+        /// Get all supported video codecs in the system.
+        /// </summary>
+        /// <returns>The supported video codecs in the system.</returns>
+        public CodecInfo[] GetVideoCodecInfo()
+        {
+            return _account.GetVideoCodecInfo();
         }
 
         /// <summary>
@@ -333,6 +342,30 @@ namespace Nequeo.VoIP.PjSip
         public void RemoveContact(Contact contact)
         {
             _account.RemoveContact(contact);
+        }
+
+        ///	<summary>
+        ///	Change audio codec priority.
+        ///	</summary>
+        /// <param name="codecID">which is a string that uniquely identify
+        ///	the codec(such as "speex/8000").</param>
+        /// <param name="priority">Codec priority, 0-255, where zero means to disable
+        ///	the codec.</param>
+        public void SetPriorityAudioCodec(string codecID, byte priority)
+        {
+            _account.AudioCodecSetPriority(codecID, priority);
+        }
+
+        ///	<summary>
+        ///	Change video codec priority.
+        ///	</summary>
+        /// <param name="codecID">which is a string that uniquely identify
+        ///	the codec(such as "speex/8000").</param>
+        /// <param name="priority">Codec priority, 0-255, where zero means to disable
+        ///	the codec.</param>
+        public void SetPriorityVideoCodec(string codecID, byte priority)
+        {
+            _account.VideoCodecSetPriority(codecID, priority);
         }
 
         /// <summary>

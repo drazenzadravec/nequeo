@@ -123,6 +123,8 @@ namespace Nequeo.VoIP.PjSip.Data
 
         private int featureRedirectCallAfterField;
 
+        private uint featureVideoBandwidthRateField;
+
         /// <remarks/>
         public string accountName
         {
@@ -744,6 +746,19 @@ namespace Nequeo.VoIP.PjSip.Data
             set
             {
                 this.featureRedirectCallAfterField = value;
+            }
+        }
+
+        /// <remarks/>
+        public uint featureVideoBandwidthRate
+        {
+            get
+            {
+                return this.featureVideoBandwidthRateField;
+            }
+            set
+            {
+                this.featureVideoBandwidthRateField = value;
             }
         }
     }

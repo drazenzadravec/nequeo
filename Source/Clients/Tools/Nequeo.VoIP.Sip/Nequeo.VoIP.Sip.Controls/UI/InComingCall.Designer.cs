@@ -271,7 +271,7 @@
             // checkBoxSuspend
             // 
             this.checkBoxSuspend.AutoSize = true;
-            this.checkBoxSuspend.Location = new System.Drawing.Point(12, 209);
+            this.checkBoxSuspend.Location = new System.Drawing.Point(12, 180);
             this.checkBoxSuspend.Name = "checkBoxSuspend";
             this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
             this.checkBoxSuspend.TabIndex = 21;

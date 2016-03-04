@@ -335,6 +335,18 @@ namespace Nequeo.VoIP.Sip
             _account.RemoveContact(contact);
         }
 
+        ///	<summary>
+        ///	Change audio codec priority.
+        ///	</summary>
+        /// <param name="codecID">which is a string that uniquely identify
+        ///	the codec(such as "speex/8000").</param>
+        /// <param name="priority">Codec priority, 0-255, where zero means to disable
+        ///	the codec.</param>
+        public void SetPriorityAudioCodec(string codecID, byte priority)
+        {
+            _account.AudioCodecSetPriority(codecID, priority);
+        }
+
         /// <summary>
         /// Create a new call.
         /// </summary>

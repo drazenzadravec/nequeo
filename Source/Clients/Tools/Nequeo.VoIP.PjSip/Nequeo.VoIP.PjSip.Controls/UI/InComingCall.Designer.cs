@@ -273,7 +273,7 @@
             // checkBoxSuspend
             // 
             this.checkBoxSuspend.AutoSize = true;
-            this.checkBoxSuspend.Location = new System.Drawing.Point(12, 209);
+            this.checkBoxSuspend.Location = new System.Drawing.Point(12, 180);
             this.checkBoxSuspend.Name = "checkBoxSuspend";
             this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
             this.checkBoxSuspend.TabIndex = 21;
@@ -304,11 +304,11 @@
             // 
             // buttonVideo
             // 
-            this.buttonVideo.Location = new System.Drawing.Point(113, 205);
+            this.buttonVideo.Location = new System.Drawing.Point(113, 176);
             this.buttonVideo.Name = "buttonVideo";
             this.buttonVideo.Size = new System.Drawing.Size(75, 23);
             this.buttonVideo.TabIndex = 24;
-            this.buttonVideo.Text = "Show Video";
+            this.buttonVideo.Text = "Video";
             this.buttonVideo.UseVisualStyleBackColor = true;
             this.buttonVideo.Visible = false;
             this.buttonVideo.Click += new System.EventHandler(this.buttonVideo_Click);

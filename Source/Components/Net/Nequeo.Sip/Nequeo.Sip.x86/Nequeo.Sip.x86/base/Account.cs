@@ -425,27 +425,21 @@ namespace Nequeo.Net.Sip
         /// <returns>The supported codecs in the system.</returns>
         public CodecInfo[] GetCodecInfo()
         {
-            // If account created.
-            if (_created)
+            List<CodecInfo> codecList = new List<CodecInfo>();
+            pjsua2.CodecInfoVector codecs = _pjAccount.GetCodecInfo();
+
+            // For each code found.
+            for (int i = 0; i < codecs.Count; i++)
             {
-                List<CodecInfo> codecList = new List<CodecInfo>();
-                pjsua2.CodecInfoVector codecs = _pjAccount.GetCodecInfo();
-
-                // For each code found.
-                for (int i = 0; i < codecs.Count; i++)
-                {
-                    CodecInfo codec = new CodecInfo();
-                    codec.CodecId = codecs[i].codecId;
-                    codec.Description = codecs[i].desc;
-                    codec.Priority = codecs[i].priority;
-                    codecList.Add(codec);
-                }
-
-                // Return the code list.
-                return codecList.ToArray();
+                CodecInfo codec = new CodecInfo();
+                codec.CodecId = codecs[i].codecId;
+                codec.Description = codecs[i].desc;
+                codec.Priority = codecs[i].priority;
+                codecList.Add(codec);
             }
-            else
-                throw new Exception(CreateAccount);
+
+            // Return the code list.
+            return codecList.ToArray();
         }
 
         ///	<summary>
@@ -457,13 +451,7 @@ namespace Nequeo.Net.Sip
         ///	the codec.</param>
         public void AudioCodecSetPriority(String codecID, byte priority)
         {
-            // If account created.
-            if (_created)
-            {
-                _pjAccount.AudioCodecSetPriority(codecID, priority);
-            }
-            else
-                throw new Exception(CreateAccount);
+            _pjAccount.AudioCodecSetPriority(codecID, priority);
         }
 
         /// <summary>

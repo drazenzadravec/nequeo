@@ -1093,11 +1093,7 @@ namespace Nequeo.VoIP.Sip.UI
                             break;
                     }
                 }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                catch { }
             }
         }
 

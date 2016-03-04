@@ -501,6 +501,26 @@ namespace Nequeo.VoIP.PjSip.Param
         }
 
         /// <summary>
+        /// Update the call.
+        /// </summary>
+        public void Update()
+        {
+            // Create the call settings.
+            CallSetting setting = new CallSetting(true);
+            CallOpParam parm = new CallOpParam(true);
+            setting.AudioCount = 1;
+            setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
+            parm.Setting = setting;
+            parm.Code = StatusCode.SC_OK;
+
+            if (_call != null)
+            {
+                // Update the call.
+                _call.Update(parm);
+            }
+        }
+
+        /// <summary>
         /// Hangup the current call.
         /// </summary>
         public void Hangup()

@@ -48,4 +48,5 @@
   <featureRedirectCallEnabled>false</featureRedirectCallEnabled>
   <featureRedirectCallNumber></featureRedirectCallNumber>
   <featureRedirectCallAfter>40</featureRedirectCallAfter>
+  <featureVideoBandwidthRate>0</featureVideoBandwidthRate>
 </configuration>

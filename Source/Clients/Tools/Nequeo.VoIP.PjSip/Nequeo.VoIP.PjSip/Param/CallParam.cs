@@ -420,7 +420,7 @@ namespace Nequeo.VoIP.PjSip.Param
         }
 
         /// <summary>
-        /// Stop the conversationbetween callers.
+        /// Stop the conversation between callers.
         /// </summary>
         /// <param name="caller">The caller to stop the conversation with.</param>
         public void StopConversation(CallParam caller)
@@ -498,6 +498,26 @@ namespace Nequeo.VoIP.PjSip.Param
 
             // Transmitting.
             _isTransmitting = false;
+        }
+
+        /// <summary>
+        /// Update the call.
+        /// </summary>
+        public void Update()
+        {
+            // Create the call settings.
+            CallSetting setting = new CallSetting(true);
+            CallOpParam parm = new CallOpParam(true);
+            setting.AudioCount = 1;
+            setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
+            parm.Setting = setting;
+            parm.Code = StatusCode.SC_OK;
+
+            if (_call != null)
+            {
+                // Update the call.
+                _call.Update(parm);
+            }
         }
 
         /// <summary>

@@ -51,6 +51,7 @@
         <xs:element name="featureRedirectCallEnabled" type="xs:boolean" />
         <xs:element name="featureRedirectCallNumber" type="xs:string" />
         <xs:element name="featureRedirectCallAfter" type="xs:int" />
+        <xs:element name="featureVideoBandwidthRate" type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

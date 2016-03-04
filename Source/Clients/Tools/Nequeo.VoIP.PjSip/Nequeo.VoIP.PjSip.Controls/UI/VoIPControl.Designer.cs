@@ -41,8 +41,6 @@
             System.Windows.Forms.ListViewGroup listViewGroup18 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
             this.groupBoxCallVideo = new System.Windows.Forms.GroupBox();
-            this.buttonVideoRemove = new System.Windows.Forms.Button();
-            this.buttonVideoAdd = new System.Windows.Forms.Button();
             this.checkBoxVideoCallAutoInclude = new System.Windows.Forms.CheckBox();
             this.buttonVideoCall = new System.Windows.Forms.Button();
             this.buttonVideoCallPreview = new System.Windows.Forms.Button();
@@ -148,6 +146,7 @@
             this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
             this.groupBoxCall.SuspendLayout();
             this.groupBoxCallVideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
@@ -177,6 +176,7 @@
             this.groupBoxCall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCall.Controls.Add(this.checkBoxSuspend);
             this.groupBoxCall.Controls.Add(this.groupBoxCallVideo);
             this.groupBoxCall.Controls.Add(this.buttonHold);
             this.groupBoxCall.Controls.Add(this.labelMicrophoneLevel);
@@ -199,8 +199,6 @@
             // 
             // groupBoxCallVideo
             // 
-            this.groupBoxCallVideo.Controls.Add(this.buttonVideoRemove);
-            this.groupBoxCallVideo.Controls.Add(this.buttonVideoAdd);
             this.groupBoxCallVideo.Controls.Add(this.checkBoxVideoCallAutoInclude);
             this.groupBoxCallVideo.Controls.Add(this.buttonVideoCall);
             this.groupBoxCallVideo.Controls.Add(this.buttonVideoCallPreview);
@@ -212,33 +210,12 @@
             this.groupBoxCallVideo.TabStop = false;
             this.groupBoxCallVideo.Text = "Video";
             // 
-            // buttonVideoRemove
-            // 
-            this.buttonVideoRemove.Location = new System.Drawing.Point(6, 107);
-            this.buttonVideoRemove.Name = "buttonVideoRemove";
-            this.buttonVideoRemove.Size = new System.Drawing.Size(75, 23);
-            this.buttonVideoRemove.TabIndex = 4;
-            this.buttonVideoRemove.Text = "Remove";
-            this.buttonVideoRemove.UseVisualStyleBackColor = true;
-            this.buttonVideoRemove.Visible = false;
-            this.buttonVideoRemove.Click += new System.EventHandler(this.buttonVideoRemove_Click);
-            // 
-            // buttonVideoAdd
-            // 
-            this.buttonVideoAdd.Location = new System.Drawing.Point(6, 78);
-            this.buttonVideoAdd.Name = "buttonVideoAdd";
-            this.buttonVideoAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonVideoAdd.TabIndex = 3;
-            this.buttonVideoAdd.Text = "Add";
-            this.buttonVideoAdd.UseVisualStyleBackColor = true;
-            this.buttonVideoAdd.Visible = false;
-            this.buttonVideoAdd.Click += new System.EventHandler(this.buttonVideoAdd_Click);
-            // 
             // checkBoxVideoCallAutoInclude
             // 
             this.checkBoxVideoCallAutoInclude.AutoSize = true;
             this.checkBoxVideoCallAutoInclude.Checked = true;
             this.checkBoxVideoCallAutoInclude.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxVideoCallAutoInclude.Enabled = false;
             this.checkBoxVideoCallAutoInclude.Location = new System.Drawing.Point(6, 142);
             this.checkBoxVideoCallAutoInclude.Name = "checkBoxVideoCallAutoInclude";
             this.checkBoxVideoCallAutoInclude.Size = new System.Drawing.Size(86, 17);
@@ -249,13 +226,13 @@
             // 
             // buttonVideoCall
             // 
-            this.buttonVideoCall.Enabled = false;
             this.buttonVideoCall.Location = new System.Drawing.Point(6, 49);
             this.buttonVideoCall.Name = "buttonVideoCall";
             this.buttonVideoCall.Size = new System.Drawing.Size(75, 23);
             this.buttonVideoCall.TabIndex = 1;
-            this.buttonVideoCall.Text = "Start Call";
+            this.buttonVideoCall.Text = "Start";
             this.buttonVideoCall.UseVisualStyleBackColor = true;
+            this.buttonVideoCall.Visible = false;
             this.buttonVideoCall.Click += new System.EventHandler(this.buttonVideoCall_Click);
             // 
             // buttonVideoCallPreview
@@ -1368,6 +1345,18 @@
             this.saveFileDialog.SupportMultiDottedExtensions = true;
             this.saveFileDialog.Title = "Save";
             // 
+            // checkBoxSuspend
+            // 
+            this.checkBoxSuspend.AutoSize = true;
+            this.checkBoxSuspend.Enabled = false;
+            this.checkBoxSuspend.Location = new System.Drawing.Point(258, 50);
+            this.checkBoxSuspend.Name = "checkBoxSuspend";
+            this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
+            this.checkBoxSuspend.TabIndex = 25;
+            this.checkBoxSuspend.Text = "Suspend";
+            this.checkBoxSuspend.UseVisualStyleBackColor = true;
+            this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
+            // 
             // VoIPControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1519,7 +1508,6 @@
         private System.Windows.Forms.Button buttonVideoCallPreview;
         private System.Windows.Forms.Button buttonVideoCall;
         private System.Windows.Forms.CheckBox checkBoxVideoCallAutoInclude;
-        private System.Windows.Forms.Button buttonVideoAdd;
-        private System.Windows.Forms.Button buttonVideoRemove;
+        private System.Windows.Forms.CheckBox checkBoxSuspend;
     }
 }

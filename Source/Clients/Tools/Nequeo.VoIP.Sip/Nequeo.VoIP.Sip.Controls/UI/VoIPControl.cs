@@ -887,6 +887,7 @@ namespace Nequeo.VoIP.Sip.UI
                     buttonCall.Enabled = false;
                     buttonHold.Enabled = true;
                     buttonHangup.Enabled = true;
+                    checkBoxSuspend.Enabled = true;
                     groupBoxDigits.Enabled = true;
                     comboBoxCallNumber.Enabled = false;
                 }
@@ -907,6 +908,7 @@ namespace Nequeo.VoIP.Sip.UI
                 buttonHangup.Enabled = false;
                 groupBoxDigits.Enabled = false;
                 comboBoxCallNumber.Enabled = true;
+                checkBoxSuspend.Enabled = false;
                 _call = null;
             }
         }
@@ -1039,6 +1041,7 @@ namespace Nequeo.VoIP.Sip.UI
             buttonHangup.Enabled = false;
             groupBoxDigits.Enabled = false;
             comboBoxCallNumber.Enabled = true;
+            checkBoxSuspend.Enabled = false;
             _call = null;
         }
 
@@ -2013,6 +2016,7 @@ namespace Nequeo.VoIP.Sip.UI
                     _voipCall.VoIPManager.AccountConnection.TimerMinSESec = _configuration.timerMinimumSession;
                     _voipCall.VoIPManager.AccountConnection.TimerSessExpiresSec = _configuration.timerSessionExpires;
                     _voipCall.VoIPManager.AccountConnection.UnregWaitSec = _configuration.timeUnregisterWait;
+                    _voipCall.VoIPManager.AccountConnection.VideoRateControlBandwidth = _configuration.featureVideoBandwidthRate;
                 }
                 catch (Exception ex)
                 {
@@ -2504,6 +2508,34 @@ namespace Nequeo.VoIP.Sip.UI
                 {
                     // Hold the call.
                     _call.Hold();
+                }
+                catch { }
+            }
+        }
+
+        /// <summary>
+        /// Suspend.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxSuspend_CheckedChanged(object sender, EventArgs e)
+        {
+            // Call exists.
+            if (_call != null)
+            {
+                try
+                {
+                    // Select the state.
+                    switch (checkBoxSuspend.CheckState)
+                    {
+                        case CheckState.Checked:
+                            _call.StopTransmitting();
+                            break;
+                        case CheckState.Indeterminate:
+                        case CheckState.Unchecked:
+                            _call.StartTransmitting();
+                            break;
+                    }
                 }
                 catch { }
             }

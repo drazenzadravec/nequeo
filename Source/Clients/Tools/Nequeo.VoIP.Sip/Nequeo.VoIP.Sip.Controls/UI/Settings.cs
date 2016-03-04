@@ -300,6 +300,28 @@ namespace Nequeo.VoIP.Sip.UI
                 else
                     comboBoxSoundsAudioDevice.SelectedIndex = -1;
             }
+
+            // Load only once.
+            if (_common.AudioCodecs == null)
+            {
+                // List all the audio codec.
+                _common.AudioCodecs = _voipCall.VoIPManager.GetCodecInfo();
+            }
+
+            // Order the codecs.
+            var orederedAudioCodecs = _common.AudioCodecs.OrderByDescending(u => u.Priority);
+
+            // For each codec.
+            foreach (Nequeo.Net.Sip.CodecInfo audioCodec in orederedAudioCodecs)
+            {
+                bool enabled = true;
+
+                if (audioCodec.Priority == (byte)0)
+                    enabled = false;
+
+                // Add to list.
+                checkedListBoxAudioCodec.Items.Add(audioCodec.CodecId, enabled);
+            }
         }
 
         /// <summary>
@@ -1263,6 +1285,42 @@ namespace Nequeo.VoIP.Sip.UI
                 {
                     // Assign the port.
                     _common.RedirectCallAfter = wait;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Audio codec checked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkedListBoxAudioCodec_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Audio codec.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkedListBoxAudioCodec_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxAudioCodec.SelectedIndex >= 0)
+            {
+                // Get the selected codec.
+                string audioCodec = (string)checkedListBoxAudioCodec.SelectedItem;
+                Nequeo.Net.Sip.CodecInfo codecInfo = _common.AudioCodecs.First(u => u.CodecId.ToLower() == audioCodec.ToLower());
+
+                // If item is unchecked.
+                if (e.NewValue == CheckState.Unchecked)
+                {
+                    // Set priorty to zero disable.
+                    _voipCall.VoIPManager.SetPriorityAudioCodec(audioCodec, 0);
+                }
+                else
+                {
+                    // Set priorty to original.
+                    _voipCall.VoIPManager.SetPriorityAudioCodec(audioCodec, codecInfo.Priority);
                 }
             }
         }
