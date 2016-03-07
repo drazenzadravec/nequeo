@@ -449,7 +449,7 @@ namespace Nequeo.VoIP.Sip
                     string combineFrom = String.Join(":", fromHeader.Skip(1));
                     fromHeader = combineFrom.Split(new char[] { ';' });
                     combineFrom = fromHeader[0];
-                    from = combineFrom.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "");
+                    from = combineFrom.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "").Replace("\"", "");
                     param.From = from;
                 }
 
@@ -461,7 +461,7 @@ namespace Nequeo.VoIP.Sip
                     string combineContact = String.Join(":", contactHeader.Skip(1));
                     contactHeader = combineContact.Split(new char[] { ';' });
                     combineContact = contactHeader[0];
-                    contact = combineContact.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "");
+                    contact = combineContact.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "").Replace("\"", "");
                     param.FromContact = contact;
                 }
             }
@@ -484,7 +484,7 @@ namespace Nequeo.VoIP.Sip
         private void FindContact(Param.OnInstantMessageParam param)
         {
             // Get from.
-            param.From = param.FromUri.Replace("<", "").Replace(">", ""); ;
+            param.From = param.FromUri.Replace("<", "").Replace(">", "").Replace("\"", "");
         }
 
         #region Dispose Object Methods

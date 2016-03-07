@@ -96,5 +96,16 @@ namespace Nequeo.Forms.UI
             _inputType = UI.InputType.OK;
             Close();
         }
+
+        /// <summary>
+        /// Load.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Input_Load(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(_inputValue))
+                textBox1.Text = _inputValue;
+        }
     }
 }

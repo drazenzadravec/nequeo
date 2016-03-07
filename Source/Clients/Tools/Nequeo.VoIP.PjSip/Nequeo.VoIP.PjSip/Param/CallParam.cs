@@ -125,11 +125,19 @@ namespace Nequeo.VoIP.PjSip.Param
         }
 
         /// <summary>
-        /// Gets an indictor specifying is the call is a video call.
+        /// Gets an indictor specifying that the call is a video call.
         /// </summary>
         public bool HasVideo
         {
             get { return _hasVideo; }
+        }
+
+        /// <summary>
+        /// Gets an indictor specifying that the call has a valid video call.
+        /// </summary>
+        public bool IsVideoValid
+        {
+            get { return _isVideoValid; }
         }
 
         /// <summary>

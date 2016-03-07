@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBoxAudioDevice = new System.Windows.Forms.GroupBox();
             this.comboBoxAudioPlaybackDevice = new System.Windows.Forms.ComboBox();
             this.comboBoxAudioCaptureDevice = new System.Windows.Forms.ComboBox();
@@ -150,6 +151,10 @@
             this.comboBoxVideoDeviceCapture = new System.Windows.Forms.ComboBox();
             this.labelVideoDevicePlayback = new System.Windows.Forms.Label();
             this.labelVideoDeviceCapture = new System.Windows.Forms.Label();
+            this.contextMenuStripCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemChangePriority = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripVideoCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemVideoChangePriority = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -170,6 +175,8 @@
             this.groupBoxAudioCodec.SuspendLayout();
             this.groupBoxFeatureTransferCall.SuspendLayout();
             this.groupBoxVideoDevice.SuspendLayout();
+            this.contextMenuStripCodecPriority.SuspendLayout();
+            this.contextMenuStripVideoCodecPriority.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -1222,6 +1229,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBoxVideoCodec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxVideoCodec.ContextMenuStrip = this.contextMenuStripVideoCodecPriority;
             this.checkedListBoxVideoCodec.FormattingEnabled = true;
             this.checkedListBoxVideoCodec.IntegralHeight = false;
             this.checkedListBoxVideoCodec.Location = new System.Drawing.Point(6, 19);
@@ -1229,6 +1237,7 @@
             this.checkedListBoxVideoCodec.Size = new System.Drawing.Size(221, 119);
             this.checkedListBoxVideoCodec.TabIndex = 3;
             this.checkedListBoxVideoCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxVideoCodec_ItemCheck);
+            this.checkedListBoxVideoCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxVideoCodec_SelectedIndexChanged);
             // 
             // groupBoxAudioCodec
             // 
@@ -1246,6 +1255,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBoxAudioCodec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxAudioCodec.ContextMenuStrip = this.contextMenuStripCodecPriority;
             this.checkedListBoxAudioCodec.FormattingEnabled = true;
             this.checkedListBoxAudioCodec.IntegralHeight = false;
             this.checkedListBoxAudioCodec.Location = new System.Drawing.Point(6, 19);
@@ -1253,6 +1263,7 @@
             this.checkedListBoxAudioCodec.Size = new System.Drawing.Size(221, 119);
             this.checkedListBoxAudioCodec.TabIndex = 2;
             this.checkedListBoxAudioCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxAudioCodec_ItemCheck);
+            this.checkedListBoxAudioCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxAudioCodec_SelectedIndexChanged);
             // 
             // groupBoxFeatureTransferCall
             // 
@@ -1417,6 +1428,36 @@
             this.labelVideoDeviceCapture.TabIndex = 0;
             this.labelVideoDeviceCapture.Text = "Capture :";
             // 
+            // contextMenuStripCodecPriority
+            // 
+            this.contextMenuStripCodecPriority.Enabled = false;
+            this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemChangePriority});
+            this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
+            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 48);
+            // 
+            // toolStripMenuItemChangePriority
+            // 
+            this.toolStripMenuItemChangePriority.Name = "toolStripMenuItemChangePriority";
+            this.toolStripMenuItemChangePriority.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemChangePriority.Text = "Change Priority";
+            this.toolStripMenuItemChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            // 
+            // contextMenuStripVideoCodecPriority
+            // 
+            this.contextMenuStripVideoCodecPriority.Enabled = false;
+            this.contextMenuStripVideoCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemVideoChangePriority});
+            this.contextMenuStripVideoCodecPriority.Name = "contextMenuStripVideoCodecPriority";
+            this.contextMenuStripVideoCodecPriority.Size = new System.Drawing.Size(157, 26);
+            // 
+            // toolStripMenuItemVideoChangePriority
+            // 
+            this.toolStripMenuItemVideoChangePriority.Name = "toolStripMenuItemVideoChangePriority";
+            this.toolStripMenuItemVideoChangePriority.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemVideoChangePriority.Text = "Change Priority";
+            this.toolStripMenuItemVideoChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1467,6 +1508,8 @@
             this.groupBoxFeatureTransferCall.PerformLayout();
             this.groupBoxVideoDevice.ResumeLayout(false);
             this.groupBoxVideoDevice.PerformLayout();
+            this.contextMenuStripCodecPriority.ResumeLayout(false);
+            this.contextMenuStripVideoCodecPriority.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1595,5 +1638,9 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxVideoCodec;
         private System.Windows.Forms.GroupBox groupBoxAudioCodec;
         private System.Windows.Forms.GroupBox groupBoxVideoCodec;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCodecPriority;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChangePriority;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripVideoCodecPriority;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemVideoChangePriority;
     }
 }

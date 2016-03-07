@@ -133,6 +133,14 @@ namespace Nequeo.VoIP.PjSip.Param
         }
 
         /// <summary>
+        /// Gets an indictor specifying that the call has a valid video call.
+        /// </summary>
+        public bool IsVideoValid
+        {
+            get { return _isVideoValid; }
+        }
+
+        /// <summary>
         /// Gets the video window, if any.
         /// </summary>
         public Nequeo.Net.PjSip.VideoWindow VideoWindow

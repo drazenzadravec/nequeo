@@ -466,12 +466,15 @@ namespace Nequeo.VoIP.PjSip.UI
                     {
                         // Get the contact number.
                         string[] splitFrom = e.From.Split(new char[] { '@' });
+                        string[] splitFromSpace = splitFrom[0].Split(new char[] { ' ' });
 
                         // For each contact.
                         foreach (Data.contactsContact contact in _contacts.contact)
                         {
                             // Cleanup the sip.
-                            string sipAccount = contact.sipAccount.Replace("sip:", "").Replace("sips:", "");
+                            string sipAccount = contact.sipAccount.
+                                Replace("sip:", "").Replace("sips:", "").Replace("\"", "").
+                                Replace("<", "").Replace(">", "");
 
                             // If the sip matches.
                             if (sipAccount.ToLower().Trim() == e.From.ToLower().Trim())
@@ -489,10 +492,62 @@ namespace Nequeo.VoIP.PjSip.UI
                                 break;
                             }
 
-                            // For each numer.
+                            // For each number.
                             foreach (string number in contact.numbers)
                             {
+                                // Get the number.
                                 string[] numb = number.Split(new char[] { '|' });
+
+                                // If just a number exists.
+                                if (splitFromSpace != null && splitFromSpace.Length > 0)
+                                {
+                                    // Try next space.
+                                    if (splitFromSpace.Length > 3)
+                                    {
+                                        if (numb[1].ToLower().Trim() == splitFromSpace[3].ToLower().Trim().Replace("\"", ""))
+                                        {
+                                            // Found.
+                                            found = true;
+                                            contactName = contact.name;
+                                            break;
+                                        }
+                                    }
+
+                                    // Try next space.
+                                    if (splitFromSpace.Length > 2)
+                                    {
+                                        if (numb[1].ToLower().Trim() == splitFromSpace[2].ToLower().Trim().Replace("\"", ""))
+                                        {
+                                            // Found.
+                                            found = true;
+                                            contactName = contact.name;
+                                            break;
+                                        }
+                                    }
+
+                                    // Try next space.
+                                    if (splitFromSpace.Length > 1)
+                                    {
+                                        if (numb[1].ToLower().Trim() == splitFromSpace[1].ToLower().Trim().Replace("\"", ""))
+                                        {
+                                            // Found.
+                                            found = true;
+                                            contactName = contact.name;
+                                            break;
+                                        }
+                                    }
+
+                                    // Try to match the number.
+                                    if (numb[1].ToLower().Trim() == splitFromSpace[0].ToLower().Trim().Replace("\"", ""))
+                                    {
+                                        // Found.
+                                        found = true;
+                                        contactName = contact.name;
+                                        break;
+                                    }
+                                }
+
+                                // If just a number exists.
                                 if (numb[1].ToLower().Trim() == splitFrom[0].ToLower().Trim())
                                 {
                                     // Found.
@@ -517,11 +572,12 @@ namespace Nequeo.VoIP.PjSip.UI
                     {
                         // Get the contact number.
                         string[] splitFrom = e.From.Split(new char[] { '@' });
-                        contactName = splitFrom[0].Replace("sip:", "").Replace("sips:", "");
+                        contactName = splitFrom[0].Replace("sip:", "").Replace("sips:", "").
+                            Replace("\"", "").Replace("<", "").Replace(">", "");
                     }
                     catch (Exception)
                     {
-                        // Call can not be found.
+                        // Caller can not be found.
                         contactName = "Unknown";
                     }
                 }
@@ -568,8 +624,8 @@ namespace Nequeo.VoIP.PjSip.UI
                     Param.CallInfoParam info = new Param.CallInfoParam();
                     info.IncomingOutgoing = true;
                     info.ContactName = e.ContactName;
-                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
-                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo : "");
+                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact : "");
                     info.CallID = e.CallID;
                     info.ConnectDuration = e.ConnectDuration;
                     info.Date = e.Date;
@@ -592,11 +648,11 @@ namespace Nequeo.VoIP.PjSip.UI
                 }
                 catch { }
 
-                Param.CallParam call = null;
+                Param.ConferenceCallContainer call = null;
                 try
                 {
                     // Get the reference of the call
-                    call = _voipCall.ConferenceCall.First(u => u.ID == e.Guid);
+                    call = _voipCall.ConferenceCall.First(u => u.Call.ID == e.Guid);
                 }
                 catch { call = null; }
 
@@ -621,7 +677,8 @@ namespace Nequeo.VoIP.PjSip.UI
                     try
                     {
                         // Clean up the current call.
-                        call.Dispose();
+                        call.Call.Dispose();
+                        call.Call = null;
                         call = null;
                     }
                     catch { }
@@ -957,8 +1014,8 @@ namespace Nequeo.VoIP.PjSip.UI
                     Param.CallInfoParam info = new Param.CallInfoParam();
                     info.IncomingOutgoing = false;
                     info.ContactName = _contactName;
-                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
-                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo : "");
+                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact : "");
                     info.CallID = e.CallID;
                     info.ConnectDuration = e.ConnectDuration;
                     info.Date = e.Date;
@@ -2289,16 +2346,67 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             // if items selected.
             if (listViewConference.SelectedItems.Count > 0)
-            {
                 contextMenuStripConference.Enabled = true;
-            }
             else
-            {
                 contextMenuStripConference.Enabled = false;
-            }
 
             // Enable or disable conference controls.
             EnableDisableConferenceList();
+
+            // if items selected.
+            if (listViewConference.SelectedItems.Count > 0)
+            {
+                string contactKey = "";
+
+                // Add each contact.
+                foreach (ListViewItem item in listViewConference.SelectedItems)
+                {
+                    // Get the name.
+                    contactKey = item.Name;
+                    break;
+                }
+
+                // If a key has been selected.
+                if (!String.IsNullOrEmpty(contactKey))
+                {
+                    // Video calls.
+                    Param.ConferenceCallContainer caller = null;
+
+                    try
+                    {
+                        // Find the caller.
+                        string[] name = contactKey.Split(new char[] { '|' });
+                        string callid = name[0];
+                        string id = name[1];
+                        caller = _voipCall.ConferenceCall.First(u => u.Call.ID == id);
+                    }
+                    catch { caller = null; }
+
+                    // If found.
+                    if (caller != null)
+                    {
+                        // If has video.
+                        if (caller.Call.IsVideoValid)
+                        {
+                            // Show video is visible.
+                            toolStripMenuItemConferenceVideo.Visible = true;
+                        }
+                        else
+                        {
+                            // Hide video is visible.
+                            toolStripMenuItemConferenceVideo.Visible = false;
+                        }
+
+                        // Start or stop transmitting media.
+                        if (caller.Call.IsTransmitting)
+                            // Suspend.
+                            toolStripMenuItemConferenceSuspend.Checked = false;
+                        else
+                            // Suspend.
+                            toolStripMenuItemConferenceSuspend.Checked = true;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -2329,33 +2437,33 @@ namespace Nequeo.VoIP.PjSip.UI
             if (listViewConference.Items.Count > 0)
             {
                 // Ask the used to answer incomming call.
-                DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete all calls.",
+                DialogResult result = MessageBox.Show(this, "Are you sure you wish to hangup all calls.",
                     "Cancel Conference", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 // If delete.
                 if (result == DialogResult.Yes)
                 {
                     // Hangup all calls.
-                    Param.CallParam[] conference = _voipCall.ConferenceCall;
+                    Param.ConferenceCallContainer[] conference = _voipCall.ConferenceCall;
                     _voipCall.RemoveAllConferenceCallContacts();
 
                     // Disconnect.
                     if (conference != null && conference.Length > 0)
                     {
                         // For each caller.
-                        foreach (Param.CallParam caller in conference)
+                        foreach (Param.ConferenceCallContainer caller in conference)
                         {
                             try
                             {
                                 // Force hangup.
-                                caller.Hangup();
+                                caller.Call.Hangup();
                             }
                             catch { }
 
                             try
                             {
                                 // Clean-up.
-                                caller.Dispose();
+                                caller.Call.Dispose();
                             }
                             catch { }
                         }
@@ -2381,7 +2489,7 @@ namespace Nequeo.VoIP.PjSip.UI
             string contactName = "";
 
             // Add each contact.
-            foreach (ListViewItem item in listViewContact.SelectedItems)
+            foreach (ListViewItem item in listViewConference.SelectedItems)
             {
                 // Get the name.
                 contactKey = item.Name;
@@ -2393,14 +2501,14 @@ namespace Nequeo.VoIP.PjSip.UI
             if (!String.IsNullOrEmpty(contactKey))
             {
                 // Ask the used to answer incomming call.
-                DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete caller " + contactName + ".",
+                DialogResult result = MessageBox.Show(this, "Are you sure you wish to hangup caller " + contactName + ".",
                     "Cancel Conference", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 // If delete.
                 if (result == DialogResult.Yes)
                 {
                     // Hangup all calls.
-                    Param.CallParam caller = null;
+                    Param.ConferenceCallContainer caller = null;
 
                     try
                     {
@@ -2408,7 +2516,7 @@ namespace Nequeo.VoIP.PjSip.UI
                         string[] name = contactKey.Split(new char[] { '|' });
                         string callid = name[0];
                         string id = name[1];
-                        caller = _voipCall.ConferenceCall.First(u => u.ID == id);
+                        caller = _voipCall.ConferenceCall.First(u => u.Call.ID == id);
                     }
                     catch { caller = null; }
 
@@ -2416,19 +2524,19 @@ namespace Nequeo.VoIP.PjSip.UI
                     if (caller != null)
                     {
                         // Remove caller.
-                        _voipCall.RemoveConferenceCallContact(caller.ID);
+                        _voipCall.RemoveConferenceCallContact(caller.Call.ID);
 
                         try
                         {
                             // Force hangup.
-                            caller.Hangup();
+                            caller.Call.Hangup();
                         }
                         catch { }
 
                         try
                         {
                             // Clean-up.
-                            caller.Dispose();
+                            caller.Call.Dispose();
                         }
                         catch { }
                     }
@@ -2472,7 +2580,7 @@ namespace Nequeo.VoIP.PjSip.UI
             string contactKey = "";
 
             // Add each contact.
-            foreach (ListViewItem item in listViewContact.SelectedItems)
+            foreach (ListViewItem item in listViewConference.SelectedItems)
             {
                 // Get the name.
                 contactKey = item.Name;
@@ -2483,7 +2591,7 @@ namespace Nequeo.VoIP.PjSip.UI
             if (!String.IsNullOrEmpty(contactKey))
             {
                 // Hangup all calls.
-                Param.CallParam caller = null;
+                Param.ConferenceCallContainer caller = null;
 
                 try
                 {
@@ -2491,7 +2599,7 @@ namespace Nequeo.VoIP.PjSip.UI
                     string[] name = contactKey.Split(new char[] { '|' });
                     string callid = name[0];
                     string id = name[1];
-                    caller = _voipCall.ConferenceCall.First(u => u.ID == id);
+                    caller = _voipCall.ConferenceCall.First(u => u.Call.ID == id);
                 }
                 catch { caller = null; }
 
@@ -2499,24 +2607,30 @@ namespace Nequeo.VoIP.PjSip.UI
                 if (caller != null)
                 {
                     // Start or stop transmitting media.
-                    if (caller.IsTransmitting)
+                    if (caller.Call.IsTransmitting)
                     {
+                        // Suspend.
+                        toolStripMenuItemConferenceSuspend.Checked = true;
+
                         // Stop transmitting.
-                        caller.StopTransmitting();
-                        if (_isVideoValid)
+                        caller.Call.StopTransmitting();
+                        if (caller.Call.IsVideoValid)
                         {
                             // Stop the video.
-                            caller.StopVideoTransmit();
+                            caller.Call.StopVideoTransmit();
                         }
                     }
                     else
                     {
+                        // Suspend.
+                        toolStripMenuItemConferenceSuspend.Checked = false;
+
                         // Start transmitting.
-                        caller.StartTransmitting();
-                        if (_isVideoValid)
+                        caller.Call.StartTransmitting();
+                        if (caller.Call.IsVideoValid)
                         {
                             // Start the video.
-                            _call.StartVideoTransmit();
+                            caller.Call.StartVideoTransmit();
                         }
                     }
                 }
@@ -2665,7 +2779,7 @@ namespace Nequeo.VoIP.PjSip.UI
                             int windowID = _call.VideoWindow.GetVideoWindowID();
                             if (windowID >= 0)
                             {
-                                _videoCallWindow = new Net.PjSip.UI.VideoIncomingWindow(windowID, "Remote Video - " + _uri, 640, 480);
+                                _videoCallWindow = new Net.PjSip.UI.VideoIncomingWindow(windowID, "Remote Video - " + _uri, _call.ID, 640, 480);
                                 _videoCallWindow.OnVideoIncomingClosing += Call_OnVideoIncomingClosing;
                                 _videoCallWindow.Show();
 
@@ -2705,7 +2819,7 @@ namespace Nequeo.VoIP.PjSip.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Call_OnVideoIncomingClosing(object sender, EventArgs e)
+        private void Call_OnVideoIncomingClosing(object sender, string e)
         {
             // Enable the video call.
             buttonVideoCall.Enabled = true;
@@ -2786,6 +2900,154 @@ namespace Nequeo.VoIP.PjSip.UI
                 }
                 catch { }
             }
+        }
+
+        /// <summary>
+        /// Open conference video.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemConferenceVideo_Click(object sender, EventArgs e)
+        {
+            // if items selected.
+            if (listViewConference.SelectedItems.Count > 0)
+            {
+                string contactKey = "";
+                string contactName = "";
+
+                // Add each contact.
+                foreach (ListViewItem item in listViewConference.SelectedItems)
+                {
+                    // Get the name.
+                    contactKey = item.Name;
+                    contactName = item.Text;
+                    break;
+                }
+
+                // If a key has been selected.
+                if (!String.IsNullOrEmpty(contactKey))
+                {
+                    // Video calls.
+                    Param.ConferenceCallContainer caller = null;
+
+                    try
+                    {
+                        // Find the caller.
+                        string[] name = contactKey.Split(new char[] { '|' });
+                        string callid = name[0];
+                        string id = name[1];
+                        caller = _voipCall.ConferenceCall.First(u => u.Call.ID == id);
+                    }
+                    catch { caller = null; }
+
+                    // If found.
+                    if (caller != null)
+                    {
+                        // If has video.
+                        if (caller.Call.IsVideoValid)
+                        {
+                            try
+                            {
+                                // If video window exists.
+                                if (caller.Call.VideoWindow != null && caller.Video == null)
+                                {
+                                    // Get the video window id.
+                                    int videoWindowID = caller.Call.VideoWindow.GetVideoWindowID();
+                                    if (videoWindowID >= 0)
+                                    {
+                                        // Show the incoming video.
+                                        caller.Video = new Net.PjSip.UI.VideoIncomingWindow(videoWindowID, "Remote Video - " + contactName, caller.Call.ID, 640, 480);
+                                        caller.Video.OnVideoIncomingClosing += ConferenceVideoIncoming_OnVideoIncomingClosing;
+                                        caller.Video.Show(this);
+
+                                        // Enabled.
+                                        toolStripMenuItemConferenceVideo.Enabled = false;
+
+                                        // Start the video.
+                                        caller.Call.StartVideoTransmit();
+                                    }
+                                }
+                                else
+                                {
+                                    // Window state.
+                                    bool windowState = caller.Video.GetActiveState();
+
+                                    // If still active.
+                                    if (windowState)
+                                    {
+                                        // Show the video.
+                                        caller.Video.ShowVideoWindow();
+
+                                        // Start the video.
+                                        caller.Call.StartVideoTransmit();
+                                    }
+
+                                    // Enabled.
+                                    toolStripMenuItemConferenceVideo.Enabled = false;
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Conference video incoming closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The call ID.</param>
+        private void ConferenceVideoIncoming_OnVideoIncomingClosing(object sender, string e)
+        {
+            // Enabled.
+            toolStripMenuItemConferenceVideo.Enabled = true;
+
+            try
+            {
+                // Video calls.
+                Param.ConferenceCallContainer caller = null;
+
+                try
+                {
+                    // Find the caller.
+                    caller = _voipCall.ConferenceCall.First(u => u.Call.ID == e);
+                }
+                catch { caller = null; }
+
+                // If found.
+                if (caller != null)
+                {
+                    // If has video.
+                    if (caller.Call.IsVideoValid)
+                    {
+                        try
+                        {
+                            // If video window exists.
+                            if (caller.Call.VideoWindow != null && caller.Video != null)
+                            {
+                                // Get the video window id.
+                                int videoWindowID = caller.Call.VideoWindow.GetVideoWindowID();
+                                if (videoWindowID >= 0)
+                                {
+                                    // Stop the video.
+                                    caller.Call.StopVideoTransmit();
+
+                                    // Window state.
+                                    bool windowState = caller.Video.GetActiveState();
+
+                                    // If still active.
+                                    if (windowState)
+                                        // Show the video.
+                                        caller.Video.HideVideoWindow();
+                                }
+                            }
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch { }
         }
     }
 }

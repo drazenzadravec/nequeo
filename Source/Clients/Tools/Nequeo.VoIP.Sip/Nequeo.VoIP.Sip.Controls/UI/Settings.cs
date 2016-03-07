@@ -1296,6 +1296,10 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void checkedListBoxAudioCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (checkedListBoxAudioCodec.SelectedIndex >= 0)
+                contextMenuStripCodecPriority.Enabled = true;
+            else
+                contextMenuStripCodecPriority.Enabled = false;
         }
 
         /// <summary>
@@ -1321,6 +1325,66 @@ namespace Nequeo.VoIP.Sip.UI
                 {
                     // Set priorty to original.
                     _voipCall.VoIPManager.SetPriorityAudioCodec(audioCodec, codecInfo.Priority);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Change codec priority.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemChangePriority_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem listBox = (ToolStripMenuItem)sender;
+            Nequeo.Forms.UI.Input inputBox = new Forms.UI.Input();
+
+            string codecName = (string)checkedListBoxAudioCodec.SelectedItem;
+            Nequeo.Net.Sip.CodecInfo codecInfo = _common.AudioCodecs.First(u => u.CodecId.ToLower() == codecName.ToLower());
+            bool isChecked = checkedListBoxAudioCodec.GetItemChecked(checkedListBoxAudioCodec.SelectedIndex);
+
+            // If un-checked then priority is zero.
+            if (!isChecked)
+                inputBox.InputValue = "0";
+            else
+                // Set the current value.
+                inputBox.InputValue = codecInfo.Priority.ToString();
+
+            // Open the window.
+            inputBox.ShowDialog(this);
+            string inputValue = inputBox.InputValue;
+
+            // If OK.
+            if (inputBox.InputType == Forms.UI.InputType.OK)
+            {
+                uint priority = 0;
+                bool isNumber = UInt32.TryParse(inputValue, out priority);
+
+                try
+                {
+                    // If is number.
+                    if (isNumber)
+                    {
+                        _voipCall.VoIPManager.SetPriorityAudioCodec(codecName, (byte)priority);
+
+                        // Un-check if priority is zero.
+                        if (priority == 0)
+                        {
+                            // Un-check the item.
+                            checkedListBoxAudioCodec.SetItemChecked(checkedListBoxAudioCodec.SelectedIndex, false);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("The priority entered is not a valid number.");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    // Ask the used to answer incomming call.
+                    DialogResult result = MessageBox.Show(this, "Unable to set priority because of an internal error. " + ex.Message,
+                        "Set Priority", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

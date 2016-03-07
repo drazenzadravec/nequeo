@@ -82,7 +82,7 @@ namespace Nequeo.VoIP.PjSip
         private VoIPManager _voipManager = null;
         private string _recordFilename = null;
 
-        private List<Param.CallParam> _conferenceCall = null;
+        private List<Param.ConferenceCallContainer> _conferenceCall = null;
 
         /// <summary>
         /// Notify application on incoming call.
@@ -108,7 +108,7 @@ namespace Nequeo.VoIP.PjSip
         /// <summary>
         /// Gets the list of callers in the conference.
         /// </summary>
-        public Param.CallParam[] ConferenceCall
+        public Param.ConferenceCallContainer[] ConferenceCall
         {
             get
             {
@@ -137,7 +137,7 @@ namespace Nequeo.VoIP.PjSip
             if (_conferenceCall != null)
             {
                 // Start the conversation between the caller and all other callers.
-                foreach (Param.CallParam call in _conferenceCall)
+                foreach (Param.ConferenceCallContainer call in _conferenceCall)
                 {
                     try
                     {
@@ -145,12 +145,16 @@ namespace Nequeo.VoIP.PjSip
                         if (stop)
                         {
                             // Stop transmitting.
-                            call.StopTransmitting();
+                            call.Call.StopTransmitting();
+                            if (call.Call.HasVideo)
+                                call.Call.StopVideoTransmit();
                         }
                         else
                         {
                             // Start transmitting.
-                            call.StartTransmitting();
+                            call.Call.StartTransmitting();
+                            if (call.Call.HasVideo)
+                                call.Call.StartVideoTransmit();
                         }
                     }
                     catch { }
@@ -162,21 +166,21 @@ namespace Nequeo.VoIP.PjSip
         /// Add the conference call contact.
         /// </summary>
         /// <param name="caller">The contact to add.</param>
-        public void AddConferenceCallContact(Param.CallParam caller)
+        public void AddConferenceCallContact(Param.ConferenceCallContainer caller)
         {
             if (_conferenceCall == null)
-                _conferenceCall = new List<Param.CallParam>();
+                _conferenceCall = new List<Param.ConferenceCallContainer>();
 
             // Add the contact.
             if (_conferenceCall != null)
             {
                 // Start the conversation between the caller and all other callers.
-                foreach (Param.CallParam call in _conferenceCall)
+                foreach (Param.ConferenceCallContainer call in _conferenceCall)
                 {
                     try
                     {
                         // The current callers.
-                        caller.StartConversation(call);
+                        caller.Call.StartConversation(call.Call);
                     }
                     catch { }
                 }
@@ -195,11 +199,11 @@ namespace Nequeo.VoIP.PjSip
             // Remove the contact.
             if (_conferenceCall != null)
             {
-                Param.CallParam caller = null;
+                Param.ConferenceCallContainer caller = null;
                 try
                 {
                     // Find the caller.
-                    caller = _conferenceCall.First(u => u.ID == id);
+                    caller = _conferenceCall.First(u => u.Call.ID == id);
                     bool ret = _conferenceCall.Remove(caller);
                     if (!ret) caller = null;
                 }
@@ -209,14 +213,26 @@ namespace Nequeo.VoIP.PjSip
                 if (caller != null)
                 {
                     // Start the conversation between the caller and all other callers.
-                    foreach (Param.CallParam call in _conferenceCall)
+                    foreach (Param.ConferenceCallContainer call in _conferenceCall)
                     {
                         try
                         {
                             // The current callers.
-                            caller.StopConversation(call);
+                            caller.Call.StopConversation(call.Call);
                         }
                         catch { }
+                    }
+
+                    // If a video exists.
+                    if (caller.Video != null)
+                    {
+                        try
+                        {
+                            caller.Video.SetActiveState(false);
+                            caller.Video.Close();
+                        }
+                        catch { }
+                        caller.Video = null;
                     }
                 }
             }
@@ -231,21 +247,33 @@ namespace Nequeo.VoIP.PjSip
             if (_conferenceCall != null)
             {
                 // Start the conversation between the caller and all other callers.
-                foreach (Param.CallParam caller in _conferenceCall)
+                foreach (Param.ConferenceCallContainer caller in _conferenceCall)
                 {
                     // Start the conversation between the caller and all other callers.
-                    foreach (Param.CallParam call in _conferenceCall)
+                    foreach (Param.ConferenceCallContainer call in _conferenceCall)
                     {
                         try
                         {
                             // If not the same call.
-                            if (call.CallID != caller.CallID)
+                            if (call.Call.CallID != caller.Call.CallID)
                             {
                                 // The current callers.
-                                caller.StopConversation(call);
+                                caller.Call.StopConversation(call.Call);
                             }
                         }
                         catch { }
+                    }
+
+                    // If a video exists.
+                    if (caller.Video != null)
+                    {
+                        try
+                        {
+                            caller.Video.SetActiveState(false);
+                            caller.Video.Close();
+                        }
+                        catch { }
+                        caller.Video = null;
                     }
                 }
 
@@ -451,7 +479,7 @@ namespace Nequeo.VoIP.PjSip
                     string combineFrom = String.Join(":", fromHeader.Skip(1));
                     fromHeader = combineFrom.Split(new char[] { ';' });
                     combineFrom = fromHeader[0];
-                    from = combineFrom.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "");
+                    from = combineFrom.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "").Replace("\"", "");
                     param.From = from;
                 }
 
@@ -463,7 +491,7 @@ namespace Nequeo.VoIP.PjSip
                     string combineContact = String.Join(":", contactHeader.Skip(1));
                     contactHeader = combineContact.Split(new char[] { ';' });
                     combineContact = contactHeader[0];
-                    contact = combineContact.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "");
+                    contact = combineContact.Replace("<", "").Replace(">", "").Replace("sip:", "").Replace("sips:", "").Replace("\"", "");
                     param.FromContact = contact;
                 }
             }
@@ -486,7 +514,7 @@ namespace Nequeo.VoIP.PjSip
         private void FindContact(Param.OnInstantMessageParam param)
         {
             // Get from.
-            param.From = param.FromUri.Replace("<", "").Replace(">", ""); ;
+            param.From = param.FromUri.Replace("<", "").Replace(">", "").Replace("\"", "");
         }
 
         #region Dispose Object Methods

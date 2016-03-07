@@ -462,12 +462,14 @@ namespace Nequeo.VoIP.Sip.UI
                     {
                         // Get the contact number.
                         string[] splitFrom = e.From.Split(new char[] { '@' });
+                        string[] splitFromSpace = splitFrom[0].Split(new char[] { ' ' });
 
                         // For each contact.
                         foreach (Data.contactsContact contact in _contacts.contact)
                         {
                             // Cleanup the sip.
-                            string sipAccount = contact.sipAccount.Replace("sip:", "").Replace("sips:", "");
+                            string sipAccount = contact.sipAccount.Replace("sip:", "").Replace("sips:", "").
+                                Replace("\"", "").Replace("<", "").Replace(">", "");
 
                             // If the sip matches.
                             if (sipAccount.ToLower().Trim() == e.From.ToLower().Trim())
@@ -485,10 +487,62 @@ namespace Nequeo.VoIP.Sip.UI
                                 break;
                             }
 
-                            // For each numer.
+                            // For each number.
                             foreach (string number in contact.numbers)
                             {
+                                // Get the number.
                                 string[] numb = number.Split(new char[] { '|' });
+
+                                // If just a number exists.
+                                if (splitFromSpace != null && splitFromSpace.Length > 0)
+                                {
+                                    // Try next space.
+                                    if (splitFromSpace.Length > 3)
+                                    {
+                                        if (numb[1].ToLower().Trim() == splitFromSpace[3].ToLower().Trim().Replace("\"", ""))
+                                        {
+                                            // Found.
+                                            found = true;
+                                            contactName = contact.name;
+                                            break;
+                                        }
+                                    }
+
+                                    // Try next space.
+                                    if (splitFromSpace.Length > 2)
+                                    {
+                                        if (numb[1].ToLower().Trim() == splitFromSpace[2].ToLower().Trim().Replace("\"", ""))
+                                        {
+                                            // Found.
+                                            found = true;
+                                            contactName = contact.name;
+                                            break;
+                                        }
+                                    }
+
+                                    // Try next space.
+                                    if (splitFromSpace.Length > 1)
+                                    {
+                                        if (numb[1].ToLower().Trim() == splitFromSpace[1].ToLower().Trim().Replace("\"", ""))
+                                        {
+                                            // Found.
+                                            found = true;
+                                            contactName = contact.name;
+                                            break;
+                                        }
+                                    }
+
+                                    // Try to match the number.
+                                    if (numb[1].ToLower().Trim() == splitFromSpace[0].ToLower().Trim().Replace("\"", ""))
+                                    {
+                                        // Found.
+                                        found = true;
+                                        contactName = contact.name;
+                                        break;
+                                    }
+                                }
+
+                                // If just a number exists.
                                 if (numb[1].ToLower().Trim() == splitFrom[0].ToLower().Trim())
                                 {
                                     // Found.
@@ -513,11 +567,12 @@ namespace Nequeo.VoIP.Sip.UI
                     {
                         // Get the contact number.
                         string[] splitFrom = e.From.Split(new char[] { '@' });
-                        contactName = splitFrom[0].Replace("sip:", "").Replace("sips:", "");
+                        contactName = splitFrom[0].Replace("sip:", "").Replace("sips:", "").
+                            Replace("\"", "").Replace("<", "").Replace(">", "");
                     }
                     catch (Exception)
                     {
-                        // Call can not be found.
+                        // Caller can not be found.
                         contactName = "Unknown";
                     }
                 }
@@ -564,8 +619,8 @@ namespace Nequeo.VoIP.Sip.UI
                     Param.CallInfoParam info = new Param.CallInfoParam();
                     info.IncomingOutgoing = true;
                     info.ContactName = e.ContactName;
-                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
-                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo : "");
+                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact : "");
                     info.CallID = e.CallID;
                     info.ConnectDuration = e.ConnectDuration;
                     info.Date = e.Date;
@@ -928,8 +983,8 @@ namespace Nequeo.VoIP.Sip.UI
                     Param.CallInfoParam info = new Param.CallInfoParam();
                     info.IncomingOutgoing = false;
                     info.ContactName = _contactName;
-                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
-                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact.Trim(new char[] { '<' }).Trim(new char[] { '>' }) : "");
+                    info.FromTo = (!String.IsNullOrEmpty(e.FromTo) ? e.FromTo : "");
+                    info.Contact = (!String.IsNullOrEmpty(e.Contact) ? e.Contact : "");
                     info.CallID = e.CallID;
                     info.ConnectDuration = e.ConnectDuration;
                     info.Date = e.Date;
@@ -2224,16 +2279,55 @@ namespace Nequeo.VoIP.Sip.UI
         {
             // if items selected.
             if (listViewConference.SelectedItems.Count > 0)
-            {
                 contextMenuStripConference.Enabled = true;
-            }
             else
-            {
                 contextMenuStripConference.Enabled = false;
-            }
 
             // Enable or disable conference controls.
             EnableDisableConferenceList();
+
+            // if items selected.
+            if (listViewConference.SelectedItems.Count > 0)
+            {
+                string contactKey = "";
+
+                // Add each contact.
+                foreach (ListViewItem item in listViewConference.SelectedItems)
+                {
+                    // Get the name.
+                    contactKey = item.Name;
+                    break;
+                }
+
+                // If a key has been selected.
+                if (!String.IsNullOrEmpty(contactKey))
+                {
+                    // Video calls.
+                    Param.CallParam caller = null;
+
+                    try
+                    {
+                        // Find the caller.
+                        string[] name = contactKey.Split(new char[] { '|' });
+                        string callid = name[0];
+                        string id = name[1];
+                        caller = _voipCall.ConferenceCall.First(u => u.ID == id);
+                    }
+                    catch { caller = null; }
+
+                    // If found.
+                    if (caller != null)
+                    {
+                        // Start or stop transmitting media.
+                        if (caller.IsTransmitting)
+                            // Suspend.
+                            toolStripMenuItemConferenceSuspend.Checked = false;
+                        else
+                            // Suspend.
+                            toolStripMenuItemConferenceSuspend.Checked = true;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -2264,7 +2358,7 @@ namespace Nequeo.VoIP.Sip.UI
             if (listViewConference.Items.Count > 0)
             {
                 // Ask the used to answer incomming call.
-                DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete all calls.",
+                DialogResult result = MessageBox.Show(this, "Are you sure you wish to hangup all calls.",
                     "Cancel Conference", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 // If delete.
@@ -2317,7 +2411,7 @@ namespace Nequeo.VoIP.Sip.UI
             string contactName = "";
 
             // Add each contact.
-            foreach (ListViewItem item in listViewContact.SelectedItems)
+            foreach (ListViewItem item in listViewConference.SelectedItems)
             {
                 // Get the name.
                 contactKey = item.Name;
@@ -2329,7 +2423,7 @@ namespace Nequeo.VoIP.Sip.UI
             if (!String.IsNullOrEmpty(contactKey))
             {
                 // Ask the used to answer incomming call.
-                DialogResult result = MessageBox.Show(this, "Are you sure you wish to delete caller " + contactName + ".",
+                DialogResult result = MessageBox.Show(this, "Are you sure you wish to hangup caller " + contactName + ".",
                     "Cancel Conference", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 // If delete.
@@ -2408,7 +2502,7 @@ namespace Nequeo.VoIP.Sip.UI
             string contactKey = "";
 
             // Add each contact.
-            foreach (ListViewItem item in listViewContact.SelectedItems)
+            foreach (ListViewItem item in listViewConference.SelectedItems)
             {
                 // Get the name.
                 contactKey = item.Name;
@@ -2436,9 +2530,21 @@ namespace Nequeo.VoIP.Sip.UI
                 {
                     // Start or stop transmitting media.
                     if (caller.IsTransmitting)
+                    {
+                        // Suspend.
+                        toolStripMenuItemConferenceSuspend.Checked = true;
+
+                        // Stop transmitting.
                         caller.StopTransmitting();
+                    }
                     else
+                    {
+                        // Suspend.
+                        toolStripMenuItemConferenceSuspend.Checked = false;
+
+                        // Start transmitting.
                         caller.StartTransmitting();
+                    }
                 }
             }
         }

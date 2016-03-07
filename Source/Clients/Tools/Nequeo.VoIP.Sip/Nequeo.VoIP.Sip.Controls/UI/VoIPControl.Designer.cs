@@ -1259,26 +1259,23 @@
             // 
             // contextMenuStripConference
             // 
-            this.contextMenuStripConference.Enabled = false;
             this.contextMenuStripConference.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemConferenceHangup,
             this.toolStripMenuItemConferenceSuspend});
             this.contextMenuStripConference.Name = "contextMenuStripConference";
-            this.contextMenuStripConference.Size = new System.Drawing.Size(120, 48);
+            this.contextMenuStripConference.Size = new System.Drawing.Size(153, 70);
             // 
             // toolStripMenuItemConferenceHangup
             // 
-            this.toolStripMenuItemConferenceHangup.Enabled = false;
             this.toolStripMenuItemConferenceHangup.Name = "toolStripMenuItemConferenceHangup";
-            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemConferenceHangup.Text = "Hangup";
             this.toolStripMenuItemConferenceHangup.Click += new System.EventHandler(this.toolStripMenuItemConferenceHangup_Click);
             // 
             // toolStripMenuItemConferenceSuspend
             // 
-            this.toolStripMenuItemConferenceSuspend.Enabled = false;
             this.toolStripMenuItemConferenceSuspend.Name = "toolStripMenuItemConferenceSuspend";
-            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemConferenceSuspend.Text = "Suspend";
             this.toolStripMenuItemConferenceSuspend.Click += new System.EventHandler(this.toolStripMenuItemConferenceSuspend_Click);
             // 

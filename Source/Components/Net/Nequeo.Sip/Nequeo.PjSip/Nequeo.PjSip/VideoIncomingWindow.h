@@ -58,9 +58,10 @@ namespace Nequeo
 					/// </summary>
 					/// <param name="videoWindowID">The video window id (>= 0).</param>
 					/// <param name="windowTitle">The video window title.</param>
+					/// <param name="callID">The video call unique id.</param>
 					/// <param name="windowWidth">The video window width.</param>
 					/// <param name="windowHeight">The video window height.</param>
-					VideoIncomingWindow(int videoWindowID, String^ windowTitle, int windowWidth, int windowHeight) : _isActive(true)
+					VideoIncomingWindow(int videoWindowID, String^ windowTitle, String^ callID, int windowWidth, int windowHeight) : _isActive(true)
 					{
 						InitializeComponent();
 						
@@ -68,12 +69,13 @@ namespace Nequeo
 						_windowHeight = windowHeight;
 						_windowWidth = windowWidth;
 						this->Text = windowTitle;
+						_callID = callID;
 					}
 
 					/// <summary>
 					/// Form is closing.
 					/// </summary>
-					event System::EventHandler^ OnVideoIncomingClosing;
+					event System::EventHandler<String^>^ OnVideoIncomingClosing;
 
 					/// <summary>
 					/// Show the video window.
@@ -97,11 +99,18 @@ namespace Nequeo
 					/// <return>The window active state.</return>
 					bool GetActiveState();
 
+					/// <summary>
+					/// Get the video call id
+					/// </summary>
+					/// <return>The video call id.</return>
+					String^ GetCallID();
+
 				private:
 					int _videoWindowID;
 					int _windowHeight;
 					int _windowWidth;
 					bool _isActive;
+					String^ _callID;
 
 					/// <summary>
 					/// Create the preview.
@@ -140,6 +149,7 @@ namespace Nequeo
 						this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 						this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 						this->ClientSize = System::Drawing::Size(239, 171);
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 						this->MaximizeBox = false;
 						this->Name = L"VideoIncomingWindow";
 						this->ShowIcon = false;

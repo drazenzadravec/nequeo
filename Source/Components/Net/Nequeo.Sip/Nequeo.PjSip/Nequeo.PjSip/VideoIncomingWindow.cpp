@@ -90,7 +90,7 @@ System::Void VideoIncomingWindow::VideoIncomingWindow_ResizeEnd(System::Object^ 
 System::Void VideoIncomingWindow::VideoIncomingWindow_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
 	// Send the form closing event.
-	OnVideoIncomingClosing(this, gcnew EventArgs());
+	OnVideoIncomingClosing(this, _callID);
 
 	if (_isActive)
 		e->Cancel = true;
@@ -130,6 +130,15 @@ void VideoIncomingWindow::SetActiveState(bool state)
 bool VideoIncomingWindow::GetActiveState()
 {
 	return _isActive;
+}
+
+/// <summary>
+/// Get the video call id
+/// </summary>
+/// <return>The video call id.</return>
+String^ VideoIncomingWindow::GetCallID()
+{
+	return _callID;
 }
 
 /// <summary>

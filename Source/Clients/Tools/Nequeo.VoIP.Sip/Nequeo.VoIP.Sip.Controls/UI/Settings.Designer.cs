@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBoxAudioDevice = new System.Windows.Forms.GroupBox();
             this.comboBoxAudioPlaybackDevice = new System.Windows.Forms.ComboBox();
             this.comboBoxAudioCaptureDevice = new System.Windows.Forms.ComboBox();
@@ -139,6 +140,8 @@
             this.labelRedirectCallTime = new System.Windows.Forms.Label();
             this.textBoxRedirectCallText = new System.Windows.Forms.TextBox();
             this.checkBoxRedirectCallEnabled = new System.Windows.Forms.CheckBox();
+            this.contextMenuStripCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemChangePriority = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -157,6 +160,7 @@
             this.tabPageCodec.SuspendLayout();
             this.groupBoxAudioCodec.SuspendLayout();
             this.groupBoxFeatureTransferCall.SuspendLayout();
+            this.contextMenuStripCodecPriority.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -1207,6 +1211,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBoxAudioCodec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxAudioCodec.ContextMenuStrip = this.contextMenuStripCodecPriority;
             this.checkedListBoxAudioCodec.FormattingEnabled = true;
             this.checkedListBoxAudioCodec.IntegralHeight = false;
             this.checkedListBoxAudioCodec.Location = new System.Drawing.Point(6, 19);
@@ -1287,6 +1292,22 @@
             this.checkBoxRedirectCallEnabled.UseVisualStyleBackColor = true;
             this.checkBoxRedirectCallEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRedirectCallEnabled_CheckedChanged);
             // 
+            // contextMenuStripCodecPriority
+            // 
+            this.contextMenuStripCodecPriority.Enabled = false;
+            this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemChangePriority});
+            this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
+            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 48);
+            // 
+            // toolStripMenuItemChangePriority
+            // 
+            this.toolStripMenuItemChangePriority.Enabled = false;
+            this.toolStripMenuItemChangePriority.Name = "toolStripMenuItemChangePriority";
+            this.toolStripMenuItemChangePriority.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemChangePriority.Text = "Change Priority";
+            this.toolStripMenuItemChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1334,6 +1355,7 @@
             this.groupBoxAudioCodec.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.PerformLayout();
+            this.contextMenuStripCodecPriority.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1451,5 +1473,7 @@
         private System.Windows.Forms.Label labelRedirectCallToNumber;
         private System.Windows.Forms.GroupBox groupBoxAudioCodec;
         private System.Windows.Forms.CheckedListBox checkedListBoxAudioCodec;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCodecPriority;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChangePriority;
     }
 }

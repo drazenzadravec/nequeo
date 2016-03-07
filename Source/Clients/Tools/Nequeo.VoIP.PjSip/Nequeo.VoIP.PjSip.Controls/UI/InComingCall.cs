@@ -1110,7 +1110,8 @@ namespace Nequeo.VoIP.PjSip.UI
             AnswerIncomingCall();
 
             // Add to the conference list.
-            _voipCall.AddConferenceCallContact(_inComingCall.Call);
+            Param.ConferenceCallContainer conference = new Param.ConferenceCallContainer() { Call = _inComingCall.Call, Video = null };
+            _voipCall.AddConferenceCallContact(conference);
 
             // Add the conference call.
             ListViewItem item = new ListViewItem(_contactName, 0);
@@ -1322,7 +1323,7 @@ namespace Nequeo.VoIP.PjSip.UI
                             if (videoWindowID >= 0)
                             {
                                 // Show the incoming video.
-                                _videoCallWindow = new Net.PjSip.UI.VideoIncomingWindow(videoWindowID, "Remote Video - " + _contactName, 640, 480);
+                                _videoCallWindow = new Net.PjSip.UI.VideoIncomingWindow(videoWindowID, "Remote Video - " + _contactName, _inComingCall.Call.ID, 640, 480);
                                 _videoCallWindow.OnVideoIncomingClosing += VideoIncoming_OnVideoIncomingClosing;
                                 _videoCallWindow.Show(this);
                                 
@@ -1362,7 +1363,7 @@ namespace Nequeo.VoIP.PjSip.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void VideoIncoming_OnVideoIncomingClosing(object sender, EventArgs e)
+        private void VideoIncoming_OnVideoIncomingClosing(object sender, string e)
         {
             // Enabled.
             buttonVideo.Enabled = true;
