@@ -59,6 +59,10 @@
     <Reference Include="Nequeo.Serialisation">
       <HintPath>..\..\..\..\References\Staging\Nequeo.Serialisation.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.Threading, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=d8c99fcd48433f43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.VoIP.PjSip">
       <HintPath>..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.dll</HintPath>
     </Reference>

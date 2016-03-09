@@ -57,6 +57,10 @@
     <ApplicationIcon>cellphone.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.Forms, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=ca3d7291d4bd9e0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.VoIP.PjSip.Controls">
       <HintPath>..\..\..\..\..\References\Staging\Client\VoIPControls\PjSip\Nequeo.VoIP.PjSip.Controls.dll</HintPath>
     </Reference>

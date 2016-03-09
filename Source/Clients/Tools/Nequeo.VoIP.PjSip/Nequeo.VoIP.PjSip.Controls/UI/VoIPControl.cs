@@ -598,7 +598,7 @@ namespace Nequeo.VoIP.PjSip.UI
 
                 // Open the window.
                 Nequeo.VoIP.PjSip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e,
-                    listViewContact, listViewInOutCalls, listViewConference, _contacts, contactName, 
+                    listViewContact, listViewInOutCalls, listViewConference, _contacts, imageListSmall, contactName, 
                     ringFilePath, audioDeviceIndex, autoAnswer, autoAnswerFile, autoAnswerWait, 
                     _audioRecordingInCallPath, messageBank, redirectEnable, redirectCallNumber,
                     redirectCallAfter);
@@ -633,9 +633,25 @@ namespace Nequeo.VoIP.PjSip.UI
                     info.TotalDuration = e.TotalDuration;
                     _inOutCalls.Add(info);
 
+                    int imageIndex = 0;
+                    Data.contactsContact contact = null;
+
+                    try
+                    {
+                        // Get the contact.
+                        contact = _contacts.contact.First(u => u.name.ToLower() == info.ContactName.ToLower());
+                        if (contact != null)
+                        {
+                            // Find in the contact list view.
+                            ListViewItem listViewItem = listViewContact.Items[contact.sipAccount];
+                            imageIndex = listViewItem.ImageIndex;
+                        }
+                    }
+                    catch { imageIndex = 0; }
+
                     // Add to the in out view.
                     // Create a new list item.
-                    ListViewItem item = new ListViewItem(info.ContactName, 0);
+                    ListViewItem item = new ListViewItem(info.ContactName, imageIndex);
                     item.Name = info.FromTo + "|" + info.Guid;
                     item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
                     item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
@@ -1023,9 +1039,25 @@ namespace Nequeo.VoIP.PjSip.UI
                     info.TotalDuration = e.TotalDuration;
                     _inOutCalls.Add(info);
 
+                    int imageIndex = 0;
+                    Data.contactsContact contact = null;
+
+                    try
+                    {
+                        // Get the contact.
+                        contact = _contacts.contact.First(u => u.name.ToLower() == info.ContactName.ToLower());
+                        if (contact != null)
+                        {
+                            // Find in the contact list view.
+                            ListViewItem listViewItem = listViewContact.Items[contact.sipAccount];
+                            imageIndex = listViewItem.ImageIndex;
+                        }
+                    }
+                    catch { imageIndex = 0; }
+
                     // Add to the in out view.
                     // Create a new list item.
-                    ListViewItem item = new ListViewItem(info.ContactName, 0);
+                    ListViewItem item = new ListViewItem(info.ContactName, imageIndex);
                     item.Name = info.FromTo + "|" + info.Guid;
                     item.SubItems.Add(info.Date.ToShortDateString() + " " + info.Date.ToShortTimeString());
                     item.SubItems.Add((info.IncomingOutgoing ? "Incoming" : "Outgoing"));
@@ -1440,7 +1472,7 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 string incomingFilePath = (_common != null ? _common.InstantMessageFilePath : null);
                 int audioDeviceIndex = (_common != null ? _common.AudioDeviceIndex : -1);
-                _instantMessage = new InstantMessage(_voipCall, listViewContact, incomingFilePath, audioDeviceIndex);
+                _instantMessage = new InstantMessage(_voipCall, listViewContact, imageListSmall, imageListLarge, incomingFilePath, audioDeviceIndex);
                 _instantMessage.OnInstantMessageClosing += _instantMessage_OnClosing;
                 _instantMessage.Show();
                 buttonInstantMessage.Enabled = false;
@@ -1473,6 +1505,18 @@ namespace Nequeo.VoIP.PjSip.UI
 
                 try
                 {
+                    // Save the contacts.
+                    if (_contacts != null && _contacts.contact != null)
+                    {
+                        // Deserialise the xml file into.
+                        GeneralSerialisation serial = new GeneralSerialisation();
+                        bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
+                    }
+                }
+                catch { }
+
+                try
+                {
                     // Remove all contacts.
                     if (listViewContact.Items.Count > 0)
                         listViewContact.Items.Clear();
@@ -1487,8 +1531,27 @@ namespace Nequeo.VoIP.PjSip.UI
                         // For each contact.
                         foreach (Data.contactsContact contact in _contacts.contact)
                         {
+                            int imageIndex = 0;
+
+                            // If a picture exists.
+                            if (!String.IsNullOrEmpty(contact.picture))
+                            {
+                                try
+                                {
+                                    // Add images large and small.
+                                    Image picture = Image.FromFile(contact.picture);
+                                    imageListLarge.Images.Add(picture);
+                                    imageListSmall.Images.Add(picture);
+
+                                    // Get the index of the image.
+                                    imageIndex = imageListLarge.Images.Count - 1;
+                                }
+                                catch { imageIndex = 0; }
+                                
+                            }
+
                             // Create a new list item.
-                            ListViewItem item = new ListViewItem(contact.name, 0);
+                            ListViewItem item = new ListViewItem(contact.name, imageIndex);
                             item.Name = contact.sipAccount;
                             item.SubItems.Add(item.Name);
                             item.SubItems.Add("Offline");
@@ -1530,7 +1593,7 @@ namespace Nequeo.VoIP.PjSip.UI
 
                             // Add the contacts.
                             listViewContact.Items.Add(item);
-                            //listViewContact.Items.Add(contact.sipAccount, contact.name, 0);
+                            //listViewContact.Items.Add(contact.sipAccount, contact.name, imageIndex);
 
                             // Create the contact in the account.
                             Nequeo.Net.PjSip.ContactConnection contactConnection = new Net.PjSip.ContactConnection(contact.presenceState, contact.sipAccount);
@@ -1664,8 +1727,27 @@ namespace Nequeo.VoIP.PjSip.UI
                 // If a new contact has been created.
                 if (contact.NewContact)
                 {
+                    int imageIndex = 0;
+
+                    // If a picture exists.
+                    if (!String.IsNullOrEmpty(contact.ContactPicture))
+                    {
+                        try
+                        {
+                            // Add images large and small.
+                            Image picture = Image.FromFile(contact.ContactPicture);
+                            imageListLarge.Images.Add(picture);
+                            imageListSmall.Images.Add(picture);
+
+                            // Get the index of the image.
+                            imageIndex = imageListLarge.Images.Count - 1;
+                        }
+                        catch { imageIndex = 0; }
+
+                    }
+
                     // Create a new list item.
-                    ListViewItem item = new ListViewItem(contact.ContactName, 0);
+                    ListViewItem item = new ListViewItem(contact.ContactName, imageIndex);
                     item.Name = contact.SipAccount;
                     item.SubItems.Add(item.Name);
                     item.SubItems.Add("Offline");
@@ -1707,7 +1789,7 @@ namespace Nequeo.VoIP.PjSip.UI
 
                     // Add the contacts.
                     listViewContact.Items.Add(item);
-                    //listViewContact.Items.Add(contact.SipAccount, contact.ContactName, 0);
+                    //listViewContact.Items.Add(contact.SipAccount, contact.ContactName, imageIndex);
 
                     // Create the contact in the account.
                     Nequeo.Net.PjSip.ContactConnection contactConnection = new Net.PjSip.ContactConnection(contact.PresenecState, contact.SipAccount);

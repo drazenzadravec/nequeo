@@ -5,6 +5,7 @@
     <sipAccount>sip:johnsmith@192.168.0.1</sipAccount>
     <presenceState>true</presenceState>
     <group>Family</group>
+    <picture>C:\picture</picture>
     <numbers>
       <number>Mobile|045677776776</number>
       <number>Home|12345666</number>
@@ -16,6 +17,7 @@
     <sipAccount>sip:fredsmith@192.168.0.2</sipAccount>
     <presenceState>true</presenceState>
     <group>Friend</group>
+    <picture>C:\picture</picture>
     <numbers>
       <number>Mobile|04567433476776</number>
       <number>Home|123457676</number>

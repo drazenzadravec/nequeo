@@ -44,6 +44,10 @@
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelPicture = new System.Windows.Forms.Label();
+            this.textBoxPicture = new System.Windows.Forms.TextBox();
+            this.buttonPicture = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxContact.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +56,9 @@
             this.groupBoxContact.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContact.Controls.Add(this.buttonPicture);
+            this.groupBoxContact.Controls.Add(this.textBoxPicture);
+            this.groupBoxContact.Controls.Add(this.labelPicture);
             this.groupBoxContact.Controls.Add(this.comboBoxGroup);
             this.groupBoxContact.Controls.Add(this.labelGroup);
             this.groupBoxContact.Controls.Add(this.checkBoxPresenceState);
@@ -64,7 +71,7 @@
             this.groupBoxContact.Controls.Add(this.listViewNumbers);
             this.groupBoxContact.Location = new System.Drawing.Point(12, 12);
             this.groupBoxContact.Name = "groupBoxContact";
-            this.groupBoxContact.Size = new System.Drawing.Size(386, 265);
+            this.groupBoxContact.Size = new System.Drawing.Size(386, 316);
             this.groupBoxContact.TabIndex = 0;
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Enter += new System.EventHandler(this.groupBoxContact_Enter);
@@ -135,7 +142,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(102, 120);
+            this.buttonDelete.Location = new System.Drawing.Point(102, 148);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(90, 23);
             this.buttonDelete.TabIndex = 5;
@@ -146,7 +153,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Enabled = false;
-            this.buttonAdd.Location = new System.Drawing.Point(6, 120);
+            this.buttonAdd.Location = new System.Drawing.Point(6, 148);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(90, 23);
             this.buttonAdd.TabIndex = 4;
@@ -160,10 +167,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewNumbers.Enabled = false;
-            this.listViewNumbers.Location = new System.Drawing.Point(6, 149);
+            this.listViewNumbers.Location = new System.Drawing.Point(6, 177);
             this.listViewNumbers.MultiSelect = false;
             this.listViewNumbers.Name = "listViewNumbers";
-            this.listViewNumbers.Size = new System.Drawing.Size(374, 110);
+            this.listViewNumbers.Size = new System.Drawing.Size(374, 133);
             this.listViewNumbers.SmallImageList = this.imageListSmall;
             this.listViewNumbers.TabIndex = 0;
             this.listViewNumbers.UseCompatibleStateImageBehavior = false;
@@ -180,7 +187,7 @@
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.Enabled = false;
-            this.buttonOk.Location = new System.Drawing.Point(323, 283);
+            this.buttonOk.Location = new System.Drawing.Point(323, 334);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 6;
@@ -191,7 +198,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(242, 283);
+            this.buttonCancel.Location = new System.Drawing.Point(242, 334);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 7;
@@ -199,11 +206,45 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // labelPicture
+            // 
+            this.labelPicture.AutoSize = true;
+            this.labelPicture.Location = new System.Drawing.Point(6, 116);
+            this.labelPicture.Name = "labelPicture";
+            this.labelPicture.Size = new System.Drawing.Size(46, 13);
+            this.labelPicture.TabIndex = 9;
+            this.labelPicture.Text = "Picture :";
+            // 
+            // textBoxPicture
+            // 
+            this.textBoxPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxPicture.Location = new System.Drawing.Point(83, 113);
+            this.textBoxPicture.Name = "textBoxPicture";
+            this.textBoxPicture.Size = new System.Drawing.Size(266, 20);
+            this.textBoxPicture.TabIndex = 10;
+            // 
+            // buttonPicture
+            // 
+            this.buttonPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPicture.Location = new System.Drawing.Point(355, 112);
+            this.buttonPicture.Name = "buttonPicture";
+            this.buttonPicture.Size = new System.Drawing.Size(25, 22);
+            this.buttonPicture.TabIndex = 11;
+            this.buttonPicture.Text = "...";
+            this.buttonPicture.UseVisualStyleBackColor = true;
+            this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.SupportMultiDottedExtensions = true;
+            this.openFileDialog.Title = "Select Picture";
+            // 
             // ContactInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 318);
+            this.ClientSize = new System.Drawing.Size(410, 369);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.groupBoxContact);
@@ -238,5 +279,9 @@
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.ComboBox comboBoxGroup;
         private System.Windows.Forms.Label labelGroup;
+        private System.Windows.Forms.Button buttonPicture;
+        private System.Windows.Forms.TextBox textBoxPicture;
+        private System.Windows.Forms.Label labelPicture;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

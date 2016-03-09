@@ -205,7 +205,7 @@ namespace Nequeo.VoIP
         }
 
         /// <summary>
-        /// 
+        /// Close.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -215,13 +215,35 @@ namespace Nequeo.VoIP
         }
 
         /// <summary>
-        /// 
+        /// Visible.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void toolStripMenuItemClose_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+        }
+
+        /// <summary>
+        /// About.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Nequeo.Forms.UI.AboutBox about = new Forms.UI.AboutBox();
+            about.ShowDialog();
+        }
+
+        /// <summary>
+        /// About.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemAbout_Click(object sender, EventArgs e)
+        {
+            Nequeo.Forms.UI.AboutBox about = new Forms.UI.AboutBox();
+            about.ShowDialog();
         }
     }
 }

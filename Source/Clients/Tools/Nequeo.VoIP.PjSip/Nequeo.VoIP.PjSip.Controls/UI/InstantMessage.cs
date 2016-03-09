@@ -55,14 +55,19 @@ namespace Nequeo.VoIP.PjSip.UI
         /// </summary>
         /// <param name="voipCall">VoIP call.</param>
         /// <param name="contacts">List of contacts.</param>
+        /// <param name="imageListSmall">The image list.</param>
+        /// <param name="imageListLarge">The image list.</param>
         /// <param name="incomingFilePath">The filename and path of the incoming audio.</param>
         /// <param name="audioDeviceIndex">The audio device index.</param>
-        public InstantMessage(Nequeo.VoIP.PjSip.VoIPCall voipCall, ListView contacts, string incomingFilePath, int audioDeviceIndex = -1)
+        public InstantMessage(Nequeo.VoIP.PjSip.VoIPCall voipCall, ListView contacts, ImageList imageListSmall, ImageList imageListLarge, 
+            string incomingFilePath, int audioDeviceIndex = -1)
         {
             InitializeComponent();
             _voipCall = voipCall;
             _contacts = contacts;
             _incomingFilePath = incomingFilePath;
+            _imageListSmall = imageListSmall;
+            _imageListLarge = imageListLarge;
 
             // If a valid audio device has been set.
             if (audioDeviceIndex >= 0)
@@ -78,6 +83,8 @@ namespace Nequeo.VoIP.PjSip.UI
         private ListView _contacts = null;
         private Nequeo.IO.Audio.WavePlayer _player = null;
         private string _incomingFilePath = null;
+        private ImageList _imageListSmall = null;
+        private ImageList _imageListLarge = null;
 
         /// <summary>
         /// Form is closing.
@@ -132,6 +139,14 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void InstantMessage_Load(object sender, EventArgs e)
         {
+            // Copy the image list.
+            for (int i = 1; i < _imageListSmall.Images.Count; i++)
+                imageListSmall.Images.Add(_imageListSmall.Images[i]);
+
+            // Copy the image list.
+            for (int i = 1; i < _imageListLarge.Images.Count; i++)
+                imageListLarge.Images.Add(_imageListLarge.Images[i]);
+
             // For each group.
             foreach (ListViewGroup group in _contacts.Groups)
             {
@@ -143,7 +158,7 @@ namespace Nequeo.VoIP.PjSip.UI
             foreach (ListViewItem item in _contacts.Items)
             {
                 // Create a new list item.
-                ListViewItem viewItem = new ListViewItem(item.Text, 0);
+                ListViewItem viewItem = new ListViewItem(item.Text, item.ImageIndex);
                 viewItem.Name = item.Name;
                 viewItem.Group = listViewMessage.Groups[item.Group.Name];
 

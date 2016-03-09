@@ -53,12 +53,14 @@ namespace Nequeo.VoIP.PjSip.UI
         /// </summary>
         /// <param name="contacts">The contact list.</param>
         /// <param name="contactsView">The contacts list view.</param>
-        public TransferList(Data.contacts contacts, ListView contactsView)
+        /// <param name="imageListSmall">The image list.</param>
+        public TransferList(Data.contacts contacts, ListView contactsView, ImageList imageListSmall)
         {
             InitializeComponent();
 
             _contacts = contacts;
             _contactsView = contactsView;
+            _imageListSmall = imageListSmall;
         }
 
         private bool _selected = false;
@@ -66,6 +68,7 @@ namespace Nequeo.VoIP.PjSip.UI
 
         private Data.contacts _contacts = null;
         private ListView _contactsView = null;
+        private ImageList _imageListSmall = null;
 
         /// <summary>
         /// Gets an indicator specifying if a contact has been selected.
@@ -90,6 +93,10 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void TransferList_Load(object sender, EventArgs e)
         {
+            // Copy the image list.
+            for (int i = 1; i < _imageListSmall.Images.Count; i++)
+                imageListSmall.Images.Add(_imageListSmall.Images[i]);
+
             // For each group.
             foreach (ListViewGroup group in _contactsView.Groups)
             {
@@ -101,7 +108,7 @@ namespace Nequeo.VoIP.PjSip.UI
             foreach (ListViewItem item in _contactsView.Items)
             {
                 // Create a new list item.
-                ListViewItem viewItem = new ListViewItem(item.Text, 0);
+                ListViewItem viewItem = new ListViewItem(item.Text, item.ImageIndex);
                 viewItem.Name = item.Name;
                 viewItem.Group = listViewTransfer.Groups[item.Group.Name];
 

@@ -61,6 +61,8 @@ namespace Nequeo.VoIP.PjSip.Data
 
         private string groupField;
 
+        private string pictureField;
+
         private string[] numbersField;
 
         /// <remarks/>
@@ -112,6 +114,19 @@ namespace Nequeo.VoIP.PjSip.Data
             set
             {
                 this.groupField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string picture
+        {
+            get
+            {
+                return this.pictureField;
+            }
+            set
+            {
+                this.pictureField = value;
             }
         }
 

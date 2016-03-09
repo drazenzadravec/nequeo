@@ -59,6 +59,7 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="callsView">The calls list view.</param>
         /// <param name="conferenceView">The conference list view.</param>
         /// <param name="contacts">The contact list.</param>
+        /// <param name="imageListSmall">The image list.</param>
         /// <param name="contactName">The contact name.</param>
         /// <param name="ringFilePath">The filename and path of the ringing audio.</param>
         /// <param name="audioDeviceIndex">The audio device index.</param>
@@ -71,7 +72,8 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="redirectCallNumber">The time to record the message.</param>
         /// <param name="redirectCallAfter">The time to record the message.</param>
         public InComingCall(Nequeo.VoIP.Sip.VoIPCall voipCall, Nequeo.VoIP.Sip.Param.OnIncomingCallParam inComingCall,
-            ListView contactsView, ListView callsView, ListView conferenceView, Data.contacts contacts, string contactName, string ringFilePath, 
+            ListView contactsView, ListView callsView, ListView conferenceView, Data.contacts contacts, ImageList imageListSmall, 
+            string contactName, string ringFilePath, 
             int audioDeviceIndex = -1, bool autoAnswer = false, string autoAnswerFilePath = null, int autoAnswerWait = 30, 
             string autoAnswerRecordingPath = null, int messageBankWaitTime = 20,
             bool redirectEnabled = false, string redirectCallNumber = "", int redirectCallAfter = -1)
@@ -86,6 +88,7 @@ namespace Nequeo.VoIP.Sip.UI
             _conferenceView = conferenceView;
             _contactsView = contactsView;
             _contacts = contacts;
+            _imageListSmall = imageListSmall;
 
             // Auto answer.
             _autoAnswer = autoAnswer;
@@ -142,6 +145,7 @@ namespace Nequeo.VoIP.Sip.UI
         private ListView _conferenceView = null;
         private ListView _contactsView = null;
         private Data.contacts _contacts = null;
+        private ImageList _imageListSmall = null;
 
         private System.Threading.Timer _autoAnswerTimer = null;
         private System.Threading.Timer _autoAnswerRecordingTimer = null;
@@ -1058,8 +1062,24 @@ namespace Nequeo.VoIP.Sip.UI
             // Add to the conference list.
             _voipCall.AddConferenceCallContact(_inComingCall.Call);
 
+            int imageIndex = 0;
+            Data.contactsContact contact = null;
+
+            try
+            {
+                // Get the contact.
+                contact = _contacts.contact.First(u => u.name.ToLower() == _contactName.ToLower());
+                if (contact != null)
+                {
+                    // Find in the contact list view.
+                    ListViewItem listViewItem = _contactsView.Items[contact.sipAccount];
+                    imageIndex = listViewItem.ImageIndex;
+                }
+            }
+            catch { imageIndex = 0; }
+
             // Add the conference call.
-            ListViewItem item = new ListViewItem(_contactName, 0);
+            ListViewItem item = new ListViewItem(_contactName, imageIndex);
             item.Name = _inComingCall.Call.CallID + "|" + _inComingCall.Call.ID;
 
             // Add the item.
@@ -1121,7 +1141,7 @@ namespace Nequeo.VoIP.Sip.UI
             if (_inComingCall != null && _inComingCall.Call != null)
             {
                 // Open the transfer window.
-                UI.TransferList transfer = new TransferList(_contacts, _contactsView);
+                UI.TransferList transfer = new TransferList(_contacts, _contactsView, _imageListSmall);
                 transfer.ShowDialog(this);
 
                 // Has a transfer number been selected.

@@ -81,6 +81,7 @@ namespace Nequeo.VoIP.Sip.UI
         private string _sipAccount = null;
         private string _name = null;
         private string _group = null;
+        private string _picture = null;
 
         /// <summary>
         /// Gets an indicator specifying if a new contact has been created.
@@ -123,6 +124,14 @@ namespace Nequeo.VoIP.Sip.UI
         }
 
         /// <summary>
+        /// Gets the contact picture.
+        /// </summary>
+        public string ContactPicture
+        {
+            get { return _picture; }
+        }
+
+        /// <summary>
         /// OK.
         /// </summary>
         /// <param name="sender"></param>
@@ -140,9 +149,11 @@ namespace Nequeo.VoIP.Sip.UI
                     contact.presenceState = checkBoxPresenceState.Checked;
                     contact.group = comboBoxGroup.Text;
                     contact.numbers = _numbers.ToArray();
+                    contact.picture = textBoxPicture.Text;
                     _name = contact.name;
                     _group = contact.group;
                     _presenecState = contact.presenceState;
+                    _picture = contact.picture;
                 }
             }
             else
@@ -158,6 +169,7 @@ namespace Nequeo.VoIP.Sip.UI
                         presenceState = checkBoxPresenceState.Checked,
                         numbers = _numbers.ToArray(),
                         group = comboBoxGroup.Text,
+                        picture = textBoxPicture.Text,
                     };
 
                     // Add the new contact.
@@ -170,6 +182,7 @@ namespace Nequeo.VoIP.Sip.UI
                     _sipAccount = contact.sipAccount;
                     _name = contact.name;
                     _group = contact.group;
+                    _picture = contact.picture;
                 }
             }
             Close();
@@ -362,6 +375,7 @@ namespace Nequeo.VoIP.Sip.UI
                     textBoxSipAccount.Text = contact.sipAccount;
                     checkBoxPresenceState.Checked = contact.presenceState;
                     comboBoxGroup.SelectedIndex = comboBoxGroup.Items.IndexOf(contact.group);
+                    textBoxPicture.Text = contact.picture;
                     textBoxSipAccount.ReadOnly = true;
 
                     // For each number.
@@ -402,6 +416,23 @@ namespace Nequeo.VoIP.Sip.UI
                 buttonOk.Enabled = false;
                 buttonAdd.Enabled = false;
                 listViewNumbers.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Open picture.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonPicture_Click(object sender, EventArgs e)
+        {
+            // Set the import filter.
+            openFileDialog.Filter = "All image files (*.bmp, *.gif, *.jpg, *.ipeg, *.png, *.ico)|*.bmp;*.gif;*.jpg;*.ipeg;*.png;*.ico";
+
+            // Get the file name selected.
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxPicture.Text = openFileDialog.FileName;
             }
         }
     }

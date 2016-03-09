@@ -1319,26 +1319,26 @@
             this.toolStripMenuItemConferenceSuspend,
             this.toolStripMenuItemConferenceVideo});
             this.contextMenuStripConference.Name = "contextMenuStripConference";
-            this.contextMenuStripConference.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStripConference.Size = new System.Drawing.Size(120, 70);
             // 
             // toolStripMenuItemConferenceHangup
             // 
             this.toolStripMenuItemConferenceHangup.Name = "toolStripMenuItemConferenceHangup";
-            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(119, 22);
             this.toolStripMenuItemConferenceHangup.Text = "Hangup";
             this.toolStripMenuItemConferenceHangup.Click += new System.EventHandler(this.toolStripMenuItemConferenceHangup_Click);
             // 
             // toolStripMenuItemConferenceSuspend
             // 
             this.toolStripMenuItemConferenceSuspend.Name = "toolStripMenuItemConferenceSuspend";
-            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(119, 22);
             this.toolStripMenuItemConferenceSuspend.Text = "Suspend";
             this.toolStripMenuItemConferenceSuspend.Click += new System.EventHandler(this.toolStripMenuItemConferenceSuspend_Click);
             // 
             // toolStripMenuItemConferenceVideo
             // 
             this.toolStripMenuItemConferenceVideo.Name = "toolStripMenuItemConferenceVideo";
-            this.toolStripMenuItemConferenceVideo.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemConferenceVideo.Size = new System.Drawing.Size(119, 22);
             this.toolStripMenuItemConferenceVideo.Text = "Video";
             this.toolStripMenuItemConferenceVideo.Visible = false;
             this.toolStripMenuItemConferenceVideo.Click += new System.EventHandler(this.toolStripMenuItemConferenceVideo_Click);
