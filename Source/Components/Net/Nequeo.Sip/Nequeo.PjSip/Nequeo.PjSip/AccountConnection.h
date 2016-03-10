@@ -42,6 +42,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "IPv6_Use.h"
 #include "SRTP_SecureSignaling.h"
 #include "SRTP_Use.h"
+#include "TransportType.h"
 
 #include "pjsua2.hpp"
 
@@ -208,6 +209,15 @@ namespace Nequeo
 				{
 					unsigned get();
 					void set(unsigned value);
+				}
+
+				/// <summary>
+				/// Gets or sets the transport type.
+				/// </summary>
+				property TransportType Transport
+				{
+					TransportType get();
+					void set(TransportType value);
 				}
 
 				/// <summary>
@@ -407,6 +417,7 @@ namespace Nequeo
 				unsigned _timerMinSESec;
 				unsigned _timerSessExpiresSec;
 
+				TransportType _transportType;
 				IPv6_Use _ipv6_Use;
 				SRTP_Use _srtp_Use;
 				SRTP_SecureSignaling _srtp_SecureSignaling;

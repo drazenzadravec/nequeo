@@ -80,6 +80,7 @@
     <Compile Include="Account\OnRegStateParam.cs" />
     <Compile Include="Account\PresenceStatus.cs" />
     <Compile Include="Account\RpidActivity.cs" />
+    <Compile Include="Account\TransportType.cs" />
     <Compile Include="base\Account.cs" />
     <Compile Include="base\Call.cs" />
     <Compile Include="base\Contact.cs" />

@@ -387,6 +387,9 @@
     <ClInclude Include="VideoIncomingWindow.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="TransportType.h">
+      <Filter>Header Files\AccountHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -681,6 +684,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="VideoPreviewWindow.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VideoIncomingWindow.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

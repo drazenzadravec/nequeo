@@ -133,8 +133,12 @@
             this.tabPageCodec = new System.Windows.Forms.TabPage();
             this.groupBoxVideoCodec = new System.Windows.Forms.GroupBox();
             this.checkedListBoxVideoCodec = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStripVideoCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemVideoChangePriority = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxAudioCodec = new System.Windows.Forms.GroupBox();
             this.checkedListBoxAudioCodec = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStripCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemChangePriority = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxFeatureTransferCall = new System.Windows.Forms.GroupBox();
             this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.labelRedirectCallTimeSec = new System.Windows.Forms.Label();
@@ -151,10 +155,8 @@
             this.comboBoxVideoDeviceCapture = new System.Windows.Forms.ComboBox();
             this.labelVideoDevicePlayback = new System.Windows.Forms.Label();
             this.labelVideoDeviceCapture = new System.Windows.Forms.Label();
-            this.contextMenuStripCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemChangePriority = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripVideoCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemVideoChangePriority = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBoxConfigTransport = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxConfigTransport = new System.Windows.Forms.CheckedListBox();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -172,11 +174,12 @@
             this.groupBoxSounds.SuspendLayout();
             this.tabPageCodec.SuspendLayout();
             this.groupBoxVideoCodec.SuspendLayout();
+            this.contextMenuStripVideoCodecPriority.SuspendLayout();
             this.groupBoxAudioCodec.SuspendLayout();
+            this.contextMenuStripCodecPriority.SuspendLayout();
             this.groupBoxFeatureTransferCall.SuspendLayout();
             this.groupBoxVideoDevice.SuspendLayout();
-            this.contextMenuStripCodecPriority.SuspendLayout();
-            this.contextMenuStripVideoCodecPriority.SuspendLayout();
+            this.groupBoxConfigTransport.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -697,7 +700,7 @@
             this.groupBoxTimer.Controls.Add(this.labelTimerMinSE);
             this.groupBoxTimer.Location = new System.Drawing.Point(194, 169);
             this.groupBoxTimer.Name = "groupBoxTimer";
-            this.groupBoxTimer.Size = new System.Drawing.Size(287, 79);
+            this.groupBoxTimer.Size = new System.Drawing.Size(202, 79);
             this.groupBoxTimer.TabIndex = 6;
             this.groupBoxTimer.TabStop = false;
             this.groupBoxTimer.Text = "Timer";
@@ -997,6 +1000,7 @@
             // 
             // tabPageConfiguration
             // 
+            this.tabPageConfiguration.Controls.Add(this.groupBoxConfigTransport);
             this.tabPageConfiguration.Controls.Add(this.groupBoxPublish);
             this.tabPageConfiguration.Controls.Add(this.groupBoxAccount);
             this.tabPageConfiguration.Controls.Add(this.groupBoxTimer);
@@ -1239,6 +1243,22 @@
             this.checkedListBoxVideoCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxVideoCodec_ItemCheck);
             this.checkedListBoxVideoCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxVideoCodec_SelectedIndexChanged);
             // 
+            // contextMenuStripVideoCodecPriority
+            // 
+            this.contextMenuStripVideoCodecPriority.Enabled = false;
+            this.contextMenuStripVideoCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemVideoChangePriority});
+            this.contextMenuStripVideoCodecPriority.Name = "contextMenuStripVideoCodecPriority";
+            this.contextMenuStripVideoCodecPriority.Size = new System.Drawing.Size(157, 26);
+            // 
+            // toolStripMenuItemVideoChangePriority
+            // 
+            this.toolStripMenuItemVideoChangePriority.Enabled = false;
+            this.toolStripMenuItemVideoChangePriority.Name = "toolStripMenuItemVideoChangePriority";
+            this.toolStripMenuItemVideoChangePriority.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemVideoChangePriority.Text = "Change Priority";
+            this.toolStripMenuItemVideoChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            // 
             // groupBoxAudioCodec
             // 
             this.groupBoxAudioCodec.Controls.Add(this.checkedListBoxAudioCodec);
@@ -1264,6 +1284,22 @@
             this.checkedListBoxAudioCodec.TabIndex = 2;
             this.checkedListBoxAudioCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxAudioCodec_ItemCheck);
             this.checkedListBoxAudioCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxAudioCodec_SelectedIndexChanged);
+            // 
+            // contextMenuStripCodecPriority
+            // 
+            this.contextMenuStripCodecPriority.Enabled = false;
+            this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemChangePriority});
+            this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
+            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 26);
+            // 
+            // toolStripMenuItemChangePriority
+            // 
+            this.toolStripMenuItemChangePriority.Enabled = false;
+            this.toolStripMenuItemChangePriority.Name = "toolStripMenuItemChangePriority";
+            this.toolStripMenuItemChangePriority.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemChangePriority.Text = "Change Priority";
+            this.toolStripMenuItemChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
             // 
             // groupBoxFeatureTransferCall
             // 
@@ -1428,35 +1464,30 @@
             this.labelVideoDeviceCapture.TabIndex = 0;
             this.labelVideoDeviceCapture.Text = "Capture :";
             // 
-            // contextMenuStripCodecPriority
+            // groupBoxConfigTransport
             // 
-            this.contextMenuStripCodecPriority.Enabled = false;
-            this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemChangePriority});
-            this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
-            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 48);
+            this.groupBoxConfigTransport.Controls.Add(this.checkedListBoxConfigTransport);
+            this.groupBoxConfigTransport.Location = new System.Drawing.Point(402, 169);
+            this.groupBoxConfigTransport.Name = "groupBoxConfigTransport";
+            this.groupBoxConfigTransport.Size = new System.Drawing.Size(79, 79);
+            this.groupBoxConfigTransport.TabIndex = 8;
+            this.groupBoxConfigTransport.TabStop = false;
+            this.groupBoxConfigTransport.Text = "Transport";
             // 
-            // toolStripMenuItemChangePriority
+            // checkedListBoxConfigTransport
             // 
-            this.toolStripMenuItemChangePriority.Name = "toolStripMenuItemChangePriority";
-            this.toolStripMenuItemChangePriority.Size = new System.Drawing.Size(156, 22);
-            this.toolStripMenuItemChangePriority.Text = "Change Priority";
-            this.toolStripMenuItemChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
-            // 
-            // contextMenuStripVideoCodecPriority
-            // 
-            this.contextMenuStripVideoCodecPriority.Enabled = false;
-            this.contextMenuStripVideoCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemVideoChangePriority});
-            this.contextMenuStripVideoCodecPriority.Name = "contextMenuStripVideoCodecPriority";
-            this.contextMenuStripVideoCodecPriority.Size = new System.Drawing.Size(157, 26);
-            // 
-            // toolStripMenuItemVideoChangePriority
-            // 
-            this.toolStripMenuItemVideoChangePriority.Name = "toolStripMenuItemVideoChangePriority";
-            this.toolStripMenuItemVideoChangePriority.Size = new System.Drawing.Size(156, 22);
-            this.toolStripMenuItemVideoChangePriority.Text = "Change Priority";
-            this.toolStripMenuItemVideoChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            this.checkedListBoxConfigTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBoxConfigTransport.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxConfigTransport.FormattingEnabled = true;
+            this.checkedListBoxConfigTransport.IntegralHeight = false;
+            this.checkedListBoxConfigTransport.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxConfigTransport.Name = "checkedListBoxConfigTransport";
+            this.checkedListBoxConfigTransport.Size = new System.Drawing.Size(67, 54);
+            this.checkedListBoxConfigTransport.TabIndex = 0;
+            this.checkedListBoxConfigTransport.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxConfigTransport_ItemCheck);
+            this.checkedListBoxConfigTransport.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxConfigTransport_SelectedIndexChanged);
             // 
             // Settings
             // 
@@ -1503,13 +1534,14 @@
             this.groupBoxSounds.PerformLayout();
             this.tabPageCodec.ResumeLayout(false);
             this.groupBoxVideoCodec.ResumeLayout(false);
+            this.contextMenuStripVideoCodecPriority.ResumeLayout(false);
             this.groupBoxAudioCodec.ResumeLayout(false);
+            this.contextMenuStripCodecPriority.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.PerformLayout();
             this.groupBoxVideoDevice.ResumeLayout(false);
             this.groupBoxVideoDevice.PerformLayout();
-            this.contextMenuStripCodecPriority.ResumeLayout(false);
-            this.contextMenuStripVideoCodecPriority.ResumeLayout(false);
+            this.groupBoxConfigTransport.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1642,5 +1674,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChangePriority;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripVideoCodecPriority;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemVideoChangePriority;
+        private System.Windows.Forms.GroupBox groupBoxConfigTransport;
+        private System.Windows.Forms.CheckedListBox checkedListBoxConfigTransport;
     }
 }

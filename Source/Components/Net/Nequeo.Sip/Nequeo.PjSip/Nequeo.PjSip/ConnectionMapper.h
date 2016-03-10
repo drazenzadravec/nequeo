@@ -43,6 +43,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "RpidActivity.h"
 #include "BuddyStatus.h"
 #include "SubscriptionState.h"
+#include "TransportType.h"
 
 #include "pjsua2\account.hpp"
 #include "pjsua2\endpoint.hpp"
@@ -282,6 +283,12 @@ namespace Nequeo
 				bool GetVideoAutoShow();
 
 				/// <summary>
+				/// Gets or sets the transport type.
+				/// </summary>
+				void SetTransportType(TransportType value);
+				TransportType GetTransportType();
+
+				/// <summary>
 				/// Get ip v6 use.
 				/// </summary>
 				/// <param name="ipv6Use">The current ipv6 use.</param>
@@ -376,6 +383,7 @@ namespace Nequeo
 				unsigned _timerMinSESec;
 				unsigned _timerSessExpiresSec;
 
+				TransportType _transportType;
 				IPv6_Use _ipv6_Use;
 				SRTP_Use _srtp_Use;
 				SRTP_SecureSignaling _srtp_SecureSignaling;

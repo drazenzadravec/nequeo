@@ -133,6 +133,8 @@
             this.tabPageCodec = new System.Windows.Forms.TabPage();
             this.groupBoxAudioCodec = new System.Windows.Forms.GroupBox();
             this.checkedListBoxAudioCodec = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStripCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemChangePriority = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxFeatureTransferCall = new System.Windows.Forms.GroupBox();
             this.labelRedirectCallToNumber = new System.Windows.Forms.Label();
             this.labelRedirectCallTimeSec = new System.Windows.Forms.Label();
@@ -140,8 +142,8 @@
             this.labelRedirectCallTime = new System.Windows.Forms.Label();
             this.textBoxRedirectCallText = new System.Windows.Forms.TextBox();
             this.checkBoxRedirectCallEnabled = new System.Windows.Forms.CheckBox();
-            this.contextMenuStripCodecPriority = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemChangePriority = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBoxConfigTransport = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxConfigTransport = new System.Windows.Forms.CheckedListBox();
             this.groupBoxAudioDevice.SuspendLayout();
             this.groupBoxAccount.SuspendLayout();
             this.groupBoxMessageWaitingIndication.SuspendLayout();
@@ -159,8 +161,9 @@
             this.groupBoxSounds.SuspendLayout();
             this.tabPageCodec.SuspendLayout();
             this.groupBoxAudioCodec.SuspendLayout();
-            this.groupBoxFeatureTransferCall.SuspendLayout();
             this.contextMenuStripCodecPriority.SuspendLayout();
+            this.groupBoxFeatureTransferCall.SuspendLayout();
+            this.groupBoxConfigTransport.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAudioDevice
@@ -681,7 +684,7 @@
             this.groupBoxTimer.Controls.Add(this.labelTimerMinSE);
             this.groupBoxTimer.Location = new System.Drawing.Point(194, 169);
             this.groupBoxTimer.Name = "groupBoxTimer";
-            this.groupBoxTimer.Size = new System.Drawing.Size(287, 79);
+            this.groupBoxTimer.Size = new System.Drawing.Size(202, 79);
             this.groupBoxTimer.TabIndex = 6;
             this.groupBoxTimer.TabStop = false;
             this.groupBoxTimer.Text = "Timer";
@@ -981,6 +984,7 @@
             // 
             // tabPageConfiguration
             // 
+            this.tabPageConfiguration.Controls.Add(this.groupBoxConfigTransport);
             this.tabPageConfiguration.Controls.Add(this.groupBoxPublish);
             this.tabPageConfiguration.Controls.Add(this.groupBoxAccount);
             this.tabPageConfiguration.Controls.Add(this.groupBoxTimer);
@@ -1221,6 +1225,22 @@
             this.checkedListBoxAudioCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxAudioCodec_ItemCheck);
             this.checkedListBoxAudioCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxAudioCodec_SelectedIndexChanged);
             // 
+            // contextMenuStripCodecPriority
+            // 
+            this.contextMenuStripCodecPriority.Enabled = false;
+            this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemChangePriority});
+            this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
+            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 26);
+            // 
+            // toolStripMenuItemChangePriority
+            // 
+            this.toolStripMenuItemChangePriority.Enabled = false;
+            this.toolStripMenuItemChangePriority.Name = "toolStripMenuItemChangePriority";
+            this.toolStripMenuItemChangePriority.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemChangePriority.Text = "Change Priority";
+            this.toolStripMenuItemChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            // 
             // groupBoxFeatureTransferCall
             // 
             this.groupBoxFeatureTransferCall.Controls.Add(this.labelRedirectCallToNumber);
@@ -1292,21 +1312,29 @@
             this.checkBoxRedirectCallEnabled.UseVisualStyleBackColor = true;
             this.checkBoxRedirectCallEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRedirectCallEnabled_CheckedChanged);
             // 
-            // contextMenuStripCodecPriority
+            // groupBoxConfigTransport
             // 
-            this.contextMenuStripCodecPriority.Enabled = false;
-            this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemChangePriority});
-            this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
-            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 48);
+            this.groupBoxConfigTransport.Controls.Add(this.checkedListBoxConfigTransport);
+            this.groupBoxConfigTransport.Location = new System.Drawing.Point(402, 169);
+            this.groupBoxConfigTransport.Name = "groupBoxConfigTransport";
+            this.groupBoxConfigTransport.Size = new System.Drawing.Size(79, 79);
+            this.groupBoxConfigTransport.TabIndex = 8;
+            this.groupBoxConfigTransport.TabStop = false;
+            this.groupBoxConfigTransport.Text = "Transport";
             // 
-            // toolStripMenuItemChangePriority
+            // checkedListBoxConfigTransport
             // 
-            this.toolStripMenuItemChangePriority.Enabled = false;
-            this.toolStripMenuItemChangePriority.Name = "toolStripMenuItemChangePriority";
-            this.toolStripMenuItemChangePriority.Size = new System.Drawing.Size(156, 22);
-            this.toolStripMenuItemChangePriority.Text = "Change Priority";
-            this.toolStripMenuItemChangePriority.Click += new System.EventHandler(this.toolStripMenuItemChangePriority_Click);
+            this.checkedListBoxConfigTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBoxConfigTransport.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxConfigTransport.FormattingEnabled = true;
+            this.checkedListBoxConfigTransport.IntegralHeight = false;
+            this.checkedListBoxConfigTransport.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxConfigTransport.Name = "checkedListBoxConfigTransport";
+            this.checkedListBoxConfigTransport.Size = new System.Drawing.Size(67, 54);
+            this.checkedListBoxConfigTransport.TabIndex = 0;
+            this.checkedListBoxConfigTransport.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxConfigTransport_ItemCheck);
             // 
             // Settings
             // 
@@ -1353,9 +1381,10 @@
             this.groupBoxSounds.PerformLayout();
             this.tabPageCodec.ResumeLayout(false);
             this.groupBoxAudioCodec.ResumeLayout(false);
+            this.contextMenuStripCodecPriority.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.ResumeLayout(false);
             this.groupBoxFeatureTransferCall.PerformLayout();
-            this.contextMenuStripCodecPriority.ResumeLayout(false);
+            this.groupBoxConfigTransport.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1475,5 +1504,7 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxAudioCodec;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCodecPriority;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChangePriority;
+        private System.Windows.Forms.GroupBox groupBoxConfigTransport;
+        private System.Windows.Forms.CheckedListBox checkedListBoxConfigTransport;
     }
 }

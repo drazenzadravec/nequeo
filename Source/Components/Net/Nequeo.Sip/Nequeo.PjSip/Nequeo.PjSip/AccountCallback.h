@@ -37,6 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "ConnectionMapper.h"
+#include "TransportType.h"
 
 #include "pjsua2\account.hpp"
 #include "pjsua2\endpoint.hpp"

@@ -2110,6 +2110,7 @@ namespace Nequeo.VoIP.PjSip.UI
             textBoxAccRegStatus.Text = info.RegStatus.ToString();
             textBoxAccRegStatusText.Text = info.RegStatusText;
             labelAccAccountUri.Text = info.Uri;
+            groupBoxAccount.Text = "Account - " + info.Uri;
             checkBoxAccIsValid.Checked = _voipCall.VoIPManager.IsValid();
         }
 
@@ -3264,6 +3265,26 @@ namespace Nequeo.VoIP.PjSip.UI
                 // Loop through the images in the list, drawing each image.
                 for (int count = 0; count < imageListLarge.Images.Count; count++)
                     imageListLarge.Draw(theGraphics, new Point(0, 0), count);
+            }
+        }
+
+        /// <summary>
+        /// Expand collapse.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxContactExpand_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the state.
+            switch (checkBoxContactExpand.CheckState)
+            {
+                case CheckState.Checked:
+                    listViewContact.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Normal);
+                    break;
+                case CheckState.Indeterminate:
+                case CheckState.Unchecked:
+                    listViewContact.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Collapsed);
+                    break;
             }
         }
     }

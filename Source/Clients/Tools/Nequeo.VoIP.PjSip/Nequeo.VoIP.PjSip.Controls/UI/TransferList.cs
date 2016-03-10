@@ -217,5 +217,25 @@ namespace Nequeo.VoIP.PjSip.UI
                 buttonOK.Enabled = false;
             }
         }
+
+        /// <summary>
+        /// Expand.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void expandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewTransfer.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Normal);
+        }
+
+        /// <summary>
+        /// Collapse.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void collapseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewTransfer.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Collapsed);
+        }
     }
 }

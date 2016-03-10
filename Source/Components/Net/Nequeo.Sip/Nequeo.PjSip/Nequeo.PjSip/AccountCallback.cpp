@@ -105,24 +105,61 @@ void AccountCallback::StartUp()
 /// <param name="mapper">Account connection mapper.</param>
 void AccountCallback::Initialise(ConnectionMapper& mapper)
 {
+	// Is IPv6 capable.
+	pjsua_ipv6_use useIPv6 = mapper.GetIPv6UseEx(mapper.GetIPv6Use());
+	TransportType transportType = mapper.GetTransportType();
+
+	// Setup TLS.
 	_transportConfig_TLS->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
 	_transportConfig_TLS->tlsConfig.verifyServer = false;
 	_transportConfig_TLS->tlsConfig.verifyClient = false;
 
-	_transportConfig_TLS6->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
-	_transportConfig_TLS6->tlsConfig.verifyServer = false;
-	_transportConfig_TLS6->tlsConfig.verifyClient = false;
+	// If IPv6 is enabled.
+	if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
+	{
+		_transportConfig_TLS6->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
+		_transportConfig_TLS6->tlsConfig.verifyServer = false;
+		_transportConfig_TLS6->tlsConfig.verifyClient = false;
+	}
 
-	// Create the client transport.
-	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP, *(_transportConfig_UDP.get()));
-	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP6, *(_transportConfig_UDP6.get()));
-	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP, *(_transportConfig_TCP.get()));
-	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP6, *(_transportConfig_TCP6.get()));
+	// If UDP transport.
+	if ((TransportType::UDP & transportType) == TransportType::UDP)
+	{
+		// Create the client transport.
+		_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP, *(_transportConfig_UDP.get()));
 
-	// Has not been implemented must change pjlib.config.PJ_HAS_SSL_SOCK = 1
-	// then recompile the pjproject and copy all the libs then then recomiple this project.
-	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS, *(_transportConfig_TLS.get()));
-	_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS6, *(_transportConfig_TLS6.get()));
+		// If IPv6 is enabled.
+		if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
+		{
+			_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP6, *(_transportConfig_UDP6.get()));
+		}
+	}
+
+	// If TCP transport.
+	if ((TransportType::TCP & transportType) == TransportType::TCP)
+	{
+		_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP, *(_transportConfig_TCP.get()));
+
+		// If IPv6 is enabled.
+		if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
+		{
+			_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP6, *(_transportConfig_TCP6.get()));
+		}
+	}
+
+	// If TLS transport.
+	if ((TransportType::TLS & transportType) == TransportType::TLS)
+	{
+		// Has not been implemented must change pjlib.config.PJ_HAS_SSL_SOCK = 1
+		// then recompile the pjproject and copy all the libs then then recomiple this project.
+		_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS, *(_transportConfig_TLS.get()));
+
+		// If IPv6 is enabled.
+		if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
+		{
+			_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS6, *(_transportConfig_TLS6.get()));
+		}
+	}
 
 	// Start.
 	_endpoint->libStart();
@@ -144,7 +181,7 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 	// Set the media options.
 	_transportConfig->port = mapper.GetMediaTransportPort();
 	_transportConfig->portRange = mapper.GetMediaTransportPortRange();
-	_accountMediaConfig->ipv6Use = mapper.GetIPv6UseEx(mapper.GetIPv6Use());
+	_accountMediaConfig->ipv6Use = useIPv6;
 	_accountMediaConfig->srtpUse = mapper.GetSrtpUseEx(mapper.GetSRTPUse());
 	_accountMediaConfig->srtpSecureSignaling = mapper.GetSRTPSecureSignalingEx(mapper.GetSRTPSecureSignaling());
 	_accountMediaConfig->transportConfig = *(_transportConfig.get());

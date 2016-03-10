@@ -202,6 +202,7 @@ void Account::SetConnectionMappings(AccountConnection^ accountConnection, Connec
 	connectionMapper.SetTimerMinSESec(accountConnection->TimerMinSESec);
 	connectionMapper.SetTimerSessExpiresSec(accountConnection->TimerSessExpiresSec);
 
+	connectionMapper.SetTransportType(accountConnection->Transport);
 	connectionMapper.SetIPv6Use(accountConnection->IPv6Use);
 	connectionMapper.SetSRTPUse(accountConnection->SRTPUse);
 	connectionMapper.SetSRTPSecureSignaling(accountConnection->SRTPSecureSignaling);

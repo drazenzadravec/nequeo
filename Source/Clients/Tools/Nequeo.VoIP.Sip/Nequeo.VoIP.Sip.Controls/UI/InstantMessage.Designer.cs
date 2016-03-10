@@ -39,12 +39,17 @@
             this.labelSendTo = new System.Windows.Forms.Label();
             this.labelSendToValue = new System.Windows.Forms.Label();
             this.buttonPrint = new System.Windows.Forms.Button();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.expandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collapseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewMessage
             // 
             this.listViewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewMessage.ContextMenuStrip = this.contextMenuStrip;
             this.listViewMessage.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewMessage.LargeImageList = this.imageListLarge;
             this.listViewMessage.Location = new System.Drawing.Point(12, 12);
@@ -138,6 +143,28 @@
             this.buttonPrint.UseVisualStyleBackColor = true;
             this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.expandToolStripMenuItem,
+            this.collapseToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(120, 48);
+            // 
+            // expandToolStripMenuItem
+            // 
+            this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
+            this.expandToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.expandToolStripMenuItem.Text = "Expand";
+            this.expandToolStripMenuItem.Click += new System.EventHandler(this.expandToolStripMenuItem_Click);
+            // 
+            // collapseToolStripMenuItem
+            // 
+            this.collapseToolStripMenuItem.Name = "collapseToolStripMenuItem";
+            this.collapseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.collapseToolStripMenuItem.Text = "Collapse";
+            this.collapseToolStripMenuItem.Click += new System.EventHandler(this.collapseToolStripMenuItem_Click);
+            // 
             // InstantMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,6 +184,7 @@
             this.Text = "Instant Message";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InstantMessage_FormClosing);
             this.Load += new System.EventHandler(this.InstantMessage_Load);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +201,8 @@
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
         private System.Windows.Forms.Button buttonPrint;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem expandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem collapseToolStripMenuItem;
     }
 }

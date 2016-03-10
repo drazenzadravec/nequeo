@@ -322,6 +322,17 @@ namespace Nequeo.VoIP.Sip.UI
                 // Add to list.
                 checkedListBoxAudioCodec.Items.Add(audioCodec.CodecId, enabled);
             }
+
+            // Get all transports.
+            Array transports = Enum.GetValues(typeof(Nequeo.Net.Sip.TransportType));
+            foreach (var value in transports)
+            {
+                // Is active.
+                if (((Nequeo.Net.Sip.TransportType)value & _voipCall.VoIPManager.AccountConnection.Transport) == (Net.Sip.TransportType)value)
+                    checkedListBoxConfigTransport.Items.Add(((Nequeo.Net.Sip.TransportType)value).ToString(), true);
+                else
+                    checkedListBoxConfigTransport.Items.Add(((Nequeo.Net.Sip.TransportType)value).ToString(), false);
+            }
         }
 
         /// <summary>
@@ -1385,6 +1396,33 @@ namespace Nequeo.VoIP.Sip.UI
                     // Ask the used to answer incomming call.
                     DialogResult result = MessageBox.Show(this, "Unable to set priority because of an internal error. " + ex.Message,
                         "Set Priority", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Transport.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkedListBoxConfigTransport_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxConfigTransport.SelectedIndex >= 0)
+            {
+                // Get the value.
+                string transportItem = checkedListBoxConfigTransport.SelectedItem.ToString();
+                Net.Sip.TransportType transport = (Net.Sip.TransportType)Enum.Parse(typeof(Net.Sip.TransportType), transportItem);
+
+                // If checked
+                if (e.NewValue == CheckState.Checked)
+                {
+                    // Add to the checked items.
+                    _voipCall.VoIPManager.AccountConnection.Transport = _voipCall.VoIPManager.AccountConnection.Transport | transport;
+                }
+                else
+                {
+                    // Remove to the checked items.
+                    _voipCall.VoIPManager.AccountConnection.Transport = _voipCall.VoIPManager.AccountConnection.Transport ^ transport;
                 }
             }
         }

@@ -448,6 +448,18 @@ bool ConnectionMapper::GetVideoAutoShow()
 }
 
 /// <summary>
+/// Gets or sets the transport type.
+/// </summary>
+void ConnectionMapper::SetTransportType(TransportType value)
+{
+	_transportType = value;
+}
+TransportType ConnectionMapper::GetTransportType()
+{
+	return _transportType;
+}
+
+/// <summary>
 /// Get ip v6 use.
 /// </summary>
 /// <param name="ipv6Use">The current ipv6 use.</param>

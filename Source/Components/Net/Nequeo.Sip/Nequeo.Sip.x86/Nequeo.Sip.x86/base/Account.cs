@@ -677,22 +677,58 @@ namespace Nequeo.Net.Sip
                 _transportConfig_TLS = new pjsua2.TransportConfig();
                 _transportConfig_TLS6 = new pjsua2.TransportConfig();
 
+                pjsua2.pjsua_ipv6_use useIPv6 = AccountInfo.GetIPv6UseEx(accountConnection.IPv6Use);
+                TransportType transportType = accountConnection.Transport;
+
                 // Assign the transport.
                 _transportConfig_TLS.tlsConfig.method = pjsua2.pjsip_ssl_method.PJSIP_TLSV1_METHOD;
                 _transportConfig_TLS.tlsConfig.verifyServer = false;
                 _transportConfig_TLS.tlsConfig.verifyClient = false;
 
-                _transportConfig_TLS6.tlsConfig.method = pjsua2.pjsip_ssl_method.PJSIP_TLSV1_METHOD;
-                _transportConfig_TLS6.tlsConfig.verifyServer = false;
-                _transportConfig_TLS6.tlsConfig.verifyClient = false;
+                // If IPv6 is enabled.
+                if (useIPv6 == pjsua2.pjsua_ipv6_use.PJSUA_IPV6_ENABLED)
+                {
+                    _transportConfig_TLS6.tlsConfig.method = pjsua2.pjsip_ssl_method.PJSIP_TLSV1_METHOD;
+                    _transportConfig_TLS6.tlsConfig.verifyServer = false;
+                    _transportConfig_TLS6.tlsConfig.verifyClient = false;
+                }
 
-                // Create the client transport.
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP, _transportConfig_UDP);
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP6, _transportConfig_UDP6);
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP, _transportConfig_TCP);
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP6, _transportConfig_TCP6);
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TLS, _transportConfig_TLS);
-                _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TLS6, _transportConfig_TLS6);
+                // If UDP transport.
+                if ((TransportType.UDP & transportType) == TransportType.UDP)
+                {
+                    // Create the client transport.
+                    _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP, _transportConfig_UDP);
+
+                    // If IPv6 is enabled.
+                    if (useIPv6 == pjsua2.pjsua_ipv6_use.PJSUA_IPV6_ENABLED)
+                    {
+                        _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_UDP6, _transportConfig_UDP6);
+                    }
+                }
+
+                // If TCP transport.
+                if ((TransportType.TCP & transportType) == TransportType.TCP)
+                {
+                    _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP, _transportConfig_TCP);
+
+                    // If IPv6 is enabled.
+                    if (useIPv6 == pjsua2.pjsua_ipv6_use.PJSUA_IPV6_ENABLED)
+                    {
+                        _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TCP6, _transportConfig_TCP6);
+                    }
+                }
+
+                // If TLS transport.
+                if ((TransportType.TLS & transportType) == TransportType.TLS)
+                {
+                    _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TLS, _transportConfig_TLS);
+
+                    // If IPv6 is enabled.
+                    if (useIPv6 == pjsua2.pjsua_ipv6_use.PJSUA_IPV6_ENABLED)
+                    {
+                        _pjEndpoint.transportCreate(pjsua2.pjsip_transport_type_e.PJSIP_TRANSPORT_TLS6, _transportConfig_TLS6);
+                    }
+                }
 
                 // Start.
                 _pjEndpoint.libStart();
@@ -726,7 +762,7 @@ namespace Nequeo.Net.Sip
                 // Set the media options.
                 _pjTransportConfig.port = accountConnection.MediaTransportPort; // RTP
                 _pjTransportConfig.portRange = accountConnection.MediaTransportPortRange; // RTP
-                _pjAccountMediaConfig.ipv6Use = AccountInfo.GetIPv6UseEx(accountConnection.IPv6Use);
+                _pjAccountMediaConfig.ipv6Use = useIPv6;
                 _pjAccountMediaConfig.srtpUse = AccountInfo.GetSrtpUseEx(accountConnection.SRTPUse);
                 _pjAccountMediaConfig.srtpSecureSignaling = AccountInfo.GetSRTPSecureSignalingEx(accountConnection.SRTPSecureSignaling);
                 _pjAccountMediaConfig.transportConfig = _pjTransportConfig;

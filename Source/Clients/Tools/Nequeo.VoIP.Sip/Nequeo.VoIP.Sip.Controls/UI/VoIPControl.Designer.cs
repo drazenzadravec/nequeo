@@ -152,6 +152,7 @@
             this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.checkBoxContactExpand = new System.Windows.Forms.CheckBox();
             this.groupBoxCall.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
@@ -1046,6 +1047,7 @@
             this.groupBoxContact.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContact.Controls.Add(this.checkBoxContactExpand);
             this.groupBoxContact.Controls.Add(this.comboBoxContactView);
             this.groupBoxContact.Controls.Add(this.buttonContactUpdate);
             this.groupBoxContact.Controls.Add(this.buttonContactDelete);
@@ -1064,9 +1066,9 @@
             this.comboBoxContactView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxContactView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContactView.FormattingEnabled = true;
-            this.comboBoxContactView.Location = new System.Drawing.Point(249, 313);
+            this.comboBoxContactView.Location = new System.Drawing.Point(269, 312);
             this.comboBoxContactView.Name = "comboBoxContactView";
-            this.comboBoxContactView.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxContactView.Size = new System.Drawing.Size(89, 21);
             this.comboBoxContactView.TabIndex = 6;
             this.comboBoxContactView.SelectedIndexChanged += new System.EventHandler(this.comboBoxContactView_SelectedIndexChanged);
             // 
@@ -1074,7 +1076,7 @@
             // 
             this.buttonContactUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonContactUpdate.Enabled = false;
-            this.buttonContactUpdate.Location = new System.Drawing.Point(87, 312);
+            this.buttonContactUpdate.Location = new System.Drawing.Point(108, 311);
             this.buttonContactUpdate.Name = "buttonContactUpdate";
             this.buttonContactUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonContactUpdate.TabIndex = 5;
@@ -1086,7 +1088,7 @@
             // 
             this.buttonContactDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonContactDelete.Enabled = false;
-            this.buttonContactDelete.Location = new System.Drawing.Point(168, 312);
+            this.buttonContactDelete.Location = new System.Drawing.Point(189, 311);
             this.buttonContactDelete.Name = "buttonContactDelete";
             this.buttonContactDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonContactDelete.TabIndex = 4;
@@ -1097,7 +1099,7 @@
             // buttonContactAdd
             // 
             this.buttonContactAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonContactAdd.Location = new System.Drawing.Point(6, 312);
+            this.buttonContactAdd.Location = new System.Drawing.Point(27, 311);
             this.buttonContactAdd.Name = "buttonContactAdd";
             this.buttonContactAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonContactAdd.TabIndex = 3;
@@ -1395,6 +1397,19 @@
             this.saveFileDialog.SupportMultiDottedExtensions = true;
             this.saveFileDialog.Title = "Save";
             // 
+            // checkBoxContactExpand
+            // 
+            this.checkBoxContactExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxContactExpand.AutoSize = true;
+            this.checkBoxContactExpand.Checked = true;
+            this.checkBoxContactExpand.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxContactExpand.Location = new System.Drawing.Point(6, 316);
+            this.checkBoxContactExpand.Name = "checkBoxContactExpand";
+            this.checkBoxContactExpand.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxContactExpand.TabIndex = 7;
+            this.checkBoxContactExpand.UseVisualStyleBackColor = true;
+            this.checkBoxContactExpand.CheckedChanged += new System.EventHandler(this.checkBoxContactExpand_CheckedChanged);
+            // 
             // VoIPControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1426,6 +1441,7 @@
             this.tabPageVoIPCall.ResumeLayout(false);
             this.tabPageContacts.ResumeLayout(false);
             this.groupBoxContact.ResumeLayout(false);
+            this.groupBoxContact.PerformLayout();
             this.tabPageIncomingOutgoingCalls.ResumeLayout(false);
             this.groupBoxInOutCalls.ResumeLayout(false);
             this.groupBoxInOutCalls.PerformLayout();
@@ -1550,5 +1566,6 @@
         private System.Windows.Forms.Label labelOptionsImageSizeLarge;
         private System.Windows.Forms.ComboBox comboBoxOptionsImageSizeSmall;
         private System.Windows.Forms.Label labelOptionsImageSizeSmall;
+        private System.Windows.Forms.CheckBox checkBoxContactExpand;
     }
 }

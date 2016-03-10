@@ -94,6 +94,7 @@ namespace Nequeo.Net.Sip
         private uint _timerMinSESec = 90;
         private uint _timerSessExpiresSec = 1800;
 
+        private TransportType _transportType = TransportType.UDP | TransportType.TCP | TransportType.TLS;
         private IPv6_Use _ipv6_Use = IPv6_Use.IPV6_DISABLED;
         private SRTP_Use _srtp_Use = SRTP_Use.SRTP_DISABLED;
         private SRTP_SecureSignaling _srtp_SecureSignaling = SRTP_SecureSignaling.SRTP_DISABLED;
@@ -293,6 +294,15 @@ namespace Nequeo.Net.Sip
         {
             get { return _timerSessExpiresSec; }
             set { _timerSessExpiresSec = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the transport type.
+        /// </summary>
+        public TransportType Transport
+        {
+            get { return _transportType; }
+            set { _transportType = value; }
         }
 
         /// <summary>

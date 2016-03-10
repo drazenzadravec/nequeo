@@ -343,5 +343,25 @@ namespace Nequeo.VoIP.Sip.UI
                 dlg.ShowDialog(this);
             }
         }
+
+        /// <summary>
+        /// Expand.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void expandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewMessage.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Normal);
+        }
+
+        /// <summary>
+        /// Collapse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void collapseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewMessage.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Collapsed);
+        }
     }
 }

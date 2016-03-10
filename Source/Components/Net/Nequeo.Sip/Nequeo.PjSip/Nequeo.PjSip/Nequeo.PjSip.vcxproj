@@ -255,6 +255,7 @@
     <ClInclude Include="StunNatType.h" />
     <ClInclude Include="SubscriptionState.h" />
     <ClInclude Include="TimeVal.h" />
+    <ClInclude Include="TransportType.h" />
     <ClInclude Include="UnknownMedia.h" />
     <ClInclude Include="VideoDeviceHandleType.h" />
     <ClInclude Include="VideoDeviceInfo.h" />

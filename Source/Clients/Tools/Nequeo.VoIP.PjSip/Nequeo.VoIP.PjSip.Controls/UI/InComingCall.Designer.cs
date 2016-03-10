@@ -330,6 +330,7 @@
             // 
             // panelCallerImage
             // 
+            this.panelCallerImage.BackColor = System.Drawing.SystemColors.Window;
             this.panelCallerImage.Location = new System.Drawing.Point(12, 144);
             this.panelCallerImage.Name = "panelCallerImage";
             this.panelCallerImage.Size = new System.Drawing.Size(95, 84);
