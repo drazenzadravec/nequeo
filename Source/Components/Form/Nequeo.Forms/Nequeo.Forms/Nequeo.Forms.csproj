@@ -345,6 +345,9 @@
     <Compile Include="UI\Control\KeyboardForm.Designer.cs">
       <DependentUpon>KeyboardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Extender\GroupListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Extender\HtmlRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>

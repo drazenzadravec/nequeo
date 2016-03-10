@@ -229,6 +229,13 @@ namespace Nequeo.VoIP.PjSip.UI
             _voipCall.OnRegStarted += Voipcall_OnRegStarted;
             _voipCall.OnRegState += Voipcall_OnRegState;
             _voipCall.VoIPManager.OnContactState += VoIPManager_OnContactState;
+
+            try
+            {
+                // Make collapsible.
+                listViewContact.SetGroupState(Nequeo.Forms.UI.Extender.ListViewGroupState.Collapsible);
+            }
+            catch { }
         }
 
         /// <summary>
@@ -598,7 +605,8 @@ namespace Nequeo.VoIP.PjSip.UI
 
                 // Open the window.
                 Nequeo.VoIP.PjSip.UI.InComingCall incomingCall = new InComingCall(_voipCall, e,
-                    listViewContact, listViewInOutCalls, listViewConference, _contacts, imageListSmall, contactName, 
+                    listViewContact, listViewInOutCalls, listViewConference, _contacts, 
+                    imageListSmall, imageListLarge, contactName, 
                     ringFilePath, audioDeviceIndex, autoAnswer, autoAnswerFile, autoAnswerWait, 
                     _audioRecordingInCallPath, messageBank, redirectEnable, redirectCallNumber,
                     redirectCallAfter);
@@ -1071,8 +1079,8 @@ namespace Nequeo.VoIP.PjSip.UI
                 catch { }
 
                 // The call has ended.
-                DialogResult result = MessageBox.Show(this, "The call has ended.",
-                "Make Call", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show(this, "The call to '" + _contactName + "' has ended.",
+                "Outgoing Call", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 EnableHangupCall();
 
@@ -1543,6 +1551,9 @@ namespace Nequeo.VoIP.PjSip.UI
                                     imageListLarge.Images.Add(picture);
                                     imageListSmall.Images.Add(picture);
 
+                                    // Add the image path
+                                    _common.ImagePath.Add(contact.picture);
+
                                     // Get the index of the image.
                                     imageIndex = imageListLarge.Images.Count - 1;
                                 }
@@ -1585,6 +1596,15 @@ namespace Nequeo.VoIP.PjSip.UI
                                     break;
                                 case "public":
                                     item.Group = listViewContact.Groups["listViewGroupPublic"];
+                                    break;
+                                case "ldap":
+                                    item.Group = listViewContact.Groups["listViewGroupLdap"];
+                                    break;
+                                case "social":
+                                    item.Group = listViewContact.Groups["listViewGroupSocial"];
+                                    break;
+                                case "company":
+                                    item.Group = listViewContact.Groups["listViewGroupCompany"];
                                     break;
                                 default:
                                     item.Group = listViewContact.Groups["listViewGroupMisc"];
@@ -1739,6 +1759,9 @@ namespace Nequeo.VoIP.PjSip.UI
                             imageListLarge.Images.Add(picture);
                             imageListSmall.Images.Add(picture);
 
+                            // Add the image path
+                            _common.ImagePath.Add(contact.ContactPicture);
+
                             // Get the index of the image.
                             imageIndex = imageListLarge.Images.Count - 1;
                         }
@@ -1781,6 +1804,15 @@ namespace Nequeo.VoIP.PjSip.UI
                             break;
                         case "public":
                             item.Group = listViewContact.Groups["listViewGroupPublic"];
+                            break;
+                        case "ldap":
+                            item.Group = listViewContact.Groups["listViewGroupLdap"];
+                            break;
+                        case "social":
+                            item.Group = listViewContact.Groups["listViewGroupSocial"];
+                            break;
+                        case "company":
+                            item.Group = listViewContact.Groups["listViewGroupCompany"];
                             break;
                         default:
                             item.Group = listViewContact.Groups["listViewGroupMisc"];
@@ -1928,6 +1960,15 @@ namespace Nequeo.VoIP.PjSip.UI
                                 break;
                             case "public":
                                 item.Group = listViewContact.Groups["listViewGroupPublic"];
+                                break;
+                            case "ldap":
+                                item.Group = listViewContact.Groups["listViewGroupLdap"];
+                                break;
+                            case "social":
+                                item.Group = listViewContact.Groups["listViewGroupSocial"];
+                                break;
+                            case "company":
+                                item.Group = listViewContact.Groups["listViewGroupCompany"];
                                 break;
                             default:
                                 item.Group = listViewContact.Groups["listViewGroupMisc"];
@@ -3130,6 +3171,100 @@ namespace Nequeo.VoIP.PjSip.UI
                 }
             }
             catch { }
+        }
+
+        /// <summary>
+        /// Small image size.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxOptionsImageSizeSmall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxOptionsImageSizeSmall.SelectedIndex >= 0)
+            {
+                // Get the item.
+                string item = comboBoxOptionsImageSizeSmall.SelectedItem.ToString();
+                string[] size = item.Split(new char[] { ',' });
+
+                // Get the size.
+                int width = Int32.Parse(size[0]);
+                int height = Int32.Parse(size[1]);
+
+                // Only get once.
+                if (_common.DefaultImage == null)
+                    _common.DefaultImage = imageListLarge.Images[0];
+
+                // Set the image size.
+                imageListSmall.ImageSize = new Size(width, height);
+                imageListSmall.Images.Add(_common.DefaultImage);
+                imageListSmall.Images.SetKeyName(0, "cellphone.jpg");
+
+                try
+                {
+                    // For each image path.
+                    foreach (string imagePath in _common.ImagePath)
+                    {
+                        // Add images large and small.
+                        Image picture = Image.FromFile(imagePath);
+                        imageListSmall.Images.Add(picture);
+                    }
+                }
+                catch { }
+
+                // Get a Graphics object from the form's handle.
+                Graphics theGraphics = Graphics.FromHwnd(this.Handle);
+
+                // Loop through the images in the list, drawing each image.
+                for (int count = 0; count < imageListSmall.Images.Count; count++)
+                    imageListSmall.Draw(theGraphics, new Point(0, 0), count);
+            }
+        }
+
+        /// <summary>
+        /// Large image size.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxOptionsImageSizeLarge_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxOptionsImageSizeLarge.SelectedIndex >= 0)
+            {
+                // Get the item.
+                string item = comboBoxOptionsImageSizeLarge.SelectedItem.ToString();
+                string[] size = item.Split(new char[] { ',' });
+
+                // Get the size.
+                int width = Int32.Parse(size[0]);
+                int height = Int32.Parse(size[1]);
+
+                // Only get once.
+                if (_common.DefaultImage == null)
+                    _common.DefaultImage = imageListLarge.Images[0];
+
+                // Set the image size.
+                imageListLarge.ImageSize = new Size(width, height);
+                imageListLarge.Images.Add(_common.DefaultImage);
+                imageListLarge.Images.SetKeyName(0, "cellphone.jpg");
+
+                try
+                {
+                    // For each image path.
+                    foreach (string imagePath in _common.ImagePath)
+                    {
+                        // Add images large and small.
+                        Image picture = Image.FromFile(imagePath);
+                        imageListLarge.Images.Add(picture);
+                    }
+                }
+                catch { }
+
+                // Get a Graphics object from the form's handle.
+                Graphics theGraphics = Graphics.FromHwnd(this.Handle);
+
+                // Loop through the images in the list, drawing each image.
+                for (int count = 0; count < imageListLarge.Images.Count; count++)
+                    imageListLarge.Draw(theGraphics, new Point(0, 0), count);
+            }
         }
     }
 }

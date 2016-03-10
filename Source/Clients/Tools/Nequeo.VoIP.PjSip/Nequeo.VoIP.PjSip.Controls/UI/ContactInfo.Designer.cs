@@ -210,7 +210,7 @@
             // 
             this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
             this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // buttonOk
             // 

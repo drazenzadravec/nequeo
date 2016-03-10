@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstantMessage));
-            this.listViewMessage = new System.Windows.Forms.ListView();
+            this.listViewMessage = new Nequeo.Forms.UI.Extender.GroupListView();
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
@@ -60,13 +60,13 @@
             // 
             this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
             this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "Folder_256x256.png");
+            this.imageListLarge.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // imageListSmall
             // 
             this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
             this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // richTextBoxMessage
             // 
@@ -163,7 +163,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewMessage;
+        private Nequeo.Forms.UI.Extender.GroupListView listViewMessage;
         private System.Windows.Forms.RichTextBox richTextBoxMessage;
         private System.Windows.Forms.TextBox textBoxSendMesssage;
         private System.Windows.Forms.Button buttonSend;

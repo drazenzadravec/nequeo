@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactInfo));
             this.groupBoxContact = new System.Windows.Forms.GroupBox();
+            this.buttonPicture = new System.Windows.Forms.Button();
+            this.textBoxPicture = new System.Windows.Forms.TextBox();
+            this.labelPicture = new System.Windows.Forms.Label();
             this.comboBoxGroup = new System.Windows.Forms.ComboBox();
             this.labelGroup = new System.Windows.Forms.Label();
             this.checkBoxPresenceState = new System.Windows.Forms.CheckBox();
@@ -44,9 +47,6 @@
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.labelPicture = new System.Windows.Forms.Label();
-            this.textBoxPicture = new System.Windows.Forms.TextBox();
-            this.buttonPicture = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxContact.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +75,35 @@
             this.groupBoxContact.TabIndex = 0;
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Enter += new System.EventHandler(this.groupBoxContact_Enter);
+            // 
+            // buttonPicture
+            // 
+            this.buttonPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPicture.Location = new System.Drawing.Point(355, 112);
+            this.buttonPicture.Name = "buttonPicture";
+            this.buttonPicture.Size = new System.Drawing.Size(25, 22);
+            this.buttonPicture.TabIndex = 11;
+            this.buttonPicture.Text = "...";
+            this.buttonPicture.UseVisualStyleBackColor = true;
+            this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
+            // 
+            // textBoxPicture
+            // 
+            this.textBoxPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxPicture.Location = new System.Drawing.Point(83, 113);
+            this.textBoxPicture.Name = "textBoxPicture";
+            this.textBoxPicture.Size = new System.Drawing.Size(266, 20);
+            this.textBoxPicture.TabIndex = 10;
+            // 
+            // labelPicture
+            // 
+            this.labelPicture.AutoSize = true;
+            this.labelPicture.Location = new System.Drawing.Point(6, 116);
+            this.labelPicture.Name = "labelPicture";
+            this.labelPicture.Size = new System.Drawing.Size(46, 13);
+            this.labelPicture.TabIndex = 9;
+            this.labelPicture.Text = "Picture :";
             // 
             // comboBoxGroup
             // 
@@ -181,7 +210,7 @@
             // 
             this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
             this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // buttonOk
             // 
@@ -205,35 +234,6 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // labelPicture
-            // 
-            this.labelPicture.AutoSize = true;
-            this.labelPicture.Location = new System.Drawing.Point(6, 116);
-            this.labelPicture.Name = "labelPicture";
-            this.labelPicture.Size = new System.Drawing.Size(46, 13);
-            this.labelPicture.TabIndex = 9;
-            this.labelPicture.Text = "Picture :";
-            // 
-            // textBoxPicture
-            // 
-            this.textBoxPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPicture.Location = new System.Drawing.Point(83, 113);
-            this.textBoxPicture.Name = "textBoxPicture";
-            this.textBoxPicture.Size = new System.Drawing.Size(266, 20);
-            this.textBoxPicture.TabIndex = 10;
-            // 
-            // buttonPicture
-            // 
-            this.buttonPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPicture.Location = new System.Drawing.Point(355, 112);
-            this.buttonPicture.Name = "buttonPicture";
-            this.buttonPicture.Size = new System.Drawing.Size(25, 22);
-            this.buttonPicture.TabIndex = 11;
-            this.buttonPicture.Text = "...";
-            this.buttonPicture.UseVisualStyleBackColor = true;
-            this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
             // 
             // openFileDialog
             // 

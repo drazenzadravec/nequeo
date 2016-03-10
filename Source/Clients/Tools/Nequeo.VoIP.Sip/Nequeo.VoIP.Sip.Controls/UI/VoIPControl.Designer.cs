@@ -39,6 +39,9 @@
             System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Government", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Private", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Public", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Ldap", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Social", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Company", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
             this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
             this.buttonHold = new System.Windows.Forms.Button();
@@ -103,6 +106,12 @@
             this.checkBoxAccIsOnline = new System.Windows.Forms.CheckBox();
             this.buttonAccDetails = new System.Windows.Forms.Button();
             this.checkBoxAccDetails = new System.Windows.Forms.CheckBox();
+            this.tabPageAccountOptions = new System.Windows.Forms.TabPage();
+            this.groupBoxOptionsImage = new System.Windows.Forms.GroupBox();
+            this.comboBoxOptionsImageSizeLarge = new System.Windows.Forms.ComboBox();
+            this.labelOptionsImageSizeLarge = new System.Windows.Forms.Label();
+            this.comboBoxOptionsImageSizeSmall = new System.Windows.Forms.ComboBox();
+            this.labelOptionsImageSizeSmall = new System.Windows.Forms.Label();
             this.labelRegistationStatusState = new System.Windows.Forms.Label();
             this.labelRegistationStatus = new System.Windows.Forms.Label();
             this.contextMenuStripContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -116,7 +125,7 @@
             this.buttonContactUpdate = new System.Windows.Forms.Button();
             this.buttonContactDelete = new System.Windows.Forms.Button();
             this.buttonContactAdd = new System.Windows.Forms.Button();
-            this.listViewContact = new System.Windows.Forms.ListView();
+            this.listViewContact = new Nequeo.Forms.UI.Extender.GroupListView();
             this.columnHeaderContactName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderContactAccount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderContactState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -154,6 +163,8 @@
             this.groupBoxAccOnlineState.SuspendLayout();
             this.tabPageAccountDetails.SuspendLayout();
             this.groupBoxAccDetails.SuspendLayout();
+            this.tabPageAccountOptions.SuspendLayout();
+            this.groupBoxOptionsImage.SuspendLayout();
             this.tabControlVoIP.SuspendLayout();
             this.tabPageVoIPCall.SuspendLayout();
             this.tabPageContacts.SuspendLayout();
@@ -491,6 +502,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlAccount.Controls.Add(this.tabPageAccountConfig);
             this.tabControlAccount.Controls.Add(this.tabPageAccountDetails);
+            this.tabControlAccount.Controls.Add(this.tabPageAccountOptions);
             this.tabControlAccount.Location = new System.Drawing.Point(6, 18);
             this.tabControlAccount.Name = "tabControlAccount";
             this.tabControlAccount.SelectedIndex = 0;
@@ -883,6 +895,80 @@
             this.checkBoxAccDetails.Text = "Is Default";
             this.checkBoxAccDetails.UseVisualStyleBackColor = true;
             // 
+            // tabPageAccountOptions
+            // 
+            this.tabPageAccountOptions.Controls.Add(this.groupBoxOptionsImage);
+            this.tabPageAccountOptions.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAccountOptions.Name = "tabPageAccountOptions";
+            this.tabPageAccountOptions.Size = new System.Drawing.Size(344, 237);
+            this.tabPageAccountOptions.TabIndex = 2;
+            this.tabPageAccountOptions.Text = "Options";
+            this.tabPageAccountOptions.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxOptionsImage
+            // 
+            this.groupBoxOptionsImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxOptionsImage.Controls.Add(this.comboBoxOptionsImageSizeLarge);
+            this.groupBoxOptionsImage.Controls.Add(this.labelOptionsImageSizeLarge);
+            this.groupBoxOptionsImage.Controls.Add(this.comboBoxOptionsImageSizeSmall);
+            this.groupBoxOptionsImage.Controls.Add(this.labelOptionsImageSizeSmall);
+            this.groupBoxOptionsImage.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxOptionsImage.Name = "groupBoxOptionsImage";
+            this.groupBoxOptionsImage.Size = new System.Drawing.Size(332, 225);
+            this.groupBoxOptionsImage.TabIndex = 0;
+            this.groupBoxOptionsImage.TabStop = false;
+            this.groupBoxOptionsImage.Text = "Image Size";
+            // 
+            // comboBoxOptionsImageSizeLarge
+            // 
+            this.comboBoxOptionsImageSizeLarge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOptionsImageSizeLarge.FormattingEnabled = true;
+            this.comboBoxOptionsImageSizeLarge.Items.AddRange(new object[] {
+            "16,16",
+            "32,32",
+            "48,48",
+            "64,64",
+            "80,80"});
+            this.comboBoxOptionsImageSizeLarge.Location = new System.Drawing.Point(224, 19);
+            this.comboBoxOptionsImageSizeLarge.Name = "comboBoxOptionsImageSizeLarge";
+            this.comboBoxOptionsImageSizeLarge.Size = new System.Drawing.Size(89, 21);
+            this.comboBoxOptionsImageSizeLarge.TabIndex = 7;
+            this.comboBoxOptionsImageSizeLarge.SelectedIndexChanged += new System.EventHandler(this.comboBoxOptionsImageSizeLarge_SelectedIndexChanged);
+            // 
+            // labelOptionsImageSizeLarge
+            // 
+            this.labelOptionsImageSizeLarge.AutoSize = true;
+            this.labelOptionsImageSizeLarge.Location = new System.Drawing.Point(178, 22);
+            this.labelOptionsImageSizeLarge.Name = "labelOptionsImageSizeLarge";
+            this.labelOptionsImageSizeLarge.Size = new System.Drawing.Size(40, 13);
+            this.labelOptionsImageSizeLarge.TabIndex = 6;
+            this.labelOptionsImageSizeLarge.Text = "Large :";
+            // 
+            // comboBoxOptionsImageSizeSmall
+            // 
+            this.comboBoxOptionsImageSizeSmall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOptionsImageSizeSmall.FormattingEnabled = true;
+            this.comboBoxOptionsImageSizeSmall.Items.AddRange(new object[] {
+            "16,16",
+            "32,32",
+            "48,48"});
+            this.comboBoxOptionsImageSizeSmall.Location = new System.Drawing.Point(59, 19);
+            this.comboBoxOptionsImageSizeSmall.Name = "comboBoxOptionsImageSizeSmall";
+            this.comboBoxOptionsImageSizeSmall.Size = new System.Drawing.Size(89, 21);
+            this.comboBoxOptionsImageSizeSmall.TabIndex = 5;
+            this.comboBoxOptionsImageSizeSmall.SelectedIndexChanged += new System.EventHandler(this.comboBoxOptionsImageSizeSmall_SelectedIndexChanged);
+            // 
+            // labelOptionsImageSizeSmall
+            // 
+            this.labelOptionsImageSizeSmall.AutoSize = true;
+            this.labelOptionsImageSizeSmall.Location = new System.Drawing.Point(15, 22);
+            this.labelOptionsImageSizeSmall.Name = "labelOptionsImageSizeSmall";
+            this.labelOptionsImageSizeSmall.Size = new System.Drawing.Size(38, 13);
+            this.labelOptionsImageSizeSmall.TabIndex = 4;
+            this.labelOptionsImageSizeSmall.Text = "Small :";
+            // 
             // labelRegistationStatusState
             // 
             this.labelRegistationStatusState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -912,13 +998,13 @@
             // 
             this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
             this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "cellphone.png");
+            this.imageListLarge.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // imageListSmall
             // 
             this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
             this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // tabControlVoIP
             // 
@@ -1048,6 +1134,12 @@
             listViewGroup8.Name = "listViewGroupPrivate";
             listViewGroup9.Header = "Public";
             listViewGroup9.Name = "listViewGroupPublic";
+            listViewGroup10.Header = "Ldap";
+            listViewGroup10.Name = "listViewGroupLdap";
+            listViewGroup11.Header = "Social";
+            listViewGroup11.Name = "listViewGroupSocial";
+            listViewGroup12.Header = "Company";
+            listViewGroup12.Name = "listViewGroupCompany";
             this.listViewContact.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1,
             listViewGroup2,
@@ -1057,7 +1149,10 @@
             listViewGroup6,
             listViewGroup7,
             listViewGroup8,
-            listViewGroup9});
+            listViewGroup9,
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12});
             this.listViewContact.LargeImageList = this.imageListLarge;
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;
@@ -1263,19 +1358,19 @@
             this.toolStripMenuItemConferenceHangup,
             this.toolStripMenuItemConferenceSuspend});
             this.contextMenuStripConference.Name = "contextMenuStripConference";
-            this.contextMenuStripConference.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStripConference.Size = new System.Drawing.Size(120, 48);
             // 
             // toolStripMenuItemConferenceHangup
             // 
             this.toolStripMenuItemConferenceHangup.Name = "toolStripMenuItemConferenceHangup";
-            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemConferenceHangup.Size = new System.Drawing.Size(119, 22);
             this.toolStripMenuItemConferenceHangup.Text = "Hangup";
             this.toolStripMenuItemConferenceHangup.Click += new System.EventHandler(this.toolStripMenuItemConferenceHangup_Click);
             // 
             // toolStripMenuItemConferenceSuspend
             // 
             this.toolStripMenuItemConferenceSuspend.Name = "toolStripMenuItemConferenceSuspend";
-            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemConferenceSuspend.Size = new System.Drawing.Size(119, 22);
             this.toolStripMenuItemConferenceSuspend.Text = "Suspend";
             this.toolStripMenuItemConferenceSuspend.Click += new System.EventHandler(this.toolStripMenuItemConferenceSuspend_Click);
             // 
@@ -1324,6 +1419,9 @@
             this.tabPageAccountDetails.ResumeLayout(false);
             this.groupBoxAccDetails.ResumeLayout(false);
             this.groupBoxAccDetails.PerformLayout();
+            this.tabPageAccountOptions.ResumeLayout(false);
+            this.groupBoxOptionsImage.ResumeLayout(false);
+            this.groupBoxOptionsImage.PerformLayout();
             this.tabControlVoIP.ResumeLayout(false);
             this.tabPageVoIPCall.ResumeLayout(false);
             this.tabPageContacts.ResumeLayout(false);
@@ -1431,7 +1529,7 @@
         private System.Windows.Forms.ColumnHeader columnHeaderContactState;
         private System.Windows.Forms.ColumnHeader columnHeaderContactAccount;
         private System.Windows.Forms.ColumnHeader columnHeaderContactName;
-        private System.Windows.Forms.ListView listViewContact;
+        private Nequeo.Forms.UI.Extender.GroupListView listViewContact;
         private System.Windows.Forms.Button buttonContactAdd;
         private System.Windows.Forms.Button buttonContactDelete;
         private System.Windows.Forms.Button buttonContactUpdate;
@@ -1446,5 +1544,11 @@
         private System.Windows.Forms.Label labelVolumeLevel;
         private System.Windows.Forms.Button buttonHold;
         private System.Windows.Forms.CheckBox checkBoxSuspend;
+        private System.Windows.Forms.TabPage tabPageAccountOptions;
+        private System.Windows.Forms.GroupBox groupBoxOptionsImage;
+        private System.Windows.Forms.ComboBox comboBoxOptionsImageSizeLarge;
+        private System.Windows.Forms.Label labelOptionsImageSizeLarge;
+        private System.Windows.Forms.ComboBox comboBoxOptionsImageSizeSmall;
+        private System.Windows.Forms.Label labelOptionsImageSizeSmall;
     }
 }

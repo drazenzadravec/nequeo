@@ -46,6 +46,16 @@ namespace Nequeo.VoIP.Sip.Data
     internal class Common
     {
         /// <summary>
+        /// Image path.
+        /// </summary>
+        public List<string> ImagePath = new List<string>();
+
+        /// <summary>
+        /// The original default image.
+        /// </summary>
+        public System.Drawing.Image DefaultImage = null;
+
+        /// <summary>
         /// The collection of audio codecs.
         /// </summary>
         public Nequeo.Net.Sip.CodecInfo[] AudioCodecs = null;

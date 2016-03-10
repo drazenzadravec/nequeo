@@ -30,9 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferList));
-            this.listViewTransfer = new System.Windows.Forms.ListView();
-            this.listViewNumber = new System.Windows.Forms.ListView();
+            this.listViewTransfer = new Nequeo.Forms.UI.Extender.GroupListView();
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.listViewNumber = new System.Windows.Forms.ListView();
+            this.imageListPhone = new System.Windows.Forms.ImageList(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -51,6 +52,12 @@
             this.listViewTransfer.View = System.Windows.Forms.View.SmallIcon;
             this.listViewTransfer.SelectedIndexChanged += new System.EventHandler(this.listViewTransfer_SelectedIndexChanged);
             // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "cellphone.jpg");
+            // 
             // listViewNumber
             // 
             this.listViewNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -60,17 +67,17 @@
             this.listViewNumber.MultiSelect = false;
             this.listViewNumber.Name = "listViewNumber";
             this.listViewNumber.Size = new System.Drawing.Size(199, 200);
-            this.listViewNumber.SmallImageList = this.imageListSmall;
+            this.listViewNumber.SmallImageList = this.imageListPhone;
             this.listViewNumber.TabIndex = 1;
             this.listViewNumber.UseCompatibleStateImageBehavior = false;
             this.listViewNumber.View = System.Windows.Forms.View.SmallIcon;
             this.listViewNumber.SelectedIndexChanged += new System.EventHandler(this.listViewNumber_SelectedIndexChanged);
             // 
-            // imageListSmall
+            // imageListPhone
             // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "cellphone.png");
+            this.imageListPhone.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListPhone.ImageStream")));
+            this.imageListPhone.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListPhone.Images.SetKeyName(0, "cellphone.jpg");
             // 
             // buttonOK
             // 
@@ -120,10 +127,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewTransfer;
+        private Nequeo.Forms.UI.Extender.GroupListView listViewTransfer;
         private System.Windows.Forms.ListView listViewNumber;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ImageList imageListPhone;
     }
 }

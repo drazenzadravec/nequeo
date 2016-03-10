@@ -53,6 +53,7 @@
             this.buttonHold = new System.Windows.Forms.Button();
             this.statusStripCall = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelAuto = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panelCallerImage = new System.Windows.Forms.Panel();
             this.groupBoxDigits.SuspendLayout();
             this.statusStripCall.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +65,7 @@
             this.textBoxDetails.Multiline = true;
             this.textBoxDetails.Name = "textBoxDetails";
             this.textBoxDetails.ReadOnly = true;
-            this.textBoxDetails.Size = new System.Drawing.Size(252, 158);
+            this.textBoxDetails.Size = new System.Drawing.Size(257, 126);
             this.textBoxDetails.TabIndex = 3;
             // 
             // buttonAnswer
@@ -271,7 +272,7 @@
             // checkBoxSuspend
             // 
             this.checkBoxSuspend.AutoSize = true;
-            this.checkBoxSuspend.Location = new System.Drawing.Point(12, 180);
+            this.checkBoxSuspend.Location = new System.Drawing.Point(194, 153);
             this.checkBoxSuspend.Name = "checkBoxSuspend";
             this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
             this.checkBoxSuspend.TabIndex = 21;
@@ -314,11 +315,19 @@
             this.toolStripStatusLabelAuto.Name = "toolStripStatusLabelAuto";
             this.toolStripStatusLabelAuto.Size = new System.Drawing.Size(0, 17);
             // 
+            // panelCallerImage
+            // 
+            this.panelCallerImage.Location = new System.Drawing.Point(12, 144);
+            this.panelCallerImage.Name = "panelCallerImage";
+            this.panelCallerImage.Size = new System.Drawing.Size(95, 84);
+            this.panelCallerImage.TabIndex = 25;
+            // 
             // InComingCall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 260);
+            this.Controls.Add(this.panelCallerImage);
             this.Controls.Add(this.statusStripCall);
             this.Controls.Add(this.buttonHold);
             this.Controls.Add(this.buttonTransfer);
@@ -376,5 +385,6 @@
         private System.Windows.Forms.Button buttonHold;
         private System.Windows.Forms.StatusStrip statusStripCall;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelAuto;
+        private System.Windows.Forms.Panel panelCallerImage;
     }
 }

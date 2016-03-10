@@ -115,6 +115,13 @@ namespace Nequeo.VoIP.Sip.UI
                 // Add the item to the list.
                 listViewTransfer.Items.Add(viewItem);
             }
+
+            try
+            {
+                // Make collapsible.
+                listViewTransfer.SetGroupState(Nequeo.Forms.UI.Extender.ListViewGroupState.Collapsible);
+            }
+            catch { }
         }
 
         /// <summary>

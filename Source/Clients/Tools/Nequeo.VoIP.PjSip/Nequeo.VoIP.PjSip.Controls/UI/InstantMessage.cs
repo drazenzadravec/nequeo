@@ -180,6 +180,13 @@ namespace Nequeo.VoIP.PjSip.UI
                 }
                 catch { }
             }
+
+            try
+            {
+                // Make collapsible.
+                listViewMessage.SetGroupState(Nequeo.Forms.UI.Extender.ListViewGroupState.Collapsible);
+            }
+            catch { }
         }
 
         /// <summary>

@@ -37,6 +37,8 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Nequeo.VoIP.PjSip.Data
 {
@@ -45,6 +47,16 @@ namespace Nequeo.VoIP.PjSip.Data
     /// </summary>
     internal class Common
     {
+        /// <summary>
+        /// Image path.
+        /// </summary>
+        public List<string> ImagePath = new List<string>();
+
+        /// <summary>
+        /// The original default image.
+        /// </summary>
+        public System.Drawing.Image DefaultImage = null;
+
         /// <summary>
         /// The collection of audio codecs.
         /// </summary>

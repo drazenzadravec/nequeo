@@ -54,7 +54,7 @@
     <DocumentationFile>..\..\..\..\..\References\Staging_x64\Client\VoIP\VoIP\Nequeo.VoIP.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>cellphone.ico</ApplicationIcon>
+    <ApplicationIcon>Thiago-Silva-Palm-Settings-Phone.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nequeo.Forms, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=ca3d7291d4bd9e0d, processorArchitecture=MSIL">
@@ -154,7 +154,7 @@
       <Link>SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="cellphone.ico" />
+    <Content Include="Thiago-Silva-Palm-Settings-Phone.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
