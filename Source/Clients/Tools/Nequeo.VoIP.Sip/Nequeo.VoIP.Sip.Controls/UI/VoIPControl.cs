@@ -163,22 +163,6 @@ namespace Nequeo.VoIP.Sip.UI
 
                 try
                 {
-                    // Save the contacts list.
-                    if (!String.IsNullOrEmpty(_contactsFilePath))
-                    {
-                        // Load the contacts.
-                        if (_contacts != null && _contacts.contact != null)
-                        {
-                            // Deserialise the xml file into.
-                            GeneralSerialisation serial = new GeneralSerialisation();
-                            bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
-                        }
-                    }
-                }
-                catch { }
-
-                try
-                {
                     // The call.
                     if (_call != null)
                         _call.Dispose();
@@ -230,6 +214,28 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Make collapsible.
                 listViewContact.SetGroupState(Nequeo.Forms.UI.Extender.ListViewGroupState.Collapsible);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Save only loaded files.
+        /// </summary>
+        private void SaveFile()
+        {
+            try
+            {
+                // Save the contacts list.
+                if (!String.IsNullOrEmpty(_contactsFilePath))
+                {
+                    // Load the contacts.
+                    if (_contacts != null && _contacts.contact != null)
+                    {
+                        // Serialise the xml file into.
+                        GeneralSerialisation serial = new GeneralSerialisation();
+                        bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
+                    }
+                }
             }
             catch { }
         }
@@ -443,6 +449,13 @@ namespace Nequeo.VoIP.Sip.UI
         {
             UISync.Execute(() =>
             {
+                // If notify of instant message.
+                if (checkBoxOptionsIM.Checked)
+                {
+                    // Open the instant message window if not opened.
+                    OpenInstantMessageWindow();
+                }
+
                 // Send the message.
                 if (_instantMessage != null)
                     _instantMessage.Message(e);
@@ -1409,13 +1422,25 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void buttonInstantMessage_Click(object sender, EventArgs e)
         {
+            OpenInstantMessageWindow();
+        }
+
+        /// <summary>
+        /// Open the instant message window.
+        /// </summary>
+        private void OpenInstantMessageWindow()
+        {
             if (_instantMessage == null)
             {
                 string incomingFilePath = (_common != null ? _common.InstantMessageFilePath : null);
                 int audioDeviceIndex = (_common != null ? _common.AudioDeviceIndex : -1);
+
+                // Create the window.
                 _instantMessage = new InstantMessage(_voipCall, listViewContact, imageListSmall, imageListLarge, incomingFilePath, audioDeviceIndex);
                 _instantMessage.OnInstantMessageClosing += _instantMessage_OnClosing;
                 _instantMessage.Show();
+
+                // Disable the button.
                 buttonInstantMessage.Enabled = false;
             }
         }
@@ -1443,18 +1468,6 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Enable contacts.
                 groupBoxContact.Enabled = true;
-
-                try
-                {
-                    // Save the contacts.
-                    if (_contacts != null && _contacts.contact != null)
-                    {
-                        // Deserialise the xml file into.
-                        GeneralSerialisation serial = new GeneralSerialisation();
-                        bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
-                    }
-                }
-                catch { }
 
                 try
                 {
@@ -1759,6 +1772,9 @@ namespace Nequeo.VoIP.Sip.UI
                     // Create the contact in the account.
                     Nequeo.Net.Sip.ContactConnection contactConnection = new Net.Sip.ContactConnection(contact.PresenecState, contact.SipAccount);
                     _voipCall.VoIPManager.AddContact(contactConnection);
+
+                    // Save only loaded files.
+                    SaveFile();
                 }
             }
             catch (Exception ex)
@@ -1808,6 +1824,9 @@ namespace Nequeo.VoIP.Sip.UI
                         _contacts.contact = _contacts.contact.Remove(u => u.Equals(contact));
                     }
                     catch { }
+
+                    // Save only loaded files.
+                    SaveFile();
                 }
             }
         }
@@ -1908,6 +1927,9 @@ namespace Nequeo.VoIP.Sip.UI
                                 break;
                         }
                     }
+
+                    // Save only loaded files.
+                    SaveFile();
                 }
             }
         }
@@ -2196,6 +2218,23 @@ namespace Nequeo.VoIP.Sip.UI
                     _voipCall.VoIPManager.AccountConnection.TimerSessExpiresSec = _configuration.timerSessionExpires;
                     _voipCall.VoIPManager.AccountConnection.UnregWaitSec = _configuration.timeUnregisterWait;
                     _voipCall.VoIPManager.AccountConnection.VideoRateControlBandwidth = _configuration.featureVideoBandwidthRate;
+
+                    // Is valid account creation.
+                    if (!String.IsNullOrEmpty(_common.AccountName) && !String.IsNullOrEmpty(_common.SipHost))
+                    {
+                        // Enable create button.
+                        buttonCreate.Enabled = true;
+
+                        // Assign credentials.
+                        _voipCall.VoIPManager.AccountConnection.AccountName = _common.AccountName;
+                        _voipCall.VoIPManager.AccountConnection.SpHost = _common.SipHost;
+
+                        // Create the credentials.
+                        Net.Sip.AuthCredInfo[] AuthCredentials = new Net.Sip.AuthCredInfo[]
+                            { new Net.Sip.AuthCredInfo(_common.SipUsername, _common.SipPassword) };
+                        _voipCall.VoIPManager.AccountConnection.AuthenticateCredentials =
+                            new Net.Sip.AuthenticateCredentials() { AuthCredentials = AuthCredentials };
+                    }
                 }
                 catch (Exception ex)
                 {

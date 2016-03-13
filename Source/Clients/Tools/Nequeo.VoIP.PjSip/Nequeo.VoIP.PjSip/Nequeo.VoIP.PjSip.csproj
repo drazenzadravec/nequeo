@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="base\VoIPCall.cs" />
+    <Compile Include="base\VoIPEndpoint.cs" />
     <Compile Include="base\VoIPManager.cs" />
     <Compile Include="Param\CallInfoParam.cs" />
     <Compile Include="Param\CallMediaStateParam.cs" />

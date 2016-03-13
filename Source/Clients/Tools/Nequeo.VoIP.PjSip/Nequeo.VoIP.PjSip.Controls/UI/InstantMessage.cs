@@ -105,7 +105,7 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 DateTime date = DateTime.Now;
                 richTextBoxMessage.Text += date.ToLongDateString() + " " + date.ToLongTimeString() + "\r\n" +
-                    "\t" + "From : \t" + item.Text + "\r\n" +
+                    "\t" + "From : \t" + item.Text + " " + message.From + "\r\n" +
                     "\t" + "Message : " + message.MsgBody + "\r\n\r\n";
             }
             else
@@ -160,6 +160,7 @@ namespace Nequeo.VoIP.PjSip.UI
                 // Create a new list item.
                 ListViewItem viewItem = new ListViewItem(item.Text, item.ImageIndex);
                 viewItem.Name = item.Name;
+                viewItem.SubItems.Add(item.Name);
                 viewItem.Group = listViewMessage.Groups[item.Group.Name];
 
                 // Add the item to the list.
@@ -274,7 +275,7 @@ namespace Nequeo.VoIP.PjSip.UI
                 foreach (ListViewItem item in listViewMessage.SelectedItems)
                 {
                     // Who to send to.
-                    labelSendToValue.Text = item.Text;
+                    labelSendToValue.Text = item.Text + " " + item.Name;
 
                     try
                     {

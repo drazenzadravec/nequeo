@@ -212,15 +212,6 @@ namespace Nequeo
 				}
 
 				/// <summary>
-				/// Gets or sets the transport type.
-				/// </summary>
-				property TransportType Transport
-				{
-					TransportType get();
-					void set(TransportType value);
-				}
-
-				/// <summary>
 				/// Gets or sets specify whether IPv6 should be used on media. Default is not used.
 				/// </summary>
 				property IPv6_Use IPv6Use
@@ -417,7 +408,6 @@ namespace Nequeo
 				unsigned _timerMinSESec;
 				unsigned _timerSessExpiresSec;
 
-				TransportType _transportType;
 				IPv6_Use _ipv6_Use;
 				SRTP_Use _srtp_Use;
 				SRTP_SecureSignaling _srtp_SecureSignaling;

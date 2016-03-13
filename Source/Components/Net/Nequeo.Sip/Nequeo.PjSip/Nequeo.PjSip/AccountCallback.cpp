@@ -41,9 +41,6 @@ using namespace Nequeo::Net::PjSip;
 AccountCallback::AccountCallback() :
 	_disposed(false)
 {
-	_endpoint = std::make_unique<pj::Endpoint>();
-	_epConfig = std::make_unique<pj::EpConfig>();
-
 	_accountVideoConfig = std::make_unique<pj::AccountVideoConfig>();
 	_accountNatConfig = std::make_unique<pj::AccountNatConfig>();
 	_accountConfig = std::make_unique<pj::AccountConfig>();
@@ -54,16 +51,6 @@ AccountCallback::AccountCallback() :
 	_accountMwiConfig = std::make_unique<pj::AccountMwiConfig>();
 	_accountPresConfig = std::make_unique<pj::AccountPresConfig>();
 	_transportConfig = std::make_unique<pj::TransportConfig>();
-
-	_transportConfig_UDP = std::make_unique<pj::TransportConfig>();
-	_transportConfig_UDP6 = std::make_unique<pj::TransportConfig>();
-	_transportConfig_TCP = std::make_unique<pj::TransportConfig>();
-	_transportConfig_TCP6 = std::make_unique<pj::TransportConfig>();
-	_transportConfig_TLS = std::make_unique<pj::TransportConfig>();
-	_transportConfig_TLS6 = std::make_unique<pj::TransportConfig>();
-
-	// Start the application.
-	StartUp();
 }
 
 ///	<summary>
@@ -74,29 +61,7 @@ AccountCallback::~AccountCallback()
 	if (!_disposed)
 	{
 		_disposed = true;
-
-		try
-		{
-			_endpoint->libStopWorkerThreads();
-		}
-		catch (const std::exception&) {}
-
-		try
-		{
-			_endpoint->libDestroy();
-		}
-		catch (const std::exception&) {}
 	}
-}
-
-/// <summary>
-/// Start the application.
-/// </summary>
-void AccountCallback::StartUp()
-{
-	// Create endpoint data.
-	_endpoint->libCreate();
-	_endpoint->libInit(*(_epConfig.get()));
 }
 
 ///	<summary>
@@ -105,65 +70,6 @@ void AccountCallback::StartUp()
 /// <param name="mapper">Account connection mapper.</param>
 void AccountCallback::Initialise(ConnectionMapper& mapper)
 {
-	// Is IPv6 capable.
-	pjsua_ipv6_use useIPv6 = mapper.GetIPv6UseEx(mapper.GetIPv6Use());
-	TransportType transportType = mapper.GetTransportType();
-
-	// Setup TLS.
-	_transportConfig_TLS->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
-	_transportConfig_TLS->tlsConfig.verifyServer = false;
-	_transportConfig_TLS->tlsConfig.verifyClient = false;
-
-	// If IPv6 is enabled.
-	if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
-	{
-		_transportConfig_TLS6->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
-		_transportConfig_TLS6->tlsConfig.verifyServer = false;
-		_transportConfig_TLS6->tlsConfig.verifyClient = false;
-	}
-
-	// If UDP transport.
-	if ((TransportType::UDP & transportType) == TransportType::UDP)
-	{
-		// Create the client transport.
-		_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP, *(_transportConfig_UDP.get()));
-
-		// If IPv6 is enabled.
-		if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
-		{
-			_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP6, *(_transportConfig_UDP6.get()));
-		}
-	}
-
-	// If TCP transport.
-	if ((TransportType::TCP & transportType) == TransportType::TCP)
-	{
-		_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP, *(_transportConfig_TCP.get()));
-
-		// If IPv6 is enabled.
-		if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
-		{
-			_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP6, *(_transportConfig_TCP6.get()));
-		}
-	}
-
-	// If TLS transport.
-	if ((TransportType::TLS & transportType) == TransportType::TLS)
-	{
-		// Has not been implemented must change pjlib.config.PJ_HAS_SSL_SOCK = 1
-		// then recompile the pjproject and copy all the libs then then recomiple this project.
-		_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS, *(_transportConfig_TLS.get()));
-
-		// If IPv6 is enabled.
-		if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
-		{
-			_endpoint->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS6, *(_transportConfig_TLS6.get()));
-		}
-	}
-
-	// Start.
-	_endpoint->libStart();
-
 	// Set the account options.
 	_accountConfig->idUri = "sip:" + mapper.GetAccountName() + "@" + mapper.GetSpHost() + ":" + std::to_string(mapper.GetSpPort());
 	_accountConfig->priority = mapper.GetPriority();
@@ -181,7 +87,7 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 	// Set the media options.
 	_transportConfig->port = mapper.GetMediaTransportPort();
 	_transportConfig->portRange = mapper.GetMediaTransportPortRange();
-	_accountMediaConfig->ipv6Use = useIPv6;
+	_accountMediaConfig->ipv6Use = mapper.GetIPv6UseEx(mapper.GetIPv6Use());
 	_accountMediaConfig->srtpUse = mapper.GetSrtpUseEx(mapper.GetSRTPUse());
 	_accountMediaConfig->srtpSecureSignaling = mapper.GetSRTPSecureSignalingEx(mapper.GetSRTPSecureSignaling());
 	_accountMediaConfig->transportConfig = *(_transportConfig.get());
@@ -232,91 +138,12 @@ void AccountCallback::Initialise(ConnectionMapper& mapper)
 }
 
 /// <summary>
-/// Get the audio deveice manager.
-/// </summary>
-/// <returns>The audio device manager.</returns>
-pj::AudDevManager& AccountCallback::GetAudioDevManager()
-{
-	return _endpoint->audDevManager();
-}
-
-/// <summary>
-/// Get the video deveice manager.
-/// </summary>
-/// <returns>The video device manager.</returns>
-pj::VidDevManager& AccountCallback::GetVideoDevManager()
-{
-	return _endpoint->vidDevManager();
-}
-
-/// <summary>
 /// Get the account video configration.
 /// </summary>
 /// <returns>The account video configuration.</returns>
 pj::AccountVideoConfig& AccountCallback::GetAccountVideoConfig()
 {
 	return *(_accountVideoConfig.get());
-}
-
-/// <summary>
-/// Get the number of active media ports.
-/// </summary>
-/// <returns>The number of active ports.</returns>
-unsigned AccountCallback::MediaActivePorts()
-{
-	return _endpoint->mediaActivePorts();
-}
-
-/// <summary>
-/// Get all supported audio codecs in the system.
-/// </summary>
-/// <returns>The supported audio codecs in the system.</returns>
-const pj::CodecInfoVector& AccountCallback::GetAudioCodecInfo()
-{
-	return _endpoint->codecEnum();
-}
-
-/// <summary>
-/// Get all supported video codecs in the system.
-/// </summary>
-/// <returns>The supported video codecs in the system.</returns>
-const pj::CodecInfoVector& AccountCallback::GetVideoCodecInfo()
-{
-	return _endpoint->videoCodecEnum();
-}
-
-///	<summary>
-///	Change audio codec priority.
-///	</summary>
-/// <param name="codecID">which is a string that uniquely identify
-///	the codec(such as "speex/8000").</param>
-/// <param name="priority">Codec priority, 0-255, where zero means to disable
-///	the codec.</param>
-void AccountCallback::AudioCodecSetPriority(const std::string &codecID, unsigned char priority)
-{
-	_endpoint->codecSetPriority(codecID, priority);
-}
-
-///	<summary>
-///	Change video codec priority.
-///	</summary>
-/// <param name="codecID">Codec ID, which is a string that uniquely identify
-///	the codec(such as "H263/90000"). Please see pjsua
-/// manual or pjmedia codec reference for details.</param>
-/// <param name="priority">Codec priority, 0-255, where zero means to disable
-///	the codec.</param>
-void AccountCallback::VideoCodecSetPriority(const std::string &codecID, unsigned char priority)
-{
-	_endpoint->videoCodecSetPriority(codecID, priority);
-}
-
-/// <summary>
-/// Add audio media device to the application.
-/// </summary>
-/// <param name="audioMedia">The audio media device.</param>
-void AccountCallback::AddAudioMedia(pj::AudioMedia& audioMedia)
-{
-	_endpoint->mediaAdd(audioMedia);
 }
 
 ///	<summary>

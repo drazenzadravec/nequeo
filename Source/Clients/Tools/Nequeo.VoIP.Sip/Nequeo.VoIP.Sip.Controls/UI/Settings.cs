@@ -1308,9 +1308,9 @@ namespace Nequeo.VoIP.Sip.UI
         private void checkedListBoxAudioCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (checkedListBoxAudioCodec.SelectedIndex >= 0)
-                contextMenuStripCodecPriority.Enabled = true;
+                toolStripMenuItemChangePriority.Enabled = true;
             else
-                contextMenuStripCodecPriority.Enabled = false;
+                toolStripMenuItemChangePriority.Enabled = false;
         }
 
         /// <summary>
@@ -1351,6 +1351,7 @@ namespace Nequeo.VoIP.Sip.UI
             Nequeo.Forms.UI.Input inputBox = new Forms.UI.Input();
 
             string codecName = (string)checkedListBoxAudioCodec.SelectedItem;
+            inputBox.Text = "Set '" + codecName + "' Priority";
             Nequeo.Net.Sip.CodecInfo codecInfo = _common.AudioCodecs.First(u => u.CodecId.ToLower() == codecName.ToLower());
             bool isChecked = checkedListBoxAudioCodec.GetItemChecked(checkedListBoxAudioCodec.SelectedIndex);
 

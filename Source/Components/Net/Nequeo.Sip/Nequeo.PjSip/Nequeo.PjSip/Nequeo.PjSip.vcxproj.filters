@@ -40,6 +40,12 @@
     <Filter Include="UI">
       <UniqueIdentifier>{a1424216-44a3-4e57-a0df-cad44afff6df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EndPointHeader">
+      <UniqueIdentifier>{995fbbc2-9cae-42d3-91d9-09263b353cb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EndPointSource">
+      <UniqueIdentifier>{ce9f1bb7-6641-499b-a058-cc66bcbafafd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -387,8 +393,35 @@
     <ClInclude Include="VideoIncomingWindow.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="EndpointCallback.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Endpoint.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnNatDetectionCompleteParam.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnNatCheckStunServersCompleteParam.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnTransportStateParam.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
     <ClInclude Include="TransportType.h">
-      <Filter>Header Files\AccountHeader</Filter>
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="TransportState.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnTimerParam.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="OnSelectAccountParam.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="TransportInfo.h">
+      <Filter>Header Files\EndPointHeader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -664,6 +697,30 @@
     </ClCompile>
     <ClCompile Include="VideoIncomingWindow.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="EndpointCallback.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Endpoint.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnNatDetectionCompleteParam.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnNatCheckStunServersCompleteParam.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnTransportStateParam.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnTimerParam.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="OnSelectAccountParam.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="TransportInfo.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

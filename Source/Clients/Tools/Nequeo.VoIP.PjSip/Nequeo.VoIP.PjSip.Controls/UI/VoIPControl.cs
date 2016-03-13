@@ -167,22 +167,6 @@ namespace Nequeo.VoIP.PjSip.UI
 
                 try
                 {
-                    // Save the contacts list.
-                    if (!String.IsNullOrEmpty(_contactsFilePath))
-                    {
-                        // Load the contacts.
-                        if (_contacts != null && _contacts.contact != null)
-                        {
-                            // Deserialise the xml file into.
-                            GeneralSerialisation serial = new GeneralSerialisation();
-                            bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
-                        }
-                    }
-                }
-                catch { }
-
-                try
-                {
                     // The call.
                     if (_call != null)
                         _call.Dispose();
@@ -214,16 +198,19 @@ namespace Nequeo.VoIP.PjSip.UI
         }
 
         /// <summary>
-        /// Initialize.
+        /// Initialize
         /// </summary>
-        public void Initialize()
+        /// <param name="endpoint">The endpoint.</param>
+        public void Initialize(VoIPEndpoint endpoint)
         {
+            if (endpoint == null) throw new ArgumentNullException(nameof(endpoint));
+
             _common = new Data.Common();
             _inOutCalls = new Data.IncomingOutgoingCalls();
             _volume = new Volume();
 
             // Create the voip call.
-            _voipCall = new VoIPCall();
+            _voipCall = new VoIPCall(endpoint);
             _voipCall.OnIncomingCall += Voipcall_OnIncomingCall;
             _voipCall.OnInstantMessage += Voipcall_OnInstantMessage;
             _voipCall.OnRegStarted += Voipcall_OnRegStarted;
@@ -234,6 +221,28 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Make collapsible.
                 listViewContact.SetGroupState(Nequeo.Forms.UI.Extender.ListViewGroupState.Collapsible);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Save only loaded files.
+        /// </summary>
+        private void SaveFile()
+        {
+            try
+            {
+                // Save the contacts list.
+                if (!String.IsNullOrEmpty(_contactsFilePath))
+                {
+                    // Load the contacts.
+                    if (_contacts != null && _contacts.contact != null)
+                    {
+                        // Serialise the xml file into.
+                        GeneralSerialisation serial = new GeneralSerialisation();
+                        bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
+                    }
+                }
             }
             catch { }
         }
@@ -447,6 +456,13 @@ namespace Nequeo.VoIP.PjSip.UI
         {
             UISync.Execute(() =>
             {
+                // If notify of instant message.
+                if (checkBoxOptionsIM.Checked)
+                {
+                    // Open the instant message window if not opened.
+                    OpenInstantMessageWindow();
+                }
+
                 // Send the message.
                 if (_instantMessage != null)
                     _instantMessage.Message(e);
@@ -1476,13 +1492,25 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void buttonInstantMessage_Click(object sender, EventArgs e)
         {
+            OpenInstantMessageWindow();
+        }
+
+        /// <summary>
+        /// Open the instant message window.
+        /// </summary>
+        private void OpenInstantMessageWindow()
+        {
             if (_instantMessage == null)
             {
                 string incomingFilePath = (_common != null ? _common.InstantMessageFilePath : null);
                 int audioDeviceIndex = (_common != null ? _common.AudioDeviceIndex : -1);
+
+                // Create the window.
                 _instantMessage = new InstantMessage(_voipCall, listViewContact, imageListSmall, imageListLarge, incomingFilePath, audioDeviceIndex);
                 _instantMessage.OnInstantMessageClosing += _instantMessage_OnClosing;
                 _instantMessage.Show();
+
+                // Disable the button.
                 buttonInstantMessage.Enabled = false;
             }
         }
@@ -1510,18 +1538,6 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Enable contacts.
                 groupBoxContact.Enabled = true;
-
-                try
-                {
-                    // Save the contacts.
-                    if (_contacts != null && _contacts.contact != null)
-                    {
-                        // Deserialise the xml file into.
-                        GeneralSerialisation serial = new GeneralSerialisation();
-                        bool authData = serial.Serialise(_contacts, typeof(Data.contacts), _contactsFilePath);
-                    }
-                }
-                catch { }
 
                 try
                 {
@@ -1826,6 +1842,9 @@ namespace Nequeo.VoIP.PjSip.UI
                     // Create the contact in the account.
                     Nequeo.Net.PjSip.ContactConnection contactConnection = new Net.PjSip.ContactConnection(contact.PresenecState, contact.SipAccount);
                     _voipCall.VoIPManager.AddContact(contactConnection);
+
+                    // Save only loaded files.
+                    SaveFile();
                 }
             }
             catch (Exception ex)
@@ -1875,6 +1894,9 @@ namespace Nequeo.VoIP.PjSip.UI
                         _contacts.contact = _contacts.contact.Remove(u => u.Equals(contact));
                     }
                     catch { }
+
+                    // Save only loaded files.
+                    SaveFile();
                 }
             }
         }
@@ -1975,6 +1997,9 @@ namespace Nequeo.VoIP.PjSip.UI
                                 break;
                         }
                     }
+
+                    // Save only loaded files.
+                    SaveFile();
                 }
             }
         }
@@ -2263,6 +2288,23 @@ namespace Nequeo.VoIP.PjSip.UI
                     _voipCall.VoIPManager.AccountConnection.TimerSessExpiresSec = _configuration.timerSessionExpires;
                     _voipCall.VoIPManager.AccountConnection.UnregWaitSec = _configuration.timeUnregisterWait;
                     _voipCall.VoIPManager.AccountConnection.VideoRateControlBandwidth = _configuration.featureVideoBandwidthRate;
+
+                    // Is valid account creation.
+                    if (!String.IsNullOrEmpty(_common.AccountName) && !String.IsNullOrEmpty(_common.SipHost))
+                    {
+                        // Enable create button.
+                        buttonCreate.Enabled = true;
+
+                        // Assign credentials.
+                        _voipCall.VoIPManager.AccountConnection.AccountName = _common.AccountName;
+                        _voipCall.VoIPManager.AccountConnection.SpHost = _common.SipHost;
+
+                        // Create the credentials.
+                        Net.PjSip.AuthCredInfo[] AuthCredentials = new Net.PjSip.AuthCredInfo[]
+                            { new Net.PjSip.AuthCredInfo(_common.SipUsername, _common.SipPassword) };
+                        _voipCall.VoIPManager.AccountConnection.AuthCredentials =
+                            new Net.PjSip.AuthenticateCredentials() { AuthCredentials = AuthCredentials };
+                    }
                 }
                 catch (Exception ex)
                 {

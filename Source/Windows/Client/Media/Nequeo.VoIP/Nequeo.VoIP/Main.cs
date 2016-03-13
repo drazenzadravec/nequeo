@@ -24,6 +24,7 @@ namespace Nequeo.VoIP
         }
 
         private int _voipTabPageCount = 2;
+        private Nequeo.VoIP.PjSip.VoIPEndpoint _endpoint = null;
 
         /// <summary>
         /// Closed.
@@ -53,38 +54,56 @@ namespace Nequeo.VoIP
                     // tab page.
                     foreach (Control voipControl in control.Controls)
                     {
-                        try
-                        {
-                            // If the control in the tab page
-                            // is a voip control.
-                            if (voipControl is Nequeo.VoIP.PjSip.UI.VoIPControl)
-                            {
-                                Nequeo.VoIP.PjSip.UI.VoIPControl voip =
-                                    (Nequeo.VoIP.PjSip.UI.VoIPControl)voipControl;
-
-                                // Dispose
-                                voip.DisposeCall();
-                            }
-                        }
-                        catch { }
-
-                        try
-                        {
-                            // If the control in the tab page
-                            // is a voip control.
-                            if (voipControl is Nequeo.VoIP.Sip.UI.VoIPControl)
-                            {
-                                Nequeo.VoIP.Sip.UI.VoIPControl voip =
-                                    (Nequeo.VoIP.Sip.UI.VoIPControl)voipControl;
-
-                                // Dispose
-                                voip.DisposeCall();
-                            }
-                        }
-                        catch { }
+                        // Remove the control.
+                        RemoveVoip(voipControl);
                     }
                 }
             }
+
+            try
+            {
+                // Cleanup.
+                if (_endpoint != null)
+                    _endpoint.Dispose();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Remove the control.
+        /// </summary>
+        /// <param name="voipControl">The voip control.</param>
+        private void RemoveVoip(Control voipControl)
+        {
+            try
+            {
+                // If the control in the tab page
+                // is a voip control.
+                if (voipControl is Nequeo.VoIP.PjSip.UI.VoIPControl)
+                {
+                    Nequeo.VoIP.PjSip.UI.VoIPControl voip =
+                        (Nequeo.VoIP.PjSip.UI.VoIPControl)voipControl;
+
+                    // Dispose
+                    voip.DisposeCall();
+                }
+            }
+            catch { }
+
+            try
+            {
+                // If the control in the tab page
+                // is a voip control.
+                if (voipControl is Nequeo.VoIP.Sip.UI.VoIPControl)
+                {
+                    Nequeo.VoIP.Sip.UI.VoIPControl voip =
+                        (Nequeo.VoIP.Sip.UI.VoIPControl)voipControl;
+
+                    // Dispose
+                    voip.DisposeCall();
+                }
+            }
+            catch { }
         }
 
         /// <summary>
@@ -94,8 +113,16 @@ namespace Nequeo.VoIP
         /// <param name="e"></param>
         private void Main_Load(object sender, EventArgs e)
         {
-            // Initlise the first control.
-            voIPControl1.Initialize();
+            // Create a new endpoint.
+            if (_endpoint == null)
+            {
+                // Create the single endpoint
+                _endpoint = new Nequeo.VoIP.PjSip.VoIPEndpoint(Net.PjSip.IPv6_Use.IPV6_DISABLED,
+                    Net.PjSip.TransportType.UDP | Net.PjSip.TransportType.TCP | Net.PjSip.TransportType.TLS);
+            }
+
+            // Initialise. the first control.
+            voIPControl1.Initialize(_endpoint);
             voIPControl2.Initialize();
         }
 
@@ -144,7 +171,7 @@ namespace Nequeo.VoIP
             this.tabControlVoIP.Controls.Add(tabPageVoipNew);
 
             // Initlise the first control.
-            voip.Initialize();
+            voip.Initialize(_endpoint);
         }
 
         /// <summary>
@@ -244,6 +271,84 @@ namespace Nequeo.VoIP
         {
             Nequeo.Forms.UI.AboutBox about = new Forms.UI.AboutBox();
             about.ShowDialog();
+        }
+
+        /// <summary>
+        /// Table selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControlVoIP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlVoIP.SelectedIndex >= 0)
+            {
+                deleteToolStripMenuItem.Enabled = true;
+                renameToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                deleteToolStripMenuItem.Enabled = false;
+                renameToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Delete tab.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControlVoIP.SelectedIndex >= 0)
+            {
+                // Get the selected tab page.
+                TabPage page = tabControlVoIP.SelectedTab;
+
+                DialogResult ret = MessageBox.Show("Are you sure you wish to delete '" + page.Text + "'", 
+                    "Delete VoIP", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                // If OK.
+                if (ret == DialogResult.Yes)
+                {
+                    // For each control in the
+                    // tab page.
+                    foreach (Control voipControl in page.Controls)
+                    {
+                        // Remove the control.
+                        RemoveVoip(voipControl);
+                    }
+
+                    // Remove the page.
+                    tabControlVoIP.TabPages.Remove(page);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Change name.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControlVoIP.SelectedIndex >= 0)
+            {
+                // Get the selected tab page.
+                TabPage page = tabControlVoIP.SelectedTab;
+
+                Nequeo.Forms.UI.Input input = new Forms.UI.Input();
+                input.Text = "Change Tab Name";
+                input.InputValue = page.Text;
+
+                // Open the window.
+                input.ShowDialog(this);
+
+                // If OK.
+                if (input.InputType == Forms.UI.InputType.OK)
+                {
+                    page.Text = input.InputValue;
+                }
+            }
         }
     }
 }

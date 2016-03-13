@@ -413,16 +413,16 @@ namespace Nequeo.VoIP.PjSip.UI
                 }
             }
 
-            // Get all transports.
-            Array transports = Enum.GetValues(typeof(Nequeo.Net.PjSip.TransportType));
-            foreach (var value in transports)
-            {
-                // Is active.
-                if (((Nequeo.Net.PjSip.TransportType)value & _voipCall.VoIPManager.AccountConnection.Transport) == (Net.PjSip.TransportType)value)
-                    checkedListBoxConfigTransport.Items.Add(((Nequeo.Net.PjSip.TransportType)value).ToString(), true);
-                else
-                    checkedListBoxConfigTransport.Items.Add(((Nequeo.Net.PjSip.TransportType)value).ToString(), false);
-            }
+            //// Get all transports.
+            //Array transports = Enum.GetValues(typeof(Nequeo.Net.PjSip.TransportType));
+            //foreach (var value in transports)
+            //{
+            //    // Is active.
+            //    if (((Nequeo.Net.PjSip.TransportType)value & _voipCall.VoIPManager.AccountConnection.Transport) == (Net.PjSip.TransportType)value)
+            //        checkedListBoxConfigTransport.Items.Add(((Nequeo.Net.PjSip.TransportType)value).ToString(), true);
+            //    else
+            //        checkedListBoxConfigTransport.Items.Add(((Nequeo.Net.PjSip.TransportType)value).ToString(), false);
+            //}
         }
 
         /// <summary>
@@ -1636,9 +1636,9 @@ namespace Nequeo.VoIP.PjSip.UI
         private void checkedListBoxAudioCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (checkedListBoxAudioCodec.SelectedIndex >= 0)
-                contextMenuStripCodecPriority.Enabled = true;
+                toolStripMenuItemChangePriority.Enabled = true;
             else
-                contextMenuStripCodecPriority.Enabled = false;
+                toolStripMenuItemChangePriority.Enabled = false;
         }
 
         /// <summary>
@@ -1649,9 +1649,9 @@ namespace Nequeo.VoIP.PjSip.UI
         private void checkedListBoxVideoCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (checkedListBoxVideoCodec.SelectedIndex >= 0)
-                contextMenuStripVideoCodecPriority.Enabled = true;
+                toolStripMenuItemVideoChangePriority.Enabled = true;
             else
-                contextMenuStripVideoCodecPriority.Enabled = false;
+                toolStripMenuItemVideoChangePriority.Enabled = false;
         }
 
         /// <summary>
@@ -1670,24 +1670,24 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void checkedListBoxConfigTransport_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (checkedListBoxConfigTransport.SelectedIndex >= 0)
-            {
-                // Get the value.
-                string transportItem = checkedListBoxConfigTransport.SelectedItem.ToString();
-                Net.PjSip.TransportType transport = (Net.PjSip.TransportType)Enum.Parse(typeof(Net.PjSip.TransportType), transportItem);
+            //if (checkedListBoxConfigTransport.SelectedIndex >= 0)
+            //{
+            //    // Get the value.
+            //    string transportItem = checkedListBoxConfigTransport.SelectedItem.ToString();
+            //    Net.PjSip.TransportType transport = (Net.PjSip.TransportType)Enum.Parse(typeof(Net.PjSip.TransportType), transportItem);
 
-                // If checked
-                if (e.NewValue == CheckState.Checked)
-                {
-                    // Add to the checked items.
-                    _voipCall.VoIPManager.AccountConnection.Transport = _voipCall.VoIPManager.AccountConnection.Transport | transport;
-                }
-                else
-                {
-                    // Remove to the checked items.
-                    _voipCall.VoIPManager.AccountConnection.Transport = _voipCall.VoIPManager.AccountConnection.Transport ^ transport;
-                }
-            }
+            //    // If checked
+            //    if (e.NewValue == CheckState.Checked)
+            //    {
+            //        // Add to the checked items.
+            //        _voipCall.VoIPManager.AccountConnection.Transport = _voipCall.VoIPManager.AccountConnection.Transport | transport;
+            //    }
+            //    else
+            //    {
+            //        // Remove to the checked items.
+            //        _voipCall.VoIPManager.AccountConnection.Transport = _voipCall.VoIPManager.AccountConnection.Transport ^ transport;
+            //    }
+            //}
         }
     }
 }

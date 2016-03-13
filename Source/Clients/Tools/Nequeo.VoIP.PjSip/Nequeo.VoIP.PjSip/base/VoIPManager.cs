@@ -49,44 +49,56 @@ namespace Nequeo.VoIP.PjSip
         /// <summary>
         /// VoIP manager.
         /// </summary>
-        public VoIPManager()
+        /// <param name="endpoint">The endpoint instance.</param>
+        public VoIPManager(VoIPEndpoint endpoint)
         {
+            if (endpoint == null) throw new ArgumentNullException(nameof(endpoint));
+
+            _endpoint = endpoint;
             _account = new Account(new AccountConnection());
 
             // Get the media manager.
-            _mediaManager = _account.GetMediaManager();
+            _mediaManager = _endpoint.Endpoint.GetMediaManager(_account);
         }
 
         /// <summary>
         /// VoIP manager.
         /// </summary>
+        /// <param name="endpoint">The endpoint instance.</param>
         /// <param name="accountConnection">Account connection configuration.</param>
-        public VoIPManager(AccountConnection accountConnection)
+        public VoIPManager(VoIPEndpoint endpoint, AccountConnection accountConnection)
         {
             if (accountConnection == null) throw new ArgumentNullException(nameof(accountConnection));
+            if (endpoint == null) throw new ArgumentNullException(nameof(endpoint));
 
+            _endpoint = endpoint;
             _account = new Account(accountConnection);
 
             // Get the media manager.
-            _mediaManager = _account.GetMediaManager();
+            _mediaManager = _endpoint.Endpoint.GetMediaManager(_account);
         }
 
         /// <summary>
         /// VoIP manager.
         /// </summary>
+        /// <param name="endpoint">The endpoint instance.</param>
         /// <param name="accountName">The account name or service phone number.</param>
         /// <param name="spHost">The service provider host name or IP address.</param>
         /// <param name="username">The sip username.</param>
         /// <param name="password">The sip password.</param>
-        public VoIPManager(string accountName, string spHost, string username, string password)
+        public VoIPManager(VoIPEndpoint endpoint, string accountName, string spHost, string username, string password)
         {
+            if (endpoint == null) throw new ArgumentNullException(nameof(endpoint));
+
+            _endpoint = endpoint;
             _account = new Account(new AccountConnection(accountName, spHost, username, password));
 
             // Get the media manager.
-            _mediaManager = _account.GetMediaManager();
+            _mediaManager = _endpoint.Endpoint.GetMediaManager(_account);
         }
 
         private bool _created = false;
+        private VoIPEndpoint _endpoint = null;
         private Account _account = null;
         private MediaManager _mediaManager = null;
 
@@ -254,7 +266,7 @@ namespace Nequeo.VoIP.PjSip
         /// <returns>The media manager.</returns>
         public MediaManager GetMediaManager()
         {
-            return _account.GetMediaManager();
+            return _endpoint.Endpoint.GetMediaManager(_account);
         }
 
         /// <summary>
@@ -263,7 +275,7 @@ namespace Nequeo.VoIP.PjSip
         /// <returns>The supported audio codecs in the system.</returns>
         public CodecInfo[] GetAudioCodecInfo()
         {
-            return _account.GetAudioCodecInfo();
+            return _endpoint.Endpoint.GetAudioCodecInfo();
         }
 
         /// <summary>
@@ -272,7 +284,7 @@ namespace Nequeo.VoIP.PjSip
         /// <returns>The supported video codecs in the system.</returns>
         public CodecInfo[] GetVideoCodecInfo()
         {
-            return _account.GetVideoCodecInfo();
+            return _endpoint.Endpoint.GetVideoCodecInfo();
         }
 
         /// <summary>
@@ -281,7 +293,7 @@ namespace Nequeo.VoIP.PjSip
         /// <param name="audioMedia">The audio media device.</param>
         public void AddAudioCaptureDevice(AudioMedia audioMedia)
         {
-            _account.AddAudioCaptureDevice(audioMedia);
+            _endpoint.Endpoint.AddAudioCaptureDevice(audioMedia);
         }
 
         /// <summary>
@@ -290,7 +302,7 @@ namespace Nequeo.VoIP.PjSip
         /// <param name="audioMedia">The audio media device.</param>
         public void AddAudioPlaybackDevice(AudioMedia audioMedia)
         {
-            _account.AddAudioPlaybackDevice(audioMedia);
+            _endpoint.Endpoint.AddAudioPlaybackDevice(audioMedia);
         }
 
         /// <summary>
@@ -299,7 +311,7 @@ namespace Nequeo.VoIP.PjSip
         /// <returns>The number of active ports.</returns>
         public uint MediaActivePorts()
         {
-            return _account.MediaActivePorts();
+            return _endpoint.Endpoint.MediaActivePorts();
         }
 
         /// <summary>
@@ -353,7 +365,7 @@ namespace Nequeo.VoIP.PjSip
         ///	the codec.</param>
         public void SetPriorityAudioCodec(string codecID, byte priority)
         {
-            _account.AudioCodecSetPriority(codecID, priority);
+            _endpoint.Endpoint.SetPriorityAudioCodec(codecID, priority);
         }
 
         ///	<summary>
@@ -365,7 +377,7 @@ namespace Nequeo.VoIP.PjSip
         ///	the codec.</param>
         public void SetPriorityVideoCodec(string codecID, byte priority)
         {
-            _account.VideoCodecSetPriority(codecID, priority);
+            _endpoint.Endpoint.SetPriorityVideoCodec(codecID, priority);
         }
 
         /// <summary>
@@ -393,7 +405,7 @@ namespace Nequeo.VoIP.PjSip
         public void SetAudioCaptureDevice(int audioCaptureDeviceID)
         {
             _mediaManager.SetCaptureDevice(audioCaptureDeviceID);
-            _account.AddAudioCaptureDevice(_mediaManager.GetCaptureDeviceMedia());
+            _endpoint.Endpoint.AddAudioCaptureDevice(_mediaManager.GetCaptureDeviceMedia());
         }
 
         /// <summary>
@@ -403,7 +415,7 @@ namespace Nequeo.VoIP.PjSip
         public void SetAudioPlaybackDevice(int audioPlaybackDeviceID)
         {
             _mediaManager.SetPlaybackDevice(audioPlaybackDeviceID);
-            _account.AddAudioPlaybackDevice(_mediaManager.GetPlaybackDeviceMedia());
+            _endpoint.Endpoint.AddAudioPlaybackDevice(_mediaManager.GetPlaybackDeviceMedia());
         }
 
         /// <summary>

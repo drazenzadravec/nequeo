@@ -121,6 +121,7 @@
             this.tabPageVoIPCall = new System.Windows.Forms.TabPage();
             this.tabPageContacts = new System.Windows.Forms.TabPage();
             this.groupBoxContact = new System.Windows.Forms.GroupBox();
+            this.checkBoxContactExpand = new System.Windows.Forms.CheckBox();
             this.comboBoxContactView = new System.Windows.Forms.ComboBox();
             this.buttonContactUpdate = new System.Windows.Forms.Button();
             this.buttonContactDelete = new System.Windows.Forms.Button();
@@ -152,7 +153,8 @@
             this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.checkBoxContactExpand = new System.Windows.Forms.CheckBox();
+            this.groupBoxOptionsIM = new System.Windows.Forms.GroupBox();
+            this.checkBoxOptionsIM = new System.Windows.Forms.CheckBox();
             this.groupBoxCall.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
@@ -176,6 +178,7 @@
             this.groupBoxConference.SuspendLayout();
             this.contextMenuStripConference.SuspendLayout();
             this.tabPageVoIPAccount.SuspendLayout();
+            this.groupBoxOptionsIM.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCall
@@ -898,6 +901,7 @@
             // 
             // tabPageAccountOptions
             // 
+            this.tabPageAccountOptions.Controls.Add(this.groupBoxOptionsIM);
             this.tabPageAccountOptions.Controls.Add(this.groupBoxOptionsImage);
             this.tabPageAccountOptions.Location = new System.Drawing.Point(4, 22);
             this.tabPageAccountOptions.Name = "tabPageAccountOptions";
@@ -915,9 +919,9 @@
             this.groupBoxOptionsImage.Controls.Add(this.labelOptionsImageSizeLarge);
             this.groupBoxOptionsImage.Controls.Add(this.comboBoxOptionsImageSizeSmall);
             this.groupBoxOptionsImage.Controls.Add(this.labelOptionsImageSizeSmall);
-            this.groupBoxOptionsImage.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxOptionsImage.Location = new System.Drawing.Point(6, 62);
             this.groupBoxOptionsImage.Name = "groupBoxOptionsImage";
-            this.groupBoxOptionsImage.Size = new System.Drawing.Size(332, 225);
+            this.groupBoxOptionsImage.Size = new System.Drawing.Size(332, 169);
             this.groupBoxOptionsImage.TabIndex = 0;
             this.groupBoxOptionsImage.TabStop = false;
             this.groupBoxOptionsImage.Text = "Image Size";
@@ -1060,6 +1064,19 @@
             this.groupBoxContact.TabIndex = 3;
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Text = "Contact";
+            // 
+            // checkBoxContactExpand
+            // 
+            this.checkBoxContactExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxContactExpand.AutoSize = true;
+            this.checkBoxContactExpand.Checked = true;
+            this.checkBoxContactExpand.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxContactExpand.Location = new System.Drawing.Point(6, 316);
+            this.checkBoxContactExpand.Name = "checkBoxContactExpand";
+            this.checkBoxContactExpand.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxContactExpand.TabIndex = 7;
+            this.checkBoxContactExpand.UseVisualStyleBackColor = true;
+            this.checkBoxContactExpand.CheckedChanged += new System.EventHandler(this.checkBoxContactExpand_CheckedChanged);
             // 
             // comboBoxContactView
             // 
@@ -1397,18 +1414,29 @@
             this.saveFileDialog.SupportMultiDottedExtensions = true;
             this.saveFileDialog.Title = "Save";
             // 
-            // checkBoxContactExpand
+            // groupBoxOptionsIM
             // 
-            this.checkBoxContactExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxContactExpand.AutoSize = true;
-            this.checkBoxContactExpand.Checked = true;
-            this.checkBoxContactExpand.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxContactExpand.Location = new System.Drawing.Point(6, 316);
-            this.checkBoxContactExpand.Name = "checkBoxContactExpand";
-            this.checkBoxContactExpand.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxContactExpand.TabIndex = 7;
-            this.checkBoxContactExpand.UseVisualStyleBackColor = true;
-            this.checkBoxContactExpand.CheckedChanged += new System.EventHandler(this.checkBoxContactExpand_CheckedChanged);
+            this.groupBoxOptionsIM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxOptionsIM.Controls.Add(this.checkBoxOptionsIM);
+            this.groupBoxOptionsIM.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxOptionsIM.Name = "groupBoxOptionsIM";
+            this.groupBoxOptionsIM.Size = new System.Drawing.Size(332, 50);
+            this.groupBoxOptionsIM.TabIndex = 1;
+            this.groupBoxOptionsIM.TabStop = false;
+            this.groupBoxOptionsIM.Text = "Instant Message";
+            // 
+            // checkBoxOptionsIM
+            // 
+            this.checkBoxOptionsIM.AutoSize = true;
+            this.checkBoxOptionsIM.Checked = true;
+            this.checkBoxOptionsIM.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxOptionsIM.Location = new System.Drawing.Point(15, 22);
+            this.checkBoxOptionsIM.Name = "checkBoxOptionsIM";
+            this.checkBoxOptionsIM.Size = new System.Drawing.Size(206, 17);
+            this.checkBoxOptionsIM.TabIndex = 0;
+            this.checkBoxOptionsIM.Text = "Incoming Instant Message Notification";
+            this.checkBoxOptionsIM.UseVisualStyleBackColor = true;
             // 
             // VoIPControl
             // 
@@ -1450,6 +1478,8 @@
             this.groupBoxConference.PerformLayout();
             this.contextMenuStripConference.ResumeLayout(false);
             this.tabPageVoIPAccount.ResumeLayout(false);
+            this.groupBoxOptionsIM.ResumeLayout(false);
+            this.groupBoxOptionsIM.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1567,5 +1597,7 @@
         private System.Windows.Forms.ComboBox comboBoxOptionsImageSizeSmall;
         private System.Windows.Forms.Label labelOptionsImageSizeSmall;
         private System.Windows.Forms.CheckBox checkBoxContactExpand;
+        private System.Windows.Forms.GroupBox groupBoxOptionsIM;
+        private System.Windows.Forms.CheckBox checkBoxOptionsIM;
     }
 }

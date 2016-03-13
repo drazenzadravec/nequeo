@@ -51,6 +51,9 @@
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparatorSep = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlVoIP.SuspendLayout();
             this.tabPageVoIP1.SuspendLayout();
             this.tabPageVoIP2.SuspendLayout();
@@ -85,6 +88,7 @@
             this.tabControlVoIP.SelectedIndex = 0;
             this.tabControlVoIP.Size = new System.Drawing.Size(401, 407);
             this.tabControlVoIP.TabIndex = 1;
+            this.tabControlVoIP.SelectedIndexChanged += new System.EventHandler(this.tabControlVoIP_SelectedIndexChanged);
             // 
             // tabPageVoIP1
             // 
@@ -155,25 +159,28 @@
             // 
             this.addVoIPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.voiceVideoToolStripMenuItem,
-            this.voiceToolStripMenuItem});
+            this.voiceToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.deleteToolStripMenuItem,
+            this.renameToolStripMenuItem});
             this.addVoIPToolStripMenuItem.Name = "addVoIPToolStripMenuItem";
-            this.addVoIPToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.addVoIPToolStripMenuItem.Text = "Add VoIP";
-            this.addVoIPToolStripMenuItem.Visible = false;
+            this.addVoIPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addVoIPToolStripMenuItem.Text = "VoIP";
             this.addVoIPToolStripMenuItem.Click += new System.EventHandler(this.addVoIPToolStripMenuItem_Click);
             // 
             // voiceVideoToolStripMenuItem
             // 
             this.voiceVideoToolStripMenuItem.Name = "voiceVideoToolStripMenuItem";
-            this.voiceVideoToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.voiceVideoToolStripMenuItem.Text = "Voice and Video";
+            this.voiceVideoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.voiceVideoToolStripMenuItem.Text = "Add Voice and Video";
             this.voiceVideoToolStripMenuItem.Click += new System.EventHandler(this.voiceVideoToolStripMenuItem_Click);
             // 
             // voiceToolStripMenuItem
             // 
             this.voiceToolStripMenuItem.Name = "voiceToolStripMenuItem";
-            this.voiceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.voiceToolStripMenuItem.Text = "Voice";
+            this.voiceToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.voiceToolStripMenuItem.Text = "Add Voice";
+            this.voiceToolStripMenuItem.Visible = false;
             this.voiceToolStripMenuItem.Click += new System.EventHandler(this.voiceToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
@@ -249,6 +256,25 @@
             this.toolStripMenuItemExit.Text = "Exit";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +324,9 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
     }
 }
 

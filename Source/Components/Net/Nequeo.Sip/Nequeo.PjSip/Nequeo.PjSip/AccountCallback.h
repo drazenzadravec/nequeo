@@ -73,11 +73,6 @@ namespace Nequeo
 				///	</summary>
 				virtual ~AccountCallback();
 
-				/// <summary>
-				/// Start the application.
-				/// </summary>
-				void StartUp();
-
 				///	<summary>
 				///	Initialise all setting.
 				///	</summary>
@@ -85,65 +80,10 @@ namespace Nequeo
 				void Initialise(ConnectionMapper& mapper);
 
 				/// <summary>
-				/// Get the audio deveice manager.
-				/// </summary>
-				/// <returns>The audio device manager.</returns>
-				pj::AudDevManager& GetAudioDevManager();
-
-				/// <summary>
-				/// Get the video deveice manager.
-				/// </summary>
-				/// <returns>The video device manager.</returns>
-				pj::VidDevManager& GetVideoDevManager();
-
-				/// <summary>
 				/// Get the account video configration.
 				/// </summary>
 				/// <returns>The account video configuration.</returns>
 				pj::AccountVideoConfig& GetAccountVideoConfig();
-
-				/// <summary>
-				/// Get the number of active media ports.
-				/// </summary>
-				/// <returns>The number of active ports.</returns>
-				unsigned MediaActivePorts();
-
-				/// <summary>
-				/// Get all supported audio codecs in the system.
-				/// </summary>
-				/// <returns>The supported audio codecs in the system.</returns>
-				const pj::CodecInfoVector& GetAudioCodecInfo();
-
-				/// <summary>
-				/// Get all supported video codecs in the system.
-				/// </summary>
-				/// <returns>The supported video codecs in the system.</returns>
-				const pj::CodecInfoVector& GetVideoCodecInfo();
-
-				///	<summary>
-				///	Change audio codec priority.
-				///	</summary>
-				/// <param name="codecID">which is a string that uniquely identify
-				///	the codec(such as "speex/8000").</param>
-				/// <param name="priority">Codec priority, 0-255, where zero means to disable
-				///	the codec.</param>
-				void AudioCodecSetPriority(const std::string &codecID, unsigned char priority);
-
-				///	<summary>
-				///	Change video codec priority.
-				///	</summary>
-				/// <param name="codecID">Codec ID, which is a string that uniquely identify
-				///	the codec(such as "H263/90000"). Please see pjsua
-				/// manual or pjmedia codec reference for details.</param>
-				/// <param name="priority">Codec priority, 0-255, where zero means to disable
-				///	the codec.</param>
-				void VideoCodecSetPriority(const std::string &codecID, unsigned char priority);
-
-				/// <summary>
-				/// Add audio media device to the application.
-				/// </summary>
-				/// <param name="audioMedia">The audio media device.</param>
-				void AddAudioMedia(pj::AudioMedia& audioMedia);
 
 				///	<summary>
 				///	Notify application on incoming call.
@@ -281,9 +221,6 @@ namespace Nequeo
 			private:
 				bool _disposed;
 
-				std::unique_ptr<pj::Endpoint> _endpoint;
-				std::unique_ptr<pj::EpConfig> _epConfig;
-
 				std::unique_ptr<pj::AccountConfig> _accountConfig;
 				std::unique_ptr<pj::AccountRegConfig> _accountRegConfig;
 				std::unique_ptr<pj::AccountSipConfig> _accountSipConfig;
@@ -294,13 +231,6 @@ namespace Nequeo
 				std::unique_ptr<pj::TransportConfig> _transportConfig;
 				std::unique_ptr<pj::AccountNatConfig> _accountNatConfig;
 				std::unique_ptr<pj::AccountVideoConfig> _accountVideoConfig;
-
-				std::unique_ptr<pj::TransportConfig> _transportConfig_UDP;
-				std::unique_ptr<pj::TransportConfig> _transportConfig_UDP6;
-				std::unique_ptr<pj::TransportConfig> _transportConfig_TCP;
-				std::unique_ptr<pj::TransportConfig> _transportConfig_TCP6;
-				std::unique_ptr<pj::TransportConfig> _transportConfig_TLS;
-				std::unique_ptr<pj::TransportConfig> _transportConfig_TLS6;
 
 				OnIncomingCall_Function _onIncomingCall_function_internal;
 				OnIncomingSubscribe_Function _onIncomingSubscribe_function_internal;

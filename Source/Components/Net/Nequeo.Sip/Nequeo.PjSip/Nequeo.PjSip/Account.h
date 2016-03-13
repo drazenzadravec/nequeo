@@ -201,60 +201,6 @@ namespace Nequeo
 				void SetOnlineStatus(PresenceState^ presenceState);
 
 				/// <summary>
-				/// Get the media manager.
-				/// </summary>
-				/// <returns>The media manager.</returns>
-				MediaManager^ GetMediaManager();
-
-				/// <summary>
-				/// Get all supported audio codecs in the system.
-				/// </summary>
-				/// <returns>The supported audio codecs in the system.</returns>
-				array<CodecInfo^>^ GetAudioCodecInfo();
-
-				/// <summary>
-				/// Get all supported video codecs in the system.
-				/// </summary>
-				/// <returns>The supported video codecs in the system.</returns>
-				array<CodecInfo^>^ GetVideoCodecInfo();
-
-				///	<summary>
-				///	Change audio codec priority.
-				///	</summary>
-				/// <param name="codecID">which is a string that uniquely identify
-				///	the codec(such as "speex/8000").</param>
-				/// <param name="priority">Codec priority, 0-255, where zero means to disable
-				///	the codec.</param>
-				void AudioCodecSetPriority(String^ codecID, byte priority);
-
-				///	<summary>
-				///	Change video codec priority.
-				///	</summary>
-				/// <param name="codecID">Codec ID, which is a string that uniquely identify
-				///	the codec(such as "H263/90000").</param>
-				/// <param name="priority">Codec priority, 0-255, where zero means to disable
-				///	the codec.</param>
-				void VideoCodecSetPriority(String^ codecID, byte priority);
-
-				/// <summary>
-				/// Add audio media device to the application.
-				/// </summary>
-				/// <param name="audioMedia">The audio media device.</param>
-				void AddAudioCaptureDevice(AudioMedia^ audioMedia);
-
-				/// <summary>
-				/// Add audio media device to the application.
-				/// </summary>
-				/// <param name="audioMedia">The audio media device.</param>
-				void AddAudioPlaybackDevice(AudioMedia^ audioMedia);
-
-				/// <summary>
-				/// Get the number of active media ports.
-				/// </summary>
-				/// <returns>The number of active ports.</returns>
-				unsigned MediaActivePorts();
-
-				/// <summary>
 				/// Get all contacts.
 				/// </summary>
 				/// <returns>A contact array.</returns>
@@ -337,5 +283,4 @@ namespace Nequeo
 		}
 	}
 }
-
 #endif

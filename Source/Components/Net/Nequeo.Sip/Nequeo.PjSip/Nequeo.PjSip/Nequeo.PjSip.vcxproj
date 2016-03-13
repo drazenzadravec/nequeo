@@ -190,6 +190,8 @@
     <ClInclude Include="ContactInfo.h" />
     <ClInclude Include="ContactMapper.h" />
     <ClInclude Include="DialogCapStatus.h" />
+    <ClInclude Include="Endpoint.h" />
+    <ClInclude Include="EndpointCallback.h" />
     <ClInclude Include="HeaderType.h" />
     <ClInclude Include="InviteSessionState.h" />
     <ClInclude Include="IPv6_Use.h" />
@@ -230,10 +232,15 @@
     <ClInclude Include="OnInstantMessageParam.h" />
     <ClInclude Include="OnInstantMessageStatusParam.h" />
     <ClInclude Include="OnMwiInfoParam.h" />
+    <ClInclude Include="OnNatCheckStunServersCompleteParam.h" />
+    <ClInclude Include="OnNatDetectionCompleteParam.h" />
     <ClInclude Include="OnRegStartedParam.h" />
     <ClInclude Include="OnRegStateParam.h" />
+    <ClInclude Include="OnSelectAccountParam.h" />
     <ClInclude Include="OnStreamCreatedParam.h" />
     <ClInclude Include="OnStreamDestroyedParam.h" />
+    <ClInclude Include="OnTimerParam.h" />
+    <ClInclude Include="OnTransportStateParam.h" />
     <ClInclude Include="OnTypingIndicationParam.h" />
     <ClInclude Include="PresenceState.h" />
     <ClInclude Include="RedirectResponseType.h" />
@@ -255,6 +262,8 @@
     <ClInclude Include="StunNatType.h" />
     <ClInclude Include="SubscriptionState.h" />
     <ClInclude Include="TimeVal.h" />
+    <ClInclude Include="TransportInfo.h" />
+    <ClInclude Include="TransportState.h" />
     <ClInclude Include="TransportType.h" />
     <ClInclude Include="UnknownMedia.h" />
     <ClInclude Include="VideoDeviceHandleType.h" />
@@ -310,6 +319,8 @@
     <ClCompile Include="ContactConnection.cpp" />
     <ClCompile Include="ContactInfo.cpp" />
     <ClCompile Include="ContactMapper.cpp" />
+    <ClCompile Include="Endpoint.cpp" />
+    <ClCompile Include="EndpointCallback.cpp" />
     <ClCompile Include="Media.cpp" />
     <ClCompile Include="MediaCoordinate.cpp" />
     <ClCompile Include="MediaEvent.cpp" />
@@ -343,10 +354,15 @@
     <ClCompile Include="OnInstantMessageParam.cpp" />
     <ClCompile Include="OnInstantMessageStatusParam.cpp" />
     <ClCompile Include="OnMwiInfoParam.cpp" />
+    <ClCompile Include="OnNatCheckStunServersCompleteParam.cpp" />
+    <ClCompile Include="OnNatDetectionCompleteParam.cpp" />
     <ClCompile Include="OnRegStartedParam.cpp" />
     <ClCompile Include="OnRegStateParam.cpp" />
+    <ClCompile Include="OnSelectAccountParam.cpp" />
     <ClCompile Include="OnStreamCreatedParam.cpp" />
     <ClCompile Include="OnStreamDestroyedParam.cpp" />
+    <ClCompile Include="OnTimerParam.cpp" />
+    <ClCompile Include="OnTransportStateParam.cpp" />
     <ClCompile Include="OnTypingIndicationParam.cpp" />
     <ClCompile Include="PresenceState.cpp" />
     <ClCompile Include="SdpSession.cpp" />
@@ -363,6 +379,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TimeVal.cpp" />
+    <ClCompile Include="TransportInfo.cpp" />
     <ClCompile Include="UnknownMedia.cpp" />
     <ClCompile Include="VideoDeviceInfo.cpp" />
     <ClCompile Include="VideoIncomingWindow.cpp" />

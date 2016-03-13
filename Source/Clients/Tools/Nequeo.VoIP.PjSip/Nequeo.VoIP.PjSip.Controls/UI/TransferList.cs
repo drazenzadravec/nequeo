@@ -110,6 +110,7 @@ namespace Nequeo.VoIP.PjSip.UI
                 // Create a new list item.
                 ListViewItem viewItem = new ListViewItem(item.Text, item.ImageIndex);
                 viewItem.Name = item.Name;
+                viewItem.SubItems.Add(item.Name);
                 viewItem.Group = listViewTransfer.Groups[item.Group.Name];
 
                 // Add the item to the list.

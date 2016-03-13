@@ -61,6 +61,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\References\Staging\Nequeo.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.PjSip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging_x64\Nequeo.PjSip.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.VoIP.PjSip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=4460adb3a24a1b26, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.VoIP.PjSip.Controls">
       <HintPath>..\..\..\..\..\References\Staging\Client\VoIPControls\PjSip\Nequeo.VoIP.PjSip.Controls.dll</HintPath>
     </Reference>

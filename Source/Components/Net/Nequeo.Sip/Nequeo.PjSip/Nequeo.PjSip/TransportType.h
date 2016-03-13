@@ -47,7 +47,7 @@ namespace Nequeo
 		namespace PjSip
 		{
 			/// <summary>
-			/// Account transport type; usage if flag.
+			/// Transport type; usage if flag.
 			/// </summary>
 			public enum class TransportType : unsigned
 			{

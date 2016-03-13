@@ -49,34 +49,37 @@ namespace Nequeo.VoIP.PjSip
         /// <summary>
         /// VoIP call.
         /// </summary>
-        public VoIPCall()
+        /// <param name="endpoint">The endpoint instance.</param>
+        public VoIPCall(VoIPEndpoint endpoint)
         {
             // Create the voip manager.
-            _voipManager = new VoIPManager();
+            _voipManager = new VoIPManager(endpoint);
         }
 
         /// <summary>
         /// VoIP call.
         /// </summary>
+        /// <param name="endpoint">The endpoint instance.</param>
         /// <param name="accountConnection">Account connection configuration.</param>
-        public VoIPCall(AccountConnection accountConnection)
+        public VoIPCall(VoIPEndpoint endpoint, AccountConnection accountConnection)
         {
             if (accountConnection == null) throw new ArgumentNullException(nameof(accountConnection));
 
             // Create the voip manager.
-            _voipManager = new VoIPManager(accountConnection);
+            _voipManager = new VoIPManager(endpoint, accountConnection);
         }
 
         /// <summary>
         /// VoIP call.
         /// </summary>
+        /// <param name="endpoint">The endpoint instance.</param>
         /// <param name="accountName">The account name or service phone number.</param>
         /// <param name="spHost">The service provider host name or IP address.</param>
         /// <param name="username">The sip username.</param>
         /// <param name="password">The sip password.</param>
-        public VoIPCall(string accountName, string spHost, string username, string password)
+        public VoIPCall(VoIPEndpoint endpoint, string accountName, string spHost, string username, string password)
         {
-            _voipManager = new VoIPManager(accountName, spHost, username, password);
+            _voipManager = new VoIPManager(endpoint, accountName, spHost, username, password);
         }
 
         private VoIPManager _voipManager = null;

@@ -39,6 +39,8 @@
             this.imageListPhone = new System.Windows.Forms.ImageList(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderAccount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,15 +48,19 @@
             // 
             this.listViewTransfer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewTransfer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderName,
+            this.columnHeaderAccount});
             this.listViewTransfer.ContextMenuStrip = this.contextMenuStrip;
+            this.listViewTransfer.LargeImageList = this.imageListSmall;
             this.listViewTransfer.Location = new System.Drawing.Point(12, 12);
             this.listViewTransfer.MultiSelect = false;
             this.listViewTransfer.Name = "listViewTransfer";
-            this.listViewTransfer.Size = new System.Drawing.Size(188, 341);
+            this.listViewTransfer.Size = new System.Drawing.Size(248, 341);
             this.listViewTransfer.SmallImageList = this.imageListSmall;
             this.listViewTransfer.TabIndex = 0;
             this.listViewTransfer.UseCompatibleStateImageBehavior = false;
-            this.listViewTransfer.View = System.Windows.Forms.View.SmallIcon;
+            this.listViewTransfer.View = System.Windows.Forms.View.Tile;
             this.listViewTransfer.SelectedIndexChanged += new System.EventHandler(this.listViewTransfer_SelectedIndexChanged);
             // 
             // contextMenuStrip
@@ -90,10 +96,10 @@
             this.listViewNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewNumber.Location = new System.Drawing.Point(206, 12);
+            this.listViewNumber.Location = new System.Drawing.Point(266, 12);
             this.listViewNumber.MultiSelect = false;
             this.listViewNumber.Name = "listViewNumber";
-            this.listViewNumber.Size = new System.Drawing.Size(199, 312);
+            this.listViewNumber.Size = new System.Drawing.Size(218, 312);
             this.listViewNumber.SmallImageList = this.imageListPhone;
             this.listViewNumber.TabIndex = 1;
             this.listViewNumber.UseCompatibleStateImageBehavior = false;
@@ -110,7 +116,7 @@
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(330, 330);
+            this.buttonOK.Location = new System.Drawing.Point(409, 330);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
@@ -121,7 +127,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(249, 330);
+            this.buttonCancel.Location = new System.Drawing.Point(328, 330);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
@@ -129,11 +135,19 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // columnHeaderName
+            // 
+            this.columnHeaderName.Text = "Name";
+            // 
+            // columnHeaderAccount
+            // 
+            this.columnHeaderAccount.Text = "Account";
+            // 
             // TransferList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 365);
+            this.ClientSize = new System.Drawing.Size(496, 365);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.listViewNumber);
@@ -164,5 +178,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem expandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem collapseToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderAccount;
     }
 }
