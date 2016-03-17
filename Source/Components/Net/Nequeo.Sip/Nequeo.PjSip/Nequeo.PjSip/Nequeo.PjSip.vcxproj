@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug Static|Win32">
+      <Configuration>Debug Static</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Static|x64">
+      <Configuration>Debug Static</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -33,6 +41,13 @@
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -41,6 +56,14 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
@@ -63,10 +86,16 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,7 +105,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,6 +140,24 @@
       </AdditionalOptions>
     </Xdcmake>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjnath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Imm32.lib;Version.lib;SDL2.lib;ZLib.lib;pjsua-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjsua2-lib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-i386-Win32-vc8-Debug-Dynamic.lib;pjlib-util-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-core-i386-Win32-vc8-Debug-Dynamic.lib;pjnath-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-audiodev-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-simple-i386-Win32-vc8-Debug-Dynamic.lib;pjsip-ua-i386-Win32-vc8-Debug-Dynamic.lib;libspeex-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-codec-i386-Win32-vc8-Debug-Dynamic.lib;libsrtp-i386-Win32-vc8-Debug-Dynamic.lib;libgsmcodec-i386-Win32-vc8-Debug-Dynamic.lib;libresample-i386-Win32-vc8-Debug-Dynamic.lib;libilbccodec-i386-Win32-vc8-Debug-Dynamic.lib;pjmedia-videodev-i386-Win32-vc8-Debug-Dynamic.lib;libg7221codec-i386-Win32-vc8-Debug-Dynamic.lib;libmilenage-i386-Win32-vc8-Debug-Dynamic.lib;libpjproject-i386-Win32-vc8-Debug-Dynamic.lib;libportaudio-i386-Win32-vc8-Debug-Dynamic.lib;libbaseclasses-i386-Win32-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x86\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\libs;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\libs\x86;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Xdcmake>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Xdcmake>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -117,6 +170,20 @@
     <Link>
       <AdditionalDependencies>pjsua-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjsua2-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-util-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-core-x86_64-x64-vc8-Debug-Dynamic.lib;pjnath-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-audiodev-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-simple-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-ua-x86_64-x64-vc8-Debug-Dynamic.lib;libspeex-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-codec-x86_64-x64-vc8-Debug-Dynamic.lib;libsrtp-x86_64-x64-vc8-Debug-Dynamic.lib;libgsmcodec-x86_64-x64-vc8-Debug-Dynamic.lib;libresample-x86_64-x64-vc8-Debug-Dynamic.lib;libilbccodec-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-videodev-x86_64-x64-vc8-Debug-Dynamic.lib;libg7221codec-x86_64-x64-vc8-Debug-Dynamic.lib;libmilenage-x86_64-x64-vc8-Debug-Dynamic.lib;libpjproject-x86_64-x64-vc8-Debug-Dynamic.lib;libportaudio-x86_64-x64-vc8-Debug-Dynamic.lib;libbaseclasses-x86_64-x64-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\include\pjnath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Imm32.lib;Version.lib;ZLib.lib;pjsua-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjsua2-lib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-x86_64-x64-vc8-Debug-Dynamic.lib;pjlib-util-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-core-x86_64-x64-vc8-Debug-Dynamic.lib;pjnath-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-audiodev-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-simple-x86_64-x64-vc8-Debug-Dynamic.lib;pjsip-ua-x86_64-x64-vc8-Debug-Dynamic.lib;libspeex-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-codec-x86_64-x64-vc8-Debug-Dynamic.lib;libsrtp-x86_64-x64-vc8-Debug-Dynamic.lib;libgsmcodec-x86_64-x64-vc8-Debug-Dynamic.lib;libresample-x86_64-x64-vc8-Debug-Dynamic.lib;libilbccodec-x86_64-x64-vc8-Debug-Dynamic.lib;pjmedia-videodev-x86_64-x64-vc8-Debug-Dynamic.lib;libg7221codec-x86_64-x64-vc8-Debug-Dynamic.lib;libmilenage-x86_64-x64-vc8-Debug-Dynamic.lib;libpjproject-x86_64-x64-vc8-Debug-Dynamic.lib;libportaudio-x86_64-x64-vc8-Debug-Dynamic.lib;libbaseclasses-x86_64-x64-vc8-Debug-Dynamic.lib;Ws2_32.lib;libeay32.lib;ssleay32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5\x64\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\libs;..\..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\libs\x64;..\..\..\..\..\..\ThirdPartyTools\zlib\0.0.1\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -374,7 +441,9 @@
     <ClCompile Include="SipTxOption.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Static|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>

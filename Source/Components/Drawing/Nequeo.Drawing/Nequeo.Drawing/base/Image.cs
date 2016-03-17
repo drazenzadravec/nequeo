@@ -57,7 +57,7 @@ namespace Nequeo.Drawing
         private Random _random = new Random();
 
         /// <summary>
-        /// Capture the screen image.
+        /// Capture the primary screen image.
         /// </summary>
         /// <param pixelFormat="image">Specifies the format of the color data for each pixel in the image.</param>
         /// <returns>The image containing the screen.</returns>
@@ -72,6 +72,86 @@ namespace Nequeo.Drawing
             {
                 // Copy the screen to the target.
                 graphics.CopyFromScreen(0, 0, 0, 0, new Size(screenSize.Width, screenSize.Height));
+            }
+
+            // Return the image.
+            return target;
+        }
+
+        /// <summary>
+        /// Capture all screens image.
+        /// </summary>
+        /// <param pixelFormat="image">Specifies the format of the color data for each pixel in the image.</param>
+        /// <returns>The image containing the screen.</returns>
+        public System.Drawing.Bitmap CaptureAllScreens(PixelFormat pixelFormat = PixelFormat.Format32bppArgb)
+        {
+            Rectangle screenSize = Rectangle.Empty;
+
+            // For each creen.
+            foreach (Screen s in Screen.AllScreens)
+                screenSize = Rectangle.Union(screenSize, s.Bounds);
+
+            // Get the image.
+            Bitmap target = new Bitmap(screenSize.Width, screenSize.Height, pixelFormat);
+
+            // Create the graphics on the bitmap image.
+            using (Graphics graphics = Graphics.FromImage(target))
+            {
+                // Copy the screen to the target.
+                graphics.CopyFromScreen(screenSize.X, screenSize.Y, 0, 0, screenSize.Size, CopyPixelOperation.SourceCopy);
+            }
+
+            // Return the image.
+            return target;
+        }
+
+        /// <summary>
+        /// Capture the primary screen image.
+        /// </summary>
+        /// <param name="width">The scaled width.</param>
+        /// <param name="height">The scaled height.</param>
+        /// <param name="showCursor">Draw the cursor on the image.</param>
+        /// <param name="pixelFormat">Specifies the format of the color data for each pixel in the image.</param>
+        /// <returns>The image containing the screen.</returns>
+        public System.Drawing.Bitmap CaptureScreenScaled(int width = -1, int height = -1, bool showCursor = true, PixelFormat pixelFormat = PixelFormat.Format32bppArgb)
+        {
+            bool scaled = false;
+
+            // Create the image.
+            Rectangle screenSize = Screen.PrimaryScreen.Bounds;
+            Bitmap target = new Bitmap(screenSize.Width, screenSize.Height, pixelFormat);
+
+            // If valid image size.
+            if (width >= 0 && height >= 0)
+                scaled = (width != screenSize.Width || height != screenSize.Height);
+
+            // Create the graphics on the bitmap image.
+            using (Graphics graphics = Graphics.FromImage(target))
+            {
+                // Copy the screen to the target.
+                graphics.CopyFromScreen(0, 0, 0, 0, new Size(screenSize.Width, screenSize.Height));
+
+                // Show the cursor be drawn.
+                if (showCursor)
+                    Cursors.Default.Draw(graphics, new Rectangle(Cursor.Position, new Size(32, 32)));
+
+                // If scaled.
+                if (scaled)
+                {
+                    // Get the scaled image.
+                    Bitmap imageScaled = new Bitmap(width, height);
+                    Rectangle sizeScaled = new Rectangle(0, 0, width, height);
+
+                    // Create the graphics on the bitmap image.
+                    using (Graphics graphicsScaled = Graphics.FromImage(imageScaled))
+                    {
+                        // Draw the scaled image.
+                        graphicsScaled.DrawImage(target, sizeScaled, screenSize, GraphicsUnit.Pixel);
+                    }
+
+                    // Assign the new image.
+                    target = imageScaled;
+                }
             }
 
             // Return the image.

@@ -302,6 +302,7 @@
     <Compile Include="base\ImageConversion.cs" />
     <Compile Include="base\PdfConversion.cs" />
     <Compile Include="base\Captcha.cs" />
+    <Compile Include="base\ScreenCapture.cs" />
     <Compile Include="base\TextEmbedding.cs" />
     <Compile Include="Convert\XpsDocument.cs" />
     <Compile Include="Printing\PreviewDialog.cs">

@@ -313,6 +313,13 @@ namespace Nequeo.VoIP.Sip.UI
                         Image picture = _imageListLarge.Images[imageIndex];
                         panelCallerImage.BackgroundImage = picture;
                     }
+                    else
+                    {
+                        // Not a contact.
+                        // Get the default image.
+                        Image picture = _imageListLarge.Images[0];
+                        panelCallerImage.BackgroundImage = picture;
+                    }
                 }
                 catch { }
             }

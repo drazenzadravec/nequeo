@@ -9,6 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPjSip", "TestPjSip\Test
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Static|Any CPU = Debug Static|Any CPU
+		Debug Static|x64 = Debug Static|x64
+		Debug Static|x86 = Debug Static|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -17,6 +20,11 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug Static|Any CPU.ActiveCfg = Debug Static|Win32
+		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug Static|x64.ActiveCfg = Debug Static|x64
+		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug Static|x64.Build.0 = Debug Static|x64
+		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug Static|x86.ActiveCfg = Debug Static|Win32
+		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug Static|x86.Build.0 = Debug Static|Win32
 		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug|x64.ActiveCfg = Debug|x64
 		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Debug|x64.Build.0 = Debug|x64
@@ -27,6 +35,12 @@ Global
 		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Release|x64.Build.0 = Release|x64
 		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Release|x86.ActiveCfg = Release|Win32
 		{AFD22342-AB36-44DD-B921-E5D58F74D8F6}.Release|x86.Build.0 = Release|Win32
+		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug Static|Any CPU.ActiveCfg = Debug Static|Any CPU
+		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug Static|Any CPU.Build.0 = Debug Static|Any CPU
+		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug Static|x64.ActiveCfg = Debug Static|x64
+		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug Static|x64.Build.0 = Debug Static|x64
+		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug Static|x86.ActiveCfg = Debug Static|x86
+		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug Static|x86.Build.0 = Debug Static|x86
 		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E359C05E-97C1-4E78-9F8C-16782DE567CC}.Debug|x64.ActiveCfg = Debug|x64

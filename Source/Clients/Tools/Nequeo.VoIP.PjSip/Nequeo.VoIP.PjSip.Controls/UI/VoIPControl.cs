@@ -2289,6 +2289,12 @@ namespace Nequeo.VoIP.PjSip.UI
                     _voipCall.VoIPManager.AccountConnection.UnregWaitSec = _configuration.timeUnregisterWait;
                     _voipCall.VoIPManager.AccountConnection.VideoRateControlBandwidth = _configuration.featureVideoBandwidthRate;
 
+                    // Enable video.
+                    if (_common.EnableVideo)
+                        groupBoxCallVideo.Enabled = true;
+                    else
+                        groupBoxCallVideo.Enabled = false;
+
                     // Is valid account creation.
                     if (!String.IsNullOrEmpty(_common.AccountName) && !String.IsNullOrEmpty(_common.SipHost))
                     {
