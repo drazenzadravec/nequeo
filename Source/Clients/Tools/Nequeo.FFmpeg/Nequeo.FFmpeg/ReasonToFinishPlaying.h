@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          VideoCodec.h
-*  Purpose :       VideoCodec class.
+*  File :          ReasonToFinishPlaying.h
+*  Purpose :       ReasonToFinishPlaying class.
 *
 */
 
@@ -31,16 +31,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _VIDEOCODEC_H
-#define _VIDEOCODEC_H
+#ifndef _REASONTOFINISHPLAYING_H
+#define _REASONTOFINISHPLAYING_H
 
 #include "stdafx.h"
 
 using namespace System;
-
-extern int video_codecs[];
-extern int pixel_formats[];
-extern int CODECS_COUNT;
 
 namespace Nequeo
 {
@@ -49,58 +45,29 @@ namespace Nequeo
 		namespace FFmpeg
 		{
 			/// <summary>
-			/// Enumeration of some video codecs from FFmpeg library, which are available for writing video files.
+			/// Reason of finishing video playing.
 			/// </summary>
-			public enum class VideoCodec
+			/// <remarks><para>When video source class fire the <see cref="IVideoSource.PlayingFinished"/> event, they
+			/// need to specify reason of finishing video playing. For example, it may be end of stream reached.</para></remarks>
+			public enum class ReasonToFinishPlaying
 			{
 				/// <summary>
-				/// Default video codec, which FFmpeg library selects for the specified file format.
+				/// Video playing has finished because it end was reached.
 				/// </summary>
-				Default = -1,
+				EndOfStreamReached,
 				/// <summary>
-				/// MPEG-4 part 2.
+				/// Video playing has finished because it was stopped by user.
 				/// </summary>
-				MPEG4 = 0,
+				StoppedByUser,
 				/// <summary>
-				/// Windows Media Video 7.
+				/// Video playing has finished because the device was lost (unplugged).
 				/// </summary>
-				WMV1,
+				DeviceLost,
 				/// <summary>
-				/// Windows Media Video 8.
+				/// Video playing has finished because of some error happened the video source (camera, stream, file, etc.).
+				/// A error reporting event usually is fired to provide error information.
 				/// </summary>
-				WMV2,
-				/// <summary>
-				/// MPEG-4 part 2 Microsoft variant version 2.
-				/// </summary>
-				MSMPEG4v2,
-				/// <summary>
-				/// MPEG-4 part 2 Microsoft variant version 3.
-				/// </summary>
-				MSMPEG4v3,
-				/// <summary>
-				/// H.263+ / H.263-1998 / H.263 version 2.
-				/// </summary>
-				H263P,
-				/// <summary>
-				/// Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
-				/// </summary>
-				FLV1,
-				/// <summary>
-				/// MPEG-2 part 2.
-				/// </summary>
-				MPEG2,
-				/// <summary>
-				/// Raw (uncompressed) video.
-				/// </summary>
-				Raw,
-				/// <summary>
-				/// H.264.
-				/// </summary>
-				H264,
-				/// <summary>
-				/// MP4
-				/// </summary>
-				MP4,
+				VideoSourceError
 			};
 		}
 	}

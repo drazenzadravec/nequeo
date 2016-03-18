@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          VideoCodec.cpp
-*  Purpose :       VideoCodec class.
+*  File :          VideoSourceErrorEventArgs.h
+*  Purpose :       VideoSourceErrorEventArgs class.
 *
 */
 
@@ -29,38 +29,48 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#pragma once
+
+#ifndef _VIDEOSOURCEERROREVENTARGS_H
+#define _VIDEOSOURCEERROREVENTARGS_H
+
 #include "stdafx.h"
 
-#include "VideoCodec.h"
+using namespace System;
+using namespace System::Drawing;
+using namespace System::Drawing::Imaging;
 
-using namespace Nequeo::Media::FFmpeg;
-
-int video_codecs[] =
+namespace Nequeo
 {
-	libffmpeg::AV_CODEC_ID_MPEG4,
-	libffmpeg::AV_CODEC_ID_WMV1,
-	libffmpeg::AV_CODEC_ID_WMV2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V3,
-	libffmpeg::AV_CODEC_ID_H263P,
-	libffmpeg::AV_CODEC_ID_FLV1,
-	libffmpeg::AV_CODEC_ID_MPEG2VIDEO,
-	libffmpeg::AV_CODEC_ID_RAWVIDEO,
-	libffmpeg::AV_CODEC_ID_H264,
-	libffmpeg::AV_CODEC_ID_MP4ALS,
-};
+	namespace Media
+	{
+		namespace FFmpeg
+		{
+			/// <summary>
+			/// Arguments for video source error event from video source.
+			/// </summary>
+			public ref class VideoSourceErrorEventArgs : public EventArgs
+			{
+			public:
+				/// <summary>
+				/// Initializes a new instance of the <see cref="VideoSourceErrorEventArgs"/> class.
+				/// </summary>
+				/// <param name="description">Error description.</param>
+				VideoSourceErrorEventArgs(String^ description);
 
-int pixel_formats[] =
-{
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_BGR24,
-};
+				/// <summary>
+				/// Gets the video source error description.
+				/// </summary>
+				property String^ Description
+				{
+					String^ get();
+				}
 
-int CODECS_COUNT ( sizeof( video_codecs ) / sizeof( libffmpeg::AVCodecID) );
+			private:
+				String^ _description;
+
+			};
+		}
+	}
+}
+#endif

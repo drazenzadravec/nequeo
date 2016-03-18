@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          VideoCodec.cpp
-*  Purpose :       VideoCodec class.
+*  File :          VideoException.h
+*  Purpose :       VideoException class.
 *
 */
 
@@ -29,38 +29,37 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#pragma once
+
+#ifndef _VIDEOEXCEPTION_H
+#define _VIDEOEXCEPTION_H
+
 #include "stdafx.h"
 
-#include "VideoCodec.h"
+using namespace System;
 
-using namespace Nequeo::Media::FFmpeg;
-
-int video_codecs[] =
+namespace Nequeo
 {
-	libffmpeg::AV_CODEC_ID_MPEG4,
-	libffmpeg::AV_CODEC_ID_WMV1,
-	libffmpeg::AV_CODEC_ID_WMV2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V3,
-	libffmpeg::AV_CODEC_ID_H263P,
-	libffmpeg::AV_CODEC_ID_FLV1,
-	libffmpeg::AV_CODEC_ID_MPEG2VIDEO,
-	libffmpeg::AV_CODEC_ID_RAWVIDEO,
-	libffmpeg::AV_CODEC_ID_H264,
-	libffmpeg::AV_CODEC_ID_MP4ALS,
-};
+	namespace Media
+	{
+		namespace FFmpeg
+		{
+			/// <summary>
+			/// Video related exception.
+			/// </summary
+			/// <remarks><para>The exception is thrown in the case of some video related issues, like
+			/// failure of initializing codec, compression, etc.</para></remarks>
+			public ref class VideoException : public Exception
+			{
+			public:
+				/// <summary>
+				/// Initializes a new instance of the <see cref="VideoException"/> class.
+				/// </summary>
+				/// <param name="message">Exception's message.</param>
+				VideoException(String^ message);
 
-int pixel_formats[] =
-{
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_BGR24,
-};
-
-int CODECS_COUNT ( sizeof( video_codecs ) / sizeof( libffmpeg::AVCodecID) );
+			};
+		}
+	}
+}
+#endif

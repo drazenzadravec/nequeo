@@ -2,7 +2,7 @@
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
 *  File :          VideoFileWriter.cpp
-*  Purpose :       SIP VideoFileWriter class.
+*  Purpose :       VideoFileWriter class.
 *
 */
 
@@ -35,45 +35,143 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Nequeo::Media::FFmpeg;
 
-#pragma region Some private FFmpeg related stuff hidden out of header file
 
-static void write_video_frame( WriterPrivateData^ data );
-static void open_video( WriterPrivateData^ data );
-static void add_video_stream( WriterPrivateData^ data, int width, int height, int frameRate, int bitRate,
-							  enum libffmpeg::AVCodecID codec_id, enum libffmpeg::AVPixelFormat pixelFormat );
+/// <summary>
+/// Write the video frame.
+/// </summary>
+/// <param name="data">Video write data.</param>
+static void write_video_frame(WriterPrivateData^ data);
 
-#pragma endregion
+/// <summary>
+/// Open the video frame.
+/// </summary>
+/// <param name="data">Video write data.</param>
+static void open_video(WriterPrivateData^ data);
 
-// Class constructor
-VideoFileWriter::VideoFileWriter( void ) :
-    data( nullptr ), disposed( false )
+/// <summary>
+/// Add video stream.
+/// </summary>
+/// <param name="data">Video write data.</param>
+/// <param name="width">Video width.</param>
+/// <param name="height">Video height.</param>
+/// <param name="frameRate">Video frame rate.</param>
+/// <param name="bitRate">Video bit rate.</param>
+/// <param name="codecId">Video codec id.</param>
+/// <param name="pixelFormat">Video pixel format.</param>
+static void add_video_stream(WriterPrivateData^ data, int width, int height, int frameRate, int bitRate,
+							  enum libffmpeg::AVCodecID codecId, enum libffmpeg::AVPixelFormat pixelFormat);
+
+
+
+/// <summary>
+/// Initializes a new instance of the <see cref="VideoFileWriter"/> class.
+/// </summary>
+VideoFileWriter::VideoFileWriter() :
+    data( nullptr ), _disposed( false )
 {
 	libffmpeg::av_register_all( );
 }
 
+/// <summary>
+/// Create video file with the specified name and attributes.
+/// </summary>
+///
+/// <param name="fileName">Video file name to create.</param>
+/// <param name="width">Frame width of the video file.</param>
+/// <param name="height">Frame height of the video file.</param>
+///
+/// <remarks><para>See documentation to the <see cref="Open( String^, int, int, int, VideoCodec )" />
+/// for more information and the list of possible exceptions.</para>
+///
+/// <para><note>The method opens the video file using <see cref="VideoCodec::Default" />
+/// codec and 25 fps frame rate.</note></para>
+/// </remarks>
 void VideoFileWriter::Open( String^ fileName, int width, int height )
 {
 	Open( fileName, width, height, 25 );
 }
 
+/// <summary>
+/// Create video file with the specified name and attributes.
+/// </summary>
+///
+/// <param name="fileName">Video file name to create.</param>
+/// <param name="width">Frame width of the video file.</param>
+/// <param name="height">Frame height of the video file.</param>
+/// <param name="frameRate">Frame rate of the video file.</param>
+///
+/// <remarks><para>See documentation to the <see cref="Open( String^, int, int, int, VideoCodec )" />
+/// for more information and the list of possible exceptions.</para>
+///
+/// <para><note>The method opens the video file using <see cref="VideoCodec::Default" />
+/// codec.</note></para>
+/// </remarks>
 void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRate )
 {
 	Open( fileName, width, height, frameRate, VideoCodec::Default );
 }
 
+/// <summary>
+/// Create video file with the specified name and attributes.
+/// </summary>
+///
+/// <param name="fileName">Video file name to create.</param>
+/// <param name="width">Frame width of the video file.</param>
+/// <param name="height">Frame height of the video file.</param>
+/// <param name="frameRate">Frame rate of the video file.</param>
+/// <param name="codec">Video codec to use for compression.</param>
+///
+/// <remarks><para>The methods creates new video file with the specified name.
+/// If a file with such name already exists in the file system, it will be overwritten.</para>
+///
+/// <para>When adding new video frames using <see cref="WriteVideoFrame(Bitmap^ frame)"/> method,
+/// the video frame must have width and height as specified during file opening.</para>
+/// </remarks>
+///
+/// <exception cref="ArgumentException">Video file resolution must be a multiple of two.</exception>
+/// <exception cref="ArgumentException">Invalid video codec is specified.</exception>
+/// <exception cref="VideoException">A error occurred while creating new video file. See exception message.</exception>
+/// <exception cref="System::IO::IOException">Cannot open video file with the specified name.</exception>
 void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRate, VideoCodec codec )
 {
 	Open( fileName, width, height, frameRate, codec, 400000 );
 }
 
-// Creates a video file with the specified name and properties
+/// <summary>
+/// Create video file with the specified name and attributes.
+/// </summary>
+///
+/// <param name="fileName">Video file name to create.</param>
+/// <param name="width">Frame width of the video file.</param>
+/// <param name="height">Frame height of the video file.</param>
+/// <param name="frameRate">Frame rate of the video file.</param>
+/// <param name="codec">Video codec to use for compression.</param>
+/// <param name="bitRate">Bit rate of the video stream.</param>
+///
+/// <remarks><para>The methods creates new video file with the specified name.
+/// If a file with such name already exists in the file system, it will be overwritten.</para>
+///
+/// <para>When adding new video frames using <see cref="WriteVideoFrame(Bitmap^ frame)"/> method,
+/// the video frame must have width and height as specified during file opening.</para>
+///
+/// <para><note>The bit rate parameter represents a trade-off value between video quality
+/// and video file size. Higher bit rate value increase video quality and result in larger
+/// file size. Smaller values result in opposite – worse quality and small video files.</note></para>
+/// </remarks>
+///
+/// <exception cref="ArgumentException">Video file resolution must be a multiple of two.</exception>
+/// <exception cref="ArgumentException">Invalid video codec is specified.</exception>
+/// <exception cref="VideoException">A error occurred while creating new video file. See exception message.</exception>
+/// <exception cref="System::IO::IOException">Cannot open video file with the specified name.</exception>
 void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRate, VideoCodec codec, int bitRate )
 {
+	// Check if disposed.
     CheckIfDisposed( );
 
 	// close previous file if any open
 	Close( );
 
+	// Create a new write data.
 	data = gcnew WriterPrivateData( );
 	bool success = false;
 
@@ -104,7 +202,7 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 
 	try
 	{
-		// gues about destination file format from its file name
+		// guess about destination file format from its file name
 		libffmpeg::AVOutputFormat* outputFormat = libffmpeg::av_guess_format( NULL, nativeFileName, NULL );
 
 		if ( !outputFormat )
@@ -132,12 +230,7 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 			( codec == VideoCodec::Default ) ? outputFormat->video_codec : (libffmpeg::AVCodecID) video_codecs[(int) codec],
 			( codec == VideoCodec::Default ) ? libffmpeg::AV_PIX_FMT_YUV420P : (libffmpeg::AVPixelFormat) pixel_formats[(int) codec] );
 
-		//// set the output parameters (must be done even if no parameters)
-		//if ( libffmpeg:: av_set_parameters( data->FormatContext, NULL ) < 0 )
-		//{
-		//	throw gcnew VideoException( "Failed configuring format context." );
-		//}
-
+		// Open the video data.
 		open_video( data );
 
 		// open output file
@@ -149,6 +242,7 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 			}
 		}
 
+		// Write the header data.
 		libffmpeg::avformat_write_header( data->FormatContext, NULL );
 
 		success = true;
@@ -160,63 +254,78 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 
 		if ( !success )
 		{
+			// Close the file.
 			Close( );
 		}
 	}
 }
 
-// Close current video file
+/// <summary>
+/// Close currently opened video file if any.
+/// </summary>
 void VideoFileWriter::Close( )
 {
+	// if data exists.
 	if ( data != nullptr )
 	{
+		// If context exists.
 		if ( data->FormatContext )
 		{
 			if ( data->FormatContext->pb != NULL )
 			{
+				// Write last bit of data.
 				libffmpeg::av_write_trailer( data->FormatContext );
 			}
 
 			if ( data->VideoStream )
 			{
+				// Close the video codec.
 				libffmpeg::avcodec_close( data->VideoStream->codec );
 			}
 
 			if ( data->VideoFrame )
 			{
+				// Free the frame data.
 				libffmpeg::av_free( data->VideoFrame->data[0] );
 				libffmpeg::av_free( data->VideoFrame );
 			}
 
 			if ( data->VideoOutputBuffer )
 			{
+				// Free the output buffer.
 				libffmpeg::av_free( data->VideoOutputBuffer );
 			}
 
 			for ( unsigned int i = 0; i < data->FormatContext->nb_streams; i++ )
 			{
+				// Free the stream data, using the stream pointer.
 				libffmpeg::av_freep( &data->FormatContext->streams[i]->codec );
 				libffmpeg::av_freep( &data->FormatContext->streams[i] );
 			}
 
 			if ( data->FormatContext->pb != NULL )
 			{
+				// Close the stream.
 				libffmpeg::avio_close( data->FormatContext->pb );
 			}
 			
+			// Free the context.
 			libffmpeg::av_free( data->FormatContext );
 		}
 
 		if ( data->ConvertContext != NULL )
 		{
+			// Free the converter.
 			libffmpeg::sws_freeContext( data->ConvertContext );
 		}
 
 		if ( data->ConvertContextGrayscale != NULL )
 		{
+			// Free the grayscale converter.
 			libffmpeg::sws_freeContext( data->ConvertContextGrayscale );
 		}
 
+		// Set to null.
 		data = nullptr;
 	}
 
@@ -224,13 +333,42 @@ void VideoFileWriter::Close( )
 	m_height = 0;
 }
 
-// Writes new video frame to the opened video file
+/// <summary>
+/// Write new video frame into currently opened video file.
+/// </summary>
+///
+/// <param name="frame">Bitmap to add as a new video frame.</param>
+///
+/// <remarks><para>The specified bitmap must be either color 24 or 32 bpp image or grayscale 8 bpp (indexed) image.</para>
+/// </remarks>
+///
+/// <exception cref="System::IO::IOException">Thrown if no video file was open.</exception>
+/// <exception cref="ArgumentException">The provided bitmap must be 24 or 32 bpp color image or 8 bpp grayscale image.</exception>
+/// <exception cref="ArgumentException">Bitmap size must be of the same as video size, which was specified on opening video file.</exception>
+/// <exception cref="VideoException">A error occurred while writing new video frame. See exception message.</exception>
 void VideoFileWriter::WriteVideoFrame( Bitmap^ frame )
 {
 	WriteVideoFrame( frame, TimeSpan::MinValue );
 }
 
-// Writes new video frame to the opened video file
+/// <summary>
+/// Write new video frame with a specific timestamp into currently opened video file.
+/// </summary>
+///
+/// <param name="frame">Bitmap to add as a new video frame.</param>
+/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+///
+/// <remarks><para>The specified bitmap must be either color 24 or 32 bpp image or grayscale 8 bpp (indexed) image.</para>
+/// 
+/// <para><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+/// over time.</note></para>
+/// </remarks>
+///
+/// <exception cref="System::IO::IOException">Thrown if no video file was open.</exception>
+/// <exception cref="ArgumentException">The provided bitmap must be 24 or 32 bpp color image or 8 bpp grayscale image.</exception>
+/// <exception cref="ArgumentException">Bitmap size must be of the same as video size, which was specified on opening video file.</exception>
+/// <exception cref="VideoException">A error occurred while writing new video frame. See exception message.</exception>
 void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 {
     CheckIfDisposed( );
@@ -254,17 +392,18 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 		throw gcnew ArgumentException( "Bitmap size must be of the same as video size, which was specified on opening video file." );
 	}
 
-	// lock the bitmap
+	// lock the bitmap to allocate memory.
 	BitmapData^ bitmapData = frame->LockBits( System::Drawing::Rectangle( 0, 0, m_width, m_height ),
-		ImageLockMode::ReadOnly,
-		( frame->PixelFormat == PixelFormat::Format8bppIndexed ) ? PixelFormat::Format8bppIndexed : PixelFormat::Format24bppRgb );
+		ImageLockMode::ReadOnly, ( frame->PixelFormat == PixelFormat::Format8bppIndexed ) ? PixelFormat::Format8bppIndexed : PixelFormat::Format24bppRgb );
 
+	// Get the pointer to the first scan pixel
 	libffmpeg::uint8_t* ptr = reinterpret_cast<libffmpeg::uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
 
+	// Get the stride (scan) pointer to the first pixel
 	libffmpeg::uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
 	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };
 
-	// convert source image to the format of the video file
+	// convert source image to the format of the video file, write the image to the bitmap data memory block.
 	if ( frame->PixelFormat == PixelFormat::Format8bppIndexed )
 	{
 		libffmpeg::sws_scale( data->ConvertContextGrayscale, srcData, srcLinesize, 0, m_height, data->VideoFrame->data, data->VideoFrame->linesize );
@@ -274,6 +413,7 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 		libffmpeg::sws_scale( data->ConvertContext, srcData, srcLinesize, 0, m_height, data->VideoFrame->data, data->VideoFrame->linesize );
 	}
 
+	// Unlick the memory where the bitmap is stored.
 	frame->UnlockBits( bitmapData );
 
 	if ( timestamp.Ticks >= 0 )
@@ -286,9 +426,11 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 	write_video_frame( data );
 }
 
-#pragma region Private methods
-// Writes video frame to opened video file
-void write_video_frame( WriterPrivateData^ data )
+/// <summary>
+/// Write the video frame.
+/// </summary>
+/// <param name="data">Video write data.</param>
+void write_video_frame(WriterPrivateData^ data)
 {
 	libffmpeg::AVCodecContext* codecContext = data->VideoStream->codec;
 	int retEncode, ret = 0;
@@ -299,19 +441,23 @@ void write_video_frame( WriterPrivateData^ data )
 	}
 	else
 	{
+		// Create the packet.
 		libffmpeg::AVPacket packet;
 		libffmpeg::av_init_packet(&packet);
 		packet.data = data->VideoOutputBuffer;
 		packet.size = data->VideoOutputBufferSize;
 		packet.stream_index = data->VideoStream->index;
 
+		// Get the value.
 		libffmpeg::int64_t _av_nopts_value = ((libffmpeg::int64_t)UINT64_C(0x8000000000000000));
 
+		// If has no options.
 		if (codecContext->coded_frame->pts != _av_nopts_value)
 		{
 			packet.pts = libffmpeg::av_rescale_q(codecContext->coded_frame->pts, codecContext->time_base, data->VideoStream->time_base);
 		}
 
+		// If the packet has a key frame.
 		if (codecContext->coded_frame->key_frame)
 		{
 			packet.flags |= AV_PKT_FLAG_KEY;
@@ -323,12 +469,8 @@ void write_video_frame( WriterPrivateData^ data )
 		retEncode = libffmpeg::avcodec_encode_video2(codecContext, &packet, data->VideoFrame, &got_packet);
 
 		// if zero size, it means the image was buffered
-		if (retEncode == 0  && got_packet == 1 )
+		if (retEncode == 0  && got_packet == 1)
 		{
-			/*packet.stream_index = data->VideoStream->index;
-			packet.data = data->VideoOutputBuffer;
-			packet.size = out_size;*/
-
 			// write the compressed frame to the media file
 			ret = libffmpeg::av_interleaved_write_frame( data->FormatContext, &packet );
 		}
@@ -338,40 +480,60 @@ void write_video_frame( WriterPrivateData^ data )
 		}
 	}
 
+	// if the image was not written.
 	if ( ret != 0 )
 	{
 		throw gcnew VideoException( "Error while writing video frame." );
 	}
 }
 
-// Allocate picture of the specified format and size
-static libffmpeg::AVFrame* alloc_picture( enum libffmpeg::AVPixelFormat pix_fmt, int width, int height )
+/// <summary>
+/// Allocate picture of the specified format and size.
+/// </summary>
+/// <param name="data">The fram data.</param>
+/// <param name="width">The frame width.</param>
+/// <param name="height">The frame height.</param>
+static libffmpeg::AVFrame* alloc_picture(enum libffmpeg::AVPixelFormat pix_fmt, int width, int height )
 {
 	libffmpeg::AVFrame* picture;
 	void* picture_buf;
 	int size;
 
+	// Allocate frame memory.
 	picture = libffmpeg::av_frame_alloc( );
 	if ( !picture )
 	{
 		return NULL;
 	}
 
+	// Allocate the picture memory.
 	size = libffmpeg::avpicture_get_size( pix_fmt, width, height );
 	picture_buf = libffmpeg::av_malloc( size );
 	if ( !picture_buf )
 	{
+		// Free if failed.
 		libffmpeg::av_free( picture );
 		return NULL;
 	}
 
+	// Write the picture data into the allocated memory.
 	libffmpeg::avpicture_fill( (libffmpeg::AVPicture *) picture, (libffmpeg::uint8_t *) picture_buf, pix_fmt, width, height );
 
+	// Return the picture.
 	return picture;
 }
 
-// Create new video stream and configure it
-void add_video_stream( WriterPrivateData^ data,  int width, int height, int frameRate, int bitRate,
+/// <summary>
+/// Add video stream.
+/// </summary>
+/// <param name="data">Video write data.</param>
+/// <param name="width">Video width.</param>
+/// <param name="height">Video height.</param>
+/// <param name="frameRate">Video frame rate.</param>
+/// <param name="bitRate">Video bit rate.</param>
+/// <param name="codecId">Video codec id.</param>
+/// <param name="pixelFormat">Video pixel format.</param>
+void add_video_stream(WriterPrivateData^ data, int width, int height, int frameRate, int bitRate,
 					  enum libffmpeg::AVCodecID codecId, enum libffmpeg::AVPixelFormat pixelFormat )
 {
 	libffmpeg::AVCodecContext* codecContex;
@@ -419,8 +581,11 @@ void add_video_stream( WriterPrivateData^ data,  int width, int height, int fram
 	}
 }
 
-// Open video codec and prepare out buffer and picture
-void open_video( WriterPrivateData^ data )
+/// <summary>
+/// Open the video frame.
+/// </summary>
+/// <param name="data">Video write data.</param>
+void open_video(WriterPrivateData^ data)
 {
 	libffmpeg::AVCodecContext* codecContext = data->VideoStream->codec;
 	libffmpeg::AVCodec* codec = avcodec_find_encoder( codecContext->codec_id );
@@ -456,6 +621,7 @@ void open_video( WriterPrivateData^ data )
 	data->ConvertContext = libffmpeg::sws_getContext( codecContext->width, codecContext->height, libffmpeg::AV_PIX_FMT_BGR24,
 			codecContext->width, codecContext->height, codecContext->pix_fmt,
 			SWS_BICUBIC, NULL, NULL, NULL );
+
 	// prepare scaling context to convert grayscale image to video format
 	data->ConvertContextGrayscale = libffmpeg::sws_getContext( codecContext->width, codecContext->height, libffmpeg::AV_PIX_FMT_GRAY8,
 			codecContext->width, codecContext->height, codecContext->pix_fmt,
@@ -466,5 +632,4 @@ void open_video( WriterPrivateData^ data )
 		throw gcnew VideoException( "Cannot initialize frames conversion context." );
 	}
 }
-#pragma endregion
 

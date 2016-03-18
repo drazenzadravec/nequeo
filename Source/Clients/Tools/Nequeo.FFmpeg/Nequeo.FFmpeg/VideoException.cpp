@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          VideoCodec.cpp
-*  Purpose :       VideoCodec class.
+*  File :          VideoException.cpp
+*  Purpose :       VideoException class.
 *
 */
 
@@ -31,36 +31,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#include "VideoCodec.h"
+#include "VideoException.h"
 
 using namespace Nequeo::Media::FFmpeg;
 
-int video_codecs[] =
+/// <summary>
+/// Initializes a new instance of the <see cref="VideoException"/> class.
+/// </summary>
+/// <param name="message">Exception's message.</param>
+VideoException::VideoException(String^ message) : Exception(message)
 {
-	libffmpeg::AV_CODEC_ID_MPEG4,
-	libffmpeg::AV_CODEC_ID_WMV1,
-	libffmpeg::AV_CODEC_ID_WMV2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V3,
-	libffmpeg::AV_CODEC_ID_H263P,
-	libffmpeg::AV_CODEC_ID_FLV1,
-	libffmpeg::AV_CODEC_ID_MPEG2VIDEO,
-	libffmpeg::AV_CODEC_ID_RAWVIDEO,
-	libffmpeg::AV_CODEC_ID_H264,
-	libffmpeg::AV_CODEC_ID_MP4ALS,
-};
-
-int pixel_formats[] =
-{
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_BGR24,
-};
-
-int CODECS_COUNT ( sizeof( video_codecs ) / sizeof( libffmpeg::AVCodecID) );
+}

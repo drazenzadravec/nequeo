@@ -2,7 +2,7 @@
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
 *  File :          VideoFileReader.h
-*  Purpose :       SIP VideoFileReader class.
+*  Purpose :       VideoFileReader class.
 *
 */
 
@@ -36,11 +36,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
+#include "ReaderPrivateData.h"
+#include "VideoException.h"
+
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Drawing::Imaging;
-
-using namespace AForge::Video;
 
 namespace Nequeo
 {
@@ -48,34 +49,6 @@ namespace Nequeo
 	{
 		namespace FFmpeg
 		{
-			/// <summary>
-			/// A structure to encapsulate all FFMPEG related private variable.
-			/// </summary>
-			public ref struct ReaderPrivateData
-			{
-			public:
-				libffmpeg::AVFormatContext*		FormatContext;
-				libffmpeg::AVStream*			VideoStream;
-				libffmpeg::AVCodecContext*		CodecContext;
-				libffmpeg::AVFrame*				VideoFrame;
-				struct libffmpeg::SwsContext*	ConvertContext;
-
-				libffmpeg::AVPacket* Packet;
-				int BytesRemaining;
-
-				ReaderPrivateData()
-				{
-					FormatContext = NULL;
-					VideoStream = NULL;
-					CodecContext = NULL;
-					VideoFrame = NULL;
-					ConvertContext = NULL;
-
-					Packet = NULL;
-					BytesRemaining = 0;
-				}
-			};
-
 			/// <summary>
 			/// Class for reading video files utilizing FFmpeg library.
 			/// </summary>
@@ -114,6 +87,23 @@ namespace Nequeo
 			public ref class VideoFileReader : IDisposable
 			{
 			public:
+				/// <summary>
+				/// Initializes a new instance of the <see cref="VideoFileReader"/> class.
+				/// </summary>
+				VideoFileReader();
+
+				/// <summary>
+				/// Disposes the object and frees its resources.
+				/// </summary>
+				/// 
+				~VideoFileReader()
+				{
+					if (!_disposed)
+					{
+						this->!VideoFileReader();
+						_disposed = true;
+					}
+				}
 
 				/// <summary>
 				/// Frame width of the opened video file.
@@ -219,22 +209,6 @@ namespace Nequeo
 			public:
 
 				/// <summary>
-				/// Initializes a new instance of the <see cref="VideoFileReader"/> class.
-				/// </summary>
-				/// 
-				VideoFileReader(void);
-
-				/// <summary>
-				/// Disposes the object and frees its resources.
-				/// </summary>
-				/// 
-				~VideoFileReader()
-				{
-					this->!VideoFileReader();
-					disposed = true;
-				}
-
-				/// <summary>
 				/// Open video file with the specified name.
 				/// </summary>
 				///
@@ -286,7 +260,7 @@ namespace Nequeo
 				// Check if the object was already disposed
 				void CheckIfDisposed()
 				{
-					if (disposed)
+					if (_disposed)
 					{
 						throw gcnew System::ObjectDisposedException("The object was already disposed.");
 					}
@@ -295,7 +269,7 @@ namespace Nequeo
 			private:
 				// private data of the class
 				ReaderPrivateData^ data;
-				bool disposed;
+				bool _disposed;
 			};
 
 		}

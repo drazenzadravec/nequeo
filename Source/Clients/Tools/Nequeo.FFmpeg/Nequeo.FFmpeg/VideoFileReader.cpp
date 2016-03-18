@@ -2,7 +2,7 @@
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
 *  File :          VideoFileReader.cpp
-*  Purpose :       SIP VideoFileReader class.
+*  Purpose :       VideoFileReader class.
 *
 */
 
@@ -35,19 +35,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Nequeo::Media::FFmpeg;
 
-// Class constructor
-VideoFileReader::VideoFileReader( void ) :
-    data( nullptr ), disposed( false )
-{	
-	libffmpeg::av_register_all( );
-}
-
 #pragma managed(push, off)
-static libffmpeg::AVFormatContext* open_file( char* fileName )
+/// <summary>
+/// Open video file with the specified name.
+/// </summary>
+/// <param name="fileName">Video file name to open.</param>
+static libffmpeg::AVFormatContext* open_file(char* fileName)
 {
 	libffmpeg::AVFormatContext* formatContext;
 
-	if ( libffmpeg::avformat_open_input( &formatContext, fileName, NULL, 0 ) !=0 )
+	if (libffmpeg::avformat_open_input(&formatContext, fileName, NULL, 0) != 0)
 	{
 		return NULL;
 	}
@@ -55,14 +52,30 @@ static libffmpeg::AVFormatContext* open_file( char* fileName )
 }
 #pragma managed(pop)
 
-// Opens the specified video file
+/// <summary>
+/// Initializes a new instance of the <see cref="VideoFileReader"/> class.
+/// </summary>
+VideoFileReader::VideoFileReader() :
+    data( nullptr ), _disposed( false )
+{	
+	libffmpeg::av_register_all( );
+}
+
+/// <summary>
+/// Open video file with the specified name.
+/// </summary>
+/// <param name="fileName">Video file name to open.</param>
+/// <exception cref="System::IO::IOException">Cannot open video file with the specified name.</exception>
+/// <exception cref="VideoException">A error occurred while opening the video file. See exception message.</exception>
 void VideoFileReader::Open(String^ fileName )
 {
+	// Check if disposed.
     CheckIfDisposed( );
 
 	// close previous file if any was open
 	Close( );
 
+	// Create the reader data packet.
 	data = gcnew ReaderPrivateData();
 	data->Packet = new libffmpeg::AVPacket( );
 	data->Packet->data = NULL;
@@ -149,39 +162,48 @@ void VideoFileReader::Open(String^ fileName )
 
 		if ( !success )
 		{
+			// Close the stream.
 			Close( );
 		}
 	}
 }
 
-// Close current video file
+/// <summary>
+/// Close currently opened video file if any.
+/// </summary>
 void VideoFileReader::Close(  )
 {
+	// If data is not null.
 	if ( data != nullptr )
 	{
 		if ( data->VideoFrame != NULL )
 		{
+			// Free video frame.
 			libffmpeg::av_free( data->VideoFrame );
 		}
 
 		if ( data->CodecContext != NULL )
 		{
+			// Close the codec context.
 			libffmpeg::avcodec_close( data->CodecContext );
 		}
 
 		if ( data->FormatContext != NULL )
 		{
-			libffmpeg::AVFormatContext* avFormatContaxt = data->FormatContext;
-			libffmpeg::avformat_close_input(&avFormatContaxt);
+			// Close the format context.
+			libffmpeg::AVFormatContext* avFormatContext = data->FormatContext;
+			libffmpeg::avformat_close_input(&avFormatContext);
 		}
 
 		if ( data->ConvertContext != NULL )
 		{
+			// Free the convert context.
 			libffmpeg::sws_freeContext( data->ConvertContext );
 		}
 
 		if ( data->Packet->data != NULL )
 		{
+			// Free the packet.
 			libffmpeg::av_free_packet( data->Packet );
 		}
 
@@ -189,11 +211,19 @@ void VideoFileReader::Close(  )
 	}
 }
 
-// Read next video frame of the current video file
+/// <summary>
+/// Read next video frame of the currently opened video file.
+/// </summary>
+/// <returns>Returns next video frame of the opened file or <see langword="null"/> if end of
+/// file was reached. The returned video frame has 24 bpp color format.</returns>
+/// <exception cref="System::IO::IOException">Thrown if no video file was open.</exception>
+/// <exception cref="VideoException">A error occurred while reading next video frame. See exception message.</exception>
 Bitmap^ VideoFileReader::ReadVideoFrame(  )
 {
+	// Check if disposed.
     CheckIfDisposed( );
 
+	// Make sure data exists.
 	if ( data == nullptr )
 	{
 		throw gcnew System::IO::IOException( "Cannot read video frames since video file is not open." );
@@ -205,6 +235,7 @@ Bitmap^ VideoFileReader::ReadVideoFrame(  )
 	int bytesDecoded;
 	bool exit = false;
 
+	// keep reading frames.
 	while ( true )
 	{
 		// work on the current packet until we have decoded all of it
@@ -219,11 +250,13 @@ Bitmap^ VideoFileReader::ReadVideoFrame(  )
 				throw gcnew VideoException( "Error while decoding frame." );
 			}
 
+			// Count down bytes remaing.
 			data->BytesRemaining -= bytesDecoded;
 					 
 			// did we finish the current frame? Then we can return
 			if ( frameFinished )
 			{
+				// Reurn the frame.
 				return DecodeVideoFrame( );
 			}
 		}
@@ -252,6 +285,7 @@ Bitmap^ VideoFileReader::ReadVideoFrame(  )
 		if ( exit )
 			break;
 
+		// Get number of pagket remaining.
 		data->BytesRemaining = data->Packet->size;
 	}
 
@@ -269,31 +303,43 @@ Bitmap^ VideoFileReader::ReadVideoFrame(  )
 	// is there a frame
 	if ( frameFinished )
 	{
+		// Decode the frame into a bitmap.
 		bitmap = DecodeVideoFrame( );
 	}
 
+	// Return the frame image.
 	return bitmap;
 }
 
-// Decodes video frame into managed Bitmap
+/// <summary>
+/// Decodes video frame into managed Bitmap.
+/// </summary>
 Bitmap^ VideoFileReader::DecodeVideoFrame( )
 {
+	// Create a new bitmap.
 	Bitmap^ bitmap = gcnew Bitmap( data->CodecContext->width, data->CodecContext->height, PixelFormat::Format24bppRgb );
 	
-	// lock the bitmap
+	// lock the bitmap size into memory, allocate space.
 	BitmapData^ bitmapData = bitmap->LockBits( System::Drawing::Rectangle( 0, 0, data->CodecContext->width, data->CodecContext->height ),
 		ImageLockMode::ReadOnly, PixelFormat::Format24bppRgb );
 
+	// Get the memory address of the first bitmap pixel
 	libffmpeg::uint8_t* ptr = reinterpret_cast<libffmpeg::uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
 
+	// Assign the pointer of the first pixel.
 	libffmpeg::uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
+
+	// Get the stride width (scan width).
 	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };
 
-	// convert video frame to the RGB bitmap
+	// Convert video frame to the RGB bitmap.
+	// Write the video fram image to the bitmap memory location set above.
 	libffmpeg::sws_scale( data->ConvertContext, data->VideoFrame->data, data->VideoFrame->linesize, 0,
 		data->CodecContext->height, srcData, srcLinesize );
 
+	// Unlock the bitmap from memory.
 	bitmap->UnlockBits( bitmapData );
 
+	// Return the bitmap.
 	return bitmap;
 }

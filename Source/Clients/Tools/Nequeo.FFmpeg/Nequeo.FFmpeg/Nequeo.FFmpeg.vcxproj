@@ -136,24 +136,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="AForge.Video">
-      <HintPath>..\..\..\..\..\ThirdPartyTools\AForge\2.2.5\Release\AForge.Video.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IVideoSource.h" />
+    <ClInclude Include="NewFrameEventArgs.h" />
+    <ClInclude Include="ReaderPrivateData.h" />
+    <ClInclude Include="ReasonToFinishPlaying.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="VideoCodec.h" />
+    <ClInclude Include="VideoException.h" />
     <ClInclude Include="VideoFileReader.h" />
     <ClInclude Include="VideoFileSource.h" />
     <ClInclude Include="VideoFileWriter.h" />
+    <ClInclude Include="VideoSourceErrorEventArgs.h" />
+    <ClInclude Include="WriterPrivateData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="NewFrameEventArgs.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -161,9 +166,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="VideoCodec.cpp" />
+    <ClCompile Include="VideoException.cpp" />
     <ClCompile Include="VideoFileReader.cpp" />
     <ClCompile Include="VideoFileSource.cpp" />
     <ClCompile Include="VideoFileWriter.cpp" />
+    <ClCompile Include="VideoSourceErrorEventArgs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -2,7 +2,7 @@
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
 *  File :          VideoFileSource.cpp
-*  Purpose :       SIP VideoFileSource class.
+*  Purpose :       VideoFileSource class.
 *
 */
 
@@ -36,6 +36,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Nequeo::Media::FFmpeg;
 
+// <summary>
+/// Initializes a new instance of the <see cref="VideoFileSource"/> class.
+/// </summary>
 VideoFileSource::VideoFileSource( String^ fileName )
 {
 	m_fileName = fileName;
@@ -46,8 +49,16 @@ VideoFileSource::VideoFileSource( String^ fileName )
 	m_frameInterval = 0;
 }
 
+/// <summary>
+/// Start video source.
+/// </summary>
+/// <remarks>Starts video source and return execution to caller. Video source
+/// object creates background thread and notifies about new frames with the
+/// help of <see cref="NewFrame"/> event.</remarks>
+/// <exception cref="ArgumentException">Video source is not specified.</exception>
 void VideoFileSource::Start( )
 {
+	// If running.
 	if ( !IsRunning )
 	{
         // check source
@@ -64,11 +75,16 @@ void VideoFileSource::Start( )
 		
 		// create and start new thread
 		m_workerThread = gcnew Thread( gcnew ThreadStart( this, &VideoFileSource::WorkerThreadHandler ) );
-		m_workerThread->Name = m_fileName; // just for debugging
+		m_workerThread->Name = m_fileName;
 		m_workerThread->Start( );
 	}
 }
 
+/// <summary>
+/// Signal video source to stop its work.
+/// </summary>
+/// <remarks>Signals video source to stop its background thread, stop to
+/// provide new frames and free resources.</remarks>
 void VideoFileSource::SignalToStop( )
 {
 	if ( m_workerThread != nullptr )
@@ -78,6 +94,11 @@ void VideoFileSource::SignalToStop( )
 	}
 }
 
+/// <summary>
+/// Wait for video source has stopped.
+/// </summary>
+/// <remarks>Waits for source stopping after it was signalled to stop using
+/// <see cref="SignalToStop"/> method.</remarks>
 void VideoFileSource::WaitForStop( )
 {
 	if ( m_workerThread != nullptr )
@@ -89,6 +110,15 @@ void VideoFileSource::WaitForStop( )
 	}
 }
 
+/// <summary>
+/// Stop video source.
+/// </summary>
+/// <remarks><para>Stops video source aborting its thread.</para>
+/// <para><note>Since the method aborts background thread, its usage is highly not preferred
+/// and should be done only if there are no other options. The correct way of stopping camera
+/// is <see cref="SignalToStop">signaling it stop</see> and then
+/// <see cref="WaitForStop">waiting</see> for background thread's completion.</note></para>
+/// </remarks>
 void VideoFileSource::Stop( )
 {
 	if ( IsRunning )
@@ -98,6 +128,9 @@ void VideoFileSource::Stop( )
 	}
 }
 
+/// <summary>
+/// Free the resources.
+/// </summary>
 void VideoFileSource::Free( )
 {
 	m_workerThread = nullptr;
@@ -107,13 +140,18 @@ void VideoFileSource::Free( )
 	m_needToStop = nullptr;
 }
 
+/// <summary>
+/// Worker thread handler.
+/// </summary>
 void VideoFileSource::WorkerThreadHandler( )
 {
+	// Create a new video reader.
 	ReasonToFinishPlaying reasonToStop = ReasonToFinishPlaying::StoppedByUser;
 	VideoFileReader^ videoReader = gcnew VideoFileReader( );
 
 	try
 	{
+		// Open the file.
 		videoReader->Open( m_fileName );
 
         // frame interval
@@ -121,6 +159,7 @@ void VideoFileSource::WorkerThreadHandler( )
 			(int) ( 1000 / ( ( videoReader->FrameRate == 0 ) ? 25 : videoReader->FrameRate ) ) :
 			m_frameInterval;
 
+		// While not stopping.
         while ( !m_needToStop->WaitOne( 0, false ) )
 		{
 			// start time
@@ -129,6 +168,7 @@ void VideoFileSource::WorkerThreadHandler( )
 			// get next video frame
 			Bitmap^ bitmap = videoReader->ReadVideoFrame( );
 
+			// If image is null.
 			if ( bitmap == nullptr )
 			{
 				reasonToStop = ReasonToFinishPlaying::EndOfStreamReached;
@@ -163,7 +203,10 @@ void VideoFileSource::WorkerThreadHandler( )
 	{
         VideoSourceError( this, gcnew VideoSourceErrorEventArgs( exception->Message ) );
 	}
-
-	videoReader->Close( );
-	PlayingFinished( this, reasonToStop );
+	finally
+	{
+		// Close the file
+		videoReader->Close();
+		PlayingFinished(this, reasonToStop);
+	}
 }
