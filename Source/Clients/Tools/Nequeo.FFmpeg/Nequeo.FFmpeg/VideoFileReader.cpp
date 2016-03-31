@@ -42,8 +42,10 @@ using namespace Nequeo::Media::FFmpeg;
 /// <param name="fileName">Video file name to open.</param>
 static libffmpeg::AVFormatContext* open_file(char* fileName)
 {
-	libffmpeg::AVFormatContext* formatContext;
+	// Allocate the context.
+	libffmpeg::AVFormatContext* formatContext = libffmpeg::avformat_alloc_context();
 
+	// Open the file.
 	if (libffmpeg::avformat_open_input(&formatContext, fileName, NULL, 0) != 0)
 	{
 		return NULL;
@@ -76,7 +78,7 @@ void VideoFileReader::Open(String^ fileName )
 	Close( );
 
 	// Create the reader data packet.
-	data = gcnew ReaderPrivateData();
+	data = gcnew ReaderVideoPrivateData();
 	data->Packet = new libffmpeg::AVPacket( );
 	data->Packet->data = NULL;
 
@@ -135,6 +137,10 @@ void VideoFileReader::Open(String^ fileName )
 
 		// allocate video frame
 		data->VideoFrame = libffmpeg::av_frame_alloc( );
+		if (data->VideoFrame == NULL)
+		{
+			throw gcnew VideoException("Cannot initialize video frames.");
+		}
 
 		// prepare scaling context to convert RGB image to video format
 		data->ConvertContext = libffmpeg::sws_getContext( data->CodecContext->width, data->CodecContext->height, data->CodecContext->pix_fmt,
@@ -180,6 +186,12 @@ void VideoFileReader::Close(  )
 		{
 			// Free video frame.
 			libffmpeg::av_free( data->VideoFrame );
+		}
+
+		if (data->VideoStream)
+		{
+			// Close the video codec.
+			libffmpeg::avcodec_close(data->VideoStream->codec);
 		}
 
 		if ( data->CodecContext != NULL )
@@ -256,7 +268,7 @@ Bitmap^ VideoFileReader::ReadVideoFrame(  )
 			// did we finish the current frame? Then we can return
 			if ( frameFinished )
 			{
-				// Reurn the frame.
+				// Return the frame.
 				return DecodeVideoFrame( );
 			}
 		}
@@ -324,10 +336,10 @@ Bitmap^ VideoFileReader::DecodeVideoFrame( )
 		ImageLockMode::ReadOnly, PixelFormat::Format24bppRgb );
 
 	// Get the memory address of the first bitmap pixel
-	libffmpeg::uint8_t* ptr = reinterpret_cast<libffmpeg::uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
+	uint8_t* ptr = reinterpret_cast<uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
 
 	// Assign the pointer of the first pixel.
-	libffmpeg::uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
+	uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
 
 	// Get the stride width (scan width).
 	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };

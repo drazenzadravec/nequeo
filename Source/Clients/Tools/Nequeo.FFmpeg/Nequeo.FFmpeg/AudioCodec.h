@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          ReasonToFinishPlaying.h
-*  Purpose :       ReasonToFinishPlaying class.
+*  File :          AudioCodec.h
+*  Purpose :       AudioCodec class.
 *
 */
 
@@ -31,12 +31,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _REASONTOFINISHPLAYING_H
-#define _REASONTOFINISHPLAYING_H
+#ifndef _AUDIOCODEC_H
+#define _AUDIOCODEC_H
 
 #include "stdafx.h"
 
 using namespace System;
+
+extern int audio_codecs[];
+extern int AUDIO_CODECS_COUNT;
 
 namespace Nequeo
 {
@@ -45,29 +48,34 @@ namespace Nequeo
 		namespace FFmpeg
 		{
 			/// <summary>
-			/// Reason of finishing video playing.
+			/// Enumeration of some audio codecs from FFmpeg library, which are available for writing audio files.
 			/// </summary>
-			/// <remarks><para>When video source class fire the PlayingFinished event, they
-			/// need to specify reason of finishing video playing. For example, it may be end of stream reached.</para></remarks>
-			public enum class ReasonToFinishPlaying
+			public enum class AudioCodec
 			{
 				/// <summary>
-				/// Video playing has finished because it end was reached.
+				/// Default audio codec, which FFmpeg library selects for the specified file format.
 				/// </summary>
-				EndOfStreamReached,
+				Default = -1,
 				/// <summary>
-				/// Video playing has finished because it was stopped by user.
+				/// MP2
 				/// </summary>
-				StoppedByUser,
+				MP2,
 				/// <summary>
-				/// Video playing has finished because the device was lost (unplugged).
+				/// MP3
 				/// </summary>
-				DeviceLost,
+				MP3,
 				/// <summary>
-				/// Video playing has finished because of some error happened the video source (camera, stream, file, etc.).
-				/// A error reporting event usually is fired to provide error information.
+				/// AAC
 				/// </summary>
-				VideoSourceError
+				AAC,
+				/// <summary>
+				/// WMA
+				/// </summary>
+				WMA_v1,
+				/// <summary>
+				/// WMA
+				/// </summary>
+				WMA_v2,
 			};
 		}
 	}

@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#include "ReaderPrivateData.h"
+#include "ReaderVideoPrivateData.h"
 #include "VideoException.h"
 
 using namespace System;
@@ -268,7 +268,7 @@ namespace Nequeo
 
 			private:
 				// private data of the class
-				ReaderPrivateData^ data;
+				ReaderVideoPrivateData^ data;
 				bool _disposed;
 			};
 

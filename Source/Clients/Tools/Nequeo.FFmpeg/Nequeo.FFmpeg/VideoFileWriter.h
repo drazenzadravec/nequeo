@@ -37,7 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "VideoCodec.h"
-#include "WriterPrivateData.h"
+#include "WriterVideoPrivateData.h"
 #include "VideoException.h"
 
 using namespace System;
@@ -361,7 +361,7 @@ namespace Nequeo
 
 			private:
 				// private data of the class
-				WriterPrivateData^ data;
+				WriterVideoPrivateData^ data;
 				bool _disposed;
 			};
 

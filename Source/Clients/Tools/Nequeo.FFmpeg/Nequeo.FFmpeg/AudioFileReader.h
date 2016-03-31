@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          ReasonToFinishPlaying.h
-*  Purpose :       ReasonToFinishPlaying class.
+*  File :          AudioFileReader.h
+*  Purpose :       AudioFileReader class.
 *
 */
 
@@ -31,12 +31,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _REASONTOFINISHPLAYING_H
-#define _REASONTOFINISHPLAYING_H
+#ifndef _AUDIOFILEREADER_H
+#define _AUDIOFILEREADER_H
 
 #include "stdafx.h"
 
+#include "ReaderAudioPrivateData.h"
+#include "AudioException.h"
+
 using namespace System;
+using namespace System::Drawing;
+using namespace System::Drawing::Imaging;
+using namespace System::Collections;
+using namespace System::Collections::Generic;
+
+using namespace Nequeo::IO::Audio;
 
 namespace Nequeo
 {
@@ -45,29 +54,54 @@ namespace Nequeo
 		namespace FFmpeg
 		{
 			/// <summary>
-			/// Reason of finishing video playing.
+			/// Audio file reader.
 			/// </summary>
-			/// <remarks><para>When video source class fire the PlayingFinished event, they
-			/// need to specify reason of finishing video playing. For example, it may be end of stream reached.</para></remarks>
-			public enum class ReasonToFinishPlaying
+			public ref class AudioFileReader
 			{
+			public:
 				/// <summary>
-				/// Video playing has finished because it end was reached.
+				/// Audio file reader.
 				/// </summary>
-				EndOfStreamReached,
+				AudioFileReader();
+
 				/// <summary>
-				/// Video playing has finished because it was stopped by user.
+				/// Disposes the object and frees its resources.
 				/// </summary>
-				StoppedByUser,
+				~AudioFileReader();
+
 				/// <summary>
-				/// Video playing has finished because the device was lost (unplugged).
+				/// Object's finalizer.
 				/// </summary>
-				DeviceLost,
+				!AudioFileReader();
+
 				/// <summary>
-				/// Video playing has finished because of some error happened the video source (camera, stream, file, etc.).
-				/// A error reporting event usually is fired to provide error information.
+				/// Audio file reader.
 				/// </summary>
-				VideoSourceError
+				/// <param name="fileName">Audio file name to open.</param>
+				/// <return>The audio file details.</return>
+				WaveStructure Open(String^ fileName);
+
+				/// <summary>
+				/// Read next audio frame of the currently opened audio file.
+				/// </summary>
+				/// <returns>The array of audio frame data.</returns>
+				array<unsigned char>^ ReadAudioFrame();
+
+				/// <summary>
+				/// Close currently opened audio file if any.
+				/// </summary>
+				void Close();
+
+			private:
+				bool _disposed;
+				ReaderAudioPrivateData^ _data;
+
+				/// <summary>
+				/// Decode next audio frame of the currently opened audio file.
+				/// </summary>
+				/// <param name="bytesDecoded">The number of bytes decoded.</param>
+				/// <returns>The array of audio frame data.</returns>
+				array<unsigned char>^ DecodeAudioFrame(int bytesDecoded);
 			};
 		}
 	}

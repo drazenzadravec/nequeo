@@ -35,18 +35,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Nequeo::Media::FFmpeg;
 
-
 /// <summary>
 /// Write the video frame.
 /// </summary>
 /// <param name="data">Video write data.</param>
-static void write_video_frame(WriterPrivateData^ data);
+static void write_video_frame(WriterVideoPrivateData^ data);
 
 /// <summary>
 /// Open the video frame.
 /// </summary>
 /// <param name="data">Video write data.</param>
-static void open_video(WriterPrivateData^ data);
+static void open_video(WriterVideoPrivateData^ data);
 
 /// <summary>
 /// Add video stream.
@@ -58,7 +57,7 @@ static void open_video(WriterPrivateData^ data);
 /// <param name="bitRate">Video bit rate.</param>
 /// <param name="codecId">Video codec id.</param>
 /// <param name="pixelFormat">Video pixel format.</param>
-static void add_video_stream(WriterPrivateData^ data, int width, int height, int frameRate, int bitRate,
+static void add_video_stream(WriterVideoPrivateData^ data, int width, int height, int frameRate, int bitRate,
 							  enum libffmpeg::AVCodecID codecId, enum libffmpeg::AVPixelFormat pixelFormat);
 
 
@@ -172,7 +171,10 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 	Close( );
 
 	// Create a new write data.
-	data = gcnew WriterPrivateData( );
+	data = gcnew WriterVideoPrivateData( );
+	data->Packet = new libffmpeg::AVPacket();
+	data->Packet->data = NULL;
+
 	bool success = false;
 
 	// check width and height
@@ -207,7 +209,7 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 
 		if ( !outputFormat )
 		{
-			// gues about destination file format from its short name
+			// guess about destination file format from its short name
 			outputFormat = libffmpeg::av_guess_format( "mpeg", NULL, NULL );
 
 			if ( !outputFormat )
@@ -309,6 +311,12 @@ void VideoFileWriter::Close( )
 				libffmpeg::avio_close( data->FormatContext->pb );
 			}
 			
+			if (data->Packet->data != NULL)
+			{
+				// Free the packet.
+				libffmpeg::av_free_packet(data->Packet);
+			}
+
 			// Free the context.
 			libffmpeg::av_free( data->FormatContext );
 		}
@@ -397,10 +405,10 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 		ImageLockMode::ReadOnly, ( frame->PixelFormat == PixelFormat::Format8bppIndexed ) ? PixelFormat::Format8bppIndexed : PixelFormat::Format24bppRgb );
 
 	// Get the pointer to the first scan pixel
-	libffmpeg::uint8_t* ptr = reinterpret_cast<libffmpeg::uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
+	uint8_t* ptr = reinterpret_cast<uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
 
 	// Get the stride (scan) pointer to the first pixel
-	libffmpeg::uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
+	uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
 	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };
 
 	// convert source image to the format of the video file, write the image to the bitmap data memory block.
@@ -419,7 +427,7 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 	if ( timestamp.Ticks >= 0 )
 	{
 		const double frameNumber = timestamp.TotalSeconds * m_frameRate;
-		data->VideoFrame->pts = static_cast<libffmpeg::int64_t>( frameNumber );
+		data->VideoFrame->pts = static_cast<int64_t>( frameNumber );
 	}
 
 	// write the converted frame to the video file
@@ -430,7 +438,7 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 /// Write the video frame.
 /// </summary>
 /// <param name="data">Video write data.</param>
-void write_video_frame(WriterPrivateData^ data)
+void write_video_frame(WriterVideoPrivateData^ data)
 {
 	libffmpeg::AVCodecContext* codecContext = data->VideoStream->codec;
 	int retEncode, ret = 0;
@@ -442,41 +450,38 @@ void write_video_frame(WriterPrivateData^ data)
 	else
 	{
 		// Create the packet.
-		libffmpeg::AVPacket packet;
-		libffmpeg::av_init_packet(&packet);
-		packet.data = data->VideoOutputBuffer;
-		packet.size = data->VideoOutputBufferSize;
-		packet.stream_index = data->VideoStream->index;
+		libffmpeg::AVPacket* packet = data->Packet;
+		libffmpeg::av_init_packet(packet);
+		packet->data = data->VideoOutputBuffer;
+		packet->size = data->VideoOutputBufferSize;
+		packet->stream_index = data->VideoStream->index;
 
 		// Get the value.
-		libffmpeg::int64_t _av_nopts_value = ((libffmpeg::int64_t)UINT64_C(0x8000000000000000));
+		int64_t _av_nopts_value = ((int64_t)UINT64_C(0x8000000000000000));
 
 		// If has no options.
 		if (codecContext->coded_frame->pts != _av_nopts_value)
 		{
-			packet.pts = libffmpeg::av_rescale_q(codecContext->coded_frame->pts, codecContext->time_base, data->VideoStream->time_base);
+			packet->pts = libffmpeg::av_rescale_q(codecContext->coded_frame->pts, codecContext->time_base, data->VideoStream->time_base);
 		}
 
 		// If the packet has a key frame.
 		if (codecContext->coded_frame->key_frame)
 		{
-			packet.flags |= AV_PKT_FLAG_KEY;
+			packet->flags |= AV_PKT_FLAG_KEY;
 		}
 
 		int got_packet = 0;
 
 		// encode the image
-		retEncode = libffmpeg::avcodec_encode_video2(codecContext, &packet, data->VideoFrame, &got_packet);
+		retEncode = libffmpeg::avcodec_encode_video2(codecContext, packet, data->VideoFrame, &got_packet);
 
 		// if zero size, it means the image was buffered
 		if (retEncode == 0  && got_packet == 1)
 		{
 			// write the compressed frame to the media file
-			ret = libffmpeg::av_interleaved_write_frame( data->FormatContext, &packet );
-		}
-		else
-		{
-			// image was buffered
+			ret = libffmpeg::av_interleaved_write_frame( data->FormatContext, packet );
+			libffmpeg::av_packet_unref(packet);
 		}
 	}
 
@@ -490,7 +495,7 @@ void write_video_frame(WriterPrivateData^ data)
 /// <summary>
 /// Allocate picture of the specified format and size.
 /// </summary>
-/// <param name="data">The fram data.</param>
+/// <param name="pix_fmt">The pixel format.</param>
 /// <param name="width">The frame width.</param>
 /// <param name="height">The frame height.</param>
 static libffmpeg::AVFrame* alloc_picture(enum libffmpeg::AVPixelFormat pix_fmt, int width, int height )
@@ -517,7 +522,7 @@ static libffmpeg::AVFrame* alloc_picture(enum libffmpeg::AVPixelFormat pix_fmt, 
 	}
 
 	// Write the picture data into the allocated memory.
-	libffmpeg::avpicture_fill( (libffmpeg::AVPicture *) picture, (libffmpeg::uint8_t *) picture_buf, pix_fmt, width, height );
+	libffmpeg::avpicture_fill( (libffmpeg::AVPicture *) picture, (uint8_t *) picture_buf, pix_fmt, width, height );
 
 	// Return the picture.
 	return picture;
@@ -533,10 +538,10 @@ static libffmpeg::AVFrame* alloc_picture(enum libffmpeg::AVPixelFormat pix_fmt, 
 /// <param name="bitRate">Video bit rate.</param>
 /// <param name="codecId">Video codec id.</param>
 /// <param name="pixelFormat">Video pixel format.</param>
-void add_video_stream(WriterPrivateData^ data, int width, int height, int frameRate, int bitRate,
+void add_video_stream(WriterVideoPrivateData^ data, int width, int height, int frameRate, int bitRate,
 					  enum libffmpeg::AVCodecID codecId, enum libffmpeg::AVPixelFormat pixelFormat )
 {
-	libffmpeg::AVCodecContext* codecContex;
+	libffmpeg::AVCodecContext* codecContext;
 
 	// create new stream
 	data->VideoStream = libffmpeg::avformat_new_stream( data->FormatContext, NULL );
@@ -547,37 +552,36 @@ void add_video_stream(WriterPrivateData^ data, int width, int height, int frameR
 	}
 
 	data->VideoStream->id = 0;
-	codecContex = data->VideoStream->codec;
-	codecContex->codec_id   = codecId;
-	codecContex->codec_type = libffmpeg::AVMEDIA_TYPE_VIDEO;
+	codecContext = data->VideoStream->codec;
+	codecContext->codec_id   = codecId;
+	codecContext->codec_type = libffmpeg::AVMEDIA_TYPE_VIDEO;
 
 	// put sample parameters
-	codecContex->bit_rate = bitRate;
-	codecContex->width    = width;
-	codecContex->height   = height;
+	codecContext->bit_rate = bitRate;
+	codecContext->width    = width;
+	codecContext->height   = height;
 
 	// time base: this is the fundamental unit of time (in seconds) in terms
 	// of which frame timestamps are represented. for fixed-fps content,
 	// timebase should be 1/framerate and timestamp increments should be
 	// identically 1.
-	codecContex->time_base.den = frameRate;
-	codecContex->time_base.num = 1;
+	codecContext->time_base.den = frameRate;
+	codecContext->time_base.num = 1;
+	codecContext->gop_size = 12; // emit one intra frame every twelve frames at most
+	codecContext->pix_fmt  = pixelFormat;
 
-	codecContex->gop_size = 12; // emit one intra frame every twelve frames at most
-	codecContex->pix_fmt  = pixelFormat;
-
-	if ( codecContex->codec_id == libffmpeg::AV_CODEC_ID_MPEG1VIDEO )
+	if (codecContext->codec_id == libffmpeg::AV_CODEC_ID_MPEG1VIDEO )
 	{
 		// Needed to avoid using macroblocks in which some coeffs overflow.
 		// This does not happen with normal video, it just happens here as
 		// the motion of the chroma plane does not match the luma plane.
-		codecContex->mb_decision = 2;
+		codecContext->mb_decision = 2;
 	}
 
 	// some formats want stream headers to be separate
 	if( data->FormatContext->oformat->flags & AVFMT_GLOBALHEADER )
 	{
-		codecContex->flags |= CODEC_FLAG_GLOBAL_HEADER;
+		codecContext->flags |= CODEC_FLAG_GLOBAL_HEADER;
 	}
 }
 
@@ -585,7 +589,7 @@ void add_video_stream(WriterPrivateData^ data, int width, int height, int frameR
 /// Open the video frame.
 /// </summary>
 /// <param name="data">Video write data.</param>
-void open_video(WriterPrivateData^ data)
+void open_video(WriterVideoPrivateData^ data)
 {
 	libffmpeg::AVCodecContext* codecContext = data->VideoStream->codec;
 	libffmpeg::AVCodec* codec = avcodec_find_encoder( codecContext->codec_id );
@@ -606,7 +610,7 @@ void open_video(WriterPrivateData^ data)
 	{
          // allocate output buffer 
          data->VideoOutputBufferSize = 6 * codecContext->width * codecContext->height; // more than enough even for raw video
-		 data->VideoOutputBuffer = (libffmpeg::uint8_t*) libffmpeg::av_malloc( data->VideoOutputBufferSize );
+		 data->VideoOutputBuffer = (uint8_t*) libffmpeg::av_malloc( data->VideoOutputBufferSize );
 	}
 
 	// allocate the encoded raw picture
@@ -632,4 +636,3 @@ void open_video(WriterPrivateData^ data)
 		throw gcnew VideoException( "Cannot initialize frames conversion context." );
 	}
 }
-

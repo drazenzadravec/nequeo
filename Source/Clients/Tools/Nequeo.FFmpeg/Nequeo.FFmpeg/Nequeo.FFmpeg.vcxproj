@@ -80,9 +80,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\References\Staging_x86\Client\FFmpeg</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\References\Staging_x64\Client\FFmpeg</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,11 +92,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\msinttypes;D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\msinttypes;..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\include;..\..\..\..\..\ThirdPartyTools\FFMpeg\Source_2016_01_15;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\mpglib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\libmp3lame;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\include</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -103,11 +106,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\msinttypes;D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\msinttypes;..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\include;..\..\..\..\..\ThirdPartyTools\FFMpeg\Source_2016_01_15;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\mpglib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\libmp3lame;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\include</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,11 +119,12 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\msinttypes;D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\msinttypes;..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\include;..\..\..\..\..\ThirdPartyTools\FFMpeg\Source_2016_01_15;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\mpglib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\libmp3lame;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\include</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -128,23 +133,32 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\msinttypes;D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\msinttypes;..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\include;..\..\..\..\..\ThirdPartyTools\FFMpeg\Source_2016_01_15;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\mpglib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\libmp3lame;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\include</AdditionalIncludeDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Development\Version2015\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.IO.Audio">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioCodec.h" />
+    <ClInclude Include="AudioException.h" />
+    <ClInclude Include="AudioFileReader.h" />
+    <ClInclude Include="AudioFileWriter.h" />
     <ClInclude Include="IVideoSource.h" />
     <ClInclude Include="NewFrameEventArgs.h" />
-    <ClInclude Include="ReaderPrivateData.h" />
+    <ClInclude Include="ReaderAudioPrivateData.h" />
+    <ClInclude Include="ReaderVideoPrivateData.h" />
     <ClInclude Include="ReasonToFinishPlaying.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
@@ -154,10 +168,15 @@
     <ClInclude Include="VideoFileSource.h" />
     <ClInclude Include="VideoFileWriter.h" />
     <ClInclude Include="VideoSourceErrorEventArgs.h" />
-    <ClInclude Include="WriterPrivateData.h" />
+    <ClInclude Include="WriterAudioPrivateData.h" />
+    <ClInclude Include="WriterVideoPrivateData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="AudioCodec.cpp" />
+    <ClCompile Include="AudioException.cpp" />
+    <ClCompile Include="AudioFileReader.cpp" />
+    <ClCompile Include="AudioFileWriter.cpp" />
     <ClCompile Include="NewFrameEventArgs.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

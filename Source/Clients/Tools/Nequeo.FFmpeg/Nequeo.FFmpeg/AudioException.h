@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          ReasonToFinishPlaying.h
-*  Purpose :       ReasonToFinishPlaying class.
+*  File :          AudioException.h
+*  Purpose :       AudioException class.
 *
 */
 
@@ -31,8 +31,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _REASONTOFINISHPLAYING_H
-#define _REASONTOFINISHPLAYING_H
+#ifndef _AUDIOEXCEPTION_H
+#define _AUDIOEXCEPTION_H
 
 #include "stdafx.h"
 
@@ -45,29 +45,19 @@ namespace Nequeo
 		namespace FFmpeg
 		{
 			/// <summary>
-			/// Reason of finishing video playing.
-			/// </summary>
-			/// <remarks><para>When video source class fire the PlayingFinished event, they
-			/// need to specify reason of finishing video playing. For example, it may be end of stream reached.</para></remarks>
-			public enum class ReasonToFinishPlaying
+			/// Audio related exception.
+			/// </summary
+			/// <remarks><para>The exception is thrown in the case of some audio related issues, like
+			/// failure of initializing codec, compression, etc.</para></remarks>
+			public ref class AudioException : public Exception
 			{
+			public:
 				/// <summary>
-				/// Video playing has finished because it end was reached.
+				/// Initializes a new instance of the <see cref="AudioException"/> class.
 				/// </summary>
-				EndOfStreamReached,
-				/// <summary>
-				/// Video playing has finished because it was stopped by user.
-				/// </summary>
-				StoppedByUser,
-				/// <summary>
-				/// Video playing has finished because the device was lost (unplugged).
-				/// </summary>
-				DeviceLost,
-				/// <summary>
-				/// Video playing has finished because of some error happened the video source (camera, stream, file, etc.).
-				/// A error reporting event usually is fired to provide error information.
-				/// </summary>
-				VideoSourceError
+				/// <param name="message">Exception's message.</param>
+				AudioException(String^ message);
+
 			};
 		}
 	}

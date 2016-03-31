@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          VideoCodec.cpp
-*  Purpose :       VideoCodec class.
+*  File :          AudioCodec.cpp
+*  Purpose :       AudioCodec class.
 *
 */
 
@@ -31,37 +31,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#include "VideoCodec.h"
+#include "AudioCodec.h"
 
 using namespace Nequeo::Media::FFmpeg;
 
-int video_codecs[] =
+int audio_codecs[] =
 {
-	libffmpeg::AV_CODEC_ID_MPEG4,
-	libffmpeg::AV_CODEC_ID_WMV1,
-	libffmpeg::AV_CODEC_ID_WMV2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V2,
-	libffmpeg::AV_CODEC_ID_MSMPEG4V3,
-	libffmpeg::AV_CODEC_ID_H263P,
-	libffmpeg::AV_CODEC_ID_FLV1,
-	libffmpeg::AV_CODEC_ID_MPEG2VIDEO,
-	libffmpeg::AV_CODEC_ID_RAWVIDEO,
-	libffmpeg::AV_CODEC_ID_H264,
-	libffmpeg::AV_CODEC_ID_MP4ALS,
+	libffmpeg::AV_CODEC_ID_MP2,
+	libffmpeg::AV_CODEC_ID_MP3,
+	libffmpeg::AV_CODEC_ID_AAC,
+	libffmpeg::AV_CODEC_ID_WMAV1,
+	libffmpeg::AV_CODEC_ID_WMAV2,
 };
 
-int pixel_formats[] =
-{
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_YUV420P,
-	libffmpeg::AV_PIX_FMT_BGR24,
-};
-
-int CODECS_COUNT ( sizeof( video_codecs ) / sizeof( libffmpeg::AVCodecID) );
+int AUDIO_CODECS_COUNT(sizeof(audio_codecs) / sizeof(libffmpeg::AVCodecID));
 
