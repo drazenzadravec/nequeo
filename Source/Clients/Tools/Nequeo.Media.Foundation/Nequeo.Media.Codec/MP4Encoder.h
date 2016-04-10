@@ -38,6 +38,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "AACProfileType.h"
 #include "H264ProfileType.h"
+#include "AACProfileInfo.h"
+#include "H264ProfileInfo.h"
 
 using namespace System;
 
@@ -74,6 +76,15 @@ namespace Nequeo
 			/// <param name="audioProfile">The mp4 encoded audio profile.</param>
 			/// <param name="videoProfile">The mp4 encoded video profile.</param>
 			void Encode(String^ inputFilename, String^ outputFilename, AACProfileType audioProfile, H264ProfileType videoProfile);
+
+			/// <summary>
+			/// Encode the file.
+			/// </summary>
+			/// <param name="inputFilename">The input file to convert.</param>
+			/// <param name="outputFilename">The mp4 encoded file.</param>
+			/// <param name="audioProfile">The mp4 encoded audio profile.</param>
+			/// <param name="videoProfile">The mp4 encoded video profile.</param>
+			void Encode(String^ inputFilename, String^ outputFilename, AACProfile^ audioProfile, H264Profile^ videoProfile);
 
 		private:
 			bool _disposed;

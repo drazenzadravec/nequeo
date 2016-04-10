@@ -144,8 +144,7 @@ void VideoFileReader::Open(String^ fileName )
 
 		// prepare scaling context to convert RGB image to video format
 		data->ConvertContext = libffmpeg::sws_getContext( data->CodecContext->width, data->CodecContext->height, data->CodecContext->pix_fmt,
-				data->CodecContext->width, data->CodecContext->height, libffmpeg::AV_PIX_FMT_BGR24,
-				SWS_BICUBIC, NULL, NULL, NULL );
+				data->CodecContext->width, data->CodecContext->height, libffmpeg::AV_PIX_FMT_BGR24, SWS_BICUBIC, NULL, NULL, NULL );
 
 		if ( data->ConvertContext == NULL )
 		{
@@ -345,7 +344,7 @@ Bitmap^ VideoFileReader::DecodeVideoFrame( )
 	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };
 
 	// Convert video frame to the RGB bitmap.
-	// Write the video fram image to the bitmap memory location set above.
+	// Write the video frame image to the bitmap memory location set above.
 	libffmpeg::sws_scale( data->ConvertContext, data->VideoFrame->data, data->VideoFrame->linesize, 0,
 		data->CodecContext->height, srcData, srcLinesize );
 

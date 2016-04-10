@@ -78,6 +78,9 @@ int LameMp3EncodeFile(const char *pszInput, const char *pszOutput)
 	FILE *outf;
 	char **argv;
 
+	// Clear the error list.
+	errorList.clear();
+
 	// Initialze lame MP3 encoder.
 	gf = lame_init();
 	if (gf != NULL)

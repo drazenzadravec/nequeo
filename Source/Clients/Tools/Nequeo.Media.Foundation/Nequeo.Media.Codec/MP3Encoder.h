@@ -86,14 +86,14 @@ namespace Nequeo
 			///	</summary>
 			/// <param name="wstr">The wide string.</param>
 			/// <returns>The result.</returns>
-			std::string MP3Encoder::WstringToString(std::wstring wstr);
+			std::string WstringToString(std::wstring wstr);
 
 			///	<summary>
 			///	Convert from string to wide string.
 			///	</summary>
 			/// <param name="str">The string.</param>
 			/// <returns>The result.</returns>
-			std::wstring MP3Encoder::StringToWstring(std::string str);
+			std::wstring StringToWstring(std::string str);
 
 		};
 	}

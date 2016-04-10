@@ -104,6 +104,74 @@ done:
 }
 
 /// <summary>
+/// Encode the file.
+/// </summary>
+/// <param name="pszInput">The input file to convert.</param>
+/// <param name="pszOutput">The mp4 encoded file.</param>
+/// <param name="videoProfile">The video profile.</param>
+/// <param name="audioProfile">The audio profile.</param>
+/// <returns>The result.</returns>
+extern HRESULT EncodeFile(PCWSTR pszInput, PCWSTR pszOutput, H264ProfileInfo& videoProfile, AACProfileInfo& audioProfile)
+{
+	IMFTranscodeProfile *pProfile = NULL;
+	IMFMediaSource *pSource = NULL;
+	IMFTopology *pTopology = NULL;
+	CSession *pSession = NULL;
+
+	MFTIME duration = 0;
+
+	HRESULT hr = CreateMediaSource(pszInput, &pSource);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = GetSourceDuration(pSource, &duration);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = CreateTranscodeProfile(&pProfile, videoProfile, audioProfile);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = MFCreateTranscodeTopology(pSource, pszOutput, pProfile, &pTopology);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = CSession::Create(&pSession);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = pSession->StartEncodingSession(pTopology);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = RunEncodingSession(pSession, duration);
+
+done:
+	if (pSource)
+	{
+		pSource->Shutdown();
+	}
+
+	SafeRelease(&pSession);
+	SafeRelease(&pProfile);
+	SafeRelease(&pSource);
+	SafeRelease(&pTopology);
+	return hr;
+}
+
+/// <summary>
 /// Create media source.
 /// </summary>
 /// <param name="pszURL">The source input file URL.</param>
@@ -238,6 +306,126 @@ done:
 }
 
 /// <summary>
+/// Create transcode profile.
+/// </summary>
+/// <param name="ppProfile">The media source.</param>
+/// <param name="videoProfile">The video profile.</param>
+/// <param name="audioProfile">The audio profile.</param>
+/// <returns>The result.</returns>
+extern HRESULT CreateTranscodeProfile(IMFTranscodeProfile **ppProfile, H264ProfileInfo& videoProfile, AACProfileInfo& audioProfile)
+{
+	IMFTranscodeProfile *pProfile = NULL;
+	IMFAttributes *pAudio = NULL;
+	IMFAttributes *pVideo = NULL;
+	IMFAttributes *pContainer = NULL;
+
+	HRESULT hr = MFCreateTranscodeProfile(&pProfile);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	// Audio attributes.
+	hr = CreateAACProfile(audioProfile, &pAudio);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = pProfile->SetAudioAttributes(pAudio);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	// Video attributes.
+	hr = CreateH264Profile(videoProfile, &pVideo);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = pProfile->SetVideoAttributes(pVideo);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	// Container attributes.
+	hr = MFCreateAttributes(&pContainer, 1);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = pContainer->SetGUID(MF_TRANSCODE_CONTAINERTYPE, MFTranscodeContainerType_MPEG4);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	hr = pProfile->SetContainerAttributes(pContainer);
+	if (FAILED(hr))
+	{
+		goto done;
+	}
+
+	*ppProfile = pProfile;
+	(*ppProfile)->AddRef();
+
+done:
+	SafeRelease(&pProfile);
+	SafeRelease(&pAudio);
+	SafeRelease(&pVideo);
+	SafeRelease(&pContainer);
+	return hr;
+}
+
+/// <summary>
+/// Create H264 profile.
+/// </summary>
+/// <param name="index">The profile index.</param>
+/// <param name="ppAttributes">The H264 attributes.</param>
+/// <returns>The result.</returns>
+extern HRESULT CreateH264Profile(H264ProfileInfo& profile, IMFAttributes **ppAttributes)
+{
+	IMFAttributes *pAttributes = NULL;
+
+	HRESULT hr = MFCreateAttributes(&pAttributes, 5);
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_H264);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(MF_MT_MPEG2_PROFILE, profile.profile);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = MFSetAttributeSize(
+			pAttributes, MF_MT_FRAME_SIZE,
+			profile.frame_size.Numerator, profile.frame_size.Numerator);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = MFSetAttributeRatio(
+			pAttributes, MF_MT_FRAME_RATE,
+			profile.fps.Numerator, profile.fps.Denominator);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(MF_MT_AVG_BITRATE, profile.bitrate);
+	}
+	if (SUCCEEDED(hr))
+	{
+		*ppAttributes = pAttributes;
+		(*ppAttributes)->AddRef();
+	}
+	SafeRelease(&pAttributes);
+	return hr;
+}
+
+/// <summary>
 /// Create H264 profile.
 /// </summary>
 /// <param name="index">The profile index.</param>
@@ -278,6 +466,59 @@ HRESULT CreateH264Profile(DWORD index, IMFAttributes **ppAttributes)
 	if (SUCCEEDED(hr))
 	{
 		hr = pAttributes->SetUINT32(MF_MT_AVG_BITRATE, profile.bitrate);
+	}
+	if (SUCCEEDED(hr))
+	{
+		*ppAttributes = pAttributes;
+		(*ppAttributes)->AddRef();
+	}
+	SafeRelease(&pAttributes);
+	return hr;
+}
+
+/// <summary>
+/// Create ACC profile.
+/// </summary>
+/// <param name="index">The profile index.</param>
+/// <param name="ppAttributes">The H264 attributes.</param>
+/// <returns>The result.</returns>
+extern HRESULT CreateAACProfile(AACProfileInfo& profile, IMFAttributes **ppAttributes)
+{
+	IMFAttributes *pAttributes = NULL;
+
+	HRESULT hr = MFCreateAttributes(&pAttributes, 7);
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_AAC);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(
+			MF_MT_AUDIO_BITS_PER_SAMPLE, profile.bitsPerSample);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(
+			MF_MT_AUDIO_SAMPLES_PER_SECOND, profile.samplesPerSec);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(
+			MF_MT_AUDIO_NUM_CHANNELS, profile.numChannels);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(
+			MF_MT_AUDIO_AVG_BYTES_PER_SECOND, profile.bytesPerSec);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, 1);
+	}
+	if (SUCCEEDED(hr))
+	{
+		hr = pAttributes->SetUINT32(
+			MF_MT_AAC_AUDIO_PROFILE_LEVEL_INDICATION, profile.aacProfile);
 	}
 	if (SUCCEEDED(hr))
 	{

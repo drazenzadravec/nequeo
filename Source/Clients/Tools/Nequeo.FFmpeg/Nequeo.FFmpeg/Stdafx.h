@@ -40,6 +40,9 @@ namespace libffmpeg
 		#include "libavformat\avio.h"
 		#include "libavcodec\avcodec.h"
 		#include "libswscale\swscale.h"
+		#include <libavutil\imgutils.h>
+		#include <libavutil\samplefmt.h>
+		#include <libswresample\swresample.h>
 
 		#include "lame.h"
 	}

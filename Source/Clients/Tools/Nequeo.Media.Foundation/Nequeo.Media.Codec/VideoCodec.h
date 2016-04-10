@@ -53,15 +53,20 @@ extern H264ProfileInfo h264_profiles[];
 extern AACProfileInfo aac_profiles[];
 
 extern HRESULT EncodeFile(PCWSTR pszInput, PCWSTR pszOutput, int videoProfile, int audioProfile);
+extern HRESULT EncodeFile(PCWSTR pszInput, PCWSTR pszOutput, H264ProfileInfo& videoProfile, AACProfileInfo& audioProfile);
 extern HRESULT CreateMediaSource(PCWSTR pszURL, IMFMediaSource **ppSource);
 extern HRESULT GetSourceDuration(IMFMediaSource *pSource, MFTIME *pDuration);
 extern HRESULT CreateTranscodeProfile(IMFTranscodeProfile **ppProfile, int videoProfile, int audioProfile);
+extern HRESULT CreateTranscodeProfile(IMFTranscodeProfile **ppProfile, H264ProfileInfo& videoProfile, AACProfileInfo& audioProfile);
 extern HRESULT CreateH264Profile(DWORD index, IMFAttributes **ppAttributes);
+extern HRESULT CreateH264Profile(H264ProfileInfo& profile, IMFAttributes **ppAttributes);
 extern HRESULT CreateAACProfile(DWORD index, IMFAttributes **ppAttributes);
+extern HRESULT CreateAACProfile(AACProfileInfo& profile, IMFAttributes **ppAttributes);
 extern HRESULT RunEncodingSession(CSession *pSession, MFTIME duration);
 
 #if defined(__cplusplus)
-extern "C" {
+extern "C" 
+{
 
 	#define INTERNAL_OPTS 0
 

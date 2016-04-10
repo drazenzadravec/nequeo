@@ -51,6 +51,18 @@ namespace Nequeo
 			UINT32  bytesPerSec;
 			UINT32  aacProfile;
 		};
+
+		/// <summary>
+		/// A structure to encapsulate AAC audio.
+		/// </summary>
+		public ref struct AACProfile
+		{
+			unsigned int SamplesPerSec;
+			unsigned int NumberChannels;
+			unsigned int BitsPerSample;
+			unsigned int BytesPerSec;
+			unsigned int AacProfile;
+		};
 	}
 }
 #endif

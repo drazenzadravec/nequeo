@@ -84,7 +84,8 @@ AudioFileReader::!AudioFileReader()
 	// If not disposed.
 	if (!_disposed)
 	{
-
+		// Release all resources.
+		Close();
 	}
 }
 

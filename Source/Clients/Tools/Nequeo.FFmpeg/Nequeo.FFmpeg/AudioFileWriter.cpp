@@ -152,10 +152,10 @@ void AudioFileWriter::Close()
 			// Free the context.
 			libffmpeg::av_free(_data->FormatContext);
 		}
-	}
 
-	// Set to null.
-	_data = nullptr;
+		// Set to null.
+		_data = nullptr;
+	}
 }
 
 /// <summary>
@@ -514,6 +514,12 @@ void add_audio_stream(WriterAudioPrivateData^ data, int64_t bitRate, int sampleR
 		case 8:
 			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_U8;
 			break;
+		case 16:
+			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
+			break;
+		case 32:
+			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S32;
+			break;
 		default:
 			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
 			break;
@@ -529,6 +535,12 @@ void add_audio_stream(WriterAudioPrivateData^ data, int64_t bitRate, int sampleR
 		{
 		case 8:
 			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_U8P;
+			break;
+		case 16:
+			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16P;
+			break;
+		case 32:
+			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S32P;
 			break;
 		default:
 			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16P;
@@ -559,6 +571,12 @@ void add_audio_stream(WriterAudioPrivateData^ data, int64_t bitRate, int sampleR
 			case 8:
 				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_U8;
 				break;
+			case 16:
+				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
+				break;
+			case 32:
+				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S32;
+				break;
 			default:
 				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
 				break;
@@ -574,6 +592,12 @@ void add_audio_stream(WriterAudioPrivateData^ data, int64_t bitRate, int sampleR
 			{
 			case 8:
 				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_U8P;
+				break;
+			case 16:
+				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16P;
+				break;
+			case 32:
+				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S32P;
 				break;
 			default:
 				codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16P;

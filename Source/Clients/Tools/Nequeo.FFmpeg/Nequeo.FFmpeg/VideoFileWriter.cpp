@@ -230,7 +230,7 @@ void VideoFileWriter::Open( String^ fileName, int width, int height, int frameRa
 		// add video stream using the specified video codec
 		add_video_stream( data, width, height, frameRate, bitRate,
 			( codec == VideoCodec::Default ) ? outputFormat->video_codec : (libffmpeg::AVCodecID) video_codecs[(int) codec],
-			( codec == VideoCodec::Default ) ? libffmpeg::AV_PIX_FMT_YUV420P : (libffmpeg::AVPixelFormat) pixel_formats[(int) codec] );
+			( codec == VideoCodec::Default ) ? libffmpeg::AV_PIX_FMT_BGR24 : (libffmpeg::AVPixelFormat) pixel_formats[(int) codec] );
 
 		// Open the video data.
 		open_video( data );
@@ -445,7 +445,7 @@ void write_video_frame(WriterVideoPrivateData^ data)
 
 	if ( data->FormatContext->oformat->flags & AVFMT_RAWPICTURE )
 	{
-		Console::WriteLine( "raw picture must be written" );
+		//throw gcnew VideoException("raw picture must be written" );
 	}
 	else
 	{
@@ -623,13 +623,11 @@ void open_video(WriterVideoPrivateData^ data)
 
 	// prepare scaling context to convert RGB image to video format
 	data->ConvertContext = libffmpeg::sws_getContext( codecContext->width, codecContext->height, libffmpeg::AV_PIX_FMT_BGR24,
-			codecContext->width, codecContext->height, codecContext->pix_fmt,
-			SWS_BICUBIC, NULL, NULL, NULL );
+			codecContext->width, codecContext->height, codecContext->pix_fmt, SWS_BICUBIC, NULL, NULL, NULL );
 
 	// prepare scaling context to convert grayscale image to video format
 	data->ConvertContextGrayscale = libffmpeg::sws_getContext( codecContext->width, codecContext->height, libffmpeg::AV_PIX_FMT_GRAY8,
-			codecContext->width, codecContext->height, codecContext->pix_fmt,
-			SWS_BICUBIC, NULL, NULL, NULL );
+			codecContext->width, codecContext->height, codecContext->pix_fmt, SWS_BICUBIC, NULL, NULL, NULL );
 
 	if ( ( data->ConvertContext == NULL ) || ( data->ConvertContextGrayscale == NULL ) )
 	{
