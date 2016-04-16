@@ -95,6 +95,24 @@ namespace Nequeo
 				void WriteAudioFrame(array<unsigned char>^ frame);
 
 				/// <summary>
+				/// Audio frame to writer.
+				/// </summary>
+				/// <param name="frame">The audio wave frame to write.</param>
+				/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+				/// <remarks><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+				/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+				/// over time.</note></para>
+				/// </remarks>
+				void WriteAudioFrame(array<unsigned char>^ frame, TimeSpan timestamp);
+
+				/// <summary>
+				/// Audio frame to writer.
+				/// </summary>
+				/// <param name="frame">The audio wave frame to write.</param>
+				/// <param name="position">The audio frame position.</param>
+				void WriteAudioFrame(array<unsigned char>^ frame, signed long long position);
+
+				/// <summary>
 				/// Close currently opened audio file if any.
 				/// </summary>
 				void Close();
@@ -108,6 +126,10 @@ namespace Nequeo
 					{
 						return _channels;
 					}
+					void set(int value)
+					{
+						_channels = value;
+					}
 				}
 
 				/// <summary>
@@ -118,6 +140,10 @@ namespace Nequeo
 					int get()
 					{
 						return _bytesPerSample;
+					}
+					void set(int value)
+					{
+						_bytesPerSample = value;
 					}
 				}
 
@@ -130,6 +156,10 @@ namespace Nequeo
 					{
 						return _numberSamples;
 					}
+					void set(int value)
+					{
+						_numberSamples = value;
+					}
 				}
 
 			private:
@@ -139,6 +169,12 @@ namespace Nequeo
 				int _numberSamples;
 
 				WriterAudioPrivateData^ _data;
+
+				/// <summary>
+				/// Audio frame to encoder.
+				/// </summary>
+				/// <param name="frame">The audio wave frame to write.</param>
+				void EncodeAudioFrame(array<unsigned char>^ frame);
 			};
 		}
 	}

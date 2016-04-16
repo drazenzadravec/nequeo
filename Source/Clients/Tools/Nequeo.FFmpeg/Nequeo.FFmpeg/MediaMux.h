@@ -113,10 +113,47 @@ namespace Nequeo
 				void WriteVideoFrame(Bitmap^ frame);
 
 				/// <summary>
+				/// Video frame to writer.
+				/// </summary>
+				/// <param name="frame">The video bitmap frame to write.</param>
+				/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+				/// <remarks><para>The specified bitmap must be either color 24 or 32 bpp image or grayscale 8 bpp (indexed) image.</para>
+				/// <para><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+				/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+				/// over time.</note></para>
+				/// </remarks>
+				void WriteVideoFrame(Bitmap^ frame, TimeSpan timestamp);
+
+				/// <summary>
+				/// Video frame to writer.
+				/// </summary>
+				/// <param name="frame">The video bitmap frame to write.</param>
+				/// <param name="position">The video frame position.</param>
+				void WriteVideoFrame(Bitmap^ frame, signed long long position);
+
+				/// <summary>
 				/// Audio frame to writer.
 				/// </summary>
 				/// <param name="frame">The audio wave frame to write.</param>
 				void WriteAudioFrame(array<unsigned char>^ frame);
+
+				/// <summary>
+				/// Audio frame to writer.
+				/// </summary>
+				/// <param name="frame">The audio wave frame to write.</param>
+				/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+				/// <remarks><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+				/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+				/// over time.</note></para>
+				/// </remarks>
+				void WriteAudioFrame(array<unsigned char>^ frame, TimeSpan timestamp);
+
+				/// <summary>
+				/// Audio frame to writer.
+				/// </summary>
+				/// <param name="frame">The audio wave frame to write.</param>
+				/// <param name="position">The audio frame position.</param>
+				void WriteAudioFrame(array<unsigned char>^ frame, signed long long position);
 
 				/// <summary>
 				/// Close currently opened files if any.
@@ -224,6 +261,18 @@ namespace Nequeo
 				int _bytesPerSample;
 				int _numberSamples;
 				int _sampleRate;
+
+				/// <summary>
+				/// Video frame to encoder.
+				/// </summary>
+				/// <param name="frame">The video bitmap frame to write.</param>
+				void EncodeVideoFrame(Bitmap^ frame);
+
+				/// <summary>
+				/// Audio frame to encoder.
+				/// </summary>
+				/// <param name="frame">The audio wave frame to write.</param>
+				void EncodeAudioFrame(array<unsigned char>^ frame);
 				
 			};
 		}

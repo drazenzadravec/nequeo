@@ -327,6 +327,16 @@ namespace Nequeo
 				void WriteVideoFrame(Bitmap^ frame, TimeSpan timestamp);
 
 				/// <summary>
+				/// Video frame to writer.
+				/// </summary>
+				/// <param name="frame">The video bitmap frame to write.</param>
+				/// <param name="position">The video frame position.</param>
+				///
+				/// <remarks><para>The specified bitmap must be either color 24 or 32 bpp image or grayscale 8 bpp (indexed) image.</para>
+				/// </remarks>
+				void WriteVideoFrame(Bitmap^ frame, signed long long position);
+
+				/// <summary>
 				/// Close currently opened video file if any.
 				/// </summary>
 				/// 
@@ -363,6 +373,13 @@ namespace Nequeo
 				// private data of the class
 				WriterVideoPrivateData^ data;
 				bool _disposed;
+
+				/// <summary>
+				/// Video frame to encoder.
+				/// </summary>
+				/// <param name="frame">The video bitmap frame to write.</param>
+				void EncodeVideoFrame(Bitmap^ frame);
+
 			};
 
 		}

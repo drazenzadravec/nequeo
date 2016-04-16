@@ -379,51 +379,10 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame )
 /// <exception cref="VideoException">A error occurred while writing new video frame. See exception message.</exception>
 void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 {
-    CheckIfDisposed( );
+	// Video frame to encoder.
+	EncodeVideoFrame(frame);
 
-	if ( data == nullptr )
-	{
-		throw gcnew System::IO::IOException( "A video file was not opened yet." );
-	}
-
-	if ( ( frame->PixelFormat != PixelFormat::Format24bppRgb ) &&
-	     ( frame->PixelFormat != PixelFormat::Format32bppArgb ) &&
-		 ( frame->PixelFormat != PixelFormat::Format32bppPArgb ) &&
-	 	 ( frame->PixelFormat != PixelFormat::Format32bppRgb ) &&
-		 ( frame->PixelFormat != PixelFormat::Format8bppIndexed ) )
-	{
-		throw gcnew ArgumentException( "The provided bitmap must be 24 or 32 bpp color image or 8 bpp grayscale image." );
-	}
-
-	if ( ( frame->Width != m_width ) || ( frame->Height != m_height ) )
-	{
-		throw gcnew ArgumentException( "Bitmap size must be of the same as video size, which was specified on opening video file." );
-	}
-
-	// lock the bitmap to allocate memory.
-	BitmapData^ bitmapData = frame->LockBits( System::Drawing::Rectangle( 0, 0, m_width, m_height ),
-		ImageLockMode::ReadOnly, ( frame->PixelFormat == PixelFormat::Format8bppIndexed ) ? PixelFormat::Format8bppIndexed : PixelFormat::Format24bppRgb );
-
-	// Get the pointer to the first scan pixel
-	uint8_t* ptr = reinterpret_cast<uint8_t*>( static_cast<void*>( bitmapData->Scan0 ) );
-
-	// Get the stride (scan) pointer to the first pixel
-	uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
-	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };
-
-	// convert source image to the format of the video file, write the image to the bitmap data memory block.
-	if ( frame->PixelFormat == PixelFormat::Format8bppIndexed )
-	{
-		libffmpeg::sws_scale( data->ConvertContextGrayscale, srcData, srcLinesize, 0, m_height, data->VideoFrame->data, data->VideoFrame->linesize );
-	}
-	else
-	{
-		libffmpeg::sws_scale( data->ConvertContext, srcData, srcLinesize, 0, m_height, data->VideoFrame->data, data->VideoFrame->linesize );
-	}
-
-	// Unlick the memory where the bitmap is stored.
-	frame->UnlockBits( bitmapData );
-
+	// Add a time stamp.
 	if ( timestamp.Ticks >= 0 )
 	{
 		const double frameNumber = timestamp.TotalSeconds * m_frameRate;
@@ -432,6 +391,78 @@ void VideoFileWriter::WriteVideoFrame( Bitmap^ frame, TimeSpan timestamp )
 
 	// write the converted frame to the video file
 	write_video_frame( data );
+}
+
+/// <summary>
+/// Video frame to writer.
+/// </summary>
+/// <param name="frame">The video bitmap frame to write.</param>
+/// <param name="position">The video frame position.</param>
+///
+/// <remarks><para>The specified bitmap must be either color 24 or 32 bpp image or grayscale 8 bpp (indexed) image.</para>
+/// </remarks>
+void VideoFileWriter::WriteVideoFrame(Bitmap^ frame, signed long long position)
+{
+	// Video frame to encoder.
+	EncodeVideoFrame(frame);
+
+	// Count next frame.
+	data->VideoFrame->pts = position;
+
+	// write the converted frame to the video file
+	write_video_frame(data);
+}
+
+/// <summary>
+/// Video frame to encoder.
+/// </summary>
+/// <param name="frame">The video bitmap frame to write.</param>
+void VideoFileWriter::EncodeVideoFrame(Bitmap^ frame)
+{
+	CheckIfDisposed();
+
+	if (data == nullptr)
+	{
+		throw gcnew System::IO::IOException("A video file was not opened yet.");
+	}
+
+	if ((frame->PixelFormat != PixelFormat::Format24bppRgb) &&
+		(frame->PixelFormat != PixelFormat::Format32bppArgb) &&
+		(frame->PixelFormat != PixelFormat::Format32bppPArgb) &&
+		(frame->PixelFormat != PixelFormat::Format32bppRgb) &&
+		(frame->PixelFormat != PixelFormat::Format8bppIndexed))
+	{
+		throw gcnew ArgumentException("The provided bitmap must be 24 or 32 bpp color image or 8 bpp grayscale image.");
+	}
+
+	if ((frame->Width != m_width) || (frame->Height != m_height))
+	{
+		throw gcnew ArgumentException("Bitmap size must be of the same as video size, which was specified on opening video file.");
+	}
+
+	// lock the bitmap to allocate memory.
+	BitmapData^ bitmapData = frame->LockBits(System::Drawing::Rectangle(0, 0, m_width, m_height),
+		ImageLockMode::ReadOnly, (frame->PixelFormat == PixelFormat::Format8bppIndexed) ? PixelFormat::Format8bppIndexed : PixelFormat::Format24bppRgb);
+
+	// Get the pointer to the first scan pixel
+	uint8_t* ptr = reinterpret_cast<uint8_t*>(static_cast<void*>(bitmapData->Scan0));
+
+	// Get the stride (scan) pointer to the first pixel
+	uint8_t* srcData[4] = { ptr, NULL, NULL, NULL };
+	int srcLinesize[4] = { bitmapData->Stride, 0, 0, 0 };
+
+	// convert source image to the format of the video file, write the image to the bitmap data memory block.
+	if (frame->PixelFormat == PixelFormat::Format8bppIndexed)
+	{
+		libffmpeg::sws_scale(data->ConvertContextGrayscale, srcData, srcLinesize, 0, m_height, data->VideoFrame->data, data->VideoFrame->linesize);
+	}
+	else
+	{
+		libffmpeg::sws_scale(data->ConvertContext, srcData, srcLinesize, 0, m_height, data->VideoFrame->data, data->VideoFrame->linesize);
+	}
+
+	// Unlock the memory where the bitmap is stored.
+	frame->UnlockBits(bitmapData);
 }
 
 /// <summary>

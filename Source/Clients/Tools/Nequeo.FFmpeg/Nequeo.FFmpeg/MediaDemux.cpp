@@ -141,7 +141,7 @@ void MediaDemux::Open(String^ fileName)
 		_data->FormatContext = open_file(nativeFileName);
 		if (_data->FormatContext == NULL)
 		{
-			throw gcnew System::IO::IOException("Cannot open the file.");
+			throw gcnew MediaDemuxException("Cannot open the file.");
 		}
 
 		// retrieve stream information
@@ -564,14 +564,18 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 				// For the number of channels.
 				for (int ch = 0; ch < data->AudioCodecContext->channels; ch++)
 				{
-					// Get the point to this set of data.
-					uint8_t *sample = data->AudioFrame->data[ch] + (data_size * i);
-
-					// Write the data size
-					for (int j = 0; j < data_size; j++)
+					// If channel exists.
+					if (data->AudioFrame->data[ch])
 					{
-						// Write the sound data.
-						audio->Add((unsigned char)(sample[j]));
+						// Get the point to this set of data.
+						uint8_t *sample = data->AudioFrame->data[ch] + (data_size * i);
+
+						// Write the data size
+						for (int j = 0; j < data_size; j++)
+						{
+							// Write the sound data.
+							audio->Add((unsigned char)(sample[j]));
+						}
 					}
 				}
 			}

@@ -135,6 +135,10 @@ namespace Nequeo
 					{
 						return _channels;
 					}
+					void set(int value)
+					{
+						_channels = value;
+					}
 				}
 
 				/// <summary>
@@ -157,6 +161,10 @@ namespace Nequeo
 					{
 						return _bitsPerSample;
 					}
+					void set(int value)
+					{
+						_bitsPerSample = value;
+					}
 				}
 
 				/// <summary>
@@ -168,6 +176,21 @@ namespace Nequeo
 					int get()
 					{
 						return _averageByteRate;
+					}
+				}
+
+				/// <summary>
+				/// Gets the number of audio samples (per channel) described by this frame.
+				/// </summary>
+				property int NumberSamples
+				{
+					int get()
+					{
+						return _numberSamples;
+					}
+					void set(int value)
+					{
+						_numberSamples = value;
 					}
 				}
 

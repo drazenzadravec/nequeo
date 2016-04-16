@@ -96,7 +96,7 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;avfilter.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -110,7 +110,7 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;avfilter.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -123,7 +123,7 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;avfilter.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x86\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -137,13 +137,16 @@
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avformat.lib;avcodec.lib;avutil.lib;swscale.lib;swresample.lib;avfilter.lib;libmp3lame-static.lib;libmpghip-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\lib;..\..\..\..\..\ThirdPartyTools\Audio\lame-3.99.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="Nequeo.IO.Audio">
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -155,11 +158,17 @@
     <ClInclude Include="AudioException.h" />
     <ClInclude Include="AudioFileReader.h" />
     <ClInclude Include="AudioFileWriter.h" />
+    <ClInclude Include="AudioSampler.h" />
     <ClInclude Include="IVideoSource.h" />
+    <ClInclude Include="MediaConverter.h" />
+    <ClInclude Include="MediaConverterData.h" />
+    <ClInclude Include="MediaConverterDataNative.h" />
+    <ClInclude Include="MediaConverterException.h" />
     <ClInclude Include="MediaDemux.h" />
     <ClInclude Include="MediaDemuxData.h" />
     <ClInclude Include="MediaDemuxDataNative.h" />
     <ClInclude Include="MediaDemuxException.h" />
+    <ClInclude Include="MediaMetadata.h" />
     <ClInclude Include="MediaMux.h" />
     <ClInclude Include="MediaMuxData.h" />
     <ClInclude Include="MediaMuxDataNative.h" />
@@ -185,8 +194,12 @@
     <ClCompile Include="AudioException.cpp" />
     <ClCompile Include="AudioFileReader.cpp" />
     <ClCompile Include="AudioFileWriter.cpp" />
+    <ClCompile Include="AudioSampler.cpp" />
+    <ClCompile Include="MediaConverter.cpp" />
+    <ClCompile Include="MediaConverterException.cpp" />
     <ClCompile Include="MediaDemux.cpp" />
     <ClCompile Include="MediaDemuxException.cpp" />
+    <ClCompile Include="MediaMetadata.cpp" />
     <ClCompile Include="MediaMux.cpp" />
     <ClCompile Include="MediaMuxException.cpp" />
     <ClCompile Include="NewFrameEventArgs.cpp" />

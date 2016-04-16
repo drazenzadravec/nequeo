@@ -43,6 +43,10 @@ namespace libffmpeg
 		#include <libavutil\imgutils.h>
 		#include <libavutil\samplefmt.h>
 		#include <libswresample\swresample.h>
+		#include <libavfilter/avfiltergraph.h>
+		#include <libavfilter/buffersink.h>
+		#include <libavfilter/buffersrc.h>
+		#include <libavutil/pixdesc.h>
 
 		#include "lame.h"
 	}

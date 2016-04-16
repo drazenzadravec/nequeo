@@ -264,6 +264,58 @@ void AudioFileWriter::Open(String^ fileName, WaveStructure header, AudioCodec co
 /// <param name="frame">The audio wave frame to write.</param>
 void AudioFileWriter::WriteAudioFrame(array<unsigned char>^ frame)
 {
+	WriteAudioFrame(frame, TimeSpan::MinValue);
+}
+
+/// <summary>
+/// Audio frame to writer.
+/// </summary>
+/// <param name="frame">The audio wave frame to write.</param>
+/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+/// <remarks><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+/// over time.</note></para>
+/// </remarks>
+void AudioFileWriter::WriteAudioFrame(array<unsigned char>^ frame, TimeSpan timestamp)
+{
+	// Audio frame to encoder.
+	EncodeAudioFrame(frame);
+
+	// Add a time stamp.
+	if (timestamp.Ticks >= 0)
+	{
+		const int audioRate = _data->AudioFrame->nb_samples * _channels;
+		const double frameNumber = timestamp.TotalSeconds * audioRate;
+		_data->AudioFrame->pts = static_cast<int64_t>(frameNumber);
+	}
+
+	// Write the converted frame to the audio file.
+	write_audio_frame(_data);
+}
+
+/// <summary>
+/// Audio frame to writer.
+/// </summary>
+/// <param name="frame">The audio wave frame to write.</param>
+/// <param name="position">The audio frame position.</param>
+void AudioFileWriter::WriteAudioFrame(array<unsigned char>^ frame, signed long long position)
+{
+	// Audio frame to encoder.
+	EncodeAudioFrame(frame);
+
+	// Count next frame.
+	_data->AudioFrame->pts = position;
+
+	// Write the converted frame to the audio file.
+	write_audio_frame(_data);
+}
+
+/// <summary>
+/// Audio frame to encoder.
+/// </summary>
+/// <param name="frame">The audio wave frame to write.</param>
+void AudioFileWriter::EncodeAudioFrame(array<unsigned char>^ frame)
+{
 	if (_data == nullptr)
 	{
 		throw gcnew System::IO::IOException("An audio file was not opened yet.");
@@ -294,9 +346,6 @@ void AudioFileWriter::WriteAudioFrame(array<unsigned char>^ frame)
 			}
 		}
 	}
-
-	// Write the converted frame to the audio file.
-	write_audio_frame(_data);
 }
 
 /// <summary>

@@ -349,14 +349,18 @@ array<unsigned char>^ AudioFileReader::DecodeAudioFrame(int bytesDecoded)
 			// For the number of channels.
 			for (int ch = 0; ch < _data->CodecContext->channels; ch++)
 			{
-				// Get the point to this set of data.
-				uint8_t *sample = _data->AudioFrame->data[ch] + (data_size * i);
-
-				// Write the data size
-				for (int j = 0; j < data_size; j++)
+				// If channel exists.
+				if (_data->AudioFrame->data[ch])
 				{
-					// Write the sound data.
-					soundData->Add((unsigned char)(sample[j]));
+					// Get the point to this set of data.
+					uint8_t *sample = _data->AudioFrame->data[ch] + (data_size * i);
+
+					// Write the data size
+					for (int j = 0; j < data_size; j++)
+					{
+						// Write the sound data.
+						soundData->Add((unsigned char)(sample[j]));
+					}
 				}
 			}
 		}

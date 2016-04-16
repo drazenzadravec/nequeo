@@ -294,6 +294,63 @@ void MediaMux::Open(String^ fileName, int videoWidth, int videoHeight, int video
 /// <param name="frame">The video bitmap frame to write.</param>
 void MediaMux::WriteVideoFrame(Bitmap^ frame)
 {
+	WriteVideoFrame(frame, TimeSpan::MinValue);
+}
+
+/// <summary>
+/// Video frame to writer.
+/// </summary>
+/// <param name="frame">The video bitmap frame to write.</param>
+/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+/// <remarks><para>The specified bitmap must be either color 24 or 32 bpp image or grayscale 8 bpp (indexed) image.</para>
+/// <para><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+/// over time.</note></para>
+/// </remarks>
+void MediaMux::WriteVideoFrame(Bitmap^ frame, TimeSpan timestamp)
+{
+	// Video frame to encoder.
+	EncodeVideoFrame(frame);
+
+	// If is time stamp.
+	if (timestamp.Ticks >= 0)
+	{
+		const double frameNumber = timestamp.TotalSeconds * _frameRate;
+		_data->VideoStream->frame->pts = static_cast<int64_t>(frameNumber);
+	}
+	else
+	{
+		// Count next frame.
+		_data->VideoStream->frame->pts = _data->VideoStream->next_pts++;
+	}
+
+	// Write the video frame.
+	_data->Encode_Video = !write_video_frame(_data);
+}
+
+/// <summary>
+/// Video frame to writer.
+/// </summary>
+/// <param name="frame">The video bitmap frame to write.</param>
+/// <param name="position">The video frame position.</param>
+void MediaMux::WriteVideoFrame(Bitmap^ frame, signed long long position)
+{
+	// Video frame to encoder.
+	EncodeVideoFrame(frame);
+
+	// Count next frame.
+	_data->VideoStream->frame->pts = position;
+
+	// Write the video frame.
+	_data->Encode_Video = !write_video_frame(_data);
+}
+
+/// <summary>
+/// Video frame to encoder.
+/// </summary>
+/// <param name="frame">The video bitmap frame to write.</param>
+void MediaMux::EncodeVideoFrame(Bitmap^ frame)
+{
 	if (_data == nullptr)
 	{
 		throw gcnew System::IO::IOException("A video file was not opened yet.");
@@ -335,9 +392,6 @@ void MediaMux::WriteVideoFrame(Bitmap^ frame)
 
 	// Unlick the memory where the bitmap is stored.
 	frame->UnlockBits(bitmapData);
-
-	// Write the video frame.
-	_data->Encode_Video = !write_video_frame(_data);
 }
 
 /// <summary>
@@ -345,6 +399,63 @@ void MediaMux::WriteVideoFrame(Bitmap^ frame)
 /// </summary>
 /// <param name="frame">The audio wave frame to write.</param>
 void MediaMux::WriteAudioFrame(array<unsigned char>^ frame)
+{
+	WriteAudioFrame(frame, TimeSpan::MinValue);
+}
+
+/// <summary>
+/// Audio frame to writer.
+/// </summary>
+/// <param name="frame">The audio wave frame to write.</param>
+/// <param name="timestamp">Frame timestamp, total time since recording started.</param>
+/// <remarks><note>The <paramref name="timestamp"/> parameter allows user to specify presentation
+/// time of the frame being saved. However, it is user's responsibility to make sure the value is increasing
+/// over time.</note></para>
+/// </remarks>
+void MediaMux::WriteAudioFrame(array<unsigned char>^ frame, TimeSpan timestamp)
+{
+	// Audio frame to encoder.
+	EncodeAudioFrame(frame);
+
+	// If is time stamp.
+	if (timestamp.Ticks >= 0)
+	{
+		const int audioRate = _data->AudioStream->frame->nb_samples * _channels;
+		const double frameNumber = timestamp.TotalSeconds * audioRate;
+		_data->AudioStream->frame->pts = static_cast<int64_t>(frameNumber);
+	}
+	else
+	{
+		_data->AudioStream->frame->pts = _data->AudioStream->next_pts;
+		_data->AudioStream->next_pts += _data->AudioStream->frame->nb_samples;
+	}
+
+	// Write the audio frame.
+	_data->Encode_Audio = !write_audio_frame(_data);
+}
+
+/// <summary>
+/// Audio frame to writer.
+/// </summary>
+/// <param name="frame">The audio wave frame to write.</param>
+/// <param name="position">The audio frame position.</param>
+void MediaMux::WriteAudioFrame(array<unsigned char>^ frame, signed long long position)
+{
+	// Audio frame to encoder.
+	EncodeAudioFrame(frame);
+
+	// Count next frame.
+	_data->AudioStream->frame->pts = position;
+
+	// Write the audio frame.
+	_data->Encode_Audio = !write_audio_frame(_data);
+}
+
+/// <summary>
+/// Audio frame to encoder.
+/// </summary>
+/// <param name="frame">The audio wave frame to write.</param>
+void MediaMux::EncodeAudioFrame(array<unsigned char>^ frame)
 {
 	if (_data == nullptr)
 	{
@@ -376,9 +487,6 @@ void MediaMux::WriteAudioFrame(array<unsigned char>^ frame)
 			}
 		}
 	}
-
-	// Write the audio frame.
-	_data->Encode_Audio = !write_audio_frame(_data);
 }
 
 /// <summary>
@@ -745,9 +853,6 @@ int write_video_frame(MediaMuxData^ data)
 	int got_packet = 0;
 	libffmpeg::AVPacket pkt = { 0 };
 
-	// Count next frame.
-	data->VideoStream->frame->pts = data->VideoStream->next_pts++;
-
 	c = data->VideoStream->st->codec;
 	frame = data->VideoStream->frame;
 	av_init_packet(&pkt);
@@ -797,10 +902,6 @@ int write_audio_frame(MediaMuxData^ data)
 	int dst_nb_samples;
 
 	frame = data->AudioStream->frame;
-	frame->pts = data->AudioStream->next_pts;
-	data->AudioStream->next_pts += frame->nb_samples;
-
-	av_init_packet(&pkt);
 	c = data->AudioStream->st->codec;
 	av_init_packet(&pkt);
 
@@ -816,7 +917,9 @@ int write_audio_frame(MediaMuxData^ data)
 		*/
 		ret = libffmpeg::av_frame_make_writable(data->AudioStream->frame);
 		if (ret < 0)
-			exit(1);
+		{
+			throw gcnew MediaMuxException("Error while allocating frame.");
+		}
 
 		/* convert to destination format */
 		ret = libffmpeg::swr_convert(data->AudioStream->swr_ctx, data->AudioStream->frame->data, dst_nb_samples,
