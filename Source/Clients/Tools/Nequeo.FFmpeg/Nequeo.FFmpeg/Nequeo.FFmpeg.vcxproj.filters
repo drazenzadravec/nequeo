@@ -114,6 +114,15 @@
     <ClInclude Include="MediaMetadata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AudioSamplerData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSamplerDataNative.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">

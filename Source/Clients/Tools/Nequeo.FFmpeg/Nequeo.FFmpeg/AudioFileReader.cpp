@@ -167,6 +167,51 @@ WaveStructure AudioFileReader::Open(String^ fileName)
 		wave.SampleRate = _data->CodecContext->sample_rate;
 		wave.FmtAverageByteRate = (_data->CodecContext->sample_rate * _data->CodecContext->channels) * (wave.BitsPerSample / 8);
 		wave.FmtBlockAlign = (short)_data->CodecContext->block_align;
+		_numberSamples = _data->AudioFrame->nb_samples;
+		_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8;
+
+		// Select the sample format.
+		switch (_data->CodecContext->sample_fmt)
+		{
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_NONE:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_NONE;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_U8:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S16:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S16;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S32:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S32;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_FLT:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_FLT;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_DBL:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_DBL;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_U8P:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8P;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S16P:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S16P;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S32P:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S32P;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_FLTP:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_FLTP;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_DBLP:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_DBLP;
+			break;
+		case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_NB:
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_NB;
+			break;
+		default:
+			break;
+		}
 
 		// All is good.
 		success = true;
@@ -340,6 +385,9 @@ array<unsigned char>^ AudioFileReader::DecodeAudioFrame(int bytesDecoded)
 	}
 	else
 	{
+		// Get the number of ssamples per channel.
+		_numberSamples = _data->AudioFrame->nb_samples;
+
 		// Create a new sound data collection.
 		List<unsigned char>^ soundData = gcnew List<unsigned char>();
 

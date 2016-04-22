@@ -69,8 +69,9 @@ static int open_codec_context(MediaDemuxData^ data, enum libffmpeg::AVMediaType 
 /// <param name="cached">The cache.</param>
 /// <param name="audio">The audio data.</param>
 /// <param name="video">The video data.</param>
+/// <param name="numberSamples">The number of samples per channel.</param>
 /// <returns>Data read.</returns>
-static int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video);
+static int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples);
 
 /// <summary>
 /// Decode the packet.
@@ -215,6 +216,50 @@ void MediaDemux::Open(String^ fileName)
 
 			// number of samples.
 			_numberSamples = _data->AudioFrame->nb_samples;
+			_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8;
+
+			// Select the sample format.
+			switch (_data->AudioCodecContext->sample_fmt)
+			{
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_NONE:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_NONE;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_U8:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S16:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S16;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S32:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S32;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_FLT:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_FLT;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_DBL:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_DBL;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_U8P:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8P;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S16P:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S16P;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S32P:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S32P;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_FLTP:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_FLTP;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_DBLP:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_DBLP;
+				break;
+			case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_NB:
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_NB;
+				break;
+			default:
+				break;
+			}
 		}
 
 		// if no audo or video exists in the file.
@@ -256,6 +301,7 @@ int MediaDemux::ReadFrame(
 {
 	int ret = 0;
 	int got_frame;
+	int numberSamples;
 	libffmpeg::AVPacket* packet = _data->Packet;
 
 	// Read some frame data.
@@ -271,7 +317,9 @@ int MediaDemux::ReadFrame(
 		do 
 		{
 			// Decode the packet data.
-			ret = decode_packet(_data, &got_frame, 0, audioData, videoData);
+			ret = decode_packet(_data, &got_frame, 0, audioData, videoData, &numberSamples);
+			_numberSamples = numberSamples;
+
 			if (ret < 0)
 				break;
 
@@ -454,8 +502,9 @@ int open_codec_context(MediaDemuxData^ data, enum libffmpeg::AVMediaType type)
 /// <param name="cached">The cache.</param>
 /// <param name="audio">The audio data.</param>
 /// <param name="video">The video data.</param>
+/// <param name="numberSamples">The number of samples per channel.</param>
 /// <returns>Data read.</returns>
-int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video)
+int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples)
 {
 	int ret = 0;
 
@@ -557,6 +606,9 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 			
 			// Audio frame has been read.
 			data->FrameType = 0;
+
+			// Get the number of samples per channel.
+			*numberSamples = data->AudioFrame->nb_samples;
 
 			// For the number of samples per channel.
 			for (int i = 0; i < data->AudioFrame->nb_samples; i++)

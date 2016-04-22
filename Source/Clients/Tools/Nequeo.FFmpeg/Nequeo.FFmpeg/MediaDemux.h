@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "MediaDemuxData.h"
 #include "MediaDemuxException.h"
+#include "SampleFormat.h"
 
 using namespace System;
 using namespace System::Collections;
@@ -194,6 +195,17 @@ namespace Nequeo
 					}
 				}
 
+				/// <summary>
+				/// Gets the sample format.
+				/// </summary>
+				property SampleFormat Sample
+				{
+					SampleFormat get()
+					{
+						return _sampleFormat;
+					}
+				}
+
 			private:
 				bool _disposed;
 				int _frameType;
@@ -210,6 +222,7 @@ namespace Nequeo
 				int _sampleRate;
 				int _averageByteRate;
 				int _blockAlign;
+				SampleFormat _sampleFormat;
 			};
 		}
 	}

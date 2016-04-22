@@ -159,6 +159,8 @@
     <ClInclude Include="AudioFileReader.h" />
     <ClInclude Include="AudioFileWriter.h" />
     <ClInclude Include="AudioSampler.h" />
+    <ClInclude Include="AudioSamplerData.h" />
+    <ClInclude Include="AudioSamplerDataNative.h" />
     <ClInclude Include="IVideoSource.h" />
     <ClInclude Include="MediaConverter.h" />
     <ClInclude Include="MediaConverterData.h" />
@@ -178,6 +180,7 @@
     <ClInclude Include="ReaderVideoPrivateData.h" />
     <ClInclude Include="ReasonToFinishPlaying.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SampleFormat.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="VideoCodec.h" />
     <ClInclude Include="VideoException.h" />

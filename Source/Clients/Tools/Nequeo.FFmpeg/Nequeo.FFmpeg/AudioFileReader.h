@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "ReaderAudioPrivateData.h"
 #include "AudioException.h"
+#include "SampleFormat.h"
 
 using namespace System;
 using namespace System::Drawing;
@@ -92,8 +93,32 @@ namespace Nequeo
 				/// </summary>
 				void Close();
 
+				/// <summary>
+				/// Gets the number of audio samples (per channel) described by this frame.
+				/// </summary>
+				property int NumberSamples
+				{
+					int get()
+					{
+						return _numberSamples;
+					}
+				}
+
+				/// <summary>
+				/// Gets the sample format.
+				/// </summary>
+				property SampleFormat Sample
+				{
+					SampleFormat get()
+					{
+						return _sampleFormat;
+					}
+				}
+
 			private:
 				bool _disposed;
+				int _numberSamples;
+				SampleFormat _sampleFormat;
 				ReaderAudioPrivateData^ _data;
 
 				/// <summary>
