@@ -59,7 +59,8 @@ namespace Nequeo
 	//   NOTE: If the function fails to install the service, it prints the error 
 	//   in the standard output stream for users to diagnose the problem.
 	//
-	void InstallService(PWSTR pszServiceName,
+	void InstallService(
+		PWSTR pszServiceName,
 		PWSTR pszDisplayName,
 		DWORD dwStartType,
 		PWSTR pszDependencies,
@@ -193,6 +194,64 @@ namespace Nequeo
 		}
 
 		wprintf(L"%s is removed.\n", pszServiceName);
+
+	Cleanup:
+		// Centralized cleanup for all allocated resources.
+		if (schSCManager)
+		{
+			CloseServiceHandle(schSCManager);
+			schSCManager = NULL;
+		}
+		if (schService)
+		{
+			CloseServiceHandle(schService);
+			schService = NULL;
+		}
+	}
+
+	//
+	//	 FUNCTION: ServiceDescription
+	//
+	//   PURPOSE: Change the description of the service.
+	//
+	//   PARAMETERS: 
+	//   * pszServiceName - the name of the service to change.
+	//   * pszDescription - the description of the service..
+	//
+	void ServiceDescription(PWSTR pszServiceName, LPTSTR pszDescription)
+	{
+		SC_HANDLE schSCManager = NULL;
+		SC_HANDLE schService = NULL;
+		SERVICE_DESCRIPTION sd;
+
+		// Open the local default service control manager database
+		schSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
+		if (schSCManager == NULL)
+		{
+			wprintf(L"OpenSCManager failed w/err 0x%08lx\n", GetLastError());
+			goto Cleanup;
+		}
+
+		// Open the service with delete, stop, and query status permissions
+		schService = OpenService(schSCManager, pszServiceName, SERVICE_CHANGE_CONFIG);
+		if (schService == NULL)
+		{
+			wprintf(L"OpenService failed w/err 0x%08lx\n", GetLastError());
+			goto Cleanup;
+		}
+
+		// Set the service description.
+		sd.lpDescription = pszDescription;
+
+		// Change the description.
+		if (!ChangeServiceConfig2(
+			schService,						// handle to service
+			SERVICE_CONFIG_DESCRIPTION,		// change: description
+			&sd))							// new description
+		{
+			wprintf(L"ChangeServiceConfig failed (%d)\n", GetLastError());
+			goto Cleanup;
+		}
 
 	Cleanup:
 		// Centralized cleanup for all allocated resources.

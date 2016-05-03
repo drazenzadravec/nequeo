@@ -63,6 +63,20 @@ namespace Nequeo
 		/// <returns>The wide string.</returns>
 		std::wstring StringToWideString(std::string str);
 
+		/// <summary>
+		/// Convert from wide string to ASCII string.
+		/// </summary>
+		/// <param name="str">The string.</param>
+		/// <returns>The wide string.</returns>
+		std::string ToAsciiString(const std::wstring &source);
+
+		/// <summary>
+		/// Convert from string to UNICODE wide string.
+		/// </summary>
+		/// <param name="str">The string.</param>
+		/// <returns>The wide string.</returns>
+		std::wstring ToUnicodeString(const std::string &source);
+
 	private:
 		bool _disposed;
 	};

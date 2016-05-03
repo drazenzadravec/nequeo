@@ -59,7 +59,8 @@ namespace Nequeo
 	//   NOTE: If the function fails to install the service, it prints the error 
 	//   in the standard output stream for users to diagnose the problem.
 	//
-	void InstallService(PWSTR pszServiceName,
+	void InstallService(
+		PWSTR pszServiceName,
 		PWSTR pszDisplayName,
 		DWORD dwStartType,
 		PWSTR pszDependencies,
@@ -80,5 +81,16 @@ namespace Nequeo
 	//   error in the standard output stream for users to diagnose the problem.
 	//
 	void UninstallService(PWSTR pszServiceName);
+
+	//
+	//	 FUNCTION: ServiceDescription
+	//
+	//   PURPOSE: Change the description of the service.
+	//
+	//   PARAMETERS: 
+	//   * pszServiceName - the name of the service to change.
+	//   * pszDescription - the description of the service..
+	//
+	void ServiceDescription(PWSTR pszServiceName, LPTSTR pszDescription);
 }
 #endif

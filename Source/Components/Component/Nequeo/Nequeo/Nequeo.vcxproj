@@ -87,7 +87,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -113,8 +113,15 @@ copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\B
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
-copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h
-copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"</Command>
+copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h"
+copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"
+copy $(ProjectDir)\ServiceBase.h "..\..\..\..\References\Release\Include\Components\Base\ServiceBase.h"
+copy $(ProjectDir)\ServiceInstaller.h "..\..\..\..\References\Release\Include\Components\Base\ServiceInstaller.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"
+copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
+copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
+copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,7 +131,7 @@ copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Component
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,8 +157,15 @@ copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\B
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
-copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h
-copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"</Command>
+copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base\ucp.h"
+copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"
+copy $(ProjectDir)\ServiceBase.h "..\..\..\..\References\Release\Include\Components\Base\ServiceBase.h"
+copy $(ProjectDir)\ServiceInstaller.h "..\..\..\..\References\Release\Include\Components\Base\ServiceInstaller.h"
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"
+copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
+copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
+copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -163,7 +177,7 @@ copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Component
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -196,7 +210,11 @@ copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base
 copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"
 copy $(ProjectDir)\ServiceBase.h "..\..\..\..\References\Release\Include\Components\Base\ServiceBase.h"
 copy $(ProjectDir)\ServiceInstaller.h "..\..\..\..\References\Release\Include\Components\Base\ServiceInstaller.h"
-copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"</Command>
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"
+copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
+copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
+copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -208,7 +226,7 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -241,7 +259,11 @@ copy $(ProjectDir)\ucp.h "..\..\..\..\References\Release\Include\Components\Base
 copy $(ProjectDir)\UnWindows.h "..\..\..\..\References\Release\Include\Components\Base\UnWindows.h"
 copy $(ProjectDir)\ServiceBase.h "..\..\..\..\References\Release\Include\Components\Base\ServiceBase.h"
 copy $(ProjectDir)\ServiceInstaller.h "..\..\..\..\References\Release\Include\Components\Base\ServiceInstaller.h"
-copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"</Command>
+copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Base\ThreadPool.h"
+copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
+copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
+copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -254,6 +276,10 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
     <ClInclude Include="ByteOrder.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="LibraryLoader.h" />
+    <ClInclude Include="NativeHandler.h" />
+    <ClInclude Include="NativeProxy.h" />
+    <ClInclude Include="NativeProxyBase.h" />
+    <ClInclude Include="NativeProxyStatic.h" />
     <ClInclude Include="pcre.h" />
     <ClInclude Include="pcre_config.h" />
     <ClInclude Include="pcre_internal.h" />
@@ -276,6 +302,9 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
     <ClCompile Include="AtomicCounter.cpp" />
     <ClCompile Include="ByteOrder.cpp" />
     <ClCompile Include="LibraryLoader.cpp" />
+    <ClCompile Include="NativeProxy.cpp" />
+    <ClCompile Include="NativeProxyBase.cpp" />
+    <ClCompile Include="NativeProxyStatic.cpp" />
     <ClCompile Include="RefCountedObject.cpp" />
     <ClCompile Include="ServiceBase.cpp" />
     <ClCompile Include="ServiceInstaller.cpp" />
@@ -288,6 +317,11 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Timespan.cpp" />
     <ClCompile Include="Timestamp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NequeoNativeToManaged\NequeoNativeToManaged.vcxproj">
+      <Project>{523b264d-1d84-4ffb-b6c9-42aed0a163bf}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

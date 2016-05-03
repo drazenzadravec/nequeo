@@ -44,15 +44,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <string>
 #include <iomanip>
 #include <memory>
+#include <vector>
 
 using namespace std;
 
-namespace Nequeo 
+namespace Nequeo
 {
 #ifdef _UNICODE
-		typedef std::wstring TFormatString;
+	typedef std::wstring TFormatString;
 #else
-		typedef std::string TFormatString;
+	typedef std::string TFormatString;
 #endif
 }
 #endif
