@@ -1,0 +1,7 @@
+try:
+   raise NetworkException("Bad hostname", 45)
+except NetworkException,e:
+   print e.getCode()
+   print e.args
+finally:
+    print('finally')

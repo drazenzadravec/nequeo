@@ -1,0 +1,4 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.5.50709\AssemblyFoldersEx\NequeoDataAccessTool]
+@="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release"

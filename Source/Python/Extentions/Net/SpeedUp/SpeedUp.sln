@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpeedUp", "SpeedUp\SpeedUp.vcxproj", "{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SpeedUp\\SpeedUp.vcxproj
+		SccProjectName1 = SpeedUp
+		SccLocalPath1 = SpeedUp
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Debug|Win32.Build.0 = Debug|Win32
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Debug|x64.ActiveCfg = Debug|x64
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Debug|x64.Build.0 = Debug|x64
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Release|Any CPU.ActiveCfg = Release|Win32
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Release|Win32.ActiveCfg = Release|Win32
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Release|Win32.Build.0 = Release|Win32
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Release|x64.ActiveCfg = Release|x64
+		{546BEA71-6D95-48A5-A21E-3CC035F4D1EE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

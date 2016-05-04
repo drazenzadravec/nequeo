@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.DataAccess", "Nequeo.DataAccess\Nequeo.DataAccess.csproj", "{510E2BE9-D972-4891-A297-F8DB01AFB836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.DataAccess2", "Nequeo.DataAccess2\Nequeo.DataAccess2.csproj", "{7CEE30C2-3304-4CFD-8D19-7209DE91DF3D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.DataAccess\\Nequeo.DataAccess.csproj
+		SccProjectName1 = Nequeo.DataAccess
+		SccLocalPath1 = Nequeo.DataAccess
+		SccProjectUniqueName2 = Nequeo.DataAccess2\\Nequeo.DataAccess2.csproj
+		SccProjectName2 = Nequeo.DataAccess2
+		SccLocalPath2 = Nequeo.DataAccess2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{510E2BE9-D972-4891-A297-F8DB01AFB836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{510E2BE9-D972-4891-A297-F8DB01AFB836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{510E2BE9-D972-4891-A297-F8DB01AFB836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{510E2BE9-D972-4891-A297-F8DB01AFB836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEE30C2-3304-4CFD-8D19-7209DE91DF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEE30C2-3304-4CFD-8D19-7209DE91DF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEE30C2-3304-4CFD-8D19-7209DE91DF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEE30C2-3304-4CFD-8D19-7209DE91DF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

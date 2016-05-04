@@ -1,0 +1,397 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{9CD551E2-5FF2-402B-A478-5687312C3E71}]
+@="Nequeo.CustomTool.CodeGenerator.GlobalCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.GlobalCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\GlobalCodeGenerator]
+@="Nequeo C# Global Code Generator"
+"CLSID"="{9CD551E2-5FF2-402B-A478-5687312C3E71}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\GlobalCodeGenerator]
+@="Nequeo VB Global Code Generator"
+"CLSID"="{9CD551E2-5FF2-402B-A478-5687312C3E71}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{A064EA11-6E21-4EA0-9BAA-F12DA619CB7C}]
+@="Nequeo.CustomTool.CodeGenerator.DataObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DataObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DataObjectCodeGenerator]
+@="Nequeo C# DataObject Code Generator"
+"CLSID"="{A064EA11-6E21-4EA0-9BAA-F12DA619CB7C}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DataObjectCodeGenerator]
+@="Nequeo VB DataObject Code Generator"
+"CLSID"="{A064EA11-6E21-4EA0-9BAA-F12DA619CB7C}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{B37D29E6-E18A-47F4-A5B9-AA5F5A59E1D6}]
+@="Nequeo.CustomTool.CodeGenerator.DatabaseObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DatabaseObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DatabaseObjectCodeGenerator]
+@="Nequeo C# DatabaseObject Code Generator"
+"CLSID"="{B37D29E6-E18A-47F4-A5B9-AA5F5A59E1D6}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DatabaseObjectCodeGenerator]
+@="Nequeo VB DatabaseObject Code Generator"
+"CLSID"="{B37D29E6-E18A-47F4-A5B9-AA5F5A59E1D6}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{7F7CEEDF-FD9E-4272-BD45-B3C72A18A362}]
+@="Nequeo.CustomTool.CodeGenerator.LinqObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.LinqObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\LinqObjectCodeGenerator]
+@="Nequeo C# LinqObject Code Generator"
+"CLSID"="{7F7CEEDF-FD9E-4272-BD45-B3C72A18A362}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\LinqObjectCodeGenerator]
+@="Nequeo VB LinqObject Code Generator"
+"CLSID"="{7F7CEEDF-FD9E-4272-BD45-B3C72A18A362}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{BA74DB1C-17CD-43D0-83C3-5721D31C935C}]
+@="Nequeo.CustomTool.CodeGenerator.ReplicaObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.ReplicaObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\ReplicaObjectCodeGenerator]
+@="Nequeo C# ReplicaObject Code Generator"
+"CLSID"="{BA74DB1C-17CD-43D0-83C3-5721D31C935C}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\ReplicaObjectCodeGenerator]
+@="Nequeo VB ReplicaObject Code Generator"
+"CLSID"="{BA74DB1C-17CD-43D0-83C3-5721D31C935C}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{2B6B8968-16D5-43A4-91E3-59875AA77C34}]
+@="Nequeo.CustomTool.CodeGenerator.ModelObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.ModelObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\ModelObjectCodeGenerator]
+@="Nequeo C# ModelObject Code Generator"
+"CLSID"="{2B6B8968-16D5-43A4-91E3-59875AA77C34}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\ModelObjectCodeGenerator]
+@="Nequeo VB ModelObject Code Generator"
+"CLSID"="{2B6B8968-16D5-43A4-91E3-59875AA77C34}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{1D7F3018-6DBA-44B7-9715-09AE31DB0612}]
+@="Nequeo.CustomTool.CodeGenerator.SchemaObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.SchemaObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\SchemaObjectCodeGenerator]
+@="Nequeo C# SchemaObject Code Generator"
+"CLSID"="{1D7F3018-6DBA-44B7-9715-09AE31DB0612}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\SchemaObjectCodeGenerator]
+@="Nequeo VB SchemaObject Code Generator"
+"CLSID"="{1D7F3018-6DBA-44B7-9715-09AE31DB0612}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{ED8B457B-223D-45D7-9816-6F48BE36BC3E}]
+@="Nequeo.CustomTool.CodeGenerator.ModelDataContextObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.ModelDataContextObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\ModelDataContextObjectCodeGenerator]
+@="Nequeo C# ModelDataContextObject Code Generator"
+"CLSID"="{ED8B457B-223D-45D7-9816-6F48BE36BC3E}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\ModelDataContextObjectCodeGenerator]
+@="Nequeo VB ModelDataContextObject Code Generator"
+"CLSID"="{ED8B457B-223D-45D7-9816-6F48BE36BC3E}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{D83F8AAE-A037-41B0-A22F-2960599EA3BC}]
+@="Nequeo.CustomTool.CodeGenerator.ReplicaDataContextObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.ReplicaDataContextObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\ReplicaDataContextObjectCodeGenerator]
+@="Nequeo C# ReplicaDataContextObject Code Generator"
+"CLSID"="{D83F8AAE-A037-41B0-A22F-2960599EA3BC}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\ReplicaDataContextObjectCodeGenerator]
+@="Nequeo VB ReplicaDataContextObject Code Generator"
+"CLSID"="{D83F8AAE-A037-41B0-A22F-2960599EA3BC}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{F7E3BB20-69D7-40CA-8B13-AB9A51FCB8F7}]
+@="Nequeo.CustomTool.CodeGenerator.SchemaDataContextObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.SchemaDataContextObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\SchemaDataContextObjectCodeGenerator]
+@="Nequeo C# SchemaDataContextObject Code Generator"
+"CLSID"="{F7E3BB20-69D7-40CA-8B13-AB9A51FCB8F7}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\SchemaDataContextObjectCodeGenerator]
+@="Nequeo VB SchemaDataContextObject Code Generator"
+"CLSID"="{F7E3BB20-69D7-40CA-8B13-AB9A51FCB8F7}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{C8D7628C-C68B-44F9-B920-D11C6E57A01C}]
+@="Nequeo.CustomTool.CodeGenerator.EnumObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.EnumObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\EnumObjectCodeGenerator]
+@="Nequeo C# EnumObject Code Generator"
+"CLSID"="{C8D7628C-C68B-44F9-B920-D11C6E57A01C}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\EnumObjectCodeGenerator]
+@="Nequeo VB EnumObject Code Generator"
+"CLSID"="{C8D7628C-C68B-44F9-B920-D11C6E57A01C}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{167A9436-4BCD-49EE-9571-63A54458EE39}]
+@="Nequeo.CustomTool.CodeGenerator.DatabaseXmlObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DatabaseXmlObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DatabaseXmlObjectCodeGenerator]
+@="Nequeo C# DatabaseXmlObject Code Generator"
+"CLSID"="{167A9436-4BCD-49EE-9571-63A54458EE39}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DatabaseXmlObjectCodeGenerator]
+@="Nequeo VB DatabaseXmlObject Code Generator"
+"CLSID"="{167A9436-4BCD-49EE-9571-63A54458EE39}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{314C4EE6-3DB3-4822-B683-E4393F5E6948}]
+@="Nequeo.CustomTool.CodeGenerator.DatabaseXmlModelObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DatabaseXmlModelObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DatabaseXmlModelObjectCodeGenerator]
+@="Nequeo C# DatabaseXmlModelObject Code Generator"
+"CLSID"="{314C4EE6-3DB3-4822-B683-E4393F5E6948}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DatabaseXmlModelObjectCodeGenerator]
+@="Nequeo VB DatabaseXmlModelObject Code Generator"
+"CLSID"="{314C4EE6-3DB3-4822-B683-E4393F5E6948}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{514C178B-695E-43AF-8162-E596FA8C9DFA}]
+@="Nequeo.CustomTool.CodeGenerator.DatabaseContextCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DatabaseContextCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DatabaseContextCodeGenerator]
+@="Nequeo C# DatabaseContext Code Generator"
+"CLSID"="{514C178B-695E-43AF-8162-E596FA8C9DFA}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DatabaseContextCodeGenerator]
+@="Nequeo VB DatabaseContext Code Generator"
+"CLSID"="{514C178B-695E-43AF-8162-E596FA8C9DFA}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{92B68E96-694B-4ED1-8B46-8B3AD732FFFD}]
+@="Nequeo.CustomTool.CodeGenerator.DataExtensionObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DataExtensionObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DataExtensionObjectCodeGenerator]
+@="Nequeo C# Data Extension Code Generator"
+"CLSID"="{92B68E96-694B-4ED1-8B46-8B3AD732FFFD}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DataExtensionObjectCodeGenerator]
+@="Nequeo VB Data Extension Code Generator"
+"CLSID"="{92B68E96-694B-4ED1-8B46-8B3AD732FFFD}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{3BECF995-5A4D-420A-9CB1-5D5D7E7D96DA}]
+@="Nequeo.CustomTool.CodeGenerator.DataExtensionContextObjectCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.DataExtensionContextObjectCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DataExtensionContextObjectCodeGenerator]
+@="Nequeo C# Data Extension Context Code Generator"
+"CLSID"="{3BECF995-5A4D-420A-9CB1-5D5D7E7D96DA}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DataExtensionContextObjectCodeGenerator]
+@="Nequeo VB Data Extension Context Code Generator"
+"CLSID"="{3BECF995-5A4D-420A-9CB1-5D5D7E7D96DA}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{4EDE3A37-1831-4C6F-9FE5-6B1367B20D6F}]
+@="Nequeo.CustomTool.CodeGenerator.ProcedureExtensionCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.ProcedureExtensionCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\ProcedureExtensionCodeGenerator]
+@="Nequeo C# Procedure Extension Code Generator"
+"CLSID"="{4EDE3A37-1831-4C6F-9FE5-6B1367B20D6F}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\ProcedureExtensionCodeGenerator]
+@="Nequeo VB Procedure Extension Code Generator"
+"CLSID"="{4EDE3A37-1831-4C6F-9FE5-6B1367B20D6F}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{ADDB1117-8CD8-4110-8B17-09BA8DEC2CBE}]
+@="Nequeo.CustomTool.CodeGenerator.FunctionTableExtensionCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.FunctionTableExtensionCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\FunctionTableExtensionCodeGenerator]
+@="Nequeo C# Function Table Extension Code Generator"
+"CLSID"="{ADDB1117-8CD8-4110-8B17-09BA8DEC2CBE}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\FunctionTableExtensionCodeGenerator]
+@="Nequeo VB Function Table Extension Code Generator"
+"CLSID"="{ADDB1117-8CD8-4110-8B17-09BA8DEC2CBE}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\CLSID\{B3C42FBC-DA78-4C7E-99D6-82A01E7170C1}]
+@="Nequeo.CustomTool.CodeGenerator.FunctionScalarExtensionCodeGenerator"
+"Class"="Nequeo.CustomTool.CodeGenerator.FunctionScalarExtensionCodeGenerator"
+"Assembly"="Nequeo.CustomTool.CodeGenerator, Version=2016.26.1.2, Culture=neutral, PublicKeyToken=510104a5aca7b358"
+"CodeBase"="D:\\Development\\Version2015\\Nequeo\\CodeGeneration\\Data\\Nequeo.DataAccess\\Nequeo.DataAccess\\bin\\Release\\Nequeo.CustomTool.CodeGenerator.dll"
+"InprocServer32"="%SystemRoot%\\system32\\mscoree.dll"
+"ThreadingModel"="Both"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\FunctionScalarExtensionCodeGenerator]
+@="Nequeo C# Function Scalar Extension Code Generator"
+"CLSID"="{B3C42FBC-DA78-4C7E-99D6-82A01E7170C1}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0_Config\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\FunctionScalarExtensionCodeGenerator]
+@="Nequeo VB Function Scalar Extension Code Generator"
+"CLSID"="{B3C42FBC-DA78-4C7E-99D6-82A01E7170C1}"
+"GeneratesDesignTimeSource"=dword:00000001
