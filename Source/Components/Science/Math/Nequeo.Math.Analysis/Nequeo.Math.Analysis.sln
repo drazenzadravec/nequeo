@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Math.Analysis", "Nequeo.Math.Analysis\Nequeo.Math.Analysis.csproj", "{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Math.Analysis.cpp", "Nequeo.Math.Analysis.cpp\Nequeo.Math.Analysis.cpp.vcxproj", "{A0C81852-CB9C-4F95-B9B3-36268B1E5848}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Math.Analysis.core", "Nequeo.Math.Analysis.python\Nequeo.Math.Analysis.python.vcxproj", "{68FA4B59-BFCE-403F-8466-3FA454AD6D01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Debug|x64.Build.0 = Debug|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Debug|x86.Build.0 = Debug|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Release|x64.ActiveCfg = Release|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Release|x64.Build.0 = Release|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}.Release|x86.Build.0 = Release|Any CPU
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Debug|Any CPU.Build.0 = Debug|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Debug|x64.ActiveCfg = Debug|x64
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Debug|x64.Build.0 = Debug|x64
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Debug|x86.ActiveCfg = Debug|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Debug|x86.Build.0 = Debug|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Release|Any CPU.ActiveCfg = Release|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Release|Any CPU.Build.0 = Release|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Release|x64.ActiveCfg = Release|x64
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Release|x64.Build.0 = Release|x64
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Release|x86.ActiveCfg = Release|Win32
+		{A0C81852-CB9C-4F95-B9B3-36268B1E5848}.Release|x86.Build.0 = Release|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Debug|Any CPU.Build.0 = Debug|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Debug|x64.ActiveCfg = Debug|x64
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Debug|x64.Build.0 = Debug|x64
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Debug|x86.ActiveCfg = Debug|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Debug|x86.Build.0 = Debug|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|Any CPU.ActiveCfg = Release|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|Any CPU.Build.0 = Release|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x64.ActiveCfg = Release|x64
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x64.Build.0 = Release|x64
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x86.ActiveCfg = Release|Win32
+		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

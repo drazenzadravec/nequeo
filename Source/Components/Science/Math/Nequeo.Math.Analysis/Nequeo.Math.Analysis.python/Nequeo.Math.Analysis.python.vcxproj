@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{68FA4B59-BFCE-403F-8466-3FA454AD6D01}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>NequeoMathAnalysispython</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Nequeo.Math.Analysis.core</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\..\References\Release_x86\Bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\..\References\Release_x64\Bin\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NEQUEOMATHANALYSISPYTHON_EXPORTS;%(PreprocessorDefinitions);X_FOR_WINDOWS</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;NEQUEOMATHANALYSISPYTHON_EXPORTS;%(PreprocessorDefinitions);X_FOR_WINDOWS</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NEQUEOMATHANALYSISPYTHON_EXPORTS;%(PreprocessorDefinitions);X_FOR_WINDOWS</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>..\..\..\..\..\References\Release_x86\Lib\$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;NEQUEOMATHANALYSISPYTHON_EXPORTS;%(PreprocessorDefinitions);X_FOR_WINDOWS</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>..\..\..\..\..\References\Release_x64\Lib\$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ablas.h" />
+    <ClInclude Include="ablasf.h" />
+    <ClInclude Include="ablasmkl.h" />
+    <ClInclude Include="aenv.h" />
+    <ClInclude Include="ae_types.h" />
+    <ClInclude Include="airyf.h" />
+    <ClInclude Include="alglib.h" />
+    <ClInclude Include="alglibbasics.h" />
+    <ClInclude Include="apserv.h" />
+    <ClInclude Include="autogk.h" />
+    <ClInclude Include="basestat.h" />
+    <ClInclude Include="basicstatops.h" />
+    <ClInclude Include="bdss.h" />
+    <ClInclude Include="bdsvd.h" />
+    <ClInclude Include="bessel.h" />
+    <ClInclude Include="betaf.h" />
+    <ClInclude Include="binomialdistr.h" />
+    <ClInclude Include="blas.h" />
+    <ClInclude Include="chebyshev.h" />
+    <ClInclude Include="chisquaredistr.h" />
+    <ClInclude Include="clustering.h" />
+    <ClInclude Include="conv.h" />
+    <ClInclude Include="corr.h" />
+    <ClInclude Include="correlationtests.h" />
+    <ClInclude Include="cqmodels.h" />
+    <ClInclude Include="creflections.h" />
+    <ClInclude Include="datacomp.h" />
+    <ClInclude Include="dawson.h" />
+    <ClInclude Include="densesolver.h" />
+    <ClInclude Include="dforest.h" />
+    <ClInclude Include="elliptic.h" />
+    <ClInclude Include="evd.h" />
+    <ClInclude Include="expintegrals.h" />
+    <ClInclude Include="fbls.h" />
+    <ClInclude Include="fdistr.h" />
+    <ClInclude Include="fft.h" />
+    <ClInclude Include="fht.h" />
+    <ClInclude Include="filters.h" />
+    <ClInclude Include="fresnel.h" />
+    <ClInclude Include="ftbase.h" />
+    <ClInclude Include="gammafunc.h" />
+    <ClInclude Include="gkq.h" />
+    <ClInclude Include="gq.h" />
+    <ClInclude Include="hblas.h" />
+    <ClInclude Include="hermite.h" />
+    <ClInclude Include="hpccores.h" />
+    <ClInclude Include="hqrnd.h" />
+    <ClInclude Include="hsschur.h" />
+    <ClInclude Include="ialglib.h" />
+    <ClInclude Include="ibetaf.h" />
+    <ClInclude Include="idwint.h" />
+    <ClInclude Include="igammaf.h" />
+    <ClInclude Include="inverseupdate.h" />
+    <ClInclude Include="jacobianelliptic.h" />
+    <ClInclude Include="jarquebera.h" />
+    <ClInclude Include="laguerre.h" />
+    <ClInclude Include="lda.h" />
+    <ClInclude Include="legendre.h" />
+    <ClInclude Include="lincg.h" />
+    <ClInclude Include="linlsqr.h" />
+    <ClInclude Include="linmin.h" />
+    <ClInclude Include="linreg.h" />
+    <ClInclude Include="logit.h" />
+    <ClInclude Include="lsfit.h" />
+    <ClInclude Include="mannwhitneyu.h" />
+    <ClInclude Include="matdet.h" />
+    <ClInclude Include="matgen.h" />
+    <ClInclude Include="matinv.h" />
+    <ClInclude Include="mcpd.h" />
+    <ClInclude Include="minbleic.h" />
+    <ClInclude Include="mincg.h" />
+    <ClInclude Include="mincomp.h" />
+    <ClInclude Include="minlbfgs.h" />
+    <ClInclude Include="minlm.h" />
+    <ClInclude Include="minnlc.h" />
+    <ClInclude Include="minns.h" />
+    <ClInclude Include="minqp.h" />
+    <ClInclude Include="mlpbase.h" />
+    <ClInclude Include="mlpe.h" />
+    <ClInclude Include="mlptrain.h" />
+    <ClInclude Include="nearestneighbor.h" />
+    <ClInclude Include="nearunityunit.h" />
+    <ClInclude Include="nleq.h" />
+    <ClInclude Include="normaldistr.h" />
+    <ClInclude Include="normestimator.h" />
+    <ClInclude Include="ntheory.h" />
+    <ClInclude Include="odesolver.h" />
+    <ClInclude Include="optserv.h" />
+    <ClInclude Include="ortfac.h" />
+    <ClInclude Include="parametric.h" />
+    <ClInclude Include="pca.h" />
+    <ClInclude Include="poissondistr.h" />
+    <ClInclude Include="polint.h" />
+    <ClInclude Include="polynomialsolver.h" />
+    <ClInclude Include="psif.h" />
+    <ClInclude Include="qpbleicsolver.h" />
+    <ClInclude Include="qpcholeskysolver.h" />
+    <ClInclude Include="qqpsolver.h" />
+    <ClInclude Include="ratint.h" />
+    <ClInclude Include="rbf.h" />
+    <ClInclude Include="rcond.h" />
+    <ClInclude Include="reflections.h" />
+    <ClInclude Include="rotations.h" />
+    <ClInclude Include="sactivesets.h" />
+    <ClInclude Include="safesolve.h" />
+    <ClInclude Include="sblas.h" />
+    <ClInclude Include="schur.h" />
+    <ClInclude Include="scodes.h" />
+    <ClInclude Include="snnls.h" />
+    <ClInclude Include="sparse.h" />
+    <ClInclude Include="spdgevd.h" />
+    <ClInclude Include="spline1d.h" />
+    <ClInclude Include="spline2d.h" />
+    <ClInclude Include="spline3d.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="stest.h" />
+    <ClInclude Include="studenttdistr.h" />
+    <ClInclude Include="studentttests.h" />
+    <ClInclude Include="svd.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="trfac.h" />
+    <ClInclude Include="trigintegrals.h" />
+    <ClInclude Include="trlinsolve.h" />
+    <ClInclude Include="tsort.h" />
+    <ClInclude Include="variancetests.h" />
+    <ClInclude Include="wsr.h" />
+    <ClInclude Include="xblas.h" />
+    <ClInclude Include="xdebug.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ablas.c" />
+    <ClCompile Include="ablasf.c" />
+    <ClCompile Include="ablasmkl.c" />
+    <ClCompile Include="aenv.c" />
+    <ClCompile Include="airyf.c" />
+    <ClCompile Include="alglib.c" />
+    <ClCompile Include="alglibbasics.c" />
+    <ClCompile Include="apserv.c" />
+    <ClCompile Include="autogk.c" />
+    <ClCompile Include="basestat.c" />
+    <ClCompile Include="basicstatops.c" />
+    <ClCompile Include="bdss.c" />
+    <ClCompile Include="bdsvd.c" />
+    <ClCompile Include="bessel.c" />
+    <ClCompile Include="betaf.c" />
+    <ClCompile Include="binomialdistr.c" />
+    <ClCompile Include="blas.c" />
+    <ClCompile Include="chebyshev.c" />
+    <ClCompile Include="chisquaredistr.c" />
+    <ClCompile Include="clustering.c" />
+    <ClCompile Include="conv.c" />
+    <ClCompile Include="corr.c" />
+    <ClCompile Include="correlationtests.c" />
+    <ClCompile Include="cqmodels.c" />
+    <ClCompile Include="creflections.c" />
+    <ClCompile Include="datacomp.c" />
+    <ClCompile Include="dawson.c" />
+    <ClCompile Include="densesolver.c" />
+    <ClCompile Include="dforest.c" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="elliptic.c" />
+    <ClCompile Include="evd.c" />
+    <ClCompile Include="expintegrals.c" />
+    <ClCompile Include="fbls.c" />
+    <ClCompile Include="fdistr.c" />
+    <ClCompile Include="fft.c" />
+    <ClCompile Include="fht.c" />
+    <ClCompile Include="filters.c" />
+    <ClCompile Include="fresnel.c" />
+    <ClCompile Include="ftbase.c" />
+    <ClCompile Include="gammafunc.c" />
+    <ClCompile Include="gkq.c" />
+    <ClCompile Include="gq.c" />
+    <ClCompile Include="hblas.c" />
+    <ClCompile Include="hermite.c" />
+    <ClCompile Include="hpccores.c" />
+    <ClCompile Include="hqrnd.c" />
+    <ClCompile Include="hsschur.c" />
+    <ClCompile Include="ialglib.c" />
+    <ClCompile Include="ibetaf.c" />
+    <ClCompile Include="idwint.c" />
+    <ClCompile Include="igammaf.c" />
+    <ClCompile Include="inverseupdate.c" />
+    <ClCompile Include="jacobianelliptic.c" />
+    <ClCompile Include="jarquebera.c" />
+    <ClCompile Include="laguerre.c" />
+    <ClCompile Include="lda.c" />
+    <ClCompile Include="legendre.c" />
+    <ClCompile Include="lincg.c" />
+    <ClCompile Include="linlsqr.c" />
+    <ClCompile Include="linmin.c" />
+    <ClCompile Include="linreg.c" />
+    <ClCompile Include="logit.c" />
+    <ClCompile Include="lsfit.c" />
+    <ClCompile Include="mannwhitneyu.c" />
+    <ClCompile Include="matdet.c" />
+    <ClCompile Include="matgen.c" />
+    <ClCompile Include="matinv.c" />
+    <ClCompile Include="mcpd.c" />
+    <ClCompile Include="minbleic.c" />
+    <ClCompile Include="mincg.c" />
+    <ClCompile Include="mincomp.c" />
+    <ClCompile Include="minlbfgs.c" />
+    <ClCompile Include="minlm.c" />
+    <ClCompile Include="minnlc.c" />
+    <ClCompile Include="minns.c" />
+    <ClCompile Include="minqp.c" />
+    <ClCompile Include="mlpbase.c" />
+    <ClCompile Include="mlpe.c" />
+    <ClCompile Include="mlptrain.c" />
+    <ClCompile Include="nearestneighbor.c" />
+    <ClCompile Include="nearunityunit.c" />
+    <ClCompile Include="nleq.c" />
+    <ClCompile Include="normaldistr.c" />
+    <ClCompile Include="normestimator.c" />
+    <ClCompile Include="ntheory.c" />
+    <ClCompile Include="odesolver.c" />
+    <ClCompile Include="optserv.c" />
+    <ClCompile Include="ortfac.c" />
+    <ClCompile Include="parametric.c" />
+    <ClCompile Include="pca.c" />
+    <ClCompile Include="poissondistr.c" />
+    <ClCompile Include="polint.c" />
+    <ClCompile Include="polynomialsolver.c" />
+    <ClCompile Include="psif.c" />
+    <ClCompile Include="qpbleicsolver.c" />
+    <ClCompile Include="qpcholeskysolver.c" />
+    <ClCompile Include="qqpsolver.c" />
+    <ClCompile Include="ratint.c" />
+    <ClCompile Include="rbf.c" />
+    <ClCompile Include="rcond.c" />
+    <ClCompile Include="reflections.c" />
+    <ClCompile Include="rotations.c" />
+    <ClCompile Include="sactivesets.c" />
+    <ClCompile Include="safesolve.c" />
+    <ClCompile Include="sblas.c" />
+    <ClCompile Include="schur.c" />
+    <ClCompile Include="scodes.c" />
+    <ClCompile Include="snnls.c" />
+    <ClCompile Include="sparse.c" />
+    <ClCompile Include="spdgevd.c" />
+    <ClCompile Include="spline1d.c" />
+    <ClCompile Include="spline2d.c" />
+    <ClCompile Include="spline3d.c" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="stest.c" />
+    <ClCompile Include="studenttdistr.c" />
+    <ClCompile Include="studentttests.c" />
+    <ClCompile Include="svd.c" />
+    <ClCompile Include="trfac.c" />
+    <ClCompile Include="trigintegrals.c" />
+    <ClCompile Include="trlinsolve.c" />
+    <ClCompile Include="tsort.c" />
+    <ClCompile Include="variancetests.c" />
+    <ClCompile Include="wsr.c" />
+    <ClCompile Include="xblas.c" />
+    <ClCompile Include="xdebug.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ablas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ablasf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ablasmkl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ae_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aenv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="airyf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="alglib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="alglibbasics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="apserv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="autogk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basestat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basicstatops.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bdss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bdsvd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bessel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="betaf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="binomialdistr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="blas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chebyshev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chisquaredistr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clustering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="corr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="correlationtests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cqmodels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="creflections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="datacomp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dawson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="densesolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dforest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elliptic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="evd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="expintegrals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fbls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fdistr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fht.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="filters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fresnel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ftbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gammafunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gkq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hblas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hermite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hpccores.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hqrnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hsschur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ialglib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ibetaf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="idwint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="igammaf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inverseupdate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jacobianelliptic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jarquebera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="laguerre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="legendre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lincg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linlsqr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linmin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linreg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lsfit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mannwhitneyu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="matdet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="matgen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="matinv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcpd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minbleic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mincg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mincomp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minlbfgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minlm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minnlc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minqp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mlpbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mlpe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mlptrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nearestneighbor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nearunityunit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nleq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="normaldistr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="normestimator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ntheory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="odesolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="optserv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ortfac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parametric.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pca.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="poissondistr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="polint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="polynomialsolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="psif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qpbleicsolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qpcholeskysolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qqpsolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ratint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rbf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rcond.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reflections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rotations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sactivesets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="safesolve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sblas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="schur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="snnls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sparse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spdgevd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spline1d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spline2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spline3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="studenttdistr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="studentttests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trfac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trigintegrals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trlinsolve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tsort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="variancetests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wsr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xblas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xdebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ablas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ablasf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ablasmkl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aenv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="airyf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="alglib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="alglibbasics.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="apserv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="autogk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="basestat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="basicstatops.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdss.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdsvd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bessel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="betaf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="binomialdistr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="blas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chebyshev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chisquaredistr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clustering.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="corr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="correlationtests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cqmodels.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="creflections.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="datacomp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dawson.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="densesolver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dforest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elliptic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="evd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="expintegrals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fbls.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fdistr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fft.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fht.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fresnel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ftbase.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gammafunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gkq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hblas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hermite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hpccores.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hqrnd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hsschur.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ialglib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ibetaf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="idwint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="igammaf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inverseupdate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jacobianelliptic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jarquebera.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="laguerre.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lda.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="legendre.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lincg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linlsqr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linmin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linreg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lsfit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mannwhitneyu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="matdet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="matgen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="matinv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcpd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minbleic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mincg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mincomp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minlbfgs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minlm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minnlc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minqp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mlpbase.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mlpe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mlptrain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nearestneighbor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nearunityunit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nleq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="normaldistr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="normestimator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ntheory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="odesolver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="optserv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ortfac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parametric.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pca.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="poissondistr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="polint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="polynomialsolver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="psif.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qpbleicsolver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qpcholeskysolver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qqpsolver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ratint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rbf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rcond.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reflections.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rotations.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sactivesets.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="safesolve.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sblas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="schur.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scodes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snnls.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sparse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spdgevd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spline1d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spline2d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spline3d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="studenttdistr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="studentttests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="svd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trfac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trigintegrals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trlinsolve.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tsort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="variancetests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wsr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xblas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xdebug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
