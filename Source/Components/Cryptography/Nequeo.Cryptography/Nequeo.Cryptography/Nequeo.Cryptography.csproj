@@ -321,6 +321,7 @@
       <DependentUpon>AdvancedRSA.tt</DependentUpon>
     </Compile>
     <Compile Include="base\DeviceProtection.cs" />
+    <Compile Include="base\EllipticCurve .cs" />
     <Compile Include="base\Pgp.cs" />
     <Compile Include="base\RandomPassword.cs" />
     <Compile Include="base\RC6.cs" />
