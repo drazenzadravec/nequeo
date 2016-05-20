@@ -31,11 +31,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#include "mkl.h"
+#include "acml.h"
+#include "fftw3.h"
 
 #include "RandomNumberGenerator.h"
 
-using namespace Nequeo::Math::MKL;
+using namespace Nequeo::Math::ACML;
 
 ///	<summary>
 ///	Random number generator.
@@ -66,16 +67,23 @@ RandomNumberGenerator::~RandomNumberGenerator()
 std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double sigma, unsigned int seed)
 {
 	double *numbers = new double[size];
-	VSLStreamStatePtr stream;
-	
-	// Initializing
-	vslNewStream(&stream, VSL_BRNG_MT19937, seed);
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
+
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
 
 	// Generate the numbers.
-	vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
-
-	// Deleting the stream.
-	vslDeleteStream(&stream);
+	drandgaussian(size, mean, sigma, state, numbers, &info);
 
 	// Assign the random number.
 	std::vector<double> result;
@@ -103,16 +111,23 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double mean, double sigma, unsigned int seed)
 {
 	double *numbers = new double[size];
-	VSLStreamStatePtr stream;
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
 
-	// Initializing
-	vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
 
 	// Generate the numbers.
-	vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
-
-	// Deleting the stream.
-	vslDeleteStream(&stream);
+	drandgaussian(size, mean, sigma, state, numbers, &info);
 
 	// Assign the random number.
 	std::vector<double> result;
@@ -142,16 +157,23 @@ std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double m
 std::vector<double> RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a, double beta, unsigned int seed)
 {
 	double *numbers = new double[size];
-	VSLStreamStatePtr stream;
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
 
-	// Initializing
-	vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
 
 	// Generate the numbers.
-	vdRngBeta(VSL_RNG_METHOD_BETA_CJA, stream, size, numbers, shapeP, shapeQ, a, beta);
-
-	// Deleting the stream.
-	vslDeleteStream(&stream);
+	drandbeta(size, shapeP, shapeQ, state, numbers, &info);
 
 	// Assign the random number.
 	std::vector<double> result;

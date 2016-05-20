@@ -77,7 +77,7 @@ std::vector<float> Solvers::Sqrt(const int n, const float a[])
 	}
 
 	// Delete the r array.
-	delete r;
+	delete[] r;
 
 	// Return the results.
 	return result;
@@ -105,7 +105,7 @@ std::vector<double> Solvers::Sqrt(const int n, const double a[])
 	}
 
 	// Delete the r array.
-	delete r;
+	delete[] r;
 
 	// Return the results.
 	return result;
@@ -145,8 +145,8 @@ std::vector<ComplexFloat> Solvers::Sqrt(const int n, const ComplexFloat a[])
 	}
 
 	// Delete the r array.
-	delete r;
-	delete ca;
+	delete[] r;
+	delete[] ca;
 
 	// Return the results.
 	return result;
@@ -186,8 +186,8 @@ std::vector<ComplexDouble> Solvers::Sqrt(const int n, const ComplexDouble a[])
 	}
 
 	// Delete the r array.
-	delete r;
-	delete ca;
+	delete[] r;
+	delete[] ca;
 
 	// Return the results.
 	return result;

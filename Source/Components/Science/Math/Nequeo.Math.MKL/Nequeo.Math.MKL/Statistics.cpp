@@ -83,6 +83,9 @@ void Statistics::Sample(std::vector<double> samples, double *mean, double *varia
 
 		// Calculate the sample statistics.
 		Sample((int)vectorSize, samplesArray, mean, variation, skewness, kurtosis, covariance, correlation);
+
+		// Delete the sample array.
+		delete[] samplesArray;
 	}
 }
 
