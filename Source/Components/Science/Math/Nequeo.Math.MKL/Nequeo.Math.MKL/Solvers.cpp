@@ -119,14 +119,13 @@ std::vector<double> Solvers::Sqrt(const int n, const double a[])
 /// <returns>An array that contains the output vector.</returns>
 std::vector<ComplexFloat> Solvers::Sqrt(const int n, const ComplexFloat a[])
 {
-	MKL_Complex8 *r = new MKL_Complex8[n];
-	MKL_Complex8 *ca = new MKL_Complex8[n];
+	std::complex<float> *r = new std::complex<float>[n];
+	std::complex<float> *ca = new std::complex<float>[n];
 
 	// Convert the type.
 	for (size_t i = 0; i < n; i++)
 	{
-		ca[i].imag = a[i].imag;
-		ca[i].real = a[i].real;
+		ca[i] = std::complex<float>(a[i].real, a[i].imag);
 	}
 
 	// Compute the square root.
@@ -137,8 +136,8 @@ std::vector<ComplexFloat> Solvers::Sqrt(const int n, const ComplexFloat a[])
 	for (size_t i = 0; i < n; i++)
 	{
 		ComplexFloat rc;
-		rc.imag = r[i].imag;
-		rc.real = r[i].real;
+		rc.imag = r[i].imag();
+		rc.real = r[i].real();
 
 		// Add the number.
 		result.push_back(rc);
@@ -160,14 +159,13 @@ std::vector<ComplexFloat> Solvers::Sqrt(const int n, const ComplexFloat a[])
 /// <returns>An array that contains the output vector.</returns>
 std::vector<ComplexDouble> Solvers::Sqrt(const int n, const ComplexDouble a[])
 {
-	MKL_Complex16 *r = new MKL_Complex16[n];
-	MKL_Complex16 *ca = new MKL_Complex16[n];
+	std::complex<double> *r = new std::complex<double>[n];
+	std::complex<double> *ca = new std::complex<double>[n];
 
 	// Convert the type.
 	for (size_t i = 0; i < n; i++)
 	{
-		ca[i].imag = a[i].imag;
-		ca[i].real = a[i].real;
+		ca[i] = std::complex<double>(a[i].real, a[i].imag);
 	}
 
 	// Compute the square root.
@@ -178,8 +176,8 @@ std::vector<ComplexDouble> Solvers::Sqrt(const int n, const ComplexDouble a[])
 	for (size_t i = 0; i < n; i++)
 	{
 		ComplexDouble rc;
-		rc.imag = r[i].imag;
-		rc.real = r[i].real;
+		rc.imag = r[i].imag();
+		rc.real = r[i].real();
 
 		// Add the number.
 		result.push_back(rc);
@@ -191,4 +189,52 @@ std::vector<ComplexDouble> Solvers::Sqrt(const int n, const ComplexDouble a[])
 
 	// Return the results.
 	return result;
+}
+
+/// <summary>
+/// Computes a square root of vector elements.
+/// </summary>
+/// <param name="n">The number of elements to be calculated.</param>
+/// <param name="a">An array that contains the input vector.</param>
+/// <param name="r">An array that contains the output vector.</param>
+void Solvers::Sqrt(const int n, const float a[], float *r)
+{
+	// Compute the square root.
+	vsSqrt(n, a, r);
+}
+
+/// <summary>
+/// Computes a square root of vector elements.
+/// </summary>
+/// <param name="n">The number of elements to be calculated.</param>
+/// <param name="a">An array that contains the input vector.</param>
+/// <param name="r">An array that contains the output vector.</param>
+void Solvers::Sqrt(const int n, const double a[], double *r)
+{
+	// Compute the square root.
+	vdSqrt(n, a, r);
+}
+
+/// <summary>
+/// Computes a square root of vector elements.
+/// </summary>
+/// <param name="n">The number of elements to be calculated.</param>
+/// <param name="a">An array that contains the input vector.</param>
+/// <param name="r">An array that contains the output vector.</param>
+void Solvers::Sqrt(const int n, const MKL_Complex8 a[], MKL_Complex8 *r)
+{
+	// Compute the square root.
+	vcSqrt(n, a, r);
+}
+
+/// <summary>
+/// Computes a square root of vector elements.
+/// </summary>
+/// <param name="n">The number of elements to be calculated.</param>
+/// <param name="a">An array that contains the input vector.</param>
+/// <param name="r">An array that contains the output vector.</param>
+void Solvers::Sqrt(const int n, const MKL_Complex16 a[], MKL_Complex16 *r)
+{
+	// Compute the square root.
+	vzSqrt(n, a, r);
 }

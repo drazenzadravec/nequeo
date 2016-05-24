@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <vector>
 #include <iostream>
+#include <complex>
 
 #include "RandomNumberGenerator.h"
 #include "Solvers.h"
@@ -21,11 +22,11 @@ int main()
 	float af[2];
 	double ad[2];
 
-	af[0] = 45.78;
-	af[1] = 475.78;
+	af[0] = 45.78f;
+	af[1] = 475.78f;
 
 	ad[0] = 545.78;
-	ad[1] = 75.78;
+	ad[1] = 75.78f;
 
 	Nequeo::Math::MKL::Solvers solv;
 	std::vector<double> solvd = solv.Sqrt(2, ad);
@@ -45,10 +46,10 @@ int main()
 	cd[1].imag = 4.78;
 	cd[1].real = 14.78;
 
-	cf[0].imag = 364.78;
-	cf[0].real = 1634.78;
-	cf[1].imag = 46.78;
-	cf[1].real = 164.78;
+	cf[0].imag = 364.78f;
+	cf[0].real = 1634.78f;
+	cf[1].imag = 46.78f;
+	cf[1].real = 164.78f;
 
 	std::vector<ComplexDouble> solcvd = solv.Sqrt(2, cd);
 	std::vector<ComplexFloat> solcvf = solv.Sqrt(2, cf);
@@ -63,6 +64,18 @@ int main()
 	std::cout << solcvd[0].real << std::endl;
 	std::cout << solcvd[1].imag << std::endl;
 	std::cout << solcvd[1].real << std::endl;
+
+	std::complex<double> r[2];
+	std::complex<double> tcd[2];
+	tcd[0] = std::complex<double>(1348.78, 348.78);
+	tcd[1] = std::complex<double>(148.78, 48.78);
+	solv.Sqrt(2, tcd, r);
+
+	std::cout << "Complex" << std::endl;
+	std::cout << r[0].imag() << std::endl;
+	std::cout << r[0].real() << std::endl;
+	std::cout << r[1].imag() << std::endl;
+	std::cout << r[1].real() << std::endl;
 
 	std::cout << "Statistics" << std::endl;
 	Nequeo::Math::MKL::Statistics stats;

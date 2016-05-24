@@ -17,12 +17,16 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
+#include <complex>
 
 #ifdef NEQUEOMATHMKL_EXPORTS
 #define EXPORT_NEQUEO_MKL_API __declspec(dllexport) 
 #else
 #define EXPORT_NEQUEO_MKL_API __declspec(dllimport) 
 #endif
+
+#define MKL_Complex8 std::complex<float>
+#define MKL_Complex16 std::complex<double>
 
 // Complex double.
 typedef struct _Complex_Double

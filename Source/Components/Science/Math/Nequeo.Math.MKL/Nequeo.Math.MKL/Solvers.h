@@ -90,6 +90,38 @@ namespace Nequeo
 				/// <returns>An array that contains the output vector.</returns>
 				std::vector<ComplexDouble> Sqrt(const int n, const ComplexDouble a[]);
 
+				/// <summary>
+				/// Computes a square root of vector elements.
+				/// </summary>
+				/// <param name="n">The number of elements to be calculated.</param>
+				/// <param name="a">An array that contains the input vector.</param>
+				/// <param name="r">An array that contains the output vector.</param>
+				void Sqrt(const int n, const float a[], float *r);
+
+				/// <summary>
+				/// Computes a square root of vector elements.
+				/// </summary>
+				/// <param name="n">The number of elements to be calculated.</param>
+				/// <param name="a">An array that contains the input vector.</param>
+				/// <param name="r">An array that contains the output vector.</param>
+				void Sqrt(const int n, const double a[], double *r);
+
+				/// <summary>
+				/// Computes a square root of vector elements.
+				/// </summary>
+				/// <param name="n">The number of elements to be calculated.</param>
+				/// <param name="a">An array that contains the input vector.</param>
+				/// <param name="r">An array that contains the output vector.</param>
+				void Sqrt(const int n, const MKL_Complex8 a[], MKL_Complex8 *r);
+
+				/// <summary>
+				/// Computes a square root of vector elements.
+				/// </summary>
+				/// <param name="n">The number of elements to be calculated.</param>
+				/// <param name="a">An array that contains the input vector.</param>
+				/// <param name="r">An array that contains the output vector.</param>
+				void Sqrt(const int n, const MKL_Complex16 a[], MKL_Complex16 *r);
+
 			private:
 				bool _disposed;
 

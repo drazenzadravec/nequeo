@@ -90,6 +90,41 @@ namespace Nequeo
 				/// <returns>The list of random numbers.</returns>
 				std::vector<double> Beta(int size, double shapeP, double shapeQ, double a, double beta, unsigned int seed = 777);
 
+				/// <summary>
+				/// Basic normal distribution random number generator.
+				/// </summary>
+				/// <param name="size">The number of random numbers to generate.</param>
+				/// <param name="mean">The mean of the normal distribution.</param>
+				/// <param name="sigma">The standard deviation of the normal distribution.</param>
+				/// <param name="numbers">The list of random numbers.</param>
+				/// <param name="seed">The random seed.</param>
+				/// <returns>Zero if successful; else error.</returns>
+				int Basic(int size, double mean, double sigma, double *numbers, unsigned int seed = 777);
+
+				/// <summary>
+				/// Normal distribution random number generator.
+				/// </summary>
+				/// <param name="size">The number of random numbers to generate.</param>
+				/// <param name="mean">The mean of the normal distribution.</param>
+				/// <param name="sigma">The standard deviation of the normal distribution.</param>
+				/// <param name="numbers">The list of random numbers.</param>
+				/// <param name="seed">The random seed.</param>
+				/// <returns>Zero if successful; else error.</returns>
+				int NormalDistribution(int size, double mean, double sigma, double *numbers, unsigned int seed = 777);
+
+				/// <summary>
+				/// Beta distributed random number generator.
+				/// </summary>
+				/// <param name="size">The number of random numbers to generate.</param>
+				/// <param name="shapeP">The shape p.</param>
+				/// <param name="shapeQ">The shape q.</param>
+				/// <param name="a">The displacement.</param>
+				/// <param name="beta">The scalefactor.</param>
+				/// <param name="numbers">The list of random numbers.</param>
+				/// <param name="seed">The random seed.</param>
+				/// <returns>Zero if successful; else error.</returns>
+				int Beta(int size, double shapeP, double shapeQ, double a, double beta, double *numbers, unsigned int seed = 777);
+
 			private:
 				bool _disposed;
 

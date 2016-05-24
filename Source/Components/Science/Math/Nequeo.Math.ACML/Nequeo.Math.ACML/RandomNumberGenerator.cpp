@@ -66,7 +66,8 @@ RandomNumberGenerator::~RandomNumberGenerator()
 /// <returns>The list of random numbers.</returns>
 std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double sigma, unsigned int seed)
 {
-	double *numbers = new double[size];
+	std::vector<double> result;
+
 	int seeds[10], state[20];
 	int genid, info, lseed, lstate, subid;
 
@@ -82,19 +83,28 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 	// Initialize the base generator
 	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
 
-	// Generate the numbers.
-	drandgaussian(size, mean, sigma, state, numbers, &info);
-
-	// Assign the random number.
-	std::vector<double> result;
-	for (size_t i = 0; i < size; i++)
+	// If initialised.
+	if (info == 0)
 	{
-		// Add the number.
-		result.push_back(numbers[i]);
-	}
+		double *numbers = new double[size];
 
-	// Delete the numbers array.
-	delete[] numbers;
+		// Generate the numbers.
+		drandgaussian(size, mean, sigma, state, numbers, &info);
+
+		// If generated.
+		if (info == 0)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
+	}
 
 	// Return the results.
 	return result;
@@ -110,7 +120,8 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 /// <returns>The list of random numbers.</returns>
 std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double mean, double sigma, unsigned int seed)
 {
-	double *numbers = new double[size];
+	std::vector<double> result;
+
 	int seeds[10], state[20];
 	int genid, info, lseed, lstate, subid;
 
@@ -126,19 +137,28 @@ std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double m
 	// Initialize the base generator
 	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
 
-	// Generate the numbers.
-	drandgaussian(size, mean, sigma, state, numbers, &info);
-
-	// Assign the random number.
-	std::vector<double> result;
-	for (size_t i = 0; i < size; i++)
+	// If initialised.
+	if (info == 0)
 	{
-		// Add the number.
-		result.push_back(numbers[i]);
-	}
+		double *numbers = new double[size];
 
-	// Delete the numbers array.
-	delete[] numbers;
+		// Generate the numbers.
+		drandgaussian(size, mean, sigma, state, numbers, &info);
+
+		// If generated.
+		if (info == 0)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
+	}
 
 	// Return the results.
 	return result;
@@ -156,7 +176,8 @@ std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double m
 /// <returns>The list of random numbers.</returns>
 std::vector<double> RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a, double beta, unsigned int seed)
 {
-	double *numbers = new double[size];
+	std::vector<double> result;
+	
 	int seeds[10], state[20];
 	int genid, info, lseed, lstate, subid;
 
@@ -172,20 +193,142 @@ std::vector<double> RandomNumberGenerator::Beta(int size, double shapeP, double 
 	// Initialize the base generator
 	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
 
-	// Generate the numbers.
-	drandbeta(size, shapeP, shapeQ, state, numbers, &info);
-
-	// Assign the random number.
-	std::vector<double> result;
-	for (size_t i = 0; i < size; i++)
+	// If initialised.
+	if (info == 0)
 	{
-		// Add the number.
-		result.push_back(numbers[i]);
-	}
+		double *numbers = new double[size];
 
-	// Delete the numbers array.
-	delete[] numbers;
+		// Generate the numbers.
+		drandbeta(size, shapeP, shapeQ, state, numbers, &info);
+
+		// If generated.
+		if (info == 0)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
+	}
 
 	// Return the results.
 	return result;
+}
+
+/// <summary>
+/// Basic normal distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="mean">The mean of the normal distribution.</param>
+/// <param name="sigma">The standard deviation of the normal distribution.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Basic(int size, double mean, double sigma, double *numbers, unsigned int seed)
+{
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
+
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
+
+	// If initialised.
+	if (info == 0)
+	{
+		// Generate the numbers.
+		drandgaussian(size, mean, sigma, state, numbers, &info);
+	}
+
+	// Return the results.
+	return info;
+}
+
+/// <summary>
+/// Normal distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="mean">The mean of the normal distribution.</param>
+/// <param name="sigma">The standard deviation of the normal distribution.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::NormalDistribution(int size, double mean, double sigma, double *numbers, unsigned int seed)
+{
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
+
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
+
+	// If initialised.
+	if (info == 0)
+	{
+		// Generate the numbers.
+		drandgaussian(size, mean, sigma, state, numbers, &info);
+	}
+
+	// Return the results.
+	return info;
+}
+
+/// <summary>
+/// Beta distributed random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="shapeP">The shape p.</param>
+/// <param name="shapeQ">The shape q.</param>
+/// <param name="a">The displacement.</param>
+/// <param name="beta">The scalefactor.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a, double beta, double *numbers, unsigned int seed)
+{
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
+
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
+
+	// If initialised.
+	if (info == 0)
+	{
+		// Generate the numbers.
+		drandbeta(size, shapeP, shapeQ, state, numbers, &info);
+	}
+
+	// Return the results.
+	return info;
 }

@@ -65,28 +65,39 @@ RandomNumberGenerator::~RandomNumberGenerator()
 /// <returns>The list of random numbers.</returns>
 std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double sigma, unsigned int seed)
 {
-	double *numbers = new double[size];
+	std::vector<double> result;
+
+	int status;
 	VSLStreamStatePtr stream;
 	
 	// Initializing
-	vslNewStream(&stream, VSL_BRNG_MT19937, seed);
+	status = vslNewStream(&stream, VSL_BRNG_MT19937, seed);
 
-	// Generate the numbers.
-	vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
-
-	// Deleting the stream.
-	vslDeleteStream(&stream);
-
-	// Assign the random number.
-	std::vector<double> result;
-	for (size_t i = 0; i < size; i++)
+	// If initialised.
+	if (status == VSL_STATUS_OK)
 	{
-		// Add the number.
-		result.push_back(numbers[i]);
+		double *numbers = new double[size];
+
+		// Generate the numbers.
+		status = vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
+
+		// If generated.
+		if (status == VSL_STATUS_OK)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
 	}
 
-	// Delete the numbers array.
-	delete[] numbers;
+	// Deleting the stream.
+	status = vslDeleteStream(&stream);
 
 	// Return the results.
 	return result;
@@ -102,28 +113,39 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 /// <returns>The list of random numbers.</returns>
 std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double mean, double sigma, unsigned int seed)
 {
-	double *numbers = new double[size];
+	std::vector<double> result;
+	
+	int status;
 	VSLStreamStatePtr stream;
 
 	// Initializing
-	vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+	status = vslNewStream(&stream, VSL_BRNG_MCG31, seed);
 
-	// Generate the numbers.
-	vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
-
-	// Deleting the stream.
-	vslDeleteStream(&stream);
-
-	// Assign the random number.
-	std::vector<double> result;
-	for (size_t i = 0; i < size; i++)
+	// If initialised.
+	if (status == VSL_STATUS_OK)
 	{
-		// Add the number.
-		result.push_back(numbers[i]);
+		double *numbers = new double[size];
+
+		// Generate the numbers.
+		status = vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
+
+		// If generated.
+		if (status == VSL_STATUS_OK)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
 	}
 
-	// Delete the numbers array.
-	delete[] numbers;
+	// Deleting the stream.
+	status = vslDeleteStream(&stream);
 
 	// Return the results.
 	return result;
@@ -141,29 +163,135 @@ std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double m
 /// <returns>The list of random numbers.</returns>
 std::vector<double> RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a, double beta, unsigned int seed)
 {
-	double *numbers = new double[size];
+	std::vector<double> result;
+
+	int status;
 	VSLStreamStatePtr stream;
 
 	// Initializing
-	vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+	status = vslNewStream(&stream, VSL_BRNG_MCG31, seed);
 
-	// Generate the numbers.
-	vdRngBeta(VSL_RNG_METHOD_BETA_CJA, stream, size, numbers, shapeP, shapeQ, a, beta);
+	// If initialised.
+	if (status == VSL_STATUS_OK)
+	{
+		double *numbers = new double[size];
+
+		// Generate the numbers.
+		status = vdRngBeta(VSL_RNG_METHOD_BETA_CJA, stream, size, numbers, shapeP, shapeQ, a, beta);
+
+		// If generated.
+		if (status == VSL_STATUS_OK)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
+	}
+
+	// Deleting the stream.
+	status = vslDeleteStream(&stream);
+
+	// Return the results.
+	return result;
+}
+
+/// <summary>
+/// Basic normal distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="mean">The mean of the normal distribution.</param>
+/// <param name="sigma">The standard deviation of the normal distribution.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Basic(int size, double mean, double sigma, double *numbers, unsigned int seed)
+{
+	int status;
+	VSLStreamStatePtr stream;
+
+	// Initializing
+	status = vslNewStream(&stream, VSL_BRNG_MT19937, seed);
+
+	// If initialised.
+	if (status == VSL_STATUS_OK)
+	{
+		// Generate the numbers.
+		status = vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
+	}
 
 	// Deleting the stream.
 	vslDeleteStream(&stream);
 
-	// Assign the random number.
-	std::vector<double> result;
-	for (size_t i = 0; i < size; i++)
+	// Return the results.
+	return status;
+}
+
+/// <summary>
+/// Normal distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="mean">The mean of the normal distribution.</param>
+/// <param name="sigma">The standard deviation of the normal distribution.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::NormalDistribution(int size, double mean, double sigma, double *numbers, unsigned int seed)
+{
+	int status;
+	VSLStreamStatePtr stream;
+
+	// Initializing
+	status = vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+
+	// If initialised.
+	if (status == VSL_STATUS_OK)
 	{
-		// Add the number.
-		result.push_back(numbers[i]);
+		// Generate the numbers.
+		status = vdRngGaussian(VSL_RNG_METHOD_GAUSSIAN_ICDF, stream, size, numbers, mean, sigma);
 	}
 
-	// Delete the numbers array.
-	delete[] numbers;
+	// Deleting the stream.
+	vslDeleteStream(&stream);
 
 	// Return the results.
-	return result;
+	return status;
+}
+
+/// <summary>
+/// Beta distributed random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="shapeP">The shape p.</param>
+/// <param name="shapeQ">The shape q.</param>
+/// <param name="a">The displacement.</param>
+/// <param name="beta">The scalefactor.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a, double beta, double *numbers, unsigned int seed)
+{
+	int status;
+	VSLStreamStatePtr stream;
+
+	// Initializing
+	status = vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+
+	// If initialised.
+	if (status == VSL_STATUS_OK)
+	{
+		// Generate the numbers.
+		status = vdRngBeta(VSL_RNG_METHOD_BETA_CJA, stream, size, numbers, shapeP, shapeQ, a, beta);
+	}
+
+	// Deleting the stream.
+	vslDeleteStream(&stream);
+
+	// Return the results.
+	return status;
 }

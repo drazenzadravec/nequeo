@@ -17,12 +17,23 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
+#include <complex>
 
 #ifdef NEQUEOMATHACML_EXPORTS
 #define EXPORT_NEQUEO_ACML_API __declspec(dllexport) 
 #else
 #define EXPORT_NEQUEO_ACML_API __declspec(dllimport) 
 #endif
+
+#define _ACML_COMPLEX
+typedef struct
+{
+	float real, imag;
+} complex;
+typedef struct
+{
+	double real, imag;
+} doublecomplex;
 
 // Complex double.
 typedef struct _Complex_Double

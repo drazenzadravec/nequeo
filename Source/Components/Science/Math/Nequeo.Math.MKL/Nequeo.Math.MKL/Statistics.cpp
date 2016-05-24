@@ -69,11 +69,12 @@ void Statistics::Sample(std::vector<double> samples, double *mean, double *varia
 {
 	// Get the vector size.
 	size_t vectorSize = samples.size();
-	double *samplesArray = new double[vectorSize];
 
 	// If samples exist.
 	if (vectorSize > 0)
 	{
+		double *samplesArray = new double[vectorSize];
+
 		// For each sample item.
 		for (size_t i = 0; i < vectorSize; i++)
 		{
