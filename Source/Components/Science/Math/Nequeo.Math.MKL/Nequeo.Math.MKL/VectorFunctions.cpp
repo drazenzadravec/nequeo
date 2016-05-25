@@ -33,81 +33,193 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "mkl.h"
 
+/// <summary>
+/// Performs element by element addition of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void s_vector_add(const int n, const float x[], const float y[], float result[]) 
 {
 	vsAdd(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element subtraction of vector b from vector a.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void s_vector_subtract(const int n, const float x[], const float y[], float result[]) 
 {
 	vsSub(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element multiplication of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void s_vector_multiply(const int n, const float x[], const float y[], float result[]) 
 {
 	vsMul(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element division of vector a by vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void s_vector_divide(const int n, const float x[], const float y[], float result[]) 
 {
 	vsDiv(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element addition of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void d_vector_add(const int n, const double x[], const double y[], double result[]) 
 {
 	vdAdd(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element subtraction of vector b from vector a.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void d_vector_subtract(const int n, const double x[], const double y[], double result[]) 
 {
 	vdSub(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element multiplication of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void d_vector_multiply(const int n, const double x[], const double y[], double result[]) 
 {
 	vdMul(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element division of vector a by vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void d_vector_divide(const int n, const double x[], const double y[], double result[]) 
 {
 	vdDiv(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element addition of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void c_vector_add(const int n, const MKL_Complex8 x[], const MKL_Complex8 y[], MKL_Complex8 result[]) 
 {
 	vcAdd(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element subtraction of vector b from vector a.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void c_vector_subtract(const int n, const MKL_Complex8 x[], const MKL_Complex8 y[], MKL_Complex8 result[]) 
 {
 	vcSub(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element multiplication of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void c_vector_multiply(const int n, const MKL_Complex8 x[], const MKL_Complex8 y[], MKL_Complex8 result[]) 
 {
 	vcMul(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element division of vector a by vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void c_vector_divide(const int n, const MKL_Complex8 x[], const MKL_Complex8 y[], MKL_Complex8 result[]) 
 {
 	vcDiv(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element addition of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void z_vector_add(const int n, const MKL_Complex16 x[], const MKL_Complex16 y[], MKL_Complex16 result[]) 
 {
 	vzAdd(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element subtraction of vector b from vector a.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void z_vector_subtract(const int n, const MKL_Complex16 x[], const MKL_Complex16 y[], MKL_Complex16 result[]) 
 {
 	vzSub(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element multiplication of vector a and vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void z_vector_multiply(const int n, const MKL_Complex16 x[], const MKL_Complex16 y[], MKL_Complex16 result[]) 
 {
 	vzMul(n, x, y, result);
 }
 
+/// <summary>
+/// Performs element by element division of vector a by vector b.
+/// </summary>
+/// <param name="n">Specifies the number of elements to be calculated.</param>
+/// <param name="x">Pointers to arrays that contain the input vector a.</param>
+/// <param name="y">Pointers to arrays that contain the input vector b.</param>
+/// <param name="result">Pointer to an array that contains the output vector.</param>
 EXPORT_NEQUEO_MKL_API void z_vector_divide(const int n, const MKL_Complex16 x[], const MKL_Complex16 y[], MKL_Complex16 result[]) 
 {
 	vzDiv(n, x, y, result);

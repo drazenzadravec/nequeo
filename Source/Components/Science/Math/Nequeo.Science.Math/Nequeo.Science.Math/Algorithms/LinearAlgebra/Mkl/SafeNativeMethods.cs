@@ -47,7 +47,7 @@ namespace Nequeo.Science.Math.Algorithms.LinearAlgebra.Mkl
         /// <summary>
         /// Name of the native DLL.
         /// </summary>
-        private const string DllName = "Nequeo.Science.Math.MKL.dll";
+        private const string DllName = "Nequeo.Math.MKL.dll";
 
         #region BLAS
         

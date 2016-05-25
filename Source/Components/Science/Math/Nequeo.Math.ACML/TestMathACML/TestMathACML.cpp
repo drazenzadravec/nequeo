@@ -16,6 +16,9 @@ int main()
 	std::cout << rand[19] << std::endl;
 	std::cout << rand1[199] << std::endl;
 
+	Nequeo::Math::ACML::RandomNumberGenerator *ff = new Nequeo::Math::ACML::RandomNumberGenerator[2];
+	delete[] ff;
+
     return 0;
 }
 

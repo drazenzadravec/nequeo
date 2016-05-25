@@ -47,7 +47,7 @@ namespace Nequeo.Science.Math.Algorithms.LinearAlgebra.Acml
         /// <summary>
         /// Name of the native DLL.
         /// </summary>
-        private const string DllName = "Nequeo.Science.Math.ACML.dll";
+        private const string DllName = "Nequeo.Math.ACML.dll";
 
         #region BLAS
         
