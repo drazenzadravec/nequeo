@@ -1,0 +1,213 @@
+C!
+C!               INTEL CORPORATION PROPRIETARY INFORMATION
+C!  This software is supplied under the terms of a license agreement or
+C!  nondisclosure agreement with Intel Corporation and may not be copied
+C!  or disclosed except in accordance with the terms of that agreement.
+C!    Copyright (C) 2001-2003 Intel Corporation. All Rights Reserved.
+C!
+C! File   : mkl_vsl.fi
+C! Purpose: Intel(R) Math Kernel Library FORTRAN interface for VSL routines
+C!
+
+C!
+C! Stream state descriptor structure
+C!
+
+      TYPE VSL_STREAM_STATE
+            INTEGER*4 descriptor1
+            INTEGER*4 descriptor2
+      END TYPE VSL_STREAM_STATE
+
+C!
+C! Defining the names for registered BRNGs
+C!
+        INTEGER, PARAMETER :: VSL_BRNG_MCG31    = 0
+        INTEGER, PARAMETER :: VSL_BRNG_R250     = 1
+        INTEGER, PARAMETER :: VSL_BRNG_MRG32K3A = 2
+        INTEGER, PARAMETER :: VSL_BRNG_MCG59    = 3
+        INTEGER, PARAMETER :: VSL_BRNG_WH       = 4
+
+C!
+C! Max allowed BRNGs to be used
+C!
+        INTEGER, PARAMETER :: VSL_MAX_REG_BRNGS = 512
+
+C!
+C! Initialization method
+C!
+        INTEGER, PARAMETER :: VSL_INIT_METHOD_STANDARD  = 0
+        INTEGER, PARAMETER :: VSL_INIT_METHOD_LEAPFROG  = 1
+        INTEGER, PARAMETER :: VSL_INIT_METHOD_SKIPAHEAD = 2
+
+C!
+C! Error codes
+C!
+        INTEGER, PARAMETER :: VSL_ERROR_OK                    = 0
+        INTEGER, PARAMETER :: VSL_ERROR_LEAPFROG_UNSUPPORTED  = -4
+        INTEGER, PARAMETER :: VSL_ERROR_SKIPAHEAD_UNSUPPORTED = -5
+
+C!
+C! Method names:
+C!*****************************************************************************
+C! Uniform 
+        INTEGER, PARAMETER :: VSL_METHOD_SUNIFORM_STD = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DUNIFORM_STD = 0
+        INTEGER, PARAMETER :: VSL_METHOD_IUNIFORM_STD = 0
+
+C!*****************************************************************************
+C! UniformBits
+        INTEGER, PARAMETER :: VSL_METHOD_IUNIFORMBITS_STD = 0
+
+C!*****************************************************************************
+C! Gaussian (normal)
+C! Comments:
+C! BOXMULLER - generates a normal distributed random number x via a pair of
+C!             uniforms u1, u2 according to the formula
+C!             x=sqrt(-ln(u1))*sin(2*Pi*u2)
+C! BOXMULLER2- generates a pair of normal distributed random numbers x1, x2 
+C!             via a pair of uniforms u1, u2 according to the formula
+C!             x1=sqrt(-ln(u1))*sin(2*Pi*u2)
+C!             x2=sqrt(-ln(u1))*cos(2*Pi*u2)
+C!             Method implemented so that it correctly processes odd vector
+C!             length, i.e. if a call ends with generating x1, the next 
+C!             call starts from generating x2
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SGAUSSIAN_BOXMULLER  = 0
+        INTEGER, PARAMETER :: VSL_METHOD_SGAUSSIAN_BOXMULLER2 = 1
+        INTEGER, PARAMETER :: VSL_METHOD_DGAUSSIAN_BOXMULLER  = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DGAUSSIAN_BOXMULLER2 = 1
+
+C!*****************************************************************************
+C! Exponential
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=-ln(u), where x - exponentially distributed random number,
+C!        u - uniformly distributed random number
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SEXPONENTIAL_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DEXPONENTIAL_ICDF = 0
+
+C!*****************************************************************************
+C! Laplace
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=+/-ln(u) with probability 1/2, where x - Laplace 
+C!        distributed random number, u - uniformly distributed random number
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SLAPLACE_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DLAPLACE_ICDF = 0
+
+C!*****************************************************************************
+C! Weibull 
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=(-ln(u))^(1/alpha), where x - Weibull distributed random number, 
+C!        u - uniformly distributed random number
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SWEIBULL_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DWEIBULL_ICDF = 0
+
+C!*****************************************************************************
+C! Cauchy 
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=tan(u), where x - Cauchy distributed random number, u - uniformly 
+C!        distributed random number in interval (-Pi/2,Pi/2)
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SCAUCHY_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DCAUCHY_ICDF = 0
+
+C!*****************************************************************************
+C! Rayleigh
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=(-ln(u))^(1/2), where x - Rayleigh distributed random number, 
+C!        u - uniformly distributed random number. Rayleigh distribution is the
+C!	  special case of Weibull distribution, where alpha=2
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SRAYLEIGH_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DRAYLEIGH_ICDF = 0
+
+C!*****************************************************************************
+C! Lognormal
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=exp(y), where x - lognormally distributed random number, 
+C!        y - normally distributed random number.
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SLOGNORMAL_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DLOGNORMAL_ICDF = 0
+
+C!*****************************************************************************
+C! Gumbel
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=(ln(y)), where x - Gumbel distributed random number, 
+C!        y - exponentially distributed random number
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_SGUMBEL_ICDF = 0
+        INTEGER, PARAMETER :: VSL_METHOD_DGUMBEL_ICDF = 0
+
+C!*****************************************************************************
+C! Bernoulli 
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=0 if u<=p and x=1 if u>p, where x - Bernoulli distributed random 
+C!        number, u - uniformly distributed random number
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_IBERNOULLI_ICDF = 0
+
+C!*****************************************************************************
+C! Geometric
+C! Comments:
+C! ICDF - inverse cumulative distribution function method according to formula
+C!        x=floor(ln(u)/ln(1-p)), where x - geometrically distributed random 
+C!        number, u - uniformly distributed random number
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_IGEOMETRIC_ICDF = 0
+
+C!*****************************************************************************
+C! Binomial 
+C! Comments:
+C! BTPE - for ntrial*min(p,1-p)>30 acceptance/rejection method with 
+C!        decomposition onto 4 regions:
+C!        combined 2 parallelograms, triangle, left exponential tail,
+C!        right exponential tail;
+C!        othewise table lookup method
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_IBINOMIAL_BTPE = 0
+
+C!*****************************************************************************
+C! Hypergeometric
+C! Comments:
+C! H2PE - if mode of distribution is large, acceptance/rejection method is used
+C!        with decomposition onto 3 regions:
+C!        rectangular, left exponential tail and right exponential tail;
+C!        othewise table lookup method is used
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_IHYPERGEOMETRIC_H2PE = 0
+
+C!*****************************************************************************
+C! Poisson 
+C! Comments:
+C! PTPE - if lambda>=27, acceptance/rejection method is used
+C!        with decomposition onto 4 regions:
+C!        2 combined parallelograms, triangle, left exponential tail and 
+C!        right exponential tail;
+C!        othewise table lookup method is used
+C! POISNORM - for lambda>=1 method is based on Poisson inverse CDF
+C!            approximation via Gaussian (normal) inverse CDF; for lambda<1
+C!            table lookup method is used.
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_IPOISSON_PTPE     = 0
+        INTEGER, PARAMETER :: VSL_METHOD_IPOISSON_POISNORM = 1
+
+C!*****************************************************************************
+C! NegBinomial 
+C! Comments:
+C! NBAR - if (a-1)*(1-p)/p>=100, acceptance/rejection method is used with
+C!        decomposition onto 5 regions: rectangular, 2 trapezoid, left
+C!        exponential tail, right exponential tail; othewise table lookup
+C!        method is used.
+C!
+        INTEGER, PARAMETER :: VSL_METHOD_INEGBINOMIAL_NBAR = 0

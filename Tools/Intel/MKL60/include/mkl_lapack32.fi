@@ -1,0 +1,3496 @@
+!!
+!!               INTEL CORPORATION PROPRIETARY INFORMATION
+!!  This software is supplied under the terms of a license agreement or
+!!  nondisclosure agreement with Intel Corporation and may not be copied
+!!  or disclosed except in accordance with the terms of that agreement.
+!!    Copyright(C) 1999-2003 Intel Corporation. All Rights Reserved.
+!!
+!! File    : mkl_lapack32.fi
+!! Purpose : Intel(R) Math Kernel Library (MKL) Fortran interface for 
+!!           LAPACK routines for single precision data
+!!
+
+$IF .NOT. DEFINED (MKL_LAPACK32_HEADER)
+
+$DEFINE MKL_LAPACK32_HEADER
+
+      interface to 
+     $subroutine sbdsqr( uplo, n, ncvt, nru, ncc, d, e, vt, ldvt, u,
+     $                   ldu, c, ldc, work, info )
+      character          uplo
+      integer            info, ldc, ldu, ldvt, n, ncc, ncvt, nru
+      real               c( ldc, * ), d( * ), e( * ), u( ldu, * ),
+     $                   vt( ldvt, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sdisna( job, m, n, d, sep, info )
+      character          job
+      integer            info, m, n
+      real               d( * ), sep( * )
+      end
+
+      interface to 
+     $subroutine sgbbrd( vect, m, n, ncc, kl, ku, ab, ldab, d, e, q,
+     $                   ldq, pt, ldpt, c, ldc, work, info )
+      character          vect
+      integer            info, kl, ku, ldab, ldc, ldpt, ldq, m, n, ncc
+      real               ab( ldab, * ), c( ldc, * ), d( * ), e( * ),
+     $                   pt( ldpt, * ), q( ldq, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgbcon( norm, n, kl, ku, ab, ldab, ipiv, anorm, rcond,
+     $                   work, iwork, info )
+      character          norm
+      integer            info, kl, ku, ldab, n
+      real               anorm, rcond
+      integer            ipiv( * ), iwork( * )
+      real               ab( ldab, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgbequ( m, n, kl, ku, ab, ldab, r, c, rowcnd, colcnd,
+     $                   amax, info )
+      integer            info, kl, ku, ldab, m, n
+      real               amax, colcnd, rowcnd
+      real               ab( ldab, * ), c( * ), r( * )
+      end
+
+      interface to 
+     $subroutine sgbrfs( trans, n, kl, ku, nrhs, ab, ldab, afb, ldafb,
+     $                   ipiv, b, ldb, x, ldx, ferr, berr, work, iwork,
+     $                   info )
+      character          trans
+      integer            info, kl, ku, ldab, ldafb, ldb, ldx, n, nrhs
+      integer            ipiv( * ), iwork( * )
+      real               ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sgbsv( n, kl, ku, nrhs, ab, ldab, ipiv, b, ldb, info )
+      integer            info, kl, ku, ldab, ldb, n, nrhs
+      integer            ipiv( * )
+      real               ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sgbsvx( fact, trans, n, kl, ku, nrhs, ab, ldab, afb,
+     $                   ldafb, ipiv, equed, r, c, b, ldb, x, ldx,
+     $                   rcond, ferr, berr, work, iwork, info )
+      character          equed, fact, trans
+      integer            info, kl, ku, ldab, ldafb, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * ), iwork( * )
+      real               ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   berr( * ), c( * ), ferr( * ), r( * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sgbtf2( m, n, kl, ku, ab, ldab, ipiv, info )
+      integer            info, kl, ku, ldab, m, n
+      integer            ipiv( * )
+      real               ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine sgbtrf( m, n, kl, ku, ab, ldab, ipiv, info )
+      integer            info, kl, ku, ldab, m, n
+      integer            ipiv( * )
+      real               ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine sgbtrs( trans, n, kl, ku, nrhs, ab, ldab, ipiv, b, ldb,
+     $                   info )
+      character          trans
+      integer            info, kl, ku, ldab, ldb, n, nrhs
+      integer            ipiv( * )
+      real               ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sgebak( job, side, n, ilo, ihi, scale, m, v, ldv,
+     $                   info )
+      character          job, side
+      integer            ihi, ilo, info, ldv, m, n
+      real               v( ldv, * ), scale( * )
+      end
+
+      interface to 
+     $subroutine sgebal( job, n, a, lda, ilo, ihi, scale, info )
+      character          job
+      integer            ihi, ilo, info, lda, n
+      real               a( lda, * ), scale( * )
+      end
+
+      interface to 
+     $subroutine sgebd2( m, n, a, lda, d, e, tauq, taup, work, info )
+      integer            info, lda, m, n
+      real               a( lda, * ), d( * ), e( * ), taup( * ),
+     $                   tauq( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgebrd( m, n, a, lda, d, e, tauq, taup, work, lwork,
+     $                   info )
+      integer            info, lda, lwork, m, n
+      real               a( lda, * ), d( * ), e( * ), taup( * ),
+     $                   tauq( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgecon( norm, n, a, lda, anorm, rcond, work, iwork,
+     $                   info )
+      character          norm
+      integer            info, lda, n
+      real               anorm, rcond
+      integer            iwork( * )
+      real               a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgeequ( m, n, a, lda, r, c, rowcnd, colcnd, amax,
+     $                   info )
+      integer            info, lda, m, n
+      real               amax, colcnd, rowcnd
+      real               a( lda, * ), c( * ), r( * )
+      end
+
+      interface to 
+     $subroutine sgees( jobvs, sort, select, n, a, lda, sdim, wr, wi,
+     $                  vs, ldvs, work, lwork, bwork, info )
+      character          jobvs, sort
+      integer            info, lda, ldvs, lwork, n, sdim
+      logical            bwork( * )
+      real               a( lda, * ), vs( ldvs, * ), wi( * ), work( * ),
+     $                   wr( * )
+      logical            select
+      external           select
+      end
+
+      interface to 
+     $subroutine sgeesx( jobvs, sort, select, sense, n, a, lda, sdim,
+     $                   wr, wi, vs, ldvs, rconde, rcondv, work, lwork,
+     $                   iwork, liwork, bwork, info )
+      character          jobvs, sense, sort
+      integer            info, lda, ldvs, liwork, lwork, n, sdim
+      real               rconde, rcondv
+      logical            bwork( * )
+      integer            iwork( * )
+      real               a( lda, * ), vs( ldvs, * ), wi( * ), work( * ),
+     $                   wr( * )
+      logical            select
+      external           select
+      end
+
+      interface to 
+     $subroutine sgeev( jobvl, jobvr, n, a, lda, wr, wi, vl, ldvl, vr,
+     $                  ldvr, work, lwork, info )
+      character          jobvl, jobvr
+      integer            info, lda, ldvl, ldvr, lwork, n
+      real               a( lda, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   wi( * ), work( * ), wr( * )
+      end
+
+      interface to 
+     $subroutine sgeevx( balanc, jobvl, jobvr, sense, n, a, lda, wr, wi,
+     $                   vl, ldvl, vr, ldvr, ilo, ihi, scale, abnrm,
+     $                   rconde, rcondv, work, lwork, iwork, info )
+      character          balanc, jobvl, jobvr, sense
+      integer            ihi, ilo, info, lda, ldvl, ldvr, lwork, n
+      real               abnrm
+      integer            iwork( * )
+      real               a( lda, * ), rconde( * ), rcondv( * ),
+     $                   scale( * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   wi( * ), work( * ), wr( * )
+      end
+
+      interface to 
+     $subroutine sgegs( jobvsl, jobvsr, n, a, lda, b, ldb, alphar,
+     $                  alphai, beta, vsl, ldvsl, vsr, ldvsr, work,
+     $                  lwork, info )
+      character          jobvsl, jobvsr
+      integer            info, lda, ldb, ldvsl, ldvsr, lwork, n
+      real               a( lda, * ), alphai( * ), alphar( * ),
+     $                   b( ldb, * ), beta( * ), vsl( ldvsl, * ),
+     $                   vsr( ldvsr, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgegv( jobvl, jobvr, n, a, lda, b, ldb, alphar, alphai,
+     $                  beta, vl, ldvl, vr, ldvr, work, lwork, info )
+      character          jobvl, jobvr
+      integer            info, lda, ldb, ldvl, ldvr, lwork, n
+      real               a( lda, * ), alphai( * ), alphar( * ),
+     $                   b( ldb, * ), beta( * ), vl( ldvl, * ),
+     $                   vr( ldvr, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgehd2( n, ilo, ihi, a, lda, tau, work, info )
+      integer            ihi, ilo, info, lda, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgehrd( n, ilo, ihi, a, lda, tau, work, lwork, info )
+      integer            ihi, ilo, info, lda, lwork, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgelq2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgelqf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgels( trans, m, n, nrhs, a, lda, b, ldb, work, lwork,
+     $                  info )
+      character          trans
+      integer            info, lda, ldb, lwork, m, n, nrhs
+      real               a( lda, * ), b( ldb, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgelss( m, n, nrhs, a, lda, b, ldb, s, rcond, rank,
+     $                   work, lwork, info )
+      integer            info, lda, ldb, lwork, m, n, nrhs, rank
+      real               rcond
+      real               a( lda, * ), b( ldb, * ), s( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgelsd( m, n, nrhs, a, lda, b, ldb, s, rcond, rank,
+     $                   work, lwork, iwork, info )
+      integer            info, lda, ldb, lwork, m, n, nrhs, rank, iwork(*)
+      real               rcond
+      real               a( lda, * ), b( ldb, * ), s( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgelsx( m, n, nrhs, a, lda, b, ldb, jpvt, rcond, rank,
+     $                   work, info )
+      integer            info, lda, ldb, m, n, nrhs, rank
+      real               rcond
+      integer            jpvt( * )
+      real               a( lda, * ), b( ldb, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgeql2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgeqlf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgeqr2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgeqrf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgerfs( trans, n, nrhs, a, lda, af, ldaf, ipiv, b, ldb,
+     $                   x, ldx, ferr, berr, work, iwork, info )
+      character          trans
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      integer            ipiv( * ), iwork( * )
+      real               a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sgerq2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgerqf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgesv( n, nrhs, a, lda, ipiv, b, ldb, info )
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sgesvd( jobu, jobvt, m, n, a, lda, s, u, ldu, vt, ldvt,
+     $                   work, lwork, info )
+      character          jobu, jobvt
+      integer            info, lda, ldu, ldvt, lwork, m, n
+      real               a( lda, * ), s( * ), u( ldu, * ),
+     $                   vt( ldvt, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgesvx( fact, trans, n, nrhs, a, lda, af, ldaf, ipiv,
+     $                   equed, r, c, b, ldb, x, ldx, rcond, ferr, berr,
+     $                   work, iwork, info )
+      character          equed, fact, trans
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * ), iwork( * )
+      real               a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   berr( * ), c( * ), ferr( * ), r( * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sgetf2( m, n, a, lda, ipiv, info )
+      integer            info, lda, m, n
+      integer            ipiv( * )
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine sgetrf( m, n, a, lda, ipiv, info )
+      integer            info, lda, m, n
+      integer            ipiv( * )
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine sgetri( n, a, lda, ipiv, work, lwork, info )
+      integer            info, lda, lwork, n
+      integer            ipiv( * )
+      real               a( lda, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sgetrs( trans, n, nrhs, a, lda, ipiv, b, ldb, info )
+      character          trans
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sggbak( job, side, n, ilo, ihi, lscale, rscale, m, v,
+     $                   ldv, info )
+      character          job, side
+      integer            ihi, ilo, info, ldv, m, n
+      real               lscale( * ), rscale( * ), v( ldv, * )
+      end
+
+      interface to 
+     $subroutine sggbal( job, n, a, lda, b, ldb, ilo, ihi, lscale,
+     $                   rscale, work, info )
+      character          job
+      integer            ihi, ilo, info, lda, ldb, n
+      real               a( lda, * ), b( ldb, * ), lscale( * ),
+     $                   rscale( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sggglm( n, m, p, a, lda, b, ldb, d, x, y, work, lwork,
+     $                   info )
+      integer            info, lda, ldb, lwork, m, n, p
+      real               a( lda, * ), b( ldb, * ), d( * ), work( * ),
+     $                   x( * ), y( * )
+      end
+
+      interface to 
+     $subroutine sgghrd( compq, compz, n, ilo, ihi, a, lda, b, ldb, q,
+     $                   ldq, z, ldz, info )
+      character          compq, compz
+      integer            ihi, ilo, info, lda, ldb, ldq, ldz, n
+      real               a( lda, * ), b( ldb, * ), q( ldq, * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sgglse( m, n, p, a, lda, b, ldb, c, d, x, work, lwork,
+     $                   info )
+      integer            info, lda, ldb, lwork, m, n, p
+      real               a( lda, * ), b( ldb, * ), c( * ), d( * ),
+     $                   work( * ), x( * )
+      end
+
+      interface to 
+     $subroutine sggqrf( n, m, p, a, lda, taua, b, ldb, taub, work,
+     $                   lwork, info )
+      integer            info, lda, ldb, lwork, m, n, p
+      real               a( lda, * ), b( ldb, * ), taua( * ), taub( * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine sggrqf( m, p, n, a, lda, taua, b, ldb, taub, work,
+     $                   lwork, info )
+      integer            info, lda, ldb, lwork, m, n, p
+      real               a( lda, * ), b( ldb, * ), taua( * ), taub( * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine sggsvd( jobu, jobv, jobq, m, n, p, k, l, a, lda, b,
+     $                   ldb, alpha, beta, u, ldu, v, ldv, q, ldq,
+     $                   work, iwork, info )
+      character          jobq, jobu, jobv
+      integer            info, k, l, lda, ldb, ldq, ldu, ldv, m, n, p
+      integer            iwork( * )
+      real               a( lda, * ), alpha( * ), b( ldb, * ),
+     $                   beta( * ), q( ldq, * ), u( ldu, * ),
+     $                   v( ldv, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sggsvp( jobu, jobv, jobq, m, p, n, a, lda, b, ldb,
+     $                   tola, tolb, k, l, u, ldu, v, ldv, q, ldq,
+     $                   iwork, tau, work, info )
+      character          jobq, jobu, jobv
+      integer            info, k, l, lda, ldb, ldq, ldu, ldv, m, n, p
+      real               tola, tolb
+      integer            iwork( * )
+      real               a( lda, * ), b( ldb, * ), q( ldq, * ),
+     $                   tau( * ), u( ldu, * ), v( ldv, * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgtcon( norm, n, dl, d, du, du2, ipiv, anorm, rcond,
+     $                   work, iwork, info )
+      character          norm
+      integer            info, n
+      real               anorm, rcond
+      integer            ipiv( * ), iwork( * )
+      real               d( * ), dl( * ), du( * ), du2( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sgtrfs( trans, n, nrhs, dl, d, du, dlf, df, duf, du2,
+     $                   ipiv, b, ldb, x, ldx, ferr, berr, work, iwork,
+     $                   info )
+      character          trans
+      integer            info, ldb, ldx, n, nrhs
+      integer            ipiv( * ), iwork( * )
+      real               b( ldb, * ), berr( * ), d( * ), df( * ),
+     $                   dl( * ), dlf( * ), du( * ), du2( * ), duf( * ),
+     $                   ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sgtsv( n, nrhs, dl, d, du, b, ldb, info )
+      integer            info, ldb, n, nrhs
+      real               b( ldb, * ), d( * ), dl( * ), du( * )
+      end
+
+      interface to 
+     $subroutine sgtsvx( fact, trans, n, nrhs, dl, d, du, dlf, df, duf,
+     $                   du2, ipiv, b, ldb, x, ldx, rcond, ferr, berr,
+     $                   work, iwork, info )
+      character          fact, trans
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * ), iwork( * )
+      real               b( ldb, * ), berr( * ), d( * ), df( * ),
+     $                   dl( * ), dlf( * ), du( * ), du2( * ), duf( * ),
+     $                   ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sgttrf( n, dl, d, du, du2, ipiv, info )
+      integer            info, n
+      integer            ipiv( * )
+      real               d( * ), dl( * ), du( * ), du2( * )
+      end
+
+      interface to 
+     $subroutine sgttrs( trans, n, nrhs, dl, d, du, du2, ipiv, b, ldb,
+     $                   info )
+      character          trans
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      real               b( ldb, * ), d( * ), dl( * ), du( * ), du2( * )
+      end
+
+      interface to 
+     $subroutine shgeqz( job, compq, compz, n, ilo, ihi, a, lda, b, ldb,
+     $                   alphar, alphai, beta, q, ldq, z, ldz, work,
+     $                   lwork, info )
+      character          compq, compz, job
+      integer            ihi, ilo, info, lda, ldb, ldq, ldz, lwork, n
+      real               a( lda, * ), alphai( * ), alphar( * ),
+     $                   b( ldb, * ), beta( * ), q( ldq, * ), work( * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine shsein( side, eigsrc, initv, select, n, h, ldh, wr, wi,
+     $                   vl, ldvl, vr, ldvr, mm, m, work, ifaill,
+     $                   ifailr, info )
+      character          eigsrc, initv, side
+      integer            info, ldh, ldvl, ldvr, m, mm, n
+      logical            select( * )
+      integer            ifaill( * ), ifailr( * )
+      real               h( ldh, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   wi( * ), work( * ), wr( * )
+      end
+
+      interface to 
+     $subroutine shseqr( job, compz, n, ilo, ihi, h, ldh, wr, wi, z,
+     $                   ldz, work, lwork, info )
+      character          compz, job
+      integer            ihi, ilo, info, ldh, ldz, lwork, n
+      real               h( ldh, * ), wi( * ), work( * ), wr( * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine slaed0( icompq, qsiz, n, d, e, q, ldq, qstore, ldqs,
+     $                   work, iwork, info )
+      integer            icompq, info, ldq, ldqs, n, qsiz
+      integer            iwork( * )
+      real               d( * ), e( * ), q( ldq, * ), qstore( ldqs, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine slaed1( n, d, q, ldq, indxq, rho, cutpnt, work, iwork,
+     $                   info )
+      integer            cutpnt, info, ldq, n
+      real               rho
+      integer            indxq( * ), iwork( * )
+      real               d( * ), q( ldq, * ), work( * )
+      end
+
+      interface to 
+     $subroutine slaed2( k, n, d, q, ldq, indxq, rho, cutpnt, z, dlamda,
+     $                   q2, ldq2, indxc, w, indxp, indx, coltyp, info )
+      integer            cutpnt, info, k, ldq, ldq2, n
+      real               rho
+      integer            coltyp( * ), indx( * ), indxc( * ), indxp( * ),
+     $                   indxq( * )
+      real               d( * ), dlamda( * ), q( ldq, * ),
+     $                   q2( ldq2, * ), w( * ), z( * )
+      end
+
+      interface to 
+     $subroutine slaed3( k, kstart, kstop, n, d, q, ldq, rho, cutpnt,
+     $                   dlamda, q2, ldq2, indxc, ctot, w, s, lds,
+     $                   info )
+      integer            cutpnt, info, k, kstart, kstop, ldq, ldq2, lds,
+     $                   n
+      real               rho
+      integer            ctot( * ), indxc( * )
+      real               d( * ), dlamda( * ), q( ldq, * ),
+     $                   q2( ldq2, * ), s( lds, * ), w( * )
+      end
+
+      interface to 
+     $subroutine slaed4( n, i, d, z, delta, rho, dlam, info )
+      integer            i, info, n
+      real               dlam, rho
+      real               d( * ), delta( * ), z( * )
+      end
+
+      interface to 
+     $subroutine slaed5( i, d, z, delta, rho, dlam )
+      integer            i
+      real               dlam, rho
+      real               d( 2 ), delta( 2 ), z( 2 )
+      end
+
+      interface to 
+     $subroutine slaed6( kniter, orgati, rho, d, z, finit, tau, info )
+      logical            orgati
+      integer            info, kniter
+      real               finit, rho, tau
+      real               d( 3 ), z( 3 )
+      end
+
+      interface to 
+     $subroutine slaed7( icompq, n, qsiz, tlvls, curlvl, curpbm, d, q,
+     $                   ldq, indxq, rho, cutpnt, qstore, qptr, prmptr,
+     $                   perm, givptr, givcol, givnum, work, iwork,
+     $                   info )
+      integer            curlvl, curpbm, cutpnt, icompq, info, ldq, n,
+     $                   qsiz, tlvls
+      real               rho
+      integer            givcol( 2, * ), givptr( * ), indxq( * ),
+     $                   iwork( * ), perm( * ), prmptr( * ), qptr( * )
+      real               d( * ), givnum( 2, * ), q( ldq, * ),
+     $                   qstore( * ), work( * )
+      end
+
+      interface to 
+     $subroutine slaed8( icompq, k, n, qsiz, d, q, ldq, indxq, rho,
+     $                   cutpnt, z, dlamda, q2, ldq2, w, perm, givptr,
+     $                   givcol, givnum, indxp, indx, info )
+      integer            cutpnt, givptr, icompq, info, k, ldq, ldq2, n,
+     $                   qsiz
+      real               rho
+      integer            givcol( 2, * ), indx( * ), indxp( * ),
+     $                   indxq( * ), perm( * )
+      real               d( * ), dlamda( * ), givnum( 2, * ),
+     $                   q( ldq, * ), q2( ldq2, * ), w( * ), z( * )
+      end
+
+      interface to 
+     $subroutine slaed9( k, kstart, kstop, n, d, q, ldq, rho, dlamda, w,
+     $                   s, lds, info )
+      integer            info, k, kstart, kstop, ldq, lds, n
+      real               rho
+      real               d( * ), dlamda( * ), q( ldq, * ), s( lds, * ),
+     $                   w( * )
+      end
+
+      interface to 
+     $subroutine slaeda( n, tlvls, curlvl, curpbm, prmptr, perm, givptr,
+     $                   givcol, givnum, q, qptr, z, ztemp, info )
+      integer            curlvl, curpbm, info, n, tlvls
+      integer            givcol( 2, * ), givptr( * ), perm( * ),
+     $                   prmptr( * ), qptr( * )
+      real               givnum( 2, * ), q( * ), z( * ), ztemp( * )
+      end
+
+      interface to 
+     $subroutine slagtf( n, a, lambda, b, c, tol, d, in, info )
+      integer            info, n
+      real               lambda, tol
+      integer            in( * )
+      real               a( * ), b( * ), c( * ), d( * )
+      end
+
+      interface to 
+     $subroutine slamrg( n1, n2, a, strd1, strd2, index )
+      integer            n1, n2, strd1, strd2
+      integer            index( * )
+      real               a( * )
+      end
+
+      interface to 
+     $subroutine slasq1( n, d, e, work, info )
+      integer            info, n
+      real               d( * ), e( * ), work( * )
+      end
+
+      interface to 
+     $subroutine slasq2( m, q, e, qq, ee, eps, tol2, small2, sup, kend,
+     $                   info )
+      integer            info, kend, m
+      real               eps, small2, sup, tol2
+      real               e( * ), ee( * ), q( * ), qq( * )
+      end
+
+      interface to 
+     $subroutine slasq3( n, q, e, qq, ee, sup, sigma, kend, off, iphase,
+     $                   iconv, eps, tol2, small2 )
+      integer            iconv, iphase, kend, n, off
+      real               eps, sigma, small2, sup, tol2
+      real               e( * ), ee( * ), q( * ), qq( * )
+      end
+
+      interface to 
+     $subroutine slasq4( n, q, e, tau, sup )
+      integer            n
+      real               sup, tau
+      real               e( * ), q( * )
+      end
+
+      interface to 
+     $subroutine slasrt( id, n, d, info )
+      character          id
+      integer            info, n
+      real               d( * )
+      end
+
+      interface to 
+     $subroutine slasyf( uplo, n, nb, kb, a, lda, ipiv, w, ldw, info )
+      character          uplo
+      integer            info, kb, lda, ldw, n, nb
+      integer            ipiv( * )
+      real               a( lda, * ), w( ldw, * )
+      end
+
+      interface to 
+     $subroutine slatzm( side, m, n, v, incv, tau, c1, c2, ldc, work )
+      character          side
+      integer            incv, ldc, m, n
+      real               tau
+      real               c1( ldc, * ), c2( ldc, * ), v( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sopgtr( uplo, n, ap, tau, q, ldq, work, info )
+      character          uplo
+      integer            info, ldq, n
+      real               ap( * ), q( ldq, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sopmtr( side, uplo, trans, m, n, ap, tau, c, ldc, work,
+     $                   info )
+      character          side, trans, uplo
+      integer            info, ldc, m, n
+      real               ap( * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sorg2l( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sorg2r( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sorgbr( vect, m, n, k, a, lda, tau, work, lwork, info )
+      character          vect
+      integer            info, k, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorghr( n, ilo, ihi, a, lda, tau, work, lwork, info )
+      integer            ihi, ilo, info, lda, lwork, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorgl2( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sorglq( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorgql( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorgqr( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorgr2( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      real               a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sorgrq( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorgtr( uplo, n, a, lda, tau, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      real               a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine sorm2l( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sorm2r( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sormbr( vect, side, trans, m, n, k, a, lda, tau, c,
+     $                   ldc, work, lwork, info )
+      character          side, trans, vect
+      integer            info, k, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine sormhr( side, trans, m, n, ilo, ihi, a, lda, tau, c,
+     $                   ldc, work, lwork, info )
+      character          side, trans
+      integer            ihi, ilo, info, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine sorml2( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sormlq( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine sormql( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine sormqr( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine sormr2( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sormrq( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine sormtr( side, uplo, trans, m, n, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans, uplo
+      integer            info, lda, ldc, lwork, m, n
+      real               a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine spbcon( uplo, n, kd, ab, ldab, anorm, rcond, work,
+     $                   iwork, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               anorm, rcond
+      integer            iwork( * )
+      real               ab( ldab, * ), work( * )
+      end
+
+      interface to 
+     $subroutine spbequ( uplo, n, kd, ab, ldab, s, scond, amax, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               amax, scond
+      real               ab( ldab, * ), s( * )
+      end
+
+      interface to 
+     $subroutine spbrfs( uplo, n, kd, nrhs, ab, ldab, afb, ldafb, b,
+     $                   ldb, x, ldx, ferr, berr, work, iwork, info )
+      character          uplo
+      integer            info, kd, ldab, ldafb, ldb, ldx, n, nrhs
+      integer            iwork( * )
+      real               ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine spbstf( uplo, n, kd, ab, ldab, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine spbsv( uplo, n, kd, nrhs, ab, ldab, b, ldb, info )
+      character          uplo
+      integer            info, kd, ldab, ldb, n, nrhs
+      real               ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine spbsvx( fact, uplo, n, kd, nrhs, ab, ldab, afb, ldafb,
+     $                   equed, s, b, ldb, x, ldx, rcond, ferr, berr,
+     $                   work, iwork, info )
+      character          equed, fact, uplo
+      integer            info, kd, ldab, ldafb, ldb, ldx, n, nrhs
+      real               rcond
+      integer            iwork( * )
+      real               ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), s( * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine spbtf2( uplo, n, kd, ab, ldab, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine spbtrf( uplo, n, kd, ab, ldab, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine spbtrs( uplo, n, kd, nrhs, ab, ldab, b, ldb, info )
+      character          uplo
+      integer            info, kd, ldab, ldb, n, nrhs
+      real               ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine spocon( uplo, n, a, lda, anorm, rcond, work, iwork,
+     $                   info )
+      character          uplo
+      integer            info, lda, n
+      real               anorm, rcond
+      integer            iwork( * )
+      real               a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine spoequ( n, a, lda, s, scond, amax, info )
+      integer            info, lda, n
+      real               amax, scond
+      real               a( lda, * ), s( * )
+      end
+
+      interface to 
+     $subroutine sporfs( uplo, n, nrhs, a, lda, af, ldaf, b, ldb, x,
+     $                   ldx, ferr, berr, work, iwork, info )
+      character          uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      integer            iwork( * )
+      real               a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sposv( uplo, n, nrhs, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sposvx( fact, uplo, n, nrhs, a, lda, af, ldaf, equed,
+     $                   s, b, ldb, x, ldx, rcond, ferr, berr, work,
+     $                   iwork, info )
+      character          equed, fact, uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      real               rcond
+      integer            iwork( * )
+      real               a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), s( * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine spotf2( uplo, n, a, lda, info )
+      character          uplo
+      integer            info, lda, n
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine spotrf( uplo, n, a, lda, info )
+      character          uplo
+      integer            info, lda, n
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine spotri( uplo, n, a, lda, info )
+      character          uplo
+      integer            info, lda, n
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine spotrs( uplo, n, nrhs, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sppcon( uplo, n, ap, anorm, rcond, work, iwork, info )
+      character          uplo
+      integer            info, n
+      real               anorm, rcond
+      integer            iwork( * )
+      real               ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sppequ( uplo, n, ap, s, scond, amax, info )
+      character          uplo
+      integer            info, n
+      real               amax, scond
+      real               ap( * ), s( * )
+      end
+
+      interface to 
+     $subroutine spprfs( uplo, n, nrhs, ap, afp, b, ldb, x, ldx, ferr,
+     $                   berr, work, iwork, info )
+      character          uplo
+      integer            info, ldb, ldx, n, nrhs
+      integer            iwork( * )
+      real               afp( * ), ap( * ), b( ldb, * ), berr( * ),
+     $                   ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sppsv( uplo, n, nrhs, ap, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      real               ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sppsvx( fact, uplo, n, nrhs, ap, afp, equed, s, b, ldb,
+     $                   x, ldx, rcond, ferr, berr, work, iwork, info )
+      character          equed, fact, uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      integer            iwork( * )
+      real               afp( * ), ap( * ), b( ldb, * ), berr( * ),
+     $                   ferr( * ), s( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine spptrf( uplo, n, ap, info )
+      character          uplo
+      integer            info, n
+      real               ap( * )
+      end
+
+      interface to 
+     $subroutine spptri( uplo, n, ap, info )
+      character          uplo
+      integer            info, n
+      real               ap( * )
+      end
+
+      interface to 
+     $subroutine spptrs( uplo, n, nrhs, ap, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      real               ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sptcon( n, d, e, anorm, rcond, work, info )
+      integer            info, n
+      real               anorm, rcond
+      real               d( * ), e( * ), work( * )
+      end
+
+      interface to 
+     $subroutine spteqr( compz, n, d, e, z, ldz, work, info )
+      character          compz
+      integer            info, ldz, n
+      real               d( * ), e( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sptrfs( n, nrhs, d, e, df, ef, b, ldb, x, ldx, ferr,
+     $                   berr, work, info )
+      integer            info, ldb, ldx, n, nrhs
+      real               b( ldb, * ), berr( * ), d( * ), df( * ),
+     $                   e( * ), ef( * ), ferr( * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sptsv( n, nrhs, d, e, b, ldb, info )
+      integer            info, ldb, n, nrhs
+      real               b( ldb, * ), d( * ), e( * )
+      end
+
+      interface to 
+     $subroutine sptsvx( fact, n, nrhs, d, e, df, ef, b, ldb, x, ldx,
+     $                   rcond, ferr, berr, work, info )
+      character          fact
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      real               b( ldb, * ), berr( * ), d( * ), df( * ),
+     $                   e( * ), ef( * ), ferr( * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine spttrf( n, d, e, info )
+      integer            info, n
+      real               d( * ), e( * )
+      end
+
+      interface to 
+     $subroutine spttrs( n, nrhs, d, e, b, ldb, info )
+      integer            info, ldb, n, nrhs
+      real               b( ldb, * ), d( * ), e( * )
+      end
+
+      interface to 
+     $subroutine ssbev( jobz, uplo, n, kd, ab, ldab, w, z, ldz, work,
+     $                  info )
+      character          jobz, uplo
+      integer            info, kd, ldab, ldz, n
+      real               ab( ldab, * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssbevd( jobz, uplo, n, kd, ab, ldab, w, z, ldz, work,
+     $                   lwork, iwork, liwork, info )
+      character          jobz, uplo
+      integer            info, kd, ldab, ldz, liwork, lwork, n
+      integer            iwork( * )
+      real               ab( ldab, * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssbevx( jobz, range, uplo, n, kd, ab, ldab, q, ldq, vl,
+     $                   vu, il, iu, abstol, m, w, z, ldz, work, iwork,
+     $                   ifail, info )
+      character          jobz, range, uplo
+      integer            il, info, iu, kd, ldab, ldq, ldz, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               ab( ldab, * ), q( ldq, * ), w( * ), work( * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssbgst( vect, uplo, n, ka, kb, ab, ldab, bb, ldbb, x,
+     $                   ldx, work, info )
+      character          uplo, vect
+      integer            info, ka, kb, ldab, ldbb, ldx, n
+      real               ab( ldab, * ), bb( ldbb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ssbgv( jobz, uplo, n, ka, kb, ab, ldab, bb, ldbb, w, z,
+     $                  ldz, work, info )
+      character          jobz, uplo
+      integer            info, ka, kb, ldab, ldbb, ldz, n
+      real               ab( ldab, * ), bb( ldbb, * ), w( * ),
+     $                   work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssbtrd( vect, uplo, n, kd, ab, ldab, d, e, q, ldq,
+     $                   work, info )
+      character          uplo, vect
+      integer            info, kd, ldab, ldq, n
+      real               ab( ldab, * ), d( * ), e( * ), q( ldq, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine sspcon( uplo, n, ap, ipiv, anorm, rcond, work, iwork,
+     $                   info )
+      character          uplo
+      integer            info, n
+      real               anorm, rcond
+      integer            ipiv( * ), iwork( * )
+      real               ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sspev( jobz, uplo, n, ap, w, z, ldz, work, info )
+      character          jobz, uplo
+      integer            info, ldz, n
+      real               ap( * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sspevd( jobz, uplo, n, ap, w, z, ldz, work, lwork,
+     $                   iwork, liwork, info )
+      character          jobz, uplo
+      integer            info, ldz, liwork, lwork, n
+      integer            iwork( * )
+      real               ap( * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sspevx( jobz, range, uplo, n, ap, vl, vu, il, iu,
+     $                   abstol, m, w, z, ldz, work, iwork, ifail,
+     $                   info )
+      character          jobz, range, uplo
+      integer            il, info, iu, ldz, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               ap( * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sspgst( itype, uplo, n, ap, bp, info )
+      character          uplo
+      integer            info, itype, n
+      real               ap( * ), bp( * )
+      end
+
+      interface to 
+     $subroutine sspgv( itype, jobz, uplo, n, ap, bp, w, z, ldz, work,
+     $                  info )
+      character          jobz, uplo
+      integer            info, itype, ldz, n
+      real               ap( * ), bp( * ), w( * ), work( * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssprfs( uplo, n, nrhs, ap, afp, ipiv, b, ldb, x, ldx,
+     $                   ferr, berr, work, iwork, info )
+      character          uplo
+      integer            info, ldb, ldx, n, nrhs
+      integer            ipiv( * ), iwork( * )
+      real               afp( * ), ap( * ), b( ldb, * ), berr( * ),
+     $                   ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine sspsv( uplo, n, nrhs, ap, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      real               ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sspsvx( fact, uplo, n, nrhs, ap, afp, ipiv, b, ldb, x,
+     $                   ldx, rcond, ferr, berr, work, iwork, info )
+      character          fact, uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * ), iwork( * )
+      real               afp( * ), ap( * ), b( ldb, * ), berr( * ),
+     $                   ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ssptrd( uplo, n, ap, d, e, tau, info )
+      character          uplo
+      integer            info, n
+      real               ap( * ), d( * ), e( * ), tau( * )
+      end
+
+      interface to 
+     $subroutine ssptrf( uplo, n, ap, ipiv, info )
+      character          uplo
+      integer            info, n
+      integer            ipiv( * )
+      real               ap( * )
+      end
+
+      interface to 
+     $subroutine ssptri( uplo, n, ap, ipiv, work, info )
+      character          uplo
+      integer            info, n
+      integer            ipiv( * )
+      real               ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine ssptrs( uplo, n, nrhs, ap, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      real               ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine sstebz( range, order, n, vl, vu, il, iu, abstol, d, e,
+     $                   m, nsplit, w, iblock, isplit, work, iwork,
+     $                   info )
+      character          order, range
+      integer            il, info, iu, m, n, nsplit
+      real               abstol, vl, vu
+      integer            iblock( * ), isplit( * ), iwork( * )
+      real               d( * ), e( * ), w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine sstedc( compz, n, d, e, z, ldz, work, lwork, iwork,
+     $                   liwork, info )
+      character          compz
+      integer            info, ldz, liwork, lwork, n
+      integer            iwork( * )
+      real               d( * ), e( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sstein( n, d, e, m, w, iblock, isplit, z, ldz, work,
+     $                   iwork, ifail, info )
+      integer            info, ldz, m, n
+      integer            iblock( * ), ifail( * ), isplit( * ),
+     $                   iwork( * )
+      real               d( * ), e( * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssteqr( compz, n, d, e, z, ldz, work, info )
+      character          compz
+      integer            info, ldz, n
+      real               d( * ), e( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssterf( n, d, e, info )
+      integer            info, n
+      real               d( * ), e( * )
+      end
+
+      interface to 
+     $subroutine sstev( jobz, n, d, e, z, ldz, work, info )
+      character          jobz
+      integer            info, ldz, n
+      real               d( * ), e( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sstevd( jobz, n, d, e, z, ldz, work, lwork, iwork,
+     $                   liwork, info )
+      character          jobz
+      integer            info, ldz, liwork, lwork, n
+      integer            iwork( * )
+      real               d( * ), e( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine sstevx( jobz, range, n, d, e, vl, vu, il, iu, abstol,
+     $                   m, w, z, ldz, work, iwork, ifail, info )
+      character          jobz, range
+      integer            il, info, iu, ldz, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               d( * ), e( * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssycon( uplo, n, a, lda, ipiv, anorm, rcond, work,
+     $                   iwork, info )
+      character          uplo
+      integer            info, lda, n
+      real               anorm, rcond
+      integer            ipiv( * ), iwork( * )
+      real               a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine ssyev( jobz, uplo, n, a, lda, w, work, lwork, info )
+      character          jobz, uplo
+      integer            info, lda, lwork, n
+      real               a( lda, * ), w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine ssyevd( jobz, uplo, n, a, lda, w, work, lwork, iwork,
+     $                   liwork, info )
+      character          jobz, uplo
+      integer            info, lda, liwork, lwork, n
+      integer            iwork( * )
+      real               a( lda, * ), w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine ssyevx( jobz, range, uplo, n, a, lda, vl, vu, il, iu,
+     $                   abstol, m, w, z, ldz, work, lwork, iwork,
+     $                   ifail, info )
+      character          jobz, range, uplo
+      integer            il, info, iu, lda, ldz, lwork, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               a( lda, * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine ssygs2( itype, uplo, n, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, itype, lda, ldb, n
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine ssygst( itype, uplo, n, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, itype, lda, ldb, n
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine ssygv( itype, jobz, uplo, n, a, lda, b, ldb, w, work,
+     $                  lwork, info )
+      character          jobz, uplo
+      integer            info, itype, lda, ldb, lwork, n
+      real               a( lda, * ), b( ldb, * ), w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine ssyrfs( uplo, n, nrhs, a, lda, af, ldaf, ipiv, b, ldb,
+     $                   x, ldx, ferr, berr, work, iwork, info )
+      character          uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      integer            ipiv( * ), iwork( * )
+      real               a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ssysv( uplo, n, nrhs, a, lda, ipiv, b, ldb, work,
+     $                  lwork, info )
+      character          uplo
+      integer            info, lda, ldb, lwork, n, nrhs
+      integer            ipiv( * )
+      real               a( lda, * ), b( ldb, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine ssysvx( fact, uplo, n, nrhs, a, lda, af, ldaf, ipiv, b,
+     $                   ldb, x, ldx, rcond, ferr, berr, work, lwork,
+     $                   iwork, info )
+      character          fact, uplo
+      integer            info, lda, ldaf, ldb, ldx, lwork, n, nrhs
+      real               rcond
+      integer            ipiv( * ), iwork( * )
+      real               a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   berr( * ), ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ssytd2( uplo, n, a, lda, d, e, tau, info )
+      character          uplo
+      integer            info, lda, n
+      real               a( lda, * ), d( * ), e( * ), tau( * )
+      end
+
+      interface to 
+     $subroutine ssytf2( uplo, n, a, lda, ipiv, info )
+      character          uplo
+      integer            info, lda, n
+      integer            ipiv( * )
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine ssytrd( uplo, n, a, lda, d, e, tau, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      real               a( lda, * ), d( * ), e( * ), tau( * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine ssytrf( uplo, n, a, lda, ipiv, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      integer            ipiv( * )
+      real               a( lda, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine ssytri( uplo, n, a, lda, ipiv, work, info )
+      character          uplo
+      integer            info, lda, n
+      integer            ipiv( * )
+      real               a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine ssytrs( uplo, n, nrhs, a, lda, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine stbcon( norm, uplo, diag, n, kd, ab, ldab, rcond, work,
+     $                   iwork, info )
+      character          diag, norm, uplo
+      integer            info, kd, ldab, n
+      real               rcond
+      integer            iwork( * )
+      real               ab( ldab, * ), work( * )
+      end
+
+      interface to 
+     $subroutine stbrfs( uplo, trans, diag, n, kd, nrhs, ab, ldab, b,
+     $                   ldb, x, ldx, ferr, berr, work, iwork, info )
+      character          diag, trans, uplo
+      integer            info, kd, ldab, ldb, ldx, n, nrhs
+      integer            iwork( * )
+      real               ab( ldab, * ), b( ldb, * ), berr( * ),
+     $                   ferr( * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine stbtrs( uplo, trans, diag, n, kd, nrhs, ab, ldab, b,
+     $                   ldb, info )
+      character          diag, trans, uplo
+      integer            info, kd, ldab, ldb, n, nrhs
+      real               ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine stgevc( side, howmny, select, n, a, lda, b, ldb, vl,
+     $                   ldvl, vr, ldvr, mm, m, work, info )
+      character          howmny, side
+      integer            info, lda, ldb, ldvl, ldvr, m, mm, n
+      logical            select( * )
+      real               a( lda, * ), b( ldb, * ), vl( ldvl, * ),
+     $                   vr( ldvr, * ), work( * )
+      end
+
+      interface to 
+     $subroutine stgsja( jobu, jobv, jobq, m, p, n, k, l, a, lda, b,
+     $                   ldb, tola, tolb, alpha, beta, u, ldu, v, ldv,
+     $                   q, ldq, work, ncycle, info )
+      character          jobq, jobu, jobv
+      integer            info, k, l, lda, ldb, ldq, ldu, ldv, m, n,
+     $                   ncycle, p
+      real               tola, tolb
+      real               alpha( * ), beta( * ), a( lda, * ),
+     $                   b( ldb, * ), q( ldq, * ), u( ldu, * ),
+     $                   v( ldv, * ), work( * )
+      end
+
+      interface to 
+     $subroutine stpcon( norm, uplo, diag, n, ap, rcond, work, iwork,
+     $                   info )
+      character          diag, norm, uplo
+      integer            info, n
+      real               rcond
+      integer            iwork( * )
+      real               ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine stprfs( uplo, trans, diag, n, nrhs, ap, b, ldb, x, ldx,
+     $                   ferr, berr, work, iwork, info )
+      character          diag, trans, uplo
+      integer            info, ldb, ldx, n, nrhs
+      integer            iwork( * )
+      real               ap( * ), b( ldb, * ), berr( * ), ferr( * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine stptri( uplo, diag, n, ap, info )
+      character          diag, uplo
+      integer            info, n
+      real               ap( * )
+      end
+
+      interface to 
+     $subroutine stptrs( uplo, trans, diag, n, nrhs, ap, b, ldb, info )
+      character          diag, trans, uplo
+      integer            info, ldb, n, nrhs
+      real               ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine strcon( norm, uplo, diag, n, a, lda, rcond, work,
+     $                   iwork, info )
+      character          diag, norm, uplo
+      integer            info, lda, n
+      real               rcond
+      integer            iwork( * )
+      real               a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine strevc( side, howmny, select, n, t, ldt, vl, ldvl, vr,
+     $                   ldvr, mm, m, work, info )
+      character          howmny, side
+      integer            info, ldt, ldvl, ldvr, m, mm, n
+      logical            select( * )
+      real               t( ldt, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine strexc( compq, n, t, ldt, q, ldq, ifst, ilst, work,
+     $                   info )
+      character          compq
+      integer            ifst, ilst, info, ldq, ldt, n
+      real               q( ldq, * ), t( ldt, * ), work( * )
+      end
+
+      interface to 
+     $subroutine strrfs( uplo, trans, diag, n, nrhs, a, lda, b, ldb, x,
+     $                   ldx, ferr, berr, work, iwork, info )
+      character          diag, trans, uplo
+      integer            info, lda, ldb, ldx, n, nrhs
+      integer            iwork( * )
+      real               a( lda, * ), b( ldb, * ), berr( * ), ferr( * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine strsen( job, compq, select, n, t, ldt, q, ldq, wr, wi,
+     $                   m, s, sep, work, lwork, iwork, liwork, info )
+      character          compq, job
+      integer            info, ldq, ldt, liwork, lwork, m, n
+      real               s, sep
+      logical            select( * )
+      integer            iwork( * )
+      real               q( ldq, * ), t( ldt, * ), wi( * ), work( * ),
+     $                   wr( * )
+      end
+
+      interface to 
+     $subroutine strsna( job, howmny, select, n, t, ldt, vl, ldvl, vr,
+     $                   ldvr, s, sep, mm, m, work, ldwork, iwork,
+     $                   info )
+      character          howmny, job
+      integer            info, ldt, ldvl, ldvr, ldwork, m, mm, n
+      logical            select( * )
+      integer            iwork( * )
+      real               s( * ), sep( * ), t( ldt, * ), vl( ldvl, * ),
+     $                   vr( ldvr, * ), work( ldwork, * )
+      end
+
+      interface to 
+     $subroutine strsyl( trana, tranb, isgn, m, n, a, lda, b, ldb, c,
+     $                   ldc, scale, info )
+      character          trana, tranb
+      integer            info, isgn, lda, ldb, ldc, m, n
+      real               scale
+      real               a( lda, * ), b( ldb, * ), c( ldc, * )
+      end
+
+      interface to 
+     $subroutine strti2( uplo, diag, n, a, lda, info )
+      character          diag, uplo
+      integer            info, lda, n
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine strtri( uplo, diag, n, a, lda, info )
+      character          diag, uplo
+      integer            info, lda, n
+      real               a( lda, * )
+      end
+
+      interface to 
+     $subroutine strtrs( uplo, trans, diag, n, nrhs, a, lda, b, ldb,
+     $                   info )
+      character          diag, trans, uplo
+      integer            info, lda, ldb, n, nrhs
+      real               a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine stzrqf( m, n, a, lda, tau, info )
+      integer            info, lda, m, n
+      real               a( lda, * ), tau( * )
+      end
+
+      interface to 
+     $subroutine cbdsqr( uplo, n, ncvt, nru, ncc, d, e, vt, ldvt, u,
+     $                   ldu, c, ldc, rwork, info )
+      character          uplo
+      integer            info, ldc, ldu, ldvt, n, ncc, ncvt, nru
+      real               d( * ), e( * ), rwork( * )
+      complex            c( ldc, * ), u( ldu, * ), vt( ldvt, * )
+      end
+
+      interface to 
+     $subroutine cgbbrd( vect, m, n, ncc, kl, ku, ab, ldab, d, e, q,
+     $                   ldq, pt, ldpt, c, ldc, work, rwork, info )
+      character          vect
+      integer            info, kl, ku, ldab, ldc, ldpt, ldq, m, n, ncc
+      real               d( * ), e( * ), rwork( * )
+      complex            ab( ldab, * ), c( ldc, * ), pt( ldpt, * ),
+     $                   q( ldq, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgbcon( norm, n, kl, ku, ab, ldab, ipiv, anorm, rcond,
+     $                   work, rwork, info )
+      character          norm
+      integer            info, kl, ku, ldab, n
+      real               anorm, rcond
+      integer            ipiv( * )
+      real               rwork( * )
+      complex            ab( ldab, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgbequ( m, n, kl, ku, ab, ldab, r, c, rowcnd, colcnd,
+     $                   amax, info )
+      integer            info, kl, ku, ldab, m, n
+      real               amax, colcnd, rowcnd
+      real               c( * ), r( * )
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cgbrfs( trans, n, kl, ku, nrhs, ab, ldab, afb, ldafb,
+     $                   ipiv, b, ldb, x, ldx, ferr, berr, work, rwork,
+     $                   info )
+      character          trans
+      integer            info, kl, ku, ldab, ldafb, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cgbsv( n, kl, ku, nrhs, ab, ldab, ipiv, b, ldb, info )
+      integer            info, kl, ku, ldab, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cgbsvx( fact, trans, n, kl, ku, nrhs, ab, ldab, afb,
+     $                   ldafb, ipiv, equed, r, c, b, ldb, x, ldx,
+     $                   rcond, ferr, berr, work, rwork, info )
+      character          equed, fact, trans
+      integer            info, kl, ku, ldab, ldafb, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), c( * ), ferr( * ), r( * ),
+     $                   rwork( * )
+      complex            ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cgbtf2( m, n, kl, ku, ab, ldab, ipiv, info )
+      integer            info, kl, ku, ldab, m, n
+      integer            ipiv( * )
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cgbtrf( m, n, kl, ku, ab, ldab, ipiv, info )
+      integer            info, kl, ku, ldab, m, n
+      integer            ipiv( * )
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cgbtrs( trans, n, kl, ku, nrhs, ab, ldab, ipiv, b, ldb,
+     $                   info )
+      character          trans
+      integer            info, kl, ku, ldab, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cgebak( job, side, n, ilo, ihi, scale, m, v, ldv,
+     $                   info )
+      character          job, side
+      integer            ihi, ilo, info, ldv, m, n
+      real               scale( * )
+      complex            v( ldv, * )
+      end
+
+      interface to 
+     $subroutine cgebal( job, n, a, lda, ilo, ihi, scale, info )
+      character          job
+      integer            ihi, ilo, info, lda, n
+      real               scale( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cgebd2( m, n, a, lda, d, e, tauq, taup, work, info )
+      integer            info, lda, m, n
+      real               d( * ), e( * )
+      complex            a( lda, * ), taup( * ), tauq( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgebrd( m, n, a, lda, d, e, tauq, taup, work, lwork,
+     $                   info )
+      integer            info, lda, lwork, m, n
+      real               d( * ), e( * )
+      complex            a( lda, * ), taup( * ), tauq( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cgecon( norm, n, a, lda, anorm, rcond, work, rwork,
+     $                   info )
+      character          norm
+      integer            info, lda, n
+      real               anorm, rcond
+      real               rwork( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgeequ( m, n, a, lda, r, c, rowcnd, colcnd, amax,
+     $                   info )
+      integer            info, lda, m, n
+      real               amax, colcnd, rowcnd
+      real               c( * ), r( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cgees( jobvs, sort, select, n, a, lda, sdim, w, vs,
+     $                  ldvs, work, lwork, rwork, bwork, info )
+      character          jobvs, sort
+      integer            info, lda, ldvs, lwork, n, sdim
+      logical            bwork( * )
+      real               rwork( * )
+      complex            a( lda, * ), vs( ldvs, * ), w( * ), work( * )
+      logical            select
+      external           select
+      end
+
+      interface to 
+     $subroutine cgeesx( jobvs, sort, select, sense, n, a, lda, sdim, w,
+     $                   vs, ldvs, rconde, rcondv, work, lwork, rwork,
+     $                   bwork, info )
+      character          jobvs, sense, sort
+      integer            info, lda, ldvs, lwork, n, sdim
+      real               rconde, rcondv
+      logical            bwork( * )
+      real               rwork( * )
+      complex            a( lda, * ), vs( ldvs, * ), w( * ), work( * )
+      logical            select
+      external           select
+      end
+
+      interface to 
+     $subroutine cgeev( jobvl, jobvr, n, a, lda, w, vl, ldvl, vr, ldvr,
+     $                  work, lwork, rwork, info )
+      character          jobvl, jobvr
+      integer            info, lda, ldvl, ldvr, lwork, n
+      real               rwork( * )
+      complex            a( lda, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgeevx( balanc, jobvl, jobvr, sense, n, a, lda, w, vl,
+     $                   ldvl, vr, ldvr, ilo, ihi, scale, abnrm, rconde,
+     $                   rcondv, work, lwork, rwork, info )
+      character          balanc, jobvl, jobvr, sense
+      integer            ihi, ilo, info, lda, ldvl, ldvr, lwork, n
+      real               abnrm
+      real               rconde( * ), rcondv( * ), rwork( * ),
+     $                   scale( * )
+      complex            a( lda, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgegs( jobvsl, jobvsr, n, a, lda, b, ldb, alpha, beta,
+     $                  vsl, ldvsl, vsr, ldvsr, work, lwork, rwork,
+     $                  info )
+      character          jobvsl, jobvsr
+      integer            info, lda, ldb, ldvsl, ldvsr, lwork, n
+      real               rwork( * )
+      complex            a( lda, * ), alpha( * ), b( ldb, * ),
+     $                   beta( * ), vsl( ldvsl, * ), vsr( ldvsr, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine cgegv( jobvl, jobvr, n, a, lda, b, ldb, alpha, beta,
+     $                  vl, ldvl, vr, ldvr, work, lwork, rwork, info )
+      character          jobvl, jobvr
+      integer            info, lda, ldb, ldvl, ldvr, lwork, n
+      real               rwork( * )
+      complex            a( lda, * ), alpha( * ), b( ldb, * ),
+     $                   beta( * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine cgehd2( n, ilo, ihi, a, lda, tau, work, info )
+      integer            ihi, ilo, info, lda, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgehrd( n, ilo, ihi, a, lda, tau, work, lwork, info )
+      integer            ihi, ilo, info, lda, lwork, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgelq2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgelqf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgels( trans, m, n, nrhs, a, lda, b, ldb, work, lwork,
+     $                  info )
+      character          trans
+      integer            info, lda, ldb, lwork, m, n, nrhs
+      complex            a( lda, * ), b( ldb, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgelss( m, n, nrhs, a, lda, b, ldb, s, rcond, rank,
+     $                   work, lwork, rwork, info )
+      integer            info, lda, ldb, lwork, m, n, nrhs, rank
+      real               rcond
+      real               rwork( * ), s( * )
+      complex            a( lda, * ), b( ldb, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgelsd( m, n, nrhs, a, lda, b, ldb, s, rcond, rank,
+     $                   work, lwork, rwork, iwork, info )
+      integer          info, lda, ldb, lwork, m, n, nrhs, rank iwork()
+      real               rcond
+      real               rwork( * ), s( * )
+      complex            a( lda, * ), b( ldb, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgelsx( m, n, nrhs, a, lda, b, ldb, jpvt, rcond, rank,
+     $                   work, rwork, info )
+      integer            info, lda, ldb, m, n, nrhs, rank
+      real               rcond
+      integer            jpvt( * )
+      real               rwork( * )
+      complex            a( lda, * ), b( ldb, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgeql2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgeqlf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgeqr2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgeqrf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgerfs( trans, n, nrhs, a, lda, af, ldaf, ipiv, b, ldb,
+     $                   x, ldx, ferr, berr, work, rwork, info )
+      character          trans
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cgerq2( m, n, a, lda, tau, work, info )
+      integer            info, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgerqf( m, n, a, lda, tau, work, lwork, info )
+      integer            info, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgesv( n, nrhs, a, lda, ipiv, b, ldb, info )
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cgesvd( jobu, jobvt, m, n, a, lda, s, u, ldu, vt, ldvt,
+     $                   work, lwork, rwork, info )
+      character          jobu, jobvt
+      integer            info, lda, ldu, ldvt, lwork, m, n
+      real               rwork( * ), s( * )
+      complex            a( lda, * ), u( ldu, * ), vt( ldvt, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine cgesvx( fact, trans, n, nrhs, a, lda, af, ldaf, ipiv,
+     $                   equed, r, c, b, ldb, x, ldx, rcond, ferr, berr,
+     $                   work, rwork, info )
+      character          equed, fact, trans
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), c( * ), ferr( * ), r( * ),
+     $                   rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cgetf2( m, n, a, lda, ipiv, info )
+      integer            info, lda, m, n
+      integer            ipiv( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cgetrf( m, n, a, lda, ipiv, info )
+      integer            info, lda, m, n
+      integer            ipiv( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cgetri( n, a, lda, ipiv, work, lwork, info )
+      integer            info, lda, lwork, n
+      integer            ipiv( * )
+      complex            a( lda, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cgetrs( trans, n, nrhs, a, lda, ipiv, b, ldb, info )
+      character          trans
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cggbak( job, side, n, ilo, ihi, lscale, rscale, m, v,
+     $                   ldv, info )
+      character          job, side
+      integer            ihi, ilo, info, ldv, m, n
+      real               lscale( * ), rscale( * )
+      complex            v( ldv, * )
+      end
+
+      interface to 
+     $subroutine cggbal( job, n, a, lda, b, ldb, ilo, ihi, lscale,
+     $                   rscale, work, info )
+      character          job
+      integer            ihi, ilo, info, lda, ldb, n
+      real               lscale( * ), rscale( * ), work( * )
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cggglm( n, m, p, a, lda, b, ldb, d, x, y, work, lwork,
+     $                   info )
+      integer            info, lda, ldb, lwork, m, n, p
+      complex            a( lda, * ), b( ldb, * ), d( * ), work( * ),
+     $                   x( * ), y( * )
+      end
+
+      interface to 
+     $subroutine cgghrd( compq, compz, n, ilo, ihi, a, lda, b, ldb, q,
+     $                   ldq, z, ldz, info )
+      character          compq, compz
+      integer            ihi, ilo, info, lda, ldb, ldq, ldz, n
+      complex            a( lda, * ), b( ldb, * ), q( ldq, * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine cgglse( m, n, p, a, lda, b, ldb, c, d, x, work, lwork,
+     $                   info )
+      integer            info, lda, ldb, lwork, m, n, p
+      complex            a( lda, * ), b( ldb, * ), c( * ), d( * ),
+     $                   work( * ), x( * )
+      end
+
+      interface to 
+     $subroutine cggqrf( n, m, p, a, lda, taua, b, ldb, taub, work,
+     $                   lwork, info )
+      integer            info, lda, ldb, lwork, m, n, p
+      complex            a( lda, * ), b( ldb, * ), taua( * ), taub( * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine cggrqf( m, p, n, a, lda, taua, b, ldb, taub, work,
+     $                   lwork, info )
+      integer            info, lda, ldb, lwork, m, n, p
+      complex            a( lda, * ), b( ldb, * ), taua( * ), taub( * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine cggsvd( jobu, jobv, jobq, m, n, p, k, l, a, lda, b,
+     $                   ldb, alpha, beta, u, ldu, v, ldv, q, ldq,
+     $                   work, rwork, iwork, info )
+      character          jobq, jobu, jobv
+      integer            info, k, l, lda, ldb, ldq, ldu, ldv, m, n, p
+      integer            iwork( * )
+      real               alpha( * ), beta( * ), rwork( * )
+      complex            a( lda, * ), b( ldb, * ), q( ldq, * ),
+     $                   u( ldu, * ), v( ldv, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cggsvp( jobu, jobv, jobq, m, p, n, a, lda, b, ldb,
+     $                   tola, tolb, k, l, u, ldu, v, ldv, q, ldq,
+     $                   iwork, rwork, tau, work, info )
+      character          jobq, jobu, jobv
+      integer            info, k, l, lda, ldb, ldq, ldu, ldv, m, n, p
+      real               tola, tolb
+      integer            iwork( * )
+      real               rwork( * )
+      complex            a( lda, * ), b( ldb, * ), q( ldq, * ),
+     $                   tau( * ), u( ldu, * ), v( ldv, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgtcon( norm, n, dl, d, du, du2, ipiv, anorm, rcond,
+     $                   work, info )
+      character          norm
+      integer            info, n
+      real               anorm, rcond
+      integer            ipiv( * )
+      complex            d( * ), dl( * ), du( * ), du2( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cgtrfs( trans, n, nrhs, dl, d, du, dlf, df, duf, du2,
+     $                   ipiv, b, ldb, x, ldx, ferr, berr, work, rwork,
+     $                   info )
+      character          trans
+      integer            info, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            b( ldb, * ), d( * ), df( * ), dl( * ),
+     $                   dlf( * ), du( * ), du2( * ), duf( * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cgtsv( n, nrhs, dl, d, du, b, ldb, info )
+      integer            info, ldb, n, nrhs
+      complex            b( ldb, * ), d( * ), dl( * ), du( * )
+      end
+
+      interface to 
+     $subroutine cgtsvx( fact, trans, n, nrhs, dl, d, du, dlf, df, duf,
+     $                   du2, ipiv, b, ldb, x, ldx, rcond, ferr, berr,
+     $                   work, rwork, info )
+      character          fact, trans
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            b( ldb, * ), d( * ), df( * ), dl( * ),
+     $                   dlf( * ), du( * ), du2( * ), duf( * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cgttrf( n, dl, d, du, du2, ipiv, info )
+      integer            info, n
+      integer            ipiv( * )
+      complex            d( * ), dl( * ), du( * ), du2( * )
+      end
+
+      interface to 
+     $subroutine cgttrs( trans, n, nrhs, dl, d, du, du2, ipiv, b, ldb,
+     $                   info )
+      character          trans
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            b( ldb, * ), d( * ), dl( * ), du( * ), du2( * )
+      end
+
+      interface to 
+     $subroutine chbev( jobz, uplo, n, kd, ab, ldab, w, z, ldz, work,
+     $                  rwork, info )
+      character          jobz, uplo
+      integer            info, kd, ldab, ldz, n
+      real               rwork( * ), w( * )
+      complex            ab( ldab, * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chbevd( jobz, uplo, n, kd, ab, ldab, w, z, ldz, work,
+     $                   lwork, rwork, lrwork, iwork, liwork, info )
+      character          jobz, uplo
+      integer            info, kd, ldab, ldz, liwork, lrwork, lwork, n
+      integer            iwork( * )
+      real               rwork( * ), w( * )
+      complex            ab( ldab, * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chbevx( jobz, range, uplo, n, kd, ab, ldab, q, ldq, vl,
+     $                   vu, il, iu, abstol, m, w, z, ldz, work, rwork,
+     $                   iwork, ifail, info )
+      character          jobz, range, uplo
+      integer            il, info, iu, kd, ldab, ldq, ldz, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               rwork( * ), w( * )
+      complex            ab( ldab, * ), q( ldq, * ), work( * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chbgst( vect, uplo, n, ka, kb, ab, ldab, bb, ldbb, x,
+     $                   ldx, work, rwork, info )
+      character          uplo, vect
+      integer            info, ka, kb, ldab, ldbb, ldx, n
+      real               rwork( * )
+      complex            ab( ldab, * ), bb( ldbb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine chbgv( jobz, uplo, n, ka, kb, ab, ldab, bb, ldbb, w, z,
+     $                  ldz, work, rwork, info )
+      character          jobz, uplo
+      integer            info, ka, kb, ldab, ldbb, ldz, n
+      real               rwork( * ), w( * )
+      complex            ab( ldab, * ), bb( ldbb, * ), work( * ),
+     $                   z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chbtrd( vect, uplo, n, kd, ab, ldab, d, e, q, ldq,
+     $                   work, info )
+      character          uplo, vect
+      integer            info, kd, ldab, ldq, n
+      real               d( * ), e( * )
+      complex            ab( ldab, * ), q( ldq, * ), work( * )
+      end
+
+      interface to 
+     $subroutine checon( uplo, n, a, lda, ipiv, anorm, rcond, work,
+     $                   info )
+      character          uplo
+      integer            info, lda, n
+      real               anorm, rcond
+      integer            ipiv( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cheev( jobz, uplo, n, a, lda, w, work, lwork, rwork,
+     $                  info )
+      character          jobz, uplo
+      integer            info, lda, lwork, n
+      real               rwork( * ), w( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cheevd( jobz, uplo, n, a, lda, w, work, lwork, rwork,
+     $                   lrwork, iwork, liwork, info )
+      character          jobz, uplo
+      integer            info, lda, liwork, lrwork, lwork, n
+      integer            iwork( * )
+      real               rwork( * ), w( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cheevx( jobz, range, uplo, n, a, lda, vl, vu, il, iu,
+     $                   abstol, m, w, z, ldz, work, lwork, rwork,
+     $                   iwork, ifail, info )
+      character          jobz, range, uplo
+      integer            il, info, iu, lda, ldz, lwork, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               rwork( * ), w( * )
+      complex            a( lda, * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chegs2( itype, uplo, n, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, itype, lda, ldb, n
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine chegst( itype, uplo, n, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, itype, lda, ldb, n
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine chegv( itype, jobz, uplo, n, a, lda, b, ldb, w, work,
+     $                  lwork, rwork, info )
+      character          jobz, uplo
+      integer            info, itype, lda, ldb, lwork, n
+      real               rwork( * ), w( * )
+      complex            a( lda, * ), b( ldb, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cherfs( uplo, n, nrhs, a, lda, af, ldaf, ipiv, b, ldb,
+     $                   x, ldx, ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine chesv( uplo, n, nrhs, a, lda, ipiv, b, ldb, work,
+     $                  lwork, info )
+      character          uplo
+      integer            info, lda, ldb, lwork, n, nrhs
+      integer            ipiv( * )
+      complex            a( lda, * ), b( ldb, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine chesvx( fact, uplo, n, nrhs, a, lda, af, ldaf, ipiv, b,
+     $                   ldb, x, ldx, rcond, ferr, berr, work, lwork,
+     $                   rwork, info )
+      character          fact, uplo
+      integer            info, lda, ldaf, ldb, ldx, lwork, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine chetd2( uplo, n, a, lda, d, e, tau, info )
+      character          uplo
+      integer            info, lda, n
+      real               d( * ), e( * )
+      complex            a( lda, * ), tau( * )
+      end
+
+      interface to 
+     $subroutine chetf2( uplo, n, a, lda, ipiv, info )
+      character          uplo
+      integer            info, lda, n
+      integer            ipiv( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine chetrd( uplo, n, a, lda, d, e, tau, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      real               d( * ), e( * )
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine chetrf( uplo, n, a, lda, ipiv, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      integer            ipiv( * )
+      complex            a( lda, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine chetri( uplo, n, a, lda, ipiv, work, info )
+      character          uplo
+      integer            info, lda, n
+      integer            ipiv( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine chetrs( uplo, n, nrhs, a, lda, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine chgeqz( job, compq, compz, n, ilo, ihi, a, lda, b, ldb,
+     $                   alpha, beta, q, ldq, z, ldz, work, lwork,
+     $                   rwork, info )
+      character          compq, compz, job
+      integer            ihi, ilo, info, lda, ldb, ldq, ldz, lwork, n
+      real               rwork( * )
+      complex            a( lda, * ), alpha( * ), b( ldb, * ),
+     $                   beta( * ), q( ldq, * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chpcon( uplo, n, ap, ipiv, anorm, rcond, work, info )
+      character          uplo
+      integer            info, n
+      real               anorm, rcond
+      integer            ipiv( * )
+      complex            ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine chpev( jobz, uplo, n, ap, w, z, ldz, work, rwork,
+     $                  info )
+      character          jobz, uplo
+      integer            info, ldz, n
+      real               rwork( * ), w( * )
+      complex            ap( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chpevd( jobz, uplo, n, ap, w, z, ldz, work, lwork,
+     $                   rwork, lrwork, iwork, liwork, info )
+      character          jobz, uplo
+      integer            info, ldz, liwork, lrwork, lwork, n
+      integer            iwork( * )
+      real               rwork( * ), w( * )
+      complex            ap( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chpevx( jobz, range, uplo, n, ap, vl, vu, il, iu,
+     $                   abstol, m, w, z, ldz, work, rwork, iwork,
+     $                   ifail, info )
+      character          jobz, range, uplo
+      integer            il, info, iu, ldz, m, n
+      real               abstol, vl, vu
+      integer            ifail( * ), iwork( * )
+      real               rwork( * ), w( * )
+      complex            ap( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chpgst( itype, uplo, n, ap, bp, info )
+      character          uplo
+      integer            info, itype, n
+      complex            ap( * ), bp( * )
+      end
+
+      interface to 
+     $subroutine chpgv( itype, jobz, uplo, n, ap, bp, w, z, ldz, work,
+     $                  rwork, info )
+      character          jobz, uplo
+      integer            info, itype, ldz, n
+      real               rwork( * ), w( * )
+      complex            ap( * ), bp( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine chprfs( uplo, n, nrhs, ap, afp, ipiv, b, ldb, x, ldx,
+     $                   ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            afp( * ), ap( * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine chpsv( uplo, n, nrhs, ap, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine chpsvx( fact, uplo, n, nrhs, ap, afp, ipiv, b, ldb, x,
+     $                   ldx, rcond, ferr, berr, work, rwork, info )
+      character          fact, uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            afp( * ), ap( * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine chptrd( uplo, n, ap, d, e, tau, info )
+      character          uplo
+      integer            info, n
+      real               d( * ), e( * )
+      complex            ap( * ), tau( * )
+      end
+
+      interface to 
+     $subroutine chptrf( uplo, n, ap, ipiv, info )
+      character          uplo
+      integer            info, n
+      integer            ipiv( * )
+      complex            ap( * )
+      end
+
+      interface to 
+     $subroutine chptri( uplo, n, ap, ipiv, work, info )
+      character          uplo
+      integer            info, n
+      integer            ipiv( * )
+      complex            ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine chptrs( uplo, n, nrhs, ap, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine chsein( side, eigsrc, initv, select, n, h, ldh, w, vl,
+     $                   ldvl, vr, ldvr, mm, m, work, rwork, ifaill,
+     $                   ifailr, info )
+      character          eigsrc, initv, side
+      integer            info, ldh, ldvl, ldvr, m, mm, n
+      logical            select( * )
+      integer            ifaill( * ), ifailr( * )
+      real               rwork( * )
+      complex            h( ldh, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine chseqr( job, compz, n, ilo, ihi, h, ldh, w, z, ldz,
+     $                   work, lwork, info )
+      character          compz, job
+      integer            ihi, ilo, info, ldh, ldz, lwork, n
+      complex            h( ldh, * ), w( * ), work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine claed0( qsiz, n, d, e, q, ldq, qstore, ldqs, rwork,
+     $                   iwork, info )
+      integer            info, ldq, ldqs, n, qsiz
+      integer            iwork( * )
+      real               d( * ), e( * ), rwork( * )
+      complex            q( ldq, * ), qstore( ldqs, * )
+      end
+
+      interface to 
+     $subroutine claed7( n, cutpnt, qsiz, tlvls, curlvl, curpbm, d, q,
+     $                   ldq, rho, indxq, qstore, qptr, prmptr, perm,
+     $                   givptr, givcol, givnum, work, rwork, iwork,
+     $                   info )
+      integer            curlvl, curpbm, cutpnt, info, ldq, n, qsiz,
+     $                   tlvls
+      real               rho
+      integer            givcol( 2, * ), givptr( * ), indxq( * ),
+     $                   iwork( * ), perm( * ), prmptr( * ), qptr( * )
+      real               d( * ), givnum( 2, * ), qstore( * ), rwork( * )
+      complex            q( ldq, * ), work( * )
+      end
+
+      interface to 
+     $subroutine claed8( k, n, qsiz, q, ldq, d, rho, cutpnt, z, dlamda,
+     $                   q2, ldq2, w, indxp, indx, indxq, perm, givptr,
+     $                   givcol, givnum, info )
+      integer            cutpnt, givptr, info, k, ldq, ldq2, n, qsiz
+      real               rho
+      integer            givcol( 2, * ), indx( * ), indxp( * ),
+     $                   indxq( * ), perm( * )
+      real               d( * ), dlamda( * ), givnum( 2, * ), w( * ),
+     $                   z( * )
+      complex            q( ldq, * ), q2( ldq2, * )
+      end
+
+      interface to 
+     $subroutine clahef( uplo, n, nb, kb, a, lda, ipiv, w, ldw, info )
+      character          uplo
+      integer            info, kb, lda, ldw, n, nb
+      integer            ipiv( * )
+      complex            a( lda, * ), w( ldw, * )
+      end
+
+      interface to 
+     $subroutine clasyf( uplo, n, nb, kb, a, lda, ipiv, w, ldw, info )
+      character          uplo
+      integer            info, kb, lda, ldw, n, nb
+      integer            ipiv( * )
+      complex            a( lda, * ), w( ldw, * )
+      end
+
+      interface to 
+     $subroutine clatzm( side, m, n, v, incv, tau, c1, c2, ldc, work )
+      character          side
+      integer            incv, ldc, m, n
+      complex            tau
+      complex            c1( ldc, * ), c2( ldc, * ), v( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cpbcon( uplo, n, kd, ab, ldab, anorm, rcond, work,
+     $                   rwork, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               anorm, rcond
+      real               rwork( * )
+      complex            ab( ldab, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cpbequ( uplo, n, kd, ab, ldab, s, scond, amax, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      real               amax, scond
+      real               s( * )
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cpbrfs( uplo, n, kd, nrhs, ab, ldab, afb, ldafb, b,
+     $                   ldb, x, ldx, ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, kd, ldab, ldafb, ldb, ldx, n, nrhs
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cpbstf( uplo, n, kd, ab, ldab, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cpbsv( uplo, n, kd, nrhs, ab, ldab, b, ldb, info )
+      character          uplo
+      integer            info, kd, ldab, ldb, n, nrhs
+      complex            ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cpbsvx( fact, uplo, n, kd, nrhs, ab, ldab, afb, ldafb,
+     $                   equed, s, b, ldb, x, ldx, rcond, ferr, berr,
+     $                   work, rwork, info )
+      character          equed, fact, uplo
+      integer            info, kd, ldab, ldafb, ldb, ldx, n, nrhs
+      real               rcond
+      real               berr( * ), ferr( * ), rwork( * ), s( * )
+      complex            ab( ldab, * ), afb( ldafb, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cpbtf2( uplo, n, kd, ab, ldab, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cpbtrf( uplo, n, kd, ab, ldab, info )
+      character          uplo
+      integer            info, kd, ldab, n
+      complex            ab( ldab, * )
+      end
+
+      interface to 
+     $subroutine cpbtrs( uplo, n, kd, nrhs, ab, ldab, b, ldb, info )
+      character          uplo
+      integer            info, kd, ldab, ldb, n, nrhs
+      complex            ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cpocon( uplo, n, a, lda, anorm, rcond, work, rwork,
+     $                   info )
+      character          uplo
+      integer            info, lda, n
+      real               anorm, rcond
+      real               rwork( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine cpoequ( n, a, lda, s, scond, amax, info )
+      integer            info, lda, n
+      real               amax, scond
+      real               s( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cporfs( uplo, n, nrhs, a, lda, af, ldaf, b, ldb, x,
+     $                   ldx, ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cposv( uplo, n, nrhs, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cposvx( fact, uplo, n, nrhs, a, lda, af, ldaf, equed,
+     $                   s, b, ldb, x, ldx, rcond, ferr, berr, work,
+     $                   rwork, info )
+      character          equed, fact, uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      real               rcond
+      real               berr( * ), ferr( * ), rwork( * ), s( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cpotf2( uplo, n, a, lda, info )
+      character          uplo
+      integer            info, lda, n
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cpotrf( uplo, n, a, lda, info )
+      character          uplo
+      integer            info, lda, n
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cpotri( uplo, n, a, lda, info )
+      character          uplo
+      integer            info, lda, n
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine cpotrs( uplo, n, nrhs, a, lda, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cppcon( uplo, n, ap, anorm, rcond, work, rwork, info )
+      character          uplo
+      integer            info, n
+      real               anorm, rcond
+      real               rwork( * )
+      complex            ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cppequ( uplo, n, ap, s, scond, amax, info )
+      character          uplo
+      integer            info, n
+      real               amax, scond
+      real               s( * )
+      complex            ap( * )
+      end
+
+      interface to 
+     $subroutine cpprfs( uplo, n, nrhs, ap, afp, b, ldb, x, ldx, ferr,
+     $                   berr, work, rwork, info )
+      character          uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            afp( * ), ap( * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cppsv( uplo, n, nrhs, ap, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cppsvx( fact, uplo, n, nrhs, ap, afp, equed, s, b, ldb,
+     $                   x, ldx, rcond, ferr, berr, work, rwork, info )
+      character          equed, fact, uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      real               berr( * ), ferr( * ), rwork( * ), s( * )
+      complex            afp( * ), ap( * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cpptrf( uplo, n, ap, info )
+      character          uplo
+      integer            info, n
+      complex            ap( * )
+      end
+
+      interface to 
+     $subroutine cpptri( uplo, n, ap, info )
+      character          uplo
+      integer            info, n
+      complex            ap( * )
+      end
+
+      interface to 
+     $subroutine cpptrs( uplo, n, nrhs, ap, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cptcon( n, d, e, anorm, rcond, rwork, info )
+      integer            info, n
+      real               anorm, rcond
+      real               d( * ), rwork( * )
+      complex            e( * )
+      end
+
+      interface to 
+     $subroutine cpteqr( compz, n, d, e, z, ldz, work, info )
+      character          compz
+      integer            info, ldz, n
+      real               d( * ), e( * ), work( * )
+      complex            z( ldz, * )
+      end
+
+      interface to 
+     $subroutine cptrfs( uplo, n, nrhs, d, e, df, ef, b, ldb, x, ldx,
+     $                   ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               berr( * ), d( * ), df( * ), ferr( * ),
+     $                   rwork( * )
+      complex            b( ldb, * ), e( * ), ef( * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cptsv( n, nrhs, d, e, b, ldb, info )
+      integer            info, ldb, n, nrhs
+      real               d( * )
+      complex            b( ldb, * ), e( * )
+      end
+
+      interface to 
+     $subroutine cptsvx( fact, n, nrhs, d, e, df, ef, b, ldb, x, ldx,
+     $                   rcond, ferr, berr, work, rwork, info )
+      character          fact
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      real               berr( * ), d( * ), df( * ), ferr( * ),
+     $                   rwork( * )
+      complex            b( ldb, * ), e( * ), ef( * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cpttrf( n, d, e, info )
+      integer            info, n
+      real               d( * )
+      complex            e( * )
+      end
+
+      interface to 
+     $subroutine cpttrs( uplo, n, nrhs, d, e, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      real               d( * )
+      complex            b( ldb, * ), e( * )
+      end
+
+      interface to 
+     $subroutine cspcon( uplo, n, ap, ipiv, anorm, rcond, work, info )
+      character          uplo
+      integer            info, n
+      real               anorm, rcond
+      integer            ipiv( * )
+      complex            ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine csprfs( uplo, n, nrhs, ap, afp, ipiv, b, ldb, x, ldx,
+     $                   ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            afp( * ), ap( * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine cspsv( uplo, n, nrhs, ap, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cspsvx( fact, uplo, n, nrhs, ap, afp, ipiv, b, ldb, x,
+     $                   ldx, rcond, ferr, berr, work, rwork, info )
+      character          fact, uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            afp( * ), ap( * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine csptrf( uplo, n, ap, ipiv, info )
+      character          uplo
+      integer            info, n
+      integer            ipiv( * )
+      complex            ap( * )
+      end
+
+      interface to 
+     $subroutine csptri( uplo, n, ap, ipiv, work, info )
+      character          uplo
+      integer            info, n
+      integer            ipiv( * )
+      complex            ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine csptrs( uplo, n, nrhs, ap, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine cstedc( compz, n, d, e, z, ldz, work, lwork, rwork,
+     $                   lrwork, iwork, liwork, info )
+      character          compz
+      integer            info, ldz, liwork, lrwork, lwork, n
+      integer            iwork( * )
+      real               d( * ), e( * ), rwork( * )
+      complex            work( * ), z( ldz, * )
+      end
+
+      interface to 
+     $subroutine cstein( n, d, e, m, w, iblock, isplit, z, ldz, work,
+     $                   iwork, ifail, info )
+      integer            info, ldz, m, n
+      integer            iblock( * ), ifail( * ), isplit( * ),
+     $                   iwork( * )
+      real               d( * ), e( * ), w( * ), work( * )
+      complex            z( ldz, * )
+      end
+
+      interface to 
+     $subroutine csteqr( compz, n, d, e, z, ldz, work, info )
+      character          compz
+      integer            info, ldz, n
+      real               d( * ), e( * ), work( * )
+      complex            z( ldz, * )
+      end
+
+      interface to 
+     $subroutine csycon( uplo, n, a, lda, ipiv, anorm, rcond, work,
+     $                   info )
+      character          uplo
+      integer            info, lda, n
+      real               anorm, rcond
+      integer            ipiv( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine csyrfs( uplo, n, nrhs, a, lda, af, ldaf, ipiv, b, ldb,
+     $                   x, ldx, ferr, berr, work, rwork, info )
+      character          uplo
+      integer            info, lda, ldaf, ldb, ldx, n, nrhs
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine csysv( uplo, n, nrhs, a, lda, ipiv, b, ldb, work,
+     $                  lwork, info )
+      character          uplo
+      integer            info, lda, ldb, lwork, n, nrhs
+      integer            ipiv( * )
+      complex            a( lda, * ), b( ldb, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine csysvx( fact, uplo, n, nrhs, a, lda, af, ldaf, ipiv, b,
+     $                   ldb, x, ldx, rcond, ferr, berr, work, lwork,
+     $                   rwork, info )
+      character          fact, uplo
+      integer            info, lda, ldaf, ldb, ldx, lwork, n, nrhs
+      real               rcond
+      integer            ipiv( * )
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), af( ldaf, * ), b( ldb, * ),
+     $                   work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine csytf2( uplo, n, a, lda, ipiv, info )
+      character          uplo
+      integer            info, lda, n
+      integer            ipiv( * )
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine csytrf( uplo, n, a, lda, ipiv, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      integer            ipiv( * )
+      complex            a( lda, * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine csytri( uplo, n, a, lda, ipiv, work, info )
+      character          uplo
+      integer            info, lda, n
+      integer            ipiv( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine csytrs( uplo, n, nrhs, a, lda, ipiv, b, ldb, info )
+      character          uplo
+      integer            info, lda, ldb, n, nrhs
+      integer            ipiv( * )
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine ctbcon( norm, uplo, diag, n, kd, ab, ldab, rcond, work,
+     $                   rwork, info )
+      character          diag, norm, uplo
+      integer            info, kd, ldab, n
+      real               rcond
+      real               rwork( * )
+      complex            ab( ldab, * ), work( * )
+      end
+
+      interface to 
+     $subroutine ctbrfs( uplo, trans, diag, n, kd, nrhs, ab, ldab, b,
+     $                   ldb, x, ldx, ferr, berr, work, rwork, info )
+      character          diag, trans, uplo
+      integer            info, kd, ldab, ldb, ldx, n, nrhs
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            ab( ldab, * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ctbtrs( uplo, trans, diag, n, kd, nrhs, ab, ldab, b,
+     $                   ldb, info )
+      character          diag, trans, uplo
+      integer            info, kd, ldab, ldb, n, nrhs
+      complex            ab( ldab, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine ctgevc( side, howmny, select, n, a, lda, b, ldb, vl,
+     $                   ldvl, vr, ldvr, mm, m, work, rwork, info )
+      character          howmny, side
+      integer            info, lda, ldb, ldvl, ldvr, m, mm, n
+      logical            select( * )
+      real               rwork( * )
+      complex            a( lda, * ), b( ldb, * ), vl( ldvl, * ),
+     $                   vr( ldvr, * ), work( * )
+      end
+
+      interface to 
+     $subroutine ctgsja( jobu, jobv, jobq, m, p, n, k, l, a, lda, b,
+     $                   ldb, tola, tolb, alpha, beta, u, ldu, v, ldv,
+     $                   q, ldq, work, ncycle, info )
+      character          jobq, jobu, jobv
+      integer            info, k, l, lda, ldb, ldq, ldu, ldv, m, n,
+     $                   ncycle, p
+      real               tola, tolb
+      real               alpha( * ), beta( * )
+      complex            a( lda, * ), b( ldb, * ), q( ldq, * ),
+     $                   u( ldu, * ), v( ldv, * ), work( * )
+      end
+
+      interface to 
+     $subroutine ctpcon( norm, uplo, diag, n, ap, rcond, work, rwork,
+     $                   info )
+      character          diag, norm, uplo
+      integer            info, n
+      real               rcond
+      real               rwork( * )
+      complex            ap( * ), work( * )
+      end
+
+      interface to 
+     $subroutine ctprfs( uplo, trans, diag, n, nrhs, ap, b, ldb, x, ldx,
+     $                   ferr, berr, work, rwork, info )
+      character          diag, trans, uplo
+      integer            info, ldb, ldx, n, nrhs
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            ap( * ), b( ldb, * ), work( * ), x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ctptri( uplo, diag, n, ap, info )
+      character          diag, uplo
+      integer            info, n
+      complex            ap( * )
+      end
+
+      interface to 
+     $subroutine ctptrs( uplo, trans, diag, n, nrhs, ap, b, ldb, info )
+      character          diag, trans, uplo
+      integer            info, ldb, n, nrhs
+      complex            ap( * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine ctrcon( norm, uplo, diag, n, a, lda, rcond, work,
+     $                   rwork, info )
+      character          diag, norm, uplo
+      integer            info, lda, n
+      real               rcond
+      real               rwork( * )
+      complex            a( lda, * ), work( * )
+      end
+
+      interface to 
+     $subroutine ctrevc( side, howmny, select, n, t, ldt, vl, ldvl, vr,
+     $                   ldvr, mm, m, work, rwork, info )
+      character          howmny, side
+      integer            info, ldt, ldvl, ldvr, m, mm, n
+      logical            select( * )
+      real               rwork( * )
+      complex            t( ldt, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   work( * )
+      end
+
+      interface to 
+     $subroutine ctrexc( compq, n, t, ldt, q, ldq, ifst, ilst, info )
+      character          compq
+      integer            ifst, ilst, info, ldq, ldt, n
+      complex            q( ldq, * ), t( ldt, * )
+      end
+
+      interface to 
+     $subroutine ctrrfs( uplo, trans, diag, n, nrhs, a, lda, b, ldb, x,
+     $                   ldx, ferr, berr, work, rwork, info )
+      character          diag, trans, uplo
+      integer            info, lda, ldb, ldx, n, nrhs
+      real               berr( * ), ferr( * ), rwork( * )
+      complex            a( lda, * ), b( ldb, * ), work( * ),
+     $                   x( ldx, * )
+      end
+
+      interface to 
+     $subroutine ctrsen( job, compq, select, n, t, ldt, q, ldq, w, m, s,
+     $                   sep, work, lwork, info )
+      character          compq, job
+      integer            info, ldq, ldt, lwork, m, n
+      real               s, sep
+      logical            select( * )
+      complex            q( ldq, * ), t( ldt, * ), w( * ), work( * )
+      end
+
+      interface to 
+     $subroutine ctrsna( job, howmny, select, n, t, ldt, vl, ldvl, vr,
+     $                   ldvr, s, sep, mm, m, work, ldwork, rwork,
+     $                   info )
+      character          howmny, job
+      integer            info, ldt, ldvl, ldvr, ldwork, m, mm, n
+      logical            select( * )
+      real               rwork( * ), s( * ), sep( * )
+      complex            t( ldt, * ), vl( ldvl, * ), vr( ldvr, * ),
+     $                   work( ldwork, * )
+      end
+
+      interface to 
+     $subroutine ctrsyl( trana, tranb, isgn, m, n, a, lda, b, ldb, c,
+     $                   ldc, scale, info )
+      character          trana, tranb
+      integer            info, isgn, lda, ldb, ldc, m, n
+      real               scale
+      complex            a( lda, * ), b( ldb, * ), c( ldc, * )
+      end
+
+      interface to 
+     $subroutine ctrti2( uplo, diag, n, a, lda, info )
+      character          diag, uplo
+      integer            info, lda, n
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine ctrtri( uplo, diag, n, a, lda, info )
+      character          diag, uplo
+      integer            info, lda, n
+      complex            a( lda, * )
+      end
+
+      interface to 
+     $subroutine ctrtrs( uplo, trans, diag, n, nrhs, a, lda, b, ldb,
+     $                   info )
+      character          diag, trans, uplo
+      integer            info, lda, ldb, n, nrhs
+      complex            a( lda, * ), b( ldb, * )
+      end
+
+      interface to 
+     $subroutine ctzrqf( m, n, a, lda, tau, info )
+      integer            info, lda, m, n
+      complex            a( lda, * ), tau( * )
+      end
+
+      interface to 
+     $subroutine cung2l( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cung2r( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cungbr( vect, m, n, k, a, lda, tau, work, lwork, info )
+      character          vect
+      integer            info, k, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cunghr( n, ilo, ihi, a, lda, tau, work, lwork, info )
+      integer            ihi, ilo, info, lda, lwork, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cungl2( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cunglq( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cungql( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cungqr( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cungr2( m, n, k, a, lda, tau, work, info )
+      integer            info, k, lda, m, n
+      complex            a( lda, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cungrq( m, n, k, a, lda, tau, work, lwork, info )
+      integer            info, k, lda, lwork, m, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cungtr( uplo, n, a, lda, tau, work, lwork, info )
+      character          uplo
+      integer            info, lda, lwork, n
+      complex            a( lda, * ), tau( * ), work( lwork )
+      end
+
+      interface to 
+     $subroutine cunm2l( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cunm2r( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cunmbr( vect, side, trans, m, n, k, a, lda, tau, c,
+     $                   ldc, work, lwork, info )
+      character          side, trans, vect
+      integer            info, k, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cunmhr( side, trans, m, n, ilo, ihi, a, lda, tau, c,
+     $                   ldc, work, lwork, info )
+      character          side, trans
+      integer            ihi, ilo, info, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cunml2( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cunmlq( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cunmql( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cunmqr( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cunmr2( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, info )
+      character          side, trans
+      integer            info, k, lda, ldc, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cunmrq( side, trans, m, n, k, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans
+      integer            info, k, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cunmtr( side, uplo, trans, m, n, a, lda, tau, c, ldc,
+     $                   work, lwork, info )
+      character          side, trans, uplo
+      integer            info, lda, ldc, lwork, m, n
+      complex            a( lda, * ), c( ldc, * ), tau( * ),
+     $                   work( lwork )
+      end
+
+      interface to 
+     $subroutine cupgtr( uplo, n, ap, tau, q, ldq, work, info )
+      character          uplo
+      integer            info, ldq, n
+      complex            ap( * ), q( ldq, * ), tau( * ), work( * )
+      end
+
+      interface to 
+     $subroutine cupmtr( side, uplo, trans, m, n, ap, tau, c, ldc, work,
+     $                   info )
+      character          side, trans, uplo
+      integer            info, ldc, m, n
+      complex            ap( * ), c( ldc, * ), tau( * ), work( * )
+      end
+
+$ENDIF

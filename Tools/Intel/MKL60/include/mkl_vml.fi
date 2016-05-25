@@ -1,0 +1,676 @@
+C!
+C!               INTEL CORPORATION PROPRIETARY INFORMATION
+C!  This software is supplied under the terms of a license agreement or
+C!  nondisclosure agreement with Intel Corporation and may not be copied
+C!  or disclosed except in accordance with the terms of that agreement.
+C!    Copyright (C) 1999-2003 Intel Corporation. All Rights Reserved.
+C!
+C! File   : mkl_vml.fi
+C! Purpose: Intel(R) Math Kernel Library FORTRAN interface for VML routines
+C!
+
+C     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C     !! Constants definition
+C     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+C     ! For accuracy setting: LA or HA
+      INTEGER(KIND=2) VML_LA
+      INTEGER(KIND=2) VML_HA
+      PARAMETER (VML_LA = Z"00000001")
+      PARAMETER (VML_HA = Z"00000002")
+
+C     ! For precision setting mode (to set or not to set :0))
+      INTEGER(KIND=2) VML_DEFAULT_PRECISION
+      INTEGER(KIND=2) VML_FLOAT_CONSISTENT
+      INTEGER(KIND=2) VML_DOUBLE_CONSISTENT
+      INTEGER(KIND=2) VML_RESTORE
+      PARAMETER (VML_DEFAULT_PRECISION = Z"00000000")
+      PARAMETER (VML_FLOAT_CONSISTENT  = Z"00000010")
+      PARAMETER (VML_DOUBLE_CONSISTENT = Z"00000020")
+      PARAMETER (VML_RESTORE           = Z"00000030")
+
+C     ! For error modes
+      INTEGER(KIND=2) VML_ERRMODE_IGNORE
+      INTEGER(KIND=2) VML_ERRMODE_ERRNO
+      INTEGER(KIND=2) VML_ERRMODE_STDERR
+      INTEGER(KIND=2) VML_ERRMODE_EXCEPT
+      INTEGER(KIND=2) VML_ERRMODE_CALLBACK
+      INTEGER(KIND=2) VML_ERRMODE_DEFAULT
+      PARAMETER (VML_ERRMODE_IGNORE   = Z"00000100")
+      PARAMETER (VML_ERRMODE_ERRNO    = Z"00000200")
+      PARAMETER (VML_ERRMODE_STDERR   = Z"00000400")
+      PARAMETER (VML_ERRMODE_EXCEPT   = Z"00000800")
+      PARAMETER (VML_ERRMODE_CALLBACK = Z"00001000")
+      PARAMETER (VML_ERRMODE_DEFAULT  = IOR(VML_ERRMODE_ERRNO,IOR
+     *(VML_ERRMODE_CALLBACK,VML_ERRMODE_EXCEPT)))
+
+C     ! Mask for accuracy settings separation
+      INTEGER(KIND=2) VML_ACCURACY_MASK
+      PARAMETER (VML_ACCURACY_MASK = Z"0000000f")
+C     ! Mask for precision settings separation
+      INTEGER(KIND=2) VML_FPUMODE_MASK
+      PARAMETER (VML_FPUMODE_MASK  = Z"000000f0")
+C     ! Mask for error mode separation
+      INTEGER(KIND=2) VML_ERRMODE_MASK
+      PARAMETER (VML_ERRMODE_MASK  = Z"0000ff00")
+
+C     ! Codes for vml?Error function call and errstatus
+      INTEGER(KIND=2) VML_STATUS_OK
+      INTEGER(KIND=2) VML_STATUS_BADSIZE
+      INTEGER(KIND=2) VML_STATUS_BADMEM
+      INTEGER(KIND=2) VML_STATUS_ERRDOM
+      INTEGER(KIND=2) VML_STATUS_SING
+      INTEGER(KIND=2) VML_STATUS_OVERFLOW
+      INTEGER(KIND=2) VML_STATUS_UNDERFLOW
+      PARAMETER (VML_STATUS_OK        = 0)
+      PARAMETER (VML_STATUS_BADSIZE   = -1)
+      PARAMETER (VML_STATUS_BADMEM    = -2)
+      PARAMETER (VML_STATUS_ERRDOM    = 1)
+      PARAMETER (VML_STATUS_SING      = 2)
+      PARAMETER (VML_STATUS_OVERFLOW  = 3)
+      PARAMETER (VML_STATUS_UNDERFLOW = 4)
+
+C     ! Mask for standard error handler modes separation
+      INTEGER(KIND=2) VML_ERRMODE_STDHANDLER_MASK
+      PARAMETER (VML_ERRMODE_STDHANDLER_MASK = Z"00000f00")
+C     ! Mask for additional callback switch bit separation
+      INTEGER(KIND=2) VML_ERRMODE_CALLBACK_MASK
+      PARAMETER (VML_ERRMODE_CALLBACK_MASK = Z"0000f000")
+
+C     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C     !! Types definition
+C     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+C     ! Type for error context structure (parameter for additional callback) 
+      TYPE ERROR_STRUCTURE
+            SEQUENCE
+            INTEGER(KIND=4) ICODE
+            INTEGER(KIND=4) IINDEX
+            REAL(KIND=8)    DBA1
+            REAL(KIND=8)    DBA2
+            REAL(KIND=8)    DBR1
+            REAL(KIND=8)    DBR2
+            CHARACTER(64)   CFUNCNAME
+            INTEGER(KIND=4) IFUNCNAMELEN
+      END TYPE ERROR_STRUCTURE
+
+C     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C     !! Function`s interfaces definition
+C     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+C     ! Inversion
+
+      interface
+        subroutine vsinv(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdinv(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Square root
+
+      interface
+        subroutine vssqrt(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdsqrt(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Inversion Square root
+
+      interface
+        subroutine vsinvsqrt(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdinvsqrt(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Cube root
+
+      interface
+        subroutine vscbrt(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdcbrt(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Inversion Cube root
+
+      interface
+        subroutine vsinvcbrt(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdinvcbrt(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Exponent
+
+      interface
+        subroutine vsexp(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdexp(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Logarithm
+
+      interface
+        subroutine vsln(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdln(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Decimal logarithm
+
+      interface
+        subroutine vslog10(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdlog10(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Sine
+
+      interface
+        subroutine vssin(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdsin(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Cosine
+
+      interface
+        subroutine vscos(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdcos(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Tangent
+
+      interface
+        subroutine vstan(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdtan(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Hyperbolic Sine
+
+      interface
+        subroutine vssinh(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdsinh(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Hyperbolic Cosine
+
+      interface
+        subroutine vscosh(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdcosh(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Hyperbolic Tangent
+
+      interface
+        subroutine vstanh(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdtanh(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Arc Cosine
+
+      interface
+        subroutine vsacos(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdacos(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Arc Sine
+
+      interface
+        subroutine vsasin(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdasin(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Arc Tangent
+
+      interface
+        subroutine vsatan(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdatan(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Hyperbolic Arc Cosine
+
+      interface
+        subroutine vsacosh(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdacosh(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Hyperbolic Arc Sine
+
+      interface
+        subroutine vsasinh(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdasinh(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Hyperbolic Arc Tangent
+
+      interface
+        subroutine vsatanh(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdatanh(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Error function
+
+      interface
+        subroutine vserf(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vderf(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Error function
+
+      interface
+        subroutine vserfc(n,a,r)
+          integer n
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vderfc(n,a,r)
+          integer n
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Arc Tangent of a/b
+
+      interface
+        subroutine vsatan2(n,a,b,r)
+          integer n
+          real*4 a(n,*),b(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdatan2(n,a,b,r)
+          integer n
+          real*8 a(n,*),b(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Division
+
+      interface
+        subroutine vsdiv(n,a,b,r)
+          integer n
+          real*4 a(n,*),b(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vddiv(n,a,b,r)
+          integer n
+          real*8 a(n,*),b(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Power
+
+      interface
+        subroutine vspow(n,a,b,r)
+          integer n
+          real*4 a(n,*),b(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdpow(n,a,b,r)
+          integer n
+          real*8 a(n,*),b(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! "Scalar" Power
+
+      interface
+        subroutine vspowx(n,a,b,r)
+          integer n
+          real*4 b
+          real*4 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdpowx(n,a,b,r)
+          integer n
+          real*8 b
+          real*8 a(n,*),r(n,*)
+        end subroutine
+      end interface
+
+C     ! Sine & Cosine
+
+      interface
+        subroutine vssincos(n,a,r1,r2)
+          integer n
+          real*4 a(n,*),r1(n,*),r2(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdsincos(n,a,r1,r2)
+          integer n
+          real*8 a(n,*),r1(n,*),r2(n,*)
+        end subroutine
+      end interface
+
+C     ! Packing functions
+
+      interface
+        subroutine vspacki(n,a,incra,y)
+          integer n,incra
+          real*4 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdpacki(n,a,incra,y)
+          integer n,incra
+          real*8 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vspackv(n,a,ia,y)
+          integer n
+          integer ia(n,*)
+          real*4 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdpackv(n,a,ia,y)
+          integer n
+          integer ia(n,*)
+          real*8 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vspackm(n,a,ma,y)
+          integer n
+          integer ma(n,*)
+          real*4 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdpackm(n,a,ma,y)
+          integer n
+          integer ma(n,*)
+          real*8 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+C     ! Unpacking functions
+
+      interface
+        subroutine vsunpacki(n,a,y,incry)
+          integer n,incry
+          real*4 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdunpacki(n,a,y,incry)
+          integer n,incry
+          real*8 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vsunpackv(n,a,y,iy)
+          integer n
+          integer iy(n,*)
+          real*4 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdunpackv(n,a,y,iy)
+          integer n
+          integer iy(n,*)
+          real*8 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vsunpackm(n,a,y,my)
+          integer n
+          integer my(n,*)
+          real*4 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+      interface
+        subroutine vdunpackm(n,a,y,my)
+          integer n
+          integer my(n,*)
+          real*8 a(n,*),y(n,*)
+        end subroutine
+      end interface
+
+C     ! Errors functions
+
+      interface
+        integer*2 function vmlseterrstatus(n)
+          integer*2 n
+        end function
+      end interface
+
+      interface 
+        integer*2 function vmlgeterrstatus()
+        end function
+      end interface
+
+      interface 
+        integer*2 function vmlclearerrstatus()
+        end function
+      end interface
+
+      interface
+        integer*4 function vmlseterrorcallback(n)
+          integer*4 n
+        end function
+      end interface
+
+      interface 
+        integer*4 function vmlgeterrorcallback()
+        end function
+      end interface
+
+      interface 
+        integer*4 function vmlclearerrorcallback()
+        end function
+      end interface
+
+C     ! Mode functions
+
+      interface 
+        integer*2 function vmlsetmode(n)
+          integer*2 n
+        end function
+      end interface
+
+      interface 
+        integer*2 function vmlgetmode()
+        end function
+      end interface

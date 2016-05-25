@@ -1,0 +1,200 @@
+!!
+!!               INTEL CORPORATION PROPRIETARY INFORMATION
+!!  This software is supplied under the terms of a license agreement or
+!!  nondisclosure agreement with Intel Corporation and may not be copied
+!!  or disclosed except in accordance with the terms of that agreement.
+!!    Copyright(C) 1999-2003 Intel Corporation. All Rights Reserved.
+!!
+!! File    : mkl_blas.fi
+!! Purpose : Intel(R) Math Kernel Library (MKL) FORTRAN interface
+!!           for BLAS routines
+!!
+
+$IF .NOT. DEFINED (MKL_BLAS_HEADER)
+
+$DEFINE MKL_BLAS_HEADER
+
+*$pragma aux __proton "_!"       \ switch to lowercase & add "_" prefix
+*  parm (reference nodescriptor) \ always call near, use nodescriptor
+*  caller []                     \ caller pops stack, no registers used
+*  value struct caller []        \ complex returns address in [eax]
+*  modify [eax ebx ecx edx esi edi]
+
+*$pragma aux __cproton "_!_"     \ switch to lowercase & surround with "_"
+*  parm (reference nodescriptor) \ always call near, use nodescriptor
+*  caller []                     \ caller pops stack, no registers used
+*  value struct caller []        \ complex returns address in [eax]
+*  modify [eax ebx ecx edx esi edi]
+
+*$pragma aux __default "^"       \ default Watcom calling convention:
+*  parm (reference descriptor)   \ always call near, use descriptor
+*  caller [eax] [edx] [ebx] [ecx]\ caller pops stack, registers used
+*  modify [eax ebx ecx edx]
+
+*$pragma aux (__proton) saxpy
+*$pragma aux (__proton) scopy
+*$pragma aux (__proton) sdot
+*$pragma aux (__proton) sscal
+*$pragma aux (__proton) sswap
+*$pragma aux (__proton) snrm2
+*$pragma aux (__proton) isamax
+*$pragma aux (__proton) isamin
+*$pragma aux (__proton) srot
+*$pragma aux (__proton) srotg
+*$pragma aux (__proton) sasum
+
+*$pragma aux (__proton) daxpy
+*$pragma aux (__proton) dcopy
+*$pragma aux (__proton) ddot
+*$pragma aux (__proton) dscal
+*$pragma aux (__proton) dswap
+*$pragma aux (__proton) dnrm2
+*$pragma aux (__proton) idamax
+*$pragma aux (__proton) idamin
+*$pragma aux (__proton) drot
+*$pragma aux (__proton) drotg
+*$pragma aux (__proton) dasum
+
+*$pragma aux (__proton) caxpy
+*$pragma aux (__proton) ccopy
+*$pragma aux (__proton) cscal
+*$pragma aux (__proton) csscal
+*$pragma aux (__proton) cswap
+*$pragma aux (__proton) scnrm2
+*$pragma aux (__proton) icamax
+*$pragma aux (__proton) icamin
+*$pragma aux (__proton) csrot
+*$pragma aux (__proton) crotg
+*$pragma aux (__proton) scasum
+
+*$pragma aux (__proton) zaxpy
+*$pragma aux (__proton) zcopy
+*$pragma aux (__proton) zscal
+*$pragma aux (__proton) zdscal
+*$pragma aux (__proton) zswap
+*$pragma aux (__proton) dznrm2
+*$pragma aux (__proton) izamax
+*$pragma aux (__proton) izamin
+*$pragma aux (__proton) zdrot
+*$pragma aux (__proton) zrotg
+*$pragma aux (__proton) dzasum
+
+*$pragma aux (__proton) sgemv
+*$pragma aux (__proton) sger
+*$pragma aux (__proton) strsv
+*$pragma aux (__proton) sgbmv
+*$pragma aux (__proton) ssbmv
+*$pragma aux (__proton) sspmv
+*$pragma aux (__proton) ssymv
+*$pragma aux (__proton) strmv
+*$pragma aux (__proton) stbmv
+*$pragma aux (__proton) stbsv
+*$pragma aux (__proton) stpmv
+*$pragma aux (__proton) stpsv
+*$pragma aux (__proton) ssyr
+*$pragma aux (__proton) sspr
+*$pragma aux (__proton) sspr2
+*$pragma aux (__proton) ssyr2
+
+*$pragma aux (__proton) dgemv
+*$pragma aux (__proton) dger
+*$pragma aux (__proton) dtrsv
+*$pragma aux (__proton) dgbmv
+*$pragma aux (__proton) dsbmv
+*$pragma aux (__proton) dspmv
+*$pragma aux (__proton) dsymv
+*$pragma aux (__proton) dtrmv
+*$pragma aux (__proton) dtbmv
+*$pragma aux (__proton) dtbsv
+*$pragma aux (__proton) dtpmv
+*$pragma aux (__proton) dtpsv
+*$pragma aux (__proton) dsyr
+*$pragma aux (__proton) dspr
+*$pragma aux (__proton) dspr2
+*$pragma aux (__proton) dsyr2
+
+*$pragma aux (__proton) cgemv
+*$pragma aux (__proton) cgerc
+*$pragma aux (__proton) cgeru
+*$pragma aux (__proton) ctrsv
+*$pragma aux (__proton) cgbmv
+*$pragma aux (__proton) chbmv
+*$pragma aux (__proton) chpmv
+*$pragma aux (__proton) chemv
+*$pragma aux (__proton) ctrmv
+*$pragma aux (__proton) ctbmv
+*$pragma aux (__proton) ctbsv
+*$pragma aux (__proton) ctpmv
+*$pragma aux (__proton) ctpsv
+*$pragma aux (__proton) cher
+*$pragma aux (__proton) chpr
+*$pragma aux (__proton) chpr2
+*$pragma aux (__proton) cher2
+
+*$pragma aux (__proton) zgemv
+*$pragma aux (__proton) zgerc
+*$pragma aux (__proton) zgeru
+*$pragma aux (__proton) ztrsv
+*$pragma aux (__proton) zgbmv
+*$pragma aux (__proton) zhbmv
+*$pragma aux (__proton) zhpmv
+*$pragma aux (__proton) zhemv
+*$pragma aux (__proton) ztrmv
+*$pragma aux (__proton) ztbmv
+*$pragma aux (__proton) ztbsv
+*$pragma aux (__proton) ztpmv
+*$pragma aux (__proton) ztpsv
+*$pragma aux (__proton) zher
+*$pragma aux (__proton) zhpr
+*$pragma aux (__proton) zhpr2
+*$pragma aux (__proton) zher2
+
+*$pragma aux (__proton) sgemm
+*$pragma aux (__proton) ssymm
+*$pragma aux (__proton) ssyrk
+*$pragma aux (__proton) ssyr2k
+*$pragma aux (__proton) strmm
+*$pragma aux (__proton) strsm
+
+*$pragma aux (__proton) dgemm
+*$pragma aux (__proton) dsymm
+*$pragma aux (__proton) dsyrk
+*$pragma aux (__proton) dsyr2k
+*$pragma aux (__proton) dtrmm
+*$pragma aux (__proton) dtrsm
+
+*$pragma aux (__proton) cgemm
+*$pragma aux (__proton) csymm
+*$pragma aux (__proton) chemm
+*$pragma aux (__proton) csyrk
+*$pragma aux (__proton) cherk
+*$pragma aux (__proton) csyr2k
+*$pragma aux (__proton) cher2k
+*$pragma aux (__proton) ctrmm
+*$pragma aux (__proton) ctrsm
+
+*$pragma aux (__proton) zgemm
+*$pragma aux (__proton) zsymm
+*$pragma aux (__proton) zhemm
+*$pragma aux (__proton) zsyrk
+*$pragma aux (__proton) zherk
+*$pragma aux (__proton) zsyr2k
+*$pragma aux (__proton) zher2k
+*$pragma aux (__proton) ztrmm
+*$pragma aux (__proton) ztrsm
+
+*$pragma aux (__cproton) cdotc
+*$pragma aux (__cproton) cdotu
+*$pragma aux (__cproton) zdotc
+*$pragma aux (__cproton) zdotu
+
+*$pragma aux (__default) cfft1d
+*$pragma aux (__default) zfft1d
+*$pragma aux (__default) csfft1d
+*$pragma aux (__default) zdfft1d
+*$pragma aux (__default) scfft1d
+*$pragma aux (__default) dzfft1d
+
+*$pragma aux (__default) xerbla
+
+$ENDIF
