@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2015 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,13 +27,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using Nequeo.Science.Math.Properties;
+using System;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
 {
-    using System;
+
+#if NOSYSNUMERICS
+    using Numerics;
+#else
     using System.Numerics;
-    using Generic;
-    using Properties;
-    using Threading;
+#endif
 
     /// <summary>
     /// <para>A class which encapsulates the functionality of a Cholesky factorization for dense matrices.</para>
@@ -45,7 +48,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
     /// The computation of the Cholesky factorization is done at construction time. If the matrix is not symmetric
     /// or positive definite, the constructor will throw an exception.
     /// </remarks>
-    public class DenseCholesky : Cholesky
+    internal sealed class DenseCholesky : Cholesky
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DenseCholesky"/> class. This object will compute the
@@ -55,22 +58,22 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is not a square matrix.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is not positive definite.</exception>
-        public DenseCholesky(DenseMatrix matrix)
+        public static DenseCholesky Create(DenseMatrix matrix)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
-
             if (matrix.RowCount != matrix.ColumnCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSquare);
             }
 
             // Create a new matrix for the Cholesky factor, then perform factorization (while overwriting).
-            var factor = (DenseMatrix)matrix.Clone();
-            Control.LinearAlgebraProvider.CholeskyFactor(factor.Data, factor.RowCount);
-            CholeskyFactor = factor;
+            var factor = (DenseMatrix) matrix.Clone();
+            Control.LinearAlgebraProvider.CholeskyFactor(factor.Values, factor.RowCount);
+            return new DenseCholesky(factor);
+        }
+
+        DenseCholesky(Matrix<Complex> factor)
+            : base(factor)
+        {
         }
 
         /// <summary>
@@ -80,18 +83,6 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<Complex> input, Matrix<Complex> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
-            // Check for proper dimensions.
             if (result.RowCount != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
@@ -102,9 +93,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
 
-            if (input.RowCount != CholeskyFactor.RowCount)
+            if (input.RowCount != Factor.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factor);
             }
 
             var dinput = input as DenseMatrix;
@@ -120,11 +111,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
             }
 
             // Copy the contents of input to result.
-            CommonParallel.For(0, dinput.Data.Length, index => dresult.Data[index] = dinput.Data[index]);
+            Array.Copy(dinput.Values, 0, dresult.Values, 0, dinput.Values.Length);
 
             // Cholesky solve by overwriting result.
-            var dfactor = (DenseMatrix)CholeskyFactor;
-            Control.LinearAlgebraProvider.CholeskySolveFactored(dfactor.Data, dfactor.RowCount, dresult.Data, dresult.ColumnCount);
+            var dfactor = (DenseMatrix) Factor;
+            Control.LinearAlgebraProvider.CholeskySolveFactored(dfactor.Values, dfactor.RowCount, dresult.Values, dresult.ColumnCount);
         }
 
         /// <summary>
@@ -134,26 +125,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<Complex> input, Vector<Complex> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
-            // Check for proper dimensions.
             if (input.Count != result.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
-            if (input.Count != CholeskyFactor.RowCount)
+            if (input.Count != Factor.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factor);
             }
 
             var dinput = input as DenseVector;
@@ -169,11 +148,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
             }
 
             // Copy the contents of input to result.
-            CommonParallel.For(0, dinput.Data.Length, index => dresult.Data[index] = dinput.Data[index]);
+            Array.Copy(dinput.Values, 0, dresult.Values, 0, dinput.Values.Length);
 
             // Cholesky solve by overwriting result.
-            var dfactor = (DenseMatrix)CholeskyFactor;
-            Control.LinearAlgebraProvider.CholeskySolveFactored(dfactor.Data, dfactor.RowCount, dresult.Data, 1);
+            var dfactor = (DenseMatrix) Factor;
+            Control.LinearAlgebraProvider.CholeskySolveFactored(dfactor.Values, dfactor.RowCount, dresult.Values, 1);
         }
     }
 }

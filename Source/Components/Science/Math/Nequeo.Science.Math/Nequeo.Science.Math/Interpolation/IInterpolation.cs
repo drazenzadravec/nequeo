@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -38,14 +37,11 @@ namespace Nequeo.Science.Math.Interpolation
         /// <summary>
         /// Gets a value indicating whether the algorithm supports differentiation (interpolated derivative).
         /// </summary>
-        /// <seealso cref="Differentiate(double)"/>
-        /// <seealso cref="Differentiate(double, out double, out double)"/>
         bool SupportsDifferentiation { get; }
 
         /// <summary>
         /// Gets a value indicating whether the algorithm supports integration (interpolated quadrature).
         /// </summary>
-        /// <seealso cref="Integrate"/>
         bool SupportsIntegration { get; }
 
         /// <summary>
@@ -60,30 +56,26 @@ namespace Nequeo.Science.Math.Interpolation
         /// </summary>
         /// <param name="t">Point t to interpolate at.</param>
         /// <returns>Interpolated first derivative at point t.</returns>
-        /// <seealso cref="SupportsDifferentiation"/>
-        /// <seealso cref="Differentiate(double, out double, out double)"/>
         double Differentiate(double t);
 
         /// <summary>
-        /// Differentiate at point t.
+        /// Differentiate twice at point t.
         /// </summary>
         /// <param name="t">Point t to interpolate at.</param>
-        /// <param name="interpolatedValue">Interpolated value x(t)</param>
-        /// <param name="secondDerivative">Interpolated second derivative at point t.</param>
-        /// <returns>Interpolated first derivative at point t.</returns>
-        /// <seealso cref="SupportsDifferentiation"/>
-        /// <seealso cref="Differentiate(double)"/>
-        double Differentiate(
-            double t,
-            out double interpolatedValue,
-            out double secondDerivative);
+        /// <returns>Interpolated second derivative at point t.</returns>
+        double Differentiate2(double t);
 
         /// <summary>
-        /// Integrate up to point t.
+        /// Indefinite integral at point t.
         /// </summary>
-        /// <param name="t">Right bound of the integration interval [a,t].</param>
-        /// <returns>Interpolated definite integral over the interval [a,t].</returns>
-        /// <seealso cref="SupportsIntegration"/>
+        /// <param name="t">Point t to integrate at.</param>
         double Integrate(double t);
+
+        /// <summary>
+        /// Definite integral between points a and b.
+        /// </summary>
+        /// <param name="a">Left bound of the integration interval [a,b].</param>
+        /// <param name="b">Right bound of the integration interval [a,b].</param>
+        double Integrate(double a, double b);
     }
 }

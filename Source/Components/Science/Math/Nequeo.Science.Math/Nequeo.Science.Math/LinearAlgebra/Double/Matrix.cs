@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2015 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,106 +27,76 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.LinearAlgebra.Double.Factorization;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.LinearAlgebra.Storage;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double
 {
-    using System;
-    using Distributions;
-    using Generic;
-    using Properties;
-
     /// <summary>
     /// <c>double</c> version of the <see cref="Matrix{T}"/> class.
     /// </summary>
     [Serializable]
     public abstract class Matrix : Matrix<double>
-    {        
+    {
         /// <summary>
         /// Initializes a new instance of the Matrix class.
         /// </summary>
-        /// <param name="rows">
-        /// The number of rows.
-        /// </param>
-        /// <param name="columns">
-        /// The number of columns.
-        /// </param>
-        protected Matrix(int rows, int columns) : base(rows, columns)
+        protected Matrix(MatrixStorage<double> storage)
+            : base(storage)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the Matrix class.
+        /// Set all values whose absolute value is smaller than the threshold to zero.
         /// </summary>
-        /// <param name="order">
-        /// The order of the matrix.
-        /// </param>
-        protected Matrix(int order)
-            : base(order)
+        public override void CoerceZero(double threshold)
         {
-        }
-
-        /// <summary>Calculates the L1 norm.</summary>
-        /// <returns>The L1 norm of the matrix.</returns>
-        public override double L1Norm()
-        {
-            var norm = 0.0;
-            for (var j = 0; j < ColumnCount; j++)
-            {
-                var s = 0.0;
-                for (var i = 0; i < RowCount; i++)
-                {
-                    s += Math.Abs(At(i, j));
-                }
-
-                norm = Math.Max(norm, s);
-            }
-
-            return norm;
+            MapInplace(x => System.Math.Abs(x) < threshold ? 0d : x, Zeros.AllowSkip);
         }
 
         /// <summary>
         /// Returns the conjugate transpose of this matrix.
-        /// </summary>        
+        /// </summary>
         /// <returns>The conjugate transpose of this matrix.</returns>
-        public override Matrix<double> ConjugateTranspose()
+        public sealed override Matrix<double> ConjugateTranspose()
         {
             return Transpose();
         }
 
-        /// <summary>Calculates the Frobenius norm of this matrix.</summary>
-        /// <returns>The Frobenius norm of this matrix.</returns>
-        public override double FrobeniusNorm()
+        /// <summary>
+        /// Complex conjugates each element of this matrix and place the results into the result matrix.
+        /// </summary>
+        /// <param name="result">The result of the conjugation.</param>
+        protected sealed override void DoConjugate(Matrix<double> result)
         {
-            var transpose = Transpose();
-            var aat = this * transpose;
-
-            var norm = 0.0;
-            for (var i = 0; i < RowCount; i++)
+            if (ReferenceEquals(this, result))
             {
-                norm += Math.Abs(aat.At(i, i));
+                return;
             }
 
-            norm = Math.Sqrt(norm);
-
-            return norm;
+            CopyTo(result);
         }
 
-        /// <summary>Calculates the infinity norm of this matrix.</summary>
-        /// <returns>The infinity norm of this matrix.</returns>   
-        public override double InfinityNorm()
+        /// <summary>
+        /// Negate each element of this matrix and place the results into the result matrix.
+        /// </summary>
+        /// <param name="result">The result of the negation.</param>
+        protected override void DoNegate(Matrix<double> result)
         {
-            var norm = 0.0;
-            for (var i = 0; i < RowCount; i++)
-            {
-                var s = 0.0;
-                for (var j = 0; j < ColumnCount; j++)
-                {
-                    s += Math.Abs(At(i, j));
-                }
+            Map(x => -x, result, Zeros.AllowSkip);
+        }
 
-                norm = Math.Max(norm, s);
-            }
-
-            return norm;
+        /// <summary>
+        /// Add a scalar to each element of the matrix and stores the result in the result vector.
+        /// </summary>
+        /// <param name="scalar">The scalar to add.</param>
+        /// <param name="result">The matrix to store the result of the addition.</param>
+        protected override void DoAdd(double scalar, Matrix<double> result)
+        {
+            Map(x => x + scalar, result, Zeros.Include);
         }
 
         /// <summary>
@@ -135,15 +108,19 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         protected override void DoAdd(Matrix<double> other, Matrix<double> result)
         {
-            for (var i = 0; i < RowCount; i++)
-            {
-                for (var j = 0; j < ColumnCount; j++)
-                {
-                    result.At(i, j, At(i, j) + other.At(i, j));
-                }
-            }
+            Map2((x, y) => x + y, other, result, Zeros.AllowSkip);
         }
-    
+
+        /// <summary>
+        /// Subtracts a scalar from each element of the vector and stores the result in the result vector.
+        /// </summary>
+        /// <param name="scalar">The scalar to subtract.</param>
+        /// <param name="result">The matrix to store the result of the subtraction.</param>
+        protected override void DoSubtract(double scalar, Matrix<double> result)
+        {
+            Map(x => x - scalar, result, Zeros.Include);
+        }
+
         /// <summary>
         /// Subtracts another matrix from this matrix.
         /// </summary>
@@ -153,13 +130,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         protected override void DoSubtract(Matrix<double> other, Matrix<double> result)
         {
-            for (var i = 0; i < RowCount; i++)
-            {
-                for (var j = 0; j < ColumnCount; j++)
-                {
-                    result.At(i, j, At(i, j) - other.At(i, j));
-                }
-            }
+            Map2((x, y) => x - y, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -169,13 +140,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The matrix to store the result of the multiplication.</param>
         protected override void DoMultiply(double scalar, Matrix<double> result)
         {
-            for (var i = 0; i < RowCount; i++)
-            {
-                for (var j = 0; j < ColumnCount; j++)
-                {
-                    result.At(i, j, At(i, j) * scalar);
-                }
-            }
+            Map(x => x*scalar, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -184,46 +149,36 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="rightSide">The vector to multiply with.</param>
         /// <param name="result">The result of the multiplication.</param>
         protected override void DoMultiply(Vector<double> rightSide, Vector<double> result)
-         {
-             for (var i = 0; i < RowCount; i++)
-             {
-                 var s = 0.0;
-                 for (var j = 0; j != ColumnCount; j++)
-                 {
-                     s += At(i, j) * rightSide[j];
-                 }
-
-                 result[i] = s;
-             }
-         }
+        {
+            for (var i = 0; i < RowCount; i++)
+            {
+                var s = 0.0;
+                for (var j = 0; j < ColumnCount; j++)
+                {
+                    s += At(i, j)*rightSide[j];
+                }
+                result[i] = s;
+            }
+        }
 
         /// <summary>
         /// Divides each element of the matrix by a scalar and places results into the result matrix.
         /// </summary>
-        /// <param name="scalar">The scalar to divide the matrix with.</param>
+        /// <param name="divisor">The scalar to divide the matrix with.</param>
         /// <param name="result">The matrix to store the result of the division.</param>
-        protected override void DoDivide(double scalar, Matrix<double> result)
+        protected override void DoDivide(double divisor, Matrix<double> result)
         {
-            DoMultiply(1.0 / scalar, result);
+            Map(x => x/divisor, result, divisor == 0.0 ? Zeros.Include : Zeros.AllowSkip);
         }
 
         /// <summary>
-        /// Left multiply a matrix with a vector ( = vector * matrix ) and place the result in the result vector.
+        /// Divides a scalar by each element of the matrix and stores the result in the result matrix.
         /// </summary>
-        /// <param name="leftSide">The vector to multiply with.</param>
-        /// <param name="result">The result of the multiplication.</param>
-        protected override void DoLeftMultiply(Vector<double> leftSide, Vector<double> result)
+        /// <param name="dividend">The scalar to divide by each element of the matrix.</param>
+        /// <param name="result">The matrix to store the result of the division.</param>
+        protected override void DoDivideByThis(double dividend, Matrix<double> result)
         {
-            for (var j = 0; j < ColumnCount; j++)
-            {
-                var s = 0.0;
-                for (var i = 0; i != leftSide.Count; i++)
-                {
-                    s += leftSide[i] * At(i, j);
-                }
-
-                result[j] = s;
-            }
+            Map(x => dividend/x, result, Zeros.Include);
         }
 
         /// <summary>
@@ -233,17 +188,16 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The result of the multiplication.</param>
         protected override void DoMultiply(Matrix<double> other, Matrix<double> result)
         {
-            for (var j = 0; j < RowCount; j++)
+            for (var i = 0; i < RowCount; i++)
             {
-                for (var i = 0; i != other.ColumnCount; i++)
+                for (var j = 0; j < other.ColumnCount; j++)
                 {
                     var s = 0.0;
-                    for (var l = 0; l < ColumnCount; l++)
+                    for (var k = 0; k < ColumnCount; k++)
                     {
-                        s += At(j, l) * other.At(l, i);
+                        s += At(i, k)*other.At(k, j);
                     }
-
-                    result.At(j, i, s);
+                    result.At(i, j, s);
                 }
             }
         }
@@ -260,14 +214,23 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
                 for (var i = 0; i < RowCount; i++)
                 {
                     var s = 0.0;
-                    for (var l = 0; l < ColumnCount; l++)
+                    for (var k = 0; k < ColumnCount; k++)
                     {
-                        s += At(i, l) * other.At(j, l);
+                        s += At(i, k)*other.At(j, k);
                     }
-
                     result.At(i, j, s);
                 }
             }
+        }
+
+        /// <summary>
+        /// Multiplies this matrix with the conjugate transpose of another matrix and places the results into the result matrix.
+        /// </summary>
+        /// <param name="other">The matrix to multiply with.</param>
+        /// <param name="result">The result of the multiplication.</param>
+        protected sealed override void DoConjugateTransposeAndMultiply(Matrix<double> other, Matrix<double> result)
+        {
+            DoTransposeAndMultiply(other, result);
         }
 
         /// <summary>
@@ -282,14 +245,23 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
                 for (var i = 0; i < ColumnCount; i++)
                 {
                     var s = 0.0;
-                    for (var l = 0; l < RowCount; l++)
+                    for (var k = 0; k < RowCount; k++)
                     {
-                        s += At(l, i) * other.At(l, j);
+                        s += At(k, i)*other.At(k, j);
                     }
-
                     result.At(i, j, s);
                 }
             }
+        }
+
+        /// <summary>
+        /// Multiplies the transpose of this matrix with another matrix and places the results into the result matrix.
+        /// </summary>
+        /// <param name="other">The matrix to multiply with.</param>
+        /// <param name="result">The result of the multiplication.</param>
+        protected sealed override void DoConjugateTransposeThisAndMultiply(Matrix<double> other, Matrix<double> result)
+        {
+            DoTransposeThisAndMultiply(other, result);
         }
 
         /// <summary>
@@ -299,31 +271,69 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The result of the multiplication.</param>
         protected override void DoTransposeThisAndMultiply(Vector<double> rightSide, Vector<double> result)
         {
-            for (var i = 0; i < ColumnCount; i++)
+            for (var j = 0; j < ColumnCount; j++)
             {
                 var s = 0.0;
-                for (var j = 0; j != RowCount; j++)
+                for (var i = 0; i < RowCount; i++)
                 {
-                    s += At(j, i) * rightSide[j];
+                    s += At(i, j)*rightSide[i];
                 }
-
-                result[i] = s;
+                result[j] = s;
             }
         }
 
         /// <summary>
-        /// Negate each element of this matrix and place the results into the result matrix.
+        /// Multiplies the conjugate transpose of this matrix with a vector and places the results into the result vector.
         /// </summary>
-        /// <param name="result">The result of the negation.</param>
-        protected override void DoNegate(Matrix<double> result)
+        /// <param name="rightSide">The vector to multiply with.</param>
+        /// <param name="result">The result of the multiplication.</param>
+        protected sealed override void DoConjugateTransposeThisAndMultiply(Vector<double> rightSide, Vector<double> result)
         {
-            for (var i = 0; i < RowCount; i++)
-            {
-                for (var j = 0; j != ColumnCount; j++)
-                {
-                    result[i, j] = -At(i, j);
-                }
-            }
+            DoTransposeThisAndMultiply(rightSide, result);
+        }
+
+        /// <summary>
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for the given divisor each element of the matrix.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
+        /// <param name="result">Matrix to store the results in.</param>
+        protected override void DoModulus(double divisor, Matrix<double> result)
+        {
+            Map(x => Euclid.Modulus(x, divisor), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for the given dividend for each element of the matrix.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoModulusByThis(double dividend, Matrix<double> result)
+        {
+            Map(x => Euclid.Modulus(dividend, x), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for the given divisor each element of the matrix.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
+        /// <param name="result">Matrix to store the results in.</param>
+        protected override void DoRemainder(double divisor, Matrix<double> result)
+        {
+            Map(x => Euclid.Remainder(x, divisor), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for the given dividend for each element of the matrix.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoRemainderByThis(double dividend, Matrix<double> result)
+        {
+            Map(x => Euclid.Remainder(dividend, x), result, Zeros.Include);
         }
 
         /// <summary>
@@ -333,45 +343,253 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The matrix to store the result of the pointwise multiplication.</param>
         protected override void DoPointwiseMultiply(Matrix<double> other, Matrix<double> result)
         {
-            for (var j = 0; j < ColumnCount; j++)
-            {
-                for (var i = 0; i < RowCount; i++)
-                {
-                    result.At(i, j, At(i, j) * other.At(i, j));
-                }
-            }
+            Map2((x, y) => x*y, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
         /// Pointwise divide this matrix by another matrix and stores the result into the result matrix.
         /// </summary>
-        /// <param name="other">The matrix to pointwise divide this one by.</param>
+        /// <param name="divisor">The matrix to pointwise divide this one by.</param>
         /// <param name="result">The matrix to store the result of the pointwise division.</param>
-        protected override void DoPointwiseDivide(Matrix<double> other, Matrix<double> result)
+        protected override void DoPointwiseDivide(Matrix<double> divisor, Matrix<double> result)
         {
-            for (var j = 0; j < ColumnCount; j++)
-            {
-                for (var i = 0; i < RowCount; i++)
-                {
-                    result.At(i, j, At(i, j) / other.At(i, j));
-                }
-            }
+            Map2((x, y) => x/y, divisor, result, Zeros.Include);
         }
 
         /// <summary>
-        /// Computes the modulus for each element of the matrix.
+        /// Pointwise raise this matrix to an exponent and store the result into the result vector.
         /// </summary>
-        /// <param name="divisor">The divisor to use.</param>
-        /// <param name="result">Matrix to store the results in.</param>
-        protected override void DoModulus(double divisor, Matrix<double> result)
+        /// <param name="exponent">The exponent to raise this matrix values to.</param>
+        /// <param name="result">The vector to store the result of the pointwise power.</param>
+        protected override void DoPointwisePower(double exponent, Matrix<double> result)
         {
-            for (var row = 0; row < RowCount; row++)
+            Map(x => System.Math.Pow(x, exponent), result, exponent > 0.0 ? Zeros.AllowSkip : Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise canonical modulus, where the result has the sign of the divisor,
+        /// of this matrix with another matrix and stores the result into the result matrix.
+        /// </summary>
+        /// <param name="divisor">The pointwise denominator matrix to use</param>
+        /// <param name="result">The result of the modulus.</param>
+        protected override void DoPointwiseModulus(Matrix<double> divisor, Matrix<double> result)
+        {
+            Map2(Euclid.Modulus, divisor, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise remainder (% operator), where the result has the sign of the dividend,
+        /// of this matrix with another matrix and stores the result into the result matrix.
+        /// </summary>
+        /// <param name="divisor">The pointwise denominator matrix to use</param>
+        /// <param name="result">The result of the modulus.</param>
+        protected override void DoPointwiseRemainder(Matrix<double> divisor, Matrix<double> result)
+        {
+            Map2(Euclid.Remainder, divisor, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise applies the exponential function to each value and stores the result into the result matrix.
+        /// </summary>
+        /// <param name="result">The matrix to store the result.</param>
+        protected override void DoPointwiseExp(Matrix<double> result)
+        {
+            Map(System.Math.Exp, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise applies the natural logarithm function to each value and stores the result into the result matrix.
+        /// </summary>
+        /// <param name="result">The matrix to store the result.</param>
+        protected override void DoPointwiseLog(Matrix<double> result)
+        {
+            Map(System.Math.Log, result, Zeros.Include);
+        }
+
+        /// <summary>Calculates the induced L1 norm of this matrix.</summary>
+        /// <returns>The maximum absolute column sum of the matrix.</returns>
+        public override double L1Norm()
+        {
+            var norm = 0d;
+            for (var j = 0; j < ColumnCount; j++)
             {
-                for (var column = 0; column < ColumnCount; column++)
+                var s = 0d;
+                for (var i = 0; i < RowCount; i++)
                 {
-                    result.At(row, column, At(row, column) % divisor);
+                    s += System.Math.Abs(At(i, j));
                 }
+                norm = System.Math.Max(norm, s);
             }
+            return norm;
+        }
+
+        /// <summary>Calculates the induced infinity norm of this matrix.</summary>
+        /// <returns>The maximum absolute row sum of the matrix.</returns>
+        public override double InfinityNorm()
+        {
+            var norm = 0d;
+            for (var i = 0; i < RowCount; i++)
+            {
+                var s = 0d;
+                for (var j = 0; j < ColumnCount; j++)
+                {
+                    s += System.Math.Abs(At(i, j));
+                }
+                norm = System.Math.Max(norm, s);
+            }
+            return norm;
+        }
+
+        /// <summary>Calculates the entry-wise Frobenius norm of this matrix.</summary>
+        /// <returns>The square root of the sum of the squared values.</returns>
+        public override double FrobeniusNorm()
+        {
+            var transpose = Transpose();
+            var aat = this*transpose;
+            var norm = 0d;
+            for (var i = 0; i < RowCount; i++)
+            {
+                norm += aat.At(i, i);
+            }
+            return System.Math.Sqrt(norm);
+        }
+
+        /// <summary>
+        /// Calculates the p-norms of all row vectors.
+        /// Typical values for p are 1.0 (L1, Manhattan norm), 2.0 (L2, Euclidean norm) and positive infinity (infinity norm)
+        /// </summary>
+        public override Vector<double> RowNorms(double norm)
+        {
+            if (norm <= 0.0)
+            {
+                throw new ArgumentOutOfRangeException("norm", Resources.ArgumentMustBePositive);
+            }
+
+            var ret = new double[RowCount];
+            if (norm == 2.0)
+            {
+                Storage.FoldByRowUnchecked(ret, (s, x) => s + x*x, (x, c) => System.Math.Sqrt(x), ret, Zeros.AllowSkip);
+            }
+            else if (norm == 1.0)
+            {
+                Storage.FoldByRowUnchecked(ret, (s, x) => s + System.Math.Abs(x), (x, c) => x, ret, Zeros.AllowSkip);
+            }
+            else if (double.IsPositiveInfinity(norm))
+            {
+                Storage.FoldByRowUnchecked(ret, (s, x) => System.Math.Max(s, System.Math.Abs(x)), (x, c) => x, ret, Zeros.AllowSkip);
+            }
+            else
+            {
+                double invnorm = 1.0/norm;
+                Storage.FoldByRowUnchecked(ret, (s, x) => s + System.Math.Pow(System.Math.Abs(x), norm), (x, c) => System.Math.Pow(x, invnorm), ret, Zeros.AllowSkip);
+            }
+            return Vector<double>.Build.Dense(ret);
+        }
+
+        /// <summary>
+        /// Calculates the p-norms of all column vectors.
+        /// Typical values for p are 1.0 (L1, Manhattan norm), 2.0 (L2, Euclidean norm) and positive infinity (infinity norm)
+        /// </summary>
+        public override Vector<double> ColumnNorms(double norm)
+        {
+            if (norm <= 0.0)
+            {
+                throw new ArgumentOutOfRangeException("norm", Resources.ArgumentMustBePositive);
+            }
+
+            var ret = new double[ColumnCount];
+            if (norm == 2.0)
+            {
+                Storage.FoldByColumnUnchecked(ret, (s, x) => s + x*x, (x, c) => System.Math.Sqrt(x), ret, Zeros.AllowSkip);
+            }
+            else if (norm == 1.0)
+            {
+                Storage.FoldByColumnUnchecked(ret, (s, x) => s + System.Math.Abs(x), (x, c) => x, ret, Zeros.AllowSkip);
+            }
+            else if (double.IsPositiveInfinity(norm))
+            {
+                Storage.FoldByColumnUnchecked(ret, (s, x) => System.Math.Max(s, System.Math.Abs(x)), (x, c) => x, ret, Zeros.AllowSkip);
+            }
+            else
+            {
+                double invnorm = 1.0/norm;
+                Storage.FoldByColumnUnchecked(ret, (s, x) => s + System.Math.Pow(System.Math.Abs(x), norm), (x, c) => System.Math.Pow(x, invnorm), ret, Zeros.AllowSkip);
+            }
+            return Vector<double>.Build.Dense(ret);
+        }
+
+        /// <summary>
+        /// Normalizes all row vectors to a unit p-norm.
+        /// Typical values for p are 1.0 (L1, Manhattan norm), 2.0 (L2, Euclidean norm) and positive infinity (infinity norm)
+        /// </summary>
+        public sealed override Matrix<double> NormalizeRows(double norm)
+        {
+            var norminv = ((DenseVectorStorage<double>)RowNorms(norm).Storage).Data;
+            for (int i = 0; i < norminv.Length; i++)
+            {
+                norminv[i] = norminv[i] == 0d ? 1d : 1d/norminv[i];
+            }
+
+            var result = Build.SameAs(this, RowCount, ColumnCount);
+            Storage.MapIndexedTo(result.Storage, (i, j, x) => norminv[i]*x, Zeros.AllowSkip, ExistingData.AssumeZeros);
+            return result;
+        }
+
+        /// <summary>
+        /// Normalizes all column vectors to a unit p-norm.
+        /// Typical values for p are 1.0 (L1, Manhattan norm), 2.0 (L2, Euclidean norm) and positive infinity (infinity norm)
+        /// </summary>
+        public sealed override Matrix<double> NormalizeColumns(double norm)
+        {
+            var norminv = ((DenseVectorStorage<double>)ColumnNorms(norm).Storage).Data;
+            for (int i = 0; i < norminv.Length; i++)
+            {
+                norminv[i] = norminv[i] == 0d ? 1d : 1d/norminv[i];
+            }
+
+            var result = Build.SameAs(this, RowCount, ColumnCount);
+            Storage.MapIndexedTo(result.Storage, (i, j, x) => norminv[j]*x, Zeros.AllowSkip, ExistingData.AssumeZeros);
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates the value sum of each row vector.
+        /// </summary>
+        public override Vector<double> RowSums()
+        {
+            var ret = new double[RowCount];
+            Storage.FoldByRowUnchecked(ret, (s, x) => s + x, (x, c) => x, ret, Zeros.AllowSkip);
+            return Vector<double>.Build.Dense(ret);
+        }
+
+        /// <summary>
+        /// Calculates the absolute value sum of each row vector.
+        /// </summary>
+        public override Vector<double> RowAbsoluteSums()
+        {
+            var ret = new double[RowCount];
+            Storage.FoldByRowUnchecked(ret, (s, x) => s + System.Math.Abs(x), (x, c) => x, ret, Zeros.AllowSkip);
+            return Vector<double>.Build.Dense(ret);
+        }
+
+        /// <summary>
+        /// Calculates the value sum of each column vector.
+        /// </summary>
+        public override Vector<double> ColumnSums()
+        {
+            var ret = new double[ColumnCount];
+            Storage.FoldByColumnUnchecked(ret, (s, x) => s + x, (x, c) => x, ret, Zeros.AllowSkip);
+            return Vector<double>.Build.Dense(ret);
+        }
+
+        /// <summary>
+        /// Calculates the absolute value sum of each column vector.
+        /// </summary>
+        public override Vector<double> ColumnAbsoluteSums()
+        {
+            var ret = new double[ColumnCount];
+            Storage.FoldByColumnUnchecked(ret, (s, x) => s + System.Math.Abs(x), (x, c) => x, ret, Zeros.AllowSkip);
+            return Vector<double>.Build.Dense(ret);
         }
 
         /// <summary>
@@ -396,35 +614,41 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         }
 
         /// <summary>
-        /// Populates a matrix with random elements.
+        /// Evaluates whether this matrix is hermitian (conjugate symmetric).
         /// </summary>
-        /// <param name="matrix">The matrix to populate.</param>
-        /// <param name="distribution">Continuous Random Distribution to generate elements from.</param>
-        protected override void DoRandom(Matrix<double> matrix, IContinuousDistribution distribution)
+        public sealed override bool IsHermitian()
         {
-            for (var i = 0; i < matrix.RowCount; i++)
-            {
-                for (var j = 0; j < matrix.ColumnCount; j++)
-                {
-                    matrix.At(i, j, distribution.Sample());
-                }
-            }
+            return IsSymmetric();
         }
 
-        /// <summary>
-        /// Populates a matrix with random elements.
-        /// </summary>
-        /// <param name="matrix">The matrix to populate.</param>
-        /// <param name="distribution">Continuous Random Distribution to generate elements from.</param>
-        protected override void DoRandom(Matrix<double> matrix, IDiscreteDistribution distribution)
+        public override Cholesky<double> Cholesky()
         {
-            for (var i = 0; i < matrix.RowCount; i++)
-            {
-                for (var j = 0; j < matrix.ColumnCount; j++)
-                {
-                    matrix.At(i, j, distribution.Sample());
-                }
-            }
+            return UserCholesky.Create(this);
+        }
+
+        public override LU<double> LU()
+        {
+            return UserLU.Create(this);
+        }
+
+        public override QR<double> QR(QRMethod method = QRMethod.Thin)
+        {
+            return UserQR.Create(this, method);
+        }
+
+        public override GramSchmidt<double> GramSchmidt()
+        {
+            return UserGramSchmidt.Create(this);
+        }
+
+        public override Svd<double> Svd(bool computeVectors = true)
+        {
+            return UserSvd.Create(this, computeVectors);
+        }
+
+        public override Evd<double> Evd(Symmetricity symmetricity = Symmetricity.Unknown)
+        {
+            return UserEvd.Create(this, symmetricity);
         }
     }
 }

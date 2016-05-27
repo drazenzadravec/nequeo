@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2013 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,23 +27,31 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 {
-    using System;
-    using Generic.Factorization;
-    using Properties;
-
     /// <summary>
     /// <para>A class which encapsulates the functionality of the QR decomposition.</para>
-    /// <para>Any real square matrix A (m x n) may be decomposed as A = QR where Q is an orthogonal matrix (m x m)
-    /// (its columns are orthogonal unit vectors meaning QTQ = I) and R (m x n) is an upper triangular matrix 
+    /// <para>Any real square matrix A (m x n) may be decomposed as A = QR where Q is an orthogonal matrix
+    /// (its columns are orthogonal unit vectors meaning QTQ = I) and R is an upper triangular matrix 
     /// (also called right triangular matrix).</para>
     /// </summary>
     /// <remarks>
     /// The computation of the QR decomposition is done at construction time by Householder transformation.
+    /// If a <seealso cref="QRMethod.Full"/> factorization is performed, the resulting Q matrix is an m x m matrix 
+    /// and the R matrix is an m x n matrix. If a <seealso cref="QRMethod.Thin"/> factorization is performed, the 
+    /// resulting Q matrix is an m x n matrix and the R matrix is an n x n matrix.     
     /// </remarks>
-    public abstract class QR : QR<double>
+    internal abstract class QR : QR<double>
     {
+        protected QR(Matrix<double> q, Matrix<double> rFull, QRMethod method)
+            : base(q, rFull, method)
+        {
+        }
+
         /// <summary>
         /// Gets the absolute determinant value of the matrix for which the QR matrix was computed.
         /// </summary>
@@ -48,22 +59,22 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         {
             get
             {
-                if (MatrixR.RowCount != MatrixR.ColumnCount)
+                if (FullR.RowCount != FullR.ColumnCount)
                 {
                     throw new ArgumentException(Resources.ArgumentMatrixSquare);
                 }
 
                 var det = 1.0;
-                for (var i = 0; i < MatrixR.ColumnCount; i++)
+                for (var i = 0; i < FullR.ColumnCount; i++)
                 {
-                    det *= MatrixR.At(i, i);
-                    if (Math.Abs(MatrixR.At(i, i)).AlmostEqual(0.0))
+                    det *= FullR.At(i, i);
+                    if (System.Math.Abs(FullR.At(i, i)).AlmostEqual(0.0))
                     {
                         return 0;
                     }
                 }
 
-                return Math.Abs(det);
+                return System.Math.Abs(det);
             }
         }
 
@@ -75,9 +86,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         {
             get
             {
-                for (var i = 0; i < MatrixR.ColumnCount; i++)
+                for (var i = 0; i < FullR.ColumnCount; i++)
                 {
-                    if (Math.Abs(MatrixR.At(i, i)).AlmostEqual(0.0))
+                    if (System.Math.Abs(FullR.At(i, i)).AlmostEqual(0.0))
                     {
                         return false;
                     }

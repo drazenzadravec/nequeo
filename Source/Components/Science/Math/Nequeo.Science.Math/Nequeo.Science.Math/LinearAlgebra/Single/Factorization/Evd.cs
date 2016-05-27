@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2013 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,11 +27,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
 {
     using System;
-    using System.Numerics;
-    using Generic.Factorization;
+
+#if NOSYSNUMERICS
+    using Complex = Numerics.Complex;
+#else
+    using Complex = System.Numerics.Complex;
+#endif
 
     /// <summary>
     /// Eigenvalues and eigenvectors of a real matrix.
@@ -45,8 +54,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
     /// conditioned, or even singular, so the validity of the equation
     /// A = V*D*Inverse(V) depends upon V.Condition().
     /// </remarks>
-    public abstract class Evd : Evd<float>
+    internal abstract class Evd : Evd<float>
     {
+        protected Evd(Matrix<float> eigenVectors, Vector<Complex> eigenValues, Matrix<float> blockDiagonal, bool isSymmetric)
+            : base(eigenVectors, eigenValues, blockDiagonal, isSymmetric)
+        {
+        }
+
         /// <summary>
         /// Gets the absolute value of determinant of the square matrix for which the EVD was computed.
         /// </summary>
@@ -55,11 +69,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
             get
             {
                 var det = Complex.One;
-                for (var i = 0; i < VectorEv.Count; i++)
+                for (var i = 0; i < EigenValues.Count; i++)
                 {
-                    det *= VectorEv[i];
+                    det *= EigenValues[i];
 
-                    if (((Nequeo.Science.Math.Complex32)VectorEv[i]).AlmostEqual(Nequeo.Science.Math.Complex32.Zero))
+                    if (((Nequeo.Science.Math.Complex32) EigenValues[i]).AlmostEqual(Nequeo.Science.Math.Complex32.Zero))
                     {
                         return 0;
                     }
@@ -78,9 +92,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
             get
             {
                 var rank = 0;
-                for (var i = 0; i < VectorEv.Count; i++)
+                for (var i = 0; i < EigenValues.Count; i++)
                 {
-                    if (((Nequeo.Science.Math.Complex32)VectorEv[i]).AlmostEqual(Nequeo.Science.Math.Complex32.Zero))
+                    if (((Nequeo.Science.Math.Complex32) EigenValues[i]).AlmostEqual(Nequeo.Science.Math.Complex32.Zero))
                     {
                         continue;
                     }
@@ -100,9 +114,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
         {
             get
             {
-                for (var i = 0; i < VectorEv.Count; i++)
+                for (var i = 0; i < EigenValues.Count; i++)
                 {
-                    if (VectorEv[i].AlmostEqual(Complex.Zero))
+                    if (EigenValues[i].AlmostEqual(Complex.Zero))
                     {
                         return false;
                     }

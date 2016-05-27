@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,13 +27,18 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using Nequeo.Science.Math.Properties;
+using Nequeo.Science.Math.Threading;
+using System;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
 {
-    using System;
+
+#if NOSYSNUMERICS
+    using Numerics;
+#else
     using System.Numerics;
-    using Generic;
-    using Properties;
-    using Threading;
+#endif
 
     /// <summary>
     /// <para>A class which encapsulates the functionality of a Cholesky factorization for user matrices.</para>
@@ -45,7 +49,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
     /// The computation of the Cholesky factorization is done at construction time. If the matrix is not symmetric
     /// or positive definite, the constructor will throw an exception.
     /// </remarks>
-    public class UserCholesky : Cholesky
+    internal sealed class UserCholesky : Cholesky
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserCholesky"/> class. This object will compute the
@@ -55,55 +59,57 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is not a square matrix.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is not positive definite.</exception>
-        public UserCholesky(Matrix<Complex> matrix)
+        public static UserCholesky Create(Matrix<Complex> matrix)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
-
             if (matrix.RowCount != matrix.ColumnCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSquare);
             }
 
             // Create a new matrix for the Cholesky factor, then perform factorization (while overwriting).
-            CholeskyFactor = matrix.Clone();
-            var tmpColumn = new Complex[CholeskyFactor.RowCount];
+            var factor = matrix.Clone();
+            var tmpColumn = new Complex[factor.RowCount];
 
             // Main loop - along the diagonal
-            for (var ij = 0; ij < CholeskyFactor.RowCount; ij++)
+            for (var ij = 0; ij < factor.RowCount; ij++)
             {
                 // "Pivot" element
-                var tmpVal = CholeskyFactor.At(ij, ij);
+                var tmpVal = factor.At(ij, ij);
 
                 if (tmpVal.Real > 0.0)
                 {
                     tmpVal = tmpVal.SquareRoot();
-                    CholeskyFactor.At(ij, ij, tmpVal);
+                    factor.At(ij, ij, tmpVal);
                     tmpColumn[ij] = tmpVal;
 
                     // Calculate multipliers and copy to local column
                     // Current column, below the diagonal
-                    for (var i = ij + 1; i < CholeskyFactor.RowCount; i++)
+                    for (var i = ij + 1; i < factor.RowCount; i++)
                     {
-                        CholeskyFactor.At(i, ij, CholeskyFactor.At(i, ij) / tmpVal);
-                        tmpColumn[i] = CholeskyFactor.At(i, ij);
+                        factor.At(i, ij, factor.At(i, ij)/tmpVal);
+                        tmpColumn[i] = factor.At(i, ij);
                     }
 
                     // Remaining columns, below the diagonal
-                    DoCholeskyStep(CholeskyFactor, CholeskyFactor.RowCount, ij + 1, CholeskyFactor.RowCount, tmpColumn, Control.NumberOfParallelWorkerThreads);
+                    DoCholeskyStep(factor, factor.RowCount, ij + 1, factor.RowCount, tmpColumn, Control.MaxDegreeOfParallelism);
                 }
                 else
                 {
                     throw new ArgumentException(Resources.ArgumentMatrixPositiveDefinite);
                 }
 
-                for (var i = ij + 1; i < CholeskyFactor.RowCount; i++)
+                for (var i = ij + 1; i < factor.RowCount; i++)
                 {
-                    CholeskyFactor.At(ij, i, Complex.Zero);
+                    factor.At(ij, i, Complex.Zero);
                 }
             }
+
+            return new UserCholesky(factor);
+        }
+
+        UserCholesky(Matrix<Complex> factor)
+            : base(factor)
+        {
         }
 
         /// <summary>
@@ -115,14 +121,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <param name="colLimit">Total columns</param>
         /// <param name="multipliers">Multipliers calculated previously</param>
         /// <param name="availableCores">Number of available processors</param>
-        private static void DoCholeskyStep(Matrix<Complex> data, int rowDim, int firstCol, int colLimit, Complex[] multipliers, int availableCores)
+        static void DoCholeskyStep(Matrix<Complex> data, int rowDim, int firstCol, int colLimit, Complex[] multipliers, int availableCores)
         {
             var tmpColCount = colLimit - firstCol;
 
             if ((availableCores > 1) && (tmpColCount > 200))
             {
-                var tmpSplit = firstCol + (tmpColCount / 3);
-                var tmpCores = availableCores / 2;
+                var tmpSplit = firstCol + (tmpColCount/3);
+                var tmpCores = availableCores/2;
 
                 CommonParallel.Invoke(
                     () => DoCholeskyStep(data, rowDim, firstCol, tmpSplit, multipliers, tmpCores),
@@ -135,7 +141,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                     var tmpVal = multipliers[j];
                     for (var i = j; i < rowDim; i++)
                     {
-                        data.At(i, j, data.At(i, j) - (multipliers[i] * tmpVal.Conjugate()));
+                        data.At(i, j, data.At(i, j) - (multipliers[i]*tmpVal.Conjugate()));
                     }
                 }
             }
@@ -148,17 +154,6 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<Complex> input, Matrix<Complex> result)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
-            // Check for proper dimensions.
             if (result.RowCount != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
@@ -169,13 +164,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
 
-            if (input.RowCount != CholeskyFactor.RowCount)
+            if (input.RowCount != Factor.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factor);
             }
 
             input.CopyTo(result);
-            var order = CholeskyFactor.RowCount;
+            var order = Factor.RowCount;
 
             for (var c = 0; c < result.ColumnCount; c++)
             {
@@ -186,10 +181,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                     sum = result.At(i, c);
                     for (var k = i - 1; k >= 0; k--)
                     {
-                        sum -= CholeskyFactor.At(i, k) * result.At(k, c);
+                        sum -= Factor.At(i, k)*result.At(k, c);
                     }
 
-                    result.At(i, c, sum / CholeskyFactor.At(i, i));
+                    result.At(i, c, sum/Factor.At(i, i));
                 }
 
                 // Solve L'*X = Y;
@@ -198,10 +193,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                     sum = result.At(i, c);
                     for (var k = i + 1; k < order; k++)
                     {
-                        sum -= CholeskyFactor.At(k, i).Conjugate() * result.At(k, c);
+                        sum -= Factor.At(k, i).Conjugate()*result.At(k, c);
                     }
 
-                    result.At(i, c, sum / CholeskyFactor.At(i, i));
+                    result.At(i, c, sum/Factor.At(i, i));
                 }
             }
         }
@@ -213,30 +208,18 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<Complex> input, Vector<Complex> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
-            // Check for proper dimensions.
             if (input.Count != result.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
-            if (input.Count != CholeskyFactor.RowCount)
+            if (input.Count != Factor.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factor);
             }
 
             input.CopyTo(result);
-            var order = CholeskyFactor.RowCount;
+            var order = Factor.RowCount;
 
             // Solve L*Y = B;
             Complex sum;
@@ -245,10 +228,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                 sum = result[i];
                 for (var k = i - 1; k >= 0; k--)
                 {
-                    sum -= CholeskyFactor.At(i, k) * result[k];
+                    sum -= Factor.At(i, k)*result[k];
                 }
 
-                result[i] = sum / CholeskyFactor.At(i, i);
+                result[i] = sum/Factor.At(i, i);
             }
 
             // Solve L'*X = Y;
@@ -257,10 +240,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
                 sum = result[i];
                 for (var k = i + 1; k < order; k++)
                 {
-                    sum -= CholeskyFactor.At(k, i).Conjugate() * result[k];
+                    sum -= Factor.At(k, i).Conjugate()*result[k];
                 }
 
-                result[i] = sum / CholeskyFactor.At(i, i);
+                result[i] = sum/Factor.At(i, i);
             }
         }
     }

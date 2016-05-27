@@ -36,6 +36,82 @@ OTHER DEALINGS IN THE SOFTWARE.
 extern "C"
 {
 	/// <summary>
+	/// The function ?lange returns the value of the 1-norm, or the Frobenius norm, or the infinity norm, or the element of largest absolute value of a real/complex matrix A.
+	/// </summary>
+	/// <param name="norm">Specifies the value to be returned by the routine:
+	/// = 'M' or 'm': val = max(abs(Aij)), largest absolute value of the matrix A.
+	/// = '1' or 'O' or 'o' : val = norm1(A), 1 - norm of the matrix A(maximum column sum),
+	/// = 'I' or 'i' : val = normI(A), infinity norm of the matrix A(maximum row sum),
+	/// = 'F', 'f', 'E' or 'e' : val = normF(A), Frobenius norm of the matrix A(square root of sum of squares).
+	/// </param>
+	/// <param name="rows">The number of rows of the matrix A. m ? 0. When m = 0, ? lange is set to zero.</param>
+	/// <param name="columns">The number of columns of the matrix A. n ? 0. When n = 0, ? lange is set to zero.</param>
+	/// <param name="a">Array, size at least max(1, lda*n) for column major and max(1, lda*m) for row major layout. Array a contains the m-by-n matrix A. </param>
+	/// <param name="ida">The ida of the matrix matrix.</param>
+	/// <returns>Returns the value of the 1-norm, Frobenius norm, infinity-norm, or the largest absolute value of any element of a general rectangular matrix.</returns>
+	EXPORT_NEQUEO_ACML_API float s_matrix_norm(unsigned char norm, int rows, int columns, float a[], int ida)
+	{
+		return slange(norm, rows, columns, a, ida);
+	}
+
+	/// <summary>
+	/// The function ?lange returns the value of the 1-norm, or the Frobenius norm, or the infinity norm, or the element of largest absolute value of a real/complex matrix A.
+	/// </summary>
+	/// <param name="norm">Specifies the value to be returned by the routine:
+	/// = 'M' or 'm': val = max(abs(Aij)), largest absolute value of the matrix A.
+	/// = '1' or 'O' or 'o' : val = norm1(A), 1 - norm of the matrix A(maximum column sum),
+	/// = 'I' or 'i' : val = normI(A), infinity norm of the matrix A(maximum row sum),
+	/// = 'F', 'f', 'E' or 'e' : val = normF(A), Frobenius norm of the matrix A(square root of sum of squares).
+	/// </param>
+	/// <param name="rows">The number of rows of the matrix A. m ? 0. When m = 0, ? lange is set to zero.</param>
+	/// <param name="columns">The number of columns of the matrix A. n ? 0. When n = 0, ? lange is set to zero.</param>
+	/// <param name="a">Array, size at least max(1, lda*n) for column major and max(1, lda*m) for row major layout. Array a contains the m-by-n matrix A. </param>
+	/// <param name="ida">The ida of the matrix matrix.</param>
+	/// <returns>Returns the value of the 1-norm, Frobenius norm, infinity-norm, or the largest absolute value of any element of a general rectangular matrix.</returns>
+	EXPORT_NEQUEO_ACML_API double d_matrix_norm(unsigned char norm, int rows, int columns, double a[], int ida)
+	{
+		return dlange(norm, rows, columns, a, ida);
+	}
+
+	/// <summary>
+	/// The function ?lange returns the value of the 1-norm, or the Frobenius norm, or the infinity norm, or the element of largest absolute value of a real/complex matrix A.
+	/// </summary>
+	/// <param name="norm">Specifies the value to be returned by the routine:
+	/// = 'M' or 'm': val = max(abs(Aij)), largest absolute value of the matrix A.
+	/// = '1' or 'O' or 'o' : val = norm1(A), 1 - norm of the matrix A(maximum column sum),
+	/// = 'I' or 'i' : val = normI(A), infinity norm of the matrix A(maximum row sum),
+	/// = 'F', 'f', 'E' or 'e' : val = normF(A), Frobenius norm of the matrix A(square root of sum of squares).
+	/// </param>
+	/// <param name="rows">The number of rows of the matrix A. m ? 0. When m = 0, ? lange is set to zero.</param>
+	/// <param name="columns">The number of columns of the matrix A. n ? 0. When n = 0, ? lange is set to zero.</param>
+	/// <param name="a">Array, size at least max(1, lda*n) for column major and max(1, lda*m) for row major layout. Array a contains the m-by-n matrix A. </param>
+	/// <param name="ida">The ida of the matrix matrix.</param>
+	/// <returns>Returns the value of the 1-norm, Frobenius norm, infinity-norm, or the largest absolute value of any element of a general rectangular matrix.</returns>
+	EXPORT_NEQUEO_ACML_API float c_matrix_norm(unsigned char norm, int rows, int columns, complex a[], int ida)
+	{
+		return clange(norm, rows, columns, a, ida);
+	}
+
+	/// <summary>
+	/// The function ?lange returns the value of the 1-norm, or the Frobenius norm, or the infinity norm, or the element of largest absolute value of a real/complex matrix A.
+	/// </summary>
+	/// <param name="norm">Specifies the value to be returned by the routine:
+	/// = 'M' or 'm': val = max(abs(Aij)), largest absolute value of the matrix A.
+	/// = '1' or 'O' or 'o' : val = norm1(A), 1 - norm of the matrix A(maximum column sum),
+	/// = 'I' or 'i' : val = normI(A), infinity norm of the matrix A(maximum row sum),
+	/// = 'F', 'f', 'E' or 'e' : val = normF(A), Frobenius norm of the matrix A(square root of sum of squares).
+	/// </param>
+	/// <param name="rows">The number of rows of the matrix A. m ? 0. When m = 0, ? lange is set to zero.</param>
+	/// <param name="columns">The number of columns of the matrix A. n ? 0. When n = 0, ? lange is set to zero.</param>
+	/// <param name="a">Array, size at least max(1, lda*n) for column major and max(1, lda*m) for row major layout. Array a contains the m-by-n matrix A. </param>
+	/// <param name="ida">The ida of the matrix matrix.</param>
+	/// <returns>Returns the value of the 1-norm, Frobenius norm, infinity-norm, or the largest absolute value of any element of a general rectangular matrix.</returns>
+	EXPORT_NEQUEO_ACML_API double z_matrix_norm(unsigned char norm, int rows, int columns, doublecomplex a[], int ida)
+	{
+		return zlange(norm, rows, columns, a, ida);
+	}
+
+	/// <summary>
 	/// Computes the LU factorization of a general m-by-n matrix. A = P*L*U.
 	/// where P is a permutation matrix, L is lower triangular with unit diagonal elements (lower trapezoidal if m > n) and U is upper triangular (upper trapezoidal if m < n). The routine uses partial pivoting, with row interchanges.
 	/// </summary>

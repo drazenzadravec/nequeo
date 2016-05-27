@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2013 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,117 +27,143 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using Nequeo.Science.Math.Distributions;
+using Nequeo.Science.Math.LinearAlgebra.Storage;
+using Nequeo.Science.Math.Properties;
+using Nequeo.Science.Math.Threading;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using Generic;
-    using NumberTheory;
-    using Properties;
-    using Threading;
-
     /// <summary>
     /// A vector using dense storage.
     /// </summary>
     [Serializable]
+    [DebuggerDisplay("DenseVector {Count}-Double")]
     public class DenseVector : Vector
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class with a given size.
+        /// Number of elements
         /// </summary>
-        /// <param name="size">
-        /// the size of the vector.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="size"/> is less than one.
-        /// </exception>
-        public DenseVector(int size)
-            : base(size)
+        readonly int _length;
+
+        /// <summary>
+        /// Gets the vector's data.
+        /// </summary>
+        readonly double[] _values;
+
+        /// <summary>
+        /// Create a new dense vector straight from an initialized vector storage instance.
+        /// The storage is used directly without copying.
+        /// Intended for advanced scenarios where you're working directly with
+        /// storage for performance or interop reasons.
+        /// </summary>
+        public DenseVector(DenseVectorStorage<double> storage)
+            : base(storage)
         {
-            Data = new double[size];
+            _length = storage.Length;
+            _values = storage.Data;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class with a given size
-        /// and each element set to the given value;
+        /// Create a new dense vector with the given length.
+        /// All cells of the vector will be initialized to zero.
+        /// Zero-length vectors are not supported.
         /// </summary>
-        /// <param name="size">
-        /// the size of the vector.
-        /// </param>
-        /// <param name="value">
-        /// the value to set each element to.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="size"/> is less than one.
-        /// </exception>
-        public DenseVector(int size, double value)
-            : this(size)
+        /// <exception cref="ArgumentException">If length is less than one.</exception>
+        public DenseVector(int length)
+            : this(new DenseVectorStorage<double>(length))
         {
-            for (var index = 0; index < Data.Length; index++)
-            {
-                Data[index] = value;
-            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class by
-        /// copying the values from another.
+        /// Create a new dense vector directly binding to a raw array.
+        /// The array is used directly without copying.
+        /// Very efficient, but changes to the array and the vector will affect each other.
         /// </summary>
-        /// <param name="other">
-        /// The vector to create the new vector from.
-        /// </param>
-        public DenseVector(Vector<double> other)
-            : this(other.Count)
+        public DenseVector(double[] storage)
+            : this(new DenseVectorStorage<double>(storage.Length, storage))
         {
-            var vector = other as DenseVector;
-            if (vector == null)
-            {
-                CommonParallel.For(
-                    0, 
-                    Data.Length, 
-                    index => this[index] = other[index]);
-            }
-            else
-            {
-                Buffer.BlockCopy(vector.Data, 0, Data, 0, Data.Length * Constants.SizeOfDouble);
-            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class by
-        /// copying the values from another.
+        /// Create a new dense vector as a copy of the given other vector.
+        /// This new vector will be independent from the other vector.
+        /// A new memory block will be allocated for storing the vector.
         /// </summary>
-        /// <param name="other">
-        /// The vector to create the new vector from.
-        /// </param>
-        public DenseVector(DenseVector other)
-            : this(other.Count)
+        public static DenseVector OfVector(Vector<double> vector)
         {
-            Buffer.BlockCopy(other.Data, 0, Data, 0, Data.Length * Constants.SizeOfDouble);
+            return new DenseVector(DenseVectorStorage<double>.OfVector(vector.Storage));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class for an array.
+        /// Create a new dense vector as a copy of the given array.
+        /// This new vector will be independent from the array.
+        /// A new memory block will be allocated for storing the vector.
         /// </summary>
-        /// <param name="array">The array to create this vector from.</param>
-        /// <remarks>The vector does not copy the array, but keeps a reference to it. Any 
-        /// changes to the vector will also change the array.</remarks>
-        public DenseVector(double[] array) : base(array.Length)
+        public static DenseVector OfArray(double[] array)
         {
-            Data = array;
+            return new DenseVector(DenseVectorStorage<double>.OfVector(new DenseVectorStorage<double>(array.Length, array)));
         }
 
         /// <summary>
-        ///  Gets the vector's internal data.
+        /// Create a new dense vector as a copy of the given enumerable.
+        /// This new vector will be independent from the enumerable.
+        /// A new memory block will be allocated for storing the vector.
         /// </summary>
-        /// <value>The vector's internal data.</value>
-        /// <remarks>Changing values in the array also changes the corresponding value in vector. Use with care.</remarks>
-        internal double[] Data
+        public static DenseVector OfEnumerable(IEnumerable<double> enumerable)
         {
-            get;
-            private set;
+            return new DenseVector(DenseVectorStorage<double>.OfEnumerable(enumerable));
+        }
+
+        /// <summary>
+        /// Create a new dense vector as a copy of the given indexed enumerable.
+        /// Keys must be provided at most once, zero is assumed if a key is omitted.
+        /// This new vector will be independent from the enumerable.
+        /// A new memory block will be allocated for storing the vector.
+        /// </summary>
+        public static DenseVector OfIndexedEnumerable(int length, IEnumerable<Tuple<int,double>> enumerable)
+        {
+            return new DenseVector(DenseVectorStorage<double>.OfIndexedEnumerable(length, enumerable));
+        }
+
+        /// <summary>
+        /// Create a new dense vector and initialize each value using the provided value.
+        /// </summary>
+        public static DenseVector Create(int length, double value)
+        {
+            if (value == 0d) return new DenseVector(length);
+            return new DenseVector(DenseVectorStorage<double>.OfValue(length, value));
+        }
+
+        /// <summary>
+        /// Create a new dense vector and initialize each value using the provided init function.
+        /// </summary>
+        public static DenseVector Create(int length, Func<int, double> init)
+        {
+            return new DenseVector(DenseVectorStorage<double>.OfInit(length, init));
+        }
+
+        /// <summary>
+        /// Create a new dense vector with values sampled from the provided random distribution.
+        /// </summary>
+        public static DenseVector CreateRandom(int length, IContinuousDistribution distribution)
+        {
+            var samples = Generate.Random(length, distribution);
+            return new DenseVector(new DenseVectorStorage<double>(length, samples));
+        }
+
+        /// <summary>
+        /// Gets the vector's data.
+        /// </summary>
+        /// <value>The vector's data.</value>
+        public double[] Values
+        {
+            get { return _values; }
         }
 
         /// <summary>
@@ -145,14 +174,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <returns>
         /// A reference to the internal date of the given vector.
         /// </returns>
-        public static implicit operator double[](DenseVector vector)
+        public static explicit operator double[](DenseVector vector)
         {
             if (vector == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("vector");
             }
 
-            return vector.Data;
+            return vector.Values;
         }
 
         /// <summary>
@@ -166,134 +195,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         {
             if (array == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("array");
             }
 
             return new DenseVector(array);
-        }
-
-        /// <summary>
-        /// Create a matrix based on this vector in column form (one single column).
-        /// </summary>
-        /// <returns>This vector as a column matrix.</returns>
-        public override Matrix<double> ToColumnMatrix()
-        {
-            var matrix = new DenseMatrix(Count, 1);
-            for (var i = 0; i < Data.Length; i++)
-            {
-                matrix[i, 0] = Data[i];
-            }
-
-            return matrix;
-        }
-
-        /// <summary>
-        /// Create a matrix based on this vector in row form (one single row).
-        /// </summary>
-        /// <returns>This vector as a row matrix.</returns>
-        public override Matrix<double> ToRowMatrix()
-        {
-            var matrix = new DenseMatrix(1, Count);
-            for (var i = 0; i < Data.Length; i++)
-            {
-                matrix[0, i] = Data[i];
-            }
-
-            return matrix;
-        }
-
-        /// <summary>Gets or sets the value at the given <paramref name="index"/>.</summary>
-        /// <param name="index">The index of the value to get or set.</param>
-        /// <returns>The value of the vector at the given <paramref name="index"/>.</returns> 
-        /// <exception cref="IndexOutOfRangeException">If <paramref name="index"/> is negative or 
-        /// greater than the size of the vector.</exception>
-        public override double this[int index]
-        {
-            get
-            {
-                return Data[index];
-            }
-
-            set
-            {
-                Data[index] = value;
-            }
-        }
-
-        /// <summary>
-        /// Creates a matrix with the given dimensions using the same storage type
-        /// as this vector.
-        /// </summary>
-        /// <param name="rows">
-        /// The number of rows.
-        /// </param>
-        /// <param name="columns">
-        /// The number of columns.
-        /// </param>
-        /// <returns>
-        /// A matrix with the given dimensions.
-        /// </returns>
-        public override Matrix<double> CreateMatrix(int rows, int columns)
-        {
-            return new DenseMatrix(rows, columns);
-        }
-
-        /// <summary>
-        /// Creates a <strong>Vector</strong> of the given size using the same storage type
-        /// as this vector.
-        /// </summary>
-        /// <param name="size">
-        /// The size of the <strong>Vector</strong> to create.
-        /// </param>
-        /// <returns>
-        /// The new <c>Vector</c>.
-        /// </returns>
-        public override Vector<double> CreateVector(int size)
-        {
-            return new DenseVector(size);
-        }
-
-        /// <summary>
-        /// Copies the values of this vector into the target vector.
-        /// </summary>
-        /// <param name="target">
-        /// The vector to copy elements into.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="target"/> is <see langword="null"/>.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="target"/> is not the same size as this vector.
-        /// </exception>
-        public override void CopyTo(Vector<double> target)
-        {
-            if (target == null)
-            {
-                throw new ArgumentNullException("target");
-            }
-
-            if (Count != target.Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "target");
-            }
-
-            if (ReferenceEquals(this, target))
-            {
-                return;
-            }
-
-            var otherVector = target as DenseVector;
-            if (otherVector == null)
-            {
-                CommonParallel.For(
-                    0, 
-                    Data.Length, 
-                    index => target[index] = Data[index]);
-            }
-            else
-            {
-                Buffer.BlockCopy(Data, 0, otherVector.Data, 0, Data.Length * Constants.SizeOfDouble);
-            }
         }
 
         /// <summary>
@@ -310,10 +215,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] + scalar);
+                CommonParallel.For(0, _values.Length, 4096, (a, b) =>
+                    {
+                        for (int i = a; i < b; i++)
+                        {
+                            dense._values[i] = _values[i] + scalar;
+                        }
+                    });
             }
         }
 
@@ -324,33 +232,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The vector to store the result of the addition.</param>
         protected override void DoAdd(Vector<double> other, Vector<double> result)
         {
-            var rdense = result as DenseVector;
-            var odense = other as DenseVector;
-            if (rdense != null && odense != null)
-            {
-                Control.LinearAlgebraProvider.AddVectorToScaledVector(Data, 1.0, odense.Data, rdense.Data);
-            }
-            else
+            var otherDense = other as DenseVector;
+            var resultDense = result as DenseVector;
+
+            if (otherDense == null || resultDense == null)
             {
                 base.DoAdd(other, result);
             }
-        }
-
-        /// <summary>
-        /// Returns a <strong>Vector</strong> containing the same values of <paramref name="rightSide"/>. 
-        /// </summary>
-        /// <remarks>This method is included for completeness.</remarks>
-        /// <param name="rightSide">The vector to get the values from.</param>
-        /// <returns>A vector containing a the same values as <paramref name="rightSide"/>.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="rightSide"/> is <see langword="null" />.</exception>
-        public static DenseVector operator +(DenseVector rightSide)
-        {
-            if (rightSide == null)
+            else
             {
-                throw new ArgumentNullException("rightSide");
+                Control.LinearAlgebraProvider.AddArrays(_values, otherDense._values, resultDense._values);
             }
-
-            return (DenseVector)rightSide.Plus();
         }
 
         /// <summary>
@@ -395,10 +287,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] - scalar);
+                CommonParallel.For(0, _values.Length, 4096, (a, b) =>
+                    {
+                        for (int i = a; i < b; i++)
+                        {
+                            dense._values[i] = _values[i] - scalar;
+                        }
+                    });
             }
         }
 
@@ -409,20 +304,21 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The vector to store the result of the subtraction.</param>
         protected override void DoSubtract(Vector<double> other, Vector<double> result)
         {
-            var rdense = result as DenseVector;
-            var odense = other as DenseVector;
-            if (rdense != null && odense != null)
-            {
-                Control.LinearAlgebraProvider.AddVectorToScaledVector(Data, -1.0, odense.Data, rdense.Data);
-            }
-            else
+            var otherDense = other as DenseVector;
+            var resultDense = result as DenseVector;
+
+            if (otherDense == null || resultDense == null)
             {
                 base.DoSubtract(other, result);
             }
+            else
+            {
+                Control.LinearAlgebraProvider.SubtractArrays(_values, otherDense._values, resultDense._values);
+            }
         }
-        
+
         /// <summary>
-        /// Returns a <strong>Vector</strong> containing the negated values of <paramref name="rightSide"/>. 
+        /// Returns a <strong>Vector</strong> containing the negated values of <paramref name="rightSide"/>.
         /// </summary>
         /// <param name="rightSide">The vector to get the values from.</param>
         /// <returns>A vector containing the negated values as <paramref name="rightSide"/>.</returns>
@@ -447,38 +343,28 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <exception cref="ArgumentNullException">If <paramref name="leftSide"/> or <paramref name="rightSide"/> is <see langword="null" />.</exception>
         public static DenseVector operator -(DenseVector leftSide, DenseVector rightSide)
         {
-            if (rightSide == null)
-            {
-                throw new ArgumentNullException("rightSide");
-            }
-
             if (leftSide == null)
             {
                 throw new ArgumentNullException("leftSide");
-            }
-
-            if (leftSide.Count != rightSide.Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "rightSide");
             }
 
             return (DenseVector)leftSide.Subtract(rightSide);
         }
 
         /// <summary>
-        /// Returns a negated vector.
+        /// Negates vector and saves result to <paramref name="result"/>
         /// </summary>
-        /// <returns>The negated vector.</returns>
-        /// <remarks>Added as an alternative to the unary negation operator.</remarks>
-        public override Vector<double> Negate()
+        /// <param name="result">Target vector</param>
+        protected override void DoNegate(Vector<double> result)
         {
-            var result = new DenseVector(Count);
-            CommonParallel.For(
-                0, 
-                Data.Length, 
-                index => result[index] = -Data[index]);
+            var denseResult = result as DenseVector;
+            if (denseResult == null)
+            {
+                base.DoNegate(result);
+                return;
+            }
 
-            return result;
+            Control.LinearAlgebraProvider.ScaleArray(-1.0d, _values, denseResult.Values);
         }
 
         /// <summary>
@@ -493,24 +379,23 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
             if (denseResult == null)
             {
                 base.DoMultiply(scalar, result);
+                return;
             }
-            else
-            {
-                Control.LinearAlgebraProvider.ScaleArray(scalar, Data, denseResult.Data);
-            }
+
+            Control.LinearAlgebraProvider.ScaleArray(scalar, _values, denseResult.Values);
         }
 
         /// <summary>
         /// Computes the dot product between this vector and another vector.
         /// </summary>
-        /// <param name="other">The other vector to add.</param>
-        /// <returns>s
-        /// The result of the addition.</returns>
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of a[i]*b[i] for all i.</returns>
         protected override double DoDotProduct(Vector<double> other)
         {
             var denseVector = other as DenseVector;
-
-            return denseVector == null ? base.DoDotProduct(other) : Control.LinearAlgebraProvider.DotProduct(Data, denseVector.Data);
+            return denseVector == null
+                ? base.DoDotProduct(other)
+                : Control.LinearAlgebraProvider.DotProduct(_values, denseVector.Values);
         }
 
         /// <summary>
@@ -557,22 +442,12 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <exception cref="ArgumentNullException">If <paramref name="leftSide"/> or <paramref name="rightSide"/> is <see langword="null" />.</exception>
         public static double operator *(DenseVector leftSide, DenseVector rightSide)
         {
-            if (rightSide == null)
-            {
-                throw new ArgumentNullException("rightSide");
-            }
-
             if (leftSide == null)
             {
                 throw new ArgumentNullException("leftSide");
             }
 
-            if (leftSide.Count != rightSide.Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "rightSide");
-            }
-
-            return Control.LinearAlgebraProvider.DotProduct(leftSide.Data, rightSide.Data);
+            return leftSide.DotProduct(rightSide);
         }
 
         /// <summary>
@@ -589,61 +464,87 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
                 throw new ArgumentNullException("leftSide");
             }
 
-            return (DenseVector)leftSide.Multiply(1.0 / rightSide);
+            return (DenseVector)leftSide.Divide(rightSide);
         }
 
         /// <summary>
-        /// Computes the modulus for each element of the vector for the given divisor.
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for each element of the vector for the given divisor.
         /// </summary>
         /// <param name="divisor">The divisor to use.</param>
         /// <param name="result">A vector to store the results in.</param>
         protected override void DoModulus(double divisor, Vector<double> result)
         {
-            var denseResult = result as DenseVector;
-            if (denseResult == null)
+            var dense = result as DenseVector;
+            if (dense == null)
             {
-                for (var index = 0; index < Count; index++)
-                {
-                    result.At(index, Data[index] % divisor);
-                }
+                base.DoModulus(divisor, result);
             }
             else
             {
-                for (var index = 0; index < Count; index++)
+                CommonParallel.For(0, _length, 4096, (a, b) =>
                 {
-                    denseResult.Data[index] = Data[index] % divisor;
-                }
+                    for (int i = a; i < b; i++)
+                    {
+                        dense._values[i] = Euclid.Modulus(_values[i], divisor);
+                    }
+                });
             }
         }
 
         /// <summary>
-        /// Computes the modulus of each element of the vector of the given divisor.
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for each element of the vector for the given divisor.
         /// </summary>
-        /// <param name="leftSide">The vector whose elements we want to compute the modulus of.</param>
+        /// <param name="divisor">The divisor to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoRemainder(double divisor, Vector<double> result)
+        {
+            var dense = result as DenseVector;
+            if (dense == null)
+            {
+                base.DoRemainder(divisor, result);
+            }
+            else
+            {
+                CommonParallel.For(0, _length, 4096, (a, b) =>
+                {
+                    for (int i = a; i < b; i++)
+                    {
+                        dense._values[i] = _values[i]%divisor;
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// of each element of the vector of the given divisor.
+        /// </summary>
+        /// <param name="leftSide">The vector whose elements we want to compute the remainder of.</param>
         /// <param name="rightSide">The divisor to use,</param>
-        /// <returns>The result of the calculation</returns>
         /// <exception cref="ArgumentNullException">If <paramref name="leftSide"/> is <see langword="null" />.</exception>
-        public static DenseVector operator %(DenseVector leftSide, float rightSide)
+        public static DenseVector operator %(DenseVector leftSide, double rightSide)
         {
             if (leftSide == null)
             {
                 throw new ArgumentNullException("leftSide");
             }
 
-            return (DenseVector)leftSide.Modulus(rightSide);
+            return (DenseVector)leftSide.Remainder(rightSide);
         }
 
         /// <summary>
         /// Returns the index of the absolute minimum element.
         /// </summary>
-        /// <returns>The index of absolute minimum element.</returns>   
+        /// <returns>The index of absolute minimum element.</returns>
         public override int AbsoluteMinimumIndex()
         {
             var index = 0;
-            var min = Math.Abs(Data[index]);
-            for (var i = 1; i < Count; i++)
+            var min = System.Math.Abs(_values[index]);
+            for (var i = 1; i < _length; i++)
             {
-                var test = Math.Abs(Data[i]);
+                var test = System.Math.Abs(_values[i]);
                 if (test < min)
                 {
                     index = i;
@@ -655,34 +556,16 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         }
 
         /// <summary>
-        /// Returns the value of the absolute minimum element.
-        /// </summary>
-        /// <returns>The value of the absolute minimum element.</returns>
-        public override double AbsoluteMinimum()
-        {
-            return Math.Abs(Data[AbsoluteMinimumIndex()]);
-        }
-
-        /// <summary>
-        /// Returns the value of the absolute maximum element.
-        /// </summary>
-        /// <returns>The value of the absolute maximum element.</returns>
-        public override double AbsoluteMaximum()
-        {
-            return Math.Abs(Data[AbsoluteMaximumIndex()]);
-        }
-
-        /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>   
+        /// <returns>The index of absolute maximum element.</returns>
         public override int AbsoluteMaximumIndex()
         {
             var index = 0;
-            var max = Math.Abs(Data[index]);
-            for (var i = 1; i < Count; i++)
+            var max = System.Math.Abs(_values[index]);
+            for (var i = 1; i < _length; i++)
             {
-                var test = Math.Abs(Data[i]);
+                var test = System.Math.Abs(_values[i]);
                 if (test > max)
                 {
                     index = i;
@@ -694,80 +577,19 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         }
 
         /// <summary>
-        /// Creates a vector containing specified elements.
-        /// </summary>
-        /// <param name="index">The first element to begin copying from.</param>
-        /// <param name="length">The number of elements to copy.</param>
-        /// <returns>A vector containing a copy of the specified elements.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><list><item>If <paramref name="index"/> is not positive or
-        /// greater than or equal to the size of the vector.</item>
-        /// <item>If <paramref name="index"/> + <paramref name="length"/> is greater than or equal to the size of the vector.</item>
-        /// </list></exception>
-        /// <exception cref="ArgumentException">If <paramref name="length"/> is not positive.</exception>
-        public override Vector<double> SubVector(int index, int length)
-        {
-            if (index < 0 || index >= Count)
-            {
-                throw new ArgumentOutOfRangeException("index");
-            }
-
-            if (length <= 0)
-            {
-                throw new ArgumentOutOfRangeException("length");
-            }
-
-            if (index + length > Count)
-            {
-                throw new ArgumentOutOfRangeException("length");
-            }
-
-            var result = new DenseVector(length);
-
-            CommonParallel.For(
-                index, 
-                index + length, 
-                i => result.Data[i - index] = Data[i]);
-            return result;
-        }
-
-        /// <summary>
-        /// Set the values of this vector to the given values.
-        /// </summary>
-        /// <param name="values">The array containing the values to use.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="values"/> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">If <paramref name="values"/> is not the same size as this vector.</exception>
-        public override void SetValues(double[] values)
-        {
-            if (values == null)
-            {
-                throw new ArgumentNullException("values");
-            }
-
-            if (values.Length != Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "values");
-            }
-
-            CommonParallel.For(
-                0, 
-                values.Length, 
-                i => Data[i] = values[i]);
-        }
-
-        /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>          
+        /// <returns>The index of absolute maximum element.</returns>
         public override int MaximumIndex()
         {
             var index = 0;
-            var max = Data[0];
-            for (var i = 1; i < Count; i++)
+            var max = _values[0];
+            for (var i = 1; i < _length; i++)
             {
-                if (max < Data[i])
+                if (max < _values[i])
                 {
                     index = i;
-                    max = Data[i];
+                    max = _values[i];
                 }
             }
 
@@ -777,17 +599,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <summary>
         /// Returns the index of the minimum element.
         /// </summary>
-        /// <returns>The index of minimum element.</returns>  
+        /// <returns>The index of minimum element.</returns>
         public override int MinimumIndex()
         {
             var index = 0;
-            var min = Data[0];
-            for (var i = 1; i < Count; i++)
+            var min = _values[0];
+            for (var i = 1; i < _length; i++)
             {
-                if (min > Data[i])
+                if (min > _values[i])
                 {
                     index = i;
-                    min = Data[i];
+                    min = _values[i];
                 }
             }
 
@@ -801,29 +623,65 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         public override double Sum()
         {
             var sum = 0.0;
-
-            for (var index = 0; index < Count; index++)
+            for (var index = 0; index < _length; index++)
             {
-                sum += Data[index];
+                sum += _values[index];
             }
-
             return sum;
         }
 
         /// <summary>
-        /// Computes the sum of the absolute value of the vector's elements.
+        /// Calculates the L1 norm of the vector, also known as Manhattan norm.
         /// </summary>
-        /// <returns>The sum of the absolute value of the vector's elements.</returns>
-        public override double SumMagnitudes()
+        /// <returns>The sum of the absolute values.</returns>
+        public override double L1Norm()
         {
-            var sum = 0.0;
-
-            for (var index = 0; index < Count; index++)
+            var sum = 0d;
+            for (var index = 0; index < _length; index++)
             {
-                sum += Math.Abs(Data[index]);
+                sum += System.Math.Abs(_values[index]);
             }
-
             return sum;
+        }
+
+        /// <summary>
+        /// Calculates the L2 norm of the vector, also known as Euclidean norm.
+        /// </summary>
+        /// <returns>The square root of the sum of the squared values.</returns>
+        public override double L2Norm()
+        {
+            // TODO: native provider
+            return _values.Aggregate(0d, SpecialFunctions.Hypotenuse);
+        }
+
+        /// <summary>
+        /// Calculates the infinity norm of the vector.
+        /// </summary>
+        /// <returns>The maximum absolute value.</returns>
+        public override double InfinityNorm()
+        {
+            return CommonParallel.Aggregate(_values, (i, v) => System.Math.Abs(v), System.Math.Max, 0d);
+        }
+
+        /// <summary>
+        /// Computes the p-Norm.
+        /// </summary>
+        /// <param name="p">The p value.</param>
+        /// <returns>Scalar <c>ret = ( ∑|this[i]|^p )^(1/p)</c></returns>
+        public override double Norm(double p)
+        {
+            if (p < 0d) throw new ArgumentOutOfRangeException("p");
+
+            if (p == 1d) return L1Norm();
+            if (p == 2d) return L2Norm();
+            if (double.IsPositiveInfinity(p)) return InfinityNorm();
+
+            var sum = 0d;
+            for (var index = 0; index < _length; index++)
+            {
+                sum += System.Math.Pow(System.Math.Abs(_values[index]), p);
+            }
+            return System.Math.Pow(sum, 1.0 / p);
         }
 
         /// <summary>
@@ -833,149 +691,41 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The vector to store the result of the pointwise division.</param>
         protected override void DoPointwiseMultiply(Vector<double> other, Vector<double> result)
         {
-            var dense = result as DenseVector;
-            if (dense == null)
+            var denseOther = other as DenseVector;
+            var denseResult = result as DenseVector;
+
+            if (denseOther == null || denseResult == null)
             {
                 base.DoPointwiseMultiply(other, result);
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] * other[index]);
+                Control.LinearAlgebraProvider.PointWiseMultiplyArrays(_values, denseOther._values, denseResult._values);
             }
         }
 
         /// <summary>
         /// Pointwise divide this vector with another vector and stores the result into the result vector.
         /// </summary>
-        /// <param name="other">The vector to pointwise divide this one by.</param>
+        /// <param name="divisor">The vector to pointwise divide this one by.</param>
         /// <param name="result">The vector to store the result of the pointwise division.</param>
         /// <remarks></remarks>
-        protected override void DoPointwiseDivide(Vector<double> other, Vector<double> result)
+        protected override void DoPointwiseDivide(Vector<double> divisor, Vector<double> result)
         {
-            var dense = result as DenseVector;
-            if (dense == null)
+            var denseOther = divisor as DenseVector;
+            var denseResult = result as DenseVector;
+
+            if (denseOther == null || denseResult == null)
             {
-                base.DoPointwiseDivide(other, result);
+                base.DoPointwiseDivide(divisor, result);
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] / other[index]);
+                Control.LinearAlgebraProvider.PointWiseDivideArrays(_values, denseOther._values, denseResult._values);
             }
         }
-
-        /// <summary>
-        /// Outer product of two vectors
-        /// </summary>
-        /// <param name="u">First vector</param>
-        /// <param name="v">Second vector</param>
-        /// <returns>Matrix M[i,j] = u[i]*v[j] </returns>
-        /// <exception cref="ArgumentNullException">If the u vector is <see langword="null" />.</exception> 
-        /// <exception cref="ArgumentNullException">If the v vector is <see langword="null" />.</exception> 
-        public static DenseMatrix OuterProduct(DenseVector u, DenseVector v)
-        {
-            if (u == null)
-            {
-                throw new ArgumentNullException("u");
-            }
-
-            if (v == null)
-            {
-                throw new ArgumentNullException("v");
-            }
-
-            var matrix = new DenseMatrix(u.Count, v.Count);
-            CommonParallel.For(
-                0, 
-                u.Count, 
-                i =>
-                {
-                    for (var j = 0; j < v.Count; j++)
-                    {
-                        matrix.At(i, j, u.Data[i] * v.Data[j]);
-                    }
-                });
-            return matrix;
-        }
-
-        /// <summary>
-        /// Outer product of this and another vector.
-        /// </summary>
-        /// <param name="v">The vector to operate on.</param>
-        /// <returns>
-        /// Matrix M[i,j] = this[i] * v[j].
-        /// </returns>
-        /// <seealso cref="OuterProduct(DenseVector, DenseVector)"/>
-        public Matrix<double> OuterProduct(DenseVector v)
-        {
-            return OuterProduct(this, v);
-        }
-
-        #region Vector Norms
-
-        /// <summary>
-        /// Computes the p-Norm.
-        /// </summary>
-        /// <param name="p">The p value.</param>
-        /// <returns>Scalar <c>ret = (sum(abs(this[i])^p))^(1/p)</c></returns>
-        public override double Norm(double p)
-        {
-            if (p < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("p");
-            }
-
-            if (1.0 == p)
-            {
-                return SumMagnitudes();
-            }
-
-            if (2.0 == p)
-            {
-                return Data.Aggregate(0.0, SpecialFunctions.Hypotenuse);
-            }
-
-            if (Double.IsPositiveInfinity(p))
-            {
-                return CommonParallel.Select(
-                    0,
-                    Count,
-                    (index, localData) => Math.Max(localData, Math.Abs(Data[index])),
-                    Math.Max);
-            }
-
-            var sum = 0.0;
-            for (var index = 0; index < Count; index++)
-            {
-                sum += Math.Pow(Math.Abs(Data[index]), p);
-            }
-
-            return Math.Pow(sum, 1.0 / p);
-        }
-       
-        #endregion
 
         #region Parse Functions
-
-        /// <summary>
-        /// Creates a double dense vector based on a string. The string can be in the following formats (without the
-        /// quotes): 'n', 'n,n,..', '(n,n,..)', '[n,n,...]', where n is a double.
-        /// </summary>
-        /// <returns>
-        /// A double dense vector containing the values specified by the given string.
-        /// </returns>
-        /// <param name="value">
-        /// The string to parse.
-        /// </param>
-        public static DenseVector Parse(string value)
-        {
-            return Parse(value, null);
-        }
 
         /// <summary>
         /// Creates a double dense vector based on a string. The string can be in the following formats (without the
@@ -990,11 +740,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="formatProvider">
         /// An <see cref="IFormatProvider"/> that supplies culture-specific formatting information.
         /// </param>
-        public static DenseVector Parse(string value, IFormatProvider formatProvider)
+        public static DenseVector Parse(string value, IFormatProvider formatProvider = null)
         {
             if (value == null)
             {
-                throw new ArgumentNullException(value);
+                throw new ArgumentNullException("value");
             }
 
             value = value.Trim();
@@ -1024,38 +774,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
                 value = value.Substring(1, value.Length - 2).Trim();
             }
 
-            // keywords
-            var textInfo = formatProvider.GetTextInfo();
-            var keywords = new[] { textInfo.ListSeparator };
-
-            // lexing
-            var tokens = new LinkedList<string>();
-            GlobalizationHelper.Tokenize(tokens.AddFirst(value), keywords, 0);
-            var token = tokens.First;
-
-            if (token == null || tokens.Count.IsEven())
-            {
-                throw new FormatException();
-            }
-
             // parsing
-            var data = new double[(tokens.Count + 1) >> 1];
-            for (var i = 0; i < data.Length; i++)
-            {
-                if (token == null || token.Value == textInfo.ListSeparator)
-                {
-                    throw new FormatException();
-                }
-
-                data[i] = Double.Parse(token.Value, NumberStyles.Any, formatProvider);
-
-                token = token.Next;
-                if (token != null)
-                {
-                    token = token.Next;
-                }
-            }
-
+            var tokens = value.Split(new[] {formatProvider.GetTextInfo().ListSeparator, " ", "\t"}, StringSplitOptions.RemoveEmptyEntries);
+            var data = tokens.Select(t => double.Parse(t, NumberStyles.Any, formatProvider)).ToArray();
+            if (data.Length == 0) throw new FormatException();
             return new DenseVector(data);
         }
 
@@ -1118,29 +840,5 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         }
 
         #endregion
-
-        /// <summary>
-        /// Resets all values to zero.
-        /// </summary>
-        public override void Clear()
-        {
-            Array.Clear(Data, 0, Data.Length);
-        }
-
-        /// <summary>Gets the value at the given <paramref name="index"/>.</summary>
-        /// <param name="index">The index of the value to get or set.</param>
-        /// <returns>The value of the vector at the given <paramref name="index"/>.</returns> 
-        internal protected override double At(int index)
-        {
-            return Data[index];
-        }
-
-        /// <summary>Sets the <paramref name="value"/> at the given <paramref name="index"/>.</summary>
-        /// <param name="index">The index of the value to get or set.</param>
-        /// <param name="value">The value to set.</param>
-        internal protected override void At(int index, double value)
-        {
-            Data[index] = value;
-        }
     }
 }

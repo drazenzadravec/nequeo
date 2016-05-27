@@ -1,42 +1,38 @@
-/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
- *  Copyright :     Copyright © Nequeo Pty Ltd 2012 http://www.nequeo.com.au/
- * 
- *  File :          
- *  Purpose :       
- * 
- */
+// <copyright file="GlobalizationHelper.cs" company="Math.NET">
+// Math.NET Numerics, part of the Math.NET Project
+// http://numerics.mathdotnet.com
+// http://github.com/mathnet/mathnet-numerics
+//
+// Copyright (c) 2009-2010 Math.NET
+//
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation
+// files (the "Software"), to deal in the Software without
+// restriction, including without limitation the rights to use,
+// copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following
+// conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+// </copyright>
 
-#region Nequeo Pty Ltd License
-/*
-    Permission is hereby granted, free of charge, to any person
-    obtaining a copy of this software and associated documentation
-    files (the "Software"), to deal in the Software without
-    restriction, including without limitation the rights to use,
-    copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following
-    conditions:
-
-    The above copyright notice and this permission notice shall be
-    included in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-    OTHER DEALINGS IN THE SOFTWARE.
-*/
-#endregion
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Nequeo.Science.Math
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-
     /// <summary>
     /// Globalized String Handling Helpers
     /// </summary>
@@ -59,8 +55,8 @@ namespace Nequeo.Science.Math
             }
 
             return (formatProvider as CultureInfo)
-                   ?? (formatProvider.GetFormat(typeof(CultureInfo)) as CultureInfo)
-                      ?? CultureInfo.CurrentCulture;
+                ?? (formatProvider.GetFormat(typeof (CultureInfo)) as CultureInfo)
+                    ?? CultureInfo.CurrentCulture;
         }
 
         /// <summary>
@@ -87,8 +83,13 @@ namespace Nequeo.Science.Math
         /// <returns>A <see cref="TextInfo"/> instance.</returns>
         internal static TextInfo GetTextInfo(this IFormatProvider formatProvider)
         {
-            return (formatProvider as TextInfo)
-                   ?? GetCultureInfo(formatProvider).TextInfo;
+            if (formatProvider == null)
+            {
+                return CultureInfo.CurrentCulture.TextInfo;
+            }
+
+            return (formatProvider.GetFormat(typeof (TextInfo)) as TextInfo)
+                ?? GetCultureInfo(formatProvider).TextInfo;
         }
 
         /// <summary>
@@ -103,7 +104,7 @@ namespace Nequeo.Science.Math
             {
                 var keyword = keywords[i];
                 int indexOfKeyword;
-                while ((indexOfKeyword = node.Value.IndexOf(keyword)) >= 0)
+                while ((indexOfKeyword = node.Value.IndexOf(keyword, StringComparison.Ordinal)) >= 0)
                 {
                     if (indexOfKeyword != 0)
                     {
@@ -130,7 +131,7 @@ namespace Nequeo.Science.Math
             }
         }
 
-#if SILVERLIGHT
+#if PORTABLE
         /// <summary>
         /// Globalized Parsing: Parse a double number
         /// </summary>
@@ -155,7 +156,7 @@ namespace Nequeo.Science.Math
             }
 
             double value;
-            if (!Double.TryParse(token.Value, NumberStyles.Any, CultureInfo.CurrentCulture, out value))
+            if (!double.TryParse(token.Value, NumberStyles.Any, CultureInfo.CurrentCulture, out value))
             {
                 throw new FormatException();
             }
@@ -223,7 +224,7 @@ namespace Nequeo.Science.Math
             }
 
             double value;
-            if (!Double.TryParse(token.Value, NumberStyles.Any, culture, out value))
+            if (!double.TryParse(token.Value, NumberStyles.Any, culture, out value))
             {
                 throw new FormatException();
             }

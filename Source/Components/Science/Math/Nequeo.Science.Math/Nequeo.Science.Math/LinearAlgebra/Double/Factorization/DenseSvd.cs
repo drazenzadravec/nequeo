@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -27,12 +26,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
+
+using System;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 {
-    using System;
-    using Generic;
-    using Properties;
-
     /// <summary>
     /// <para>A class which encapsulates the functionality of the singular value decomposition (SVD) for <see cref="DenseMatrix"/>.</para>
     /// <para>Suppose M is an m-by-n matrix whose entries are real numbers. 
@@ -47,7 +46,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
     /// <remarks>
     /// The computation of the singular value decomposition is done at construction time.
     /// </remarks>
-    public class DenseSvd : Svd
+    internal sealed class DenseSvd : Svd
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DenseSvd"/> class. This object will compute the
@@ -57,19 +56,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="computeVectors">Compute the singular U and VT vectors or not.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If SVD algorithm failed to converge with matrix <paramref name="matrix"/>.</exception>
-        public DenseSvd(DenseMatrix matrix, bool computeVectors)
+        public static DenseSvd Create(DenseMatrix matrix, bool computeVectors)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
+            var nm = System.Math.Min(matrix.RowCount, matrix.ColumnCount);
+            var s = new DenseVector(nm);
+            var u = new DenseMatrix(matrix.RowCount);
+            var vt = new DenseMatrix(matrix.ColumnCount);
+            Control.LinearAlgebraProvider.SingularValueDecomposition(computeVectors, ((DenseMatrix) matrix.Clone()).Values, matrix.RowCount, matrix.ColumnCount, s.Values, u.Values, vt.Values);
 
-            ComputeVectors = computeVectors;
-            var nm = Math.Min(matrix.RowCount, matrix.ColumnCount);
-            VectorS = new DenseVector(nm);
-            MatrixU = new DenseMatrix(matrix.RowCount);
-            MatrixVT = new DenseMatrix(matrix.ColumnCount);
-            Control.LinearAlgebraProvider.SingularValueDecomposition(computeVectors, ((DenseMatrix)matrix.Clone()).Data, matrix.RowCount, matrix.ColumnCount, ((DenseVector)VectorS).Data, ((DenseMatrix)MatrixU).Data, ((DenseMatrix)MatrixVT).Data);
+            return new DenseSvd(s, u, vt, computeVectors);
+        }
+
+        DenseSvd(Vector<double> s, Matrix<double> u, Matrix<double> vt, bool vectorsComputed)
+            : base(s, u, vt, vectorsComputed)
+        {
         }
 
         /// <summary>
@@ -79,18 +79,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<double> input, Matrix<double> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
-            if (!ComputeVectors)
+            if (!VectorsComputed)
             {
                 throw new InvalidOperationException(Resources.SingularVectorsNotComputed);
             }
@@ -102,13 +91,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             }
 
             // The dimension compatibility conditions for X = A\B require the two matrices A and B to have the same number of rows
-            if (MatrixU.RowCount != input.RowCount)
+            if (U.RowCount != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
             }
 
             // The solution X row dimension is equal to the column dimension of A
-            if (MatrixVT.ColumnCount != result.RowCount)
+            if (VT.ColumnCount != result.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
@@ -125,7 +114,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 throw new NotSupportedException("Can only do SVD factorization for dense matrices at the moment.");
             }
 
-            Control.LinearAlgebraProvider.SvdSolveFactored(MatrixU.RowCount, MatrixVT.ColumnCount, ((DenseVector)VectorS).Data, ((DenseMatrix)MatrixU).Data, ((DenseMatrix)MatrixVT).Data, dinput.Data, input.ColumnCount, dresult.Data);
+            Control.LinearAlgebraProvider.SvdSolveFactored(U.RowCount, VT.ColumnCount, ((DenseVector) S).Values, ((DenseMatrix) U).Values, ((DenseMatrix) VT).Values, dinput.Values, input.ColumnCount, dresult.Values);
         }
 
         /// <summary>
@@ -135,32 +124,22 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<double> input, Vector<double> result)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
-            if (!ComputeVectors)
+            if (!VectorsComputed)
             {
                 throw new InvalidOperationException(Resources.SingularVectorsNotComputed);
             }
 
             // Ax=b where A is an m x n matrix
             // Check that b is a column vector with m entries
-            if (MatrixU.RowCount != input.Count)
+            if (U.RowCount != input.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
             // Check that x is a column vector with n entries
-            if (MatrixVT.ColumnCount != result.Count)
+            if (VT.ColumnCount != result.Count)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(VT, result);
             }
 
             var dinput = input as DenseVector;
@@ -175,7 +154,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 throw new NotSupportedException("Can only do SVD factorization for dense vectors at the moment.");
             }
 
-            Control.LinearAlgebraProvider.SvdSolveFactored(MatrixU.RowCount, MatrixVT.ColumnCount, ((DenseVector)VectorS).Data, ((DenseMatrix)MatrixU).Data, ((DenseMatrix)MatrixVT).Data, dinput.Data, 1, dresult.Data);
+            Control.LinearAlgebraProvider.SvdSolveFactored(U.RowCount, VT.ColumnCount, ((DenseVector) S).Values, ((DenseMatrix) U).Values, ((DenseMatrix) VT).Values, dinput.Values, 1, dresult.Values);
         }
     }
 }

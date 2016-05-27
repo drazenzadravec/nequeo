@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,12 +27,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 {
-    using System;
-    using Generic;
-    using Properties;
-
     /// <summary>
     /// <para>A class which encapsulates the functionality of an LU factorization.</para>
     /// <para>For a matrix A, the LU factorization is a pair of lower triangular matrix L and
@@ -42,7 +40,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
     /// <remarks>
     /// The computation of the LU factorization is done at construction time.
     /// </remarks>
-    public class UserLU : LU
+    internal sealed class UserLU : LU
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserLU"/> class. This object will compute the
@@ -51,7 +49,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="matrix">The matrix to factor.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is not a square matrix.</exception>
-        public UserLU(Matrix<double> matrix)
+        public static UserLU Create(Matrix<double> matrix)
         {
             if (matrix == null)
             {
@@ -65,13 +63,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
             // Create an array for the pivot indices.
             var order = matrix.RowCount;
-            Factors = matrix.Clone();
-            Pivots = new int[order];
-            
+            var factors = matrix.Clone();
+            var pivots = new int[order];
+
             // Initialize the pivot matrix to the identity permutation.
             for (var i = 0; i < order; i++)
             {
-                Pivots[i] = i;
+                pivots[i] = i;
             }
 
             var vectorLUcolj = new double[order];
@@ -80,28 +78,28 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 // Make a copy of the j-th column to localize references.
                 for (var i = 0; i < order; i++)
                 {
-                    vectorLUcolj[i] = Factors.At(i, j);
+                    vectorLUcolj[i] = factors.At(i, j);
                 }
 
                 // Apply previous transformations.
                 for (var i = 0; i < order; i++)
                 {
-                    var kmax = Math.Min(i, j);
+                    var kmax = System.Math.Min(i, j);
                     var s = 0.0;
                     for (var k = 0; k < kmax; k++)
                     {
-                        s += Factors.At(i, k) * vectorLUcolj[k];
+                        s += factors.At(i, k)*vectorLUcolj[k];
                     }
 
                     vectorLUcolj[i] -= s;
-                    Factors.At(i, j, vectorLUcolj[i]);
+                    factors.At(i, j, vectorLUcolj[i]);
                 }
 
                 // Find pivot and exchange if necessary.
                 var p = j;
                 for (var i = j + 1; i < order; i++)
                 {
-                    if (Math.Abs(vectorLUcolj[i]) > Math.Abs(vectorLUcolj[p]))
+                    if (System.Math.Abs(vectorLUcolj[i]) > System.Math.Abs(vectorLUcolj[p]))
                     {
                         p = i;
                     }
@@ -111,23 +109,30 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 {
                     for (var k = 0; k < order; k++)
                     {
-                        var temp = Factors.At(p, k);
-                        Factors.At(p, k, Factors.At(j, k));
-                        Factors.At(j, k, temp);
+                        var temp = factors.At(p, k);
+                        factors.At(p, k, factors.At(j, k));
+                        factors.At(j, k, temp);
                     }
 
-                    Pivots[j] = p;
+                    pivots[j] = p;
                 }
 
                 // Compute multipliers.
-                if (j < order & Factors.At(j, j) != 0.0)
+                if (j < order & factors.At(j, j) != 0.0)
                 {
                     for (var i = j + 1; i < order; i++)
                     {
-                        Factors.At(i, j, (Factors.At(i, j) / Factors.At(j, j)));
+                        factors.At(i, j, (factors.At(i, j)/factors.At(j, j)));
                     }
                 }
             }
+
+            return new UserLU(factors, pivots);
+        }
+
+        UserLU(Matrix<double> factors, int[] pivots)
+            : base(factors, pivots)
+        {
         }
 
         /// <summary>
@@ -161,7 +166,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
             if (input.RowCount != Factors.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factors);
             }
 
             // Copy the contents of input to result.
@@ -183,7 +188,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             }
 
             var order = Factors.RowCount;
-            
+
             // Solve L*Y = P*B
             for (var k = 0; k < order; k++)
             {
@@ -191,7 +196,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 {
                     for (var j = 0; j < result.ColumnCount; j++)
                     {
-                        var temp = result.At(k, j) * Factors.At(i, k);
+                        var temp = result.At(k, j)*Factors.At(i, k);
                         result.At(i, j, result.At(i, j) - temp);
                     }
                 }
@@ -202,14 +207,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             {
                 for (var j = 0; j < result.ColumnCount; j++)
                 {
-                    result.At(k, j, (result.At(k, j) / Factors.At(k, k)));
+                    result.At(k, j, (result.At(k, j)/Factors.At(k, k)));
                 }
 
                 for (var i = 0; i < k; i++)
                 {
                     for (var j = 0; j < result.ColumnCount; j++)
                     {
-                        var temp = result.At(k, j) * Factors.At(i, k);
+                        var temp = result.At(k, j)*Factors.At(i, k);
                         result.At(i, j, result.At(i, j) - temp);
                     }
                 }
@@ -242,7 +247,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
             if (input.Count != Factors.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factors);
             }
 
             // Copy the contents of input to result.
@@ -259,7 +264,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 result[p] = result[i];
                 result[i] = temp;
             }
-            
+
             var order = Factors.RowCount;
 
             // Solve L*Y = P*B
@@ -267,7 +272,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             {
                 for (var i = k + 1; i < order; i++)
                 {
-                    result[i] -= result[k] * Factors.At(i, k);
+                    result[i] -= result[k]*Factors.At(i, k);
                 }
             }
 
@@ -277,7 +282,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 result[k] /= Factors.At(k, k);
                 for (var i = 0; i < k; i++)
                 {
-                    result[i] -= result[k] * Factors.At(i, k);
+                    result[i] -= result[k]*Factors.At(i, k);
                 }
             }
         }
@@ -289,7 +294,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         public override Matrix<double> Inverse()
         {
             var order = Factors.RowCount;
-            var inverse = Factors.CreateMatrix(order, order);
+            var inverse = Matrix<double>.Build.SameAs(Factors, order, order);
             for (var i = 0; i < order; i++)
             {
                 inverse.At(i, i, 1.0);

@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2013 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,13 +27,13 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
 {
-    using System;
-    using Generic.Factorization;
-
     using Nequeo.Science.Math;
-    using Properties;
 
     /// <summary>
     /// <para>A class which encapsulates the functionality of the QR decomposition Modified Gram-Schmidt Orthogonalization.</para>
@@ -39,8 +42,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
     /// <remarks>
     /// The computation of the QR decomposition is done at construction time by modified Gram-Schmidt Orthogonalization.
     /// </remarks>
-    public abstract class GramSchmidt : GramSchmidt<Complex32>
+    internal abstract class GramSchmidt : GramSchmidt<Complex32>
     {
+        protected GramSchmidt(Matrix<Complex32> q, Matrix<Complex32> rFull)
+            : base(q, rFull)
+        {
+        }
+
         /// <summary>
         /// Gets the absolute determinant value of the matrix for which the QR matrix was computed.
         /// </summary>
@@ -48,16 +56,16 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         {
             get
             {
-                if (MatrixR.RowCount != MatrixR.ColumnCount)
+                if (FullR.RowCount != FullR.ColumnCount)
                 {
                     throw new ArgumentException(Resources.ArgumentMatrixSquare);
                 }
 
                 var det = Complex32.One;
-                for (var i = 0; i < MatrixR.ColumnCount; i++)
+                for (var i = 0; i < FullR.ColumnCount; i++)
                 {
-                    det *= MatrixR.At(i, i);
-                    if (MatrixR.At(i, i).Magnitude.AlmostEqual(0.0f))
+                    det *= FullR.At(i, i);
+                    if (FullR.At(i, i).Magnitude.AlmostEqual(0.0f))
                     {
                         return 0;
                     }
@@ -75,9 +83,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         {
             get
             {
-                for (var i = 0; i < MatrixR.ColumnCount; i++)
+                for (var i = 0; i < FullR.ColumnCount; i++)
                 {
-                    if (MatrixR.At(i, i).Magnitude.AlmostEqual(0.0f))
+                    if (FullR.At(i, i).Magnitude.AlmostEqual(0.0f))
                     {
                         return false;
                     }

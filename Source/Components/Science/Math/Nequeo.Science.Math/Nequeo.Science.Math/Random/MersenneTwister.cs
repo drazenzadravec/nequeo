@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,10 +27,10 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
-/* 
+/*
    Original code's copyright and license:
    Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura,
-   All rights reserved.                          
+   All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
@@ -44,8 +43,8 @@
         notice, this list of conditions and the following disclaimer in the
         documentation and/or other materials provided with the distribution.
 
-     3. The names of its contributors may not be used to endorse or promote 
-        products derived from this software without specific prior written 
+     3. The names of its contributors may not be used to endorse or promote
+        products derived from this software without specific prior written
         permission.
 
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -66,77 +65,84 @@
    email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 */
 
+using System.Collections.Generic;
+
+#if PORTABLE
+using System;
+#else
+using System.Runtime;
+using System.Threading;
+#endif
+
 namespace Nequeo.Science.Math.Random
 {
-    using System;
-
     /// <summary>
     /// Random number generator using Mersenne Twister 19937 algorithm.
     /// </summary>
-    public class MersenneTwister : AbstractRandomNumberGenerator, IDisposable
+    public class MersenneTwister : RandomSource
     {
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private const uint _lower_mask = 0x7fffffff;
+        const uint LowerMask = 0x7fffffff;
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private const int _m = 397;
+        const int M = 397;
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private const uint _matrix_a = 0x9908b0df;
+        const uint MatrixA = 0x9908b0df;
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private const int _n = 624;
+        const int N = 624;
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private const double _reciprocal = 1.0/4294967295.0;
+        const double Reciprocal = 1.0/4294967296.0; // 1.0/(uint.MaxValue + 1.0)
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private const uint _upper_mask = 0x80000000;
+        const uint UpperMask = 0x80000000;
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private static readonly uint[] _mag01 = {0x0U, _matrix_a};
+        static readonly uint[] Mag01 = { 0x0U, MatrixA };
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private readonly uint[] _mt = new uint[624];
+        readonly uint[] _mt = new uint[N];
 
         /// <summary>
         /// Mersenne twister constant.
         /// </summary>
-        private int mti = _n + 1;
+        int _mti = N + 1;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MersenneTwister"/> class using
-        /// the current time as the seed.
+        /// a seed based on time and unique GUIDs.
         /// </summary>
         /// <remarks>If the seed value is zero, it is set to one. Uses the
         /// value of <see cref="Control.ThreadSafeRandomNumberGenerators"/> to
         /// set whether the instance is thread safe.</remarks>
-        public MersenneTwister() : this((int) DateTime.Now.Ticks)
+        public MersenneTwister() : this(RandomSeed.Robust())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MersenneTwister"/> class using
-        /// the current time as the seed.
+        /// a seed based on time and unique GUIDs.
         /// </summary>
         /// <param name="threadSafe">if set to <c>true</c> , the class is thread safe.</param>
-        public MersenneTwister(bool threadSafe) : this((int) DateTime.Now.Ticks, threadSafe)
+        public MersenneTwister(bool threadSafe) : this(RandomSeed.Robust(), threadSafe)
         {
         }
 
@@ -145,9 +151,10 @@ namespace Nequeo.Science.Math.Random
         /// </summary>
         /// <param name="seed">The seed value.</param>
         /// <remarks>Uses the value of <see cref="Control.ThreadSafeRandomNumberGenerators"/> to
-        /// set whether the instance is thread safe.</remarks>        
-        public MersenneTwister(int seed) : this(seed, Control.ThreadSafeRandomNumberGenerators)
+        /// set whether the instance is thread safe.</remarks>
+        public MersenneTwister(int seed)
         {
+            init_genrand((uint)seed);
         }
 
         /// <summary>
@@ -159,7 +166,37 @@ namespace Nequeo.Science.Math.Random
         {
             init_genrand((uint)seed);
         }
-        
+
+#if PORTABLE
+        [ThreadStatic]
+        static MersenneTwister DefaultInstance;
+
+        /// <summary>
+        /// Default instance, thread-safe.
+        /// </summary>
+        public static MersenneTwister Default
+        {
+            get
+            {
+                if (DefaultInstance == null)
+                {
+                    DefaultInstance = new MersenneTwister(RandomSeed.Robust(), true);
+                }
+                return DefaultInstance;
+            }
+        }
+#else
+        static readonly ThreadLocal<MersenneTwister> DefaultInstance = new ThreadLocal<MersenneTwister>(() => new MersenneTwister(RandomSeed.Robust(), true));
+
+        /// <summary>
+        /// Default instance, thread-safe.
+        /// </summary>
+        public static MersenneTwister Default
+        {
+            get { return DefaultInstance.Value; }
+        }
+#endif
+
         /*/// <summary>
         /// Initializes a new instance of the <see cref="MersenneTwister"/> class.
         /// </summary>
@@ -180,27 +217,26 @@ namespace Nequeo.Science.Math.Random
         */
         /* initializes _mt[_n] with a seed */
 
-        private void init_genrand(uint s)
+        void init_genrand(uint s)
         {
             _mt[0] = s & 0xffffffff;
-            for (mti = 1; mti < _n; mti++)
+            for (_mti = 1; _mti < N; _mti++)
             {
-                _mt[mti] = (1812433253*(_mt[mti - 1] ^ (_mt[mti - 1] >> 30)) + (uint) mti);
+                _mt[_mti] = 1812433253*(_mt[_mti - 1] ^ (_mt[_mti - 1] >> 30)) + (uint)_mti;
                 /* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
                 /* In the previous versions, MSBs of the seed affect   */
                 /* only MSBs of the array _mt[].                        */
                 /* 2002/01/09 modified by Makoto Matsumoto             */
-                _mt[mti] &= 0xffffffff;
+                _mt[_mti] &= 0xffffffff;
                 /* for >32 bit machines */
             }
         }
-
 
         /* initialize by an array with array-length */
         /* init_key is the array for initializing keys */
         /* slight change for C++, 2004/2/26 */
 
-       /* private void init_by_array(uint[] init_key)
+        /* private void init_by_array(uint[] init_key)
         {
             uint key_length = (uint) init_key.Length;
             init_genrand(19650218);
@@ -209,8 +245,8 @@ namespace Nequeo.Science.Math.Random
             uint k = (_n > key_length ? _n : key_length);
             for (; k > 0; k--)
             {
-                _mt[i] = (_mt[i] ^ ((_mt[i - 1] ^ (_mt[i - 1] >> 30))*1664525)) + init_key[j] + j; //non linear 
-                _mt[i] &= 0xffffffff; // for WORDSIZE > 32 machines 
+                _mt[i] = (_mt[i] ^ ((_mt[i - 1] ^ (_mt[i - 1] >> 30))*1664525)) + init_key[j] + j; //non linear
+                _mt[i] &= 0xffffffff; // for WORDSIZE > 32 machines
                 i++;
                 j++;
                 if (i >= _n)
@@ -222,8 +258,8 @@ namespace Nequeo.Science.Math.Random
             }
             for (k = _n - 1; k > 0; k--)
             {
-                _mt[i] = (_mt[i] ^ ((_mt[i - 1] ^ (_mt[i - 1] >> 30))*1566083941)) - i; // non linear 
-                _mt[i] &= 0xffffffff; // for WORDSIZE > 32 machines 
+                _mt[i] = (_mt[i] ^ ((_mt[i - 1] ^ (_mt[i - 1] >> 30))*1566083941)) - i; // non linear
+                _mt[i] &= 0xffffffff; // for WORDSIZE > 32 machines
                 i++;
                 if (i >= _n)
                 {
@@ -232,64 +268,80 @@ namespace Nequeo.Science.Math.Random
                 }
             }
 
-            _mt[0] = 0x80000000; // MSB is 1; assuring non-zero initial array 
+            _mt[0] = 0x80000000; // MSB is 1; assuring non-zero initial array
         }*/
 
         /* generates a random number on [0,0xffffffff]-interval */
 
-        private uint genrand_int32()
+        uint genrand_int32()
         {
             uint y;
 
             /* mag01[x] = x * MATRIX_A  for x=0,1 */
 
-            if (mti >= _n)
+            if (_mti >= N)
             {
                 /* generate _n words at one time */
                 int kk;
 
-                if (mti == _n + 1) /* if init_genrand() has not been called, */
+                if (_mti == N + 1) /* if init_genrand() has not been called, */
+                {
                     init_genrand(5489); /* a default initial seed is used */
-
-                for (kk = 0; kk < _n - _m; kk++)
-                {
-                    y = (_mt[kk] & _upper_mask) | (_mt[kk + 1] & _lower_mask);
-                    _mt[kk] = _mt[kk + _m] ^ (y >> 1) ^ _mag01[y & 0x1];
                 }
-                for (; kk < _n - 1; kk++)
-                {
-                    y = (_mt[kk] & _upper_mask) | (_mt[kk + 1] & _lower_mask);
-                    _mt[kk] = _mt[kk + (_m - _n)] ^ (y >> 1) ^ _mag01[y & 0x1];
-                }
-                y = (_mt[_n - 1] & _upper_mask) | (_mt[0] & _lower_mask);
-                _mt[_n - 1] = _mt[_m - 1] ^ (y >> 1) ^ _mag01[y & 0x1];
 
-                mti = 0;
+                for (kk = 0; kk < N - M; kk++)
+                {
+                    y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
+                    _mt[kk] = _mt[kk + M] ^ (y >> 1) ^ Mag01[y & 0x1];
+                }
+
+                for (; kk < N - 1; kk++)
+                {
+                    y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
+                    _mt[kk] = _mt[kk + (M - N)] ^ (y >> 1) ^ Mag01[y & 0x1];
+                }
+
+                y = (_mt[N - 1] & UpperMask) | (_mt[0] & LowerMask);
+                _mt[N - 1] = _mt[M - 1] ^ (y >> 1) ^ Mag01[y & 0x1];
+
+                _mti = 0;
             }
 
-            y = _mt[mti++];
+            y = _mt[_mti++];
 
             /* Tempering */
-            y ^= (y >> 11);
+            y ^= y >> 11;
             y ^= (y << 7) & 0x9d2c5680;
             y ^= (y << 15) & 0xefc60000;
-            y ^= (y >> 18);
+            y ^= y >> 18;
 
             return y;
         }
 
         /// <summary>
-        /// Returns a random number between 0.0 and 1.0.
+        /// Returns a random double-precision floating point number greater than or equal to 0.0, and less than 1.0.
         /// </summary>
-        /// <returns>
-        /// A double-precision floating point number greater than or equal to 0.0, and less than 1.0.
-        /// </returns>
-        protected override double DoSample()
+        protected sealed override double DoSample()
         {
-            return genrand_int32() * _reciprocal;
+            return genrand_int32()*Reciprocal;
         }
 
-       /* /// <summary>
+        /// <summary>
+        /// Returns a random 32-bit signed integer greater than or equal to zero and less than <see cref="F:System.Int32.MaxValue"/>
+        /// </summary>
+        protected sealed override int DoSampleInteger()
+        {
+            uint uint32 = genrand_int32();
+            int int31 = (int)(uint32 >> 1);
+            if (int31 == int.MaxValue)
+            {
+                return DoSampleInteger();
+            }
+
+            return int31;
+        }
+
+        /* /// <summary>
         /// Generates a random number on [0,1) with 53-bit resolution.
         /// </summary>
         /// <returns>A random number on [0,1) with 53-bit resolution.</returns>
@@ -299,16 +351,124 @@ namespace Nequeo.Science.Math.Random
             return (a * 67108864.0 + b) * (1.0 / 9007199254740992.0);
         }*/
 
-        #region IDisposable Members
-
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Fills an array with random numbers greater than or equal to 0.0 and less than 1.0.
         /// </summary>
-        public void Dispose()
+        /// <remarks>Supports being called in parallel from multiple threads.</remarks>
+        public static void Doubles(double[] values, int seed)
         {
-            //do nothing in the managed version.
+            uint[] t = new uint[624];
+            int k;
+            uint s = (uint)seed;
+
+            t[0] = s & 0xffffffff;
+            for (k = 1; k < N; k++)
+            {
+                t[k] = 1812433253*(t[k - 1] ^ (t[k - 1] >> 30)) + (uint)k;
+                t[k] &= 0xffffffff;
+            }
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                uint y;
+
+                if (k >= N)
+                {
+                    int kk;
+                    for (kk = 0; kk < N - M; kk++)
+                    {
+                        y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
+                        t[kk] = t[kk + M] ^ (y >> 1) ^ Mag01[y & 0x1];
+                    }
+
+                    for (; kk < N - 1; kk++)
+                    {
+                        y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
+                        t[kk] = t[kk + (M - N)] ^ (y >> 1) ^ Mag01[y & 0x1];
+                    }
+
+                    y = (t[N - 1] & UpperMask) | (t[0] & LowerMask);
+                    t[N - 1] = t[M - 1] ^ (y >> 1) ^ Mag01[y & 0x1];
+
+                    k = 0;
+                }
+
+                y = t[k++];
+
+                /* Tempering */
+                y ^= y >> 11;
+                y ^= (y << 7) & 0x9d2c5680;
+                y ^= (y << 15) & 0xefc60000;
+                y ^= y >> 18;
+
+                values[i] = y*Reciprocal;
+            }
         }
 
-        #endregion
+        /// <summary>
+        /// Returns an array of random numbers greater than or equal to 0.0 and less than 1.0.
+        /// </summary>
+        /// <remarks>Supports being called in parallel from multiple threads.</remarks>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static double[] Doubles(int length, int seed)
+        {
+            var data = new double[length];
+            Doubles(data, seed);
+            return data;
+        }
+
+        /// <summary>
+        /// Returns an infinite sequence of random numbers greater than or equal to 0.0 and less than 1.0.
+        /// </summary>
+        /// <remarks>Supports being called in parallel from multiple threads, but the result must be enumerated from a single thread each.</remarks>
+        public static IEnumerable<double> DoubleSequence(int seed)
+        {
+            uint[] t = new uint[624];
+            int k;
+            uint s = (uint)seed;
+
+            t[0] = s & 0xffffffff;
+            for (k = 1; k < N; k++)
+            {
+                t[k] = 1812433253*(t[k - 1] ^ (t[k - 1] >> 30)) + (uint)k;
+                t[k] &= 0xffffffff;
+            }
+
+            while (true)
+            {
+                uint y;
+
+                if (k >= N)
+                {
+                    int kk;
+                    for (kk = 0; kk < N - M; kk++)
+                    {
+                        y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
+                        t[kk] = t[kk + M] ^ (y >> 1) ^ Mag01[y & 0x1];
+                    }
+
+                    for (; kk < N - 1; kk++)
+                    {
+                        y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
+                        t[kk] = t[kk + (M - N)] ^ (y >> 1) ^ Mag01[y & 0x1];
+                    }
+
+                    y = (t[N - 1] & UpperMask) | (t[0] & LowerMask);
+                    t[N - 1] = t[M - 1] ^ (y >> 1) ^ Mag01[y & 0x1];
+
+                    k = 0;
+                }
+
+                y = t[k++];
+
+                /* Tempering */
+                y ^= y >> 11;
+                y ^= (y << 7) & 0x9d2c5680;
+                y ^= (y << 15) & 0xefc60000;
+                y ^= y >> 18;
+
+                yield return y*Reciprocal;
+            }
+        }
     }
 }

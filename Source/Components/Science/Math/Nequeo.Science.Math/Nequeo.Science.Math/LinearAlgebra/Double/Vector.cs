@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2015 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,14 +27,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.LinearAlgebra.Storage;
+using Nequeo.Science.Math.Threading;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double
 {
-    using System;
-    using Distributions;
-    using Generic;
-    using Properties;
-    using Threading;
-
     /// <summary>
     /// <c>double</c> version of the <see cref="Vector{T}"/> class.
     /// </summary>
@@ -39,17 +40,42 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
     public abstract class Vector : Vector<double>
     {
         /// <summary>
-        /// Initializes a new instance of the Vector class. 
-        /// Constructs a <strong>Vector</strong> with the given size.
+        /// Initializes a new instance of the Vector class.
         /// </summary>
-        /// <param name="size">
-        /// The size of the <strong>Vector</strong> to construct.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="size"/> is less than one.
-        /// </exception>
-        protected Vector(int size) : base(size)
+        protected Vector(VectorStorage<double> storage)
+            : base(storage)
         {
+        }
+
+        /// <summary>
+        /// Set all values whose absolute value is smaller than the threshold to zero.
+        /// </summary>
+        public override void CoerceZero(double threshold)
+        {
+            MapInplace(x => System.Math.Abs(x) < threshold ? 0d : x, Zeros.AllowSkip);
+        }
+
+        /// <summary>
+        /// Conjugates vector and save result to <paramref name="result"/>
+        /// </summary>
+        /// <param name="result">Target vector</param>
+        protected sealed override void DoConjugate(Vector<double> result)
+        {
+            if (ReferenceEquals(this, result))
+            {
+                return;
+            }
+
+            CopyTo(result);
+        }
+
+        /// <summary>
+        /// Negates vector and saves result to <paramref name="result"/>
+        /// </summary>
+        /// <param name="result">Target vector</param>
+        protected override void DoNegate(Vector<double> result)
+        {
+            Map(x => -x, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -63,10 +89,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// </param>
         protected override void DoAdd(double scalar, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) + scalar);
-            }
+            Map(x => x + scalar, result, Zeros.Include);
         }
 
         /// <summary>
@@ -80,10 +103,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// </param>
         protected override void DoAdd(Vector<double> other, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) + other.At(index));
-            }
+            Map2((x, y) => x + y, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -97,7 +117,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// </param>
         protected override void DoSubtract(double scalar, Vector<double> result)
         {
-            DoAdd(-scalar, result);
+            Map(x => x - scalar, result, Zeros.Include);
         }
 
         /// <summary>
@@ -111,10 +131,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// </param>
         protected override void DoSubtract(Vector<double> other, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) - other.At(index));
-            }
+            Map2((x, y) => x - y, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -128,24 +145,31 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// </param>
         protected override void DoMultiply(double scalar, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) * scalar);
-            }
+            Map(x => x*scalar, result, Zeros.AllowSkip);
         }
 
         /// <summary>
         /// Divides each element of the vector by a scalar and stores the result in the result vector.
         /// </summary>
-        /// <param name="scalar">
+        /// <param name="divisor">
         /// The scalar to divide with.
         /// </param>
         /// <param name="result">
         /// The vector to store the result of the division.
         /// </param>
-        protected override void DoDivide(double scalar, Vector<double> result)
+        protected override void DoDivide(double divisor, Vector<double> result)
         {
-            DoMultiply(1 / scalar, result);
+            Map(x => x/divisor, result, divisor == 0.0 ? Zeros.Include : Zeros.AllowSkip);
+        }
+
+        /// <summary>
+        /// Divides a scalar by each element of the vector and stores the result in the result vector.
+        /// </summary>
+        /// <param name="dividend">The scalar to divide.</param>
+        /// <param name="result">The vector to store the result of the division.</param>
+        protected override void DoDivideByThis(double dividend, Vector<double> result)
+        {
+            Map(x => dividend/x, result, Zeros.Include);
         }
 
         /// <summary>
@@ -155,57 +179,136 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <param name="result">The vector to store the result of the pointwise multiplication.</param>
         protected override void DoPointwiseMultiply(Vector<double> other, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) * other.At(index));
-            }
+            Map2((x, y) => x*y, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
         /// Pointwise divide this vector with another vector and stores the result into the result vector.
         /// </summary>
-        /// <param name="other">The vector to pointwise divide this one by.</param>
+        /// <param name="divisor">The vector to pointwise divide this one by.</param>
         /// <param name="result">The vector to store the result of the pointwise division.</param>
-        protected override void DoPointwiseDivide(Vector<double> other, Vector<double> result)
+        protected override void DoPointwiseDivide(Vector<double> divisor, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) / other.At(index));
-            }
+            Map2((x, y) => x/y, divisor, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise raise this vector to an exponent and store the result into the result vector.
+        /// </summary>
+        /// <param name="exponent">The exponent to raise this vector values to.</param>
+        /// <param name="result">The vector to store the result of the pointwise power.</param>
+        protected override void DoPointwisePower(double exponent, Vector<double> result)
+        {
+            Map(x => System.Math.Pow(x, exponent), result, exponent > 0.0 ? Zeros.AllowSkip : Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise canonical modulus, where the result has the sign of the divisor,
+        /// of this vector with another vector and stores the result into the result vector.
+        /// </summary>
+        /// <param name="divisor">The pointwise denominator vector to use.</param>
+        /// <param name="result">The result of the modulus.</param>
+        protected override void DoPointwiseModulus(Vector<double> divisor, Vector<double> result)
+        {
+            Map2(Euclid.Modulus, divisor, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise remainder (% operator), where the result has the sign of the dividend,
+        /// of this vector with another vector and stores the result into the result vector.
+        /// </summary>
+        /// <param name="divisor">The pointwise denominator vector to use.</param>
+        /// <param name="result">The result of the modulus.</param>
+        protected override void DoPointwiseRemainder(Vector<double> divisor, Vector<double> result)
+        {
+            Map2(Euclid.Remainder, divisor, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise applies the exponential function to each value and stores the result into the result vector.
+        /// </summary>
+        /// <param name="result">The vector to store the result.</param>
+        protected override void DoPointwiseExp(Vector<double> result)
+        {
+            Map(System.Math.Exp, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise applies the natural logarithm function to each value and stores the result into the result vector.
+        /// </summary>
+        /// <param name="result">The vector to store the result.</param>
+        protected override void DoPointwiseLog(Vector<double> result)
+        {
+            Map(System.Math.Log, result, Zeros.Include);
         }
 
         /// <summary>
         /// Computes the dot product between this vector and another vector.
         /// </summary>
-        /// <param name="other">
-        /// The other vector to add.
-        /// </param>
-        /// <returns>s
-        /// The result of the addition.
-        /// </returns>
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of a[i]*b[i] for all i.</returns>
         protected override double DoDotProduct(Vector<double> other)
         {
             var dot = 0.0;
-
             for (var i = 0; i < Count; i++)
             {
                 dot += At(i) * other.At(i);
             }
-
             return dot;
         }
 
         /// <summary>
-        /// Computes the modulus for each element of the vector for the given divisor.
+        /// Computes the dot product between the conjugate of this vector and another vector.
         /// </summary>
-        /// <param name="divisor">The divisor to use.</param>
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of conj(a[i])*b[i] for all i.</returns>
+        protected sealed override double DoConjugateDotProduct(Vector<double> other)
+        {
+            return DoDotProduct(other);
+        }
+
+        /// <summary>
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for each element of the vector for the given divisor.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
         /// <param name="result">A vector to store the results in.</param>
         protected override void DoModulus(double divisor, Vector<double> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result[index] = At(index) % divisor;
-            }
+            Map(x => Euclid.Modulus(x, divisor), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for the given dividend for each element of the vector.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoModulusByThis(double dividend, Vector<double> result)
+        {
+            Map(x => Euclid.Modulus(dividend, x), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for each element of the vector for the given divisor.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoRemainder(double divisor, Vector<double> result)
+        {
+            Map(x => Euclid.Remainder(x, divisor), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for the given dividend for each element of the vector.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoRemainderByThis(double dividend, Vector<double> result)
+        {
+            Map(x => Euclid.Remainder(dividend, x), result, Zeros.Include);
         }
 
         /// <summary>
@@ -214,20 +317,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <returns>The value of the absolute minimum element.</returns>
         public override double AbsoluteMinimum()
         {
-            return Math.Abs(At(AbsoluteMinimumIndex()));
+            return System.Math.Abs(At(AbsoluteMinimumIndex()));
         }
 
         /// <summary>
         /// Returns the index of the absolute minimum element.
         /// </summary>
-        /// <returns>The index of absolute minimum element.</returns>   
+        /// <returns>The index of absolute minimum element.</returns>
         public override int AbsoluteMinimumIndex()
         {
             var index = 0;
-            var min = Math.Abs(At(index));
+            var min = System.Math.Abs(At(index));
             for (var i = 1; i < Count; i++)
             {
-                var test = Math.Abs(At(i));
+                var test = System.Math.Abs(At(i));
                 if (test < min)
                 {
                     index = i;
@@ -244,20 +347,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <returns>The value of the absolute maximum element.</returns>
         public override double AbsoluteMaximum()
         {
-            return Math.Abs(At(AbsoluteMaximumIndex()));
+            return System.Math.Abs(At(AbsoluteMaximumIndex()));
         }
 
         /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>   
+        /// <returns>The index of absolute maximum element.</returns>
         public override int AbsoluteMaximumIndex()
         {
             var index = 0;
-            var max = Math.Abs(At(index));
+            var max = System.Math.Abs(At(index));
             for (var i = 1; i < Count; i++)
             {
-                var test = Math.Abs(At(i));
+                var test = System.Math.Abs(At(i));
                 if (test > max)
                 {
                     index = i;
@@ -275,29 +378,43 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         public override double Sum()
         {
             var sum = 0.0;
-
             for (var i = 0; i < Count; i++)
             {
                 sum += At(i);
             }
-
             return sum;
         }
 
         /// <summary>
-        /// Computes the sum of the absolute value of the vector's elements.
+        /// Calculates the L1 norm of the vector, also known as Manhattan norm.
         /// </summary>
-        /// <returns>The sum of the absolute value of the vector's elements.</returns>
-        public override double SumMagnitudes()
+        /// <returns>The sum of the absolute values.</returns>
+        public override double L1Norm()
         {
             var sum = 0.0;
-
             for (var i = 0; i < Count; i++)
             {
-                sum += Math.Abs(At(i));
+                sum += System.Math.Abs(At(i));
             }
-
             return sum;
+        }
+
+        /// <summary>
+        /// Calculates the L2 norm of the vector, also known as Euclidean norm.
+        /// </summary>
+        /// <returns>The square root of the sum of the squared values.</returns>
+        public override double L2Norm()
+        {
+            return System.Math.Sqrt(DoDotProduct(this));
+        }
+
+        /// <summary>
+        /// Calculates the infinity norm of the vector.
+        /// </summary>
+        /// <returns>The maximum absolute value.</returns>
+        public override double InfinityNorm()
+        {
+            return CommonParallel.Aggregate(0, Count, i => System.Math.Abs(At(i)), System.Math.Max, 0d);
         }
 
         /// <summary>
@@ -307,73 +424,28 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// The p value.
         /// </param>
         /// <returns>
-        /// <c>Scalar ret = (sum(abs(this[i])^p))^(1/p)</c>
+        /// <c>Scalar ret = ( ∑|At(i)|^p )^(1/p)</c>
         /// </returns>
         public override double Norm(double p)
         {
-            if (p < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("p");
-            }
+            if (p < 0d) throw new ArgumentOutOfRangeException("p");
 
-            if (Double.IsPositiveInfinity(p))
-            {
-                return CommonParallel.Select(
-                    0,
-                    Count,
-                    (index, localData) => Math.Max(localData, Math.Abs(At(index))),
-                    Math.Max);
-            }
+            if (p == 1d) return L1Norm();
+            if (p == 2d) return L2Norm();
+            if (double.IsPositiveInfinity(p)) return InfinityNorm();
 
-            var sum = 0.0;
-
+            var sum = 0d;
             for (var index = 0; index < Count; index++)
             {
-                sum += Math.Pow(Math.Abs(At(index)), p);
+                sum += System.Math.Pow(System.Math.Abs(At(index)), p);
             }
-
-            return Math.Pow(sum, 1.0 / p);
-        }
-
-        /// <summary>
-        /// Conjugates vector and save result to <paramref name="target"/>
-        /// </summary>
-        /// <param name="target">Target vector</param>
-        protected override void DoConjugate(Vector<double> target)
-        {
-            if (ReferenceEquals(this, target))
-            {
-                return;
-            }
-
-            CopyTo(target);
-        }
-
-        /// <summary>
-        /// Returns a negated vector.
-        /// </summary>
-        /// <returns>
-        /// The negated vector.
-        /// </returns>
-        /// <remarks>
-        /// Added as an alternative to the unary negation operator.
-        /// </remarks>
-        public override Vector<double> Negate()
-        {
-            var result = CreateVector(Count);
-
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, -At(index));
-            }
-
-            return result;
+            return System.Math.Pow(sum, 1.0/p);
         }
 
         /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>          
+        /// <returns>The index of absolute maximum element.</returns>
         public override int MaximumIndex()
         {
             var index = 0;
@@ -394,7 +466,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// <summary>
         /// Returns the index of the minimum element.
         /// </summary>
-        /// <returns>The index of minimum element.</returns>  
+        /// <returns>The index of minimum element.</returns>
         public override int MinimumIndex()
         {
             var index = 0;
@@ -423,73 +495,21 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double
         /// </returns>
         public override Vector<double> Normalize(double p)
         {
-            if (p < 0.0)
+            if (p < 0d)
             {
                 throw new ArgumentOutOfRangeException("p");
             }
 
-            var norm = Norm(p);
+            double norm = Norm(p);
             var clone = Clone();
-            if (norm == 0.0)
+            if (norm == 0d)
             {
                 return clone;
             }
 
-            clone.Multiply(1.0 / norm, clone);
+            clone.Multiply(1d / norm, clone);
 
             return clone;
-        }
-
-        /// <summary>
-        /// Generates a vector with random elements
-        /// </summary>
-        /// <param name="length">Number of elements in the vector.</param>
-        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
-        /// <returns>
-        /// A vector with n-random elements distributed according
-        /// to the specified random distribution.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">If the n vector is non positive<see langword="null" />.</exception> 
-        public override Vector<double> Random(int length, IContinuousDistribution randomDistribution)
-        {
-            if (length < 1)
-            {
-                throw new ArgumentException(Resources.ArgumentMustBePositive, "length");
-            }
-
-            var v = CreateVector(length);
-            for (var index = 0; index < Count; index++)
-            {
-                v.At(index, randomDistribution.Sample());
-            }
-
-            return v;
-        }
-
-        /// <summary>
-        /// Generates a vector with random elements
-        /// </summary>
-        /// <param name="length">Number of elements in the vector.</param>
-        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
-        /// <returns>
-        /// A vector with n-random elements distributed according
-        /// to the specified random distribution.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">If the n vector is non positive<see langword="null" />.</exception> 
-        public override Vector<double> Random(int length, IDiscreteDistribution randomDistribution)
-        {
-            if (length < 1)
-            {
-                throw new ArgumentException(Resources.ArgumentMustBePositive, "length");
-            }
-
-            var v = CreateVector(length);
-            for (var index = 0; index < Count; index++)
-            {
-                At(index, randomDistribution.Sample());
-            }
-
-            return v;
         }
     }
 }

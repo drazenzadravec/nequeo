@@ -1,10 +1,9 @@
-﻿// <copyright file="IDistribution.cs" company="Math.NET">
+﻿// <copyright file="IUnivariateDistribution.cs" company="Math.NET">
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -30,48 +29,16 @@
 
 namespace Nequeo.Science.Math.Distributions
 {
-    using System;
-
     /// <summary>
-    /// The interface for univariate distributions.
+    /// Probability Distribution.
     /// </summary>
+    /// <seealso cref="IContinuousDistribution"/>
+    /// <seealso cref="IDiscreteDistribution"/>
     public interface IDistribution
     {
         /// <summary>
-        /// Gets or sets the random number generator which is used to generate random samples from the distribution.
+        /// Gets or sets the random number generator which is used to draw random samples.
         /// </summary>
-        Random RandomSource { get; set; }
-
-        /// <summary>
-        /// Gets the mean of the distribution.
-        /// </summary>
-        double Mean { get; }
-
-        /// <summary>
-        /// Gets the variance of the distribution.
-        /// </summary>
-        double Variance { get; }
-
-        /// <summary>
-        /// Gets the standard deviation of the distribution.
-        /// </summary>
-        double StdDev { get; }
-
-        /// <summary>
-        /// Gets the entropy of the distribution.
-        /// </summary>
-        double Entropy { get; }
-
-        /// <summary>
-        /// Gets the skewness of the distribution.
-        /// </summary>
-        double Skewness { get; }
-
-        /// <summary>
-        /// Computes the cumulative distribution function (cdf) for this probability distribution.
-        /// </summary>
-        /// <param name="x">The location at which to compute the cumulative distribution function.</param>
-        /// <returns>the cumulative distribution at location <paramref name="x"/>.</returns>
-        double CumulativeDistribution(double x);
+        System.Random RandomSource { get; set; }
     }
 }

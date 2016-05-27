@@ -1,69 +1,65 @@
-/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
- *  Copyright :     Copyright © Nequeo Pty Ltd 2012 http://www.nequeo.com.au/
- * 
- *  File :          
- *  Purpose :       
- * 
- */
+// <copyright file="Complex32.cs" company="Math.NET">
+// Math.NET Numerics, part of the Math.NET Project
+// http://numerics.mathdotnet.com
+// http://github.com/mathnet/mathnet-numerics
+//
+// Copyright (c) 2009-2010 Math.NET
+//
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation
+// files (the "Software"), to deal in the Software without
+// restriction, including without limitation the rights to use,
+// copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following
+// conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+// </copyright>
 
-#region Nequeo Pty Ltd License
-/*
-    Permission is hereby granted, free of charge, to any person
-    obtaining a copy of this software and associated documentation
-    files (the "Software"), to deal in the Software without
-    restriction, including without limitation the rights to use,
-    copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following
-    conditions:
-
-    The above copyright notice and this permission notice shall be
-    included in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-    OTHER DEALINGS IN THE SOFTWARE.
-*/
-#endregion
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace Nequeo.Science.Math
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Numerics;
+#if !PORTABLE
     using System.Runtime;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using Properties;
+#endif
+#if !NOSYSNUMERICS
+    using Complex = System.Numerics.Complex;
+    using BigInteger = System.Numerics.BigInteger;
+#endif
 
     /// <summary>
-    /// 32-bit Complex32 numbers class.
+    /// 32-bit single precision complex numbers class.
     /// </summary>
     /// <remarks>
     /// <para>
     /// The class <c>Complex32</c> provides all elementary operations
     /// on complex numbers. All the operators <c>+</c>, <c>-</c>,
     /// <c>*</c>, <c>/</c>, <c>==</c>, <c>!=</c> are defined in the
-    /// canonical way. Additional complex trigonometric functions 
-    /// are also provided. Note that the <c>Complex32</c> structures 
-    /// has two special constant values <see cref="Complex32.NaN"/> and 
-    /// <see cref="Complex32.Infinity"/>.
-    /// </para>
-    /// <para>
-    /// In order to avoid possible ambiguities resulting from a 
-    /// <c>Complex32(float, float)</c> constructor, the static methods 
-    /// <see cref="Complex32.WithRealImaginary"/> and <see cref="Complex32.WithModulusArgument"/>
-    /// are provided instead.
+    /// canonical way. Additional complex trigonometric functions
+    /// are also provided. Note that the <c>Complex32</c> structures
+    /// has two special constant values <see cref="Complex32.NaN"/> and
+    /// <see cref="Complex32.PositiveInfinity"/>.
     /// </para>
     /// <para>
     /// <code>
-    /// Complex32 x = Complex32.FromRealImaginary(1d, 2d);
-    /// Complex32 y = Complex32.FromModulusArgument(1d, Math.Pi);
+    /// Complex32 x = new Complex32(1f,2f);
+    /// Complex32 y = Complex32.FromPolarCoordinates(1f, Math.Pi);
     /// Complex32 z = (x + y) / (x - y);
     /// </code>
     /// </para>
@@ -75,141 +71,74 @@ namespace Nequeo.Science.Math
     /// </remarks>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct Complex32 : IFormattable, IEquatable<Complex32>, IPrecisionSupport<Complex32>
+    [DataContract(Namespace = "urn:MathNet/Numerics")]
+    public struct Complex32 : IFormattable, IEquatable<Complex32>
     {
-        #region fields
-
-        /// <summary>
-        /// Represents imaginary unit number.
-        /// </summary>
-        private static readonly Complex32 _i = new Complex32(0, 1);
-
-        /// <summary>
-        /// Represents a infinite complex number
-        /// </summary>
-        private static readonly Complex32 _infinity = new Complex32(float.PositiveInfinity, float.PositiveInfinity);
-
-        /// <summary>
-        /// Represents not-a-number.
-        /// </summary>
-        private static readonly Complex32 _nan = new Complex32(float.NaN, float.NaN);
-
-        /// <summary>
-        /// Representing the one value.
-        /// </summary>
-        private static readonly Complex32 _one = new Complex32(1.0f, 0.0f);
-
-        /// <summary>
-        /// Representing the zero value.
-        /// </summary>
-        private static readonly Complex32 _zero = new Complex32(0.0f, 0.0f);
-
         /// <summary>
         /// The real component of the complex number.
         /// </summary>
+        [DataMember(Order = 1)]
         private readonly float _real;
 
         /// <summary>
         /// The imaginary component of the complex number.
         /// </summary>
+        [DataMember(Order = 2)]
         private readonly float _imag;
-
-        #endregion fields
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the Complex32 structure with the given real
         /// and imaginary parts.
         /// </summary>
-        /// <param name="real">
-        /// The value for the real component.
-        /// </param>
-        /// <param name="imaginary">
-        /// The value for the imaginary component.
-        /// </param>
-#if !SILVERLIGHT
+        /// <param name="real">The value for the real component.</param>
+        /// <param name="imaginary">The value for the imaginary component.</param>
         [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
         public Complex32(float real, float imaginary)
         {
             _real = real;
             _imag = imaginary;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
-        /// Gets a value representing the infinity value. This field is constant.
+        /// Creates a complex number from a point's polar coordinates.
         /// </summary>
-        /// <value>The infinity.</value>
-        /// <remarks>
-        /// The semantic associated to this value is a <c>Complex32</c> of
-        /// infinite real and imaginary part. If you need more formal complex
-        /// number handling (according to the Riemann Sphere and the extended
-        /// complex plane C*, or using directed infinity) please check out the
-        /// alternative Math.NET symbolics packages instead.
-        /// </remarks>
-        /// <value>A value representing the infinity value.</value>
-        public static Complex32 Infinity
+        /// <returns>A complex number.</returns>
+        /// <param name="magnitude">The magnitude, which is the distance from the origin (the intersection of the x-axis and the y-axis) to the number.</param>
+        /// <param name="phase">The phase, which is the angle from the line to the horizontal axis, measured in radians.</param>
+        public static Complex32 FromPolarCoordinates(float magnitude, float phase)
         {
-            get
-            {
-                return _infinity;
-            }
+            return new Complex32(magnitude * (float)System.Math.Cos(phase), magnitude * (float)System.Math.Sin(phase));
         }
 
         /// <summary>
-        /// Gets a value representing not-a-number. This field is constant.
+        /// Returns a new <see cref="T:Nequeo.Science.Math.Complex32" /> instance
+        /// with a real number equal to zero and an imaginary number equal to zero.
         /// </summary>
-        /// <value>A value representing not-a-number.</value>
-        public static Complex32 NaN
-        {
-            get
-            {
-                return _nan;
-            }
-        }
+        public static readonly Complex32 Zero = new Complex32(0.0f, 0.0f);
 
         /// <summary>
-        /// Gets a value representing the imaginary unit number. This field is constant.
+        /// Returns a new <see cref="T:Nequeo.Science.Math.Complex32" /> instance
+        /// with a real number equal to one and an imaginary number equal to zero.
         /// </summary>
-        /// <value>A value representing the imaginary unit number.</value>
-        public static Complex32 ImaginaryOne
-        {
-            get
-            {
-                return _i;
-            }
-        }
+        public static readonly Complex32 One = new Complex32(1.0f, 0.0f);
 
         /// <summary>
-        /// Gets a value representing the zero value. This field is constant.
+        /// Returns a new <see cref="T:Nequeo.Science.Math.Complex32" /> instance
+        /// with a real number equal to zero and an imaginary number equal to one.
         /// </summary>
-        /// <value>A value representing the zero value.</value>
-        public static Complex32 Zero
-        {
-            get
-            {
-                return new Complex32(0.0f, 0.0f);
-            }
-        }
+        public static readonly Complex32 ImaginaryOne = new Complex32(0, 1);
 
         /// <summary>
-        /// Gets a value representing the <c>1</c> value. This field is constant.
+        /// Returns a new <see cref="T:Nequeo.Science.Math.Complex32" /> instance
+        /// with real and imaginary numbers positive infinite.
         /// </summary>
-        /// <value>A value representing the <c>1</c> value.</value>
-        public static Complex32 One
-        {
-            get
-            {
-                return _one;
-            }
-        }
+        public static readonly Complex32 PositiveInfinity = new Complex32(float.PositiveInfinity, float.PositiveInfinity);
 
-        #endregion Properties
+        /// <summary>
+        /// Returns a new <see cref="T:Nequeo.Science.Math.Complex32" /> instance
+        /// with real and imaginary numbers not a number.
+        /// </summary>
+        public static readonly Complex32 NaN = new Complex32(float.NaN, float.NaN);
 
         /// <summary>
         /// Gets the real component of the complex number.
@@ -217,13 +146,8 @@ namespace Nequeo.Science.Math
         /// <value>The real component of the complex number.</value>
         public float Real
         {
-#if !SILVERLIGHT
             [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-                get
-            {
-                return _real;
-            }
+            get { return _real; }
         }
 
         /// <summary>
@@ -232,12 +156,105 @@ namespace Nequeo.Science.Math
         /// <value>The real imaginary component of the complex number.</value>
         public float Imaginary
         {
-#if !SILVERLIGHT
             [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-                get
+            get { return _imag; }
+        }
+
+        /// <summary>
+        /// Gets the phase or argument of this <c>Complex32</c>.
+        /// </summary>
+        /// <remarks>
+        /// Phase always returns a value bigger than negative Pi and
+        /// smaller or equal to Pi. If this <c>Complex32</c> is zero, the Complex32
+        /// is assumed to be positive real with an argument of zero.
+        /// </remarks>
+        /// <returns>The phase or argument of this <c>Complex32</c></returns>
+        public float Phase
+        {
+            // NOTE: the special case for negative real numbers fixes negative-zero value behavior. Do not remove.
+            [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+            get { return _imag == 0f && _real < 0f ? (float)Constants.Pi : (float)System.Math.Atan2(_imag, _real); }
+        }
+
+        /// <summary>
+        /// Gets the magnitude (or absolute value) of a complex number.
+        /// </summary>
+        /// <remarks>Assuming that magnitude of (inf,a) and (a,inf) and (inf,inf) is inf and (NaN,a), (a,NaN) and (NaN,NaN) is NaN</remarks>
+        /// <returns>The magnitude of the current instance.</returns>
+        public float Magnitude
+        {
+            [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+            get
             {
-                return _imag;
+                if (float.IsNaN(_real) || float.IsNaN(_imag))
+                    return float.NaN;
+                if (float.IsInfinity(_real) || float.IsInfinity(_imag))
+                    return float.PositiveInfinity;
+                float a = System.Math.Abs(_real);
+                float b = System.Math.Abs(_imag);
+                if (a > b)
+                {
+                    double tmp = b / a;
+                    return a * (float)System.Math.Sqrt(1.0f + tmp * tmp);
+
+                }
+                if (a == 0.0f) // one can write a >= float.Epsilon here
+                {
+                    return b;
+                }
+                else
+                {
+                    double tmp = a / b;
+                    return b * (float)System.Math.Sqrt(1.0f + tmp * tmp);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the squared magnitude (or squared absolute value) of a complex number.
+        /// </summary>
+        /// <returns>The squared magnitude of the current instance.</returns>
+        public float MagnitudeSquared
+        {
+            get { return (_real * _real) + (_imag * _imag); }
+        }
+
+        /// <summary>
+        /// Gets the unity of this complex (same argument, but on the unit circle; exp(I*arg))
+        /// </summary>
+        /// <returns>The unity of this <c>Complex32</c>.</returns>
+        public Complex32 Sign
+        {
+            get
+            {
+                if (float.IsPositiveInfinity(_real) && float.IsPositiveInfinity(_imag))
+                {
+                    return new Complex32((float)Constants.Sqrt1Over2, (float)Constants.Sqrt1Over2);
+                }
+
+                if (float.IsPositiveInfinity(_real) && float.IsNegativeInfinity(_imag))
+                {
+                    return new Complex32((float)Constants.Sqrt1Over2, -(float)Constants.Sqrt1Over2);
+                }
+
+                if (float.IsNegativeInfinity(_real) && float.IsPositiveInfinity(_imag))
+                {
+                    return new Complex32(-(float)Constants.Sqrt1Over2, -(float)Constants.Sqrt1Over2);
+                }
+
+                if (float.IsNegativeInfinity(_real) && float.IsNegativeInfinity(_imag))
+                {
+                    return new Complex32(-(float)Constants.Sqrt1Over2, (float)Constants.Sqrt1Over2);
+                }
+
+                // don't replace this with "Magnitude"!
+                var mod = SpecialFunctions.Hypotenuse(_real, _imag);
+                if (mod == 0.0f)
+                {
+                    return Zero;
+                }
+
+                return new Complex32(_real / mod, _imag / mod);
             }
         }
 
@@ -318,115 +335,6 @@ namespace Nequeo.Science.Math
         }
 
         /// <summary>
-        /// Gets the conjugate of this <c>Complex32</c>.
-        /// </summary>
-        /// <remarks>
-        /// The semantic of <i>setting the conjugate</i> is such that
-        /// <code>
-        /// // a, b of type Complex32
-        /// a.Conjugate = b;
-        /// </code>
-        /// is equivalent to
-        /// <code>
-        /// // a, b of type Complex32
-        /// a = b.Conjugate
-        /// </code>
-        /// </remarks>
-        /// <returns>The conjugate of this <c>Complex32</c></returns>
-        public Complex32 Conjugate()
-        {
-            return new Complex32(_real, -_imag);
-        }
-
-        /// <summary>
-        /// Gets the magnitude or modulus of this <c>Complex32</c>.
-        /// </summary>
-        /// <returns>The magnitude or modulus of this <c>Complex32</c></returns>
-        /// <seealso cref="Phase"/>
-        public float Magnitude
-        {
-            get
-            {
-                return (float)Math.Sqrt((_real * _real) + (_imag * _imag));
-            }
-        }
-
-        /// <summary>
-        /// Gets the squared magnitude of this <c>Complex32</c>.
-        /// </summary>
-        /// <returns>The squared magnitude of this <c>Complex32</c></returns>
-        public float MagnitudeSquared
-        {
-            get
-            {
-                return (_real * _real) + (_imag * _imag);
-            }
-        }
-
-        /// <summary>
-        /// Gets the phase or argument of this <c>Complex32</c>.
-        /// </summary>
-        /// <remarks>
-        /// Phase always returns a value bigger than negative Pi and
-        /// smaller or equal to Pi. If this <c>Complex32</c> is zero, the Complex32
-        /// is assumed to be positive real with an argument of zero.
-        /// </remarks>
-        /// <returns>The phase or argument of this <c>Complex32</c></returns>
-        public float Phase
-        {
-            get
-            {
-                if (IsReal() && _real < 0)
-                {
-                    return (float)Math.PI;
-                }
-
-                return IsRealNonNegative() ? 0.0f : (float)Math.Atan2(_imag, _real);
-            }
-        }
-
-        /// <summary>
-        /// Gets the unity of this complex (same argument, but on the unit circle; exp(I*arg))
-        /// </summary>
-        /// <returns>The unity of this <c>Complex32</c>.</returns>
-        public Complex32 Sign
-        {
-            get
-            {
-                if (float.IsPositiveInfinity(_real) && float.IsPositiveInfinity(_imag))
-                {
-                    return new Complex32((float)Constants.Sqrt1Over2, (float)Constants.Sqrt1Over2);
-                }
-
-                if (float.IsPositiveInfinity(_real) && float.IsNegativeInfinity(_imag))
-                {
-                    return new Complex32((float)Constants.Sqrt1Over2, -(float)Constants.Sqrt1Over2);
-                }
-
-                if (float.IsNegativeInfinity(_real) && float.IsPositiveInfinity(_imag))
-                {
-                    return new Complex32(-(float)Constants.Sqrt1Over2, -(float)Constants.Sqrt1Over2);
-                }
-
-                if (float.IsNegativeInfinity(_real) && float.IsNegativeInfinity(_imag))
-                {
-                    return new Complex32(-(float)Constants.Sqrt1Over2, (float)Constants.Sqrt1Over2);
-                }
-
-                // don't replace this with "Magnitude"!
-                var mod = SpecialFunctions.Hypotenuse(_real, _imag);
-                if (mod == 0.0f)
-                {
-                    return Zero;
-                }
-
-                return new Complex32((float)(_real / mod), (float)(_imag / mod));
-            }
-        }
-
-        #region Exponential Functions
-
-        /// <summary>
         /// Exponential of this <c>Complex32</c> (exp(x), E^x).
         /// </summary>
         /// <returns>
@@ -434,29 +342,45 @@ namespace Nequeo.Science.Math
         /// </returns>
         public Complex32 Exponential()
         {
-            var exp = (float)Math.Exp(_real);
+            var exp = (float)System.Math.Exp(_real);
             if (IsReal())
             {
                 return new Complex32(exp, 0.0f);
             }
 
-            return new Complex32(exp * (float)Trig.Cosine(_imag), exp * (float)Trig.Sine(_imag));
+            return new Complex32(exp * (float)System.Math.Cos(_imag), exp * (float)System.Math.Sin(_imag));
         }
 
         /// <summary>
         /// Natural Logarithm of this <c>Complex32</c> (Base E).
         /// </summary>
-        /// <returns>
-        /// The natural logarithm of this complex number.
-        /// </returns>
+        /// <returns>The natural logarithm of this complex number.</returns>
         public Complex32 NaturalLogarithm()
         {
             if (IsRealNonNegative())
             {
-                return new Complex32((float)Math.Log(_real), 0.0f);
+                return new Complex32((float)System.Math.Log(_real), 0.0f);
             }
 
-            return new Complex32(0.5f * (float)Math.Log(MagnitudeSquared), Phase);
+            return new Complex32(0.5f * (float)System.Math.Log(MagnitudeSquared), Phase);
+        }
+
+        /// <summary>
+        /// Common Logarithm of this <c>Complex32</c> (Base 10).
+        /// </summary>
+        /// <returns>The common logarithm of this complex number.</returns>
+        public Complex32 CommonLogarithm()
+        {
+            return NaturalLogarithm() / (float)Constants.Ln10;
+        }
+
+        /// <summary>
+        /// Logarithm of this <c>Complex32</c> with custom base.
+        /// </summary>
+        /// <returns>The logarithm of this complex number.</returns>
+        public Complex32 Logarithm(float baseValue)
+        {
+            return NaturalLogarithm() / (float)System.Math.Log(baseValue);
         }
 
         /// <summary>
@@ -477,19 +401,16 @@ namespace Nequeo.Science.Math
                     return One;
                 }
 
-                if (exponent.Real > 0.0f)
+                if (exponent.Real > 0f)
                 {
                     return Zero;
                 }
 
-                if (exponent.Real < 0)
+                if (exponent.Real < 0f)
                 {
-                    if (exponent.Imaginary == 0.0f)
-                    {
-                        return new Complex32(float.PositiveInfinity, 0.0f);
-                    }
-
-                    return new Complex32(float.PositiveInfinity, float.PositiveInfinity);
+                    return exponent.Imaginary == 0f
+                        ? new Complex32(float.PositiveInfinity, 0f)
+                        : new Complex32(float.PositiveInfinity, float.PositiveInfinity);
                 }
 
                 return NaN;
@@ -538,23 +459,23 @@ namespace Nequeo.Science.Math
         {
             if (IsRealNonNegative())
             {
-                return new Complex32((float)Math.Sqrt(_real), 0.0f);
+                return new Complex32((float)System.Math.Sqrt(_real), 0.0f);
             }
 
             Complex32 result;
 
-            var absReal = Math.Abs(Real);
-            var absImag = Math.Abs(Imaginary);
+            var absReal = System.Math.Abs(Real);
+            var absImag = System.Math.Abs(Imaginary);
             double w;
             if (absReal >= absImag)
             {
                 var ratio = Imaginary / Real;
-                w = Math.Sqrt(absReal) * Math.Sqrt(0.5 * (1.0f + Math.Sqrt(1.0f + (ratio * ratio))));
+                w = System.Math.Sqrt(absReal) * System.Math.Sqrt(0.5 * (1.0f + System.Math.Sqrt(1.0f + (ratio * ratio))));
             }
             else
             {
                 var ratio = Real / Imaginary;
-                w = Math.Sqrt(absImag) * Math.Sqrt(0.5 * (Math.Abs(ratio) + Math.Sqrt(1.0f + (ratio * ratio))));
+                w = System.Math.Sqrt(absImag) * System.Math.Sqrt(0.5 * (System.Math.Abs(ratio) + System.Math.Sqrt(1.0f + (ratio * ratio))));
             }
 
             if (Real >= 0.0f)
@@ -573,186 +494,28 @@ namespace Nequeo.Science.Math
             return result;
         }
 
-        #endregion
-
-        #region Static Initializers
-
         /// <summary>
-        /// Constructs a <c>Complex32</c> from its real
-        /// and imaginary parts.
+        /// Evaluate all square roots of this <c>Complex32</c>.
         /// </summary>
-        /// <param name="real">
-        /// The value for the real component.
-        /// </param>
-        /// <param name="imaginary">
-        /// The value for the imaginary component.
-        /// </param>
-        /// <returns>
-        /// A new <c>Complex32</c> with the given values.
-        /// </returns>
-        public static Complex32 WithRealImaginary(float real, float imaginary)
+        public Tuple<Complex32, Complex32> SquareRoots()
         {
-            return new Complex32(real, imaginary);
+            var principal = SquareRoot();
+            return new Tuple<Complex32, Complex32>(principal, -principal);
         }
 
         /// <summary>
-        /// Constructs a <c>Complex32</c> from its modulus and
-        /// argument.
+        /// Evaluate all cubic roots of this <c>Complex32</c>.
         /// </summary>
-        /// <param name="modulus">
-        /// Must be non-negative.
-        /// </param>
-        /// <param name="argument">
-        /// Real number.
-        /// </param>
-        /// <returns>
-        /// A new <c>Complex32</c> from the given values.
-        /// </returns>
-        public static Complex32 WithModulusArgument(float modulus, float argument)
+        public Tuple<Complex32, Complex32, Complex32> CubicRoots()
         {
-            if (modulus < 0.0f)
-            {
-                throw new ArgumentOutOfRangeException("modulus", Resources.ArgumentNotNegative);
-            }
-
-            return new Complex32(modulus * (float)Math.Cos(argument), modulus * (float)Math.Sin(argument));
+            float r = (float)System.Math.Pow(Magnitude, 1d / 3d);
+            float theta = Phase / 3;
+            const float shift = (float)Constants.Pi2 / 3;
+            return new Tuple<Complex32, Complex32, Complex32>(
+                FromPolarCoordinates(r, theta),
+                FromPolarCoordinates(r, theta + shift),
+                FromPolarCoordinates(r, theta - shift));
         }
-
-        #endregion
-
-        #region IFormattable Members
-
-        /// <summary>
-        /// A string representation of this complex number.
-        /// </summary>
-        /// <returns>
-        /// The string representation of this complex number.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString(null, null);
-        }
-
-        /// <summary>
-        /// A string representation of this complex number.
-        /// </summary>
-        /// <returns>
-        /// The string representation of this complex number formatted as specified by the
-        /// format string.
-        /// </returns>
-        /// <param name="format">
-        /// A format specification.
-        /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, null);
-        }
-
-        /// <summary>
-        /// A string representation of this complex number.
-        /// </summary>
-        /// <returns>
-        /// The string representation of this complex number formatted as specified by the
-        /// format provider.
-        /// </returns>
-        /// <param name="formatProvider">
-        /// An <see cref="IFormatProvider"/> that supplies culture-specific formatting information.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString(null, formatProvider);
-        }
-
-        /// <summary>
-        /// A string representation of this complex number.
-        /// </summary>
-        /// <returns>
-        /// The string representation of this complex number formatted as specified by the
-        /// format string and format provider.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// if the n, is not a number.
-        /// </exception>
-        /// <exception cref="ArgumentNullException">
-        /// if s, is <see langword="null"/>.
-        /// </exception>
-        /// <param name="format">
-        /// A format specification.
-        /// </param>
-        /// <param name="formatProvider">
-        /// An <see cref="IFormatProvider"/> that supplies culture-specific formatting information.
-        /// </param>
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            var ret = new StringBuilder();
-            ret.Append("(").Append(_real.ToString(format, formatProvider)).Append(", ").Append(_imag.ToString(format, formatProvider)).Append(")");
-            return ret.ToString();
-        }
-
-        #endregion
-
-        #region IEquatable<Complex32> Members
-
-        /// <summary>
-        /// Checks if two complex numbers are equal. Two complex numbers are equal if their
-        /// corresponding real and imaginary components are equal.
-        /// </summary>
-        /// <returns>
-        /// Returns <c>true</c> if the two objects are the same object, or if their corresponding
-        /// real and imaginary components are equal, <c>false</c> otherwise.
-        /// </returns>
-        /// <param name="other">
-        /// The complex number to compare to with.
-        /// </param>
-        public bool Equals(Complex32 other)
-        {
-            if (IsNaN() || other.IsNaN())
-            {
-                return false;
-            }
-
-            if (IsInfinity() && other.IsInfinity())
-            {
-                return true;
-            }
-
-            return _real.AlmostEqual(other._real) && _imag.AlmostEqual(other._imag);
-        }
-
-        /// <summary>
-        /// The hash code for the complex number.
-        /// </summary>
-        /// <returns>
-        /// The hash code of the complex number.
-        /// </returns>
-        /// <remarks>
-        /// The hash code is calculated as
-        /// System.Math.Exp(ComplexMath.Absolute(complexNumber)).
-        /// </remarks>
-        public override int GetHashCode()
-        {
-            return _real.GetHashCode() ^ (-_imag.GetHashCode());
-        }
-
-        /// <summary>
-        /// Checks if two complex numbers are equal. Two complex numbers are equal if their
-        /// corresponding real and imaginary components are equal.
-        /// </summary>
-        /// <returns>
-        /// Returns <c>true</c> if the two objects are the same object, or if their corresponding
-        /// real and imaginary components are equal, <c>false</c> otherwise.
-        /// </returns>
-        /// <param name="obj">
-        /// The complex number to compare to with.
-        /// </param>
-        public override bool Equals(object obj)
-        {
-            return (obj is Complex32) && Equals((Complex32)obj);
-        }
-
-        #endregion
-
-        #region Operators
 
         /// <summary>
         /// Equality test.
@@ -857,7 +620,7 @@ namespace Nequeo.Science.Math
         public static Complex32 operator *(Complex32 multiplicand, Complex32 multiplier)
         {
             return new Complex32(
-                (multiplicand._real * multiplier._real) - (multiplicand._imag * multiplier._imag), 
+                (multiplicand._real * multiplier._real) - (multiplicand._imag * multiplier._imag),
                 (multiplicand._real * multiplier._imag) + (multiplicand._imag * multiplier._real));
         }
 
@@ -880,6 +643,8 @@ namespace Nequeo.Science.Math
         }
 
         /// <summary>Division operator. Divides a complex number by another.</summary>
+        /// <remarks>Enhanced Smith's algorithm for dividing two complex numbers </remarks>
+        /// <see cref="InternalDiv(float, float, float, float, bool)"/>
         /// <returns>The result of the division.</returns>
         /// <param name="dividend">The dividend.</param>
         /// <param name="divisor">The divisor.</param>
@@ -892,16 +657,48 @@ namespace Nequeo.Science.Math
 
             if (divisor.IsZero())
             {
-                return Infinity;
+                return PositiveInfinity;
             }
-
-            var modSquared = divisor.MagnitudeSquared;
-            return new Complex32(
-                ((dividend._real * divisor._real) + (dividend._imag * divisor._imag)) / modSquared, 
-                ((dividend._imag * divisor._real) - (dividend._real * divisor._imag)) / modSquared);
+            float a = dividend.Real;
+            float b = dividend.Imaginary;
+            float c = divisor.Real;
+            float d = divisor.Imaginary;
+            if (System.Math.Abs(d) <= System.Math.Abs(c))
+                return InternalDiv(a, b, c, d, false);
+            return InternalDiv(b, a, d, c, true);
+        }
+        /// <summary>
+        ///  Helper method for dividing.
+        /// </summary>
+        /// <param name="a">Re first</param>
+        /// <param name="b">Im first</param>
+        /// <param name="c">Re second</param>
+        /// <param name="d">Im second</param>
+        /// <param name="swapped"></param>
+        /// <returns></returns>
+        private static Complex32 InternalDiv(float a, float b, float c, float d, bool swapped)
+        {
+            float r = d / c;
+            float t = 1 / (c + d * r);
+            float e, f;
+            if (r != 0.0f) // one can use r >= float.Epsilon || r <= float.Epsilon instead
+            {
+                e = (a + b * r) * t;
+                f = (b - a * r) * t;
+            }
+            else
+            {
+                e = (a + d * (b / c)) * t;
+                f = (b - d * (a / c)) * t;
+            }
+            if (swapped)
+                f = -f;
+            return new Complex32(e, f);
         }
 
         /// <summary>Division operator. Divides a float value by a complex number.</summary>
+        /// <remarks>Algorithm based on Smith's algorithm</remarks>
+        /// <see cref="InternalDiv(float, float, float, float, bool)"/> 
         /// <returns>The result of the division.</returns>
         /// <param name="dividend">The dividend.</param>
         /// <param name="divisor">The divisor.</param>
@@ -914,11 +711,13 @@ namespace Nequeo.Science.Math
 
             if (divisor.IsZero())
             {
-                return Infinity;
+                return PositiveInfinity;
             }
-
-            var zmod = divisor.MagnitudeSquared;
-            return new Complex32(dividend * divisor._real / zmod, -dividend * divisor._imag / zmod);
+            float c = divisor.Real;
+            float d = divisor.Imaginary;
+            if (System.Math.Abs(d) <= System.Math.Abs(c))
+                return InternalDiv(dividend, 0, c, d, false);
+            return InternalDiv(0, dividend, d, c, true);
         }
 
         /// <summary>Division operator. Divides a complex number by a float value.</summary>
@@ -934,158 +733,151 @@ namespace Nequeo.Science.Math
 
             if (divisor == 0.0f)
             {
-                return Infinity;
+                return PositiveInfinity;
             }
 
             return new Complex32(dividend._real / divisor, dividend._imag / divisor);
         }
 
         /// <summary>
-        /// Unary addition.
+        /// Computes the conjugate of a complex number and returns the result.
         /// </summary>
-        /// <returns>
-        /// Returns the same complex number.
-        /// </returns>
-#if !SILVERLIGHT
-        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-        public Complex32 Plus()
+        public Complex32 Conjugate()
         {
-            return this;
+            return new Complex32(_real, -_imag);
         }
 
         /// <summary>
-        /// Unary minus.
+        /// Returns the multiplicative inverse of a complex number.
         /// </summary>
-        /// <returns>
-        /// The negated value of this complex number.
-        /// </returns>
-#if !SILVERLIGHT
-        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-        public Complex32 Negate()
+        public Complex32 Reciprocal()
         {
-            return -this;
+            if (IsZero())
+            {
+                return Zero;
+            }
+
+            return 1.0f / this;
+        }
+
+        #region IFormattable Members
+
+        /// <summary>
+        /// Converts the value of the current complex number to its equivalent string representation in Cartesian form.
+        /// </summary>
+        /// <returns>The string representation of the current instance in Cartesian form.</returns>
+        public override string ToString()
+        {
+            return string.Format(CultureInfo.CurrentCulture, "({0}, {1})", _real, _imag);
         }
 
         /// <summary>
-        /// Adds a complex number to this one.
+        /// Converts the value of the current complex number to its equivalent string representation
+        /// in Cartesian form by using the specified format for its real and imaginary parts.
         /// </summary>
-        /// <returns>
-        /// The result of the addition.
-        /// </returns>
-        /// <param name="other">
-        /// The other complex number to add.
-        /// </param>
-#if !SILVERLIGHT
-        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-        public Complex32 Add(Complex32 other)
+        /// <returns>The string representation of the current instance in Cartesian form.</returns>
+        /// <param name="format">A standard or custom numeric format string.</param>
+        /// <exception cref="T:System.FormatException">
+        ///   <paramref name="format" /> is not a valid format string.</exception>
+        public string ToString(string format)
         {
-            return this + other;
+            return string.Format(CultureInfo.CurrentCulture, "({0}, {1})",
+                _real.ToString(format, CultureInfo.CurrentCulture),
+                _imag.ToString(format, CultureInfo.CurrentCulture));
         }
 
         /// <summary>
-        /// Subtracts a complex number from this one.
+        /// Converts the value of the current complex number to its equivalent string representation
+        /// in Cartesian form by using the specified culture-specific formatting information.
         /// </summary>
-        /// <returns>
-        /// The result of the subtraction.
-        /// </returns>
-        /// <param name="other">
-        /// The other complex number to subtract from this one.
-        /// </param>
-#if !SILVERLIGHT
-        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-        public Complex32 Subtract(Complex32 other)
+        /// <returns>The string representation of the current instance in Cartesian form, as specified by <paramref name="provider" />.</returns>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        public string ToString(IFormatProvider provider)
         {
-            return this - other;
+            return string.Format(provider, "({0}, {1})", _real, _imag);
         }
 
-        /// <summary>
-        /// Multiplies this complex number with this one.
-        /// </summary>
-        /// <returns>
-        /// The result of the multiplication.
-        /// </returns>
-        /// <param name="multiplier">
-        /// The complex number to multiply.
-        /// </param>
-#if !SILVERLIGHT
-        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-        public Complex32 Multiply(Complex32 multiplier)
+        /// <summary>Converts the value of the current complex number to its equivalent string representation
+        /// in Cartesian form by using the specified format and culture-specific format information for its real and imaginary parts.</summary>
+        /// <returns>The string representation of the current instance in Cartesian form, as specified by <paramref name="format" /> and <paramref name="provider" />.</returns>
+        /// <param name="format">A standard or custom numeric format string.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <exception cref="T:System.FormatException">
+        ///   <paramref name="format" /> is not a valid format string.</exception>
+        public string ToString(string format, IFormatProvider provider)
         {
-            return this * multiplier;
-        }
-
-        /// <summary>
-        /// Divides this complex number by another.
-        /// </summary>
-        /// <returns>
-        /// The result of the division.
-        /// </returns>
-        /// <param name="divisor">
-        /// The divisor.
-        /// </param>
-#if !SILVERLIGHT
-        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-#endif
-        public Complex32 Divide(Complex32 divisor)
-        {
-            return this / divisor;
+            return string.Format(provider, "({0}, {1})",
+                _real.ToString(format, provider),
+                _imag.ToString(format, provider));
         }
 
         #endregion
 
-        #region IPrecisionSupport<Complex32>
+        #region IEquatable<Complex32> Members
 
         /// <summary>
-        /// Returns a Norm of a value of this type, which is appropriate for measuring how
-        /// close this value is to zero.
+        /// Checks if two complex numbers are equal. Two complex numbers are equal if their
+        /// corresponding real and imaginary components are equal.
         /// </summary>
         /// <returns>
-        /// A norm of this value.
+        /// Returns <c>true</c> if the two objects are the same object, or if their corresponding
+        /// real and imaginary components are equal, <c>false</c> otherwise.
         /// </returns>
-        double IPrecisionSupport<Complex32>.Norm()
+        /// <param name="other">
+        /// The complex number to compare to with.
+        /// </param>
+        public bool Equals(Complex32 other)
         {
-            return MagnitudeSquared;
+            if (IsNaN() || other.IsNaN())
+            {
+                return false;
+            }
+
+            if (IsInfinity() && other.IsInfinity())
+            {
+                return true;
+            }
+
+            return _real.AlmostEqual(other._real) && _imag.AlmostEqual(other._imag);
         }
 
         /// <summary>
-        /// Returns a Norm of the difference of two values of this type, which is
-        /// appropriate for measuring how close together these two values are.
+        /// The hash code for the complex number.
         /// </summary>
-        /// <param name="otherValue">
-        /// The value to compare with.
-        /// </param>
         /// <returns>
-        /// A norm of the difference between this and the other value.
+        /// The hash code of the complex number.
         /// </returns>
-        double IPrecisionSupport<Complex32>.NormOfDifference(Complex32 otherValue)
+        /// <remarks>
+        /// The hash code is calculated as
+        /// System.Math.Exp(ComplexSystem.Math.Absolute(complexNumber)).
+        /// </remarks>
+        public override int GetHashCode()
         {
-            return (this - otherValue).MagnitudeSquared;
+            int hash = 27;
+            hash = (13 * hash) + _real.GetHashCode();
+            hash = (13 * hash) + _imag.GetHashCode();
+            return hash;
+        }
+
+        /// <summary>
+        /// Checks if two complex numbers are equal. Two complex numbers are equal if their
+        /// corresponding real and imaginary components are equal.
+        /// </summary>
+        /// <returns>
+        /// Returns <c>true</c> if the two objects are the same object, or if their corresponding
+        /// real and imaginary components are equal, <c>false</c> otherwise.
+        /// </returns>
+        /// <param name="obj">
+        /// The complex number to compare to with.
+        /// </param>
+        public override bool Equals(object obj)
+        {
+            return (obj is Complex32) && Equals((Complex32)obj);
         }
 
         #endregion
 
         #region Parse Functions
-
-        /// <summary>
-        /// Creates a complex number based on a string. The string can be in the
-        /// following formats (without the quotes): 'n', 'ni', 'n +/- ni',
-        /// 'ni +/- n', 'n,n', 'n,ni,' '(n,n)', or '(n,ni)', where n is a float.
-        /// </summary>
-        /// <returns>
-        /// A complex number containing the value specified by the given string.
-        /// </returns>
-        /// <param name="value">
-        /// The string to parse.
-        /// </param>
-        public static Complex32 Parse(string value)
-        {
-            return Parse(value, null);
-        }
 
         /// <summary>
         /// Creates a complex number based on a string. The string can be in the
@@ -1102,11 +894,11 @@ namespace Nequeo.Science.Math
         /// An <see cref="IFormatProvider"/> that supplies culture-specific
         /// formatting information.
         /// </param>
-        public static Complex32 Parse(string value, IFormatProvider formatProvider)
+        public static Complex32 Parse(string value, IFormatProvider formatProvider = null)
         {
             if (value == null)
             {
-                throw new ArgumentNullException(value);
+                throw new ArgumentNullException("value");
             }
 
             value = value.Trim();
@@ -1132,8 +924,8 @@ namespace Nequeo.Science.Math
             var keywords =
                 new[]
                 {
-                    textInfo.ListSeparator, numberFormatInfo.NaNSymbol, 
-                    numberFormatInfo.NegativeInfinitySymbol, numberFormatInfo.PositiveInfinitySymbol, 
+                    textInfo.ListSeparator, numberFormatInfo.NaNSymbol,
+                    numberFormatInfo.NegativeInfinitySymbol, numberFormatInfo.PositiveInfinitySymbol,
                     "+", "-", "i", "j"
                 };
 
@@ -1238,7 +1030,7 @@ namespace Nequeo.Science.Math
                 }
             }
 
-#if SILVERLIGHT
+#if PORTABLE
             var value = GlobalizationHelper.ParseSingle(ref token);
 #else
             var value = GlobalizationHelper.ParseSingle(ref token, format.GetCultureInfo());
@@ -1262,17 +1054,17 @@ namespace Nequeo.Science.Math
         }
 
         /// <summary>
-        /// Converts the string representation of a complex number to a single-precision complex number equivalent. 
+        /// Converts the string representation of a complex number to a single-precision complex number equivalent.
         /// A return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
-        /// A string containing a complex number to convert. 
+        /// A string containing a complex number to convert.
         /// </param>
         /// <param name="result">
         /// The parsed value.
         /// </param>
         /// <returns>
-        /// If the conversion succeeds, the result will contain a complex number equivalent to value. 
+        /// If the conversion succeeds, the result will contain a complex number equivalent to value.
         /// Otherwise the result will contain complex32.Zero.  This parameter is passed uninitialized
         /// </returns>
         public static bool TryParse(string value, out Complex32 result)
@@ -1307,12 +1099,12 @@ namespace Nequeo.Science.Math
             }
             catch (ArgumentNullException)
             {
-                result = _zero;
+                result = Zero;
                 ret = false;
             }
             catch (FormatException)
             {
-                result = _zero;
+                result = Zero;
                 ret = false;
             }
 
@@ -1395,6 +1187,7 @@ namespace Nequeo.Science.Math
             return new Complex32(value, 0.0f);
         }
 
+#if !NOSYSNUMERICS
         /// <summary>
         /// Implicit conversion of a BigInteger int to a <c>Complex32</c>.
         /// </summary>
@@ -1404,6 +1197,7 @@ namespace Nequeo.Science.Math
         {
             return new Complex32((long)value, 0.0f);
         }
+#endif
 
         /// <summary>
         /// Implicit conversion of a real long to a <c>Complex32</c>.
@@ -1469,243 +1263,264 @@ namespace Nequeo.Science.Math
         #endregion
 
         /// <summary>
+        /// Returns the additive inverse of a specified complex number.
+        /// </summary>
+        /// <returns>The result of the real and imaginary components of the value parameter multiplied by -1.</returns>
+        /// <param name="value">A complex number.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Negate(Complex32 value)
+        {
+            return -value;
+        }
+
+        /// <summary>
+        /// Computes the conjugate of a complex number and returns the result.
+        /// </summary>
+        /// <returns>The conjugate of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Conjugate(Complex32 value)
+        {
+            return value.Conjugate();
+        }
+
+        /// <summary>
+        /// Adds two complex numbers and returns the result.
+        /// </summary>
+        /// <returns>The sum of <paramref name="left" /> and <paramref name="right" />.</returns>
+        /// <param name="left">The first complex number to add.</param>
+        /// <param name="right">The second complex number to add.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Add(Complex32 left, Complex32 right)
+        {
+            return left + right;
+        }
+
+        /// <summary>
+        /// Subtracts one complex number from another and returns the result.
+        /// </summary>
+        /// <returns>The result of subtracting <paramref name="right" /> from <paramref name="left" />.</returns>
+        /// <param name="left">The value to subtract from (the minuend).</param>
+        /// <param name="right">The value to subtract (the subtrahend).</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Subtract(Complex32 left, Complex32 right)
+        {
+            return left - right;
+        }
+
+        /// <summary>
+        /// Returns the product of two complex numbers.
+        /// </summary>
+        /// <returns>The product of the <paramref name="left" /> and <paramref name="right" /> parameters.</returns>
+        /// <param name="left">The first complex number to multiply.</param>
+        /// <param name="right">The second complex number to multiply.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Multiply(Complex32 left, Complex32 right)
+        {
+            return left * right;
+        }
+
+        /// <summary>
+        /// Divides one complex number by another and returns the result.
+        /// </summary>
+        /// <returns>The quotient of the division.</returns>
+        /// <param name="dividend">The complex number to be divided.</param>
+        /// <param name="divisor">The complex number to divide by.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Divide(Complex32 dividend, Complex32 divisor)
+        {
+            return dividend / divisor;
+        }
+        /// <summary>
+        /// Returns the multiplicative inverse of a complex number.
+        /// </summary>
+        /// <returns>The reciprocal of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Reciprocal(Complex32 value)
+        {
+            return value.Reciprocal();
+        }
+
+        /// <summary>
+        /// Returns the square root of a specified complex number.
+        /// </summary>
+        /// <returns>The square root of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Sqrt(Complex32 value)
+        {
+            return value.SquareRoot();
+        }
+
+        /// <summary>
         /// Gets the absolute value (or magnitude) of a complex number.
         /// </summary>
+        /// <returns>The absolute value of <paramref name="value" />.</returns>
         /// <param name="value">A complex number.</param>
-        /// <returns>The absolute value (or magnitude) of a complex number.</returns>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
         public static double Abs(Complex32 value)
         {
             return value.Magnitude;
         }
 
         /// <summary>
-        /// Trigonometric Arc Cosine of a <c>Complex</c> number.
+        /// Returns e raised to the power specified by a complex number.
         /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The arc cosine of a complex number.
-        /// </returns>
-        public static Complex32 Acos(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().InverseCosine();
-        }
-
-        /// <summary>
-        /// Trigonometric Arc Sine of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The arc sine of a complex number.
-        /// </returns>
-        public static Complex32 Asin(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().InverseSine();
-        }
-
-        /// <summary>
-        /// Trigonometric Arc Tangent of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The arc tangent of a complex number.
-        /// </returns>
-        public static Complex32 Atan(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().InverseTangent();
-        }
-
-        /// <summary>
-        /// Trigonometric Cosine of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The cosine of a complex number.
-        /// </returns>
-        public static Complex32 Cos(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().Cosine();
-        }
-
-        /// <summary>
-        /// Trigonometric Sine of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The Sine of a complex number.
-        /// </returns>
-        public static Complex32 Sin(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().Sine();
-        }
-
-        /// <summary>
-        /// Trigonometric Tangent of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The tangent of a complex number.
-        /// </returns>
-        public static Complex32 Tan(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().Tangent();
-        }
-
-        /// <summary>
-        /// Trigonometric Hyperbolic Cosine of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The hyperbolic cosine of a complex number.
-        /// </returns>
-        public static Complex32 Cosh(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().HyperbolicCosine();
-        }
-
-        /// <summary>
-        /// Trigonometric Hyperbolic Sine of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The hyperbolic sine of a complex number.
-        /// </returns>
-        public static Complex32 Sinh(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().HyperbolicSine();
-        }
-
-        /// <summary>
-        /// Trigonometric Hyperbolic Tangent of a <c>Complex</c> number.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The hyperbolic tangent of a complex number.
-        /// </returns>
-        public static Complex32 Tanh(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().HyperbolicTangent();
-        }
-
-        /// <summary>
-        /// Exponential of a <c>Complex</c> number (exp(x), E^x).
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The exponential of a complex number.
-        /// </returns>
+        /// <returns>The number e raised to the power <paramref name="value" />.</returns>
+        /// <param name="value">A complex number that specifies a power.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
         public static Complex32 Exp(Complex32 value)
         {
-            return (Complex32)value.ToComplex().Exponential();
+            return value.Exponential();
         }
 
         /// <summary>
-        /// Constructs a <c>Complex</c> from its magnitude and phase.
+        /// Returns a specified complex number raised to a power specified by a complex number.
         /// </summary>
-        /// <param name="magnitude">
-        /// Must be non-negative.
-        /// </param>
-        /// <param name="phase">
-        /// Real number.
-        /// </param>
-        /// <returns>
-        /// A new <c>Complex</c> from the given values.
-        /// </returns>
-        /// <seealso cref="WithModulusArgument"/>
-        public static Complex32 FromPolarCoordinates(float magnitude, float phase)
-        {
-            return WithModulusArgument(magnitude, phase);
-        }
-
-        /// <summary>
-        /// Natural Logarithm  of a <c>Complex</c> number (exp(x), E^x).
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The natural logarithm of a complex number.
-        /// </returns>
-        public static Complex32 Log(Complex32 value)
-        {
-            return (Complex32)value.ToComplex().NaturalLogarithm();
-        }
-
-        /// <summary>
-        /// Returns the logarithm of a specified complex number in a specified base
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <param name="baseValue">The base of the logarithm.</param>
-        /// <returns>The logarithm of value in base baseValue.</returns>
-        public static Complex32 Log(Complex32 value, float baseValue)
-        {
-            if (baseValue == 1.0)
-            {
-                return float.NaN;
-            }
-
-            return (Complex32)(value.ToComplex().NaturalLogarithm() / Math.Log(baseValue, Math.E));
-        }
-
-        /// <summary>
-        /// Returns the base-10 logarithm of a specified complex number in a specified base
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <returns>The base-10 logarithm of the complex number.</returns>
-        public static Complex32 Log10(Complex32 value)
-        {
-            return Log(value, 10);
-        }
-
-        /// <summary>
-        /// Raise this a <c>Complex</c>number to the given value.
-        /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <param name="power">The exponent.</param>
-        /// <returns>
-        /// The complex number raised to the given exponent.
-        /// </returns>
+        /// <returns>The complex number <paramref name="value" /> raised to the power <paramref name="power" />.</returns>
+        /// <param name="value">A complex number to be raised to a power.</param>
+        /// <param name="power">A complex number that specifies a power.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
         public static Complex32 Pow(Complex32 value, Complex32 power)
         {
             return value.Power(power);
         }
 
         /// <summary>
-        /// Raise this a <c>Complex</c>number to the given value.
+        /// Returns a specified complex number raised to a power specified by a single-precision floating-point number.
         /// </summary>
-        /// <param name="value">A complex number.</param>
-        /// <param name="power">The exponent.</param>
-        /// <returns>
-        /// The complex number raised to the given exponent.
-        /// </returns>
+        /// <returns>The complex number <paramref name="value" /> raised to the power <paramref name="power" />.</returns>
+        /// <param name="value">A complex number to be raised to a power.</param>
+        /// <param name="power">A single-precision floating-point number that specifies a power.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
         public static Complex32 Pow(Complex32 value, float power)
         {
             return value.Power(power);
         }
 
         /// <summary>
-        /// Returns the multiplicative inverse of a complex number.
+        /// Returns the natural (base e) logarithm of a specified complex number.
         /// </summary>
+        /// <returns>The natural (base e) logarithm of <paramref name="value" />.</returns>
         /// <param name="value">A complex number.</param>
-        /// <returns>The reciprocal of value.</returns>
-        /// <remarks>If value is <see cref="Zero"/>, the method returns <see cref="Zero"/>. Otherwise, it returns the result of the expression <see cref="One"/> / value. </remarks>
-        public static Complex32 Reciprocal(Complex32 value)
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Log(Complex32 value)
         {
-            if (value.IsZero())
-            {
-                return _zero;
-            }
-
-            return 1.0f / value;
+            return value.NaturalLogarithm();
         }
 
         /// <summary>
-        /// The Square Root (power 1/2) of a <c>Complex</c> number.
+        /// Returns the logarithm of a specified complex number in a specified base.
         /// </summary>
+        /// <returns>The logarithm of <paramref name="value" /> in base <paramref name="baseValue" />.</returns>
         /// <param name="value">A complex number.</param>
-        /// <returns>
-        /// The square root of a complex number.
-        /// </returns>
-        public static Complex32 Sqrt(Complex32 value)
+        /// <param name="baseValue">The base of the logarithm.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Log(Complex32 value, float baseValue)
         {
-            return value.SquareRoot();
+            return value.Logarithm(baseValue);
+        }
+
+        /// <summary>
+        /// Returns the base-10 logarithm of a specified complex number.
+        /// </summary>
+        /// <returns>The base-10 logarithm of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
+        public static Complex32 Log10(Complex32 value)
+        {
+            return value.CommonLogarithm();
+        }
+
+        /// <summary>
+        /// Returns the sine of the specified complex number.
+        /// </summary>
+        /// <returns>The sine of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Sin(Complex32 value)
+        {
+            return (Complex32)Trig.Sin(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the cosine of the specified complex number.
+        /// </summary>
+        /// <returns>The cosine of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Cos(Complex32 value)
+        {
+            return (Complex32)Trig.Cos(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the tangent of the specified complex number.
+        /// </summary>
+        /// <returns>The tangent of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Tan(Complex32 value)
+        {
+            return (Complex32)Trig.Tan(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the angle that is the arc sine of the specified complex number.
+        /// </summary>
+        /// <returns>The angle which is the arc sine of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Asin(Complex32 value)
+        {
+            return (Complex32)Trig.Asin(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the angle that is the arc cosine of the specified complex number.
+        /// </summary>
+        /// <returns>The angle, measured in radians, which is the arc cosine of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number that represents a cosine.</param>
+        public static Complex32 Acos(Complex32 value)
+        {
+            return (Complex32)Trig.Acos(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the angle that is the arc tangent of the specified complex number.
+        /// </summary>
+        /// <returns>The angle that is the arc tangent of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Atan(Complex32 value)
+        {
+            return (Complex32)Trig.Atan(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic sine of the specified complex number.
+        /// </summary>
+        /// <returns>The hyperbolic sine of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Sinh(Complex32 value)
+        {
+            return (Complex32)Trig.Sinh(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic cosine of the specified complex number.
+        /// </summary>
+        /// <returns>The hyperbolic cosine of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Cosh(Complex32 value)
+        {
+            return (Complex32)Trig.Cosh(value.ToComplex());
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic tangent of the specified complex number.
+        /// </summary>
+        /// <returns>The hyperbolic tangent of <paramref name="value" />.</returns>
+        /// <param name="value">A complex number.</param>
+        public static Complex32 Tanh(Complex32 value)
+        {
+            return (Complex32)Trig.Tanh(value.ToComplex());
         }
     }
 }

@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,12 +27,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 {
-    using System;
-    using Generic;
-    using Properties;
-
     /// <summary>
     /// <para>A class which encapsulates the functionality of the QR decomposition.</para>
     /// <para>Any real square matrix A may be decomposed as A = QR where Q is an orthogonal matrix 
@@ -43,40 +42,52 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
     /// <remarks>
     /// The computation of the QR decomposition is done at construction time by Householder transformation.
     /// </remarks>
-    public class DenseQR : QR
+    internal sealed class DenseQR : QR
     {
         /// <summary>
         ///  Gets or sets Tau vector. Contains additional information on Q - used for native solver.
         /// </summary>
-        public double[] Tau
-        {
-            get;
-            set;
-        }
-        
+        double[] Tau { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DenseQR"/> class. This object will compute the
         /// QR factorization when the constructor is called and cache it's factorization.
         /// </summary>
         /// <param name="matrix">The matrix to factor.</param>
+        /// <param name="method">The type of QR factorization to perform.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> row count is less then column count</exception>
-        public DenseQR(DenseMatrix matrix)
+        public static DenseQR Create(DenseMatrix matrix, QRMethod method = QRMethod.Full)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
-
             if (matrix.RowCount < matrix.ColumnCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(matrix);
             }
 
-            MatrixR = matrix.Clone();
-            MatrixQ = new DenseMatrix(matrix.RowCount);
-            Tau = new double[Math.Min(matrix.RowCount, matrix.ColumnCount)];
-            Control.LinearAlgebraProvider.QRFactor(((DenseMatrix)MatrixR).Data, matrix.RowCount, matrix.ColumnCount, ((DenseMatrix)MatrixQ).Data, Tau);
+            var tau = new double[System.Math.Min(matrix.RowCount, matrix.ColumnCount)];
+            Matrix<double> q;
+            Matrix<double> r;
+
+            if (method == QRMethod.Full)
+            {
+                r = matrix.Clone();
+                q = new DenseMatrix(matrix.RowCount);
+                Control.LinearAlgebraProvider.QRFactor(((DenseMatrix) r).Values, matrix.RowCount, matrix.ColumnCount, ((DenseMatrix) q).Values, tau);
+            }
+            else
+            {
+                q = matrix.Clone();
+                r = new DenseMatrix(matrix.ColumnCount);
+                Control.LinearAlgebraProvider.ThinQRFactor(((DenseMatrix) q).Values, matrix.RowCount, matrix.ColumnCount, ((DenseMatrix) r).Values, tau);
+            }
+
+            return new DenseQR(q, r, method, tau);
+        }
+
+        DenseQR(Matrix<double> q, Matrix<double> rFull, QRMethod method, double[] tau)
+            : base(q, rFull, method)
+        {
+            Tau = tau;
         }
 
         /// <summary>
@@ -86,17 +97,6 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<double> input, Matrix<double> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // The solution X should have the same number of columns as B
             if (input.ColumnCount != result.ColumnCount)
             {
@@ -104,13 +104,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             }
 
             // The dimension compatibility conditions for X = A\B require the two matrices A and B to have the same number of rows
-            if (MatrixR.RowCount != input.RowCount)
+            if (Q.RowCount != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
             }
 
             // The solution X row dimension is equal to the column dimension of A
-            if (MatrixR.ColumnCount != result.RowCount)
+            if (FullR.ColumnCount != result.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
@@ -127,7 +127,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 throw new NotSupportedException("Can only do QR factorization for dense matrices at the moment.");
             }
 
-            Control.LinearAlgebraProvider.QRSolveFactored(((DenseMatrix)MatrixQ).Data, ((DenseMatrix)MatrixR).Data, MatrixR.RowCount, MatrixR.ColumnCount, Tau, dinput.Data, input.ColumnCount, dresult.Data);
+            Control.LinearAlgebraProvider.QRSolveFactored(((DenseMatrix) Q).Values, ((DenseMatrix) FullR).Values, Q.RowCount, FullR.ColumnCount, Tau, dinput.Values, input.ColumnCount, dresult.Values, Method);
         }
 
         /// <summary>
@@ -137,27 +137,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<double> input, Vector<double> result)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // Ax=b where A is an m x n matrix
             // Check that b is a column vector with m entries
-            if (MatrixR.RowCount != input.Count)
+            if (Q.RowCount != input.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
             // Check that x is a column vector with n entries
-            if (MatrixR.ColumnCount != result.Count)
+            if (FullR.ColumnCount != result.Count)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(FullR, result);
             }
 
             var dinput = input as DenseVector;
@@ -172,7 +162,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 throw new NotSupportedException("Can only do QR factorization for dense vectors at the moment.");
             }
 
-            Control.LinearAlgebraProvider.QRSolveFactored(((DenseMatrix)MatrixQ).Data, ((DenseMatrix)MatrixR).Data, MatrixR.RowCount, MatrixR.ColumnCount, Tau, dinput.Data, 1, dresult.Data);
+            Control.LinearAlgebraProvider.QRSolveFactored(((DenseMatrix) Q).Values, ((DenseMatrix) FullR).Values, Q.RowCount, FullR.ColumnCount, Tau, dinput.Values, 1, dresult.Values, Method);
         }
     }
 }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccuracyNotReached" xml:space="preserve">
+    <value>The accuracy couldn't be reached with the specified number of iterations.</value>
+  </data>
   <data name="ArgumentArraysSameLength" xml:space="preserve">
     <value>The array arguments must have the same length.</value>
   </data>
@@ -133,7 +136,7 @@
     <value>Value must be even.</value>
   </data>
   <data name="ArgumentHistogramContainsNot" xml:space="preserve">
-    <value>The histogram does not contains the value.</value>
+    <value>The histogram does not contain the value.</value>
   </data>
   <data name="ArgumentInIntervalXYInclusive" xml:space="preserve">
     <value>Value is expected to be between {0} and {1} (including {0} and {1}).</value>
@@ -144,11 +147,17 @@
   <data name="ArgumentLessThanOne" xml:space="preserve">
     <value>Value must be greater than or equal to one.</value>
   </data>
-  <data name="ArgumentLowerBoundLargerThanUpperBound" xml:space="preserve">
-    <value>han the given upper bound.</value>
-  </data>
   <data name="ArgumentMatrixDimensions" xml:space="preserve">
     <value>Matrix dimensions must agree.</value>
+  </data>
+  <data name="ArgumentMatrixDimensions1" xml:space="preserve">
+    <value>Matrix dimensions must agree: {0}.</value>
+  </data>
+  <data name="ArgumentMatrixDimensions2" xml:space="preserve">
+    <value>Matrix dimensions must agree: op1 is {0}, op2 is {1}.</value>
+  </data>
+  <data name="ArgumentMatrixDimensions3" xml:space="preserve">
+    <value>Matrix dimensions must agree: op1 is {0}, op2 is {1}, op3 is {2}.</value>
   </data>
   <data name="ArgumentMatrixDoesNotExist" xml:space="preserve">
     <value>The requested matrix does not exist.</value>
@@ -213,6 +222,12 @@
   <data name="ArgumentOutOfRangeGreaterEqual" xml:space="preserve">
     <value>{0} must be greater than or equal to {1}.</value>
   </data>
+  <data name="ArgumentOutOfRangeSmaller" xml:space="preserve">
+    <value>{0} must be smaller than {1}.</value>
+  </data>
+  <data name="ArgumentOutOfRangeSmallerEqual" xml:space="preserve">
+    <value>{0} must be smaller than or equal to {1}.</value>
+  </data>
   <data name="ArgumentParameterSetInvalid" xml:space="preserve">
     <value>The chosen parameter set is invalid (probably some value is out of range).</value>
   </data>
@@ -246,6 +261,12 @@
   <data name="ArgumentTypeMismatch" xml:space="preserve">
     <value>Type mismatch.</value>
   </data>
+  <data name="ArgumentUpperBoundMustBeLargerThanLowerBound" xml:space="preserve">
+    <value>The upper bound must be strictly larger than the lower bound.</value>
+  </data>
+  <data name="ArgumentUpperBoundMustBeLargerThanOrEqualToLowerBound" xml:space="preserve">
+    <value>The upper bound must be at least as large as the lower bound.</value>
+  </data>
   <data name="ArgumentVectorLengthsMultipleOf" xml:space="preserve">
     <value>Array length must be a multiple of {0}.</value>
   </data>
@@ -276,6 +297,12 @@
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>The given file doesn't exist.</value>
   </data>
+  <data name="Interpolation_Initialize_SamplePointsNotStrictlyAscendingOrder" xml:space="preserve">
+    <value>Sample points should be sorted in strictly ascending order</value>
+  </data>
+  <data name="Interpolation_Initialize_SamplePointsNotUnique" xml:space="preserve">
+    <value>All sample points should be unique.</value>
+  </data>
   <data name="InvalidDistributionParameters" xml:space="preserve">
     <value>Invalid parameterization for the distribution.</value>
   </data>
@@ -294,20 +321,41 @@
   <data name="InvalidOperationNoSamplesProvided" xml:space="preserve">
     <value>No Samples Provided. Preparation Required.</value>
   </data>
+  <data name="InvalidParameter" xml:space="preserve">
+    <value>An invalid parameter was passed to a native method.</value>
+  </data>
+  <data name="InvalidParameterWithNumber" xml:space="preserve">
+    <value>An invalid parameter was passed to a native method, parameter number : {0}</value>
+  </data>
   <data name="InvalidRightBoundaryCondition" xml:space="preserve">
     <value>Invalid Right Boundary Condition.</value>
+  </data>
+  <data name="LagMustBePositive" xml:space="preserve">
+    <value>Lag must be positive</value>
+  </data>
+  <data name="LagMustBeSmallerThanTheSampleSize" xml:space="preserve">
+    <value>Lag must be smaller than the sample size</value>
   </data>
   <data name="MatlabDateHeaderFormat" xml:space="preserve">
     <value>ddd MMM dd HH:mm:ss yyyy</value>
   </data>
+  <data name="MatrixCanNotBeEmpty" xml:space="preserve">
+    <value>Matrices can not be empty and must have at least one row and column.</value>
+  </data>
   <data name="MatrixColumnsMustBePositive" xml:space="preserve">
     <value>The number of columns of a matrix must be positive.</value>
+  </data>
+  <data name="MatrixMustBeSparse" xml:space="preserve">
+    <value>Matrix must be in sparse storage format</value>
   </data>
   <data name="MatrixRowsMustBePositive" xml:space="preserve">
     <value>The number of rows of a matrix must be positive.</value>
   </data>
   <data name="MatrixRowsOrColumnsMustBePositive" xml:space="preserve">
     <value>The number of rows or columns of a matrix must be positive.</value>
+  </data>
+  <data name="MemoryAllocation" xml:space="preserve">
+    <value>Unable to allocate native memory.</value>
   </data>
   <data name="MoreThan2D" xml:space="preserve">
     <value>Only 1 and 2 dimensional arrays are supported.</value>
@@ -321,6 +369,10 @@
   <data name="NotSupportedType" xml:space="preserve">
     <value>{0} is not a supported type.</value>
   </data>
+  <data name="NumericalBreakdown" xml:space="preserve">
+    <value>Algorithm experience a numerical break down
+</value>
+  </data>
   <data name="PartialOrderException" xml:space="preserve">
     <value>The two arguments can't be compared (maybe they are part of a partial ordering?)</value>
   </data>
@@ -330,8 +382,32 @@
   <data name="ProposalDistributionNoUpperBound" xml:space="preserve">
     <value>The sampler's proposal distribution is not upper bounding the target density.</value>
   </data>
+  <data name="RegressionNotEnoughSamples" xml:space="preserve">
+    <value>A regression of the requested order requires at least {0} samples. Only {1} samples have been provided. </value>
+  </data>
+  <data name="RootFindingFailed" xml:space="preserve">
+    <value>The algorithm has failed, exceeded the number of iterations allowed or there is no root within the provided bounds.</value>
+  </data>
+  <data name="RootFindingFailedRecommendRobustNewtonRaphson" xml:space="preserve">
+    <value>The algorithm has failed, exceeded the number of iterations allowed or there is no root within the provided bounds. Consider to use RobustNewtonRaphson instead.</value>
+  </data>
+  <data name="RootMustBeBracketedByBounds" xml:space="preserve">
+    <value>The lower and upper bounds must bracket a single root.</value>
+  </data>
+  <data name="RootNotFound" xml:space="preserve">
+    <value>The algorithm ended without root in the range.</value>
+  </data>
   <data name="RowsLessThanColumns" xml:space="preserve">
     <value>The number of rows must greater than or equal to the number of columns.</value>
+  </data>
+  <data name="SampleVectorsSameLength" xml:space="preserve">
+    <value>All sample vectors must have the same length. However, vectors with disagreeing length {0} and {1} have been provided. A sample with index i is given by the value at index i of each provided vector.</value>
+  </data>
+  <data name="SingularUMatrix" xml:space="preserve">
+    <value>U is singular, and the inversion could not be completed.</value>
+  </data>
+  <data name="SingularUMatrixWithElement" xml:space="preserve">
+    <value>U is singular, and the inversion could not be completed. The {0}-th diagonal element of the factor U is zero.</value>
   </data>
   <data name="SingularVectorsNotComputed" xml:space="preserve">
     <value>The singular vectors were not computed.</value>
@@ -339,20 +415,29 @@
   <data name="SpecialCasePlannedButNotImplementedYet" xml:space="preserve">
     <value>This special case is not supported yet (but is planned).</value>
   </data>
-  <data name="StopCriteriumDuplicate" xml:space="preserve">
-    <value>The given stop criterium already exist in the collection.</value>
+  <data name="StopCriterionDuplicate" xml:space="preserve">
+    <value>The given stop criterion already exist in the collection.</value>
   </data>
-  <data name="StopCriteriumMissing" xml:space="preserve">
-    <value>There is no stop criterium in the collection.</value>
+  <data name="StopCriterionMissing" xml:space="preserve">
+    <value>There is no stop criterion in the collection.</value>
   </data>
   <data name="StringNullOrEmpty" xml:space="preserve">
     <value>String parameter cannot be empty or null.</value>
+  </data>
+  <data name="TooManyElements" xml:space="preserve">
+    <value>We only support sparse matrix with less than int.MaxValue elements.</value>
   </data>
   <data name="UndefinedMoment" xml:space="preserve">
     <value>The moment of the distribution is undefined.</value>
   </data>
   <data name="UserDefinedProviderNotSpecified" xml:space="preserve">
     <value>A user defined provider has not been specified.</value>
+  </data>
+  <data name="UserWorkBufferNotSupported" xml:space="preserve">
+    <value>User work buffers are not supported by this provider.</value>
+  </data>
+  <data name="VectorCanNotBeEmpty" xml:space="preserve">
+    <value>Vectors can not be empty and must have at least one element.</value>
   </data>
   <data name="WorkArrayTooSmall" xml:space="preserve">
     <value>The given work array is too small. Check work[0] for the corret size.</value>

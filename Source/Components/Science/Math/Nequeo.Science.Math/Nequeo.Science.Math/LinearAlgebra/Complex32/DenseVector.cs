@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2013 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,110 +27,143 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using Nequeo.Science.Math.Distributions;
+using Nequeo.Science.Math.LinearAlgebra.Storage;
+using Nequeo.Science.Math.Threading;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex32
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Distributions;
-    using Generic;
-
-    using NumberTheory;
     using Nequeo.Science.Math;
-    using Properties;
-    using Threading;
 
     /// <summary>
     /// A vector using dense storage.
     /// </summary>
     [Serializable]
+    [DebuggerDisplay("DenseVector {Count}-Complex32")]
     public class DenseVector : Vector
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class with a given size.
+        /// Number of elements
         /// </summary>
-        /// <param name="size">
-        /// the size of the vector.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="size"/> is less than one.
-        /// </exception>
-        public DenseVector(int size) : base(size)
+        readonly int _length;
+
+        /// <summary>
+        /// Gets the vector's data.
+        /// </summary>
+        readonly Complex32[] _values;
+
+        /// <summary>
+        /// Create a new dense vector straight from an initialized vector storage instance.
+        /// The storage is used directly without copying.
+        /// Intended for advanced scenarios where you're working directly with
+        /// storage for performance or interop reasons.
+        /// </summary>
+        public DenseVector(DenseVectorStorage<Complex32> storage)
+            : base(storage)
         {
-            Data = new Complex32[size];
+            _length = storage.Length;
+            _values = storage.Data;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class with a given size
-        /// and each element set to the given value;
+        /// Create a new dense vector with the given length.
+        /// All cells of the vector will be initialized to zero.
+        /// Zero-length vectors are not supported.
         /// </summary>
-        /// <param name="size">
-        /// the size of the vector.
-        /// </param>
-        /// <param name="value">
-        /// the value to set each element to.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="size"/> is less than one.
-        /// </exception>
-        public DenseVector(int size, Complex32 value) : this(size)
+        /// <exception cref="ArgumentException">If length is less than one.</exception>
+        public DenseVector(int length)
+            : this(new DenseVectorStorage<Complex32>(length))
         {
-            for (var index = 0; index < Data.Length; index++)
-            {
-                Data[index] = value;
-            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class by
-        /// copying the values from another.
+        /// Create a new dense vector directly binding to a raw array.
+        /// The array is used directly without copying.
+        /// Very efficient, but changes to the array and the vector will affect each other.
         /// </summary>
-        /// <param name="other">
-        /// The vector to create the new vector from.
-        /// </param>
-        public DenseVector(Vector<Complex32> other) : this(other.Count)
+        public DenseVector(Complex32[] storage)
+            : this(new DenseVectorStorage<Complex32>(storage.Length, storage))
         {
-                CommonParallel.For(
-                    0, 
-                    Data.Length, 
-                    index => this[index] = other[index]);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class by
-        /// copying the values from another.
+        /// Create a new dense vector as a copy of the given other vector.
+        /// This new vector will be independent from the other vector.
+        /// A new memory block will be allocated for storing the vector.
         /// </summary>
-        /// <param name="other">
-        /// The vector to create the new vector from.
-        /// </param>
-        public DenseVector(DenseVector other) : this(other.Count)
+        public static DenseVector OfVector(Vector<Complex32> vector)
         {
-            CommonParallel.For(
-                0,
-                Data.Length,
-                index => Data[index] = other.Data[index]);
+            return new DenseVector(DenseVectorStorage<Complex32>.OfVector(vector.Storage));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseVector"/> class for an array.
+        /// Create a new dense vector as a copy of the given array.
+        /// This new vector will be independent from the array.
+        /// A new memory block will be allocated for storing the vector.
         /// </summary>
-        /// <param name="array">The array to create this vector from.</param>
-        /// <remarks>The vector does not copy the array, but keeps a reference to it. Any 
-        /// changes to the vector will also change the array.</remarks>
-        public DenseVector(Complex32[] array) : base(array.Length)
+        public static DenseVector OfArray(Complex32[] array)
         {
-            Data = array;
+            return new DenseVector(DenseVectorStorage<Complex32>.OfVector(new DenseVectorStorage<Complex32>(array.Length, array)));
         }
 
         /// <summary>
-        ///  Gets the vector's internal data.
+        /// Create a new dense vector as a copy of the given enumerable.
+        /// This new vector will be independent from the enumerable.
+        /// A new memory block will be allocated for storing the vector.
         /// </summary>
-        /// <value>The vector's internal data.</value>
-        /// <remarks>Changing values in the array also changes the corresponding value in vector. Use with care.</remarks>
-        internal Complex32[] Data
+        public static DenseVector OfEnumerable(IEnumerable<Complex32> enumerable)
         {
-            get;
-            private set;
+            return new DenseVector(DenseVectorStorage<Complex32>.OfEnumerable(enumerable));
+        }
+
+        /// <summary>
+        /// Create a new dense vector as a copy of the given indexed enumerable.
+        /// Keys must be provided at most once, zero is assumed if a key is omitted.
+        /// This new vector will be independent from the enumerable.
+        /// A new memory block will be allocated for storing the vector.
+        /// </summary>
+        public static DenseVector OfIndexedEnumerable(int length, IEnumerable<Tuple<int, Complex32>> enumerable)
+        {
+            return new DenseVector(DenseVectorStorage<Complex32>.OfIndexedEnumerable(length, enumerable));
+        }
+
+        /// <summary>
+        /// Create a new dense vector and initialize each value using the provided value.
+        /// </summary>
+        public static DenseVector Create(int length, Complex32 value)
+        {
+            if (value == Complex32.Zero) return new DenseVector(length);
+            return new DenseVector(DenseVectorStorage<Complex32>.OfValue(length, value));
+        }
+
+        /// <summary>
+        /// Create a new dense vector and initialize each value using the provided init function.
+        /// </summary>
+        public static DenseVector Create(int length, Func<int, Complex32> init)
+        {
+            return new DenseVector(DenseVectorStorage<Complex32>.OfInit(length, init));
+        }
+
+        /// <summary>
+        /// Create a new dense vector with values sampled from the provided random distribution.
+        /// </summary>
+        public static DenseVector CreateRandom(int length, IContinuousDistribution distribution)
+        {
+            var samples = Generate.RandomComplex32(length, distribution);
+            return new DenseVector(new DenseVectorStorage<Complex32>(length, samples));
+        }
+
+        /// <summary>
+        /// Gets the vector's data.
+        /// </summary>
+        /// <value>The vector's data.</value>
+        public Complex32[] Values
+        {
+            get { return _values; }
         }
 
         /// <summary>
@@ -138,14 +174,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <returns>
         /// A reference to the internal date of the given vector.
         /// </returns>
-        public static implicit operator Complex32[](DenseVector vector)
+        public static explicit operator Complex32[](DenseVector vector)
         {
             if (vector == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("vector");
             }
 
-            return vector.Data;
+            return vector.Values;
         }
 
         /// <summary>
@@ -159,91 +195,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         {
             if (array == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("array");
             }
 
             return new DenseVector(array);
-        }
-
-        /// <summary>
-        /// Create a matrix based on this vector in column form (one single column).
-        /// </summary>
-        /// <returns>This vector as a column matrix.</returns>
-        public override Matrix<Complex32> ToColumnMatrix()
-        {
-            var matrix = new DenseMatrix(Count, 1);
-            for (var i = 0; i < Data.Length; i++)
-            {
-                matrix[i, 0] = Data[i];
-            }
-
-            return matrix;
-        }
-
-        /// <summary>
-        /// Create a matrix based on this vector in row form (one single row).
-        /// </summary>
-        /// <returns>This vector as a row matrix.</returns>
-        public override Matrix<Complex32> ToRowMatrix()
-        {
-            var matrix = new DenseMatrix(1, Count);
-            for (var i = 0; i < Data.Length; i++)
-            {
-                matrix[0, i] = Data[i];
-            }
-
-            return matrix;
-        }
-
-        /// <summary>Gets or sets the value at the given <paramref name="index"/>.</summary>
-        /// <param name="index">The index of the value to get or set.</param>
-        /// <returns>The value of the vector at the given <paramref name="index"/>.</returns> 
-        /// <exception cref="IndexOutOfRangeException">If <paramref name="index"/> is negative or 
-        /// greater than the size of the vector.</exception>
-        public override Complex32 this[int index]
-        {
-            get
-            {
-                return Data[index];
-            }
-
-            set
-            {
-                Data[index] = value;
-            }
-        }
-
-        /// <summary>
-        /// Creates a matrix with the given dimensions using the same storage type
-        /// as this vector.
-        /// </summary>
-        /// <param name="rows">
-        /// The number of rows.
-        /// </param>
-        /// <param name="columns">
-        /// The number of columns.
-        /// </param>
-        /// <returns>
-        /// A matrix with the given dimensions.
-        /// </returns>
-        public override Matrix<Complex32> CreateMatrix(int rows, int columns)
-        {
-            return new DenseMatrix(rows, columns);
-        }
-
-        /// <summary>
-        /// Creates a <strong>Vector</strong> of the given size using the same storage type
-        /// as this vector.
-        /// </summary>
-        /// <param name="size">
-        /// The size of the <strong>Vector</strong> to create.
-        /// </param>
-        /// <returns>
-        /// The new <c>Vector</c>.
-        /// </returns>
-        public override Vector<Complex32> CreateVector(int size)
-        {
-            return new DenseVector(size);
         }
 
         /// <summary>
@@ -260,10 +215,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] + scalar);
+                CommonParallel.For(0, _values.Length, 4096, (a, b) =>
+                    {
+                        for (int i = a; i < b; i++)
+                        {
+                            dense._values[i] = _values[i] + scalar;
+                        }
+                    });
             }
         }
 
@@ -274,33 +232,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <param name="result">The vector to store the result of the addition.</param>
         protected override void DoAdd(Vector<Complex32> other, Vector<Complex32> result)
         {
-            var rdense = result as DenseVector;
-            var odense = other as DenseVector;
-            if (rdense != null && odense != null)
-            {
-                Control.LinearAlgebraProvider.AddVectorToScaledVector(Data, Complex32.One, odense.Data, rdense.Data);
-            }
-            else
+            var otherDense = other as DenseVector;
+            var resultDense = result as DenseVector;
+
+            if (otherDense == null || resultDense == null)
             {
                 base.DoAdd(other, result);
             }
-        }
-
-        /// <summary>
-        /// Returns a <strong>Vector</strong> containing the same values of <paramref name="rightSide"/>. 
-        /// </summary>
-        /// <remarks>This method is included for completeness.</remarks>
-        /// <param name="rightSide">The vector to get the values from.</param>
-        /// <returns>A vector containing a the same values as <paramref name="rightSide"/>.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="rightSide"/> is <see langword="null" />.</exception>
-        public static DenseVector operator +(DenseVector rightSide)
-        {
-            if (rightSide == null)
+            else
             {
-                throw new ArgumentNullException("rightSide");
+                Control.LinearAlgebraProvider.AddArrays(_values, otherDense._values, resultDense._values);
             }
-
-            return (DenseVector)rightSide.Plus();
         }
 
         /// <summary>
@@ -313,19 +255,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <exception cref="ArgumentNullException">If <paramref name="leftSide"/> or <paramref name="rightSide"/> is <see langword="null" />.</exception>
         public static DenseVector operator +(DenseVector leftSide, DenseVector rightSide)
         {
-            if (rightSide == null)
-            {
-                throw new ArgumentNullException("rightSide");
-            }
-
             if (leftSide == null)
             {
                 throw new ArgumentNullException("leftSide");
-            }
-
-            if (leftSide.Count != rightSide.Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "rightSide");
             }
 
             return (DenseVector)leftSide.Add(rightSide);
@@ -345,34 +277,38 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] - scalar);
+                CommonParallel.For(0, _values.Length, 4096, (a, b) =>
+                    {
+                        for (int i = a; i < b; i++)
+                        {
+                            dense._values[i] = _values[i] - scalar;
+                        }
+                    });
             }
         }
 
         /// <summary>
-        /// Subtracts another vector to this vector and stores the result into the result vector.
+        /// Subtracts another vector from this vector and stores the result into the result vector.
         /// </summary>
         /// <param name="other">The vector to subtract from this one.</param>
         /// <param name="result">The vector to store the result of the subtraction.</param>
         protected override void DoSubtract(Vector<Complex32> other, Vector<Complex32> result)
         {
-            var rdense = result as DenseVector;
-            var odense = other as DenseVector;
-            if (rdense != null && odense != null)
-            {
-                Control.LinearAlgebraProvider.AddVectorToScaledVector(Data, -1.0f, odense.Data, rdense.Data);
-            }
-            else
+            var otherDense = other as DenseVector;
+            var resultDense = result as DenseVector;
+
+            if (otherDense == null || resultDense == null)
             {
                 base.DoSubtract(other, result);
             }
+            else
+            {
+                Control.LinearAlgebraProvider.SubtractArrays(_values, otherDense._values, resultDense._values);
+            }
         }
-        
+
         /// <summary>
-        /// Returns a <strong>Vector</strong> containing the negated values of <paramref name="rightSide"/>. 
+        /// Returns a <strong>Vector</strong> containing the negated values of <paramref name="rightSide"/>.
         /// </summary>
         /// <param name="rightSide">The vector to get the values from.</param>
         /// <returns>A vector containing the negated values as <paramref name="rightSide"/>.</returns>
@@ -397,38 +333,44 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <exception cref="ArgumentNullException">If <paramref name="leftSide"/> or <paramref name="rightSide"/> is <see langword="null" />.</exception>
         public static DenseVector operator -(DenseVector leftSide, DenseVector rightSide)
         {
-            if (rightSide == null)
-            {
-                throw new ArgumentNullException("rightSide");
-            }
-
             if (leftSide == null)
             {
                 throw new ArgumentNullException("leftSide");
-            }
-
-            if (leftSide.Count != rightSide.Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "rightSide");
             }
 
             return (DenseVector)leftSide.Subtract(rightSide);
         }
 
         /// <summary>
-        /// Returns a negated vector.
+        /// Negates vector and saves result to <paramref name="result"/>
         /// </summary>
-        /// <returns>The negated vector.</returns>
-        /// <remarks>Added as an alternative to the unary negation operator.</remarks>
-        public override Vector<Complex32> Negate()
+        /// <param name="result">Target vector</param>
+        protected override void DoNegate(Vector<Complex32> result)
         {
-            var result = new DenseVector(Count);
-            CommonParallel.For(
-                0, 
-                Data.Length, 
-                index => result[index] = -Data[index]);
+            var denseResult = result as DenseVector;
+            if (denseResult == null)
+            {
+                base.DoNegate(result);
+                return;
+            }
 
-            return result;
+            Control.LinearAlgebraProvider.ScaleArray(-Complex32.One, _values, denseResult.Values);
+        }
+
+        /// <summary>
+        /// Conjugates vector and save result to <paramref name="result"/>
+        /// </summary>
+        /// <param name="result">Target vector</param>
+        protected override void DoConjugate(Vector<Complex32> result)
+        {
+            var resultDense = result as DenseVector;
+            if (resultDense == null)
+            {
+                base.DoConjugate(result);
+                return;
+            }
+
+            Control.LinearAlgebraProvider.ConjugateArray(_values, resultDense._values);
         }
 
         /// <summary>
@@ -443,24 +385,42 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
             if (denseResult == null)
             {
                 base.DoMultiply(scalar, result);
+                return;
             }
-            else
-            {
-                Control.LinearAlgebraProvider.ScaleArray(scalar, Data, denseResult.Data);
-            }
+
+            Control.LinearAlgebraProvider.ScaleArray(scalar, _values, denseResult.Values);
         }
 
         /// <summary>
         /// Computes the dot product between this vector and another vector.
         /// </summary>
-        /// <param name="other">The other vector to add.</param>
-        /// <returns>s
-        /// The result of the addition.</returns>
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of a[i]*b[i] for all i.</returns>
         protected override Complex32 DoDotProduct(Vector<Complex32> other)
         {
             var denseVector = other as DenseVector;
+            return denseVector == null
+                ? base.DoDotProduct(other)
+                : Control.LinearAlgebraProvider.DotProduct(_values, denseVector.Values);
+        }
 
-            return denseVector == null ? base.DoDotProduct(other) : Control.LinearAlgebraProvider.DotProduct(Data, denseVector.Data);
+        /// <summary>
+        /// Computes the dot product between the conjugate of this vector and another vector.
+        /// </summary>
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of conj(a[i])*b[i] for all i.</returns>
+        protected override Complex32 DoConjugateDotProduct(Vector<Complex32> other)
+        {
+            var denseVector = other as DenseVector;
+            if (denseVector == null) return base.DoConjugateDotProduct(other);
+
+            // TODO: provide native cdotc routine
+            var dot = Complex32.Zero;
+            for (var i = 0; i < _values.Length; i++)
+            {
+                dot += _values[i].Conjugate() * denseVector._values[i];
+            }
+            return dot;
         }
 
         /// <summary>
@@ -507,22 +467,12 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <exception cref="ArgumentNullException">If <paramref name="leftSide"/> or <paramref name="rightSide"/> is <see langword="null" />.</exception>
         public static Complex32 operator *(DenseVector leftSide, DenseVector rightSide)
         {
-            if (rightSide == null)
-            {
-                throw new ArgumentNullException("rightSide");
-            }
-
             if (leftSide == null)
             {
                 throw new ArgumentNullException("leftSide");
             }
 
-            if (leftSide.Count != rightSide.Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "rightSide");
-            }
-
-            return Control.LinearAlgebraProvider.DotProduct(leftSide.Data, rightSide.Data);
+            return leftSide.DotProduct(rightSide);
         }
 
         /// <summary>
@@ -539,20 +489,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
                 throw new ArgumentNullException("leftSide");
             }
 
-            return (DenseVector)leftSide.Multiply(Complex32.One / rightSide);
+            return (DenseVector)leftSide.Divide(rightSide);
         }
 
         /// <summary>
         /// Returns the index of the absolute minimum element.
         /// </summary>
-        /// <returns>The index of absolute minimum element.</returns>   
+        /// <returns>The index of absolute minimum element.</returns>
         public override int AbsoluteMinimumIndex()
         {
             var index = 0;
-            var min = Data[index].Magnitude;
-            for (var i = 1; i < Count; i++)
+            var min = _values[index].Magnitude;
+            for (var i = 1; i < _length; i++)
             {
-                var test = Data[i].Magnitude;
+                var test = _values[i].Magnitude;
                 if (test < min)
                 {
                     index = i;
@@ -564,34 +514,16 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         }
 
         /// <summary>
-        /// Returns the value of the absolute minimum element.
-        /// </summary>
-        /// <returns>The value of the absolute minimum element.</returns>
-        public override Complex32 AbsoluteMinimum()
-        {
-            return Data[AbsoluteMinimumIndex()].Magnitude;
-        }
-
-        /// <summary>
-        /// Returns the value of the absolute maximum element.
-        /// </summary>
-        /// <returns>The value of the absolute maximum element.</returns>
-        public override Complex32 AbsoluteMaximum()
-        {
-            return Data[AbsoluteMaximumIndex()].Magnitude;
-        }
-
-        /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>   
+        /// <returns>The index of absolute maximum element.</returns>
         public override int AbsoluteMaximumIndex()
         {
             var index = 0;
-            var max = Data[index].Magnitude;
-            for (var i = 1; i < Count; i++)
+            var max = _values[index].Magnitude;
+            for (var i = 1; i < _length; i++)
             {
-                var test = Data[i].Magnitude;
+                var test = _values[i].Magnitude;
                 if (test > max)
                 {
                     index = i;
@@ -603,96 +535,71 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         }
 
         /// <summary>
-        /// Creates a vector containing specified elements.
-        /// </summary>
-        /// <param name="index">The first element to begin copying from.</param>
-        /// <param name="length">The number of elements to copy.</param>
-        /// <returns>A vector containing a copy of the specified elements.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><list><item>If <paramref name="index"/> is not positive or
-        /// greater than or equal to the size of the vector.</item>
-        /// <item>If <paramref name="index"/> + <paramref name="length"/> is greater than or equal to the size of the vector.</item>
-        /// </list></exception>
-        /// <exception cref="ArgumentException">If <paramref name="length"/> is not positive.</exception>
-        public override Vector<Complex32> SubVector(int index, int length)
-        {
-            if (index < 0 || index >= Count)
-            {
-                throw new ArgumentOutOfRangeException("index");
-            }
-
-            if (length <= 0)
-            {
-                throw new ArgumentOutOfRangeException("length");
-            }
-
-            if (index + length > Count)
-            {
-                throw new ArgumentOutOfRangeException("length");
-            }
-
-            var result = new DenseVector(length);
-
-            CommonParallel.For(
-                index, 
-                index + length, 
-                i => result.Data[i - index] = Data[i]);
-            return result;
-        }
-
-        /// <summary>
-        /// Set the values of this vector to the given values.
-        /// </summary>
-        /// <param name="values">The array containing the values to use.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="values"/> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">If <paramref name="values"/> is not the same size as this vector.</exception>
-        public override void SetValues(Complex32[] values)
-        {
-            if (values == null)
-            {
-                throw new ArgumentNullException("values");
-            }
-
-            if (values.Length != Count)
-            {
-                throw new ArgumentException(Resources.ArgumentVectorsSameLength, "values");
-            }
-
-            CommonParallel.For(
-                0, 
-                values.Length, 
-                i => Data[i] = values[i]);
-        }
-
-        /// <summary>
         /// Computes the sum of the vector's elements.
         /// </summary>
         /// <returns>The sum of the vector's elements.</returns>
         public override Complex32 Sum()
         {
             var sum = Complex32.Zero;
-
-            for (var i = 0; i < Count; i++)
+            for (var i = 0; i < _length; i++)
             {
-                sum += Data[i];
+                sum += _values[i];
             }
-
             return sum;
         }
 
         /// <summary>
-        /// Computes the sum of the absolute value of the vector's elements.
+        /// Calculates the L1 norm of the vector, also known as Manhattan norm.
         /// </summary>
-        /// <returns>The sum of the absolute value of the vector's elements.</returns>
-        public override Complex32 SumMagnitudes()
+        /// <returns>The sum of the absolute values.</returns>
+        public override double L1Norm()
         {
-            var sum = Complex32.Zero;
-
-            for (var i = 0; i < Count; i++)
+            double sum = 0d;
+            for (var i = 0; i < _length; i++)
             {
-                sum += Data[i].Magnitude;
+                sum += _values[i].Magnitude;
             }
-
             return sum;
+        }
+
+        /// <summary>
+        /// Calculates the L2 norm of the vector, also known as Euclidean norm.
+        /// </summary>
+        /// <returns>The square root of the sum of the squared values.</returns>
+        public override double L2Norm()
+        {
+            // TODO: native provider
+            return _values.Aggregate(Complex32.Zero, SpecialFunctions.Hypotenuse).Magnitude;
+        }
+
+        /// <summary>
+        /// Calculates the infinity norm of the vector.
+        /// </summary>
+        /// <returns>The maximum absolute value.</returns>
+        public override double InfinityNorm()
+        {
+            return CommonParallel.Aggregate(_values, (i, v) => v.Magnitude, System.Math.Max, 0f);
+        }
+
+        /// <summary>
+        /// Computes the p-Norm.
+        /// </summary>
+        /// <param name="p">The p value.</param>
+        /// <returns>Scalar <c>ret = ( ∑|this[i]|^p )^(1/p)</c></returns>
+        public override double Norm(double p)
+        {
+            if (p < 0d) throw new ArgumentOutOfRangeException("p");
+
+            if (p == 1d) return L1Norm();
+            if (p == 2d) return L2Norm();
+            if (double.IsPositiveInfinity(p)) return InfinityNorm();
+
+            double sum = 0d;
+            for (var i = 0; i < _length; i++)
+            {
+                sum += System.Math.Pow(_values[i].Magnitude, p);
+            }
+            return System.Math.Pow(sum, 1.0 / p);
         }
 
         /// <summary>
@@ -702,198 +609,41 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <param name="result">The vector to store the result of the pointwise division.</param>
         protected override void DoPointwiseMultiply(Vector<Complex32> other, Vector<Complex32> result)
         {
-            var dense = result as DenseVector;
-            if (dense == null)
+            var denseOther = other as DenseVector;
+            var denseResult = result as DenseVector;
+
+            if (denseOther == null || denseResult == null)
             {
                 base.DoPointwiseMultiply(other, result);
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] * other[index]);
+                Control.LinearAlgebraProvider.PointWiseMultiplyArrays(_values, denseOther._values, denseResult._values);
             }
         }
 
         /// <summary>
         /// Pointwise divide this vector with another vector and stores the result into the result vector.
         /// </summary>
-        /// <param name="other">The vector to pointwise divide this one by.</param>
+        /// <param name="divisor">The vector to pointwise divide this one by.</param>
         /// <param name="result">The vector to store the result of the pointwise division.</param>
         /// <remarks></remarks>
-        protected override void DoPointwiseDivide(Vector<Complex32> other, Vector<Complex32> result)
+        protected override void DoPointwiseDivide(Vector<Complex32> divisor, Vector<Complex32> result)
         {
-            var dense = result as DenseVector;
-            if (dense == null)
+            var denseOther = divisor as DenseVector;
+            var denseResult = result as DenseVector;
+
+            if (denseOther == null || denseResult == null)
             {
-                base.DoPointwiseDivide(other, result);
+                base.DoPointwiseDivide(divisor, result);
             }
             else
             {
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => dense.Data[index] = Data[index] / other[index]);
+                Control.LinearAlgebraProvider.PointWiseDivideArrays(_values, denseOther._values, denseResult._values);
             }
-        }
-
-        /// <summary>
-        /// Outer product of two vectors
-        /// </summary>
-        /// <param name="u">First vector</param>
-        /// <param name="v">Second vector</param>
-        /// <returns>Matrix M[i,j] = u[i]*v[j] </returns>
-        /// <exception cref="ArgumentNullException">If the u vector is <see langword="null" />.</exception> 
-        /// <exception cref="ArgumentNullException">If the v vector is <see langword="null" />.</exception> 
-        public static DenseMatrix OuterProduct(DenseVector u, DenseVector v)
-        {
-            if (u == null)
-            {
-                throw new ArgumentNullException("u");
-            }
-
-            if (v == null)
-            {
-                throw new ArgumentNullException("v");
-            }
-
-            var matrix = new DenseMatrix(u.Count, v.Count);
-            CommonParallel.For(
-                0, 
-                u.Count, 
-                i =>
-                {
-                    for (var j = 0; j < v.Count; j++)
-                    {
-                        matrix.At(i, j, u.Data[i] * v.Data[j]);
-                    }
-                });
-            return matrix;
-        }
-
-        /// <summary>
-        /// Generates a vector with random elements
-        /// </summary>
-        /// <param name="length">Number of elements in the vector.</param>
-        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
-        /// <returns>
-        /// A vector with n-random elements distributed according
-        /// to the specified random distribution.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">If the n vector is non positive<see langword="null" />.</exception> 
-        public override Vector<Complex32> Random(int length, IContinuousDistribution randomDistribution)
-        {
-            if (length < 1)
-            {
-                throw new ArgumentException(Resources.ArgumentMustBePositive, "length");
-            }
-
-            var v = (DenseVector)CreateVector(length);
-            for (var index = 0; index < v.Data.Length; index++)
-            {
-                v.Data[index] = new Complex32((float)randomDistribution.Sample(), (float)randomDistribution.Sample());
-            }
-
-            return v;
-        }
-
-        /// <summary>
-        /// Generates a vector with random elements
-        /// </summary>
-        /// <param name="length">Number of elements in the vector.</param>
-        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
-        /// <returns>
-        /// A vector with n-random elements distributed according
-        /// to the specified random distribution.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">If the n vector is non positive<see langword="null" />.</exception> 
-        public override Vector<Complex32> Random(int length, IDiscreteDistribution randomDistribution)
-        {
-            if (length < 1)
-            {
-                throw new ArgumentException(Resources.ArgumentMustBePositive, "length");
-            }
-
-            var v = (DenseVector)CreateVector(length);
-            for (var index = 0; index < v.Data.Length; index++)
-            {
-                v.Data[index] = new Complex32(randomDistribution.Sample(), randomDistribution.Sample());
-            }
-
-            return v;
-        }
-
-        /// <summary>
-        /// Outer product of this and another vector.
-        /// </summary>
-        /// <param name="v">The vector to operate on.</param>
-        /// <returns>
-        /// Matrix M[i,j] = this[i] * v[j].
-        /// </returns>
-        /// <seealso cref="OuterProduct(DenseVector, DenseVector)"/>
-        public Matrix<Complex32> OuterProduct(DenseVector v)
-        {
-            return OuterProduct(this, v);
-        }
-
-        /// <summary>
-        /// Computes the p-Norm.
-        /// </summary>
-        /// <param name="p">The p value.</param>
-        /// <returns>Scalar <c>ret = (sum(abs(this[i])^p))^(1/p)</c></returns>
-        public override Complex32 Norm(double p)
-        {
-            if (p < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("p");
-            }
-
-            if (1.0 == p)
-            {
-                return SumMagnitudes();
-            }
-
-            if (2.0 == p)
-            {
-                return Data.Aggregate(Complex32.Zero, SpecialFunctions.Hypotenuse).Magnitude;
-            }
-
-            if (Double.IsPositiveInfinity(p))
-            {
-                return CommonParallel.Select(
-                    0,
-                    Count,
-                    (index, localData) => Math.Max(localData, Data[index].Magnitude),
-                    Common.Max);
-            }
-
-            var sum = 0.0;
-
-            for (var i = 0; i < Count; i++)
-            {
-                sum += Math.Pow(Data[i].Magnitude, p);
-            }
-
-            return (float)Math.Pow(sum, 1.0 / p);
         }
 
         #region Parse Functions
-
-        /// <summary>
-        /// Creates a Complex32 dense vector based on a string. The string can be in the following formats (without the
-        /// quotes): 'n', 'n;n;..', '(n;n;..)', '[n;n;...]', where n is a Complex32.
-        /// </summary>
-        /// <returns>
-        /// A Complex32 dense vector containing the values specified by the given string.
-        /// </returns>
-        /// <param name="value">
-        /// The string to parse.
-        /// </param>
-        public static DenseVector Parse(string value)
-        {
-            return Parse(value, null);
-        }
 
         /// <summary>
         /// Creates a Complex32 dense vector based on a string. The string can be in the following formats (without the
@@ -908,11 +658,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <param name="formatProvider">
         /// An <see cref="IFormatProvider"/> that supplies culture-specific formatting information.
         /// </param>
-        public static DenseVector Parse(string value, IFormatProvider formatProvider)
+        public static DenseVector Parse(string value, IFormatProvider formatProvider = null)
         {
             if (value == null)
             {
-                throw new ArgumentNullException(value);
+                throw new ArgumentNullException("value");
             }
 
             value = value.Trim();
@@ -942,39 +692,38 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
                 value = value.Substring(1, value.Length - 2).Trim();
             }
 
-            // keywords
-            var textInfo = formatProvider.GetTextInfo();
-            var keywords = new[] { textInfo.ListSeparator };
-
-            // lexing
-            var tokens = new LinkedList<string>();
-            GlobalizationHelper.Tokenize(tokens.AddFirst(value), keywords, 0);
-            var token = tokens.First;
-
-            if (token == null || tokens.Count.IsEven())
-            {
-                throw new FormatException();
-            }
-
             // parsing
-            var data = new Complex32[(tokens.Count + 1) >> 1];
-            for (var i = 0; i < data.Length; i++)
+            var strongTokens = value.Split(new[] { formatProvider.GetTextInfo().ListSeparator }, StringSplitOptions.RemoveEmptyEntries);
+            var data = new List<Complex32>();
+            foreach (string strongToken in strongTokens)
             {
-                if (token == null || token.Value == textInfo.ListSeparator)
+                var weakTokens = strongToken.Split(new[] { " ", "\t" }, StringSplitOptions.RemoveEmptyEntries);
+                string current = string.Empty;
+                for (int i = 0; i < weakTokens.Length; i++)
+                {
+                    current += weakTokens[i];
+                    if (current.EndsWith("+") || current.EndsWith("-") || current.StartsWith("(") && !current.EndsWith(")"))
+                    {
+                        continue;
+                    }
+                    var ahead = i < weakTokens.Length - 1 ? weakTokens[i + 1] : string.Empty;
+                    if (ahead.StartsWith("+") || ahead.StartsWith("-"))
+                    {
+                        continue;
+                    }
+                    data.Add(current.ToComplex32(formatProvider));
+                    current = string.Empty;
+                }
+                if (current != string.Empty)
                 {
                     throw new FormatException();
                 }
-
-                data[i] = token.Value.ToComplex32(formatProvider);
-
-                token = token.Next;
-                if (token != null)
-                {
-                    token = token.Next;
-                }
             }
-
-            return new DenseVector(data);
+            if (data.Count == 0)
+            {
+                throw new FormatException();
+            }
+            return new DenseVector(data.ToArray());
         }
 
         /// <summary>
@@ -1036,50 +785,5 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         }
 
         #endregion
-
-        /// <summary>
-        /// Resets all values to zero.
-        /// </summary>
-        public override void Clear()
-        {
-            Array.Clear(Data, 0, Data.Length);
-        }
-
-        /// <summary>
-        /// Conjugates vector and save result to <paramref name="target"/>
-        /// </summary>
-        /// <param name="target">Target vector</param>
-        protected override void DoConjugate(Vector<Complex32> target)
-        {
-            var denseTarget = target as DenseVector;
-
-            if (denseTarget == null)
-            {
-                base.DoConjugate(target);
-            }
-            else
-            {
-                CommonParallel.For(
-                    0,
-                    Count,
-                    index => denseTarget.Data[index] = Data[index].Conjugate());
-            }
-        }
-
-        /// <summary>Gets the value at the given <paramref name="index"/>.</summary>
-        /// <param name="index">The index of the value to get or set.</param>
-        /// <returns>The value of the vector at the given <paramref name="index"/>.</returns> 
-        internal protected override Complex32 At(int index)
-        {
-            return Data[index];
-        }
-
-        /// <summary>Sets the <paramref name="value"/> at the given <paramref name="index"/>.</summary>
-        /// <param name="index">The index of the value to get or set.</param>
-        /// <param name="value">The value to set.</param>
-        internal protected override void At(int index, Complex32 value)
-        {
-            Data[index] = value;
-        }
     }
 }

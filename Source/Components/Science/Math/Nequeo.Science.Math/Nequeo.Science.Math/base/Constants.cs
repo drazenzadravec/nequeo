@@ -1,41 +1,34 @@
-/*  Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
- *  Copyright :     Copyright © Nequeo Pty Ltd 2012 http://www.nequeo.com.au/
- * 
- *  File :          
- *  Purpose :       
- * 
- */
-
-#region Nequeo Pty Ltd License
-/*
-    Permission is hereby granted, free of charge, to any person
-    obtaining a copy of this software and associated documentation
-    files (the "Software"), to deal in the Software without
-    restriction, including without limitation the rights to use,
-    copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following
-    conditions:
-
-    The above copyright notice and this permission notice shall be
-    included in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-    OTHER DEALINGS IN THE SOFTWARE.
-*/
-#endregion
+// <copyright file="Constants.cs" company="Math.NET">
+// Math.NET Numerics, part of the Math.NET Project
+// http://numerics.mathdotnet.com
+// http://github.com/mathnet/mathnet-numerics
+//
+// Copyright (c) 2009-2010 Math.NET
+//
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation
+// files (the "Software"), to deal in the Software without
+// restriction, including without limitation the rights to use,
+// copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following
+// conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+// </copyright>
 
 namespace Nequeo.Science.Math
 {
-    using System.Numerics;
-    using System.Runtime.InteropServices;
-
     /// <summary>
     /// A collection of frequently used mathematical constants.
     /// </summary>
@@ -73,6 +66,9 @@ namespace Nequeo.Science.Math
         /// <summary>The number sqrt(2)</summary>
         public const double Sqrt2 = 1.4142135623730950488016887242096980785696718753769d;
 
+        /// <summary>The number sqrt(3)</summary>
+        public const double Sqrt3 = 1.7320508075688772935274463415058723669428052538104d;
+
         /// <summary>The number sqrt(1/2) = 1/sqrt(2) = sqrt(2)/2</summary>
         public const double Sqrt1Over2 = 0.70710678118654752440084436210484903928483593768845d;
 
@@ -82,14 +78,14 @@ namespace Nequeo.Science.Math
         /// <summary>The number pi</summary>
         public const double Pi = 3.1415926535897932384626433832795028841971693993751d;
 
-        /// <summary>The number 2*pi</summary>
+        /// <summary>The number pi*2</summary>
         public const double Pi2 = 6.2831853071795864769252867665590057683943387987502d;
-
-        /// <summary>The number 1/pi</summary>
-        public const double OneOverPi = 0.31830988618379067153776752674502872406891929148091d;
 
         /// <summary>The number pi/2</summary>
         public const double PiOver2 = 1.5707963267948966192313216916397514420985846996876d;
+
+        /// <summary>The number pi*3/2</summary>
+        public const double Pi3Over2 = 4.71238898038468985769396507491925432629575409906266d;
 
         /// <summary>The number pi/4</summary>
         public const double PiOver4 = 0.78539816339744830961566084581987572104929234984378d;
@@ -398,6 +394,9 @@ namespace Nequeo.Science.Math
 
         /// <summary>Helion Molar Mass: [kg mol^-1] (2007 CODATA)</summary>
         public const double HelionMolarMass = 3.0149322473e-3;
+
+        /// <summary>Avogadro constant: [mol^-1] (2010 CODATA)</summary>
+        public const double Avogadro = 6.0221412927e23;
 
         #endregion
 

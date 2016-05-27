@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2013 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,18 +27,25 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Nequeo.Science.Math.Distributions;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.LinearAlgebra.Single.Factorization;
+using Nequeo.Science.Math.LinearAlgebra.Storage;
+using Nequeo.Science.Math.Properties;
+using Nequeo.Science.Math.Providers.LinearAlgebra;
+using Nequeo.Science.Math.Threading;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Single
 {
-    using System;
-    using Algorithms.LinearAlgebra;
-    using Generic;
-    using Properties;
-    using Threading;
-
     /// <summary>
-    /// A Matrix class with dense storage. The underlying storage is a one dimensional array in column-major order.
+    /// A Matrix class with dense storage. The underlying storage is a one dimensional array in column-major order (column by column).
     /// </summary>
     [Serializable]
+    [DebuggerDisplay("DenseMatrix {RowCount}x{ColumnCount}-Single")]
     public class DenseMatrix : Matrix
     {
         /// <summary>
@@ -43,292 +53,411 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         /// </summary>
         /// <remarks>Using this instead of the RowCount property to speed up calculating
         /// a matrix index in the data array.</remarks>
-        private readonly int _rowCount;
+        readonly int _rowCount;
 
         /// <summary>
         /// Number of columns.
         /// </summary>
         /// <remarks>Using this instead of the ColumnCount property to speed up calculating
         /// a matrix index in the data array.</remarks>
-        private readonly int _columnCount;
+        readonly int _columnCount;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseMatrix"/> class. This matrix is square with a given size.
+        /// Gets the matrix's data.
         /// </summary>
-        /// <param name="order">the size of the square matrix.</param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="order"/> is less than one.
-        /// </exception>
+        /// <value>The matrix's data.</value>
+        readonly float[] _values;
+
+        /// <summary>
+        /// Create a new dense matrix straight from an initialized matrix storage instance.
+        /// The storage is used directly without copying.
+        /// Intended for advanced scenarios where you're working directly with
+        /// storage for performance or interop reasons.
+        /// </summary>
+        public DenseMatrix(DenseColumnMajorMatrixStorage<float> storage)
+            : base(storage)
+        {
+            _rowCount = storage.RowCount;
+            _columnCount = storage.ColumnCount;
+            _values = storage.Data;
+        }
+
+        /// <summary>
+        /// Create a new square dense matrix with the given number of rows and columns.
+        /// All cells of the matrix will be initialized to zero.
+        /// Zero-length matrices are not supported.
+        /// </summary>
+        /// <exception cref="ArgumentException">If the order is less than one.</exception>
         public DenseMatrix(int order)
-            : base(order)
+            : this(new DenseColumnMajorMatrixStorage<float>(order, order))
         {
-            _rowCount = order;
-            _columnCount = order;
-            Data = new float[order * order];
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseMatrix"/> class.
+        /// Create a new dense matrix with the given number of rows and columns.
+        /// All cells of the matrix will be initialized to zero.
+        /// Zero-length matrices are not supported.
         /// </summary>
-        /// <param name="rows">
-        /// The number of rows.
-        /// </param>
-        /// <param name="columns">
-        /// The number of columns.
-        /// </param>
+        /// <exception cref="ArgumentException">If the row or column count is less than one.</exception>
         public DenseMatrix(int rows, int columns)
-            : base(rows, columns)
+            : this(new DenseColumnMajorMatrixStorage<float>(rows, columns))
         {
-            _rowCount = rows;
-            _columnCount = columns;
-            Data = new float[rows * columns];
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseMatrix"/> class with all entries set to a particular value.
+        /// Create a new dense matrix with the given number of rows and columns directly binding to a raw array.
+        /// The array is assumed to be in column-major order (column by column) and is used directly without copying.
+        /// Very efficient, but changes to the array and the matrix will affect each other.
         /// </summary>
-        /// <param name="rows">
-        /// The number of rows.
-        /// </param>
-        /// <param name="columns">
-        /// The number of columns.
-        /// </param>
-        /// <param name="value">The value which we assign to each element of the matrix.</param>
-        public DenseMatrix(int rows, int columns, float value)
-            : base(rows, columns)
+        /// <seealso href="http://en.wikipedia.org/wiki/Row-major_order"/>
+        public DenseMatrix(int rows, int columns, float[] storage)
+            : this(new DenseColumnMajorMatrixStorage<float>(rows, columns, storage))
         {
-            _rowCount = rows;
-            _columnCount = columns;
-            Data = new float[rows * columns];
-            for (var i = 0; i < Data.Length; i++)
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given other matrix.
+        /// This new matrix will be independent from the other matrix.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfMatrix(Matrix<float> matrix)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfMatrix(matrix.Storage));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given two-dimensional array.
+        /// This new matrix will be independent from the provided array.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfArray(float[,] array)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfArray(array));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given indexed enumerable.
+        /// Keys must be provided at most once, zero is assumed if a key is omitted.
+        /// This new matrix will be independent from the enumerable.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfIndexed(int rows, int columns, IEnumerable<Tuple<int, int, float>> enumerable)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfIndexedEnumerable(rows, columns, enumerable));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given enumerable.
+        /// The enumerable is assumed to be in column-major order (column by column).
+        /// This new matrix will be independent from the enumerable.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfColumnMajor(int rows, int columns, IEnumerable<float> columnMajor)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfColumnMajorEnumerable(rows, columns, columnMajor));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given enumerable of enumerable columns.
+        /// Each enumerable in the master enumerable specifies a column.
+        /// This new matrix will be independent from the enumerables.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfColumns(IEnumerable<IEnumerable<float>> data)
+        {
+            return OfColumnArrays(data.Select(v => v.ToArray()).ToArray());
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given enumerable of enumerable columns.
+        /// Each enumerable in the master enumerable specifies a column.
+        /// This new matrix will be independent from the enumerables.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfColumns(int rows, int columns, IEnumerable<IEnumerable<float>> data)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfColumnEnumerables(rows, columns, data));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given column arrays.
+        /// This new matrix will be independent from the arrays.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfColumnArrays(params float[][] columns)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfColumnArrays(columns));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given column arrays.
+        /// This new matrix will be independent from the arrays.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfColumnArrays(IEnumerable<float[]> columns)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfColumnArrays((columns as float[][]) ?? columns.ToArray()));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given column vectors.
+        /// This new matrix will be independent from the vectors.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfColumnVectors(params Vector<float>[] columns)
+        {
+            var storage = new VectorStorage<float>[columns.Length];
+            for (int i = 0; i < columns.Length; i++)
             {
-                Data[i] = value;
+                storage[i] = columns[i].Storage;
             }
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfColumnVectors(storage));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseMatrix"/> class from a one dimensional array. This constructor
-        /// will reference the one dimensional array and not copy it.
+        /// Create a new dense matrix as a copy of the given column vectors.
+        /// This new matrix will be independent from the vectors.
+        /// A new memory block will be allocated for storing the matrix.
         /// </summary>
-        /// <param name="rows">The number of rows.</param>
-        /// <param name="columns">The number of columns.</param>
-        /// <param name="array">The one dimensional array to create this matrix from. This array should store the matrix in column-major order. see: http://en.wikipedia.org/wiki/Row-major_order </param>
-        public DenseMatrix(int rows, int columns, float[] array)
-            : base(rows, columns)
+        public static DenseMatrix OfColumnVectors(IEnumerable<Vector<float>> columns)
         {
-            _rowCount = rows;
-            _columnCount = columns;
-            Data = array;
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfColumnVectors(columns.Select(c => c.Storage).ToArray()));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DenseMatrix"/> class from a 2D array. This constructor
-        /// will allocate a completely new memory block for storing the dense matrix.
+        /// Create a new dense matrix as a copy of the given enumerable of enumerable rows.
+        /// Each enumerable in the master enumerable specifies a row.
+        /// This new matrix will be independent from the enumerables.
+        /// A new memory block will be allocated for storing the matrix.
         /// </summary>
-        /// <param name="array">The 2D array to create this matrix from.</param>
-        public DenseMatrix(float[,] array)
-            : base(array.GetLength(0), array.GetLength(1))
+        public static DenseMatrix OfRows(IEnumerable<IEnumerable<float>> data)
         {
-            _rowCount = array.GetLength(0);
-            _columnCount = array.GetLength(1);
-            Data = new float[_rowCount * _columnCount];
-            for (var i = 0; i < _rowCount; i++)
+            return OfRowArrays(data.Select(v => v.ToArray()).ToArray());
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given enumerable of enumerable rows.
+        /// Each enumerable in the master enumerable specifies a row.
+        /// This new matrix will be independent from the enumerables.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfRows(int rows, int columns, IEnumerable<IEnumerable<float>> data)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfRowEnumerables(rows, columns, data));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given row arrays.
+        /// This new matrix will be independent from the arrays.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfRowArrays(params float[][] rows)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfRowArrays(rows));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given row arrays.
+        /// This new matrix will be independent from the arrays.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfRowArrays(IEnumerable<float[]> rows)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfRowArrays((rows as float[][]) ?? rows.ToArray()));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given row vectors.
+        /// This new matrix will be independent from the vectors.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfRowVectors(params Vector<float>[] rows)
+        {
+            var storage = new VectorStorage<float>[rows.Length];
+            for (int i = 0; i < rows.Length; i++)
             {
-                for (var j = 0; j < _columnCount; j++)
-                {
-                    Data[(j * _rowCount) + i] = array[i, j];
-                }
+                storage[i] = rows[i].Storage;
             }
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfRowVectors(storage));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix as a copy of the given row vectors.
+        /// This new matrix will be independent from the vectors.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfRowVectors(IEnumerable<Vector<float>> rows)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfRowVectors(rows.Select(r => r.Storage).ToArray()));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix with the diagonal as a copy of the given vector.
+        /// This new matrix will be independent from the vector.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfDiagonalVector(Vector<float> diagonal)
+        {
+            var m = new DenseMatrix(diagonal.Count, diagonal.Count);
+            m.SetDiagonal(diagonal);
+            return m;
+        }
+
+        /// <summary>
+        /// Create a new dense matrix with the diagonal as a copy of the given vector.
+        /// This new matrix will be independent from the vector.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfDiagonalVector(int rows, int columns, Vector<float> diagonal)
+        {
+            var m = new DenseMatrix(rows, columns);
+            m.SetDiagonal(diagonal);
+            return m;
+        }
+
+        /// <summary>
+        /// Create a new dense matrix with the diagonal as a copy of the given array.
+        /// This new matrix will be independent from the array.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfDiagonalArray(float[] diagonal)
+        {
+            var m = new DenseMatrix(diagonal.Length, diagonal.Length);
+            m.SetDiagonal(diagonal);
+            return m;
+        }
+
+        /// <summary>
+        /// Create a new dense matrix with the diagonal as a copy of the given array.
+        /// This new matrix will be independent from the array.
+        /// A new memory block will be allocated for storing the matrix.
+        /// </summary>
+        public static DenseMatrix OfDiagonalArray(int rows, int columns, float[] diagonal)
+        {
+            var m = new DenseMatrix(rows, columns);
+            m.SetDiagonal(diagonal);
+            return m;
+        }
+
+        /// <summary>
+        /// Create a new dense matrix and initialize each value to the same provided value.
+        /// </summary>
+        public static DenseMatrix Create(int rows, int columns, float value)
+        {
+            if (value == 0f) return new DenseMatrix(rows, columns);
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfValue(rows, columns, value));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix and initialize each value using the provided init function.
+        /// </summary>
+        public static DenseMatrix Create(int rows, int columns, Func<int, int, float> init)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfInit(rows, columns, init));
+        }
+
+        /// <summary>
+        /// Create a new diagonal dense matrix and initialize each diagonal value to the same provided value.
+        /// </summary>
+        public static DenseMatrix CreateDiagonal(int rows, int columns, float value)
+        {
+            if (value == 0f) return new DenseMatrix(rows, columns);
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfDiagonalInit(rows, columns, i => value));
+        }
+
+        /// <summary>
+        /// Create a new diagonal dense matrix and initialize each diagonal value using the provided init function.
+        /// </summary>
+        public static DenseMatrix CreateDiagonal(int rows, int columns, Func<int, float> init)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfDiagonalInit(rows, columns, init));
+        }
+
+        /// <summary>
+        /// Create a new square sparse identity matrix where each diagonal value is set to One.
+        /// </summary>
+        public static DenseMatrix CreateIdentity(int order)
+        {
+            return new DenseMatrix(DenseColumnMajorMatrixStorage<float>.OfDiagonalInit(order, order, i => One));
+        }
+
+        /// <summary>
+        /// Create a new dense matrix with values sampled from the provided random distribution.
+        /// </summary>
+        public static DenseMatrix CreateRandom(int rows, int columns, IContinuousDistribution distribution)
+        {
+            return new DenseMatrix(new DenseColumnMajorMatrixStorage<float>(rows, columns, Generate.RandomSingle(rows*columns, distribution)));
         }
 
         /// <summary>
         /// Gets the matrix's data.
         /// </summary>
         /// <value>The matrix's data.</value>
-        public float[] Data
+        public float[] Values
         {
-            get;
-            private set;
+            get { return _values; }
+        }
+
+        /// <summary>Calculates the induced L1 norm of this matrix.</summary>
+        /// <returns>The maximum absolute column sum of the matrix.</returns>
+        public override double L1Norm()
+        {
+            return Control.LinearAlgebraProvider.MatrixNorm(Norm.OneNorm, _rowCount, _columnCount, _values);
+        }
+
+        /// <summary>Calculates the induced infinity norm of this matrix.</summary>
+        /// <returns>The maximum absolute row sum of the matrix.</returns>
+        public override double InfinityNorm()
+        {
+            return Control.LinearAlgebraProvider.MatrixNorm(Norm.InfinityNorm, _rowCount, _columnCount, _values);
+        }
+
+        /// <summary>Calculates the entry-wise Frobenius norm of this matrix.</summary>
+        /// <returns>The square root of the sum of the squared values.</returns>
+        public override double FrobeniusNorm()
+        {
+            return Control.LinearAlgebraProvider.MatrixNorm(Norm.FrobeniusNorm, _rowCount, _columnCount, _values);
         }
 
         /// <summary>
-        /// Creates a <c>DenseMatrix</c> for the given number of rows and columns.
+        /// Negate each element of this matrix and place the results into the result matrix.
         /// </summary>
-        /// <param name="numberOfRows">
-        /// The number of rows.
-        /// </param>
-        /// <param name="numberOfColumns">
-        /// The number of columns.
-        /// </param>
-        /// <returns>
-        /// A <c>DenseMatrix</c> with the given dimensions.
-        /// </returns>
-        public override Matrix<float> CreateMatrix(int numberOfRows, int numberOfColumns)
+        /// <param name="result">The result of the negation.</param>
+        protected override void DoNegate(Matrix<float> result)
         {
-            return new DenseMatrix(numberOfRows, numberOfColumns);
-        }
-
-        /// <summary>
-        /// Creates a <see cref="Vector{T}"/> with a the given dimension.
-        /// </summary>
-        /// <param name="size">The size of the vector.</param>
-        /// <returns>
-        /// A <see cref="Vector{T}"/> with the given dimension.
-        /// </returns>
-        public override Vector<float> CreateVector(int size)
-        {
-            return new DenseVector(size);
-        }
-
-        /// <summary>
-        /// Gets or sets the value at the given row and column.
-        /// </summary>
-        /// <param name="row">
-        /// The row of the element.
-        /// </param>
-        /// <param name="column">
-        /// The column of the element.
-        /// </param>
-        /// <value>The value to get or set.</value>
-        /// <remarks>This method is ranged checked. <see cref="At(int,int)"/> and <see cref="At(int,int,float)"/>
-        /// to get and set values without range checking.</remarks>
-        public override float this[int row, int column]
-        {
-            get
+            var denseResult = result as DenseMatrix;
+            if (denseResult != null)
             {
-                if (row < 0 || row >= _rowCount)
-                {
-                    throw new ArgumentOutOfRangeException("row");
-                }
-
-                if (column < 0 || column >= _columnCount)
-                {
-                    throw new ArgumentOutOfRangeException("column");
-                }
-
-                return Data[(column * _rowCount) + row];
+                Control.LinearAlgebraProvider.ScaleArray(-1, _values, denseResult._values);
+                return;
             }
 
-            set
+            base.DoNegate(result);
+        }
+
+        /// <summary>
+        /// Add a scalar to each element of the matrix and stores the result in the result vector.
+        /// </summary>
+        /// <param name="scalar">The scalar to add.</param>
+        /// <param name="result">The matrix to store the result of the addition.</param>
+        protected override void DoAdd(float scalar, Matrix<float> result)
+        {
+            var denseResult = result as DenseMatrix;
+            if (denseResult == null)
             {
-                if (row < 0 || row >= _rowCount)
-                {
-                    throw new ArgumentOutOfRangeException("row");
-                }
-
-                if (column < 0 || column >= _columnCount)
-                {
-                    throw new ArgumentOutOfRangeException("column");
-                }
-
-                Data[(column * _rowCount) + row] = value;
-            }
-        }
-
-        /// <summary>
-        /// Retrieves the requested element without range checking.
-        /// </summary>
-        /// <param name="row">
-        /// The row of the element.
-        /// </param>
-        /// <param name="column">
-        /// The column of the element.
-        /// </param>
-        /// <returns>
-        /// The requested element.
-        /// </returns>
-        public override float At(int row, int column)
-        {
-            return Data[(column * _rowCount) + row];
-        }
-
-        /// <summary>
-        /// Sets the value of the given element.
-        /// </summary>
-        /// <param name="row">
-        /// The row of the element.
-        /// </param>
-        /// <param name="column">
-        /// The column of the element.
-        /// </param>
-        /// <param name="value">
-        /// The value to set the element to.
-        /// </param>
-        public override void At(int row, int column, float value)
-        {
-            Data[(column * _rowCount) + row] = value;
-        }
-
-        /// <summary>
-        /// Sets all values to zero.
-        /// </summary>
-        public override void Clear()
-        {
-            Array.Clear(Data, 0, Data.Length);
-        }
-
-        /// <summary>
-        /// Returns the transpose of this matrix.
-        /// </summary>        
-        /// <returns>The transpose of this matrix.</returns>
-        public override Matrix<float> Transpose()
-        {
-            var ret = new DenseMatrix(ColumnCount, RowCount);
-            for (var j = 0; j < ColumnCount; j++)
-            {
-                var index = j * RowCount;
-                for (var i = 0; i < RowCount; i++)
-                {
-                    ret.Data[(i * ColumnCount) + j] = Data[index + i];
-                }
+                base.DoAdd(scalar, result);
+                return;
             }
 
-            return ret;
-        }
-
-        /// <summary>Calculates the L1 norm.</summary>
-        /// <returns>The L1 norm of the matrix.</returns>
-        public override float L1Norm()
-        {
-            return Control.LinearAlgebraProvider.MatrixNorm(Norm.OneNorm, RowCount, ColumnCount, Data);
-        }
-
-        /// <summary>Calculates the Frobenius norm of this matrix.</summary>
-        /// <returns>The Frobenius norm of this matrix.</returns>
-        public override float FrobeniusNorm()
-        {
-            return Control.LinearAlgebraProvider.MatrixNorm(Norm.FrobeniusNorm, RowCount, ColumnCount, Data);
-        }
-
-        /// <summary>Calculates the infinity norm of this matrix.</summary>
-        /// <returns>The infinity norm of this matrix.</returns>  
-        public override float InfinityNorm()
-        {
-            return Control.LinearAlgebraProvider.MatrixNorm(Norm.InfinityNorm, RowCount, ColumnCount, Data);
-        }
-
-        #region Static constructors for special matrices.
-
-        /// <summary>
-        /// Initializes a square <see cref="DenseMatrix"/> with all zero's except for ones on the diagonal.
-        /// </summary>
-        /// <param name="order">the size of the square matrix.</param>
-        /// <returns>A dense identity matrix.</returns>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="order"/> is less than one.
-        /// </exception>
-        public static DenseMatrix Identity(int order)
-        {
-            var m = new DenseMatrix(order);
-            for (var i = 0; i < order; i++)
+            CommonParallel.For(0, _values.Length, 4096, (a, b) =>
             {
-                m.Data[(i * order) + i] = 1.0f;
-            }
-
-            return m;
+                var v = denseResult._values;
+                for (int i = a; i < b; i++)
+                {
+                    v[i] = _values[i] + scalar;
+                }
+            });
         }
-
-        #endregion
 
         /// <summary>
         /// Adds another matrix to this matrix.
@@ -339,16 +468,53 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         protected override void DoAdd(Matrix<float> other, Matrix<float> result)
         {
-            var denseOther = other as DenseMatrix;
+            // dense + dense = dense
+            var denseOther = other.Storage as DenseColumnMajorMatrixStorage<float>;
+            var denseResult = result.Storage as DenseColumnMajorMatrixStorage<float>;
+            if (denseOther != null && denseResult != null)
+            {
+                Control.LinearAlgebraProvider.AddArrays(_values, denseOther.Data, denseResult.Data);
+                return;
+            }
+
+            // dense + diagonal = any
+            var diagonalOther = other.Storage as DiagonalMatrixStorage<float>;
+            if (diagonalOther != null)
+            {
+                Storage.CopyToUnchecked(result.Storage, ExistingData.Clear);
+                var diagonal = diagonalOther.Data;
+                for (int i = 0; i < diagonal.Length; i++)
+                {
+                    result.At(i, i, result.At(i, i) + diagonal[i]);
+                }
+                return;
+            }
+
+            base.DoAdd(other, result);
+        }
+
+        /// <summary>
+        /// Subtracts a scalar from each element of the matrix and stores the result in the result vector.
+        /// </summary>
+        /// <param name="scalar">The scalar to subtract.</param>
+        /// <param name="result">The matrix to store the result of the subtraction.</param>
+        protected override void DoSubtract(float scalar, Matrix<float> result)
+        {
             var denseResult = result as DenseMatrix;
-            if (denseOther == null || denseResult == null)
+            if (denseResult == null)
             {
-                base.DoAdd(other, result);
+                base.DoSubtract(scalar, result);
+                return;
             }
-            else
+
+            CommonParallel.For(0, _values.Length, 4096, (a, b) =>
             {
-                Control.LinearAlgebraProvider.AddArrays(Data, denseOther.Data, denseResult.Data);
-            }
+                var v = denseResult._values;
+                for (int i = a; i < b; i++)
+                {
+                    v[i] = _values[i] - scalar;
+                }
+            });
         }
 
         /// <summary>
@@ -358,16 +524,29 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         /// <param name="result">The matrix to store the result of the subtraction.</param>
         protected override void DoSubtract(Matrix<float> other, Matrix<float> result)
         {
-            var denseOther = other as DenseMatrix;
-            var denseResult = result as DenseMatrix;
-            if (denseOther == null || denseResult == null)
+            // dense + dense = dense
+            var denseOther = other.Storage as DenseColumnMajorMatrixStorage<float>;
+            var denseResult = result.Storage as DenseColumnMajorMatrixStorage<float>;
+            if (denseOther != null && denseResult != null)
             {
-                base.DoSubtract(other, result);
+                Control.LinearAlgebraProvider.SubtractArrays(_values, denseOther.Data, denseResult.Data);
+                return;
             }
-            else
+
+            // dense + diagonal = matrix
+            var diagonalOther = other.Storage as DiagonalMatrixStorage<float>;
+            if (diagonalOther != null)
             {
-                Control.LinearAlgebraProvider.SubtractArrays(Data, denseOther.Data, denseResult.Data);
+                CopyTo(result);
+                var diagonal = diagonalOther.Data;
+                for (int i = 0; i < diagonal.Length; i++)
+                {
+                    result.At(i, i, result.At(i, i) - diagonal[i]);
+                }
+                return;
             }
+
+            base.DoSubtract(other, result);
         }
 
         /// <summary>
@@ -384,7 +563,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
             }
             else
             {
-                Control.LinearAlgebraProvider.ScaleArray(scalar, Data, denseResult.Data);
+                Control.LinearAlgebraProvider.ScaleArray(scalar, _values, denseResult._values);
             }
         }
 
@@ -404,49 +583,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
             }
             else
             {
-                Control.LinearAlgebraProvider.MatrixMultiplyWithUpdate(
-                    Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                    Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                    1.0f,
-                    Data,
-                    RowCount,
-                    ColumnCount,
-                    denseRight.Data,
+                Control.LinearAlgebraProvider.MatrixMultiply(
+                    _values,
+                    _rowCount,
+                    _columnCount,
+                    denseRight.Values,
                     denseRight.Count,
                     1,
-                    0.0f,
-                    denseResult.Data);
-            }
-        }
-
-        /// <summary>
-        /// Left multiply a matrix with a vector ( = vector * matrix ) and place the result in the result vector.
-        /// </summary>
-        /// <param name="leftSide">The vector to multiply with.</param>
-        /// <param name="result">The result of the multiplication.</param>
-        protected override void DoLeftMultiply(Vector<float> leftSide, Vector<float> result)
-        {
-            var denseLeft = leftSide as DenseVector;
-            var denseResult = result as DenseVector;
-
-            if (denseLeft == null || denseResult == null)
-            {
-                base.DoLeftMultiply(leftSide, result);
-            }
-            else
-            {
-                Control.LinearAlgebraProvider.MatrixMultiplyWithUpdate(
-                    Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                    Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                    1.0f,
-                    denseLeft.Data,
-                    1,
-                    denseLeft.Count,
-                    Data,
-                    RowCount,
-                    ColumnCount,
-                    0.0f,
-                    denseResult.Data);
+                    denseResult.Values);
             }
         }
 
@@ -459,26 +603,41 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
+            if (denseOther != null && denseResult != null)
+            {
+                Control.LinearAlgebraProvider.MatrixMultiply(
+                    _values,
+                    _rowCount,
+                    _columnCount,
+                    denseOther._values,
+                    denseOther._rowCount,
+                    denseOther._columnCount,
+                    denseResult._values);
+                return;
+            }
 
-            if (denseOther == null || denseResult == null)
+            var diagonalOther = other.Storage as DiagonalMatrixStorage<float>;
+            if (diagonalOther != null)
             {
-                base.DoMultiply(other, result);
+                var diagonal = diagonalOther.Data;
+                var d = System.Math.Min(ColumnCount, other.ColumnCount);
+                if (d < other.ColumnCount)
+                {
+                    result.ClearSubMatrix(0, RowCount, ColumnCount, other.ColumnCount - ColumnCount);
+                }
+                int index = 0;
+                for (int j = 0; j < d; j++)
+                {
+                    for (int i = 0; i < RowCount; i++)
+                    {
+                        result.At(i, j, _values[index]*diagonal[j]);
+                        index++;
+                    }
+                }
+                return;
             }
-            else
-            {
-                Control.LinearAlgebraProvider.MatrixMultiplyWithUpdate(
-                                  Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                                  Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                                  1.0f,
-                                  Data,
-                                  RowCount,
-                                  ColumnCount,
-                                  denseOther.Data,
-                                  denseOther.RowCount,
-                                  denseOther.ColumnCount,
-                                  0.0f,
-                                  denseResult.Data);
-            }
+
+            base.DoMultiply(other, result);
         }
 
         /// <summary>
@@ -488,28 +647,47 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         /// <param name="result">The result of the multiplication.</param>
         protected override void DoTransposeAndMultiply(Matrix<float> other, Matrix<float> result)
         {
-             var denseOther = other as DenseMatrix;
+            var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-
-            if (denseOther == null || denseResult == null)
-            {
-                base.DoTransposeAndMultiply(other, result);
-            }
-            else
+            if (denseOther != null && denseResult != null)
             {
                 Control.LinearAlgebraProvider.MatrixMultiplyWithUpdate(
-                                  Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                                  Algorithms.LinearAlgebra.Transpose.Transpose,
-                                  1.0f,
-                                  Data,
-                                  RowCount,
-                                  ColumnCount,
-                                  denseOther.Data,
-                                  denseOther.RowCount,
-                                  denseOther.ColumnCount,
-                                  0.0f,
-                                  denseResult.Data);
+                    Providers.LinearAlgebra.Transpose.DontTranspose,
+                    Providers.LinearAlgebra.Transpose.Transpose,
+                    1.0f,
+                    _values,
+                    _rowCount,
+                    _columnCount,
+                    denseOther._values,
+                    denseOther._rowCount,
+                    denseOther._columnCount,
+                    0.0f,
+                    denseResult._values);
+                return;
             }
+
+            var diagonalOther = other.Storage as DiagonalMatrixStorage<float>;
+            if (diagonalOther != null)
+            {
+                var diagonal = diagonalOther.Data;
+                var d = System.Math.Min(ColumnCount, other.RowCount);
+                if (d < other.RowCount)
+                {
+                    result.ClearSubMatrix(0, RowCount, ColumnCount, other.RowCount - ColumnCount);
+                }
+                int index = 0;
+                for (int j = 0; j < d; j++)
+                {
+                    for (int i = 0; i < RowCount; i++)
+                    {
+                        result.At(i, j, _values[index]*diagonal[j]);
+                        index++;
+                    }
+                }
+                return;
+            }
+
+            base.DoTransposeAndMultiply(other, result);
         }
 
         /// <summary>
@@ -529,17 +707,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
             else
             {
                 Control.LinearAlgebraProvider.MatrixMultiplyWithUpdate(
-                    Algorithms.LinearAlgebra.Transpose.Transpose,
-                    Algorithms.LinearAlgebra.Transpose.DontTranspose,
+                    Providers.LinearAlgebra.Transpose.Transpose,
+                    Providers.LinearAlgebra.Transpose.DontTranspose,
                     1.0f,
-                    Data,
-                    RowCount,
-                    ColumnCount,
-                    denseRight.Data,
+                    _values,
+                    _rowCount,
+                    _columnCount,
+                    denseRight.Values,
                     denseRight.Count,
                     1,
                     0.0f,
-                    denseResult.Data);
+                    denseResult.Values);
             }
         }
 
@@ -552,43 +730,63 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-
-            if (denseOther == null || denseResult == null)
-            {
-                base.DoTransposeThisAndMultiply(other, result);
-            }
-            else
+            if (denseOther != null && denseResult != null)
             {
                 Control.LinearAlgebraProvider.MatrixMultiplyWithUpdate(
-                                  Algorithms.LinearAlgebra.Transpose.Transpose,
-                                  Algorithms.LinearAlgebra.Transpose.DontTranspose,
-                                  1.0f,
-                                  Data,
-                                  RowCount,
-                                  ColumnCount,
-                                  denseOther.Data,
-                                  denseOther.RowCount,
-                                  denseOther.ColumnCount,
-                                  0.0f,
-                                  denseResult.Data);
+                    Providers.LinearAlgebra.Transpose.Transpose,
+                    Providers.LinearAlgebra.Transpose.DontTranspose,
+                    1.0f,
+                    _values,
+                    _rowCount,
+                    _columnCount,
+                    denseOther._values,
+                    denseOther._rowCount,
+                    denseOther._columnCount,
+                    0.0f,
+                    denseResult._values);
+                return;
             }
+
+            var diagonalOther = other.Storage as DiagonalMatrixStorage<float>;
+            if (diagonalOther != null)
+            {
+                var diagonal = diagonalOther.Data;
+                var d = System.Math.Min(RowCount, other.ColumnCount);
+                if (d < other.ColumnCount)
+                {
+                    result.ClearSubMatrix(0, ColumnCount, RowCount, other.ColumnCount - RowCount);
+                }
+                int index = 0;
+                for (int i = 0; i < ColumnCount; i++)
+                {
+                    for (int j = 0; j < d; j++)
+                    {
+                        result.At(i, j, _values[index]*diagonal[j]);
+                        index++;
+                    }
+                    index += (RowCount - d);
+                }
+                return;
+            }
+
+            base.DoTransposeThisAndMultiply(other, result);
         }
 
         /// <summary>
-        /// Negate each element of this matrix and place the results into the result matrix.
+        /// Divides each element of the matrix by a scalar and places results into the result matrix.
         /// </summary>
-        /// <param name="result">The result of the negation.</param>
-        protected override void DoNegate(Matrix<float> result)
+        /// <param name="divisor">The scalar to divide the matrix with.</param>
+        /// <param name="result">The matrix to store the result of the division.</param>
+        protected override void DoDivide(float divisor, Matrix<float> result)
         {
             var denseResult = result as DenseMatrix;
-
             if (denseResult == null)
             {
-                base.DoNegate(result);
+                base.DoDivide(divisor, result);
             }
             else
             {
-                Control.LinearAlgebraProvider.ScaleArray(-1, Data, denseResult.Data);
+                Control.LinearAlgebraProvider.ScaleArray(1.0f/divisor, _values, denseResult._values);
             }
         }
 
@@ -608,64 +806,138 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
             }
             else
             {
-                Control.LinearAlgebraProvider.PointWiseMultiplyArrays(Data, denseOther.Data, denseResult.Data);
+                Control.LinearAlgebraProvider.PointWiseMultiplyArrays(_values, denseOther._values, denseResult._values);
             }
         }
 
         /// <summary>
         /// Pointwise divide this matrix by another matrix and stores the result into the result matrix.
         /// </summary>
-        /// <param name="other">The matrix to pointwise divide this one by.</param>
+        /// <param name="divisor">The matrix to pointwise divide this one by.</param>
         /// <param name="result">The matrix to store the result of the pointwise division.</param>
-        protected override void DoPointwiseDivide(Matrix<float> other, Matrix<float> result)
+        protected override void DoPointwiseDivide(Matrix<float> divisor, Matrix<float> result)
         {
-            var denseOther = other as DenseMatrix;
+            var denseOther = divisor as DenseMatrix;
             var denseResult = result as DenseMatrix;
 
             if (denseOther == null || denseResult == null)
             {
-                base.DoPointwiseDivide(other, result);
+                base.DoPointwiseDivide(divisor, result);
             }
             else
             {
-                Control.LinearAlgebraProvider.PointWiseDivideArrays(Data, denseOther.Data, denseResult.Data);
+                Control.LinearAlgebraProvider.PointWiseDivideArrays(_values, denseOther._values, denseResult._values);
             }
         }
 
         /// <summary>
-        /// Computes the modulus for each element of the matrix.
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for the given divisor each element of the matrix.
         /// </summary>
-        /// <param name="divisor">The divisor to use.</param>
+        /// <param name="divisor">The scalar denominator to use.</param>
         /// <param name="result">Matrix to store the results in.</param>
         protected override void DoModulus(float divisor, Matrix<float> result)
         {
             var denseResult = result as DenseMatrix;
-
             if (denseResult == null)
             {
                 base.DoModulus(divisor, result);
+                return;
             }
-            else
-            {
-                if (!ReferenceEquals(this, result))
-                {
-                    CopyTo(result);
-                }
 
-                CommonParallel.For(
-                    0,
-                    Data.Length,
-                    index => denseResult.Data[index] %= divisor);
+            if (!ReferenceEquals(this, result))
+            {
+                CopyTo(result);
             }
+
+            CommonParallel.For(0, _values.Length, (a, b) =>
+            {
+                var v = denseResult._values;
+                for (int i = a; i < b; i++)
+                {
+                    v[i] = Euclid.Modulus(v[i], divisor);
+                }
+            });
         }
 
         /// <summary>
-        /// Returns the conjugate transpose of this matrix.
-        /// </summary>        
-        /// <returns>The conjugate transpose of this matrix.</returns>
-        public override Matrix<float> ConjugateTranspose()
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for the given dividend for each element of the matrix.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoModulusByThis(float dividend, Matrix<float> result)
         {
-            return Transpose();
+            var denseResult = result as DenseMatrix;
+            if (denseResult == null)
+            {
+                base.DoModulusByThis(dividend, result);
+                return;
+            }
+
+            CommonParallel.For(0, _values.Length, 4096, (a, b) =>
+            {
+                var v = denseResult._values;
+                for (int i = a; i < b; i++)
+                {
+                    v[i] = Euclid.Modulus(dividend, _values[i]);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for the given divisor each element of the matrix.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
+        /// <param name="result">Matrix to store the results in.</param>
+        protected override void DoRemainder(float divisor, Matrix<float> result)
+        {
+            var denseResult = result as DenseMatrix;
+            if (denseResult == null)
+            {
+                base.DoRemainder(divisor, result);
+                return;
+            }
+
+            if (!ReferenceEquals(this, result))
+            {
+                CopyTo(result);
+            }
+
+            CommonParallel.For(0, _values.Length, (a, b) =>
+            {
+                var v = denseResult._values;
+                for (int i = a; i < b; i++)
+                {
+                    v[i] %= divisor;
+                }
+            });
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for the given dividend for each element of the matrix.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected override void DoRemainderByThis(float dividend, Matrix<float> result)
+        {
+            var denseResult = result as DenseMatrix;
+            if (denseResult == null)
+            {
+                base.DoRemainderByThis(dividend, result);
+                return;
+            }
+
+            CommonParallel.For(0, _values.Length, 4096, (a, b) =>
+            {
+                var v = denseResult._values;
+                for (int i = a; i < b; i++)
+                {
+                    v[i] = dividend%_values[i];
+                }
+            });
         }
 
         /// <summary>
@@ -675,15 +947,15 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
         /// <exception cref="ArgumentException">If the matrix is not square</exception>
         public override float Trace()
         {
-            if (RowCount != ColumnCount)
+            if (_rowCount != _columnCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSquare);
             }
 
             var sum = 0.0f;
-            for (var i = 0; i < RowCount; i++)
+            for (var i = 0; i < _rowCount; i++)
             {
-                sum += Data[(i * RowCount) + i];
+                sum += _values[(i * _rowCount) + i];
             }
 
             return sum;
@@ -712,16 +984,16 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
                 throw new ArgumentNullException("leftSide");
             }
 
-            if (leftSide.RowCount != rightSide.RowCount || leftSide.ColumnCount != rightSide.ColumnCount)
+            if (leftSide._rowCount != rightSide._rowCount || leftSide._columnCount != rightSide._columnCount)
             {
-                throw new ArgumentOutOfRangeException(Resources.ArgumentMatrixDimensions);
+                throw DimensionsDontMatch<ArgumentOutOfRangeException>(leftSide, rightSide);
             }
 
             return (DenseMatrix)leftSide.Add(rightSide);
         }
 
         /// <summary>
-        /// Returns a <strong>Matrix</strong> containing the same values of <paramref name="rightSide"/>. 
+        /// Returns a <strong>Matrix</strong> containing the same values of <paramref name="rightSide"/>.
         /// </summary>
         /// <param name="rightSide">The matrix to get the values from.</param>
         /// <returns>A matrix containing a the same values as <paramref name="rightSide"/>.</returns>
@@ -759,9 +1031,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
                 throw new ArgumentNullException("leftSide");
             }
 
-            if (leftSide.RowCount != rightSide.RowCount || leftSide.ColumnCount != rightSide.ColumnCount)
+            if (leftSide._rowCount != rightSide._rowCount || leftSide._columnCount != rightSide._columnCount)
             {
-                throw new ArgumentOutOfRangeException(Resources.ArgumentMatrixDimensions);
+                throw DimensionsDontMatch<ArgumentOutOfRangeException>(leftSide, rightSide);
             }
 
             return (DenseMatrix)leftSide.Subtract(rightSide);
@@ -840,9 +1112,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
                 throw new ArgumentNullException("rightSide");
             }
 
-            if (leftSide.ColumnCount != rightSide.RowCount)
+            if (leftSide._columnCount != rightSide._rowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw DimensionsDontMatch<ArgumentException>(leftSide, rightSide);
             }
 
             return (DenseMatrix)leftSide.Multiply(rightSide);
@@ -896,7 +1168,62 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single
                 throw new ArgumentNullException("leftSide");
             }
 
-            return (DenseMatrix)leftSide.Modulus(rightSide);
+            return (DenseMatrix)leftSide.Remainder(rightSide);
+        }
+
+        /// <summary>
+        /// Evaluates whether this matrix is symmetric.
+        /// </summary>
+        public override bool IsSymmetric()
+        {
+            if (RowCount != ColumnCount)
+            {
+                return false;
+            }
+
+            for (var j = 0; j < ColumnCount; j++)
+            {
+                var index = j * RowCount;
+                for (var i = j + 1; i < RowCount; i++)
+                {
+                    if (_values[(i*ColumnCount) + j] != _values[index + i])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public override Cholesky<float> Cholesky()
+        {
+            return DenseCholesky.Create(this);
+        }
+
+        public override LU<float> LU()
+        {
+            return DenseLU.Create(this);
+        }
+
+        public override QR<float> QR(QRMethod method = QRMethod.Thin)
+        {
+            return DenseQR.Create(this, method);
+        }
+
+        public override GramSchmidt<float> GramSchmidt()
+        {
+            return DenseGramSchmidt.Create(this);
+        }
+
+        public override Svd<float> Svd(bool computeVectors = true)
+        {
+            return DenseSvd.Create(this, computeVectors);
+        }
+
+        public override Evd<float> Evd(Symmetricity symmetricity = Symmetricity.Unknown)
+        {
+            return DenseEvd.Create(this, symmetricity);
         }
     }
 }

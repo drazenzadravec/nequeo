@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,13 +27,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
 {
-    using System;
-    using Generic;
-
     using Nequeo.Science.Math;
-    using Properties;
 
     /// <summary>
     /// <para>A class which encapsulates the functionality of the QR decomposition Modified Gram-Schmidt Orthogonalization.</para>
@@ -43,7 +41,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
     /// <remarks>
     /// The computation of the QR decomposition is done at construction time by modified Gram-Schmidt Orthogonalization.
     /// </remarks>
-    public class UserGramSchmidt : GramSchmidt
+    internal sealed class UserGramSchmidt : GramSchmidt
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserGramSchmidt"/> class. This object creates an unitary matrix 
@@ -53,51 +51,53 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> row count is less then column count</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is rank deficient</exception>
-        public UserGramSchmidt(Matrix<Complex32> matrix)
+        public static UserGramSchmidt Create(Matrix<Complex32> matrix)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
-
             if (matrix.RowCount < matrix.ColumnCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(matrix);
             }
 
-            MatrixQ = matrix.Clone();
-            MatrixR = matrix.CreateMatrix(matrix.ColumnCount, matrix.ColumnCount);
+            var q = matrix.Clone();
+            var r = Matrix<Complex32>.Build.SameAs(matrix, matrix.ColumnCount, matrix.ColumnCount);
 
-            for (var k = 0; k < MatrixQ.ColumnCount; k++)
+            for (var k = 0; k < q.ColumnCount; k++)
             {
-                var norm = MatrixQ.Column(k).Norm(2).Real;
-                if (norm == 0.0f)
+                var norm = (float) q.Column(k).L2Norm();
+                if (norm == 0f)
                 {
                     throw new ArgumentException(Resources.ArgumentMatrixNotRankDeficient);
                 }
 
-                MatrixR.At(k, k, norm);
-                for (var i = 0; i < MatrixQ.RowCount; i++)
+                r.At(k, k, norm);
+                for (var i = 0; i < q.RowCount; i++)
                 {
-                    MatrixQ.At(i, k, MatrixQ.At(i, k) / norm);
+                    q.At(i, k, (q.At(i, k) / norm));
                 }
 
-                for (var j = k + 1; j < MatrixQ.ColumnCount; j++)
+                for (var j = k + 1; j < q.ColumnCount; j++)
                 {
                     var dot = Complex32.Zero;
-                    for (int i = 0; i < MatrixQ.RowCount; i++)
+                    for (int i = 0; i < q.RowCount; i++)
                     {
-                        dot += MatrixQ.Column(k)[i].Conjugate() * MatrixQ.Column(j)[i];
+                        dot += q.Column(k)[i].Conjugate() * q.Column(j)[i];
                     }
                     
-                    MatrixR.At(k, j, dot);
-                    for (var i = 0; i < MatrixQ.RowCount; i++)
+                    r.At(k, j, dot);
+                    for (var i = 0; i < q.RowCount; i++)
                     {
-                        var value = MatrixQ.At(i, j) - (MatrixQ.At(i, k) * dot);
-                        MatrixQ.At(i, j, value);
+                        var value = q.At(i, j) - (q.At(i, k) * dot);
+                        q.At(i, j, value);
                     }
                 }
             }
+
+            return new UserGramSchmidt(q, r);
+        }
+
+        UserGramSchmidt(Matrix<Complex32> q, Matrix<Complex32> rFull)
+            : base(q, rFull)
+        {
         }
         
         /// <summary>
@@ -107,17 +107,6 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<Complex32> input, Matrix<Complex32> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // The solution X should have the same number of columns as B
             if (input.ColumnCount != result.ColumnCount)
             {
@@ -125,13 +114,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
             }
 
             // The dimension compatibility conditions for X = A\B require the two matrices A and B to have the same number of rows
-            if (MatrixQ.RowCount != input.RowCount)
+            if (Q.RowCount != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
             }
 
             // The solution X row dimension is equal to the column dimension of A
-            if (MatrixQ.ColumnCount != result.RowCount)
+            if (Q.ColumnCount != result.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
@@ -139,20 +128,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
             var inputCopy = input.Clone();
             
             // Compute Y = transpose(Q)*B
-            var column = new Complex32[MatrixQ.RowCount];
+            var column = new Complex32[Q.RowCount];
             for (var j = 0; j < input.ColumnCount; j++)
             {
-                for (var k = 0; k < MatrixQ.RowCount; k++)
+                for (var k = 0; k < Q.RowCount; k++)
                 {
                     column[k] = inputCopy.At(k, j);
                 }
 
-                for (var i = 0; i < MatrixQ.ColumnCount; i++)
+                for (var i = 0; i < Q.ColumnCount; i++)
                 {
                     var s = Complex32.Zero;
-                    for (var k = 0; k < MatrixQ.RowCount; k++)
+                    for (var k = 0; k < Q.RowCount; k++)
                     {
-                        s += MatrixQ.At(k, i).Conjugate() * column[k];
+                        s += Q.At(k, i).Conjugate() * column[k];
                     }
 
                     inputCopy.At(i, j, s);
@@ -160,23 +149,23 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
             }
 
             // Solve R*X = Y;
-            for (var k = MatrixQ.ColumnCount - 1; k >= 0; k--)
+            for (var k = Q.ColumnCount - 1; k >= 0; k--)
             {
                 for (var j = 0; j < input.ColumnCount; j++)
                 {
-                    inputCopy.At(k, j, inputCopy.At(k, j) / MatrixR.At(k, k));
+                    inputCopy.At(k, j, inputCopy.At(k, j) / FullR.At(k, k));
                 }
 
                 for (var i = 0; i < k; i++)
                 {
                     for (var j = 0; j < input.ColumnCount; j++)
                     {
-                        inputCopy.At(i, j, inputCopy.At(i, j) - (inputCopy.At(k, j) * MatrixR.At(i, k)));
+                        inputCopy.At(i, j, inputCopy.At(i, j) - (inputCopy.At(k, j) * FullR.At(i, k)));
                     }
                 }
             }
 
-            for (var i = 0; i < MatrixR.ColumnCount; i++)
+            for (var i = 0; i < FullR.ColumnCount; i++)
             {
                 for (var j = 0; j < input.ColumnCount; j++)
                 {
@@ -192,60 +181,50 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<Complex32> input, Vector<Complex32> result)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // Ax=b where A is an m x n matrix
             // Check that b is a column vector with m entries
-            if (MatrixQ.RowCount != input.Count)
+            if (Q.RowCount != input.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
             // Check that x is a column vector with n entries
-            if (MatrixQ.ColumnCount != result.Count)
+            if (Q.ColumnCount != result.Count)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(Q, result);
             }
 
             var inputCopy = input.Clone();
 
             // Compute Y = transpose(Q)*B
-            var column = new Complex32[MatrixQ.RowCount];
-            for (var k = 0; k < MatrixQ.RowCount; k++)
+            var column = new Complex32[Q.RowCount];
+            for (var k = 0; k < Q.RowCount; k++)
             {
                 column[k] = inputCopy[k];
             }
 
-            for (var i = 0; i < MatrixQ.ColumnCount; i++)
+            for (var i = 0; i < Q.ColumnCount; i++)
             {
                 var s = Complex32.Zero;
-                for (var k = 0; k < MatrixQ.RowCount; k++)
+                for (var k = 0; k < Q.RowCount; k++)
                 {
-                    s += MatrixQ.At(k, i).Conjugate() * column[k];
+                    s += Q.At(k, i).Conjugate() * column[k];
                 }
 
                 inputCopy[i] = s;
             }
 
             // Solve R*X = Y;
-            for (var k = MatrixQ.ColumnCount - 1; k >= 0; k--)
+            for (var k = Q.ColumnCount - 1; k >= 0; k--)
             {
-                inputCopy[k] /= MatrixR.At(k, k);
+                inputCopy[k] /= FullR.At(k, k);
                 for (var i = 0; i < k; i++)
                 {
-                    inputCopy[i] -= inputCopy[k] * MatrixR.At(i, k);
+                    inputCopy[i] -= inputCopy[k] * FullR.At(i, k);
                 }
             }
 
-            for (var i = 0; i < MatrixR.ColumnCount; i++)
+            for (var i = 0; i < FullR.ColumnCount; i++)
             {
                 result[i] = inputCopy[i];
             }

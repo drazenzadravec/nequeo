@@ -2,7 +2,6 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
 // Copyright (c) 2009-2010 Math.NET
 //
@@ -28,23 +27,37 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
-namespace Nequeo.Science.Math
-{
-    using System;
-    using Properties;
+using System;
+using Nequeo.Science.Math.Properties;
 
+#if !NOSYSNUMERICS
+using System.Numerics;
+#endif
+
+// ReSharper disable CheckNamespace
+namespace Nequeo.Science.Math
+// ReSharper restore CheckNamespace
+{
     public partial class SpecialFunctions
     {
-        private const int FactorialMaxArgument = 170;
-        private static double[] factorialCache;
+        const int FactorialMaxArgument = 170;
+        static double[] _factorialCache;
 
-        private static void InitializeFactorial()
+        /// <summary>
+        /// Initializes static members of the SpecialFunctions class.
+        /// </summary>
+        static SpecialFunctions()
         {
-            factorialCache = new double[FactorialMaxArgument + 1];
-            factorialCache[0] = 1.0;
-            for (int i = 1; i < factorialCache.Length; i++)
+            InitializeFactorial();
+        }
+
+        static void InitializeFactorial()
+        {
+            _factorialCache = new double[FactorialMaxArgument + 1];
+            _factorialCache[0] = 1.0;
+            for (int i = 1; i < _factorialCache.Length; i++)
             {
-                factorialCache[i] = factorialCache[i - 1] * i;
+                _factorialCache[i] = _factorialCache[i - 1]*i;
             }
         }
 
@@ -54,7 +67,7 @@ namespace Nequeo.Science.Math
         /// </summary>
         /// <returns>A value value! for value > 0</returns>
         /// <remarks>
-        /// If you need to multiply or divide various such factorials, consider using the logarithmic version 
+        /// If you need to multiply or divide various such factorials, consider using the logarithmic version
         /// <see cref="FactorialLn"/> instead so you can add instead of multiply and subtract instead of divide, and
         /// then exponentiate the result using <see cref="System.Math.Exp"/>. This will also circumvent the problem that
         /// factorials become very large even for small parameters.
@@ -64,16 +77,42 @@ namespace Nequeo.Science.Math
         {
             if (x < 0)
             {
-                throw new ArgumentOutOfRangeException("x", Properties.Resources.ArgumentPositive);
+                throw new ArgumentOutOfRangeException("x", Resources.ArgumentPositive);
             }
 
-            if (x < factorialCache.Length)
+            if (x < _factorialCache.Length)
             {
-                return factorialCache[x];
+                return _factorialCache[x];
             }
 
-            return Double.PositiveInfinity;
+            return double.PositiveInfinity;
         }
+
+#if !NOSYSNUMERICS
+        /// <summary>
+        /// Computes the factorial of an integer.
+        /// </summary>
+        public static BigInteger Factorial(BigInteger x)
+        {
+            if (x < 0)
+            {
+                throw new ArgumentOutOfRangeException("x", Resources.ArgumentPositive);
+            }
+
+            if (x == 0)
+            {
+                return BigInteger.One;
+            }
+
+            BigInteger r = x;
+            while (--x > 1)
+            {
+                r *= x;
+            }
+
+            return r;
+        }
+#endif
 
         /// <summary>
         /// Computes the logarithmic factorial function x -> ln(x!) of an integer number > 0.
@@ -83,7 +122,7 @@ namespace Nequeo.Science.Math
         {
             if (x < 0)
             {
-                throw new ArgumentOutOfRangeException("x", Properties.Resources.ArgumentPositive);
+                throw new ArgumentOutOfRangeException("x", Resources.ArgumentPositive);
             }
 
             if (x <= 1)
@@ -91,9 +130,9 @@ namespace Nequeo.Science.Math
                 return 0d;
             }
 
-            if (x < factorialCache.Length)
+            if (x < _factorialCache.Length)
             {
-                return Math.Log(factorialCache[x]);
+                return System.Math.Log(_factorialCache[x]);
             }
 
             return GammaLn(x + 1.0);
@@ -112,7 +151,7 @@ namespace Nequeo.Science.Math
                 return 0.0;
             }
 
-            return Math.Floor(0.5 + Math.Exp(FactorialLn(n) - FactorialLn(k) - FactorialLn(n - k)));
+            return System.Math.Floor(0.5 + System.Math.Exp(FactorialLn(n) - FactorialLn(k) - FactorialLn(n - k)));
         }
 
         /// <summary>
@@ -125,7 +164,7 @@ namespace Nequeo.Science.Math
         {
             if (k < 0 || n < 0 || k > n)
             {
-                return Double.NegativeInfinity;
+                return double.NegativeInfinity;
             }
 
             return FactorialLn(n) - FactorialLn(k) - FactorialLn(n - k);
@@ -137,7 +176,7 @@ namespace Nequeo.Science.Math
         /// <param name="n">A nonnegative value n.</param>
         /// <param name="ni">An array of nonnegative values that sum to <paramref name="n"/>.</param>
         /// <returns>The multinomial coefficient.</returns>
-        /// <exception cref="ArgumentNullException">if <paramref name="ni"/> is <see langword="null" />.</exception>   
+        /// <exception cref="ArgumentNullException">if <paramref name="ni"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentException">If <paramref name="n"/> or any of the <paramref name="ni"/> are negative.</exception>
         /// <exception cref="ArgumentException">If the sum of all <paramref name="ni"/> is not equal to <paramref name="n"/>.</exception>
         public static double Multinomial(int n, int[] ni)
@@ -146,6 +185,7 @@ namespace Nequeo.Science.Math
             {
                 throw new ArgumentException(Resources.ArgumentMustBePositive, "n");
             }
+
             if (ni == null)
             {
                 throw new ArgumentNullException("ni");
@@ -167,7 +207,7 @@ namespace Nequeo.Science.Math
             // Before returning, check that the sum of all elements was equal to n.
             if (sum != n)
             {
-                throw new ArgumentException(Resources.ArgumentParameterSetInvalid , "ni");
+                throw new ArgumentException(Resources.ArgumentParameterSetInvalid, "ni");
             }
 
             return System.Math.Floor(0.5 + System.Math.Exp(ret));

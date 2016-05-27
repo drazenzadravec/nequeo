@@ -2,7 +2,6 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
 // Copyright (c) 2009-2010 Math.NET
 //
@@ -28,11 +27,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.Random;
+
 namespace Nequeo.Science.Math.Statistics.Mcmc
 {
-    using System;
-
-	/// <summary>
+    /// <summary>
     /// A method which samples datapoints from a proposal distribution. The implementation of this sampler
     /// is stateless: no variables are saved between two calls to Sample. This proposal is different from
     /// <seealso cref="LocalProposalSampler{T}"/> in that it doesn't take any parameters; it samples random
@@ -40,10 +40,10 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
     /// </summary>
     /// <typeparam name="T">The type of the datapoints.</typeparam>
     /// <returns>A sample from the proposal distribution.</returns>
-    public delegate T GlobalProposalSampler<T>();
+    public delegate T GlobalProposalSampler<out T>();
 
     /// <summary>
-    /// A method which samples datapoints from a proposal distribution given an initial sample. The implementation 
+    /// A method which samples datapoints from a proposal distribution given an initial sample. The implementation
     /// of this sampler is stateless: no variables are saved between two calls to Sample. This proposal is different from
     /// <seealso cref="GlobalProposalSampler{T}"/> in that it samples locally around an initial point. In other words, it
     /// makes a small local move rather than producing a global sample from the proposal.
@@ -58,14 +58,14 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
     /// </summary>
     /// <typeparam name="T">The type of data the distribution is over.</typeparam>
     /// <param name="sample">The sample we want to evaluate the density for.</param>
-    public delegate double Density<T>(T sample);
+    public delegate double Density<in T>(T sample);
 
     /// <summary>
     /// A function which evaluates a log density.
     /// </summary>
     /// <typeparam name="T">The type of data the distribution is over.</typeparam>
     /// <param name="sample">The sample we want to evaluate the log density for.</param>
-    public delegate double DensityLn<T>(T sample);
+    public delegate double DensityLn<in T>(T sample);
 
     /// <summary>
     /// A function which evaluates the log of a transition kernel probability.
@@ -74,7 +74,7 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
     /// <param name="to">The new state in the transition.</param>
     /// <param name="from">The previous state in the transition.</param>
     /// <returns>The log probability of the transition.</returns>
-    public delegate double TransitionKernelLn<T>(T to, T from);
+    public delegate double TransitionKernelLn<in T>(T to, T from);
 
     /// <summary>
     /// The interface which every sampler must implement.
@@ -85,17 +85,17 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// <summary>
         /// The random number generator for this class.
         /// </summary>
-        private System.Random mRandomNumberGenerator;
+        private System.Random _randomNumberGenerator;
 
         /// <summary>
         /// Keeps track of the number of accepted samples.
         /// </summary>
-        protected int mAccepts;
+        protected int Accepts;
 
         /// <summary>
         /// Keeps track of the number of calls to the proposal sampler.
         /// </summary>
-        protected int mSamples;
+        protected int Samples;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="McmcSampler{T}"/> class.
@@ -104,9 +104,9 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// safe classes.</remarks>
         protected McmcSampler()
         {
-            mAccepts = 0;
-            mSamples = 0;
-            RandomSource = new System.Random();
+            Accepts = 0;
+            Samples = 0;
+            RandomSource = SystemRandomSource.Default;
         }
 
         /// <summary>
@@ -115,15 +115,14 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// <exception cref="ArgumentNullException">When the random number generator is null.</exception>
         public System.Random RandomSource
         {
-            get { return mRandomNumberGenerator; }
-
+            get { return _randomNumberGenerator; }
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentNullException("value");
                 }
-                mRandomNumberGenerator = value;
+                _randomNumberGenerator = value;
             }
         }
 
@@ -139,13 +138,11 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// <returns>An array of samples.</returns>
         public virtual T[] Sample(int n)
         {
-            T[] ret = new T[n];
-
+            var ret = new T[n];
             for (int i = 0; i < n; i++)
             {
                 ret[i] = Sample();
             }
-
             return ret;
         }
 
@@ -154,7 +151,7 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// </summary>
         public double AcceptanceRate
         {
-            get { return (double)mAccepts / (double)mSamples; }
+            get { return Accepts / (double)Samples; }
         }
     }
 }

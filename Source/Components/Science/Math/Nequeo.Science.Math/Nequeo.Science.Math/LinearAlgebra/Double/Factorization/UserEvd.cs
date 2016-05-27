@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -27,12 +26,18 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
+
+using System;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 {
-    using System;
+
+#if NOSYSNUMERICS
+    using Numerics;
+#else
     using System.Numerics;
-    using Generic;
-    using Properties;
+#endif
 
     /// <summary>
     /// Eigenvalues and eigenvectors of a real matrix.
@@ -49,22 +54,18 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
     /// conditioned, or even singular, so the validity of the equation
     /// A = V*D*Inverse(V) depends upon V.Condition().
     /// </remarks>
-    public class UserEvd : Evd
+    internal sealed class UserEvd : Evd
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserEvd"/> class. This object will compute the
         /// the eigenvalue decomposition when the constructor is called and cache it's decomposition.
         /// </summary>
         /// <param name="matrix">The matrix to factor.</param>
+        /// <param name="symmetricity">If it is known whether the matrix is symmetric or not the routine can skip checking it itself.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If EVD algorithm failed to converge with matrix <paramref name="matrix"/>.</exception>
-        public UserEvd(Matrix<double> matrix)
+        public static UserEvd Create(Matrix<double> matrix, Symmetricity symmetricity)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
-
             if (matrix.RowCount != matrix.ColumnCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSquare);
@@ -73,62 +74,75 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             var order = matrix.RowCount;
 
             // Initialize matricies for eigenvalues and eigenvectors
-            MatrixEv = matrix.CreateMatrix(order, order);
-            MatrixD = matrix.CreateMatrix(order, order);
-            VectorEv = new LinearAlgebra.Complex.DenseVector(order);
-           
-            IsSymmetric = true;
+            var eigenVectors = Matrix<double>.Build.SameAs(matrix, order, order);
+            var blockDiagonal = Matrix<double>.Build.SameAs(matrix, order, order);
+            var eigenValues = new LinearAlgebra.Complex.DenseVector(order);
 
-            for (var i = 0; i < order & IsSymmetric; i++)
+            bool isSymmetric;
+            switch (symmetricity)
             {
-                for (var j = 0; j < order & IsSymmetric; j++)
-                {
-                    IsSymmetric &= matrix[i, j] == matrix[j, i];
-                }
+                case Symmetricity.Symmetric:
+                case Symmetricity.Hermitian:
+                    isSymmetric = true;
+                    break;
+                case Symmetricity.Asymmetric:
+                    isSymmetric = false;
+                    break;
+                default:
+                    isSymmetric = matrix.IsSymmetric();
+                    break;
             }
 
             var d = new double[order];
             var e = new double[order];
 
-            if (IsSymmetric)
+            if (isSymmetric)
             {
-                matrix.CopyTo(MatrixEv);
-                d = MatrixEv.Row(order - 1).ToArray();
+                matrix.CopyTo(eigenVectors);
+                d = eigenVectors.Row(order - 1).ToArray();
 
-                SymmetricTridiagonalize(d, e, order);
-                SymmetricDiagonalize(d, e, order);
+                SymmetricTridiagonalize(eigenVectors, d, e, order);
+                SymmetricDiagonalize(eigenVectors, d, e, order);
             }
             else
             {
                 var matrixH = matrix.ToArray();
 
-                NonsymmetricReduceToHessenberg(matrixH, order);
-                NonsymmetricReduceHessenberToRealSchur(matrixH, d, e, order);
+                NonsymmetricReduceToHessenberg(eigenVectors, matrixH, order);
+                NonsymmetricReduceHessenberToRealSchur(eigenVectors, matrixH, d, e, order);
             }
 
             for (var i = 0; i < order; i++)
             {
-                MatrixD[i, i] = d[i];
+                blockDiagonal.At(i, i, d[i]);
 
                 if (e[i] > 0)
                 {
-                    MatrixD.At(i, i + 1, e[i]);
+                    blockDiagonal.At(i, i + 1, e[i]);
                 }
                 else if (e[i] < 0)
                 {
-                    MatrixD.At(i, i - 1, e[i]);
+                    blockDiagonal.At(i, i - 1, e[i]);
                 }
             }
 
             for (var i = 0; i < order; i++)
             {
-                VectorEv[i] = new Complex(d[i], e[i]);
+                eigenValues[i] = new Complex(d[i], e[i]);
             }
+
+            return new UserEvd(eigenVectors, eigenValues, blockDiagonal, isSymmetric);
+        }
+
+        UserEvd(Matrix<double> eigenVectors, Vector<Complex> eigenValues, Matrix<double> blockDiagonal, bool isSymmetric)
+            : base(eigenVectors, eigenValues, blockDiagonal, isSymmetric)
+        {
         }
 
         /// <summary>
         /// Symmetric Householder reduction to tridiagonal form.
         /// </summary>
+        /// <param name="eigenVectors">The eigen vectors to work on.</param>
         /// <param name="d">Arrays for internal storage of real parts of eigenvalues</param>
         /// <param name="e">Arrays for internal storage of imaginary parts of eigenvalues</param>
         /// <param name="order">Order of initial matrix</param>
@@ -136,7 +150,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// Bowdler, Martin, Reinsch, and Wilkinson, Handbook for 
         /// Auto. Comp., Vol.ii-Linear Algebra, and the corresponding 
         /// Fortran subroutine in EISPACK.</remarks>
-        private void SymmetricTridiagonalize(double[] d, double[] e, int order)
+        static void SymmetricTridiagonalize(Matrix<double> eigenVectors, double[] d, double[] e, int order)
         {
             // Householder reduction to tridiagonal form.
             for (var i = order - 1; i > 0; i--)
@@ -147,7 +161,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
                 for (var k = 0; k < i; k++)
                 {
-                    scale = scale + Math.Abs(d[k]);
+                    scale = scale + System.Math.Abs(d[k]);
                 }
 
                 if (scale == 0.0)
@@ -155,9 +169,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     e[i] = d[i - 1];
                     for (var j = 0; j < i; j++)
                     {
-                        d[j] = MatrixEv.At(i - 1, j);
-                        MatrixEv.At(i, j, 0.0);
-                        MatrixEv.At(j, i, 0.0);
+                        d[j] = eigenVectors.At(i - 1, j);
+                        eigenVectors.At(i, j, 0.0);
+                        eigenVectors.At(j, i, 0.0);
                     }
                 }
                 else
@@ -166,18 +180,18 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     for (var k = 0; k < i; k++)
                     {
                         d[k] /= scale;
-                        h += d[k] * d[k];
+                        h += d[k]*d[k];
                     }
 
                     var f = d[i - 1];
-                    var g = Math.Sqrt(h);
+                    var g = System.Math.Sqrt(h);
                     if (f > 0)
                     {
                         g = -g;
                     }
 
-                    e[i] = scale * g;
-                    h = h - (f * g);
+                    e[i] = scale*g;
+                    h = h - (f*g);
                     d[i - 1] = f - g;
 
                     for (var j = 0; j < i; j++)
@@ -189,13 +203,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     for (var j = 0; j < i; j++)
                     {
                         f = d[j];
-                        MatrixEv.At(j, i, f);
-                        g = e[j] + (MatrixEv.At(j, j) * f);
+                        eigenVectors.At(j, i, f);
+                        g = e[j] + (eigenVectors.At(j, j)*f);
 
                         for (var k = j + 1; k <= i - 1; k++)
                         {
-                            g += MatrixEv.At(k, j) * d[k];
-                            e[k] += MatrixEv.At(k, j) * f;
+                            g += eigenVectors.At(k, j)*d[k];
+                            e[k] += eigenVectors.At(k, j)*f;
                         }
 
                         e[j] = g;
@@ -206,14 +220,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     for (var j = 0; j < i; j++)
                     {
                         e[j] /= h;
-                        f += e[j] * d[j];
+                        f += e[j]*d[j];
                     }
 
-                    var hh = f / (h + h);
+                    var hh = f/(h + h);
 
                     for (var j = 0; j < i; j++)
                     {
-                        e[j] -= hh * d[j];
+                        e[j] -= hh*d[j];
                     }
 
                     for (var j = 0; j < i; j++)
@@ -223,11 +237,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
                         for (var k = j; k <= i - 1; k++)
                         {
-                            MatrixEv.At(k, j, MatrixEv.At(k, j) - (f * e[k]) - (g * d[k]));
+                            eigenVectors.At(k, j, eigenVectors.At(k, j) - (f*e[k]) - (g*d[k]));
                         }
 
-                        d[j] = MatrixEv.At(i - 1, j);
-                        MatrixEv.At(i, j, 0.0);
+                        d[j] = eigenVectors.At(i - 1, j);
+                        eigenVectors.At(i, j, 0.0);
                     }
                 }
 
@@ -237,14 +251,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             // Accumulate transformations.
             for (var i = 0; i < order - 1; i++)
             {
-                MatrixEv.At(order - 1, i, MatrixEv.At(i, i));
-                MatrixEv.At(i, i, 1.0);
+                eigenVectors.At(order - 1, i, eigenVectors.At(i, i));
+                eigenVectors.At(i, i, 1.0);
                 var h = d[i + 1];
                 if (h != 0.0)
                 {
                     for (var k = 0; k <= i; k++)
                     {
-                        d[k] = MatrixEv.At(k, i + 1) / h;
+                        d[k] = eigenVectors.At(k, i + 1)/h;
                     }
 
                     for (var j = 0; j <= i; j++)
@@ -252,35 +266,36 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         var g = 0.0;
                         for (var k = 0; k <= i; k++)
                         {
-                            g += MatrixEv.At(k, i + 1) * MatrixEv.At(k, j);
+                            g += eigenVectors.At(k, i + 1)*eigenVectors.At(k, j);
                         }
 
                         for (var k = 0; k <= i; k++)
                         {
-                            MatrixEv.At(k, j, MatrixEv.At(k, j) - g * d[k]);
+                            eigenVectors.At(k, j, eigenVectors.At(k, j) - g*d[k]);
                         }
                     }
                 }
 
                 for (var k = 0; k <= i; k++)
                 {
-                    MatrixEv.At(k, i + 1, 0.0);
+                    eigenVectors.At(k, i + 1, 0.0);
                 }
             }
 
             for (var j = 0; j < order; j++)
             {
-                d[j] = MatrixEv.At(order - 1, j);
-                MatrixEv.At(order - 1, j, 0.0);
+                d[j] = eigenVectors.At(order - 1, j);
+                eigenVectors.At(order - 1, j, 0.0);
             }
 
-            MatrixEv.At(order - 1, order - 1, 1.0);
+            eigenVectors.At(order - 1, order - 1, 1.0);
             e[0] = 0.0;
         }
 
         /// <summary>
         /// Symmetric tridiagonal QL algorithm.
         /// </summary>
+        /// <param name="eigenVectors">The eigen vectors to work on.</param>
         /// <param name="d">Arrays for internal storage of real parts of eigenvalues</param>
         /// <param name="e">Arrays for internal storage of imaginary parts of eigenvalues</param>
         /// <param name="order">Order of initial matrix</param>
@@ -288,9 +303,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
         /// Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
         /// Fortran subroutine in EISPACK.</remarks>
-        private void SymmetricDiagonalize(double[] d, double[] e, int order)
+        /// <exception cref="NonConvergenceException"></exception>
+        static void SymmetricDiagonalize(Matrix<double> eigenVectors, double[] d, double[] e, int order)
         {
-            const int Maxiter = 1000;
+            const int maxiter = 1000;
 
             for (var i = 1; i < order; i++)
             {
@@ -301,15 +317,15 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
             var f = 0.0;
             var tst1 = 0.0;
-            var eps = Precision.DoubleMachinePrecision;
+            var eps = Precision.DoublePrecision;
             for (var l = 0; l < order; l++)
             {
                 // Find small subdiagonal element
-                tst1 = Math.Max(tst1, Math.Abs(d[l]) + Math.Abs(e[l]));
+                tst1 = System.Math.Max(tst1, System.Math.Abs(d[l]) + System.Math.Abs(e[l]));
                 var m = l;
                 while (m < order)
                 {
-                    if (Math.Abs(e[m]) <= eps * tst1)
+                    if (System.Math.Abs(e[m]) <= eps*tst1)
                     {
                         break;
                     }
@@ -328,15 +344,15 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
 
                         // Compute implicit shift
                         var g = d[l];
-                        var p = (d[l + 1] - g) / (2.0 * e[l]);
+                        var p = (d[l + 1] - g)/(2.0*e[l]);
                         var r = SpecialFunctions.Hypotenuse(p, 1.0);
                         if (p < 0)
                         {
                             r = -r;
                         }
 
-                        d[l] = e[l] / (p + r);
-                        d[l + 1] = e[l] * (p + r);
+                        d[l] = e[l]/(p + r);
+                        d[l + 1] = e[l]*(p + r);
 
                         var dl1 = d[l + 1];
                         var h = g - d[l];
@@ -360,36 +376,35 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             c3 = c2;
                             c2 = c;
                             s2 = s;
-                            g = c * e[i];
-                            h = c * p;
+                            g = c*e[i];
+                            h = c*p;
                             r = SpecialFunctions.Hypotenuse(p, e[i]);
-                            e[i + 1] = s * r;
-                            s = e[i] / r;
-                            c = p / r;
-                            p = (c * d[i]) - (s * g);
-                            d[i + 1] = h + (s * ((c * g) + (s * d[i])));
+                            e[i + 1] = s*r;
+                            s = e[i]/r;
+                            c = p/r;
+                            p = (c*d[i]) - (s*g);
+                            d[i + 1] = h + (s*((c*g) + (s*d[i])));
 
                             // Accumulate transformation.
                             for (var k = 0; k < order; k++)
                             {
-                                h = MatrixEv.At(k, i + 1);
-                                MatrixEv.At(k, i + 1, (s * MatrixEv.At(k, i)) + (c * h));
-                                MatrixEv.At(k, i, (c * MatrixEv.At(k, i)) - (s * h));
+                                h = eigenVectors.At(k, i + 1);
+                                eigenVectors.At(k, i + 1, (s*eigenVectors.At(k, i)) + (c*h));
+                                eigenVectors.At(k, i, (c*eigenVectors.At(k, i)) - (s*h));
                             }
                         }
 
-                        p = (-s) * s2 * c3 * el1 * e[l] / dl1;
-                        e[l] = s * p;
-                        d[l] = c * p;
+                        p = (-s)*s2*c3*el1*e[l]/dl1;
+                        e[l] = s*p;
+                        d[l] = c*p;
 
                         // Check for convergence. If too many iterations have been performed, 
                         // throw exception that Convergence Failed
-                        if (iter >= Maxiter)
+                        if (iter >= maxiter)
                         {
-                            throw new ArgumentException(Resources.ConvergenceFailed);
+                            throw new NonConvergenceException();
                         }
-                    }
-                    while (Math.Abs(e[l]) > eps * tst1);
+                    } while (System.Math.Abs(e[l]) > eps*tst1);
                 }
 
                 d[l] = d[l] + f;
@@ -416,9 +431,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     d[i] = p;
                     for (var j = 0; j < order; j++)
                     {
-                        p = MatrixEv.At(j, i);
-                        MatrixEv.At(j, i, MatrixEv.At(j, k));
-                        MatrixEv.At(j, k, p);
+                        p = eigenVectors.At(j, i);
+                        eigenVectors.At(j, i, eigenVectors.At(j, k));
+                        eigenVectors.At(j, k, p);
                     }
                 }
             }
@@ -427,13 +442,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <summary>
         /// Nonsymmetric reduction to Hessenberg form.
         /// </summary>
+        /// <param name="eigenVectors">The eigen vectors to work on.</param>
         /// <param name="matrixH">Array for internal storage of nonsymmetric Hessenberg form.</param>
         /// <param name="order">Order of initial matrix</param>
         /// <remarks>This is derived from the Algol procedures orthes and ortran,
         /// by Martin and Wilkinson, Handbook for Auto. Comp.,
         /// Vol.ii-Linear Algebra, and the corresponding
         /// Fortran subroutines in EISPACK.</remarks>
-        private void NonsymmetricReduceToHessenberg(double[,] matrixH, int order)
+        static void NonsymmetricReduceToHessenberg(Matrix<double> eigenVectors, double[,] matrixH, int order)
         {
             var ort = new double[order];
 
@@ -443,7 +459,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 var scale = 0.0;
                 for (var i = m; i < order; i++)
                 {
-                    scale = scale + Math.Abs(matrixH[i, m - 1]);
+                    scale = scale + System.Math.Abs(matrixH[i, m - 1]);
                 }
 
                 if (scale != 0.0)
@@ -452,17 +468,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     var h = 0.0;
                     for (var i = order - 1; i >= m; i--)
                     {
-                        ort[i] = matrixH[i, m - 1] / scale;
-                        h += ort[i] * ort[i];
+                        ort[i] = matrixH[i, m - 1]/scale;
+                        h += ort[i]*ort[i];
                     }
 
-                    var g = Math.Sqrt(h);
+                    var g = System.Math.Sqrt(h);
                     if (ort[m] > 0)
                     {
                         g = -g;
                     }
 
-                    h = h - (ort[m] * g);
+                    h = h - (ort[m]*g);
                     ort[m] = ort[m] - g;
 
                     // Apply Householder similarity transformation
@@ -472,13 +488,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         var f = 0.0;
                         for (var i = order - 1; i >= m; i--)
                         {
-                            f += ort[i] * matrixH[i, j];
+                            f += ort[i]*matrixH[i, j];
                         }
 
-                        f = f / h;
+                        f = f/h;
                         for (var i = m; i < order; i++)
                         {
-                            matrixH[i, j] -= f * ort[i];
+                            matrixH[i, j] -= f*ort[i];
                         }
                     }
 
@@ -487,18 +503,18 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         var f = 0.0;
                         for (var j = order - 1; j >= m; j--)
                         {
-                            f += ort[j] * matrixH[i, j];
+                            f += ort[j]*matrixH[i, j];
                         }
 
-                        f = f / h;
+                        f = f/h;
                         for (var j = m; j < order; j++)
                         {
-                            matrixH[i, j] -= f * ort[j];
+                            matrixH[i, j] -= f*ort[j];
                         }
                     }
 
-                    ort[m] = scale * ort[m];
-                    matrixH[m, m - 1] = scale * g;
+                    ort[m] = scale*ort[m];
+                    matrixH[m, m - 1] = scale*g;
                 }
             }
 
@@ -507,7 +523,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             {
                 for (var j = 0; j < order; j++)
                 {
-                    MatrixEv.At(i, j, i == j ? 1.0 : 0.0);
+                    eigenVectors.At(i, j, i == j ? 1.0 : 0.0);
                 }
             }
 
@@ -525,14 +541,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         var g = 0.0;
                         for (var i = m; i < order; i++)
                         {
-                            g += ort[i] * MatrixEv.At(i, j);
+                            g += ort[i]*eigenVectors.At(i, j);
                         }
 
                         // Double division avoids possible underflow
-                        g = (g / ort[m]) / matrixH[m, m - 1];
+                        g = (g/ort[m])/matrixH[m, m - 1];
                         for (var i = m; i < order; i++)
                         {
-                            MatrixEv.At(i, j, MatrixEv.At(i, j) + g * ort[i]);
+                            eigenVectors.At(i, j, eigenVectors.At(i, j) + g*ort[i]);
                         }
                     }
                 }
@@ -542,6 +558,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <summary>
         /// Nonsymmetric reduction from Hessenberg to real Schur form.
         /// </summary>
+        /// <param name="eigenVectors">The eigen vectors to work on.</param>
         /// <param name="matrixH">Array for internal storage of nonsymmetric Hessenberg form.</param>
         /// <param name="d">Arrays for internal storage of real parts of eigenvalues</param>
         /// <param name="e">Arrays for internal storage of imaginary parts of eigenvalues</param>
@@ -550,11 +567,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// by Martin and Wilkinson, Handbook for Auto. Comp.,
         /// Vol.ii-Linear Algebra, and the corresponding
         /// Fortran subroutine in EISPACK.</remarks>
-        private void NonsymmetricReduceHessenberToRealSchur(double[,] matrixH, double[] d, double[] e, int order)
+        static void NonsymmetricReduceHessenberToRealSchur(Matrix<double> eigenVectors, double[,] matrixH, double[] d, double[] e, int order)
         {
             // Initialize
             var n = order - 1;
-            var eps = Precision.DoubleMachinePrecision;
+            var eps = Precision.DoublePrecision;
             var exshift = 0.0;
             double p = 0, q = 0, r = 0, s = 0, z = 0, w, x, y;
 
@@ -562,9 +579,9 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             var norm = 0.0;
             for (var i = 0; i < order; i++)
             {
-                for (var j = Math.Max(i - 1, 0); j < order; j++)
+                for (var j = System.Math.Max(i - 1, 0); j < order; j++)
                 {
-                    norm = norm + Math.Abs(matrixH[i, j]);
+                    norm = norm + System.Math.Abs(matrixH[i, j]);
                 }
             }
 
@@ -576,14 +593,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 var l = n;
                 while (l > 0)
                 {
-                    s = Math.Abs(matrixH[l - 1, l - 1]) + Math.Abs(matrixH[l, l]);
+                    s = System.Math.Abs(matrixH[l - 1, l - 1]) + System.Math.Abs(matrixH[l, l]);
 
                     if (s == 0.0)
                     {
                         s = norm;
                     }
 
-                    if (Math.Abs(matrixH[l, l - 1]) < eps * s)
+                    if (System.Math.Abs(matrixH[l, l - 1]) < eps*s)
                     {
                         break;
                     }
@@ -605,10 +622,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                 }
                 else if (l == n - 1)
                 {
-                    w = matrixH[n, n - 1] * matrixH[n - 1, n];
-                    p = (matrixH[n - 1, n - 1] - matrixH[n, n]) / 2.0;
-                    q = (p * p) + w;
-                    z = Math.Sqrt(Math.Abs(q));
+                    w = matrixH[n, n - 1]*matrixH[n - 1, n];
+                    p = (matrixH[n - 1, n - 1] - matrixH[n, n])/2.0;
+                    q = (p*p) + w;
+                    z = System.Math.Sqrt(System.Math.Abs(q));
                     matrixH[n, n] = matrixH[n, n] + exshift;
                     matrixH[n - 1, n - 1] = matrixH[n - 1, n - 1] + exshift;
                     x = matrixH[n, n];
@@ -630,41 +647,41 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         d[n] = d[n - 1];
                         if (z != 0.0)
                         {
-                            d[n] = x - (w / z);
+                            d[n] = x - (w/z);
                         }
 
                         e[n - 1] = 0.0;
                         e[n] = 0.0;
                         x = matrixH[n, n - 1];
-                        s = Math.Abs(x) + Math.Abs(z);
-                        p = x / s;
-                        q = z / s;
-                        r = Math.Sqrt((p * p) + (q * q));
-                        p = p / r;
-                        q = q / r;
+                        s = System.Math.Abs(x) + System.Math.Abs(z);
+                        p = x/s;
+                        q = z/s;
+                        r = System.Math.Sqrt((p*p) + (q*q));
+                        p = p/r;
+                        q = q/r;
 
                         // Row modification
                         for (var j = n - 1; j < order; j++)
                         {
                             z = matrixH[n - 1, j];
-                            matrixH[n - 1, j] = (q * z) + (p * matrixH[n, j]);
-                            matrixH[n, j] = (q * matrixH[n, j]) - (p * z);
+                            matrixH[n - 1, j] = (q*z) + (p*matrixH[n, j]);
+                            matrixH[n, j] = (q*matrixH[n, j]) - (p*z);
                         }
 
                         // Column modification
                         for (var i = 0; i <= n; i++)
                         {
                             z = matrixH[i, n - 1];
-                            matrixH[i, n - 1] = (q * z) + (p * matrixH[i, n]);
-                            matrixH[i, n] = (q * matrixH[i, n]) - (p * z);
+                            matrixH[i, n - 1] = (q*z) + (p*matrixH[i, n]);
+                            matrixH[i, n] = (q*matrixH[i, n]) - (p*z);
                         }
 
                         // Accumulate transformations
                         for (var i = 0; i < order; i++)
                         {
-                            z = MatrixEv.At(i, n - 1);
-                            MatrixEv.At(i, n - 1, (q * z) + (p * MatrixEv.At(i, n)));
-                            MatrixEv.At(i, n, (q * MatrixEv.At(i, n)) - (p * z));
+                            z = eigenVectors.At(i, n - 1);
+                            eigenVectors.At(i, n - 1, (q*z) + (p*eigenVectors.At(i, n)));
+                            eigenVectors.At(i, n, (q*eigenVectors.At(i, n)) - (p*z));
                         }
 
                         // Complex pair
@@ -691,7 +708,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     if (l < n)
                     {
                         y = matrixH[n - 1, n - 1];
-                        w = matrixH[n, n - 1] * matrixH[n - 1, n];
+                        w = matrixH[n, n - 1]*matrixH[n - 1, n];
                     }
 
                     // Wilkinson's original ad hoc shift
@@ -703,25 +720,25 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             matrixH[i, i] -= x;
                         }
 
-                        s = Math.Abs(matrixH[n, n - 1]) + Math.Abs(matrixH[n - 1, n - 2]);
-                        x = y = 0.75 * s;
-                        w = (-0.4375) * s * s;
+                        s = System.Math.Abs(matrixH[n, n - 1]) + System.Math.Abs(matrixH[n - 1, n - 2]);
+                        x = y = 0.75*s;
+                        w = (-0.4375)*s*s;
                     }
 
                     // MATLAB's new ad hoc shift
                     if (iter == 30)
                     {
-                        s = (y - x) / 2.0;
-                        s = (s * s) + w;
+                        s = (y - x)/2.0;
+                        s = (s*s) + w;
                         if (s > 0)
                         {
-                            s = Math.Sqrt(s);
+                            s = System.Math.Sqrt(s);
                             if (y < x)
                             {
                                 s = -s;
                             }
 
-                            s = x - (w / (((y - x) / 2.0) + s));
+                            s = x - (w/(((y - x)/2.0) + s));
                             for (var i = 0; i <= n; i++)
                             {
                                 matrixH[i, i] -= s;
@@ -741,20 +758,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         z = matrixH[m, m];
                         r = x - z;
                         s = y - z;
-                        p = (((r * s) - w) / matrixH[m + 1, m]) + matrixH[m, m + 1];
+                        p = (((r*s) - w)/matrixH[m + 1, m]) + matrixH[m, m + 1];
                         q = matrixH[m + 1, m + 1] - z - r - s;
                         r = matrixH[m + 2, m + 1];
-                        s = Math.Abs(p) + Math.Abs(q) + Math.Abs(r);
-                        p = p / s;
-                        q = q / s;
-                        r = r / s;
+                        s = System.Math.Abs(p) + System.Math.Abs(q) + System.Math.Abs(r);
+                        p = p/s;
+                        q = q/s;
+                        r = r/s;
 
                         if (m == l)
                         {
                             break;
                         }
 
-                        if (Math.Abs(matrixH[m, m - 1]) * (Math.Abs(q) + Math.Abs(r)) < eps * (Math.Abs(p) * (Math.Abs(matrixH[m - 1, m - 1]) + Math.Abs(z) + Math.Abs(matrixH[m + 1, m + 1]))))
+                        if (System.Math.Abs(matrixH[m, m - 1])*(System.Math.Abs(q) + System.Math.Abs(r)) < eps*(System.Math.Abs(p)*(System.Math.Abs(matrixH[m - 1, m - 1]) + System.Math.Abs(z) + System.Math.Abs(matrixH[m + 1, m + 1]))))
                         {
                             break;
                         }
@@ -781,12 +798,12 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             p = matrixH[k, k - 1];
                             q = matrixH[k + 1, k - 1];
                             r = notlast ? matrixH[k + 2, k - 1] : 0.0;
-                            x = Math.Abs(p) + Math.Abs(q) + Math.Abs(r);
+                            x = System.Math.Abs(p) + System.Math.Abs(q) + System.Math.Abs(r);
                             if (x != 0.0)
                             {
-                                p = p / x;
-                                q = q / x;
-                                r = r / x;
+                                p = p/x;
+                                q = q/x;
+                                r = r/x;
                             }
                         }
 
@@ -795,7 +812,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             break;
                         }
 
-                        s = Math.Sqrt((p * p) + (q * q) + (r * r));
+                        s = System.Math.Sqrt((p*p) + (q*q) + (r*r));
                         if (p < 0)
                         {
                             s = -s;
@@ -805,7 +822,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         {
                             if (k != m)
                             {
-                                matrixH[k, k - 1] = (-s) * x;
+                                matrixH[k, k - 1] = (-s)*x;
                             }
                             else if (l != m)
                             {
@@ -813,55 +830,55 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             }
 
                             p = p + s;
-                            x = p / s;
-                            y = q / s;
-                            z = r / s;
-                            q = q / p;
-                            r = r / p;
+                            x = p/s;
+                            y = q/s;
+                            z = r/s;
+                            q = q/p;
+                            r = r/p;
 
                             // Row modification
                             for (var j = k; j < order; j++)
                             {
-                                p = matrixH[k, j] + (q * matrixH[k + 1, j]);
+                                p = matrixH[k, j] + (q*matrixH[k + 1, j]);
 
                                 if (notlast)
                                 {
-                                    p = p + (r * matrixH[k + 2, j]);
-                                    matrixH[k + 2, j] = matrixH[k + 2, j] - (p * z);
+                                    p = p + (r*matrixH[k + 2, j]);
+                                    matrixH[k + 2, j] = matrixH[k + 2, j] - (p*z);
                                 }
 
-                                matrixH[k, j] = matrixH[k, j] - (p * x);
-                                matrixH[k + 1, j] = matrixH[k + 1, j] - (p * y);
+                                matrixH[k, j] = matrixH[k, j] - (p*x);
+                                matrixH[k + 1, j] = matrixH[k + 1, j] - (p*y);
                             }
 
                             // Column modification
-                            for (var i = 0; i <= Math.Min(n, k + 3); i++)
+                            for (var i = 0; i <= System.Math.Min(n, k + 3); i++)
                             {
-                                p = (x * matrixH[i, k]) + (y * matrixH[i, k + 1]);
+                                p = (x*matrixH[i, k]) + (y*matrixH[i, k + 1]);
 
                                 if (notlast)
                                 {
-                                    p = p + (z * matrixH[i, k + 2]);
-                                    matrixH[i, k + 2] = matrixH[i, k + 2] - (p * r);
+                                    p = p + (z*matrixH[i, k + 2]);
+                                    matrixH[i, k + 2] = matrixH[i, k + 2] - (p*r);
                                 }
 
                                 matrixH[i, k] = matrixH[i, k] - p;
-                                matrixH[i, k + 1] = matrixH[i, k + 1] - (p * q);
+                                matrixH[i, k + 1] = matrixH[i, k + 1] - (p*q);
                             }
 
                             // Accumulate transformations
                             for (var i = 0; i < order; i++)
                             {
-                                p = (x * MatrixEv.At(i, k)) + (y * MatrixEv.At(i, k + 1));
+                                p = (x*eigenVectors.At(i, k)) + (y*eigenVectors.At(i, k + 1));
 
                                 if (notlast)
                                 {
-                                    p = p + (z * MatrixEv.At(i, k + 2));
-                                    MatrixEv.At(i, k + 2, MatrixEv.At(i, k + 2) - (p * r));
+                                    p = p + (z*eigenVectors.At(i, k + 2));
+                                    eigenVectors.At(i, k + 2, eigenVectors.At(i, k + 2) - (p*r));
                                 }
 
-                                MatrixEv.At(i, k, MatrixEv.At(i, k) - p);
-                                MatrixEv.At(i, k + 1, MatrixEv.At(i, k + 1) - (p * q));
+                                eigenVectors.At(i, k, eigenVectors.At(i, k) - p);
+                                eigenVectors.At(i, k + 1, eigenVectors.At(i, k + 1) - (p*q));
                             }
                         } // (s != 0)
                     } // k loop
@@ -892,7 +909,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         r = 0.0;
                         for (var j = l; j <= n; j++)
                         {
-                            r = r + (matrixH[i, j] * matrixH[j, n]);
+                            r = r + (matrixH[i, j]*matrixH[j, n]);
                         }
 
                         if (e[i] < 0.0)
@@ -907,11 +924,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             {
                                 if (w != 0.0)
                                 {
-                                    matrixH[i, n] = (-r) / w;
+                                    matrixH[i, n] = (-r)/w;
                                 }
                                 else
                                 {
-                                    matrixH[i, n] = (-r) / (eps * norm);
+                                    matrixH[i, n] = (-r)/(eps*norm);
                                 }
 
                                 // Solve real equations
@@ -920,26 +937,26 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                             {
                                 x = matrixH[i, i + 1];
                                 y = matrixH[i + 1, i];
-                                q = ((d[i] - p) * (d[i] - p)) + (e[i] * e[i]);
-                                t = ((x * s) - (z * r)) / q;
+                                q = ((d[i] - p)*(d[i] - p)) + (e[i]*e[i]);
+                                t = ((x*s) - (z*r))/q;
                                 matrixH[i, n] = t;
-                                if (Math.Abs(x) > Math.Abs(z))
+                                if (System.Math.Abs(x) > System.Math.Abs(z))
                                 {
-                                    matrixH[i + 1, n] = (-r - (w * t)) / x;
+                                    matrixH[i + 1, n] = (-r - (w*t))/x;
                                 }
                                 else
                                 {
-                                    matrixH[i + 1, n] = (-s - (y * t)) / z;
+                                    matrixH[i + 1, n] = (-s - (y*t))/z;
                                 }
                             }
 
                             // Overflow control
-                            t = Math.Abs(matrixH[i, n]);
-                            if ((eps * t) * t > 1)
+                            t = System.Math.Abs(matrixH[i, n]);
+                            if ((eps*t)*t > 1)
                             {
                                 for (var j = i; j <= n; j++)
                                 {
-                                    matrixH[j, n] = matrixH[j, n] / t;
+                                    matrixH[j, n] = matrixH[j, n]/t;
                                 }
                             }
                         }
@@ -952,10 +969,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     var l = n - 1;
 
                     // Last vector component imaginary so matrix is triangular
-                    if (Math.Abs(matrixH[n, n - 1]) > Math.Abs(matrixH[n - 1, n]))
+                    if (System.Math.Abs(matrixH[n, n - 1]) > System.Math.Abs(matrixH[n - 1, n]))
                     {
-                        matrixH[n - 1, n - 1] = q / matrixH[n, n - 1];
-                        matrixH[n - 1, n] = (-(matrixH[n, n] - p)) / matrixH[n, n - 1];
+                        matrixH[n - 1, n - 1] = q/matrixH[n, n - 1];
+                        matrixH[n - 1, n] = (-(matrixH[n, n] - p))/matrixH[n, n - 1];
                     }
                     else
                     {
@@ -972,8 +989,8 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         double sa = 0.0;
                         for (var j = l; j <= n; j++)
                         {
-                            ra = ra + (matrixH[i, j] * matrixH[j, n - 1]);
-                            sa = sa + (matrixH[i, j] * matrixH[j, n]);
+                            ra = ra + (matrixH[i, j]*matrixH[j, n - 1]);
+                            sa = sa + (matrixH[i, j]*matrixH[j, n]);
                         }
 
                         w = matrixH[i, i] - p;
@@ -999,37 +1016,37 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                                 x = matrixH[i, i + 1];
                                 y = matrixH[i + 1, i];
 
-                                double vr = ((d[i] - p) * (d[i] - p)) + (e[i] * e[i]) - (q * q);
-                                double vi = (d[i] - p) * 2.0 * q;
+                                double vr = ((d[i] - p)*(d[i] - p)) + (e[i]*e[i]) - (q*q);
+                                double vi = (d[i] - p)*2.0*q;
                                 if ((vr == 0.0) && (vi == 0.0))
                                 {
-                                    vr = eps * norm * (Math.Abs(w) + Math.Abs(q) + Math.Abs(x) + Math.Abs(y) + Math.Abs(z));
+                                    vr = eps*norm*(System.Math.Abs(w) + System.Math.Abs(q) + System.Math.Abs(x) + System.Math.Abs(y) + System.Math.Abs(z));
                                 }
 
-                                var res = Cdiv((x * r) - (z * ra) + (q * sa), (x * s) - (z * sa) - (q * ra), vr, vi);
+                                var res = Cdiv((x*r) - (z*ra) + (q*sa), (x*s) - (z*sa) - (q*ra), vr, vi);
                                 matrixH[i, n - 1] = res.Real;
                                 matrixH[i, n] = res.Imaginary;
-                                if (Math.Abs(x) > (Math.Abs(z) + Math.Abs(q)))
+                                if (System.Math.Abs(x) > (System.Math.Abs(z) + System.Math.Abs(q)))
                                 {
-                                    matrixH[i + 1, n - 1] = (-ra - (w * matrixH[i, n - 1]) + (q * matrixH[i, n])) / x;
-                                    matrixH[i + 1, n] = (-sa - (w * matrixH[i, n]) - (q * matrixH[i, n - 1])) / x;
+                                    matrixH[i + 1, n - 1] = (-ra - (w*matrixH[i, n - 1]) + (q*matrixH[i, n]))/x;
+                                    matrixH[i + 1, n] = (-sa - (w*matrixH[i, n]) - (q*matrixH[i, n - 1]))/x;
                                 }
                                 else
                                 {
-                                    res = Cdiv(-r - (y * matrixH[i, n - 1]), -s - (y * matrixH[i, n]), z, q);
+                                    res = Cdiv(-r - (y*matrixH[i, n - 1]), -s - (y*matrixH[i, n]), z, q);
                                     matrixH[i + 1, n - 1] = res.Real;
                                     matrixH[i + 1, n] = res.Imaginary;
                                 }
                             }
 
                             // Overflow control
-                            t = Math.Max(Math.Abs(matrixH[i, n - 1]), Math.Abs(matrixH[i, n]));
-                            if ((eps * t) * t > 1)
+                            t = System.Math.Max(System.Math.Abs(matrixH[i, n - 1]), System.Math.Abs(matrixH[i, n]));
+                            if ((eps*t)*t > 1)
                             {
                                 for (var j = i; j <= n; j++)
                                 {
-                                    matrixH[j, n - 1] = matrixH[j, n - 1] / t;
-                                    matrixH[j, n] = matrixH[j, n] / t;
+                                    matrixH[j, n - 1] = matrixH[j, n - 1]/t;
+                                    matrixH[j, n] = matrixH[j, n]/t;
                                 }
                             }
                         }
@@ -1045,10 +1062,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     z = 0.0;
                     for (var k = 0; k <= j; k++)
                     {
-                        z = z + (MatrixEv.At(i, k) * matrixH[k, j]);
+                        z = z + (eigenVectors.At(i, k)*matrixH[k, j]);
                     }
 
-                    MatrixEv.At(i, j, z);
+                    eigenVectors.At(i, j, z);
                 }
             }
         }
@@ -1061,14 +1078,14 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="yreal">Real part of Y</param>
         /// <param name="yimag">Imaginary part of Y</param>
         /// <returns>Division result as a <see cref="Complex"/> number.</returns>
-        private static Complex Cdiv(double xreal, double ximag, double yreal, double yimag)
+        static Complex Cdiv(double xreal, double ximag, double yreal, double yimag)
         {
-            if (Math.Abs(yimag) < Math.Abs(yreal))
+            if (System.Math.Abs(yimag) < System.Math.Abs(yreal))
             {
-                return new Complex((xreal + (ximag * (yimag / yreal))) / (yreal + (yimag * (yimag / yreal))), (ximag - (xreal * (yimag / yreal))) / (yreal + (yimag * (yimag / yreal))));
+                return new Complex((xreal + (ximag*(yimag/yreal)))/(yreal + (yimag*(yimag/yreal))), (ximag - (xreal*(yimag/yreal)))/(yreal + (yimag*(yimag/yreal))));
             }
 
-            return new Complex((ximag + (xreal * (yreal / yimag))) / (yimag + (yreal * (yreal / yimag))), (-xreal + (ximag * (yreal / yimag))) / (yimag + (yreal * (yreal / yimag))));
+            return new Complex((ximag + (xreal*(yreal/yimag)))/(yimag + (yreal*(yreal/yimag))), (-xreal + (ximag*(yreal/yimag)))/(yimag + (yreal*(yreal/yimag))));
         }
 
         /// <summary>
@@ -1078,17 +1095,6 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<double> input, Matrix<double> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // The solution X should have the same number of columns as B
             if (input.ColumnCount != result.ColumnCount)
             {
@@ -1096,20 +1102,20 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             }
 
             // The dimension compatibility conditions for X = A\B require the two matrices A and B to have the same number of rows
-            if (VectorEv.Count != input.RowCount)
+            if (EigenValues.Count != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
             }
 
             // The solution X row dimension is equal to the column dimension of A
-            if (VectorEv.Count != result.RowCount)
+            if (EigenValues.Count != result.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
 
             if (IsSymmetric)
             {
-                var order = VectorEv.Count;
+                var order = EigenValues.Count;
                 var tmp = new double[order];
 
                 for (var k = 0; k < order; k++)
@@ -1121,10 +1127,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         {
                             for (var i = 0; i < order; i++)
                             {
-                                value += MatrixEv.At(i, j) * input.At(i, k);
+                                value += EigenVectors.At(i, j)*input.At(i, k);
                             }
 
-                            value /= VectorEv[j].Real;
+                            value /= EigenValues[j].Real;
                         }
 
                         tmp[j] = value;
@@ -1135,10 +1141,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                         double value = 0;
                         for (var i = 0; i < order; i++)
                         {
-                            value += MatrixEv.At(j, i) * tmp[i];
+                            value += EigenVectors.At(j, i)*tmp[i];
                         }
 
-                        result[j, k] = value;
+                        result.At(j, k, value);
                     }
                 }
             }
@@ -1155,25 +1161,15 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<double> input, Vector<double> result)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // Ax=b where A is an m x m matrix
             // Check that b is a column vector with m entries
-            if (VectorEv.Count != input.Count)
+            if (EigenValues.Count != input.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
             // Check that x is a column vector with n entries
-            if (VectorEv.Count != result.Count)
+            if (EigenValues.Count != result.Count)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixDimensions);
             }
@@ -1181,7 +1177,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
             if (IsSymmetric)
             {
                 // Symmetric case -> x = V * inv(λ) * VT * b;
-                var order = VectorEv.Count;
+                var order = EigenValues.Count;
                 var tmp = new double[order];
                 double value;
 
@@ -1192,10 +1188,10 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     {
                         for (var i = 0; i < order; i++)
                         {
-                            value += MatrixEv.At(i, j) * input[i];
+                            value += EigenVectors.At(i, j)*input[i];
                         }
 
-                        value /= VectorEv[j].Real;
+                        value /= EigenValues[j].Real;
                     }
 
                     tmp[j] = value;
@@ -1206,7 +1202,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Double.Factorization
                     value = 0;
                     for (int i = 0; i < order; i++)
                     {
-                        value += MatrixEv.At(j, i) * tmp[i];
+                        value += EigenVectors.At(j, i)*tmp[i];
                     }
 
                     result[j] = value;

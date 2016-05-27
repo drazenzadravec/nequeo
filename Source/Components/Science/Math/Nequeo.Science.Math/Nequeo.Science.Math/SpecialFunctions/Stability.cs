@@ -2,7 +2,6 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
 // Copyright (c) 2009-2010 Math.NET
 //
@@ -28,11 +27,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
-namespace Nequeo.Science.Math
-{
-    using System;
-    using System.Numerics;
+using System;
 
+#if !NOSYSNUMERICS
+using System.Numerics;
+#endif
+
+// ReSharper disable CheckNamespace
+namespace Nequeo.Science.Math
+// ReSharper restore CheckNamespace
+{
     public partial class SpecialFunctions
     {
         /// <summary>
@@ -42,10 +46,10 @@ namespace Nequeo.Science.Math
         /// <returns>Returns <code>exp(power)-1</code>.</returns>
         public static double ExponentialMinusOne(double power)
         {
-            double x = Math.Abs(power);
+            double x = System.Math.Abs(power);
             if (x > 0.1)
             {
-                return Math.Exp(power) - 1.0;
+                return System.Math.Exp(power) - 1.0;
             }
 
             if (x < x.PositiveEpsilonOf())
@@ -56,15 +60,14 @@ namespace Nequeo.Science.Math
             // Series Expansion to x^k / k!
             int k = 0;
             double term = 1.0;
-            return Series(
+            return Evaluate.Series(
                 () =>
                 {
                     k++;
                     term *= power;
                     term /= k;
                     return term;
-                }
-                );
+                });
         }
 
         /// <summary>
@@ -77,15 +80,15 @@ namespace Nequeo.Science.Math
         {
             if (a.Magnitude > b.Magnitude)
             {
-                var r = b.Magnitude / a.Magnitude;
-                return a.Magnitude * Math.Sqrt(1 + (r * r));
+                var r = b.Magnitude/a.Magnitude;
+                return a.Magnitude*System.Math.Sqrt(1 + (r*r));
             }
 
             if (b != 0.0)
             {
                 // NOTE (ruegg): not "!b.AlmostZero()" to avoid convergence issues (e.g. in SVD algorithm)
-                var r = a.Magnitude / b.Magnitude;
-                return b.Magnitude * Math.Sqrt(1 + (r * r));
+                var r = a.Magnitude/b.Magnitude;
+                return b.Magnitude*System.Math.Sqrt(1 + (r*r));
             }
 
             return 0d;
@@ -101,15 +104,15 @@ namespace Nequeo.Science.Math
         {
             if (a.Magnitude > b.Magnitude)
             {
-                var r = b.Magnitude / a.Magnitude;
-                return a.Magnitude * (float)Math.Sqrt(1 + (r * r));
+                var r = b.Magnitude/a.Magnitude;
+                return a.Magnitude*(float)System.Math.Sqrt(1 + (r*r));
             }
 
             if (b != 0.0f)
             {
                 // NOTE (ruegg): not "!b.AlmostZero()" to avoid convergence issues (e.g. in SVD algorithm)
-                var r = a.Magnitude / b.Magnitude;
-                return b.Magnitude * (float)Math.Sqrt(1 + (r * r));
+                var r = a.Magnitude/b.Magnitude;
+                return b.Magnitude*(float)System.Math.Sqrt(1 + (r*r));
             }
 
             return 0f;
@@ -123,17 +126,17 @@ namespace Nequeo.Science.Math
         /// <returns>Returns <code>sqrt(a<sup>2</sup> + b<sup>2</sup>)</code> without underflow/overflow.</returns>
         public static double Hypotenuse(double a, double b)
         {
-            if (Math.Abs(a) > Math.Abs(b))
+            if (System.Math.Abs(a) > System.Math.Abs(b))
             {
-                double r = b / a;
-                return Math.Abs(a) * Math.Sqrt(1 + (r * r));
+                double r = b/a;
+                return System.Math.Abs(a)*System.Math.Sqrt(1 + (r*r));
             }
 
             if (b != 0.0)
             {
                 // NOTE (ruegg): not "!b.AlmostZero()" to avoid convergence issues (e.g. in SVD algorithm)
-                double r = a / b;
-                return Math.Abs(b) * Math.Sqrt(1 + (r * r));
+                double r = a/b;
+                return System.Math.Abs(b)*System.Math.Sqrt(1 + (r*r));
             }
 
             return 0d;
@@ -147,49 +150,20 @@ namespace Nequeo.Science.Math
         /// <returns>Returns <code>sqrt(a<sup>2</sup> + b<sup>2</sup>)</code> without underflow/overflow.</returns>
         public static float Hypotenuse(float a, float b)
         {
-            if (Math.Abs(a) > Math.Abs(b))
+            if (System.Math.Abs(a) > System.Math.Abs(b))
             {
-                float r = b / a;
-                return Math.Abs(a) * (float)Math.Sqrt(1 + (r * r));
+                float r = b/a;
+                return System.Math.Abs(a)*(float)System.Math.Sqrt(1 + (r*r));
             }
 
             if (b != 0.0)
             {
                 // NOTE (ruegg): not "!b.AlmostZero()" to avoid convergence issues (e.g. in SVD algorithm)
-                float r = a / b;
-                return Math.Abs(b) * (float)Math.Sqrt(1 + (r * r));
+                float r = a/b;
+                return System.Math.Abs(b)*(float)System.Math.Sqrt(1 + (r*r));
             }
 
             return 0f;
-        }
-
-        /// <summary>
-        /// Numerically stable series summation
-        /// </summary>
-        /// <param name="nextSummand">provides the summands sequentially</param>
-        /// <returns>Sum</returns>
-        private static double Series(Func<double> nextSummand)
-        {
-            double compensation = 0.0;
-            double current;
-            double factor = 1 << 16;
-
-            double sum = nextSummand();
-
-            do
-            {
-                // Kahan Summation
-                // NOTE (ruegg): do NOT optimize. Now, how to tell that the compiler?
-                current = nextSummand();
-                double y = current - compensation;
-                double t = sum + y;
-                compensation = t - sum;
-                compensation -= y;
-                sum = t;
-            }
-            while (Math.Abs(sum) < Math.Abs(factor * current));
-
-            return sum;
         }
     }
 }

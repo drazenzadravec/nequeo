@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2013 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,12 +27,13 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
 {
-    using System;
-    using Generic;
     using Nequeo.Science.Math;
-    using Properties;
 
     /// <summary>
     /// <para>A class which encapsulates the functionality of the QR decomposition Modified Gram-Schmidt Orthogonalization.</para>
@@ -42,13 +42,8 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
     /// <remarks>
     /// The computation of the QR decomposition is done at construction time by modified Gram-Schmidt Orthogonalization.
     /// </remarks>
-    public class DenseGramSchmidt : GramSchmidt
+    internal sealed class DenseGramSchmidt : GramSchmidt
     {
-        /// <summary>
-        /// used for QR solve
-        /// </summary>
-        private readonly Algorithms.LinearAlgebra.ILinearAlgebraProvider _provider = new Algorithms.LinearAlgebra.ManagedLinearAlgebraProvider();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DenseGramSchmidt"/> class. This object creates an unitary matrix 
         /// using the modified Gram-Schmidt method.
@@ -57,21 +52,23 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> row count is less then column count</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is rank deficient</exception>
-        public DenseGramSchmidt(DenseMatrix matrix)
+        public static DenseGramSchmidt Create(Matrix<Complex32> matrix)
         {
-            if (matrix == null)
-            {
-                throw new ArgumentNullException("matrix");
-            }
-
             if (matrix.RowCount < matrix.ColumnCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(matrix);
             }
 
-            MatrixQ = matrix.Clone();
-            MatrixR = matrix.CreateMatrix(matrix.ColumnCount, matrix.ColumnCount);
-            Factorize(((DenseMatrix)MatrixQ).Data, MatrixQ.RowCount, MatrixQ.ColumnCount, ((DenseMatrix)MatrixR).Data);
+            var q = (DenseMatrix)matrix.Clone();
+            var r = new DenseMatrix(matrix.ColumnCount, matrix.ColumnCount);
+            Factorize(q.Values, q.RowCount, q.ColumnCount, r.Values);
+
+            return new DenseGramSchmidt(q, r);
+        }
+
+        DenseGramSchmidt(Matrix<Complex32> q, Matrix<Complex32> rFull)
+            : base(q, rFull)
+        {
         }
 
         /// <summary>
@@ -91,7 +88,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
                     norm += q[(k * rowsQ) + i].Magnitude * q[(k * rowsQ) + i].Magnitude;
                 }
 
-                norm = (float)Math.Sqrt(norm);
+                norm = (float)System.Math.Sqrt(norm);
                 if (norm == 0.0f)
                 {
                     throw new ArgumentException(Resources.ArgumentMatrixNotRankDeficient);
@@ -131,17 +128,6 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>X</b>.</param>
         public override void Solve(Matrix<Complex32> input, Matrix<Complex32> result)
         {
-            // Check for proper arguments.
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // The solution X should have the same number of columns as B
             if (input.ColumnCount != result.ColumnCount)
             {
@@ -149,13 +135,13 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
             }
 
             // The dimension compatibility conditions for X = A\B require the two matrices A and B to have the same number of rows
-            if (MatrixQ.RowCount != input.RowCount)
+            if (Q.RowCount != input.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameRowDimension);
             }
 
             // The solution X row dimension is equal to the column dimension of A
-            if (MatrixQ.ColumnCount != result.RowCount)
+            if (Q.ColumnCount != result.RowCount)
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
@@ -172,7 +158,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
                 throw new NotSupportedException("Can only do GramSchmidt factorization for dense matrices at the moment.");
             }
 
-            _provider.QRSolveFactored(((DenseMatrix)MatrixQ).Data, ((DenseMatrix)MatrixR).Data, MatrixQ.RowCount, MatrixQ.ColumnCount, null, dinput.Data, input.ColumnCount, dresult.Data);
+            Control.LinearAlgebraProvider.QRSolveFactored(((DenseMatrix)Q).Values, ((DenseMatrix)FullR).Values, Q.RowCount, FullR.ColumnCount, null, dinput.Values, input.ColumnCount, dresult.Values, QRMethod.Thin);
         }
 
         /// <summary>
@@ -182,27 +168,17 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
         /// <param name="result">The left hand side <see cref="Matrix{T}"/>, <b>x</b>.</param>
         public override void Solve(Vector<Complex32> input, Vector<Complex32> result)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException("input");
-            }
-
-            if (result == null)
-            {
-                throw new ArgumentNullException("result");
-            }
-
             // Ax=b where A is an m x n matrix
             // Check that b is a column vector with m entries
-            if (MatrixQ.RowCount != input.Count)
+            if (Q.RowCount != input.Count)
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
             // Check that x is a column vector with n entries
-            if (MatrixQ.ColumnCount != result.Count)
+            if (Q.ColumnCount != result.Count)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(Q, result);
             }
 
             var dinput = input as DenseVector;
@@ -217,7 +193,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32.Factorization
                 throw new NotSupportedException("Can only do GramSchmidt factorization for dense vectors at the moment.");
             }
 
-            _provider.QRSolveFactored(((DenseMatrix)MatrixQ).Data, ((DenseMatrix)MatrixR).Data, MatrixQ.RowCount, MatrixQ.ColumnCount, null, dinput.Data, 1, dresult.Data);
+            Control.LinearAlgebraProvider.QRSolveFactored(((DenseMatrix)Q).Values, ((DenseMatrix)FullR).Values, Q.RowCount, FullR.ColumnCount, null, dinput.Values, 1, dresult.Values, QRMethod.Thin);
         }
     }
 }

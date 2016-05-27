@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2015 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,14 +27,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
 {
-    using System;
+
+#if NOSYSNUMERICS
+    using Numerics;
+#else
     using System.Numerics;
-    using Algorithms.LinearAlgebra;
-    using Generic;
-    using Properties;
-    using Threading;
+#endif
 
     /// <summary>
     /// <para>A class which encapsulates the functionality of an LU factorization.</para>
@@ -45,7 +47,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
     /// <remarks>
     /// The computation of the LU factorization is done at construction time.
     /// </remarks>
-    public class DenseLU : LU
+    internal sealed class DenseLU : LU
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DenseLU"/> class. This object will compute the
@@ -54,7 +56,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <param name="matrix">The matrix to factor.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="matrix"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="matrix"/> is not a square matrix.</exception>
-        public DenseLU(DenseMatrix matrix)
+        public static DenseLU Create(DenseMatrix matrix)
         {
             if (matrix == null)
             {
@@ -67,12 +69,18 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
             }
 
             // Create an array for the pivot indices.
-            Pivots = new int[matrix.RowCount];
+            var pivots = new int[matrix.RowCount];
 
             // Create a new matrix for the LU factors, then perform factorization (while overwriting).
-            var factors = (DenseMatrix)matrix.Clone();
-            Control.LinearAlgebraProvider.LUFactor(factors.Data, factors.RowCount, Pivots);
-            Factors = factors;
+            var factors = (DenseMatrix) matrix.Clone();
+            Control.LinearAlgebraProvider.LUFactor(factors.Values, factors.RowCount, pivots);
+
+            return new DenseLU(factors, pivots);
+        }
+
+        DenseLU(Matrix<Complex> factors, int[] pivots)
+            : base(factors, pivots)
+        {
         }
 
         /// <summary>
@@ -106,7 +114,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
 
             if (input.RowCount != Factors.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factors);
             }
 
             var dinput = input as DenseMatrix;
@@ -122,11 +130,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
             }
 
             // Copy the contents of input to result.
-            CommonParallel.For(0, dinput.Data.Length, index => dresult.Data[index] = dinput.Data[index]);
+            Array.Copy(dinput.Values, 0, dresult.Values, 0, dinput.Values.Length);
 
             // LU solve by overwriting result.
-            var dfactors = (DenseMatrix)Factors;
-            Control.LinearAlgebraProvider.LUSolveFactored(input.ColumnCount, dfactors.Data, dfactors.RowCount, Pivots, dresult.Data);
+            var dfactors = (DenseMatrix) Factors;
+            Control.LinearAlgebraProvider.LUSolveFactored(input.ColumnCount, dfactors.Values, dfactors.RowCount, Pivots, dresult.Values);
         }
 
         /// <summary>
@@ -155,7 +163,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
 
             if (input.Count != Factors.RowCount)
             {
-                throw new ArgumentException(Resources.ArgumentMatrixDimensions);
+                throw Matrix.DimensionsDontMatch<ArgumentException>(input, Factors);
             }
 
             var dinput = input as DenseVector;
@@ -171,11 +179,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
             }
 
             // Copy the contents of input to result.
-            CommonParallel.For(0, dinput.Data.Length, index => dresult.Data[index] = dinput.Data[index]);
+            Array.Copy(dinput.Values, 0, dresult.Values, 0, dinput.Values.Length);
 
             // LU solve by overwriting result.
-            var dfactors = (DenseMatrix)Factors;
-            Control.LinearAlgebraProvider.LUSolveFactored(1, dfactors.Data, dfactors.RowCount, Pivots, dresult.Data);
+            var dfactors = (DenseMatrix) Factors;
+            Control.LinearAlgebraProvider.LUSolveFactored(1, dfactors.Values, dfactors.RowCount, Pivots, dresult.Values);
         }
 
         /// <summary>
@@ -184,8 +192,8 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex.Factorization
         /// <returns>The inverse of this matrix.</returns>
         public override Matrix<Complex> Inverse()
         {
-            var result = (DenseMatrix)Factors.Clone();
-            Control.LinearAlgebraProvider.LUInverseFactored(result.Data, result.RowCount, Pivots);
+            var result = (DenseMatrix) Factors.Clone();
+            Control.LinearAlgebraProvider.LUInverseFactored(result.Values, result.RowCount, Pivots);
             return result;
         }
     }

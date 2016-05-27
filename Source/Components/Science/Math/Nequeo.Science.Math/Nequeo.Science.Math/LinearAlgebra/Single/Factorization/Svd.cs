@@ -2,9 +2,8 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
-// Copyright (c) 2009-2010 Math.NET
+// Copyright (c) 2009-2015 Math.NET
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,30 +27,34 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using System;
+using System.Linq;
+using Nequeo.Science.Math.LinearAlgebra.Factorization;
+using Nequeo.Science.Math.Properties;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
 {
-    using System;
-    using System.Linq;
-    using Generic;
-    using Generic.Factorization;
-    using Properties;
-
     /// <summary>
     /// <para>A class which encapsulates the functionality of the singular value decomposition (SVD).</para>
-    /// <para>Suppose M is an m-by-n matrix whose entries are real numbers. 
+    /// <para>Suppose M is an m-by-n matrix whose entries are real numbers.
     /// Then there exists a factorization of the form M = UΣVT where:
     /// - U is an m-by-m unitary matrix;
     /// - Σ is m-by-n diagonal matrix with nonnegative real numbers on the diagonal;
-    /// - VT denotes transpose of V, an n-by-n unitary matrix; 
-    /// Such a factorization is called a singular-value decomposition of M. A common convention is to order the diagonal 
-    /// entries Σ(i,i) in descending order. In this case, the diagonal matrix Σ is uniquely determined 
+    /// - VT denotes transpose of V, an n-by-n unitary matrix;
+    /// Such a factorization is called a singular-value decomposition of M. A common convention is to order the diagonal
+    /// entries Σ(i,i) in descending order. In this case, the diagonal matrix Σ is uniquely determined
     /// by M (though the matrices U and V are not). The diagonal entries of Σ are known as the singular values of M.</para>
     /// </summary>
     /// <remarks>
     /// The computation of the singular value decomposition is done at construction time.
     /// </remarks>
-    public abstract class Svd : Svd<float>
+    internal abstract class Svd : Svd<float>
     {
+        protected Svd(Vector<float> s, Matrix<float> u, Matrix<float> vt, bool vectorsComputed)
+            : base(s, u, vt, vectorsComputed)
+        {
+        }
+
         /// <summary>
         /// Gets the effective numerical matrix rank.
         /// </summary>
@@ -60,7 +63,8 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
         {
             get
             {
-                return VectorS.Count(t => !Math.Abs(t).AlmostEqual(0.0f));
+                double tolerance = Precision.EpsilonOf(S.Maximum())*System.Math.Max(U.RowCount, VT.RowCount);
+                return S.Count(t => System.Math.Abs(t) > tolerance);
             }
         }
 
@@ -68,11 +72,11 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
         /// Gets the two norm of the <see cref="Matrix{T}"/>.
         /// </summary>
         /// <returns>The 2-norm of the <see cref="Matrix{T}"/>.</returns>
-        public override float Norm2
+        public override double L2Norm
         {
             get
             {
-                return Math.Abs(VectorS[0]);
+                return System.Math.Abs(S[0]);
             }
         }
 
@@ -84,8 +88,8 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
         {
             get
             {
-                var tmp = Math.Min(MatrixU.RowCount, MatrixVT.ColumnCount) - 1;
-                return Math.Abs(VectorS[0]) / Math.Abs(VectorS[tmp]);
+                var tmp = System.Math.Min(U.RowCount, VT.ColumnCount) - 1;
+                return System.Math.Abs(S[0]) / System.Math.Abs(S[tmp]);
             }
         }
 
@@ -96,22 +100,22 @@ namespace Nequeo.Science.Math.LinearAlgebra.Single.Factorization
         {
             get
             {
-                if (MatrixU.RowCount != MatrixVT.ColumnCount)
+                if (U.RowCount != VT.ColumnCount)
                 {
                     throw new ArgumentException(Resources.ArgumentMatrixSquare);
                 }
 
                 var det = 1.0;
-                foreach (var value in VectorS)
+                foreach (var value in S)
                 {
                     det *= value;
-                    if (Math.Abs(value).AlmostEqual(0.0f))
+                    if (System.Math.Abs(value).AlmostEqual(0.0f))
                     {
                         return 0;
                     }
                 }
 
-                return Convert.ToSingle(Math.Abs(det));
+                return Convert.ToSingle(System.Math.Abs(det));
             }
         }
     }

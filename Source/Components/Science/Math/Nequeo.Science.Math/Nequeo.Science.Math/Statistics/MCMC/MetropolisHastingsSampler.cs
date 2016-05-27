@@ -2,7 +2,6 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
 //
 // Copyright (c) 2009-2010 Math.NET
 //
@@ -39,7 +38,7 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
     /// and accepting/rejecting based on the density of P. Metropolis-Hastings sampling doesn't require that the
     /// proposal distribution Q is symmetric in comparison to <seealso cref="MetropolisSampler{T}"/>. It does need to
     /// be able to evaluate the proposal sampler's log density though. All densities are required to be in log space.
-    /// 
+    ///
     /// The Metropolis-Hastings sampler is a stateful sampler. It keeps track of where it currently is in the domain
     /// of the distribution P.
     /// </summary>
@@ -49,45 +48,32 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// <summary>
         /// Evaluates the log density function of the target distribution.
         /// </summary>
-        private readonly DensityLn<T> mPdfLnP;
+        private readonly DensityLn<T> _pdfLnP;
 
         /// <summary>
         /// Evaluates the log transition probability for the proposal distribution.
         /// </summary>
-        private readonly TransitionKernelLn<T> mKrnlQ;
+        private readonly TransitionKernelLn<T> _krnlQ;
 
         /// <summary>
         /// A function which samples from a proposal distribution.
         /// </summary>
-        private readonly LocalProposalSampler<T> mProposal;
+        private readonly LocalProposalSampler<T> _proposal;
 
         /// <summary>
         /// The current location of the sampler.
         /// </summary>
-        private T mCurrent;
+        private T _current;
 
         /// <summary>
         /// The log density at the current location.
         /// </summary>
-        private double mCurrentDensityLn;
+        private double _currentDensityLn;
 
         /// <summary>
         /// The number of burn iterations between two samples.
         /// </summary>
-        private int mBurnInterval;
-
-        /// <summary>
-        /// Constructs a new Metropolis-Hastings sampler using the default <see cref="System.Random"/> random 
-        /// number generator. The burn interval will be set to 0.
-        /// </summary>
-        /// <param name="x0">The initial sample.</param>
-        /// <param name="pdfLnP">The log density of the distribution we want to sample from.</param>
-        /// <param name="krnlQ">The log transition probability for the proposal distribution.</param>
-        /// <param name="proposal">A method that samples from the proposal distribution.</param>
-        public MetropolisHastingsSampler(T x0, DensityLn<T> pdfLnP, TransitionKernelLn<T> krnlQ, LocalProposalSampler<T> proposal) :
-            this(x0, pdfLnP, krnlQ, proposal, 0)
-        {
-        }
+        private int _burnInterval;
 
         /// <summary>
         /// Constructs a new Metropolis-Hastings sampler using the default <see cref="System.Random"/> random number generator. This
@@ -99,13 +85,13 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// <param name="proposal">A method that samples from the proposal distribution.</param>
         /// <param name="burnInterval">The number of iterations in between returning samples.</param>
         /// <exception cref="ArgumentOutOfRangeException">When the number of burnInterval iteration is negative.</exception>
-        public MetropolisHastingsSampler(T x0, DensityLn<T> pdfLnP, TransitionKernelLn<T> krnlQ, LocalProposalSampler<T> proposal, int burnInterval)
+        public MetropolisHastingsSampler(T x0, DensityLn<T> pdfLnP, TransitionKernelLn<T> krnlQ, LocalProposalSampler<T> proposal, int burnInterval = 0)
         {
-            mCurrent = x0;
-            mCurrentDensityLn = pdfLnP(x0);
-            mPdfLnP = pdfLnP;
-            mKrnlQ = krnlQ;
-            mProposal = proposal;
+            _current = x0;
+            _currentDensityLn = pdfLnP(x0);
+            _pdfLnP = pdfLnP;
+            _krnlQ = krnlQ;
+            _proposal = proposal;
             BurnInterval = burnInterval;
 
             Burn(BurnInterval);
@@ -117,15 +103,14 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         /// <exception cref="ArgumentOutOfRangeException">When burn interval is negative.</exception>
         public int BurnInterval
         {
-            get { return mBurnInterval; }
-
+            get { return _burnInterval; }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(Resources.ArgumentNotNegative);
+                    throw new ArgumentException(Resources.ArgumentNotNegative);
                 }
-                mBurnInterval = value;
+                _burnInterval = value;
             }
         }
 
@@ -137,28 +122,28 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
             for (int i = 0; i < n; i++)
             {
                 // Get a sample from the proposal.
-                T next = mProposal(mCurrent);
+                T next = _proposal(_current);
                 // Evaluate the density at the next sample.
-                double p = mPdfLnP(next);
+                double p = _pdfLnP(next);
                 // Evaluate the forward transition probability.
-                double fwd = mKrnlQ(next, mCurrent);
+                double fwd = _krnlQ(next, _current);
                 // Evaluate the backward transition probability
-                double bwd = mKrnlQ(mCurrent, next);
+                double bwd = _krnlQ(_current, next);
 
-                mSamples++;
+                Samples++;
 
-                double acc = System.Math.Min(0.0, p + bwd - mCurrentDensityLn - fwd);
+                double acc = System.Math.Min(0.0, p + bwd - _currentDensityLn - fwd);
                 if (acc == 0.0)
                 {
-                    mCurrent = next;
-                    mCurrentDensityLn = p;
-                    mAccepts++;
+                    _current = next;
+                    _currentDensityLn = p;
+                    Accepts++;
                 }
                 else if (Bernoulli.Sample(RandomSource, System.Math.Exp(acc)) == 1)
                 {
-                    mCurrent = next;
-                    mCurrentDensityLn = p;
-                    mAccepts++;
+                    _current = next;
+                    _currentDensityLn = p;
+                    Accepts++;
                 }
             }
         }
@@ -170,7 +155,7 @@ namespace Nequeo.Science.Math.Statistics.Mcmc
         {
             Burn(BurnInterval + 1);
 
-            return mCurrent;
+            return _current;
         }
     }
 }

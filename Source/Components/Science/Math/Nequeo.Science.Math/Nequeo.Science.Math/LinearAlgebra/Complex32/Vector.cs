@@ -2,8 +2,9 @@
 // Math.NET Numerics, part of the Math.NET Project
 // http://numerics.mathdotnet.com
 // http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-// Copyright (c) 2009-2010 Math.NET
+//
+// Copyright (c) 2009-2015 Math.NET
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -12,8 +13,10 @@
 // copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following
 // conditions:
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,13 +27,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
+using Nequeo.Science.Math.LinearAlgebra.Storage;
+using Nequeo.Science.Math.Threading;
+using System;
+
 namespace Nequeo.Science.Math.LinearAlgebra.Complex32
 {
-    using System;
-    using Distributions;
-    using Generic;
-    using Properties;
-    using Threading;
     using Complex32 = Nequeo.Science.Math.Complex32;
 
     /// <summary>
@@ -40,17 +42,37 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
     public abstract class Vector : Vector<Complex32>
     {
         /// <summary>
-        /// Initializes a new instance of the Vector class. 
-        /// Constructs a <strong>Vector</strong> with the given size.
+        /// Initializes a new instance of the Vector class.
         /// </summary>
-        /// <param name="size">
-        /// The size of the <strong>Vector</strong> to construct.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="size"/> is less than one.
-        /// </exception>
-        protected Vector(int size) : base(size)
+        protected Vector(VectorStorage<Complex32> storage)
+            : base(storage)
         {
+        }
+
+        /// <summary>
+        /// Set all values whose absolute value is smaller than the threshold to zero.
+        /// </summary>
+        public override void CoerceZero(double threshold)
+        {
+            MapInplace(x => x.Magnitude < threshold ? Complex32.Zero : x, Zeros.AllowSkip);
+        }
+
+        /// <summary>
+        /// Conjugates vector and save result to <paramref name="result"/>
+        /// </summary>
+        /// <param name="result">Target vector</param>
+        protected override void DoConjugate(Vector<Complex32> result)
+        {
+            Map(Complex32.Conjugate, result, Zeros.AllowSkip);
+        }
+
+        /// <summary>
+        /// Negates vector and saves result to <paramref name="result"/>
+        /// </summary>
+        /// <param name="result">Target vector</param>
+        protected override void DoNegate(Vector<Complex32> result)
+        {
+            Map(Complex32.Negate, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -64,10 +86,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// </param>
         protected override void DoAdd(Complex32 scalar, Vector<Complex32> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) + scalar);
-            }
+            Map(x => x + scalar, result, Zeros.Include);
         }
 
         /// <summary>
@@ -81,10 +100,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// </param>
         protected override void DoAdd(Vector<Complex32> other, Vector<Complex32> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) + other.At(index));
-            }
+            Map2(Complex32.Add, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -98,7 +114,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// </param>
         protected override void DoSubtract(Complex32 scalar, Vector<Complex32> result)
         {
-            DoAdd(-scalar, result);
+            Map(x => x - scalar, result, Zeros.Include);
         }
 
         /// <summary>
@@ -112,10 +128,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// </param>
         protected override void DoSubtract(Vector<Complex32> other, Vector<Complex32> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) - other.At(index));
-            }
+            Map2(Complex32.Subtract, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
@@ -129,24 +142,31 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// </param>
         protected override void DoMultiply(Complex32 scalar, Vector<Complex32> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) * scalar);
-            }
+            Map(x => x*scalar, result, Zeros.AllowSkip);
         }
 
         /// <summary>
         /// Divides each element of the vector by a scalar and stores the result in the result vector.
         /// </summary>
-        /// <param name="scalar">
+        /// <param name="divisor">
         /// The scalar to divide with.
         /// </param>
         /// <param name="result">
         /// The vector to store the result of the division.
         /// </param>
-        protected override void DoDivide(Complex32 scalar, Vector<Complex32> result)
+        protected override void DoDivide(Complex32 divisor, Vector<Complex32> result)
         {
-            DoMultiply(1 / scalar, result);
+            Map(x => x/divisor, result, divisor.IsZero() ? Zeros.Include : Zeros.AllowSkip);
+        }
+
+        /// <summary>
+        /// Divides a scalar by each element of the vector and stores the result in the result vector.
+        /// </summary>
+        /// <param name="dividend">The scalar to divide.</param>
+        /// <param name="result">The vector to store the result of the division.</param>
+        protected override void DoDivideByThis(Complex32 dividend, Vector<Complex32> result)
+        {
+            Map(x => dividend/x, result, Zeros.Include);
         }
 
         /// <summary>
@@ -156,61 +176,148 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <param name="result">The vector to store the result of the pointwise multiplication.</param>
         protected override void DoPointwiseMultiply(Vector<Complex32> other, Vector<Complex32> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) * other.At(index));
-            }
+            Map2(Complex32.Multiply, other, result, Zeros.AllowSkip);
         }
 
         /// <summary>
         /// Pointwise divide this vector with another vector and stores the result into the result vector.
         /// </summary>
-        /// <param name="other">The vector to pointwise divide this one by.</param>
+        /// <param name="divisor">The vector to pointwise divide this one by.</param>
         /// <param name="result">The vector to store the result of the pointwise division.</param>
-        protected override void DoPointwiseDivide(Vector<Complex32> other, Vector<Complex32> result)
+        protected override void DoPointwiseDivide(Vector<Complex32> divisor, Vector<Complex32> result)
         {
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, At(index) / other.At(index));
-            }
+            Map2(Complex32.Divide, divisor, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise raise this vector to an exponent and store the result into the result vector.
+        /// </summary>
+        /// <param name="exponent">The exponent to raise this vector values to.</param>
+        /// <param name="result">The vector to store the result of the pointwise power.</param>
+        protected override void DoPointwisePower(Complex32 exponent, Vector<Complex32> result)
+        {
+            Map(x => x.Power(exponent), result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise canonical modulus, where the result has the sign of the divisor,
+        /// of this vector with another vector and stores the result into the result vector.
+        /// </summary>
+        /// <param name="divisor">The pointwise denominator vector to use.</param>
+        /// <param name="result">The result of the modulus.</param>
+        protected sealed override void DoPointwiseModulus(Vector<Complex32> divisor, Vector<Complex32> result)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Pointwise remainder (% operator), where the result has the sign of the dividend,
+        /// of this vector with another vector and stores the result into the result vector.
+        /// </summary>
+        /// <param name="divisor">The pointwise denominator vector to use.</param>
+        /// <param name="result">The result of the modulus.</param>
+        protected sealed override void DoPointwiseRemainder(Vector<Complex32> divisor, Vector<Complex32> result)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Pointwise applies the exponential function to each value and stores the result into the result vector.
+        /// </summary>
+        /// <param name="result">The vector to store the result.</param>
+        protected override void DoPointwiseExp(Vector<Complex32> result)
+        {
+            Map(Complex32.Exp, result, Zeros.Include);
+        }
+
+        /// <summary>
+        /// Pointwise applies the natural logarithm function to each value and stores the result into the result vector.
+        /// </summary>
+        /// <param name="result">The vector to store the result.</param>
+        protected override void DoPointwiseLog(Vector<Complex32> result)
+        {
+            Map(Complex32.Log, result, Zeros.Include);
         }
 
         /// <summary>
         /// Computes the dot product between this vector and another vector.
         /// </summary>
-        /// <param name="other">
-        /// The other vector to add.
-        /// </param>
-        /// <returns>s
-        /// The result of the addition.
-        /// </returns>
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of a[i]*b[i] for all i.</returns>
         protected override Complex32 DoDotProduct(Vector<Complex32> other)
         {
             var dot = Complex32.Zero;
-
             for (var i = 0; i < Count; i++)
             {
                 dot += At(i) * other.At(i);
             }
-
             return dot;
         }
 
         /// <summary>
-        /// Computes the modulus for each element of the vector for the given divisor.
+        /// Computes the dot product between the conjugate of this vector and another vector.
         /// </summary>
-        /// <param name="divisor">The divisor to use.</param>
-        /// <param name="result">A vector to store the results in.</param>
-        protected override void DoModulus(Complex32 divisor, Vector<Complex32> result)
+        /// <param name="other">The other vector.</param>
+        /// <returns>The sum of conj(a[i])*b[i] for all i.</returns>
+        protected override Complex32 DoConjugateDotProduct(Vector<Complex32> other)
         {
-            throw new NotImplementedException();
+            var dot = Complex32.Zero;
+            for (var i = 0; i < Count; i++)
+            {
+                dot += At(i).Conjugate() * other.At(i);
+            }
+            return dot;
+        }
+
+        /// <summary>
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for each element of the vector for the given divisor.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected sealed override void DoModulus(Complex32 divisor, Vector<Complex32> result)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Computes the canonical modulus, where the result has the sign of the divisor,
+        /// for the given dividend for each element of the vector.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected sealed override void DoModulusByThis(Complex32 dividend, Vector<Complex32> result)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for each element of the vector for the given divisor.
+        /// </summary>
+        /// <param name="divisor">The scalar denominator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected sealed override void DoRemainder(Complex32 divisor, Vector<Complex32> result)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Computes the remainder (% operator), where the result has the sign of the dividend,
+        /// for the given dividend for each element of the vector.
+        /// </summary>
+        /// <param name="dividend">The scalar numerator to use.</param>
+        /// <param name="result">A vector to store the results in.</param>
+        protected sealed override void DoRemainderByThis(Complex32 dividend, Vector<Complex32> result)
+        {
+            throw new NotSupportedException();
         }
 
         /// <summary>
         /// Returns the value of the absolute minimum element.
         /// </summary>
         /// <returns>The value of the absolute minimum element.</returns>
-        public override Complex32 AbsoluteMinimum()
+        public sealed override Complex32 AbsoluteMinimum()
         {
             return At(AbsoluteMinimumIndex()).Magnitude;
         }
@@ -218,7 +325,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <summary>
         /// Returns the index of the absolute minimum element.
         /// </summary>
-        /// <returns>The index of absolute minimum element.</returns>   
+        /// <returns>The index of absolute minimum element.</returns>
         public override int AbsoluteMinimumIndex()
         {
             var index = 0;
@@ -248,7 +355,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>   
+        /// <returns>The index of absolute maximum element.</returns>
         public override int AbsoluteMaximumIndex()
         {
             var index = 0;
@@ -273,29 +380,43 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         public override Complex32 Sum()
         {
             var sum = Complex32.Zero;
-
             for (var i = 0; i < Count; i++)
             {
                 sum += At(i);
             }
-
             return sum;
         }
 
         /// <summary>
-        /// Computes the sum of the absolute value of the vector's elements.
+        /// Calculates the L1 norm of the vector, also known as Manhattan norm.
         /// </summary>
-        /// <returns>The sum of the absolute value of the vector's elements.</returns>
-        public override Complex32 SumMagnitudes()
+        /// <returns>The sum of the absolute values.</returns>
+        public override double L1Norm()
         {
-            var sum = Complex32.Zero;
-
+            double sum = 0d;
             for (var i = 0; i < Count; i++)
             {
                 sum += At(i).Magnitude;
             }
-
             return sum;
+        }
+
+        /// <summary>
+        /// Calculates the L2 norm of the vector, also known as Euclidean norm.
+        /// </summary>
+        /// <returns>The square root of the sum of the squared values.</returns>
+        public override double L2Norm()
+        {
+            return DoConjugateDotProduct(this).SquareRoot().Real;
+        }
+
+        /// <summary>
+        /// Calculates the infinity norm of the vector.
+        /// </summary>
+        /// <returns>The maximum absolute value.</returns>
+        public override double InfinityNorm()
+        {
+            return CommonParallel.Aggregate(0, Count, i => At(i).Magnitude, System.Math.Max, 0f);
         }
 
         /// <summary>
@@ -305,71 +426,28 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// The p value.
         /// </param>
         /// <returns>
-        /// <c>Scalar ret = (sum(abs(At(i))^p))^(1/p)</c>
+        /// <c>Scalar ret = ( ∑|At(i)|^p )^(1/p)</c>
         /// </returns>
-        public override Complex32 Norm(double p)
+        public override double Norm(double p)
         {
-            if (p < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("p");
-            }
+            if (p < 0d) throw new ArgumentOutOfRangeException("p");
 
-            if (double.IsPositiveInfinity(p))
-            {
-                return CommonParallel.Select(
-                    0, 
-                    Count, 
-                    (index, localData) => Math.Max(localData, At(index).Magnitude), 
-                    Common.Max);
-            }
+            if (p == 1d) return L1Norm();
+            if (p == 2d) return L2Norm();
+            if (double.IsPositiveInfinity(p)) return InfinityNorm();
 
-            var sum = 0.0;
-
+            double sum = 0d;
             for (var index = 0; index < Count; index++)
             {
-                sum += Math.Pow(At(index).Magnitude, p);
+                sum += System.Math.Pow(At(index).Magnitude, p);
             }
-
-            return (float)Math.Pow(sum, 1.0 / p);
-        }
-
-        /// <summary>
-        /// Conjugates vector and save result to <paramref name="target"/>
-        /// </summary>
-        /// <param name="target">Target vector</param>
-        protected override void DoConjugate(Vector<Complex32> target)
-        {
-            for (var index = 0; index < Count; index++)
-            {
-                target.At(index, At(index).Conjugate());
-            }
-        }
-
-        /// <summary>
-        /// Returns a negated vector.
-        /// </summary>
-        /// <returns>
-        /// The negated vector.
-        /// </returns>
-        /// <remarks>
-        /// Added as an alternative to the unary negation operator.
-        /// </remarks>
-        public override Vector<Complex32> Negate()
-        {
-            var result = CreateVector(Count);
-
-            for (var index = 0; index < Count; index++)
-            {
-                result.At(index, -At(index));
-            }
-
-            return result;
+            return System.Math.Pow(sum, 1.0/p);
         }
 
         /// <summary>
         /// Returns the index of the absolute maximum element.
         /// </summary>
-        /// <returns>The index of absolute maximum element.</returns>          
+        /// <returns>The index of absolute maximum element.</returns>
         public override int MaximumIndex()
         {
             throw new NotSupportedException();
@@ -378,7 +456,7 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// <summary>
         /// Returns the index of the minimum element.
         /// </summary>
-        /// <returns>The index of minimum element.</returns>  
+        /// <returns>The index of minimum element.</returns>
         public override int MinimumIndex()
         {
             throw new NotSupportedException();
@@ -395,73 +473,21 @@ namespace Nequeo.Science.Math.LinearAlgebra.Complex32
         /// </returns>
         public override Vector<Complex32> Normalize(double p)
         {
-            if (p < 0.0)
+            if (p < 0d)
             {
                 throw new ArgumentOutOfRangeException("p");
             }
 
-            var norm = Norm(p);
+            double norm = Norm(p);
             var clone = Clone();
-            if (norm.Real == 0.0f)
+            if (norm == 0d)
             {
                 return clone;
             }
 
-            clone.Multiply(1.0f / norm, clone);
+            clone.Multiply((float)(1d / norm), clone);
 
             return clone;
-        }
-
-        /// <summary>
-        /// Generates a vector with random elements
-        /// </summary>
-        /// <param name="length">Number of elements in the vector.</param>
-        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
-        /// <returns>
-        /// A vector with n-random elements distributed according
-        /// to the specified random distribution.
-        /// </returns>
-        /// <exception cref="ArgumentException">If the n vector is non-positive.</exception> 
-        public override Vector<Complex32> Random(int length, IContinuousDistribution randomDistribution)
-        {
-            if (length < 1)
-            {
-                throw new ArgumentException(Resources.ArgumentMustBePositive, "length");
-            }
-
-            var vector = CreateVector(length);
-            for (var index = 0; index < length; index++)
-            {
-                vector.At(index, new Complex32(Convert.ToSingle(randomDistribution.Sample()), Convert.ToSingle(randomDistribution.Sample())));
-            }
-
-            return vector;
-        }
-
-        /// <summary>
-        /// Generates a vector with random elements
-        /// </summary>
-        /// <param name="length">Number of elements in the vector.</param>
-        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
-        /// <returns>
-        /// A vector with n-random elements distributed according
-        /// to the specified random distribution.
-        /// </returns>
-        /// <exception cref="ArgumentException">If the n vector is not positive.</exception> 
-        public override Vector<Complex32> Random(int length, IDiscreteDistribution randomDistribution)
-        {
-            if (length < 1)
-            {
-                throw new ArgumentException(Resources.ArgumentMustBePositive, "length");
-            }
-
-            var vector = CreateVector(length);
-            for (var index = 0; index < length; index++)
-            {
-                vector.At(index, new Complex32(Convert.ToSingle(randomDistribution.Sample()), Convert.ToSingle(randomDistribution.Sample())));
-            }
-
-            return vector;
         }
     }
 }

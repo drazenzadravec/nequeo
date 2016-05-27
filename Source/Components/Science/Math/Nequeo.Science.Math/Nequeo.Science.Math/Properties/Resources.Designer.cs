@@ -61,6 +61,15 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The accuracy couldn&apos;t be reached with the specified number of iterations..
+        /// </summary>
+        internal static string AccuracyNotReached {
+            get {
+                return ResourceManager.GetString("AccuracyNotReached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The array arguments must have the same length..
         /// </summary>
         internal static string ArgumentArraysSameLength {
@@ -106,7 +115,7 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The histogram does not contains the value..
+        ///   Looks up a localized string similar to The histogram does not contain the value..
         /// </summary>
         internal static string ArgumentHistogramContainsNot {
             get {
@@ -142,20 +151,38 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to han the given upper bound..
-        /// </summary>
-        internal static string ArgumentLowerBoundLargerThanUpperBound {
-            get {
-                return ResourceManager.GetString("ArgumentLowerBoundLargerThanUpperBound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Matrix dimensions must agree..
         /// </summary>
         internal static string ArgumentMatrixDimensions {
             get {
                 return ResourceManager.GetString("ArgumentMatrixDimensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix dimensions must agree: {0}..
+        /// </summary>
+        internal static string ArgumentMatrixDimensions1 {
+            get {
+                return ResourceManager.GetString("ArgumentMatrixDimensions1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix dimensions must agree: op1 is {0}, op2 is {1}..
+        /// </summary>
+        internal static string ArgumentMatrixDimensions2 {
+            get {
+                return ResourceManager.GetString("ArgumentMatrixDimensions2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix dimensions must agree: op1 is {0}, op2 is {1}, op3 is {2}..
+        /// </summary>
+        internal static string ArgumentMatrixDimensions3 {
+            get {
+                return ResourceManager.GetString("ArgumentMatrixDimensions3", resourceCulture);
             }
         }
         
@@ -349,6 +376,24 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} must be smaller than {1}..
+        /// </summary>
+        internal static string ArgumentOutOfRangeSmaller {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeSmaller", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} must be smaller than or equal to {1}..
+        /// </summary>
+        internal static string ArgumentOutOfRangeSmallerEqual {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeSmallerEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The chosen parameter set is invalid (probably some value is out of range)..
         /// </summary>
         internal static string ArgumentParameterSetInvalid {
@@ -448,6 +493,24 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The upper bound must be strictly larger than the lower bound..
+        /// </summary>
+        internal static string ArgumentUpperBoundMustBeLargerThanLowerBound {
+            get {
+                return ResourceManager.GetString("ArgumentUpperBoundMustBeLargerThanLowerBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upper bound must be at least as large as the lower bound..
+        /// </summary>
+        internal static string ArgumentUpperBoundMustBeLargerThanOrEqualToLowerBound {
+            get {
+                return ResourceManager.GetString("ArgumentUpperBoundMustBeLargerThanOrEqualToLowerBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Array length must be a multiple of {0}..
         /// </summary>
         internal static string ArgumentVectorLengthsMultipleOf {
@@ -538,6 +601,24 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sample points should be sorted in strictly ascending order.
+        /// </summary>
+        internal static string Interpolation_Initialize_SamplePointsNotStrictlyAscendingOrder {
+            get {
+                return ResourceManager.GetString("Interpolation_Initialize_SamplePointsNotStrictlyAscendingOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All sample points should be unique..
+        /// </summary>
+        internal static string Interpolation_Initialize_SamplePointsNotUnique {
+            get {
+                return ResourceManager.GetString("Interpolation_Initialize_SamplePointsNotUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid parameterization for the distribution..
         /// </summary>
         internal static string InvalidDistributionParameters {
@@ -592,11 +673,47 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An invalid parameter was passed to a native method..
+        /// </summary>
+        internal static string InvalidParameter {
+            get {
+                return ResourceManager.GetString("InvalidParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid parameter was passed to a native method, parameter number : {0}.
+        /// </summary>
+        internal static string InvalidParameterWithNumber {
+            get {
+                return ResourceManager.GetString("InvalidParameterWithNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Right Boundary Condition..
         /// </summary>
         internal static string InvalidRightBoundaryCondition {
             get {
                 return ResourceManager.GetString("InvalidRightBoundaryCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lag must be positive.
+        /// </summary>
+        internal static string LagMustBePositive {
+            get {
+                return ResourceManager.GetString("LagMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lag must be smaller than the sample size.
+        /// </summary>
+        internal static string LagMustBeSmallerThanTheSampleSize {
+            get {
+                return ResourceManager.GetString("LagMustBeSmallerThanTheSampleSize", resourceCulture);
             }
         }
         
@@ -610,11 +727,29 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Matrices can not be empty and must have at least one row and column..
+        /// </summary>
+        internal static string MatrixCanNotBeEmpty {
+            get {
+                return ResourceManager.GetString("MatrixCanNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of columns of a matrix must be positive..
         /// </summary>
         internal static string MatrixColumnsMustBePositive {
             get {
                 return ResourceManager.GetString("MatrixColumnsMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix must be in sparse storage format.
+        /// </summary>
+        internal static string MatrixMustBeSparse {
+            get {
+                return ResourceManager.GetString("MatrixMustBeSparse", resourceCulture);
             }
         }
         
@@ -633,6 +768,15 @@ namespace Nequeo.Science.Math.Properties {
         internal static string MatrixRowsOrColumnsMustBePositive {
             get {
                 return ResourceManager.GetString("MatrixRowsOrColumnsMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to allocate native memory..
+        /// </summary>
+        internal static string MemoryAllocation {
+            get {
+                return ResourceManager.GetString("MemoryAllocation", resourceCulture);
             }
         }
         
@@ -673,6 +817,16 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Algorithm experience a numerical break down
+        ///.
+        /// </summary>
+        internal static string NumericalBreakdown {
+            get {
+                return ResourceManager.GetString("NumericalBreakdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The two arguments can&apos;t be compared (maybe they are part of a partial ordering?).
         /// </summary>
         internal static string PartialOrderException {
@@ -700,11 +854,83 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A regression of the requested order requires at least {0} samples. Only {1} samples have been provided. .
+        /// </summary>
+        internal static string RegressionNotEnoughSamples {
+            get {
+                return ResourceManager.GetString("RegressionNotEnoughSamples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The algorithm has failed, exceeded the number of iterations allowed or there is no root within the provided bounds..
+        /// </summary>
+        internal static string RootFindingFailed {
+            get {
+                return ResourceManager.GetString("RootFindingFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The algorithm has failed, exceeded the number of iterations allowed or there is no root within the provided bounds. Consider to use RobustNewtonRaphson instead..
+        /// </summary>
+        internal static string RootFindingFailedRecommendRobustNewtonRaphson {
+            get {
+                return ResourceManager.GetString("RootFindingFailedRecommendRobustNewtonRaphson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The lower and upper bounds must bracket a single root..
+        /// </summary>
+        internal static string RootMustBeBracketedByBounds {
+            get {
+                return ResourceManager.GetString("RootMustBeBracketedByBounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The algorithm ended without root in the range..
+        /// </summary>
+        internal static string RootNotFound {
+            get {
+                return ResourceManager.GetString("RootNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of rows must greater than or equal to the number of columns..
         /// </summary>
         internal static string RowsLessThanColumns {
             get {
                 return ResourceManager.GetString("RowsLessThanColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All sample vectors must have the same length. However, vectors with disagreeing length {0} and {1} have been provided. A sample with index i is given by the value at index i of each provided vector..
+        /// </summary>
+        internal static string SampleVectorsSameLength {
+            get {
+                return ResourceManager.GetString("SampleVectorsSameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U is singular, and the inversion could not be completed..
+        /// </summary>
+        internal static string SingularUMatrix {
+            get {
+                return ResourceManager.GetString("SingularUMatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U is singular, and the inversion could not be completed. The {0}-th diagonal element of the factor U is zero..
+        /// </summary>
+        internal static string SingularUMatrixWithElement {
+            get {
+                return ResourceManager.GetString("SingularUMatrixWithElement", resourceCulture);
             }
         }
         
@@ -727,20 +953,20 @@ namespace Nequeo.Science.Math.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The given stop criterium already exist in the collection..
+        ///   Looks up a localized string similar to The given stop criterion already exist in the collection..
         /// </summary>
-        internal static string StopCriteriumDuplicate {
+        internal static string StopCriterionDuplicate {
             get {
-                return ResourceManager.GetString("StopCriteriumDuplicate", resourceCulture);
+                return ResourceManager.GetString("StopCriterionDuplicate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no stop criterium in the collection..
+        ///   Looks up a localized string similar to There is no stop criterion in the collection..
         /// </summary>
-        internal static string StopCriteriumMissing {
+        internal static string StopCriterionMissing {
             get {
-                return ResourceManager.GetString("StopCriteriumMissing", resourceCulture);
+                return ResourceManager.GetString("StopCriterionMissing", resourceCulture);
             }
         }
         
@@ -750,6 +976,15 @@ namespace Nequeo.Science.Math.Properties {
         internal static string StringNullOrEmpty {
             get {
                 return ResourceManager.GetString("StringNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We only support sparse matrix with less than int.MaxValue elements..
+        /// </summary>
+        internal static string TooManyElements {
+            get {
+                return ResourceManager.GetString("TooManyElements", resourceCulture);
             }
         }
         
@@ -768,6 +1003,24 @@ namespace Nequeo.Science.Math.Properties {
         internal static string UserDefinedProviderNotSpecified {
             get {
                 return ResourceManager.GetString("UserDefinedProviderNotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User work buffers are not supported by this provider..
+        /// </summary>
+        internal static string UserWorkBufferNotSupported {
+            get {
+                return ResourceManager.GetString("UserWorkBufferNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vectors can not be empty and must have at least one element..
+        /// </summary>
+        internal static string VectorCanNotBeEmpty {
+            get {
+                return ResourceManager.GetString("VectorCanNotBeEmpty", resourceCulture);
             }
         }
         
