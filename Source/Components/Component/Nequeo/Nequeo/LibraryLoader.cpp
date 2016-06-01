@@ -122,6 +122,8 @@ namespace Nequeo
 		{
 			// Execute the function handler.
 			HRESULT hr = _func(&clsID, &interfaceID, outObject);
+			return hr;
 		}
+		return -1;
 	}
 }

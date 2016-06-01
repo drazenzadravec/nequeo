@@ -42,9 +42,6 @@
     <ClInclude Include="UnWindows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="String.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RefCountedObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -94,6 +91,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NativeHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionTemplates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

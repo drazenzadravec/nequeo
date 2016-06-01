@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#include "String.h"
+#include "StringEx.h"
 
 namespace Nequeo
 {

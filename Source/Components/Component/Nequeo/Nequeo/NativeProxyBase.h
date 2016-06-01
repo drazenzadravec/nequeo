@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "Global.h"
 #include "Types.h"
-#include "String.h"
+#include "StringEx.h"
 #include "NativeHandler.h"
 #include "Exceptions\Exception.h"
 

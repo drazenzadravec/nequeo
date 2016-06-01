@@ -109,7 +109,7 @@ copy $(ProjectDir)\pcre_config.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\pcre_internal.h "..\..\..\..\References\Release\Include\Components\Base\pcre_internal.h"
 copy $(ProjectDir)\RefCountedObject.h "..\..\..\..\References\Release\Include\Components\Base\RefCountedObject.h"
 copy $(ProjectDir)\SharedPtr.h "..\..\..\..\References\Release\Include\Components\Base\SharedPtr.h"
-copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\Base\String.h"
+copy $(ProjectDir)\StringEx.h "..\..\..\..\References\Release\Include\Components\Base\StringEx.h"
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
@@ -121,7 +121,8 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
 copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
-copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -153,7 +154,7 @@ copy $(ProjectDir)\pcre_config.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\pcre_internal.h "..\..\..\..\References\Release\Include\Components\Base\pcre_internal.h"
 copy $(ProjectDir)\RefCountedObject.h "..\..\..\..\References\Release\Include\Components\Base\RefCountedObject.h"
 copy $(ProjectDir)\SharedPtr.h "..\..\..\..\References\Release\Include\Components\Base\SharedPtr.h"
-copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\Base\String.h"
+copy $(ProjectDir)\StringEx.h "..\..\..\..\References\Release\Include\Components\Base\StringEx.h"
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
@@ -165,7 +166,8 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
 copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
-copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -202,7 +204,7 @@ copy $(ProjectDir)\pcre_config.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\pcre_internal.h "..\..\..\..\References\Release\Include\Components\Base\pcre_internal.h"
 copy $(ProjectDir)\RefCountedObject.h "..\..\..\..\References\Release\Include\Components\Base\RefCountedObject.h"
 copy $(ProjectDir)\SharedPtr.h "..\..\..\..\References\Release\Include\Components\Base\SharedPtr.h"
-copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\Base\String.h"
+copy $(ProjectDir)\StringEx.h "..\..\..\..\References\Release\Include\Components\Base\StringEx.h"
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
@@ -214,7 +216,8 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
 copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
-copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -251,7 +254,7 @@ copy $(ProjectDir)\pcre_config.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\pcre_internal.h "..\..\..\..\References\Release\Include\Components\Base\pcre_internal.h"
 copy $(ProjectDir)\RefCountedObject.h "..\..\..\..\References\Release\Include\Components\Base\RefCountedObject.h"
 copy $(ProjectDir)\SharedPtr.h "..\..\..\..\References\Release\Include\Components\Base\SharedPtr.h"
-copy $(ProjectDir)\String.h "..\..\..\..\References\Release\Include\Components\Base\String.h"
+copy $(ProjectDir)\StringEx.h "..\..\..\..\References\Release\Include\Components\Base\StringEx.h"
 copy $(ProjectDir)\Timespan.h "..\..\..\..\References\Release\Include\Components\Base\Timespan.h"
 copy $(ProjectDir)\Timestamp.h "..\..\..\..\References\Release\Include\Components\Base\Timestamp.h"
 copy $(ProjectDir)\Types.h "..\..\..\..\References\Release\Include\Components\Base\Types.h"
@@ -263,7 +266,8 @@ copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Componen
 copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxy.h"
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
-copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"</Command>
+copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -274,6 +278,7 @@ copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Compo
     <ClInclude Include="AtomicCounter.h" />
     <ClInclude Include="AutoPtr.h" />
     <ClInclude Include="ByteOrder.h" />
+    <ClInclude Include="FunctionTemplates.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="LibraryLoader.h" />
     <ClInclude Include="NativeHandler.h" />
@@ -288,7 +293,7 @@ copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Compo
     <ClInclude Include="ServiceInstaller.h" />
     <ClInclude Include="SharedPtr.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="String.h" />
+    <ClInclude Include="StringEx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Timespan.h" />
