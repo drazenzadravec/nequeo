@@ -67,6 +67,51 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 {
 	std::vector<double> result;
 
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
+
+	// Normal distribution random number generator
+	std::normal_distribution<> distr(mean, sigma);
+
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		result.push_back(distr(gen));
+	}
+
+	// Return the results.
+	return result;
+}
+
+/// <summary>
+/// Uniformly distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="minimum">The minimum number to generate.</param>
+/// <param name="maximum">The maximum number to generate.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>The list of random numbers.</returns>
+std::vector<double> RandomNumberGenerator::Uniform(int size, double minimum, double maximum, unsigned int seed)
+{
+	std::vector<double> result;
+
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
+
+	// Uniformly distribution random number generator
+	std::uniform_real_distribution<> distr(minimum, maximum);
+
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		result.push_back(distr(gen));
+	}
 
 	// Return the results.
 	return result;
@@ -84,6 +129,20 @@ std::vector<double> RandomNumberGenerator::NormalDistribution(int size, double m
 {
 	std::vector<double> result;
 
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
+
+	// Normal distribution random number generator
+	std::normal_distribution<> distr(mean, sigma);
+
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		result.push_back(distr(gen));
+	}
 
 	// Return the results.
 	return result;
@@ -103,7 +162,20 @@ std::vector<double> RandomNumberGenerator::Beta(int size, double shapeP, double 
 {
 	std::vector<double> result;
 
-	
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
+
+	// Normal distribution random number generator
+	std::gamma_distribution<> distr(a, beta);
+
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		result.push_back(distr(gen));
+	}
 
 	// Return the results.
 	return result;
@@ -120,13 +192,22 @@ std::vector<double> RandomNumberGenerator::Beta(int size, double shapeP, double 
 /// <returns>Zero if successful; else error.</returns>
 int RandomNumberGenerator::Basic(int size, double mean, double sigma, double *numbers, unsigned int seed)
 {
-	int seeds[10], state[20];
-	int genid, info, lseed, lstate, subid;
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
 
-	info = 0;
-	
-	// Return the results.
-	return info;
+	// Normal distribution random number generator
+	std::normal_distribution<> distr(mean, sigma);
+
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		numbers[i] = distr(gen);
+	}
+
+	return 0;
 }
 
 /// <summary>
@@ -140,13 +221,22 @@ int RandomNumberGenerator::Basic(int size, double mean, double sigma, double *nu
 /// <returns>Zero if successful; else error.</returns>
 int RandomNumberGenerator::NormalDistribution(int size, double mean, double sigma, double *numbers, unsigned int seed)
 {
-	int seeds[10], state[20];
-	int genid, info, lseed, lstate, subid;
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
 
-	info = 0;
+	// Normal distribution random number generator
+	std::normal_distribution<> distr(mean, sigma);
 
-	// Return the results.
-	return info;
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		numbers[i] = distr(gen);
+	}
+
+	return 0;
 }
 
 /// <summary>
@@ -162,11 +252,49 @@ int RandomNumberGenerator::NormalDistribution(int size, double mean, double sigm
 /// <returns>Zero if successful; else error.</returns>
 int RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a, double beta, double *numbers, unsigned int seed)
 {
-	int seeds[10], state[20];
-	int genid, info, lseed, lstate, subid;
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
 
-	info = 0;
+	// Normal distribution random number generator
+	std::gamma_distribution<> distr(a, beta);
 
-	// Return the results.
-	return info;
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		numbers[i] = distr(gen);
+	}
+
+	return 0;
+}
+
+/// <summary>
+/// Uniformly distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="minimum">The minimum number to generate.</param>
+/// <param name="maximum">The maximum number to generate.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Uniform(int size, double minimum, double maximum, double *numbers, unsigned int seed)
+{
+	// non-deterministic generator
+	// mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(seed);
+
+	// Uniformly distribution random number generator
+	std::uniform_real_distribution<> distr(minimum, maximum);
+
+	// For the number of samples to generate.
+	for (int i = 0; i < size; ++i)
+	{
+		// Generate the distribution.
+		numbers[i] = distr(gen);
+	}
+
+	return 0;
 }

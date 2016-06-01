@@ -104,6 +104,54 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 }
 
 /// <summary>
+/// Uniformly distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="minimum">The minimum number to generate.</param>
+/// <param name="maximum">The maximum number to generate.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>The list of random numbers.</returns>
+std::vector<double> RandomNumberGenerator::Uniform(int size, double minimum, double maximum, unsigned int seed)
+{
+	std::vector<double> result;
+
+	int status;
+	VSLStreamStatePtr stream;
+
+	// Initializing
+	status = vslNewStream(&stream, VSL_BRNG_MT19937, seed);
+
+	// If initialised.
+	if (status == VSL_STATUS_OK)
+	{
+		double *numbers = new double[size];
+
+		// Generate the numbers.
+		status = vdRngUniform(VSL_RNG_METHOD_UNIFORM_STD, stream, size, numbers, minimum, maximum);
+
+		// If generated.
+		if (status == VSL_STATUS_OK)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
+	}
+
+	// Deleting the stream.
+	status = vslDeleteStream(&stream);
+
+	// Return the results.
+	return result;
+}
+
+/// <summary>
 /// Normal distribution random number generator.
 /// </summary>
 /// <param name="size">The number of random numbers to generate.</param>
@@ -287,6 +335,37 @@ int RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a
 	{
 		// Generate the numbers.
 		status = vdRngBeta(VSL_RNG_METHOD_BETA_CJA, stream, size, numbers, shapeP, shapeQ, a, beta);
+	}
+
+	// Deleting the stream.
+	vslDeleteStream(&stream);
+
+	// Return the results.
+	return status;
+}
+
+/// <summary>
+/// Uniformly distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="minimum">The minimum number to generate.</param>
+/// <param name="maximum">The maximum number to generate.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Uniform(int size, double minimum, double maximum, double *numbers, unsigned int seed)
+{
+	int status;
+	VSLStreamStatePtr stream;
+
+	// Initializing
+	status = vslNewStream(&stream, VSL_BRNG_MCG31, seed);
+
+	// If initialised.
+	if (status == VSL_STATUS_OK)
+	{
+		// Generate the numbers.
+		status = vdRngUniform(VSL_RNG_METHOD_UNIFORM_STD, stream, size, numbers, minimum, maximum);
 	}
 
 	// Deleting the stream.

@@ -111,6 +111,60 @@ std::vector<double> RandomNumberGenerator::Basic(int size, double mean, double s
 }
 
 /// <summary>
+/// Uniformly distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="minimum">The minimum number to generate.</param>
+/// <param name="maximum">The maximum number to generate.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>The list of random numbers.</returns>
+std::vector<double> RandomNumberGenerator::Uniform(int size, double minimum, double maximum, unsigned int seed)
+{
+	std::vector<double> result;
+
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
+
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
+
+	// If initialised.
+	if (info == 0)
+	{
+		double *numbers = new double[size];
+
+		// Generate the numbers.
+		dranduniform(size, minimum, maximum, state, numbers, &info);
+
+		// If generated.
+		if (info == 0)
+		{
+			// Assign the random number.
+			for (size_t i = 0; i < size; i++)
+			{
+				// Add the number.
+				result.push_back(numbers[i]);
+			}
+		}
+
+		// Delete the numbers array.
+		delete[] numbers;
+	}
+
+	// Return the results.
+	return result;
+}
+
+/// <summary>
 /// Normal distribution random number generator.
 /// </summary>
 /// <param name="size">The number of random numbers to generate.</param>
@@ -327,6 +381,43 @@ int RandomNumberGenerator::Beta(int size, double shapeP, double shapeQ, double a
 	{
 		// Generate the numbers.
 		drandbeta(size, shapeP, shapeQ, state, numbers, &info);
+	}
+
+	// Return the results.
+	return info;
+}
+
+/// <summary>
+/// Uniformly distribution random number generator.
+/// </summary>
+/// <param name="size">The number of random numbers to generate.</param>
+/// <param name="minimum">The minimum number to generate.</param>
+/// <param name="maximum">The maximum number to generate.</param>
+/// <param name="numbers">The list of random numbers.</param>
+/// <param name="seed">The random seed.</param>
+/// <returns>Zero if successful; else error.</returns>
+int RandomNumberGenerator::Uniform(int size, double minimum, double maximum, double *numbers, unsigned int seed)
+{
+	int seeds[10], state[20];
+	int genid, info, lseed, lstate, subid;
+
+	// Use the basic generator as the base generator.
+	genid = 1;
+	subid = 1;
+
+	// Populate the seed array, basic generator needs one seed, and a STATE array of length 16.
+	lstate = 16;
+	lseed = 1;
+	seeds[0] = seed;
+
+	// Initialize the base generator
+	drandinitialize(genid, subid, seeds, &lseed, state, &lstate, &info);
+
+	// If initialised.
+	if (info == 0)
+	{
+		// Generate the numbers.
+		dranduniform(size, minimum, maximum, state, numbers, &info);
 	}
 
 	// Return the results.

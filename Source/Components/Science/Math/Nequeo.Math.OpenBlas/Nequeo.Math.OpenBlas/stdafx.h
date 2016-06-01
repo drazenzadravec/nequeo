@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <memory>
 #include <complex>
+#include <random>
 
 #ifdef NEQUEOMATHOPENBLAS_EXPORTS
 #define EXPORT_NEQUEO_OPENBLAS_API __declspec(dllexport) 

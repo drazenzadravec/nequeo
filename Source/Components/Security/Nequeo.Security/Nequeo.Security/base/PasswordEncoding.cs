@@ -68,6 +68,7 @@ namespace Nequeo.Security
 
         private string _authorisationCode = null;
         private string _authorisationKey = "Y/t01cC?-8eWS!6m4o%QE9i&$T3bG7q{";
+        private string _encodedSalt = null;
 
         /// <summary>
         /// Internal key container.
@@ -164,6 +165,15 @@ namespace Nequeo.Security
         }
 
         /// <summary>
+        /// Gets or sets the encoded salt (used when format is Hashed).
+        /// </summary>
+        public string EncodedSalt
+        {
+            get { return _encodedSalt; }
+            set { _encodedSalt = value; }
+        }
+
+        /// <summary>
         /// Gets or sets the password format.
         /// </summary>
         public Nequeo.Cryptography.PasswordFormat PasswordFormat { get; set; }
@@ -176,10 +186,10 @@ namespace Nequeo.Security
         /// <summary>
         /// Decode the password.
         /// </summary>
-        /// <param name="password">The password to decode.</param>
+        /// <param name="password">The password to decode (must include at the start of the password the encoded salt).</param>
         /// <param name="passwordFormat">The password format type to decode with.</param>
         /// <param name="originalPassword">The original password (used when format is Hashed).</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
         /// <returns>The decoded password (if format is Hashed and the hash has been verified to be 
         /// the same then the original password is returned; else the password is returned).</returns>
         public string Decode(string password, Cryptography.PasswordFormat passwordFormat, string originalPassword = "",
@@ -214,7 +224,8 @@ namespace Nequeo.Security
 
                         // Get the hex salt.
                         byte[] saltBase64 = Encoding.Default.GetBytes(salt);
-                        string hashed = Nequeo.Conversion.Context.ByteArrayToHexString(saltBase64) + hash;
+                        _encodedSalt = Nequeo.Conversion.Context.ByteArrayToHexString(saltBase64);
+                        string hashed = _encodedSalt + hash;
 
                         // If the hash is the password.
                         if (hashed.Equals(password))
@@ -239,10 +250,10 @@ namespace Nequeo.Security
         /// <summary>
         /// Decode the password.
         /// </summary>
-        /// <param name="password">The encoded password to decode.</param>
+        /// <param name="password">The password to decode (must include at the start of the password the encoded salt).</param>
         /// <param name="passwordFormat">The password format type to decode with.</param>
         /// <param name="originalPassword">The original password (used when format is Hashed); can be null.</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
         /// <returns>The decoded password.</returns>
         public string Decode(SecureString password, Nequeo.Cryptography.PasswordFormat passwordFormat, SecureString originalPassword,
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512)
@@ -259,8 +270,8 @@ namespace Nequeo.Security
         /// </summary>
         /// <param name="password">The password to encode.</param>
         /// <param name="passwordFormat">The password format type to encode with.</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
-        /// <returns>The encode password.</returns>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
+        /// <returns>The encode password (includes at the start of the password the encoded salt).</returns>
         public string Encode(string password, Cryptography.PasswordFormat passwordFormat,
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512)
         {
@@ -287,7 +298,8 @@ namespace Nequeo.Security
 
                         // Get the hex salt.
                         string hash = Nequeo.Cryptography.Hashcode.GetHashcode(derivedPassword + _authorisationKey + salt, hashcodeType);
-                        return Nequeo.Conversion.Context.ByteArrayToHexString(saltBase) + hash;
+                        _encodedSalt = Nequeo.Conversion.Context.ByteArrayToHexString(saltBase);
+                        return _encodedSalt + hash;
 
                     case Cryptography.PasswordFormat.Clear:
                     default:
@@ -308,8 +320,8 @@ namespace Nequeo.Security
         /// </summary>
         /// <param name="password">The password to encode.</param>
         /// <param name="passwordFormat">The password format type to encode with.</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
-        /// <returns>The encode password.</returns>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
+        /// <returns>The encode password (includes at the start of the password the encoded salt).</returns>
         public string Encode(SecureString password, Nequeo.Cryptography.PasswordFormat passwordFormat,
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512)
         {

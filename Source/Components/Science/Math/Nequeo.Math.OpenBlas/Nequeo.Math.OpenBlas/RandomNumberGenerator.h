@@ -69,6 +69,16 @@ namespace Nequeo
 				std::vector<double> Basic(int size, double mean, double sigma, unsigned int seed = 777);
 
 				/// <summary>
+				/// Uniformly distribution random number generator.
+				/// </summary>
+				/// <param name="size">The number of random numbers to generate.</param>
+				/// <param name="minimum">The minimum number to generate.</param>
+				/// <param name="maximum">The maximum number to generate.</param>
+				/// <param name="seed">The random seed.</param>
+				/// <returns>The list of random numbers.</returns>
+				std::vector<double> Uniform(int size, double minimum, double maximum, unsigned int seed = 777);
+
+				/// <summary>
 				/// Normal distribution random number generator.
 				/// </summary>
 				/// <param name="size">The number of random numbers to generate.</param>
@@ -124,6 +134,17 @@ namespace Nequeo
 				/// <param name="seed">The random seed.</param>
 				/// <returns>Zero if successful; else error.</returns>
 				int Beta(int size, double shapeP, double shapeQ, double a, double beta, double *numbers, unsigned int seed = 777);
+
+				/// <summary>
+				/// Uniformly distribution random number generator.
+				/// </summary>
+				/// <param name="size">The number of random numbers to generate.</param>
+				/// <param name="minimum">The minimum number to generate.</param>
+				/// <param name="maximum">The maximum number to generate.</param>
+				/// <param name="numbers">The list of random numbers.</param>
+				/// <param name="seed">The random seed.</param>
+				/// <returns>Zero if successful; else error.</returns>
+				int Uniform(int size, double minimum, double maximum, double *numbers, unsigned int seed = 777);
 
 			private:
 				bool _disposed;

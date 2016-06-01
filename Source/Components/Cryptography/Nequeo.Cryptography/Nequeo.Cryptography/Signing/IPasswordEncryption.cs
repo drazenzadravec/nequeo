@@ -67,6 +67,11 @@ namespace Nequeo.Cryptography
         Nequeo.Cryptography.HashcodeType HashcodeType { get; set; }
 
         /// <summary>
+        /// Gets or sets the encoded salt (used when format is Hashed).
+        /// </summary>
+        string EncodedSalt { get; set; }
+
+        /// <summary>
         /// Get the authorisation code.
         /// </summary>
         /// <returns>The authorisation code used for access.</returns>
@@ -77,7 +82,7 @@ namespace Nequeo.Cryptography
         /// </summary>
         /// <param name="password">The password to encode.</param>
         /// <param name="passwordFormat">The password format type to encode with.</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
         /// <returns>The encode password.</returns>
         string Encode(string password, Nequeo.Cryptography.PasswordFormat passwordFormat, 
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512);
@@ -87,7 +92,7 @@ namespace Nequeo.Cryptography
         /// </summary>
         /// <param name="password">The password to encode.</param>
         /// <param name="passwordFormat">The password format type to encode with.</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
         /// <returns>The encode password.</returns>
         string Encode(SecureString password, Nequeo.Cryptography.PasswordFormat passwordFormat,
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512);
@@ -98,7 +103,7 @@ namespace Nequeo.Cryptography
         /// <param name="password">The encoded password to decode.</param>
         /// <param name="passwordFormat">The password format type to decode with.</param>
         /// <param name="originalPassword">The original password (used when format is Hashed).</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
         /// <returns>The decoded password.</returns>
         string Decode(string password, Nequeo.Cryptography.PasswordFormat passwordFormat, string originalPassword = "",
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512);
@@ -109,7 +114,7 @@ namespace Nequeo.Cryptography
         /// <param name="password">The encoded password to decode.</param>
         /// <param name="passwordFormat">The password format type to decode with.</param>
         /// <param name="originalPassword">The original password (used when format is Hashed).</param>
-        /// <param name="hashcodeType">The the hash code type (used when format is Hashed).</param>
+        /// <param name="hashcodeType">The hash code type (used when format is Hashed).</param>
         /// <returns>The decoded password.</returns>
         string Decode(SecureString password, Nequeo.Cryptography.PasswordFormat passwordFormat, SecureString originalPassword,
             Nequeo.Cryptography.HashcodeType hashcodeType = Cryptography.HashcodeType.SHA512);
