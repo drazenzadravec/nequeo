@@ -32,12 +32,14 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Tamir.SharpSsh;
+using Renci.SshNet;
 
 namespace Nequeo.Net.SFtp
 {
@@ -45,7 +47,7 @@ namespace Nequeo.Net.SFtp
     /// SSH connection handler.
     /// </summary>
     [Serializable]
-    public class SshConnection
+    public class SshConnection : IDisposable
     {
         #region Constructors
         /// <summary>
@@ -53,6 +55,7 @@ namespace Nequeo.Net.SFtp
         /// </summary>
         public SshConnection()
         {
+            _privateKeyFiles = new List<PrivateKeyFile>();
         }
 
         /// <summary>
@@ -64,6 +67,7 @@ namespace Nequeo.Net.SFtp
         /// <param name="timeout">The time out request.</param>
         public SshConnection(string host, string username, int port = 22, int timeout = -1)
         {
+            _privateKeyFiles = new List<PrivateKeyFile>();
             _host = host;
             _username = username;
             _timeout = timeout;
@@ -75,11 +79,10 @@ namespace Nequeo.Net.SFtp
         private string _username = string.Empty;
         private string _password = string.Empty;
         private string _host = string.Empty;
-        private string _privateKeyFile = string.Empty;
-        private string _privateKeyFilePassword = string.Empty;
         private int _timeout = -1;
         private int _port = 22;
         private bool _isPrivateKeyAuthentication = false;
+        private List<PrivateKeyFile> _privateKeyFiles = null;
         #endregion
 
         #region Public Properties
@@ -101,19 +104,11 @@ namespace Nequeo.Net.SFtp
         }
 
         /// <summary>
-        /// Gets, the private key file.
+        /// Gets, the private key files.
         /// </summary>
-        public string PrivateKeyFile
+        public PrivateKeyFile[] PrivateKeyFiles
         {
-            get { return _privateKeyFile; }
-        }
-
-        /// <summary>
-        /// Gets, the private key file password.
-        /// </summary>
-        public string PrivateKeyFilePassword
-        {
-            get { return _privateKeyFilePassword; }
+            get { return _privateKeyFiles.ToArray(); }
         }
 
         /// <summary>
@@ -144,12 +139,11 @@ namespace Nequeo.Net.SFtp
         }
 
         /// <summary>
-        /// Gets or sets, an indicator specifying if private key authentication is used; else password authentication is used.
+        /// Gets, an indicator specifying if private key authentication is used; else password authentication is used.
         /// </summary>
         public bool IsPrivateKeyAuthentication
         {
             get { return _isPrivateKeyAuthentication; }
-            set { _isPrivateKeyAuthentication = value; }
         }
         #endregion
 
@@ -168,12 +162,254 @@ namespace Nequeo.Net.SFtp
         /// Set the private key file used for authentication.
         /// </summary>
         /// <param name="privateKeyFile">The private key file used for authentication.</param>
-        /// <param name="privateKeyFilePassword">The private key file password.</param>
+        /// <param name="privateKeyFilePassword">The private key file password; null for no passphrase.</param>
         public void SetPrivateKeyFile(string privateKeyFile, string privateKeyFilePassword)
-        {
-            _privateKeyFile = privateKeyFile;
-            _privateKeyFilePassword = privateKeyFilePassword;
+        { 
             _isPrivateKeyAuthentication = true;
+            if (String.IsNullOrEmpty(privateKeyFilePassword))
+                _privateKeyFiles.Add(new PrivateKeyFile(privateKeyFile));
+            else
+                _privateKeyFiles.Add(new PrivateKeyFile(privateKeyFile, privateKeyFilePassword));
+        }
+
+        /// <summary>
+        /// Set the private key stream used for authentication.
+        /// </summary>
+        /// <param name="privateKeyStream">The private key stream used for authentication.</param>
+        /// <param name="privateKeyFilePassword">The private key file password; null for no passphrase.</param>
+        public void SetPrivateKeyFile(Stream privateKeyStream, string privateKeyFilePassword)
+        {
+            _isPrivateKeyAuthentication = true;
+            if (String.IsNullOrEmpty(privateKeyFilePassword))
+                _privateKeyFiles.Add(new PrivateKeyFile(privateKeyStream));
+            else
+                _privateKeyFiles.Add(new PrivateKeyFile(privateKeyStream, privateKeyFilePassword));
+        }
+
+        #endregion
+
+        #region Dispose Object Methods
+
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Implement IDisposable.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            // This object will be cleaned up by the Dispose method.
+            // Therefore, you should call GC.SuppressFinalize to
+            // take this object off the finalization queue
+            // and prevent finalization code for this object
+            // from executing a second time.
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose(bool disposing) executes in two distinct scenarios.
+        /// If disposing equals true, the method has been called directly
+        /// or indirectly by a user's code. Managed and unmanaged resources
+        /// can be disposed.
+        /// If disposing equals false, the method has been called by the
+        /// runtime from inside the finalizer and you should not reference
+        /// other objects. Only unmanaged resources can be disposed.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+            // Check to see if Dispose has already been called.
+            if (!this._disposed)
+            {
+                // Note disposing has been done.
+                _disposed = true;
+
+                // If disposing equals true, dispose all managed
+                // and unmanaged resources.
+                if (disposing)
+                {
+                    if (_privateKeyFiles != null)
+                    {
+                        // For each private key file.
+                        foreach (PrivateKeyFile keyfile in _privateKeyFiles)
+                        {
+                            try
+                            {
+                                // Dispose of the resource.
+                                if (keyfile != null)
+                                    keyfile.Dispose();
+                            }
+                            catch { }
+                        }
+                    }
+                }
+
+                // Call the appropriate methods to clean up
+                // unmanaged resources here.
+                _privateKeyFiles = null;
+            }
+        }
+
+        /// <summary>
+        /// Use C# destructor syntax for finalization code.
+        /// This destructor will run only if the Dispose method
+        /// does not get called.
+        /// It gives your base class the opportunity to finalize.
+        /// Do not provide destructors in types derived from this class.
+        /// </summary>
+        ~SshConnection()
+        {
+            // Do not re-create Dispose clean-up code here.
+            // Calling Dispose(false) is optimal in terms of
+            // readability and maintainability.
+            Dispose(false);
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// Represents private key information.
+    /// </summary>
+    public class PrivateKeyFile : IDisposable
+    {
+        #region Constructors
+        /// <summary>
+        /// Represents private key information.
+        /// </summary>
+        /// <param name="privateKey">The private key stream used for authentication.</param>
+        internal PrivateKeyFile(Stream privateKey)
+        {
+            _privateKeyFile = new Renci.SshNet.PrivateKeyFile(privateKey);
+        }
+
+        /// <summary>
+        /// Represents private key information.
+        /// </summary>
+        /// <param name="privateKey">The private key file used for authentication.</param>
+        internal PrivateKeyFile(string privateKey)
+        {
+            _privateKey = privateKey;
+            _privateKeyFile = new Renci.SshNet.PrivateKeyFile(privateKey);
+        }
+
+        /// <summary>
+        /// Represents private key information.
+        /// </summary>
+        /// <param name="privateKey">The private key file used for authentication.</param>
+        /// <param name="privateKeyFilePassword">The private key file password.</param>
+        internal PrivateKeyFile(string privateKey, string privateKeyFilePassword)
+        {
+            _privateKey = privateKey;
+            _privateKeyPassword = privateKeyFilePassword;
+            _privateKeyFile = new Renci.SshNet.PrivateKeyFile(privateKey, privateKeyFilePassword);
+        }
+
+        /// <summary>
+        /// Represents private key information.
+        /// </summary>
+        /// <param name="privateKey">The private key stream used for authentication.</param>
+        /// <param name="privateKeyFilePassword">The private key file password.</param>
+        internal PrivateKeyFile(Stream privateKey, string privateKeyFilePassword)
+        {
+            _privateKeyFile = new Renci.SshNet.PrivateKeyFile(privateKey, privateKeyFilePassword);
+        }
+        #endregion
+
+        #region Private fields
+        private Renci.SshNet.PrivateKeyFile _privateKeyFile = null;
+        private string _privateKey = string.Empty;
+        private string _privateKeyPassword = string.Empty;
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Gets, the private key file.
+        /// </summary>
+        public string PrivateKey
+        {
+            get { return _privateKey; }
+        }
+
+        /// <summary>
+        /// Gets, the private key file password.
+        /// </summary>
+        public string PrivateKeyPassword
+        {
+            get { return _privateKeyPassword; }
+        }
+        #endregion
+
+        #region Internal Properties
+        /// <summary>
+        /// Gets, the SSH private key file.
+        /// </summary>
+        internal Renci.SshNet.PrivateKeyFile SshNetPrivateKeyFile
+        {
+            get { return _privateKeyFile; }
+        }
+        #endregion
+
+        #region Dispose Object Methods
+
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Implement IDisposable.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            // This object will be cleaned up by the Dispose method.
+            // Therefore, you should call GC.SuppressFinalize to
+            // take this object off the finalization queue
+            // and prevent finalization code for this object
+            // from executing a second time.
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose(bool disposing) executes in two distinct scenarios.
+        /// If disposing equals true, the method has been called directly
+        /// or indirectly by a user's code. Managed and unmanaged resources
+        /// can be disposed.
+        /// If disposing equals false, the method has been called by the
+        /// runtime from inside the finalizer and you should not reference
+        /// other objects. Only unmanaged resources can be disposed.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+            // Check to see if Dispose has already been called.
+            if (!this._disposed)
+            {
+                // Note disposing has been done.
+                _disposed = true;
+
+                // If disposing equals true, dispose all managed
+                // and unmanaged resources.
+                if (disposing)
+                {
+                    if (_privateKeyFile != null)
+                        _privateKeyFile.Dispose();
+                }
+
+                // Call the appropriate methods to clean up
+                // unmanaged resources here.
+                _privateKeyFile = null;
+            }
+        }
+
+        /// <summary>
+        /// Use C# destructor syntax for finalization code.
+        /// This destructor will run only if the Dispose method
+        /// does not get called.
+        /// It gives your base class the opportunity to finalize.
+        /// Do not provide destructors in types derived from this class.
+        /// </summary>
+        ~PrivateKeyFile()
+        {
+            // Do not re-create Dispose clean-up code here.
+            // Calling Dispose(false) is optimal in terms of
+            // readability and maintainability.
+            Dispose(false);
         }
         #endregion
     }

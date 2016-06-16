@@ -58,18 +58,22 @@ namespace Nequeo.Net.SFtp
             // Get the authentication used.
             if (sshConnection.IsPrivateKeyAuthentication)
             {
-                // If a file exists.
-                if (!String.IsNullOrEmpty(sshConnection.PrivateKeyFile) && !String.IsNullOrEmpty(sshConnection.PrivateKeyFilePassword))
+                // For each private key file.
+                foreach(PrivateKeyFile keyFile in sshConnection.PrivateKeyFiles)
                 {
-                    // Set the file.
-                    _scp.AddIdentityFile(sshConnection.PrivateKeyFile, sshConnection.PrivateKeyFilePassword);
-                }
+                    // If a file exists.
+                    if (!String.IsNullOrEmpty(keyFile.PrivateKey) && !String.IsNullOrEmpty(keyFile.PrivateKeyPassword))
+                    {
+                        // Set the file.
+                        _scp.AddIdentityFile(keyFile.PrivateKey, keyFile.PrivateKeyPassword);
+                    }
 
-                // If a file exists.
-                if (!String.IsNullOrEmpty(sshConnection.PrivateKeyFile))
-                {
-                    // Set the file.
-                    _scp.AddIdentityFile(sshConnection.PrivateKeyFile);
+                    // If a file exists.
+                    if (!String.IsNullOrEmpty(keyFile.PrivateKey))
+                    {
+                        // Set the file.
+                        _scp.AddIdentityFile(keyFile.PrivateKey);
+                    }
                 }
             }
             else
@@ -335,12 +339,14 @@ namespace Nequeo.Net.SFtp
                 // and unmanaged resources.
                 if (disposing)
                 {
-                    
+                    if (_sshConnection != null)
+                        _sshConnection.Dispose();
                 }
 
                 // Call the appropriate methods to clean up
                 // unmanaged resources here.
                 _scp = null;
+                _sshConnection = null;
             }
         }
 
