@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Math.Analysis", "Nequeo.Math.Analysis\Nequeo.Math.Analysis.csproj", "{E27E6040-431B-4AAD-A0C7-7CF741A2C9BF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Math.Analysis.cpp", "Nequeo.Math.Analysis.cpp\Nequeo.Math.Analysis.cpp.vcxproj", "{A0C81852-CB9C-4F95-B9B3-36268B1E5848}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nequeo.Math.Analysis.core", "Nequeo.Math.Analysis.python\Nequeo.Math.Analysis.python.vcxproj", "{68FA4B59-BFCE-403F-8466-3FA454AD6D01}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMathAnalysis", "TestMathAnalysis\TestMathAnalysis.vcxproj", "{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Nequeo.Analysis.Python", "Nequeo.Analysis.Python\Nequeo.Analysis.Python.pyproj", "{FC6354C0-359F-43F6-A7EE-197FE11D1291}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,22 @@ Global
 		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x64.Build.0 = Release|x64
 		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x86.ActiveCfg = Release|Win32
 		{68FA4B59-BFCE-403F-8466-3FA454AD6D01}.Release|x86.Build.0 = Release|Win32
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Debug|x64.ActiveCfg = Debug|x64
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Debug|x64.Build.0 = Debug|x64
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Debug|x86.ActiveCfg = Debug|Win32
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Debug|x86.Build.0 = Debug|Win32
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Release|Any CPU.ActiveCfg = Release|Win32
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Release|x64.ActiveCfg = Release|x64
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Release|x64.Build.0 = Release|x64
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Release|x86.ActiveCfg = Release|Win32
+		{26E8F0BE-5C0F-4762-ABA1-826D9B9D63CD}.Release|x86.Build.0 = Release|Win32
+		{FC6354C0-359F-43F6-A7EE-197FE11D1291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6354C0-359F-43F6-A7EE-197FE11D1291}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FC6354C0-359F-43F6-A7EE-197FE11D1291}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC6354C0-359F-43F6-A7EE-197FE11D1291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6354C0-359F-43F6-A7EE-197FE11D1291}.Release|x64.ActiveCfg = Release|Any CPU
+		{FC6354C0-359F-43F6-A7EE-197FE11D1291}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
