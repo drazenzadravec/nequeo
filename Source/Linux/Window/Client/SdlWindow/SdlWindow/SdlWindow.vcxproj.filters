@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{1645afd6-91c9-4122-8844-4317e9e1bf0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{3f6e28df-0247-4ecf-828f-4eb26d6d4502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{6004559d-8391-4630-9bc9-fde60ff5f704}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="04_key_presses\down.bmp" />
+    <Image Include="04_key_presses\left.bmp" />
+    <Image Include="04_key_presses\press.bmp" />
+    <Image Include="04_key_presses\right.bmp" />
+    <Image Include="04_key_presses\up.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="04_key_presses\04_key_presses.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="04_key_presses\readme.txt" />
+  </ItemGroup>
+</Project>
