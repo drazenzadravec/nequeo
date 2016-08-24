@@ -1,0 +1,36 @@
+*************** Hunspell **********************
+Copy the *.cpp / *.hpp, license.hunspell, license.myspell files from the Hunspell folder in the Hunspell Folder
+Copy hunvisapi.h.in file from the Hunspell folder to hunvisapi.h in the Hunspell Folder
+copy config.h from the win_api folder in the Hunspell Folder
+
+** csutil.hxx:
+// character encoding information
+struct cs_info {
+  unsigned char ccase;
+  unsigned char clower;
+  unsigned char cupper;
+};
+
+** Add this and remove it from csutil.cxx 
+// Unicode character encoding information
+struct unicode_info {
+  unsigned short c;
+  unsigned short cupper;
+  unsigned short clower;
+};
+
+Insert the header include in Hunspell/filemgr.hxx
+#include "../NHunspellExtensions.h"
+
+
+*************** Hyphen **********************
+Copy the Hyphen Files in the Hyphen folder
+Rename the .c hyphen files in .cpp
+
+Compile the Hyphen File and fix the C - CPP errors
+* rename variables new to newstr
+* cast void * to char *, HypenTrans *, Hyphen Dict * ... when needed
+
+Insert the header include in Hyphen/Hyphen.cpp after the standard headers:
+#include "../NHunspellExtensions.h"
+

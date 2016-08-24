@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50E331DB-7D25-440A-9086-86EBDE0F2D66}"
+	ProjectSection(SolutionItems) = preProject
+		HunspellVersions.txt = HunspellVersions.txt
+		Hunspell\UpdateToNewHunspellSourcecode.txt = Hunspell\UpdateToNewHunspellSourcecode.txt
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hunspell", "Hunspell\Hunspell.vcxproj", "{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Debug|x64.ActiveCfg = Debug|x64
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Debug|x64.Build.0 = Debug|x64
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Debug|x86.ActiveCfg = Debug|Win32
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Debug|x86.Build.0 = Debug|Win32
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Release|x64.ActiveCfg = Release|x64
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Release|x64.Build.0 = Release|x64
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Release|x86.ActiveCfg = Release|Win32
+		{D9E6347A-ABBF-48CA-AE63-6D10C5BACA29}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		AMDCaProjectFile = D:\CheckOutLibraries\NHunspell\CodeAnalyst\NHunspell.caw
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal
