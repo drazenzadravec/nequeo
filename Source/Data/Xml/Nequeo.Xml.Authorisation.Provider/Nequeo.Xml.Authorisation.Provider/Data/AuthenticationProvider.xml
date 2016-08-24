@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<context>
+    <clients>
+        <client uniqueIdentifier="1" name="Administrator" emailAddress="admin@nequeo.net.au" username="admin" password="admin" applicationName="All" isLoggedOn="false" isSuspended="false" onlineStatus="Invisible" activeConnections="0" >2</client>
+        <client uniqueIdentifier="2" name="Information" emailAddress="info@nequeo.net.au" username="info" password="info" applicationName="All" isLoggedOn="false" isSuspended="false" onlineStatus="Invisible" activeConnections="0" >1</client>
+    </clients>
+</context>

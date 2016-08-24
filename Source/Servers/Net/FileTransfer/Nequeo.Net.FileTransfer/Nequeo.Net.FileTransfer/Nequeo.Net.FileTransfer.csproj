@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A48D3CC9-2E26-46C7-B121-B6474009CC51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Net.FileTransfer</RootNamespace>
+    <AssemblyName>Nequeo.Net.FileTransfer.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoNetFileTransferKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\References\Staging\Server\FileTransfer\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Server\FileTransfer\Nequeo.Net.FileTransfer.Server.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\..\References\Staging\Server\FileTransfer\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Server\FileTransfer\Nequeo.Net.FileTransfer.Server.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.ComponentModel, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=5bff97510f36166b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Composite">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=058191c6ae32205d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=3b355968680c6ed8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Adapters.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\ServiceBase.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Connection\FileTransfer.cs" />
+    <Compile Include="Connection\FileTransferSsl.cs" />
+    <Compile Include="Controller\FileTransfer.cs" />
+    <Compile Include="Controller\FileTransferSsl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Server\FileTransfer.cs" />
+    <Compile Include="Server\FileTransferSsl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="NequeoNetFileTransferKey.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

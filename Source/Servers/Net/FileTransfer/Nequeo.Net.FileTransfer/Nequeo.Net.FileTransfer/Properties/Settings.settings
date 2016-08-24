@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Net.FileTransfer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SQLAuthenticationTypeProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SQL</Value>
+    </Setting>
+    <Setting Name="SQLCompositeService" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NequeoApplicationLoginModel_User</Value>
+    </Setting>
+    <Setting Name="AuthenticationProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SQLCompositeService</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

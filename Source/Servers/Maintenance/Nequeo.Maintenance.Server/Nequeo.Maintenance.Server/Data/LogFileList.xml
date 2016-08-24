@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LogDirectoryList>
+    <Interval>1</Interval>
+    <Directories>
+        <Directory fileRetension="45.0" filePattern="*.*" >C:\Temp</Directory>
+        <Directory fileRetension="45.0" filePattern="*.*" >C:\Temp</Directory>
+        <Directory fileRetension="45.0" filePattern="*.*" >C:\Temp</Directory>
+    </Directories>
+</LogDirectoryList>

@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{17368629-300F-47FB-BD50-5E32F5A0055B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Resource</RootNamespace>
+    <AssemblyName>Nequeo.Resource</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoResourcesKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <DocumentationFile>bin\x86\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>bin\x64\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\References\Nequeo\Any\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>..\..\..\References\Nequeo\Any\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|x86'">
+    <OutputPath>bin\x86\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\References\Nequeo\x86\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>..\..\..\References\Nequeo\x86\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|x64'">
+    <OutputPath>bin\x64\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\References\Nequeo\x64\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\References\Staging\Nequeo.Resource.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>..\..\..\References\Nequeo\Any\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|x86'">
+    <OutputPath>bin\x86\Staging Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\References\Nequeo\x86\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>..\..\..\References\Nequeo\x86\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|x64'">
+    <OutputPath>bin\x64\Staging Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\..\References\Nequeo\x64\Release\Nequeo.Resource.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\References\Staging\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>..\..\..\References\Staging\Nequeo.Resource.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Staging Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Debug\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Staging Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Nequeo.Resource.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Continent1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Continent.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Countries.cs" />
+    <Compile Include="Country1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Country.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CountryDial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CountryDial.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomToolXml1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomToolXml.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomToolXsd.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomToolXsd.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomToolXslt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomToolXslt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Language.cs" />
+    <Compile Include="Language1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeZone1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeZone.resx</DependentUpon>
+    </Compile>
+    <Compile Include="XsdFiles\Database.cs">
+      <DependentUpon>Database.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AjaxTools\AjaxControlToolkit.Accordion.AccordionBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.AlwaysVisibleControl.AlwaysVisibleControlBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Animation.AnimationBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Animation.Animations.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.AutoComplete.AutoCompleteBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Calendar.arrow-left.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Calendar.arrow-right.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Calendar.Calendar.css" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Calendar.CalendarBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.CascadingDropDown.CascadingDropDownBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.CollapsiblePanel.CollapsiblePanelBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Common.Common.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Common.DateTime.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Common.Threading.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Compat.DragDrop.DragDropScripts.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Compat.Timer.Timer.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ConfirmButton.confirmButtonBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.DragPanel.FloatingBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.DropDown.drop-arrow.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.DropDown.DropDown.css" />
+    <Content Include="AjaxTools\AjaxControlToolkit.DropDown.DropDownBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.DropShadow.DropShadowBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.DynamicPopulate.DynamicPopulateBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.ar.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.cs.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.de.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.es.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.fr.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.he.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.hi.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.it.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.ja.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.ko.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.nl.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.pt.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.ru.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.tr-TR.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.zh-CHS.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ExtenderBase.BaseScripts.zh-CHT.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.FilteredTextBox.FilteredTextBoxBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.HoverExtender.HoverBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.HoverMenu.HoverMenuBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ListSearch.ListSearchBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MaskedEdit.MaskedEditBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MaskedEdit.MaskedEditValidator.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ModalPopup.ModalPopupBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_h_handle.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_h_handle_down.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_h_handle_hover.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_h_rail.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_h_rail_outer.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_v_handle.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_v_handle_down.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_v_handle_hover.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_v_rail.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.Images.slider_v_rail_outer.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.MultiHandleSlider.css" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MultiHandleSlider.MultiHandleSliderBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.MutuallyExclusiveCheckBox.MutuallyExclusiveCheckBoxBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.NoBot.NoBotBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.NumericUpDown.NumericUpDownBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.PagingBulletedList.PagingBulletedListBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.PasswordStrength.PasswordStrengthExtenderBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.PopupControl.PopupControlBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.PopupExtender.PopupBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Rating.RatingBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ReorderList.DraggableListItemBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ReorderList.DropWatcherBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ResizableControl.ResizableControlBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.RoundedCorners.RoundedCornersBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Slider.Images.slider_h_handle.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Slider.Images.slider_h_rail.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Slider.Images.slider_v_handle.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Slider.Images.slider_v_rail.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Slider.Slider.css" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Slider.SliderBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.SlideShow.SlideShowBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-active-left.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-active-right.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-active.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-hover-left.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-hover-right.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-hover.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-left.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-line.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab-right.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.tab.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.Tabs.css" />
+    <Content Include="AjaxTools\AjaxControlToolkit.Tabs.Tabs.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.TextboxWatermark.TextboxWatermark.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ToggleButton.ToggleButton.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.UpdatePanelAnimation.UpdatePanelAnimationBehavior.js" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ValidatorCallout.alert-large.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ValidatorCallout.alert-small.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ValidatorCallout.close.gif" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ValidatorCallout.ValidatorCallout.css" />
+    <Content Include="AjaxTools\AjaxControlToolkit.ValidatorCallout.ValidatorCalloutBehavior.js" />
+    <Content Include="Common\back_disabled.jpg" />
+    <Content Include="Common\back_enabled.jpg" />
+    <Content Include="Common\BuilderDialog_movedown.bmp" />
+    <Content Include="Common\BuilderDialog_moveup.bmp" />
+    <Content Include="Common\calendar.gif" />
+    <Content Include="Common\Calendar.ico" />
+    <Content Include="Common\Calendar_scheduleHS.png" />
+    <Content Include="Common\Code_ClassCS.ico" />
+    <Content Include="Common\Code_Component.ico" />
+    <Content Include="Common\Code_WebService.ico" />
+    <Content Include="Common\Computer.ico" />
+    <Content Include="Common\Data_Dataset.ico" />
+    <Content Include="Common\Data_Schema.ico" />
+    <Content Include="Common\dbs.ico" />
+    <Content Include="Common\forward_disabled.jpg" />
+    <Content Include="Common\forward_enabled.jpg" />
+    <Content Include="Common\Properties.png" />
+    <Content Include="Common\Resource_Bitmap.ico" />
+    <Content Include="Common\servers.ico" />
+    <Content Include="Common\sort_asc.png" />
+    <Content Include="Common\sort_asc_disabled.png" />
+    <Content Include="Common\sort_both.png" />
+    <Content Include="Common\sort_desc.png" />
+    <Content Include="Common\sort_desc_disabled.png" />
+    <Content Include="Common\UI_WebUserControl.ico" />
+    <Content Include="Common\Utility_VBScript.ico" />
+    <Content Include="Common\Web_HTML.ico" />
+    <Content Include="Common\Web_StyleSheet.ico" />
+    <Content Include="Common\Web_WebConfig.ico" />
+    <Content Include="Common\Web_XML.ico" />
+    <Content Include="Common\Web_XSLT.ico" />
+    <Content Include="Common\WinForm.bmp" />
+    <Content Include="JQueryTools\jquery-1.3.2.min.js" />
+    <Content Include="JQueryTools\jquery-1.4.2.js" />
+    <Content Include="JQueryTools\jquery-1.4.2.min.js" />
+    <Content Include="JQueryTools\jquery-ui-1.8.2.custom.js" />
+    <Content Include="JQueryTools\jquery-ui-1.8.2.custom.min.js" />
+    <Content Include="JQueryTools\jquery-ui.min.js" />
+    <Content Include="JQueryTools\jquery.ajax.upload.js" />
+    <Content Include="JQueryTools\jquery.dataTables.js" />
+    <Content Include="JQueryTools\jquery.dataTables.min.js" />
+    <Content Include="JQueryTools\jquery.effects.blind.js" />
+    <Content Include="JQueryTools\jquery.effects.bounce.js" />
+    <Content Include="JQueryTools\jquery.effects.clip.js" />
+    <Content Include="JQueryTools\jquery.effects.core.js" />
+    <Content Include="JQueryTools\jquery.effects.drop.js" />
+    <Content Include="JQueryTools\jquery.effects.explode.js" />
+    <Content Include="JQueryTools\jquery.effects.fold.js" />
+    <Content Include="JQueryTools\jquery.effects.highlight.js" />
+    <Content Include="JQueryTools\jquery.effects.pulsate.js" />
+    <Content Include="JQueryTools\jquery.effects.scale.js" />
+    <Content Include="JQueryTools\jquery.effects.shake.js" />
+    <Content Include="JQueryTools\jquery.effects.slide.js" />
+    <Content Include="JQueryTools\jquery.effects.transfer.js" />
+    <Content Include="JQueryTools\jquery.form.js" />
+    <Content Include="JQueryTools\jquery.json-2.2.js" />
+    <Content Include="JQueryTools\jquery.json-2.2.min.js" />
+    <Content Include="JQueryTools\jquery.mousewheel.js" />
+    <Content Include="JQueryTools\jquery.multiupload.js" />
+    <Content Include="JQueryTools\jquery.popup.tooltip.js" />
+    <Content Include="JQueryTools\jquery.ui.accordion.js" />
+    <Content Include="JQueryTools\jquery.ui.autocomplete.js" />
+    <Content Include="JQueryTools\jquery.ui.button.js" />
+    <Content Include="JQueryTools\jquery.ui.core.js" />
+    <Content Include="JQueryTools\jquery.ui.datepicker.js" />
+    <Content Include="JQueryTools\jquery.ui.dialog.js" />
+    <Content Include="JQueryTools\jquery.ui.draggable.js" />
+    <Content Include="JQueryTools\jquery.ui.droppable.js" />
+    <Content Include="JQueryTools\jquery.ui.mouse.js" />
+    <Content Include="JQueryTools\jquery.ui.position.js" />
+    <Content Include="JQueryTools\jquery.ui.progressbar.js" />
+    <Content Include="JQueryTools\jquery.ui.resizable.js" />
+    <Content Include="JQueryTools\jquery.ui.selectable.js" />
+    <Content Include="JQueryTools\jquery.ui.slider.js" />
+    <Content Include="JQueryTools\jquery.ui.sortable.js" />
+    <Content Include="JQueryTools\jquery.ui.tabs.js" />
+    <Content Include="JQueryTools\jquery.ui.widget.js" />
+    <Content Include="JQueryTools\jquery.validate.js" />
+    <Content Include="JQueryTools\jScrollPane.js" />
+    <Content Include="TelerikTools\Content\Black\loading.gif" />
+    <Content Include="TelerikTools\Content\Black\sprite.png" />
+    <Content Include="TelerikTools\Content\Black\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Black\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Default\loading.gif" />
+    <Content Include="TelerikTools\Content\Default\sprite.png" />
+    <Content Include="TelerikTools\Content\Default\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Default\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Forest\loading.gif" />
+    <Content Include="TelerikTools\Content\Forest\sprite.png" />
+    <Content Include="TelerikTools\Content\Forest\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Forest\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Hay\loading.gif" />
+    <Content Include="TelerikTools\Content\Hay\sprite.png" />
+    <Content Include="TelerikTools\Content\Hay\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Hay\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Office2007\loading.gif" />
+    <Content Include="TelerikTools\Content\Office2007\sprite.png" />
+    <Content Include="TelerikTools\Content\Office2007\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Office2007\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Outlook\loading.gif" />
+    <Content Include="TelerikTools\Content\Outlook\sprite.png" />
+    <Content Include="TelerikTools\Content\Outlook\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Outlook\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Simple\loading.gif" />
+    <Content Include="TelerikTools\Content\Simple\sprite.png" />
+    <Content Include="TelerikTools\Content\Simple\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Simple\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Sitefinity\loading.gif" />
+    <Content Include="TelerikTools\Content\Sitefinity\sprite.png" />
+    <Content Include="TelerikTools\Content\Sitefinity\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Sitefinity\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Sunset\loading.gif" />
+    <Content Include="TelerikTools\Content\Sunset\sprite.png" />
+    <Content Include="TelerikTools\Content\Sunset\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Sunset\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\telerik.black.css" />
+    <Content Include="TelerikTools\Content\telerik.common.css" />
+    <Content Include="TelerikTools\Content\telerik.default.css" />
+    <Content Include="TelerikTools\Content\telerik.forest.css" />
+    <Content Include="TelerikTools\Content\telerik.hay.css" />
+    <Content Include="TelerikTools\Content\telerik.office2007.css" />
+    <Content Include="TelerikTools\Content\telerik.outlook.css" />
+    <Content Include="TelerikTools\Content\telerik.simple.css" />
+    <Content Include="TelerikTools\Content\telerik.sitefinity.css" />
+    <Content Include="TelerikTools\Content\telerik.sunset.css" />
+    <Content Include="TelerikTools\Content\telerik.telerik.css" />
+    <Content Include="TelerikTools\Content\telerik.vista.css" />
+    <Content Include="TelerikTools\Content\telerik.web20.css" />
+    <Content Include="TelerikTools\Content\telerik.webblue.css" />
+    <Content Include="TelerikTools\Content\telerik.windows7.css" />
+    <Content Include="TelerikTools\Content\Telerik\loading.gif" />
+    <Content Include="TelerikTools\Content\Telerik\sprite.png" />
+    <Content Include="TelerikTools\Content\Telerik\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Telerik\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Vista\loading.gif" />
+    <Content Include="TelerikTools\Content\Vista\sprite.png" />
+    <Content Include="TelerikTools\Content\Web20\loading.gif" />
+    <Content Include="TelerikTools\Content\Web20\sprite.png" />
+    <Content Include="TelerikTools\Content\Web20\treeview-line.png" />
+    <Content Include="TelerikTools\Content\Web20\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\WebBlue\loading.gif" />
+    <Content Include="TelerikTools\Content\WebBlue\sprite.png" />
+    <Content Include="TelerikTools\Content\WebBlue\treeview-line.png" />
+    <Content Include="TelerikTools\Content\WebBlue\treeview-nodes.png" />
+    <Content Include="TelerikTools\Content\Windows7\loading.gif" />
+    <Content Include="TelerikTools\Content\Windows7\sprite.png" />
+    <Content Include="TelerikTools\telerik.calendar.js" />
+    <Content Include="TelerikTools\telerik.common.js" />
+    <Content Include="TelerikTools\telerik.datepicker.js" />
+    <Content Include="TelerikTools\telerik.draganddrop.js" />
+    <Content Include="TelerikTools\telerik.grid.editing.js" />
+    <Content Include="TelerikTools\telerik.grid.filtering.js" />
+    <Content Include="TelerikTools\telerik.grid.grouping.js" />
+    <Content Include="TelerikTools\telerik.grid.js" />
+    <Content Include="TelerikTools\telerik.menu.js" />
+    <Content Include="TelerikTools\telerik.panelbar.js" />
+    <Content Include="TelerikTools\telerik.tabstrip.js" />
+    <Content Include="TelerikTools\telerik.textbox.js" />
+    <Content Include="TelerikTools\telerik.treeview.js" />
+    <Content Include="XsltFiles\DataModel.xslt" />
+    <Content Include="XsltFiles\DateFormat.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Continent.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Continent1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Country.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Country1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CountryDial.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CountryDial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomToolXml.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomToolXml1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomToolXsd.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomToolXsd.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomToolXslt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomToolXslt.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeZone.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TimeZone1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="NequeoResourcesKey.snk" />
+    <None Include="XsdFiles\Database.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\DatabaseContext.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\DatabaseSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\DataObject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\DataObjectItem.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\DataSetExtension.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\DataSetSchemaDesigner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\EdmExtension.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\EdmModelDesigner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\EnumObject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\Extension.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\ExtensionDesigner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\LinqExtension.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\LinqObjectItem.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\LinqReplicaDesigner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\MvcObjectItem.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\ScalarFunction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\StoredProcedure.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XsdFiles\TableFunction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

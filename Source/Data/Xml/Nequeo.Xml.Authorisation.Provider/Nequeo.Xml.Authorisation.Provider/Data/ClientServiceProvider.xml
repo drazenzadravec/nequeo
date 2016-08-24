@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<contextService>
+    <clients>
+        <client uniqueIdentifier="1" serviceName="Chat" host="nequeompc" active="false" dateAdded="2014-02-14 10:30:45 am" >bc824f05-0ed7-4bdf-83e3-5db0e36cf730</client>
+        <client uniqueIdentifier="2" serviceName="Chat" host="nequeompc" active="false" dateAdded="2014-02-14 10:30:45 am" >bc824f05-0ed7-4bdf-83e3-5db0e36cf730</client>
+    </clients>
+</contextService>

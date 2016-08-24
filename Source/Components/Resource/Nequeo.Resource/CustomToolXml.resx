@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DataContextExtensionCustomTool" xml:space="preserve">
+    <value>DataExtensionContextObjectCodeGenerator</value>
+  </data>
+  <data name="DataContextExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataContextExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;DataContextName&gt;&lt;/DataContextName&gt;
+  &lt;ContextName&gt;&lt;/ContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;TableListExclusion&gt;&lt;/TableListExclusion&gt;
+  &lt;TableList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/TableList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataDatabaseCodeXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;Context xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;CompanyNameSpace&gt;&lt;/CompanyNameSpace&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;Tables&gt;
+    &lt;Table&gt;
+      &lt;TableName&gt;&lt;/TableName&gt;
+      &lt;TableOwner&gt;&lt;/TableOwner&gt;
+      &lt;DataColumns&gt;
+        &lt;DataColumn&gt;
+          &lt;DbColumnName&gt;&lt;/DbColumnName&gt;
+          &lt;Name&gt;&lt;/Name&gt;
+          &lt;IsSeeded&gt;&lt;/IsSeeded&gt;
+          &lt;IsPrimaryKey&gt;&lt;/IsPrimaryKey&gt;
+          &lt;IsAutoGenerated&gt;&lt;/IsAutoGenerated&gt;
+          &lt;IsNullable&gt;&lt;/IsNullable&gt;
+          &lt;IsRowVersion&gt;&lt;/IsRowVersion&gt;
+          &lt;DbType&gt;&lt;/DbType&gt;
+          &lt;Length&gt;&lt;/Length&gt;
+        &lt;/DataColumn&gt;
+      &lt;ForeignKeys&gt;
+        &lt;ForeignKey&gt;
+          &lt;Name&gt;&lt;/Name&gt;
+          &lt;ReferenceTable&gt;&lt;/ReferenceTable&gt;
+          &lt;ReferenceColumnName&gt;&lt;/ReferenceColumnName&gt;
+          &lt;ReferenceOwner&gt;&lt;/ReferenceOwner&gt;
+          &lt;ColumnName&gt;&lt;/ColumnName&gt;
+          &lt;ColumnType&gt;&lt;/ColumnType&gt;
+          &lt;Length&gt;&lt;/Length&gt;
+          &lt;IsNullable&gt;&lt;/IsNullable&gt;
+        &lt;/ForeignKey&gt;
+      &lt;/ForeignKeys&gt;
+      &lt;References&gt;
+        &lt;Reference&gt;
+          &lt;Owner&gt;&lt;/Owner&gt;
+          &lt;Name&gt;&lt;/Name&gt;
+          &lt;ColumnName&gt;&lt;/ColumnName&gt;
+          &lt;ColumnType&gt;&lt;/ColumnType&gt;
+          &lt;Length&gt;&lt;/Length&gt;
+          &lt;IsNullable&gt;&lt;/IsNullable&gt;
+        &lt;/Reference&gt;
+      &lt;/References&gt;
+    &lt;/Table&gt;
+  &lt;/Tables&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataDatabaseCodeXmlCustomTool" xml:space="preserve">
+    <value>DatabaseXmlModelObjectCodeGenerator</value>
+  </data>
+  <data name="DataDatabaseCodeXmlHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataDatabaseContextCustomTool" xml:space="preserve">
+    <value>DatabaseContextCodeGenerator</value>
+  </data>
+  <data name="DataDatabaseContextHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataDatabaseContextXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;ConfigKeyDatabaseConnection&gt;&lt;/ConfigKeyDatabaseConnection&gt;
+  &lt;ContextName&gt;&lt;/ContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;IncludeContextItems&gt;&lt;/IncludeContextItems&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;TableListExclusion&gt;&lt;/TableListExclusion&gt;
+  &lt;TableList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/TableList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataDatabaseCustomTool" xml:space="preserve">
+    <value>DatabaseXmlObjectCodeGenerator</value>
+    <comment>Data Database Custom Tool Class Name</comment>
+  </data>
+  <data name="DataDatabaseHelp" xml:space="preserve">
+    <value>Data Database help</value>
+  </data>
+  <data name="DataDatabaseXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;TableListExclusion&gt;&lt;/TableListExclusion&gt;
+  &lt;TableList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/TableList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataExtendedCustomTool" xml:space="preserve">
+    <value>DataObjectCodeGenerator</value>
+  </data>
+  <data name="DataExtendedHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataExtendedXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+     &lt;ClassName&gt;&lt;/ClassName&gt;
+     &lt;Database&gt;&lt;/Database&gt;
+     &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+     &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+     &lt;PropertyName&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyName&gt;
+     &lt;PropertyType&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyType&gt;
+     &lt;PropertyIsNullable&gt;
+          &lt;boolean&gt;&lt;/boolean&gt;
+          &lt;boolean&gt;&lt;/boolean&gt;
+          &lt;boolean&gt;&lt;/boolean&gt;
+          &lt;boolean&gt;&lt;/boolean&gt;
+     &lt;/PropertyIsNullable&gt;
+     &lt;!--&gt;PropertyDefaultValue&gt;
+        &lt;string&gt;&lt;/string&gt;
+        &lt;string&gt;&lt;/string&gt;
+        &lt;string&gt;&lt;/string&gt;
+        &lt;string&gt;&lt;/string&gt;
+    &lt;/PropertyDefaultValue--&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataExtensionCustomTool" xml:space="preserve">
+    <value>DataExtensionObjectCodeGenerator</value>
+  </data>
+  <data name="DataExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;TableName&gt;&lt;/TableName&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;DataContextName&gt;&lt;/DataContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ConfigKeyDatabaseConnection&gt;&lt;/ConfigKeyDatabaseConnection&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataScalarFunctionCustomTool" xml:space="preserve">
+    <value>FunctionScalarExtensionCodeGenerator</value>
+  </data>
+  <data name="DataScalarFunctionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataScalarFunctionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ExtensionClassName&gt;&lt;/ExtensionClassName&gt;
+  &lt;FunctionHandler&gt;&lt;/FunctionHandler&gt;
+  &lt;FunctionListExclusion&gt;&lt;/FunctionListExclusion&gt;
+  &lt;FunctionList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/FunctionList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataSetContextExtensionCustomTool" xml:space="preserve">
+    <value>SchemaDataContextObjectCodeGenerator</value>
+  </data>
+  <data name="DataSetContextExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataSetContextExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;DataContextName&gt;&lt;/DataContextName&gt;
+  &lt;ContextName&gt;Extension&lt;/ContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;TableListExclusion&gt;&lt;/TableListExclusion&gt;
+  &lt;TableList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/TableList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataSetExtensionCustomTool" xml:space="preserve">
+    <value>SchemaObjectCodeGenerator</value>
+  </data>
+  <data name="DataSetExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataSetExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;TableName&gt;&lt;/TableName&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;DataSetDataContextName&gt;&lt;/DataSetDataContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ConfigKeyDatabaseConnection&gt;&lt;/ConfigKeyDatabaseConnection&gt;
+  &lt;UseAnonymousDataEntity&gt;&lt;/UseAnonymousDataEntity&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataStoredProcedureCustomTool" xml:space="preserve">
+    <value>ProcedureExtensionCodeGenerator</value>
+  </data>
+  <data name="DataStoredProcedureHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataStoredProcedureXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ExtensionClassName&gt;&lt;/ExtensionClassName&gt;
+  &lt;FunctionHandler&gt;&lt;/FunctionHandler&gt;
+  &lt;ProcedureListExclusion&gt;&lt;/ProcedureListExclusion&gt;
+  &lt;ProcedureList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/ProcedureList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="DataTableFunctionCustomTool" xml:space="preserve">
+    <value>FunctionTableExtensionCodeGenerator</value>
+  </data>
+  <data name="DataTableFunctionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataTableFunctionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ExtensionClassName&gt;&lt;/ExtensionClassName&gt;
+  &lt;FunctionHandler&gt;&lt;/FunctionHandler&gt;
+  &lt;FunctionListExclusion&gt;&lt;/FunctionListExclusion&gt;
+  &lt;FunctionList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/FunctionList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="EdmContextExtensionCustomTool" xml:space="preserve">
+    <value>ModelDataContextObjectCodeGenerator</value>
+  </data>
+  <data name="EdmContextExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EdmContextExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;DataContextName&gt;&lt;/DataContextName&gt;
+  &lt;ContextName&gt;&lt;/ContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;TableListExclusion&gt;&lt;/TableListExclusion&gt;
+  &lt;TableList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/TableList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="EdmExtensionCustomTool" xml:space="preserve">
+    <value>ModelObjectCodeGenerator</value>
+  </data>
+  <data name="EdmExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EdmExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;TableName&gt;&lt;/TableName&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;EdmDataContextName&gt;&lt;/EdmDataContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ConfigKeyDatabaseConnection&gt;&lt;/ConfigKeyDatabaseConnection&gt;
+  &lt;UseAnonymousDataEntity&gt;&lt;/UseAnonymousDataEntity&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="EnumCustomTool" xml:space="preserve">
+    <value>EnumObjectCodeGenerator</value>
+    <comment>Enum Custom Tool Class Name</comment>
+  </data>
+  <data name="EnumHelp" xml:space="preserve">
+    <value>Enum help</value>
+    <comment>Enum Code Generation Help</comment>
+  </data>
+  <data name="EnumXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+     &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+     &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+     &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+     &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+     &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+     &lt;EnumName&gt;&lt;/EnumName&gt;
+     &lt;Database&gt;&lt;/Database&gt;
+     &lt;TableName&gt;&lt;/TableName&gt;
+     &lt;ValueColumnName&gt;&lt;/ValueColumnName&gt;
+     &lt;IndicatorColumnName&gt;&lt;/IndicatorColumnName&gt;
+     &lt;DataFilter&gt;&lt;/DataFilter&gt;
+&lt;/Context&gt;</value>
+    <comment>Enum Xml Code Generation</comment>
+  </data>
+  <data name="LinqContextExtensionCustomTool" xml:space="preserve">
+    <value>ReplicaDataContextObjectCodeGenerator</value>
+  </data>
+  <data name="LinqContextExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinqContextExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;DatabaseConnection&gt;&lt;/DatabaseConnection&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;DataContextName&gt;&lt;/DataContextName&gt;
+  &lt;ContextName&gt;&lt;/ContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseConnect&gt;&lt;/DataBaseConnect&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;TableListExclusion&gt;&lt;/TableListExclusion&gt;
+  &lt;TableList&gt;
+    &lt;string&gt;&lt;/string&gt;
+  &lt;/TableList&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="LinqExtendedCustomTool" xml:space="preserve">
+    <value>LinqObjectCodeGenerator</value>
+  </data>
+  <data name="LinqExtendedHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinqExtendedXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+     &lt;ClassName&gt;&lt;/ClassName&gt;
+     &lt;Database&gt;&lt;/Database&gt;
+     &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+     &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+     &lt;PropertyName&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyName&gt;
+     &lt;PropertyType&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyType&gt;
+     &lt;PropertyDatabaseType&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyDatabaseType&gt;
+     &lt;PropertyDatabaseColumnName&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyDatabaseColumnName&gt;
+     &lt;PropertyIsNullable&gt;
+          &lt;boolean&gt;&lt;/boolean&gt;
+          &lt;boolean&gt;&lt;/boolean&gt;
+     &lt;/PropertyIsNullable&gt;
+     &lt;!--&gt;PropertyDefaultValue&gt;
+          &lt;string&gt;&lt;/string&gt;
+          &lt;string&gt;&lt;/string&gt;
+     &lt;/PropertyDefaultValue--&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="LinqExtensionCustomTool" xml:space="preserve">
+    <value>ReplicaObjectCodeGenerator</value>
+  </data>
+  <data name="LinqExtensionHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinqExtensionXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Context&gt;
+  &lt;TableName&gt;&lt;/TableName&gt;
+  &lt;Database&gt;&lt;/Database&gt;
+  &lt;LinqDataContextName&gt;&lt;/LinqDataContextName&gt;
+  &lt;NamespaceCompanyName&gt;&lt;/NamespaceCompanyName&gt;
+  &lt;NamespaceExtendedName&gt;&lt;/NamespaceExtendedName&gt;
+  &lt;DataBaseOwner&gt;&lt;/DataBaseOwner&gt;
+  &lt;ConnectionType&gt;&lt;/ConnectionType&gt;
+  &lt;ConnectionDataType&gt;&lt;/ConnectionDataType&gt;
+  &lt;ConfigKeyDatabaseConnection&gt;&lt;/ConfigKeyDatabaseConnection&gt;
+  &lt;UseAnonymousDataEntity&gt;&lt;/UseAnonymousDataEntity&gt;
+&lt;/Context&gt;</value>
+  </data>
+  <data name="MvcExtendedXml" xml:space="preserve">
+    <value />
+  </data>
+</root>

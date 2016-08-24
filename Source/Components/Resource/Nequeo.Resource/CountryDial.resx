@@ -1,0 +1,1116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Afghanistan" xml:space="preserve">
+    <value>+93</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="AlandIslands" xml:space="preserve">
+    <value>+358</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Albania" xml:space="preserve">
+    <value>+355</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Algeria" xml:space="preserve">
+    <value>+213</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="AmericanSamoa" xml:space="preserve">
+    <value>+1684</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Andorra" xml:space="preserve">
+    <value>+376</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Angola" xml:space="preserve">
+    <value>+244</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Anguilla" xml:space="preserve">
+    <value>+1264</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Antarctica" xml:space="preserve">
+    <value>+672</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="AntiguaAndBarbuda" xml:space="preserve">
+    <value>+1268</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Argentina" xml:space="preserve">
+    <value>+54</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Armenia" xml:space="preserve">
+    <value>+374</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Aruba" xml:space="preserve">
+    <value>+297</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Australia" xml:space="preserve">
+    <value>+61</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Austria" xml:space="preserve">
+    <value>+43</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Azerbaijan" xml:space="preserve">
+    <value>+994</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bahamas" xml:space="preserve">
+    <value>+1242</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bahrain" xml:space="preserve">
+    <value>+973</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bangladesh" xml:space="preserve">
+    <value>+880</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Barbados" xml:space="preserve">
+    <value>+1246</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Belarus" xml:space="preserve">
+    <value>+375</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Belgium" xml:space="preserve">
+    <value>+32</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Belize" xml:space="preserve">
+    <value>+501</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Benin" xml:space="preserve">
+    <value>+229</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bermuda" xml:space="preserve">
+    <value>+1441</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bhutan" xml:space="preserve">
+    <value>+975</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bolivia" xml:space="preserve">
+    <value>+591</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="BosniaAndHerzegovina" xml:space="preserve">
+    <value>+387</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Botswana" xml:space="preserve">
+    <value>+267</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="BouvetIsland" xml:space="preserve">
+    <value>+47</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Brazil" xml:space="preserve">
+    <value>+55</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="BritishIndianOceanTerritory" xml:space="preserve">
+    <value>+246</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="BritishVirginIslands" xml:space="preserve">
+    <value>+1284</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Brunei" xml:space="preserve">
+    <value>+673</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Bulgaria" xml:space="preserve">
+    <value>+359</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="BurkinaFaso" xml:space="preserve">
+    <value>+226</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Burundi" xml:space="preserve">
+    <value>+257</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Cambodia" xml:space="preserve">
+    <value>+855</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Cameroon" xml:space="preserve">
+    <value>+237</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Canada" xml:space="preserve">
+    <value>+1</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CapeVerde" xml:space="preserve">
+    <value>+238</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CaribbeanNetherlands" xml:space="preserve">
+    <value>+599</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CaymanIslands" xml:space="preserve">
+    <value>+1345</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CentralAfricanRepublic" xml:space="preserve">
+    <value>+236</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Chad" xml:space="preserve">
+    <value>+235</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Chile" xml:space="preserve">
+    <value>+56</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="China" xml:space="preserve">
+    <value>+86</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="ChristmasIsland" xml:space="preserve">
+    <value>+61</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CocosIslands" xml:space="preserve">
+    <value>+61</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Colombia" xml:space="preserve">
+    <value>+57</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Comoros" xml:space="preserve">
+    <value>+269</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CongoBrazzaville" xml:space="preserve">
+    <value>+242</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CongoKinshasa" xml:space="preserve">
+    <value>+243</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CookIslands" xml:space="preserve">
+    <value>+682</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CostaRica" xml:space="preserve">
+    <value>+506</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CoteDIvoire" xml:space="preserve">
+    <value>+225</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Croatia" xml:space="preserve">
+    <value>+385</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Cuba" xml:space="preserve">
+    <value>+53</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Curacao" xml:space="preserve">
+    <value>+5999</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Cyprus" xml:space="preserve">
+    <value>+357</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="CzechRepublic" xml:space="preserve">
+    <value>+420</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Denmark" xml:space="preserve">
+    <value>+45</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Dominica" xml:space="preserve">
+    <value>+1767</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="DominicanRepublic" xml:space="preserve">
+    <value>+1809</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="DominicanRepublic1" xml:space="preserve">
+    <value>+1829</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="DominicanRepublic2" xml:space="preserve">
+    <value>+1849</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Ecuador" xml:space="preserve">
+    <value>+593</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Egypt" xml:space="preserve">
+    <value>+20</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="ElSalvador" xml:space="preserve">
+    <value>+503</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="EquatorialGuinea" xml:space="preserve">
+    <value>+240</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Eritrea" xml:space="preserve">
+    <value>+291</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Estonia" xml:space="preserve">
+    <value>+372</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Ethiopia" xml:space="preserve">
+    <value>+251</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="FalklandIslands" xml:space="preserve">
+    <value>+500</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="FaroeIslands" xml:space="preserve">
+    <value>+298</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Fiji" xml:space="preserve">
+    <value>+679</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Finland" xml:space="preserve">
+    <value>+358</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="France" xml:space="preserve">
+    <value>+33</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="FrenchGuiana" xml:space="preserve">
+    <value>+594</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="FrenchPolynesia" xml:space="preserve">
+    <value>+689</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="FrenchSouthernTerritories" xml:space="preserve">
+    <value>+596</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Gabon" xml:space="preserve">
+    <value>+241</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Gambia" xml:space="preserve">
+    <value>+220</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Georgia" xml:space="preserve">
+    <value>+995</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Germany" xml:space="preserve">
+    <value>+49</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Ghana" xml:space="preserve">
+    <value>+233</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Gibraltar" xml:space="preserve">
+    <value>+350</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Greece" xml:space="preserve">
+    <value>+30</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Greenland" xml:space="preserve">
+    <value>+299</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Grenada" xml:space="preserve">
+    <value>+1473</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Guadeloupe" xml:space="preserve">
+    <value>+590</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Guam" xml:space="preserve">
+    <value>+1671</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Guatemala" xml:space="preserve">
+    <value>+502</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Guernsey" xml:space="preserve">
+    <value>+44</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Guinea" xml:space="preserve">
+    <value>+224</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="GuineaBissau" xml:space="preserve">
+    <value>+245</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Guyana" xml:space="preserve">
+    <value>+592</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Haiti" xml:space="preserve">
+    <value>+509</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="HeardAndMcDonaldIslands" xml:space="preserve">
+    <value>+672</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Honduras" xml:space="preserve">
+    <value>+504</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="HongKongSARChina" xml:space="preserve">
+    <value>+852</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Hungary" xml:space="preserve">
+    <value>+36</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Iceland" xml:space="preserve">
+    <value>+354</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="India" xml:space="preserve">
+    <value>+91</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Indonesia" xml:space="preserve">
+    <value>+62</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Iran" xml:space="preserve">
+    <value>+98</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Iraq" xml:space="preserve">
+    <value>+964</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Ireland" xml:space="preserve">
+    <value>+353</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="IsleOfMan" xml:space="preserve">
+    <value>+44</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Israel" xml:space="preserve">
+    <value>+972</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Italy" xml:space="preserve">
+    <value>+39</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Jamaica" xml:space="preserve">
+    <value>+1876</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Japan" xml:space="preserve">
+    <value>+81</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Jersey" xml:space="preserve">
+    <value>+44</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Jordan" xml:space="preserve">
+    <value>+962</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Kazakhstan" xml:space="preserve">
+    <value>+7</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Kenya" xml:space="preserve">
+    <value>+254</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Kiribati" xml:space="preserve">
+    <value>+686</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Kuwait" xml:space="preserve">
+    <value>+965</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Kyrgyzstan" xml:space="preserve">
+    <value>+996</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Laos" xml:space="preserve">
+    <value>+856</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Latvia" xml:space="preserve">
+    <value>+371</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Lebanon" xml:space="preserve">
+    <value>+961</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Lesotho" xml:space="preserve">
+    <value>+266</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Liberia" xml:space="preserve">
+    <value>+231</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Libya" xml:space="preserve">
+    <value>+218</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Liechtenstein" xml:space="preserve">
+    <value>+423</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Lithuania" xml:space="preserve">
+    <value>+370</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Luxembourg" xml:space="preserve">
+    <value>+352</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="MacauSARChina" xml:space="preserve">
+    <value>+853</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Macedonia" xml:space="preserve">
+    <value>+389</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Madagascar" xml:space="preserve">
+    <value>+261</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Malawi" xml:space="preserve">
+    <value>+265</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Malaysia" xml:space="preserve">
+    <value>+60</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Maldives" xml:space="preserve">
+    <value>+960</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mali" xml:space="preserve">
+    <value>+223</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Malta" xml:space="preserve">
+    <value>+356</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="MarshallIslands" xml:space="preserve">
+    <value>+692</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Martinique" xml:space="preserve">
+    <value>+596</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mauritania" xml:space="preserve">
+    <value>+222</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mauritius" xml:space="preserve">
+    <value>+230</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mayotte" xml:space="preserve">
+    <value>+262</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mexico" xml:space="preserve">
+    <value>+52</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Micronesia" xml:space="preserve">
+    <value>+691</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Moldova" xml:space="preserve">
+    <value>+373</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Monaco" xml:space="preserve">
+    <value>+377</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mongolia" xml:space="preserve">
+    <value>+976</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Montenegro" xml:space="preserve">
+    <value>+382</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Montserrat" xml:space="preserve">
+    <value>+1664</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Morocco" xml:space="preserve">
+    <value>+212</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Mozambique" xml:space="preserve">
+    <value>+258</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Myanmar" xml:space="preserve">
+    <value>+95</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Namibia" xml:space="preserve">
+    <value>+264</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Nauru" xml:space="preserve">
+    <value>+674</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Nepal" xml:space="preserve">
+    <value>+977</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>+31</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="NewCaledonia" xml:space="preserve">
+    <value>+687</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="NewZealand" xml:space="preserve">
+    <value>+64</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Nicaragua" xml:space="preserve">
+    <value>+505</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Niger" xml:space="preserve">
+    <value>+227</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Nigeria" xml:space="preserve">
+    <value>+234</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Niue" xml:space="preserve">
+    <value>+683</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="NorfolkIsland" xml:space="preserve">
+    <value>+6723</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="NorthernMarianaIslands" xml:space="preserve">
+    <value>+1670</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="NorthKorea" xml:space="preserve">
+    <value>+850</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Norway" xml:space="preserve">
+    <value>+47</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Oman" xml:space="preserve">
+    <value>+968</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Pakistan" xml:space="preserve">
+    <value>+92</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Palau" xml:space="preserve">
+    <value>+680</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="PalestinianTerritories" xml:space="preserve">
+    <value>+970</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Panama" xml:space="preserve">
+    <value>+507</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="PapuaNewGuinea" xml:space="preserve">
+    <value>+675</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Paraguay" xml:space="preserve">
+    <value>+595</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Peru" xml:space="preserve">
+    <value>+51</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Philippines" xml:space="preserve">
+    <value>+63</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="PitcairnIslands" xml:space="preserve">
+    <value>+872</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Poland" xml:space="preserve">
+    <value>+48</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Portugal" xml:space="preserve">
+    <value>+351</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="PuertoRico" xml:space="preserve">
+    <value>+1787</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Qatar" xml:space="preserve">
+    <value>+974</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Reunion" xml:space="preserve">
+    <value>+262</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Romania" xml:space="preserve">
+    <value>+40</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Russia" xml:space="preserve">
+    <value>+7</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Rwanda" xml:space="preserve">
+    <value>+250</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Samoa" xml:space="preserve">
+    <value>+685</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SanMarino" xml:space="preserve">
+    <value>+378</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SaoTomeAndPrincipe" xml:space="preserve">
+    <value>+239</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SaudiArabia" xml:space="preserve">
+    <value>+966</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Senegal" xml:space="preserve">
+    <value>+221</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Serbia" xml:space="preserve">
+    <value>+381</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Seychelles" xml:space="preserve">
+    <value>+248</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SierraLeone" xml:space="preserve">
+    <value>+232</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Singapore" xml:space="preserve">
+    <value>+65</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SintMaarten" xml:space="preserve">
+    <value>+1721</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Slovakia" xml:space="preserve">
+    <value>+421</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Slovenia" xml:space="preserve">
+    <value>+386</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SoGeorgiaAndSoSandwichIsl" xml:space="preserve">
+    <value>+500</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SolomonIslands" xml:space="preserve">
+    <value>+677</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Somalia" xml:space="preserve">
+    <value>+252</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SouthAfrica" xml:space="preserve">
+    <value>+27</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SouthKorea" xml:space="preserve">
+    <value>+82</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SouthSudan" xml:space="preserve">
+    <value>+211</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Spain" xml:space="preserve">
+    <value>+34</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SriLanka" xml:space="preserve">
+    <value>+94</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StBarthelemy" xml:space="preserve">
+    <value>+590</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StHelena" xml:space="preserve">
+    <value>+290</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StKittsAndNevis" xml:space="preserve">
+    <value>+1869</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StLucia" xml:space="preserve">
+    <value>+1758</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StMartin" xml:space="preserve">
+    <value>+590</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StPierreAndMiquelon" xml:space="preserve">
+    <value>+508</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="StVincentAndGrenadines" xml:space="preserve">
+    <value>+1784</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Sudan" xml:space="preserve">
+    <value>+249</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Suriname" xml:space="preserve">
+    <value>+597</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="SvalbardAndJanMayen" xml:space="preserve">
+    <value>+47</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Sweden" xml:space="preserve">
+    <value>+46</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Switzerland" xml:space="preserve">
+    <value>+41</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Syria" xml:space="preserve">
+    <value>+963</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Taiwan" xml:space="preserve">
+    <value>+886</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Tajikistan" xml:space="preserve">
+    <value>+992</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Tanzania" xml:space="preserve">
+    <value>+255</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Thailand" xml:space="preserve">
+    <value>+66</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="TimorLeste" xml:space="preserve">
+    <value>+670</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Togo" xml:space="preserve">
+    <value>+228</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Tokelau" xml:space="preserve">
+    <value>+690</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Tonga" xml:space="preserve">
+    <value>+676</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="TrinidadAndTobago" xml:space="preserve">
+    <value>+1868</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Tunisia" xml:space="preserve">
+    <value>+216</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Turkey" xml:space="preserve">
+    <value>+90</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Turkmenistan" xml:space="preserve">
+    <value>+993</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="TurksAndCaicosIslands" xml:space="preserve">
+    <value>+1649</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Tuvalu" xml:space="preserve">
+    <value>+688</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Uganda" xml:space="preserve">
+    <value>+256</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Ukraine" xml:space="preserve">
+    <value>+380</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="UnitedArabEmirates" xml:space="preserve">
+    <value>+971</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="UnitedKingdom" xml:space="preserve">
+    <value>+44</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="UnitedStates" xml:space="preserve">
+    <value>+1</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Uruguay" xml:space="preserve">
+    <value>+598</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="USOutlyingIslands" xml:space="preserve">
+    <value>+1</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="USVirginIslands" xml:space="preserve">
+    <value>+1340</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Uzbekistan" xml:space="preserve">
+    <value>+998</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Vanuatu" xml:space="preserve">
+    <value>+678</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="VaticanCity" xml:space="preserve">
+    <value>+379</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Venezuela" xml:space="preserve">
+    <value>+58</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Vietnam" xml:space="preserve">
+    <value>+84</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="WallisAndFutuna" xml:space="preserve">
+    <value>+681</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Yemen" xml:space="preserve">
+    <value>+967</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Zambia" xml:space="preserve">
+    <value>+260</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Zimbabwe" xml:space="preserve">
+    <value>+263</value>
+    <comment>Country dialing code</comment>
+  </data>
+  <data name="Zanzibar" xml:space="preserve">
+    <value>+255</value>
+    <comment>Country dialing code</comment>
+  </data>
+</root>

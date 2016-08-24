@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<context>
+    <clients>
+        <client uniqueIdentifier="1" serviceName="Chat" token="bc824f05-0ed7-4bdf-83e3-5db0e36cf730" dateAdded="2014-02-14 10:30:45 am" permission="Read, Write" ></client>
+        <client uniqueIdentifier="2" serviceName="Chat" token="bc824f05-0ed7-4bdf-83e3-5db0e36cf730" dateAdded="2014-02-14 10:30:45 am" permission="Read, Write" ></client>
+    </clients>
+</context>

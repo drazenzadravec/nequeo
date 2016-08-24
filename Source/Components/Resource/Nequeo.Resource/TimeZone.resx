@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbuDhabi" xml:space="preserve">
+    <value>Arabian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Adelaide" xml:space="preserve">
+    <value>Cen. Australia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Almaty" xml:space="preserve">
+    <value>N. Central Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Amman" xml:space="preserve">
+    <value>Jordan Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Amsterdam" xml:space="preserve">
+    <value>W. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Anchorage" xml:space="preserve">
+    <value>Alaskan Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Apia" xml:space="preserve">
+    <value>Samoa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Astana" xml:space="preserve">
+    <value>Central Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Athens" xml:space="preserve">
+    <value>GTB Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Auckland" xml:space="preserve">
+    <value>New Zealand Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Azores" xml:space="preserve">
+    <value>Azores Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Baghdad" xml:space="preserve">
+    <value>Arabic Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="BajaCalifornia" xml:space="preserve">
+    <value>Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Baku" xml:space="preserve">
+    <value>Azerbaijan Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Bangkok" xml:space="preserve">
+    <value>SE Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Beijing" xml:space="preserve">
+    <value>China Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Beirut" xml:space="preserve">
+    <value>Middle East Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Belgrade" xml:space="preserve">
+    <value>Central Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Berlin" xml:space="preserve">
+    <value>W. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Bern" xml:space="preserve">
+    <value>W. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Bogota" xml:space="preserve">
+    <value>SA Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Bratislava" xml:space="preserve">
+    <value>Central Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Brisbane" xml:space="preserve">
+    <value>E. Australia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Brussels" xml:space="preserve">
+    <value>Romance Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Bucharest" xml:space="preserve">
+    <value>GTB Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Budapest" xml:space="preserve">
+    <value>Central Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="BuenosAires" xml:space="preserve">
+    <value>Argentina Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Cairo" xml:space="preserve">
+    <value>Egypt Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Calcutta" xml:space="preserve">
+    <value>India Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Canberra" xml:space="preserve">
+    <value>Aus Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="CapeVerde" xml:space="preserve">
+    <value>Cape Verde Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Caracas" xml:space="preserve">
+    <value>Venezuela Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Casablanca" xml:space="preserve">
+    <value>Greenland Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Chennai" xml:space="preserve">
+    <value>India Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Chicago" xml:space="preserve">
+    <value>Central Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Chihuahua" xml:space="preserve">
+    <value>Mexico Standard Time 2</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Chongqing" xml:space="preserve">
+    <value>China Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Colombo" xml:space="preserve">
+    <value>Sri Lanka Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Copenhagen" xml:space="preserve">
+    <value>Romance Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Darwin" xml:space="preserve">
+    <value>AUS Central Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Denver" xml:space="preserve">
+    <value>Mountain Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Dhaka" xml:space="preserve">
+    <value>Central Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Dubai" xml:space="preserve">
+    <value>Arabian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Dublin" xml:space="preserve">
+    <value>GMT Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Edinburgh" xml:space="preserve">
+    <value>GMT Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Fiji" xml:space="preserve">
+    <value>Fiji Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Georgetown" xml:space="preserve">
+    <value>SA Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Godthab" xml:space="preserve">
+    <value>Greenland Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Guadalajara" xml:space="preserve">
+    <value>Mexico Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Guadalcanal" xml:space="preserve">
+    <value>Central Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Guatemala" xml:space="preserve">
+    <value>Central America Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Halifax" xml:space="preserve">
+    <value>Atlantic Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Hanoi" xml:space="preserve">
+    <value>SE Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Harare" xml:space="preserve">
+    <value>South Africa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Helsinki" xml:space="preserve">
+    <value>FLE Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Hobart" xml:space="preserve">
+    <value>Tasmania Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="HongKong" xml:space="preserve">
+    <value>China Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Honolulu" xml:space="preserve">
+    <value>Hawaiian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Indiana" xml:space="preserve">
+    <value>US Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Irkutsk" xml:space="preserve">
+    <value>North Asia East Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Islamabad" xml:space="preserve">
+    <value>West Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Istanbul" xml:space="preserve">
+    <value>GTB Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Jakarta" xml:space="preserve">
+    <value>SE Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Jerusalem" xml:space="preserve">
+    <value>Israel Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Johannesburg" xml:space="preserve">
+    <value>South Africa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Kabul" xml:space="preserve">
+    <value>Afghanistan Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Kamchatka" xml:space="preserve">
+    <value>Fiji Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Karachi" xml:space="preserve">
+    <value>West Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Katmandu" xml:space="preserve">
+    <value>Nepal Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Kiev" xml:space="preserve">
+    <value>FLE Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Kolkata" xml:space="preserve">
+    <value>India Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Krasnoyarsk" xml:space="preserve">
+    <value>North Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="KualaLumpur" xml:space="preserve">
+    <value>Singapore Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Kuwai" xml:space="preserve">
+    <value>Arab Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Lagos" xml:space="preserve">
+    <value>W. Central Africa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="LaPaz" xml:space="preserve">
+    <value>Mexico Standard Time 2</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Lima" xml:space="preserve">
+    <value>SA Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Lisbon" xml:space="preserve">
+    <value>GMT Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Ljubljana" xml:space="preserve">
+    <value>Central Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="London" xml:space="preserve">
+    <value>GMT Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="LosAngeles" xml:space="preserve">
+    <value>Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Madrid" xml:space="preserve">
+    <value>Romance Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Magadan" xml:space="preserve">
+    <value>Central Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Manaus" xml:space="preserve">
+    <value>Central Brazilian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="MarshallIs" xml:space="preserve">
+    <value>Fiji Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Mazatlan" xml:space="preserve">
+    <value>Mexico Standard Time 2</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Melbourne" xml:space="preserve">
+    <value>Aus Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="MexicoCity" xml:space="preserve">
+    <value>Mexico Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Minsk" xml:space="preserve">
+    <value>E. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Monrovia" xml:space="preserve">
+    <value>Greenland Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Monterrey" xml:space="preserve">
+    <value>Mexico Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Montevideo" xml:space="preserve">
+    <value>Montevideo Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Moscow" xml:space="preserve">
+    <value>Russian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Mumbai" xml:space="preserve">
+    <value>India Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Muscat" xml:space="preserve">
+    <value>Arabian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Nairobi" xml:space="preserve">
+    <value>E. Africa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="NewCaledonia" xml:space="preserve">
+    <value>Central Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="NewDelhi" xml:space="preserve">
+    <value>India Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="NewYork" xml:space="preserve">
+    <value>Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Novosibirsk" xml:space="preserve">
+    <value>N. Central Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Osaka" xml:space="preserve">
+    <value>Tokyo Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Paris" xml:space="preserve">
+    <value>Romance Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Perth" xml:space="preserve">
+    <value>W. Australia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Phoenix" xml:space="preserve">
+    <value>US Mountain Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="PortMoresby" xml:space="preserve">
+    <value>West Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Prague" xml:space="preserve">
+    <value>Central Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Pretoria" xml:space="preserve">
+    <value>South Africa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Quito" xml:space="preserve">
+    <value>SA Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Rangoon" xml:space="preserve">
+    <value>Myanmar Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Regina" xml:space="preserve">
+    <value>Canada Central Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Reykjavik" xml:space="preserve">
+    <value>Greenland Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Riga" xml:space="preserve">
+    <value>FLE Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="RioBranco" xml:space="preserve">
+    <value>SA Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Riyadh" xml:space="preserve">
+    <value>Arab Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Rome" xml:space="preserve">
+    <value>W. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Samoa" xml:space="preserve">
+    <value>Samoa Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Santiago" xml:space="preserve">
+    <value>Pacific SA Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="SaoPaulo" xml:space="preserve">
+    <value>E. South America Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Sapporo" xml:space="preserve">
+    <value>Tokyo Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Sarajevo" xml:space="preserve">
+    <value>Central European Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Seoul" xml:space="preserve">
+    <value>Korea Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Shanghai" xml:space="preserve">
+    <value>China Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Singapore" xml:space="preserve">
+    <value>Singapore Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Skopje" xml:space="preserve">
+    <value>Central European Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Sofia" xml:space="preserve">
+    <value>FLE Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="SolomonIs" xml:space="preserve">
+    <value>Central Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="SouthGeorgia" xml:space="preserve">
+    <value>Mid-Atlantic Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="SriJayawardenepura" xml:space="preserve">
+    <value>Sri Lanka Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="StJohns" xml:space="preserve">
+    <value>Newfoundland Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Stockholm" xml:space="preserve">
+    <value>W. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="StPetersburg" xml:space="preserve">
+    <value>Russian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Sydney" xml:space="preserve">
+    <value>Aus Eastern Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Taipei" xml:space="preserve">
+    <value>Taipei Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tallinn" xml:space="preserve">
+    <value>FLE Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tashkent" xml:space="preserve">
+    <value>West Asia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tbilisi" xml:space="preserve">
+    <value>Caucasus Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tehran" xml:space="preserve">
+    <value>Iran Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tijuana" xml:space="preserve">
+    <value>Pacific Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tokyo" xml:space="preserve">
+    <value>Tokyo Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Tongatapu" xml:space="preserve">
+    <value>Tonga Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="UlaanBataar" xml:space="preserve">
+    <value>North Asia East Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Urumqi" xml:space="preserve">
+    <value>China Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Vienna" xml:space="preserve">
+    <value>W. Europe Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Vilnius" xml:space="preserve">
+    <value>FLE Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Vladivostok" xml:space="preserve">
+    <value>Vladivostok Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Volgograd" xml:space="preserve">
+    <value>Russian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Warsaw" xml:space="preserve">
+    <value>Central European Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Wellington" xml:space="preserve">
+    <value>New Zealand Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Windhoek" xml:space="preserve">
+    <value>Namibia Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Yakutsk" xml:space="preserve">
+    <value>Yakutsk Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Yekaterinburg" xml:space="preserve">
+    <value>Ekaterinburg Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Yerevan" xml:space="preserve">
+    <value>Armenian Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+  <data name="Zagreb" xml:space="preserve">
+    <value>Central European Standard Time</value>
+    <comment>City system time zone</comment>
+  </data>
+</root>

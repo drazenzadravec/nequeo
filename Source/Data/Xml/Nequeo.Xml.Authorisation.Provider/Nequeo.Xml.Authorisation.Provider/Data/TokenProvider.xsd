@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="context">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="clients">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" name="client">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="uniqueIdentifier" type="xs:int" use="required" />
+                                            <xs:attribute name="serviceName" type="xs:string" use="required" />
+                                            <xs:attribute name="token" type="xs:string" use="required" />
+                                            <xs:attribute name="dateAdded" type="xs:dateTime" use="required" />
+                                            <xs:attribute name="permission" type="xs:string" use="required" />
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

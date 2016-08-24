@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<context>
+    <hosts>
+        <!-- type : clientManager, then include request URL. -->
+        <host name="nequeompc" index="0" activeConnections="0" domain="nequeo" type="chat" ></host>
+        <host name="development" index="1" activeConnections="0" domain="nequeo" type="chat" ></host>
+    </hosts>
+    <ports>
+        <port serviceName="chat" >
+            <type name="Integration_RemoteHost" number="8604" ></type>
+            <type name="Integration_RemoteHostSsl" number="8605" ></type>
+            <type name="Interface_RemoteHost" number="8606" ></type>
+            <type name="Interface_RemoteHostSsl" number="8607" ></type>
+        </port>
+        <port serviceName="conformance" >
+            <type name="Integration_RemoteHost" number="8604" ></type>
+            <type name="Integration_RemoteHostSsl" number="8605" ></type>
+            <type name="Interface_RemoteHost" number="8606" ></type>
+            <type name="Interface_RemoteHostSsl" number="8607" ></type>
+        </port>
+    </ports>
+    <manageURLs>
+        <manage type="chat" >
+            <url service="http://nequeompc:80/manager/manage/chat/client.svc/WebInvokeRequest" ></url>
+        </manage>
+        <manage type="conformance" >
+            <url service="http://host1:80/manager/manage/conformance/client.svc/WebInvokeRequest" ></url>
+            <url service="http://host2:80/manager/manage/conformance/client.svc/WebInvokeRequest" ></url>
+            <url service="http://host3:80/manager/manage/conformance/client.svc/WebInvokeRequest" ></url>
+        </manage>
+    </manageURLs>
+</context>

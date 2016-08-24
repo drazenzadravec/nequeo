@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nequeo.Xml.Authorisation.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AuthenticationXmlPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\AuthenticationProvider.xml</Value>
+    </Setting>
+    <Setting Name="CommunicationXmlPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\CommunicationProvider.xml</Value>
+    </Setting>
+    <Setting Name="ClientServiceXmlPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\ClientServiceProvider.xml</Value>
+    </Setting>
+    <Setting Name="TokenXmlPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Data\TokenProvider.xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
