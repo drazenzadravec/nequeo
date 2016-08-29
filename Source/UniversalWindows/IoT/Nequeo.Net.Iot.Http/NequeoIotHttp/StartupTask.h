@@ -33,16 +33,43 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "pch.h"
 
+#include "HttpServer.h"
+
 using namespace Platform;
+using namespace Windows::Foundation;
 using namespace Windows::ApplicationModel::Background;
 
 namespace NequeoIotHttp
 {
+	/// <summary>
+	/// Start a background task.
+	/// </summary>
 	[Windows::Foundation::Metadata::WebHostHidden]
     public ref class StartupTask sealed : public IBackgroundTask
     {
     public:
+		/// <summary>
+		/// Run the background task, entry-point.
+		/// </summary>
+		/// <param name="taskInstance">The background task instance.</param>
         virtual void Run(IBackgroundTaskInstance^ taskInstance);
+
+	private:
+		HttpServer^ _server;
+		Platform::Agile<BackgroundTaskDeferral^> _serviceDeferral;
+
+		/// <summary>
+		/// On cancel background task.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="reason">The reason for cancellation.</param>
+		void OnCanceled(IBackgroundTaskInstance^ sender, BackgroundTaskCancellationReason reason);
+
+		/// <summary>
+		/// On start server work item handler.
+		/// </summary>
+		/// <param name="operation">The async action.</param>
+		void OnWorkItemHandler(Windows::Foundation::IAsyncAction^ operation);
 
     };
 }

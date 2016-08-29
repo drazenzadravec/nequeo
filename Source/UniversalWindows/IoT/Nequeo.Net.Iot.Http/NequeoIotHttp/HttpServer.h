@@ -35,8 +35,96 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Platform;
 using namespace Windows::ApplicationModel::Background;
+using namespace Windows::Networking::Sockets;
+using namespace Windows::Storage::Streams;
+using namespace Windows::Foundation;
+using namespace Windows::Globalization;
 
 namespace NequeoIotHttp
 {
-	
+	/// <summary>
+	/// Http server.
+	/// </summary>
+	public ref class HttpServer sealed
+	{
+	public:
+		/// <summary>
+		/// Http server.
+		/// </summary>
+		/// <param name="serverPort">The server port number.</param>
+		HttpServer(int serverPort);
+
+		/// <summary>
+		/// Http server deconstructor.
+		/// </summary>
+		virtual ~HttpServer();
+
+		/// <summary>
+		/// Start the server.
+		/// </summary>
+		Windows::Foundation::IAsyncAction^ StartServer();
+
+	private:
+		int _port;
+		bool _disposed;
+		const unsigned int BufferSize;
+		StreamSocketListener^ _listener;
+
+		/// <summary>
+		/// On connection received.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="args">The stream socket listener connection received event arguments.</param>
+		void OnConnectionReceived(StreamSocketListener ^sender, StreamSocketListenerConnectionReceivedEventArgs ^args);
+
+		/// <summary>
+		/// Process a new request async.
+		/// </summary>
+		/// <param name="socket">The current socket stream.</param>
+		Windows::Foundation::IAsyncAction^ ProcessRequestAsync(StreamSocket^ socket);
+
+		/// <summary>
+		/// Write response.
+		/// </summary>
+		/// <param name="request">The request (page and query).</param>
+		/// <param name="os">The current output stream.</param>
+		void WriteResponse(String^ request, IOutputStream^ os);
+
+		/// <summary>
+		/// Write response error.
+		/// </summary>
+		/// <param name="os">The current output stream.</param>
+		void WriteResponseError(IOutputStream^ os);
+
+		/// <summary>
+		/// Create the response html.
+		/// </summary>
+		/// <param name="title">The page title.</param>
+		/// <param name="body">The page body.</param>
+		/// <returns>The html.</returns>
+		String^ CreateHtml(String^ title, String^ body);
+
+		/// <summary>
+		/// Create the response text.
+		/// </summary>
+		/// <param name="body">The page body.</param>
+		/// <returns>The text.</returns>
+		String^ CreateText(String^ body);
+
+		/// <summary>
+		/// Convert the buffer to an array of bytes.
+		/// </summary>
+		/// <param name="buffer">The buffer to convert.</param>
+		/// <return>The array of bytes.</return>
+		std::vector<unsigned char> GetData(IBuffer^ buffer);
+
+		/// <summary>
+		/// Split the text.
+		/// </summary>
+		/// <param name="s">The text to split.</param>
+		/// <param name="delim">The delimeter.</param>
+		/// <param name="v">The array of split text.</param>
+		void Split(std::string &s, char delim, std::vector<std::string> &v);
+		
+	};
 }

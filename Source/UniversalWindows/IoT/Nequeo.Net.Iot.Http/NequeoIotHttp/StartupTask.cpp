@@ -34,11 +34,57 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace NequeoIotHttp;
 
-// The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
-
+/// <summary>
+/// Run the background task, entry-point.
+/// </summary>
+/// <param name="taskInstance">The background task instance.</param>
 void StartupTask::Run(IBackgroundTaskInstance^ taskInstance)
 {
-    //
-    // TODO: Insert code to start one or more asynchronous methods
-    //
+	// Associate a cancellation handler with the background task. 
+	taskInstance->Canceled += ref new Windows::ApplicationModel::Background::BackgroundTaskCanceledEventHandler(this, &NequeoIotHttp::StartupTask::OnCanceled);
+
+	// Get the deferral object from the task instance.
+	_serviceDeferral = taskInstance->GetDeferral();
+
+	// Set a result to return to the caller.
+	_server = ref new HttpServer(83);
+	Windows::System::Threading::ThreadPool::RunAsync(
+		ref new Windows::System::Threading::WorkItemHandler(this, &NequeoIotHttp::StartupTask::OnWorkItemHandler));
+}
+
+/// <summary>
+/// On start server work item handler.
+/// </summary>
+/// <param name="operation">The async action.</param>
+void StartupTask::OnWorkItemHandler(Windows::Foundation::IAsyncAction^ operation)
+{
+	// If the server has been created.
+	if (_server != nullptr)
+	{
+		// Start the server.
+		auto start = concurrency::create_task(_server->StartServer());
+	}
+}
+
+/// <summary>
+/// On cancel background task.
+/// </summary>
+/// <param name="sender">The sender.</param>
+/// <param name="reason">The reson for cancellation.</param>
+void StartupTask::OnCanceled(IBackgroundTaskInstance^ sender, BackgroundTaskCancellationReason reason)
+{
+	// Clean up and get ready to exit.
+	if (_server != nullptr)
+		delete _server;
+
+	// Service was asked to quit. Give us service deferral
+	// so platform can terminate the background task
+	if (_serviceDeferral != nullptr)
+	{
+		_serviceDeferral->Complete();
+		_serviceDeferral.Release();
+	}
+
+	_server = nullptr;
+	_serviceDeferral = nullptr;
 }
