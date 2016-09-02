@@ -5,7 +5,7 @@
 #include "PropVariant.h"
 #include "FileSys.h"
 #include "InStreamWrapper.h"
-
+#include "CPP\Common\Defs.h"
 
 namespace SevenZip
 {
