@@ -35,7 +35,7 @@ namespace intl
 		STDMETHOD(CryptoGetTextPassword)( BSTR* password );
 
 		bool PasswordIsDefined;
-		UString Password;
+		LPCOLESTR Password;
 
 	};
 }

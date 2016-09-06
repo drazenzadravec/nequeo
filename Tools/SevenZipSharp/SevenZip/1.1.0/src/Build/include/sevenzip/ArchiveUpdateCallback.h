@@ -50,7 +50,7 @@ namespace intl
 		STDMETHOD(SetRatioInfo)( const UInt64* inSize, const UInt64* outSize );
 
 		bool PasswordIsDefined;
-		UString Password;
+		LPCOLESTR Password;
 		bool AskPassword;
 	};
 }
