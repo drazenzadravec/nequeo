@@ -1,4 +1,4 @@
-# Nequeo
+# Nequeo [![Build Status](https://travis-ci.org/drazenzadravec/nequeo.svg?branch=master)](https://travis-ci.org/drazenzadravec/nequeo)
  
 Nequeo master repo contains component projects wriiten in C++, C, C#, Python, Java and PHP.
 
