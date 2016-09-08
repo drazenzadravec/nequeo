@@ -1,1 +1,2 @@
 language: csharp
+solution: Source/Components/Component/NequeoEx/NequeoEx.sln
