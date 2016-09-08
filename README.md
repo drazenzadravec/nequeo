@@ -2,6 +2,6 @@
  
 Nequeo master repo contains component projects wriiten in C++, C, C#, Python, Java and PHP.
 
-## Components [![Stories in Progress](https://badge.waffle.io/drazenzadravec/nequeo.png?label=open&title=Waffle)](http://waffle.io/drazenzadravec/nequeo)
+## Components [![Stories in Progress](https://badge.waffle.io/drazenzadravec/nequeo.png?label=inprogress&title=Waffle)](http://waffle.io/drazenzadravec/nequeo)
 
 Cross-platform, desktop, mobile and web applications.
