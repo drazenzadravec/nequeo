@@ -1,1 +1,1 @@
-https://www.nuget.org/packages/NequeoSerialisation/
+[![nuget-badge](https://img.shields.io/badge/nuget-active-blue.svg)](https://www.nuget.org/packages/NequeoSerialisation)
