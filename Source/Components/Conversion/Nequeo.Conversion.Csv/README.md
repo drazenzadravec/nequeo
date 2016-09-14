@@ -1,1 +1,1 @@
-https://www.nuget.org/packages/NequeoConversionCsv/
+[![nuget-badge](https://img.shields.io/badge/nuget-active-blue.svg)](https://www.nuget.org/packages/NequeoConversionCsv)
