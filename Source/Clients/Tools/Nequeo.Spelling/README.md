@@ -1,2 +1,5 @@
-https://www.nuget.org/packages/NequeoSpellingCommon/
-https://www.nuget.org/packages/NequeoSpellingAustralia/
+[![nuget-badge](https://img.shields.io/badge/nuget-common_active-blue.svg)](https://www.nuget.org/packages/NequeoSpellingCommon)
+[![nuget-badge](https://img.shields.io/badge/nuget-australia_active-blue.svg)](https://www.nuget.org/packages/NequeoSpellingAustralia)
+[![nuget-badge](https://img.shields.io/badge/nuget-united_states_active-blue.svg)](https://www.nuget.org/packages/NequeoSpellingUnitedStates)
+[![nuget-badge](https://img.shields.io/badge/nuget-united_kingdom_active-blue.svg)](https://www.nuget.org/packages/NequeoSpellingUnitedKindom)
+[![nuget-badge](https://img.shields.io/badge/nuget-new_zealand_active-blue.svg)](https://www.nuget.org/packages/NequeoSpellingNewZeland)
