@@ -37,6 +37,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+namespace Nequeo.Net.Search.Google.Model
+{
+    using System;
+    using System.Threading;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Xml.Serialization;
+    using System.Runtime.Serialization;
+    using System.ComponentModel;
+
+    /// <summary>
+    /// The searchresult data object class.
+    /// </summary>
+    public partial class SearchResult
+    {
+        /// <summary>
+        /// Gets or sets the error messsage.
+        /// </summary>
+        public ErrorModel Error { get; set; }
+    }
+}
+
 namespace Nequeo.Net.Search.Google
 {
     /// <summary>

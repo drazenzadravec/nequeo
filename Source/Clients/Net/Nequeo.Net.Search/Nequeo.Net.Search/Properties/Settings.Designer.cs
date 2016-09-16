@@ -46,5 +46,17 @@ namespace Nequeo.Net.Search.Properties {
                 this["GoogleSearchServiceURI"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.cognitive.microsoft.com/bing/v5.0/search")]
+        public string MicrosoftSearchServiceURI_v5 {
+            get {
+                return ((string)(this["MicrosoftSearchServiceURI_v5"]));
+            }
+            set {
+                this["MicrosoftSearchServiceURI_v5"] = value;
+            }
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace Nequeo.Net.Search.Google
         /// </summary>
         public Api()
         {
-            // Gets the google translator service URI.
+            // Gets the google search service URI.
             _service = new Uri(Nequeo.Net.Search.Properties.Settings.Default.GoogleSearchServiceURI);
         }
 
@@ -68,7 +68,7 @@ namespace Nequeo.Net.Search.Google
         private ApiContainer _container = null;
 
         /// <summary>
-        /// Gets or sets the translator service.
+        /// Gets or sets the search service.
         /// </summary>
         public Uri Service
         {

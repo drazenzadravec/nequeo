@@ -8,5 +8,8 @@
     <Setting Name="GoogleSearchServiceURI" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://www.googleapis.com/customsearch/v1</Value>
     </Setting>
+    <Setting Name="MicrosoftSearchServiceURI_v5" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.cognitive.microsoft.com/bing/v5.0/search</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

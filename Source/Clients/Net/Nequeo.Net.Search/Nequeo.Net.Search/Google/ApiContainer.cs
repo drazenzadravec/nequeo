@@ -46,7 +46,7 @@ namespace Nequeo.Net.Search.Google
     internal class ApiContainer
     {
         /// <summary>
-        /// Google api language service query container.
+        /// Google api search service query container.
         /// </summary>
         /// <param name="serviceRoot">An absolute URI that identifies the root of a data service.</param>
         /// <param name="apiKey">The api key used to access this service.</param>
