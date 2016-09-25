@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          MimeType.h
-*  Purpose :       Mime types.
+*  File :          MultiWebServer.h
+*  Purpose :       MultiWebServer.
 *
 */
 
@@ -34,47 +34,59 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 #include "Global.h"
 
+#include "MultiServerContainer.h"
+#include "WebServer.h"
+
 namespace Nequeo {
 	namespace Net {
-		namespace Mime
+		namespace Http
 		{
 			/// <summary>
-			/// Mime types.
+			/// Http multi web server.
 			/// </summary>
-			class EXPORT_NEQUEO_NET_BOOST_SERVER_API MimeType
+			class EXPORT_NEQUEO_NET_BOOST_SERVER_API MultiWebServer
 			{
 			public:
 				/// <summary>
-				/// Mime types.
+				/// Http multi web server.
 				/// </summary>
-				MimeType();
+				/// <param name="containers">The list of server arguments.</param>
+				MultiWebServer(std::vector<MultiServerContainer>& containers);
 
 				/// <summary>
-				/// Mime types.
+				/// Http multi web server.
 				/// </summary>
-				~MimeType();
+				virtual ~MultiWebServer();
 
 				/// <summary>
-				/// Is the mime type an application hosting type.
+				/// On web context request.
 				/// </summary>
-				/// <param name="extension">The extension.</param>
-				/// <returns>True if application hosting type; else false.</returns>
-				bool IsApplicationType(const std::string& extension);
+				/// <param name="webContext">The web context callback function.</param>
+				void OnWebContext(const WebContextHandler& webContext);
+
+				///	<summary>
+				///	Start the servers.
+				///	</summary>
+				void Start();
+
+				///	<summary>
+				///	Stop the servers.
+				///	</summary>
+				void Stop();
 
 				/// <summary>
-				/// Get the mime type for the extension.
+				/// Get the web server list.
 				/// </summary>
-				/// <param name="extension">The extension.</param>
-				/// <returns>The mime type.</returns>
-				std::string GetMimeType(const std::string& extension);
+				/// <return>The web servers.</return>
+				const std::vector<std::shared_ptr<WebServer>>& GetWebServers() const;
 
 			private:
 				bool _disposed;
-				std::map<std::string, std::string> _mimeTypes;
-				std::vector<std::string> _applicationTypes;
 
-				void CreateApplicationTypes();
-				void CreateMimeTypes();
+				std::vector<std::shared_ptr<WebServer>> _webServers;
+				std::vector<MultiServerContainer> _containers;
+
+				WebContextHandler _onWebContext;
 			};
 		}
 	}

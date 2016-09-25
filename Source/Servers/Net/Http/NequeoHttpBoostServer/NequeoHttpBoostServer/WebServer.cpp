@@ -42,8 +42,8 @@ std::atomic<int> serverCount;
 concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalHttpServer>> serverPtr;
 concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalSecureHttpServer>> serverSecurePtr;
 
-void Accept(WebServer*, std::shared_ptr<InternalHttpServer>, std::function<void(WebContext*)>);
-void AcceptSecure(WebServer*, std::shared_ptr<InternalSecureHttpServer>, std::function<void(WebContext*)>);
+void Accept(WebServer*, std::shared_ptr<InternalHttpServer>, std::function<void(const WebContext*)>);
+void AcceptSecure(WebServer*, std::shared_ptr<InternalSecureHttpServer>, std::function<void(const WebContext*)>);
 
 void StopAccept(std::shared_ptr<InternalHttpServer>);
 void StopAcceptSecure(std::shared_ptr<InternalSecureHttpServer>);
@@ -60,7 +60,7 @@ void MakeSecureWebContext(std::shared_ptr<WebContext>, std::shared_ptr<InternalS
 WebServer::WebServer(unsigned short port, IPVersionType ipv) :
 	_disposed(false), _listening(false), _isSecure(false), _port(port), 
 	_internalThread(false), _ipv(ipv), _hasEndpoint(false), _serverName("Nequeo Web Server 16.26.1.1"),
-	_serverIndex(-1)
+	_serverIndex(-1), _endpoint("")
 {
 }
 
@@ -69,7 +69,7 @@ WebServer::WebServer(unsigned short port, IPVersionType ipv) :
 /// </summary>
 /// <param name="port">The listening port number.</param>
 /// <param name="endpoint">The endpoint address to listen on.</param>
-WebServer::WebServer(unsigned short port, std::string& endpoint) :
+WebServer::WebServer(unsigned short port, const std::string& endpoint) :
 	_disposed(false), _listening(false), _isSecure(false), _port(port), 
 	_internalThread(false), _endpoint(endpoint), _hasEndpoint(true), _serverName("Nequeo Web Server 16.26.1.1"),
 	_serverIndex(-1)
@@ -109,7 +109,7 @@ WebServer::~WebServer()
 /// On web context request.
 /// </summary>
 /// <param name="webContext">The web context callback function.</param>
-void WebServer::OnWebContext(std::function<void(WebContext*)> webContext)
+void WebServer::OnWebContext(const WebContextHandler& webContext)
 {
 	_onWebContext = webContext;
 }
@@ -270,11 +270,11 @@ IPVersionType WebServer::IPVersion() const
 /// </summary>
 /// <param name="serverName">The server name.</param>
 /// <return>The servername.</return>
-std::string WebServer::GetServerName() const
+const std::string& WebServer::GetServerName() const
 {
 	return _serverName;
 }
-void WebServer::SetServerName(std::string& serverName)
+void WebServer::SetServerName(const std::string& serverName)
 {
 	_serverName = serverName;
 }
@@ -288,13 +288,22 @@ unsigned short WebServer::Port() const
 	return _port;
 }
 
+/// <summary>
+/// Get the endpoint.
+/// </summary>
+/// <return>The endpoint.</return>
+const std::string& WebServer::GetEndpoint() const
+{
+	return _endpoint;
+}
+
 ///	<summary>
 ///	Accept connections for the server.
 ///	</summary>
 /// <param name="webServer">The web server instance.</param>
 /// <param name="server">The server instance.</param>
 /// <param name="handler">The web context callback function.</param>
-void Accept(WebServer* webServer, std::shared_ptr<InternalHttpServer> server, std::function<void(WebContext*)> handler)
+void Accept(WebServer* webServer, std::shared_ptr<InternalHttpServer> server, std::function<void(const WebContext*)> handler)
 {
 	// Default GET-DEFAULT_METHOD. If no other matches, this anonymous function will be called. 
 	server->default_resource["DEFAULT_METHOD"] = [&webServer, &server, &handler](std::shared_ptr<InternalHttpServer::Response> response, std::shared_ptr<InternalHttpServer::Request> request)
@@ -328,7 +337,7 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalHttpServer> server, st
 /// <param name="webServer">The web server instance.</param>
 /// <param name="server">The server instance.</param>
 /// <param name="handler">The web context callback function.</param>
-void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureHttpServer> server, std::function<void(WebContext*)> handler)
+void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureHttpServer> server, std::function<void(const WebContext*)> handler)
 {
 	// Default GET-DEFAULT_METHOD. If no other matches, this anonymous function will be called. 
 	server->default_resource["DEFAULT_METHOD"] = [&webServer, &server, &handler](std::shared_ptr<InternalSecureHttpServer::Response> response, std::shared_ptr<InternalSecureHttpServer::Request> request)

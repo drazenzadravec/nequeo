@@ -65,25 +65,25 @@ namespace Nequeo {
 				/// Get the net request.
 				/// </summary>
 				/// <return>The net request.</return>
-				NetRequest& Request();
+				NetRequest& Request() const;
 
 				/// <summary>
 				/// Get the net response.
 				/// </summary>
 				/// <return>The net response.</return>
-				NetResponse& Response();
+				NetResponse& Response() const;
 
 				/// <summary>
 				/// Is the server secure.
 				/// </summary>
 				/// <return>True if the server is secure; else false.</return>
-				bool IsSecure();
+				bool IsSecure() const;
 
 				/// <summary>
 				/// The IP version type.
 				/// </summary>
 				/// <return>The IP version type.</return>
-				IPVersionType IPVersion();
+				IPVersionType IPVersion() const;
 
 				/// <summary>
 				/// Get the port number.

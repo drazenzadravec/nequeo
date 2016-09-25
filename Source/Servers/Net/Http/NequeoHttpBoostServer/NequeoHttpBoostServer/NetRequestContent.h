@@ -58,7 +58,7 @@ namespace Nequeo {
 				/// Get the accept encoding.
 				/// </summary>
 				/// <return>The accept encoding.</return>
-				inline std::string GetAcceptEncoding() const
+				inline const std::string& GetAcceptEncoding() const
 				{
 					return _acceptEncoding;
 				}
@@ -67,7 +67,7 @@ namespace Nequeo {
 				/// Set the accept encoding.
 				/// </summary>
 				/// <param name="acceptEncoding">The accept encoding.</param>
-				inline void SetAcceptEncoding(std::string acceptEncoding)
+				inline void SetAcceptEncoding(const std::string& acceptEncoding)
 				{
 					_acceptEncoding = acceptEncoding;
 				}
@@ -76,7 +76,7 @@ namespace Nequeo {
 				/// Get the content type.
 				/// </summary>
 				/// <return>The content type.</return>
-				inline std::string GetContentType() const
+				inline const std::string& GetContentType() const
 				{
 					return _contentType;
 				}
@@ -85,7 +85,7 @@ namespace Nequeo {
 				/// Set the content type.
 				/// </summary>
 				/// <param name="contentType">The content type.</param>
-				inline void SetContentType(std::string contentType)
+				inline void SetContentType(const std::string& contentType)
 				{
 					_contentType = contentType;
 				}
@@ -112,7 +112,7 @@ namespace Nequeo {
 				/// Get the protocol version.
 				/// </summary>
 				/// <return>The protocol version.</return>
-				inline std::string GetProtocolVersion() const
+				inline const std::string& GetProtocolVersion() const
 				{
 					return _protocolVersion;
 				}
@@ -130,7 +130,7 @@ namespace Nequeo {
 				/// Get the method.
 				/// </summary>
 				/// <return>The method.</return>
-				inline std::string GetMethod() const
+				inline const std::string& GetMethod() const
 				{
 					return _method;
 				}
@@ -139,7 +139,7 @@ namespace Nequeo {
 				/// Set the method.
 				/// </summary>
 				/// <param name="method">The method.</param>
-				inline void SetMethod(std::string method)
+				inline void SetMethod(const std::string& method)
 				{
 					_method = method;
 				}
@@ -148,7 +148,7 @@ namespace Nequeo {
 				/// Get the path.
 				/// </summary>
 				/// <return>The path.</return>
-				inline std::string GetPath() const
+				inline const std::string& GetPath() const
 				{
 					return _path;
 				}
@@ -157,7 +157,7 @@ namespace Nequeo {
 				/// Set the path.
 				/// </summary>
 				/// <param name="path">The path.</param>
-				inline void SetPath(std::string path)
+				inline void SetPath(const std::string& path)
 				{
 					_path = path;
 				}
@@ -166,7 +166,7 @@ namespace Nequeo {
 				/// Get the host.
 				/// </summary>
 				/// <return>The host.</return>
-				inline std::string GetHost() const
+				inline const std::string& GetHost() const
 				{
 					return _host;
 				}
@@ -175,7 +175,7 @@ namespace Nequeo {
 				/// Set the host.
 				/// </summary>
 				/// <param name="host">The host.</param>
-				inline void SetHost(std::string host)
+				inline void SetHost(const std::string& host)
 				{
 					_host = host;
 				}
@@ -191,7 +191,7 @@ namespace Nequeo {
 				/// Get the headers.
 				/// </summary>
 				/// <return>The headers.</return>
-				inline std::map<std::string, std::string> GetHeaders() const
+				inline std::map<std::string, std::string>& GetHeaders()
 				{
 					return _headers;
 				}

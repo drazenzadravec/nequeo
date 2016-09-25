@@ -297,6 +297,8 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="IPVersionType.h" />
     <ClInclude Include="MimeType.h" />
+    <ClInclude Include="MultiServerContainer.h" />
+    <ClInclude Include="MultiWebServer.h" />
     <ClInclude Include="NetContext.h" />
     <ClInclude Include="NetRequest.h" />
     <ClInclude Include="NetRequestContent.h" />
@@ -316,6 +318,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MimeType.cpp" />
+    <ClCompile Include="MultiWebServer.cpp" />
     <ClCompile Include="NetContext.cpp" />
     <ClCompile Include="NetRequest.cpp" />
     <ClCompile Include="NetRequestContent.cpp" />

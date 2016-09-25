@@ -41,6 +41,8 @@ namespace Nequeo {
 	namespace Net {
 		namespace Http 
 		{
+			typedef std::function<void(const WebContext*)> WebContextHandler;
+
 			/// <summary>
 			/// Http web server.
 			/// </summary>
@@ -59,7 +61,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="port">The listening port number.</param>
 				/// <param name="endpoint">The endpoint address to listen on.</param>
-				WebServer(unsigned short port, std::string& endpoint);
+				WebServer(unsigned short port, const std::string& endpoint);
 
 				/// <summary>
 				/// Http web server.
@@ -70,7 +72,7 @@ namespace Nequeo {
 				/// On web context request.
 				/// </summary>
 				/// <param name="webContext">The web context callback function.</param>
-				void OnWebContext(std::function<void(WebContext*)> webContext);
+				void OnWebContext(const WebContextHandler& webContext);
 
 				///	<summary>
 				///	Start the server.
@@ -122,14 +124,20 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="serverName">The server name.</param>
 				/// <return>The servername.</return>
-				std::string GetServerName() const;
-				void SetServerName(std::string& serverName);
+				const std::string& GetServerName() const;
+				void SetServerName(const std::string& serverName);
 
 				/// <summary>
 				/// Get the port number.
 				/// </summary>
 				/// <return>The port number.</return>
 				unsigned short Port() const;
+
+				/// <summary>
+				/// Get the endpoint.
+				/// </summary>
+				/// <return>The endpoint.</return>
+				const std::string& GetEndpoint() const;
 
 			private:
 				bool _disposed;
@@ -149,7 +157,7 @@ namespace Nequeo {
 				std::string _publicKeyFile;
 				std::string _privateKeyFile;
 
-				std::function<void(WebContext*)> _onWebContext;
+				WebContextHandler _onWebContext;
 			};
 		}
 	}

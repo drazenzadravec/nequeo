@@ -64,7 +64,7 @@ NetContext::~NetContext()
 /// Get the net request.
 /// </summary>
 /// <return>The net request.</return>
-NetRequest& NetContext::Request()
+NetRequest& NetContext::Request() const
 {
 	return *(_request.get());
 }
@@ -73,7 +73,7 @@ NetRequest& NetContext::Request()
 /// Get the net response.
 /// </summary>
 /// <return>The net response.</return>
-NetResponse& NetContext::Response()
+NetResponse& NetContext::Response() const
 {
 	return *(_response.get());
 }
@@ -82,7 +82,7 @@ NetResponse& NetContext::Response()
 /// Is the server secure.
 /// </summary>
 /// <return>True if the server is secure; else false.</return>
-bool NetContext::IsSecure()
+bool NetContext::IsSecure() const
 {
 	return _isSecure;
 }
@@ -91,7 +91,7 @@ bool NetContext::IsSecure()
 /// The IP version type.
 /// </summary>
 /// <return>The IP version type.</return>
-IPVersionType NetContext::IPVersion()
+IPVersionType NetContext::IPVersion() const
 {
 	return _ipv;
 }

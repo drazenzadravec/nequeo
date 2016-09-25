@@ -62,7 +62,7 @@ WebContext::~WebContext()
 /// Get the web request.
 /// </summary>
 /// <return>The web request.</return>
-WebRequest& WebContext::Request()
+WebRequest& WebContext::Request() const
 {
 	return *(_request.get());
 }
@@ -71,7 +71,7 @@ WebRequest& WebContext::Request()
 /// Get the web response.
 /// </summary>
 /// <return>The web response.</return>
-WebResponse& WebContext::Response()
+WebResponse& WebContext::Response() const
 {
 	return *(_response.get());
 }
@@ -98,7 +98,7 @@ IPVersionType WebContext::IPVersion() const
 /// Get the server name.
 /// </summary>
 /// <return>The servername.</return>
-std::string WebContext::GetServerName() const
+const std::string& WebContext::GetServerName() const
 {
 	return _serverName;
 }

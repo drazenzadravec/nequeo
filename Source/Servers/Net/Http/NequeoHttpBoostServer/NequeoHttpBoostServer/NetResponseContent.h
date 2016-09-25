@@ -58,7 +58,7 @@ namespace Nequeo {
 				/// Get the headers.
 				/// </summary>
 				/// <return>The headers.</return>
-				inline std::map<std::string, std::string> GetHeaders() const
+				inline const std::map<std::string, std::string>& GetHeaders() const
 				{
 					return _headers;
 				}
@@ -67,7 +67,7 @@ namespace Nequeo {
 				/// Set the headers.
 				/// </summary>
 				/// <param name="headers">The headers.</param>
-				inline void SetHeaders(std::map<std::string, std::string> headers)
+				inline void SetHeaders(std::map<std::string, std::string>& headers)
 				{
 					_headers = headers;
 				}
@@ -76,7 +76,7 @@ namespace Nequeo {
 				/// Get the protocol version.
 				/// </summary>
 				/// <return>The protocol version.</return>
-				inline std::string GetProtocolVersion() const
+				inline const std::string& GetProtocolVersion() const
 				{
 					return _protocolVersion;
 				}
@@ -85,7 +85,7 @@ namespace Nequeo {
 				/// Set the protocol version.
 				/// </summary>
 				/// <param name="protocolVersion">The protocol version.</param>
-				inline void SetProtocolVersion(std::string protocolVersion)
+				inline void SetProtocolVersion(const std::string& protocolVersion)
 				{
 					_protocolVersion = protocolVersion;
 				}
@@ -112,7 +112,7 @@ namespace Nequeo {
 				/// Get the content type.
 				/// </summary>
 				/// <return>The content type.</return>
-				inline std::string GetContentType() const
+				inline const std::string& GetContentType() const
 				{
 					return _contentType;
 				}
@@ -121,7 +121,7 @@ namespace Nequeo {
 				/// Set the content type.
 				/// </summary>
 				/// <param name="contentType">The content type.</param>
-				inline void SetContentType(std::string contentType)
+				inline void SetContentType(const std::string& contentType)
 				{
 					_contentType = contentType;
 				}
@@ -130,7 +130,7 @@ namespace Nequeo {
 				/// Get the content encoding.
 				/// </summary>
 				/// <return>The content encoding.</return>
-				inline std::string GetContentEncoding() const
+				inline const std::string& GetContentEncoding() const
 				{
 					return _contentEncoding;
 				}
@@ -139,7 +139,7 @@ namespace Nequeo {
 				/// Set the content encoding.
 				/// </summary>
 				/// <param name="contentEncoding">The content encoding.</param>
-				inline void SetContentEncoding(std::string contentEncoding)
+				inline void SetContentEncoding(const std::string& contentEncoding)
 				{
 					_contentEncoding = contentEncoding;
 				}
@@ -148,7 +148,7 @@ namespace Nequeo {
 				/// Get the status description.
 				/// </summary>
 				/// <return>The status description.</return>
-				inline std::string GetStatusDescription() const
+				inline const std::string& GetStatusDescription() const
 				{
 					return _statusDescription;
 				}
@@ -157,7 +157,7 @@ namespace Nequeo {
 				/// Set the status description.
 				/// </summary>
 				/// <param name="statusDescription">The status description.</param>
-				inline void SetStatusDescription(std::string statusDescription)
+				inline void SetStatusDescription(const std::string& statusDescription)
 				{
 					_statusDescription = statusDescription;
 				}

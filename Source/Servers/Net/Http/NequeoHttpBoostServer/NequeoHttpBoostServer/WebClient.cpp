@@ -251,7 +251,7 @@ NetResponse& WebClient::Request(const NetRequest& request)
 	netRequest->SetContentType(request.GetContentType());
 
 	// Assign the headers.
-	std::map<std::string, std::string> headers = request.GetHeaders();
+	std::map<std::string, std::string> headers = const_cast<NetRequest&>(request).GetHeaders();
 	typedef std::pair<std::string, std::string> headerPair;
 
 	// For each header.
@@ -291,7 +291,7 @@ NetResponse& WebClient::Request(const NetRequest& request, const std::string& co
 	netRequest->SetContentType(request.GetContentType());
 
 	// Assign the headers.
-	std::map<std::string, std::string> headers = request.GetHeaders();
+	std::map<std::string, std::string> headers = const_cast<NetRequest&>(request).GetHeaders();
 	typedef std::pair<std::string, std::string> headerPair;
 
 	// For each header.
@@ -337,7 +337,7 @@ NetResponse& WebClient::Request(const NetRequest& request, std::iostream& conten
 	netRequest->SetContentLength(content_length);
 
 	// Assign the headers.
-	std::map<std::string, std::string> headers = request.GetHeaders();
+	std::map<std::string, std::string> headers = const_cast<NetRequest&>(request).GetHeaders();
 	typedef std::pair<std::string, std::string> headerPair;
 
 	// For each header.

@@ -60,7 +60,7 @@ namespace Nequeo {
 				/// Get the remote endpoint address.
 				/// </summary>
 				/// <return>The remote endpoint address.</return>
-				inline std::string GetRemoteEndpointAddress() const
+				inline const std::string& GetRemoteEndpointAddress() const
 				{
 					return _remoteEndpointAddress;
 				}
@@ -69,7 +69,7 @@ namespace Nequeo {
 				/// Set the remote endpoint address.
 				/// </summary>
 				/// <param name="remoteEndpointAddress">The remote endpoint address.</param>
-				inline void SetRemoteEndpointAddress(std::string remoteEndpointAddress)
+				inline void SetRemoteEndpointAddress(const std::string& remoteEndpointAddress)
 				{
 					_remoteEndpointAddress = remoteEndpointAddress;
 				}

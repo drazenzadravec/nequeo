@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          MimeType.h
-*  Purpose :       Mime types.
+*  File :          MultiServerContainer.h
+*  Purpose :       MultiServerContainer.
 *
 */
 
@@ -34,47 +34,87 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 #include "Global.h"
 
+#include "IPVersionType.h"
+
 namespace Nequeo {
 	namespace Net {
-		namespace Mime
+		namespace Http
 		{
 			/// <summary>
-			/// Mime types.
+			/// Multi server container.
 			/// </summary>
-			class EXPORT_NEQUEO_NET_BOOST_SERVER_API MimeType
+			class EXPORT_NEQUEO_NET_BOOST_SERVER_API MultiServerContainer
 			{
 			public:
 				/// <summary>
-				/// Mime types.
+				/// Multi server container.
 				/// </summary>
-				MimeType();
+				MultiServerContainer() {}
 
 				/// <summary>
-				/// Mime types.
+				/// Multi server container.
 				/// </summary>
-				~MimeType();
+				virtual ~MultiServerContainer() {}
 
 				/// <summary>
-				/// Is the mime type an application hosting type.
+				/// Get the port.
 				/// </summary>
-				/// <param name="extension">The extension.</param>
-				/// <returns>True if application hosting type; else false.</returns>
-				bool IsApplicationType(const std::string& extension);
+				/// <return>The port.</return>
+				inline unsigned short GetPort() const
+				{
+					return _port;
+				}
 
 				/// <summary>
-				/// Get the mime type for the extension.
+				/// Set the port.
 				/// </summary>
-				/// <param name="extension">The extension.</param>
-				/// <returns>The mime type.</returns>
-				std::string GetMimeType(const std::string& extension);
+				/// <param name="port">The port.</param>
+				inline void SetPort(unsigned short port)
+				{
+					_port = port;
+				}
+
+				/// <summary>
+				/// Get the endpoint.
+				/// </summary>
+				/// <return>The endpoint.</return>
+				inline const std::string& GetEndpoint() const
+				{
+					return _endpoint;
+				}
+
+				/// <summary>
+				/// Set the endpoint.
+				/// </summary>
+				/// <param name="endpoint">The endpoint.</param>
+				inline void SetEndpoint(const std::string& endpoint)
+				{
+					_endpoint = endpoint;
+				}
+
+				/// <summary>
+				/// Get the ipv.
+				/// </summary>
+				/// <return>The ipv.</return>
+				inline IPVersionType GetIPversion() const
+				{
+					return _ipv;
+				}
+
+				/// <summary>
+				/// Set the ipv.
+				/// </summary>
+				/// <param name="ipv">The ipv.</param>
+				inline void SetIPversion(IPVersionType ipv)
+				{
+					_ipv = ipv;
+				}
 
 			private:
 				bool _disposed;
-				std::map<std::string, std::string> _mimeTypes;
-				std::vector<std::string> _applicationTypes;
-
-				void CreateApplicationTypes();
-				void CreateMimeTypes();
+				unsigned short _port;
+				IPVersionType _ipv;
+				std::string _endpoint;
 			};
 		}
 	}

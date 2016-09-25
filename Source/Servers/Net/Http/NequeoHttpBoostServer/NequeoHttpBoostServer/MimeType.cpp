@@ -61,7 +61,7 @@ MimeType::~MimeType()
 /// </summary>
 /// <param name="extension">The extension.</param>
 /// <returns>True if application hosting type; else false.</returns>
-bool MimeType::IsApplicationType(std::string extension)
+bool MimeType::IsApplicationType(const std::string& extension)
 {
 	// Remove the dot a begining if exists.
 	std::string extNoDot = extension;
@@ -98,7 +98,7 @@ bool MimeType::IsApplicationType(std::string extension)
 /// </summary>
 /// <param name="extension">The extension.</param>
 /// <returns>The mime type.</returns>
-std::string MimeType::GetMimeType(std::string extension)
+std::string MimeType::GetMimeType(const std::string& extension)
 {
 	// Remove the dot a begining if exists.
 	std::string extNoDot = extension;

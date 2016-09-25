@@ -64,13 +64,13 @@ namespace Nequeo {
 				/// Get the web request.
 				/// </summary>
 				/// <return>The web request.</return>
-				WebRequest& Request();
+				WebRequest& Request() const;
 
 				/// <summary>
 				/// Get the web response.
 				/// </summary>
 				/// <return>The web response.</return>
-				WebResponse& Response();
+				WebResponse& Response() const;
 
 				/// <summary>
 				/// Is the server secure.
@@ -88,7 +88,7 @@ namespace Nequeo {
 				/// Get the server name.
 				/// </summary>
 				/// <return>The servername.</return>
-				std::string GetServerName() const;
+				const std::string& GetServerName() const;
 
 				/// <summary>
 				/// Get the port number.
@@ -117,7 +117,7 @@ namespace Nequeo {
 				/// Set server name.
 				/// </summary>
 				/// <param name="serverName">Server name.</param>
-				inline void SetServerName(std::string serverName)
+				inline void SetServerName(const std::string& serverName)
 				{
 					_serverName = serverName;
 				}
