@@ -54,14 +54,16 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="port">The listening port number.</param>
 				/// <param name="ipv">The IP version to use.</param>
-				WebServer(unsigned short port, IPVersionType ipv = IPVersionType::IPv4);
+				/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
+				WebServer(unsigned short port, IPVersionType ipv = IPVersionType::IPv4, bool isSecure = false);
 
 				/// <summary>
 				/// Http web server.
 				/// </summary>
 				/// <param name="port">The listening port number.</param>
 				/// <param name="endpoint">The endpoint address to listen on.</param>
-				WebServer(unsigned short port, const std::string& endpoint);
+				/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
+				WebServer(unsigned short port, const std::string& endpoint, bool isSecure = false);
 
 				/// <summary>
 				/// Http web server.

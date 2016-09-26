@@ -110,11 +110,69 @@ namespace Nequeo {
 					_ipv = ipv;
 				}
 
+				/// <summary>
+				/// Get the is secure.
+				/// </summary>
+				/// <return>The is secure.</return>
+				inline bool GetIsSecure() const
+				{
+					return _isSecure;
+				}
+
+				/// <summary>
+				/// Set the is secure.
+				/// </summary>
+				/// <param name="isSecure">The is secure.</param>
+				inline void SetIsSecure(bool isSecure)
+				{
+					_isSecure = isSecure;
+				}
+
+				/// <summary>
+				/// Get the public key file.
+				/// </summary>
+				/// <return>The public key file.</return>
+				inline const std::string& GetPublicKeyFile() const
+				{
+					return _publicKeyFile;
+				}
+
+				/// <summary>
+				/// Set the public key file.
+				/// </summary>
+				/// <param name="publicKeyFile">The public key file.</param>
+				inline void SetPublicKeyFile(const std::string& publicKeyFile)
+				{
+					_publicKeyFile = publicKeyFile;
+				}
+
+				/// <summary>
+				/// Get the private key file.
+				/// </summary>
+				/// <return>The private key file.</return>
+				inline const std::string& GetPrivateKeyFile() const
+				{
+					return _privateKeyFile;
+				}
+
+				/// <summary>
+				/// Set the private key file.
+				/// </summary>
+				/// <param name="privateKeyFile">The private key file.</param>
+				inline void SetPrivateKeyFile(const std::string& privateKeyFile)
+				{
+					_privateKeyFile = privateKeyFile;
+				}
+
 			private:
 				bool _disposed;
+
+				bool _isSecure;
 				unsigned short _port;
 				IPVersionType _ipv;
 				std::string _endpoint;
+				std::string _publicKeyFile;
+				std::string _privateKeyFile;
 			};
 		}
 	}

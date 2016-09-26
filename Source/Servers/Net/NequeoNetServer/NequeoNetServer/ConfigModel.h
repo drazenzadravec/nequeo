@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          MultiWebServer.h
-*  Purpose :       MultiWebServer.
+*  File :          ConfigModel.h
+*  Purpose :       Configuration Model class.
 *
 */
 
@@ -32,62 +32,60 @@ OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 
 #include "stdafx.h"
-#include "Global.h"
+#include "GlobalNetServer.h"
 
-#include "MultiServerContainer.h"
-#include "WebServer.h"
+#include "NequeoHttpBoostServer\MultiWebServer.h"
 
 namespace Nequeo {
 	namespace Net {
 		namespace Http
 		{
 			/// <summary>
-			/// Http multi web server.
+			/// Configuration model.
 			/// </summary>
-			class EXPORT_NEQUEO_NET_BOOST_SERVER_API MultiWebServer
+			class EXPORT_NEQUEO_NET_SERVER_API ConfigModel
 			{
 			public:
 				/// <summary>
-				/// Http multi web server.
+				/// Configuration model.
 				/// </summary>
-				/// <param name="containers">The list of server arguments.</param>
-				MultiWebServer(std::vector<MultiServerContainer>& containers);
+				/// <param name="path">The path and file name of the configuration file (json format).</param>
+				ConfigModel(const std::string& path) : _disposed(false), _path(path) {}
 
 				/// <summary>
-				/// Http multi web server.
+				/// Configuration model.
 				/// </summary>
-				virtual ~MultiWebServer();
+				~ConfigModel() {}
 
 				/// <summary>
-				/// On web context request.
+				/// Read the condifuration file contents.
 				/// </summary>
-				/// <param name="webContext">The web context callback function.</param>
-				void OnWebContext(const WebContextHandler& webContext);
-
-				///	<summary>
-				///	Start the servers.
-				///	</summary>
-				void Start();
-
-				///	<summary>
-				///	Stop the servers.
-				///	</summary>
-				void Stop();
+				void ReadConfigFile();
 
 				/// <summary>
-				/// Get the web server list.
+				/// Get the muilti server contatiner list.
 				/// </summary>
-				/// <return>The web servers.</return>
-				const std::vector<std::shared_ptr<WebServer>>& GetWebServers() const;
+				/// <return>The muilti server contatiner list.</return>
+				inline const std::vector<MultiServerContainer>& GetMultiServerContainer() const
+				{
+					return _containers;
+				}
+
+				/// <summary>
+				/// Get the root path.
+				/// </summary>
+				/// <return>The root path.</return>
+				inline const std::string& GetRootPath() const
+				{
+					return _rootPath;
+				}
 
 			private:
 				bool _disposed;
-				bool _started;
 
-				std::vector<std::shared_ptr<WebServer>> _webServers;
+				std::string _path;
+				std::string _rootPath;
 				std::vector<MultiServerContainer> _containers;
-
-				WebContextHandler _onWebContext;
 			};
 		}
 	}

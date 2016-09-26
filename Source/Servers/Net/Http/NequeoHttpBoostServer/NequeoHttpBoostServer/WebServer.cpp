@@ -57,8 +57,9 @@ void MakeSecureWebContext(std::shared_ptr<WebContext>, std::shared_ptr<InternalS
 ///	</summary>
 /// <param name="port">The listening port number.</param>
 /// <param name="ipv">The IP version to use.</param>
-WebServer::WebServer(unsigned short port, IPVersionType ipv) :
-	_disposed(false), _listening(false), _isSecure(false), _port(port), 
+/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
+WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure) :
+	_disposed(false), _listening(false), _isSecure(isSecure), _port(port),
 	_internalThread(false), _ipv(ipv), _hasEndpoint(false), _serverName("Nequeo Web Server 16.26.1.1"),
 	_serverIndex(-1), _endpoint("")
 {
@@ -69,8 +70,9 @@ WebServer::WebServer(unsigned short port, IPVersionType ipv) :
 /// </summary>
 /// <param name="port">The listening port number.</param>
 /// <param name="endpoint">The endpoint address to listen on.</param>
-WebServer::WebServer(unsigned short port, const std::string& endpoint) :
-	_disposed(false), _listening(false), _isSecure(false), _port(port), 
+/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
+WebServer::WebServer(unsigned short port, const std::string& endpoint, bool isSecure) :
+	_disposed(false), _listening(false), _isSecure(isSecure), _port(port),
 	_internalThread(false), _endpoint(endpoint), _hasEndpoint(true), _serverName("Nequeo Web Server 16.26.1.1"),
 	_serverIndex(-1)
 {

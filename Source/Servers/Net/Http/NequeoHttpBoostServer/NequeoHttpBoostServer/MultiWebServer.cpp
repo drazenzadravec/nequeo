@@ -41,7 +41,7 @@ using namespace Nequeo::Net::Http;
 /// </summary>
 /// <param name="containers">The list of server arguments.</param>
 MultiWebServer::MultiWebServer(std::vector<MultiServerContainer>& containers) :
-	_disposed(false), _containers(containers)
+	_disposed(false), _containers(containers), _started(false)
 {
 	// Get the vector size.
 	size_t vectorSize = containers.size();
@@ -59,12 +59,32 @@ MultiWebServer::MultiWebServer(std::vector<MultiServerContainer>& containers) :
 			if (container.GetEndpoint().length() > 0)
 			{
 				// Construct the endpoint server.
-				_webServers.push_back(std::make_shared<WebServer>(container.GetPort(), container.GetEndpoint()));
+				std::shared_ptr<WebServer> serverEndpoint = std::make_shared<WebServer>(container.GetPort(), container.GetEndpoint(), container.GetIsSecure());
+
+				// If secure.
+				if (serverEndpoint->IsSecure())
+				{
+					// Set the public and private keys.
+					serverEndpoint->SetSecurePublicPrivateKeys(container.GetPublicKeyFile(), container.GetPrivateKeyFile());
+				}
+
+				// Add the server.
+				_webServers.push_back(serverEndpoint);
 			}
 			else
 			{
 				// Construct the ipv server.
-				_webServers.push_back(std::make_shared<WebServer>(container.GetPort(), container.GetIPversion()));
+				std::shared_ptr<WebServer> serverIPversion = std::make_shared<WebServer>(container.GetPort(), container.GetIPversion(), container.GetIsSecure());
+
+				// If secure.
+				if (serverIPversion->IsSecure())
+				{
+					// Set the public and private keys.
+					serverIPversion->SetSecurePublicPrivateKeys(container.GetPublicKeyFile(), container.GetPrivateKeyFile());
+				}
+
+				// Add the server.
+				_webServers.push_back(serverIPversion);
 			}
 		}
 	}
@@ -78,6 +98,7 @@ MultiWebServer::~MultiWebServer()
 	if (!_disposed)
 	{
 		_disposed = true;
+		_started = false;
 	}
 }
 
@@ -95,19 +116,27 @@ void MultiWebServer::OnWebContext(const WebContextHandler& webContext)
 ///	</summary>
 void MultiWebServer::Start()
 {
-	// Get the vector size.
-	size_t vectorSize = _webServers.size();
-
-	// If servers exist.
-	if (vectorSize > 0)
+	// If not stared.
+	if (!_started)
 	{
-		// For each server found.
-		for (int i = 0; i < vectorSize; i++)
+		// Get the vector size.
+		size_t vectorSize = _webServers.size();
+
+		// If servers exist.
+		if (vectorSize > 0)
 		{
-			// Get the server.
-			WebServer* server = _webServers[i].get();
-			server->OnWebContext(_onWebContext);
-			server->StartThread();
+			// For each server found.
+			for (int i = 0; i < vectorSize; i++)
+			{
+				// Get the server.
+				WebServer* server = _webServers[i].get();
+				server->OnWebContext(_onWebContext);
+
+				// Start a new thread.
+				server->StartThread();
+			}
+
+			_started = true;
 		}
 	}
 }
@@ -117,18 +146,24 @@ void MultiWebServer::Start()
 ///	</summary>
 void MultiWebServer::Stop()
 {
-	// Get the vector size.
-	size_t vectorSize = _webServers.size();
-
-	// If servers exist.
-	if (vectorSize > 0)
+	// If stared.
+	if (_started)
 	{
-		// For each server found.
-		for (int i = 0; i < vectorSize; i++)
+		// Get the vector size.
+		size_t vectorSize = _webServers.size();
+
+		// If servers exist.
+		if (vectorSize > 0)
 		{
-			// Get the server.
-			WebServer* server = _webServers[i].get();
-			server->StopThread();
+			// For each server found.
+			for (int i = 0; i < vectorSize; i++)
+			{
+				// Get the server.
+				WebServer* server = _webServers[i].get();
+				server->StopThread();
+			}
+
+			_started = false;
 		}
 	}
 }

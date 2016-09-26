@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "MimeType.h"
+#include "Base\StringUtils.h"
 
 using namespace Nequeo::Net::Mime;
 
@@ -82,8 +83,12 @@ bool MimeType::IsApplicationType(const std::string& extension)
 		}
 	}
 
+	// Make to lower.
+	Nequeo::String toLowerNoDot = Nequeo::StringUtils::ToLower(extNoDot.c_str());
+	std::string ext(toLowerNoDot.c_str());
+
 	// If exists.
-	if (std::find(_applicationTypes.begin(), _applicationTypes.end(), extNoDot) != _applicationTypes.end())
+	if (std::find(_applicationTypes.begin(), _applicationTypes.end(), ext) != _applicationTypes.end())
 	{
 		return true;
 	}
@@ -111,7 +116,7 @@ std::string MimeType::GetMimeType(const std::string& extension)
 	if (index != std::string::npos)
 	{
 		// If the dot is at position 1.
-		if (index == 1)
+		if (index == 0)
 		{
 			// Ext without the dot.
 			// Move to the second char, this is index 0 based.
@@ -119,8 +124,12 @@ std::string MimeType::GetMimeType(const std::string& extension)
 		}
 	}
 
+	// Make to lower.
+	Nequeo::String toLowerNoDot = Nequeo::StringUtils::ToLower(extNoDot.c_str());
+	std::string ext(toLowerNoDot.c_str());
+
 	// Find existing mime.
-	auto mime_it = _mimeTypes.find(extNoDot);
+	auto mime_it = _mimeTypes.find(ext);
 
 	// If found mime.
 	if (mime_it != _mimeTypes.end())

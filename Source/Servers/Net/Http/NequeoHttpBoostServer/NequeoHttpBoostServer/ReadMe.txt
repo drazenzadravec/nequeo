@@ -35,3 +35,85 @@ AppWizard uses "TODO:" comments to indicate parts of the source code you
 should add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+
+// TestHttpServer.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <thread>
+
+#include "WebClient.h"
+#include "WebServer.h"
+#include "WebContext.h"
+#include "IPVersionType.h"
+#include "NetResponse.h"
+#include "MimeType.h"
+
+using namespace Nequeo::Net::Http;
+using namespace Nequeo::Net::Mime;
+
+void OnWebContext(const WebContext*);
+void AsyncClient(const WebClient*, const NetResponse&, const std::shared_ptr<const Nequeo::AsyncCallerContext>&);
+
+int main()
+{
+	WebClient client("www.google.com", 8800, false, IPVersionType::IPv6);
+	client.RequestAsync("GET", "/", AsyncClient);
+
+	WebServer server(333, IPVersionType::IPv6);
+	server.OnWebContext(OnWebContext);
+	server.StartThread();
+	std::cout << "Server started" << std::endl;
+
+    return 0;
+}
+
+void AsyncClient(const WebClient* client, const NetResponse& response, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context)
+{
+	std::cout << "In Here." << std::endl;
+	std::cout << response.Content->rdbuf() << std::endl;
+	std::cout << response.GetContentLength() << std::endl;
+}
+
+void OnWebContext(const WebContext* context)
+{
+	
+	std::cout << "GOT a request." << std::endl;
+	std::cout << context->Request().GetMethod().c_str() << std::endl;
+	std::cout << context->Request().GetPath().c_str() << std::endl;
+	std::cout << context->GetPort() << std::endl;
+	std::cout << context->IsSecure() << std::endl;
+	std::cout << context->GetServerName().c_str() << std::endl;
+	std::cout << context->Request().GetProtocolVersion().c_str() << std::endl;
+	std::cout << context->Request().GetRemoteEndpointAddress().c_str() << std::endl;
+	std::cout << context->Request().GetRemoteEndpointPort() << std::endl;
+	std::cout << context->Request().GetAcceptEncoding().c_str() << std::endl;
+	std::cout << context->Request().GetContentLength() << std::endl;
+	std::cout << context->Request().GetContentType().c_str() << std::endl;
+	
+	// For each header.
+	for (auto& h : context->Request().GetHeaders())
+	{
+		// Write header name and value.
+		std::cout << h.first.c_str() << ": " << h.second.c_str() << "\r\n";
+	}
+
+	if (context->Request().Content != nullptr && context->Request().GetContentLength() > 0)
+	{
+		std::cout << context->Request().Content << std::endl;
+	}
+
+	// Write response.
+	WebResponse* webResponse = &context->Response();
+	webResponse->SetContentType("text/html");
+	webResponse->SetContentLength(50);
+
+	webResponse->WriteHeaders();
+
+	std::istringstream input("01234567890123456789012345678901234567890123456789");
+	webResponse->WriteContent(input.rdbuf());
+	
+}

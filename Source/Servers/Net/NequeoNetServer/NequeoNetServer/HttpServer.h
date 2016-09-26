@@ -34,7 +34,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 #include "GlobalNetServer.h"
 
-#include "NequeoHttpBoostServer\WebServer.h"
+#include "NequeoHttpBoostServer\MultiWebServer.h"
 
 namespace Nequeo {
 	namespace Net {
@@ -49,15 +49,54 @@ namespace Nequeo {
 				/// <summary>
 				/// Http web server.
 				/// </summary>
-				HttpServer();
+				/// <param name="path">The root folder path (this is where all files are located).</param>
+				HttpServer(const std::string& path);
 
 				/// <summary>
 				/// Http web server.
 				/// </summary>
 				~HttpServer();
 
+				/// <summary>
+				/// Set the muilti server contatiner list.
+				/// </summary>
+				/// <param name="path">The muilti server contatiner list.</param>
+				inline void SetMultiServerContainer(const std::vector<MultiServerContainer>& containers)
+				{
+					_containers = containers;
+				}
+
+				/// <summary>
+				/// Is initialise.
+				/// </summary>
+				/// <return>True if initialise; else false.</return>
+				inline bool IsInitialise() const
+				{
+					return _initialised;
+				}
+
+				/// <summary>
+				/// Initialise the servers.
+				/// </summary>
+				void Initialise();
+
+				///	<summary>
+				///	Start the servers.
+				///	</summary>
+				void Start();
+
+				///	<summary>
+				///	Stop the servers.
+				///	</summary>
+				void Stop();
+
 			private:
 				bool _disposed;
+				bool _initialised;
+
+				std::string _path;
+				std::shared_ptr<MultiWebServer> _servers;
+				std::vector<MultiServerContainer> _containers;
 			};
 		}
 	}

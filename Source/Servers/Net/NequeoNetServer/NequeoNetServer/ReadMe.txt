@@ -46,3 +46,46 @@ AppWizard uses "TODO:" comments to indicate parts of the source code you
 should add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+
+
+// TestNetServer.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <thread>
+
+#include "HttpClient.h"
+#include "HttpServer.h"
+#include "ConfigModel.h"
+
+using namespace Nequeo::Net::Http;
+
+void AsyncClient(const Nequeo::Net::Http::WebClient*, const Nequeo::Net::Http::NetResponse&, const std::shared_ptr<const Nequeo::AsyncCallerContext>&);
+
+int main()
+{
+	
+
+	HttpClient client("www.google.com", 80, false, IPVersionType::IPv6);
+	client.RequestAsync("GET", "/", AsyncClient);
+
+	ConfigModel config("configuration.json");
+	config.ReadConfigFile();
+	
+	HttpServer server(config.GetRootPath());
+	server.SetMultiServerContainer(config.GetMultiServerContainer());
+	server.Initialise();
+	server.Start();
+
+	return 0;
+}
+
+void AsyncClient(const Nequeo::Net::Http::WebClient* client, const Nequeo::Net::Http::NetResponse& response, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context)
+{
+	std::cout << "In Here." << std::endl;
+	std::cout << response.Content->rdbuf() << std::endl;
+	std::cout << response.GetContentLength() << std::endl;
+}

@@ -15,8 +15,12 @@
 #include <thread>
 #include <vector>
 #include <map>
+#include <fstream>
 #include <ostream>
 #include <istream>
+#include <sstream>
+#include <cstdlib>
+#include <cstring>
 #include <algorithm>
 #include <concurrent_unordered_map.h>
 #include <concurrent_vector.h>
