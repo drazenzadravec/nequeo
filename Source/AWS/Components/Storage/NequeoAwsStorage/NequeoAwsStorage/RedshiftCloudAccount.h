@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          Global.h
-*  Purpose :       Global.
+*  File :          RedshiftCloudAccount.h
+*  Purpose :       Redshift Cloud account provider class.
 *
 */
 
@@ -33,25 +33,53 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#ifdef NEQUEOAWSSTORAGE_EXPORTS
-#define EXPORT_NEQUEO_AWS_STORAGE_API __declspec(dllexport) 
-#else
-#define EXPORT_NEQUEO_AWS_STORAGE_API __declspec(dllimport) 
-#endif
+#include "Global.h"
+#include "AwsAccount.h"
 
-// Global Aws definitions.
-#include <aws\core\Aws.h>
-#include <aws\core\Region.h>
-#include <aws\core\SDKConfig.h>
-#include <aws\core\Core_EXPORTS.h>
-#include <aws\core\utils\Outcome.h>
-#include <aws\core\utils\StringUtils.h>
-#include <aws\core\utils\threading\Executor.h>
-#include <aws\core\utils\threading\ThreadTask.h>
-#include <aws\core\utils\memory\AWSMemory.h>
-#include <aws\core\utils\memory\stl\AWSAllocator.h>
-#include <aws\core\utils\memory\stl\AWSString.h>
-#include <aws\core\client\ClientConfiguration.h>
-#include <aws\core\auth\AWSCredentialsProvider.h>
-#include <aws\core\utils\ratelimiter\DefaultRateLimiter.h>
-#include <aws\core\client\RetryStrategy.h>
+#undef IN
+#undef GetObject
+
+#include <aws\redshift\RedshiftClient.h>
+#include <aws\redshift\RedshiftEndpoint.h>
+
+namespace Nequeo {
+	namespace AWS {
+		namespace Storage
+		{
+			///	<summary>
+			///	Cloud account provider.
+			///	</summary>
+			class EXPORT_NEQUEO_AWS_STORAGE_API RedshiftCloudAccount
+			{
+			public:
+				///	<summary>
+				///	Cloud account provider.
+				///	</summary>
+				/// <param name="account">The AWS services account.</param>
+				RedshiftCloudAccount(const AwsAccount& account);
+
+				///	<summary>
+				///	Cloud account provider destructor.
+				///	</summary>
+				~RedshiftCloudAccount();
+
+				/// <summary>
+				/// Gets the Redshift client.
+				/// </summary>
+				/// <return>The Redshift client.</return>
+				const Aws::Redshift::RedshiftClient& GetClient() const;
+
+				///	<summary>
+				///	Get the service URI.
+				///	</summary>
+				///	<return>The service URI.</return>
+				std::string GetServiceUri();
+
+			private:
+				bool _disposed;
+				AwsAccount _account;
+				Aws::UniquePtr<Aws::Redshift::RedshiftClient> _client;
+			};
+		}
+	}
+}

@@ -94,7 +94,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,7 +110,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,7 +130,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,7 +150,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -158,13 +158,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AwsAccount.h" />
+    <ClInclude Include="CloudFrontCloudAccount.h" />
+    <ClInclude Include="DMSCloudAccount.h" />
     <ClInclude Include="DynamoDBCloudAccount.h" />
+    <ClInclude Include="ElastiCacheCloudAccount.h" />
+    <ClInclude Include="ElasticFileSystemCloudAccount.h" />
+    <ClInclude Include="GlacierCloudAccount.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="RDSCloudAccount.h" />
+    <ClInclude Include="RedshiftCloudAccount.h" />
+    <ClInclude Include="S3CloudAccount.h" />
+    <ClInclude Include="SnowballCloudAccount.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StorageGatewayCloudAccount.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AwsAccount.cpp" />
+    <ClCompile Include="CloudFrontCloudAccount.cpp" />
+    <ClCompile Include="DMSCloudAccount.cpp" />
     <ClCompile Include="DynamoDBCloudAccount.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -180,12 +192,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ElastiCacheCloudAccount.cpp" />
+    <ClCompile Include="ElasticFileSystemCloudAccount.cpp" />
+    <ClCompile Include="GlacierCloudAccount.cpp" />
+    <ClCompile Include="RDSCloudAccount.cpp" />
+    <ClCompile Include="RedshiftCloudAccount.cpp" />
+    <ClCompile Include="S3CloudAccount.cpp" />
+    <ClCompile Include="SnowballCloudAccount.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StorageGatewayCloudAccount.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

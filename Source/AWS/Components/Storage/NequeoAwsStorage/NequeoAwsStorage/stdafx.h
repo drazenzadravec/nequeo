@@ -20,3 +20,9 @@
 #include <complex>
 #include <functional>
 #include <future>
+#include <fstream>
+#include <ostream>
+#include <istream>
+#include <sstream>
+#include <cstdlib>
+#include <cstring>

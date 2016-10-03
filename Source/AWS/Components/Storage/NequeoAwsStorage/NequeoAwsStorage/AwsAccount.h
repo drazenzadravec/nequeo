@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "Global.h"
 
 namespace Nequeo {
-	namespace Aws {
+	namespace AWS {
 		namespace Storage 
 		{
 			///	<summary>
@@ -50,7 +50,7 @@ namespace Nequeo {
 				///	</summary>
 				/// <param name="credentials">The credentials object for AWS services.</param>
 				/// <param name="clientConfiguration">Configuration for accessing Amazon web services.</param>
-				AwsAccount(const AWS::Auth::AWSCredentials& credentials, const AWS::Client::ClientConfiguration& clientConfiguration = AWS::Client::ClientConfiguration());
+				AwsAccount(const Aws::Auth::AWSCredentials& credentials, const Aws::Client::ClientConfiguration& clientConfiguration = Aws::Client::ClientConfiguration());
 
 				///	<summary>
 				///	AWS account provider destructor.
@@ -67,7 +67,7 @@ namespace Nequeo {
 				///	</summary>
 				///	<return>The region.</return>
 				std::string GetRegion();
-				void SetRegion(const std::string& region = std::string(AWS::Region::AP_SOUTHEAST_2));
+				void SetRegion(const std::string& region = std::string(Aws::Region::AP_SOUTHEAST_2));
 
 				///	<summary>
 				///	Set the defualt client configuration executor.
@@ -84,7 +84,7 @@ namespace Nequeo {
 				///	Get the AWS SDK options (change what is needed).
 				///	</summary>
 				///	<return>The AWS SDK options.</return>
-				inline AWS::SDKOptions& GetSDKOptions()
+				inline Aws::SDKOptions& GetSDKOptions()
 				{
 					return _options;
 				}
@@ -102,15 +102,24 @@ namespace Nequeo {
 				bool _disposed;
 				bool _initialized;
 
-				AWS::SDKOptions _options;
-				AWS::Auth::AWSCredentials _credentials;
-				AWS::Client::ClientConfiguration _clientConfiguration;
+				Aws::SDKOptions _options;
+				Aws::Auth::AWSCredentials _credentials;
+				Aws::Client::ClientConfiguration _clientConfiguration;
 
-				std::shared_ptr<AWS::Utils::Threading::Executor> _executor;
+				std::shared_ptr<Aws::Utils::Threading::Executor> _executor;
 
 				// Allow internal access to private members.
 				friend class DynamoDBCloudAccount;
-				
+				friend class S3CloudAccount;
+				friend class RDSCloudAccount;
+				friend class CloudFrontCloudAccount;
+				friend class ElasticFileSystemCloudAccount;
+				friend class GlacierCloudAccount;
+				friend class SnowballCloudAccount;
+				friend class StorageGatewayCloudAccount;
+				friend class ElastiCacheCloudAccount;
+				friend class RedshiftCloudAccount;
+				friend class DMSCloudAccount;
 			};
 		}
 	}

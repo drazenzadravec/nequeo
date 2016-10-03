@@ -19,6 +19,66 @@
     <Filter Include="Source Files\DynamoDB">
       <UniqueIdentifier>{b484133e-2577-4978-867a-ca468d6ac0e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\S3">
+      <UniqueIdentifier>{778a68fe-00ab-4d01-a9b6-5c7a5612f762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\S3">
+      <UniqueIdentifier>{21b54f0a-c6b9-484d-9cc3-20d0c2c50a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RDS">
+      <UniqueIdentifier>{f85659c0-2711-4900-a203-2ae4d06123bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RDS">
+      <UniqueIdentifier>{1ea00ac7-82b8-483a-94bf-2a7df560b044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CloudFront">
+      <UniqueIdentifier>{1de6eb32-b86f-4a34-8376-a1f73e493515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CloudFront">
+      <UniqueIdentifier>{8107a49e-a3c2-4adf-8c1c-a4763eb13d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ElasticFileSystem">
+      <UniqueIdentifier>{59499ae9-61fd-4cc8-9088-926d551baa12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ElasticFileSystem">
+      <UniqueIdentifier>{19093bca-e22c-452e-8f27-eae696e7cd5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Glacier">
+      <UniqueIdentifier>{9d7356eb-8144-4d3b-a1cf-af33831a23b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Glacier">
+      <UniqueIdentifier>{f8801b8f-28c0-478a-b20b-8d57fffc309b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Snowball">
+      <UniqueIdentifier>{ef47a3fc-3f71-441b-9de0-a1a58cca87bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Snowball">
+      <UniqueIdentifier>{6de64f71-6e40-4e5f-8006-05d3fa1dff1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StorageGateway">
+      <UniqueIdentifier>{0ca8a175-428e-48da-b110-6cd25660072e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StorageGateway">
+      <UniqueIdentifier>{07c27ed7-f95a-4231-9bb7-4d7b69e88fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ElastiCache">
+      <UniqueIdentifier>{449a4754-85e6-4352-b5a6-11a26b4c94e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ElastiCache">
+      <UniqueIdentifier>{f52e11de-51b7-45f5-aa3e-dd96b3ea08e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Redshift">
+      <UniqueIdentifier>{fb39a006-b982-4b74-bd62-39f43e53d370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Redshift">
+      <UniqueIdentifier>{9be1cdd4-9001-4dd6-934d-7b6018db54aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DMS">
+      <UniqueIdentifier>{a239a311-e1a7-4b41-b2d5-893cd93552a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DMS">
+      <UniqueIdentifier>{a1350019-6dc9-4720-b07b-896b2bc35875}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -39,6 +99,36 @@
     <ClInclude Include="DynamoDBCloudAccount.h">
       <Filter>Header Files\DynamoDB</Filter>
     </ClInclude>
+    <ClInclude Include="S3CloudAccount.h">
+      <Filter>Header Files\S3</Filter>
+    </ClInclude>
+    <ClInclude Include="RDSCloudAccount.h">
+      <Filter>Header Files\RDS</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudFrontCloudAccount.h">
+      <Filter>Header Files\CloudFront</Filter>
+    </ClInclude>
+    <ClInclude Include="ElasticFileSystemCloudAccount.h">
+      <Filter>Header Files\ElasticFileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GlacierCloudAccount.h">
+      <Filter>Header Files\Glacier</Filter>
+    </ClInclude>
+    <ClInclude Include="SnowballCloudAccount.h">
+      <Filter>Header Files\Snowball</Filter>
+    </ClInclude>
+    <ClInclude Include="StorageGatewayCloudAccount.h">
+      <Filter>Header Files\StorageGateway</Filter>
+    </ClInclude>
+    <ClInclude Include="ElastiCacheCloudAccount.h">
+      <Filter>Header Files\ElastiCache</Filter>
+    </ClInclude>
+    <ClInclude Include="RedshiftCloudAccount.h">
+      <Filter>Header Files\Redshift</Filter>
+    </ClInclude>
+    <ClInclude Include="DMSCloudAccount.h">
+      <Filter>Header Files\DMS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -52,6 +142,36 @@
     </ClCompile>
     <ClCompile Include="DynamoDBCloudAccount.cpp">
       <Filter>Source Files\DynamoDB</Filter>
+    </ClCompile>
+    <ClCompile Include="S3CloudAccount.cpp">
+      <Filter>Source Files\S3</Filter>
+    </ClCompile>
+    <ClCompile Include="RDSCloudAccount.cpp">
+      <Filter>Source Files\RDS</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudFrontCloudAccount.cpp">
+      <Filter>Source Files\CloudFront</Filter>
+    </ClCompile>
+    <ClCompile Include="ElasticFileSystemCloudAccount.cpp">
+      <Filter>Source Files\ElasticFileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GlacierCloudAccount.cpp">
+      <Filter>Source Files\Glacier</Filter>
+    </ClCompile>
+    <ClCompile Include="SnowballCloudAccount.cpp">
+      <Filter>Source Files\Snowball</Filter>
+    </ClCompile>
+    <ClCompile Include="StorageGatewayCloudAccount.cpp">
+      <Filter>Source Files\StorageGateway</Filter>
+    </ClCompile>
+    <ClCompile Include="ElastiCacheCloudAccount.cpp">
+      <Filter>Source Files\ElastiCache</Filter>
+    </ClCompile>
+    <ClCompile Include="RedshiftCloudAccount.cpp">
+      <Filter>Source Files\Redshift</Filter>
+    </ClCompile>
+    <ClCompile Include="DMSCloudAccount.cpp">
+      <Filter>Source Files\DMS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

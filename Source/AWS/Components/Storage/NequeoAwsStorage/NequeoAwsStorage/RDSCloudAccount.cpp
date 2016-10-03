@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          Global.h
-*  Purpose :       Global.
+*  File :          RDSCloudAccount.cpp
+*  Purpose :       RDS Cloud account provider class.
 *
 */
 
@@ -29,29 +29,49 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#pragma once
-
 #include "stdafx.h"
 
-#ifdef NEQUEOAWSSTORAGE_EXPORTS
-#define EXPORT_NEQUEO_AWS_STORAGE_API __declspec(dllexport) 
-#else
-#define EXPORT_NEQUEO_AWS_STORAGE_API __declspec(dllimport) 
-#endif
+#include "RDSCloudAccount.h"
 
-// Global Aws definitions.
-#include <aws\core\Aws.h>
-#include <aws\core\Region.h>
-#include <aws\core\SDKConfig.h>
-#include <aws\core\Core_EXPORTS.h>
-#include <aws\core\utils\Outcome.h>
-#include <aws\core\utils\StringUtils.h>
-#include <aws\core\utils\threading\Executor.h>
-#include <aws\core\utils\threading\ThreadTask.h>
-#include <aws\core\utils\memory\AWSMemory.h>
-#include <aws\core\utils\memory\stl\AWSAllocator.h>
-#include <aws\core\utils\memory\stl\AWSString.h>
-#include <aws\core\client\ClientConfiguration.h>
-#include <aws\core\auth\AWSCredentialsProvider.h>
-#include <aws\core\utils\ratelimiter\DefaultRateLimiter.h>
-#include <aws\core\client\RetryStrategy.h>
+using namespace Nequeo::AWS::Storage;
+
+static const char* RDS_CLIENT_TAG = "NequeoRDSClient";
+
+///	<summary>
+///	Cloud account provider.
+///	</summary>
+/// <param name="account">The AWS services account.</param>
+RDSCloudAccount::RDSCloudAccount(const AwsAccount& account) : _disposed(false), _account(account)
+{
+	// Create the client.
+	_client = Aws::MakeUnique<Aws::RDS::RDSClient>(RDS_CLIENT_TAG, _account._credentials, _account._clientConfiguration);
+}
+
+///	<summary>
+///	Cloud account provider.
+///	</summary>
+RDSCloudAccount::~RDSCloudAccount()
+{
+	if (!_disposed)
+	{
+		_disposed = true;
+	}
+}
+
+/// <summary>
+/// Gets the RDS client.
+/// </summary>
+/// <return>The RDS client.</return>
+const Aws::RDS::RDSClient& RDSCloudAccount::GetClient() const
+{
+	return *(_client.get());
+}
+
+///	<summary>
+///	Get the service URI.
+///	</summary>
+///	<return>The service URI.</return>
+std::string RDSCloudAccount::GetServiceUri()
+{
+	return std::string(Aws::RDS::RDSEndpoint::ForRegion(_account._clientConfiguration.region).c_str());
+}

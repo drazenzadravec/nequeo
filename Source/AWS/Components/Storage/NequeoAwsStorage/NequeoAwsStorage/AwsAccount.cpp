@@ -33,7 +33,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "AwsAccount.h"
 
-using namespace Nequeo::Aws::Storage;
+using namespace Nequeo::AWS::Storage;
 
 static const char* ACCOUNT_CLIENT_TAG = "NequeoAccountClient";
 
@@ -42,7 +42,7 @@ static const char* ACCOUNT_CLIENT_TAG = "NequeoAccountClient";
 ///	</summary>
 /// <param name="credentials">The credentials object for AWS services.</param>
 /// <param name="clientConfiguration">Configuration for accessing Amazon web services.</param>
-AwsAccount::AwsAccount(const AWS::Auth::AWSCredentials& credentials, const AWS::Client::ClientConfiguration& clientConfiguration) : 
+AwsAccount::AwsAccount(const Aws::Auth::AWSCredentials& credentials, const Aws::Client::ClientConfiguration& clientConfiguration) :
 	_disposed(false), _initialized(false), _credentials(credentials), _clientConfiguration(clientConfiguration)
 {
 }
@@ -57,7 +57,7 @@ AwsAccount::~AwsAccount()
 		_disposed = true;
 		
 		// Clenup Aws.
-		AWS::ShutdownAPI(_options);
+		Aws::ShutdownAPI(_options);
 		_initialized = false;
 	}
 }
@@ -70,7 +70,7 @@ void AwsAccount::Initialize()
 	if (!_initialized)
 	{
 		// Initialize SDK wide state for the SDK.
-		AWS::InitAPI(_options);
+		Aws::InitAPI(_options);
 		_initialized = true;
 	}
 }
@@ -90,7 +90,7 @@ std::string AwsAccount::GetRegion()
 /// <param name="region">The region.</param>
 void AwsAccount::SetRegion(const std::string& region)
 {
-	_clientConfiguration.region = AWS::String(region.c_str());
+	_clientConfiguration.region = Aws::String(region.c_str());
 }
 
 ///	<summary>
@@ -99,7 +99,7 @@ void AwsAccount::SetRegion(const std::string& region)
 void AwsAccount::SetDefaultExecutor()
 {
 	// Create a new executor.
-	_executor = AWS::MakeShared<AWS::Utils::Threading::DefaultExecutor>(ACCOUNT_CLIENT_TAG);
+	_executor = Aws::MakeShared<Aws::Utils::Threading::DefaultExecutor>(ACCOUNT_CLIENT_TAG);
 	_clientConfiguration.executor = _executor;
 }
 
@@ -110,6 +110,6 @@ void AwsAccount::SetDefaultExecutor()
 void AwsAccount::SetPooledExecutor(size_t poolSize)
 {
 	// Create a new executor.
-	_executor = AWS::MakeShared<AWS::Utils::Threading::PooledThreadExecutor>(ACCOUNT_CLIENT_TAG, poolSize);
+	_executor = Aws::MakeShared<Aws::Utils::Threading::PooledThreadExecutor>(ACCOUNT_CLIENT_TAG, poolSize);
 	_clientConfiguration.executor = _executor;
 }
