@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\EC2">
+      <UniqueIdentifier>{9918be5e-8e6f-49fa-bd92-7d1928ad34e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EC2">
+      <UniqueIdentifier>{f9f88d8e-0b46-461d-8eef-e27f4217b67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ECS">
+      <UniqueIdentifier>{2d48185e-6439-4b8f-9514-c5709bd8510a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS">
+      <UniqueIdentifier>{46b5e4ab-5c1f-4367-b9e8-371197acc30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ElasticBeanstalk">
+      <UniqueIdentifier>{49d97321-c33f-4bab-9faa-edb9efb80a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ElasticBeanstalk">
+      <UniqueIdentifier>{bdfe7f06-69f1-4215-a572-01a99ef25660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lambda">
+      <UniqueIdentifier>{955268db-5863-489f-931a-342222f32f91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lambda">
+      <UniqueIdentifier>{4de383e0-31ac-4ed3-866c-6aa3f8f8f20a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IoT">
+      <UniqueIdentifier>{6e17138f-0d50-4f0f-8c00-5860a696b448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IoT">
+      <UniqueIdentifier>{8ed7d8a7-6491-44be-b8bc-4719ec4c8c3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cognito">
+      <UniqueIdentifier>{b134e0f1-a634-4cd1-9ef2-b2b076427a7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cognito">
+      <UniqueIdentifier>{3b4ec1c4-4333-4298-8b31-ecdf715caacd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DeviceFarm">
+      <UniqueIdentifier>{bd2992ee-c3d8-45d8-8097-6c674a47906b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DeviceFarm">
+      <UniqueIdentifier>{4ab5b82c-1e98-4ce1-8894-0d7953d018fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MobileAnalytics">
+      <UniqueIdentifier>{8295db52-e1f8-42ab-8c19-cf0bccca287d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MobileAnalytics">
+      <UniqueIdentifier>{97930179-ac1b-4218-8bab-69dc638a35db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SNS">
+      <UniqueIdentifier>{97313157-f659-4c00-a2a5-335332352576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SNS">
+      <UniqueIdentifier>{1fdc00bf-55df-4eab-af84-e890e3b27c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ApiGateway">
+      <UniqueIdentifier>{d97432d7-c14e-4e11-ac83-79585bc66bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ApiGateway">
+      <UniqueIdentifier>{52546bdc-e1eb-4784-9ac1-17841c249d14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CloudSearch">
+      <UniqueIdentifier>{69b8b13c-f516-4a34-b0d8-7429d1593250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CloudSearch">
+      <UniqueIdentifier>{5ddac633-572a-4d65-997a-b8b8d3f6282e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ElasticTranscoder">
+      <UniqueIdentifier>{636f4c88-f9fa-40c9-9f1c-548b4bba0e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ElasticTranscoder">
+      <UniqueIdentifier>{8d94535b-40e9-450d-b786-bafebaa0a40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Email">
+      <UniqueIdentifier>{f4f74ffc-03dd-4b78-928d-37da479bf4d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Email">
+      <UniqueIdentifier>{5883e24a-6891-4084-8aa9-e87be8f2de61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Queue">
+      <UniqueIdentifier>{dc13c5f8-2f07-4256-a281-c4b507e9d026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Queue">
+      <UniqueIdentifier>{a4b4cadd-50c5-4cab-aa21-22e38e3730f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Workflow">
+      <UniqueIdentifier>{debf2615-fa49-442a-955a-cab4ebe4a08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Workflow">
+      <UniqueIdentifier>{98d4fb35-bcf7-46c6-a009-a78444bd4598}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AwsAccount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EC2CloudAccount.h">
+      <Filter>Header Files\EC2</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSCloudAccount.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ElasticBeanstalkCloudAccount.h">
+      <Filter>Header Files\ElasticBeanstalk</Filter>
+    </ClInclude>
+    <ClInclude Include="LambdaCloudAccount.h">
+      <Filter>Header Files\Lambda</Filter>
+    </ClInclude>
+    <ClInclude Include="IoTCloudAccount.h">
+      <Filter>Header Files\IoT</Filter>
+    </ClInclude>
+    <ClInclude Include="CognitoIdentityCloudAccount.h">
+      <Filter>Header Files\Cognito</Filter>
+    </ClInclude>
+    <ClInclude Include="CognitoIDPCloudAccount.h">
+      <Filter>Header Files\Cognito</Filter>
+    </ClInclude>
+    <ClInclude Include="CognitoSyncCloudAccount.h">
+      <Filter>Header Files\Cognito</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceFarmCloudAccount.h">
+      <Filter>Header Files\DeviceFarm</Filter>
+    </ClInclude>
+    <ClInclude Include="MobileAnalyticsCloudAccount.h">
+      <Filter>Header Files\MobileAnalytics</Filter>
+    </ClInclude>
+    <ClInclude Include="SNSCloudAccount.h">
+      <Filter>Header Files\SNS</Filter>
+    </ClInclude>
+    <ClInclude Include="ApiGatewayCloudAccount.h">
+      <Filter>Header Files\ApiGateway</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudSearchCloudAccount.h">
+      <Filter>Header Files\CloudSearch</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudSearchDomainCloudAccount.h">
+      <Filter>Header Files\CloudSearch</Filter>
+    </ClInclude>
+    <ClInclude Include="ElasticTranscoderCloudAccount.h">
+      <Filter>Header Files\ElasticTranscoder</Filter>
+    </ClInclude>
+    <ClInclude Include="SESCloudAccount.h">
+      <Filter>Header Files\Email</Filter>
+    </ClInclude>
+    <ClInclude Include="SQSCloudAccount.h">
+      <Filter>Header Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="SWFCloudAccount.h">
+      <Filter>Header Files\Workflow</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AwsAccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EC2CloudAccount.cpp">
+      <Filter>Source Files\EC2</Filter>
+    </ClCompile>
+    <ClCompile Include="ECSCloudAccount.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ElasticBeanstalkCloudAccount.cpp">
+      <Filter>Source Files\ElasticBeanstalk</Filter>
+    </ClCompile>
+    <ClCompile Include="LambdaCloudAccount.cpp">
+      <Filter>Source Files\Lambda</Filter>
+    </ClCompile>
+    <ClCompile Include="IoTCloudAccount.cpp">
+      <Filter>Source Files\IoT</Filter>
+    </ClCompile>
+    <ClCompile Include="CognitoIdentityCloudAccount.cpp">
+      <Filter>Source Files\Cognito</Filter>
+    </ClCompile>
+    <ClCompile Include="CognitoIDPCloudAccount.cpp">
+      <Filter>Source Files\Cognito</Filter>
+    </ClCompile>
+    <ClCompile Include="CognitoSyncCloudAccount.cpp">
+      <Filter>Source Files\Cognito</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceFarmCloudAccount.cpp">
+      <Filter>Source Files\DeviceFarm</Filter>
+    </ClCompile>
+    <ClCompile Include="MobileAnalyticsCloudAccount.cpp">
+      <Filter>Source Files\MobileAnalytics</Filter>
+    </ClCompile>
+    <ClCompile Include="SNSCloudAccount.cpp">
+      <Filter>Source Files\SNS</Filter>
+    </ClCompile>
+    <ClCompile Include="ApiGatewayCloudAccount.cpp">
+      <Filter>Source Files\ApiGateway</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudSearchCloudAccount.cpp">
+      <Filter>Source Files\CloudSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudSearchDomainCloudAccount.cpp">
+      <Filter>Source Files\CloudSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="ElasticTranscoderCloudAccount.cpp">
+      <Filter>Source Files\ElasticTranscoder</Filter>
+    </ClCompile>
+    <ClCompile Include="SESCloudAccount.cpp">
+      <Filter>Source Files\Email</Filter>
+    </ClCompile>
+    <ClCompile Include="SQSCloudAccount.cpp">
+      <Filter>Source Files\Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="SWFCloudAccount.cpp">
+      <Filter>Source Files\Workflow</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
