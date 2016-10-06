@@ -79,6 +79,12 @@
     <Filter Include="Source Files\DMS">
       <UniqueIdentifier>{a1350019-6dc9-4720-b07b-896b2bc35875}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SDB">
+      <UniqueIdentifier>{2b366152-9566-45d5-bcda-5244195d50a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDB">
+      <UniqueIdentifier>{95909dce-ef46-454f-ba34-adf7817a72f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -129,6 +135,9 @@
     <ClInclude Include="DMSCloudAccount.h">
       <Filter>Header Files\DMS</Filter>
     </ClInclude>
+    <ClInclude Include="SDBCloudAccount.h">
+      <Filter>Header Files\SDB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -172,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="DMSCloudAccount.cpp">
       <Filter>Source Files\DMS</Filter>
+    </ClCompile>
+    <ClCompile Include="SDBCloudAccount.cpp">
+      <Filter>Source Files\SDB</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

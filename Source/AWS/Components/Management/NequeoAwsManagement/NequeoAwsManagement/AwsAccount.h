@@ -37,12 +37,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Nequeo {
 	namespace AWS {
-		namespace Storage 
+		namespace Management
 		{
 			///	<summary>
 			///	AWS account provider.
 			///	</summary>
-			class EXPORT_NEQUEO_AWS_STORAGE_API AwsAccount
+			class EXPORT_NEQUEO_AWS_MANAGEMENT_API AwsAccount
 			{
 			public:
 				///	<summary>
@@ -109,18 +109,17 @@ namespace Nequeo {
 				std::shared_ptr<Aws::Utils::Threading::Executor> _executor;
 
 				// Allow internal access to private members.
-				friend class DynamoDBCloudAccount;
-				friend class S3CloudAccount;
-				friend class RDSCloudAccount;
-				friend class CloudFrontCloudAccount;
-				friend class ElasticFileSystemCloudAccount;
-				friend class GlacierCloudAccount;
-				friend class SnowballCloudAccount;
-				friend class StorageGatewayCloudAccount;
-				friend class ElastiCacheCloudAccount;
-				friend class RedshiftCloudAccount;
-				friend class DMSCloudAccount;
-				friend class SDBCloudAccount;
+				friend class CloudWatchCloudAccount;
+				friend class CloudFormationCloudAccount;
+				friend class CloudTrailCloudAccount;
+				friend class ConfigServiceCloudAccount;
+				friend class OpsWorksCloudAccount;
+				friend class ServiceCatalogCloudAccount;
+				friend class AccessManagementCloudAccount;
+				friend class DirectoryServiceCloudAccount;
+				friend class InspectorCloudAccount;
+				friend class WAFCloudAccount;
+				friend class ACMCloudAccount;
 			};
 		}
 	}

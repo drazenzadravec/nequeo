@@ -152,6 +152,7 @@ void DynamoDBCloudAccount::ScanAsync(
 ///	<summary>
 ///	Get all scanned items after request.
 ///	</summary>
+/// <param name="client">The DynamoDB Client.</param>
 /// <param name="results">The scan result.</param>
 /// <param name="take">The maximum number of results to return (set take = -1 to return all results found).</param>
 ///	<return>The array of scanned results.</return>

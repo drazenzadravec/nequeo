@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Monitoring">
+      <UniqueIdentifier>{a4fec6b8-9a90-4d0c-ad32-6b90bad60b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Monitoring">
+      <UniqueIdentifier>{80a63175-842e-44ca-8266-c5a1af8abeef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CloudFormation">
+      <UniqueIdentifier>{4b3ef03a-389e-4d0f-bc33-07fd1c97b377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CloudFormation">
+      <UniqueIdentifier>{82cb13f2-5975-42e0-9d6a-ae02b5ed0c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CloudTrail">
+      <UniqueIdentifier>{e853fb32-d9d2-4f51-a21f-426f56cc7b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CloudTrail">
+      <UniqueIdentifier>{93485445-411e-4f3f-b2e8-148c42780217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Config">
+      <UniqueIdentifier>{42475037-ad54-4bc7-b823-6aa6bdd37a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Config">
+      <UniqueIdentifier>{75857f81-473c-4a92-913d-c55ae3d4c0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OpsWorks">
+      <UniqueIdentifier>{c5e91313-63b1-475f-8596-de6fc1e3dce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OpsWorks">
+      <UniqueIdentifier>{700e973f-f1e1-4699-960a-77b728e71506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ServiceCatalog">
+      <UniqueIdentifier>{2040a01d-903e-4acb-8546-bf5ee2f2082c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ServiceCatalog">
+      <UniqueIdentifier>{cccfa720-8a82-4671-af30-007931460c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manage">
+      <UniqueIdentifier>{22579af9-09d0-4896-b432-a489436a69e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manage">
+      <UniqueIdentifier>{64249c5e-b16a-4f8d-b24c-006393e638d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DirectoryService">
+      <UniqueIdentifier>{944c8ab8-83f0-4aed-8536-0085c32699b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DirectoryService">
+      <UniqueIdentifier>{8e90daa7-0089-4c3c-9dc6-20a3ecc46cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Inspector">
+      <UniqueIdentifier>{ae0c8226-f1dd-426b-ab24-85e7281fd339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Inspector">
+      <UniqueIdentifier>{ffb25fb8-6c19-4a16-9a90-edf60adc54c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Filter">
+      <UniqueIdentifier>{31be721a-c173-4b45-92cd-ad2eb3550269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Filter">
+      <UniqueIdentifier>{1c7019e0-e0e5-4bbf-94ec-c08f3bc63a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Certificate">
+      <UniqueIdentifier>{7c789f14-4ab3-428d-b40e-21a980e1754b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Certificate">
+      <UniqueIdentifier>{65994975-f437-4482-94a9-d612a47e4a08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AwsAccount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudWatchCloudAccount.h">
+      <Filter>Header Files\Monitoring</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudFormationCloudAccount.h">
+      <Filter>Header Files\CloudFormation</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudTrailCloudAccount.h">
+      <Filter>Header Files\CloudTrail</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigServiceCloudAccount.h">
+      <Filter>Header Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="OpsWorksCloudAccount.h">
+      <Filter>Header Files\OpsWorks</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceCatalogCloudAccount.h">
+      <Filter>Header Files\ServiceCatalog</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessManagementCloudAccount.h">
+      <Filter>Header Files\Manage</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectoryServiceCloudAccount.h">
+      <Filter>Header Files\DirectoryService</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorCloudAccount.h">
+      <Filter>Header Files\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="WAFCloudAccount.h">
+      <Filter>Header Files\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="ACMCloudAccount.h">
+      <Filter>Header Files\Certificate</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AwsAccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudWatchCloudAccount.cpp">
+      <Filter>Source Files\Monitoring</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudFormationCloudAccount.cpp">
+      <Filter>Source Files\CloudFormation</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudTrailCloudAccount.cpp">
+      <Filter>Source Files\CloudTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigServiceCloudAccount.cpp">
+      <Filter>Source Files\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="OpsWorksCloudAccount.cpp">
+      <Filter>Source Files\OpsWorks</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceCatalogCloudAccount.cpp">
+      <Filter>Source Files\ServiceCatalog</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessManagementCloudAccount.cpp">
+      <Filter>Source Files\Manage</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryServiceCloudAccount.cpp">
+      <Filter>Source Files\DirectoryService</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorCloudAccount.cpp">
+      <Filter>Source Files\Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="WAFCloudAccount.cpp">
+      <Filter>Source Files\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="ACMCloudAccount.cpp">
+      <Filter>Source Files\Certificate</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -63,5 +63,10 @@ namespace Nequeo.Aws.Storage
         /// </summary>
         [DynamoDBRangeKey("AuthRange")]
         public long AuthRange { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authorisation token.
+        /// </summary>
+        public string Token { get; set; }
     }
 }

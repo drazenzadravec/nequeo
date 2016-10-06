@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1A5FEEE2-D4C2-44E8-9317-5BAA17F199F6}</ProjectGuid>
+    <ProjectGuid>{7FF849DF-348E-46A7-BA63-D50B40E36D70}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NequeoAwsStorage</RootNamespace>
+    <RootNamespace>NequeoAwsManagement</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -86,15 +86,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>USE_IMPORT_EXPORT;WIN32;_DEBUG;_WINDOWS;_USRDLL;NEQUEOAWSSTORAGE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_IMPORT_EXPORT;WIN32;_DEBUG;_WINDOWS;_USRDLL;NEQUEOAWSMANAGEMENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-monitoring.lib;aws-cpp-sdk-cloudformation.lib;aws-cpp-sdk-cloudtrail.lib;aws-cpp-sdk-config.lib;aws-cpp-sdk-opsworks.lib;aws-cpp-sdk-servicecatalog.lib;aws-cpp-sdk-access-management.lib;aws-cpp-sdk-identity-management.lib;aws-cpp-sdk-ds.lib;aws-cpp-sdk-inspector.lib;aws-cpp-sdk-waf.lib;aws-cpp-sdk-acm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;aws-cpp-sdk-sdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -102,15 +102,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>USE_IMPORT_EXPORT;_DEBUG;_WINDOWS;_USRDLL;NEQUEOAWSSTORAGE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_IMPORT_EXPORT;_DEBUG;_WINDOWS;_USRDLL;NEQUEOAWSMANAGEMENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-monitoring.lib;aws-cpp-sdk-cloudformation.lib;aws-cpp-sdk-cloudtrail.lib;aws-cpp-sdk-config.lib;aws-cpp-sdk-opsworks.lib;aws-cpp-sdk-servicecatalog.lib;aws-cpp-sdk-access-management.lib;aws-cpp-sdk-identity-management.lib;aws-cpp-sdk-ds.lib;aws-cpp-sdk-inspector.lib;aws-cpp-sdk-waf.lib;aws-cpp-sdk-acm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;aws-cpp-sdk-sdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,7 +120,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>USE_IMPORT_EXPORT;WIN32;NDEBUG;_WINDOWS;_USRDLL;NEQUEOAWSSTORAGE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_IMPORT_EXPORT;WIN32;NDEBUG;_WINDOWS;_USRDLL;NEQUEOAWSMANAGEMENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -129,8 +129,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-monitoring.lib;aws-cpp-sdk-cloudformation.lib;aws-cpp-sdk-cloudtrail.lib;aws-cpp-sdk-config.lib;aws-cpp-sdk-opsworks.lib;aws-cpp-sdk-servicecatalog.lib;aws-cpp-sdk-access-management.lib;aws-cpp-sdk-identity-management.lib;aws-cpp-sdk-ds.lib;aws-cpp-sdk-inspector.lib;aws-cpp-sdk-waf.lib;aws-cpp-sdk-acm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;aws-cpp-sdk-sdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,7 +140,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>USE_IMPORT_EXPORT;NDEBUG;_WINDOWS;_USRDLL;NEQUEOAWSSTORAGE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_IMPORT_EXPORT;NDEBUG;_WINDOWS;_USRDLL;NEQUEOAWSMANAGEMENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -149,36 +149,39 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-monitoring.lib;aws-cpp-sdk-cloudformation.lib;aws-cpp-sdk-cloudtrail.lib;aws-cpp-sdk-config.lib;aws-cpp-sdk-opsworks.lib;aws-cpp-sdk-servicecatalog.lib;aws-cpp-sdk-access-management.lib;aws-cpp-sdk-identity-management.lib;aws-cpp-sdk-ds.lib;aws-cpp-sdk-inspector.lib;aws-cpp-sdk-waf.lib;aws-cpp-sdk-acm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Amazon\WebServices\SDK\CPP\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>aws-cpp-sdk-core.lib;aws-cpp-sdk-dynamodb.lib;aws-cpp-sdk-s3.lib;aws-cpp-sdk-rds.lib;aws-cpp-sdk-cloudfront.lib;aws-cpp-sdk-elasticfilesystem.lib;aws-cpp-sdk-glacier.lib;aws-cpp-sdk-snowball.lib;aws-cpp-sdk-storagegateway.lib;aws-cpp-sdk-elasticache.lib;aws-cpp-sdk-redshift.lib;aws-cpp-sdk-dms.lib;aws-cpp-sdk-sdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccessManagementCloudAccount.h" />
+    <ClInclude Include="ACMCloudAccount.h" />
     <ClInclude Include="AwsAccount.h" />
-    <ClInclude Include="CloudFrontCloudAccount.h" />
-    <ClInclude Include="DMSCloudAccount.h" />
-    <ClInclude Include="DynamoDBCloudAccount.h" />
-    <ClInclude Include="ElastiCacheCloudAccount.h" />
-    <ClInclude Include="ElasticFileSystemCloudAccount.h" />
-    <ClInclude Include="GlacierCloudAccount.h" />
+    <ClInclude Include="CloudFormationCloudAccount.h" />
+    <ClInclude Include="CloudTrailCloudAccount.h" />
+    <ClInclude Include="CloudWatchCloudAccount.h" />
+    <ClInclude Include="ConfigServiceCloudAccount.h" />
+    <ClInclude Include="DirectoryServiceCloudAccount.h" />
     <ClInclude Include="Global.h" />
-    <ClInclude Include="RDSCloudAccount.h" />
-    <ClInclude Include="RedshiftCloudAccount.h" />
-    <ClInclude Include="S3CloudAccount.h" />
-    <ClInclude Include="SDBCloudAccount.h" />
-    <ClInclude Include="SnowballCloudAccount.h" />
+    <ClInclude Include="InspectorCloudAccount.h" />
+    <ClInclude Include="OpsWorksCloudAccount.h" />
+    <ClInclude Include="ServiceCatalogCloudAccount.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="StorageGatewayCloudAccount.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="WAFCloudAccount.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AccessManagementCloudAccount.cpp" />
+    <ClCompile Include="ACMCloudAccount.cpp" />
     <ClCompile Include="AwsAccount.cpp" />
-    <ClCompile Include="CloudFrontCloudAccount.cpp" />
-    <ClCompile Include="DMSCloudAccount.cpp" />
-    <ClCompile Include="DynamoDBCloudAccount.cpp" />
+    <ClCompile Include="CloudFormationCloudAccount.cpp" />
+    <ClCompile Include="CloudTrailCloudAccount.cpp" />
+    <ClCompile Include="CloudWatchCloudAccount.cpp" />
+    <ClCompile Include="ConfigServiceCloudAccount.cpp" />
+    <ClCompile Include="DirectoryServiceCloudAccount.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -193,21 +196,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ElastiCacheCloudAccount.cpp" />
-    <ClCompile Include="ElasticFileSystemCloudAccount.cpp" />
-    <ClCompile Include="GlacierCloudAccount.cpp" />
-    <ClCompile Include="RDSCloudAccount.cpp" />
-    <ClCompile Include="RedshiftCloudAccount.cpp" />
-    <ClCompile Include="S3CloudAccount.cpp" />
-    <ClCompile Include="SDBCloudAccount.cpp" />
-    <ClCompile Include="SnowballCloudAccount.cpp" />
+    <ClCompile Include="InspectorCloudAccount.cpp" />
+    <ClCompile Include="OpsWorksCloudAccount.cpp" />
+    <ClCompile Include="ServiceCatalogCloudAccount.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="StorageGatewayCloudAccount.cpp" />
+    <ClCompile Include="WAFCloudAccount.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
