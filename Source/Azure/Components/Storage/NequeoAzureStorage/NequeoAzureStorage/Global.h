@@ -53,6 +53,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <cpprest\json.h>
 #include <cpprest\uri.h>
 #include <cpprest\uri_builder.h>
+#include <cpprest\streams.h>
+#include <cpprest\containerstream.h>
+#include <cpprest\astreambuf.h>
+#include <cpprest\interopstream.h>
+#include <cpprest\rawptrstream.h>
+#include <cpprest\filestream.h>
 
 #include <was\core.h>
 #include <was\common.h>

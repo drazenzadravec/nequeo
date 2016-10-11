@@ -56,6 +56,15 @@ QueueCloudClient::~QueueCloudClient()
 }
 
 ///	<summary>
+///	Get the queue client.
+///	</summary>
+/// <returns>The queue client.</returns>
+const azure::storage::cloud_queue_client& QueueCloudClient::QueueClient() const
+{
+	return _client;
+}
+
+///	<summary>
 ///	Initialise the Queue client.
 ///	</summary>
 void QueueCloudClient::Initialise()
@@ -80,4 +89,95 @@ void QueueCloudClient::Initialise(const azure::storage::queue_request_options& d
 		_client = _account._account.create_cloud_queue_client(default_request_options);
 		_isInitialised = true;
 	}
+}
+
+///	<summary>
+///	Get the list if queues items.
+///	</summary>
+/// <returns>The list of queues items.</returns>
+const std::vector<azure::storage::cloud_queue> QueueCloudClient::ListQueues() const
+{
+	std::vector<azure::storage::cloud_queue> items;
+
+	// Get the list.
+	auto itemIterator = _client.list_queues();
+
+	// Iterate through the list.
+	for (azure::storage::cloud_queue item : itemIterator)
+	{
+		// Add the item.
+		items.push_back(item);
+	}
+
+	// Return the items.
+	return items;
+}
+
+///	<summary>
+///	Get the list if queues items.
+///	</summary>
+/// <param name="prefix">The queues name prefix.</param>
+/// <returns>The list of queues items.</returns>
+const std::vector<azure::storage::cloud_queue> QueueCloudClient::ListQueues(const utility::string_t& prefix) const
+{
+	std::vector<azure::storage::cloud_queue> items;
+
+	// Get the list.
+	auto itemIterator = _client.list_queues(prefix);
+
+	// Iterate through the list.
+	for (azure::storage::cloud_queue item : itemIterator)
+	{
+		// Add the item.
+		items.push_back(item);
+	}
+
+	// Return the items.
+	return items;
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation to return a result segment containing a collection of queue items.
+/// </summary>
+/// <param name="token">A continuation token returned by a previous listing operation.</param>
+/// <param name="prefix">The queue name prefix.</param>
+/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::queue_result_segment"/> that represents the current operation.</returns>
+Concurrency::task<azure::storage::queue_result_segment> QueueCloudClient::ListQueuesSegmentedAsync(
+	const utility::string_t& prefix, const azure::storage::continuation_token& token) const
+{
+	return _client.list_queues_segmented_async(prefix, token);
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation to set the service properties for the Queue service client.
+/// </summary>
+/// <param name="properties">The <see cref="azure::storage::service_properties"/> for the Queue service client.</param>
+/// <param name="includes">An <see cref="azure::storage::service_properties_includes /> enumeration describing which items to include when setting service properties.</param>
+/// <returns>A <see cref="Concurrency::task"/> object that represents the current operation.</returns>
+Concurrency::task<void> QueueCloudClient::UploadServicePropertiesAsync(
+	const azure::storage::service_properties& properties,
+	const azure::storage::service_properties_includes& includes) const
+{
+	return _client.upload_service_properties_async(properties, includes);
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation to get the properties of the service.
+/// </summary>
+/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
+Concurrency::task<azure::storage::service_properties> QueueCloudClient::DownloadServicePropertiesAsync() const
+{
+	return _client.download_service_properties_async();
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation to get the properties of the service.
+/// </summary>
+/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
+Concurrency::task<azure::storage::service_properties> QueueCloudClient::DownloadServicePropertiesAsync(
+	const azure::storage::queue_request_options& options, azure::storage::operation_context context) const
+{
+	return _client.download_service_properties_async(options, context);
 }

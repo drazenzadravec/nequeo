@@ -53,7 +53,8 @@ AzureAccount::AzureAccount(const azure::storage::storage_credentials& credential
 /// <param name="blob_endpoint">The Blob service endpoint.</param>
 /// <param name="queue_endpoint">The Queue service endpoint.</param>
 /// <param name="table_endpoint">The Table service endpoint.</param>
-AzureAccount::AzureAccount(const azure::storage::storage_credentials& credentials,
+AzureAccount::AzureAccount(
+	const azure::storage::storage_credentials& credentials,
 	const azure::storage::storage_uri& blob_endpoint,
 	const azure::storage::storage_uri& queue_endpoint,
 	const azure::storage::storage_uri& table_endpoint)

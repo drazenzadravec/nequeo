@@ -59,6 +59,21 @@ namespace Nequeo {
 				///	</summary>
 				~TableCloudClient();
 
+				/// <summary>
+				/// Has the client been initialised.
+				/// </summary>
+				/// <returns>True if is initialised; else false.</returns>
+				inline bool IsInitialised() const
+				{
+					return _isInitialised;
+				}
+
+				///	<summary>
+				///	Get the table client.
+				///	</summary>
+				/// <returns>The table client.</returns>
+				const azure::storage::cloud_table_client& TableClient() const;
+
 				///	<summary>
 				///	Initialise the Table client.
 				///	</summary>
@@ -69,6 +84,53 @@ namespace Nequeo {
 				///	</summary>
 				/// <param name="default_request_options">Default table request options.</param>
 				void Initialise(const azure::storage::table_request_options& default_request_options);
+
+				///	<summary>
+				///	Get the list if table items.
+				///	</summary>
+				/// <returns>The list of table items.</returns>
+				const std::vector<azure::storage::cloud_table> ListTable() const;
+
+				///	<summary>
+				///	Get the list if table items.
+				///	</summary>
+				/// <param name="prefix">The table name prefix.</param>
+				/// <returns>The list of table items.</returns>
+				const std::vector<azure::storage::cloud_table> ListTable(const utility::string_t& prefix) const;
+
+				/// <summary>
+				/// Intitiates an asynchronous operation that returns an <see cref="azure::storage::table_result_segment"/> containing an enumerable collection of tables that begin with the specified prefix.
+				/// </summary>
+				/// <param name="prefix">The table name prefix.</param>
+				/// <param name="token">An <see cref="azure::storage::continuation_token" /> returned by a previous listing operation.</param>
+				/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::table_result_segment"/> that represents the current operation.</returns>
+				Concurrency::task<azure::storage::table_result_segment> ListTableSegmentedAsync(
+					const utility::string_t& prefix, const azure::storage::continuation_token& token) const;
+
+				/// <summary>
+				/// Intitiates an asynchronous operation to set the service properties for the Table service client.
+				/// </summary>
+				/// <param name="properties">The <see cref="azure::storage::service_properties"/> for the Table service client.</param>
+				/// <param name="includes">An <see cref="azure::storage::service_properties_includes /> enumeration describing which items to include when setting service properties.</param>
+				/// <returns>A <see cref="Concurrency::task"/> object that represents the current operation.</returns>
+				Concurrency::task<void> UploadServicePropertiesAsync(
+					const azure::storage::service_properties& properties,
+					const azure::storage::service_properties_includes& includes) const;
+
+				/// <summary>
+				/// Intitiates an asynchronous operation to get the properties of the service.
+				/// </summary>
+				/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
+				Concurrency::task<azure::storage::service_properties> DownloadServicePropertiesAsync() const;
+
+				/// <summary>
+				/// Intitiates an asynchronous operation to get the properties of the service.
+				/// </summary>
+				/// <param name="options">An <see cref="azure::storage::table_request_options"/> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+				/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
+				Concurrency::task<azure::storage::service_properties> DownloadServicePropertiesAsync(
+					const azure::storage::table_request_options& options, azure::storage::operation_context context) const;
 
 			private:
 				bool _disposed;
