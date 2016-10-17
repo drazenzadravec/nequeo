@@ -176,11 +176,11 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Is capture device.
                 if(audioDevice.InputCount > 0)
-                    comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+                    comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + "|" + audioDevice.Driver);
 
                 // Is playback device.
                 if (audioDevice.OutputCount > 0)
-                    comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+                    comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + "|" + audioDevice.Driver);
             }
 
             // Set any initial items.
@@ -192,7 +192,7 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Get capture device.
                 Nequeo.Net.Sip.AudioDeviceInfo captureDevice = audioDevices[captureIndex];
-                int index = comboBoxAudioCaptureDevice.Items.IndexOf(captureDevice.Name + " | " + captureDevice.Driver);
+                int index = comboBoxAudioCaptureDevice.Items.IndexOf(captureDevice.Name + "|" + captureDevice.Driver);
                 comboBoxAudioCaptureDevice.SelectedIndex = index;
             }
             else
@@ -205,7 +205,7 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Get playback device.
                 Nequeo.Net.Sip.AudioDeviceInfo playbackDevice = audioDevices[playbackIndex];
-                int index = comboBoxAudioPlaybackDevice.Items.IndexOf(playbackDevice.Name + " | " + playbackDevice.Driver);
+                int index = comboBoxAudioPlaybackDevice.Items.IndexOf(playbackDevice.Name + "|" + playbackDevice.Driver);
                 comboBoxAudioPlaybackDevice.SelectedIndex = index;
             }
             else
@@ -347,8 +347,8 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Get the device.
                 string[] device = ((string)comboBoxAudioCaptureDevice.SelectedItem).Split(new char[] { '|' });
-                string name = device[0].Trim();
-                string driver = device[1].Trim();
+                string name = device[0];
+                string driver = device[1];
 
                 // Get the capture index.
                 int captureIndex = _voipCall.VoIPManager.MediaManager.GetAudioDeviceID(driver, name);
@@ -370,8 +370,8 @@ namespace Nequeo.VoIP.Sip.UI
             {
                 // Get the device.
                 string[] device = ((string)comboBoxAudioPlaybackDevice.SelectedItem).Split(new char[] { '|' });
-                string name = device[0].Trim();
-                string driver = device[1].Trim();
+                string name = device[0];
+                string driver = device[1];
 
                 // Get the playback index.
                 int playbackIndex = _voipCall.VoIPManager.MediaManager.GetAudioDeviceID(driver, name);

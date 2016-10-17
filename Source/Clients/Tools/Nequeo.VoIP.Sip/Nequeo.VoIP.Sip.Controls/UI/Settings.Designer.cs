@@ -186,7 +186,7 @@
             this.comboBoxAudioPlaybackDevice.Location = new System.Drawing.Point(78, 46);
             this.comboBoxAudioPlaybackDevice.Name = "comboBoxAudioPlaybackDevice";
             this.comboBoxAudioPlaybackDevice.Size = new System.Drawing.Size(381, 21);
-            this.comboBoxAudioPlaybackDevice.TabIndex = 1;
+            this.comboBoxAudioPlaybackDevice.TabIndex = 5;
             this.comboBoxAudioPlaybackDevice.SelectedIndexChanged += new System.EventHandler(this.comboBoxAudioPlaybackDevice_SelectedIndexChanged);
             // 
             // comboBoxAudioCaptureDevice
@@ -196,7 +196,7 @@
             this.comboBoxAudioCaptureDevice.Location = new System.Drawing.Point(78, 19);
             this.comboBoxAudioCaptureDevice.Name = "comboBoxAudioCaptureDevice";
             this.comboBoxAudioCaptureDevice.Size = new System.Drawing.Size(381, 21);
-            this.comboBoxAudioCaptureDevice.TabIndex = 0;
+            this.comboBoxAudioCaptureDevice.TabIndex = 4;
             this.comboBoxAudioCaptureDevice.SelectedIndexChanged += new System.EventHandler(this.comboBoxAudioCaptureDevice_SelectedIndexChanged);
             // 
             // labelAudioPlaybackDevice
@@ -258,7 +258,7 @@
             this.textBoxMessageBankWait.Location = new System.Drawing.Point(110, 283);
             this.textBoxMessageBankWait.Name = "textBoxMessageBankWait";
             this.textBoxMessageBankWait.Size = new System.Drawing.Size(42, 20);
-            this.textBoxMessageBankWait.TabIndex = 17;
+            this.textBoxMessageBankWait.TabIndex = 26;
             this.textBoxMessageBankWait.TextChanged += new System.EventHandler(this.textBoxMessageBankWait_TextChanged);
             // 
             // labelMessageBankWait
@@ -284,7 +284,7 @@
             this.textBoxAutoAnswerWait.Location = new System.Drawing.Point(110, 257);
             this.textBoxAutoAnswerWait.Name = "textBoxAutoAnswerWait";
             this.textBoxAutoAnswerWait.Size = new System.Drawing.Size(42, 20);
-            this.textBoxAutoAnswerWait.TabIndex = 14;
+            this.textBoxAutoAnswerWait.TabIndex = 25;
             this.textBoxAutoAnswerWait.TextChanged += new System.EventHandler(this.textBoxAutoAnswerWait_TextChanged);
             // 
             // checkBoxAutoAnswer
@@ -293,7 +293,7 @@
             this.checkBoxAutoAnswer.Location = new System.Drawing.Point(18, 259);
             this.checkBoxAutoAnswer.Name = "checkBoxAutoAnswer";
             this.checkBoxAutoAnswer.Size = new System.Drawing.Size(86, 17);
-            this.checkBoxAutoAnswer.TabIndex = 12;
+            this.checkBoxAutoAnswer.TabIndex = 24;
             this.checkBoxAutoAnswer.Text = "Auto Answer";
             this.checkBoxAutoAnswer.UseVisualStyleBackColor = true;
             this.checkBoxAutoAnswer.CheckedChanged += new System.EventHandler(this.checkBoxAutoAnswer_CheckedChanged);
@@ -304,7 +304,7 @@
             this.checkBoxSrtpSecureSignaling.Location = new System.Drawing.Point(18, 140);
             this.checkBoxSrtpSecureSignaling.Name = "checkBoxSrtpSecureSignaling";
             this.checkBoxSrtpSecureSignaling.Size = new System.Drawing.Size(128, 17);
-            this.checkBoxSrtpSecureSignaling.TabIndex = 7;
+            this.checkBoxSrtpSecureSignaling.TabIndex = 19;
             this.checkBoxSrtpSecureSignaling.Text = "Srtp Secure Signaling";
             this.checkBoxSrtpSecureSignaling.ThreeState = true;
             this.checkBoxSrtpSecureSignaling.UseVisualStyleBackColor = true;
@@ -316,7 +316,7 @@
             this.checkBoxUseSrtp.Location = new System.Drawing.Point(18, 117);
             this.checkBoxUseSrtp.Name = "checkBoxUseSrtp";
             this.checkBoxUseSrtp.Size = new System.Drawing.Size(67, 17);
-            this.checkBoxUseSrtp.TabIndex = 6;
+            this.checkBoxUseSrtp.TabIndex = 18;
             this.checkBoxUseSrtp.Text = "Use Srtp";
             this.checkBoxUseSrtp.ThreeState = true;
             this.checkBoxUseSrtp.UseVisualStyleBackColor = true;
@@ -328,7 +328,7 @@
             this.checkBoxUseIPv6.Location = new System.Drawing.Point(18, 94);
             this.checkBoxUseIPv6.Name = "checkBoxUseIPv6";
             this.checkBoxUseIPv6.Size = new System.Drawing.Size(70, 17);
-            this.checkBoxUseIPv6.TabIndex = 5;
+            this.checkBoxUseIPv6.TabIndex = 16;
             this.checkBoxUseIPv6.Text = "Use IPv6";
             this.checkBoxUseIPv6.ThreeState = true;
             this.checkBoxUseIPv6.UseVisualStyleBackColor = true;
@@ -340,7 +340,7 @@
             this.checkBoxIceEnabled.Location = new System.Drawing.Point(18, 236);
             this.checkBoxIceEnabled.Name = "checkBoxIceEnabled";
             this.checkBoxIceEnabled.Size = new System.Drawing.Size(83, 17);
-            this.checkBoxIceEnabled.TabIndex = 11;
+            this.checkBoxIceEnabled.TabIndex = 23;
             this.checkBoxIceEnabled.Text = "Ice Enabled";
             this.checkBoxIceEnabled.UseVisualStyleBackColor = true;
             this.checkBoxIceEnabled.CheckedChanged += new System.EventHandler(this.checkBoxIceEnabled_CheckedChanged);
@@ -351,7 +351,7 @@
             this.checkBoxNoIceRtcp.Location = new System.Drawing.Point(18, 212);
             this.checkBoxNoIceRtcp.Name = "checkBoxNoIceRtcp";
             this.checkBoxNoIceRtcp.Size = new System.Drawing.Size(84, 17);
-            this.checkBoxNoIceRtcp.TabIndex = 10;
+            this.checkBoxNoIceRtcp.TabIndex = 22;
             this.checkBoxNoIceRtcp.Text = "No Ice Rtcp";
             this.checkBoxNoIceRtcp.UseVisualStyleBackColor = true;
             this.checkBoxNoIceRtcp.CheckedChanged += new System.EventHandler(this.checkBoxNoIceRtcp_CheckedChanged);
@@ -362,7 +362,7 @@
             this.checkBoxRegisterOnAdd.Location = new System.Drawing.Point(18, 187);
             this.checkBoxRegisterOnAdd.Name = "checkBoxRegisterOnAdd";
             this.checkBoxRegisterOnAdd.Size = new System.Drawing.Size(104, 17);
-            this.checkBoxRegisterOnAdd.TabIndex = 9;
+            this.checkBoxRegisterOnAdd.TabIndex = 21;
             this.checkBoxRegisterOnAdd.Text = "Register On Add";
             this.checkBoxRegisterOnAdd.UseVisualStyleBackColor = true;
             this.checkBoxRegisterOnAdd.CheckedChanged += new System.EventHandler(this.checkBoxRegisterOnAdd_CheckedChanged);
@@ -373,7 +373,7 @@
             this.checkBoxDropCallsOnFail.Location = new System.Drawing.Point(18, 163);
             this.checkBoxDropCallsOnFail.Name = "checkBoxDropCallsOnFail";
             this.checkBoxDropCallsOnFail.Size = new System.Drawing.Size(110, 17);
-            this.checkBoxDropCallsOnFail.TabIndex = 8;
+            this.checkBoxDropCallsOnFail.TabIndex = 20;
             this.checkBoxDropCallsOnFail.Text = "Drop Calls On Fail";
             this.checkBoxDropCallsOnFail.UseVisualStyleBackColor = true;
             this.checkBoxDropCallsOnFail.CheckedChanged += new System.EventHandler(this.checkBoxDropCallsOnFail_CheckedChanged);
@@ -383,7 +383,7 @@
             this.textBoxPriority.Location = new System.Drawing.Point(65, 68);
             this.textBoxPriority.Name = "textBoxPriority";
             this.textBoxPriority.Size = new System.Drawing.Size(60, 20);
-            this.textBoxPriority.TabIndex = 4;
+            this.textBoxPriority.TabIndex = 16;
             this.textBoxPriority.TextChanged += new System.EventHandler(this.textBoxPriority_TextChanged);
             // 
             // labelPriority
@@ -401,7 +401,7 @@
             this.checkBoxIsDefault.Location = new System.Drawing.Point(18, 45);
             this.checkBoxIsDefault.Name = "checkBoxIsDefault";
             this.checkBoxIsDefault.Size = new System.Drawing.Size(71, 17);
-            this.checkBoxIsDefault.TabIndex = 3;
+            this.checkBoxIsDefault.TabIndex = 15;
             this.checkBoxIsDefault.Text = "Is Default";
             this.checkBoxIsDefault.UseVisualStyleBackColor = true;
             this.checkBoxIsDefault.CheckedChanged += new System.EventHandler(this.checkBoxIsDefault_CheckedChanged);
@@ -411,7 +411,7 @@
             this.textBoxSipPort.Location = new System.Drawing.Point(65, 19);
             this.textBoxSipPort.Name = "textBoxSipPort";
             this.textBoxSipPort.Size = new System.Drawing.Size(60, 20);
-            this.textBoxSipPort.TabIndex = 2;
+            this.textBoxSipPort.TabIndex = 14;
             this.textBoxSipPort.TextChanged += new System.EventHandler(this.textBoxSipPort_TextChanged);
             // 
             // labelSipPort
@@ -450,7 +450,7 @@
             this.textBoxMwiExpiration.Location = new System.Drawing.Point(88, 44);
             this.textBoxMwiExpiration.Name = "textBoxMwiExpiration";
             this.textBoxMwiExpiration.Size = new System.Drawing.Size(60, 20);
-            this.textBoxMwiExpiration.TabIndex = 2;
+            this.textBoxMwiExpiration.TabIndex = 39;
             this.textBoxMwiExpiration.TextChanged += new System.EventHandler(this.textBoxMwiExpiration_TextChanged);
             // 
             // labelMwiExpiration
@@ -468,7 +468,7 @@
             this.checkBoxMessageWaitingIndicationEnabled.Location = new System.Drawing.Point(18, 22);
             this.checkBoxMessageWaitingIndicationEnabled.Name = "checkBoxMessageWaitingIndicationEnabled";
             this.checkBoxMessageWaitingIndicationEnabled.Size = new System.Drawing.Size(65, 17);
-            this.checkBoxMessageWaitingIndicationEnabled.TabIndex = 0;
+            this.checkBoxMessageWaitingIndicationEnabled.TabIndex = 38;
             this.checkBoxMessageWaitingIndicationEnabled.Text = "Enabled";
             this.checkBoxMessageWaitingIndicationEnabled.UseVisualStyleBackColor = true;
             this.checkBoxMessageWaitingIndicationEnabled.CheckedChanged += new System.EventHandler(this.checkBoxMessageWaitingIndicationEnabled_CheckedChanged);
@@ -491,7 +491,7 @@
             this.textBoxMediaTransportPortRange.Location = new System.Drawing.Point(88, 45);
             this.textBoxMediaTransportPortRange.Name = "textBoxMediaTransportPortRange";
             this.textBoxMediaTransportPortRange.Size = new System.Drawing.Size(60, 20);
-            this.textBoxMediaTransportPortRange.TabIndex = 3;
+            this.textBoxMediaTransportPortRange.TabIndex = 41;
             this.textBoxMediaTransportPortRange.TextChanged += new System.EventHandler(this.textBoxMediaTransportPortRange_TextChanged);
             // 
             // labelMediaTransportPortRange
@@ -508,7 +508,7 @@
             this.textBoxMediaTransportPort.Location = new System.Drawing.Point(88, 19);
             this.textBoxMediaTransportPort.Name = "textBoxMediaTransportPort";
             this.textBoxMediaTransportPort.Size = new System.Drawing.Size(60, 20);
-            this.textBoxMediaTransportPort.TabIndex = 1;
+            this.textBoxMediaTransportPort.TabIndex = 40;
             this.textBoxMediaTransportPort.TextChanged += new System.EventHandler(this.textBoxMediaTransportPort_TextChanged);
             // 
             // labelMediaTransportPort
@@ -576,7 +576,7 @@
             this.textBoxTimeUnregisterWait.Location = new System.Drawing.Point(135, 123);
             this.textBoxTimeUnregisterWait.Name = "textBoxTimeUnregisterWait";
             this.textBoxTimeUnregisterWait.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimeUnregisterWait.TabIndex = 11;
+            this.textBoxTimeUnregisterWait.TabIndex = 31;
             this.textBoxTimeUnregisterWait.TextChanged += new System.EventHandler(this.textBoxTimeUnregisterWait_TextChanged);
             // 
             // textBoxTimeTimeout
@@ -584,7 +584,7 @@
             this.textBoxTimeTimeout.Location = new System.Drawing.Point(135, 97);
             this.textBoxTimeTimeout.Name = "textBoxTimeTimeout";
             this.textBoxTimeTimeout.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimeTimeout.TabIndex = 10;
+            this.textBoxTimeTimeout.TabIndex = 30;
             this.textBoxTimeTimeout.TextChanged += new System.EventHandler(this.textBoxTimeTimeout_TextChanged);
             // 
             // labelTimeTimeout
@@ -637,7 +637,7 @@
             this.textBoxTimeDelayBeforeRefresh.Location = new System.Drawing.Point(135, 71);
             this.textBoxTimeDelayBeforeRefresh.Name = "textBoxTimeDelayBeforeRefresh";
             this.textBoxTimeDelayBeforeRefresh.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimeDelayBeforeRefresh.TabIndex = 4;
+            this.textBoxTimeDelayBeforeRefresh.TabIndex = 29;
             this.textBoxTimeDelayBeforeRefresh.TextChanged += new System.EventHandler(this.textBoxTimeDelayBeforeRefresh_TextChanged);
             // 
             // textBoxTimeFirstRetryInterval
@@ -645,7 +645,7 @@
             this.textBoxTimeFirstRetryInterval.Location = new System.Drawing.Point(135, 45);
             this.textBoxTimeFirstRetryInterval.Name = "textBoxTimeFirstRetryInterval";
             this.textBoxTimeFirstRetryInterval.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimeFirstRetryInterval.TabIndex = 3;
+            this.textBoxTimeFirstRetryInterval.TabIndex = 27;
             this.textBoxTimeFirstRetryInterval.TextChanged += new System.EventHandler(this.textBoxTimeFirstRetryInterval_TextChanged);
             // 
             // textBoxTimeRetryInterval
@@ -653,7 +653,7 @@
             this.textBoxTimeRetryInterval.Location = new System.Drawing.Point(135, 19);
             this.textBoxTimeRetryInterval.Name = "textBoxTimeRetryInterval";
             this.textBoxTimeRetryInterval.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimeRetryInterval.TabIndex = 2;
+            this.textBoxTimeRetryInterval.TabIndex = 27;
             this.textBoxTimeRetryInterval.TextChanged += new System.EventHandler(this.textBoxTimeRetryInterval_TextChanged);
             // 
             // labelTimeFirstRetryInterval
@@ -703,7 +703,7 @@
             this.textBoxTimerSessExpires.Location = new System.Drawing.Point(115, 45);
             this.textBoxTimerSessExpires.Name = "textBoxTimerSessExpires";
             this.textBoxTimerSessExpires.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimerSessExpires.TabIndex = 4;
+            this.textBoxTimerSessExpires.TabIndex = 33;
             this.textBoxTimerSessExpires.TextChanged += new System.EventHandler(this.textBoxTimerSessExpires_TextChanged);
             // 
             // labelTimerSessExpires
@@ -729,7 +729,7 @@
             this.textBoxTimerMinSE.Location = new System.Drawing.Point(115, 19);
             this.textBoxTimerMinSE.Name = "textBoxTimerMinSE";
             this.textBoxTimerMinSE.Size = new System.Drawing.Size(60, 20);
-            this.textBoxTimerMinSE.TabIndex = 1;
+            this.textBoxTimerMinSE.TabIndex = 32;
             this.textBoxTimerMinSE.TextChanged += new System.EventHandler(this.textBoxTimerMinSE_TextChanged);
             // 
             // labelTimerMinSE
@@ -762,7 +762,7 @@
             this.buttonAudioRecordOutCall.Location = new System.Drawing.Point(429, 18);
             this.buttonAudioRecordOutCall.Name = "buttonAudioRecordOutCall";
             this.buttonAudioRecordOutCall.Size = new System.Drawing.Size(30, 21);
-            this.buttonAudioRecordOutCall.TabIndex = 7;
+            this.buttonAudioRecordOutCall.TabIndex = 8;
             this.buttonAudioRecordOutCall.Text = "...";
             this.buttonAudioRecordOutCall.UseVisualStyleBackColor = true;
             this.buttonAudioRecordOutCall.Click += new System.EventHandler(this.buttonAudioRecordOutCall_Click);
@@ -773,7 +773,7 @@
             this.buttonAudioRecordInCall.Location = new System.Drawing.Point(429, 45);
             this.buttonAudioRecordInCall.Name = "buttonAudioRecordInCall";
             this.buttonAudioRecordInCall.Size = new System.Drawing.Size(30, 21);
-            this.buttonAudioRecordInCall.TabIndex = 6;
+            this.buttonAudioRecordInCall.TabIndex = 11;
             this.buttonAudioRecordInCall.Text = "...";
             this.buttonAudioRecordInCall.UseVisualStyleBackColor = true;
             this.buttonAudioRecordInCall.Click += new System.EventHandler(this.buttonAudioRecordInCall_Click);
@@ -784,7 +784,7 @@
             this.checkBoxAudioRecordOutCall.Location = new System.Drawing.Point(18, 21);
             this.checkBoxAudioRecordOutCall.Name = "checkBoxAudioRecordOutCall";
             this.checkBoxAudioRecordOutCall.Size = new System.Drawing.Size(120, 17);
-            this.checkBoxAudioRecordOutCall.TabIndex = 5;
+            this.checkBoxAudioRecordOutCall.TabIndex = 6;
             this.checkBoxAudioRecordOutCall.Text = "Outgoing Call Path :";
             this.checkBoxAudioRecordOutCall.UseVisualStyleBackColor = true;
             this.checkBoxAudioRecordOutCall.CheckedChanged += new System.EventHandler(this.checkBoxAudioRecordOutCall_CheckedChanged);
@@ -795,7 +795,7 @@
             this.checkBoxAudioRecordInCall.Location = new System.Drawing.Point(18, 47);
             this.checkBoxAudioRecordInCall.Name = "checkBoxAudioRecordInCall";
             this.checkBoxAudioRecordInCall.Size = new System.Drawing.Size(120, 17);
-            this.checkBoxAudioRecordInCall.TabIndex = 4;
+            this.checkBoxAudioRecordInCall.TabIndex = 9;
             this.checkBoxAudioRecordInCall.Text = "Incoming Call Path :";
             this.checkBoxAudioRecordInCall.UseVisualStyleBackColor = true;
             this.checkBoxAudioRecordInCall.CheckedChanged += new System.EventHandler(this.checkBoxAudioRecordInCall_CheckedChanged);
@@ -807,7 +807,7 @@
             this.textBoxAudioRecordInCall.Name = "textBoxAudioRecordInCall";
             this.textBoxAudioRecordInCall.ReadOnly = true;
             this.textBoxAudioRecordInCall.Size = new System.Drawing.Size(279, 20);
-            this.textBoxAudioRecordInCall.TabIndex = 3;
+            this.textBoxAudioRecordInCall.TabIndex = 10;
             this.textBoxAudioRecordInCall.TextChanged += new System.EventHandler(this.textBoxAudioRecordinCall_TextChanged);
             // 
             // textBoxAudioRecordOutCall
@@ -817,7 +817,7 @@
             this.textBoxAudioRecordOutCall.Name = "textBoxAudioRecordOutCall";
             this.textBoxAudioRecordOutCall.ReadOnly = true;
             this.textBoxAudioRecordOutCall.Size = new System.Drawing.Size(279, 20);
-            this.textBoxAudioRecordOutCall.TabIndex = 1;
+            this.textBoxAudioRecordOutCall.TabIndex = 7;
             this.textBoxAudioRecordOutCall.TextChanged += new System.EventHandler(this.textBoxAudioRecordOutCall_TextChanged);
             // 
             // saveFileDialog
@@ -842,7 +842,7 @@
             this.buttonContactFilePath.Location = new System.Drawing.Point(429, 18);
             this.buttonContactFilePath.Name = "buttonContactFilePath";
             this.buttonContactFilePath.Size = new System.Drawing.Size(30, 21);
-            this.buttonContactFilePath.TabIndex = 2;
+            this.buttonContactFilePath.TabIndex = 13;
             this.buttonContactFilePath.Text = "...";
             this.buttonContactFilePath.UseVisualStyleBackColor = true;
             this.buttonContactFilePath.Click += new System.EventHandler(this.buttonContactFilePath_Click);
@@ -862,7 +862,7 @@
             this.textBoxContactFilePath.Name = "textBoxContactFilePath";
             this.textBoxContactFilePath.ReadOnly = true;
             this.textBoxContactFilePath.Size = new System.Drawing.Size(279, 20);
-            this.textBoxContactFilePath.TabIndex = 0;
+            this.textBoxContactFilePath.TabIndex = 12;
             this.textBoxContactFilePath.TextChanged += new System.EventHandler(this.textBoxContactFilePath_TextChanged);
             // 
             // openFileDialog
@@ -893,7 +893,7 @@
             this.textBoxCredentialsPassword.Name = "textBoxCredentialsPassword";
             this.textBoxCredentialsPassword.PasswordChar = '*';
             this.textBoxCredentialsPassword.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsPassword.TabIndex = 7;
+            this.textBoxCredentialsPassword.TabIndex = 3;
             this.textBoxCredentialsPassword.TextChanged += new System.EventHandler(this.textBoxCredentialsPassword_TextChanged);
             // 
             // textBoxCredentialsUsername
@@ -901,7 +901,7 @@
             this.textBoxCredentialsUsername.Location = new System.Drawing.Point(339, 19);
             this.textBoxCredentialsUsername.Name = "textBoxCredentialsUsername";
             this.textBoxCredentialsUsername.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsUsername.TabIndex = 6;
+            this.textBoxCredentialsUsername.TabIndex = 2;
             this.textBoxCredentialsUsername.TextChanged += new System.EventHandler(this.textBoxCredentialsUsername_TextChanged);
             // 
             // labelCredentialsPassword
@@ -927,7 +927,7 @@
             this.textBoxCredentialsSipHost.Location = new System.Drawing.Point(105, 45);
             this.textBoxCredentialsSipHost.Name = "textBoxCredentialsSipHost";
             this.textBoxCredentialsSipHost.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsSipHost.TabIndex = 3;
+            this.textBoxCredentialsSipHost.TabIndex = 1;
             this.textBoxCredentialsSipHost.TextChanged += new System.EventHandler(this.textBoxCredentialsSipHost_TextChanged);
             // 
             // textBoxCredentialsAccountName
@@ -935,7 +935,7 @@
             this.textBoxCredentialsAccountName.Location = new System.Drawing.Point(105, 19);
             this.textBoxCredentialsAccountName.Name = "textBoxCredentialsAccountName";
             this.textBoxCredentialsAccountName.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCredentialsAccountName.TabIndex = 2;
+            this.textBoxCredentialsAccountName.TabIndex = 0;
             this.textBoxCredentialsAccountName.TextChanged += new System.EventHandler(this.textBoxCredentialsAccountName_TextChanged);
             // 
             // labelCredentialsSipHost
@@ -1017,7 +1017,7 @@
             this.checkedListBoxConfigTransport.Location = new System.Drawing.Point(6, 19);
             this.checkedListBoxConfigTransport.Name = "checkedListBoxConfigTransport";
             this.checkedListBoxConfigTransport.Size = new System.Drawing.Size(67, 54);
-            this.checkedListBoxConfigTransport.TabIndex = 0;
+            this.checkedListBoxConfigTransport.TabIndex = 34;
             this.checkedListBoxConfigTransport.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxConfigTransport_ItemCheck);
             // 
             // groupBoxPublish
@@ -1048,7 +1048,7 @@
             this.textBoxPublishShutdownWait.Location = new System.Drawing.Point(181, 19);
             this.textBoxPublishShutdownWait.Name = "textBoxPublishShutdownWait";
             this.textBoxPublishShutdownWait.Size = new System.Drawing.Size(60, 20);
-            this.textBoxPublishShutdownWait.TabIndex = 3;
+            this.textBoxPublishShutdownWait.TabIndex = 36;
             // 
             // labelPublishShutdownWait
             // 
@@ -1065,7 +1065,7 @@
             this.checkBoxPublishQueue.Location = new System.Drawing.Point(18, 45);
             this.checkBoxPublishQueue.Name = "checkBoxPublishQueue";
             this.checkBoxPublishQueue.Size = new System.Drawing.Size(58, 17);
-            this.checkBoxPublishQueue.TabIndex = 1;
+            this.checkBoxPublishQueue.TabIndex = 37;
             this.checkBoxPublishQueue.Text = "Queue";
             this.checkBoxPublishQueue.UseVisualStyleBackColor = true;
             // 
@@ -1075,7 +1075,7 @@
             this.checkBoxPublishEnabled.Location = new System.Drawing.Point(18, 22);
             this.checkBoxPublishEnabled.Name = "checkBoxPublishEnabled";
             this.checkBoxPublishEnabled.Size = new System.Drawing.Size(65, 17);
-            this.checkBoxPublishEnabled.TabIndex = 0;
+            this.checkBoxPublishEnabled.TabIndex = 35;
             this.checkBoxPublishEnabled.Text = "Enabled";
             this.checkBoxPublishEnabled.UseVisualStyleBackColor = true;
             // 
@@ -1117,7 +1117,7 @@
             this.buttonSoundsAutoAnswer.Location = new System.Drawing.Point(429, 100);
             this.buttonSoundsAutoAnswer.Name = "buttonSoundsAutoAnswer";
             this.buttonSoundsAutoAnswer.Size = new System.Drawing.Size(30, 21);
-            this.buttonSoundsAutoAnswer.TabIndex = 10;
+            this.buttonSoundsAutoAnswer.TabIndex = 52;
             this.buttonSoundsAutoAnswer.Text = "...";
             this.buttonSoundsAutoAnswer.UseVisualStyleBackColor = true;
             this.buttonSoundsAutoAnswer.Click += new System.EventHandler(this.buttonSoundsAutoAnswer_Click);
@@ -1127,7 +1127,7 @@
             this.textBoxSoundsAutoAnswer.Location = new System.Drawing.Point(144, 100);
             this.textBoxSoundsAutoAnswer.Name = "textBoxSoundsAutoAnswer";
             this.textBoxSoundsAutoAnswer.Size = new System.Drawing.Size(279, 20);
-            this.textBoxSoundsAutoAnswer.TabIndex = 9;
+            this.textBoxSoundsAutoAnswer.TabIndex = 51;
             this.textBoxSoundsAutoAnswer.TextChanged += new System.EventHandler(this.textBoxSoundsAutoAnswer_TextChanged);
             // 
             // labelSoundsAutoAnswer
@@ -1155,7 +1155,7 @@
             this.comboBoxSoundsAudioDevice.Location = new System.Drawing.Point(144, 19);
             this.comboBoxSoundsAudioDevice.Name = "comboBoxSoundsAudioDevice";
             this.comboBoxSoundsAudioDevice.Size = new System.Drawing.Size(315, 21);
-            this.comboBoxSoundsAudioDevice.TabIndex = 6;
+            this.comboBoxSoundsAudioDevice.TabIndex = 46;
             this.comboBoxSoundsAudioDevice.SelectedIndexChanged += new System.EventHandler(this.comboBoxSoundsAudioDevice_SelectedIndexChanged);
             // 
             // buttonSoundsIMPath
@@ -1163,7 +1163,7 @@
             this.buttonSoundsIMPath.Location = new System.Drawing.Point(429, 74);
             this.buttonSoundsIMPath.Name = "buttonSoundsIMPath";
             this.buttonSoundsIMPath.Size = new System.Drawing.Size(30, 21);
-            this.buttonSoundsIMPath.TabIndex = 5;
+            this.buttonSoundsIMPath.TabIndex = 50;
             this.buttonSoundsIMPath.Text = "...";
             this.buttonSoundsIMPath.UseVisualStyleBackColor = true;
             this.buttonSoundsIMPath.Click += new System.EventHandler(this.buttonSoundsIMPath_Click);
@@ -1182,7 +1182,7 @@
             this.textBoxSoundsIMPath.Location = new System.Drawing.Point(144, 74);
             this.textBoxSoundsIMPath.Name = "textBoxSoundsIMPath";
             this.textBoxSoundsIMPath.Size = new System.Drawing.Size(279, 20);
-            this.textBoxSoundsIMPath.TabIndex = 3;
+            this.textBoxSoundsIMPath.TabIndex = 49;
             this.textBoxSoundsIMPath.TextChanged += new System.EventHandler(this.textBoxSoundsIMPath_TextChanged);
             // 
             // labelSoundsRingPath
@@ -1199,7 +1199,7 @@
             this.buttonSoundsRingPath.Location = new System.Drawing.Point(429, 46);
             this.buttonSoundsRingPath.Name = "buttonSoundsRingPath";
             this.buttonSoundsRingPath.Size = new System.Drawing.Size(30, 21);
-            this.buttonSoundsRingPath.TabIndex = 1;
+            this.buttonSoundsRingPath.TabIndex = 48;
             this.buttonSoundsRingPath.Text = "...";
             this.buttonSoundsRingPath.UseVisualStyleBackColor = true;
             this.buttonSoundsRingPath.Click += new System.EventHandler(this.buttonSoundsRingPath_Click);
@@ -1209,7 +1209,7 @@
             this.textBoxSoundsRingPath.Location = new System.Drawing.Point(144, 46);
             this.textBoxSoundsRingPath.Name = "textBoxSoundsRingPath";
             this.textBoxSoundsRingPath.Size = new System.Drawing.Size(279, 20);
-            this.textBoxSoundsRingPath.TabIndex = 0;
+            this.textBoxSoundsRingPath.TabIndex = 47;
             this.textBoxSoundsRingPath.TextChanged += new System.EventHandler(this.textBoxSoundsRingPath_TextChanged);
             // 
             // tabPageCodec
@@ -1245,7 +1245,7 @@
             this.checkedListBoxAudioCodec.Location = new System.Drawing.Point(6, 19);
             this.checkedListBoxAudioCodec.Name = "checkedListBoxAudioCodec";
             this.checkedListBoxAudioCodec.Size = new System.Drawing.Size(463, 226);
-            this.checkedListBoxAudioCodec.TabIndex = 2;
+            this.checkedListBoxAudioCodec.TabIndex = 45;
             this.checkedListBoxAudioCodec.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxAudioCodec_ItemCheck);
             this.checkedListBoxAudioCodec.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxAudioCodec_SelectedIndexChanged);
             // 
@@ -1254,7 +1254,7 @@
             this.contextMenuStripCodecPriority.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemChangePriority});
             this.contextMenuStripCodecPriority.Name = "contextMenuStripCodecPriority";
-            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 48);
+            this.contextMenuStripCodecPriority.Size = new System.Drawing.Size(157, 26);
             // 
             // toolStripMenuItemChangePriority
             // 
@@ -1303,7 +1303,7 @@
             this.textBoxRedirectCallTime.Name = "textBoxRedirectCallTime";
             this.textBoxRedirectCallTime.ReadOnly = true;
             this.textBoxRedirectCallTime.Size = new System.Drawing.Size(70, 20);
-            this.textBoxRedirectCallTime.TabIndex = 8;
+            this.textBoxRedirectCallTime.TabIndex = 44;
             this.textBoxRedirectCallTime.TextChanged += new System.EventHandler(this.textBoxRedirectCallTime_TextChanged);
             // 
             // labelRedirectCallTime
@@ -1321,7 +1321,7 @@
             this.textBoxRedirectCallText.Name = "textBoxRedirectCallText";
             this.textBoxRedirectCallText.ReadOnly = true;
             this.textBoxRedirectCallText.Size = new System.Drawing.Size(187, 20);
-            this.textBoxRedirectCallText.TabIndex = 6;
+            this.textBoxRedirectCallText.TabIndex = 43;
             this.textBoxRedirectCallText.TextChanged += new System.EventHandler(this.textBoxRedirectCallText_TextChanged);
             // 
             // checkBoxRedirectCallEnabled
@@ -1330,7 +1330,7 @@
             this.checkBoxRedirectCallEnabled.Location = new System.Drawing.Point(18, 22);
             this.checkBoxRedirectCallEnabled.Name = "checkBoxRedirectCallEnabled";
             this.checkBoxRedirectCallEnabled.Size = new System.Drawing.Size(65, 17);
-            this.checkBoxRedirectCallEnabled.TabIndex = 5;
+            this.checkBoxRedirectCallEnabled.TabIndex = 42;
             this.checkBoxRedirectCallEnabled.Text = "Enabled";
             this.checkBoxRedirectCallEnabled.UseVisualStyleBackColor = true;
             this.checkBoxRedirectCallEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRedirectCallEnabled_CheckedChanged);

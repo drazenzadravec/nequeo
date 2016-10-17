@@ -247,19 +247,29 @@ namespace Nequeo.VoIP.PjSip.UI
         /// <param name="e"></param>
         private void InstantMessage_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            // Ask to save the message first.
+            DialogResult result = MessageBox.Show("Save the messages first?", "Instant Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                // Cleanup the player.
-                if (_player != null)
-                {
-                    _player.Stop();
-                    _player.Dispose();
-                }
+                // Do not close the window.
+                e.Cancel = true;
             }
-            catch { }
+            else
+            {
+                try
+                {
+                    // Cleanup the player.
+                    if (_player != null)
+                    {
+                        _player.Stop();
+                        _player.Dispose();
+                    }
+                }
+                catch { }
 
-            // Send the form closing event.
-            OnInstantMessageClosing?.Invoke(this, new EventArgs());
+                // Send the form closing event.
+                OnInstantMessageClosing?.Invoke(this, new EventArgs());
+            }
         }
 
         /// <summary>

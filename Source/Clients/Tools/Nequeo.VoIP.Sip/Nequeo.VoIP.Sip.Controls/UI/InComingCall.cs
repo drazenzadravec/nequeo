@@ -302,7 +302,15 @@ namespace Nequeo.VoIP.Sip.UI
                 try
                 {
                     // Get the contact.
-                    Data.contactsContact contact = _contacts.contact.First(u => u.name.ToLower() == _contactName.ToLower());
+                    Data.contactsContact contact = null;
+                    try
+                    {
+                        // Get the contact.
+                        contact = _contacts.contact.First(u => u.name.ToLower() == _contactName.ToLower());
+                    }
+                    catch { }
+
+                    // If contact.
                     if (contact != null)
                     {
                         // Find in the contact list view.

@@ -64,16 +64,15 @@
             this.textBoxDetails.Location = new System.Drawing.Point(12, 12);
             this.textBoxDetails.Multiline = true;
             this.textBoxDetails.Name = "textBoxDetails";
-            this.textBoxDetails.ReadOnly = true;
             this.textBoxDetails.Size = new System.Drawing.Size(257, 126);
-            this.textBoxDetails.TabIndex = 3;
+            this.textBoxDetails.TabIndex = 0;
             // 
             // buttonAnswer
             // 
             this.buttonAnswer.Location = new System.Drawing.Point(437, 176);
             this.buttonAnswer.Name = "buttonAnswer";
             this.buttonAnswer.Size = new System.Drawing.Size(75, 23);
-            this.buttonAnswer.TabIndex = 0;
+            this.buttonAnswer.TabIndex = 1;
             this.buttonAnswer.Text = "Answer";
             this.buttonAnswer.UseVisualStyleBackColor = true;
             this.buttonAnswer.Click += new System.EventHandler(this.buttonAnswer_Click);
@@ -83,7 +82,7 @@
             this.buttonHangup.Location = new System.Drawing.Point(356, 176);
             this.buttonHangup.Name = "buttonHangup";
             this.buttonHangup.Size = new System.Drawing.Size(75, 23);
-            this.buttonHangup.TabIndex = 1;
+            this.buttonHangup.TabIndex = 2;
             this.buttonHangup.Text = "Hangup";
             this.buttonHangup.UseVisualStyleBackColor = true;
             this.buttonHangup.Click += new System.EventHandler(this.buttonHangup_Click);
@@ -116,7 +115,7 @@
             this.buttonDigitsClear.Location = new System.Drawing.Point(153, 12);
             this.buttonDigitsClear.Name = "buttonDigitsClear";
             this.buttonDigitsClear.Size = new System.Drawing.Size(61, 23);
-            this.buttonDigitsClear.TabIndex = 15;
+            this.buttonDigitsClear.TabIndex = 8;
             this.buttonDigitsClear.Text = "Clear";
             this.buttonDigitsClear.UseVisualStyleBackColor = true;
             this.buttonDigitsClear.Click += new System.EventHandler(this.buttonDigitsClear_Click);
@@ -134,7 +133,7 @@
             this.buttonHash.Location = new System.Drawing.Point(153, 127);
             this.buttonHash.Name = "buttonHash";
             this.buttonHash.Size = new System.Drawing.Size(61, 23);
-            this.buttonHash.TabIndex = 14;
+            this.buttonHash.TabIndex = 20;
             this.buttonHash.Text = "#";
             this.buttonHash.UseVisualStyleBackColor = true;
             this.buttonHash.Click += new System.EventHandler(this.buttonHash_Click);
@@ -144,7 +143,7 @@
             this.buttonStar.Location = new System.Drawing.Point(19, 127);
             this.buttonStar.Name = "buttonStar";
             this.buttonStar.Size = new System.Drawing.Size(61, 23);
-            this.buttonStar.TabIndex = 12;
+            this.buttonStar.TabIndex = 18;
             this.buttonStar.Text = "*";
             this.buttonStar.UseVisualStyleBackColor = true;
             this.buttonStar.Click += new System.EventHandler(this.buttonStar_Click);
@@ -154,7 +153,7 @@
             this.buttonZero.Location = new System.Drawing.Point(86, 127);
             this.buttonZero.Name = "buttonZero";
             this.buttonZero.Size = new System.Drawing.Size(61, 23);
-            this.buttonZero.TabIndex = 13;
+            this.buttonZero.TabIndex = 19;
             this.buttonZero.Text = "0";
             this.buttonZero.UseVisualStyleBackColor = true;
             this.buttonZero.Click += new System.EventHandler(this.buttonZero_Click);
@@ -164,7 +163,7 @@
             this.buttonEight.Location = new System.Drawing.Point(86, 98);
             this.buttonEight.Name = "buttonEight";
             this.buttonEight.Size = new System.Drawing.Size(61, 23);
-            this.buttonEight.TabIndex = 10;
+            this.buttonEight.TabIndex = 16;
             this.buttonEight.Text = "8 tuv";
             this.buttonEight.UseVisualStyleBackColor = true;
             this.buttonEight.Click += new System.EventHandler(this.buttonEight_Click);
@@ -174,7 +173,7 @@
             this.buttonSeven.Location = new System.Drawing.Point(19, 98);
             this.buttonSeven.Name = "buttonSeven";
             this.buttonSeven.Size = new System.Drawing.Size(61, 23);
-            this.buttonSeven.TabIndex = 9;
+            this.buttonSeven.TabIndex = 15;
             this.buttonSeven.Text = "7 pqrs";
             this.buttonSeven.UseVisualStyleBackColor = true;
             this.buttonSeven.Click += new System.EventHandler(this.buttonSeven_Click);
@@ -184,7 +183,7 @@
             this.buttonSix.Location = new System.Drawing.Point(153, 69);
             this.buttonSix.Name = "buttonSix";
             this.buttonSix.Size = new System.Drawing.Size(61, 23);
-            this.buttonSix.TabIndex = 8;
+            this.buttonSix.TabIndex = 14;
             this.buttonSix.Text = "6 mno";
             this.buttonSix.UseVisualStyleBackColor = true;
             this.buttonSix.Click += new System.EventHandler(this.buttonSix_Click);
@@ -194,7 +193,7 @@
             this.buttonFive.Location = new System.Drawing.Point(86, 69);
             this.buttonFive.Name = "buttonFive";
             this.buttonFive.Size = new System.Drawing.Size(61, 23);
-            this.buttonFive.TabIndex = 7;
+            this.buttonFive.TabIndex = 13;
             this.buttonFive.Text = "5 jkl";
             this.buttonFive.UseVisualStyleBackColor = true;
             this.buttonFive.Click += new System.EventHandler(this.buttonFive_Click);
@@ -204,7 +203,7 @@
             this.buttonFour.Location = new System.Drawing.Point(19, 69);
             this.buttonFour.Name = "buttonFour";
             this.buttonFour.Size = new System.Drawing.Size(61, 23);
-            this.buttonFour.TabIndex = 6;
+            this.buttonFour.TabIndex = 12;
             this.buttonFour.Text = "4 ghi";
             this.buttonFour.UseVisualStyleBackColor = true;
             this.buttonFour.Click += new System.EventHandler(this.buttonFour_Click);
@@ -214,7 +213,7 @@
             this.buttonNine.Location = new System.Drawing.Point(153, 98);
             this.buttonNine.Name = "buttonNine";
             this.buttonNine.Size = new System.Drawing.Size(61, 23);
-            this.buttonNine.TabIndex = 11;
+            this.buttonNine.TabIndex = 17;
             this.buttonNine.Text = "9 wxyz";
             this.buttonNine.UseVisualStyleBackColor = true;
             this.buttonNine.Click += new System.EventHandler(this.buttonNine_Click);
@@ -224,7 +223,7 @@
             this.buttonThree.Location = new System.Drawing.Point(153, 40);
             this.buttonThree.Name = "buttonThree";
             this.buttonThree.Size = new System.Drawing.Size(61, 23);
-            this.buttonThree.TabIndex = 5;
+            this.buttonThree.TabIndex = 11;
             this.buttonThree.Text = "3 def";
             this.buttonThree.UseVisualStyleBackColor = true;
             this.buttonThree.Click += new System.EventHandler(this.buttonThree_Click);
@@ -234,7 +233,7 @@
             this.buttonTwo.Location = new System.Drawing.Point(86, 40);
             this.buttonTwo.Name = "buttonTwo";
             this.buttonTwo.Size = new System.Drawing.Size(61, 23);
-            this.buttonTwo.TabIndex = 4;
+            this.buttonTwo.TabIndex = 10;
             this.buttonTwo.Text = "2 abc";
             this.buttonTwo.UseVisualStyleBackColor = true;
             this.buttonTwo.Click += new System.EventHandler(this.buttonTwo_Click);
@@ -244,7 +243,7 @@
             this.buttonOne.Location = new System.Drawing.Point(19, 40);
             this.buttonOne.Name = "buttonOne";
             this.buttonOne.Size = new System.Drawing.Size(61, 23);
-            this.buttonOne.TabIndex = 3;
+            this.buttonOne.TabIndex = 9;
             this.buttonOne.Text = "1";
             this.buttonOne.UseVisualStyleBackColor = true;
             this.buttonOne.Click += new System.EventHandler(this.buttonOne_Click);
@@ -254,7 +253,7 @@
             this.buttonSendToMessageBank.Location = new System.Drawing.Point(356, 205);
             this.buttonSendToMessageBank.Name = "buttonSendToMessageBank";
             this.buttonSendToMessageBank.Size = new System.Drawing.Size(156, 23);
-            this.buttonSendToMessageBank.TabIndex = 19;
+            this.buttonSendToMessageBank.TabIndex = 7;
             this.buttonSendToMessageBank.Text = "Send To Messasge Bank";
             this.buttonSendToMessageBank.UseVisualStyleBackColor = true;
             this.buttonSendToMessageBank.Click += new System.EventHandler(this.buttonSendToMessageBank_Click);
@@ -264,7 +263,7 @@
             this.buttonAddToConferenceCall.Location = new System.Drawing.Point(194, 205);
             this.buttonAddToConferenceCall.Name = "buttonAddToConferenceCall";
             this.buttonAddToConferenceCall.Size = new System.Drawing.Size(156, 23);
-            this.buttonAddToConferenceCall.TabIndex = 20;
+            this.buttonAddToConferenceCall.TabIndex = 6;
             this.buttonAddToConferenceCall.Text = "Add To Conference Call";
             this.buttonAddToConferenceCall.UseVisualStyleBackColor = true;
             this.buttonAddToConferenceCall.Click += new System.EventHandler(this.buttonAddToConferenceCall_Click);
@@ -275,7 +274,7 @@
             this.checkBoxSuspend.Location = new System.Drawing.Point(194, 153);
             this.checkBoxSuspend.Name = "checkBoxSuspend";
             this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
-            this.checkBoxSuspend.TabIndex = 21;
+            this.checkBoxSuspend.TabIndex = 5;
             this.checkBoxSuspend.Text = "Suspend";
             this.checkBoxSuspend.UseVisualStyleBackColor = true;
             this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
@@ -285,7 +284,7 @@
             this.buttonTransfer.Location = new System.Drawing.Point(275, 176);
             this.buttonTransfer.Name = "buttonTransfer";
             this.buttonTransfer.Size = new System.Drawing.Size(75, 23);
-            this.buttonTransfer.TabIndex = 22;
+            this.buttonTransfer.TabIndex = 3;
             this.buttonTransfer.Text = "Transfer";
             this.buttonTransfer.UseVisualStyleBackColor = true;
             this.buttonTransfer.Click += new System.EventHandler(this.buttonTransfer_Click);
@@ -296,7 +295,7 @@
             this.buttonHold.Location = new System.Drawing.Point(194, 176);
             this.buttonHold.Name = "buttonHold";
             this.buttonHold.Size = new System.Drawing.Size(75, 23);
-            this.buttonHold.TabIndex = 23;
+            this.buttonHold.TabIndex = 4;
             this.buttonHold.Text = "Hold";
             this.buttonHold.UseVisualStyleBackColor = true;
             this.buttonHold.Click += new System.EventHandler(this.buttonHold_Click);
@@ -321,7 +320,7 @@
             this.panelCallerImage.Location = new System.Drawing.Point(12, 144);
             this.panelCallerImage.Name = "panelCallerImage";
             this.panelCallerImage.Size = new System.Drawing.Size(95, 84);
-            this.panelCallerImage.TabIndex = 25;
+            this.panelCallerImage.TabIndex = 21;
             // 
             // InComingCall
             // 

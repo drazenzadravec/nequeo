@@ -32,6 +32,7 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -246,19 +247,29 @@ namespace Nequeo.VoIP.Sip.UI
         /// <param name="e"></param>
         private void InstantMessage_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            // Ask to save the message first.
+            DialogResult result = MessageBox.Show("Save the messages first?", "Instant Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                // Cleanup the player.
-                if (_player != null)
-                {
-                    _player.Stop();
-                    _player.Dispose();
-                }
+                // Do not close the window.
+                e.Cancel = true;
             }
-            catch { }
+            else
+            {
+                try
+                {
+                    // Cleanup the player.
+                    if (_player != null)
+                    {
+                        _player.Stop();
+                        _player.Dispose();
+                    }
+                }
+                catch { }
 
-            // Send the form closing event.
-            OnInstantMessageClosing?.Invoke(this, new EventArgs());
+                // Send the form closing event.
+                OnInstantMessageClosing?.Invoke(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -363,6 +374,61 @@ namespace Nequeo.VoIP.Sip.UI
         private void collapseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             listViewMessage.SetGroupState(Forms.UI.Extender.ListViewGroupState.Collapsible | Forms.UI.Extender.ListViewGroupState.Collapsed);
+        }
+
+        /// <summary>
+        /// Save.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new SaveFileDialog())
+            {
+                dlg.DefaultExt = ".rtf";
+                dlg.Filter = "Rich Text Files (*.rtf)|*.rtf|Text Files (*.txt)|*.txt";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    FileStream file = null;
+                    try
+                    {
+                        // Create the file.
+                        file = File.Create(dlg.FileName);
+                        file.Close();
+
+                        // If the file is rtf.
+                        if (System.IO.Path.GetExtension(dlg.FileName).Equals(".rtf"))
+                        {
+                            richTextBoxMessage.SaveFile(dlg.FileName, RichTextBoxStreamType.RichText);
+                        }
+                        else if (System.IO.Path.GetExtension(dlg.FileName).Equals(".txt"))
+                        {
+                            richTextBoxMessage.SaveFile(dlg.FileName, RichTextBoxStreamType.PlainText);
+                        }
+                        else
+                        {
+                            // Save the text only.
+                            // Create a new file stream
+                            // truncate the file.
+                            file = new FileStream(dlg.FileName, FileMode.Truncate,
+                                 FileAccess.Write, FileShare.ReadWrite);
+
+                            // Get the bytes from the text.
+                            byte[] buffer = Encoding.Default.GetBytes(richTextBoxMessage.Text);
+                            file.Write(buffer, 0, buffer.Length);
+                        }
+                    }
+                    catch (Exception x)
+                    {
+                        MessageBox.Show(x.Message, "Instant Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        if (file != null)
+                            file.Close();
+                    }
+                }
+            }
         }
     }
 }
