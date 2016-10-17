@@ -42,6 +42,14 @@ namespace Nequeo.VoIP
         /// <param name="e"></param>
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            try
+            {
+                // Cleanup.
+                if (_endpoint != null)
+                    _endpoint.Dispose();
+            }
+            catch { }
+
             // For each tab page created
             // iterate through each tab page.
             foreach (Control control in tabControlVoIP.Controls)
@@ -59,14 +67,6 @@ namespace Nequeo.VoIP
                     }
                 }
             }
-
-            try
-            {
-                // Cleanup.
-                if (_endpoint != null)
-                    _endpoint.Dispose();
-            }
-            catch { }
         }
 
         /// <summary>

@@ -47,8 +47,8 @@
     <Reference Include="Nequeo.IO.Audio">
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
     </Reference>
-    <Reference Include="Nequeo.PjSip">
-      <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.dll</HintPath>
+    <Reference Include="Nequeo.PjSip.v255">
+      <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.v255.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Primitive">
       <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>

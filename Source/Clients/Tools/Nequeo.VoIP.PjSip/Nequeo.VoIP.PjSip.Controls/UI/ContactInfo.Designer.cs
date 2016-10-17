@@ -82,7 +82,7 @@
             this.buttonPicture.Location = new System.Drawing.Point(355, 112);
             this.buttonPicture.Name = "buttonPicture";
             this.buttonPicture.Size = new System.Drawing.Size(25, 22);
-            this.buttonPicture.TabIndex = 11;
+            this.buttonPicture.TabIndex = 5;
             this.buttonPicture.Text = "...";
             this.buttonPicture.UseVisualStyleBackColor = true;
             this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
@@ -94,7 +94,7 @@
             this.textBoxPicture.Location = new System.Drawing.Point(83, 113);
             this.textBoxPicture.Name = "textBoxPicture";
             this.textBoxPicture.Size = new System.Drawing.Size(266, 20);
-            this.textBoxPicture.TabIndex = 10;
+            this.textBoxPicture.TabIndex = 4;
             // 
             // labelPicture
             // 
@@ -127,7 +127,7 @@
             // checkBoxPresenceState
             // 
             this.checkBoxPresenceState.AutoSize = true;
-            this.checkBoxPresenceState.Location = new System.Drawing.Point(9, 65);
+            this.checkBoxPresenceState.Location = new System.Drawing.Point(83, 65);
             this.checkBoxPresenceState.Name = "checkBoxPresenceState";
             this.checkBoxPresenceState.Size = new System.Drawing.Size(99, 17);
             this.checkBoxPresenceState.TabIndex = 2;
@@ -174,7 +174,7 @@
             this.buttonDelete.Location = new System.Drawing.Point(102, 148);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(90, 23);
-            this.buttonDelete.TabIndex = 5;
+            this.buttonDelete.TabIndex = 7;
             this.buttonDelete.Text = "Delete Number";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
@@ -185,7 +185,7 @@
             this.buttonAdd.Location = new System.Drawing.Point(6, 148);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(90, 23);
-            this.buttonAdd.TabIndex = 4;
+            this.buttonAdd.TabIndex = 6;
             this.buttonAdd.Text = "Add Number";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -201,7 +201,7 @@
             this.listViewNumbers.Name = "listViewNumbers";
             this.listViewNumbers.Size = new System.Drawing.Size(374, 121);
             this.listViewNumbers.SmallImageList = this.imageListSmall;
-            this.listViewNumbers.TabIndex = 0;
+            this.listViewNumbers.TabIndex = 8;
             this.listViewNumbers.UseCompatibleStateImageBehavior = false;
             this.listViewNumbers.View = System.Windows.Forms.View.SmallIcon;
             this.listViewNumbers.SelectedIndexChanged += new System.EventHandler(this.listViewNumbers_SelectedIndexChanged);
@@ -219,7 +219,7 @@
             this.buttonOk.Location = new System.Drawing.Point(323, 322);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 6;
+            this.buttonOk.TabIndex = 9;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
@@ -230,7 +230,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(242, 322);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 7;
+            this.buttonCancel.TabIndex = 10;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);

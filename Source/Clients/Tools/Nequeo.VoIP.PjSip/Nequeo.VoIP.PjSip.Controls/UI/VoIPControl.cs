@@ -1622,6 +1622,9 @@ namespace Nequeo.VoIP.PjSip.UI
                                 case "company":
                                     item.Group = listViewContact.Groups["listViewGroupCompany"];
                                     break;
+                                case "temp":
+                                    item.Group = listViewContact.Groups["listViewGroupTemp"];
+                                    break;
                                 default:
                                     item.Group = listViewContact.Groups["listViewGroupMisc"];
                                     break;
@@ -1830,6 +1833,9 @@ namespace Nequeo.VoIP.PjSip.UI
                         case "company":
                             item.Group = listViewContact.Groups["listViewGroupCompany"];
                             break;
+                        case "temp":
+                            item.Group = listViewContact.Groups["listViewGroupTemp"];
+                            break;
                         default:
                             item.Group = listViewContact.Groups["listViewGroupMisc"];
                             break;
@@ -1992,15 +1998,18 @@ namespace Nequeo.VoIP.PjSip.UI
                             case "company":
                                 item.Group = listViewContact.Groups["listViewGroupCompany"];
                                 break;
+                            case "temp":
+                                item.Group = listViewContact.Groups["listViewGroupTemp"];
+                                break;
                             default:
                                 item.Group = listViewContact.Groups["listViewGroupMisc"];
                                 break;
                         }
                     }
-
-                    // Save only loaded files.
-                    SaveFile();
                 }
+
+                // Save only loaded files.
+                SaveFile();
             }
         }
 

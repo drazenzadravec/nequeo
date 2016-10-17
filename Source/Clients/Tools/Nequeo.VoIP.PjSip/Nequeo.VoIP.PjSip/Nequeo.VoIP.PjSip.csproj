@@ -55,8 +55,8 @@
     <AssemblyOriginatorKeyFile>NequeoVoIPPjSipKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nequeo.PjSip">
-      <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.dll</HintPath>
+    <Reference Include="Nequeo.PjSip.v255">
+      <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.v255.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -116,6 +116,10 @@
     </Content>
     <Content Include="..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\bin\swscale-4.dll">
       <Link>swscale-4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\ThirdPartyTools\Opus\1.1.3\x64\bin\opus.dll">
+      <Link>opus.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\ThirdPartyTools\SDL\SDL2-2.0.4\lib\x64\SDL2.dll">

@@ -61,15 +61,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\References\Staging\Nequeo.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="Nequeo.PjSip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\References\Staging_x64\Nequeo.PjSip.dll</HintPath>
+    <Reference Include="Nequeo.PjSip.v255">
+      <HintPath>..\..\..\..\..\References\Staging_x64\Nequeo.PjSip.v255.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.VoIP.PjSip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=4460adb3a24a1b26, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.dll</HintPath>
     </Reference>
-    <Reference Include="Nequeo.VoIP.PjSip.Controls">
+    <Reference Include="Nequeo.VoIP.PjSip.Controls, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=4460adb3a24a1b26, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\References\Staging\Client\VoIPControls\PjSip\Nequeo.VoIP.PjSip.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.VoIP.Sip.Controls">
@@ -152,6 +152,10 @@
     </Content>
     <Content Include="..\..\..\..\..\..\ThirdPartyTools\FFMpeg\2016_01_15\x64\bin\swscale-4.dll">
       <Link>swscale-4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3\x64\bin\opus.dll">
+      <Link>opus.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\ThirdPartyTools\PjSIP\Wrapper\PjSIPWrapper\x64\Release\pjsua2.dll">

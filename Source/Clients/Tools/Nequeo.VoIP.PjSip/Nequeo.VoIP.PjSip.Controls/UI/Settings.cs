@@ -177,11 +177,11 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Is capture device.
                 if(audioDevice.InputCount > 0)
-                    comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+                    comboBoxAudioCaptureDevice.Items.Add(audioDevice.Name + "|" + audioDevice.Driver);
 
                 // Is playback device.
                 if (audioDevice.OutputCount > 0)
-                    comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + " | " + audioDevice.Driver);
+                    comboBoxAudioPlaybackDevice.Items.Add(audioDevice.Name + "|" + audioDevice.Driver);
             }
 
             // Set any initial items.
@@ -193,7 +193,7 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get capture device.
                 Nequeo.Net.PjSip.AudioDeviceInfo captureDevice = audioDevices[captureIndex];
-                int index = comboBoxAudioCaptureDevice.Items.IndexOf(captureDevice.Name + " | " + captureDevice.Driver);
+                int index = comboBoxAudioCaptureDevice.Items.IndexOf(captureDevice.Name + "|" + captureDevice.Driver);
                 comboBoxAudioCaptureDevice.SelectedIndex = index;
             }
             else
@@ -206,7 +206,7 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get playback device.
                 Nequeo.Net.PjSip.AudioDeviceInfo playbackDevice = audioDevices[playbackIndex];
-                int index = comboBoxAudioPlaybackDevice.Items.IndexOf(playbackDevice.Name + " | " + playbackDevice.Driver);
+                int index = comboBoxAudioPlaybackDevice.Items.IndexOf(playbackDevice.Name + "|" + playbackDevice.Driver);
                 comboBoxAudioPlaybackDevice.SelectedIndex = index;
             }
             else
@@ -224,12 +224,12 @@ namespace Nequeo.VoIP.PjSip.UI
                 // Is capture device.
                 if ((videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_CAPTURE) ||
                     (videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_ENCODING))
-                    comboBoxVideoDeviceCapture.Items.Add(videoDevice.Name + " | " + videoDevice.Driver);
+                    comboBoxVideoDeviceCapture.Items.Add(videoDevice.Name + "|" + videoDevice.Driver);
 
                 // Is playback device.
                 if ((videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_PLAYBACK) ||
                     (videoDevice.Direction == Net.PjSip.MediaDirection.PJMEDIA_DIR_DECODING))
-                    comboBoxVideoDevicePlayback.Items.Add(videoDevice.Name + " | " + videoDevice.Driver);
+                    comboBoxVideoDevicePlayback.Items.Add(videoDevice.Name + "|" + videoDevice.Driver);
             }
 
             // Set any initial items.
@@ -241,7 +241,7 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get capture device.
                 Nequeo.Net.PjSip.VideoDeviceInfo captureVideo = videoDevices[captureVideoIndex];
-                int index = comboBoxVideoDeviceCapture.Items.IndexOf(captureVideo.Name + " | " + captureVideo.Driver);
+                int index = comboBoxVideoDeviceCapture.Items.IndexOf(captureVideo.Name + "|" + captureVideo.Driver);
                 comboBoxVideoDeviceCapture.SelectedIndex = index;
             }
             else
@@ -254,7 +254,7 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get playback device.
                 Nequeo.Net.PjSip.VideoDeviceInfo playbackVideo = videoDevices[playbackVideoIndex];
-                int index = comboBoxVideoDevicePlayback.Items.IndexOf(playbackVideo.Name + " | " + playbackVideo.Driver);
+                int index = comboBoxVideoDevicePlayback.Items.IndexOf(playbackVideo.Name + "|" + playbackVideo.Driver);
                 comboBoxVideoDevicePlayback.SelectedIndex = index;
             }
             else
@@ -437,8 +437,8 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get the device.
                 string[] device = ((string)comboBoxAudioCaptureDevice.SelectedItem).Split(new char[] { '|' });
-                string name = device[0].Trim();
-                string driver = device[1].Trim();
+                string name = device[0];
+                string driver = device[1];
 
                 // Get the capture index.
                 int captureIndex = _voipCall.VoIPManager.MediaManager.GetAudioDeviceID(driver, name);
@@ -460,8 +460,8 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get the device.
                 string[] device = ((string)comboBoxAudioPlaybackDevice.SelectedItem).Split(new char[] { '|' });
-                string name = device[0].Trim();
-                string driver = device[1].Trim();
+                string name = device[0];
+                string driver = device[1];
 
                 // Get the playback index.
                 int playbackIndex = _voipCall.VoIPManager.MediaManager.GetAudioDeviceID(driver, name);
@@ -1364,8 +1364,8 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get the device.
                 string[] device = ((string)comboBoxVideoDeviceCapture.SelectedItem).Split(new char[] { '|' });
-                string name = device[0].Trim();
-                string driver = device[1].Trim();
+                string name = device[0];
+                string driver = device[1];
 
                 // Get the capture index.
                 int captureIndex = _voipCall.VoIPManager.MediaManager.GetVideoDeviceID(driver, name);
@@ -1387,8 +1387,8 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 // Get the device.
                 string[] device = ((string)comboBoxVideoDevicePlayback.SelectedItem).Split(new char[] { '|' });
-                string name = device[0].Trim();
-                string driver = device[1].Trim();
+                string name = device[0];
+                string driver = device[1];
 
                 // Get the render index.
                 int renderIndex = _voipCall.VoIPManager.MediaManager.GetVideoDeviceID(driver, name);

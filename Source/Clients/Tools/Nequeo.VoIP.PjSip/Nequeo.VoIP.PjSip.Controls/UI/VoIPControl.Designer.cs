@@ -42,6 +42,7 @@
             System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Ldap", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Social", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Company", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup13 = new System.Windows.Forms.ListViewGroup("Temp", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBoxCall = new System.Windows.Forms.GroupBox();
             this.checkBoxSuspend = new System.Windows.Forms.CheckBox();
             this.groupBoxCallVideo = new System.Windows.Forms.GroupBox();
@@ -111,6 +112,8 @@
             this.buttonAccDetails = new System.Windows.Forms.Button();
             this.checkBoxAccDetails = new System.Windows.Forms.CheckBox();
             this.tabPageAccountOptions = new System.Windows.Forms.TabPage();
+            this.groupBoxOptionsIM = new System.Windows.Forms.GroupBox();
+            this.checkBoxOptionsIM = new System.Windows.Forms.CheckBox();
             this.groupBoxOptionsImage = new System.Windows.Forms.GroupBox();
             this.comboBoxOptionsImageSizeLarge = new System.Windows.Forms.ComboBox();
             this.labelOptionsImageSizeLarge = new System.Windows.Forms.Label();
@@ -158,8 +161,6 @@
             this.tabPageVoIPAccount = new System.Windows.Forms.TabPage();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.groupBoxOptionsIM = new System.Windows.Forms.GroupBox();
-            this.checkBoxOptionsIM = new System.Windows.Forms.CheckBox();
             this.groupBoxCall.SuspendLayout();
             this.groupBoxCallVideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMicrophone)).BeginInit();
@@ -173,6 +174,7 @@
             this.tabPageAccountDetails.SuspendLayout();
             this.groupBoxAccDetails.SuspendLayout();
             this.tabPageAccountOptions.SuspendLayout();
+            this.groupBoxOptionsIM.SuspendLayout();
             this.groupBoxOptionsImage.SuspendLayout();
             this.tabControlVoIP.SuspendLayout();
             this.tabPageVoIPCall.SuspendLayout();
@@ -184,7 +186,6 @@
             this.groupBoxConference.SuspendLayout();
             this.contextMenuStripConference.SuspendLayout();
             this.tabPageVoIPAccount.SuspendLayout();
-            this.groupBoxOptionsIM.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCall
@@ -220,7 +221,7 @@
             this.checkBoxSuspend.Location = new System.Drawing.Point(258, 50);
             this.checkBoxSuspend.Name = "checkBoxSuspend";
             this.checkBoxSuspend.Size = new System.Drawing.Size(68, 17);
-            this.checkBoxSuspend.TabIndex = 25;
+            this.checkBoxSuspend.TabIndex = 4;
             this.checkBoxSuspend.Text = "Suspend";
             this.checkBoxSuspend.UseVisualStyleBackColor = true;
             this.checkBoxSuspend.CheckedChanged += new System.EventHandler(this.checkBoxSuspend_CheckedChanged);
@@ -247,7 +248,7 @@
             this.checkBoxVideoCallAutoInclude.Location = new System.Drawing.Point(6, 142);
             this.checkBoxVideoCallAutoInclude.Name = "checkBoxVideoCallAutoInclude";
             this.checkBoxVideoCallAutoInclude.Size = new System.Drawing.Size(86, 17);
-            this.checkBoxVideoCallAutoInclude.TabIndex = 2;
+            this.checkBoxVideoCallAutoInclude.TabIndex = 7;
             this.checkBoxVideoCallAutoInclude.Text = "Auto Include";
             this.checkBoxVideoCallAutoInclude.UseVisualStyleBackColor = true;
             this.checkBoxVideoCallAutoInclude.CheckedChanged += new System.EventHandler(this.checkBoxVideoCallAutoInclude_CheckedChanged);
@@ -257,7 +258,7 @@
             this.buttonVideoCall.Location = new System.Drawing.Point(6, 49);
             this.buttonVideoCall.Name = "buttonVideoCall";
             this.buttonVideoCall.Size = new System.Drawing.Size(75, 23);
-            this.buttonVideoCall.TabIndex = 1;
+            this.buttonVideoCall.TabIndex = 6;
             this.buttonVideoCall.Text = "Start";
             this.buttonVideoCall.UseVisualStyleBackColor = true;
             this.buttonVideoCall.Visible = false;
@@ -268,7 +269,7 @@
             this.buttonVideoCallPreview.Location = new System.Drawing.Point(6, 19);
             this.buttonVideoCallPreview.Name = "buttonVideoCallPreview";
             this.buttonVideoCallPreview.Size = new System.Drawing.Size(75, 23);
-            this.buttonVideoCallPreview.TabIndex = 0;
+            this.buttonVideoCallPreview.TabIndex = 5;
             this.buttonVideoCallPreview.Text = "Preview";
             this.buttonVideoCallPreview.UseVisualStyleBackColor = true;
             this.buttonVideoCallPreview.Click += new System.EventHandler(this.buttonVideoCallPreview_Click);
@@ -279,7 +280,7 @@
             this.buttonHold.Location = new System.Drawing.Point(90, 46);
             this.buttonHold.Name = "buttonHold";
             this.buttonHold.Size = new System.Drawing.Size(75, 23);
-            this.buttonHold.TabIndex = 23;
+            this.buttonHold.TabIndex = 2;
             this.buttonHold.Text = "Hold";
             this.buttonHold.UseVisualStyleBackColor = true;
             this.buttonHold.Click += new System.EventHandler(this.buttonHold_Click);
@@ -309,7 +310,7 @@
             this.trackBarMicrophone.Maximum = 100;
             this.trackBarMicrophone.Name = "trackBarMicrophone";
             this.trackBarMicrophone.Size = new System.Drawing.Size(129, 45);
-            this.trackBarMicrophone.TabIndex = 20;
+            this.trackBarMicrophone.TabIndex = 11;
             this.trackBarMicrophone.Scroll += new System.EventHandler(this.trackBarMicrophone_Scroll);
             // 
             // trackBarVolume
@@ -319,7 +320,7 @@
             this.trackBarVolume.Maximum = 100;
             this.trackBarVolume.Name = "trackBarVolume";
             this.trackBarVolume.Size = new System.Drawing.Size(129, 45);
-            this.trackBarVolume.TabIndex = 19;
+            this.trackBarVolume.TabIndex = 9;
             this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
             // 
             // checkBoxMuteMicrophone
@@ -328,7 +329,7 @@
             this.checkBoxMuteMicrophone.Location = new System.Drawing.Point(162, 250);
             this.checkBoxMuteMicrophone.Name = "checkBoxMuteMicrophone";
             this.checkBoxMuteMicrophone.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxMuteMicrophone.TabIndex = 18;
+            this.checkBoxMuteMicrophone.TabIndex = 10;
             this.checkBoxMuteMicrophone.Text = "Mute Microphone";
             this.checkBoxMuteMicrophone.UseVisualStyleBackColor = true;
             this.checkBoxMuteMicrophone.CheckedChanged += new System.EventHandler(this.checkBoxMuteMicrophone_CheckedChanged);
@@ -339,7 +340,7 @@
             this.checkBoxMuteVolume.Location = new System.Drawing.Point(9, 249);
             this.checkBoxMuteVolume.Name = "checkBoxMuteVolume";
             this.checkBoxMuteVolume.Size = new System.Drawing.Size(88, 17);
-            this.checkBoxMuteVolume.TabIndex = 17;
+            this.checkBoxMuteVolume.TabIndex = 8;
             this.checkBoxMuteVolume.Text = "Mute Volume";
             this.checkBoxMuteVolume.UseVisualStyleBackColor = true;
             this.checkBoxMuteVolume.CheckedChanged += new System.EventHandler(this.checkBoxMuteVolume_CheckedChanged);
@@ -373,7 +374,7 @@
             this.buttonDigitsClear.Location = new System.Drawing.Point(153, 20);
             this.buttonDigitsClear.Name = "buttonDigitsClear";
             this.buttonDigitsClear.Size = new System.Drawing.Size(61, 23);
-            this.buttonDigitsClear.TabIndex = 27;
+            this.buttonDigitsClear.TabIndex = 12;
             this.buttonDigitsClear.Text = "Clear";
             this.buttonDigitsClear.UseVisualStyleBackColor = true;
             this.buttonDigitsClear.Click += new System.EventHandler(this.buttonDigitsClear_Click);
@@ -391,7 +392,7 @@
             this.buttonHash.Location = new System.Drawing.Point(153, 136);
             this.buttonHash.Name = "buttonHash";
             this.buttonHash.Size = new System.Drawing.Size(61, 23);
-            this.buttonHash.TabIndex = 25;
+            this.buttonHash.TabIndex = 24;
             this.buttonHash.Text = "#";
             this.buttonHash.UseVisualStyleBackColor = true;
             this.buttonHash.Click += new System.EventHandler(this.buttonHash_Click);
@@ -401,7 +402,7 @@
             this.buttonStar.Location = new System.Drawing.Point(19, 136);
             this.buttonStar.Name = "buttonStar";
             this.buttonStar.Size = new System.Drawing.Size(61, 23);
-            this.buttonStar.TabIndex = 24;
+            this.buttonStar.TabIndex = 22;
             this.buttonStar.Text = "*";
             this.buttonStar.UseVisualStyleBackColor = true;
             this.buttonStar.Click += new System.EventHandler(this.buttonStar_Click);
@@ -421,7 +422,7 @@
             this.buttonEight.Location = new System.Drawing.Point(86, 107);
             this.buttonEight.Name = "buttonEight";
             this.buttonEight.Size = new System.Drawing.Size(61, 23);
-            this.buttonEight.TabIndex = 21;
+            this.buttonEight.TabIndex = 20;
             this.buttonEight.Text = "8 tuv";
             this.buttonEight.UseVisualStyleBackColor = true;
             this.buttonEight.Click += new System.EventHandler(this.buttonEight_Click);
@@ -431,7 +432,7 @@
             this.buttonSeven.Location = new System.Drawing.Point(19, 107);
             this.buttonSeven.Name = "buttonSeven";
             this.buttonSeven.Size = new System.Drawing.Size(61, 23);
-            this.buttonSeven.TabIndex = 20;
+            this.buttonSeven.TabIndex = 19;
             this.buttonSeven.Text = "7 pqrs";
             this.buttonSeven.UseVisualStyleBackColor = true;
             this.buttonSeven.Click += new System.EventHandler(this.buttonSeven_Click);
@@ -441,7 +442,7 @@
             this.buttonSix.Location = new System.Drawing.Point(153, 78);
             this.buttonSix.Name = "buttonSix";
             this.buttonSix.Size = new System.Drawing.Size(61, 23);
-            this.buttonSix.TabIndex = 19;
+            this.buttonSix.TabIndex = 18;
             this.buttonSix.Text = "6 mno";
             this.buttonSix.UseVisualStyleBackColor = true;
             this.buttonSix.Click += new System.EventHandler(this.buttonSix_Click);
@@ -451,7 +452,7 @@
             this.buttonFive.Location = new System.Drawing.Point(86, 78);
             this.buttonFive.Name = "buttonFive";
             this.buttonFive.Size = new System.Drawing.Size(61, 23);
-            this.buttonFive.TabIndex = 18;
+            this.buttonFive.TabIndex = 17;
             this.buttonFive.Text = "5 jkl";
             this.buttonFive.UseVisualStyleBackColor = true;
             this.buttonFive.Click += new System.EventHandler(this.buttonFive_Click);
@@ -461,7 +462,7 @@
             this.buttonFour.Location = new System.Drawing.Point(19, 78);
             this.buttonFour.Name = "buttonFour";
             this.buttonFour.Size = new System.Drawing.Size(61, 23);
-            this.buttonFour.TabIndex = 17;
+            this.buttonFour.TabIndex = 16;
             this.buttonFour.Text = "4 ghi";
             this.buttonFour.UseVisualStyleBackColor = true;
             this.buttonFour.Click += new System.EventHandler(this.buttonFour_Click);
@@ -471,7 +472,7 @@
             this.buttonNine.Location = new System.Drawing.Point(153, 107);
             this.buttonNine.Name = "buttonNine";
             this.buttonNine.Size = new System.Drawing.Size(61, 23);
-            this.buttonNine.TabIndex = 22;
+            this.buttonNine.TabIndex = 21;
             this.buttonNine.Text = "9 wxyz";
             this.buttonNine.UseVisualStyleBackColor = true;
             this.buttonNine.Click += new System.EventHandler(this.buttonNine_Click);
@@ -481,7 +482,7 @@
             this.buttonThree.Location = new System.Drawing.Point(153, 49);
             this.buttonThree.Name = "buttonThree";
             this.buttonThree.Size = new System.Drawing.Size(61, 23);
-            this.buttonThree.TabIndex = 16;
+            this.buttonThree.TabIndex = 15;
             this.buttonThree.Text = "3 def";
             this.buttonThree.UseVisualStyleBackColor = true;
             this.buttonThree.Click += new System.EventHandler(this.buttonThree_Click);
@@ -491,7 +492,7 @@
             this.buttonTwo.Location = new System.Drawing.Point(86, 49);
             this.buttonTwo.Name = "buttonTwo";
             this.buttonTwo.Size = new System.Drawing.Size(61, 23);
-            this.buttonTwo.TabIndex = 15;
+            this.buttonTwo.TabIndex = 14;
             this.buttonTwo.Text = "2 abc";
             this.buttonTwo.UseVisualStyleBackColor = true;
             this.buttonTwo.Click += new System.EventHandler(this.buttonTwo_Click);
@@ -501,7 +502,7 @@
             this.buttonOne.Location = new System.Drawing.Point(19, 49);
             this.buttonOne.Name = "buttonOne";
             this.buttonOne.Size = new System.Drawing.Size(61, 23);
-            this.buttonOne.TabIndex = 14;
+            this.buttonOne.TabIndex = 13;
             this.buttonOne.Text = "1";
             this.buttonOne.UseVisualStyleBackColor = true;
             this.buttonOne.Click += new System.EventHandler(this.buttonOne_Click);
@@ -523,7 +524,7 @@
             this.buttonHangup.Location = new System.Drawing.Point(9, 46);
             this.buttonHangup.Name = "buttonHangup";
             this.buttonHangup.Size = new System.Drawing.Size(75, 23);
-            this.buttonHangup.TabIndex = 15;
+            this.buttonHangup.TabIndex = 3;
             this.buttonHangup.Text = "Hangup";
             this.buttonHangup.UseVisualStyleBackColor = true;
             this.buttonHangup.Click += new System.EventHandler(this.buttonHangup_Click);
@@ -534,7 +535,7 @@
             this.buttonCall.Location = new System.Drawing.Point(171, 46);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(75, 23);
-            this.buttonCall.TabIndex = 14;
+            this.buttonCall.TabIndex = 1;
             this.buttonCall.Text = "Call";
             this.buttonCall.UseVisualStyleBackColor = true;
             this.buttonCall.Click += new System.EventHandler(this.buttonCall_Click);
@@ -601,7 +602,7 @@
             this.buttonConfiguration.Location = new System.Drawing.Point(217, 48);
             this.buttonConfiguration.Name = "buttonConfiguration";
             this.buttonConfiguration.Size = new System.Drawing.Size(99, 23);
-            this.buttonConfiguration.TabIndex = 13;
+            this.buttonConfiguration.TabIndex = 42;
             this.buttonConfiguration.Text = "Configuration";
             this.buttonConfiguration.UseVisualStyleBackColor = true;
             this.buttonConfiguration.Click += new System.EventHandler(this.buttonConfiguration_Click);
@@ -612,7 +613,7 @@
             this.buttonSettings.Location = new System.Drawing.Point(169, 19);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonSettings.TabIndex = 4;
+            this.buttonSettings.TabIndex = 39;
             this.buttonSettings.Text = "Settings";
             this.buttonSettings.UseVisualStyleBackColor = true;
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
@@ -623,7 +624,7 @@
             this.buttonRegister.Location = new System.Drawing.Point(7, 19);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(75, 23);
-            this.buttonRegister.TabIndex = 6;
+            this.buttonRegister.TabIndex = 37;
             this.buttonRegister.Text = "Register";
             this.buttonRegister.UseVisualStyleBackColor = true;
             this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
@@ -634,7 +635,7 @@
             this.buttonLoadContacts.Location = new System.Drawing.Point(7, 48);
             this.buttonLoadContacts.Name = "buttonLoadContacts";
             this.buttonLoadContacts.Size = new System.Drawing.Size(99, 23);
-            this.buttonLoadContacts.TabIndex = 12;
+            this.buttonLoadContacts.TabIndex = 40;
             this.buttonLoadContacts.Text = "Load Contacts";
             this.buttonLoadContacts.UseVisualStyleBackColor = true;
             this.buttonLoadContacts.Click += new System.EventHandler(this.buttonLoadContacts_Click);
@@ -645,7 +646,7 @@
             this.buttonCreate.Location = new System.Drawing.Point(88, 19);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(75, 23);
-            this.buttonCreate.TabIndex = 5;
+            this.buttonCreate.TabIndex = 38;
             this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
@@ -656,7 +657,7 @@
             this.buttonInstantMessage.Location = new System.Drawing.Point(112, 48);
             this.buttonInstantMessage.Name = "buttonInstantMessage";
             this.buttonInstantMessage.Size = new System.Drawing.Size(99, 23);
-            this.buttonInstantMessage.TabIndex = 11;
+            this.buttonInstantMessage.TabIndex = 41;
             this.buttonInstantMessage.Text = "Instant Message";
             this.buttonInstantMessage.UseVisualStyleBackColor = true;
             this.buttonInstantMessage.Click += new System.EventHandler(this.buttonInstantMessage_Click);
@@ -689,7 +690,7 @@
             this.buttonAccSetStatus.Location = new System.Drawing.Point(243, 98);
             this.buttonAccSetStatus.Name = "buttonAccSetStatus";
             this.buttonAccSetStatus.Size = new System.Drawing.Size(75, 23);
-            this.buttonAccSetStatus.TabIndex = 8;
+            this.buttonAccSetStatus.TabIndex = 47;
             this.buttonAccSetStatus.Text = "Set Status";
             this.buttonAccSetStatus.UseVisualStyleBackColor = true;
             this.buttonAccSetStatus.Click += new System.EventHandler(this.buttonAccSetStatus_Click);
@@ -708,7 +709,7 @@
             this.textBoxAccNote.Location = new System.Drawing.Point(68, 72);
             this.textBoxAccNote.Name = "textBoxAccNote";
             this.textBoxAccNote.Size = new System.Drawing.Size(250, 20);
-            this.textBoxAccNote.TabIndex = 6;
+            this.textBoxAccNote.TabIndex = 46;
             this.textBoxAccNote.TextChanged += new System.EventHandler(this.textBoxAccNote_TextChanged);
             // 
             // textBoxAccStatusText
@@ -716,7 +717,7 @@
             this.textBoxAccStatusText.Location = new System.Drawing.Point(68, 46);
             this.textBoxAccStatusText.Name = "textBoxAccStatusText";
             this.textBoxAccStatusText.Size = new System.Drawing.Size(250, 20);
-            this.textBoxAccStatusText.TabIndex = 5;
+            this.textBoxAccStatusText.TabIndex = 45;
             this.textBoxAccStatusText.TextChanged += new System.EventHandler(this.textBoxAccStatusText_TextChanged);
             // 
             // labelAccStatusText
@@ -739,7 +740,7 @@
             this.comboBoxAccActivity.Location = new System.Drawing.Point(230, 19);
             this.comboBoxAccActivity.Name = "comboBoxAccActivity";
             this.comboBoxAccActivity.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxAccActivity.TabIndex = 3;
+            this.comboBoxAccActivity.TabIndex = 44;
             this.comboBoxAccActivity.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccActivity_SelectedIndexChanged);
             // 
             // comboBoxAccStatus
@@ -753,7 +754,7 @@
             this.comboBoxAccStatus.Location = new System.Drawing.Point(68, 19);
             this.comboBoxAccStatus.Name = "comboBoxAccStatus";
             this.comboBoxAccStatus.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxAccStatus.TabIndex = 2;
+            this.comboBoxAccStatus.TabIndex = 43;
             this.comboBoxAccStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccStatus_SelectedIndexChanged);
             // 
             // labelAccActivity
@@ -938,7 +939,7 @@
             this.buttonAccDetails.Location = new System.Drawing.Point(152, 188);
             this.buttonAccDetails.Name = "buttonAccDetails";
             this.buttonAccDetails.Size = new System.Drawing.Size(75, 23);
-            this.buttonAccDetails.TabIndex = 1;
+            this.buttonAccDetails.TabIndex = 48;
             this.buttonAccDetails.Text = "Get Details";
             this.buttonAccDetails.UseVisualStyleBackColor = true;
             this.buttonAccDetails.Click += new System.EventHandler(this.buttonAccDetails_Click);
@@ -964,6 +965,30 @@
             this.tabPageAccountOptions.TabIndex = 2;
             this.tabPageAccountOptions.Text = "Options";
             this.tabPageAccountOptions.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxOptionsIM
+            // 
+            this.groupBoxOptionsIM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxOptionsIM.Controls.Add(this.checkBoxOptionsIM);
+            this.groupBoxOptionsIM.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxOptionsIM.Name = "groupBoxOptionsIM";
+            this.groupBoxOptionsIM.Size = new System.Drawing.Size(332, 50);
+            this.groupBoxOptionsIM.TabIndex = 1;
+            this.groupBoxOptionsIM.TabStop = false;
+            this.groupBoxOptionsIM.Text = "Instant Message";
+            // 
+            // checkBoxOptionsIM
+            // 
+            this.checkBoxOptionsIM.AutoSize = true;
+            this.checkBoxOptionsIM.Checked = true;
+            this.checkBoxOptionsIM.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxOptionsIM.Location = new System.Drawing.Point(15, 22);
+            this.checkBoxOptionsIM.Name = "checkBoxOptionsIM";
+            this.checkBoxOptionsIM.Size = new System.Drawing.Size(206, 17);
+            this.checkBoxOptionsIM.TabIndex = 49;
+            this.checkBoxOptionsIM.Text = "Incoming Instant Message Notification";
+            this.checkBoxOptionsIM.UseVisualStyleBackColor = true;
             // 
             // groupBoxOptionsImage
             // 
@@ -994,7 +1019,7 @@
             this.comboBoxOptionsImageSizeLarge.Location = new System.Drawing.Point(224, 19);
             this.comboBoxOptionsImageSizeLarge.Name = "comboBoxOptionsImageSizeLarge";
             this.comboBoxOptionsImageSizeLarge.Size = new System.Drawing.Size(89, 21);
-            this.comboBoxOptionsImageSizeLarge.TabIndex = 3;
+            this.comboBoxOptionsImageSizeLarge.TabIndex = 51;
             this.comboBoxOptionsImageSizeLarge.SelectedIndexChanged += new System.EventHandler(this.comboBoxOptionsImageSizeLarge_SelectedIndexChanged);
             // 
             // labelOptionsImageSizeLarge
@@ -1017,7 +1042,7 @@
             this.comboBoxOptionsImageSizeSmall.Location = new System.Drawing.Point(59, 19);
             this.comboBoxOptionsImageSizeSmall.Name = "comboBoxOptionsImageSizeSmall";
             this.comboBoxOptionsImageSizeSmall.Size = new System.Drawing.Size(89, 21);
-            this.comboBoxOptionsImageSizeSmall.TabIndex = 1;
+            this.comboBoxOptionsImageSizeSmall.TabIndex = 50;
             this.comboBoxOptionsImageSizeSmall.SelectedIndexChanged += new System.EventHandler(this.comboBoxOptionsImageSizeSmall_SelectedIndexChanged);
             // 
             // labelOptionsImageSizeSmall
@@ -1129,7 +1154,7 @@
             this.checkBoxContactExpand.Location = new System.Drawing.Point(6, 316);
             this.checkBoxContactExpand.Name = "checkBoxContactExpand";
             this.checkBoxContactExpand.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxContactExpand.TabIndex = 7;
+            this.checkBoxContactExpand.TabIndex = 26;
             this.checkBoxContactExpand.UseVisualStyleBackColor = true;
             this.checkBoxContactExpand.CheckedChanged += new System.EventHandler(this.checkBoxContactExpand_CheckedChanged);
             // 
@@ -1141,7 +1166,7 @@
             this.comboBoxContactView.Location = new System.Drawing.Point(269, 312);
             this.comboBoxContactView.Name = "comboBoxContactView";
             this.comboBoxContactView.Size = new System.Drawing.Size(89, 21);
-            this.comboBoxContactView.TabIndex = 6;
+            this.comboBoxContactView.TabIndex = 30;
             this.comboBoxContactView.SelectedIndexChanged += new System.EventHandler(this.comboBoxContactView_SelectedIndexChanged);
             // 
             // buttonContactUpdate
@@ -1151,7 +1176,7 @@
             this.buttonContactUpdate.Location = new System.Drawing.Point(108, 311);
             this.buttonContactUpdate.Name = "buttonContactUpdate";
             this.buttonContactUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonContactUpdate.TabIndex = 5;
+            this.buttonContactUpdate.TabIndex = 28;
             this.buttonContactUpdate.Text = "Update";
             this.buttonContactUpdate.UseVisualStyleBackColor = true;
             this.buttonContactUpdate.Click += new System.EventHandler(this.buttonContactUpdate_Click);
@@ -1163,7 +1188,7 @@
             this.buttonContactDelete.Location = new System.Drawing.Point(189, 311);
             this.buttonContactDelete.Name = "buttonContactDelete";
             this.buttonContactDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonContactDelete.TabIndex = 4;
+            this.buttonContactDelete.TabIndex = 29;
             this.buttonContactDelete.Text = "Delete";
             this.buttonContactDelete.UseVisualStyleBackColor = true;
             this.buttonContactDelete.Click += new System.EventHandler(this.buttonContactDelete_Click);
@@ -1174,7 +1199,7 @@
             this.buttonContactAdd.Location = new System.Drawing.Point(27, 311);
             this.buttonContactAdd.Name = "buttonContactAdd";
             this.buttonContactAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonContactAdd.TabIndex = 3;
+            this.buttonContactAdd.TabIndex = 27;
             this.buttonContactAdd.Text = "Add";
             this.buttonContactAdd.UseVisualStyleBackColor = true;
             this.buttonContactAdd.Click += new System.EventHandler(this.buttonContactAdd_Click);
@@ -1214,6 +1239,8 @@
             listViewGroup11.Name = "listViewGroupSocial";
             listViewGroup12.Header = "Company";
             listViewGroup12.Name = "listViewGroupCompany";
+            listViewGroup13.Header = "Temp";
+            listViewGroup13.Name = "listViewGroupTemp";
             this.listViewContact.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1,
             listViewGroup2,
@@ -1226,14 +1253,15 @@
             listViewGroup9,
             listViewGroup10,
             listViewGroup11,
-            listViewGroup12});
+            listViewGroup12,
+            listViewGroup13});
             this.listViewContact.LargeImageList = this.imageListLarge;
             this.listViewContact.Location = new System.Drawing.Point(6, 19);
             this.listViewContact.MultiSelect = false;
             this.listViewContact.Name = "listViewContact";
             this.listViewContact.Size = new System.Drawing.Size(352, 287);
             this.listViewContact.SmallImageList = this.imageListSmall;
-            this.listViewContact.TabIndex = 0;
+            this.listViewContact.TabIndex = 25;
             this.listViewContact.UseCompatibleStateImageBehavior = false;
             this.listViewContact.View = System.Windows.Forms.View.Tile;
             this.listViewContact.SelectedIndexChanged += new System.EventHandler(this.listViewContact_SelectedIndexChanged);
@@ -1288,7 +1316,7 @@
             this.textBoxInOutCallsDetails.Name = "textBoxInOutCallsDetails";
             this.textBoxInOutCallsDetails.ReadOnly = true;
             this.textBoxInOutCallsDetails.Size = new System.Drawing.Size(266, 13);
-            this.textBoxInOutCallsDetails.TabIndex = 2;
+            this.textBoxInOutCallsDetails.TabIndex = 33;
             // 
             // buttonInOutCallsSave
             // 
@@ -1296,7 +1324,7 @@
             this.buttonInOutCallsSave.Location = new System.Drawing.Point(6, 312);
             this.buttonInOutCallsSave.Name = "buttonInOutCallsSave";
             this.buttonInOutCallsSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonInOutCallsSave.TabIndex = 1;
+            this.buttonInOutCallsSave.TabIndex = 32;
             this.buttonInOutCallsSave.Text = "Save Calls";
             this.buttonInOutCallsSave.UseVisualStyleBackColor = true;
             this.buttonInOutCallsSave.Click += new System.EventHandler(this.buttonInOutCallsSave_Click);
@@ -1320,7 +1348,7 @@
             this.listViewInOutCalls.Name = "listViewInOutCalls";
             this.listViewInOutCalls.Size = new System.Drawing.Size(352, 287);
             this.listViewInOutCalls.SmallImageList = this.imageListSmall;
-            this.listViewInOutCalls.TabIndex = 0;
+            this.listViewInOutCalls.TabIndex = 31;
             this.listViewInOutCalls.UseCompatibleStateImageBehavior = false;
             this.listViewInOutCalls.View = System.Windows.Forms.View.Details;
             this.listViewInOutCalls.SelectedIndexChanged += new System.EventHandler(this.listViewInOutCalls_SelectedIndexChanged);
@@ -1393,7 +1421,7 @@
             this.checkBoxConferenceSuspendAll.Location = new System.Drawing.Point(87, 316);
             this.checkBoxConferenceSuspendAll.Name = "checkBoxConferenceSuspendAll";
             this.checkBoxConferenceSuspendAll.Size = new System.Drawing.Size(82, 17);
-            this.checkBoxConferenceSuspendAll.TabIndex = 3;
+            this.checkBoxConferenceSuspendAll.TabIndex = 36;
             this.checkBoxConferenceSuspendAll.Text = "Suspend All";
             this.checkBoxConferenceSuspendAll.UseVisualStyleBackColor = true;
             this.checkBoxConferenceSuspendAll.CheckedChanged += new System.EventHandler(this.checkBoxConferenceSuspendAll_CheckedChanged);
@@ -1405,7 +1433,7 @@
             this.buttonConferenceHangupAll.Location = new System.Drawing.Point(6, 312);
             this.buttonConferenceHangupAll.Name = "buttonConferenceHangupAll";
             this.buttonConferenceHangupAll.Size = new System.Drawing.Size(75, 23);
-            this.buttonConferenceHangupAll.TabIndex = 1;
+            this.buttonConferenceHangupAll.TabIndex = 35;
             this.buttonConferenceHangupAll.Text = "Hangup All";
             this.buttonConferenceHangupAll.UseVisualStyleBackColor = true;
             this.buttonConferenceHangupAll.Click += new System.EventHandler(this.buttonConferenceHangupAll_Click);
@@ -1422,7 +1450,7 @@
             this.listViewConference.Name = "listViewConference";
             this.listViewConference.Size = new System.Drawing.Size(352, 287);
             this.listViewConference.SmallImageList = this.imageListSmall;
-            this.listViewConference.TabIndex = 0;
+            this.listViewConference.TabIndex = 34;
             this.listViewConference.UseCompatibleStateImageBehavior = false;
             this.listViewConference.SelectedIndexChanged += new System.EventHandler(this.listViewConference_SelectedIndexChanged);
             // 
@@ -1478,30 +1506,6 @@
             this.saveFileDialog.SupportMultiDottedExtensions = true;
             this.saveFileDialog.Title = "Save";
             // 
-            // groupBoxOptionsIM
-            // 
-            this.groupBoxOptionsIM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxOptionsIM.Controls.Add(this.checkBoxOptionsIM);
-            this.groupBoxOptionsIM.Location = new System.Drawing.Point(6, 6);
-            this.groupBoxOptionsIM.Name = "groupBoxOptionsIM";
-            this.groupBoxOptionsIM.Size = new System.Drawing.Size(332, 50);
-            this.groupBoxOptionsIM.TabIndex = 1;
-            this.groupBoxOptionsIM.TabStop = false;
-            this.groupBoxOptionsIM.Text = "Instant Message";
-            // 
-            // checkBoxOptionsIM
-            // 
-            this.checkBoxOptionsIM.AutoSize = true;
-            this.checkBoxOptionsIM.Checked = true;
-            this.checkBoxOptionsIM.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOptionsIM.Location = new System.Drawing.Point(15, 22);
-            this.checkBoxOptionsIM.Name = "checkBoxOptionsIM";
-            this.checkBoxOptionsIM.Size = new System.Drawing.Size(206, 17);
-            this.checkBoxOptionsIM.TabIndex = 0;
-            this.checkBoxOptionsIM.Text = "Incoming Instant Message Notification";
-            this.checkBoxOptionsIM.UseVisualStyleBackColor = true;
-            // 
             // VoIPControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1529,6 +1533,8 @@
             this.groupBoxAccDetails.ResumeLayout(false);
             this.groupBoxAccDetails.PerformLayout();
             this.tabPageAccountOptions.ResumeLayout(false);
+            this.groupBoxOptionsIM.ResumeLayout(false);
+            this.groupBoxOptionsIM.PerformLayout();
             this.groupBoxOptionsImage.ResumeLayout(false);
             this.groupBoxOptionsImage.PerformLayout();
             this.tabControlVoIP.ResumeLayout(false);
@@ -1544,8 +1550,6 @@
             this.groupBoxConference.PerformLayout();
             this.contextMenuStripConference.ResumeLayout(false);
             this.tabPageVoIPAccount.ResumeLayout(false);
-            this.groupBoxOptionsIM.ResumeLayout(false);
-            this.groupBoxOptionsIM.PerformLayout();
             this.ResumeLayout(false);
 
         }

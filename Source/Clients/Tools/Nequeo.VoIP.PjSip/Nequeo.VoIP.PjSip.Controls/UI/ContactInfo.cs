@@ -427,7 +427,7 @@ namespace Nequeo.VoIP.PjSip.UI
         private void buttonPicture_Click(object sender, EventArgs e)
         {
             // Set the import filter.
-            openFileDialog.Filter = "All image files (*.bmp, *.gif, *.jpg, *.ipeg, *.png, *.ico)|*.bmp;*.gif;*.jpg;*.ipeg;*.png;*.ico";
+            openFileDialog.Filter = "All image files (*.bmp, *.gif, *.jpg, *.jpeg, *.png, *.ico)|*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.ico";
 
             // Get the file name selected.
             if (openFileDialog.ShowDialog() == DialogResult.OK)

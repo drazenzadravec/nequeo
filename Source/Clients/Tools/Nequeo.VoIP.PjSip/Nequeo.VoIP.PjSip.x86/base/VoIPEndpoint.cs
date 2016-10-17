@@ -110,7 +110,7 @@ namespace Nequeo.VoIP.PjSip
                     {
                         // Cleanup.
                         if (_endpoint != null)
-                            _endpoint.StopThreads();
+                            _endpoint.Destroy();
                     }
                     catch { }
 
@@ -118,7 +118,7 @@ namespace Nequeo.VoIP.PjSip
                     {
                         // Cleanup.
                         if (_endpoint != null)
-                            _endpoint.Destroy();
+                            _endpoint.StopThreads();
                     }
                     catch { }
 
