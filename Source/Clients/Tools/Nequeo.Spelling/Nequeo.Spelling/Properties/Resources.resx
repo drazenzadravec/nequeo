@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Arabic\ar.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Arabic\ar.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="de_DE_frami" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\German\de_DE_frami.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="de_DE_frami1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\German\de_DE_frami.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_AU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_AU.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_AU1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_AU.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_CA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_CA.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_CA1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_CA.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_GB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_GB.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_GB1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_GB.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_NZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_NZ.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_NZ1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_NZ.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_US.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_US1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_US.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_ZA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_ZA.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en_ZA1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\en_ZA.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="es_ES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Spanish\es_ES.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="es_ES1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Spanish\es_ES.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fr_moderne" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\French\fr-moderne.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fr_moderne1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\French\fr-moderne.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_de_DE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\German\hyph_de_DE.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_en_GB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\hyph_en_GB.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\hyph_en_US.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\French\hyph_fr.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_it_IT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Italian\hyph_it_IT.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_la" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Latin\hyph_la.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="it_IT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Italian\it_IT.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="it_IT1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Italian\it_IT.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="la" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Latin\la.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="la1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Latin\la.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ru_RU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Russian\ru_RU.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ru_RU1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Russian\ru_RU.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="thes_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\French\thes_fr.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="thes_fr1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\French\thes_fr.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_ar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Arabic\th_ar.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_ar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Arabic\th_ar.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_de_DE_v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\German\th_de_DE_v2.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_de_DE_v21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\German\th_de_DE_v2.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_en_US_v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\th_en_US_v2.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_en_US_v21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\th_en_US_v2.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_es_ES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Spanish\th_es_ES.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_es_ES1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Spanish\th_es_ES.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_it_IT_v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Italian\th_it_IT_v2.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_it_IT_v21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Italian\th_it_IT_v2.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_pt_PT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Portuguese\hyph_pt_PT.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pt_PT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Portuguese\pt_PT.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pt_PT1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Portuguese\pt_PT.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_pt_PT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Portuguese\th_pt_PT.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_pt_PT1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Portuguese\th_pt_PT.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="he_IL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Hebrew\he_IL.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="he_IL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Hebrew\he_IL.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_en_AU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\hyph_en_AU.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_en_AU_v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\th_en_AU_v2.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="th_en_AU_v21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\English\th_en_AU_v2.idx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hr_HR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Croatian\hr_HR.aff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hr_HR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Croatian\hr_HR.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hyph_hr_HR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Dictionary\Croatian\hyph_hr_HR.dic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

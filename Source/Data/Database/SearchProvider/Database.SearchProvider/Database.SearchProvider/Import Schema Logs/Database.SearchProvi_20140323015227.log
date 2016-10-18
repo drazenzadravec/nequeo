@@ -1,0 +1,71 @@
+23/03/2014 12:52:27 pm	This log contains information about the import schema operation into project 'Database.SearchProvider' on computer 'DEVELOPMENT' by user 'PC'.
+23/03/2014 12:52:27 pm	Import of database schema has started.
+23/03/2014 12:52:31 pm	Gathering database options
+23/03/2014 12:52:31 pm	Gathering users
+23/03/2014 12:52:31 pm	Gathering roles
+23/03/2014 12:52:31 pm	Gathering application roles
+23/03/2014 12:52:31 pm	Gathering role memberships
+23/03/2014 12:52:31 pm	Gathering filegroups
+23/03/2014 12:52:31 pm	Gathering full-text catalogs
+23/03/2014 12:52:31 pm	Gathering assemblies
+23/03/2014 12:52:31 pm	Gathering certificates
+23/03/2014 12:52:31 pm	Gathering asymmetric keys
+23/03/2014 12:52:31 pm	Gathering symmetric keys
+23/03/2014 12:52:31 pm	Gathering encrypted symmetric keys
+23/03/2014 12:52:31 pm	Gathering schemas
+23/03/2014 12:52:31 pm	Gathering XML schema collections
+23/03/2014 12:52:31 pm	Gathering user-defined data types
+23/03/2014 12:52:31 pm	Gathering user-defined types
+23/03/2014 12:52:31 pm	Gathering table types
+23/03/2014 12:52:31 pm	Gathering unique keys for table types
+23/03/2014 12:52:31 pm	Gathering primary keys for table types
+23/03/2014 12:52:31 pm	Gathering check constraints for table types
+23/03/2014 12:52:31 pm	Gathering default constraints for table types
+23/03/2014 12:52:31 pm	Gathering partition functions
+23/03/2014 12:52:31 pm	Gathering partition schemes
+23/03/2014 12:52:31 pm	Gathering functions
+23/03/2014 12:52:31 pm	Gathering encrypted functions
+23/03/2014 12:52:31 pm	Gathering aggregates
+23/03/2014 12:52:31 pm	Gathering procedures
+23/03/2014 12:52:31 pm	Gathering encrypted procedures
+23/03/2014 12:52:31 pm	Gathering tables
+23/03/2014 12:52:31 pm	Gathering primary keys
+23/03/2014 12:52:31 pm	Gathering unique constraints
+23/03/2014 12:52:31 pm	Gathering foreign keys
+23/03/2014 12:52:31 pm	Gathering default constraints
+23/03/2014 12:52:31 pm	Gathering check constraints
+23/03/2014 12:52:31 pm	Gathering views
+23/03/2014 12:52:31 pm	Gathering encrypted views
+23/03/2014 12:52:31 pm	Gathering indexes
+23/03/2014 12:52:31 pm	Gathering statistics
+23/03/2014 12:52:31 pm	Gathering full-text index stoplists
+23/03/2014 12:52:31 pm	Gathering full-text indexes
+23/03/2014 12:52:31 pm	Gathering spatial indexes
+23/03/2014 12:52:31 pm	Gathering XML indexes
+23/03/2014 12:52:31 pm	Gathering encrypted triggers
+23/03/2014 12:52:31 pm	Gathering triggers
+23/03/2014 12:52:31 pm	Gathering encrypted and clr ddl triggers
+23/03/2014 12:52:31 pm	Gathering ddl triggers
+23/03/2014 12:52:31 pm	Gathering synonyms
+23/03/2014 12:52:31 pm	Gathering defaults
+23/03/2014 12:52:31 pm	Gathering data constraint uddt bindings
+23/03/2014 12:52:31 pm	Gathering rules
+23/03/2014 12:52:31 pm	Gathering data constraint uddt bindings
+23/03/2014 12:52:31 pm	Gathering message types
+23/03/2014 12:52:31 pm	Gathering queues
+23/03/2014 12:52:31 pm	Gathering contracts
+23/03/2014 12:52:31 pm	Gathering services
+23/03/2014 12:52:31 pm	Gathering event notifications
+23/03/2014 12:52:31 pm	Gathering remote service bindings
+23/03/2014 12:52:31 pm	Gathering broker priorities
+23/03/2014 12:52:31 pm	Gathering signatures
+23/03/2014 12:52:31 pm	Gathering data compression options
+23/03/2014 12:52:31 pm	Gathering extended properties
+23/03/2014 12:52:31 pm	Gathering credentials
+23/03/2014 12:52:31 pm	Gathering logins
+23/03/2014 12:52:31 pm	Gathering server audits
+23/03/2014 12:52:31 pm	Scanning project for duplicate elements
+23/03/2014 12:52:31 pm	Finished duplicate element processing
+23/03/2014 12:52:32 pm	Finished importing database.
+23/03/2014 12:52:32 pm	A summary of the import was saved to the following location: Z:\Development\Version2013\Nequeo\Data\Database\SearchProvider\Database.SearchProvider\Database.SearchProvider\Import Schema Logs\Database.SearchProvi_20140323015227.log
+23/03/2014 12:52:32 pm	Click Finish to continue...

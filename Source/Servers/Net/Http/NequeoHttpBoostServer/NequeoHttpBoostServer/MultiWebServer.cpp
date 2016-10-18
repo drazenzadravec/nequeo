@@ -128,14 +128,17 @@ void MultiWebServer::Start()
 			// For each server found.
 			for (int i = 0; i < vectorSize; i++)
 			{
-				// Get the server.
-				WebServer* server = _webServers[i].get();
-				server->OnWebContext(_onWebContext);
+				try
+				{
+					// Get the server.
+					WebServer* server = _webServers[i].get();
+					server->OnWebContext(_onWebContext);
 
-				// Start a new thread.
-				server->StartThread();
+					// Start a new thread.
+					server->StartThread();
+				}
+				catch (...) {}
 			}
-
 			_started = true;
 		}
 	}
@@ -158,11 +161,14 @@ void MultiWebServer::Stop()
 			// For each server found.
 			for (int i = 0; i < vectorSize; i++)
 			{
-				// Get the server.
-				WebServer* server = _webServers[i].get();
-				server->StopThread();
+				try
+				{
+					// Get the server.
+					WebServer* server = _webServers[i].get();
+					server->StopThread();
+				}
+				catch (...) {}
 			}
-
 			_started = false;
 		}
 	}

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Integrated Security=True;Initial Catalog=Nequeo;Data Source=NEQUEOMPCX64\SQL2012</DatabaseConnection>
+  <ExtensionClassName>InvoiceProducts</ExtensionClassName>
+  <Database>NequeoCompany</Database>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <FunctionHandler>1</FunctionHandler>
+  <ProcedureListExclusion>0</ProcedureListExclusion>
+  <ProcedureList>
+    <string>GetInvoiceProductsBetweenDate</string>
+    <string>GetInvoiceProductsBetweenDateIncome</string>
+    <string>GetInvoiceProductsBetweenDatePayment</string>
+    <string>GetInvoiceProductsSummaryBetweenDate</string>
+    <string>GetInvoiceProductsSummaryBetweenDateIncome</string>
+    <string>GetInvoiceProductsSummaryNotPaidBetweenDate</string>
+    <string>GetInvoiceProductsSummaryPaidBetweenDate</string>
+    <string>GetSelectedInvoiceProducts</string>
+  </ProcedureList>
+</Context>

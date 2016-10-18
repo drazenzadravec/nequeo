@@ -180,6 +180,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactType.xml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Extension\Designer\FunctionScalar\UserFunction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFunction.xml</DependentUpon>
+    </Compile>
     <Compile Include="Data\Extension\Designer\FunctionTable\UserFunction.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -251,7 +256,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\Database.xsd">
       <SubType>Designer</SubType>
       <Generator>DatabaseXmlObjectCodeGenerator</Generator>
@@ -292,6 +299,10 @@
     <Content Include="Data\Extension\Designer\ContactType.xml">
       <Generator>DataExtensionObjectCodeGenerator</Generator>
       <LastGenOutput>ContactType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\FunctionScalar\UserFunction.xml">
+      <Generator>FunctionScalarExtensionCodeGenerator</Generator>
+      <LastGenOutput>UserFunction.Designer.cs</LastGenOutput>
     </Content>
     <Content Include="Data\Extension\Designer\FunctionTable\UserFunction.xml">
       <Generator>FunctionTableExtensionCodeGenerator</Generator>

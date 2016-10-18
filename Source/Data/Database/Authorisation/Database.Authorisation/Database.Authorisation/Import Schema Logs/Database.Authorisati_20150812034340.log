@@ -1,0 +1,76 @@
+12/08/2015 1:43:40 PM	This log contains information about the import schema operation into project 'Database.Authorisation' on computer 'NEQUEOMPCX64' by user 'dev'.
+12/08/2015 1:43:41 PM	Import of database schema has started.
+12/08/2015 1:43:46 PM	Gathering database options
+12/08/2015 1:43:46 PM	Gathering users
+12/08/2015 1:43:46 PM	Gathering roles
+12/08/2015 1:43:46 PM	Gathering application roles
+12/08/2015 1:43:46 PM	Gathering role memberships
+12/08/2015 1:43:46 PM	Gathering filegroups
+12/08/2015 1:43:46 PM	Gathering full-text catalogs
+12/08/2015 1:43:46 PM	Gathering assemblies
+12/08/2015 1:43:46 PM	Gathering certificates
+12/08/2015 1:43:46 PM	Gathering asymmetric keys
+12/08/2015 1:43:46 PM	Gathering symmetric keys
+12/08/2015 1:43:46 PM	Gathering encrypted symmetric keys
+12/08/2015 1:43:46 PM	Gathering schemas
+12/08/2015 1:43:46 PM	Gathering XML schema collections
+12/08/2015 1:43:46 PM	Gathering user-defined data types
+12/08/2015 1:43:46 PM	Gathering user-defined types
+12/08/2015 1:43:46 PM	Gathering table types
+12/08/2015 1:43:46 PM	Gathering unique keys for table types
+12/08/2015 1:43:46 PM	Gathering primary keys for table types
+12/08/2015 1:43:46 PM	Gathering check constraints for table types
+12/08/2015 1:43:46 PM	Gathering default constraints for table types
+12/08/2015 1:43:46 PM	Gathering partition functions
+12/08/2015 1:43:46 PM	Gathering partition schemes
+12/08/2015 1:43:46 PM	Gathering functions
+12/08/2015 1:43:46 PM	Gathering encrypted functions
+12/08/2015 1:43:46 PM	Gathering aggregates
+12/08/2015 1:43:46 PM	Gathering procedures
+12/08/2015 1:43:46 PM	Gathering encrypted procedures
+12/08/2015 1:43:46 PM	Gathering tables
+12/08/2015 1:43:46 PM	Gathering primary keys
+12/08/2015 1:43:46 PM	Gathering unique constraints
+12/08/2015 1:43:46 PM	Gathering foreign keys
+12/08/2015 1:43:46 PM	Gathering default constraints
+12/08/2015 1:43:46 PM	Gathering check constraints
+12/08/2015 1:43:46 PM	Gathering views
+12/08/2015 1:43:46 PM	Gathering encrypted views
+12/08/2015 1:43:46 PM	Gathering indexes
+12/08/2015 1:43:46 PM	Gathering statistics
+12/08/2015 1:43:46 PM	Gathering full-text index stoplists
+12/08/2015 1:43:46 PM	Gathering search property lists
+12/08/2015 1:43:46 PM	Gathering search properties
+12/08/2015 1:43:46 PM	Gathering full-text indexes
+12/08/2015 1:43:46 PM	Gathering column store indexes
+12/08/2015 1:43:46 PM	Gathering spatial indexes
+12/08/2015 1:43:46 PM	Gathering XML indexes
+12/08/2015 1:43:46 PM	Gathering Selective XML indexes
+12/08/2015 1:43:46 PM	Gathering encrypted triggers
+12/08/2015 1:43:46 PM	Gathering triggers
+12/08/2015 1:43:46 PM	Gathering encrypted and clr ddl triggers
+12/08/2015 1:43:46 PM	Gathering ddl triggers
+12/08/2015 1:43:46 PM	Gathering synonyms
+12/08/2015 1:43:46 PM	Gathering defaults
+12/08/2015 1:43:46 PM	Gathering data constraint uddt bindings
+12/08/2015 1:43:46 PM	Gathering rules
+12/08/2015 1:43:46 PM	Gathering data constraint uddt bindings
+12/08/2015 1:43:46 PM	Gathering message types
+12/08/2015 1:43:46 PM	Gathering queues
+12/08/2015 1:43:46 PM	Gathering contracts
+12/08/2015 1:43:46 PM	Gathering services
+12/08/2015 1:43:46 PM	Gathering event notifications
+12/08/2015 1:43:46 PM	Gathering remote service bindings
+12/08/2015 1:43:46 PM	Gathering broker priorities
+12/08/2015 1:43:46 PM	Gathering signatures
+12/08/2015 1:43:46 PM	Gathering data compression options
+12/08/2015 1:43:46 PM	Gathering sequence types
+12/08/2015 1:43:46 PM	Gathering extended properties
+12/08/2015 1:43:46 PM	Gathering credentials
+12/08/2015 1:43:46 PM	Gathering logins
+12/08/2015 1:43:46 PM	Gathering server audits
+12/08/2015 1:43:46 PM	Scanning project for duplicate elements
+12/08/2015 1:43:46 PM	Finished duplicate element processing
+12/08/2015 1:43:47 PM	Finished importing database.
+12/08/2015 1:43:47 PM	A summary of the import was saved to the following location: D:\Development\Version2015\Nequeo\Data\Database\Authorisation\Database.Authorisation\Database.Authorisation\Import Schema Logs\Database.Authorisati_20150812034340.log
+12/08/2015 1:43:47 PM	Click Finish to continue...

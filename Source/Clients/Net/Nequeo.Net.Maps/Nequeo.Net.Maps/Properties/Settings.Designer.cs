@@ -58,5 +58,29 @@ namespace Nequeo.Net.Maps.Properties {
                 this["MicrosoftMapsGeocodeServiceURI"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://maps.googleapis.com/maps/api/staticmap/")]
+        public string GoogleMapsStaticServiceURI {
+            get {
+                return ((string)(this["GoogleMapsStaticServiceURI"]));
+            }
+            set {
+                this["GoogleMapsStaticServiceURI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dev.virtualearth.net/REST/v1/Imagery/Map/")]
+        public string MicrosoftMapsStaticServiceURI {
+            get {
+                return ((string)(this["MicrosoftMapsStaticServiceURI"]));
+            }
+            set {
+                this["MicrosoftMapsStaticServiceURI"] = value;
+            }
+        }
     }
 }

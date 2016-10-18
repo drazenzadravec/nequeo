@@ -1,0 +1,5 @@
+# Robots.txt List - http://www.nequeo.net.au/
+#
+User-agent: *
+Disallow: /_private/
+Disallow: /_vti_log/

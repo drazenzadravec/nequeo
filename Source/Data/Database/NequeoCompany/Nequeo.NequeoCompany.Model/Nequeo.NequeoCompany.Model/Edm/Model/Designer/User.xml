@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+    <TableName>User</TableName>
+    <Database>NequeoCompany</Database>
+    <EdmDataContextName>NequeoCompanyEntities</EdmDataContextName>
+    <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+    <NamespaceExtendedName></NamespaceExtendedName>
+    <DataBaseOwner></DataBaseOwner>
+    <ConnectionType>1</ConnectionType>
+    <ConnectionDataType>1</ConnectionDataType>
+    <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+    <ConfigKeyDatabaseConnection>NequeoCompanyEntities</ConfigKeyDatabaseConnection>
+    <UseAnonymousDataEntity>false</UseAnonymousDataEntity>
+</Context>
+
+

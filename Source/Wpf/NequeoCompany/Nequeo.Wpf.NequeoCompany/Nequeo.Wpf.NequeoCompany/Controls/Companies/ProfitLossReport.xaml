@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Companies.ProfitLossReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="955" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Business Activity Statement" Margin="6,6,0,6" Name="groupBoxBASReport" HorizontalAlignment="Left" Width="309">
+            <Grid>
+                <Label Content="Business Activity Statement Quarter Starting Date" Height="28" HorizontalAlignment="Left" Margin="6,31,0,0" Name="lblStartBASQuarterDate" VerticalAlignment="Top" Width="279" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtStartBASQuarterDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View BAS" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewBASReport" VerticalAlignment="Top" Width="125" ToolTip="View Company BAS" Click="btnViewBASReport_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Tax Return" HorizontalAlignment="Left" Margin="321,6,0,6" Name="groupBoxTaxReturnReport" Width="309">
+            <Grid>
+                <Label Content="Company ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblCompanyReportID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtCompanyReportID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectCompanyReport" VerticalAlignment="Top" Width="36" ToolTip="Select an asset" Click="btnSelectCompanyReport_Click" />
+                <Label Content="Tax Return Financial Year Starting Date" Height="28" HorizontalAlignment="Left" Margin="6,31,0,0" Name="lblStartTaxReturnDate" VerticalAlignment="Top" Width="279" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtStartTaxReturnDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View Tax Return" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewTaxReturnReport" VerticalAlignment="Top" Width="125" ToolTip="View Company Tax Return" Click="btnViewTaxReturnReport_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Profit or Loss" HorizontalAlignment="Left" Margin="636,6,0,6" Name="groupBoxProfitLossReport" Width="309">
+            <Grid>
+                <Label Content="Company Profit / Loss Financial Year Starting Date" Height="28" HorizontalAlignment="Left" Margin="6,31,0,0" Name="lblStartFinancialYearDate" VerticalAlignment="Top" Width="279" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtStartFinancialYearDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View Profit / Loss" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewProfitLossReport" VerticalAlignment="Top" Width="125" ToolTip="View Company Profit / Loss" Click="btnViewProfitLossReport_Click" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

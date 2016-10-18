@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+    <DatabaseConnection>Data Source=NEQUEOMPCX64\SQL2012;Initial Catalog=Nequeo;Integrated Security=True</DatabaseConnection>
+    <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+    <NamespaceExtendedName></NamespaceExtendedName>
+    <ConnectionType>1</ConnectionType>
+    <ConnectionDataType>1</ConnectionDataType>
+    <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+    <EnumName>EnumDataMember</EnumName>
+    <Database>NequeoCompany</Database>
+    <TableName>DataMember</TableName>
+    <ValueColumnName>DataMemberID</ValueColumnName>
+    <IndicatorColumnName>Name</IndicatorColumnName>
+    <DataFilter></DataFilter>
+</Context>

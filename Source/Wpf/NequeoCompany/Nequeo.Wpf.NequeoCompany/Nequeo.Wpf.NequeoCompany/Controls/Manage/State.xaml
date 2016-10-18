@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Manage.State"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dataSource="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:dataSourceEx="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data.Extended;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:nequeoComponentModel="clr-namespace:Nequeo.ComponentModel;assembly=Nequeo.Data" 
+             xmlns:nequeoWpf="clr-namespace:Nequeo.Wpf.UI;assembly=Nequeo.Wpf"
+             xmlns:nequeoWpfValidation="clr-namespace:Nequeo.Wpf.Validation;assembly=Nequeo.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="325" d:DesignWidth="978" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <dataSource:State x:Key="StateDataSource" />
+
+        <Style x:Key="TextBoxValueError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DatePickerValueError" TargetType="{x:Type DatePicker}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Header="State" Margin="6,6,6,6" Name="groupBoxState">
+            <Grid Name="gridState">
+                <Grid.DataContext>
+                    <Binding Source="{StaticResource StateDataSource}" />
+                </Grid.DataContext>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Name="StateRow0" Width="660*" />
+                    <ColumnDefinition Name="StateRow1" Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Name="gridStateContainer">
+                    <GroupBox Name="groupBoxStateContainer" IsEnabled="False" Foreground="Black">
+                        <Grid>
+                            <Label Content="State ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblStateID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,31,0,0" Name="txtStateID" VerticalAlignment="Top" Width="80" Text="{Binding Path=StateID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                            <Label Content="Short Name" Height="28" HorizontalAlignment="Left" Margin="93,6,0,0" Name="lblShortName" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="93,31,0,0" Name="txtShortName" VerticalAlignment="Top" Width="200" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="ShortName" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Long Name" Height="28" HorizontalAlignment="Left" Margin="299,6,0,0" Name="lblLongName" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="299,31,0,0" Name="txtLongName" VerticalAlignment="Top" Width="426" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="LongName" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Column="1" Name="gridControlStateContainer">
+                    <nequeoWpf:DataAccess Name="dataAccess" VerticalAlignment="Top" 
+                              OnBeforeLoad="dataAccess_OnBeforeLoad" 
+                              OnBeforeUpdate="dataAccess_OnBeforeUpdate" 
+                              OnBeforeInsert="dataAccess_OnBeforeInsert" 
+                              OnBeforeDelete="dataAccess_OnBeforeDelete" 
+                              OnLoadError="dataAccess_OnLoadError" 
+                              OnUpdateError="dataAccess_OnUpdateError" 
+                              OnInsertError="dataAccess_OnInsertError" 
+                              OnDeleteError="dataAccess_OnDeleteError" 
+                              OnLoad="dataAccess_OnLoad" 
+                              OnUpdate="dataAccess_OnUpdate" 
+                              OnInsert="dataAccess_OnInsert" 
+                              OnDelete="dataAccess_OnDelete">
+                        <nequeoWpf:DataAccess.ConnectionTypeModel>
+                            <nequeoComponentModel:ConnectionTypeModel />
+                        </nequeoWpf:DataAccess.ConnectionTypeModel>
+                    </nequeoWpf:DataAccess>
+                    <Button Content="Add New" Height="23" HorizontalAlignment="Left" Margin="12,131,0,0" Name="btnAddNew" VerticalAlignment="Top" Width="75" Click="btnAddNew_Click" ToolTip="Add a new record" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
+

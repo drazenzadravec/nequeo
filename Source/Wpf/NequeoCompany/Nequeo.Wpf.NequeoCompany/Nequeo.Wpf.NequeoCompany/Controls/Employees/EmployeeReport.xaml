@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Employees.EmployeeReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="955" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Employee Wage" Margin="6,6,0,6" Name="groupBoxEmployeeWageReport" HorizontalAlignment="Left" Width="309">
+            <Grid>
+                <CheckBox Content="Employee ID" Height="16" HorizontalAlignment="Left" Margin="6,11,0,0" Name="lblEmployeeWageReportID" VerticalAlignment="Top" Checked="lblEmployeeWageReportID_Checked" Unchecked="lblEmployeeWageReportID_Unchecked" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="96,8,0,0" Name="txtEmployeeWageReportID" VerticalAlignment="Top" Width="120" Text="1" Visibility="Hidden" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,39,0" Name="btnSelectEmployeeWageReport" VerticalAlignment="Top" Width="36" ToolTip="Select an employee" Click="btnSelectEmployeeWageReport_Click" Visibility="Hidden" />
+                <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblEmployeeWageFromDate" VerticalAlignment="Top" />
+                <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblEmployeeWageToDate" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtFromEmployeeWageDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,88,0,0" Name="txtToEmployeeWageDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View Wage" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewEmployeeWageReport" VerticalAlignment="Top" Width="125" ToolTip="View Employee Wage" Click="btnViewEmployeeWageReport_Click" />
+                <Button Content="Summary All" Height="23" HorizontalAlignment="Left" Margin="160,185,0,0" Name="btnEmployeeWageSummaryAll" VerticalAlignment="Top" Width="125" ToolTip="View summary employee wage report" Click="btnEmployeeWageSummaryAll_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Employee Superannuation" HorizontalAlignment="Left" Margin="321,6,0,6" Name="groupBoxEmployeeSuperReport" Width="309">
+            <Grid>
+                <CheckBox Content="Employee ID" Height="16" HorizontalAlignment="Left" Margin="6,11,0,0" Name="lblEmployeeSuperReportID" VerticalAlignment="Top" Checked="lblEmployeeSuperReportID_Checked" Unchecked="lblEmployeeSuperReportID_Unchecked" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="96,8,0,0" Name="txtEmployeeSuperReportID" VerticalAlignment="Top" Width="120" Text="1" Visibility="Hidden" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,39,0" Name="btnSelectEmployeeSuperReport" VerticalAlignment="Top" Width="36" ToolTip="Select an employee" Click="btnSelectEmployeeSuperReport_Click" Visibility="Hidden" />
+                <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblEmployeeSuperFromDate" VerticalAlignment="Top" />
+                <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblEmployeeSuperToDate" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtFromEmployeeSuperDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,88,0,0" Name="txtToEmployeeSuperDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View Super" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewEmployeeSuperReport" VerticalAlignment="Top" Width="125" ToolTip="View Employee Superannuation" Click="btnViewEmployeeSuperReport_Click" />
+                <Button Content="Summary All" Height="23" HorizontalAlignment="Left" Margin="160,185,0,0" Name="btnEmployeeSuperSummaryAll" VerticalAlignment="Top" Width="125" ToolTip="View summary employee superannuation report" Click="btnEmployeeSuperSummaryAll_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Employee Pay Slip" HorizontalAlignment="Left" Margin="636,6,0,6" Name="groupBoxEmployeePaySlipReport" Width="309">
+            <Grid>
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,6,0,0" Name="txtEmployeeID" VerticalAlignment="Top" Width="120" Text="1" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,35,0,0" Name="txtCompanyID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Label Content="Employee ID" Height="28" HorizontalAlignment="Left" Margin="6,4,0,0" Name="lblEmployeeID" VerticalAlignment="Top" />
+                <Label Content="Company ID" Height="28" HorizontalAlignment="Left" Margin="6,33,0,0" Name="lblCompanyID" VerticalAlignment="Top" />
+                <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="209,6,0,0" Name="btnSelectEmployee" VerticalAlignment="Top" Width="36" Click="btnSelectEmployee_Click" ToolTip="Select an employee" />
+                <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="209,34,0,0" Name="btnSelectCompany" VerticalAlignment="Top" Width="36" Click="btnSelectCompany_Click" ToolTip="Select a company" />
+                <Button Content="View Pay Slip" Height="23" HorizontalAlignment="Left" Margin="160,185,0,0" Name="btnViewEmployeePaySlipReport" VerticalAlignment="Top" Width="125" ToolTip="View Employee Pay Slip" Click="btnViewEmployeePaySlipReport_Click" />
+                <Label Content="Pay Period Ending" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblEmployeePaySlipFromDate" VerticalAlignment="Top" />
+                <Label Content="Start of Financial Year" Height="28" HorizontalAlignment="Left" Margin="6,118,0,0" Name="lblEmployeePaySlipToDate" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,86,0,0" Name="txtEndingEmployeePaySlipDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,144,0,0" Name="txtStartEmployeePaySlipDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

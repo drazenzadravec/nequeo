@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Employees] (
+    [EmployeeID]   INT           IDENTITY (1, 1) NOT NULL,
+    [Firstname]    VARCHAR (50)  NULL,
+    [Surname]      VARCHAR (50)  NULL,
+    [DOB]          VARCHAR (20)  NULL,
+    [Address]      VARCHAR (50)  NULL,
+    [Suburb]       VARCHAR (30)  NULL,
+    [State]        VARCHAR (5)   NULL,
+    [Postcode]     VARCHAR (5)   NULL,
+    [HomeNumber]   VARCHAR (14)  NULL,
+    [FaxNumber]    VARCHAR (14)  NULL,
+    [MobileNumber] VARCHAR (12)  NULL,
+    [EmailAddress] VARCHAR (100) NULL,
+    [Comments]     VARCHAR (300) NULL,
+    [TFN]          VARCHAR (14)  NULL,
+    [AnnualWage]   MONEY         CONSTRAINT [DF_Employees_AnnualWage] DEFAULT (0.00) NOT NULL,
+    [SuperRate]    FLOAT (53)    CONSTRAINT [DF_Employees_SuperRate] DEFAULT (0.00) NOT NULL,
+    [TaxRate]      FLOAT (53)    NOT NULL,
+    [BaseHours]    FLOAT (53)    NOT NULL,
+    [WageInclude]  FLOAT (53)    NOT NULL,
+    [BCoefficient] FLOAT (53)    NOT NULL,
+    [PayInterval]  VARCHAR (12)  NOT NULL,
+    CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([EmployeeID] ASC)
+);
+

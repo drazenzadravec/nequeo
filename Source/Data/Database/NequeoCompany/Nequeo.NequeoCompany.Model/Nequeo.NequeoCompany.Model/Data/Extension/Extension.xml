@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+    <DatabaseConnection>Data Source=NEQUEOMPCX64\SQL2012;Initial Catalog=Nequeo;Integrated Security=True</DatabaseConnection>
+    <ContextName>Extension</ContextName>
+    <DataContextName>DataContext</DataContextName>
+    <Database>NequeoCompany</Database>
+    <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+    <NamespaceExtendedName></NamespaceExtendedName>
+    <ConnectionType>1</ConnectionType>
+    <ConnectionDataType>1</ConnectionDataType>
+    <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+    <TableListExclusion>false</TableListExclusion>
+    <TableList>
+        <string>Accounts</string>
+        <string>AccountTransactions</string>
+        <string>BAS</string>
+        <string>Companies</string>
+        <string>Employees</string>
+        <string>Wages</string>
+        <string>EmployeePAYG</string>
+        <string>Super</string>
+        <string>Invoices</string>
+        <string>InvoiceDetails</string>
+        <string>InvoiceProducts</string>
+        <string>Customers</string>
+        <string>Vendors</string>
+        <string>VendorDetails</string>
+        <string>TaxReturn</string>
+        <string>State</string>
+        <string>User</string>
+        <string>UserType</string>
+        <string>GenericData</string>
+        <string>ProductCategory</string>
+        <string>ProductStatus</string>
+        <string>DataMember</string>
+        <string>DataMemberTables</string>
+        <string>PaymentType</string>
+    </TableList>
+</Context>

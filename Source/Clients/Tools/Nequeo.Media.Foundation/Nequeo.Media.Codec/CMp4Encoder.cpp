@@ -404,7 +404,7 @@ extern HRESULT CreateH264Profile(H264ProfileInfo& profile, IMFAttributes **ppAtt
 	{
 		hr = MFSetAttributeSize(
 			pAttributes, MF_MT_FRAME_SIZE,
-			profile.frame_size.Numerator, profile.frame_size.Numerator);
+			profile.frame_size.Numerator, profile.frame_size.Denominator);
 	}
 	if (SUCCEEDED(hr))
 	{
@@ -455,7 +455,7 @@ HRESULT CreateH264Profile(DWORD index, IMFAttributes **ppAttributes)
 	{
 		hr = MFSetAttributeSize(
 			pAttributes, MF_MT_FRAME_SIZE,
-			profile.frame_size.Numerator, profile.frame_size.Numerator);
+			profile.frame_size.Numerator, profile.frame_size.Denominator);
 	}
 	if (SUCCEEDED(hr))
 	{

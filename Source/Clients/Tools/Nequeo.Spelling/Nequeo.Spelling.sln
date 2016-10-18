@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Spelling", "Nequeo.Spelling\Nequeo.Spelling.csproj", "{6AF784CE-7732-41ED-A3F1-072E5763D25A}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Spelling.Lataina", "Nequeo.Spelling.Lataina\Nequeo.Spelling.Lataina.csproj", "{E46467B1-F537-4A2B-951E-2720BB858312}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Spelling.Israel", "Nequeo.Spelling.Israel\Nequeo.Spelling.Israel.csproj", "{71824E56-98E2-4FD2-BCBB-B066D039D6AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Spelling.Croatia", "Nequeo.Spelling.Croatia\Nequeo.Spelling.Croatia.csproj", "{2C870A41-8D48-4C5B-9BE3-5901401D2F73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{71824E56-98E2-4FD2-BCBB-B066D039D6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71824E56-98E2-4FD2-BCBB-B066D039D6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71824E56-98E2-4FD2-BCBB-B066D039D6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C870A41-8D48-4C5B-9BE3-5901401D2F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C870A41-8D48-4C5B-9BE3-5901401D2F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C870A41-8D48-4C5B-9BE3-5901401D2F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C870A41-8D48-4C5B-9BE3-5901401D2F73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

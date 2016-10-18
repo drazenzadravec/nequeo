@@ -97,7 +97,9 @@ namespace Nequeo {
 				afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 				afx_msg void OnBnClickedCancel();
 				afx_msg void OnBnClickedOk();
+				afx_msg void OnEnChangeEditNetworUuri();
 				afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+				
 			};
 		}
 	}

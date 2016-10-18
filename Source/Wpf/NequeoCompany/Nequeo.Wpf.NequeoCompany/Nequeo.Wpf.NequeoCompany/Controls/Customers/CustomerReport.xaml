@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Customers.CustomerReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="955" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Customer Tax Invoice" Margin="6,6,0,6" Name="groupBoxCustomerIncomeReport" HorizontalAlignment="Left" Width="309">
+            <Grid>
+                <Label Content="Customer ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblCustomerID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtCustomerID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="209,8,0,0" Name="btnSelectCustomer" VerticalAlignment="Top" Width="36" ToolTip="Select a customer" Click="btnSelectCustomer_Click" />
+                <CheckBox Content="View Date Interval Selection" Height="16" HorizontalAlignment="Left" Margin="6,40,0,0" Name="cbCustomerDateInterval" VerticalAlignment="Top" Checked="cbCustomerDateInterval_Checked" Unchecked="cbCustomerDateInterval_Unchecked" />
+                <Grid Name="gridCustomerInvocieTax" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Height="55" Width="291" Visibility="Hidden">
+                    <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,0,0,0" Name="lblInvoiceTaxFromDate" VerticalAlignment="Top" />
+                    <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,29,0,0" Name="lblInvoiceYaxToDate" VerticalAlignment="Top" />
+                    <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,0,0,0" Name="txtFromInvoiceTaxDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                    <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,29,0,0" Name="txtToInvoiceTaxDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                </Grid>
+                <Button Content="View Income" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewReport" VerticalAlignment="Top" Width="125" ToolTip="View Income" Click="btnViewReport_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Customer Income" HorizontalAlignment="Left" Margin="321,6,0,6" Name="groupBoxCustomerDateReport" Width="309">
+            <Grid>
+                <Label Height="50" Margin="6,6,0,0" Name="lblInvoiceInstructions" 
+                       VerticalAlignment="Top" HorizontalAlignment="Left" Width="279" >
+                    <TextBlock TextWrapping="Wrap" Height="46" Width="269" FontSize="10">Select the time interval below to view all invoices that have been paid. All the invoices paid is an indication of total income for the time interval</TextBlock>
+                </Label>
+                <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblInvoiceFromDate" VerticalAlignment="Top" />
+                <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblInvoiceToDate" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtFromInvoiceDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,88,0,0" Name="txtToInvoiceDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View All Income" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewAllReport" VerticalAlignment="Top" Width="125" ToolTip="View All Income" Click="btnViewAllReport_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Customer" HorizontalAlignment="Left" Margin="636,6,0,6" Name="groupBoxCustomerReport" Width="309">
+            <Grid>
+                <Label Content="Customer ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblCustomerReportID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtCustomerReportID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectCustomerReport" VerticalAlignment="Top" Width="36" ToolTip="Select a customer" Click="btnSelectCustomerReport_Click" />
+                <Button Content="View Customer" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewCustomerReport" VerticalAlignment="Top" Width="125" ToolTip="View Customer" Click="btnViewCustomerReport_Click" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

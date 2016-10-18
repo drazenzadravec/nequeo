@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Companies.PaygInstalement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dataSource="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:dataSourceEx="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data.Extended;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:nequeoComponentModel="clr-namespace:Nequeo.ComponentModel;assembly=Nequeo.Data" 
+             xmlns:nequeoWpf="clr-namespace:Nequeo.Wpf.UI;assembly=Nequeo.Wpf"
+             xmlns:nequeoWpfValidation="clr-namespace:Nequeo.Wpf.Validation;assembly=Nequeo.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="325" d:DesignWidth="978" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <dataSource:CompanyPAYGInstalment x:Key="PaygInstalDataSource" />
+
+        <Style x:Key="TextBoxValueError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DatePickerValueError" TargetType="{x:Type DatePicker}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Header="Company PAYG Instalment" Margin="6,6,6,6" Name="groupPaygInstal">
+            <Grid Name="gridPaygInstal">
+                <Grid.DataContext>
+                    <Binding Source="{StaticResource PaygInstalDataSource}" />
+                </Grid.DataContext>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Name="InvoiceRow0" Width="660*" />
+                    <ColumnDefinition Name="InvoiceRow1" Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Name="gridPaygInstalContainer">
+                    <GroupBox Name="groupBoxPaygInstalContainer" IsEnabled="False" Foreground="Black">
+                        <Grid>
+                            <Label Content="PAYG ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblPAYGID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,31,0,0" Name="txtPAYGID" VerticalAlignment="Top" Width="80" Text="{Binding Path=PAYGInstID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                            <Label Content="Company ID" Height="28" HorizontalAlignment="Left" Margin="93,6,0,0" Name="lblCompanyID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="93,31,0,0" Name="txtCompanyID" 
+                                     VerticalAlignment="Top" Width="80" IsReadOnly="True" Style="{StaticResource TextBoxValueError}">
+                                <TextBox.Text>
+                                    <Binding Path="CompanyID" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Integer Minimum="1" OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="BAS Starting Date" Height="28" HorizontalAlignment="Left" Margin="179,6,0,0" Name="lblPaymentDate" VerticalAlignment="Top" Width="125" />
+                            <DatePicker Height="25" HorizontalAlignment="Left" Margin="179,31,0,0" Name="txtPaymentDate" VerticalAlignment="Top" 
+                                        Width="230" Style="{StaticResource DatePickerValueError}" SelectedDateFormat="Long" >
+                                <DatePicker.SelectedDate>
+                                    <Binding Path="InstalmentDate" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:DateTime OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+                            </DatePicker>
+                            <Label Content="Assessment year used in calculations" Height="28" HorizontalAlignment="Left" Margin="6,63,0,0" Name="lblAssYear" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,88,0,0" Name="txtAssYear" VerticalAlignment="Top" Width="105" 
+                                     HorizontalContentAlignment="Right" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="AssessmentYear" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Integer Minimum="1" OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="PAYG instalment rate (as calculated by the Tax Office)" Height="28" HorizontalAlignment="Left" Margin="216,63,0,0" Name="lblInstalRate" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="216,88,0,0" Name="txtInstalRate" VerticalAlignment="Top" Width="105" 
+                                     HorizontalContentAlignment="Right" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="InstalRate" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Double OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Instalment amounts calculated by the Tax Office" Height="28" HorizontalAlignment="Left" Margin="515,63,0,0" Name="lblInstalCalTaxOffice" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="515,88,0,0" Name="txtInstalCalTaxOffice" VerticalAlignment="Top" Width="105" 
+                                     HorizontalContentAlignment="Right" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="InstalCalTaxOffice" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Decimal OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Tax on business and investment income" Height="28" HorizontalAlignment="Left" Margin="6,123,0,0" Name="lblTaxOnIncome" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,148,0,0" Name="txtTaxOnIncome" VerticalAlignment="Top" Width="105" 
+                                     HorizontalContentAlignment="Right" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="TaxOnIncome" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Decimal OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Amount of national tax adjusted for Gross Domestic Product" Height="28" HorizontalAlignment="Left" Margin="232,123,0,0" Name="lblGDPTax" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="232,148,0,0" Name="txtGDPTax" VerticalAlignment="Top" Width="105" 
+                                     HorizontalContentAlignment="Right" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="GDPTax" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Decimal OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Comments" Height="28" HorizontalAlignment="Left" Margin="6,185,0,0" Name="lblComments" VerticalAlignment="Top" />
+                            <TextBox Height="51" HorizontalAlignment="Left" Margin="6,210,0,0" Name="txtComments" VerticalAlignment="Top" Width="466" 
+                                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Path=Comments, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Column="1" Name="gridControlPaygInstalContainer">
+                    <nequeoWpf:DataAccess Name="dataAccess" VerticalAlignment="Top" 
+                              OnBeforeLoad="dataAccess_OnBeforeLoad" 
+                              OnBeforeUpdate="dataAccess_OnBeforeUpdate" 
+                              OnBeforeInsert="dataAccess_OnBeforeInsert" 
+                              OnBeforeDelete="dataAccess_OnBeforeDelete" 
+                              OnLoadError="dataAccess_OnLoadError" 
+                              OnUpdateError="dataAccess_OnUpdateError" 
+                              OnInsertError="dataAccess_OnInsertError" 
+                              OnDeleteError="dataAccess_OnDeleteError" 
+                              OnLoad="dataAccess_OnLoad" 
+                              OnUpdate="dataAccess_OnUpdate" 
+                              OnInsert="dataAccess_OnInsert" 
+                              OnDelete="dataAccess_OnDelete">
+                        <nequeoWpf:DataAccess.ConnectionTypeModel>
+                            <nequeoComponentModel:ConnectionTypeModel />
+                        </nequeoWpf:DataAccess.ConnectionTypeModel>
+                    </nequeoWpf:DataAccess>
+                    <Button Content="Add New" Height="23" HorizontalAlignment="Left" Margin="12,131,0,0" Name="btnAddNew" 
+                            VerticalAlignment="Top" Width="75" ToolTip="Add a new record" Click="btnAddNew_Click" IsEnabled="False" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

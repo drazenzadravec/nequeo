@@ -362,7 +362,14 @@ namespace Nequeo {
 					{
 						try
 						{
+							// Close acceptor.
 							acceptor.close();
+						}
+						catch (...) {}
+
+						try
+						{
+							// Close service.
 							io_service.stop();
 						}
 						catch (...) {}

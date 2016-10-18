@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{483171D7-3E8D-4716-A195-511C938B2C96}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Report.NequeoCompany</RootNamespace>
+    <AssemblyName>Nequeo.NequeoCompany.Reports</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoCompanyReportKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\References\Staging\Data\NequeoCompany\Report\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Data\NequeoCompany\Report\Nequeo.NequeoCompany.Reports.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\..\References\Staging\Data\NequeoCompany\Report\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Data\NequeoCompany\Report\Nequeo.NequeoCompany.Reports.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Nequeo.Data">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.NequeoCompany.Model">
+      <HintPath>..\..\..\..\..\References\Staging\Data\NequeoCompany\Model\Nequeo.NequeoCompany.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Report">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\Accounts.cs" />
+    <Compile Include="Account\Transaction\Transaction.cs" />
+    <Compile Include="Asset\Assets.cs" />
+    <Compile Include="Asset\Vendor\Vendor.cs" />
+    <Compile Include="Company\BAS\Bas.cs" />
+    <Compile Include="Company\Companies.cs" />
+    <Compile Include="Company\ProfitLoss\ProfitLoss.cs" />
+    <Compile Include="Company\TaxReturn\TaxReturn.cs" />
+    <Compile Include="Customer\Customers.cs" />
+    <Compile Include="Customer\Income\Income.cs" />
+    <Compile Include="Customer\Invoice\Detail\Detail.cs" />
+    <Compile Include="Customer\Invoice\Invoice.cs" />
+    <Compile Include="Customer\Invoice\Product\Product.cs" />
+    <Compile Include="Employee\BankAccount\BankAccount.cs" />
+    <Compile Include="Employee\Employees.cs" />
+    <Compile Include="Employee\PAYG\PAYG.cs" />
+    <Compile Include="Employee\PaySlip\PaySlip.cs" />
+    <Compile Include="Employee\SuperAccount\SuperAccount.cs" />
+    <Compile Include="Employee\Superannuation\Superannuation.cs" />
+    <Compile Include="Employee\Wage\Wage.cs" />
+    <Compile Include="Product\Products.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vendor\Detail\Detail.cs" />
+    <Compile Include="Vendor\Vendors.cs" />
+    <Compile Include="Viewer\ReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\ReportViewer.Designer.cs">
+      <DependentUpon>ReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\ReportViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Viewer\ReportViewerControl.Designer.cs">
+      <DependentUpon>ReportViewerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\ViewerControl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NequeoCompanyReportKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Account\Accounts.rdlc" />
+    <EmbeddedResource Include="Account\Transaction\FromToDataMemberDate.rdlc" />
+    <EmbeddedResource Include="Account\Transaction\FromToDataMemberDateID.rdlc" />
+    <EmbeddedResource Include="Account\Transaction\FromToDate.rdlc" />
+    <EmbeddedResource Include="Account\Transaction\FromToDatePaidToBy.rdlc" />
+    <EmbeddedResource Include="Account\Transaction\FromToDatePaidToByAndID.rdlc" />
+    <EmbeddedResource Include="Asset\Assets.rdlc" />
+    <EmbeddedResource Include="Asset\Vendor\SelectedVendorAssetsDate.rdlc" />
+    <EmbeddedResource Include="Asset\Vendor\SelectedVendorAssetsIDDate.rdlc" />
+    <EmbeddedResource Include="Company\BAS\Bas.rdlc" />
+    <EmbeddedResource Include="Company\Companies.rdlc" />
+    <EmbeddedResource Include="Company\ProfitLoss\ProfitLoss.rdlc" />
+    <EmbeddedResource Include="Company\TaxReturn\TaxReturn.rdlc" />
+    <EmbeddedResource Include="Customer\Customers.rdlc" />
+    <EmbeddedResource Include="Customer\Income\FromToDate.rdlc" />
+    <EmbeddedResource Include="Customer\Income\FromToDateID.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\EmptyQuotation.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\EmptyTaxInvoice.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\FromToInvoiceDate.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\FromToInvoiceDateIncome.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\FromToInvoiceDateNotPaid.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\Quotation.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Detail\TaxInvoice.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\FromToDateSummary.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\FromToDateSummaryIncome.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\FromToDateSummaryNotPaid.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\FromToInvoiceDate.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\FromToInvoiceDateIncome.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\FromToInvoiceDateNotPaid.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\EmptyQuotation.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\EmptyTaxInvoice.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\FromToInvoiceDate.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\FromToInvoiceDateIncome.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\FromToInvoiceDateNotPaid.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\Quotation.rdlc" />
+    <EmbeddedResource Include="Customer\Invoice\Product\TaxInvoice.rdlc" />
+    <EmbeddedResource Include="Employee\BankAccount\BankAccount.rdlc" />
+    <EmbeddedResource Include="Employee\Employees.rdlc" />
+    <EmbeddedResource Include="Employee\PAYG\ExtraFromToDate.rdlc" />
+    <EmbeddedResource Include="Employee\PAYG\FromToDate.rdlc" />
+    <EmbeddedResource Include="Employee\PaySlip\FromToYear.rdlc" />
+    <EmbeddedResource Include="Employee\SuperAccount\SuperAccount.rdlc" />
+    <EmbeddedResource Include="Employee\Superannuation\FromToDate.rdlc" />
+    <EmbeddedResource Include="Employee\Superannuation\FromToDateID.rdlc" />
+    <EmbeddedResource Include="Employee\Superannuation\FromToDateSummary.rdlc" />
+    <EmbeddedResource Include="Employee\Superannuation\FromToDateSuperID.rdlc" />
+    <EmbeddedResource Include="Employee\Wage\FromToDate.rdlc" />
+    <EmbeddedResource Include="Employee\Wage\FromToDateBankID.rdlc" />
+    <EmbeddedResource Include="Employee\Wage\FromToDateID.rdlc" />
+    <EmbeddedResource Include="Employee\Wage\FromToDateSummary.rdlc" />
+    <EmbeddedResource Include="Product\Products.rdlc" />
+    <EmbeddedResource Include="Vendor\Detail\FromToDate.rdlc" />
+    <EmbeddedResource Include="Vendor\Detail\FromToDateID.rdlc" />
+    <EmbeddedResource Include="Vendor\Detail\FromToDateSummary.rdlc" />
+    <EmbeddedResource Include="Vendor\Vendors.rdlc" />
+    <EmbeddedResource Include="Viewer\ReportViewer.resx">
+      <DependentUpon>ReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\ReportViewerControl.resx">
+      <DependentUpon>ReportViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Customers.InvoiceReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="650" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Invoice" Margin="6,6,0,6" Name="groupBoxInvoiceReport" HorizontalAlignment="Left" Width="309">
+            <Grid>
+                <Button Content="View Tax Invoice" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewReport" VerticalAlignment="Top" Width="125" Click="btnViewReport_Click" ToolTip="View the Tax Invoice" />
+                <RadioButton Content="Details Tax Invoice" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="rbDetailsTaxInvoice" VerticalAlignment="Top" IsChecked="True" />
+                <RadioButton Content="Details Quotation" Height="16" HorizontalAlignment="Left" Margin="154,6,0,0" Name="rbDetailsQuotation" VerticalAlignment="Top" />
+                <RadioButton Content="Product Tax Invoice" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="rbProductTaxInvoice" VerticalAlignment="Top" />
+                <RadioButton Content="Product Quotation" Height="16" HorizontalAlignment="Left" Margin="154,28,0,0" Name="rbProductQuotation" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,60,0,0" Name="txtInvoiceID" VerticalAlignment="Top" Width="120" Text="1" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,89,0,0" Name="txtCompanyID" VerticalAlignment="Top" Width="120" Text="1" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,118,0,0" Name="txtAccountID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Label Content="Invoice ID" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblInvoiveID" VerticalAlignment="Top" />
+                <Label Content="Company ID" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblCompanyID" VerticalAlignment="Top" />
+                <Label Content="Account ID" Height="28" HorizontalAlignment="Left" Margin="6,116,0,0" Name="lblAccountID" VerticalAlignment="Top" />
+                <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="209,60,0,0" Name="btnSelectInvoice" VerticalAlignment="Top" Width="36" Click="btnSelectInvoice_Click" ToolTip="Select an invoice" />
+                <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="209,88,0,0" Name="btnSelectCompany" VerticalAlignment="Top" Width="36" Click="btnSelectCompany_Click" ToolTip="Select a company" />
+                <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="209,117,0,0" Name="btnSelectAccount" VerticalAlignment="Top" Width="36" Click="btnSelectAccount_Click" ToolTip="Select an account" />
+                <CheckBox Content="Empty Invoice" Height="16" HorizontalAlignment="Left" Margin="6,160,0,0" Name="cbEmptyInvoice" VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Invoice Date" HorizontalAlignment="Left" Margin="321,6,0,6" Name="groupBoxInvoiceDateReport" Width="309">
+            <Grid>
+                <RadioButton Content="Details" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="rbDetailsInvoiceDate" VerticalAlignment="Top" IsChecked="True" />
+                <RadioButton Content="Product" Height="16" HorizontalAlignment="Left" Margin="96,6,0,0" Name="rbProductInvoiceDate" VerticalAlignment="Top" />
+                <RadioButton Content="All" Height="16" HorizontalAlignment="Left" Margin="193,6,0,0" Name="rbAllInvoiceDate" VerticalAlignment="Top" />
+                <Label Content="Select the from date and to date to view the report" Height="28" HorizontalAlignment="Left" Margin="6,28,0,0" Name="lblInvoiceInstructions" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtFromInvoiceDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,88,0,0" Name="txtToInvoiceDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblInvoiceFromDate" VerticalAlignment="Top" />
+                <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblInvoiceToDate" VerticalAlignment="Top" />
+                <CheckBox Content="Payment" Height="16" HorizontalAlignment="Left" Margin="6,124,0,0" Name="cbPaymentInvoice" VerticalAlignment="Top" Checked="cbPaymentInvoice_Checked" Unchecked="cbPaymentInvoice_Unchecked" />
+                <Grid Height="26" HorizontalAlignment="Left" Margin="85,118,0,0" Name="gridInvoicePaidNotPaid" VerticalAlignment="Top" Width="165">
+                    <RadioButton Content="Paid" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="rbInvoicePaid" VerticalAlignment="Top" IsChecked="True" Visibility="Hidden" />
+                    <RadioButton Content="Not Paid" Height="16" HorizontalAlignment="Left" Margin="76,6,0,0" Name="rbInvoiceNotPaid" VerticalAlignment="Top" Visibility="Hidden" />
+                </Grid>
+                <Button Content="Summary All" Height="23" HorizontalAlignment="Left" Margin="160,185,0,0" Name="btnSummaryAll" VerticalAlignment="Top" Width="125" ToolTip="View summary report" Click="btnSummaryAll_Click" />
+                <Button Content="View Date Interval" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnDateInterval" VerticalAlignment="Top" Width="125" ToolTip="View date interval report" Click="btnDateInterval_Click" />
+                <Button Content="All Income" Height="23" HorizontalAlignment="Left" Margin="29,185,0,0" Name="txtAllIncome" VerticalAlignment="Top" Width="124" ToolTip="All income for the interval" Click="txtAllIncome_Click" />
+                <Button Content="Income For Interval" Height="23" HorizontalAlignment="Left" Margin="29,156,0,0" Name="txtIncomeInterval" VerticalAlignment="Top" Width="124" ToolTip="View income for the interval" Click="txtIncomeInterval_Click" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

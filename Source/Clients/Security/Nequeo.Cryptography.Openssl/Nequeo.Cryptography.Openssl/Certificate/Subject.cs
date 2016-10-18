@@ -63,12 +63,12 @@ namespace Nequeo.Cryptography.Openssl
         public Subject(string countryName, string state, string locationName, string organisationName,
             string organisationUnitName, string commonName, string emailAddress = null)
         {
-            if (String.IsNullOrEmpty(countryName)) throw new ArgumentNullException("countryName");
-            if (String.IsNullOrEmpty(state)) throw new ArgumentNullException("state");
-            if (String.IsNullOrEmpty(locationName)) throw new ArgumentNullException("locationName");
-            if (String.IsNullOrEmpty(organisationName)) throw new ArgumentNullException("organisationName");
-            if (String.IsNullOrEmpty(organisationUnitName)) throw new ArgumentNullException("organisationUnitName");
-            if (String.IsNullOrEmpty(commonName)) throw new ArgumentNullException("commonName");
+            if (String.IsNullOrEmpty(countryName)) throw new ArgumentNullException(nameof(countryName));
+            if (String.IsNullOrEmpty(state)) throw new ArgumentNullException(nameof(state));
+            if (String.IsNullOrEmpty(locationName)) throw new ArgumentNullException(nameof(locationName));
+            if (String.IsNullOrEmpty(organisationName)) throw new ArgumentNullException(nameof(organisationName));
+            if (String.IsNullOrEmpty(organisationUnitName)) throw new ArgumentNullException(nameof(organisationUnitName));
+            if (String.IsNullOrEmpty(commonName)) throw new ArgumentNullException(nameof(commonName));
 
             // Assign each subject varibale.
             _countryName = countryName;

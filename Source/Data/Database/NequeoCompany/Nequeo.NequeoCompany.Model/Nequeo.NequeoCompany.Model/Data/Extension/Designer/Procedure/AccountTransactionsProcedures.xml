@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Integrated Security=True;Initial Catalog=Nequeo;Data Source=NEQUEOMPCX64\SQL2012</DatabaseConnection>
+  <ExtensionClassName>AccountTransactions</ExtensionClassName>
+  <Database>NequeoCompany</Database>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <FunctionHandler>1</FunctionHandler>
+  <ProcedureListExclusion>0</ProcedureListExclusion>
+  <ProcedureList>
+    <string>GetAccountTransactionCreditsFromToDate</string>
+    <string>GetAccountTransactionDebitsFromToDate</string>
+    <string>GetAccountTransactionsFromToDate</string>
+    <string>GetAccountTransactionsFromToDatePaidToBy</string>
+    <string>GetAccountTransactionsFromToDatePaidToByAndID</string>
+    <string>GetAccountTransactionsMemberFromToDate</string>
+    <string>GetAccountTransactionsMemberFromToDateByID</string>
+    <string>GetAccountBalanceFromToDate</string>
+    <string>GetAccountTransactionCreditsFromToDatePaidToBy</string>
+    <string>GetAccountTransactionCreditsFromToDatePaidToByAndID</string>
+    <string>GetAccountTransactionCreditsMemberFromToDate</string>
+    <string>GetAccountTransactionCreditsMemberFromToDateByID</string>
+    <string>GetAccountTransactionDebitsFromToDatePaidToBy</string>
+    <string>GetAccountTransactionDebitsFromToDatePaidToByAndID</string>
+    <string>GetAccountTransactionDebitsMemberFromToDate</string>
+    <string>GetAccountTransactionDebitsMemberFromToDateByID</string>
+  </ProcedureList>
+</Context>

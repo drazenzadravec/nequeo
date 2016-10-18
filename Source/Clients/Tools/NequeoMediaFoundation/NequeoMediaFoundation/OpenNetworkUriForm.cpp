@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::OpenNetworkUriForm, CDialog)
 	ON_WM_CREATE()
 	ON_BN_CLICKED(IDCANCEL, &OpenNetworkUriForm::OnBnClickedCancel)
 	ON_BN_CLICKED(IDOK, &OpenNetworkUriForm::OnBnClickedOk)
+	ON_EN_CHANGE(IDC_EDITNETWORKURI, &OpenNetworkUriForm::OnEnChangeEditNetworUuri)
 	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
@@ -189,7 +190,23 @@ namespace Nequeo {
 				}
 				CDialog::OnOK();
 			}
+
+			/// <summary>
+			/// On text changed.
+			/// </summary>
+			void OpenNetworkUriForm::OnEnChangeEditNetworUuri()
+			{
+				// TODO:  If this is a RICHEDIT control, the control will not
+				// send this notification unless you override the CDialog::OnInitDialog()
+				// function and call CRichEditCtrl().SetEventMask()
+				// with the ENM_CHANGE flag ORed into the mask.
+
+				// TODO:  Add your control notification handler code here
+			}
+
 		}
 	}
 }
+
+
 

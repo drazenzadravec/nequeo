@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3ECD399-3633-4B75-B9B6-C5236D496707}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Wpf.NequeoCompany</RootNamespace>
+    <AssemblyName>Nequeo</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Release\Wpf\NequeoCompany\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Nequeo.Wpf.NequeoCompany.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>0065.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nequeo.Collections, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=95250545e5d9f3b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Conversion.Xml">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Conversion.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=058191c6ae32205d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=731a1445b7d27437, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Common">
+      <HintPath>..\..\..\..\References\Staging\Data\Common\Nequeo.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Linq, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=731a1445b7d27437, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Model">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.NequeoCompany.Logic">
+      <HintPath>..\..\..\..\References\Staging\Data\NequeoCompany\Logic\Nequeo.NequeoCompany.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.NequeoCompany.Model, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=e7de52f072ff1a5a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Data\NequeoCompany\Model\Nequeo.NequeoCompany.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.NequeoCompany.Reports">
+      <HintPath>..\..\..\..\References\Staging\Data\NequeoCompany\Report\Nequeo.NequeoCompany.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Primitive, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=605226a0b789a2b2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=3b355968680c6ed8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Report">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Service.NequeoCompany">
+      <HintPath>..\..\..\..\References\Staging\Service\Nequeo.Service.NequeoCompany\Nequeo.Service.NequeoCompany.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=d8c99fcd48433f43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Wpf">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Wpf.Controls">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Wpf.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Wpf.Toolkit">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\Account.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Accounts\AccountReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Accounts\Transaction.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Asset.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Assets\AssetReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Companies\BAS.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Companies\CompanyReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Companies\PaygInstalement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Companies\ProfitLossReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Companies\TaxReturn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Company.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Customer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Customers\CustomerReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Customers\InvoiceDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Customers\InvoiceProducts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Customers\InvoiceReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employee.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\AccountReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\BankAccount.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\CustomReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\EmployeeReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\ExtraPAYG.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\Superannuation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\SuperFundAccount.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Employees\Wage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Invoice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Management.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\AccountType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\AssetCategory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\DataMember.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\DataMemberTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\ExpenseType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\GenericData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\GSTIncomeType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\IncomeType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\PayIntervalType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\PaymentType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\ProductCategory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\ProductStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\ProductSubCategory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\PurchaseType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\State.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\TransactionType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\User.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Manage\UserType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Product.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Products\ProductReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vendor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vendors\VendorDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vendors\VendorReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Welcome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\AsyncAccount1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AsyncAccount.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\AsyncAsset1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AsyncAsset.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ServiceLocator.cs" />
+    <Compile Include="Controls\Account.xaml.cs">
+      <DependentUpon>Account.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Accounts\AccountReport.xaml.cs">
+      <DependentUpon>AccountReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Accounts\Transaction.xaml.cs">
+      <DependentUpon>Transaction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Asset.xaml.cs">
+      <DependentUpon>Asset.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Assets\AssetReport.xaml.cs">
+      <DependentUpon>AssetReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Companies\BAS.xaml.cs">
+      <DependentUpon>BAS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Companies\CompanyReport.xaml.cs">
+      <DependentUpon>CompanyReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Companies\PaygInstalement.xaml.cs">
+      <DependentUpon>PaygInstalement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Companies\ProfitLossReport.xaml.cs">
+      <DependentUpon>ProfitLossReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Companies\TaxReturn.xaml.cs">
+      <DependentUpon>TaxReturn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Company.xaml.cs">
+      <DependentUpon>Company.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Customer.xaml.cs">
+      <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Customers\CustomerReport.xaml.cs">
+      <DependentUpon>CustomerReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Customers\InvoiceDetails.xaml.cs">
+      <DependentUpon>InvoiceDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Customers\InvoiceProducts.xaml.cs">
+      <DependentUpon>InvoiceProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Customers\InvoiceReport.xaml.cs">
+      <DependentUpon>InvoiceReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employee.xaml.cs">
+      <DependentUpon>Employee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\AccountReport.xaml.cs">
+      <DependentUpon>AccountReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\BankAccount.xaml.cs">
+      <DependentUpon>BankAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\CustomReport.xaml.cs">
+      <DependentUpon>CustomReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\EmployeeReport.xaml.cs">
+      <DependentUpon>EmployeeReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\ExtraPAYG.xaml.cs">
+      <DependentUpon>ExtraPAYG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\Superannuation.xaml.cs">
+      <DependentUpon>Superannuation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\SuperFundAccount.xaml.cs">
+      <DependentUpon>SuperFundAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Employees\Wage.xaml.cs">
+      <DependentUpon>Wage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Invoice.xaml.cs">
+      <DependentUpon>Invoice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Management.xaml.cs">
+      <DependentUpon>Management.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\AccountType.xaml.cs">
+      <DependentUpon>AccountType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\AssetCategory.xaml.cs">
+      <DependentUpon>AssetCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\DataMember.xaml.cs">
+      <DependentUpon>DataMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\DataMemberTable.xaml.cs">
+      <DependentUpon>DataMemberTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\ExpenseType.xaml.cs">
+      <DependentUpon>ExpenseType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\GenericData.xaml.cs">
+      <DependentUpon>GenericData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\GSTIncomeType.xaml.cs">
+      <DependentUpon>GSTIncomeType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\IncomeType.xaml.cs">
+      <DependentUpon>IncomeType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\PayIntervalType.xaml.cs">
+      <DependentUpon>PayIntervalType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\PaymentType.xaml.cs">
+      <DependentUpon>PaymentType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\ProductCategory.xaml.cs">
+      <DependentUpon>ProductCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\ProductStatus.xaml.cs">
+      <DependentUpon>ProductStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\ProductSubCategory.xaml.cs">
+      <DependentUpon>ProductSubCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\PurchaseType.xaml.cs">
+      <DependentUpon>PurchaseType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\State.xaml.cs">
+      <DependentUpon>State.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\TransactionType.xaml.cs">
+      <DependentUpon>TransactionType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\User.xaml.cs">
+      <DependentUpon>User.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Manage\UserType.xaml.cs">
+      <DependentUpon>UserType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Product.xaml.cs">
+      <DependentUpon>Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Products\ProductReport.xaml.cs">
+      <DependentUpon>ProductReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vendor.xaml.cs">
+      <DependentUpon>Vendor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vendors\VendorDetails.xaml.cs">
+      <DependentUpon>VendorDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vendors\VendorReport.xaml.cs">
+      <DependentUpon>VendorReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Common\_AsyncExecuteTypeGeneric.include" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="0065.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="base_cylinder_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\AsyncAccount.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AsyncAccount1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Common\AsyncAsset.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AsyncAsset1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

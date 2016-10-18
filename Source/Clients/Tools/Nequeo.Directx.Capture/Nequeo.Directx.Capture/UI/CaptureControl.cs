@@ -681,9 +681,9 @@ namespace Nequeo.Directx.UI
         private void buttonCaptureToFile_Click(object sender, EventArgs e)
         {
             if (_isVideo && _isAudio)
-                saveFileDialogMain.Filter = "Video Files (*.wmv)|*.wmv";
+                saveFileDialogMain.Filter = "Video Files (*.wmv *.avi)|*.wmv;*.avi";
             else if(_isVideo)
-                saveFileDialogMain.Filter = "Video Files (*.wmv)|*.wmv";
+                saveFileDialogMain.Filter = "Video Files (*.wmv *.avi)|*.wmv;*.avi";
             else if(_isAudio)
                 saveFileDialogMain.Filter = "Audio Files (*.wav)|*.wav";
 
@@ -802,6 +802,11 @@ namespace Nequeo.Directx.UI
                                 case ".wav":
                                     // Audio.
                                     _capture.StartToFile(textBoxCaptureToFile.Text, MediaFormatType.Wav);
+                                    break;
+
+                                case ".avi":
+                                    // Video and audio.
+                                    _capture.StartToFile(textBoxCaptureToFile.Text, MediaFormatType.Avi);
                                     break;
 
                                 default:

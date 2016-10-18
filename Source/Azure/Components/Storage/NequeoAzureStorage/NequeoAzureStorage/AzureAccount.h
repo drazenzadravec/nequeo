@@ -51,7 +51,8 @@ namespace Nequeo {
 				/// <param name="credentials">The storage credentials to use.</param>
 				/// <param name="endpoint_suffix">The DNS endpoint suffix for the storage services, e.g., &quot;core.windows.net&quot;.</param>
 				/// <param name="useHttps"><c>true</c> to use HTTPS to connect to storage service endpoints; otherwise, <c>false</c>.</param>
-				AzureAccount(const azure::storage::storage_credentials& credentials, 
+				AzureAccount(
+					const azure::storage::storage_credentials& credentials, 
 					const utility::string_t& endpoint_suffix, 
 					bool useHttps = true);
 
@@ -63,10 +64,34 @@ namespace Nequeo {
 				/// <param name="blob_endpoint">The Blob service endpoint.</param>
 				/// <param name="queue_endpoint">The Queue service endpoint.</param>
 				/// <param name="table_endpoint">The Table service endpoint.</param>
-				AzureAccount(const azure::storage::storage_credentials& credentials,
+				AzureAccount(
+					const azure::storage::storage_credentials& credentials,
 					const azure::storage::storage_uri& blob_endpoint, 
 					const azure::storage::storage_uri& queue_endpoint, 
 					const azure::storage::storage_uri& table_endpoint);
+
+				/// <summary>
+				/// Initializes a new instance of the <see cref="azure::storage::cloud_storage_account" /> class using the specified
+				/// credentials and service endpoints.
+				/// </summary>
+				/// <param name="credentials">The <see cref="azure::storage::storage_credentials" /> to use.</param>
+				/// <param name="blob_endpoint">The Blob service endpoint.</param>
+				/// <param name="queue_endpoint">The Queue service endpoint.</param>
+				/// <param name="table_endpoint">The Table service endpoint.</param>
+				/// <param name="file_endpoint">The File service endpoint.</param>
+				AzureAccount(
+					const azure::storage::storage_credentials& credentials,
+					const azure::storage::storage_uri& blob_endpoint,
+					const azure::storage::storage_uri& queue_endpoint,
+					const azure::storage::storage_uri& table_endpoint,
+					const azure::storage::storage_uri& file_endpoint);
+
+				///	<summary>
+				///	Azure account client provider.
+				///	</summary>
+				/// <param name="connection_string">The account connection string.</param>
+				AzureAccount(
+					const utility::string_t& connection_string);
 
 				///	<summary>
 				///	Azure account client provider destructor.
@@ -98,6 +123,15 @@ namespace Nequeo {
 				inline const azure::storage::storage_uri& TableEndpoint() const
 				{
 					return _table_endpoint;
+				}
+
+				/// <summary>
+				/// Gets the endpoint for the File service for all location.
+				/// </summary>
+				/// <returns>An <see cref="azure::storage::storage_uri" /> object containing the File service endpoint for all locations.</returns>
+				inline const azure::storage::storage_uri& FileEndpoint() const
+				{
+					return _file_endpoint;
 				}
 
 				/// <summary>
@@ -138,10 +172,12 @@ namespace Nequeo {
 				azure::storage::storage_uri _blob_endpoint;
 				azure::storage::storage_uri _queue_endpoint;
 				azure::storage::storage_uri _table_endpoint;
+				azure::storage::storage_uri _file_endpoint;
 
 				friend class BlobCloudClient;
 				friend class QueueCloudClient;
 				friend class TableCloudClient;
+				friend class FileCloudClient;
 			};
 		}
 	}

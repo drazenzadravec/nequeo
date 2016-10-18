@@ -1,0 +1,6 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# string Namespace = "Nequeo.DataAccess.NequeoCompany.Data.Extension";#>
+<# string TypeNamespace = "Nequeo.DataAccess.NequeoCompany.Data.Extension";#>
+<# string TypeName = "Assets";#>
+<#@ include file="_AsyncExecuteTypeGeneric.include" #>

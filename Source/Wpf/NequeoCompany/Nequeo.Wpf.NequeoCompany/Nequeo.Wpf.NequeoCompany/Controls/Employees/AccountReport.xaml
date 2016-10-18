@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Employees.AccountReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="955" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Employee Extra PAYG" Margin="6,6,0,6" Name="groupBoxEmployeeExtraPAYGReport" HorizontalAlignment="Left" Width="309">
+            <Grid>
+                <CheckBox Content="Employee ID" Height="16" HorizontalAlignment="Left" Margin="6,11,0,0" Name="lblEmployeeExtraReportID" VerticalAlignment="Top" Checked="lblEmployeeExtraReportID_Checked" Unchecked="lblEmployeeExtraReportID_Unchecked" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="96,8,0,0" Name="txtEmployeeExtraReportID" VerticalAlignment="Top" Width="120" Text="1" Visibility="Hidden" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,39,0" Name="btnSelectEmployeeExtraReport" VerticalAlignment="Top" Width="36" ToolTip="Select an employee" Click="btnSelectEmployeeExtraReport_Click" Visibility="Hidden" />
+                <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblEmployeeExtraFromDate" VerticalAlignment="Top" />
+                <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblEmployeeExtraToDate" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtFromEmployeeExtraDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,88,0,0" Name="txtToEmployeeExtraDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View Extra PAYG" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewEmployeeExtraReport" VerticalAlignment="Top" Width="125" ToolTip="View Vendor" Click="btnViewEmployeeExtraReport_Click" />
+                <Button Content="Summary All" Height="23" HorizontalAlignment="Left" Margin="160,185,0,0" Name="btnSummaryAll" VerticalAlignment="Top" Width="125" ToolTip="View summary report" Click="btnSummaryAll_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Employee Bank Account" HorizontalAlignment="Left" Margin="321,6,0,6" Name="groupBoxEmployeeBankAccountReport" Width="309">
+            <Grid>
+                <Label Content="Employee ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblEmployeeBankReportID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtEmployeeBankReportID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectEmployeeBankReport" VerticalAlignment="Top" Width="36" ToolTip="Select a employee" Click="btnSelectEmployeeBankReport_Click" />
+                <Button Content="View Bank Account" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewEmployeeBankReport" VerticalAlignment="Top" Width="125" ToolTip="View Employee Bank Account" Click="btnViewEmployeeBankReport_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Employee Super Fund Account" HorizontalAlignment="Left" Margin="636,6,0,6" Name="groupBoxEmployeeSuperFundReport" Width="309">
+            <Grid>
+                <Label Content="Employee ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblEmployeeFundReportID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtEmployeeFundReportID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectEmployeeFundReport" VerticalAlignment="Top" Width="36" ToolTip="Select a employee" Click="btnSelectEmployeeFundReport_Click" />
+                <Button Content="View Super Fund" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewEmployeeFundReport" VerticalAlignment="Top" Width="125" ToolTip="View Employee Super Fund Account" Click="btnViewEmployeeFundReport_Click" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

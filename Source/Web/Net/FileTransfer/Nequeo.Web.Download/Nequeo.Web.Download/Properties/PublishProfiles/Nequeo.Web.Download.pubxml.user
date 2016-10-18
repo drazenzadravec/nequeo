@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>Z:\Development\Version2013\Nequeo\References\Release\Service\WebDownloadManager</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Api/Transfer.ashx">
+      <publishTime>06/10/2014 09:39:26</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Collections.dll">
+      <publishTime>03/04/2015 14:22:20</publishTime>
+    </File>
+    <File Include="bin/Nequeo.ComponentModel.dll">
+      <publishTime>07/22/2014 10:21:35</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Composite.dll">
+      <publishTime>07/22/2014 10:21:48</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Conversion.dll">
+      <publishTime>02/28/2015 14:24:14</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Cryptography.dll">
+      <publishTime>04/19/2015 16:52:45</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Cryptography.Key.dll">
+      <publishTime>02/27/2015 13:06:59</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Data.Common.dll">
+      <publishTime>07/22/2014 10:42:14</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Data.dll">
+      <publishTime>07/23/2014 10:45:53</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Data.Linq.dll">
+      <publishTime>07/23/2014 10:46:13</publishTime>
+    </File>
+    <File Include="bin/Nequeo.dll">
+      <publishTime>03/25/2015 16:01:26</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Exceptions.dll">
+      <publishTime>02/14/2015 16:55:40</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Handler.dll">
+      <publishTime>10/31/2014 13:21:55</publishTime>
+    </File>
+    <File Include="bin/Nequeo.IO.Compress.dll">
+      <publishTime>04/01/2015 15:57:01</publishTime>
+    </File>
+    <File Include="bin/Nequeo.IO.Stream.dll">
+      <publishTime>04/21/2015 16:46:40</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Linq.dll">
+      <publishTime>02/05/2015 09:48:05</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Model.dll">
+      <publishTime>07/22/2014 10:20:09</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.Client.dll">
+      <publishTime>01/18/2015 14:27:13</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.dll">
+      <publishTime>02/19/2015 14:09:40</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.Http.dll">
+      <publishTime>02/19/2015 14:09:41</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Net.ServiceModel.dll">
+      <publishTime>11/18/2014 15:53:37</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Primitive.dll">
+      <publishTime>03/19/2015 14:48:29</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Reflection.dll">
+      <publishTime>03/04/2015 13:58:55</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Resource.dll">
+      <publishTime>07/22/2014 10:19:29</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Security.dll">
+      <publishTime>04/23/2015 11:48:39</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Serialisation.dll">
+      <publishTime>07/22/2014 10:23:45</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Service.Common.dll">
+      <publishTime>02/19/2015 14:34:26</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Service.dll">
+      <publishTime>02/19/2015 14:34:23</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Threading.dll">
+      <publishTime>01/25/2015 13:07:22</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Web.dll">
+      <publishTime>10/31/2014 13:23:03</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Web.Download.dll">
+      <publishTime>05/09/2015 11:36:53</publishTime>
+    </File>
+    <File Include="bin/Nequeo.Xml.dll">
+      <publishTime>07/22/2014 10:24:04</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>06/10/2014 12:03:37</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/09/2015 11:37:59</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

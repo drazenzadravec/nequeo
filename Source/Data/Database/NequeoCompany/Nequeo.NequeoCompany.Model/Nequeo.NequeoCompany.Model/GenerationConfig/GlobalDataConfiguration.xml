@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+    <DatabaseConnection>Integrated Security=True;Initial Catalog=Nequeo;Data Source=development\sqlexpress</DatabaseConnection>
+    <Database>NequeoCompany</Database>
+    <NamespaceExtendedName></NamespaceExtendedName>
+    <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+    <ConfigKeyDatabaseConnection>Nequeo.DataAccess.NequeoCompany.Properties.Settings.NequeoCompanyDatabaseConnection</ConfigKeyDatabaseConnection>
+    <ContextName>DataContext</ContextName>
+    <ExtensionContextName>Extension</ExtensionContextName>
+    <IncludeContextItems>true</IncludeContextItems>
+    <DataBaseConnect></DataBaseConnect>
+    <DataBaseOwner></DataBaseOwner>
+    <DataSetDataContextName>Common</DataSetDataContextName>
+    <DataSetUseAnonymousDataEntity>false</DataSetUseAnonymousDataEntity>
+    <EdmDataContextName>CommonEntityContext</EdmDataContextName>
+    <EdmUseAnonymousDataEntity>false</EdmUseAnonymousDataEntity>
+    <LinqDataContextName>CommonDataContext</LinqDataContextName>
+    <LinqUseAnonymousDataEntity>false</LinqUseAnonymousDataEntity>
+    <ConnectionType>1</ConnectionType>
+    <ConnectionDataType>1</ConnectionDataType>
+    <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+    <TableListMaxSize>0</TableListMaxSize>
+    <TableListExclusion>false</TableListExclusion>
+    <TableList>
+        <string>sysdiagrams</string>
+        <string>dtproperties</string>
+    </TableList>
+    <ProcedureExtensionClassName>User</ProcedureExtensionClassName>
+    <ProcedureFunctionHandler>false</ProcedureFunctionHandler>
+    <ProcedureListExclusion>false</ProcedureListExclusion>
+    <ProcedureList>
+        <string>sysdiagrams</string>
+        <string>dtproperties</string>
+    </ProcedureList>
+    <FunctionScalarExtensionClassName>User</FunctionScalarExtensionClassName>
+    <FunctionScalarFunctionHandler>false</FunctionScalarFunctionHandler>
+    <FunctionScalarListExclusion>false</FunctionScalarListExclusion>
+    <FunctionScalarList>
+        <string>sysdiagrams</string>
+        <string>dtproperties</string>
+    </FunctionScalarList>
+    <FunctionTableExtensionClassName>User</FunctionTableExtensionClassName>
+    <FunctionTableFunctionHandler>false</FunctionTableFunctionHandler>
+    <FunctionTableListExclusion>false</FunctionTableListExclusion>
+    <FunctionTableList>
+        <string>sysdiagrams</string>
+        <string>dtproperties</string>
+    </FunctionTableList>
+</Context>

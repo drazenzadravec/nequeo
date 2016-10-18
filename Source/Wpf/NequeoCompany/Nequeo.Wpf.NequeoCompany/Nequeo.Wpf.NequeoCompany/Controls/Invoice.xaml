@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Invoice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dataSource="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:dataSourceEx="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data.Extended;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:nequeoComponentModel="clr-namespace:Nequeo.ComponentModel;assembly=Nequeo.Data" 
+             xmlns:nequeoWpf="clr-namespace:Nequeo.Wpf.UI;assembly=Nequeo.Wpf"
+             xmlns:nequeoWpfValidation="clr-namespace:Nequeo.Wpf.Validation;assembly=Nequeo.Wpf"
+             xmlns:invoiceReport="clr-namespace:Nequeo.Wpf.NequeoCompany.Controls.Customers"
+             mc:Ignorable="d" 
+             d:DesignHeight="724" d:DesignWidth="707" Loaded="UserControl_Loaded" >
+    <UserControl.Resources>
+        <dataSource:Invoices x:Key="InvoiceDataSource" />
+        <dataSourceEx:IncomeTypeList x:Key="IncomeTypeDataSoure" />
+        <dataSourceEx:GstTypeList x:Key="GstIncomeTypeDataSoure" />
+
+        <Style x:Key="TextBoxValueError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DatePickerValueError" TargetType="{x:Type DatePicker}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Row0" Height="150*" />
+            <RowDefinition Name="Row1" Height="10" />
+            <RowDefinition Name="Row2" Height="120*" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Invoice" Name="groupBoxInvoice">
+            <Grid Name="gridInvoice">
+                <Grid.DataContext>
+                    <Binding Source="{StaticResource InvoiceDataSource}" />
+                </Grid.DataContext>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Name="InvoiceRow0" Width="660*" />
+                    <ColumnDefinition Name="InvoiceRow1" Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Name="gridInvoiceContainer">
+                    <GroupBox Name="groupBoxInvoiceContainer" IsEnabled="False" Foreground="Black">
+                        <Grid>
+                            <Label Content="Invoice ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblIvoiceID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,31,0,0" Name="txtInvoiceID" VerticalAlignment="Top" Width="80" Text="{Binding Path=InvoiceID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                            <Label Content="Invoice Date" Height="28" HorizontalAlignment="Left" Margin="6,63,0,0" Name="lblInvoiceDate" VerticalAlignment="Top" Width="125" />
+                            <DatePicker Height="25" HorizontalAlignment="Left" Margin="6,88,0,0" Name="txtInvoiceDate" VerticalAlignment="Top" 
+                                        Width="230" Style="{StaticResource DatePickerValueError}" SelectedDateFormat="Long" >
+                                <DatePicker.SelectedDate>
+                                    <Binding Path="InvoiceDate" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:DateTime OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+                            </DatePicker>
+                            <Label Content="Customer ID" Height="28" HorizontalAlignment="Left" Margin="93,6,0,0" Name="lblCustomerID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="93,31,0,0" Name="txtCustomerID" 
+                                     VerticalAlignment="Top" Width="80" IsReadOnly="True" Style="{StaticResource TextBoxValueError}">
+                                <TextBox.Text>
+                                    <Binding Path="CustomerID" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Integer Minimum="1" OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Payment Date" Height="28" HorizontalAlignment="Left" Margin="242,63,0,0" Name="lblPaymentDate" VerticalAlignment="Top" />
+                            <DatePicker Height="25" HorizontalAlignment="Left" Margin="242,88,0,0" Name="txtPaymentDate" 
+                                        VerticalAlignment="Top" Width="230" SelectedDateFormat="Long" SelectedDate="{Binding Path=PaymentDate, UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="162,150,0,0" Name="txtIncomeType" VerticalAlignment="Top" Width="310" 
+                                ItemsSource="{Binding Source={StaticResource IncomeTypeDataSoure}}" 
+                                SelectionChanged="txtIncomeType_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,150,0,0" Name="txtGstIncomeType" VerticalAlignment="Top" Width="150" 
+                                ItemsSource="{Binding Source={StaticResource GstIncomeTypeDataSoure}}"
+                                SelectionChanged="txtGstIncomeType_SelectionChanged" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Label Content="Order ID" Height="28" HorizontalAlignment="Left" Margin="179,6,0,0" Name="lblOrderID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="179,31,0,0" Name="txtOrderID" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="OrderID" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="305,31,0,0" Name="txtContact" VerticalAlignment="Top" Width="212" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="Developer" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Contact" Height="28" HorizontalAlignment="Left" Margin="305,6,0,0" Name="lblContact" VerticalAlignment="Top" />
+                            <Label Content="GST" Height="28" HorizontalAlignment="Left" Margin="6,125,0,0" Name="lblGstIncomeType" VerticalAlignment="Top" />
+                            <Label Content="Income Type" Height="28" HorizontalAlignment="Left" Margin="162,125,0,0" Name="lblIncomeType" VerticalAlignment="Top" />
+                            <Label Content="Comments" Height="28" HorizontalAlignment="Left" Margin="6,185,0,0" Name="lblComments" VerticalAlignment="Top" />
+                            <TextBox Height="94" HorizontalAlignment="Left" Margin="6,211,0,0" Name="txtComments" VerticalAlignment="Top" Width="466" 
+                                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Path=Comments, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Height="23" HorizontalAlignment="Left" Margin="6,324,0,0" Name="textBlockTxtGstIncomeType" VerticalAlignment="Top" Width="93" Visibility="Hidden" >
+                                <TextBlock.Text>
+                                    <Binding Path="SelectedIndex" ElementName="txtGstIncomeType" />
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <Rectangle Height="24" HorizontalAlignment="Left" Margin="6,149,0,0" Name="rectangleTxtGstIncomeType" 
+                                       Stroke="Red" VerticalAlignment="Top" Width="150" Visibility="Hidden" />
+                            <Rectangle Height="23" HorizontalAlignment="Left" Margin="162,150,0,0" Name="rectangleTxtIncomeType" 
+                                       Stroke="Red" VerticalAlignment="Top" Width="310" Visibility="Hidden" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Column="1" Name="gridControlInvoiceContainer">
+                    <nequeoWpf:DataAccess Name="dataAccess" VerticalAlignment="Top"
+                                          OnBeforeLoad="dataAccess_OnBeforeLoad" 
+                                          OnBeforeUpdate="dataAccess_OnBeforeUpdate" 
+                                          OnBeforeInsert="dataAccess_OnBeforeInsert" 
+                                          OnBeforeDelete="dataAccess_OnBeforeDelete" 
+                                          OnLoad="dataAccess_OnLoad" 
+                                          OnUpdate="dataAccess_OnUpdate" 
+                                          OnInsert="dataAccess_OnInsert" 
+                                          OnDelete="dataAccess_OnDelete" 
+                                          OnLoadError="dataAccess_OnLoadError" 
+                                          OnUpdateError="dataAccess_OnUpdateError" 
+                                          OnInsertError="dataAccess_OnInsertError" 
+                                          OnDeleteError="dataAccess_OnDeleteError">
+                        <nequeoWpf:DataAccess.ConnectionTypeModel>
+                            <nequeoComponentModel:ConnectionTypeModel />
+                        </nequeoWpf:DataAccess.ConnectionTypeModel>
+                    </nequeoWpf:DataAccess>
+                    <Button Content="Add New" Height="23" HorizontalAlignment="Left" Margin="12,131,0,0" Name="btnAddNew" VerticalAlignment="Top" Width="75" Click="btnAddNew_Click" ToolTip="Add a new record" />
+                    <Button HorizontalAlignment="Left" Margin="12,160,0,0" Name="btnSelectCustomer" Width="75" ToolTip="Select the customer for the invoice" IsEnabled="False" Height="48" VerticalAlignment="Top" Click="btnSelectCustomer_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Select Customer</TextBlock>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <GridSplitter Grid.Row="1" Height="7" ResizeDirection="Rows" HorizontalAlignment="Stretch" />
+        <GroupBox Grid.Row="2" Header="Invoice Details" Name="groupBoxInvoiceDetails">
+            <Grid Name="gridInvoiceDetails">
+                <TabControl Margin="5,5,5,5" Name="tabControlInvoiceDetails" >
+                    <TabItem Header="Report" Name="tabItemInvoiceReports">
+                        <Grid>
+                            <invoiceReport:InvoiceReport x:Name="invoiceReport" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Detail" Name="tabItemInvoiceDetails">
+                        <Grid>
+                            <invoiceReport:InvoiceDetails x:Name="invoiceDetails" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Product" Name="tabItemInvoiceProducts">
+                        <Grid>
+                            <invoiceReport:InvoiceProducts x:Name="invoiceProducts" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

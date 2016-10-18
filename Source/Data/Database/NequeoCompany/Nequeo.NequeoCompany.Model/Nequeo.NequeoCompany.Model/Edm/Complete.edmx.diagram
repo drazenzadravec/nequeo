@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5369856f791f4d5b971212850863d495" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.AccountTransaction" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.AccountType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.AssetCategory" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Asset" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.BA" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Company" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.CompanyPAYGInstalment" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Customer" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.DataMember" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.DataMemberTable" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.EmployeeBankAccount" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.EmployeePAYG" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Employee" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.EmployeeSuperAccount" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.GenericData" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.GstIncomeType" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.InvoiceDetail" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.InvoiceProduct" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Invoice" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.PayIntervalType" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.PaymentType" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ProductCategory" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Product" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ProductStatu" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ProductSubCategory" Width="1.5" PointX="14.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.PurchaseType" Width="1.5" PointX="14.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.State" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Super" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.TaxReturn" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.TransactionType" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.VendorDetail" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Vendor" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Wage" Width="1.5" PointX="16.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.UserType" Width="1.5" PointX="8.6352682936169529" PointY="18.072904729318296" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.User" Width="1.5" PointX="17" PointY="0.875" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.IncomeType" Width="1.5" PointX="5.375" PointY="17.625" />
+        <EntityTypeShape EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ExpenseType" Width="1.5" PointX="11.625" PointY="17.375" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

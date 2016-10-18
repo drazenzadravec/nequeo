@@ -1,0 +1,44 @@
+﻿<Window x:Class="Nequeo.Wpf.NequeoCompany.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nequeo.Wpf.NequeoCompany"
+        mc:Ignorable="d" Icon="base_cylinder_32.png" Closing="Window_Closing"
+        Title="Nequeo" Height="971" Width="1049" WindowStartupLocation="CenterScreen"
+        xmlns:controls="clr-namespace:Nequeo.Wpf.NequeoCompany.Controls">
+    <Grid>
+        <TabControl Margin="6,6,6,6" Name="tabControlNequeo" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <TabItem Header="Snap Shot" Name="tabWelcome">
+                <controls:Welcome x:Name="welcome" />
+            </TabItem>
+            <TabItem Header="Invoice" Name="tabInvoice">
+                <controls:Invoice x:Name="invoice" />
+            </TabItem>
+            <TabItem Header="Customer" Name="tabCustomer">
+                <controls:Customer x:Name="customer" />
+            </TabItem>
+            <TabItem Header="Vendor" Name="tabVendor">
+                <controls:Vendor x:Name="vendor" />
+            </TabItem>
+            <TabItem Header="Asset" Name="tabAsset">
+                <controls:Asset x:Name="asset" />
+            </TabItem>
+            <TabItem Header="Product" Name="tabProduct">
+                <controls:Product x:Name="product" />
+            </TabItem>
+            <TabItem Header="Account" Name="tabAccount">
+                <controls:Account x:Name="account" />
+            </TabItem>
+            <TabItem Header="Employee" Name="tabEmployee">
+                <controls:Employee x:Name="employee" />
+            </TabItem>
+            <TabItem Header="Company" Name="tabCompany">
+                <controls:Company x:Name="company" />
+            </TabItem>
+            <TabItem Header="Management" Name="tabManagement">
+                <controls:Management x:Name="management" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

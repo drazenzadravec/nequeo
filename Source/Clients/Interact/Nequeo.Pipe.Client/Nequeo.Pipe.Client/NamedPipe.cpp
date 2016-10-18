@@ -69,7 +69,7 @@ NamedPipe::~NamedPipe()
 /// Initialize the name pipe.
 /// </summary>
 /// <param name="namedPipeName">The named pipe name.</param>
-/// <param name="onRequestFunction">The request call back function handler.</param>
+/// <param name="onReplyFunction">The reply call back function handler.</param>
 void NamedPipe::Initialize(std::string namedPipeName, OnReply_Function onReplyFunction)
 {
 	_namedPipeName = namedPipeName;

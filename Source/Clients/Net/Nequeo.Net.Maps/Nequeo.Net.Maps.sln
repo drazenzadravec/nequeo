@@ -29,8 +29,8 @@ Global
 		{10F05674-D5F4-4020-A115-24554D8D779C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
 		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
-		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
-		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F05674-D5F4-4020-A115-24554D8D779C}.Staging Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

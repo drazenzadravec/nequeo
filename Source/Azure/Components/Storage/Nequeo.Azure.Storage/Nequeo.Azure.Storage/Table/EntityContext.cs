@@ -91,6 +91,7 @@ namespace Nequeo.Azure.Storage.Table
         /// Insert entity async.
         /// </summary>
         /// <param name="entity">The entity.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The inserted entity.</returns>
         public async Task<T> InsertAsync(T entity, CancellationToken cancellationToken)
         {
@@ -112,7 +113,6 @@ namespace Nequeo.Azure.Storage.Table
         /// Insert entities async.
         /// </summary>
         /// <param name="entities">The array of entities.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The array of inserted entities.</returns>
         public async Task<T[]> InsertAsync(T[] entities)
         {

@@ -452,7 +452,7 @@ namespace Nequeo {
 
 				CFileDialog dlgFile(TRUE);
 				OPENFILENAME& ofn = dlgFile.GetOFN();
-				ofn.lpstrFilter = L"Video Media\0*.mp4;*.wmv;*.asf;*.avi\0Audio Media\0*.mp3;*.wma\0All files\0*.*\0";
+				ofn.lpstrFilter = L"Video Media\0*.mp4;*.wmv;*.asf;*.avi\0Audio Media\0*.mp3;*.wma;*.wav\0All files\0*.*\0";
 				ofn.lpstrFile = path;
 				ofn.nMaxFile = MAX_PATH;
 				ofn.Flags = OFN_FILEMUSTEXIST;

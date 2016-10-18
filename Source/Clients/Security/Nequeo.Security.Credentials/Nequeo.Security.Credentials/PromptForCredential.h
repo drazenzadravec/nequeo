@@ -154,10 +154,10 @@ namespace NequeoSecurity
 			}
 
 			[SecurityPermission(SecurityAction::LinkDemand, Flags=SecurityPermissionFlag::UnmanagedCode)]
-			Windows::Forms::DialogResult ShowDialog();
+			System::Windows::Forms::DialogResult ShowDialog();
 
 			[SecurityPermission(SecurityAction::LinkDemand, Flags=SecurityPermissionFlag::UnmanagedCode)]
-			Windows::Forms::DialogResult ShowDialog(Windows::Forms::IWin32Window^ owner);
+			System::Windows::Forms::DialogResult ShowDialog(System::Windows::Forms::IWin32Window^ owner);
 
 			[SecurityPermission(SecurityAction::LinkDemand, Flags=SecurityPermissionFlag::UnmanagedCode)]
 			void ConfirmCredentials();

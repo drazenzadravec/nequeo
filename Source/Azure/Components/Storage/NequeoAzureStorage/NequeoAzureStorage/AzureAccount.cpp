@@ -45,6 +45,7 @@ AzureAccount::AzureAccount(const azure::storage::storage_credentials& credential
 	: _disposed(false), _credentials(credentials), _endpoint_suffix(endpoint_suffix), _useHttps(useHttps), _account(credentials, endpoint_suffix, useHttps)
 {
 }
+
 /// <summary>
 /// Initializes a new instance of the <see cref="azure::storage::cloud_storage_account" /> class using the specified
 /// credentials and service endpoints.
@@ -61,6 +62,37 @@ AzureAccount::AzureAccount(
 	: _disposed(false), _credentials(credentials), _account(credentials, blob_endpoint, queue_endpoint, table_endpoint),
 	_blob_endpoint(blob_endpoint), _queue_endpoint(queue_endpoint), _table_endpoint(table_endpoint)
 {
+}
+
+/// <summary>
+/// Initializes a new instance of the <see cref="azure::storage::cloud_storage_account" /> class using the specified
+/// credentials and service endpoints.
+/// </summary>
+/// <param name="credentials">The <see cref="azure::storage::storage_credentials" /> to use.</param>
+/// <param name="blob_endpoint">The Blob service endpoint.</param>
+/// <param name="queue_endpoint">The Queue service endpoint.</param>
+/// <param name="table_endpoint">The Table service endpoint.</param>
+/// <param name="file_endpoint">The File service endpoint.</param>
+AzureAccount::AzureAccount(
+	const azure::storage::storage_credentials& credentials,
+	const azure::storage::storage_uri& blob_endpoint,
+	const azure::storage::storage_uri& queue_endpoint,
+	const azure::storage::storage_uri& table_endpoint,
+	const azure::storage::storage_uri& file_endpoint)
+	: _disposed(false), _credentials(credentials), _account(credentials, blob_endpoint, queue_endpoint, table_endpoint, file_endpoint),
+	_blob_endpoint(blob_endpoint), _queue_endpoint(queue_endpoint), _table_endpoint(table_endpoint), _file_endpoint(file_endpoint)
+{
+
+}
+
+///	<summary>
+///	Azure account client provider.
+///	</summary>
+/// <param name="connection_string">The account connection string.</param>
+AzureAccount::AzureAccount(const utility::string_t& connection_string) : _disposed(false)
+{
+	// Retrieve the storage account from the connection string.
+	_account = azure::storage::cloud_storage_account::parse(connection_string);
 }
 
 ///	<summary>

@@ -505,7 +505,7 @@ void NequeoSecurity::PromptForCredential::ValidateUserName::set(bool value)
 //  Shows the dialog box.
 //
 //*****************************************************************************
-Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog()
+System::Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog()
 {
     CheckNotDisposed();
     return ShowDialog(nullptr);
@@ -516,7 +516,7 @@ Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog()
 //  Shows the dialog box using the specified owner window.
 //
 //*****************************************************************************
-Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog(Windows::Forms::IWin32Window^ owner)
+System::Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog(System::Windows::Forms::IWin32Window^ owner)
 {
     CheckNotDisposed();
     CREDUI_INFO info = { sizeof (CREDUI_INFO) };
@@ -589,7 +589,7 @@ Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog(Win
                                                 &saveChecked,
                                                 m_flags);
 
-    Windows::Forms::DialogResult dialogResult = Windows::Forms::DialogResult::None;
+	System::Windows::Forms::DialogResult dialogResult = System::Windows::Forms::DialogResult::None;
 
     switch (result)
     {
@@ -602,12 +602,12 @@ Windows::Forms::DialogResult NequeoSecurity::PromptForCredential::ShowDialog(Win
 
             m_saveChecked = 0 != saveChecked;
 
-            dialogResult = Windows::Forms::DialogResult::OK;
+            dialogResult = System::Windows::Forms::DialogResult::OK;
             break;
         }
         case ERROR_CANCELLED:
         {
-            dialogResult = Windows::Forms::DialogResult::Cancel;
+            dialogResult = System::Windows::Forms::DialogResult::Cancel;
             break;
         }
         default:

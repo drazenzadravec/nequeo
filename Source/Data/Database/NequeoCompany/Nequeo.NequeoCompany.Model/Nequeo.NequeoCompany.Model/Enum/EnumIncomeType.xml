@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <DatabaseConnection>Integrated Security=True;Initial Catalog=Nequeo;Data Source=NEQUEOMPCX64\SQL2012</DatabaseConnection>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <EnumName>EnumIncomeType</EnumName>
+  <Database>NequeoCompany</Database>
+  <TableName>IncomeType</TableName>
+  <ValueColumnName>IncomeTypeID</ValueColumnName>
+  <IndicatorColumnName>Name</IndicatorColumnName>
+  <DataFilter></DataFilter>
+</Context>

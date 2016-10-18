@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Web.Common", "Nequeo.Web.Common\Nequeo.Web.Common.csproj", "{EB7BA2B3-7090-48E6-B274-7078211D62AB}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://development:8080/tfs/version2012collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nequeo.Web.Common\\Nequeo.Web.Common.csproj
+		SccProjectName1 = Nequeo.Web.Common
+		SccLocalPath1 = Nequeo.Web.Common
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging Debug|Any CPU = Staging Debug|Any CPU
+		Staging Release|Any CPU = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Staging Debug|Any CPU.ActiveCfg = Staging Debug|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
+		{EB7BA2B3-7090-48E6-B274-7078211D62AB}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

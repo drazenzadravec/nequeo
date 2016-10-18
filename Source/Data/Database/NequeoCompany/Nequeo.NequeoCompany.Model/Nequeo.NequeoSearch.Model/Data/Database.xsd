@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+    <DatabaseConnection>Integrated Security=True;Initial Catalog=NequeoSearch;Data Source=NEQUEOMPCX64\MSSQL2012</DatabaseConnection>
+    <Database>NequeoSearch</Database>
+    <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+    <NamespaceExtendedName></NamespaceExtendedName>
+    <DataBaseConnect></DataBaseConnect>
+    <DataBaseOwner></DataBaseOwner>
+    <ConnectionType>1</ConnectionType>
+    <ConnectionDataType>1</ConnectionDataType>
+    <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+    <TableListExclusion>true</TableListExclusion>
+    <TableList>
+        <string>sysdiagrams</string>
+        <string>dtproperties</string>
+    </TableList>
+</Context>

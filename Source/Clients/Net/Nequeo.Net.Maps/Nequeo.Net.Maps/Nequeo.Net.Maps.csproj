@@ -56,12 +56,16 @@
     <DocumentationFile>..\..\..\..\References\Staging\Client\Maps\Nequeo.Net.Maps.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.Drawing">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Net.Client, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=62ef87e096111394, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Client\Net.Client\Nequeo.Net.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,7 +74,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="base\MapsImage.cs" />
     <Compile Include="Google\Geocoding.cs" />
+    <Compile Include="Google\MapsStaticApi.cs" />
+    <Compile Include="Google\MapsStaticModel.cs" />
     <Compile Include="Google\TimeZone.cs" />
     <Compile Include="Google\GeocodingApi.cs" />
     <Compile Include="Google\TimeZoneApi.cs" />
@@ -78,6 +85,8 @@
     <Compile Include="Microsoft\ApiContainer.cs" />
     <Compile Include="Microsoft\Geocoding.cs" />
     <Compile Include="Microsoft\GeocodingApi.cs" />
+    <Compile Include="Microsoft\MapsStaticApi.cs" />
+    <Compile Include="Microsoft\MapsStaticModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -93,9 +102,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="base\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

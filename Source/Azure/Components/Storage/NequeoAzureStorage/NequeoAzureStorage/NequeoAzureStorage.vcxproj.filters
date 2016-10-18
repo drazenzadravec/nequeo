@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Table">
       <UniqueIdentifier>{aecc2e88-0b12-4aed-ba4e-9d9b3ee43cb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\File">
+      <UniqueIdentifier>{f034b1f0-fdb8-4d46-bdcd-9d947d30d861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\File">
+      <UniqueIdentifier>{3a899814-6415-4547-9f75-edf282f436dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -57,6 +63,9 @@
     <ClInclude Include="AzureAccount.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FileCloudClient.h">
+      <Filter>Header Files\File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="AzureAccount.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileCloudClient.cpp">
+      <Filter>Source Files\File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

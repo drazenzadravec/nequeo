@@ -74,3 +74,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <wascore\streams.h>
 #include <wascore\streambuf.h>
 #include <wascore\util.h>
+#include <wascore\filestream.h>
+#include <wascore\constants.h>

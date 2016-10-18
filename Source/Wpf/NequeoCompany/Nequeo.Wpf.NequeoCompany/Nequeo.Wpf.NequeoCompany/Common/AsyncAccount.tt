@@ -1,0 +1,6 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# string Namespace = "Nequeo.Wpf.NequeoCompany.Controls";#>
+<# string TypeNamespace = "Nequeo.Wpf.NequeoCompany.Controls";#>
+<# string TypeName = "Account";#>
+<#@ include file="_AsyncExecuteTypeGeneric.include" #>

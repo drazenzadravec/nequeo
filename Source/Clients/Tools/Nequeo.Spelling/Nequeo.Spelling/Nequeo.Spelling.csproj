@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AF784CE-7732-41ED-A3F1-072E5763D25A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.Spelling</RootNamespace>
+    <AssemblyName>Nequeo.Spelling</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Nequeo.Spelling.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\References\Staging\Client\Spelling\Complete\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\..\References\Staging\Client\Spelling\Complete\Nequeo.Spelling.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoSpellingKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHunspell, Version=1.2.5372.690, Culture=neutral, PublicKeyToken=1ac793ea843b4366, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Release\NHunspell.dll</HintPath>
+    </Reference>
+    <Reference Include="NThes, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Release\NThes.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Language\Arabic\Iraq.cs" />
+    <Compile Include="Language\Croatian\Croatia.cs" />
+    <Compile Include="Language\English\Australia.cs" />
+    <Compile Include="Language\English\Canada.cs" />
+    <Compile Include="Language\English\UnitedKingdom.cs" />
+    <Compile Include="Language\English\NewZealand.cs" />
+    <Compile Include="Language\English\SouthAfrica.cs" />
+    <Compile Include="Language\English\UnitedStates.cs" />
+    <Compile Include="Language\French\France.cs" />
+    <Compile Include="Language\German\Germany.cs" />
+    <Compile Include="Language\Hebrew\Israel.cs" />
+    <Compile Include="Language\Italian\Italy.cs" />
+    <Compile Include="Language\Latin\Lataina.cs" />
+    <Compile Include="Language\Portuguese\Portugal.cs" />
+    <Compile Include="Language\Russian\Russia.cs" />
+    <Compile Include="Language\Spanish\Spain.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dictionary\Arabic\ar.aff" />
+    <None Include="Dictionary\Arabic\ar.dic" />
+    <None Include="Dictionary\Arabic\dictionaries.xcu" />
+    <None Include="Dictionary\Arabic\howto" />
+    <None Include="Dictionary\Arabic\README_ar" />
+    <None Include="Dictionary\Arabic\th_ar.dat" />
+    <None Include="Dictionary\Arabic\th_ar.idx" />
+    <None Include="Dictionary\Croatian\hr_HR.aff" />
+    <None Include="Dictionary\Croatian\hr_HR.dic" />
+    <None Include="Dictionary\Croatian\hyph_hr_HR.dic" />
+    <None Include="Dictionary\English\dictionaries.xcu" />
+    <None Include="Dictionary\English\en_AU.aff" />
+    <None Include="Dictionary\English\en_AU.dic" />
+    <None Include="Dictionary\English\en_CA.aff" />
+    <None Include="Dictionary\English\en_CA.dic" />
+    <None Include="Dictionary\English\en_GB.aff" />
+    <None Include="Dictionary\English\en_GB.dic" />
+    <None Include="Dictionary\English\en_NZ.aff" />
+    <None Include="Dictionary\English\en_NZ.dic" />
+    <None Include="Dictionary\English\en_US.aff" />
+    <None Include="Dictionary\English\en_US.dic" />
+    <None Include="Dictionary\English\en_ZA.aff" />
+    <None Include="Dictionary\English\en_ZA.dic" />
+    <None Include="Dictionary\English\hyph_en_AU.dic" />
+    <None Include="Dictionary\English\hyph_en_GB.dic" />
+    <None Include="Dictionary\English\hyph_en_US.dic" />
+    <None Include="Dictionary\English\th_en_AU_v2.dat" />
+    <None Include="Dictionary\English\th_en_AU_v2.idx" />
+    <None Include="Dictionary\English\th_en_US_v2.dat" />
+    <None Include="Dictionary\English\th_en_US_v2.idx" />
+    <None Include="Dictionary\French\fr-classique.aff" />
+    <None Include="Dictionary\French\fr-classique.dic" />
+    <None Include="Dictionary\French\fr-moderne.aff" />
+    <None Include="Dictionary\French\fr-moderne.dic" />
+    <None Include="Dictionary\French\fr-reforme1990.aff" />
+    <None Include="Dictionary\French\fr-reforme1990.dic" />
+    <None Include="Dictionary\French\fr-toutesvariantes.aff" />
+    <None Include="Dictionary\French\fr-toutesvariantes.dic" />
+    <None Include="Dictionary\French\frhyph.tex" />
+    <None Include="Dictionary\French\hyph-fr.tex" />
+    <None Include="Dictionary\French\hyph_fr.dic" />
+    <None Include="Dictionary\French\hyph_fr.iso8859-1.dic" />
+    <None Include="Dictionary\French\thes_fr.dat" />
+    <None Include="Dictionary\French\thes_fr.idx" />
+    <None Include="Dictionary\German\de_DE_frami.aff" />
+    <None Include="Dictionary\German\de_DE_frami.dic" />
+    <None Include="Dictionary\German\hyph_de_DE.dic" />
+    <None Include="Dictionary\German\th_de_DE_v2.dat" />
+    <None Include="Dictionary\German\th_de_DE_v2.idx" />
+    <None Include="Dictionary\Hebrew\changelog" />
+    <None Include="Dictionary\Hebrew\COPYING" />
+    <None Include="Dictionary\Hebrew\dictionaries.xcu" />
+    <None Include="Dictionary\Hebrew\he_IL.aff" />
+    <None Include="Dictionary\Hebrew\he_IL.dic" />
+    <None Include="Dictionary\Italian\hyph_it_IT.dic" />
+    <None Include="Dictionary\Italian\it_IT.aff" />
+    <None Include="Dictionary\Italian\it_IT.dic" />
+    <None Include="Dictionary\Italian\it_IT_AUTHORS" />
+    <None Include="Dictionary\Italian\it_IT_ChangeLog" />
+    <None Include="Dictionary\Italian\it_IT_COPYING" />
+    <None Include="Dictionary\Italian\it_IT_README.1st" />
+    <None Include="Dictionary\Italian\th_it_IT_AUTHORS" />
+    <None Include="Dictionary\Italian\th_it_IT_ChangeLog" />
+    <None Include="Dictionary\Italian\th_it_IT_COPYING" />
+    <None Include="Dictionary\Italian\th_it_IT_INSTALL" />
+    <None Include="Dictionary\Italian\th_it_IT_README" />
+    <None Include="Dictionary\Italian\th_it_IT_v2.dat" />
+    <None Include="Dictionary\Italian\th_it_IT_v2.idx" />
+    <None Include="Dictionary\Latin\classical\la.aff" />
+    <None Include="Dictionary\Latin\classical\la.dic" />
+    <None Include="Dictionary\Latin\hyph_la.dic" />
+    <None Include="Dictionary\Latin\la.aff" />
+    <None Include="Dictionary\Latin\la.dic" />
+    <None Include="Dictionary\Latin\universal\la.aff" />
+    <None Include="Dictionary\Latin\universal\la.dic" />
+    <None Include="Dictionary\Portuguese\COPYING" />
+    <None Include="Dictionary\Portuguese\hyph_pt_PT.dic" />
+    <None Include="Dictionary\Portuguese\pt_PT.aff" />
+    <None Include="Dictionary\Portuguese\pt_PT.dic" />
+    <None Include="Dictionary\Portuguese\th_pt_PT.dat" />
+    <None Include="Dictionary\Portuguese\th_pt_PT.idx" />
+    <None Include="Dictionary\Russian\Changelog" />
+    <None Include="Dictionary\Russian\Dictionaries.xcu" />
+    <None Include="Dictionary\Russian\LICENSE" />
+    <None Include="Dictionary\Russian\README" />
+    <None Include="Dictionary\Russian\README.koi" />
+    <None Include="Dictionary\Russian\ru_RU.aff" />
+    <None Include="Dictionary\Russian\ru_RU.dic" />
+    <None Include="Dictionary\Spanish\dictionaries.xcu" />
+    <None Include="Dictionary\Spanish\es_ES.aff" />
+    <None Include="Dictionary\Spanish\es_ES.dic" />
+    <None Include="Dictionary\Spanish\hyph_es_ES.dic" />
+    <None Include="Dictionary\Spanish\th_es_ES.dat" />
+    <None Include="Dictionary\Spanish\th_es_ES.idx" />
+    <None Include="NequeoSpellingKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\References\Release_x64\Bin\Hunspellx64.dll">
+      <Link>Hunspellx64.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\References\Release_x86\Bin\Hunspellx86.dll">
+      <Link>Hunspellx86.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dictionary\Arabic\description.xml" />
+    <Content Include="Dictionary\Croatian\croatian-wordlist-checked-iso8859-2.txt" />
+    <Content Include="Dictionary\Croatian\description_xml.txt" />
+    <Content Include="Dictionary\Croatian\dictionaries_xcu.txt" />
+    <Content Include="Dictionary\Croatian\README_hr_HR.txt" />
+    <Content Include="Dictionary\Croatian\README_hyph_hr_HR.txt" />
+    <Content Include="Dictionary\English\affDescription.txt" />
+    <Content Include="Dictionary\English\changelog.txt" />
+    <Content Include="Dictionary\English\description.xml" />
+    <Content Include="Dictionary\English\license.txt" />
+    <Content Include="Dictionary\English\package-description.txt" />
+    <Content Include="Dictionary\English\README.txt" />
+    <Content Include="Dictionary\English\README_en_AU.txt" />
+    <Content Include="Dictionary\English\README_en_CA.txt" />
+    <Content Include="Dictionary\English\README_en_GB.txt" />
+    <Content Include="Dictionary\English\README_en_GB_thes.txt" />
+    <Content Include="Dictionary\English\README_en_NZ.txt" />
+    <Content Include="Dictionary\English\README_en_US.txt" />
+    <Content Include="Dictionary\English\README_en_ZA.txt" />
+    <Content Include="Dictionary\English\README_hyph_en_GB.txt" />
+    <Content Include="Dictionary\English\README_hyph_en_US.txt" />
+    <Content Include="Dictionary\English\WordNet_license.txt" />
+    <Content Include="Dictionary\French\README_dict_fr.txt" />
+    <Content Include="Dictionary\French\README_hyph_fr-2.9.txt" />
+    <Content Include="Dictionary\French\README_hyph_fr-3.0.txt" />
+    <Content Include="Dictionary\French\README_thes_fr.txt" />
+    <Content Include="Dictionary\German\COPYING_GPLv2.txt" />
+    <Content Include="Dictionary\German\COPYING_GPLv3.txt" />
+    <Content Include="Dictionary\German\COPYING_LGPL_v2.0.txt" />
+    <Content Include="Dictionary\German\COPYING_LGPL_v2.1.txt" />
+    <Content Include="Dictionary\German\COPYING_LGPL_v3.0.txt" />
+    <Content Include="Dictionary\German\COPYING_OASIS.txt" />
+    <Content Include="Dictionary\German\README_extension_owner.txt" />
+    <Content Include="Dictionary\German\README_hyph_de_DE.txt" />
+    <Content Include="Dictionary\German\th_de_DE_readme.txt" />
+    <Content Include="Dictionary\Hebrew\description.xml" />
+    <Content Include="Dictionary\Hebrew\license.txt" />
+    <Content Include="Dictionary\Hebrew\license_he.txt" />
+    <Content Include="Dictionary\Italian\CHANGELOG.txt" />
+    <Content Include="Dictionary\Italian\it_IT_license.txt" />
+    <Content Include="Dictionary\Italian\it_IT_notes.txt" />
+    <Content Include="Dictionary\Italian\it_IT_README.txt" />
+    <Content Include="Dictionary\Italian\it_IT_todo.txt" />
+    <Content Include="Dictionary\Italian\README.txt" />
+    <Content Include="Dictionary\Italian\README_hyph_it_IT.txt" />
+    <Content Include="Dictionary\Italian\thes_gpl.txt" />
+    <Content Include="Dictionary\Italian\th_it_IT_copyright_licenza.txt" />
+    <Content Include="Dictionary\Italian\th_it_IT_lettera_in_inglese.txt" />
+    <Content Include="Dictionary\Latin\COPYING_GPLv2.txt" />
+    <Content Include="Dictionary\Latin\COPYING_GPLv3.txt" />
+    <Content Include="Dictionary\Latin\README_hyph_la.txt" />
+    <Content Include="Dictionary\Latin\README_la.txt" />
+    <Content Include="Dictionary\Portuguese\README_hyph_pt_PT.txt" />
+    <Content Include="Dictionary\Portuguese\README_pt_PT.txt" />
+    <Content Include="Dictionary\Russian\description.xml" />
+    <Content Include="Dictionary\Russian\manifest.xml" />
+    <Content Include="Dictionary\Spanish\Changelog.txt" />
+    <Content Include="Dictionary\Spanish\description.xml" />
+    <Content Include="Dictionary\Spanish\GPLv3.txt" />
+    <Content Include="Dictionary\Spanish\LGPLv3.txt" />
+    <Content Include="Dictionary\Spanish\MPL-1.1.txt" />
+    <Content Include="Dictionary\Spanish\README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nequeo.Spelling.Common\Nequeo.Spelling.Common.csproj">
+      <Project>{8c2f5130-ebde-47ed-818e-9946d69a8ff0}</Project>
+      <Name>Nequeo.Spelling.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

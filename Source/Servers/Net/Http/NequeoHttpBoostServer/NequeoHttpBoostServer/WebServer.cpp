@@ -153,8 +153,12 @@ void WebServer::StopThread()
 	// If an internal thread was created.
 	if (_internalThread)
 	{
-		_internalThread = false;
-		_thread.join();
+		try
+		{
+			_internalThread = false;
+			_thread.join();
+		}
+		catch (...) {}
 	}
 }
 

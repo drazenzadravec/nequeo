@@ -103,7 +103,7 @@ namespace Nequeo.Azure.Storage
             _storageAccount = new CloudStorageAccount(storageCredentials, blobStorageUri, queueStorageUri, tableStorageUri, fileStorageUri);
         }
 
-        public CloudStorageAccount _storageAccount = null;
+        private CloudStorageAccount _storageAccount = null;
 
         /// <summary>
         /// Gets the cloud storgae account.

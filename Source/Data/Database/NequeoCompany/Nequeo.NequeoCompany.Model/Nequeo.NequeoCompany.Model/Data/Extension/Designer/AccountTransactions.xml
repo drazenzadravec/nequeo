@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Context>
+  <TableName>AccountTransactions</TableName>
+  <DataContextName>DataContext</DataContextName>
+  <Database>NequeoCompany</Database>
+  <NamespaceCompanyName>Nequeo</NamespaceCompanyName>
+  <NamespaceExtendedName></NamespaceExtendedName>
+  <DataBaseOwner></DataBaseOwner>
+  <DataAccessProvider>Nequeo.Data.SqlServer.DataAccess</DataAccessProvider>
+  <ConnectionType>1</ConnectionType>
+  <ConnectionDataType>1</ConnectionDataType>
+  <ConfigKeyDatabaseConnection>Nequeo.DataAccess.NequeoCompany.Properties.Settings.NequeoCompanyDatabaseConnection</ConfigKeyDatabaseConnection>
+</Context>
+
+

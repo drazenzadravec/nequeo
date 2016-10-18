@@ -1,0 +1,37 @@
+{
+  "rootpath": "C:\\inetpub\\HttpBase\\htmlprovider",
+  "webservers": [
+    {
+      "port": 8808,
+      "endpoint": "",
+      "ipversion": "ipv4",
+      "issecure": false,
+      "publickeyfile": "",
+      "privatekeyfile": ""
+    },
+    {
+      "port": 8808,
+      "endpoint": "",
+      "ipversion": "ipv6",
+      "issecure": false,
+      "publickeyfile": "",
+      "privatekeyfile": ""
+    },
+    {
+      "port": 8809,
+      "endpoint": "",
+      "ipversion": "ipv4",
+      "issecure": false,
+      "publickeyfile": "",
+      "privatekeyfile": ""
+    },
+    {
+      "port": 8809,
+      "endpoint": "",
+      "ipversion": "ipv6",
+      "issecure": false,
+      "publickeyfile": "",
+      "privatekeyfile": ""
+    }
+  ]
+}

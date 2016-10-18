@@ -1,0 +1,958 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Views" targetNamespace="http://tempuri.org/Views.xsd" xmlns:mstns="http://tempuri.org/Views.xsd" xmlns="http://tempuri.org/Views.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NequeoCompanyDatabaseConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NequeoCompanyDatabaseConnection (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Nequeo.DataAccess.NequeoCompany.Properties.Settings.GlobalReference.Default.NequeoCompanyDatabaseConnection" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountTransactionCreditDebitSubtotalTableAdapter" GeneratorDataComponentClassName="AccountTransactionCreditDebitSubtotalTableAdapter" Name="AccountTransactionCreditDebitSubtotal" UserDataComponentName="AccountTransactionCreditDebitSubtotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.AccountTransactionCreditDebitSubtotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountID, TransactionType, SubTotal FROM dbo.AccountTransactionCreditDebitSubtotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountID" DataSetColumn="AccountID" />
+              <Mapping SourceColumn="TransactionType" DataSetColumn="TransactionType" />
+              <Mapping SourceColumn="SubTotal" DataSetColumn="SubTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VendorDetailsSubtotalTotalTableAdapter" GeneratorDataComponentClassName="VendorDetailsSubtotalTotalTableAdapter" Name="VendorDetailsSubtotalTotal" UserDataComponentName="VendorDetailsSubtotalTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.VendorDetailsSubtotalTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Total, GST FROM dbo.VendorDetailsSubtotalTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="GST" DataSetColumn="GST" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountTransactionCreditTotalTableAdapter" GeneratorDataComponentClassName="AccountTransactionCreditTotalTableAdapter" Name="AccountTransactionCreditTotal" UserDataComponentName="AccountTransactionCreditTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.AccountTransactionCreditTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT CreditTotal FROM dbo.AccountTransactionCreditTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CreditTotal" DataSetColumn="CreditTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountTransactionDebitTotalTableAdapter" GeneratorDataComponentClassName="AccountTransactionDebitTotalTableAdapter" Name="AccountTransactionDebitTotal" UserDataComponentName="AccountTransactionDebitTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.AccountTransactionDebitTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT DebitTotal FROM dbo.AccountTransactionDebitTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DebitTotal" DataSetColumn="DebitTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountTransactionTypeCreditTableAdapter" GeneratorDataComponentClassName="AccountTransactionTypeCreditTableAdapter" Name="AccountTransactionTypeCredit" UserDataComponentName="AccountTransactionTypeCreditTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.AccountTransactionTypeCredit" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountID, AccountTransactionID, Amount FROM dbo.AccountTransactionTypeCredit</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountID" DataSetColumn="AccountID" />
+              <Mapping SourceColumn="AccountTransactionID" DataSetColumn="AccountTransactionID" />
+              <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountTransactionTypeDebitTableAdapter" GeneratorDataComponentClassName="AccountTransactionTypeDebitTableAdapter" Name="AccountTransactionTypeDebit" UserDataComponentName="AccountTransactionTypeDebitTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.AccountTransactionTypeDebit" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT AccountID, AccountTransactionID, Amount FROM dbo.AccountTransactionTypeDebit</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccountID" DataSetColumn="AccountID" />
+              <Mapping SourceColumn="AccountTransactionID" DataSetColumn="AccountTransactionID" />
+              <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CustomerInvoiceDetailsTotalsTableAdapter" GeneratorDataComponentClassName="CustomerInvoiceDetailsTotalsTableAdapter" Name="CustomerInvoiceDetailsTotals" UserDataComponentName="CustomerInvoiceDetailsTotalsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.CustomerInvoiceDetailsTotals" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT TotalHours, TotalTotal, TotalGST, CustomerID, InvoiceID FROM dbo.CustomerInvoiceDetailsTotals</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TotalHours" DataSetColumn="TotalHours" />
+              <Mapping SourceColumn="TotalTotal" DataSetColumn="TotalTotal" />
+              <Mapping SourceColumn="TotalGST" DataSetColumn="TotalGST" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="InvoiceID" DataSetColumn="InvoiceID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CustomerInvoiceDetailsTotalTotalsTableAdapter" GeneratorDataComponentClassName="CustomerInvoiceDetailsTotalTotalsTableAdapter" Name="CustomerInvoiceDetailsTotalTotals" UserDataComponentName="CustomerInvoiceDetailsTotalTotalsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.CustomerInvoiceDetailsTotalTotals" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT HoursTotal, TotalTotals, GSTTotal, CustomerID FROM dbo.CustomerInvoiceDetailsTotalTotals</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="HoursTotal" DataSetColumn="HoursTotal" />
+              <Mapping SourceColumn="TotalTotals" DataSetColumn="TotalTotals" />
+              <Mapping SourceColumn="GSTTotal" DataSetColumn="GSTTotal" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CustomerInvoiceProductsTotalsTableAdapter" GeneratorDataComponentClassName="CustomerInvoiceProductsTotalsTableAdapter" Name="CustomerInvoiceProductsTotals" UserDataComponentName="CustomerInvoiceProductsTotalsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.CustomerInvoiceProductsTotals" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT TotalUnits, TotalTotal, TotalGST, CustomerID, InvoiceID FROM dbo.CustomerInvoiceProductsTotals</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TotalUnits" DataSetColumn="TotalUnits" />
+              <Mapping SourceColumn="TotalTotal" DataSetColumn="TotalTotal" />
+              <Mapping SourceColumn="TotalGST" DataSetColumn="TotalGST" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="InvoiceID" DataSetColumn="InvoiceID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CustomerInvoiceProductsTotalTotalsTableAdapter" GeneratorDataComponentClassName="CustomerInvoiceProductsTotalTotalsTableAdapter" Name="CustomerInvoiceProductsTotalTotals" UserDataComponentName="CustomerInvoiceProductsTotalTotalsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.CustomerInvoiceProductsTotalTotals" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT UnitsTotal, TotalTotals, GSTTotal, CustomerID FROM dbo.CustomerInvoiceProductsTotalTotals</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="UnitsTotal" DataSetColumn="UnitsTotal" />
+              <Mapping SourceColumn="TotalTotals" DataSetColumn="TotalTotals" />
+              <Mapping SourceColumn="GSTTotal" DataSetColumn="GSTTotal" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeePAYGSubtotalTableAdapter" GeneratorDataComponentClassName="EmployeePAYGSubtotalTableAdapter" Name="EmployeePAYGSubtotal" UserDataComponentName="EmployeePAYGSubtotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeePAYGSubtotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT EmployeeID, Subtotal FROM dbo.EmployeePAYGSubtotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EmployeeID" DataSetColumn="EmployeeID" />
+              <Mapping SourceColumn="Subtotal" DataSetColumn="Subtotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeePAYGSubtotalTotalTableAdapter" GeneratorDataComponentClassName="EmployeePAYGSubtotalTotalTableAdapter" Name="EmployeePAYGSubtotalTotal" UserDataComponentName="EmployeePAYGSubtotalTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeePAYGSubtotalTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Total FROM dbo.EmployeePAYGSubtotalTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeSuperSubtotalTableAdapter" GeneratorDataComponentClassName="EmployeeSuperSubtotalTableAdapter" Name="EmployeeSuperSubtotal" UserDataComponentName="EmployeeSuperSubtotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeeSuperSubtotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT EmployeeID, SubTotal FROM dbo.EmployeeSuperSubtotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EmployeeID" DataSetColumn="EmployeeID" />
+              <Mapping SourceColumn="SubTotal" DataSetColumn="SubTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeSuperSubtotalTotalTableAdapter" GeneratorDataComponentClassName="EmployeeSuperSubtotalTotalTableAdapter" Name="EmployeeSuperSubtotalTotal" UserDataComponentName="EmployeeSuperSubtotalTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeeSuperSubtotalTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Total FROM dbo.EmployeeSuperSubtotalTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeWageSubtotalTableAdapter" GeneratorDataComponentClassName="EmployeeWageSubtotalTableAdapter" Name="EmployeeWageSubtotal" UserDataComponentName="EmployeeWageSubtotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeeWageSubtotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PaymentDate, EmployeeID, Subtotal, PAYGSubTotal FROM dbo.EmployeeWageSubtotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PaymentDate" DataSetColumn="PaymentDate" />
+              <Mapping SourceColumn="EmployeeID" DataSetColumn="EmployeeID" />
+              <Mapping SourceColumn="Subtotal" DataSetColumn="Subtotal" />
+              <Mapping SourceColumn="PAYGSubTotal" DataSetColumn="PAYGSubTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeWageSubtotalTotalTableAdapter" GeneratorDataComponentClassName="EmployeeWageSubtotalTotalTableAdapter" Name="EmployeeWageSubtotalTotal" UserDataComponentName="EmployeeWageSubtotalTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeeWageSubtotalTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Total, PAYGTotal FROM dbo.EmployeeWageSubtotalTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="PAYGTotal" DataSetColumn="PAYGTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeWageTotalByEmployeeTableAdapter" GeneratorDataComponentClassName="EmployeeWageTotalByEmployeeTableAdapter" Name="EmployeeWageTotalByEmployee" UserDataComponentName="EmployeeWageTotalByEmployeeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.EmployeeWageTotalByEmployee" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT EmployeeID, Total, PAYGTotal FROM dbo.EmployeeWageTotalByEmployee</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EmployeeID" DataSetColumn="EmployeeID" />
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="PAYGTotal" DataSetColumn="PAYGTotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvoiceProductsSubtotalTableAdapter" GeneratorDataComponentClassName="InvoiceProductsSubtotalTableAdapter" Name="InvoiceProductsSubtotal" UserDataComponentName="InvoiceProductsSubtotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.InvoiceProductsSubtotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT InvoiceID, Subtotal, Gst, Totals, PreGST FROM dbo.InvoiceProductsSubtotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvoiceID" DataSetColumn="InvoiceID" />
+              <Mapping SourceColumn="Subtotal" DataSetColumn="Subtotal" />
+              <Mapping SourceColumn="Gst" DataSetColumn="Gst" />
+              <Mapping SourceColumn="Totals" DataSetColumn="Totals" />
+              <Mapping SourceColumn="PreGST" DataSetColumn="PreGST" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvoiceProductsSubtotalTotalTableAdapter" GeneratorDataComponentClassName="InvoiceProductsSubtotalTotalTableAdapter" Name="InvoiceProductsSubtotalTotal" UserDataComponentName="InvoiceProductsSubtotalTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.InvoiceProductsSubtotalTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Total, GST, PreGst FROM dbo.InvoiceProductsSubtotalTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="GST" DataSetColumn="GST" />
+              <Mapping SourceColumn="PreGst" DataSetColumn="PreGst" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvoiceSubtotalsTableAdapter" GeneratorDataComponentClassName="InvoiceSubtotalsTableAdapter" Name="InvoiceSubtotals" UserDataComponentName="InvoiceSubtotalsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.InvoiceSubtotals" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT InvoiceID, Subtotal, Gst, Totals, PreGST FROM dbo.InvoiceSubtotals</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvoiceID" DataSetColumn="InvoiceID" />
+              <Mapping SourceColumn="Subtotal" DataSetColumn="Subtotal" />
+              <Mapping SourceColumn="Gst" DataSetColumn="Gst" />
+              <Mapping SourceColumn="Totals" DataSetColumn="Totals" />
+              <Mapping SourceColumn="PreGST" DataSetColumn="PreGST" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvoiceSubtotalTotalTableAdapter" GeneratorDataComponentClassName="InvoiceSubtotalTotalTableAdapter" Name="InvoiceSubtotalTotal" UserDataComponentName="InvoiceSubtotalTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.InvoiceSubtotalTotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Total, GST, PreGst FROM dbo.InvoiceSubtotalTotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="GST" DataSetColumn="GST" />
+              <Mapping SourceColumn="PreGst" DataSetColumn="PreGst" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProductsInvoiceCustomerSummaryTableAdapter" GeneratorDataComponentClassName="ProductsInvoiceCustomerSummaryTableAdapter" Name="ProductsInvoiceCustomerSummary" UserDataComponentName="ProductsInvoiceCustomerSummaryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.ProductsInvoiceCustomerSummary" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ProductID, ProductNumber, ProductVersion, Description, ProductionDate, Model, SerialNumber, Category, Units, UnitPrice, Status, Comments, InvoiceID, UnitsIP, DescriptionIP, UnitPriceIP, Total, GST, CommIP, CustomerID, InvoiceDate, PaymentDate, OrderID, Developer, GSTIncluded, CommI, IncomeType, CompanyName, Firstname, Surname, Address, Suburb, State, PostCode, PhoneNumber, FaxNumber, MobileNumber, EmailAddress, WebSite, ABN, PostalAddress, PostalSuburb, PostalState, PostalPostCode, CommC FROM dbo.ProductsInvoiceCustomerSummary</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProductID" DataSetColumn="ProductID" />
+              <Mapping SourceColumn="ProductNumber" DataSetColumn="ProductNumber" />
+              <Mapping SourceColumn="ProductVersion" DataSetColumn="ProductVersion" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="ProductionDate" DataSetColumn="ProductionDate" />
+              <Mapping SourceColumn="Model" DataSetColumn="Model" />
+              <Mapping SourceColumn="SerialNumber" DataSetColumn="SerialNumber" />
+              <Mapping SourceColumn="Category" DataSetColumn="Category" />
+              <Mapping SourceColumn="Units" DataSetColumn="Units" />
+              <Mapping SourceColumn="UnitPrice" DataSetColumn="UnitPrice" />
+              <Mapping SourceColumn="Status" DataSetColumn="Status" />
+              <Mapping SourceColumn="Comments" DataSetColumn="Comments" />
+              <Mapping SourceColumn="InvoiceID" DataSetColumn="InvoiceID" />
+              <Mapping SourceColumn="UnitsIP" DataSetColumn="UnitsIP" />
+              <Mapping SourceColumn="DescriptionIP" DataSetColumn="DescriptionIP" />
+              <Mapping SourceColumn="UnitPriceIP" DataSetColumn="UnitPriceIP" />
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="GST" DataSetColumn="GST" />
+              <Mapping SourceColumn="CommIP" DataSetColumn="CommIP" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="InvoiceDate" DataSetColumn="InvoiceDate" />
+              <Mapping SourceColumn="PaymentDate" DataSetColumn="PaymentDate" />
+              <Mapping SourceColumn="OrderID" DataSetColumn="OrderID" />
+              <Mapping SourceColumn="Developer" DataSetColumn="Developer" />
+              <Mapping SourceColumn="GSTIncluded" DataSetColumn="GSTIncluded" />
+              <Mapping SourceColumn="CommI" DataSetColumn="CommI" />
+              <Mapping SourceColumn="IncomeType" DataSetColumn="IncomeType" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="Firstname" DataSetColumn="Firstname" />
+              <Mapping SourceColumn="Surname" DataSetColumn="Surname" />
+              <Mapping SourceColumn="Address" DataSetColumn="Address" />
+              <Mapping SourceColumn="Suburb" DataSetColumn="Suburb" />
+              <Mapping SourceColumn="State" DataSetColumn="State" />
+              <Mapping SourceColumn="PostCode" DataSetColumn="PostCode" />
+              <Mapping SourceColumn="PhoneNumber" DataSetColumn="PhoneNumber" />
+              <Mapping SourceColumn="FaxNumber" DataSetColumn="FaxNumber" />
+              <Mapping SourceColumn="MobileNumber" DataSetColumn="MobileNumber" />
+              <Mapping SourceColumn="EmailAddress" DataSetColumn="EmailAddress" />
+              <Mapping SourceColumn="WebSite" DataSetColumn="WebSite" />
+              <Mapping SourceColumn="ABN" DataSetColumn="ABN" />
+              <Mapping SourceColumn="PostalAddress" DataSetColumn="PostalAddress" />
+              <Mapping SourceColumn="PostalSuburb" DataSetColumn="PostalSuburb" />
+              <Mapping SourceColumn="PostalState" DataSetColumn="PostalState" />
+              <Mapping SourceColumn="PostalPostCode" DataSetColumn="PostalPostCode" />
+              <Mapping SourceColumn="CommC" DataSetColumn="CommC" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VendorDetailsSubtotalTableAdapter" GeneratorDataComponentClassName="VendorDetailsSubtotalTableAdapter" Name="VendorDetailsSubtotal" UserDataComponentName="VendorDetailsSubtotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NequeoCompanyDatabaseConnection (Settings)" DbObjectName="Nequeo.dbo.VendorDetailsSubtotal" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT VendorID, Subtotal, GSTSubtotal FROM dbo.VendorDetailsSubtotal</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="VendorID" DataSetColumn="VendorID" />
+              <Mapping SourceColumn="Subtotal" DataSetColumn="Subtotal" />
+              <Mapping SourceColumn="GSTSubtotal" DataSetColumn="GSTSubtotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Views" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Views" msprop:Generator_UserDSName="Views">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AccountTransactionCreditDebitSubtotal" msprop:Generator_TableClassName="AccountTransactionCreditDebitSubtotalDataTable" msprop:Generator_TableVarName="tableAccountTransactionCreditDebitSubtotal" msprop:Generator_TablePropName="AccountTransactionCreditDebitSubtotal" msprop:Generator_RowDeletingName="AccountTransactionCreditDebitSubtotalRowDeleting" msprop:Generator_RowChangingName="AccountTransactionCreditDebitSubtotalRowChanging" msprop:Generator_RowEvHandlerName="AccountTransactionCreditDebitSubtotalRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountTransactionCreditDebitSubtotalRowDeleted" msprop:Generator_UserTableName="AccountTransactionCreditDebitSubtotal" msprop:Generator_RowChangedName="AccountTransactionCreditDebitSubtotalRowChanged" msprop:Generator_RowEvArgName="AccountTransactionCreditDebitSubtotalRowChangeEvent" msprop:Generator_RowClassName="AccountTransactionCreditDebitSubtotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountID" msprop:Generator_ColumnVarNameInTable="columnAccountID" msprop:Generator_ColumnPropNameInRow="AccountID" msprop:Generator_ColumnPropNameInTable="AccountIDColumn" msprop:Generator_UserColumnName="AccountID" type="xs:int" />
+              <xs:element name="TransactionType" msprop:Generator_ColumnVarNameInTable="columnTransactionType" msprop:Generator_ColumnPropNameInRow="TransactionType" msprop:Generator_ColumnPropNameInTable="TransactionTypeColumn" msprop:Generator_UserColumnName="TransactionType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubTotal" msprop:Generator_ColumnVarNameInTable="columnSubTotal" msprop:Generator_ColumnPropNameInRow="SubTotal" msprop:Generator_ColumnPropNameInTable="SubTotalColumn" msprop:Generator_UserColumnName="SubTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VendorDetailsSubtotalTotal" msprop:Generator_TableClassName="VendorDetailsSubtotalTotalDataTable" msprop:Generator_TableVarName="tableVendorDetailsSubtotalTotal" msprop:Generator_TablePropName="VendorDetailsSubtotalTotal" msprop:Generator_RowDeletingName="VendorDetailsSubtotalTotalRowDeleting" msprop:Generator_RowChangingName="VendorDetailsSubtotalTotalRowChanging" msprop:Generator_RowEvHandlerName="VendorDetailsSubtotalTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="VendorDetailsSubtotalTotalRowDeleted" msprop:Generator_UserTableName="VendorDetailsSubtotalTotal" msprop:Generator_RowChangedName="VendorDetailsSubtotalTotalRowChanged" msprop:Generator_RowEvArgName="VendorDetailsSubtotalTotalRowChangeEvent" msprop:Generator_RowClassName="VendorDetailsSubtotalTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GST" msprop:Generator_ColumnVarNameInTable="columnGST" msprop:Generator_ColumnPropNameInRow="GST" msprop:Generator_ColumnPropNameInTable="GSTColumn" msprop:Generator_UserColumnName="GST" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountTransactionCreditTotal" msprop:Generator_TableClassName="AccountTransactionCreditTotalDataTable" msprop:Generator_TableVarName="tableAccountTransactionCreditTotal" msprop:Generator_TablePropName="AccountTransactionCreditTotal" msprop:Generator_RowDeletingName="AccountTransactionCreditTotalRowDeleting" msprop:Generator_RowChangingName="AccountTransactionCreditTotalRowChanging" msprop:Generator_RowEvHandlerName="AccountTransactionCreditTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountTransactionCreditTotalRowDeleted" msprop:Generator_UserTableName="AccountTransactionCreditTotal" msprop:Generator_RowChangedName="AccountTransactionCreditTotalRowChanged" msprop:Generator_RowEvArgName="AccountTransactionCreditTotalRowChangeEvent" msprop:Generator_RowClassName="AccountTransactionCreditTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CreditTotal" msprop:Generator_ColumnVarNameInTable="columnCreditTotal" msprop:Generator_ColumnPropNameInRow="CreditTotal" msprop:Generator_ColumnPropNameInTable="CreditTotalColumn" msprop:Generator_UserColumnName="CreditTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountTransactionDebitTotal" msprop:Generator_TableClassName="AccountTransactionDebitTotalDataTable" msprop:Generator_TableVarName="tableAccountTransactionDebitTotal" msprop:Generator_TablePropName="AccountTransactionDebitTotal" msprop:Generator_RowDeletingName="AccountTransactionDebitTotalRowDeleting" msprop:Generator_RowChangingName="AccountTransactionDebitTotalRowChanging" msprop:Generator_RowEvHandlerName="AccountTransactionDebitTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountTransactionDebitTotalRowDeleted" msprop:Generator_UserTableName="AccountTransactionDebitTotal" msprop:Generator_RowChangedName="AccountTransactionDebitTotalRowChanged" msprop:Generator_RowEvArgName="AccountTransactionDebitTotalRowChangeEvent" msprop:Generator_RowClassName="AccountTransactionDebitTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DebitTotal" msprop:Generator_ColumnVarNameInTable="columnDebitTotal" msprop:Generator_ColumnPropNameInRow="DebitTotal" msprop:Generator_ColumnPropNameInTable="DebitTotalColumn" msprop:Generator_UserColumnName="DebitTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountTransactionTypeCredit" msprop:Generator_TableClassName="AccountTransactionTypeCreditDataTable" msprop:Generator_TableVarName="tableAccountTransactionTypeCredit" msprop:Generator_TablePropName="AccountTransactionTypeCredit" msprop:Generator_RowDeletingName="AccountTransactionTypeCreditRowDeleting" msprop:Generator_RowChangingName="AccountTransactionTypeCreditRowChanging" msprop:Generator_RowEvHandlerName="AccountTransactionTypeCreditRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountTransactionTypeCreditRowDeleted" msprop:Generator_UserTableName="AccountTransactionTypeCredit" msprop:Generator_RowChangedName="AccountTransactionTypeCreditRowChanged" msprop:Generator_RowEvArgName="AccountTransactionTypeCreditRowChangeEvent" msprop:Generator_RowClassName="AccountTransactionTypeCreditRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountID" msprop:Generator_ColumnVarNameInTable="columnAccountID" msprop:Generator_ColumnPropNameInRow="AccountID" msprop:Generator_ColumnPropNameInTable="AccountIDColumn" msprop:Generator_UserColumnName="AccountID" type="xs:int" />
+              <xs:element name="AccountTransactionID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnAccountTransactionID" msprop:Generator_ColumnPropNameInRow="AccountTransactionID" msprop:Generator_ColumnPropNameInTable="AccountTransactionIDColumn" msprop:Generator_UserColumnName="AccountTransactionID" type="xs:int" />
+              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountTransactionTypeDebit" msprop:Generator_TableClassName="AccountTransactionTypeDebitDataTable" msprop:Generator_TableVarName="tableAccountTransactionTypeDebit" msprop:Generator_TablePropName="AccountTransactionTypeDebit" msprop:Generator_RowDeletingName="AccountTransactionTypeDebitRowDeleting" msprop:Generator_RowChangingName="AccountTransactionTypeDebitRowChanging" msprop:Generator_RowEvHandlerName="AccountTransactionTypeDebitRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountTransactionTypeDebitRowDeleted" msprop:Generator_UserTableName="AccountTransactionTypeDebit" msprop:Generator_RowChangedName="AccountTransactionTypeDebitRowChanged" msprop:Generator_RowEvArgName="AccountTransactionTypeDebitRowChangeEvent" msprop:Generator_RowClassName="AccountTransactionTypeDebitRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountID" msprop:Generator_ColumnVarNameInTable="columnAccountID" msprop:Generator_ColumnPropNameInRow="AccountID" msprop:Generator_ColumnPropNameInTable="AccountIDColumn" msprop:Generator_UserColumnName="AccountID" type="xs:int" />
+              <xs:element name="AccountTransactionID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnAccountTransactionID" msprop:Generator_ColumnPropNameInRow="AccountTransactionID" msprop:Generator_ColumnPropNameInTable="AccountTransactionIDColumn" msprop:Generator_UserColumnName="AccountTransactionID" type="xs:int" />
+              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomerInvoiceDetailsTotals" msprop:Generator_TableClassName="CustomerInvoiceDetailsTotalsDataTable" msprop:Generator_TableVarName="tableCustomerInvoiceDetailsTotals" msprop:Generator_TablePropName="CustomerInvoiceDetailsTotals" msprop:Generator_RowDeletingName="CustomerInvoiceDetailsTotalsRowDeleting" msprop:Generator_RowChangingName="CustomerInvoiceDetailsTotalsRowChanging" msprop:Generator_RowEvHandlerName="CustomerInvoiceDetailsTotalsRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerInvoiceDetailsTotalsRowDeleted" msprop:Generator_UserTableName="CustomerInvoiceDetailsTotals" msprop:Generator_RowChangedName="CustomerInvoiceDetailsTotalsRowChanged" msprop:Generator_RowEvArgName="CustomerInvoiceDetailsTotalsRowChangeEvent" msprop:Generator_RowClassName="CustomerInvoiceDetailsTotalsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TotalHours" msprop:Generator_ColumnVarNameInTable="columnTotalHours" msprop:Generator_ColumnPropNameInRow="TotalHours" msprop:Generator_ColumnPropNameInTable="TotalHoursColumn" msprop:Generator_UserColumnName="TotalHours" type="xs:double" minOccurs="0" />
+              <xs:element name="TotalTotal" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalTotal" msprop:Generator_ColumnPropNameInRow="TotalTotal" msprop:Generator_ColumnPropNameInTable="TotalTotalColumn" msprop:Generator_UserColumnName="TotalTotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalGST" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalGST" msprop:Generator_ColumnPropNameInRow="TotalGST" msprop:Generator_ColumnPropNameInTable="TotalGSTColumn" msprop:Generator_UserColumnName="TotalGST" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+              <xs:element name="InvoiceID" msprop:Generator_ColumnVarNameInTable="columnInvoiceID" msprop:Generator_ColumnPropNameInRow="InvoiceID" msprop:Generator_ColumnPropNameInTable="InvoiceIDColumn" msprop:Generator_UserColumnName="InvoiceID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomerInvoiceDetailsTotalTotals" msprop:Generator_TableClassName="CustomerInvoiceDetailsTotalTotalsDataTable" msprop:Generator_TableVarName="tableCustomerInvoiceDetailsTotalTotals" msprop:Generator_TablePropName="CustomerInvoiceDetailsTotalTotals" msprop:Generator_RowDeletingName="CustomerInvoiceDetailsTotalTotalsRowDeleting" msprop:Generator_RowChangingName="CustomerInvoiceDetailsTotalTotalsRowChanging" msprop:Generator_RowEvHandlerName="CustomerInvoiceDetailsTotalTotalsRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerInvoiceDetailsTotalTotalsRowDeleted" msprop:Generator_UserTableName="CustomerInvoiceDetailsTotalTotals" msprop:Generator_RowChangedName="CustomerInvoiceDetailsTotalTotalsRowChanged" msprop:Generator_RowEvArgName="CustomerInvoiceDetailsTotalTotalsRowChangeEvent" msprop:Generator_RowClassName="CustomerInvoiceDetailsTotalTotalsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HoursTotal" msprop:Generator_ColumnVarNameInTable="columnHoursTotal" msprop:Generator_ColumnPropNameInRow="HoursTotal" msprop:Generator_ColumnPropNameInTable="HoursTotalColumn" msprop:Generator_UserColumnName="HoursTotal" type="xs:double" minOccurs="0" />
+              <xs:element name="TotalTotals" msprop:Generator_ColumnVarNameInTable="columnTotalTotals" msprop:Generator_ColumnPropNameInRow="TotalTotals" msprop:Generator_ColumnPropNameInTable="TotalTotalsColumn" msprop:Generator_UserColumnName="TotalTotals" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GSTTotal" msprop:Generator_ColumnVarNameInTable="columnGSTTotal" msprop:Generator_ColumnPropNameInRow="GSTTotal" msprop:Generator_ColumnPropNameInTable="GSTTotalColumn" msprop:Generator_UserColumnName="GSTTotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomerInvoiceProductsTotals" msprop:Generator_TableClassName="CustomerInvoiceProductsTotalsDataTable" msprop:Generator_TableVarName="tableCustomerInvoiceProductsTotals" msprop:Generator_TablePropName="CustomerInvoiceProductsTotals" msprop:Generator_RowDeletingName="CustomerInvoiceProductsTotalsRowDeleting" msprop:Generator_RowChangingName="CustomerInvoiceProductsTotalsRowChanging" msprop:Generator_RowEvHandlerName="CustomerInvoiceProductsTotalsRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerInvoiceProductsTotalsRowDeleted" msprop:Generator_UserTableName="CustomerInvoiceProductsTotals" msprop:Generator_RowChangedName="CustomerInvoiceProductsTotalsRowChanged" msprop:Generator_RowEvArgName="CustomerInvoiceProductsTotalsRowChangeEvent" msprop:Generator_RowClassName="CustomerInvoiceProductsTotalsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TotalUnits" msprop:Generator_ColumnVarNameInTable="columnTotalUnits" msprop:Generator_ColumnPropNameInRow="TotalUnits" msprop:Generator_ColumnPropNameInTable="TotalUnitsColumn" msprop:Generator_UserColumnName="TotalUnits" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalTotal" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalTotal" msprop:Generator_ColumnPropNameInRow="TotalTotal" msprop:Generator_ColumnPropNameInTable="TotalTotalColumn" msprop:Generator_UserColumnName="TotalTotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalGST" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalGST" msprop:Generator_ColumnPropNameInRow="TotalGST" msprop:Generator_ColumnPropNameInTable="TotalGSTColumn" msprop:Generator_UserColumnName="TotalGST" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+              <xs:element name="InvoiceID" msprop:Generator_ColumnVarNameInTable="columnInvoiceID" msprop:Generator_ColumnPropNameInRow="InvoiceID" msprop:Generator_ColumnPropNameInTable="InvoiceIDColumn" msprop:Generator_UserColumnName="InvoiceID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomerInvoiceProductsTotalTotals" msprop:Generator_TableClassName="CustomerInvoiceProductsTotalTotalsDataTable" msprop:Generator_TableVarName="tableCustomerInvoiceProductsTotalTotals" msprop:Generator_TablePropName="CustomerInvoiceProductsTotalTotals" msprop:Generator_RowDeletingName="CustomerInvoiceProductsTotalTotalsRowDeleting" msprop:Generator_RowChangingName="CustomerInvoiceProductsTotalTotalsRowChanging" msprop:Generator_RowEvHandlerName="CustomerInvoiceProductsTotalTotalsRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerInvoiceProductsTotalTotalsRowDeleted" msprop:Generator_UserTableName="CustomerInvoiceProductsTotalTotals" msprop:Generator_RowChangedName="CustomerInvoiceProductsTotalTotalsRowChanged" msprop:Generator_RowEvArgName="CustomerInvoiceProductsTotalTotalsRowChangeEvent" msprop:Generator_RowClassName="CustomerInvoiceProductsTotalTotalsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UnitsTotal" msprop:Generator_ColumnVarNameInTable="columnUnitsTotal" msprop:Generator_ColumnPropNameInRow="UnitsTotal" msprop:Generator_ColumnPropNameInTable="UnitsTotalColumn" msprop:Generator_UserColumnName="UnitsTotal" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalTotals" msprop:Generator_ColumnVarNameInTable="columnTotalTotals" msprop:Generator_ColumnPropNameInRow="TotalTotals" msprop:Generator_ColumnPropNameInTable="TotalTotalsColumn" msprop:Generator_UserColumnName="TotalTotals" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GSTTotal" msprop:Generator_ColumnVarNameInTable="columnGSTTotal" msprop:Generator_ColumnPropNameInRow="GSTTotal" msprop:Generator_ColumnPropNameInTable="GSTTotalColumn" msprop:Generator_UserColumnName="GSTTotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeePAYGSubtotal" msprop:Generator_TableClassName="EmployeePAYGSubtotalDataTable" msprop:Generator_TableVarName="tableEmployeePAYGSubtotal" msprop:Generator_TablePropName="EmployeePAYGSubtotal" msprop:Generator_RowDeletingName="EmployeePAYGSubtotalRowDeleting" msprop:Generator_RowChangingName="EmployeePAYGSubtotalRowChanging" msprop:Generator_RowEvHandlerName="EmployeePAYGSubtotalRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeePAYGSubtotalRowDeleted" msprop:Generator_UserTableName="EmployeePAYGSubtotal" msprop:Generator_RowChangedName="EmployeePAYGSubtotalRowChanged" msprop:Generator_RowEvArgName="EmployeePAYGSubtotalRowChangeEvent" msprop:Generator_RowClassName="EmployeePAYGSubtotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" type="xs:int" />
+              <xs:element name="Subtotal" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_UserColumnName="Subtotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeePAYGSubtotalTotal" msprop:Generator_TableClassName="EmployeePAYGSubtotalTotalDataTable" msprop:Generator_TableVarName="tableEmployeePAYGSubtotalTotal" msprop:Generator_TablePropName="EmployeePAYGSubtotalTotal" msprop:Generator_RowDeletingName="EmployeePAYGSubtotalTotalRowDeleting" msprop:Generator_RowChangingName="EmployeePAYGSubtotalTotalRowChanging" msprop:Generator_RowEvHandlerName="EmployeePAYGSubtotalTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeePAYGSubtotalTotalRowDeleted" msprop:Generator_UserTableName="EmployeePAYGSubtotalTotal" msprop:Generator_RowChangedName="EmployeePAYGSubtotalTotalRowChanged" msprop:Generator_RowEvArgName="EmployeePAYGSubtotalTotalRowChangeEvent" msprop:Generator_RowClassName="EmployeePAYGSubtotalTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeeSuperSubtotal" msprop:Generator_TableClassName="EmployeeSuperSubtotalDataTable" msprop:Generator_TableVarName="tableEmployeeSuperSubtotal" msprop:Generator_TablePropName="EmployeeSuperSubtotal" msprop:Generator_RowDeletingName="EmployeeSuperSubtotalRowDeleting" msprop:Generator_RowChangingName="EmployeeSuperSubtotalRowChanging" msprop:Generator_RowEvHandlerName="EmployeeSuperSubtotalRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeSuperSubtotalRowDeleted" msprop:Generator_UserTableName="EmployeeSuperSubtotal" msprop:Generator_RowChangedName="EmployeeSuperSubtotalRowChanged" msprop:Generator_RowEvArgName="EmployeeSuperSubtotalRowChangeEvent" msprop:Generator_RowClassName="EmployeeSuperSubtotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" type="xs:int" />
+              <xs:element name="SubTotal" msprop:Generator_ColumnVarNameInTable="columnSubTotal" msprop:Generator_ColumnPropNameInRow="SubTotal" msprop:Generator_ColumnPropNameInTable="SubTotalColumn" msprop:Generator_UserColumnName="SubTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeeSuperSubtotalTotal" msprop:Generator_TableClassName="EmployeeSuperSubtotalTotalDataTable" msprop:Generator_TableVarName="tableEmployeeSuperSubtotalTotal" msprop:Generator_TablePropName="EmployeeSuperSubtotalTotal" msprop:Generator_RowDeletingName="EmployeeSuperSubtotalTotalRowDeleting" msprop:Generator_RowChangingName="EmployeeSuperSubtotalTotalRowChanging" msprop:Generator_RowEvHandlerName="EmployeeSuperSubtotalTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeSuperSubtotalTotalRowDeleted" msprop:Generator_UserTableName="EmployeeSuperSubtotalTotal" msprop:Generator_RowChangedName="EmployeeSuperSubtotalTotalRowChanged" msprop:Generator_RowEvArgName="EmployeeSuperSubtotalTotalRowChangeEvent" msprop:Generator_RowClassName="EmployeeSuperSubtotalTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeeWageSubtotal" msprop:Generator_TableClassName="EmployeeWageSubtotalDataTable" msprop:Generator_TableVarName="tableEmployeeWageSubtotal" msprop:Generator_TablePropName="EmployeeWageSubtotal" msprop:Generator_RowDeletingName="EmployeeWageSubtotalRowDeleting" msprop:Generator_RowChangingName="EmployeeWageSubtotalRowChanging" msprop:Generator_RowEvHandlerName="EmployeeWageSubtotalRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeWageSubtotalRowDeleted" msprop:Generator_UserTableName="EmployeeWageSubtotal" msprop:Generator_RowChangedName="EmployeeWageSubtotalRowChanged" msprop:Generator_RowEvArgName="EmployeeWageSubtotalRowChangeEvent" msprop:Generator_RowClassName="EmployeeWageSubtotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PaymentDate" msprop:Generator_ColumnVarNameInTable="columnPaymentDate" msprop:Generator_ColumnPropNameInRow="PaymentDate" msprop:Generator_ColumnPropNameInTable="PaymentDateColumn" msprop:Generator_UserColumnName="PaymentDate" type="xs:dateTime" />
+              <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" type="xs:int" />
+              <xs:element name="Subtotal" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_UserColumnName="Subtotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PAYGSubTotal" msprop:Generator_ColumnVarNameInTable="columnPAYGSubTotal" msprop:Generator_ColumnPropNameInRow="PAYGSubTotal" msprop:Generator_ColumnPropNameInTable="PAYGSubTotalColumn" msprop:Generator_UserColumnName="PAYGSubTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeeWageSubtotalTotal" msprop:Generator_TableClassName="EmployeeWageSubtotalTotalDataTable" msprop:Generator_TableVarName="tableEmployeeWageSubtotalTotal" msprop:Generator_TablePropName="EmployeeWageSubtotalTotal" msprop:Generator_RowDeletingName="EmployeeWageSubtotalTotalRowDeleting" msprop:Generator_RowChangingName="EmployeeWageSubtotalTotalRowChanging" msprop:Generator_RowEvHandlerName="EmployeeWageSubtotalTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeWageSubtotalTotalRowDeleted" msprop:Generator_UserTableName="EmployeeWageSubtotalTotal" msprop:Generator_RowChangedName="EmployeeWageSubtotalTotalRowChanged" msprop:Generator_RowEvArgName="EmployeeWageSubtotalTotalRowChangeEvent" msprop:Generator_RowClassName="EmployeeWageSubtotalTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PAYGTotal" msprop:Generator_ColumnVarNameInTable="columnPAYGTotal" msprop:Generator_ColumnPropNameInRow="PAYGTotal" msprop:Generator_ColumnPropNameInTable="PAYGTotalColumn" msprop:Generator_UserColumnName="PAYGTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeeWageTotalByEmployee" msprop:Generator_TableClassName="EmployeeWageTotalByEmployeeDataTable" msprop:Generator_TableVarName="tableEmployeeWageTotalByEmployee" msprop:Generator_TablePropName="EmployeeWageTotalByEmployee" msprop:Generator_RowDeletingName="EmployeeWageTotalByEmployeeRowDeleting" msprop:Generator_RowChangingName="EmployeeWageTotalByEmployeeRowChanging" msprop:Generator_RowEvHandlerName="EmployeeWageTotalByEmployeeRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeWageTotalByEmployeeRowDeleted" msprop:Generator_UserTableName="EmployeeWageTotalByEmployee" msprop:Generator_RowChangedName="EmployeeWageTotalByEmployeeRowChanged" msprop:Generator_RowEvArgName="EmployeeWageTotalByEmployeeRowChangeEvent" msprop:Generator_RowClassName="EmployeeWageTotalByEmployeeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" type="xs:int" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PAYGTotal" msprop:Generator_ColumnVarNameInTable="columnPAYGTotal" msprop:Generator_ColumnPropNameInRow="PAYGTotal" msprop:Generator_ColumnPropNameInTable="PAYGTotalColumn" msprop:Generator_UserColumnName="PAYGTotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvoiceProductsSubtotal" msprop:Generator_TableClassName="InvoiceProductsSubtotalDataTable" msprop:Generator_TableVarName="tableInvoiceProductsSubtotal" msprop:Generator_TablePropName="InvoiceProductsSubtotal" msprop:Generator_RowDeletingName="InvoiceProductsSubtotalRowDeleting" msprop:Generator_RowChangingName="InvoiceProductsSubtotalRowChanging" msprop:Generator_RowEvHandlerName="InvoiceProductsSubtotalRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceProductsSubtotalRowDeleted" msprop:Generator_UserTableName="InvoiceProductsSubtotal" msprop:Generator_RowChangedName="InvoiceProductsSubtotalRowChanged" msprop:Generator_RowEvArgName="InvoiceProductsSubtotalRowChangeEvent" msprop:Generator_RowClassName="InvoiceProductsSubtotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvoiceID" msprop:Generator_ColumnVarNameInTable="columnInvoiceID" msprop:Generator_ColumnPropNameInRow="InvoiceID" msprop:Generator_ColumnPropNameInTable="InvoiceIDColumn" msprop:Generator_UserColumnName="InvoiceID" type="xs:int" />
+              <xs:element name="Subtotal" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_UserColumnName="Subtotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Gst" msprop:Generator_ColumnVarNameInTable="columnGst" msprop:Generator_ColumnPropNameInRow="Gst" msprop:Generator_ColumnPropNameInTable="GstColumn" msprop:Generator_UserColumnName="Gst" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Totals" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotals" msprop:Generator_ColumnPropNameInRow="Totals" msprop:Generator_ColumnPropNameInTable="TotalsColumn" msprop:Generator_UserColumnName="Totals" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PreGST" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPreGST" msprop:Generator_ColumnPropNameInRow="PreGST" msprop:Generator_ColumnPropNameInTable="PreGSTColumn" msprop:Generator_UserColumnName="PreGST" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvoiceProductsSubtotalTotal" msprop:Generator_TableClassName="InvoiceProductsSubtotalTotalDataTable" msprop:Generator_TableVarName="tableInvoiceProductsSubtotalTotal" msprop:Generator_TablePropName="InvoiceProductsSubtotalTotal" msprop:Generator_RowDeletingName="InvoiceProductsSubtotalTotalRowDeleting" msprop:Generator_RowChangingName="InvoiceProductsSubtotalTotalRowChanging" msprop:Generator_RowEvHandlerName="InvoiceProductsSubtotalTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceProductsSubtotalTotalRowDeleted" msprop:Generator_UserTableName="InvoiceProductsSubtotalTotal" msprop:Generator_RowChangedName="InvoiceProductsSubtotalTotalRowChanged" msprop:Generator_RowEvArgName="InvoiceProductsSubtotalTotalRowChangeEvent" msprop:Generator_RowClassName="InvoiceProductsSubtotalTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GST" msprop:Generator_ColumnVarNameInTable="columnGST" msprop:Generator_ColumnPropNameInRow="GST" msprop:Generator_ColumnPropNameInTable="GSTColumn" msprop:Generator_UserColumnName="GST" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PreGst" msprop:Generator_ColumnVarNameInTable="columnPreGst" msprop:Generator_ColumnPropNameInRow="PreGst" msprop:Generator_ColumnPropNameInTable="PreGstColumn" msprop:Generator_UserColumnName="PreGst" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvoiceSubtotals" msprop:Generator_TableClassName="InvoiceSubtotalsDataTable" msprop:Generator_TableVarName="tableInvoiceSubtotals" msprop:Generator_TablePropName="InvoiceSubtotals" msprop:Generator_RowDeletingName="InvoiceSubtotalsRowDeleting" msprop:Generator_RowChangingName="InvoiceSubtotalsRowChanging" msprop:Generator_RowEvHandlerName="InvoiceSubtotalsRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceSubtotalsRowDeleted" msprop:Generator_UserTableName="InvoiceSubtotals" msprop:Generator_RowChangedName="InvoiceSubtotalsRowChanged" msprop:Generator_RowEvArgName="InvoiceSubtotalsRowChangeEvent" msprop:Generator_RowClassName="InvoiceSubtotalsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvoiceID" msprop:Generator_ColumnVarNameInTable="columnInvoiceID" msprop:Generator_ColumnPropNameInRow="InvoiceID" msprop:Generator_ColumnPropNameInTable="InvoiceIDColumn" msprop:Generator_UserColumnName="InvoiceID" type="xs:int" />
+              <xs:element name="Subtotal" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_UserColumnName="Subtotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Gst" msprop:Generator_ColumnVarNameInTable="columnGst" msprop:Generator_ColumnPropNameInRow="Gst" msprop:Generator_ColumnPropNameInTable="GstColumn" msprop:Generator_UserColumnName="Gst" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Totals" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotals" msprop:Generator_ColumnPropNameInRow="Totals" msprop:Generator_ColumnPropNameInTable="TotalsColumn" msprop:Generator_UserColumnName="Totals" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PreGST" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPreGST" msprop:Generator_ColumnPropNameInRow="PreGST" msprop:Generator_ColumnPropNameInTable="PreGSTColumn" msprop:Generator_UserColumnName="PreGST" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvoiceSubtotalTotal" msprop:Generator_TableClassName="InvoiceSubtotalTotalDataTable" msprop:Generator_TableVarName="tableInvoiceSubtotalTotal" msprop:Generator_TablePropName="InvoiceSubtotalTotal" msprop:Generator_RowDeletingName="InvoiceSubtotalTotalRowDeleting" msprop:Generator_RowChangingName="InvoiceSubtotalTotalRowChanging" msprop:Generator_RowEvHandlerName="InvoiceSubtotalTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceSubtotalTotalRowDeleted" msprop:Generator_UserTableName="InvoiceSubtotalTotal" msprop:Generator_RowChangedName="InvoiceSubtotalTotalRowChanged" msprop:Generator_RowEvArgName="InvoiceSubtotalTotalRowChangeEvent" msprop:Generator_RowClassName="InvoiceSubtotalTotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GST" msprop:Generator_ColumnVarNameInTable="columnGST" msprop:Generator_ColumnPropNameInRow="GST" msprop:Generator_ColumnPropNameInTable="GSTColumn" msprop:Generator_UserColumnName="GST" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PreGst" msprop:Generator_ColumnVarNameInTable="columnPreGst" msprop:Generator_ColumnPropNameInRow="PreGst" msprop:Generator_ColumnPropNameInTable="PreGstColumn" msprop:Generator_UserColumnName="PreGst" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProductsInvoiceCustomerSummary" msprop:Generator_TableClassName="ProductsInvoiceCustomerSummaryDataTable" msprop:Generator_TableVarName="tableProductsInvoiceCustomerSummary" msprop:Generator_TablePropName="ProductsInvoiceCustomerSummary" msprop:Generator_RowDeletingName="ProductsInvoiceCustomerSummaryRowDeleting" msprop:Generator_RowChangingName="ProductsInvoiceCustomerSummaryRowChanging" msprop:Generator_RowEvHandlerName="ProductsInvoiceCustomerSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductsInvoiceCustomerSummaryRowDeleted" msprop:Generator_UserTableName="ProductsInvoiceCustomerSummary" msprop:Generator_RowChangedName="ProductsInvoiceCustomerSummaryRowChanged" msprop:Generator_RowEvArgName="ProductsInvoiceCustomerSummaryRowChangeEvent" msprop:Generator_RowClassName="ProductsInvoiceCustomerSummaryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnProductID" msprop:Generator_ColumnPropNameInRow="ProductID" msprop:Generator_ColumnPropNameInTable="ProductIDColumn" msprop:Generator_UserColumnName="ProductID" type="xs:int" />
+              <xs:element name="ProductNumber" msprop:Generator_ColumnVarNameInTable="columnProductNumber" msprop:Generator_ColumnPropNameInRow="ProductNumber" msprop:Generator_ColumnPropNameInTable="ProductNumberColumn" msprop:Generator_UserColumnName="ProductNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProductVersion" msprop:Generator_ColumnVarNameInTable="columnProductVersion" msprop:Generator_ColumnPropNameInRow="ProductVersion" msprop:Generator_ColumnPropNameInTable="ProductVersionColumn" msprop:Generator_UserColumnName="ProductVersion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProductionDate" msprop:Generator_ColumnVarNameInTable="columnProductionDate" msprop:Generator_ColumnPropNameInRow="ProductionDate" msprop:Generator_ColumnPropNameInTable="ProductionDateColumn" msprop:Generator_UserColumnName="ProductionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Model" msprop:Generator_ColumnVarNameInTable="columnModel" msprop:Generator_ColumnPropNameInRow="Model" msprop:Generator_ColumnPropNameInTable="ModelColumn" msprop:Generator_UserColumnName="Model" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SerialNumber" msprop:Generator_ColumnVarNameInTable="columnSerialNumber" msprop:Generator_ColumnPropNameInRow="SerialNumber" msprop:Generator_ColumnPropNameInTable="SerialNumberColumn" msprop:Generator_UserColumnName="SerialNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Units" msprop:Generator_ColumnVarNameInTable="columnUnits" msprop:Generator_ColumnPropNameInRow="Units" msprop:Generator_ColumnPropNameInTable="UnitsColumn" msprop:Generator_UserColumnName="Units" type="xs:int" minOccurs="0" />
+              <xs:element name="UnitPrice" msprop:Generator_ColumnVarNameInTable="columnUnitPrice" msprop:Generator_ColumnPropNameInRow="UnitPrice" msprop:Generator_ColumnPropNameInTable="UnitPriceColumn" msprop:Generator_UserColumnName="UnitPrice" type="xs:decimal" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_UserColumnName="Comments" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvoiceID" msprop:Generator_ColumnVarNameInTable="columnInvoiceID" msprop:Generator_ColumnPropNameInRow="InvoiceID" msprop:Generator_ColumnPropNameInTable="InvoiceIDColumn" msprop:Generator_UserColumnName="InvoiceID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnitsIP" msprop:Generator_ColumnVarNameInTable="columnUnitsIP" msprop:Generator_ColumnPropNameInRow="UnitsIP" msprop:Generator_ColumnPropNameInTable="UnitsIPColumn" msprop:Generator_UserColumnName="UnitsIP" type="xs:int" />
+              <xs:element name="DescriptionIP" msprop:Generator_ColumnVarNameInTable="columnDescriptionIP" msprop:Generator_ColumnPropNameInRow="DescriptionIP" msprop:Generator_ColumnPropNameInTable="DescriptionIPColumn" msprop:Generator_UserColumnName="DescriptionIP" type="xs:int" />
+              <xs:element name="UnitPriceIP" msprop:Generator_ColumnVarNameInTable="columnUnitPriceIP" msprop:Generator_ColumnPropNameInRow="UnitPriceIP" msprop:Generator_ColumnPropNameInTable="UnitPriceIPColumn" msprop:Generator_UserColumnName="UnitPriceIP">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" />
+              <xs:element name="GST" msprop:Generator_ColumnVarNameInTable="columnGST" msprop:Generator_ColumnPropNameInRow="GST" msprop:Generator_ColumnPropNameInTable="GSTColumn" msprop:Generator_UserColumnName="GST" type="xs:decimal" />
+              <xs:element name="CommIP" msprop:Generator_ColumnVarNameInTable="columnCommIP" msprop:Generator_ColumnPropNameInRow="CommIP" msprop:Generator_ColumnPropNameInTable="CommIPColumn" msprop:Generator_UserColumnName="CommIP" type="xs:decimal" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvoiceDate" msprop:Generator_ColumnVarNameInTable="columnInvoiceDate" msprop:Generator_ColumnPropNameInRow="InvoiceDate" msprop:Generator_ColumnPropNameInTable="InvoiceDateColumn" msprop:Generator_UserColumnName="InvoiceDate" type="xs:int" />
+              <xs:element name="PaymentDate" msprop:Generator_ColumnVarNameInTable="columnPaymentDate" msprop:Generator_ColumnPropNameInRow="PaymentDate" msprop:Generator_ColumnPropNameInTable="PaymentDateColumn" msprop:Generator_UserColumnName="PaymentDate" type="xs:dateTime" />
+              <xs:element name="OrderID" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Developer" msprop:Generator_ColumnVarNameInTable="columnDeveloper" msprop:Generator_ColumnPropNameInRow="Developer" msprop:Generator_ColumnPropNameInTable="DeveloperColumn" msprop:Generator_UserColumnName="Developer">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GSTIncluded" msprop:Generator_ColumnVarNameInTable="columnGSTIncluded" msprop:Generator_ColumnPropNameInRow="GSTIncluded" msprop:Generator_ColumnPropNameInTable="GSTIncludedColumn" msprop:Generator_UserColumnName="GSTIncluded" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CommI" msprop:Generator_ColumnVarNameInTable="columnCommI" msprop:Generator_ColumnPropNameInRow="CommI" msprop:Generator_ColumnPropNameInTable="CommIColumn" msprop:Generator_UserColumnName="CommI" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IncomeType" msprop:Generator_ColumnVarNameInTable="columnIncomeType" msprop:Generator_ColumnPropNameInRow="IncomeType" msprop:Generator_ColumnPropNameInTable="IncomeTypeColumn" msprop:Generator_UserColumnName="IncomeType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Firstname" msprop:Generator_ColumnVarNameInTable="columnFirstname" msprop:Generator_ColumnPropNameInRow="Firstname" msprop:Generator_ColumnPropNameInTable="FirstnameColumn" msprop:Generator_UserColumnName="Firstname">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Surname" msprop:Generator_ColumnVarNameInTable="columnSurname" msprop:Generator_ColumnPropNameInRow="Surname" msprop:Generator_ColumnPropNameInTable="SurnameColumn" msprop:Generator_UserColumnName="Surname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Suburb" msprop:Generator_ColumnVarNameInTable="columnSuburb" msprop:Generator_ColumnPropNameInRow="Suburb" msprop:Generator_ColumnPropNameInTable="SuburbColumn" msprop:Generator_UserColumnName="Suburb" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="State" msprop:Generator_ColumnVarNameInTable="columnState" msprop:Generator_ColumnPropNameInRow="State" msprop:Generator_ColumnPropNameInTable="StateColumn" msprop:Generator_UserColumnName="State" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PostCode" msprop:Generator_ColumnVarNameInTable="columnPostCode" msprop:Generator_ColumnPropNameInRow="PostCode" msprop:Generator_ColumnPropNameInTable="PostCodeColumn" msprop:Generator_UserColumnName="PostCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PhoneNumber" msprop:Generator_ColumnVarNameInTable="columnPhoneNumber" msprop:Generator_ColumnPropNameInRow="PhoneNumber" msprop:Generator_ColumnPropNameInTable="PhoneNumberColumn" msprop:Generator_UserColumnName="PhoneNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FaxNumber" msprop:Generator_ColumnVarNameInTable="columnFaxNumber" msprop:Generator_ColumnPropNameInRow="FaxNumber" msprop:Generator_ColumnPropNameInTable="FaxNumberColumn" msprop:Generator_UserColumnName="FaxNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="14" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MobileNumber" msprop:Generator_ColumnVarNameInTable="columnMobileNumber" msprop:Generator_ColumnPropNameInRow="MobileNumber" msprop:Generator_ColumnPropNameInTable="MobileNumberColumn" msprop:Generator_UserColumnName="MobileNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="14" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EmailAddress" msprop:Generator_ColumnVarNameInTable="columnEmailAddress" msprop:Generator_ColumnPropNameInRow="EmailAddress" msprop:Generator_ColumnPropNameInTable="EmailAddressColumn" msprop:Generator_UserColumnName="EmailAddress" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WebSite" msprop:Generator_ColumnVarNameInTable="columnWebSite" msprop:Generator_ColumnPropNameInRow="WebSite" msprop:Generator_ColumnPropNameInTable="WebSiteColumn" msprop:Generator_UserColumnName="WebSite" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ABN" msprop:Generator_ColumnVarNameInTable="columnABN" msprop:Generator_ColumnPropNameInRow="ABN" msprop:Generator_ColumnPropNameInTable="ABNColumn" msprop:Generator_UserColumnName="ABN" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PostalAddress" msprop:Generator_ColumnVarNameInTable="columnPostalAddress" msprop:Generator_ColumnPropNameInRow="PostalAddress" msprop:Generator_ColumnPropNameInTable="PostalAddressColumn" msprop:Generator_UserColumnName="PostalAddress" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PostalSuburb" msprop:Generator_ColumnVarNameInTable="columnPostalSuburb" msprop:Generator_ColumnPropNameInRow="PostalSuburb" msprop:Generator_ColumnPropNameInTable="PostalSuburbColumn" msprop:Generator_UserColumnName="PostalSuburb" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PostalState" msprop:Generator_ColumnVarNameInTable="columnPostalState" msprop:Generator_ColumnPropNameInRow="PostalState" msprop:Generator_ColumnPropNameInTable="PostalStateColumn" msprop:Generator_UserColumnName="PostalState" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PostalPostCode" msprop:Generator_ColumnVarNameInTable="columnPostalPostCode" msprop:Generator_ColumnPropNameInRow="PostalPostCode" msprop:Generator_ColumnPropNameInTable="PostalPostCodeColumn" msprop:Generator_UserColumnName="PostalPostCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CommC" msprop:Generator_ColumnVarNameInTable="columnCommC" msprop:Generator_ColumnPropNameInRow="CommC" msprop:Generator_ColumnPropNameInTable="CommCColumn" msprop:Generator_UserColumnName="CommC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VendorDetailsSubtotal" msprop:Generator_TableClassName="VendorDetailsSubtotalDataTable" msprop:Generator_TableVarName="tableVendorDetailsSubtotal" msprop:Generator_TablePropName="VendorDetailsSubtotal" msprop:Generator_RowDeletingName="VendorDetailsSubtotalRowDeleting" msprop:Generator_RowChangingName="VendorDetailsSubtotalRowChanging" msprop:Generator_RowEvHandlerName="VendorDetailsSubtotalRowChangeEventHandler" msprop:Generator_RowDeletedName="VendorDetailsSubtotalRowDeleted" msprop:Generator_UserTableName="VendorDetailsSubtotal" msprop:Generator_RowChangedName="VendorDetailsSubtotalRowChanged" msprop:Generator_RowEvArgName="VendorDetailsSubtotalRowChangeEvent" msprop:Generator_RowClassName="VendorDetailsSubtotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VendorID" msprop:Generator_ColumnVarNameInTable="columnVendorID" msprop:Generator_ColumnPropNameInRow="VendorID" msprop:Generator_ColumnPropNameInTable="VendorIDColumn" msprop:Generator_UserColumnName="VendorID" type="xs:int" />
+              <xs:element name="Subtotal" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_UserColumnName="Subtotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GSTSubtotal" msprop:Generator_ColumnVarNameInTable="columnGSTSubtotal" msprop:Generator_ColumnPropNameInRow="GSTSubtotal" msprop:Generator_ColumnPropNameInTable="GSTSubtotalColumn" msprop:Generator_UserColumnName="GSTSubtotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccountTransactionTypeCredit" />
+      <xs:field xpath="mstns:AccountTransactionID" />
+    </xs:unique>
+    <xs:unique name="AccountTransactionTypeDebit_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccountTransactionTypeDebit" />
+      <xs:field xpath="mstns:AccountTransactionID" />
+    </xs:unique>
+    <xs:unique name="CustomerInvoiceDetailsTotals_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CustomerInvoiceDetailsTotals" />
+      <xs:field xpath="mstns:CustomerID" />
+      <xs:field xpath="mstns:InvoiceID" />
+    </xs:unique>
+    <xs:unique name="CustomerInvoiceDetailsTotalTotals_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CustomerInvoiceDetailsTotalTotals" />
+      <xs:field xpath="mstns:CustomerID" />
+    </xs:unique>
+    <xs:unique name="CustomerInvoiceProductsTotals_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CustomerInvoiceProductsTotals" />
+      <xs:field xpath="mstns:CustomerID" />
+      <xs:field xpath="mstns:InvoiceID" />
+    </xs:unique>
+    <xs:unique name="CustomerInvoiceProductsTotalTotals_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CustomerInvoiceProductsTotalTotals" />
+      <xs:field xpath="mstns:CustomerID" />
+    </xs:unique>
+    <xs:unique name="ProductsInvoiceCustomerSummary_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ProductsInvoiceCustomerSummary" />
+      <xs:field xpath="mstns:ProductID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

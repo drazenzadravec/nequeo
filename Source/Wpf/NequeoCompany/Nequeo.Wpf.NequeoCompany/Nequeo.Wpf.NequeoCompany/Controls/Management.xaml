@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Management"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:manageDetails="clr-namespace:Nequeo.Wpf.NequeoCompany.Controls.Manage"
+             mc:Ignorable="d" 
+             d:DesignHeight="724" d:DesignWidth="707" Loaded="UserControl_Loaded" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Row0" Height="135*" />
+            <RowDefinition Name="Row1" Height="10" />
+            <RowDefinition Name="Row2" Height="135*" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Management" Name="groupBoxManagement">
+            <Grid Name="gridManagement">
+                <TabControl Margin="5,5,5,5" Name="tabControlManagement" >
+                    <TabItem Header="User" Name="tabItemUser">
+                        <Grid>
+                            <manageDetails:User x:Name="user" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="User Type" Name="tabItemUserType">
+                        <Grid>
+                            <manageDetails:UserType x:Name="userType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Payment Type" Name="tabItemPaymentType">
+                        <Grid>
+                            <manageDetails:PaymentType x:Name="paymentType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Pay Interval Type" Name="tabItemPayIntervalType">
+                        <Grid>
+                            <manageDetails:PayIntervalType x:Name="payIntervalType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Income Type" Name="tabItemIncomeType">
+                        <Grid>
+                            <manageDetails:IncomeType x:Name="incomeType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="GST Income Type" Name="tabItemGstIncomeType">
+                        <Grid>
+                            <manageDetails:GSTIncomeType x:Name="gstIncomeType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Expense Type" Name="tabItemExpenseType">
+                        <Grid>
+                            <manageDetails:ExpenseType x:Name="expenseType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Data Member" Name="tabItemDataMember">
+                        <Grid>
+                            <manageDetails:DataMember x:Name="dataMember" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Data Member Table" Name="tabItemDataMemberTables">
+                        <Grid>
+                            <manageDetails:DataMemberTable x:Name="dataMemberTable" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </GroupBox>
+        <GridSplitter Grid.Row="1" Height="7" ResizeDirection="Rows" HorizontalAlignment="Stretch" />
+        <GroupBox Grid.Row="2" Header="Management" Name="groupBoxManagementDetails">
+            <Grid Name="gridManagementDetails">
+                <TabControl Margin="5,5,5,5" Name="tabControlManagementDetails" >
+                    <TabItem Header="Asset Category" Name="tabItemAssetCategory">
+                        <Grid>
+                            <manageDetails:AssetCategory x:Name="assetCategory" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Product Category" Name="tabItemProductCategory">
+                        <Grid>
+                            <manageDetails:ProductCategory x:Name="productCategory" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Product Sub Category" Name="tabItemProductSubCategory">
+                        <Grid>
+                            <manageDetails:ProductSubCategory x:Name="productSubCategory" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Product Status" Name="tabItemProductStatus">
+                        <Grid>
+                            <manageDetails:ProductStatus x:Name="productStatus" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Account Type" Name="tabItemAccountType">
+                        <Grid>
+                            <manageDetails:AccountType x:Name="accountType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Transaction Type" Name="tabItemTransactionType">
+                        <Grid>
+                            <manageDetails:TransactionType x:Name="transactionType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Purchase Type" Name="tabItemPurchaseType">
+                        <Grid>
+                            <manageDetails:PurchaseType x:Name="purchaseType" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="State" Name="tabItemState">
+                        <Grid>
+                            <manageDetails:State x:Name="state" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Generic Data" Name="tabItemGenericData">
+                        <Grid>
+                            <manageDetails:GenericData x:Name="genericData" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

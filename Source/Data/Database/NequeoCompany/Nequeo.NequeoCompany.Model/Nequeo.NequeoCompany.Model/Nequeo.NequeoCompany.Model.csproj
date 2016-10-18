@@ -1,0 +1,1126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A5780740-EDDF-4893-B541-5768AAB5100A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nequeo.DataAccess.NequeoCompany</RootNamespace>
+    <AssemblyName>Nequeo.NequeoCompany.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NequeoCompanyKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\References\Staging\Data\NequeoCompany\Model\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Data\NequeoCompany\Model\Nequeo.NequeoCompany.Model.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging Release|AnyCPU'">
+    <OutputPath>..\..\..\..\..\References\Staging\Data\NequeoCompany\Model\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\..\..\References\Staging\Data\NequeoCompany\Model\Nequeo.NequeoCompany.Model.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Collections">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.ComponentModel, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=5bff97510f36166b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Cryptography, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=058191c6ae32205d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Common">
+      <HintPath>..\..\..\..\..\References\Staging\Data\Common\Nequeo.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.DataSet">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.Edm">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.SqlServer">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.LinqTo.Xml">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.LinqTo.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Data.SqlServer.Provider">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Data.SqlServer.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Handler, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=17ce537f814a362f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Net.ServiceModel">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Net.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Security, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=2d222aa2794dadca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Threading">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\PasswordAuthorisationCode.cs" />
+    <Compile Include="DataSet\Complete.cs">
+      <DependentUpon>Complete.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet\Complete.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Complete.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet\StoredProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoredProcedures.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet\Views.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Views.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Database.Schema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Schema.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DatabaseContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseContext.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extended\AccountType.cs" />
+    <Compile Include="Data\Extended\DataMember.cs" />
+    <Compile Include="Data\Extended\ExpenseType.cs" />
+    <Compile Include="Data\Extended\GstType.cs" />
+    <Compile Include="Data\Extended\IncomeType.cs" />
+    <Compile Include="Data\Extended\PayIntervalType.cs" />
+    <Compile Include="Data\Extended\PaymentType.cs" />
+    <Compile Include="Data\Extended\ProductCategoryType.cs" />
+    <Compile Include="Data\Extended\ProductStatusType.cs" />
+    <Compile Include="Data\Extended\ProductSubCategoryType.cs" />
+    <Compile Include="Data\Extended\PurchaseType.cs" />
+    <Compile Include="Data\Extended\StateType.cs" />
+    <Compile Include="Data\Extended\TransactionType.cs" />
+    <Compile Include="Data\Extended\UserType.cs" />
+    <Compile Include="Data\Extension\Account\Accounts.cs" />
+    <Compile Include="Data\Extension\Account\AccountType.cs" />
+    <Compile Include="Data\Extension\Account\DataMember.cs" />
+    <Compile Include="Data\Extension\Account\PaymentType.cs" />
+    <Compile Include="Data\Extension\Account\TransactionType.cs" />
+    <Compile Include="Data\Extension\Asset\Assets.cs" />
+    <Compile Include="Data\Extension\Company\Companies.cs" />
+    <Compile Include="Data\Extension\Company\GenericData.cs" />
+    <Compile Include="Data\Extension\ContextOverride.cs" />
+    <Compile Include="Data\Extension\Customer\Customers.cs" />
+    <Compile Include="Data\Extension\Customer\GstType.cs" />
+    <Compile Include="Data\Extension\Customer\IncomeType.cs" />
+    <Compile Include="Data\Extension\Customer\State.cs" />
+    <Compile Include="Data\Extension\Designer\Accounts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounts.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\AccountTransactions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountTransactions.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\AccountType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\AssetCategory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetCategory.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Assets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assets.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\BAS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BAS.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Companies.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Companies.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\CompanyPAYGInstalment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompanyPAYGInstalment.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Customers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customers.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\DataMember.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataMember.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\DataMemberTables.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataMemberTables.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\EmployeeBankAccounts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeBankAccounts.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\EmployeePAYG.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeePAYG.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Employees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employees.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\EmployeeSuperAccounts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeSuperAccounts.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ExpenseType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExpenseType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\FunctionScalar\GstFunction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GstFunction.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenericData.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Accounts.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounts.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Assets.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\AsyncAssets.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AsyncAssets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Companies.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Companies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Customers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Employees.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employees.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Products.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Products.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\User.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Vendors.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Vendors.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GenericInclude\Wages.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\GstType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GstType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\IncomeType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IncomeType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\InvoiceDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceDetails.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\InvoiceProducts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceProducts.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Invoices.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invoices.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\PayIntervalType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayIntervalType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\PaymentType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\AccountTransactionsProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountTransactionsProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\AssetProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\BASProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BASProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\CompaniesProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompaniesProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\CustomersProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomersProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\EmployeePAYGProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeePAYGProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\EmployeesProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeesProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\InvoiceDetailsProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceDetailsProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\InvoiceProductsProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceProductsProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\InvoicesProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoicesProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\SuperProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuperProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\TaxReturnProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaxReturnProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\VendorDetailsProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VendorDetailsProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\VendorsProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VendorsProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Procedure\WagesProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WagesProcedures.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ProductCategory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductCategory.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Products.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Products.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ProductStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\ProductSubCategory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductSubCategory.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\PurchaseType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\State.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Super.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Super.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\TaxReturn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaxReturn.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\TransactionType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransactionType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\UserType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\VendorDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VendorDetails.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Vendors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Vendors.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Designer\Wages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wages.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Employee\Employees.cs" />
+    <Compile Include="Data\Extension\Employee\PayIntervalType.cs" />
+    <Compile Include="Data\Extension\Employee\Wages.cs" />
+    <Compile Include="Data\Extension\Extension.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extension.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Extension\Product\ProductCategory.cs" />
+    <Compile Include="Data\Extension\Product\Products.cs" />
+    <Compile Include="Data\Extension\Product\ProductStatus.cs" />
+    <Compile Include="Data\Extension\Product\ProductSubCategory.cs" />
+    <Compile Include="Data\Extension\User\User.cs" />
+    <Compile Include="Data\Extension\User\UserOverride.cs" />
+    <Compile Include="Data\Extension\User\UserType.cs" />
+    <Compile Include="Data\Extension\Vendor\ExpenseType.cs" />
+    <Compile Include="Data\Extension\Vendor\PurchaseType.cs" />
+    <Compile Include="Data\Extension\Vendor\Vendors.cs" />
+    <Compile Include="Edm\Account.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\AccountTransaction.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\AccountType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Asset.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\AssetCategory.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\BA.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Company.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\CompanyPAYGInstalment.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Complete.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Complete.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Complete.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Complete.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Complete.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Customer.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\DataMember.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\DataMemberTable.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Employee.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\EmployeeBankAccount.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\EmployeePAYG.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\EmployeeSuperAccount.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\ExpenseType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Extension\Extension.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extension.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\GenericData.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\GstIncomeType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\IncomeType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Invoice.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\InvoiceDetail.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\InvoiceProduct.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Model\Designer\Company.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Company.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Model\Designer\Products.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Products.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Model\Designer\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Model\User\User.cs" />
+    <Compile Include="Edm\PayIntervalType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\PaymentType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Product.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\ProductCategory.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\ProductStatu.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\ProductSubCategory.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\PurchaseType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\State.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Super.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\TaxReturn.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\TransactionType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\User.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\UserType.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Vendor.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\VendorDetail.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edm\Wage.cs">
+      <DependentUpon>Complete.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumDataMember.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumDataMember.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumExpenseType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumExpenseType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumGstType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumGstType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumIncomeType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumIncomeType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumStateLongName.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumStateLongName.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumStateShortName.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumStateShortName.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EnumUserType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumUserType.xml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DataSet\Complete.xsc">
+      <DependentUpon>Complete.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\Complete.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Complete.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\Complete.xss">
+      <DependentUpon>Complete.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\StoredProcedures.xsc">
+      <DependentUpon>StoredProcedures.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\StoredProcedures.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StoredProcedures.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\StoredProcedures.xss">
+      <DependentUpon>StoredProcedures.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\Views.xsc">
+      <DependentUpon>Views.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\Views.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Views.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\Views.xss">
+      <DependentUpon>Views.xsd</DependentUpon>
+    </None>
+    <None Include="Data\Database.xsd">
+      <SubType>Designer</SubType>
+      <Generator>DatabaseXmlObjectCodeGenerator</Generator>
+      <LastGenOutput>Database.Schema.xml</LastGenOutput>
+    </None>
+    <None Include="Data\DatabaseContext.xsd">
+      <SubType>Designer</SubType>
+      <Generator>DatabaseContextCodeGenerator</Generator>
+      <LastGenOutput>DatabaseContext.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Accounts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Accounts.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Assets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Assets.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\AsyncAssets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AsyncAssets.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Companies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Companies.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Customers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Customers.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Employees.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Employees.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Products.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Products.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\User.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>User.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Vendors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Vendors.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\Wages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Wages.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Extension\Designer\GenericInclude\_AsyncExecuteTypeGeneric.include" />
+    <None Include="Data\Extension\Designer\GenericInclude\_DataExtensionGeneric.include" />
+    <EntityDeploy Include="Edm\Complete.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Complete.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Edm\Complete.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Complete.edmx</DependentUpon>
+      <LastGenOutput>Complete.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Edm\Complete.edmx.diagram">
+      <DependentUpon>Complete.edmx</DependentUpon>
+    </None>
+    <None Include="Edm\Complete.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Complete.edmx</DependentUpon>
+      <LastGenOutput>Complete.cs</LastGenOutput>
+    </None>
+    <None Include="NequeoCompanyKey.snk" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Database.Schema.xml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.xsd</DependentUpon>
+      <Generator>DatabaseXmlModelObjectCodeGenerator</Generator>
+      <LastGenOutput>Database.Schema.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Accounts.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Accounts.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\AccountTransactions.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>AccountTransactions.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\AccountType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>AccountType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\AssetCategory.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>AssetCategory.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Assets.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Assets.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\BAS.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>BAS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Companies.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Companies.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\CompanyPAYGInstalment.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>CompanyPAYGInstalment.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Customers.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Customers.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\DataMember.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>DataMember.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\DataMemberTables.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>DataMemberTables.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\EmployeeBankAccounts.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>EmployeeBankAccounts.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\EmployeePAYG.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>EmployeePAYG.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Employees.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Employees.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\EmployeeSuperAccounts.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>EmployeeSuperAccounts.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ExpenseType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ExpenseType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\FunctionScalar\GstFunction.xml">
+      <Generator>FunctionScalarExtensionCodeGenerator</Generator>
+      <LastGenOutput>GstFunction.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\GenericData.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>GenericData.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\GstType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>GstType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\IncomeType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>IncomeType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\InvoiceDetails.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>InvoiceDetails.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\InvoiceProducts.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>InvoiceProducts.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Invoices.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Invoices.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\PayIntervalType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>PayIntervalType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\PaymentType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>PaymentType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\AccountTransactionsProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>AccountTransactionsProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\AssetProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>AssetProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\BASProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>BASProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\CompaniesProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>CompaniesProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\CustomersProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>CustomersProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\EmployeePAYGProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>EmployeePAYGProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\EmployeesProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>EmployeesProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\InvoiceDetailsProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>InvoiceDetailsProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\InvoiceProductsProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>InvoiceProductsProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\InvoicesProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>InvoicesProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\SuperProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>SuperProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\TaxReturnProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>TaxReturnProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\VendorDetailsProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>VendorDetailsProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\VendorsProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>VendorsProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Procedure\WagesProcedures.xml">
+      <Generator>ProcedureExtensionCodeGenerator</Generator>
+      <LastGenOutput>WagesProcedures.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ProductCategory.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ProductCategory.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Products.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Products.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ProductStatus.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ProductStatus.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\ProductSubCategory.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>ProductSubCategory.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\PurchaseType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>PurchaseType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\State.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>State.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Super.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Super.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\TaxReturn.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>TaxReturn.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\TransactionType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>TransactionType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\User.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\UserType.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>UserType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\VendorDetails.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>VendorDetails.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Vendors.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Vendors.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Designer\Wages.xml">
+      <Generator>DataExtensionObjectCodeGenerator</Generator>
+      <LastGenOutput>Wages.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Extension\Extension.xml">
+      <Generator>DataExtensionContextObjectCodeGenerator</Generator>
+      <LastGenOutput>Extension.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Edm\Extension\Extension.xml">
+      <Generator>ModelDataContextObjectCodeGenerator</Generator>
+      <LastGenOutput>Extension.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Edm\Model\Designer\Company.xml">
+      <Generator>ModelObjectCodeGenerator</Generator>
+      <LastGenOutput>Company.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Edm\Model\Designer\Products.xml">
+      <Generator>ModelObjectCodeGenerator</Generator>
+      <LastGenOutput>Products.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Edm\Model\Designer\User.xml">
+      <Generator>ModelObjectCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumDataMember.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumDataMember.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumExpenseType.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumExpenseType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumGstType.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumGstType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumIncomeType.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumIncomeType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumStateLongName.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumStateLongName.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumStateShortName.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumStateShortName.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Enum\EnumUserType.xml">
+      <Generator>EnumObjectCodeGenerator</Generator>
+      <LastGenOutput>EnumUserType.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="GenerationConfig\GlobalDataConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -96,6 +96,9 @@
     <Reference Include="Nequeo.Net.Http">
       <HintPath>..\..\..\..\References\Staging\Nequeo.Net.Http.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.Net.Http2">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.Http2.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Net.WebSockets">
       <HintPath>..\..\..\..\References\Staging\Nequeo.Net.WebSockets.dll</HintPath>
     </Reference>
@@ -144,6 +147,7 @@
     </Compile>
     <Compile Include="Data\MimeType.cs" />
     <Compile Include="Download\Manager.cs" />
+    <Compile Include="Http2\Server.cs" />
     <Compile Include="Http\Server.cs" />
     <Compile Include="Http\ServerSingle.cs" />
     <Compile Include="Http\ServerSingleDynamic.cs" />

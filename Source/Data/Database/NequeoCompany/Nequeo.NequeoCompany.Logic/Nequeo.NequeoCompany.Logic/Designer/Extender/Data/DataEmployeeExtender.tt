@@ -1,0 +1,8 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# string CompanyNamespace = "Nequeo";#>
+<# string DatabaseName = "NequeoCompany";#>
+<# string TypeNameSpace = "Employee";#>
+<# string TypeName = "Employee";#>
+<# string DataTypeName = "Employees";#>
+<#@ include file="_DataExtenderGeneric.include" #>

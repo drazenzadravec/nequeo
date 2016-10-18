@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Employees.CustomReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="955" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Employee" HorizontalAlignment="Left" Margin="6,6,0,6" Name="groupBoxEmployeeReport" Width="309">
+            <Grid>
+                <Label Content="Employee ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblEmployeeReportID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtEmployeeReportID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectEmployeeReport" VerticalAlignment="Top" Width="36" ToolTip="Select a employee" Click="btnSelectEmployeeReport_Click" />
+                <Button Content="View Employee" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewEmployeeReport" VerticalAlignment="Top" Width="125" ToolTip="View Employee" Click="btnViewEmployeeReport_Click" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,1682 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Nequeo.DataAccess.NequeoCompany.Edm.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="NequeoDataAccessNequeoCompanyEdmStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Accounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountTransactions" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.AccountTransactions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.AccountType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssetCategory" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.AssetCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Assets" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Assets" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BAS" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.BAS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Companies" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Companies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyPAYGInstalment" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.CompanyPAYGInstalment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customers" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DataMember" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.DataMember" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DataMemberTables" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.DataMemberTables" store:Type="Tables" store:Schema="dbo" store:Name="DataMemberTables">
+            <DefiningQuery>SELECT 
+      [DataMemberTables].[DataMemberID] AS [DataMemberID], 
+      [DataMemberTables].[DataTables] AS [DataTables], 
+      [DataMemberTables].[TableName] AS [TableName], 
+      [DataMemberTables].[Reference] AS [Reference], 
+      [DataMemberTables].[NameTo] AS [NameTo], 
+      [DataMemberTables].[DataTableKeyName] AS [DataTableKeyName]
+      FROM [dbo].[DataMemberTables] AS [DataMemberTables]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EmployeeBankAccounts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.EmployeeBankAccounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeePAYG" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.EmployeePAYG" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employees" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Employees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeSuperAccounts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.EmployeeSuperAccounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ExpenseType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.ExpenseType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GenericData" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.GenericData" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GstIncomeType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.GstIncomeType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="IncomeType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.IncomeType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InvoiceDetails" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.InvoiceDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InvoiceProducts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.InvoiceProducts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Invoices" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Invoices" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PayIntervalType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.PayIntervalType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PaymentType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.PaymentType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductCategory" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.ProductCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductStatus" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.ProductStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductSubCategory" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.ProductSubCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PurchaseType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.PurchaseType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="State" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.State" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Super" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Super" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TaxReturn" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.TaxReturn" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TransactionType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.TransactionType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserType" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.UserType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VendorDetails" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.VendorDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vendors" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Vendors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Wages" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Store.Wages" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="varchar" MaxLength="40" />
+          <Property Name="Surname" Type="varchar" MaxLength="40" />
+          <Property Name="Bank" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="AccountName" Type="varchar" MaxLength="60" />
+          <Property Name="BSB" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="AccountNumber" Type="varchar" Nullable="false" MaxLength="14" />
+          <Property Name="AccountType" Type="varchar" MaxLength="50" />
+          <Property Name="Branch" Type="varchar" MaxLength="20" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="14" />
+          <Property Name="FaxNumber" Type="varchar" MaxLength="14" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+          <Property Name="Balance" Type="money" />
+        </EntityType>
+        <EntityType Name="AccountTransactions">
+          <Key>
+            <PropertyRef Name="AccountTransactionID" />
+          </Key>
+          <Property Name="AccountTransactionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="DataMember" Type="int" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="ReferenceNumber" Type="varchar" MaxLength="50" />
+          <Property Name="PaidToFrom" Type="varchar" MaxLength="50" />
+          <Property Name="PaidToFromID" Type="int" />
+          <Property Name="PaidToFromRefID" Type="int" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeID" />
+          </Key>
+          <Property Name="AccountTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AssetCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="AssetID" />
+          </Key>
+          <Property Name="AssetID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="VendorDetailsID" Type="int" />
+          <Property Name="Location" Type="varchar" MaxLength="150" />
+          <Property Name="Model" Type="varchar" MaxLength="200" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="150" />
+          <Property Name="ManufacturerWebSite" Type="varchar" MaxLength="200" />
+          <Property Name="Category" Type="varchar" MaxLength="50" />
+          <Property Name="Units" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="Details" Type="varchar" MaxLength="500" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+          <Property Name="Amount" Type="money" />
+        </EntityType>
+        <EntityType Name="BAS">
+          <Key>
+            <PropertyRef Name="BASID" />
+          </Key>
+          <Property Name="BASID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="BasDate" Type="datetime" Nullable="false" />
+          <Property Name="DocumentID" Type="varchar" MaxLength="20" />
+          <Property Name="Reference" Type="varchar" MaxLength="20" />
+          <Property Name="EFTCode" Type="varchar" MaxLength="20" />
+          <Property Name="TotalSales" Type="money" Nullable="false" />
+          <Property Name="ExportSales" Type="money" />
+          <Property Name="OtherGSTFreeSales" Type="money" />
+          <Property Name="CapitalPurchases" Type="money" />
+          <Property Name="NonCapitalPurchases" Type="money" Nullable="false" />
+          <Property Name="GSTOnSales" Type="money" Nullable="false" />
+          <Property Name="GSTOnPurchases" Type="money" Nullable="false" />
+          <Property Name="PaymentOrRefund" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+          <Property Name="TotalWages" Type="money" Nullable="false" />
+          <Property Name="PAYGWithheld" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Firstname" Type="varchar" MaxLength="40" />
+          <Property Name="Surname" Type="varchar" MaxLength="40" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Suburb" Type="varchar" MaxLength="30" />
+          <Property Name="State" Type="varchar" MaxLength="5" />
+          <Property Name="Postcode" Type="varchar" MaxLength="5" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="14" />
+          <Property Name="FaxNumber" Type="varchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="12" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+          <Property Name="ABN" Type="varchar" MaxLength="15" />
+          <Property Name="TFN" Type="varchar" MaxLength="16" />
+          <Property Name="PostalAddress" Type="varchar" MaxLength="50" />
+          <Property Name="PostalSuburb" Type="varchar" MaxLength="30" />
+          <Property Name="PostalState" Type="varchar" MaxLength="5" />
+          <Property Name="PostalPostcode" Type="varchar" MaxLength="5" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="CompanyPAYGInstalment">
+          <Key>
+            <PropertyRef Name="PAYGInstID" />
+          </Key>
+          <Property Name="PAYGInstID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AssessmentYear" Type="varchar" MaxLength="50" />
+          <Property Name="InstalRate" Type="float" />
+          <Property Name="TaxOnIncome" Type="money" />
+          <Property Name="GDPTax" Type="money" />
+          <Property Name="InstalCalTaxOffice" Type="money" />
+          <Property Name="InstalmentDate" Type="datetime" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Firstname" Type="varchar" MaxLength="40" />
+          <Property Name="Surname" Type="varchar" MaxLength="40" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Suburb" Type="varchar" MaxLength="30" />
+          <Property Name="State" Type="varchar" MaxLength="5" />
+          <Property Name="PostCode" Type="varchar" MaxLength="5" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="14" />
+          <Property Name="FaxNumber" Type="varchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="12" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+          <Property Name="ABN" Type="varchar" MaxLength="15" />
+          <Property Name="PostalAddress" Type="varchar" MaxLength="50" />
+          <Property Name="PostalSuburb" Type="varchar" MaxLength="30" />
+          <Property Name="PostalState" Type="varchar" MaxLength="5" />
+          <Property Name="PostalPostCode" Type="varchar" MaxLength="5" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DataMember">
+          <Key>
+            <PropertyRef Name="DataMemberID" />
+          </Key>
+          <Property Name="DataMemberID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="DataMemberTableID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Nequeo.dbo.DataMemberTables' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="DataMemberTables">
+          <Key>
+            <PropertyRef Name="DataMemberID" />
+            <PropertyRef Name="DataTables" />
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="Reference" />
+          </Key>
+          <Property Name="DataMemberID" Type="int" Nullable="false" />
+          <Property Name="DataTables" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TableName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Reference" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="NameTo" Type="varchar" MaxLength="50" />
+          <Property Name="DataTableKeyName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeBankAccounts">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Bank" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccountName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="BSB" Type="varchar" Nullable="false" MaxLength="8" />
+          <Property Name="AccountNumber" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EmployeePAYG">
+          <Key>
+            <PropertyRef Name="PAYGID" />
+          </Key>
+          <Property Name="PAYGID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="varchar" MaxLength="50" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Suburb" Type="varchar" MaxLength="30" />
+          <Property Name="State" Type="varchar" MaxLength="5" />
+          <Property Name="Postcode" Type="varchar" MaxLength="5" />
+          <Property Name="HomeNumber" Type="varchar" MaxLength="14" />
+          <Property Name="FaxNumber" Type="varchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="12" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+          <Property Name="TFN" Type="varchar" MaxLength="14" />
+          <Property Name="AnnualWage" Type="money" Nullable="false" />
+          <Property Name="SuperRate" Type="float" Nullable="false" />
+          <Property Name="TaxRate" Type="float" Nullable="false" />
+          <Property Name="BaseHours" Type="float" Nullable="false" />
+          <Property Name="WageInclude" Type="float" Nullable="false" />
+          <Property Name="BCoefficient" Type="float" Nullable="false" />
+          <Property Name="PayInterval" Type="varchar" Nullable="false" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="EmployeeSuperAccounts">
+          <Key>
+            <PropertyRef Name="SuperFundID" />
+          </Key>
+          <Property Name="SuperFundID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="SuperName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="PolicyNumber" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ExpenseType">
+          <Key>
+            <PropertyRef Name="ExpenseTypeID" />
+          </Key>
+          <Property Name="ExpenseTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="GenericData">
+          <Key>
+            <PropertyRef Name="GenericDataID" />
+          </Key>
+          <Property Name="GenericDataID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DataValue" Type="varchar(max)" Nullable="false" />
+          <Property Name="DataValueType" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="GstIncomeType">
+          <Key>
+            <PropertyRef Name="GstIncomeTypeID" />
+          </Key>
+          <Property Name="GstIncomeTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IncomeType">
+          <Key>
+            <PropertyRef Name="IncomeTypeID" />
+          </Key>
+          <Property Name="IncomeTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="InvoiceDetails">
+          <Key>
+            <PropertyRef Name="InvoiceDetailsID" />
+          </Key>
+          <Property Name="InvoiceDetailsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceID" Type="int" Nullable="false" />
+          <Property Name="Hours" Type="float" Nullable="false" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="Rate" Type="money" Nullable="false" />
+          <Property Name="Total" Type="money" Nullable="false" />
+          <Property Name="GST" Type="money" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="InvoiceProducts">
+          <Key>
+            <PropertyRef Name="InvoiceProductID" />
+          </Key>
+          <Property Name="InvoiceProductID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Units" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="Total" Type="money" Nullable="false" />
+          <Property Name="GST" Type="money" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Developer" Type="varchar" MaxLength="40" />
+          <Property Name="GSTIncluded" Type="varchar" MaxLength="10" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+          <Property Name="IncomeType" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PayIntervalType">
+          <Key>
+            <PropertyRef Name="PayIntervalTypeID" />
+          </Key>
+          <Property Name="PayIntervalTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ProductVersion" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="ProductionDate" Type="datetime" />
+          <Property Name="Model" Type="varchar" MaxLength="100" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Category" Type="varchar" MaxLength="50" />
+          <Property Name="Units" Type="int" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+          <Property Name="SubCategory" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductStatus">
+          <Key>
+            <PropertyRef Name="ProductStatusID" />
+          </Key>
+          <Property Name="ProductStatusID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ProductSubCategory">
+          <Key>
+            <PropertyRef Name="SubCategoryID" />
+          </Key>
+          <Property Name="SubCategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="SubCategoryName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PurchaseType">
+          <Key>
+            <PropertyRef Name="PurchaseTypeID" />
+          </Key>
+          <Property Name="PurchaseTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LongName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Super">
+          <Key>
+            <PropertyRef Name="SuperID" />
+          </Key>
+          <Property Name="SuperID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="SuperFundID" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="TaxReturn">
+          <Key>
+            <PropertyRef Name="TaxReturnID" />
+          </Key>
+          <Property Name="TaxReturnID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="TaxReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="EFTCodeCustomerReference" Type="varchar" MaxLength="50" />
+          <Property Name="ATOCode" Type="varchar" MaxLength="50" />
+          <Property Name="ATOFileNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeID" />
+          </Key>
+          <Property Name="TransactionTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="LastName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Suspended" Type="bit" Nullable="false" />
+          <Property Name="LoginUserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LoginPassword" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserType" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="VendorDetails">
+          <Key>
+            <PropertyRef Name="VendorDetailsID" />
+          </Key>
+          <Property Name="VendorDetailsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VendorID" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="InvoiceNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Reference" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="GST" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+          <Property Name="PurchaseType" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="ExpenseType" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Vendors">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Firstname" Type="varchar" MaxLength="40" />
+          <Property Name="Surname" Type="varchar" MaxLength="40" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Suburb" Type="varchar" MaxLength="30" />
+          <Property Name="State" Type="varchar" MaxLength="5" />
+          <Property Name="Postcode" Type="varchar" MaxLength="5" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="14" />
+          <Property Name="FaxNumber" Type="varchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="12" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+          <Property Name="ABN" Type="varchar" MaxLength="15" />
+          <Property Name="PostalAddress" Type="varchar" MaxLength="50" />
+          <Property Name="PostalSuburb" Type="varchar" MaxLength="30" />
+          <Property Name="PostalState" Type="varchar" MaxLength="5" />
+          <Property Name="PostalPostcode" Type="varchar" MaxLength="5" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Wages">
+          <Key>
+            <PropertyRef Name="WageID" />
+          </Key>
+          <Property Name="WageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Hours" Type="float" Nullable="false" />
+          <Property Name="Rate" Type="money" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="PAYG" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="100" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Nequeo.DataAccess.NequeoCompany.Edm" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NequeoCompanyEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Account" />
+          <EntitySet Name="AccountTransactions" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.AccountTransaction" />
+          <EntitySet Name="AccountTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.AccountType" />
+          <EntitySet Name="AssetCategories" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.AssetCategory" />
+          <EntitySet Name="Assets" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Asset" />
+          <EntitySet Name="BAS" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.BA" />
+          <EntitySet Name="Companies" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Company" />
+          <EntitySet Name="CompanyPAYGInstalments" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.CompanyPAYGInstalment" />
+          <EntitySet Name="Customers" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Customer" />
+          <EntitySet Name="DataMembers" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.DataMember" />
+          <EntitySet Name="DataMemberTables" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.DataMemberTable" />
+          <EntitySet Name="EmployeeBankAccounts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.EmployeeBankAccount" />
+          <EntitySet Name="EmployeePAYGs" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.EmployeePAYG" />
+          <EntitySet Name="Employees" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Employee" />
+          <EntitySet Name="EmployeeSuperAccounts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.EmployeeSuperAccount" />
+          <EntitySet Name="GenericDatas" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.GenericData" />
+          <EntitySet Name="GstIncomeTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.GstIncomeType" />
+          <EntitySet Name="InvoiceDetails" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.InvoiceDetail" />
+          <EntitySet Name="InvoiceProducts" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.InvoiceProduct" />
+          <EntitySet Name="Invoices" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Invoice" />
+          <EntitySet Name="PayIntervalTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.PayIntervalType" />
+          <EntitySet Name="PaymentTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.PaymentType" />
+          <EntitySet Name="ProductCategories" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ProductCategory" />
+          <EntitySet Name="Products" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Product" />
+          <EntitySet Name="ProductStatus" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ProductStatu" />
+          <EntitySet Name="ProductSubCategories" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ProductSubCategory" />
+          <EntitySet Name="PurchaseTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.PurchaseType" />
+          <EntitySet Name="States" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.State" />
+          <EntitySet Name="Supers" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Super" />
+          <EntitySet Name="TaxReturns" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.TaxReturn" />
+          <EntitySet Name="TransactionTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.TransactionType" />
+          <EntitySet Name="VendorDetails" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.VendorDetail" />
+          <EntitySet Name="Vendors" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Vendor" />
+          <EntitySet Name="Wages" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.Wage" />
+          <EntitySet Name="UserTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.UserType" />
+          <EntitySet Name="Users" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.User" />
+          <EntitySet Name="IncomeTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.IncomeType" />
+          <EntitySet Name="ExpenseTypes" EntityType="Nequeo.DataAccess.NequeoCompany.Edm.ExpenseType" />
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Bank" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="AccountName" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="BSB" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="AccountType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Branch" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="WebSite" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="AccountTransaction">
+          <Key>
+            <PropertyRef Name="AccountTransactionID" />
+          </Key>
+          <Property Name="AccountTransactionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="DataMember" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionType" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PaidToFrom" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PaidToFromID" Type="Int32" />
+          <Property Name="PaidToFromRefID" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeID" />
+          </Key>
+          <Property Name="AccountTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="AssetCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetID" />
+          </Key>
+          <Property Name="AssetID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="VendorDetailsID" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Model" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="ManufacturerWebSite" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Category" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Details" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="BA">
+          <Key>
+            <PropertyRef Name="BASID" />
+          </Key>
+          <Property Name="BASID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="BasDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DocumentID" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Reference" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="EFTCode" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="TotalSales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ExportSales" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OtherGSTFreeSales" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CapitalPurchases" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NonCapitalPurchases" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="GSTOnSales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="GSTOnPurchases" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PaymentOrRefund" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="TotalWages" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PAYGWithheld" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Firstname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Suburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="Postcode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="WebSite" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ABN" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="TFN" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="PostalAddress" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PostalSuburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PostalState" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PostalPostcode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="CompanyPAYGInstalment">
+          <Key>
+            <PropertyRef Name="PAYGInstID" />
+          </Key>
+          <Property Name="PAYGInstID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AssessmentYear" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="InstalRate" Type="Double" />
+          <Property Name="TaxOnIncome" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GDPTax" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InstalCalTaxOffice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InstalmentDate" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Firstname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Suburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PostCode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="WebSite" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ABN" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PostalAddress" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PostalSuburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PostalState" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PostalPostCode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="DataMember">
+          <Key>
+            <PropertyRef Name="DataMemberID" />
+          </Key>
+          <Property Name="DataMemberID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="DataMemberTableID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataMemberTable">
+          <Key>
+            <PropertyRef Name="DataMemberID" />
+            <PropertyRef Name="DataTables" />
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="Reference" />
+          </Key>
+          <Property Name="DataMemberID" Type="Int32" Nullable="false" />
+          <Property Name="DataTables" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NameTo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DataTableKeyName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="EmployeeBankAccount">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Bank" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="AccountName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BSB" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="WebSite" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="EmployeePAYG">
+          <Key>
+            <PropertyRef Name="PAYGID" />
+          </Key>
+          <Property Name="PAYGID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DOB" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Suburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="Postcode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="HomeNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="TFN" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="AnnualWage" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="SuperRate" Type="Double" Nullable="false" />
+          <Property Name="TaxRate" Type="Double" Nullable="false" />
+          <Property Name="BaseHours" Type="Double" Nullable="false" />
+          <Property Name="WageInclude" Type="Double" Nullable="false" />
+          <Property Name="BCoefficient" Type="Double" Nullable="false" />
+          <Property Name="PayInterval" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="EmployeeSuperAccount">
+          <Key>
+            <PropertyRef Name="SuperFundID" />
+          </Key>
+          <Property Name="SuperFundID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="SuperName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PolicyNumber" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="WebSite" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GenericData">
+          <Key>
+            <PropertyRef Name="GenericDataID" />
+          </Key>
+          <Property Name="GenericDataID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DataValue" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DataValueType" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GstIncomeType">
+          <Key>
+            <PropertyRef Name="GstIncomeTypeID" />
+          </Key>
+          <Property Name="GstIncomeTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="InvoiceDetail">
+          <Key>
+            <PropertyRef Name="InvoiceDetailsID" />
+          </Key>
+          <Property Name="InvoiceDetailsID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceID" Type="Int32" Nullable="false" />
+          <Property Name="Hours" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="GST" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="InvoiceProduct">
+          <Key>
+            <PropertyRef Name="InvoiceProductID" />
+          </Key>
+          <Property Name="InvoiceProductID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Units" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="GST" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderID" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Developer" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="GSTIncluded" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="IncomeType" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PayIntervalType">
+          <Key>
+            <PropertyRef Name="PayIntervalTypeID" />
+          </Key>
+          <Property Name="PayIntervalTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ProductionDate" Type="DateTime" Precision="3" />
+          <Property Name="Model" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Category" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="SubCategory" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ProductStatu">
+          <Key>
+            <PropertyRef Name="ProductStatusID" />
+          </Key>
+          <Property Name="ProductStatusID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ProductSubCategory">
+          <Key>
+            <PropertyRef Name="SubCategoryID" />
+          </Key>
+          <Property Name="SubCategoryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="SubCategoryName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PurchaseType">
+          <Key>
+            <PropertyRef Name="PurchaseTypeID" />
+          </Key>
+          <Property Name="PurchaseTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LongName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Super">
+          <Key>
+            <PropertyRef Name="SuperID" />
+          </Key>
+          <Property Name="SuperID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="SuperFundID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaxReturn">
+          <Key>
+            <PropertyRef Name="TaxReturnID" />
+          </Key>
+          <Property Name="TaxReturnID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="TaxReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="EFTCodeCustomerReference" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ATOCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ATOFileNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeID" />
+          </Key>
+          <Property Name="TransactionTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VendorDetail">
+          <Key>
+            <PropertyRef Name="VendorDetailsID" />
+          </Key>
+          <Property Name="VendorDetailsID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="OrderNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Reference" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="GST" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="PurchaseType" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="ExpenseType" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Firstname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Suburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="Postcode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="WebSite" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ABN" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PostalAddress" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PostalSuburb" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PostalState" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PostalPostcode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Wage">
+          <Key>
+            <PropertyRef Name="WageID" />
+          </Key>
+          <Property Name="WageID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hours" Type="Double" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PAYG" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Type="Int64" Name="UserTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Suspended" Nullable="false" />
+          <Property Type="String" Name="LoginUserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LoginPassword" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="IncomeType">
+          <Key>
+            <PropertyRef Name="IncomeTypeID" />
+          </Key>
+          <Property Type="Int32" Name="IncomeTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ExpenseType">
+          <Key>
+            <PropertyRef Name="ExpenseTypeID" />
+          </Key>
+          <Property Type="Int32" Name="ExpenseTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NequeoDataAccessNequeoCompanyEdmStoreContainer" CdmEntityContainer="NequeoCompanyEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="BSB" ColumnName="BSB" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTransactions">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.AccountTransaction">
+              <MappingFragment StoreEntitySet="AccountTransactions">
+                <ScalarProperty Name="AccountTransactionID" ColumnName="AccountTransactionID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="DataMember" ColumnName="DataMember" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="PaidToFrom" ColumnName="PaidToFrom" />
+                <ScalarProperty Name="PaidToFromID" ColumnName="PaidToFromID" />
+                <ScalarProperty Name="PaidToFromRefID" ColumnName="PaidToFromRefID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetCategories">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.AssetCategory">
+              <MappingFragment StoreEntitySet="AssetCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Asset">
+              <MappingFragment StoreEntitySet="Assets">
+                <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorDetailsID" ColumnName="VendorDetailsID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="ManufacturerWebSite" ColumnName="ManufacturerWebSite" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAS">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.BA">
+              <MappingFragment StoreEntitySet="BAS">
+                <ScalarProperty Name="BASID" ColumnName="BASID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="BasDate" ColumnName="BasDate" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EFTCode" ColumnName="EFTCode" />
+                <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
+                <ScalarProperty Name="ExportSales" ColumnName="ExportSales" />
+                <ScalarProperty Name="OtherGSTFreeSales" ColumnName="OtherGSTFreeSales" />
+                <ScalarProperty Name="CapitalPurchases" ColumnName="CapitalPurchases" />
+                <ScalarProperty Name="NonCapitalPurchases" ColumnName="NonCapitalPurchases" />
+                <ScalarProperty Name="GSTOnSales" ColumnName="GSTOnSales" />
+                <ScalarProperty Name="GSTOnPurchases" ColumnName="GSTOnPurchases" />
+                <ScalarProperty Name="PaymentOrRefund" ColumnName="PaymentOrRefund" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TotalWages" ColumnName="TotalWages" />
+                <ScalarProperty Name="PAYGWithheld" ColumnName="PAYGWithheld" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="ABN" ColumnName="ABN" />
+                <ScalarProperty Name="TFN" ColumnName="TFN" />
+                <ScalarProperty Name="PostalAddress" ColumnName="PostalAddress" />
+                <ScalarProperty Name="PostalSuburb" ColumnName="PostalSuburb" />
+                <ScalarProperty Name="PostalState" ColumnName="PostalState" />
+                <ScalarProperty Name="PostalPostcode" ColumnName="PostalPostcode" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyPAYGInstalments">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.CompanyPAYGInstalment">
+              <MappingFragment StoreEntitySet="CompanyPAYGInstalment">
+                <ScalarProperty Name="PAYGInstID" ColumnName="PAYGInstID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="AssessmentYear" ColumnName="AssessmentYear" />
+                <ScalarProperty Name="InstalRate" ColumnName="InstalRate" />
+                <ScalarProperty Name="TaxOnIncome" ColumnName="TaxOnIncome" />
+                <ScalarProperty Name="GDPTax" ColumnName="GDPTax" />
+                <ScalarProperty Name="InstalCalTaxOffice" ColumnName="InstalCalTaxOffice" />
+                <ScalarProperty Name="InstalmentDate" ColumnName="InstalmentDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="ABN" ColumnName="ABN" />
+                <ScalarProperty Name="PostalAddress" ColumnName="PostalAddress" />
+                <ScalarProperty Name="PostalSuburb" ColumnName="PostalSuburb" />
+                <ScalarProperty Name="PostalState" ColumnName="PostalState" />
+                <ScalarProperty Name="PostalPostCode" ColumnName="PostalPostCode" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataMembers">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.DataMember">
+              <MappingFragment StoreEntitySet="DataMember">
+                <ScalarProperty Name="DataMemberID" ColumnName="DataMemberID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DataMemberTableID" ColumnName="DataMemberTableID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataMemberTables">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.DataMemberTable">
+              <MappingFragment StoreEntitySet="DataMemberTables">
+                <ScalarProperty Name="DataMemberID" ColumnName="DataMemberID" />
+                <ScalarProperty Name="DataTables" ColumnName="DataTables" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="NameTo" ColumnName="NameTo" />
+                <ScalarProperty Name="DataTableKeyName" ColumnName="DataTableKeyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeBankAccounts">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.EmployeeBankAccount">
+              <MappingFragment StoreEntitySet="EmployeeBankAccounts">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="BSB" ColumnName="BSB" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePAYGs">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.EmployeePAYG">
+              <MappingFragment StoreEntitySet="EmployeePAYG">
+                <ScalarProperty Name="PAYGID" ColumnName="PAYGID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TFN" ColumnName="TFN" />
+                <ScalarProperty Name="AnnualWage" ColumnName="AnnualWage" />
+                <ScalarProperty Name="SuperRate" ColumnName="SuperRate" />
+                <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+                <ScalarProperty Name="BaseHours" ColumnName="BaseHours" />
+                <ScalarProperty Name="WageInclude" ColumnName="WageInclude" />
+                <ScalarProperty Name="BCoefficient" ColumnName="BCoefficient" />
+                <ScalarProperty Name="PayInterval" ColumnName="PayInterval" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeSuperAccounts">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.EmployeeSuperAccount">
+              <MappingFragment StoreEntitySet="EmployeeSuperAccounts">
+                <ScalarProperty Name="SuperFundID" ColumnName="SuperFundID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SuperName" ColumnName="SuperName" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenericDatas">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.GenericData">
+              <MappingFragment StoreEntitySet="GenericData">
+                <ScalarProperty Name="GenericDataID" ColumnName="GenericDataID" />
+                <ScalarProperty Name="DataValue" ColumnName="DataValue" />
+                <ScalarProperty Name="DataValueType" ColumnName="DataValueType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GstIncomeTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.GstIncomeType">
+              <MappingFragment StoreEntitySet="GstIncomeType">
+                <ScalarProperty Name="GstIncomeTypeID" ColumnName="GstIncomeTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceDetails">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.InvoiceDetail">
+              <MappingFragment StoreEntitySet="InvoiceDetails">
+                <ScalarProperty Name="InvoiceDetailsID" ColumnName="InvoiceDetailsID" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceProducts">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.InvoiceProduct">
+              <MappingFragment StoreEntitySet="InvoiceProducts">
+                <ScalarProperty Name="InvoiceProductID" ColumnName="InvoiceProductID" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Invoice">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Developer" ColumnName="Developer" />
+                <ScalarProperty Name="GSTIncluded" ColumnName="GSTIncluded" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="IncomeType" ColumnName="IncomeType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayIntervalTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.PayIntervalType">
+              <MappingFragment StoreEntitySet="PayIntervalType">
+                <ScalarProperty Name="PayIntervalTypeID" ColumnName="PayIntervalTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentType">
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductStatus">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.ProductStatu">
+              <MappingFragment StoreEntitySet="ProductStatus">
+                <ScalarProperty Name="ProductStatusID" ColumnName="ProductStatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSubCategories">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.ProductSubCategory">
+              <MappingFragment StoreEntitySet="ProductSubCategory">
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.PurchaseType">
+              <MappingFragment StoreEntitySet="PurchaseType">
+                <ScalarProperty Name="PurchaseTypeID" ColumnName="PurchaseTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="LongName" ColumnName="LongName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supers">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Super">
+              <MappingFragment StoreEntitySet="Super">
+                <ScalarProperty Name="SuperID" ColumnName="SuperID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SuperFundID" ColumnName="SuperFundID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxReturns">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.TaxReturn">
+              <MappingFragment StoreEntitySet="TaxReturn">
+                <ScalarProperty Name="TaxReturnID" ColumnName="TaxReturnID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="TaxReturnDate" ColumnName="TaxReturnDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="EFTCodeCustomerReference" ColumnName="EFTCodeCustomerReference" />
+                <ScalarProperty Name="ATOCode" ColumnName="ATOCode" />
+                <ScalarProperty Name="ATOFileNumber" ColumnName="ATOFileNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorDetails">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.VendorDetail">
+              <MappingFragment StoreEntitySet="VendorDetails">
+                <ScalarProperty Name="VendorDetailsID" ColumnName="VendorDetailsID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="PurchaseType" ColumnName="PurchaseType" />
+                <ScalarProperty Name="ExpenseType" ColumnName="ExpenseType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Vendor">
+              <MappingFragment StoreEntitySet="Vendors">
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="ABN" ColumnName="ABN" />
+                <ScalarProperty Name="PostalAddress" ColumnName="PostalAddress" />
+                <ScalarProperty Name="PostalSuburb" ColumnName="PostalSuburb" />
+                <ScalarProperty Name="PostalState" ColumnName="PostalState" />
+                <ScalarProperty Name="PostalPostcode" ColumnName="PostalPostcode" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wages">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.Wage">
+              <MappingFragment StoreEntitySet="Wages">
+                <ScalarProperty Name="WageID" ColumnName="WageID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PAYG" ColumnName="PAYG" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+                <ScalarProperty Name="LoginUserName" ColumnName="LoginUserName" />
+                <ScalarProperty Name="Suspended" ColumnName="Suspended" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncomeTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.IncomeType">
+              <MappingFragment StoreEntitySet="IncomeType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IncomeTypeID" ColumnName="IncomeTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseTypes">
+            <EntityTypeMapping TypeName="Nequeo.DataAccess.NequeoCompany.Edm.ExpenseType">
+              <MappingFragment StoreEntitySet="ExpenseType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpenseTypeID" ColumnName="ExpenseTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

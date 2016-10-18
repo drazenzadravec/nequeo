@@ -1,0 +1,197 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Account"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dataSource="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:dataSourceEx="clr-namespace:Nequeo.DataAccess.NequeoCompany.Data.Extended;assembly=Nequeo.NequeoCompany.Model"
+             xmlns:nequeoComponentModel="clr-namespace:Nequeo.ComponentModel;assembly=Nequeo.Data" 
+             xmlns:nequeoWpf="clr-namespace:Nequeo.Wpf.UI;assembly=Nequeo.Wpf"
+             xmlns:nequeoWpfValidation="clr-namespace:Nequeo.Wpf.Validation;assembly=Nequeo.Wpf"
+             xmlns:accountReport="clr-namespace:Nequeo.Wpf.NequeoCompany.Controls.Accounts"
+             mc:Ignorable="d" 
+             d:DesignHeight="848" d:DesignWidth="819" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <dataSource:Accounts x:Key="AccountDataSource" />
+        <dataSourceEx:AccountTypeList x:Key="AccountTypeDataSoure" />
+
+        <Style x:Key="TextBoxValueError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Row0" Height="150*" />
+            <RowDefinition Name="Row1" Height="10" />
+            <RowDefinition Name="Row2" Height="120*" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Account" Name="groupBoxAccount">
+            <Grid Name="gridAccount">
+                <Grid.DataContext>
+                    <Binding Source="{StaticResource AccountDataSource}" />
+                </Grid.DataContext>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Name="InvoiceRow0" Width="660*" />
+                    <ColumnDefinition Name="InvoiceRow1" Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Name="gridAccountContainer">
+                    <GroupBox Name="groupBoxAccountContainer" IsEnabled="False" Foreground="Black">
+                        <Grid>
+                            <Label Content="Account ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblAccountID" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,31,0,0" Name="txtAccountID" VerticalAlignment="Top" 
+                                     Width="80" Text="{Binding Path=AccountID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                            <Label Content="Bank" Height="28" HorizontalAlignment="Left" Margin="92,6,0,0" Name="lblBank" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="92,31,0,0" Name="txtBank" VerticalAlignment="Top" Width="298" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="Bank" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Branch" Height="28" HorizontalAlignment="Left" Margin="397,6,0,0" Name="lblBranch" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="397,31,0,0" Name="txtBranch" VerticalAlignment="Top" Width="198" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="Branch" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Account Name" Height="28" HorizontalAlignment="Left" Margin="6,63,0,0" Name="lblAccountName" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,88,0,0" Name="txtAccountName" VerticalAlignment="Top" Width="198" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="AccountName" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="BSB" Height="28" HorizontalAlignment="Left" Margin="210,63,0,0" Name="lblBSB" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="210,88,0,0" Name="txtBSB" VerticalAlignment="Top" Width="87" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="BSB" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Account Number" Height="28" HorizontalAlignment="Left" Margin="304,63,0,0" Name="lblAccountNumber" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="304,88,0,0" Name="txtAccountNumber" VerticalAlignment="Top" Width="160" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="AccountNumber" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:EmptyNull OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Content="Balance $" Height="28" HorizontalAlignment="Left" Margin="470,63,0,0" Name="lblBalance" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="470,88,0,0" Name="txtBalance" VerticalAlignment="Top" Width="105" 
+                                     HorizontalContentAlignment="Right" Style="{StaticResource TextBoxValueError}" >
+                                <TextBox.Text>
+                                    <Binding Path="Balance" UpdateSourceTrigger="PropertyChanged" StringFormat="N4" >
+                                        <Binding.ValidationRules>
+                                            <nequeoWpfValidation:Decimal OnValidate="DataItemValid" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Content="Email Address" Height="28" HorizontalAlignment="Left" Margin="6,185,0,0" Name="lblEmailAddress" 
+                                     VerticalAlignment="Top" Width="125" Foreground="#FF0000E1" Cursor="Hand" 
+                                     Background="{x:Null}" BorderBrush="{x:Null}" AllowDrop="False" HorizontalContentAlignment="Left" BorderThickness="0" 
+                                    Focusable="False" IsTabStop="False" OverridesDefaultStyle="False" SnapsToDevicePixels="False" Click="lblEmailAddress_Click">
+                            </Button>
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="6,210,0,0" Name="txtEmaillAddress" VerticalAlignment="Top" Width="278"
+                                     Text="{Binding Path=EmailAddress, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Content="Website" Height="28" HorizontalAlignment="Left" Margin="290,185,0,0" Name="lblWebSite" 
+                                     VerticalAlignment="Top" Width="125" Foreground="#FF0000E1" Cursor="Hand" 
+                                     Background="{x:Null}" BorderBrush="{x:Null}" AllowDrop="False" HorizontalContentAlignment="Left" BorderThickness="0" 
+                                    Focusable="False" IsTabStop="False" OverridesDefaultStyle="False" SnapsToDevicePixels="False" Click="lblWebSite_Click">
+                            </Button>
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="290,210,0,0" Name="txtWebSite" VerticalAlignment="Top" Width="320"
+                                     Text="{Binding Path=WebSite, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="Account Type" Height="28" HorizontalAlignment="Left" Margin="6,123,0,0" Name="lblAccountType" VerticalAlignment="Top" />
+                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,148,0,0" Name="txtAccountType" VerticalAlignment="Top" Width="152" 
+                                ItemsSource="{Binding Source={StaticResource AccountTypeDataSoure}}" 
+                                SelectionChanged="txtAccountType_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Label Content="Contact First Name" Height="28" HorizontalAlignment="Left" Margin="164,123,0,0" Name="lblFirstname" VerticalAlignment="Top" Width="114" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="164,148,0,0" Name="txtFirstname" VerticalAlignment="Top" Width="114"
+                                     Text="{Binding Path=Firstname, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="Contact Last Name" Height="28" HorizontalAlignment="Left" Margin="284,123,0,0" Name="lblLastname" VerticalAlignment="Top" Width="114" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="284,148,0,0" Name="txtLastname" VerticalAlignment="Top" Width="114"
+                                     Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="Phone Number" Height="28" HorizontalAlignment="Left" Margin="404,123,0,0" Name="lblPhoneNumber" VerticalAlignment="Top" Width="114" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="404,148,0,0" Name="txtPhoneNumber" VerticalAlignment="Top" Width="114"
+                                     Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="Fax Number" Height="28" HorizontalAlignment="Left" Margin="524,123,0,0" Name="lblFaxNumber" VerticalAlignment="Top" Width="114" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="524,148,0,0" Name="txtFaxNumber" VerticalAlignment="Top" Width="114"
+                                     Text="{Binding Path=FaxNumber, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="Comments" Height="28" HorizontalAlignment="Left" Margin="6,247,0,0" Name="lblComments" VerticalAlignment="Top" />
+                            <TextBox Height="94" HorizontalAlignment="Left" Margin="6,272,0,0" Name="txtComments" VerticalAlignment="Top" Width="466" 
+                                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Path=Comments, UpdateSourceTrigger=PropertyChanged}" />
+                            <Rectangle Height="24" HorizontalAlignment="Left" Margin="8,148,0,0" Name="rectangleTxtAccountType" 
+                                       Stroke="Red" VerticalAlignment="Top" Width="150" Visibility="Hidden" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Column="1" Name="gridControlAccountContainer">
+                    <nequeoWpf:DataAccess Name="dataAccess" VerticalAlignment="Top" 
+                                          OnBeforeLoad="dataAccess_OnBeforeLoad" 
+                                          OnBeforeUpdate="dataAccess_OnBeforeUpdate" 
+                                          OnBeforeInsert="dataAccess_OnBeforeInsert" 
+                                          OnBeforeDelete="dataAccess_OnBeforeDelete" 
+                                          OnLoad="dataAccess_OnLoad" 
+                                          OnInsert="dataAccess_OnInsert" 
+                                          OnUpdate="dataAccess_OnUpdate" 
+                                          OnDelete="dataAccess_OnDelete" 
+                                          OnLoadError="dataAccess_OnLoadError" 
+                                          OnUpdateError="dataAccess_OnUpdateError"
+                                          OnInsertError="dataAccess_OnInsertError" 
+                                          OnDeleteError="dataAccess_OnDeleteError">
+                        <nequeoWpf:DataAccess.ConnectionTypeModel>
+                            <nequeoComponentModel:ConnectionTypeModel />
+                        </nequeoWpf:DataAccess.ConnectionTypeModel>
+                    </nequeoWpf:DataAccess>
+                    <Button Content="Add New" Height="23" HorizontalAlignment="Left" Margin="12,131,0,0" Name="btnAddNew" 
+                            VerticalAlignment="Top" Width="75" ToolTip="Add a new record" Click="btnAddNew_Click" />
+                    <Button HorizontalAlignment="Left" Margin="12,160,0,0" Name="btnGetBalance" Width="75" 
+                            ToolTip="Calculate the current balance" IsEnabled="False" Height="48" VerticalAlignment="Top" Click="btnGetBalance_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Calculate Balance</TextBlock>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <GridSplitter Grid.Row="1" Height="7" ResizeDirection="Rows" HorizontalAlignment="Stretch" />
+        <GroupBox Grid.Row="2" Header="Account Details" Name="groupBoxAccountDetails">
+            <Grid Name="gridAccountDetails">
+                <TabControl Margin="5,5,5,5" Name="tabControlAccount" >
+                    <TabItem Header="Report" Name="tabItemAccountReports">
+                        <Grid>
+                            <accountReport:AccountReport x:Name="accountReport" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Transaction" Name="tabItemTransaction">
+                        <Grid>
+                            <accountReport:Transaction x:Name="transaction" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

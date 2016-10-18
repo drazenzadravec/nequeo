@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Nequeo.Wpf.NequeoCompany.Controls.Vendors.VendorReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="650" Loaded="UserControl_Loaded">
+    <Grid>
+        <GroupBox Header="Vendor Details" HorizontalAlignment="Left" Margin="6,6,0,6" Name="groupBoxVendorDetailsReport" Width="309">
+            <Grid>
+                <CheckBox Content="Vendor ID" Height="16" HorizontalAlignment="Left" Margin="6,11,0,0" Name="lblVendorReportID" VerticalAlignment="Top" Checked="lblVendorReportID_Checked" Unchecked="lblVendorReportID_Unchecked" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtVendorReportID" VerticalAlignment="Top" Width="120" Text="1" Visibility="Hidden" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectVendorReport" VerticalAlignment="Top" Width="36" ToolTip="Select a vendor" Click="btnSelectVendorReport_Click" Visibility="Hidden" />
+                <Label Content="From" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="lblVendorFromDate" VerticalAlignment="Top" />
+                <Label Content="To" Height="28" HorizontalAlignment="Left" Margin="6,87,0,0" Name="lblVendorToDate" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,59,0,0" Name="txtFromVendorDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="52,88,0,0" Name="txtToVendorDate" VerticalAlignment="Top" Width="233" SelectedDateFormat="Long" />
+                <Button Content="View Vendor" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewVendorReport" VerticalAlignment="Top" Width="125" ToolTip="View Vendor" Click="btnViewVendorReport_Click" />
+                <Button Content="Summary All" Height="23" HorizontalAlignment="Left" Margin="160,185,0,0" Name="btnSummaryAll" VerticalAlignment="Top" Width="125" ToolTip="View summary report" Click="btnSummaryAll_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Vendor" HorizontalAlignment="Left" Margin="321,6,0,6" Name="groupBoxVendorReport" Width="309">
+            <Grid>
+                <Label Content="Vendor ID" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lblVendorDataReportID" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="83,8,0,0" Name="txtVendorDataReportID" VerticalAlignment="Top" Width="120" Text="1" />
+                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,8,52,0" Name="btnSelectVendorDataReport" VerticalAlignment="Top" Width="36" ToolTip="Select a vendor" Click="btnSelectVendorDataReport_Click" />
+                <Button Content="View Vendor" Height="23" HorizontalAlignment="Left" Margin="160,156,0,0" Name="btnViewVendorDataReport" VerticalAlignment="Top" Width="125" ToolTip="View Vendor" Click="btnViewVendorDataReport_Click" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
