@@ -45,6 +45,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 
 using LinqTypes = Nequeo.Data.DataType.ProviderToDataTypes;
 
@@ -442,7 +443,68 @@ namespace Nequeo.Data.Linq
         /// <param name="exp">The current sql method.</param>
         private void DefaultMethod(MethodCallExpression call, Expression exp)
         {
-            throw new Exception("Sql method is not valid.");
+            // Get the two method arguments.
+            MemberExpression memberColumn = (MemberExpression)base.Visit(call.Arguments[0]);
+
+            // Clear the current sql method statement.
+            _sqlMethodStatement = string.Empty;
+
+            if (call.Arguments[1].NodeType == ExpressionType.Constant)
+            {
+                // Get the constant expression and
+                // create the current branch sql statement.
+                ConstantExpression constant = (ConstantExpression)base.Visit(call.Arguments[1]);
+                _sqlMethodStatement += constant.Value.ToString();
+            }
+            else if (call.Arguments[1].NodeType == ExpressionType.MemberAccess)
+            {
+                ReadOnlyCollection<Expression> arguments = call.Arguments;
+                foreach (Expression expr in arguments)
+                {
+                    // Get the member type argument.
+                    MemberExpression expValue = (MemberExpression)base.Visit(expr);
+                    string memberNameValue = expValue.Member.Name;
+
+                    // Get the constant expression and
+                    // create the current branch sql statement.
+                    ConstantExpression constValue = (ConstantExpression)base.Visit(expValue.Expression);
+
+                    // Get the current member argument field and
+                    // get the value for the current argument field.
+                    FieldInfo fieldValue = constValue.Value.GetType().GetField(memberNameValue,
+                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                    object objectValue = fieldValue.GetValue(constValue.Value);
+
+                    _sqlMethodStatement += objectValue.ToString() + ",";
+                }
+            }
+            else
+            {
+                // Get the binay type argument.
+                BinaryExpression body = (BinaryExpression)base.Visit(call.Arguments[1]);
+
+                // If more branches exist then
+                // start recursive analysis.
+                if (ContinueOnSqlMethodNodeType(body))
+                {
+                    // Create the group expression sql,
+                    // add the left, node type and right
+                    // expression group.
+                    LeftMethodExpression(body);
+                    RightMethodExpression(body);
+                }
+                else
+                {
+                    // Get the constant expression and
+                    // create the current branch sql statement.
+                    ConstantExpression right = (ConstantExpression)base.Visit(body.Right);
+                    _sqlMethodStatement += right.Value.ToString();
+                }
+            }
+
+            // Create the final sql statement.
+            _sqlStatement += "(" + DatabaseColumnName(memberColumn) + "(" +
+                _sqlMethodStatement.TrimEnd(',') + "))";
         }
 
         /// <summary>
@@ -1698,6 +1760,18 @@ namespace Nequeo.Data.Linq
                     _sqlStatement = _sqlStatement.TrimEnd(',', ' ');
                     break;
 
+                case ExpressionType.MemberInit:
+                    MemberInitExpression expNewInt = ((MemberInitExpression)(base.Visit(body.Body)));
+                    NewExpression expNew2 = expNewInt.NewExpression;
+                    System.Collections.ObjectModel.ReadOnlyCollection<MemberBinding> bindings = expNewInt.Bindings;
+                    foreach (MemberBinding exp in bindings)
+                    {
+                        MemberInfo expArgMem = exp.Member;
+                        _sqlStatement += "[" + expArgMem.Name + "], ";
+                    }
+                    _sqlStatement = _sqlStatement.TrimEnd(',', ' ');
+                    break;
+
                 case ExpressionType.MemberAccess:
                     MemberExpression expMem = ((MemberExpression)(base.Visit(body.Body)));
                     _sqlStatement = "[" + expMem.Member.Name + "]";
@@ -2081,7 +2155,68 @@ namespace Nequeo.Data.Linq
         /// <param name="exp">The current sql method.</param>
         private void DefaultMethod(MethodCallExpression call, Expression exp)
         {
-            throw new Exception("Sql method is not valid.");
+            // Get the two method arguments.
+            MemberExpression memberColumn = (MemberExpression)base.Visit(call.Arguments[0]);
+
+            // Clear the current sql method statement.
+            _sqlMethodStatement = string.Empty;
+
+            if (call.Arguments[1].NodeType == ExpressionType.Constant)
+            {
+                // Get the constant expression and
+                // create the current branch sql statement.
+                ConstantExpression constant = (ConstantExpression)base.Visit(call.Arguments[1]);
+                _sqlMethodStatement += constant.Value.ToString();
+            }
+            else if (call.Arguments[1].NodeType == ExpressionType.MemberAccess)
+            {
+                ReadOnlyCollection<Expression> arguments = call.Arguments;
+                foreach (Expression expr in arguments)
+                {
+                    // Get the member type argument.
+                    MemberExpression expValue = (MemberExpression)base.Visit(expr);
+                    string memberNameValue = expValue.Member.Name;
+
+                    // Get the constant expression and
+                    // create the current branch sql statement.
+                    ConstantExpression constValue = (ConstantExpression)base.Visit(expValue.Expression);
+
+                    // Get the current member argument field and
+                    // get the value for the current argument field.
+                    FieldInfo fieldValue = constValue.Value.GetType().GetField(memberNameValue,
+                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                    object objectValue = fieldValue.GetValue(constValue.Value);
+
+                    _sqlMethodStatement += objectValue.ToString() + ",";
+                }
+            }
+            else
+            {
+                // Get the binay type argument.
+                BinaryExpression body = (BinaryExpression)base.Visit(call.Arguments[1]);
+
+                // If more branches exist then
+                // start recursive analysis.
+                if (ContinueOnSqlMethodNodeType(body))
+                {
+                    // Create the group expression sql,
+                    // add the left, node type and right
+                    // expression group.
+                    LeftMethodExpression(body);
+                    RightMethodExpression(body);
+                }
+                else
+                {
+                    // Get the constant expression and
+                    // create the current branch sql statement.
+                    ConstantExpression right = (ConstantExpression)base.Visit(body.Right);
+                    _sqlMethodStatement += right.Value.ToString();
+                }
+            }
+
+            // Create the final sql statement.
+            _sqlStatement += "(" + DatabaseColumnName(memberColumn) + "(" +
+                _sqlMethodStatement.TrimEnd(',') + "))";
         }
 
         /// <summary>
@@ -3958,6 +4093,10 @@ namespace Nequeo.Data.Linq
         private string _takeSkipSql = string.Empty;
         private string _whereSql = string.Empty;
         private string _firstSql = string.Empty;
+        private string _lastSql = string.Empty;
+        private string _singleSql = string.Empty;
+        private string _anySql = string.Empty;
+        private string _allSql = string.Empty;
         private string _selectSql = string.Empty;
         private string _orderbySql = string.Empty;
         private string _orderbyDescendingSql = string.Empty;
@@ -4049,7 +4188,11 @@ namespace Nequeo.Data.Linq
         {
             // The expression must represent a query over the data source.
             //if (!IsQueryOverDataSource(expression))
-                //throw new InvalidProgramException("No query over the data source was specified.");
+            //throw new InvalidProgramException("No query over the data source was specified.");
+
+            // Find the call to Count() and get the lambda expression predicate.
+            InnermostCountFinder countFinder = new InnermostCountFinder();
+            MethodCallExpression countExpression = countFinder.GetInnermostCount(expression);
 
             // Find the call to Skip() and get the lambda expression predicate.
             InnermostSkipFinder skipFinder = new InnermostSkipFinder();
@@ -4066,6 +4209,14 @@ namespace Nequeo.Data.Linq
             // Find the call to First() and get the lambda expression predicate.
             InnermostFirstFinder firstFinder = new InnermostFirstFinder();
             MethodCallExpression firstExpression = firstFinder.GetInnermostFirst(expression);
+
+            // Find the call to Last() and get the lambda expression predicate.
+            InnermostLastFinder lastFinder = new InnermostLastFinder();
+            MethodCallExpression lastExpression = lastFinder.GetInnermostLast(expression);
+
+            // Find the call to Single() and get the lambda expression predicate.
+            InnermostSingleFinder singleFinder = new InnermostSingleFinder();
+            MethodCallExpression singleExpression = singleFinder.GetInnermostSingle(expression);
 
             // Find the call to Select() and get the lambda expression predicate.
             InnermostSelectFinder selectFinder = new InnermostSelectFinder();
@@ -4087,6 +4238,14 @@ namespace Nequeo.Data.Linq
             InnermostThenByDescendingFinder thenByDescendingFinder = new InnermostThenByDescendingFinder();
             MethodCallExpression thenByDescendingExpression = thenByDescendingFinder.GetInnermostThenByDescending(expression);
 
+            // Find the call to Any() and get the lambda expression predicate.
+            InnermostAnyFinder anyFinder = new InnermostAnyFinder();
+            MethodCallExpression anyExpression = anyFinder.GetInnermostAny(expression);
+
+            // Find the call to All() and get the lambda expression predicate.
+            InnermostAllFinder allFinder = new InnermostAllFinder();
+            MethodCallExpression allExpression = allFinder.GetInnermostAll(expression);
+
             // Get the where arguments
             if (whereExpression != null)
             {
@@ -4094,6 +4253,31 @@ namespace Nequeo.Data.Linq
                 whereLambdaExpression = (LambdaExpression)Evaluator.PartialEval(whereLambdaExpression);
                 ExpressionEvaluator evalWhere = new ExpressionEvaluator();
                 _whereSql = evalWhere.CreateSqlWhereQuery(whereLambdaExpression, _dataTypeConversion);
+            }
+
+            // Get the all arguments
+            if (allExpression != null)
+            {
+                LambdaExpression allLambdaExpression = (LambdaExpression)((UnaryExpression)(allExpression.Arguments[1])).Operand;
+                allLambdaExpression = (LambdaExpression)Evaluator.PartialEval(allLambdaExpression);
+                ExpressionEvaluator evalAll = new ExpressionEvaluator();
+                _whereSql = evalAll.CreateSqlWhereQuery(allLambdaExpression, _dataTypeConversion);
+                _allSql = _whereSql;
+            }
+
+            // Get the any arguments
+            if (anyExpression != null)
+            {
+                if (anyExpression.Arguments.Count() > 1)
+                {
+                    LambdaExpression anyLambdaExpression = (LambdaExpression)((UnaryExpression)(anyExpression.Arguments[1])).Operand;
+                    anyLambdaExpression = (LambdaExpression)Evaluator.PartialEval(anyLambdaExpression);
+                    ExpressionEvaluator evalAny = new ExpressionEvaluator();
+                    _whereSql = evalAny.CreateSqlWhereQuery(anyLambdaExpression, _dataTypeConversion);
+                    _anySql = _whereSql;
+                }
+                _anySql = "1";
+                _firstSql = "1";
             }
 
             // Get the first arguments
@@ -4109,6 +4293,34 @@ namespace Nequeo.Data.Linq
                 _firstSql = "1";
             }
 
+            // Get the last arguments
+            if (lastExpression != null)
+            {
+                if (lastExpression.Arguments.Count() > 1)
+                {
+                    LambdaExpression lastLambdaExpression = (LambdaExpression)((UnaryExpression)(lastExpression.Arguments[1])).Operand;
+                    lastLambdaExpression = (LambdaExpression)Evaluator.PartialEval(lastLambdaExpression);
+                    ExpressionEvaluator evalLast = new ExpressionEvaluator();
+                    _whereSql = evalLast.CreateSqlWhereQuery(lastLambdaExpression, _dataTypeConversion);
+                }
+                _lastSql = "1";
+                _firstSql = "1";
+            }
+
+            // Get the single arguments
+            if (singleExpression != null)
+            {
+                if (singleExpression.Arguments.Count() > 1)
+                {
+                    LambdaExpression singleLambdaExpression = (LambdaExpression)((UnaryExpression)(singleExpression.Arguments[1])).Operand;
+                    singleLambdaExpression = (LambdaExpression)Evaluator.PartialEval(singleLambdaExpression);
+                    ExpressionEvaluator evalSingle = new ExpressionEvaluator();
+                    _whereSql = evalSingle.CreateSqlWhereQuery(singleLambdaExpression, _dataTypeConversion);
+                }
+                _singleSql = "1";
+                _firstSql = "1";
+            }
+            
             // Get the select arguments
             if (selectExpression != null)
             {

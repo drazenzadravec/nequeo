@@ -87,6 +87,7 @@ namespace Nequeo.Wpf.UI.Text
 
         /// <summary>
         /// Print async
+        /// </summary>
         public static readonly RoutedCommand PrintAsyncCommand = new RoutedCommand("PrintAsync", typeof(RichTextEditorControl), null);
 
         /// <summary>

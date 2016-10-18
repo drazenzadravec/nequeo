@@ -416,6 +416,12 @@
     <Compile Include="UI\DataAccess\DataGridView.xaml.cs">
       <DependentUpon>DataGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Net\WebBrowser.xaml.cs">
+      <DependentUpon>WebBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Net\WebPage.xaml.cs">
+      <DependentUpon>WebPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Printing\Document.cs" />
     <Compile Include="UI\Printing\HeaderFooterDocumentPaginator.cs" />
     <Compile Include="UI\Printing\Preview.cs" />
@@ -505,6 +511,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\DataAccess\DataGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Net\WebBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Net\WebPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

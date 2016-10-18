@@ -76,6 +76,32 @@ namespace Nequeo.Net.Provider
         {
             if (multiEndpointModels == null) throw new ArgumentNullException("multiEndpointModels");
         }
+
+        /// <summary>
+        /// Server socket endpoints.
+        /// </summary>
+        /// <param name="serverContextType">The server context type, must inherit Nequeo.Net.Sockets.ServerContext.</param>
+        /// <param name="addresses">The collection of IP address endpoints.</param>
+        /// <param name="port">The port to connect to.</param>
+        /// <param name="maxNumClients">The combined maximum number of clients for all servers with each endpoint.</param>
+        public ServerEndpoint(Type serverContextType, IPAddress[] addresses, int port, int maxNumClients = Int32.MaxValue)
+            : base(serverContextType, addresses, port, maxNumClients)
+        {
+            if (addresses == null) throw new ArgumentNullException("addresses");
+            if (port < 1) throw new IndexOutOfRangeException("The port must be greater than zero.");
+        }
+
+        /// <summary>
+        /// Server socket endpoints.
+        /// </summary>
+        /// <param name="serverContextType">The server context type, must inherit Nequeo.Net.Sockets.ServerContext.</param>
+        /// <param name="multiEndpointModels">The multi-endpoint model.</param>
+        /// <param name="maxNumClients">The combined maximum number of clients for all servers with each endpoint.</param>
+        public ServerEndpoint(Type serverContextType, Net.Sockets.MultiEndpointModel[] multiEndpointModels, int maxNumClients = Int32.MaxValue)
+            : base(serverContextType, multiEndpointModels, maxNumClients)
+        {
+            if (multiEndpointModels == null) throw new ArgumentNullException("multiEndpointModels");
+        }
     }
 
     /// <summary>

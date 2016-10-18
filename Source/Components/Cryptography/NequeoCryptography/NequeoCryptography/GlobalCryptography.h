@@ -41,4 +41,85 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace std;
 
+namespace Nequeo {
+	namespace Cryptography
+	{
+		/// <summary>
+		/// Open ssl certificate subject container
+		/// </summary>
+		typedef struct 
+		{
+			/// <summary>
+			/// The country name.
+			/// </summary>
+			std::string CountryName;
+			/// <summary>
+			/// The state.
+			/// </summary>
+			std::string State;
+			/// <summary>
+			/// The location name.
+			/// </summary>
+			std::string LocationName;
+			/// <summary>
+			/// The organisation name.
+			/// </summary>
+			std::string OrganisationName;
+			/// <summary>
+			/// The organisation unit name.
+			/// </summary>
+			std::string OrganisationUnitName;
+			/// <summary>
+			/// The comman name.
+			/// </summary>
+			std::string CommonName;
+			/// <summary>
+			/// The email address.
+			/// </summary>
+			std::string EmailAddress;
+
+			/// <summary>
+			/// Creates the subject list from the subject arguments.
+			/// </summary>
+			/// <returns>The well formed subject</returns>
+			std::string SubjectArguments()
+			{
+				return
+					"/C=" + CountryName +
+					"/ST=" + State +
+					"/L=" + LocationName +
+					"/O=" + OrganisationName +
+					"/OU=" + OrganisationUnitName +
+					"/CN=" + CommonName +
+					(EmailAddress.size() > 0 ? "/emailAddress=" + EmailAddress : "");
+			}
+
+		} Subject;
+
+		/// <summary>
+		/// Open ssl certificate issuer container.
+		/// </summary>
+		typedef struct
+		{
+			/// <summary>
+			/// Private key data.
+			/// </summary>
+			const unsigned char* PrivateKey;
+			/// <summary>
+			/// Private key data length.
+			/// </summary>
+			int PrivateKeyLength;
+			/// <summary>
+			/// Public key data.
+			/// </summary>
+			const unsigned char* PublicKey;
+			/// <summary>
+			/// Public key data length.
+			/// </summary>
+			int PublicKeyLength;
+
+		} RSACertificateIssuer;
+	}
+}
+
 #endif

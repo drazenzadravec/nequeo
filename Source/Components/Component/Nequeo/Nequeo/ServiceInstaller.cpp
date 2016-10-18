@@ -91,7 +91,7 @@ namespace Nequeo
 			schSCManager,                   // SCManager database
 			pszServiceName,                 // Name of service
 			pszDisplayName,                 // Name to display
-			SERVICE_QUERY_STATUS,           // Desired access
+			SERVICE_ALL_ACCESS,             // Desired access
 			SERVICE_WIN32_OWN_PROCESS,      // Service type
 			dwStartType,                    // Service start type
 			SERVICE_ERROR_NORMAL,           // Error control type

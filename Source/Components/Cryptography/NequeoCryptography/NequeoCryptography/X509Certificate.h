@@ -57,10 +57,35 @@ namespace Nequeo {
 			/// </summary>
 			~X509Certificate();
 
-			
+			/// <summary>
+			/// Copy constructor.
+			/// </summary>
+			X509Certificate(const X509Certificate& other);
+
+			/// <summary>
+			/// Copy assignment operator.
+			/// </summary>
+			X509Certificate& operator=(const X509Certificate& other);
+
+			/// <summary>
+			/// Move constructor.
+			/// </summary>
+			X509Certificate(X509Certificate&& other);
+
+			/// <summary>
+			/// Move assignment operator.
+			/// </summary>
+			X509Certificate& operator=(X509Certificate&& other);
+
 		private:
 			bool _disposed;
 
+			// The length of the raw certificate.
+			size_t _length;
+			unsigned char* _rawCertificate;
+
+			std::string _issuerName;
+			std::string _subjectName;
 		};
 	}
 }

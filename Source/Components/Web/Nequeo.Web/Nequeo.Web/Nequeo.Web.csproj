@@ -261,22 +261,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nequeo.Collections">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Collections.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.ComponentModel">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.ComponentModel.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.ComponentModel.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Cryptography">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Cryptography.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Data">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Data.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Data.Linq">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Data.Linq.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Handler">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Handler.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Handler.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.IO.Stream, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=43b018473d802851, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -291,13 +291,13 @@
       <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Primitive">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Primitive.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Reflection">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Reflection.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Threading">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Threading.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

@@ -136,5 +136,96 @@ namespace Nequeo.Xml
             // Return the element.
             return element;
         }
+
+        /// <summary>
+        /// Create an xml document from the data.
+        /// </summary>
+        /// <param name="data">The array of bytes that contains the xml data.</param>
+        /// <returns>The xml document.</returns>
+        public static XmlDocument Document(byte[] data)
+        {
+            // Load the xml data into the document.
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(new System.IO.MemoryStream(data));
+            return xmlDoc;
+        }
+
+        /// <summary>
+        /// Extract the specified node.
+        /// </summary>
+        /// <param name="data">The array of bytes that contains the xml data.</param>
+        /// <param name="selectNode">The name of the selected node with a namespace; e.g. "//d:Text"</param>
+        /// <returns>Represents an ordered collection of nodes.</returns>
+        public static XmlNodeList ExtractNode(byte[] data, string selectNode)
+        {
+            // Load the xml data into the document.
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(new System.IO.MemoryStream(data));
+
+            // Get the node.
+            XmlNodeList textElements = xmlDoc.SelectNodes(selectNode);
+            return textElements;
+        }
+
+        /// <summary>
+        /// Extract the specified node.
+        /// </summary>
+        /// <param name="data">The array of bytes that contains the xml data.</param>
+        /// <param name="namespaces">The array of namespaces. prefix and uri.</param>
+        /// <param name="selectNode">The name of the selected node with a namespace; e.g. "//d:Text"</param>
+        /// <returns>Represents an ordered collection of nodes.</returns>
+        public static XmlNodeList ExtractNode(byte[] data, Nequeo.Model.NameValue[] namespaces, string selectNode)
+        {
+            // Load the xml data into the document.
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(new System.IO.MemoryStream(data));
+
+            //Create namespace manager
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            foreach (Nequeo.Model.NameValue item in namespaces)
+            {
+                // Add the namespace.
+                nsmgr.AddNamespace(item.Name, item.Value);
+            }
+
+            // Get the node.
+            XmlNodeList textElements = xmlDoc.SelectNodes(selectNode, nsmgr);
+            return textElements;
+        }
+
+        /// <summary>
+        /// Extract the specified node.
+        /// </summary>
+        /// <param name="xmlDoc">The xml document.</param>
+        /// <param name="selectNode">The name of the selected node with a namespace; e.g. "//d:Text"</param>
+        /// <returns>Represents an ordered collection of nodes.</returns>
+        public static XmlNodeList ExtractNode(XmlDocument xmlDoc, string selectNode)
+        {
+            // Get the node.
+            XmlNodeList textElements = xmlDoc.SelectNodes(selectNode);
+            return textElements;
+        }
+
+        /// <summary>
+        /// Extract the specified node.
+        /// </summary>
+        /// <param name="xmlDoc">The xml document.</param>
+        /// <param name="namespaces">The array of namespaces. prefix and uri.</param>
+        /// <param name="selectNode">The name of the selected node with a namespace; e.g. "//d:Text"</param>
+        /// <returns>Represents an ordered collection of nodes.</returns>
+        public static XmlNodeList ExtractNode(XmlDocument xmlDoc, Nequeo.Model.NameValue[] namespaces, string selectNode)
+        {
+            //Create namespace manager
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            foreach (Nequeo.Model.NameValue item in namespaces)
+            {
+                // Add the namespace.
+                nsmgr.AddNamespace(item.Name, item.Value);
+            }
+
+            // Get the node.
+            XmlNodeList textElements = xmlDoc.SelectNodes(selectNode, nsmgr);
+            return textElements;
+        }
     }
 }

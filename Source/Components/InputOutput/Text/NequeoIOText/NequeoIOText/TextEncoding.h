@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define _TEXTENCODING_H
 
 #include "GlobalText.h"
-#include "Base\String.h"
+#include "Base\StringEx.h"
 #include "Base\SharedPtr.h"
 
 namespace Nequeo{

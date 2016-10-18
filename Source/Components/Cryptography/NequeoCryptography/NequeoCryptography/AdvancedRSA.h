@@ -39,9 +39,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "RsaExponent.h"
 #include "CipherMode.h"
 #include "PaddingMode.h"
+#include "X509Certificate.h"
 
 struct bignum_st;
 typedef struct bignum_st BIGNUM;
+typedef struct X509_name_st X509_NAME;
 
 namespace Nequeo {
 	namespace Cryptography
@@ -91,12 +93,13 @@ namespace Nequeo {
 			void GenerateKey(std::ostream* publicKeyStream, std::ostream* privateKeyStream, const std::string& privateKeyPassphrase = "", int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
 			
 			/// <summary>
-			/// Generate the certificate from the key RSA parameters.
+			/// Generate the certificate from the parameters.
 			/// </summary>
-			/// <param name="key">The key RSA parameters.</param>
 			/// <param name="subject">The certificate subject.</param>
-			/// <param name="issuer">The certificate issuer.</param>
-			void GenerateCertificate(RsaParameters& key, string subject, string issuer);
+			/// <param name="keyBitSize">The key bit size.</param>
+			/// <param name="exponent">The RSA exponent size.</param>
+			/// <returns>The X509 Certificate.</returns>
+			X509Certificate& GenerateCertificate(RSACertificateIssuer& caIssuer, Subject& subject, long serialNumber, tm& notBefore, tm& notAfter, int keyBitSize = 4096, RsaExponent exponent = RsaExponent::RSA_Exp_3);
 
 		private:
 			bool _disposed;
@@ -107,6 +110,14 @@ namespace Nequeo {
 			/// <param name="bn">The big number.</param>
 			/// <returns>The array of bytes.</returns>
 			std::vector<unsigned char> ConvertToByteArray(const BIGNUM* bn);
+
+			/// <summary>
+			/// Create certificate subject entry.
+			/// </summary>
+			/// <param name="subject">The subject.</param>
+			/// <param name="entryKey">The entry name.</param>
+			/// <param name="entryVal">The entry value.</param>
+			void CreateCertificateEntry(X509_NAME* subject, char* entryKey, std::string entryVal);
 		};
 	}
 }

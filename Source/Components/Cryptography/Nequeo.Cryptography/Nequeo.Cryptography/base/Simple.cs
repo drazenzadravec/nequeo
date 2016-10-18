@@ -278,8 +278,9 @@ namespace Nequeo.Cryptography
         /// <param name="value">The value to generate the hash code for.</param>
         /// <param name="hashcodeType">The hash name.</param>
         /// <param name="keySizePBKDF2">The PBKDF2 key size to generate.</param>
+        /// <param name="iterations">The number of iterations.</param>
         /// <returns>The generated hash code.</returns>
-        public static string GetHashcode(string value, Nequeo.Cryptography.HashcodeType hashcodeType, int keySizePBKDF2 = 100)
+        public static string GetHashcode(string value, Nequeo.Cryptography.HashcodeType hashcodeType, int keySizePBKDF2 = 100, int iterations = 5000)
         {
             // Generate the hash code
             HashAlgorithm alg = null;
@@ -294,7 +295,7 @@ namespace Nequeo.Cryptography
 
                 case HashcodeType.PBKDF2:
                     // PBKDF2 hashcode.
-                    byte[] hashValueEx = RandomDerivedKey.GenerateEx(value, keySizePBKDF2, 5000);
+                    byte[] hashValueEx = RandomDerivedKey.GenerateEx(value, keySizePBKDF2, iterations);
                     return GetOctetHashcode(hashValueEx);
 
                 default:
@@ -334,8 +335,9 @@ namespace Nequeo.Cryptography
         /// <param name="value">The value to generate the hash code for.</param>
         /// <param name="hashcodeType">The hash name.</param>
         /// <param name="keySizePBKDF2">The PBKDF2 key size to generate.</param>
+        /// <param name="iterations">The number of iterations.</param>
         /// <returns>The generated hash code.</returns>
-        public static byte[] GetHashcodeRaw(string value, Nequeo.Cryptography.HashcodeType hashcodeType, int keySizePBKDF2 = 100)
+        public static byte[] GetHashcodeRaw(string value, Nequeo.Cryptography.HashcodeType hashcodeType, int keySizePBKDF2 = 100, int iterations = 5000)
         {
             // Generate the hash code
             HashAlgorithm alg = null;
@@ -350,7 +352,7 @@ namespace Nequeo.Cryptography
 
                 case HashcodeType.PBKDF2:
                     // PBKDF2 hashcode.
-                    byte[] hashValueEx = RandomDerivedKey.GenerateEx(value, keySizePBKDF2, 5000);
+                    byte[] hashValueEx = RandomDerivedKey.GenerateEx(value, keySizePBKDF2, iterations);
                     return hashValueEx;
 
                 default:

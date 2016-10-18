@@ -38,7 +38,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Tamir.SharpSsh;
 using Renci.SshNet;
 
 namespace Nequeo.Net.SFtp

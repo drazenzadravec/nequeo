@@ -69,7 +69,27 @@ namespace Nequeo.Net.Sockets
         /// <exception cref="System.IndexOutOfRangeException"></exception>
         public Server(Type serverContextType, IPAddress address, int port)
         {
-            if (serverContextType.BaseType != typeof(Nequeo.Net.Sockets.ServerContext))
+            bool isBaseType = false;
+            Type baseType = serverContextType.BaseType;
+
+            // Do until no more base type.
+            while (baseType != null)
+            {
+                // If the correct base type.
+                if (baseType == typeof(Nequeo.Net.Sockets.ServerContext))
+                {
+                    isBaseType = true;
+                    break;
+                }
+                else
+                {
+                    // Get the next base type.
+                    baseType = baseType.BaseType;
+                }
+            }
+
+            // If not base type.
+            if (!isBaseType)
                 throw new Exception("The server context type is not of type Nequeo.Net.Sockets.ServerContext");
 
             if (address == null) throw new ArgumentNullException("address");

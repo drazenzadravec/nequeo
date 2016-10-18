@@ -35,6 +35,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define _FUNCTIONTEMPLATES_H
 
 #include "Global.h"
+#include "Allocator.h"
+
+#include <functional>
 
 namespace Nequeo
 {
@@ -256,6 +259,36 @@ namespace Nequeo
 
 		// Return the function definition.
 		return function;
+	}
+
+	///	<summary>
+	///	Function build (_Function can be defined as : int (int, bool) return int pass int and bool parameters).
+	///	</summary>
+	/// <returns>The created function.</returns>
+	template<typename _Function>
+	std::function< _Function > FunctionBuild(const _Function& f)
+	{
+		return std::function< _Function >(std::allocator_arg_t(), Nequeo::Allocator<void>(), f);
+	}
+
+	///	<summary>
+	///	Function build (_Function can be defined as : int (int, bool) return int pass int and bool parameters).
+	///	</summary>
+	/// <returns>The created function.</returns>
+	template<typename _Function>
+	std::function< _Function > FunctionBuild(const std::function< _Function >& f)
+	{
+		return std::function< _Function >(std::allocator_arg_t(), Nequeo::Allocator<void>(), f);
+	}
+
+	///	<summary>
+	///	Function build (_Function can be defined as : int (int, bool) return int pass int and bool parameters).
+	///	</summary>
+	/// <returns>The created function.</returns>
+	template<typename _Function>
+	std::function< _Function > FunctionBuild(std::function< _Function >&& f)
+	{
+		return std::function< _Function >(std::allocator_arg_t(), Nequeo::Allocator<void>(), f);
 	}
 }
 #endif

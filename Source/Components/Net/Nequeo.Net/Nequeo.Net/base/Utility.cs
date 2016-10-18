@@ -55,6 +55,185 @@ namespace Nequeo.Net
 	public class Utility
     {
         /// <summary>
+        /// Create the URI from the parameters.
+        /// </summary>
+        /// <param name="serviceRoot">The service root.</param>
+        /// <param name="serviceEntityName">The service entity name.</param>
+        /// <returns>Return the constructed Uri.</returns>
+        public static Uri CreateUri(string serviceRoot, string serviceEntityName)
+        {
+            // Return the URI
+            return new Uri(serviceRoot.TrimEnd('/') + "/" + serviceEntityName);
+        }
+
+        /// <summary>
+        /// Create the URI from the parameters.
+        /// </summary>
+        /// <param name="serviceRoot">The service root.</param>
+        /// <param name="serviceEntityName">The service entity name.</param>
+        /// <param name="queries">The array of name and value query pairs.</param>
+        /// <returns>Return the constructed Uri.</returns>
+        public static Uri CreateUri(string serviceRoot, string serviceEntityName, Nequeo.Model.NameObject[] queries)
+        {
+            string query = "";
+
+            // If queries exist.
+            if (queries != null && queries.Length > 0)
+            {
+                // Create the query.
+                query = Nequeo.Net.Utility.CreateQueryString(queries);
+            }
+
+            // Return the URI
+            return new Uri(serviceRoot.TrimEnd('/') + "/" + serviceEntityName + (String.IsNullOrEmpty(query) ? "" : query));
+        }
+
+        /// <summary>
+        /// Create the URI from the parameters.
+        /// </summary>
+        /// <param name="serviceRoot">The service root.</param>
+        /// <param name="serviceEntityName">The service entity name.</param>
+        /// <param name="queries">The array of name and value query pairs.</param>
+        /// <returns>Return the constructed Uri.</returns>
+        public static Uri CreateUri(string serviceRoot, string serviceEntityName, Nequeo.Model.NameValue[] queries)
+        {
+            string query = "";
+
+            // If queries exist.
+            if (queries != null && queries.Length > 0)
+            {
+                // Create the query.
+                query = Nequeo.Net.Utility.CreateQueryString(queries);
+            }
+
+            // Return the URI
+            return new Uri(serviceRoot.TrimEnd('/') + "/" + serviceEntityName + (String.IsNullOrEmpty(query) ? "" : query));
+        }
+
+        /// <summary>
+        /// Create the URI from the parameters.
+        /// </summary>
+        /// <param name="serviceRoot">The service root.</param>
+        /// <param name="serviceEntityName">The service entity name.</param>
+        /// <param name="queries">The array of name and value query pairs.</param>
+        /// <returns>Return the constructed Uri.</returns>
+        public static Uri CreateUri(string serviceRoot, string serviceEntityName, NameValueCollection queries)
+        {
+            string query = "";
+
+            // If queries exist.
+            if (queries != null && queries.Count > 0)
+            {
+                // Create the query.
+                query = Nequeo.Net.Utility.CreateQueryString(queries);
+            }
+
+            // Return the URI
+            return new Uri(serviceRoot.TrimEnd('/') + "/" + serviceEntityName + (String.IsNullOrEmpty(query) ? "" : query));
+        }
+
+        /// <summary>
+        /// Create the query string from the collection.
+        /// </summary>
+        /// <param name="collection">The name value collection.</param>
+        /// <returns>The query string.</returns>
+        public static string CreateQueryString(NameValueCollection collection)
+        {
+            string query = "";
+
+            // Iterate through the collection.
+            foreach (string item in collection.AllKeys)
+            {
+                query += item + "=" + collection[item] + "&";
+            }
+
+            // Return the query string.
+            return "?" + query.TrimEnd('&');
+        }
+
+        /// <summary>
+        /// Create the query string from the collection.
+        /// </summary>
+        /// <param name="collection">The name value collection.</param>
+        /// <returns>The query string.</returns>
+        public static string CreateQueryString(Nequeo.Model.NameValue[] collection)
+        {
+            string query = "";
+
+            // Iterate through the collection.
+            for(int i = 0; i < collection.Length; i++)
+            {
+                query += collection[i].Name + "=" + collection[i].Value + "&";
+            }
+
+            // Return the query string.
+            return "?" + query.TrimEnd('&');
+        }
+
+        /// <summary>
+        /// Create the query string from the collection.
+        /// </summary>
+        /// <param name="collection">The name value collection.</param>
+        /// <returns>The query string.</returns>
+        public static string CreateQueryString(Nequeo.Model.NameObject[] collection)
+        {
+            string query = "";
+
+            // Iterate through the collection.
+            for (int i = 0; i < collection.Length; i++)
+            {
+                query += collection[i].Name + "=" + collection[i].Value.ToString() + "&";
+            }
+
+            // Return the query string.
+            return "?" + query.TrimEnd('&');
+        }
+
+        /// <summary>
+        /// Parse the query string.
+        /// </summary>
+        /// <param name="query">The data to parse.</param>
+        /// <returns>The name value collection.</returns>
+        public static NameValueCollection ParseQueryString(string query)
+        {
+            NameValueCollection nameValue = new NameValueCollection();
+
+            // If data exists.
+            if (!String.IsNullOrEmpty(query))
+            {
+                string[] split = query.Split('&');
+                foreach (string item in split)
+                {
+                    string[] equ = item.Split('=');
+                    nameValue.Add(equ[0], equ[1]);
+                }
+            }
+            return nameValue;
+        }
+
+        /// <summary>
+        /// Parse the query string.
+        /// </summary>
+        /// <param name="query">The data to parse.</param>
+        /// <returns>The name value collection.</returns>
+        public static Nequeo.Model.NameValue[] ParseQueryStringEx(string query)
+        {
+            List<Nequeo.Model.NameValue> nameValue = new List<NameValue>();
+
+            // If data exists.
+            if (!String.IsNullOrEmpty(query))
+            {
+                string[] split = query.Split('&');
+                foreach (string item in split)
+                {
+                    string[] equ = item.Split('=');
+                    nameValue.Add(new Nequeo.Model.NameValue() { Name = equ[0], Value = equ[1] });
+                }
+            }
+            return nameValue.ToArray();
+        }
+
+        /// <summary>
         /// Get a new resources with the supplied request.
         /// </summary>
         /// <param name="request">The request header.</param>

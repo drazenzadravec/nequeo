@@ -348,7 +348,12 @@
     <Compile Include="base\SpinLockClass.cs" />
     <Compile Include="Stream\AbstractStreamBase.cs" />
     <Compile Include="Task\AsyncCall.cs" />
+    <Compile Include="Task\AsyncResultQueue.cs" />
     <Compile Include="Task\CompletedTask.cs" />
+    <Compile Include="Task\DelegateQueue.cs" />
+    <Compile Include="Task\DelegateQueueAsyncResult.cs" />
+    <Compile Include="Task\InvokeCompletedEventArgs.cs" />
+    <Compile Include="Task\PostCompletedEventArgs.cs" />
     <Compile Include="Task\Schedulers\ConcurrentExclusiveInterleave.cs" />
     <Compile Include="Task\Schedulers\CurrentThreadTaskScheduler.cs" />
     <Compile Include="Task\Schedulers\IOCompletionPortTaskScheduler.cs" />

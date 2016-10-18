@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "ServiceBase.h"
 #include <assert.h>
 #include <strsafe.h>
+#include <functional>
 #pragma endregion
 
 
@@ -43,10 +44,12 @@ namespace Nequeo
 #pragma region Register Service Implementation
 
 	// Initialize the singleton service instance.
-	CServiceBase *CRegisterService::s_service1 = NULL;
-	CServiceBase *CRegisterService::s_service2 = NULL;
-	CServiceBase *CRegisterService::s_service3 = NULL;
-	CServiceBase *CRegisterService::s_service4 = NULL;
+	CServiceBase* CRegisterService::s_service1 = NULL;
+	CServiceBase* CRegisterService::s_service2 = NULL;
+	CServiceBase* CRegisterService::s_service3 = NULL;
+	CServiceBase* CRegisterService::s_service4 = NULL;
+	CServiceBase* CRegisterService::s_service5 = NULL;
+	CServiceBase* CRegisterService::s_service6 = NULL;
 
 	//
 	//   FUNCTION: CServiceBase::Run(CServiceBase &)
@@ -70,7 +73,7 @@ namespace Nequeo
 
 		SERVICE_TABLE_ENTRY serviceTable[] =
 		{
-			{ service1.m_name, ServiceMain1 },
+			{ service1.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain1 },
 			{ NULL, NULL }
 		};
 
@@ -104,8 +107,8 @@ namespace Nequeo
 
 		SERVICE_TABLE_ENTRY serviceTable[] =
 		{
-			{ service1.m_name, ServiceMain1 },
-			{ service2.m_name, ServiceMain2 },
+			{ service1.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain1 },
+			{ service2.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain2 },
 			{ NULL, NULL }
 		};
 
@@ -140,9 +143,9 @@ namespace Nequeo
 
 		SERVICE_TABLE_ENTRY serviceTable[] =
 		{
-			{ service1.m_name, ServiceMain1 },
-			{ service2.m_name, ServiceMain2 },
-			{ service3.m_name, ServiceMain3 },
+			{ service1.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain1 },
+			{ service2.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain2 },
+			{ service3.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain3 },
 			{ NULL, NULL }
 		};
 
@@ -178,10 +181,70 @@ namespace Nequeo
 
 		SERVICE_TABLE_ENTRY serviceTable[] =
 		{
-			{ service1.m_name, ServiceMain1 },
-			{ service2.m_name, ServiceMain2 },
-			{ service3.m_name, ServiceMain3 },
-			{ service4.m_name, ServiceMain4 },
+			{ service1.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain1 },
+			{ service2.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain2 },
+			{ service3.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain3 },
+			{ service4.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain4 },
+			{ NULL, NULL }
+		};
+
+		// Connects the main thread of a service process to the service control 
+		// manager, which causes the thread to be the service control dispatcher 
+		// thread for the calling process. This call returns when the service has 
+		// stopped. The process should simply terminate when the call returns.
+		return StartServiceCtrlDispatcher(serviceTable);
+	}
+
+	// Register the executable for a service with the Service Control Manager 
+	// (SCM). After you call Run(ServiceBase), the SCM issues a Start command, 
+	// which results in a call to the OnStart method in the service. This 
+	// method blocks until the service has stopped.
+	BOOL CRegisterService::Run(CServiceBase &service1, CServiceBase &service2, CServiceBase &service3, CServiceBase &service4, CServiceBase &service5)
+	{
+		s_service1 = &service1;
+		s_service2 = &service2;
+		s_service3 = &service3;
+		s_service4 = &service4;
+		s_service5 = &service5;
+
+		SERVICE_TABLE_ENTRY serviceTable[] =
+		{
+			{ service1.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain1 },
+			{ service2.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain2 },
+			{ service3.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain3 },
+			{ service4.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain4 },
+			{ service5.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain5 },
+			{ NULL, NULL }
+		};
+
+		// Connects the main thread of a service process to the service control 
+		// manager, which causes the thread to be the service control dispatcher 
+		// thread for the calling process. This call returns when the service has 
+		// stopped. The process should simply terminate when the call returns.
+		return StartServiceCtrlDispatcher(serviceTable);
+	}
+
+	// Register the executable for a service with the Service Control Manager 
+	// (SCM). After you call Run(ServiceBase), the SCM issues a Start command, 
+	// which results in a call to the OnStart method in the service. This 
+	// method blocks until the service has stopped.
+	BOOL CRegisterService::Run(CServiceBase &service1, CServiceBase &service2, CServiceBase &service3, CServiceBase &service4, CServiceBase &service5, CServiceBase &service6)
+	{
+		s_service1 = &service1;
+		s_service2 = &service2;
+		s_service3 = &service3;
+		s_service4 = &service4;
+		s_service5 = &service5;
+		s_service6 = &service6;
+
+		SERVICE_TABLE_ENTRY serviceTable[] =
+		{
+			{ service1.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain1 },
+			{ service2.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain2 },
+			{ service3.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain3 },
+			{ service4.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain4 },
+			{ service5.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain5 },
+			{ service6.m_name, (LPSERVICE_MAIN_FUNCTION)ServiceMain6 },
 			{ NULL, NULL }
 		};
 
@@ -202,7 +265,7 @@ namespace Nequeo
 	//   * dwArgc   - number of command line arguments
 	//   * lpszArgv - array of command line arguments
 	//
-	void WINAPI CRegisterService::ServiceMain1(DWORD dwArgc, PWSTR *pszArgv)
+	void WINAPI CRegisterService::ServiceMain1(DWORD dwArgc, LPWSTR *pszArgv)
 	{
 		assert(s_service1 != NULL);
 
@@ -228,7 +291,7 @@ namespace Nequeo
 	//   * dwArgc   - number of command line arguments
 	//   * lpszArgv - array of command line arguments
 	//
-	void WINAPI CRegisterService::ServiceMain2(DWORD dwArgc, PWSTR *pszArgv)
+	void WINAPI CRegisterService::ServiceMain2(DWORD dwArgc, LPWSTR *pszArgv)
 	{
 		assert(s_service2 != NULL);
 
@@ -254,7 +317,7 @@ namespace Nequeo
 	//   * dwArgc   - number of command line arguments
 	//   * lpszArgv - array of command line arguments
 	//
-	void WINAPI CRegisterService::ServiceMain3(DWORD dwArgc, PWSTR *pszArgv)
+	void WINAPI CRegisterService::ServiceMain3(DWORD dwArgc, LPWSTR *pszArgv)
 	{
 		assert(s_service3 != NULL);
 
@@ -280,7 +343,7 @@ namespace Nequeo
 	//   * dwArgc   - number of command line arguments
 	//   * lpszArgv - array of command line arguments
 	//
-	void WINAPI CRegisterService::ServiceMain4(DWORD dwArgc, PWSTR *pszArgv)
+	void WINAPI CRegisterService::ServiceMain4(DWORD dwArgc, LPWSTR *pszArgv)
 	{
 		assert(s_service4 != NULL);
 
@@ -294,6 +357,42 @@ namespace Nequeo
 
 		// Start the service.
 		s_service4->Start(dwArgc, pszArgv);
+	}
+
+	// Entry point for the service. It registers the handler function for the 
+	// service and starts the service.
+	void WINAPI CRegisterService::ServiceMain5(DWORD dwArgc, LPWSTR *pszArgv)
+	{
+		assert(s_service5 != NULL);
+
+		// Register the handler function for the service
+		s_service5->m_statusHandle = RegisterServiceCtrlHandler(
+			s_service5->m_name, ServiceCtrlHandler5);
+		if (s_service5->m_statusHandle == NULL)
+		{
+			throw GetLastError();
+		}
+
+		// Start the service.
+		s_service5->Start(dwArgc, pszArgv);
+	}
+
+	// Entry point for the service. It registers the handler function for the 
+	// service and starts the service.
+	void WINAPI CRegisterService::ServiceMain6(DWORD dwArgc, LPWSTR *pszArgv)
+	{
+		assert(s_service6 != NULL);
+
+		// Register the handler function for the service
+		s_service6->m_statusHandle = RegisterServiceCtrlHandler(
+			s_service6->m_name, ServiceCtrlHandler6);
+		if (s_service6->m_statusHandle == NULL)
+		{
+			throw GetLastError();
+		}
+
+		// Start the service.
+		s_service6->Start(dwArgc, pszArgv);
 	}
 
 	//
@@ -435,6 +534,36 @@ namespace Nequeo
 		case SERVICE_CONTROL_PAUSE: s_service4->Pause(); break;
 		case SERVICE_CONTROL_CONTINUE: s_service4->Continue(); break;
 		case SERVICE_CONTROL_SHUTDOWN: s_service4->Shutdown(); break;
+		case SERVICE_CONTROL_INTERROGATE: break;
+		default: break;
+		}
+	}
+
+	// The function is called by the SCM whenever a control code is sent to 
+	// the service.
+	void WINAPI CRegisterService::ServiceCtrlHandler5(DWORD dwCtrl)
+	{
+		switch (dwCtrl)
+		{
+		case SERVICE_CONTROL_STOP: s_service5->Stop(); break;
+		case SERVICE_CONTROL_PAUSE: s_service5->Pause(); break;
+		case SERVICE_CONTROL_CONTINUE: s_service5->Continue(); break;
+		case SERVICE_CONTROL_SHUTDOWN: s_service5->Shutdown(); break;
+		case SERVICE_CONTROL_INTERROGATE: break;
+		default: break;
+		}
+	}
+
+	// The function is called by the SCM whenever a control code is sent to 
+	// the service.
+	void WINAPI CRegisterService::ServiceCtrlHandler6(DWORD dwCtrl)
+	{
+		switch (dwCtrl)
+		{
+		case SERVICE_CONTROL_STOP: s_service6->Stop(); break;
+		case SERVICE_CONTROL_PAUSE: s_service6->Pause(); break;
+		case SERVICE_CONTROL_CONTINUE: s_service6->Continue(); break;
+		case SERVICE_CONTROL_SHUTDOWN: s_service6->Shutdown(); break;
 		case SERVICE_CONTROL_INTERROGATE: break;
 		default: break;
 		}

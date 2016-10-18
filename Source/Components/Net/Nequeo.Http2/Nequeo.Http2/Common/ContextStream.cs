@@ -94,11 +94,6 @@ namespace Nequeo.Net.Http2
         public int FramesReceived { get; set; }
 
         /// <summary>
-        /// Gets or sets the priority.
-        /// </summary>
-        public int Priority { get; set; }
-
-        /// <summary>
         /// Gets or sets an indicator specifying that the reset stream frame was sent.
         /// </summary>
         public bool WasResetSent { get; set; }

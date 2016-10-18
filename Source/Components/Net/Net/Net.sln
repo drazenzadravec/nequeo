@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nequeo.Net", "..\Nequeo.Net\Nequeo.Net\Nequeo.Net.csproj", "{6279D624-6153-46C2-B570-049DB17479FB}"
 EndProject
@@ -434,8 +434,8 @@ Global
 		{D55E69E3-66FE-4F63-AB1F-341EBCF25DCB}.Staging|Any CPU.Build.0 = Staging Release|Any CPU
 		{D55E69E3-66FE-4F63-AB1F-341EBCF25DCB}.Staging|x64.ActiveCfg = Staging Release|Any CPU
 		{D55E69E3-66FE-4F63-AB1F-341EBCF25DCB}.Staging|x86.ActiveCfg = Staging Release|Any CPU
-		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Debug|Any CPU.Build.0 = Debug|x64
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -446,10 +446,12 @@ Global
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Debug|Any CPU.Build.0 = Staging Debug|Any CPU
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Debug|x64.ActiveCfg = Staging Debug|Any CPU
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Debug|x86.ActiveCfg = Staging Debug|Any CPU
-		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|Any CPU.ActiveCfg = Staging Release|Any CPU
-		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|Any CPU.Build.0 = Staging Release|Any CPU
-		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|x64.ActiveCfg = Staging Release|Any CPU
-		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|x86.ActiveCfg = Staging Release|Any CPU
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|Any CPU.ActiveCfg = Staging Release|x64
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|Any CPU.Build.0 = Staging Release|x64
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|x64.ActiveCfg = Staging Release|x64
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|x64.Build.0 = Staging Release|x64
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|x86.ActiveCfg = Staging Release|x86
+		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging Release|x86.Build.0 = Staging Release|x86
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging|Any CPU.ActiveCfg = Staging Release|Any CPU
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging|Any CPU.Build.0 = Staging Release|Any CPU
 		{24E6BAAD-8AA0-48A2-AFC0-9514C6EE559D}.Staging|x64.ActiveCfg = Staging Release|Any CPU

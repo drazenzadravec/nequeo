@@ -11,7 +11,7 @@
             <RowDefinition Name="Row0" Height="150*" />
             <RowDefinition Name="Row1" Height="35" />
         </Grid.RowDefinitions>
-        <TextBox Name="txtInputExpression" Grid.Row="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+        <TextBox Name="txtInputExpression" Grid.Row="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txtInputExpression_TextChanged" />
         <Button Content="Cancel" Grid.Row="1" Height="23" HorizontalAlignment="Right" Margin="0,1,0,0" Name="btnCancel" Width="75" Click="btnCancel_Click" ToolTip="Cancel the operation" />
         <Button Content="Apply" Grid.Row="1" Height="23" HorizontalAlignment="Right" Margin="0,1,80,0" Name="btnApply" Width="75" Click="btnApply_Click" ToolTip="Apply the changes" />
     </Grid>

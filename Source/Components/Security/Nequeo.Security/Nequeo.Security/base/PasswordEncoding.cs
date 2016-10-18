@@ -143,7 +143,7 @@ namespace Nequeo.Security
             string encryptedBase64AuthorisationCode = Nequeo.Conversion.Context.ByteArrayToHexString(encryptedData);
 
             // Current encrypted Base64 authorisation code.
-            return encryptedBase64AuthorisationCode; // 46638A1D3B7F9502B8460824FB75841E1DF38537EBAACA5163DB7529D38063AE
+            return encryptedBase64AuthorisationCode;
         }
 
         /// <summary>

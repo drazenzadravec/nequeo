@@ -70,6 +70,7 @@ namespace Nequeo.Net.Http2
         }
 
         private readonly int _streamId;
+        private OpCodeFrame _frameType = OpCodeFrame.Go_Away;
         private HttpContext _httpContext = null;
 
         /// <summary>
@@ -79,6 +80,20 @@ namespace Nequeo.Net.Http2
         {
             get { return _streamId; }
         }
+
+        /// <summary>
+        /// Gets the frame type that is in the request queue.
+        /// </summary>
+        public OpCodeFrame FrameType
+        {
+            get { return _frameType; }
+            internal set { _frameType = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
+        public int Priority { get; set; }
 
         /// <summary>
         /// Gets the http context.

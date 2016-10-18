@@ -133,6 +133,7 @@ namespace Nequeo.Net.Http2
         private int _currentStreamId = 0;
         private bool _usePriorities = false;
         private bool _useFlowControl = false;
+        private OpCodeFrame _currentFrameType = OpCodeFrame.Go_Away;
 
         private readonly Dictionary<int, string> _promisedResources = null;
         private readonly SettingsPair[] _settings = null;
@@ -149,19 +150,19 @@ namespace Nequeo.Net.Http2
         /// <summary>
         /// Gets or sets an indicator specifying if priorities should be used.
         /// </summary>
-        internal bool UsePriorities 
+        public bool UsePriorities 
         {
             get { return _usePriorities; }
-            set { _usePriorities = value; }
+            internal set { _usePriorities = value; }
         }
 
         /// <summary>
         /// Gets or sets an indicator specifying if flow control should be used.
         /// </summary>
-        internal bool UseFlowControl
+        public bool UseFlowControl
         {
             get { return _useFlowControl; }
-            set { _useFlowControl = value; }
+            internal set { _useFlowControl = value; }
         }
 
         /// <summary>
@@ -188,6 +189,15 @@ namespace Nequeo.Net.Http2
         internal Dictionary<int, string> PromisedResources
         {
             get { return _promisedResources; }
+        }
+
+        /// <summary>
+        /// Gets the current frame type that is in the request queue.
+        /// </summary>
+        public OpCodeFrame FrameType
+        {
+            get { return _currentFrameType; }
+            internal set { _currentFrameType = value; }
         }
 
         /// <summary>

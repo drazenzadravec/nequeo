@@ -108,6 +108,7 @@ namespace Nequeo {
 			{
 				// Release the big number.
 				BN_free(bn);
+				RSA_free(rsa);
 				throw;
 			}
 
@@ -131,6 +132,9 @@ namespace Nequeo {
 			rsaParm.setQ(ConvertToByteArray(rsa->q));
 			rsaParm.setModulus(ConvertToByteArray(rsa->n));
 			rsaParm.setExponent(ConvertToByteArray(rsa->e));
+
+			// Release resources.
+			RSA_free(rsa);
 			
 			// Return the RSA parameters.
 			return rsaParm;
@@ -209,14 +213,161 @@ namespace Nequeo {
 		}
 
 		/// <summary>
-		/// Generate the certificate from the key RSA parameters.
+		/// Generate the certificate from the parameters.
 		/// </summary>
-		/// <param name="key">The key RSA parameters.</param>
 		/// <param name="subject">The certificate subject.</param>
-		/// <param name="issuer">The certificate issuer.</param>
-		void AdvancedRSA::GenerateCertificate(RsaParameters& key, string subject, string issuer)
+		/// <param name="keyBitSize">The key bit size.</param>
+		/// <param name="exponent">The RSA exponent size.</param>
+		X509Certificate& AdvancedRSA::GenerateCertificate(RSACertificateIssuer& caIssuer, Subject& subject, long serialNumber, tm& notBefore, tm& notAfter, int keyBitSize, RsaExponent exponent)
 		{
-			
+			// Serial number must be valid.
+			if (serialNumber < 1) 
+			{
+				throw Nequeo::Exceptions::InvalidArgumentException("Serial number is invalid.");
+			}
+
+			// If no issuer private key or public key data exists.
+			if ((sizeof(caIssuer.PrivateKey) <= 0) || (sizeof(caIssuer.PublicKey) <= 0))
+			{
+				throw Nequeo::Exceptions::InvalidArgumentException("An RSA certificate issuer private key or public key has not been supplied.");
+			}
+
+			RSA* rsa;
+			unsigned long exp = (exponent == RsaExponent::RSA_Exp_3 ? RSA_3 : RSA_F4);
+
+#if OPENSSL_VERSION_NUMBER >= 0x00908000L
+
+			int ret = 0;
+			BIGNUM* bn = 0;
+
+			// Initialise.
+			rsa = RSA_new();
+
+			try
+			{
+				// Create a new big number.
+				bn = BN_new();
+				BN_set_word(bn, exp);
+
+				// Create the RSA parameters.
+				ret = RSA_generate_key_ex(rsa, keyBitSize, bn, 0);
+
+				// Release the big number.
+				BN_free(bn);
+			}
+			catch (...)
+			{
+				// Release the big number.
+				BN_free(bn);
+				RSA_free(rsa);
+				throw;
+			}
+
+			// The RSA creation failed.
+			if (!ret) throw Nequeo::Exceptions::InvalidArgumentException("Failed to create RSA context.");
+#else
+			// Create the RSA parameters.
+			rsa = RSA_generate_key(keyBitSize, exp, 0, 0);
+
+			// The RSA creation failed.
+			if (!rsa) throw Nequeo::Exceptions::InvalidArgumentException("Failed to create RSA context.");
+#endif
+
+			X509Certificate x509Certificate;
+			time_t caltime_start;
+			time_t caltime_end;
+			time_t systime;
+			long timediff_start;
+			long timediff_end;
+			tm* timeinfo;
+
+			EVP_PKEY *pkey = 0;
+			X509 *req = 0;
+			X509_NAME *subj = 0;
+
+			/* Get time in seconds from the time structure */
+			caltime_start = mktime(&notBefore);
+			caltime_end = mktime(&notAfter);
+
+			/* Get the system time in seconds since EPOCH */
+			/* and return a pointer to the time structure */
+			time(&systime); 
+			timeinfo = localtime(&systime);
+
+			// Get the start and end difference.
+			timediff_start = caltime_start - systime;
+			if (timediff_start < 0) 
+			{
+				timediff_start = timediff_start * (-1);
+			}
+			else 
+			{
+				// No time difference.
+				timediff_start = 0;
+			}
+
+			timediff_end = caltime_end - systime;
+			if (timediff_end < 0)
+				timediff_end = 0;
+
+			try
+			{
+				// Create evp obj to hold our rsakey.
+				if (!(pkey = EVP_PKEY_new()))
+					throw Nequeo::Exceptions::NullPointerException("Could not create EVP object.");
+
+				if (!(EVP_PKEY_set1_RSA(pkey, rsa)))
+					throw Nequeo::Exceptions::NullPointerException("Could not assign RSA key to EVP object.");
+
+				// Create request object.
+				if (!(req = X509_new()))
+					throw Nequeo::Exceptions::NullPointerException("Failed to create X509_REQ object.");
+
+				// Set the certificate info.
+				X509_set_version(req, NID_X509);
+				X509_set_pubkey(req, pkey);
+				subj = X509_get_subject_name(req);
+				ASN1_INTEGER_set(X509_get_serialNumber(req), serialNumber);
+
+				// Set the not before date.
+				if (!X509_gmtime_adj(X509_get_notBefore(req), (long)timediff_start))
+					throw Nequeo::Exceptions::NullPointerException("Error setting start date.");
+
+				// Set the not after date.
+				if (!X509_gmtime_adj(X509_get_notAfter(req), (long)timediff_end))
+					throw Nequeo::Exceptions::NullPointerException("Error setting end date.");
+
+				// Bind the subject to the request.
+				if (X509_set_subject_name(req, subj) != 1)
+					throw Nequeo::Exceptions::NullPointerException("Error adding subject to request.");
+
+				CreateCertificateEntry(subj, "countryName", subject.CountryName);
+				CreateCertificateEntry(subj, "stateOrProvinceName", subject.State);
+				CreateCertificateEntry(subj, "localityName", subject.LocationName);
+				CreateCertificateEntry(subj, "organizationName", subject.OrganisationName);
+				CreateCertificateEntry(subj, "organizationalUnitName", subject.OrganisationUnitName);
+				CreateCertificateEntry(subj, "commonName", subject.CommonName);
+
+				// If an email exists.
+				if (subject.EmailAddress.size() > 0)
+					CreateCertificateEntry(subj, "emailAddress", subject.EmailAddress);
+
+				// Release resources.
+				RSA_free(rsa);
+				EVP_PKEY_free(pkey);
+				X509_free(req);
+
+				// Return the x509 certificate.
+				return x509Certificate;
+			}
+			catch (...)
+			{
+				// Release the pkey.
+				RSA_free(rsa);
+				EVP_PKEY_free(pkey);
+				X509_free(req);
+				throw;
+			}
 		}
 
 		/// <summary>
@@ -243,6 +394,33 @@ namespace Nequeo {
 
 			// Return the array.
 			return byteVector;
+		}
+
+		/// <summary>
+		/// Create certificate subject entry.
+		/// </summary>
+		/// <param name="subject">The subject.</param>
+		/// <param name="entryKey">The entry name.</param>
+		/// <param name="entryVal">The entry value.</param>
+		void AdvancedRSA::CreateCertificateEntry(X509_NAME* subject, char* entryKey, std::string entryVal)
+		{
+			int nid;                  // ASN numeric identifier
+			X509_NAME_ENTRY *ent;
+
+			// If the name is undefined.
+			if ((nid = OBJ_txt2nid(entryKey)) == NID_undef) 
+			{
+				throw Nequeo::Exceptions::NullPointerException("Error finding NID for " + std::string(entryKey));
+			}
+
+			if (!(ent = X509_NAME_ENTRY_create_by_NID(NULL, nid, MBSTRING_ASC, reinterpret_cast<unsigned char*>((char*)entryVal.data()), -1)))
+				Nequeo::Exceptions::NullPointerException("Error creating Name entry from NID");
+
+			if (X509_NAME_add_entry(subject, ent, -1, 0) != 1)
+				Nequeo::Exceptions::NullPointerException("Error adding entry to Name");
+
+			// Free the entry.
+			X509_NAME_ENTRY_free(ent);
 		}
 	}
 }

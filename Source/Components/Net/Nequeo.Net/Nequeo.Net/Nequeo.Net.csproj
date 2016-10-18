@@ -380,6 +380,7 @@
     <Compile Include="Provider\UdpSingleServerSocket.cs" />
     <Compile Include="Security\Authentication.cs" />
     <Compile Include="Provider\SingleContext.cs" />
+    <Compile Include="Server\ContextBase.cs" />
     <Compile Include="Server\RemoteServer.cs" />
     <Compile Include="Server\SingleContextInt.cs" />
     <Compile Include="Sockets\Designer\Client.cs">

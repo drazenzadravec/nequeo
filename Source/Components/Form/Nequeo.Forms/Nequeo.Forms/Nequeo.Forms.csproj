@@ -275,30 +275,30 @@
       <HintPath>..\..\..\..\References\Staging\Nequeo.Conversion.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Cryptography">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Cryptography.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Data">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Data.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Data.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Drawing, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=7a5ff21c6ca66d6e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Primitive">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Primitive.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Primitive.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Reflection">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Reflection.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Security">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Security.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Security.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Serialisation, Version=2014.26.1.1, Culture=neutral, PublicKeyToken=60e6b5624b241280, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.Serialisation.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Threading">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Threading.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

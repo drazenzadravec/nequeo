@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <openssl/evp.h>
+#include <openssl\ssl.h>
 
 #define AES_BLOCK_SIZE 256
 
@@ -38,7 +39,7 @@ int aes_init(unsigned char *key_data, int key_data_len, unsigned char *salt, EVP
   EVP_EncryptInit_ex(e_ctx, EVP_aes_256_cbc(), NULL, key, iv);
   EVP_CIPHER_CTX_init(d_ctx);
   EVP_DecryptInit_ex(d_ctx, EVP_aes_256_cbc(), NULL, key, iv);
-
+  
   return 0;
 }
 

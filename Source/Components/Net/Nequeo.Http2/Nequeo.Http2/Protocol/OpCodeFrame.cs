@@ -42,7 +42,7 @@ namespace Nequeo.Net.Http2.Protocol
     /// <summary>
     /// Represents the frame type of the Http/2 frame as defined in section 11.2 of the Http/2 protocol spec.
     /// </summary>
-    internal enum OpCodeFrame : byte
+    public enum OpCodeFrame : byte
     {
         /// <summary>
         /// Data frame.

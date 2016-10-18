@@ -211,7 +211,7 @@ namespace Nequeo
 				/// <summary>
 				/// Get the transport information.
 				/// </summary>
-				/// <param name="account">The transport id.</param>
+				/// <param name="transportID">The transport id.</param>
 				/// <returns>The transport information.</returns>
 				TransportInfo^ GetTransportInfo(int transportID);
 

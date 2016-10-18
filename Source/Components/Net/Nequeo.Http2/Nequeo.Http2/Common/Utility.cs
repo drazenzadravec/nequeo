@@ -58,6 +58,56 @@ namespace Nequeo.Net.Http2
     public class Utility
     {
         /// <summary>
+        /// Decompress headers.
+        /// </summary>
+        /// <param name="headerFrame">Header frame.</param>
+        /// <returns>The decompressed headers list.</returns>
+        internal static HeadersList DecompressHeaders(HeadersFrame headerFrame)
+        {
+            // Get the number of compressed headers.
+            var serializedHeaders = new byte[headerFrame.CompressedHeaders.Count];
+
+            // Copy the compressed frame.
+            Buffer.BlockCopy(headerFrame.CompressedHeaders.Array, headerFrame.CompressedHeaders.Offset, serializedHeaders, 0, serializedHeaders.Length);
+
+            // Decompress the compressed headers.
+            HeadersList decompressedHeaders = new HeaderCompression().Decompress(serializedHeaders);
+            HeadersList headers = new HeadersList(decompressedHeaders);
+            return headers;
+        }
+
+        /// <summary>
+        /// Decompress headers.
+        /// </summary>
+        /// <param name="continuationFrame">Continuation frame.</param>
+        /// <returns>The decompressed headers list.</returns>
+        internal static HeadersList DecompressHeaders(ContinuationFrame continuationFrame)
+        {
+            // Get the number of compressed headers.
+            var serializedHeaders = new byte[continuationFrame.CompressedHeaders.Count];
+
+            // Copy the compressed frame.
+            Buffer.BlockCopy(continuationFrame.CompressedHeaders.Array, continuationFrame.CompressedHeaders.Offset, serializedHeaders, 0, serializedHeaders.Length);
+
+            // Decompress the compressed headers.
+            HeadersList decompressedHeaders = new HeaderCompression().Decompress(serializedHeaders);
+            HeadersList headers = new HeadersList(decompressedHeaders);
+            return headers;
+        }
+
+        /// <summary>
+        /// Compress headers.
+        /// </summary>
+        /// <param name="headers">The headers list.</param>
+        /// <returns>The compressed headers.</returns>
+        public static byte[] CompressHeaders(HeadersList headers)
+        {
+            // Compress the decompressed headers.
+            byte[] compressedHeaders = new HeaderCompression().Compress(headers);
+            return compressedHeaders;
+        }
+
+        /// <summary>
         /// Get a new resources with the supplied request.
         /// </summary>
         /// <param name="request">The request header.</param>
@@ -364,7 +414,46 @@ namespace Nequeo.Net.Http2
                 ProcessCloseFrame(httpContext, ErrorCodeRegistry.Internal_Error);
                 ret = false;
             }
-            
+
+            try
+            {
+                // Set the user principle if credentials
+                // have been passed.
+                if (httpContext.User == null)
+                {
+                    // Set the user principle if credentials
+                    // have been passed.
+                    if (stream != null && stream.HttpRequest.Credentials != null)
+                    {
+                        // Add the credentials.
+                        Nequeo.Security.IdentityMember identity =
+                            new Nequeo.Security.IdentityMember(
+                                stream.HttpRequest.Credentials.UserName,
+                                stream.HttpRequest.Credentials.Password,
+                                stream.HttpRequest.Credentials.Domain);
+
+                        Nequeo.Security.AuthenticationType authType = Nequeo.Security.AuthenticationType.None;
+                        try
+                        {
+                            // Attempt to get the authentication type.
+                            authType = (Nequeo.Security.AuthenticationType)
+                                Enum.Parse(typeof(Nequeo.Security.AuthenticationType), stream.HttpRequest.AuthorizationType);
+                        }
+                        catch { }
+
+                        // Set the cuurent authentication schema.
+                        identity.AuthenticationSchemes = authType;
+
+                        // Create the principal.
+                        Nequeo.Security.PrincipalMember principal = new Nequeo.Security.PrincipalMember(identity, null);
+
+                        // Assign the principal
+                        httpContext.User = principal;
+                    }
+                }
+            }
+            catch { }
+
             // Return the result.
             return ret;
         }
@@ -533,6 +622,10 @@ namespace Nequeo.Net.Http2
 
             // Write the frame.
             httpContext.ResponseWrite(frame.Buffer);
+
+            // Set the current stream id.
+            httpContext.StreamId = 0;
+            httpContext.FrameType = OpCodeFrame.Go_Away;
         }
 
         /// <summary>
@@ -548,6 +641,10 @@ namespace Nequeo.Net.Http2
 
             // Write the frame.
             httpContext.ResponseWrite(frame.Buffer);
+
+            // Set the current stream id.
+            httpContext.StreamId = streamID;
+            httpContext.FrameType = OpCodeFrame.Reset_Stream;
         }
 
         /// <summary>
@@ -572,6 +669,10 @@ namespace Nequeo.Net.Http2
 
             // Write the frame.
             httpContext.ResponseWrite(frame.Buffer);
+
+            // Set the current stream id.
+            httpContext.StreamId = 0;
+            httpContext.FrameType = OpCodeFrame.Ping;
         }
 
         /// <summary>
@@ -586,6 +687,13 @@ namespace Nequeo.Net.Http2
             stream = httpContext.GetStream(pushPromiseFrame.StreamId);
             if (stream == null)
                 throw new MaxConcurrentStreamsLimitException();
+
+            // Set the stream frame type.
+            stream.FrameType = OpCodeFrame.Push_Promise;
+
+            // Set the current stream id.
+            httpContext.StreamId = stream.StreamId;
+            httpContext.FrameType = OpCodeFrame.Push_Promise;
         }
 
         /// <summary>
@@ -600,6 +708,13 @@ namespace Nequeo.Net.Http2
             stream = httpContext.GetStream(windowUpdateFrame.StreamId);
             if (stream == null)
                 throw new MaxConcurrentStreamsLimitException();
+
+            // Set the stream frame type.
+            stream.FrameType = OpCodeFrame.Window_Update;
+
+            // Set the current stream id.
+            httpContext.StreamId = stream.StreamId;
+            httpContext.FrameType = OpCodeFrame.Window_Update;
         }
 
         /// <summary>
@@ -619,15 +734,19 @@ namespace Nequeo.Net.Http2
                 received whose stream identifier field is 0x0, the recipient MUST 
                 respond with a connection error of type PROTOCOL_ERROR. */
             if (dataFrame.StreamId == 0)
-                throw new ProtocolError(ErrorCodeRegistry.Protocol_Error, "Incoming continuation frame with stream id is equal to 0.");
+                throw new ProtocolError(ErrorCodeRegistry.Protocol_Error, "Incoming data frame with stream id is equal to 0.");
 
             // Attempt to get the sepcific stream.
             stream = httpContext.GetStream(dataFrame.StreamId);
             if (stream == null)
                 throw new MaxConcurrentStreamsLimitException();
 
+            // Set the stream frame type.
+            stream.FrameType = OpCodeFrame.Data;
+
             // Set the current stream id.
             httpContext.StreamId = stream.StreamId;
+            httpContext.FrameType = OpCodeFrame.Data;
 
             // Is the data compressed.
             stream.HttpRequest.IsCompressed = dataFrame.IsCompressed;
@@ -657,6 +776,9 @@ namespace Nequeo.Net.Http2
             if (stream == null)
                 throw new MaxConcurrentStreamsLimitException();
 
+            // Set the stream frame type.
+            stream.FrameType = OpCodeFrame.Priority;
+
             /*  The PRIORITY frame can be sent on a stream in any of the "reserved
                 (remote)", "open", "half-closed (local)", or "half closed (remote)"
                 states, though it cannot be sent between consecutive frames that
@@ -674,6 +796,10 @@ namespace Nequeo.Net.Http2
                 // Set the priority weight.
                 stream.Priority = priorityFrame.Weight;
             }
+
+            // Set the current stream id.
+            httpContext.StreamId = stream.StreamId;
+            httpContext.FrameType = OpCodeFrame.Priority;
         }
 
         /// <summary>
@@ -761,8 +887,12 @@ namespace Nequeo.Net.Http2
                 // If headers have been found.
                 if (stream.HttpRequest.HeadersFound)
                 {
+                    // Set the stream frame type.
+                    stream.FrameType = OpCodeFrame.Headers;
+
                     // Set the current stream id
                     httpContext.StreamId = stream.StreamId;
+                    httpContext.FrameType = OpCodeFrame.Headers;
                     stream.HttpRequest.IsEndOfData = headerFrame.IsEndStream;
 
                     // Get the request resources.
@@ -858,8 +988,12 @@ namespace Nequeo.Net.Http2
                 // If headers have been found.
                 if (stream.HttpRequest.HeadersFound)
                 {
+                    // Set the stream frame type.
+                    stream.FrameType = OpCodeFrame.Continuation;
+
                     // Set the current stream id
                     httpContext.StreamId = stream.StreamId;
+                    httpContext.FrameType = OpCodeFrame.Continuation;
                     stream.HttpRequest.IsEndOfData = continuationFrame.IsEndStream;
 
                     // Get the request resources.
@@ -954,6 +1088,10 @@ namespace Nequeo.Net.Http2
                 // Write the frame.
                 httpContext.ResponseWrite(frame.Buffer);
             }
+
+            // Set the current stream id.
+            httpContext.StreamId = 0;
+            httpContext.FrameType = OpCodeFrame.Settings;
         }
 
         /// <summary>
@@ -965,6 +1103,10 @@ namespace Nequeo.Net.Http2
         {
             if (goAwayFrame.StreamId != 0)
                 throw new ProtocolError(ErrorCodeRegistry.Protocol_Error, "GoAway frame stream id is not equal to 0.");
+
+            // Set the current stream id.
+            httpContext.StreamId = 0;
+            httpContext.FrameType = OpCodeFrame.Go_Away;
 
             // Close the connection.
             throw new ProtocolError(ErrorCodeRegistry.No_Error, "Close the session and connection.");
@@ -988,6 +1130,13 @@ namespace Nequeo.Net.Http2
             stream = httpContext.GetStream(resetFrame.StreamId);
             if (stream == null)
                 throw new MaxConcurrentStreamsLimitException();
+
+            // Set the stream frame type.
+            stream.FrameType = OpCodeFrame.Reset_Stream;
+
+            // Set the current stream id.
+            httpContext.StreamId = stream.StreamId;
+            httpContext.FrameType = OpCodeFrame.Reset_Stream;
 
             // If the stream is closed.
             if (stream.Closed)

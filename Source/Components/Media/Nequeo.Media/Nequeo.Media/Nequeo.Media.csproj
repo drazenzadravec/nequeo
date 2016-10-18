@@ -69,6 +69,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Compress.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.Net, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ReachFramework" />
@@ -88,6 +92,7 @@
     <Compile Include="base\AudioModel.cs" />
     <Compile Include="base\MediaPlayer.cs" />
     <Compile Include="base\MediaType.cs" />
+    <Compile Include="base\MpegStreamer.cs" />
     <Compile Include="base\Streaming.cs" />
     <Compile Include="base\VideoAudioModel.cs" />
     <Compile Include="base\VideoAudioMux.cs" />

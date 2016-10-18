@@ -22,6 +22,7 @@
     <ProjectGuid>{228223A3-42D7-4313-BFEB-FB8FFD7047AA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NequeoCryptographyEx</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -70,14 +71,20 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\References\Release_x86\Lib\Components</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\..\References\Release_x64\Lib\Components</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_AFXDLL;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -92,8 +99,9 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_AFXDLL;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -110,8 +118,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_AFXDLL;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -122,6 +131,16 @@
     <Lib>
       <AdditionalDependencies>Advapi32.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\Advanced.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\Advanced.h"
+copy $(ProjectDir)\Aes.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\Aes.h"
+copy $(ProjectDir)\CipherMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\CipherMode.h"
+copy $(ProjectDir)\CryptoGlobal.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\CryptoGlobal.h"
+copy $(ProjectDir)\PaddingMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\PaddingMode.h"
+copy $(ProjectDir)\RC2.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\RC2.h"
+copy $(ProjectDir)\RC4.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\RC4.h"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -130,8 +149,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_AFXDLL;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +162,16 @@
     <Lib>
       <AdditionalDependencies>Advapi32.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)\Advanced.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\Advanced.h"
+copy $(ProjectDir)\Aes.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\Aes.h"
+copy $(ProjectDir)\CipherMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\CipherMode.h"
+copy $(ProjectDir)\CryptoGlobal.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\CryptoGlobal.h"
+copy $(ProjectDir)\PaddingMode.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\PaddingMode.h"
+copy $(ProjectDir)\RC2.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\RC2.h"
+copy $(ProjectDir)\RC4.h "..\..\..\..\References\Release\Include\Components\Cryptography\win\RC4.h"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

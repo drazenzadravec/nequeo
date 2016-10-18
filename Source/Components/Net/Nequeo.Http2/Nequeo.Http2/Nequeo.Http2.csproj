@@ -114,12 +114,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="base\HttpClient.cs" />
     <Compile Include="base\HttpContext.cs" />
     <Compile Include="base\HttpRequest.cs" />
     <Compile Include="base\HttpResponse.cs" />
     <Compile Include="base\HttpServer.cs" />
     <Compile Include="base\HttpStream.cs" />
     <Compile Include="Common\ContextStream.cs" />
+    <Compile Include="Common\CustomContext.cs" />
     <Compile Include="Common\EnumTypes.cs" />
     <Compile Include="Common\HeaderDelta.cs" />
     <Compile Include="Common\InvalidHeaderException.cs" />
@@ -127,25 +129,25 @@
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\Constants.cs" />
-    <Compile Include="Protocol\ContinuationFrame.cs" />
-    <Compile Include="Protocol\DataFrame.cs" />
+    <Compile Include="Frames\ContinuationFrame.cs" />
+    <Compile Include="Frames\DataFrame.cs" />
     <Compile Include="Protocol\FlowControlManager.cs" />
-    <Compile Include="Protocol\Frame.cs" />
-    <Compile Include="Protocol\FrameHelper.cs" />
-    <Compile Include="Protocol\FrameReader.cs" />
-    <Compile Include="Protocol\GoAwayFrame.cs" />
-    <Compile Include="Protocol\HeadersFrame.cs" />
-    <Compile Include="Protocol\IEndSegmentFrame.cs" />
-    <Compile Include="Protocol\IHeadersFrame.cs" />
-    <Compile Include="Protocol\IPaddingFrame.cs" />
+    <Compile Include="Frames\Frame.cs" />
+    <Compile Include="Frames\FrameHelper.cs" />
+    <Compile Include="Frames\FrameReader.cs" />
+    <Compile Include="Frames\GoAwayFrame.cs" />
+    <Compile Include="Frames\HeadersFrame.cs" />
+    <Compile Include="Frames\IEndSegmentFrame.cs" />
+    <Compile Include="Frames\IHeadersFrame.cs" />
+    <Compile Include="Frames\IPaddingFrame.cs" />
     <Compile Include="Protocol\OpCodeFrame.cs" />
-    <Compile Include="Protocol\PingFrame.cs" />
-    <Compile Include="Protocol\PriorityFrame.cs" />
-    <Compile Include="Protocol\PushPromiseFrame.cs" />
-    <Compile Include="Protocol\RstStreamFrame.cs" />
-    <Compile Include="Protocol\SettingsFrame.cs" />
+    <Compile Include="Frames\PingFrame.cs" />
+    <Compile Include="Frames\PriorityFrame.cs" />
+    <Compile Include="Frames\PushPromiseFrame.cs" />
+    <Compile Include="Frames\RstStreamFrame.cs" />
+    <Compile Include="Frames\SettingsFrame.cs" />
     <Compile Include="Protocol\SettingsPair.cs" />
-    <Compile Include="Protocol\WindowUpdateFrame.cs" />
+    <Compile Include="Frames\WindowUpdateFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NequeoNetKey.snk" />

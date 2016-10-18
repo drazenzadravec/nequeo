@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "UTF8Encoding.h"
-#include "Base\String.h"
+#include "Base\StringEx.h"
 
 namespace Nequeo{
 	namespace IO{

@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 
 #include "Windows1252Encoding.h"
-#include "Base\String.h"
+#include "Base\StringEx.h"
 #include <map>
 
 namespace Nequeo{

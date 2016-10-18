@@ -99,7 +99,8 @@ namespace Nequeo.Net
         /// Write the request to the stream.
         /// </summary>
         /// <param name="writeEndOfHeaders">Write the end of the header bytes, carrige return line feed.</param>
-        public virtual void WriteNetRequestHeaders(bool writeEndOfHeaders = true)
+        /// <param name="writeResponseStatus">Write the response status (HTTP/1.1 200 OK)</param>
+        public virtual void WriteNetRequestHeaders(bool writeEndOfHeaders = true, bool writeResponseStatus = true)
         {
             byte[] buffer = null;
             string data = "";
@@ -197,20 +198,24 @@ namespace Nequeo.Net
                 }
             }
 
-            // If protocol version http/2 is used.
-            if ((ProtocolVersion.ToLower().Equals("http/2")) || (ProtocolVersion.ToLower().Equals("http/2.0")))
+            // Write response status.
+            if (writeResponseStatus)
             {
-                // Send the http request.
-                data = ":method = " + Method + _deli + ":scheme = " + Scheme + _deli + ":path = " + Path + _deli;
-                buffer = Encoding.Default.GetBytes(data);
-                Write(buffer, 0, buffer.Length);
-            }
-            else
-            {
-                // Send the http request.
-                data = Method + " " + Path + " " + ProtocolVersion + _deli;
-                buffer = Encoding.Default.GetBytes(data);
-                Write(buffer, 0, buffer.Length);
+                // If protocol version http/2 is used.
+                if ((ProtocolVersion.ToLower().Equals("http/2")) || (ProtocolVersion.ToLower().Equals("http/2.0")))
+                {
+                    // Send the http request.
+                    data = ":method = " + Method + _deli + ":scheme = " + Scheme + _deli + ":path = " + Path + _deli;
+                    buffer = Encoding.Default.GetBytes(data);
+                    Write(buffer, 0, buffer.Length);
+                }
+                else
+                {
+                    // Send the http request.
+                    data = Method + " " + Path + " " + ProtocolVersion + _deli;
+                    buffer = Encoding.Default.GetBytes(data);
+                    Write(buffer, 0, buffer.Length);
+                }
             }
 
             // If headers exists.

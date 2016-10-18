@@ -48,6 +48,9 @@ Nequeo.ServiceModel (Net)
 Nequeo.WebDav
 Nequeo.OAuth
 Nequeo.OAuth2
+Nequeo.Sip
+Nequeo.Sip.x86
+Nequeo.PjSip
 Nequeo.Management
 Nequeo.Management.Python
 Nequeo.MessageQueue
@@ -78,4 +81,8 @@ Nequeo.Forms
 Nequeo.Web
 Nequeo.Web.Mvc
 Nequeo.Web.Hosting
+Nequeo.Wpf.Controls
+Nequeo.Wpf.Toolkit
+Nequeo.Wpf.Toolkit.DataGrid
+Nequeo.Wpf.Toolkit.Docker
 Nequeo.Wpf

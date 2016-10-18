@@ -119,5 +119,15 @@ namespace Nequeo.Wpf
             // Close the window.
             this.Close();
         }
+
+        /// <summary>
+        /// Input text changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtInputExpression_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

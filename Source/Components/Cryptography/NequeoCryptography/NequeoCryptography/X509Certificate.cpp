@@ -47,7 +47,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <Poco\Crypto\RSAKey.h>
 #include <Poco\Crypto\X509Certificate.h>
 
-using Nequeo::Cryptography::Converter;
 using Poco::Crypto::X509Certificate;
 using Poco::Crypto::RSAKey;
 
@@ -57,7 +56,7 @@ namespace Nequeo {
 		/// <summary>
 		/// Constructor for the current class.
 		/// </summary>
-		X509Certificate::X509Certificate() : _disposed(false)
+		X509Certificate::X509Certificate() : _disposed(false), _length(0), _rawCertificate(nullptr)
 		{
 		}
 
@@ -71,7 +70,91 @@ namespace Nequeo {
 			{
 				// Indicate that dispose has been called.
 				_disposed = true;
+
+				if (_rawCertificate != nullptr)
+				{
+					// Delete the resource.
+					delete[] _rawCertificate;
+					_rawCertificate = nullptr;
+				}
+
 			}
+		}
+
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		X509Certificate::X509Certificate(const X509Certificate& other) : 
+			_disposed(false), _length(other._length), _rawCertificate(new unsigned char[other._length])
+		{
+			std::copy(other._rawCertificate, other._rawCertificate + _length, _rawCertificate);
+		}
+
+		/// <summary>
+		/// Copy assignment operator.
+		/// </summary>
+		X509Certificate& X509Certificate::operator=(const X509Certificate& other)
+		{
+			// If the ojects are not the same object.
+			if (this != &other)
+			{
+				// Free the existing resource.
+				delete[] _rawCertificate;
+
+				// Create and re-assign the resources.
+				_length = other._length;
+				_rawCertificate = new unsigned char[_length];
+				std::copy(other._rawCertificate, other._rawCertificate + _length, _rawCertificate);
+			}
+
+			// Return the reference to this object.
+			return *this;
+		}
+
+		/// <summary>
+		/// Move constructor.
+		/// </summary>
+		X509Certificate::X509Certificate(X509Certificate&& other) :
+			_disposed(false), _length(0), _rawCertificate(nullptr)
+		{
+			// Copy the data pointer and its length from the 
+			// source object.
+			_rawCertificate = other._rawCertificate;
+			_length = other._length;
+
+			// Release the data pointer from the source object so that
+			// the destructor does not free the memory multiple times.
+			other._rawCertificate = nullptr;
+			other._length = 0;
+
+			// Un-comment the code below for equivalent of above.
+			//*this = std::move(other);
+		}
+
+		/// <summary>
+		/// Move assignment operator.
+		/// </summary>
+		X509Certificate& X509Certificate::operator=(X509Certificate&& other)
+		{
+			// If the ojects are not the same object.
+			if (this != &other)
+			{
+				// Free the existing resource.
+				delete[] _rawCertificate;
+
+				// Copy the data pointer and its length from the 
+				// source object.
+				_rawCertificate = other._rawCertificate;
+				_length = other._length;
+
+				// Release the data pointer from the source object so that
+				// the destructor does not free the memory multiple times.
+				other._rawCertificate = nullptr;
+				other._length = 0;
+			}
+
+			// Return the reference to this object.
+			return *this;
 		}
 	}
 }

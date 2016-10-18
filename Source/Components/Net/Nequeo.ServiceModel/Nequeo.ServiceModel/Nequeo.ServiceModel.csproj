@@ -276,8 +276,16 @@
     <Reference Include="Nequeo.Handler">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Handler.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.Model, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=577bba95b8d30372, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Net">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Reflection, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=3b355968680c6ed8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Security">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Security.dll</HintPath>
@@ -288,11 +296,17 @@
     <Reference Include="Nequeo.Threading">
       <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Threading.dll</HintPath>
     </Reference>
+    <Reference Include="Nequeo.Xml, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=5cc23bf5f7fba567, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Xml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
     <Reference Include="System.Runtime.Serialization" />
@@ -314,6 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="base\ClientManager.cs" />
+    <Compile Include="base\DataServiceClient.cs" />
     <Compile Include="base\ExtensionHostService.cs" />
     <Compile Include="base\GenericServiceHost.cs" />
     <Compile Include="base\MultipleHttpSchemaServiceFactory.cs" />

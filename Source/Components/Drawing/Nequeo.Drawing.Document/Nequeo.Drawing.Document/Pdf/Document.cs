@@ -88,7 +88,7 @@ namespace Nequeo.Drawing.Pdf
         /// <param name="password">The password used to protect the document.</param>
         /// <param name="encoding">The encoding the extracted text should be converted to; the default is UTF8</param>
         /// <returns>The complete text extracted.</returns>
-        public StringBuilder ExtractText(Stream pdf, string password = "", Nequeo.Text.EncodingType encoding = Text.EncodingType.UTF8)
+        public StringBuilder ExtractText(Stream pdf, string password = "", Nequeo.Text.EncodingType encoding = Nequeo.Text.EncodingType.UTF8)
         {
             return ExtractText(pdf, 1, Int32.MaxValue, password, encoding);
         }
@@ -102,7 +102,7 @@ namespace Nequeo.Drawing.Pdf
         /// <param name="password">The password used to protect the document.</param>
         /// <param name="encoding">The encoding the extracted text should be converted to; the default is UTF8</param>
         /// <returns>The complete text extracted.</returns>
-        public StringBuilder ExtractText(Stream pdf, int fromPage, int toPage = Int32.MaxValue, string password = "", Nequeo.Text.EncodingType encoding = Text.EncodingType.UTF8)
+        public StringBuilder ExtractText(Stream pdf, int fromPage, int toPage = Int32.MaxValue, string password = "", Nequeo.Text.EncodingType encoding = Nequeo.Text.EncodingType.UTF8)
         {
             byte[] pass = null;
             StringBuilder text = new StringBuilder();
@@ -159,7 +159,7 @@ namespace Nequeo.Drawing.Pdf
         /// <param name="password">The password used to protect the document.</param>
         /// <param name="encoding">The encoding the extracted text should be converted to; the default is UTF8</param>
         /// <returns>The complete text extracted.</returns>
-        public StringBuilder ExtractText(Stream pdf, int[] pages, string password = "", Nequeo.Text.EncodingType encoding = Text.EncodingType.UTF8)
+        public StringBuilder ExtractText(Stream pdf, int[] pages, string password = "", Nequeo.Text.EncodingType encoding = Nequeo.Text.EncodingType.UTF8)
         {
             byte[] pass = null;
             StringBuilder text = new StringBuilder();

@@ -36,9 +36,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Microsoft.DirectX;
-using Microsoft.DirectX.DirectSound;
-
 using Nequeo.IO.Audio.Capture;
 
 namespace Nequeo.IO.Audio.Directx.Formats

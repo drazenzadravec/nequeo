@@ -32,10 +32,14 @@
 #endregion
 
 using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Specialized;
+
+using Nequeo.Collections;
 
 namespace Nequeo.Net.Http2
 {
@@ -51,8 +55,10 @@ namespace Nequeo.Net.Http2
         {
             // Create the buffers.
             _output = new Nequeo.IO.Stream.StreamBufferBase();
+            ProtocolVersion = "HTTP/2";
         }
 
+        private string _deli = "\r\n";
         private Action<int> _writeComplete = null;
         private Nequeo.IO.Stream.StreamBufferBase _output = null;
 
@@ -121,6 +127,189 @@ namespace Nequeo.Net.Http2
             // Trigger the write complete action.
             if (_writeComplete != null)
                 _writeComplete(count);
+        }
+
+        /// <summary>
+        /// Write the response status and compressed header.
+        /// </summary>
+        /// <param name="writeEndOfHeaders">Write the end of the header bytes, carrige return line feed.</param>
+        /// <param name="writeResponseStatus">Write the response status (:status = 200).</param>
+        /// <param name="compressed">Compress the headers.</param>
+        /// <param name="headerFrame">Only header frame types are supported.</param>
+        public void WriteResponseHeaders(bool writeEndOfHeaders = true, bool writeResponseStatus = true, 
+            bool compressed = true, Protocol.OpCodeFrame headerFrame = Protocol.OpCodeFrame.Headers)
+        {
+            byte[] buffer = null;
+            string data = "";
+            HeadersList headers = new HeadersList();
+
+            // If chunked is used.
+            if (SendChunked)
+            {
+                AddHeader("Transfer-Encoding", "Chunked");
+            }
+
+            // If the server has been specified.
+            if (!String.IsNullOrEmpty(Server))
+            {
+                AddHeader("Server", Server);
+            }
+
+            // If content length has been specified.
+            if (ContentLength > 0)
+            {
+                AddHeader("Content-Length", ContentLength.ToString());
+            }
+
+            // If the allow has been specified.
+            if (!String.IsNullOrEmpty(Allow))
+            {
+                AddHeader("Allow", Allow);
+            }
+
+            // If the content type has been specified.
+            if (!String.IsNullOrEmpty(ContentType))
+            {
+                AddHeader("Content-Type", ContentType);
+            }
+
+            // If the Upgrade has been specified.
+            if (!String.IsNullOrEmpty(Upgrade))
+            {
+                // If an upgrade is required
+                // then set the connection to upgrade
+                // and set the upgrade to the protocol (e.g. WebSocket, HTTP/2.0 .. etc).
+                AddHeader("Connection", "Upgrade");
+                AddHeader("Upgrade", Upgrade);
+            }
+            else
+            {
+                // If the connection is open.
+                if (KeepAlive)
+                {
+                    AddHeader("Connection", "Keep-Alive");
+                }
+            }
+
+            // If the content encoding has been specified.
+            if (!String.IsNullOrEmpty(ContentEncoding))
+            {
+                AddHeader("Content-Encoding", ContentEncoding);
+            }
+
+            // If the content lanaguage has been specified.
+            if (!String.IsNullOrEmpty(ContentLanguage))
+            {
+                AddHeader("Content-Language", ContentLanguage);
+            }
+
+            // If authenticate type is other than none.
+            if (AuthorizationType != Nequeo.Security.AuthenticationType.None)
+            {
+                AddHeader("WWW-Authenticate", AuthorizationType.ToString());
+            }
+
+            // Write response status.
+            if (writeResponseStatus)
+            {
+                // Compress the headers
+                if (compressed)
+                {
+                    // Set the response status.
+                    headers.Add(new KeyValuePair<string, string>(":status", StatusCode.ToString() + (StatusSubcode > 0 ? "." + StatusSubcode.ToString() : "")));
+                }
+                else
+                {
+                    // Send the http response status.
+                    data = ":status = " + StatusCode.ToString() + (StatusSubcode > 0 ? "." + StatusSubcode.ToString() : "") + _deli;
+                    buffer = Encoding.Default.GetBytes(data);
+                    Write(buffer, 0, buffer.Length);
+                }
+            }
+
+            // If headers exists.
+            if (Headers != null)
+            {
+                // For each header found.
+                foreach (string header in Headers.AllKeys)
+                {
+                    // Compress the headers
+                    if (compressed)
+                    {
+                        // Add each header.
+                        headers.Add(new KeyValuePair<string, string>(header.ToLower(), Headers[header]));
+                    }
+                    else
+                    {
+                        // Add each header.
+                        data = header.ToLower() + " = " + Headers[header] + _deli;
+                        buffer = Encoding.Default.GetBytes(data);
+                        Write(buffer, 0, buffer.Length);
+                    }
+                }
+            }
+
+            // If cookies exists.
+            if (Cookies != null)
+            {
+                // For each cookie found.
+                foreach (Cookie cookie in Cookies)
+                {
+                    // Make shore the cookie has been set.
+                    if (!String.IsNullOrEmpty(cookie.Name) && !String.IsNullOrEmpty(cookie.Value))
+                    {
+                        // Compress the headers
+                        if (compressed)
+                        {
+                            // Get the cookie details.
+                            headers.Add(new KeyValuePair<string, string>("set-cookie",
+                                cookie.Name + "=" + cookie.Value +
+                               (cookie.Expires != null ? "; Expires=" + cookie.Expires.ToUniversalTime().ToLongDateString() + " " + cookie.Expires.ToUniversalTime().ToLongTimeString() + " GMT" : "") +
+                               (!String.IsNullOrEmpty(cookie.Path) ? "; Path=" + cookie.Path : "") +
+                               (!String.IsNullOrEmpty(cookie.Domain) ? "; Domain=" + cookie.Domain : "") +
+                               (cookie.Version > 0 ? "; Version=" + cookie.Version : "") +
+                               (cookie.Secure ? "; Secure" : "") +
+                               (cookie.HttpOnly ? "; HttpOnly" : "")
+                            ));
+                        }
+                        else
+                        {
+                            // Get the cookie details.
+                            data = "Set-Cookie" + ": " + cookie.Name + "=" + cookie.Value +
+                               (cookie.Expires != null ? "; Expires=" + cookie.Expires.ToUniversalTime().ToLongDateString() + " " + cookie.Expires.ToUniversalTime().ToLongTimeString() + " GMT" : "") +
+                               (!String.IsNullOrEmpty(cookie.Path) ? "; Path=" + cookie.Path : "") +
+                               (!String.IsNullOrEmpty(cookie.Domain) ? "; Domain=" + cookie.Domain : "") +
+                               (cookie.Version > 0 ? "; Version=" + cookie.Version : "") +
+                               (cookie.Secure ? "; Secure" : "") +
+                               (cookie.HttpOnly ? "; HttpOnly" : "") +
+                               _deli;
+
+                            // Write to the stream.
+                            buffer = Encoding.Default.GetBytes(data);
+                            Write(buffer, 0, buffer.Length);
+                        }
+                    }
+                }
+            }
+
+            // Compress the headers
+            if (compressed)
+            {
+                // Compress the headers.
+                buffer = Utility.CompressHeaders(headers);
+                Write(buffer, 0, buffer.Length);
+            }
+            else
+            {
+                // Write the end of the headers.
+                if (writeEndOfHeaders)
+                {
+                    // Send the header end space.
+                    data = _deli;
+                    buffer = Encoding.Default.GetBytes(data);
+                    Write(buffer, 0, buffer.Length);
+                }
+            }
         }
 
         #region Dispose Object Methods

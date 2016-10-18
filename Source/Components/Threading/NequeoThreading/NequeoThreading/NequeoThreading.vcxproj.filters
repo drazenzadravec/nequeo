@@ -213,6 +213,12 @@
     <ClInclude Include="Priority.h">
       <Filter>Thread\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Executor.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadTask.h">
+      <Filter>Thread\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -297,6 +303,12 @@
       <Filter>Thread\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadTask.cpp">
+      <Filter>Thread\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Executor.cpp">
       <Filter>Thread\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

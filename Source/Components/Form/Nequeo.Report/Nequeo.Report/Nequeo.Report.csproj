@@ -286,7 +286,7 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Nequeo.Model">
-      <HintPath>..\..\..\..\References\NequeoStaging\Any CPU\Nequeo.Model.dll</HintPath>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Model.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

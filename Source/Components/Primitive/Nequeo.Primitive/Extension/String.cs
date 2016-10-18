@@ -57,12 +57,13 @@ namespace Nequeo.Extension
     {
         private static readonly Regex NameExpression = new Regex("([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)", RegexOptions.Compiled);
 
+        #region Public Methods
         /// <summary>
         /// Is one of.
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="candidates"></param>
-        /// <returns></returns>
+        /// <param name="s">The string.</param>
+        /// <param name="candidates">The values to compare.</param>
+        /// <returns>True if the s exists in the candiadtes.</returns>
         internal static bool IsOneOf(string s, params string[] candidates)
         {
             foreach (string candidate in candidates)
@@ -73,7 +74,6 @@ namespace Nequeo.Extension
             return false;
         }
 
-        #region Public Methods
         /// <summary>
         /// Get all words split by whitspace.
         /// </summary>
@@ -1001,95 +1001,95 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Convert to ASCII from byte array.
         /// </summary>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <param name="bytes">The byte array.</param>
+        /// <returns>The ASCII string.</returns>
         public static string FromAsciiByteArray(byte[] bytes)
         {
             return Encoding.ASCII.GetString(bytes, 0, bytes.Length);
         }
 
         /// <summary>
-        /// 
+        /// Convert to ASCII byte array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="cs"></param>
-        /// <returns></returns>
+        /// <param name="value">The current string.</param>
+        /// <param name="cs">The array of chars to convert.</param>
+        /// <returns>The byte array.</returns>
         public static byte[] ToAsciiByteArray(this string value, char[] cs)
         {
             return Encoding.ASCII.GetBytes(cs);
         }
 
         /// <summary>
-        /// 
+        /// Convert to ASCII byte array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">The chars to convert.</param>
+        /// <returns>The byte array.</returns>
         public static byte[] ToAsciiByteArray(this string value)
         {
             return Encoding.ASCII.GetBytes(value);
         }
 
         /// <summary>
-        /// 
+        /// Convert from UTF8 byte array to string.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <param name="value">The value.</param>
+        /// <param name="bytes">The UTF8 byte array.</param>
+        /// <returns>The string.</returns>
         public static string FromUtf8ByteArray(this string value, byte[] bytes)
         {
             return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
 
         /// <summary>
-        /// 
+        /// Convert to UTF8 byte array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="cs"></param>
-        /// <returns></returns>
+        /// <param name="value">The string value.</param>
+        /// <param name="cs">The char array.</param>
+        /// <returns>The byte array.</returns>
         public static byte[] ToUtf8ByteArray(this string value, char[] cs)
         {
             return Encoding.UTF8.GetBytes(cs);
         }
 
         /// <summary>
-        /// 
+        /// Convert to UTF8 byte array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">The string value.</param>
+        /// <returns>The byte array.</returns>
         public static byte[] ToUtf8ByteArray(this string value)
         {
             return Encoding.UTF8.GetBytes(value);
         }
 
         /// <summary>
-        /// 
+        /// Convert from Default byte array to string.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <param name="value">The value.</param>
+        /// <param name="bytes">The Default byte array.</param>
+        /// <returns>The string.</returns>
         public static string FromDefaultByteArray(this string value, byte[] bytes)
         {
             return Encoding.Default.GetString(bytes, 0, bytes.Length);
         }
 
         /// <summary>
-        /// 
+        /// Convert to Default byte array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="cs"></param>
-        /// <returns></returns>
+        /// <param name="value">The value.</param>
+        /// <param name="cs">The char array.</param>
+        /// <returns>The byte array.</returns>
         public static byte[] ToDefaultByteArray(this string value, char[] cs)
         {
             return Encoding.Default.GetBytes(cs);
         }
 
         /// <summary>
-        /// 
+        /// Convert to Default byte array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">The value.</param>
+        /// <returns>The byte array.</returns>
         public static byte[] ToDefaultByteArray(this string value)
         {
             return Encoding.Default.GetBytes(value);

@@ -33,7 +33,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "UTF16Encoding.h"
 #include "Base\ByteOrder.h"
-#include "Base\String.h"
+#include "Base\StringEx.h"
 
 namespace Nequeo{
 	namespace IO{

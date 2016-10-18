@@ -150,24 +150,43 @@ namespace Nequeo
 		// method blocks until the service has stopped.
 		static BOOL Run(CServiceBase &service1, CServiceBase &service2, CServiceBase &service3, CServiceBase &service4);
 
+		// Register the executable for a service with the Service Control Manager 
+		// (SCM). After you call Run(ServiceBase), the SCM issues a Start command, 
+		// which results in a call to the OnStart method in the service. This 
+		// method blocks until the service has stopped.
+		static BOOL Run(CServiceBase &service1, CServiceBase &service2, CServiceBase &service3, CServiceBase &service4, CServiceBase &service5);
+
+		// Register the executable for a service with the Service Control Manager 
+		// (SCM). After you call Run(ServiceBase), the SCM issues a Start command, 
+		// which results in a call to the OnStart method in the service. This 
+		// method blocks until the service has stopped.
+		static BOOL Run(CServiceBase &service1, CServiceBase &service2, CServiceBase &service3, CServiceBase &service4, CServiceBase &service5, CServiceBase &service6);
+
 	private:
 
+		// Entry point for the service. It registers the handler function for the 
+		// service and starts the service.
+		static void WINAPI ServiceMain1(DWORD, LPWSTR*);
 
 		// Entry point for the service. It registers the handler function for the 
 		// service and starts the service.
-		static void WINAPI ServiceMain1(DWORD dwArgc, LPWSTR *lpszArgv);
+		static void WINAPI ServiceMain2(DWORD, LPWSTR*);
 
 		// Entry point for the service. It registers the handler function for the 
 		// service and starts the service.
-		static void WINAPI ServiceMain2(DWORD dwArgc, LPWSTR *lpszArgv);
+		static void WINAPI ServiceMain3(DWORD, LPWSTR*);
 
 		// Entry point for the service. It registers the handler function for the 
 		// service and starts the service.
-		static void WINAPI ServiceMain3(DWORD dwArgc, LPWSTR *lpszArgv);
+		static void WINAPI ServiceMain4(DWORD, LPWSTR*);
 
 		// Entry point for the service. It registers the handler function for the 
 		// service and starts the service.
-		static void WINAPI ServiceMain4(DWORD dwArgc, LPWSTR *lpszArgv);
+		static void WINAPI ServiceMain5(DWORD, LPWSTR*);
+
+		// Entry point for the service. It registers the handler function for the 
+		// service and starts the service.
+		static void WINAPI ServiceMain6(DWORD, LPWSTR*);
 
 		// The function is called by the SCM whenever a control code is sent to 
 		// the service.
@@ -185,11 +204,21 @@ namespace Nequeo
 		// the service.
 		static void WINAPI ServiceCtrlHandler4(DWORD dwCtrl);
 
+		// The function is called by the SCM whenever a control code is sent to 
+		// the service.
+		static void WINAPI ServiceCtrlHandler5(DWORD dwCtrl);
+
+		// The function is called by the SCM whenever a control code is sent to 
+		// the service.
+		static void WINAPI ServiceCtrlHandler6(DWORD dwCtrl);
+
 		// The singleton service instance.
 		static CServiceBase *s_service1;
 		static CServiceBase *s_service2;
 		static CServiceBase *s_service3;
 		static CServiceBase *s_service4;
+		static CServiceBase *s_service5;
+		static CServiceBase *s_service6;
 	};
 }
 #endif

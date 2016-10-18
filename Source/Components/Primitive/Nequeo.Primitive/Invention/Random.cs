@@ -89,7 +89,7 @@ namespace Nequeo.Invention
         private string PASSWORD_CHARS_LCASE = "abcdefgijkmnopqrstwxyz";
         private string PASSWORD_CHARS_UCASE = "ABCDEFGHJKLMNPQRSTWXYZ";
         private string PASSWORD_CHARS_NUMERIC = "0123456789";
-        private string PASSWORD_CHARS_SPECIAL = "*$-+?_&=!%{}/";
+        private string PASSWORD_CHARS_SPECIAL = "~^*$-+?_&=!%{}/#[]()<>.,";
         #endregion
 
         #region Private Random Methods

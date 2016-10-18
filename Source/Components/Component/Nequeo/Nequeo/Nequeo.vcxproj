@@ -87,7 +87,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -95,7 +95,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoException.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\Ascii.h "..\..\..\..\References\Release\Include\Components\Base\Ascii.h"
@@ -122,7 +122,20 @@ copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
 copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
-copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"
+copy $(ProjectDir)\FastRandom.h "..\..\..\..\References\Release\Include\Components\Base\FastRandom.h"
+copy $(ProjectDir)\Outcome.h "..\..\..\..\References\Release\Include\Components\Base\Outcome.h"
+copy $(ProjectDir)\MemorySystemInterface.h "..\..\..\..\References\Release\Include\Components\Base\MemorySystemInterface.h"
+copy $(ProjectDir)\Memory.h "..\..\..\..\References\Release\Include\Components\Base\Memory.h"
+copy $(ProjectDir)\Allocator.h "..\..\..\..\References\Release\Include\Components\Base\Allocator.h"
+copy $(ProjectDir)\Array.h "..\..\..\..\References\Release\Include\Components\Base\Array.h"
+copy $(ProjectDir)\Base64.h "..\..\..\..\References\Release\Include\Components\Base\Base64.h"
+copy $(ProjectDir)\StringUtils.h "..\..\..\..\References\Release\Include\Components\Base\StringUtils.h"
+copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components\Base\Platform.h"
+copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
+copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
+copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,7 +145,7 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,7 +153,7 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoException.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\Ascii.h "..\..\..\..\References\Release\Include\Components\Base\Ascii.h"
@@ -167,7 +180,20 @@ copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
 copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
-copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"
+copy $(ProjectDir)\FastRandom.h "..\..\..\..\References\Release\Include\Components\Base\FastRandom.h"
+copy $(ProjectDir)\Outcome.h "..\..\..\..\References\Release\Include\Components\Base\Outcome.h"
+copy $(ProjectDir)\MemorySystemInterface.h "..\..\..\..\References\Release\Include\Components\Base\MemorySystemInterface.h"
+copy $(ProjectDir)\Memory.h "..\..\..\..\References\Release\Include\Components\Base\Memory.h"
+copy $(ProjectDir)\Allocator.h "..\..\..\..\References\Release\Include\Components\Base\Allocator.h"
+copy $(ProjectDir)\Array.h "..\..\..\..\References\Release\Include\Components\Base\Array.h"
+copy $(ProjectDir)\Base64.h "..\..\..\..\References\Release\Include\Components\Base\Base64.h"
+copy $(ProjectDir)\StringUtils.h "..\..\..\..\References\Release\Include\Components\Base\StringUtils.h"
+copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components\Base\Platform.h"
+copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
+copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
+copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -179,8 +205,8 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -217,7 +243,20 @@ copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
 copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
-copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"
+copy $(ProjectDir)\FastRandom.h "..\..\..\..\References\Release\Include\Components\Base\FastRandom.h"
+copy $(ProjectDir)\Outcome.h "..\..\..\..\References\Release\Include\Components\Base\Outcome.h"
+copy $(ProjectDir)\MemorySystemInterface.h "..\..\..\..\References\Release\Include\Components\Base\MemorySystemInterface.h"
+copy $(ProjectDir)\Memory.h "..\..\..\..\References\Release\Include\Components\Base\Memory.h"
+copy $(ProjectDir)\Allocator.h "..\..\..\..\References\Release\Include\Components\Base\Allocator.h"
+copy $(ProjectDir)\Array.h "..\..\..\..\References\Release\Include\Components\Base\Array.h"
+copy $(ProjectDir)\Base64.h "..\..\..\..\References\Release\Include\Components\Base\Base64.h"
+copy $(ProjectDir)\StringUtils.h "..\..\..\..\References\Release\Include\Components\Base\StringUtils.h"
+copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components\Base\Platform.h"
+copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
+copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
+copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -229,8 +268,8 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\157\stage\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -240,7 +279,7 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoException.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\Ascii.h "..\..\..\..\References\Release\Include\Components\Base\Ascii.h"
@@ -267,33 +306,59 @@ copy $(ProjectDir)\NativeProxy.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\NativeProxyBase.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyBase.h"
 copy $(ProjectDir)\NativeProxyStatic.h "..\..\..\..\References\Release\Include\Components\Base\NativeProxyStatic.h"
 copy $(ProjectDir)\NativeHandler.h "..\..\..\..\References\Release\Include\Components\Base\NativeHandler.h"
-copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"</Command>
+copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\Components\Base\FunctionTemplates.h"
+copy $(ProjectDir)\FastRandom.h "..\..\..\..\References\Release\Include\Components\Base\FastRandom.h"
+copy $(ProjectDir)\Outcome.h "..\..\..\..\References\Release\Include\Components\Base\Outcome.h"
+copy $(ProjectDir)\MemorySystemInterface.h "..\..\..\..\References\Release\Include\Components\Base\MemorySystemInterface.h"
+copy $(ProjectDir)\Memory.h "..\..\..\..\References\Release\Include\Components\Base\Memory.h"
+copy $(ProjectDir)\Allocator.h "..\..\..\..\References\Release\Include\Components\Base\Allocator.h"
+copy $(ProjectDir)\Array.h "..\..\..\..\References\Release\Include\Components\Base\Array.h"
+copy $(ProjectDir)\Base64.h "..\..\..\..\References\Release\Include\Components\Base\Base64.h"
+copy $(ProjectDir)\StringUtils.h "..\..\..\..\References\Release\Include\Components\Base\StringUtils.h"
+copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components\Base\Platform.h"
+copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
+copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
+copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Allocator.h" />
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Ascii.h" />
+    <ClInclude Include="AsyncCallerContext.h" />
     <ClInclude Include="AtomicCounter.h" />
     <ClInclude Include="AutoPtr.h" />
+    <ClInclude Include="Base64.h" />
     <ClInclude Include="ByteOrder.h" />
+    <ClInclude Include="FastRandom.h" />
+    <ClInclude Include="FileSystemUtils.h" />
     <ClInclude Include="FunctionTemplates.h" />
+    <ClInclude Include="GetTheLights.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="LibraryLoader.h" />
+    <ClInclude Include="Memory.h" />
+    <ClInclude Include="MemorySystemInterface.h" />
     <ClInclude Include="NativeHandler.h" />
     <ClInclude Include="NativeProxy.h" />
     <ClInclude Include="NativeProxyBase.h" />
     <ClInclude Include="NativeProxyStatic.h" />
+    <ClInclude Include="Number.h" />
+    <ClInclude Include="Outcome.h" />
     <ClInclude Include="pcre.h" />
     <ClInclude Include="pcre_config.h" />
     <ClInclude Include="pcre_internal.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="RefCountedObject.h" />
     <ClInclude Include="ServiceBase.h" />
     <ClInclude Include="ServiceInstaller.h" />
     <ClInclude Include="SharedPtr.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringEx.h" />
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Timespan.h" />
@@ -303,13 +368,20 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
     <ClInclude Include="UnWindows.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Ascii.cpp" />
     <ClCompile Include="AtomicCounter.cpp" />
+    <ClCompile Include="Base64.cpp" />
     <ClCompile Include="ByteOrder.cpp" />
+    <ClCompile Include="FastRandom.cpp" />
+    <ClCompile Include="FileSystemUtils.cpp" />
+    <ClCompile Include="GetTheLights.cpp" />
     <ClCompile Include="LibraryLoader.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="NativeProxy.cpp" />
     <ClCompile Include="NativeProxyBase.cpp" />
     <ClCompile Include="NativeProxyStatic.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="RefCountedObject.cpp" />
     <ClCompile Include="ServiceBase.cpp" />
     <ClCompile Include="ServiceInstaller.cpp" />
@@ -320,6 +392,7 @@ copy $(ProjectDir)\FunctionTemplates.h "..\..\..\..\References\Release\Include\C
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Timespan.cpp" />
     <ClCompile Include="Timestamp.cpp" />
   </ItemGroup>

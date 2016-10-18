@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoCryptography", "NequeoCryptography\NequeoCryptography.vcxproj", "{D455A18C-CBEE-488C-8AA2-DE68942EECEB}"
 EndProject
@@ -14,10 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crypto", "Crypto", "{422E99
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoShared", "..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCertCreate", "TestCertCreate\TestCertCreate.vcxproj", "{9B52051F-4108-4F23-B8E7-8E31AE88DC43}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems*{d455a18c-cbee-488c-8aa2-de68942eeceb}*SharedItemsImports = 4
 		..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
+		..\..\Component\NequeoShared\NequeoShared\NequeoShared.vcxitems*{d455a18c-cbee-488c-8aa2-de68942eeceb}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -36,10 +38,20 @@ Global
 		{D455A18C-CBEE-488C-8AA2-DE68942EECEB}.Release|x64.Build.0 = Release|x64
 		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Debug|Win32.ActiveCfg = Debug|Win32
 		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Debug|Win32.Build.0 = Debug|Win32
-		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Debug|x64.ActiveCfg = Debug|Win32
+		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Debug|x64.ActiveCfg = Debug|x64
+		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Debug|x64.Build.0 = Debug|x64
 		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Release|Win32.ActiveCfg = Release|Win32
 		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Release|Win32.Build.0 = Release|Win32
-		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Release|x64.ActiveCfg = Release|Win32
+		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Release|x64.ActiveCfg = Release|x64
+		{D910C69B-9BA3-45B1-A15B-1AD4AAEB6358}.Release|x64.Build.0 = Release|x64
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Debug|Win32.Build.0 = Debug|Win32
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Debug|x64.ActiveCfg = Debug|x64
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Debug|x64.Build.0 = Debug|x64
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Release|Win32.ActiveCfg = Release|Win32
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Release|Win32.Build.0 = Release|Win32
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Release|x64.ActiveCfg = Release|x64
+		{9B52051F-4108-4F23-B8E7-8E31AE88DC43}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

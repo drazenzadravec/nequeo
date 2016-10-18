@@ -1,25 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoIOCompression", "NequeoIOCompression\NequeoIOCompression.vcxproj", "{7665FFC8-7775-420D-BEA7-A3DA1056DD8F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCompression", "TestCompression\TestCompression.vcxproj", "{F5123149-D16D-4303-8346-A9EEF3FAAF3C}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://development:8080/tfs/version2013collection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = NequeoIOCompression\\NequeoIOCompression.vcxproj
-		SccProjectName1 = NequeoIOCompression
-		SccLocalPath1 = NequeoIOCompression
-		SccProjectUniqueName2 = TestCompression\\TestCompression.vcxproj
-		SccProjectName2 = TestCompression
-		SccLocalPath2 = TestCompression
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
@@ -37,10 +25,12 @@ Global
 		{7665FFC8-7775-420D-BEA7-A3DA1056DD8F}.Release|x64.Build.0 = Release|x64
 		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Debug|Win32.Build.0 = Debug|Win32
-		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Debug|x64.ActiveCfg = Debug|Win32
+		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Debug|x64.ActiveCfg = Debug|x64
+		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Debug|x64.Build.0 = Debug|x64
 		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Release|Win32.ActiveCfg = Release|Win32
 		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Release|Win32.Build.0 = Release|Win32
-		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Release|x64.ActiveCfg = Release|Win32
+		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Release|x64.ActiveCfg = Release|x64
+		{F5123149-D16D-4303-8346-A9EEF3FAAF3C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -83,7 +83,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,7 +145,9 @@ copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
 copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
 copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
-copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"
+copy $(ProjectDir)\Executor.h "..\..\..\..\References\Release\Include\Components\Threading\Executor.h"
+copy $(ProjectDir)\ThreadTask.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTask.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,7 +157,7 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -217,7 +219,9 @@ copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
 copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
 copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
-copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"
+copy $(ProjectDir)\Executor.h "..\..\..\..\References\Release\Include\Components\Threading\Executor.h"
+copy $(ProjectDir)\ThreadTask.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTask.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -229,8 +233,8 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -298,7 +302,9 @@ copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
 copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
 copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
-copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"
+copy $(ProjectDir)\Executor.h "..\..\..\..\References\Release\Include\Components\Threading\Executor.h"
+copy $(ProjectDir)\ThreadTask.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTask.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -310,8 +316,8 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -321,7 +327,7 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Nequeo.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\AbstractDelegate.h "..\..\..\..\References\Release\Include\Components\Threading\AbstractDelegate.h"
@@ -379,7 +385,9 @@ copy $(ProjectDir)\ThreadLocal.h "..\..\..\..\References\Release\Include\Compone
 copy $(ProjectDir)\ThreadPool.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadPool.h"
 copy $(ProjectDir)\ThreadTarget.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTarget.h"
 copy $(ProjectDir)\Timer.h "..\..\..\..\References\Release\Include\Components\Threading\Timer.h"
-copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"</Command>
+copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components\Threading\Priority.h"
+copy $(ProjectDir)\Executor.h "..\..\..\..\References\Release\Include\Components\Threading\Executor.h"
+copy $(ProjectDir)\ThreadTask.h "..\..\..\..\References\Release\Include\Components\Threading\ThreadTask.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -404,6 +412,7 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventArgs.h" />
     <ClInclude Include="Event_WIN32.h" />
+    <ClInclude Include="Executor.h" />
     <ClInclude Include="Expire.h" />
     <ClInclude Include="FIFOEvent.h" />
     <ClInclude Include="FIFOStrategy.h" />
@@ -441,6 +450,7 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
     <ClInclude Include="ThreadLocal.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="ThreadTarget.h" />
+    <ClInclude Include="ThreadTask.h" />
     <ClInclude Include="Thread_WIN32.h" />
     <ClInclude Include="TimedNotificationQueue.h" />
     <ClInclude Include="Timer.h" />
@@ -453,6 +463,7 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventArgscpp.cpp" />
     <ClCompile Include="Event_WIN32.cpp" />
+    <ClCompile Include="Executor.cpp" />
     <ClCompile Include="Mutex.cpp" />
     <ClCompile Include="Mutex_WIN32.cpp" />
     <ClCompile Include="Notification.cpp" />
@@ -476,6 +487,7 @@ copy $(ProjectDir)\Priority.h "..\..\..\..\References\Release\Include\Components
     <ClCompile Include="ThreadLocal.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="ThreadTarget.cpp" />
+    <ClCompile Include="ThreadTask.cpp" />
     <ClCompile Include="Thread_WIN32.cpp" />
     <ClCompile Include="TimedNotificationQueue.cpp" />
     <ClCompile Include="Timer.cpp" />

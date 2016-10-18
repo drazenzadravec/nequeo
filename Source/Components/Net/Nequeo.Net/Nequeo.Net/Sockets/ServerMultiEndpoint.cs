@@ -67,7 +67,28 @@ namespace Nequeo.Net.Sockets
         {
             if (addresses == null) throw new ArgumentNullException("addresses");
             if (port < 1) throw new IndexOutOfRangeException("The port must be greater than zero.");
-            if (serverContextType.BaseType != typeof(Nequeo.Net.Sockets.ServerContext))
+
+            bool isBaseType = false;
+            Type baseType = serverContextType.BaseType;
+
+            // Do until no more base type.
+            while (baseType != null)
+            {
+                // If the correct base type.
+                if (baseType == typeof(Nequeo.Net.Sockets.ServerContext))
+                {
+                    isBaseType = true;
+                    break;
+                }
+                else
+                {
+                    // Get the next base type.
+                    baseType = baseType.BaseType;
+                }
+            }
+
+            // If not base type.
+            if (!isBaseType)
                 throw new Exception("The server context type is not of type Nequeo.Net.Sockets.ServerContext");
 
             // Create the collection of servers.
@@ -96,7 +117,28 @@ namespace Nequeo.Net.Sockets
         public MultiEndpointServer(Type serverContextType, MultiEndpointModel[] multiEndpointModels, int maxNumClients = Int32.MaxValue)
         {
             if (multiEndpointModels == null) throw new ArgumentNullException("multiEndpointModels");
-            if (serverContextType.BaseType != typeof(Nequeo.Net.Sockets.ServerContext))
+
+            bool isBaseType = false;
+            Type baseType = serverContextType.BaseType;
+
+            // Do until no more base type.
+            while (baseType != null)
+            {
+                // If the correct base type.
+                if (baseType == typeof(Nequeo.Net.Sockets.ServerContext))
+                {
+                    isBaseType = true;
+                    break;
+                }
+                else
+                {
+                    // Get the next base type.
+                    baseType = baseType.BaseType;
+                }
+            }
+
+            // If not base type.
+            if (!isBaseType)
                 throw new Exception("The server context type is not of type Nequeo.Net.Sockets.ServerContext");
 
             // Total number of servers
@@ -151,8 +193,27 @@ namespace Nequeo.Net.Sockets
             // Get the total number of servers.
             foreach (MultiEndpointServerContextModel item in multiEndpointModels)
             {
-                // If not the correct type.
-                if (item.ServerContextType.BaseType != typeof(Nequeo.Net.Sockets.ServerContext))
+                bool isBaseType = false;
+                Type baseType = item.ServerContextType.BaseType;
+
+                // Do until no more base type.
+                while (baseType != null)
+                {
+                    // If the correct base type.
+                    if (baseType == typeof(Nequeo.Net.Sockets.ServerContext))
+                    {
+                        isBaseType = true;
+                        break;
+                    }
+                    else
+                    {
+                        // Get the next base type.
+                        baseType = baseType.BaseType;
+                    }
+                }
+
+                // If not base type.
+                if (!isBaseType)
                     throw new Exception("The server context type is not of type Nequeo.Net.Sockets.ServerContext");
 
                 totalServerCount += item.Addresses.Length;

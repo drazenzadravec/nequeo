@@ -94,6 +94,8 @@ namespace Nequeo.Net.Mime
                 _mimeTypes.Add("7z", "application/x-7z-compressed");
                 _mimeTypes.Add("aspx", "text/html");
                 _mimeTypes.Add("asp", "text/html");
+                _mimeTypes.Add("php", "text/html");
+                _mimeTypes.Add("jsp", "text/html");
                 _mimeTypes.Add("a", "application/octet-stream");
                 _mimeTypes.Add("aab", "application/x-authorware-bin");
                 _mimeTypes.Add("aam", "application/x-authorware-map");

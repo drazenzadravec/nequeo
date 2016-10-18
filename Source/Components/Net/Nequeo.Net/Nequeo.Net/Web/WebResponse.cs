@@ -84,7 +84,8 @@ namespace Nequeo.Net
         /// Write the response status to the stream.
         /// </summary>
         /// <param name="writeEndOfHeaders">Write the end of the header bytes, carrige return line feed.</param>
-        public virtual void WriteWebResponseHeaders(bool writeEndOfHeaders = true)
+        /// <param name="writeResponseStatus">Write the response status (HTTP/1.1 200 OK)</param>
+        public virtual void WriteWebResponseHeaders(bool writeEndOfHeaders = true, bool writeResponseStatus = true)
         {
             byte[] buffer = null;
             string data = "";
@@ -155,20 +156,24 @@ namespace Nequeo.Net
                 AddHeader("WWW-Authenticate", AuthorizationType.ToString());
             }
 
-            // If protocol version http/2 is used.
-            if ((ProtocolVersion.ToLower().Equals("http/2")) || (ProtocolVersion.ToLower().Equals("http/2.0")))
+            // Write response status.
+            if (writeResponseStatus)
             {
-                // Send the http response status.
-                data = ":status = " + StatusCode.ToString() + (StatusSubcode > 0 ? "." + StatusSubcode.ToString() : "") + _deli;
-                buffer = Encoding.Default.GetBytes(data);
-                Write(buffer, 0, buffer.Length);
-            }
-            else
-            {
-                // Send the http response status.
-                data = ProtocolVersion + " " + StatusCode.ToString() + (StatusSubcode > 0 ? "." + StatusSubcode.ToString() : "") + " " + StatusDescription + _deli;
-                buffer = Encoding.Default.GetBytes(data);
-                Write(buffer, 0, buffer.Length);
+                // If protocol version http/2 is used.
+                if ((ProtocolVersion.ToLower().Equals("http/2")) || (ProtocolVersion.ToLower().Equals("http/2.0")))
+                {
+                    // Send the http response status.
+                    data = ":status = " + StatusCode.ToString() + (StatusSubcode > 0 ? "." + StatusSubcode.ToString() : "") + _deli;
+                    buffer = Encoding.Default.GetBytes(data);
+                    Write(buffer, 0, buffer.Length);
+                }
+                else
+                {
+                    // Send the http response status.
+                    data = ProtocolVersion + " " + StatusCode.ToString() + (StatusSubcode > 0 ? "." + StatusSubcode.ToString() : "") + " " + StatusDescription + _deli;
+                    buffer = Encoding.Default.GetBytes(data);
+                    Write(buffer, 0, buffer.Length);
+                }
             }
 
             // If headers exists.

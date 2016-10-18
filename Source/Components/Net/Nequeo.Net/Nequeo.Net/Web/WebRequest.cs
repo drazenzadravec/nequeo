@@ -119,13 +119,19 @@ namespace Nequeo.Net
                     headersCol.Add(item.Name, item.Value);
                 }
 
-                // Assign the headers.
-                Headers = headersCol;
-                HeadersFound = true;
-                Method = request.Method;
-                ProtocolVersion = request.ProtocolVersion;
-                Path = request.Path;
-                Scheme = request.Scheme;
+                // If top level header information exists.
+                if (request != null)
+                {
+                    Headers = headersCol;
+                    HeadersFound = true;
+
+                    // Assign the headers.
+                    Method = (String.IsNullOrEmpty(request.Method) ? Method : request.Method);
+                    ProtocolVersion = (String.IsNullOrEmpty(request.ProtocolVersion) ? ProtocolVersion : request.ProtocolVersion);
+                    Path = (String.IsNullOrEmpty(request.Path) ? Path : request.Path);
+                    Scheme = (String.IsNullOrEmpty(request.Scheme) ? Scheme : request.Scheme);
+                    Authority = (String.IsNullOrEmpty(request.Authority) ? Authority : request.Authority);
+                }
 
                 try
                 {
@@ -400,6 +406,15 @@ namespace Nequeo.Net
         /// Gets or sets the scheme;
         /// </summary>
         public virtual string Scheme
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the authority;
+        /// </summary>
+        public virtual string Authority
         {
             get;
             set;

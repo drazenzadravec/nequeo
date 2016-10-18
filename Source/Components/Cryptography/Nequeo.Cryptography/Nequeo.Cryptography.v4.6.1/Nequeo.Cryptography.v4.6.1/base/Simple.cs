@@ -277,15 +277,47 @@ namespace Nequeo.Cryptography
         /// </summary>
         /// <param name="value">The value to generate the hash code for.</param>
         /// <param name="hashcodeType">The hash name.</param>
+        /// <param name="keySizePBKDF2">The PBKDF2 key size to generate.</param>
+        /// <param name="iterations">The number of iterations.</param>
         /// <returns>The generated hash code.</returns>
-        public static string GetHashcode(string value, Nequeo.Cryptography.HashcodeType hashcodeType)
+        public static string GetHashcode(string value, Nequeo.Cryptography.HashcodeType hashcodeType, int keySizePBKDF2 = 100, int iterations = 5000)
         {
-            int i = 0;
-            
             // Generate the hash code
-            HashAlgorithm alg = HashAlgorithm.Create(hashcodeType.ToString());
+            HashAlgorithm alg = null;
+
+            // Select the hash code type.
+            switch (hashcodeType)
+            {
+                case HashcodeType.SHA3:
+                    // SHA3 hashcode.
+                    alg = new Sha3.SHA3Managed();
+                    break;
+
+                case HashcodeType.PBKDF2:
+                    // PBKDF2 hashcode.
+                    byte[] hashValueEx = RandomDerivedKey.GenerateEx(value, keySizePBKDF2, iterations);
+                    return GetOctetHashcode(hashValueEx);
+
+                default:
+                    alg = HashAlgorithm.Create(hashcodeType.ToString());
+                    break;
+            }
+
             byte[] byteValue = Encoding.ASCII.GetBytes(value);
             byte[] hashValue = alg.ComputeHash(byteValue);
+
+            // Return the hash.
+            return GetOctetHashcode(hashValue);
+        }
+
+        /// <summary>
+        /// Get the octet hashcode.
+        /// </summary>
+        /// <param name="hashValue">The data to convert.</param>
+        /// <returns>The generated hash code.</returns>
+        private static string GetOctetHashcode(byte[] hashValue)
+        {
+            int i = 0;
 
             // Get the string value of hashcode.
             string[] octetArrayByte = new string[hashValue.Count()];
@@ -302,11 +334,32 @@ namespace Nequeo.Cryptography
         /// </summary>
         /// <param name="value">The value to generate the hash code for.</param>
         /// <param name="hashcodeType">The hash name.</param>
+        /// <param name="keySizePBKDF2">The PBKDF2 key size to generate.</param>
+        /// <param name="iterations">The number of iterations.</param>
         /// <returns>The generated hash code.</returns>
-        public static byte[] GetHashcodeRaw(string value, Nequeo.Cryptography.HashcodeType hashcodeType)
+        public static byte[] GetHashcodeRaw(string value, Nequeo.Cryptography.HashcodeType hashcodeType, int keySizePBKDF2 = 100, int iterations = 5000)
         {
             // Generate the hash code
-            HashAlgorithm alg = HashAlgorithm.Create(hashcodeType.ToString());
+            HashAlgorithm alg = null;
+
+            // Select the hash code type.
+            switch (hashcodeType)
+            {
+                case HashcodeType.SHA3:
+                    // SHA3 hashcode.
+                    alg = new Sha3.SHA3Managed();
+                    break;
+
+                case HashcodeType.PBKDF2:
+                    // PBKDF2 hashcode.
+                    byte[] hashValueEx = RandomDerivedKey.GenerateEx(value, keySizePBKDF2, iterations);
+                    return hashValueEx;
+
+                default:
+                    alg = HashAlgorithm.Create(hashcodeType.ToString());
+                    break;
+            }
+
             byte[] byteValue = Encoding.ASCII.GetBytes(value);
             byte[] hashValue = alg.ComputeHash(byteValue);
             return hashValue;
@@ -437,6 +490,15 @@ namespace Nequeo.Cryptography
                             SHA512 sha512 = new SHA512CryptoServiceProvider();
                             hashValue = sha512.ComputeHash(file);
                             break;
+
+                        case HashcodeType.SHA3:
+                            // SHA3 hashcode.
+                            Sha3.SHA3Managed sha3 = new Sha3.SHA3Managed();
+                            hashValue = sha3.ComputeHash(file);
+                            break;
+
+                        case HashcodeType.PBKDF2:
+                            throw new Exception("PBKDF2 Hashing is not supported.");
                     }
 
                     // Close the file.
@@ -511,6 +573,15 @@ namespace Nequeo.Cryptography
                             SHA512 sha512 = new SHA512CryptoServiceProvider();
                             hashValue = sha512.ComputeHash(file);
                             break;
+
+                        case HashcodeType.SHA3:
+                            // SHA3 hashcode.
+                            Sha3.SHA3Managed sha3 = new Sha3.SHA3Managed();
+                            hashValue = sha3.ComputeHash(file);
+                            break;
+
+                        case HashcodeType.PBKDF2:
+                            throw new Exception("PBKDF2 Hashing is not supported.");
                     }
 
                     // Close the file.
@@ -722,7 +793,15 @@ namespace Nequeo.Cryptography
         /// <summary>
         /// SHA512.
         /// </summary>
-        SHA512 = 4
+        SHA512 = 4,
+        /// <summary>
+        /// SHA3.
+        /// </summary>
+        SHA3 = 5,
+        /// <summary>
+        /// PBKDF2.
+        /// </summary>
+        PBKDF2 = 6,
     }
 
     /// <summary>

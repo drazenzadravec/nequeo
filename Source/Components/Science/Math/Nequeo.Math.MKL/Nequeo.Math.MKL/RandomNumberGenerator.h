@@ -148,7 +148,6 @@ namespace Nequeo
 
 			private:
 				bool _disposed;
-
 			};
 		}
 	}

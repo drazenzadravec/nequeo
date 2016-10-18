@@ -119,6 +119,7 @@ namespace Nequeo.Net.Sockets
         private IPHostEntry _hostEntry = null;
         private System.Net.Sockets.ProtocolType _protocolType = System.Net.Sockets.ProtocolType.Tcp;
         private System.Net.Sockets.SocketType _socketType = System.Net.Sockets.SocketType.Stream;
+        private X509CertificateCollection _clientCertificates = null;
 
         private byte[] _readBuffer = null;
         private byte[] _writeBuffer = null;
@@ -147,6 +148,15 @@ namespace Nequeo.Net.Sockets
         #endregion
 
         #region Public Properties
+        /// <summary>
+        /// Gets or sets the client certificates.
+        /// </summary>
+        public X509CertificateCollection ClientCertificates
+        {
+            get { return _clientCertificates; }
+            set { _clientCertificates = value; }
+        }
+
         /// <summary>
         /// Gets or sets the current unique connection identifier.
         /// </summary>
@@ -913,7 +923,7 @@ namespace Nequeo.Net.Sockets
                             // Load the certificate into the
                             // secure stream used for secure communication.
                             _sslStream.BeginAuthenticateAsClient(
-                                _hostEntry.HostName, null, _sslProtocols, false,
+                                _hostEntry.HostName, _clientCertificates, _sslProtocols, false,
                                 new AsyncCallback(EndAuthenticateAsClientCallback), null);
 
                             // Negotiation complete.
@@ -1033,7 +1043,7 @@ namespace Nequeo.Net.Sockets
                 // Get the current ssl stream
                 // from the socket.
                 _sslStream = new SslStream(_networkStream, true, callback);
-                _sslStream.AuthenticateAsClient(_hostEntry.HostName, null, _sslProtocols, false);
+                _sslStream.AuthenticateAsClient(_hostEntry.HostName, _clientCertificates, _sslProtocols, false);
 
                 // Get the state of the authentication.
                 if (_sslStream.IsAuthenticated && _sslStream.IsEncrypted)

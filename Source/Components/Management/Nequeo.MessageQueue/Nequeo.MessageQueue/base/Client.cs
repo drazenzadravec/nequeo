@@ -78,5 +78,99 @@ namespace Nequeo.Management.MessageQueue
                 scope.Complete();
             }
         }
-	}
+
+        /// <summary>
+        /// Send the message to the message queue
+        /// </summary>
+        /// <param name="message">The message data to send.</param>
+        /// <param name="serverAndQueuePath">The server and queue path name.</param>
+        public void SendMessage(Message message, string serverAndQueuePath)
+        {
+            // Connect to the queue
+            System.Messaging.MessageQueue serverQueue =
+                new System.Messaging.MessageQueue(serverAndQueuePath);
+
+            // Submit the message
+            System.Messaging.Message msg = new System.Messaging.Message();
+            msg.Body = message;
+            msg.Label = "SendMessage";
+
+            // Create a transaction scope.
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+            {
+                // Send the message.
+                serverQueue.Send(msg, MessageQueueTransactionType.Automatic);
+
+                // Complete the transaction.
+                scope.Complete();
+            }
+        }
+
+        /// <summary>
+        /// Get the queued message from the message queue.
+        /// </summary>
+        /// <returns>The queued message.</returns>
+        public Message GetMessage()
+        {
+            // Connect to the queue
+            System.Messaging.MessageQueue serverQueue =
+                new System.Messaging.MessageQueue(
+                    Nequeo.Management.MessageQueue.Properties.Settings.Default.ServerQueueName +
+                    Nequeo.Management.MessageQueue.Properties.Settings.Default.QueueName);
+
+            // Get the message.
+            Message message = new Message();
+            Object o = new Object();
+            System.Type[] arrTypes = new System.Type[2];
+            arrTypes[0] = message.GetType();
+            arrTypes[1] = o.GetType();
+            serverQueue.Formatter = new XmlMessageFormatter(arrTypes);
+
+            // Create a transaction scope.
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+            {
+                // Get the message
+                message = ((Message)serverQueue.Receive(MessageQueueTransactionType.Automatic).Body);
+
+                // Complete the transaction.
+                scope.Complete();
+            }
+
+            // Return the message from the queue.
+            return message;
+        }
+
+        /// <summary>
+        /// Get the queued message from the message queue.
+        /// </summary>
+        /// <param name="serverAndQueuePath">The server and queue path name.</param>
+        /// <returns>The queued message.</returns>
+        public Message GetMessage(string serverAndQueuePath)
+        {
+            // Connect to the queue
+            System.Messaging.MessageQueue serverQueue =
+                new System.Messaging.MessageQueue(serverAndQueuePath);
+
+            // Get the message.
+            Message message = new Message();
+            Object o = new Object();
+            System.Type[] arrTypes = new System.Type[2];
+            arrTypes[0] = message.GetType();
+            arrTypes[1] = o.GetType();
+            serverQueue.Formatter = new XmlMessageFormatter(arrTypes);
+
+            // Create a transaction scope.
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+            {
+                // Get the message
+                message = ((Message)serverQueue.Receive(MessageQueueTransactionType.Automatic).Body);
+
+                // Complete the transaction.
+                scope.Complete();
+            }
+
+            // Return the message from the queue.
+            return message;
+        }
+    }
 }

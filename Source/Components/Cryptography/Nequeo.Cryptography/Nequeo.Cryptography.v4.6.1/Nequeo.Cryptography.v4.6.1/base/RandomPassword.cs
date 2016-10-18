@@ -84,6 +84,20 @@ namespace Nequeo.Cryptography
         /// Generate the derived key.
         /// </summary>
         /// <param name="sharedKey">The shared key used with the common salt.</param>
+        /// <param name="keySize">The derived key size to generate.</param>
+        /// <param name="iterations">The number of iterations.</param>
+        /// <returns>The derived key.</returns>
+        public static byte[] GenerateEx(string sharedKey, int keySize = 32, int iterations = 5000)
+        {
+            // Generate the key from the shared secret and the salt
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedKey, _salt, iterations);
+            return key.GetBytes(keySize);
+        }
+
+        /// <summary>
+        /// Generate the derived key.
+        /// </summary>
+        /// <param name="sharedKey">The shared key used with the common salt.</param>
         /// <param name="salt">The common salt used to generate the key.</param>
         /// <param name="keySize">The derived key size to generate.</param>
         /// <returns>The derived key.</returns>
@@ -91,6 +105,21 @@ namespace Nequeo.Cryptography
         {
             // Generate the key from the shared secret and the salt
             Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedKey, salt);
+            return key.GetBytes(keySize);
+        }
+
+        /// <summary>
+        /// Generate the derived key.
+        /// </summary>
+        /// <param name="sharedKey">The shared key used with the common salt.</param>
+        /// <param name="salt">The common salt used to generate the key.</param>
+        /// <param name="keySize">The derived key size to generate.</param>
+        /// <param name="iterations">The number of iterations.</param>
+        /// <returns>The derived key.</returns>
+        public static byte[] GenerateEx(string sharedKey, byte[] salt, int keySize = 32, int iterations = 5000)
+        {
+            // Generate the key from the shared secret and the salt
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedKey, salt, iterations);
             return key.GetBytes(keySize);
         }
     }

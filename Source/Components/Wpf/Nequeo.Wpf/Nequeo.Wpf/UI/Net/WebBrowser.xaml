@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Nequeo.Wpf.UI.Net.WebBrowser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nequeo.Wpf.UI.Net"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="600">
+    <Grid>
+        <DockPanel LastChildFill="True" >
+            <ToolBar x:Name="toolBar" DockPanel.Dock="Top" Height="24" >
+                <Button x:Name="backButton" Content="Back" Height="22" Click="backButton_Click"/>
+                <Button x:Name="forwardButton" Content="Forward" Height="22" Click="forwardButton_Click"/>
+                <Button x:Name="stopButton" Content="Stop" Height="22" Click="stopButton_Click" Visibility="Hidden"/>
+                <Button x:Name="refreshButton" Content="Refresh" Height="22" Click="refreshButton_Click"/>
+                <ComboBox x:Name="comboBoxUrl" Width="300" SelectionChanged="comboBoxUrl_SelectionChanged" IsEditable="True" IsReadOnly="False" KeyDown="comboBoxUrl_KeyDown" >
+                    
+                </ComboBox>
+                <Button x:Name="homeButton" Content="Home" Height="22" Click="homeButton_Click"/>
+                <Button x:Name="previewButton" Content="Preview" Height="22" Click="previewButton_Click" Visibility="Hidden" />
+                <Button x:Name="saveButton" Content="Save" Height="22" Click="saveButton_Click" Visibility="Hidden" />
+            </ToolBar>
+            <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom" Height="24">
+                <ProgressBar x:Name="progressBar" Height="18" Width="100"/>
+            </StatusBar>
+            <WebBrowser x:Name="wb" />
+        </DockPanel>
+    </Grid>
+</UserControl>

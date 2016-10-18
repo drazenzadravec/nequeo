@@ -104,7 +104,7 @@ namespace Nequeo.Net.Provider
 
         /// <summary>
         /// Gets or sets the context is only generated once used along with IsAsyncMode when set to true.
-        /// All client processing is done in async and within the current context. The is triggered only
+        /// All client processing is done in async and within the current context. This is triggered only
         /// when data has arrived.
         /// </summary>
         public Action ReceivedAsyncMode

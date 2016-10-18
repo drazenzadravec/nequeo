@@ -42,6 +42,25 @@ using Nequeo.Collections;
 namespace Nequeo.Net.Http2.Protocol
 {
     /// <summary>
+    /// HTTP/2 Version Identification.
+    /// </summary>
+    public static class Protocols
+    {
+        /// <summary>
+        /// Http /2.
+        /// </summary>
+        public static string Http2 = "h2-12";
+        /// <summary>
+        /// Http /2 no TLS.
+        /// </summary>
+        public static string Http2NoTls = "h2c-12";
+        /// <summary>
+        /// Http /1.1
+        /// </summary>
+        public static string Http1 = "http/1.1";
+    }
+
+    /// <summary>
     /// This class contains the most commonly used constants.
     /// </summary>
     internal static class Constants

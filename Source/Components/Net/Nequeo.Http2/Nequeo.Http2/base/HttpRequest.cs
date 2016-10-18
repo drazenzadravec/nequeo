@@ -163,11 +163,16 @@ namespace Nequeo.Net.Http2
                     Headers.Add(item.Name, item.Value);
                 }
 
-                // Assign the headers.
-                Method = request.Method;
-                ProtocolVersion = request.ProtocolVersion;
-                Path = request.Path;
-                Scheme = request.Scheme;
+                // If top level header information exists.
+                if (request != null)
+                {
+                    // Assign the headers.
+                    Method = (String.IsNullOrEmpty(request.Method) ? Method : request.Method);
+                    ProtocolVersion = (String.IsNullOrEmpty(request.ProtocolVersion) ? ProtocolVersion : request.ProtocolVersion);
+                    Path = (String.IsNullOrEmpty(request.Path) ? Path : request.Path);
+                    Scheme = (String.IsNullOrEmpty(request.Scheme) ? Scheme : request.Scheme);
+                    Authority = (String.IsNullOrEmpty(request.Authority) ? Authority : request.Authority);
+                }
 
                 try
                 {

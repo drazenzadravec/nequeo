@@ -45,6 +45,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <iomanip>
 #include <memory>
 #include <vector>
+#include <cstring>
 
 using namespace std;
 
@@ -55,5 +56,15 @@ namespace Nequeo
 #else
 	typedef std::string TFormatString;
 #endif
+
+	struct CompareStrings
+	{
+		bool operator()(const char* a, const char* b) const
+		{
+			return std::strcmp(a, b) < 0;
+		}
+	};
 }
 #endif
+
+#define NEQUEO_UNREFERENCED_PARAM(x) (&reinterpret_cast<const int &>(x))

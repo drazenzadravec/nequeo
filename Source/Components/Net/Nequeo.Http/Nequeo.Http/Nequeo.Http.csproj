@@ -323,6 +323,7 @@
     <Compile Include="base\HttpRequest.cs" />
     <Compile Include="base\HttpResponse.cs" />
     <Compile Include="base\HttpServer.cs" />
+    <Compile Include="Common\CustomContext.cs" />
     <Compile Include="Common\HttpCodes.cs" />
     <Compile Include="Common\HttpContextMember.cs" />
     <Compile Include="Common\HttpFormModel.cs" />

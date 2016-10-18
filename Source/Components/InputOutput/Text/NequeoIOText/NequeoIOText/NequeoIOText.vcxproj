@@ -87,7 +87,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -107,11 +107,13 @@ copy $(ProjectDir)\UnicodeConverter.h "..\..\..\..\..\References\Release\Include
 copy $(ProjectDir)\UTF8Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8Encoding.h"
 copy $(ProjectDir)\UTF8String.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8String.h"
 copy $(ProjectDir)\UTF16Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF16Encoding.h"
-copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"</Command>
+copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"
+copy $(ProjectDir)\JsonSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\JsonSerializer.h"
+copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\XmlSerializer.h"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoThreading.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\lib\x86;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;NequeoThreading.lib;jsoncpp.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,7 +123,7 @@ copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Incl
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,11 +143,13 @@ copy $(ProjectDir)\UnicodeConverter.h "..\..\..\..\..\References\Release\Include
 copy $(ProjectDir)\UTF8Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8Encoding.h"
 copy $(ProjectDir)\UTF8String.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8String.h"
 copy $(ProjectDir)\UTF16Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF16Encoding.h"
-copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"</Command>
+copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"
+copy $(ProjectDir)\JsonSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\JsonSerializer.h"
+copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\XmlSerializer.h"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoThreading.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\lib\x64;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;NequeoThreading.lib;jsoncpp.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -157,8 +161,8 @@ copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Incl
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -180,11 +184,13 @@ copy $(ProjectDir)\UnicodeConverter.h "..\..\..\..\..\References\Release\Include
 copy $(ProjectDir)\UTF8Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8Encoding.h"
 copy $(ProjectDir)\UTF8String.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8String.h"
 copy $(ProjectDir)\UTF16Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF16Encoding.h"
-copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"</Command>
+copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"
+copy $(ProjectDir)\JsonSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\JsonSerializer.h"
+copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\XmlSerializer.h"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\lib\x86;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;NequeoThreading.lib;jsoncpp.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -196,8 +202,8 @@ copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Incl
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -219,11 +225,13 @@ copy $(ProjectDir)\UnicodeConverter.h "..\..\..\..\..\References\Release\Include
 copy $(ProjectDir)\UTF8Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8Encoding.h"
 copy $(ProjectDir)\UTF8String.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF8String.h"
 copy $(ProjectDir)\UTF16Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\UTF16Encoding.h"
-copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"</Command>
+copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\Windows1252Encoding.h"
+copy $(ProjectDir)\JsonSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\JsonSerializer.h"
+copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Components\IO\Text\XmlSerializer.h"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NequeoThreading.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\lib\x64;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.lib;NequeoThreading.lib;jsoncpp.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -232,6 +240,7 @@ copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Incl
   <ItemGroup>
     <ClInclude Include="ASCIIEncoding.h" />
     <ClInclude Include="GlobalText.h" />
+    <ClInclude Include="JsonSerializer.h" />
     <ClInclude Include="Latin1Encoding.h" />
     <ClInclude Include="Latin9Encoding.h" />
     <ClInclude Include="stdafx.h" />
@@ -246,9 +255,11 @@ copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Incl
     <ClInclude Include="UTF8Encoding.h" />
     <ClInclude Include="UTF8String.h" />
     <ClInclude Include="Windows1252Encoding.h" />
+    <ClInclude Include="XmlSerializer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ASCIIEncoding.cpp" />
+    <ClCompile Include="JsonSerializer.cpp" />
     <ClCompile Include="Latin1Encoding.cpp" />
     <ClCompile Include="Latin9Encoding.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -267,6 +278,7 @@ copy $(ProjectDir)\Windows1252Encoding.h "..\..\..\..\..\References\Release\Incl
     <ClCompile Include="UTF8Encoding.cpp" />
     <ClCompile Include="UTF8String.cpp" />
     <ClCompile Include="Windows1252Encoding.cpp" />
+    <ClCompile Include="XmlSerializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

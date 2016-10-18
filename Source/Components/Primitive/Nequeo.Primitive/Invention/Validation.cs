@@ -259,6 +259,8 @@ namespace Nequeo.Invention
                 // Select the special characters.
                 switch(character)
                 {
+                    case '~':
+                    case '^':
                     case '*':
                     case '$':
                     case '-':
@@ -266,12 +268,21 @@ namespace Nequeo.Invention
                     case '?':
                     case '_':
                     case '&':
+                    case '#':
                     case '=':
                     case '!':
                     case '%':
                     case '{':
                     case '}':
                     case '/':
+                    case '[':
+                    case ']':
+                    case '(':
+                    case ')':
+                    case '>':
+                    case '<':
+                    case '.':
+                    case ',':
                         // Count special characters.
                         specialCount++;
                         break;
@@ -1004,7 +1015,7 @@ namespace Nequeo.Invention
             int combinationsOfLowerCaseLetters = 26;
             int combinationsOfUpperCaseLetters = 26;
             int combinationsOfNumbers = 10;
-            int combinationsOfSpecialChars = 13;
+            int combinationsOfSpecialChars = 24;
 
             // For each char calculate the number
             // of combinations.

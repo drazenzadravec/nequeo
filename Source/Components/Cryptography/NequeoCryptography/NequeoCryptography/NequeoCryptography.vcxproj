@@ -84,17 +84,17 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;POCO_STATIC;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Crypto\include;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\cryptopp562\Win32\Output\Debug;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\cryptopp562\Win32\Output\Debug;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;NequeoException.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
@@ -113,17 +113,17 @@ copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;POCO_STATIC;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Crypto\include;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;NequeoException.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
@@ -143,10 +143,10 @@ copy $(ProjectDir)\Simple.h "..\..\..\..\References\Release\Include\Components\C
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;POCO_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Crypto\include;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,7 +155,7 @@ copy $(ProjectDir)\Simple.h "..\..\..\..\References\Release\Include\Components\C
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x86\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x86\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x86\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x86\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
@@ -168,7 +168,8 @@ copy $(ProjectDir)\PasswordType.h "..\..\..\..\References\Release\Include\Compon
 copy $(ProjectDir)\RandomGenerator.h "..\..\..\..\References\Release\Include\Components\Cryptography\RandomGenerator.h"
 copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components\Cryptography\Hashcode.h"
 copy $(ProjectDir)\RsaExponent.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaExponent.h"
-copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaParameters.h"</Command>
+copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaParameters.h"
+copy $(ProjectDir)\X509Certificate.h "..\..\..\..\References\Release\Include\Components\Cryptography\X509Certificate.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -178,10 +179,10 @@ copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Compo
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;POCO_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\include;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\Crypto\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\include;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Foundation\include;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\Crypto\include;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -190,7 +191,7 @@ copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Compo
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\156\stage\x64\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.6.0-all\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\References\Release_x64\Lib\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\lib;..\..\..\..\..\ThirdPartyTools\Crypto_cpp\562\x64\lib;..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\lib;..\..\..\..\..\ThirdPartyTools\Poco\1.7.3-all\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
@@ -203,7 +204,8 @@ copy $(ProjectDir)\PasswordType.h "..\..\..\..\References\Release\Include\Compon
 copy $(ProjectDir)\RandomGenerator.h "..\..\..\..\References\Release\Include\Components\Cryptography\RandomGenerator.h"
 copy $(ProjectDir)\Hashcode.h "..\..\..\..\References\Release\Include\Components\Cryptography\Hashcode.h"
 copy $(ProjectDir)\RsaExponent.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaExponent.h"
-copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaParameters.h"</Command>
+copy $(ProjectDir)\RsaParameters.h "..\..\..\..\References\Release\Include\Components\Cryptography\RsaParameters.h"
+copy $(ProjectDir)\X509Certificate.h "..\..\..\..\References\Release\Include\Components\Cryptography\X509Certificate.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

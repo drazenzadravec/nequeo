@@ -147,7 +147,7 @@ void toAny(System::Object ^source, AnyType &destination)
     {
         toAny(safe_cast<cli::array<System::Byte>^>(source), destination);
     }
-	else if (type == cli::array<System::String>::typeid)
+	else if (type == cli::array<System::String^>::typeid)
 	{
 		toAny(safe_cast<cli::array<System::String^>^>(source), destination);
 	}

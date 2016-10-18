@@ -723,11 +723,11 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Executes the provided delegate for each item.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="instance"></param>
-        /// <param name="action"></param>
+        /// <param name="instance">The instance.</param>
+        /// <param name="action">The action to be applied.</param>
         public static void Each<T>(this IEnumerable<T> instance, Action<T, int> action)
         {
             int index = 0;
@@ -748,11 +748,11 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Convert to generic object enumerable instance.
         /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        internal static IEnumerable AsGenericEnumerable(this IEnumerable source)
+        /// <param name="source">The current enumerable.</param>
+        /// <returns>The generic enumerable instance.</returns>
+        public static IEnumerable AsGenericEnumerable(this IEnumerable source)
         {
             Type elementType = typeof(Object);
 
@@ -787,12 +787,12 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Get the index of the item.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        internal static int IndexOf(this IEnumerable source, object item)
+        /// <param name="source">The current enumerable.</param>
+        /// <param name="item">The item.</param>
+        /// <returns>The index of the item.</returns>
+        public static int IndexOf(this IEnumerable source, object item)
         {
             int index = 0;
             foreach (object i in source)
@@ -809,12 +809,12 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Get the element at index.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        internal static object ElementAt(this IEnumerable source, int index)
+        /// <param name="source">The current enumerable.</param>
+        /// <param name="index">The index.</param>
+        /// <returns>The object at the index; else null.</returns>
+        public static object ElementAt(this IEnumerable source, int index)
         {
             if (index < 0)
             {
@@ -841,12 +841,12 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Select recursively.
         /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="recursiveSelector"></param>
-        /// <returns></returns>
+        /// <typeparam name="TSource">The enumerable type.</typeparam>
+        /// <param name="source">The enum source.</param>
+        /// <param name="recursiveSelector">The recursive selector.</param>
+        /// <returns>The enumerable type result.</returns>
         public static IEnumerable<TSource> SelectRecursive<TSource>(this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TSource>> recursiveSelector)
         {
@@ -885,15 +885,15 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Zip iterator. 
         /// </summary>
-        /// <typeparam name="TFirst"></typeparam>
-        /// <typeparam name="TSecond"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="resultSelector"></param>
-        /// <returns></returns>
+        /// <typeparam name="TFirst">The first type.</typeparam>
+        /// <typeparam name="TSecond">The second type.</typeparam>
+        /// <typeparam name="TResult">The result ype.</typeparam>
+        /// <param name="first">The first collection.</param>
+        /// <param name="second">The second collection.</param>
+        /// <param name="resultSelector">The result selector function.</param>
+        /// <returns>The combined type collection.</returns>
         public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
         {
@@ -905,15 +905,15 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Zip iterator. 
         /// </summary>
-        /// <typeparam name="TFirst"></typeparam>
-        /// <typeparam name="TSecond"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="resultSelector"></param>
-        /// <returns></returns>
+        /// <typeparam name="TFirst">The first type.</typeparam>
+        /// <typeparam name="TSecond">The second type.</typeparam>
+        /// <typeparam name="TResult">The result ype.</typeparam>
+        /// <param name="first">The first collection.</param>
+        /// <param name="second">The second collection.</param>
+        /// <param name="resultSelector">The result selector function.</param>
+        /// <returns>The combined type collection.</returns>
         private static IEnumerable<TResult> ZipIterator<TFirst, TSecond, TResult>(
             IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
         {
@@ -924,11 +924,11 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// To readOnly collection.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sequence"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The collection type.</typeparam>
+        /// <param name="sequence">The current sequence.</param>
+        /// <returns>The readOnly collection.</returns>
         public static ReadOnlyCollection<T> ToReadOnlyCollection<T>(this IEnumerable<T> sequence)
         {
             if (sequence == null)
@@ -944,13 +944,16 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Default ReadOnly Collection.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The generic type.</typeparam>
         private static class DefaultReadOnlyCollection<T>
         {
             private static ReadOnlyCollection<T> defaultCollection;
 
+            /// <summary>
+            /// Gets the Empty collection.
+            /// </summary>
             internal static ReadOnlyCollection<T> Empty
             {
                 get
@@ -965,9 +968,9 @@ namespace Nequeo.Extension
         }
 
         /// <summary>
-        /// 
+        /// Generic enumerable.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The generic type.</typeparam>
         private class GenericEnumerable<T> : IEnumerable<T>
         {
             private readonly IEnumerable source;
@@ -982,18 +985,18 @@ namespace Nequeo.Extension
             }
 
             /// <summary>
-            /// 
+            /// Get the implicit enumerable.
             /// </summary>
-            /// <returns></returns>
+            /// <returns>The implicit enumerable.</returns>
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this.source.GetEnumerator();
             }
 
             /// <summary>
-            /// 
+            /// Get the implicit generic enumerable.
             /// </summary>
-            /// <returns></returns>
+            /// <returns>The implicit generic enumerable.</returns>
             IEnumerator<T> IEnumerable<T>.GetEnumerator()
             {
                 foreach (T item in this.source)

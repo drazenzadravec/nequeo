@@ -44,7 +44,7 @@ namespace Nequeo.Science.Math.Providers.LinearAlgebra.OpenBlas
         /// <summary>
         /// Name of the native DLL.
         /// </summary>
-        const string _DllName = "Nequeo.Math.OpenBLAS.dll";
+        const string _DllName = "Nequeo.Math.OpenBlas.dll";
         internal static string DllName { get { return _DllName; } }
 
         [DllImport(_DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]

@@ -120,7 +120,7 @@ namespace Nequeo.Media
     public struct SoundModel
     {
         /// <summary>
-        /// The index of the video frame at which the sound is going to start.
+        /// The index of the audio frame at which the sound is going to start.
         /// </summary>
         public int StartAtFrameIndex;
 
