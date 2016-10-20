@@ -132,6 +132,189 @@ namespace Nequeo {
 				Concurrency::task<azure::storage::service_properties> DownloadServicePropertiesAsync(
 					const azure::storage::table_request_options& options, azure::storage::operation_context context) const;
 
+				///	<summary>
+				///	Create a Table.
+				///	</summary>
+				/// <param name="tableName">The Table name to create.</param>
+				/// <returns>True if created; else false.</returns>
+				bool CreateTable(const utility::string_t& tableName) const;
+
+				///	<summary>
+				///	Delete a Table.
+				///	</summary>
+				/// <param name="tableName">The Table name to delete.</param>
+				/// <returns>True if deleted; else false.</returns>
+				bool DeleteTable(const utility::string_t& tableName) const;
+
+				///	<summary>
+				///	Add an entity to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entity">The entity to add.</param>
+				/// <returns>The add entity result.</returns>
+				azure::storage::table_result AddEntity(const utility::string_t& tableName, azure::storage::table_entity& entity);
+
+				///	<summary>
+				///	Add an entity to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entity">The entity to add.</param>
+				/// <returns>The add entity result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_result> AddEntityAsync(const utility::string_t& tableName, azure::storage::table_entity& entity);
+
+				///	<summary>
+				///	Add entities to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entities">The entities to add.</param>
+				/// <returns>The add entities result.</returns>
+				std::vector<azure::storage::table_result> AddEntities(const utility::string_t& tableName, const std::vector<azure::storage::table_entity>& entities);
+
+				///	<summary>
+				///	Add entities to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entities">The entities to add.</param>
+				/// <returns>The add entities result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<std::vector<azure::storage::table_result>> AddEntitiesAsync(
+					const utility::string_t& tableName, const std::vector<azure::storage::table_entity>& entities);
+
+				///	<summary>
+				///	Retrieve entities in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="query">The query.</param>
+				/// <returns>The retrieved entities result.</returns>
+				azure::storage::table_query_iterator RetrieveEntities(
+					const utility::string_t& tableName, azure::storage::table_query& query);
+
+				///	<summary>
+				///	Retrieve entities in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="query">The query.</param>
+				/// <returns>The retrieved entities result.</returns>
+				std::vector<azure::storage::table_entity> RetrieveEntitiesEx(
+					const utility::string_t& tableName, azure::storage::table_query& query);
+
+				///	<summary>
+				///	Retrieve entities in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="query">The query.</param>
+				/// <returns>The retrieved entities result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_query_iterator> RetrieveEntitiesAsync(
+					const utility::string_t& tableName, azure::storage::table_query& query);
+
+				///	<summary>
+				///	Retrieve entities in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="query">The query.</param>
+				/// <returns>The retrieved entities result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<std::vector<azure::storage::table_entity>> RetrieveEntitiesExAsync(
+					const utility::string_t& tableName, azure::storage::table_query& query);
+
+				///	<summary>
+				///	Retrieve entity in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="retrieveOperation">The retrieve operation.</param>
+				/// <returns>The retrieved entity result.</returns>
+				azure::storage::table_entity RetrieveEntity(
+					const utility::string_t& tableName, azure::storage::table_operation& retrieveOperation);
+
+				///	<summary>
+				///	Retrieve entity in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="retrieveOperation">The retrieve operation.</param>
+				/// <returns>The retrieved entity result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_entity> RetrieveEntityAsync(
+					const utility::string_t& tableName, azure::storage::table_operation& retrieveOperation);
+
+				///	<summary>
+				///	Replace an entity to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entity">The entity to add.</param>
+				/// <returns>The add entity result.</returns>
+				azure::storage::table_result ReplaceEntity(const utility::string_t& tableName, azure::storage::table_entity& entity);
+
+				///	<summary>
+				///	Replace an entity to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entity">The entity to add.</param>
+				/// <returns>The add entity result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_result> ReplaceEntityAsync(const utility::string_t& tableName, azure::storage::table_entity& entity);
+
+				///	<summary>
+				///	Add or replace an entity to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entity">The entity to add.</param>
+				/// <returns>The add entity result.</returns>
+				azure::storage::table_result AddReplaceEntity(const utility::string_t& tableName, azure::storage::table_entity& entity);
+
+				///	<summary>
+				///	Add or replace an entity to the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="entity">The entity to add.</param>
+				/// <returns>The add entity result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_result> AddReplaceEntityAsync(const utility::string_t& tableName, azure::storage::table_entity& entity);
+
+				///	<summary>
+				///	Retrieve entity properties in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="columns">The columns within the entity.</param>
+				/// <returns>The retrieved entity properties result.</returns>
+				azure::storage::table_query_iterator QuerySubset(const utility::string_t& tableName, std::vector<utility::string_t>& columns);
+
+				///	<summary>
+				///	Retrieve entity properties in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="columns">The columns within the entity.</param>
+				/// <returns>The retrieved entity properties result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_query_iterator> QuerySubsetAsync(const utility::string_t& tableName, std::vector<utility::string_t>& columns);
+
+				///	<summary>
+				///	Retrieve entity properties in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="columns">The columns within the entity.</param>
+				/// <returns>The retrieved entity properties result.</returns>
+				std::vector<azure::storage::table_entity> QuerySubsetEx(const utility::string_t& tableName, std::vector<utility::string_t>& columns);
+
+				///	<summary>
+				///	Retrieve entity properties in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="columns">The columns within the entity.</param>
+				/// <returns>The retrieved entity properties result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<std::vector<azure::storage::table_entity>> QuerySubsetExAsync(const utility::string_t& tableName, std::vector<utility::string_t>& columns);
+
+				///	<summary>
+				///	Delete entity in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="retrieveOperation">The retrieve operation.</param>
+				/// <returns>The deleted entity result.</returns>
+				azure::storage::table_result DeleteEntity(
+					const utility::string_t& tableName, azure::storage::table_operation& retrieveOperation);
+
+				///	<summary>
+				///	Delete entity in the Table.
+				///	</summary>
+				/// <param name="tableName">The Table name.</param>
+				/// <param name="retrieveOperation">The retrieve operation.</param>
+				/// <returns>The deleted entity result <see cref="Concurrency::task"/>.</returns>
+				Concurrency::task<azure::storage::table_result> DeleteEntityAsync(
+					const utility::string_t& tableName, azure::storage::table_operation& retrieveOperation);
+
 			private:
 				bool _disposed;
 				bool _isInitialised;

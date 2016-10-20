@@ -164,7 +164,7 @@ void BlobCloudClient::UploadFileBlob(const utility::string_t& containerName, con
 /// <param name="blobName">The blob name.</param>
 /// <param name="inputStream">The input stream containing the file to upload.</param>
 /// <returns>A <see cref="Concurrency::task"/> object that represents the current operation.</returns>
-Concurrency::task<void> BlobCloudClient::UploadFileBlobAsync(const utility::string_t& containerName, const utility::string_t& blobName, Concurrency::streams::istream& inputStream)
+Concurrency::task<void> BlobCloudClient::UploadStreamBlobAsync(const utility::string_t& containerName, const utility::string_t& blobName, Concurrency::streams::istream& inputStream)
 {
 	// Retrieve a reference to a previously created container.
 	azure::storage::cloud_blob_container container = _client.get_container_reference(containerName);
@@ -191,6 +191,7 @@ void BlobCloudClient::UploadTextBlob(const utility::string_t& containerName, con
 	azure::storage::cloud_block_blob blockBlob = container.get_block_blob_reference(blobName);
 	blockBlob.upload_text(text);
 }
+
 ///	<summary>
 ///	Upload a blob to the container.
 ///	</summary>

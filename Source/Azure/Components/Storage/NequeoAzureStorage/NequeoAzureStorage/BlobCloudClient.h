@@ -122,7 +122,7 @@ namespace Nequeo {
 				/// <param name="blobName">The blob name.</param>
 				/// <param name="inputStream">The input stream containing the file to upload.</param>
 				/// <returns>A <see cref="Concurrency::task"/> object that represents the current operation.</returns>
-				Concurrency::task<void> UploadFileBlobAsync(const utility::string_t& containerName, const utility::string_t& blobName, Concurrency::streams::istream& inputStream);
+				Concurrency::task<void> UploadStreamBlobAsync(const utility::string_t& containerName, const utility::string_t& blobName, Concurrency::streams::istream& inputStream);
 
 				///	<summary>
 				///	Upload a blob to the container.

@@ -38,6 +38,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include <was\queue.h>
 
+#undef PeekMessage
+
 namespace Nequeo {
 	namespace Azure {
 		namespace Storage
@@ -131,6 +133,152 @@ namespace Nequeo {
 				/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
 				Concurrency::task<azure::storage::service_properties> DownloadServicePropertiesAsync(
 					const azure::storage::queue_request_options& options, azure::storage::operation_context context) const;
+
+				///	<summary>
+				///	Create a Queue.
+				///	</summary>
+				/// <param name="queueName">The queue name to create.</param>
+				/// <returns>True if created; else false.</returns>
+				bool CreateQueue(const utility::string_t& queueName);
+
+				///	<summary>
+				///	Delete a Queue.
+				///	</summary>
+				/// <param name="queueName">The queue name to delete.</param>
+				/// <returns>True if deleted; else false.</returns>
+				bool DeleteQueue(const utility::string_t& queueName);
+
+				///	<summary>
+				///	Create a Message.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="message">The message to create.</param>
+				void CreateMessage(const utility::string_t& queueName, const utility::string_t& message);
+
+				///	<summary>
+				///	Create a Message.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="content">The content of the message as raw data.</param>
+				void CreateMessage(const utility::string_t& queueName, const std::vector<uint8_t>& content);
+
+				///	<summary>
+				///	Create a Message.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="message">The message to create.</param>
+				/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
+				Concurrency::task<void> CreateMessageAsync(const utility::string_t& queueName, const utility::string_t& message);
+
+				///	<summary>
+				///	Create a Message.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="content">The content of the message as raw data.</param>
+				/// <returns>A <see cref="Concurrency::task"/> object of type <see cref="azure::storage::service_properties"/> that represents the current operation.</returns>
+				Concurrency::task<void> CreateMessageAsync(const utility::string_t& queueName, const std::vector<uint8_t>& content);
+
+				/// <summary>
+				/// Peeks a message from the front of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>An <see cref="azure::storage::cloud_queue_message"/> object.</returns>
+				azure::storage::cloud_queue_message PeekMessage(const utility::string_t& queueName) const;
+
+				/// <summary>
+				/// Peeks a message from the front of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>A <see cref="concurrency::task"/> object of type <see cref="azure::storage::cloud_queue_message"/> that represents the current operation.</returns>
+				Concurrency::task<azure::storage::cloud_queue_message> PeekMessageAsync(const utility::string_t& queueName) const;
+
+				/// <summary>
+				/// Peeks a message from the front of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+				/// <returns>An <see cref="azure::storage::cloud_queue_message"/> object.</returns>
+				azure::storage::cloud_queue_message PeekMessage(
+					const utility::string_t& queueName, 
+					const azure::storage::queue_request_options& options,
+					azure::storage::operation_context context) const;
+
+				/// <summary>
+				/// Peeks a message from the front of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+				/// <returns>A <see cref="concurrency::task"/> object of type <see cref="azure::storage::cloud_queue_message"/> that represents the current operation.</returns>
+				Concurrency::task<azure::storage::cloud_queue_message> PeekMessageAsync(
+					const utility::string_t& queueName,
+					const azure::storage::queue_request_options& options,
+					azure::storage::operation_context context) const;
+
+				///	<summary>
+				///	Change a message from the front of the queue.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="message">The message to assign.</param>
+				/// <param name="visibilityTimeout">The time interval, in seconds, after which the message becomes visible again, unless it has been deleted.</param>
+				void ChangeMessage(const utility::string_t& queueName, const utility::string_t& message, long long visibilityTimeout = 60);
+
+				///	<summary>
+				///	Change a message from the front of the queue.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="message">The message to assign.</param>
+				/// <param name="visibilityTimeout">The time interval, in seconds, after which the message becomes visible again, unless it has been deleted.</param>
+				/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+				Concurrency::task<void> ChangeMessageAsync(const utility::string_t& queueName, const utility::string_t& message, long long visibilityTimeout = 60);
+
+				///	<summary>
+				///	De-Queue a message from the front of the queue.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>An <see cref="azure::storage::cloud_queue_message"/> object.</returns>
+				azure::storage::cloud_queue_message DequeueMessage(const utility::string_t& queueName);
+
+				///	<summary>
+				///	De-Queue a message from the front of the queue.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>A <see cref="concurrency::task"/> object of type <see cref="azure::storage::cloud_queue_message"/> that represents the current operation.</returns>
+				Concurrency::task<azure::storage::cloud_queue_message> DequeueMessageAsync(const utility::string_t& queueName);
+
+				///	<summary>
+				///	De-Queue a message from the front of the queue.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="messageCount">The number of messages to return.</param>
+				/// <param name="visibilityTimeout">The time interval, in seconds, after which the message becomes visible again, unless it has been deleted.</param>
+				/// <returns>The collection of messages.</returns>
+				std::vector<azure::storage::cloud_queue_message> DequeueMessageList(const utility::string_t& queueName, long long messageCount = 20, long long visibilityTimeout = 300);
+
+				///	<summary>
+				///	De-Queue a message from the front of the queue.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="messageCount">The number of messages to return.</param>
+				/// <param name="visibilityTimeout">The time interval, in seconds, after which the message becomes visible again, unless it has been deleted.</param>
+				/// <returns>The collection of messages <see cref="concurrency::task"/>.</returns>
+				Concurrency::task<std::vector<azure::storage::cloud_queue_message>> DequeueMessageListAsync(
+					const utility::string_t& queueName, long long messageCount = 20, long long visibilityTimeout = 300);
+
+				///	<summary>
+				///	Get the approximate message count.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>The approximate message count.</returns>
+				int GetMessageCount(const utility::string_t& queueName) const;
+
+				///	<summary>
+				///	Get the approximate message count.
+				///	</summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>The approximate message count <see cref="concurrency::task"/>.</returns>
+				Concurrency::task<int> GetMessageCountAsync(const utility::string_t& queueName);
 
 			private:
 				bool _disposed;
