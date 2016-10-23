@@ -2,7 +2,7 @@
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
 *  File :          ECSCloudAccount.cpp
-*  Purpose :       EC2 Container Service Cloud account provider class.
+*  Purpose :       ECS Container Service Cloud account provider class.
 *
 */
 
@@ -59,9 +59,9 @@ ECSCloudAccount::~ECSCloudAccount()
 }
 
 /// <summary>
-/// Gets the EC2 Container Service client.
+/// Gets the ECS Container Service client.
 /// </summary>
-/// <return>The EC2 Container Service client.</return>
+/// <return>The ECS Container Service client.</return>
 const Aws::ECS::ECSClient& ECSCloudAccount::GetClient() const
 {
 	return *(_client.get());
