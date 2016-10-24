@@ -1,0 +1,623 @@
+@c ------------------------------------------------------------------
+@chapter Website
+@nav{}
+
+@menu
+* Main::
+* News::
+* Features::
+* Pictures::
+@c * MGL scripts::
+* Download::
+* Other projects::
+@end menu
+
+@external{}
+
+@node Main, News, , Website
+@section MathGL is ...
+@nav{}
+
+@ifhtml
+@html
+<a href="Adding-fog.html"><img border="0" align="right" hspace="30" vspace="20" alt="Surface in fog" src="../small/fog-sm.png"></a>
+@end html
+@end ifhtml
+@itemize @bullet
+@item
+a library for making high-quality scientific graphics under Linux and Windows;
+@item
+a library for the fast data plotting and data processing of large data arrays;
+@item
+a library for working in window and console modes and for easy embedding into other programs;
+@item
+a library with large and growing set of graphics.
+@end itemize
+
+Now MathGL has more than 35000 lines of code, more than 55 general types of graphics for 1d, 2d and 3d data arrays, including special ones for chemical and statistical graphics. It can export graphics to raster and vector (EPS or SVG) formats. It has Qt, FLTK, OpenGL interfaces and can be used even from console programs. It has functions for data processing and script MGL language for simplification of data plotting. Also it has several types of transparency and smoothed lightning, vector fonts and TeX-like symbol parsing, arbitrary curvilinear coordinate system and many over useful things. It can be used from code written on C++/C/Fortran/Python/Octave and many other languages. Finally it is platform independent and free (under GPL v.2.0 license).
+
+There is a @uref{http://sourceforge.net/forum/?group_id=152187, forum} where you can ask a question or suggest an improvement. However the @uref{http://groups.google.com/group/mathgl, MathGL group} is preferable for quicker answer.
+
+For subscribing to @uref{http://groups.google.com/group/mathgl, MathGL group} you can use form below
+@ifhtml
+@html
+<form action="http://groups.google.com/group/mathgl/boxsubscribe">
+Email: <input type=text name=email> <input type=submit name="sub" value="Subscribe">
+</form>
+@end html
+@end ifhtml
+
+@strong{About LGPL and GPL licenses.}
+Generally, MathGL is GPL library. However, you can use LGPL license for MathGL core and widgets if you don't use SWIG-based interfaces and disable GSL features. This can be done by using @code{lgpl} option at build time. According this, I've added the LGPL win32 binaries into @ref{Download} page.
+
+@strong{Latest news}
+@itemize
+@item @emph{19 March 2014.}
+New version (v.2.2.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are compatibility changes for MS VisualStudio 2010 and early, and documentation update.
+@item @emph{10 March 2014.}
+New version (v.@value{VERSION}@value{MINVER}) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are extend of 'region' plot, improve export to TeX, add missing Fortran functions, bugfixes, and other improvements, which denoted @ref{News, here}. Note, this release looks as bug free, but next release (v.2.3) will introduce a set of improvements which may not so stable at first time.
+@item @emph{22 January 2014.}
+New version (v.@value{VERSION}) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are support of Qt5 and Pascal, improvements in JavaScript interface, bugfixes, and other improvements, which denoted @ref{News, here}.
+@item @emph{11 November 2013.}
+New version (v.2.2) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are speeding up, new plot kinds and data handling functions, new plot styles, masks for bitmap output, wx-widget, Lua interface, and many other improvements, which denoted @ref{News, here}.
+@end itemize
+
+There is detailed @ref{News, news list}. Sourceforge project page @uref{http://sourceforge.net/projects/mathgl/, here}.
+
+@ifhtml
+@html
+<a href="http://www.datadvance.net"><img border="0" align="right" hspace="10" alt="DATADVANCE" src="../datadvance.png"></a>
+@end html
+@end ifhtml
+Javascript interface was developed with support of @url{http://www.datadvance.net, DATADVANCE} company.
+
+@external{}
+
+@node News, Features, Main, Website
+@section News
+@nav{}
+
+@itemize
+@item
+@strong{19 March 2014.}
+New version (v.2.2.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are compatibility changes for MS VisualStudio 2010 and early.
+New version (v.2.2.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are compatibility changes for MS VisualStudio 2010 and early.
+@itemize @bullet
+@item Compatibility changes for MS VisualStudio 2010 and early.
+@item Function SetRange(v1,v2) ignore NAN values now.
+@item Add enable-json-sample for building json-samples on demand only.
+@item Update documentation.
+@end itemize
+
+@item
+@strong{10 March 2014.}
+New version (v.2.2.2) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor improvements and bugfixes:
+@itemize @bullet
+@item Add mgl_region_3d() to draw region (or ribbon) between 2 curves. Correspondingly extend mglGraph::Region() function and MGL command 'region'.
+@item Allow LGPL for MathGL widgets.
+@item Improve export to TeX.
+@item Add missing functions to Fortran interface.
+@item Bugfix for legend with enabled lighting.
+@item Minor bugfixes and memory leaks.
+@end itemize
+
+@item
+@strong{22 January 2014.}
+New version (v.2.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor improvements and bugfixes:
+@itemize @bullet
+@item Add Qt5 support.
+@item Add Pascal interface.
+@item Improve JavaScript interface.
+@item Add function mglGraph::AddRange(char dir, mreal v1, mreal v2) and extend corresponding MGL commands '[xyzc]range'.
+@item Add 'hypot(x,y)' function for known functions in formula parsing.
+@item Add style '~' to disable colorbar or axis labels. NOTE, axis style '_' is obsolete and should be replaced by '~'.
+@item Change Aspect() if Ax=NAN. Now, Ay and Az set the ratio to optimal aspect (not exact value as previously).
+@item Disable changes by View(),Zoom(),Perspective() for position of Title(), Legend(), Colorbar().
+@item Partial support of perspective in CalcXYZ().
+@item Speed up PDE solving.
+@item Add complex versions of PDE, QO2d, QO3d.
+@item Correct filled background for Box() in curved coordinates.
+@item Allow nx=1 for Stem and Error.
+@item Bugfix for drawing single axis.
+@item Bugfix for missing options parsing for some of MGL commands.
+@item Bugfix for .pmin suffix in MGL. Add mglData::MaximalNeg() and mglData::MinimalPos() functions. Add .nmin and .nmax suffixes.
+@item Bugfix for colorbar labels.
+@item Force using python 2.7 by default due to bug in Ubuntu. Debian sid works well with python 3.* too.
+@item Other minor bugfixes and memory leaks.
+@end itemize
+
+@item
+@strong{11 November 2013.}
+New version (v.2.2) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor bugfixes and improvements:
+@itemize @bullet
+@item Add OpenMP calls mostly everywhere (can work as replacement of pthreads - a bit faster since more loops is parallelized).
+@item Greatly speed up consequent FFT and Hankel transforms. Add mgl_clear_fft() function for manual clearing of saved FFT/Hankel data.
+@item Add @ref{ohlc} plot for drawing Open-High-Low-Close diagram
+@item Add wxMathGL widget. See @ref{wxMathGL class}.
+@item Add interface for Lua v.5.1.
+@item Add @ref{mask} for face drawing if one of symbols @samp{-+=;oOsS~<>jdD*^} is specified in color scheme. This work only for export in bitmap images.
+@item Add @ref{quality}=8 for dots drawing (extremely fast).
+@item Add styles '4','6','8' for @ref{cone} and @ref{cones} to produce square, hex-, octo-prism.
+@item Add style 't' for @ref{cones} to produce tubes (cylinders).
+@item Add style '^' for @ref{legend} to left/right align legend if its coordinates are right/left from the center
+@item Add style '<', '^', '>' for aligning/centering boxes in @ref{bars}, @ref{barh}, @ref{boxplot}, @ref{cones}. Also this plots become centered by default if nx sizes are the same for all data.
+@item Add @ref{dots} function which set independently both color and transparency of dots.
+@item Improve automatic axis position. Add style '^' for inverse automatic axis position.
+@item Improve tick labeling. Add style @ref{tuneticks}&4 for zero filling of tick labels.
+@item Add @ref{refill} for filling by interpolation of parametrically dependent data
+@item Add transparency for @ref{area} and @ref{region} plots.
+@item Add mgl_clf_chr() function and extend @ref{clf} command.
+@item Fourier now perform true inverse Fourier transform (instead of backward one).
+@item Improve/change lighting from local sources. Add @ref{diffuse} function.
+@item C functions now return NULL if HMDT data cannot be created for given input argument(s).
+@item Enable line width for @ref{mesh} and @ref{fall} plots.
+@item Replace +INF and -INF by NAN in textual formula output.
+@item Add manual compression of JSON.
+@item Define WORDS_BIGENDIAN and HAVE_MEMRCHR (thanks to Dinar Valeev).
+@item Bugfix for cleaning unused points.
+@item Fix 'setsize' command at UDAV starting.
+@item Rewrite MGL parsing by using std::wstring for avoiding possible bugs of wcs*() functions.
+@item Minor bugfixes.
+@item Update docs.
+@end itemize
+
+@item
+@strong{8 May 2013.}
+New version (v.2.1.3.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor bugfixes and improvements:
+@itemize @bullet
+@item Compatibility changes for MS VS.
+@item Bugfixes for cmake options @code{enable-double=OFF, enable-zlib=OFF}.
+@item Enable mouse actions for Firefox in JS sample.
+@end itemize
+
+@item
+@strong{2 May 2013.}
+New version (v.2.1.3) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor bugfixes and improvements:
+@itemize @bullet
+@item Functions @ref{sinfft}, @ref{cosfft}, @ref{hankel} and so on, become multi-threaded.
+@item Use DFT instead of FFT if GSL support is disabled (much slow!).
+@item Add Join() function for joining mglData arrays (see @ref{join})
+@item Add Roots() function for root finding of nonlinear equation (see @ref{roots})
+@item Add class mglExprC for parsing formula with complex numbers (see @ref{Evaluate expression})
+@item Correctly read #QNAN values in data files
+@item Speed up @ref{dots} drawing
+@item Add flag to disable tick labels at axis origin (see SetOriginTick())
+@item Add MGL commands @ref{origintick}, @ref{tickshift}
+@item WriteJSON now use zlib if filename end at 'z' (like "test.jsonz")
+@item Make separate libmgl-mpi
+@item Add SetAutoRanges() function (duplicate corresponding options)
+@item Add JSON sample usage via QtWebKit (thanks to DATADVANCE)
+@item Bugfixes and memory leaks
+@end itemize
+
+@item
+@strong{28 January 2013.}
+New version (v.2.1.2) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor bugfixes and improvements:
+@itemize @bullet
+@item Exclude "local" functions from resulting library.
+@item String in MGL script now can be concatenated with another string or data/numbers (like @samp{'max(u)=',u.max,' a.u.'}).
+@item Bugfix for colors in 3D PDF.
+@item Bugfix for drawing in MPI mode.
+@item If Aspect() function have NAN argument(s) then it try to select optimal aspect ratio.
+@item Option 'size' in Legend() now change only text size (not mark size).
+@item Option 'meshnum' now influence on Boxs() and Belt() functions
+@item Adjust marks drawing (line width and dots).
+@item Minor improvements and bugfixes.
+@end itemize
+
+@item
+@strong{24 December 2012.}
+New version (v.2.1.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are minor bugfixes and improvements:
+@itemize @bullet
+@item Bugfix for SetRange(val,val) function
+@item Exclude export MGL to CPP
+@item MGL parsing now produce errors for any wrong list of arguments
+@item Add help message to mgl.cgi
+@item Improve text rotation at View()
+@item Make compatible with GIF library v.5.0.
+@item Bugfix for making MPI interface.
+@item Bugfix for running in Win32 mode.
+@item Update docs and MGL samples
+@end itemize
+
+@item
+@strong{13 December 2012.}
+New version (v.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are speeding up and many improvements and bugfixes:
+@itemize @bullet
+@item
+Add class mglDataC for complex data arrays.
+@item
+Add Vect3() plot for drawing vectors on slice of 3d vector field. See @ref{Vect3 sample}.
+@item
+Add Table() function for drawing table with data values. See @ref{Table sample}.
+@item
+Add ZoomAxis() for zooming/shifting axis range as whole.
+@item
+Add WriteJSON() function for exporting in JSON format suitable for later drawing by JavaScript
+@item
+Add JavaScript code for visualizing JSON data. See @uref{../json.html, samples}.
+@item
+Add mgl.cgi tool which return PNG image for CGI request in form of MGL script.
+@item
+Add mglData::Solve() for finding x-value where dat(x)=val. See @ref{Solve sample}.
+@item
+Add mglData::Clean() for removing rows with duplicate values for given column.
+@item
+Add MGL commands 'errbox', 'face'
+
+@item
+Color can be specified as its RGB[A] values, i.e. like @samp{@{xFFFFFF@}} or @samp{@{xFFFFFFFF@}}. See @ref{Line styles}.
+@item
+Color in color scheme  may have position in range [0,1]. Format is @samp{@{CN,pos@}} or @samp{@{xFFFFFF,pos@}}. See @ref{Color scheme}.
+@item
+Now pen width for marks is proportional to pen width of line multiplied by size of marks.
+@item
+Now you can use different font-faces in the plot simultaneously. See @ref{Text features}.
+@item
+Now Legend() automatically use several columns if it contain too many legend entries.
+@item
+Add style '-' for legend for drawing them horizontally. See @ref{Legend sample}.
+@item
+Vectors is drawn now even if only starting or ending points are placed in bounding box.
+@item
+Strongly rewrite the algorithm of vector field plotting.
+
+@item
+Grid lines for NAN origin values are always located at far-away edges.
+@item
+Try correctly place axis and tick labels even for axis with inverse range (i.e. for v2<v1). Note, it work well for 2D axis. One should use Aspect() with negative values to do it correctly in general case.
+@item
+Axis style 'XYZ' draw corresponding axis with ticks labels on opposite side. This also influence on following Label() calls.
+@item
+Text is drawn for initially invisible axis (like z-axis) too.
+
+@item
+Frames now save 3D information if MGL_VECT_FRAME is set (by default).
+@item
+Add functions GetFrame(), DelFrame(), SetFrame(), ShowFrame() for replacing or showing data from given frame. It can be use to hide/show a set of plot(s) quickly. Work if MGL_VECT_FRAME is set on (by default is on).
+@item
+CalcXYZ() function now use data from z-buffer for better determining @{x,y,z@} coordinates.
+
+@item
+Add dialog for data arguments in "New command" dialog of UDAV. See @ref{UDAV dialogs}.
+@item
+Value of arguments are saved while the kind of command is changed in "New command" dialog of UDAV.
+@item
+Extend classification of commands in "New command" dialog of UDAV and make it automatic.
+@item
+Mouse position at an object click now is displayed on the image itself.
+@item
+Add zoom in/out by mouse wheel.
+@item
+Add zoom in/out of axis range by mouse wheel, and shift of axis range by middle button.
+@item
+Text editor in UDAV now highlight current line.
+@item
+Completer can be switched off correctly now.
+@item
+Multi-line strings (i.e. separated by "\" symbol) are highlighted correctly now.
+@item
+Add option to enable/disable selected plot in UDAV.
+@item
+Rearrange hot-keys in UDAV and in QMathGL.
+
+@item
+Make code compilable by Borland compiler too.
+@item
+Improve output in OpenGL mode.
+@item
+Add fog at export in EPS/SVG formats.
+@item
+Add mglParse::AllowFileIO() for enable/disable I/O commands in MGL scripts.
+
+@item
+Export functions now can write in stdout if file name is "-".
+@item
+Picture drawing now use multi-threading for each stage.
+
+@item
+Functions mglData::Spline*, mglData::Linear* now can return gradient at the point.
+@item
+mglFourier now make true inverse transform.
+
+@item
+Add annotation for all pure C functions.
+@item
+Update list of built-in glyphs.
+@item
+Update samples.
+@item
+Update documentation.
+@item
+Different bugfixes.
+
+@item
+@strong{INCOMPATIBLE CHANGES:} in the arguments of functions: mgl_axis, mgl_axis_grid, mgl_label, mgl_labelw, mgl_legend_pos, mgl_legend; and in functions for MGL parsing.
+@item
+@strong{MINOR INCOMPATIBLE:} plotting functions now use double argument always.
+@end itemize
+
+@item 
+@strong{23 August 2011.} Version 2.0.beta was released.
+@item 
+@strong{30 May 2011.} Version 1.11.2 was released.
+@item 
+@strong{8 November 2010.} Version 1.11 was released.
+@item 
+@strong{28 December 2009.} Version 1.10 was released.
+@item 
+@strong{8 July 2009.} Version 1.9 was released.
+@item 
+@strong{27 November 2008.} Version 1.8 was released.
+@item 
+@strong{5 June 2008.} Version 1.7 was released.
+@item 
+@strong{17 March 2008.} Version 1.6 was released.
+@item 
+@strong{11 January 2008.} Version 1.5 was released.
+@item 
+@strong{30 October 2007.} Version 1.4 was released.
+@item 
+@strong{15 October 2007.} Version 1.3 was released.
+@item 
+@strong{10 September 2007.} Version 1.2 was released.
+@item 
+@strong{23 May 2007.} Version 1.1 was released.
+@item 
+@strong{2 April 2007.} Version 1.0 was released.
+@item 
+@strong{24 January 2007.} First public release (v.0.8).
+@end itemize
+
+@external{}
+
+
+@node Features, Pictures, News, Website
+@section Features
+@nav{}
+
+MathGL can plot a wide range of graphics. It includes:
+@itemize @bullet
+@item
+one-dimensional: Plot, Area, Bars, Step, Stem, Torus, Chart, Error, Tube, Mark, (@ref{1D plotting});
+
+@item
+two-dimensional plots: Mesh, Surf, Dens, Cont, ContF, Boxs, Axial, Fall, Belt, Tile, including surfaces transparent (SurfA) or colored (SurfC) by another data (@ref{2D plotting});
+
+@item
+three-dimensional plots: Surf3, Dens3, Cont3, ContF3, Cloud-like, including isosurfaces transparent (Surf3A) or colored (Surf3C) by another data (@ref{3D plotting});
+
+@item
+vector fields plots: vector fields Vect, Vect3 and Traj, flow threads Flow, flow pipes Pipe, mapping chart Map, and so on (@ref{Vector fields});
+
+@item
+and so on. See also @ref{Extra samples}.
+@end itemize
+
+In fact, I created the functions for drawing of all the types of scientific plots that I know. The list of plots is growing; if you need some special type of a plot then please email me @email{mathgl.abalakin@@gmail.com, e-mail} and it will appear in the new version.
+
+I tried to make plots as nice looking as possible: e.g., a surface can be transparent and highlighted by several (up to 10) light sources. Most of the drawing functions have 2 variants: simple one for the fast plotting of data, complex one for specifying of the exact position of the plot (including parametric representation). Resulting image can be saved in bitmap PNG, JPEG, TGA, BMP format, or in vector EPS, SVG or TeX format, or in 3D formats OBJ, OFF, STL or in PRC format.
+
+All texts are drawn by vector fonts, which allows for high scalability and portability. Texts may contain commands for: some of the TeX-like symbols, changing index (upper or lower indexes) and the style of font inside the text string. Texts of ticks are rotated with axis rotation. It is possible to create a legend of plot and put text in an arbitrary position on the plot. Arbitrary text encoding (by the help of function @code{setlocale()}) and UTF-16 encoding are supported.
+
+Special class mglData is used for data encapsulation. In addition to a safe creation and deletion of data arrays it includes functions for data processing (smoothing, differentiating, integrating, interpolating and so on) and reading of data files with automatic size determination. Class mglData can handle arrays with up to three dimensions (arrays which depend on up to 3 independent indexes @math{a_@{ijk@}}). Using an array with higher number of dimensions is not meaningful, because I do not know how it can be plotted. Data filling and modification may be done manually or by textual formulas.
+
+There is fast evaluation of a textual mathematical expression. It is based on string precompilation to tree-like code at the creation of class instance. At evaluation stage code performs only fast tree-walk and returns the value of the expression. In addition to changing data values, textual formulas are also used for drawing in @emph{arbitrary} curvilinear coordinates. A set of such curvilinear coordinates is limited only by user's imagination rather than a fixed list like: polar, parabolic, spherical, and so on.
+
+@external{}
+
+@node Pictures, Download, Features, Website
+@section Pictures
+@nav{}
+
+There are samples for @ref{1D data plotting, 1D arrays}, @ref{2D data plotting, 2D arrays}, @ref{3D data plotting, 3D arrays}, @ref{Vector fields plotting} and some @ref{Extra samples}.
+
+@anchor{1D data plotting}
+@subheading Examples of graphics for 1d arrays
+
+@sfig{plot, Plot sample}
+@sfig{radar, Radar sample}
+@sfig{step, Step sample}
+@sfig{tens, Tens sample}
+
+@sfig{area, Area sample}
+@sfig{region,Region sample}
+@sfig{stem, Stem sample}
+@sfig{torus,Torus sample}
+
+@sfig{bars, Bars sample}
+@sfig{barh, Barh sample}
+@sfig{cones,Cones sample}
+@sfig{chart,Chart sample}
+
+@sfig{boxplot,BoxPlot sample}
+@sfig{candle, Candle sample}
+@sfig{tube, Tube sample}
+@sfig{tape, Tape sample}
+
+@sfig{error,Error sample}
+@sfig{mark, Mark sample}
+@sfig{textmark, TextMark sample}
+@sfig{label,Label sample}
+
+@anchor{2D data plotting}
+@subheading Examples of graphics for 2d arrays
+
+@sfig{surf, Surf sample}
+@sfig{surfc,SurfC sample}
+@sfig{surfa,SurfA sample}
+@sfig{mesh, Mesh sample}
+
+@sfig{fall, Fall sample}
+@sfig{belt, Belt sample}
+@sfig{boxs, Boxs sample}
+@sfig{axial,Axial sample}
+
+@sfig{dens, Dens sample}
+@sfig{tile, Tile sample}
+@sfig{tiles,TileS sample}
+@sfig{grad, Grad sample}
+
+@sfig{cont, Cont sample}
+@sfig{contf,ContF sample}
+@sfig{contd,ContD sample}
+@sfig{contv,ContV sample}
+
+@anchor{3D data plotting}
+@subheading Examples of graphics for 3d arrays
+
+@sfig{surf3, Surf3 sample}
+@sfig{surf3c,Surf3C sample}
+@sfig{surf3a,Surf3A sample}
+@sfig{cloud, Cloud sample}
+
+@sfig{densa, Dens3 sample}
+@sfig{conta, Cont3 sample}
+@sfig{contfa,ContF3 sample}
+@sfig{dots,  Dots sample}
+
+@sfig{dens_xyz, Dens projection sample}
+@sfig{cont_xyz, Cont projection sample}
+@sfig{contf_xyz,ContF projection sample}
+@sfig{triplot, TriPlot and QuadPlot}
+
+@anchor{Vector fields plotting}
+@subheading Examples of graphics for vector fields
+
+@sfig{vect, Vect sample}
+@sfig{vecta,Vect3 sample}
+@sfig{flow, Flow sample}
+@sfig{pipe, Pipe sample}
+
+@sfig{traj, Traj sample}
+@sfig{dew, Dew sample}
+
+@anchor{Extra samples}
+@subheading Examples of additional features
+
+@sfig{inplot, Subplots}
+@sfig{axis, Axis and ticks}
+@sfig{ticks, Axis and ticks}
+@sfig{loglog, Axis and ticks}
+
+@sfig{curvcoor, Curvilinear coordinates}
+@sfig{colorbar, Colorbars}
+@sfig{box, Bounding box}
+@sfig{ternary, Ternary axis}
+
+@sfig{text, Text features}
+@sfig{legend, Legend sample}
+@sfig{cut, Cutting sample}
+@sfig{alpha, Transparency and lighting}
+
+@sfig{type0, Types of transparency}
+@sfig{type1, Types of transparency}
+@sfig{type2, Types of transparency}
+@sfig{fog, Adding fog}
+
+@sfig{combined, ``Compound'' graphics}
+@sfig{several_light, Lighting sample}
+@sfig{stereo, Stereo image}
+@sfig{primitives, Using primitives}
+
+@sfig{stfa, STFA sample}
+@sfig{dat_diff, Change data}
+@sfig{dat_extra, Change data}
+@sfig{map, Mapping visualization}
+
+@sfig{hist, Making histogram}
+@sfig{fit, Nonlinear fitting hints}
+@sfig{pde, PDE solving hints}
+@sfig{parser, MGL parser using}
+
+@external{}
+
+@node Download, Other projects, Pictures, Website
+@section Download
+@nav{}
+
+@strong{Stable version (v.@value{VERSION})}
+
+You may download current version of MathGL for following configurations:
+@itemize @bullet
+@item
+@uref{http://downloads.sourceforge.net/mathgl/mathgl-@value{VERSION}@value{MINVER}.tar.gz,source} file with cmake build system.
+@item
+@uref{http://downloads.sourceforge.net/mathgl/mathgl-@value{VERSION}@value{MINVER}-mingw.i686.7z,Win32 GPL} binaries for MinGW (build for i686)
+@item
+@uref{http://downloads.sourceforge.net/mathgl/mathgl-@value{VERSION}@value{MINVER}.LGPL-mingw.i686.7z,Win32 LGPL} binaries for MinGW (build for i686, no GSL and HDF5 support)
+@c @item
+@c @uref{http://downloads.sourceforge.net/mathgl/mathgl-@value{VERSION}@value{MINVER}.LGPL-win64.7z,Win64 LGPL} binaries for MSVS 2010 (no GSL and HDF5 support)
+@item
+@uref{http://downloads.sourceforge.net/mathgl/mathgl-@value{VERSION}@value{MINVER}.eng.pdf,PDF} documentation in English
+@item
+@uref{http://downloads.sourceforge.net/mathgl/mgl_scripts-@value{VERSION}@value{MINVER}.7z, UDAV and utilities} with all required DLL files (build for i686)
+@c HTML documentation in English
+@c HTML documentation in Russian
+@c @item
+@c @uref{http://downloads.sourceforge.net/mathgl/mathgl_slides-1.9.pdf,PDF} slideshow of main features
+@end itemize
+
+@strong{Font files}
+
+There are a set of @uref{http://sourceforge.net/project/showfiles.php?group_id=152187&package_id=267177,font files} for MathGL with following typefaces. Note, that the set of glyphs can be less than in default font. As result not all TeX symbols can be displayed.
+@itemize @bullet
+@item
+@uref{http://downloads.sourceforge.net/mathgl/STIX_font.tgz,STIX} font -- default font for MathGL.
+@item
+@uref{http://downloads.sourceforge.net/mathgl/adventor_font.tgz,Adventor font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} sansserif font based on the URW Gothic L family (like Avant Garde Gothic).
+@item
+@uref{http://downloads.sourceforge.net/mathgl/bonum_font.tgz,Bonum font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} serif font based on the URW Bookman L family.
+@item
+@uref{http://downloads.sourceforge.net/mathgl/chorus_font.tgz,Chorus font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} font based on the URW Chancery L Medium Italic.
+@item
+@uref{http://downloads.sourceforge.net/mathgl/cursor_font.tgz,Cursor font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} monospaced serif font based on the URW Nimbus Mono L (like Courier).
+@item
+@uref{http://downloads.sourceforge.net/mathgl/heros_font.tgz,Heros font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} sansserif font based on the URW Nimbus Sans L (like Helvetica).
+@item
+@uref{http://downloads.sourceforge.net/mathgl/heroscn_font.tgz,HerosCN font} -- the "compressed" version of previous one.
+@item
+@uref{http://downloads.sourceforge.net/mathgl/pagella_font.tgz,Pagella font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} serif font based on the URW Palladio L (like Palatino).
+@item
+@uref{http://downloads.sourceforge.net/mathgl/schola_font.tgz,Schola font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} serif fonts is based on the URW Century Schoolbook L.
+@item
+@uref{http://downloads.sourceforge.net/mathgl/termes_font.tgz,Termes font} -- the @uref{http://www.gust.org.pl/projects/e-foundry/tex-gyre/index_html,TeX Gyre} serif fonts is based on the Nimbus Roman No9 L (like Times).
+@end itemize
+
+@external{}
+
+@node Other projects, , Download, Website
+@section Other projects
+@nav{}
+
+Except scientific (non public) projects I also have some general interest projects:
+@itemize @bullet
+@item
+@uref{http://sourceforge.net/projects/pocketmk/, PocketMK} is small program for PocketPC which simulate famous Russian calculators MK-61 and slightly extend it.
+@item
+@uref{http://udav.sourceforge.net/,UDAV} is front-end for MGL scripts. It has windows interface for data viewing, changing and plotting. Also it can execute MGL scripts, setup and rotating graphics and so on.
+@end itemize
+
+Also I recommend to look at:
+@itemize @bullet
+@item
+@uref{http://englab.bugfest.net/,EngLab} is a cross-compile mathematical platform with a C like syntax intended to be used both by engineers and users with small programming knowledge. It is extremely scalable and allows users and the community to easily compile their own functions as shared objects.
+@item
+@uref{http://threedepict.sourceforge.net/,3Depict} is software for analysis of scientific datasets commonly encountered in atom probe tomography. You can manipulate, interact with and analyse point based datasets.
+@item
+@uref{http://www.sourceforge.net/projects/graphplot/,Graphplot} is function plotter based on MathGL.
+@item
+@uref{http://www.sourceforge.net/projects/graphplot/,OscillViewer} is oscilloscope monitoring program. Working with L-Card 14-140 AD-Convertor. Based on Qt and MathGL libraries.
+@end itemize
+
+Finally, few links to free software and libraries:
+@itemize @bullet
+@item
+@uref{http://www.thefreecountry.com/,thefreecountry.com} have a lot of Free Programmers', Webmasters' and Security Resources
+@item
+@uref{http://gnuwin32.sourceforge.net/,GnuWin} provides ports of tools with a GNU or similar open source license, to modern MS-Windows.
+@item
+@uref{http://loll.sourceforge.net/,LLoL} is project collecting, organising, classifying, and maintaining important URLs about Linux and the Open Source movement for all levels of Linux users. The LoLL project now has 4000+ links which are updated usually on a daily basis.
+@end itemize
+
+@external{}

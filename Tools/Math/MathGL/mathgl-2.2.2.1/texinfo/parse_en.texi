@@ -1,0 +1,319 @@
+
+@c ------------------------------------------------------------------
+@chapter MGL scripts
+@nav{}
+
+MathGL library supports the simplest scripts for data handling and plotting. These scripts can be used independently (with the help of UDAV, mglconv, mglview programs and others
+@ifclear UDAV
+, @pxref{Utilities}) or in the frame of the library using.
+@end ifclear
+
+@menu
+* MGL definition::
+* Program flow commands::
+@ifclear UDAV
+* mglParse class::
+@end ifclear
+@end menu
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node MGL definition, Program flow commands, , MGL scripts
+@section MGL definition
+@nav{}
+
+MGL script language is rather simple. Each string is a command. First word of string is the name of command. Other words are command arguments. Command may have up to 1000 arguments (at least for now). Words are separated from each other by space or tabulation symbol. The upper or lower case of words is important, i.e. variables @var{a} and @var{A} are different variables. Symbol @samp{#} starts the comment (all characters after # will be ignored). The exception is situation when @samp{#} is a part of some string. Also options can be specified after symbol @samp{;} (@pxref{Command options}). Symbol @samp{:} starts new command (like new line character) if it is not placed inside a string or inside brackets.
+
+If string contain references to external parameters (substrings @samp{$0}, @samp{$1} ... @samp{$9}) or definitions (substrings @samp{$a}, @samp{$b} ... @samp{$z}) then before execution the values of parameter/definition will be substituted instead of reference. It allows to use the same MGL script for different parameters (filenames, paths, condition and so on).
+
+Argument can be a string, a variable (data arrays) or a number (scalars).
+@itemize @bullet
+@item
+The string is any symbols between ordinary marks @samp{'}. Long strings can be concatenated from several lines by @samp{\} symbol. I.e. the string @samp{'a +'\<br>' b'} will give string @samp{'a + b'} (here @samp{<br>} is newline). Also you can concatenate strings and numbers using @samp{,} with out spaces (for example, @samp{'max(u)=',u.max,' a.u.'}).
+
+@item
+Usually variable have a name which is arbitrary combination of symbols (except spaces and @samp{'}) started from a letter and with length less than 64. A temporary array can be used as variable:
+@itemize @bullet
+@item
+sub-arrays (like in @ref{subdata} command) as command argument. For example, @code{a(1)} or @code{a(1,:)} or @code{a(1,:,:)} is second row, @code{a(:,2)} or @code{a(:,2,:)} is third column, @code{a(:,:,0)} is first slice and so on. Also you can extract a part of array from m-th to n-th element by code @code{a(m:n,:,:)} or just @code{a(m:n)}.
+
+@item
+any column combinations defined by formulas, like @code{a('n*w^2/exp(t)')} if names for data columns was specified (by @ref{idset} command or in the file at string started with @code{##}).
+
+@item
+any expression (without spaces) of existed variables produce temporary variable. For example, @samp{sqrt(dat(:,5)+1)} will produce temporary variable with data values equal to @code{tmp[i,j] = sqrt(dat[i,5,j]+1)}.
+
+@item
+temporary variable of higher dimensions by help of []. For example, @samp{[1,2,3]} will produce a temporary vector of 3 elements @{1, 2, 3@}; @samp{[[11,12],[21,22]]} will produce matrix 2*2 and so on. Here you can join even an arrays of the same dimensions by construction like @samp{[v1,v2,...,vn]}.
+
+@item
+result of code for making new data (@pxref{Make another data}) inside @{@}. For example, @samp{@{sum dat 'x'@}} produce temporary variable which contain result of summation of @var{dat} along direction 'x'. This is the same array @var{tmp} as produced by command @samp{sum tmp dat 'x'}. You can use nested constructions, like @samp{@{sum @{max dat 'z'@} 'x'@}}.
+@end itemize
+Temporary variables can not be used as 1st argument for commands which create (return) the data (like @samp{new}, @samp{read}, @samp{hist} and so on).
+
+@item
+Special names @code{nan=#QNAN, pi=3.1415926..., on=1, off=0, :=-1} are treated as number if they were not redefined by user. Variables with suffixes are treated as numbers (@pxref{Data information}). Names defined by @ref{define} command are treated as number. Also results of formulas with sizes 1x1x1 are treated as number (for example, @samp{pi/dat.nx}).
+@end itemize
+Before the first using all variables must be defined with the help of commands, like, @ref{new}, @ref{var}, @ref{list}, @ref{copy}, @ref{read}, @ref{hist}, @ref{sum} and so on (see sections @ref{Data constructor}, @ref{Data filling} and @ref{Make another data}).
+
+Command may have several set of possible arguments (for example, @code{plot ydat} and @code{plot xdat ydat}). All command arguments for a selected set must be specified. However, some arguments can have default values. These argument are printed in [], like @code{text ydat ['stl'='']} or @code{text x y 'txt' ['fnt'='' size=-1]}. At this, the record @code{[arg1 arg2 arg3 ...]} means @code{[arg1 [arg2 [arg3 ...]]]}, i.e. you can omit only tailing arguments if you agree with its default values. For example, @code{text x y 'txt' '' 1} or @code{text x y 'txt' ''} is correct, but @code{text x y 'txt' 1} is incorrect (argument @code{'fnt'} is missed).
+
+
+@c ------------------------------------------------------------------
+@external{}
+@ifclear UDAV
+@node Program flow commands, mglParse class, MGL definition, MGL scripts
+@end ifclear
+@ifset UDAV
+@node Program flow commands, , MGL definition, MGL scripts
+@end ifset
+@section Program flow commands
+@nav{}
+
+Below I show commands to control program flow, like, conditions, loops, define script arguments and so on. Other commands can be found in chapters @ref{MathGL core} and @ref{Data processing}. Note, that some of program flow commands (like @ref{define}, @ref{ask}, @ref{call}, @ref{for}, @ref{func}) should be placed alone in the string.
+
+@cindex chdir
+@anchor{chdir}
+@deftypefn {MGL command} {} chdir 'path'
+Changes the current directory to @var{path}.
+@end deftypefn
+
+@cindex ask
+@anchor{ask}
+@deftypefn {MGL command} {} ask $N 'question'
+Sets @var{N}-th script argument to answer which give the user on the @var{question}. Usually this show dialog with question where user can enter some text as answer. Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+
+@cindex define
+@anchor{define}
+@deftypefn {MGL command} {} define $N smth
+Sets @var{N}-th script argument to @var{smth}. Note, that @var{smth} is used as is (with @samp{'} symbols if present). Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+@deftypefn {MGL command} {} define name smth
+Create scalar variable @code{name} which have the numeric value of @code{smth}. Later you can use this variable as usual number.
+@end deftypefn
+@cindex defchr
+@anchor{defchr}
+@deftypefn {MGL command} {} defchr $N smth
+Sets @var{N}-th script argument to character with value evaluated from @var{smth}. Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+@cindex defnum
+@anchor{defnum}
+@deftypefn {MGL command} {} defnum $N smth
+Sets @var{N}-th script argument to number with value evaluated from @var{smth}. Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+@cindex defpal
+@anchor{defpal}
+@deftypefn {MGL command} {} defpal $N smth
+Sets @var{N}-th script argument to palette character at position evaluated from @var{smth}. Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+
+@cindex call
+@anchor{call}
+@deftypefn {MGL command} {} call 'fname' [ARG1 ARG2 ... ARG9]
+Executes function @var{fname} (or script if function is not found). Optional arguments will be passed to functions. See also @ref{func}.
+@end deftypefn
+@cindex func
+@anchor{func}
+@deftypefn {MGL command} {} func 'fname' [narg=0]
+Define the function @var{fname} and number of required arguments. The arguments will be placed in script parameters $1, $2, ... $9. Note, you should stop script execution before function definition(s) by command @ref{stop}. See also @ref{return}.
+@end deftypefn
+@cindex return
+@anchor{return}
+@deftypefn {MGL command} {} return
+Return from the function. See also @ref{func}.
+@end deftypefn
+
+
+@cindex if
+@anchor{if}
+@deftypefn {MGL command} {} if dat 'cond'
+Starts block which will be executed if @var{dat} satisfy to @var{cond}.
+@end deftypefn
+@deftypefn {MGL command} {} if @code{val}
+Starts block which will be executed if @code{val} is nonzero.
+@end deftypefn
+@cindex elseif
+@anchor{elseif}
+@deftypefn {MGL command} {} elseif dat 'cond'
+Starts block which will be executed if previous @code{if} or @code{elseif} is false and @var{dat} satisfy to @var{cond}.
+@end deftypefn
+@deftypefn {MGL command} {} elseif @code{val}
+Starts block which will be executed if previous @code{if} or @code{elseif} is false and @code{val} is nonzero.
+@end deftypefn
+@cindex else
+@anchor{else}
+@deftypefn {MGL command} {} else
+Starts block which will be executed if previous @code{if} or @code{elseif} is false.
+@end deftypefn
+@cindex endif
+@anchor{endif}
+@deftypefn {MGL command} {} endif
+Finishes @code{if/elseif/else} block.
+@end deftypefn
+
+@cindex for
+@anchor{for}
+@deftypefn {MGL command} {} for $N @code{v1 v2 [dv=1]}
+Starts cycle with $@var{N}-th argument changing from @var{v1} to @var{v2} with the step @var{dv}. Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+@deftypefn {MGL command} {} for $N dat
+Starts cycle with $@var{N}-th argument changing for @var{dat} values. Here @var{N} is digit (0...9) or alpha (a...z).
+@end deftypefn
+@cindex next
+@anchor{next}
+@deftypefn {MGL command} {} next
+Finishes @code{for} cycle.
+@end deftypefn
+
+@cindex once
+@anchor{once}
+@deftypefn {MGL command} {} once @code{val}
+The code between @code{once on} and @code{once off} will be executed only once. Useful for large data manipulation in programs like UDAV.
+@end deftypefn
+@cindex stop
+@anchor{stop}
+@deftypefn {MGL command} {} stop
+Terminate execution.
+@end deftypefn
+
+@ifclear UDAV
+@c ------------------------------------------------------------------
+@external{}
+@node mglParse class, , Program flow commands, MGL scripts
+@section mglParse class
+@nav{}
+@cindex mglParse
+
+Class for parsing and executing MGL script. This class is defined in @code{#include <mgl2/mgl.h>}.
+
+The main function of mglParse class is @code{Execute()}. Exactly this function parses and executes the script string-by-string. Also there are subservient functions for the finding and creation of a variable (object derived from @code{mglData} class, see @ref{MGL variables}). These functions can be useful for displaying values of variables (arrays) in some external object (like, window) or for providing access to internal data. Function @code{AllowSetSize()} allows one to prevent changing the size of the  picture inside the script (forbids the MGL command @code{setsize}).
+
+@c Note an important feature -- if user defines function @var{func} in variable then it will be called before the destroying of this variable (@pxref{mglVar class}).
+
+@deftypefn {Constructor on @code{mglParse}} @code{} mglParse (@code{bool} setsize=@code{false})
+@deftypefnx {Constructor on @code{mglParse}} @code{} mglParse (@code{HMPR} pr)
+@deftypefnx {Constructor on @code{mglParse}} @code{} mglParse (@code{mglParse &}pr)
+@deftypefnx {C function} @code{HMPR} mgl_create_parser ()
+Constructor initializes all values with zero and set @var{AllowSetSize} value.
+@end deftypefn
+
+@deftypefn {Destructor on @code{mglParse}} @code{} ~mglParse ()
+@deftypefnx {C function} @code{void} mgl_delete_parser (@code{HMPR} p)
+Destructor delete parser
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{HMPR} Self ()
+Returns the pointer to internal object of type @code{HMPR}.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{void} Execute (@code{mglGraph *}gr, @code{const char *}text)
+@deftypefnx{Method on @code{mglParse}} @code{void} Execute (@code{mglGraph *}gr, @code{const wchar_t *}text)
+@deftypefnx {C function} @code{void} mgl_parse_text (@code{HMGL} gr, @code{HMPR} p, @code{const char *}text)
+@deftypefnx {C function} @code{void} mgl_parse_textw (@code{HMGL} gr, @code{HMPR} p, @code{const wchar_t *}text)
+Main function in the class. Function parse and execute line-by-line MGL script in array @var{text}. Lines are separated by newline symbol @samp{\n} as usual.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{void} Execute (@code{mglGraph *}gr, @code{FILE *}fp, @code{bool} print=@code{false})
+@deftypefnx {C function} @code{void} mgl_parse_file (@code{HMGL} gr, @code{HMPR} p, @code{FILE *}fp, @code{int} print)
+The same as previous but read script from the file @var{fp}. If @var{print}=@code{true} then all warnings and information will be printed in stdout.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{int} Parse (@code{mglGraph *}gr, @code{const char *}str, @code{long} pos=@code{0})
+@deftypefnx {Method on @code{mglParse}} @code{int} Parse (@code{mglGraph *}gr, @code{const wchar_t *}str, @code{long} pos=@code{0})
+@deftypefnx {C function} @code{int} mgl_parse_line (@code{HMGL} gr, @code{HMPR} p, @code{const char *}str, @code{int} pos)
+@deftypefnx {C function} @code{int} mgl_parse_linew (@code{HMGL} gr, @code{HMPR} p, @code{const wchar_t *}str, @code{int} pos)
+Function parses the string @var{str} and executes it by  using @var{gr} as a graphics plotter. Returns the value depending on an error presence in the string @var{str}: 0 -- no error, 1 -- wrong command argument(s), 2 -- unknown command, 3 -- string is too long. Optional argument @var{pos} allows to save the string position in the document (or file) for using @code{for|next} command.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{mglData} Calc (@code{const char *}formula)
+@deftypefnx {Method on @code{mglParse}} @code{mglData} Calc (@code{const wchar_t *}formula)
+@deftypefnx {C function} @code{HMDT} mgl_parser_calc (@code{HMPR} p, @code{const char *}formula)
+@deftypefnx {C function} @code{HMDT} mgl_parser_calcw (@code{HMPR} p, @code{const wchar_t *}formula)
+Function parses the string @var{formula} and return resulting data array. In difference to @code{AddVar()} or @code{FindVar()}, it is usual data array which should be deleted after usage.
+@end deftypefn
+
+
+@deftypefn {Method on @code{mglParse}} @code{void} AddParam (@code{int} n, @code{const char *}str)
+@deftypefnx {Method on @code{mglParse}} @code{void} AddParam (@code{int} n, @code{const wchar_t *}str)
+@deftypefnx {C function} @code{void} mgl_parser_add_param (@code{HMPR} p, @code{int} id, @code{const char *}val)
+@deftypefnx {C function} @code{void} mgl_parser_add_paramw (@code{HMPR} p, @code{int} id, @code{const wchar_t *}val)
+Function set the value of @var{n}-th parameter as string @var{str} (@var{n}=0, 1 ... 'z'-'a'+10). String @var{str} shouldn't contain @samp{$} symbol.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{mglVar *} FindVar (@code{const char *}name)
+@deftypefnx {Method on @code{mglParse}} @code{mglVar *} FindVar (@code{const wchar_t *}name)
+@deftypefnx {C function} @code{HMDT} mgl_parser_find_var  (@code{HMPR} p, @code{const char *}name)
+@deftypefnx {C function} @code{HMDT} mgl_parser_find_varw  (@code{HMPR} p, @code{const wchar_t *}name)
+Function returns the pointer to variable with name @var{name} or zero if variable is absent. Use this function to put external data array to the script or get the data from the script. You must @strong{not delete} obtained data arrays!
+@end deftypefn
+@deftypefn {Method on @code{mglParse}} @code{mglVar *} AddVar (@code{const char *}name)
+@deftypefnx {Method on @code{mglParse}} @code{mglVar *} AddVar (@code{const wchar_t *}name)
+@deftypefnx {C function} @code{HMDT} mgl_parser_add_var (@code{HMPR} p, @code{const char *}name)
+@deftypefnx {C function} @code{HMDT} mgl_parser_add_varw (@code{HMPR} p, @code{const wchar_t *}name)
+Function returns the pointer to variable with name @var{name}. If variable is absent then new variable is created with name @var{name}. Use this function to put external data array to the script or get the data from the script. You must @strong{not delete} obtained data arrays!
+@end deftypefn
+
+@deftypefn{Method on @code{mglParse} (C++)} @code{void} DeleteVar (@code{const char *}name)
+@deftypefnx{Method on @code{mglParse} (C++)} @code{void} DeleteVar (@code{const wchar_t *}name)
+@deftypefnx {C function} @code{void} mgl_parser_del_var (@code{HMPR} p, @code{const char *}name)
+@deftypefnx {C function} @code{void} mgl_parser_del_varw (@code{HMPR} p, @code{const wchar_t *}name)
+Function delete the variable with given @var{name}.
+@end deftypefn
+
+@deftypefn{Method on @code{mglParse} (C++)} @code{void} DeleteAll ()
+@deftypefnx {C function} @code{void} mgl_parser_del_all (@code{HMPR} p)
+Function delete all variables in this parser.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{void} RestoreOnce ()
+@deftypefnx {C function} @code{void} mgl_parser_restore_once (@code{HMPR} p)
+Restore Once flag.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{void} AllowSetSize (@code{bool} a)
+@deftypefnx {C function} @code{void} mgl_parser_allow_setsize (@code{HMPR} p, @code{int} a)
+Allow to parse 'setsize' command or not.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{void} AllowFileIO (@code{bool} a)
+@deftypefnx {C function} @code{void} mgl_parser_allow_file_io (@code{HMPR} p, @code{int} a)
+Allow reading/saving files or not.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{void} Stop ()
+@deftypefnx {C function} @code{void} mgl_parser_stop (@code{HMPR} p)
+Sends stop signal which terminate execution at next command.
+@end deftypefn
+
+
+@deftypefn {Method on @code{mglParse}} @code{long} GetCmdNum ()
+@deftypefnx {C function} @code{long} mgl_parser_cmd_num (@code{HMPR} p)
+Return the number of registered MGL commands.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{const char *} GetCmdName (@code{long} id)
+@deftypefnx {C function} @code{const char *} mgl_parser_cmd_name (@code{HMPR} p, @code{long} id)
+Return the name of command with given @var{id}.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{int} CmdType (@code{const char *}name)
+@deftypefnx {C function} @code{int} mgl_parser_cmd_type (@code{HMPR} p, @code{const char *}name)
+Return the type of MGL command @var{name}. Type of commands are: 0 -- not the command, 1 - data plot, 2 - other plot, 3 - setup, 4 - data handle, 5 - data create, 6 - subplot, 7 - program, 8 - 1d plot, 9 - 2d plot, 10 - 3d plot, 11 - dd plot, 12 - vector plot, 13 - axis, 14 - primitives, 15 - axis setup, 16 - text/legend, 17 - data transform.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{const char *} CmdFormat (@code{const char *}name)
+@deftypefnx {C function} @code{const char *} mgl_parser_cmd_frmt (@code{HMPR} p, @code{const char *}name)
+Return the format of arguments for MGL command @var{name}.
+@end deftypefn
+
+@deftypefn {Method on @code{mglParse}} @code{const char *} CmdDesc (@code{const char *}name)
+@deftypefnx {C function} @code{const char *} mgl_parser_cmd_desc (@code{HMPR} p, @code{const char *}name)
+Return the description of MGL command @var{name}.
+@end deftypefn
+
+@end ifclear
+
+@external{}
+

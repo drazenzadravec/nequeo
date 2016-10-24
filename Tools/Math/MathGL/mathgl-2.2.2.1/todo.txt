@@ -1,0 +1,95 @@
+
+============= NEW FOR LATER =============
+
+1. Export to COLLADA !!!
+2. GTK window/widgets ???
+3. Labels at TriCont()
+4. Rewrite glyph drawing for bitmaps (speeding up by excluding boundary checks) ?!?
+
+5. 2D textures as one of standard way for coloring -- if '%' present in color scheme
+6. Graph(mreal x, mreal y, names, styles, font, size); -- names = "node1[node2,node3,node4[node5,node6]]", styles -- the same + apply for subnodes if absent. Styles are colors (fill,border,line), dash (to subnodes), marks "dos^v><", arrows.
+7. 3D text (with depth, for Quality=3)
+8. Text along 3D curve (for Quality=3)
+9. introduce new primitive type=5 -- arrow for Quality&3!=3. for better drawing in projections + json/view ?!?
+
+10. New tests:
+	c. Tests for mglDataC arrays (as separate flag)
+	e. Test for Crop, Momentum, NormSl, Sew, DiffParam, Envelope, STFA for all directions "xyz"; Clean, Last, First, Find, Spline3, FindAny, Insert, Delete, Put, SetId/Column, Squeeze, Extend, Trace, Combine, new Max/Min/Momentum, FillSample, Hist, operators, Sort, Roots, Jacobian
+	u. Test FlowP + 3d
+
+11. Check centered curved text (see text2)
+12. Export to X3D
+
+13. Inplot data should have ranges (add mglInPlot{x1,x2,y1,y2,Bp or something like this} which include mglMatrix instead of mglBase::Bp) + calc coor + JS
+14. 'perspective' command in UDAV
+15. Check octave 3.8
+16. Use mglFormulaCalc() for data transformation/filling (much faster but require more memory) + the same for complex
+17. Test mglDataC::Diffraction() + write sample + add rational function???
+
+18. Use mglStack<T> instead of std::vector<T> due to multi-threading
+19. Get true coordinates in CalcXYZ for curved equations too
+20. Add mglDataVar, mglDataCol, mglDataFunc for handling special (temporary) data + add real(), imag(), conj() + accurate types in MGL + add 'expr'/'complex' in MGL
+
+21. Check if Fortran versions possible for: mgl_data_info, mgl_datas_hdf, mgl_get_fit, mgl_get_mess, mgl_get_plotid
+22. Replace pthread by openmp in mgl_draw_thr() and similar
+23. Add function Rasterize() -- Finish() + clear points -- m.b. add background image for export, which will be cleared at Clf()???
+
+============= DOCUMENTATION =============
+
+A. Paper about MathGL!!!
+B. Add chapter with real samples
+C. Translate to Russian everything
+
+1. Extend Dots sample (add A, CA, Tens)
+2. Extend Refill sample (add 2d)
+3. Docs about JS interface
+
+4. Extend docs about region
+5. Docs about mgl_datac_diffr
+
+============= UDAV =============
+
+01. Show plot at creation stage (if option is enabled -- can be long process!!!) + auto axis range or [-1,1] by default
+
+02. Double click -> setup dialog (optionally -- after QTreeWidgetItem)
+
+03. Dialog for InPlot(s):
+{SubPlot,MultiPlot}	-- enable rotate,aspect,title
+{ColumnPlot}		-- enable rotate,several
+{StickPlot}		-- enable several
+{InPlot}			-- enable rotate,aspect,title
+Image with gray alternatives and black choice
+
+04. QTreeWidgetItem -- ICON (func/call,if,for,once,subplot,...); annotation/name; (keep LINE - POS in script). After editing/changing --> put text to editor.
+Buttons: new,load,save // newcmd,hide,annotation,collapse on/off,setup // calc. Click on item cause change of line number in editor.
+05. Group/ungroup if command in single line, separated by ':'
+06. Hide plot/group by putting "#h " at beginning of line
+07. Annotation of plot/group -- comment before it
+08. Drag&drop plot/group between inplots (in tree widget)
+
+09. Create default plot dependently of selected row/column/range in data table
+10. Data change via menu/toolbar -- save to internal script => enable undo + save initial array(?)
+
+11. Speed up rotation like as done in JavaScript
+
+12. Multi-threading for enabling "stop".
+
+13. Manual rotate (i.e. change rotate arguments) by spinboxes ???
+
+14. Close button on data tabs ?!?
+
+15. Add dialog for mask creation.
+
+============= UNSURE ===========
+
+1. Problem with \calB and so on (\calH, ...) -- they are present only in italic font :(.
+2. create PWT fonts
+3. \dfrac for normal size and centering  (sample \big\big{\frac{1}{2}}) ???
+4. "Cut off" curves if text is printed inside it (for contour labels) ?!?
+5. String variables in MGL + readstr command.
+6. Pool of threads for speeding up ??? or openmp ???
+7. Read DICOM files
+8. Check RunThr() in python/octave
+9. Try libtcc (TinyCC) as alternative to MGL -- how to handle ^ operator???
+10. Auto axis range for formulas, like AutoRange("y(x)") or AutoRange('x',"x(t)").
+11. Use Hershey as built-in font ??? -- for smaller size only

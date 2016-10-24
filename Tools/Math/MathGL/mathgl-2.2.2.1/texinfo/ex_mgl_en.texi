@@ -1,0 +1,2834 @@
+@c ------------------------------------------------------------------
+@chapter MathGL examples
+@nav{}
+
+This chapter contain information about basic and advanced MathGL, hints and samples for all types of graphics. I recommend you read first 2 sections one after another and at least look on @ref{Hints} section. Also I recommend you to look at @ref{General concepts} and @ref{FAQ}.
+
+Most of sample scripts placed below use a set of functions for preparing the data.
+@verbatim
+func 'prepare1d'
+new y 50 3
+modify y '0.7*sin(2*pi*x)+0.5*cos(3*pi*x)+0.2*sin(pi*x)'
+modify y 'sin(2*pi*x)' 1
+modify y 'cos(2*pi*x)' 2
+new x1 50 'x'
+new x2 50 '0.05-0.03*cos(pi*x)'
+new y1 50 '0.5-0.3*cos(pi*x)'
+new y2 50 '-0.3*sin(pi*x)'
+return
+
+func 'prepare2d'
+new a 50 40 '0.6*sin(pi*(x+1))*sin(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+new b 50 40 '0.6*cos(pi*(x+1))*cos(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+return
+
+func 'prepare3d'
+new c 61 50 40 '-2*(x^2+y^2+z^4-z^2)+0.2'
+new d 61 50 40 '1-2*tanh((x+y)*(x+y))'
+return
+
+func 'prepare2v'
+new a 20 30 '0.6*sin(pi*(x+1))*sin(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+new b 20 30 '0.6*cos(pi*(x+1))*cos(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+return
+
+func 'prepare3v'
+define $1 pow(x*x+y*y+(z-0.3)*(z-0.3)+0.03,1.5)
+define $2 pow(x*x+y*y+(z+0.3)*(z+0.3)+0.03,1.5)
+new ex 10 10 10 '0.2*x/$1-0.2*x/$2'
+new ey 10 10 10 '0.2*y/$1-0.2*y/$2'
+new ez 10 10 10 '0.2*(z-0.3)/$1-0.2*(z+0.3)/$2'
+return
+@end verbatim
+Basically, you can put this text after the script. Note, that you need to terminate main script by @ref{stop} command before defining a function.
+
+@menu
+* Basic usage::
+* Advanced usage::
+* Data handling::
+* Data plotting::
+* 1D samples::
+* 2D samples::
+* 3D samples::
+* Vector field samples::
+* Hints::
+* FAQ::
+@end menu
+
+@c ------------------------------------------------------------------
+@external{}
+@node Basic usage, Advanced usage, , Examples
+@section Basic usage
+@nav{}
+
+MGL script can be used by several manners. Each has positive and negative sides:
+@itemize @bullet
+@item
+@emph{Using UDAV.}
+
+Positive sides are possibilities to view the plot at once and to modify it, rotate, zoom or switch on transparency or lighting by hands or by mouse. Negative side is the needness of the X-terminal. @c For more details, see @ref{UDAV}.
+
+@item
+@emph{Using command line tools.}
+
+Positive aspects are: batch processing of similar data set, for example, a set of resulting data files for different calculation parameters), running from the console program, including the cluster calculation), fast and automated drawing, saving pictures for further analysis, or demonstration). Negative sides are: the usage of the external program for picture viewing. Also, the data plotting is non-visual. So, you have to imagine the picture, view angles, lighting and so on) before the plotting. I recommend to use graphical window for determining the optimal parameters of plotting on the base of some typical data set. And later use these parameters for batch processing in console program.
+
+In this case you can use the program: @code{mglconv} or @code{mglview} for viewing.
+
+@item
+@emph{Using C/C++/... code.}
+
+You can easily execute MGL script within C/C++/Fortan code. This can be useful for fast data plotting, for example, in web applications, where textual string (MGL script) may contain all necessary information for plot. The basic C++ code may look as following
+@verbatim
+const char *mgl_script; // script itself, can be of type const wchar_t*
+mglGraph gr;
+mglParse pr;
+pr.Execute(&gr, mgl_script);
+@end verbatim
+@end itemize
+
+The simplest script is
+@verbatim
+box         # draw bounding box
+axis        # draw axis
+fplot 'x^3' # draw some function
+@end verbatim
+
+Just type it in UDAV and press F5. Also you can save it in text file @samp{test.mgl} and type in the console @code{mglconv test.mgl} what produce file @samp{test.mgl.png} with resulting picture.
+
+@c ------------------------------------------------------------------
+@external{}
+@node Advanced usage, Data handling, Basic usage, Examples
+@section Advanced usage
+@nav{}
+
+Now I show several non-obvious features of MGL: several subplots in a single picture, curvilinear coordinates, text printing and so on. Generally you may miss this section at first reading, but I don't recommend it.
+
+@menu
+* Subplots::
+* Axis and ticks::
+* Curvilinear coordinates::
+* Colorbars::
+* Bounding box::
+* Ternary axis::
+* Text features::
+* Legend sample::
+* Cutting sample::
+@end menu
+
+@c ------------------------------------------------------------------
+@external{}
+@node Subplots, Axis and ticks, , Advanced usage
+@subsection Subplots
+@nav{}
+
+Let me demonstrate possibilities of plot positioning and rotation. MathGL has a set of functions: @ref{subplot}, @ref{inplot}, @ref{title}, @ref{aspect} and @ref{rotate} and so on (see @ref{Subplots and rotation}). The order of their calling is strictly determined. First, one changes the position of plot in image area (functions @ref{subplot}, @ref{inplot} and @ref{multiplot}). Secondly, you can add the title of plot by @ref{title} function. After that one may rotate the plot (command @ref{rotate}). Finally, one may change aspects of axes (command @ref{aspect}). The following code illustrates the aforesaid it:
+@verbatim
+subplot 2 2 0
+box:text -1 1.1 'Just box' ':L'
+inplot 0.2 0.5 0.7 off
+box:text 0 1.2 'InPlot example'
+
+subplot 2 2 1:title 'Rotate only'
+rotate 50 60:box
+
+subplot 2 2 2:title 'Rotate and Aspect'
+rotate 50 60:aspect 1 1 2:box
+
+subplot 2 2 3:title 'Aspect in other direction'
+rotate 50 60:aspect 1 2 2:box
+@end verbatim
+Here I used function @code{Puts} for printing the text in arbitrary position of picture (see @ref{Text printing}). Text coordinates and size are connected with axes. However, text coordinates may be everywhere, including the outside the bounding box. I'll show its features later in @ref{Text features}.
+
+Note that several commands can be placed in a string if they are separated by @samp{:} symbol.
+
+@pfig{aspect, Example of several subplots on the single picture.}
+
+More complicated sample show how to use most of positioning functions:
+@verbatim
+subplot 3 2 0:title 'StickPlot'
+stickplot 3 0 20 30:box 'r':text 0 0 '0' 'r'
+stickplot 3 1 20 30:box 'g':text 0 0 '1' 'g'
+stickplot 3 2 20 30:box 'b':text 0 0 '2' 'b'
+
+subplot 3 2 3 '':title 'ColumnPlot'
+columnplot 3 0:box 'r':text 0 0 '0' 'r'
+columnplot 3 1:box 'g':text 0 0 '1' 'g'
+columnplot 3 2:box 'b':text 0 0 '2' 'b'
+
+subplot 3 2 4 '':title 'GridPlot'
+gridplot 2 2 0:box 'r':text 0 0 '0' 'r'
+gridplot 2 2 1:box 'g':text 0 0 '1' 'g'
+gridplot 2 2 2:box 'b':text 0 0 '2' 'b'
+gridplot 2 2 3:box 'm':text 0 0 '3' 'm'
+
+subplot 3 2 5 '':title 'InPlot':box
+inplot 0.4 1 0.6 1 on:box 'r'
+
+multiplot 3 2 1 2 1 '':title 'MultiPlot':box
+@end verbatim
+
+@pfig{inplot, Example for most of positioning functions.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Axis and ticks, Curvilinear coordinates, Subplots, Advanced usage
+@subsection Axis and ticks
+@nav{}
+
+MathGL library can draw not only the bounding box but also the axes, grids, labels and so on. The ranges of axes and their origin (the point of intersection) are determined by functions @code{SetRange()}, @code{SetRanges()}, @code{SetOrigin()} (see @ref{Ranges (bounding box)}). Ticks on axis are specified by function @code{SetTicks}, @code{SetTicksVal}, @code{SetTicksTime} (see @ref{Ticks}). But usually
+
+Command @ref{axis} draws axes. Its textual string shows in which directions the axis or axes will be drawn (by default @code{"xyz"}, function draws axes in all directions). Command @ref{grid} draws grid perpendicularly to specified directions. Example of axes and grid drawing is:
+@verbatim
+subplot 2 2 0:title 'Axis origin, Grid'
+origin 0 0:axis:grid:fplot 'x^3'
+
+subplot 2 2 1:title '2 axis'
+ranges -1 1 -1 1:origin -1 -1:axis
+ylabel 'axis_1':fplot 'sin(pi*x)' 'r2'
+ranges 0 1 0 1:origin 1 1:axis
+ylabel 'axis_2':fplot 'cos(pi*x)'
+
+subplot 2 2 3:title 'More axis'
+origin nan nan:xrange -1 1:axis
+xlabel 'x' 0:ylabel 'y_1' 0:fplot 'x^2' 'k'
+yrange -1 1:origin -1.3 -1:axis 'y' 'r'
+ylabel '#r{y_2}' 0.2:fplot 'x^3' 'r'
+
+subplot 2 2 2:title '4 segments, inverted axis':origin 0 0:
+inplot 0.5 1 0.5 1 on:ranges 0 10 0 2:axis
+fplot 'sqrt(x/2)':xlabel 'W' 1:ylabel 'U' 1
+inplot 0 0.5 0.5 1 on:ranges 1 0 0 2:axis 'x'
+fplot 'sqrt(x)+x^3':xlabel '\tau' 1
+inplot 0.5 1 0 0.5 on:ranges 0 10 4 0:axis 'y'
+fplot 'x/4':ylabel 'L' -1
+inplot 0 0.5 0 0.5 on:ranges 1 0 4 0:fplot '4*x^2'
+@end verbatim
+
+Note, that MathGL can draw not only single axis (which is default). But also several axis on the plot (see right plots). The idea is that the change of settings does not influence on the already drawn graphics. So, for 2-axes I setup the first axis and draw everything concerning it. Then I setup the second axis and draw things for the second axis. Generally, the similar idea allows one to draw rather complicated plot of 4 axis with different ranges (see bottom left plot).
+
+At this inverted axis can be created by 2 methods. First one is used in this sample -- just specify minimal axis value to be large than maximal one. This method work well for 2D axis, but can wrongly place labels in 3D case. Second method is more general and work in 3D case too -- just use @ref{aspect} function with negative arguments. For example, following code will produce exactly the same result for 2D case, but 2nd variant will look better in 3D.
+@verbatim
+# variant 1
+ranges 0 10 4 0:axis
+
+# variant 2
+ranges 0 10 0 4:aspect 1 -1:axis
+@end verbatim
+
+@pfig{axis, Example of axis.}
+
+Another MathGL feature is fine ticks tunning. By default (if it is not changed by @code{SetTicks} function), MathGL try to adjust ticks positioning, so that they looks most human readable. At this, MathGL try to extract common factor for too large or too small axis ranges, as well as for too narrow ranges. Last one is non-common notation and can be disabled by @code{SetTuneTicks} function.
+
+Also, one can specify its own ticks with arbitrary labels by help of @code{SetTicksVal} function. Or one can set ticks in time format. In last case MathGL will try to select optimal format for labels with automatic switching between years, months/days, hours/minutes/seconds or microseconds. However, you can specify its own time representation using formats described in @url{http://www.manpagez.com/man/3/strftime/}. Most common variants are @samp{%X} for national representation of time, @samp{%x} for national representation of date, @samp{%Y} for year with century.
+
+The sample code, demonstrated ticks feature is
+@verbatim
+subplot 3 2 0:title 'Usual axis'
+axis
+
+subplot 3 2 1:title 'Too big/small range'
+ranges -1000 1000 0 0.001:axis
+
+subplot 3 2 3:title 'Too narrow range'
+ranges 100 100.1 10 10.01:axis
+
+subplot 3 2 4:title 'Disable ticks tuning'
+tuneticks off:axis
+
+subplot 3 2 2:title 'Manual ticks'
+ranges -pi pi 0 2
+xtick -pi '\pi' -pi/2 '-\pi/2' 0 '0' 0.886 'x^*' pi/2 '\pi/2' pi 'pi'
+# or you can use:
+#list v -pi -pi/2 0 0.886 pi/2 pi:xtick v '-\pi\n-\pi/2\n{}0\n{}x^*\n\pi/2\n\pi'
+axis:grid:fplot '2*cos(x^2)^2' 'r2'
+
+subplot 3 2 5:title 'Time ticks'
+xrange 0 3e5:ticktime 'x':axis
+@end verbatim
+
+@pfig{ticks, Features of axis ticks.}
+
+The last sample I want to show in this subsection is Log-axis. From MathGL's point of view, the log-axis is particular case of general curvilinear coordinates. So, we need first define new coordinates (see also @ref{Curvilinear coordinates}) by help of @code{SetFunc} or @code{SetCoor} functions. At this one should wary about proper axis range. So the code looks as following:
+@verbatim
+subplot 2 2 0 '<_':title 'Semi-log axis'
+ranges 0.01 100 -1 1:axis 'lg(x)' '' ''
+axis:grid 'xy' 'g':fplot 'sin(1/x)'
+xlabel 'x' 0:ylabel 'y = sin 1/x' 0
+
+subplot 2 2 1 '<_':title 'Log-log axis'
+ranges 0.01 100 0.1 100:axis 'lg(x)' 'lg(y)' ''
+axis:fplot 'sqrt(1+x^2)'
+xlabel 'x' 0:ylabel 'y = \sqrt{1+x^2}' 0
+
+subplot 2 2 2 '<_':title 'Minus-log axis'
+ranges -100 -0.01 -100 -0.1:axis '-lg(-x)' '-lg(-y)' ''
+axis:fplot '-sqrt(1+x^2)'
+xlabel 'x' 0:ylabel 'y = -\sqrt{1+x^2}' 0
+
+subplot 2 2 3 '<_':title 'Log-ticks'
+ranges 0.01 100 0 100:axis 'sqrt(x)' '' ''
+axis:fplot 'x'
+xlabel 'x' 1:ylabel 'y = x' 0
+@end verbatim
+
+@pfig{loglog, Features of axis ticks.}
+
+You can see that MathGL automatically switch to log-ticks as we define log-axis formula (in difference from v.1.*). Moreover, it switch to log-ticks for any formula if axis range will be large enough (see right bottom plot). Another interesting feature is that you not necessary define usual log-axis (i.e. when coordinates are positive), but you can define ``minus-log'' axis when coordinate is negative (see left bottom plot).
+
+@c ------------------------------------------------------------------
+@external{}
+@node Curvilinear coordinates, Colorbars, Axis and ticks, Advanced usage
+@subsection Curvilinear coordinates
+@nav{}
+
+As I noted in previous subsection, MathGL support curvilinear coordinates. In difference from other plotting programs and libraries, MathGL uses textual formulas for connection of the old (data) and new (output) coordinates. This allows one to plot in arbitrary coordinates. The following code plots the line @var{y}=0, @var{z}=0 in Cartesian, polar, parabolic and spiral coordinates:
+@verbatim
+origin -1 1 -1
+subplot 2 2 0:title 'Cartesian':rotate 50 60
+fplot '2*t-1' '0.5' '0' '2r':axis:grid
+
+axis 'y*sin(pi*x)' 'y*cos(pi*x)' '':
+subplot 2 2 1:title 'Cylindrical':rotate 50 60
+fplot '2*t-1' '0.5' '0' '2r':axis:grid
+
+axis '2*y*x' 'y*y - x*x' ''
+subplot 2 2 2:title 'Parabolic':rotate 50 60
+fplot '2*t-1' '0.5' '0' '2r':axis:grid
+
+axis 'y*sin(pi*x)' 'y*cos(pi*x)' 'x+z'
+subplot 2 2 3:title 'Spiral':rotate 50 60
+fplot '2*t-1' '0.5' '0' '2r':axis:grid
+@end verbatim
+
+@pfig{curvcoor, Example of curvilinear coordinates}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Colorbars, Bounding box, Curvilinear coordinates, Advanced usage
+@subsection Colorbars
+@nav{}
+
+MathGL handle @ref{colorbar} as special kind of axis. So, most of functions for axis and ticks setup will work for colorbar too. Colorbars can be in log-scale, and generally as arbitrary function scale; common factor of colorbar labels can be separated; and so on.
+
+But of course, there are differences -- colorbars usually located out of bounding box. At this, colorbars can be at subplot boundaries (by default), or at bounding box (if symbol @samp{I} is specified). Colorbars can handle sharp colors. And they can be located at arbitrary position too. The sample code, which demonstrate colorbar features is:
+@verbatim
+call 'prepare2d'
+new v 9 'x'
+
+subplot 2 2 0:title 'Colorbar out of box':box
+colorbar '<':colorbar '>':colorbar '_':colorbar '^'
+
+subplot 2 2 1:title 'Colorbar near box':box
+colorbar '<I':colorbar '>I':colorbar '_I':colorbar '^I'
+
+subplot 2 2 2:title 'manual colors':box:contd v a
+colorbar v '<':colorbar v '>':colorbar v '_':colorbar v '^'
+
+subplot 2 2 3:title '':text -0.5 1.55 'Color positions' ':C' -2
+
+colorbar 'bwr>' 0.25 0:text -0.9 1.2 'Default'
+colorbar 'b{w,0.3}r>' 0.5 0:text -0.1 1.2 'Manual'
+
+crange 0.01 1e3
+colorbar '>' 0.75 0:text 0.65 1.2 'Normal scale'
+colorbar '>':text 1.35 1.2 'Log scale'
+@end verbatim
+
+@pfig{colorbar, Example of colorbars}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Bounding box, Ternary axis, Colorbars, Advanced usage
+@subsection Bounding box
+@nav{}
+
+Box around the plot is rather useful thing because it allows one to: see the plot boundaries, and better estimate points position since box contain another set of ticks. MathGL provide special function for drawing such box -- @ref{box} function. By default, it draw black or white box with ticks (color depend on transparency type, see @ref{Types of transparency}). However, you can change the color of box, or add drawing of rectangles at rear faces of box. Also you can disable ticks drawing, but I don't know why anybody will want it. The sample code, which demonstrate @ref{box} features is:
+@verbatim
+subplot 2 2 0:title 'Box (default)':rotate 50 60:box
+
+subplot 2 2 1:title 'colored':rotate 50 60:box 'r'
+
+subplot 2 2 2:title 'with faces':rotate 50 60:box '@'
+
+subplot 2 2 3:title 'both':rotate 50 60:box '@cm'
+@end verbatim
+
+@pfig{box, Example of Box()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Ternary axis, Text features, Bounding box, Advanced usage
+@subsection Ternary axis
+@nav{}
+
+There are another unusual axis types which are supported by MathGL. These are ternary and quaternary axis. Ternary axis is special axis of 3 coordinates @var{a}, @var{b}, @var{c} which satisfy relation @var{a}+@var{b}+@var{c}=1. Correspondingly, quaternary axis is special axis of 4 coordinates @var{a}, @var{b}, @var{c}, @var{d} which satisfy relation @var{a}+@var{b}+@var{c}+@var{d}=1.
+
+Generally speaking, only 2 of coordinates (3 for quaternary) are independent. So, MathGL just introduce some special transformation formulas which treat @var{a} as @samp{x}, @var{b} as @samp{y} (and @var{c} as @samp{z} for quaternary). As result, all plotting functions (curves, surfaces, contours and so on) work as usual, but in new axis. You should use @ref{ternary} function for switching to ternary/quaternary coordinates. The sample code is:
+@verbatim
+ranges 0 1 0 1 0 1
+new x 50 '0.25*(1+cos(2*pi*x))'
+new y 50 '0.25*(1+sin(2*pi*x))'
+new z 50 'x'
+new a 20 30 '30*x*y*(1-x-y)^2*(x+y<1)'
+new rx 10 'rnd':copy ry (1-rx)*rnd
+light on
+
+subplot 2 2 0:title 'Ordinary axis 3D':rotate 50 60
+box:axis:grid
+plot x y z 'r2':surf a '#'
+xlabel 'B':ylabel 'C':zlabel 'Z'
+
+subplot 2 2 1:title 'Ternary axis (x+y+t=1)':ternary 1
+box:axis:grid 'xyz' 'B;'
+plot x y 'r2':plot rx ry 'q^ ':cont a:line 0.5 0 0 0.75 'g2'
+xlabel 'B':ylabel 'C':tlabel 'A'
+
+subplot 2 2 2:title 'Quaternary axis 3D':rotate 50 60:ternary 2
+box:axis:grid 'xyz' 'B;'
+plot x y z 'r2':surf a '#'
+xlabel 'B':ylabel 'C':tlabel 'A':zlabel 'D'
+
+subplot 2 2 3:title 'Ternary axis 3D':rotate 50 60:ternary 1
+box:axis:grid 'xyz' 'B;'
+plot x y z 'r2':surf a '#'
+xlabel 'B':ylabel 'C':tlabel 'A':zlabel 'Z'
+@end verbatim
+
+@pfig{ternary, Ternary and Quaternary axis}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Text features, Legend sample, Ternary axis, Advanced usage
+@subsection Text features
+@nav{}
+
+MathGL prints text by vector font. There are functions for manual specifying of text position (like @code{Puts}) and for its automatic selection (like @code{Label}, @code{Legend} and so on). MathGL prints text always in specified position even if it lies outside the bounding box. The default size of font is specified by functions @var{SetFontSize*} (see @ref{Font settings}). However, the actual size of output string depends on subplot size (depends on functions @code{SubPlot}, @code{InPlot}). The switching of the font style (italic, bold, wire and so on) can be done for the whole string (by function parameter) or inside the string. By default MathGL parses TeX-like commands for symbols and indexes (see @ref{Font styles}).
+
+Text can be printed as usual one (from left to right), along some direction (rotated text), or along a curve. Text can be printed on several lines, divided by new line symbol @samp{\n}.
+
+Example of MathGL font drawing is:
+@verbatim
+call 'prepare1d'
+
+subplot 2 2 0 ''
+text 0 1 'Text can be in ASCII and in Unicode'
+text 0 0.6 'It can be \wire{wire}, \big{big} or #r{colored}'
+text 0 0.2 'One can change style in string: \b{bold}, \i{italic, \b{both}}'
+text 0 -0.2 'Easy to \a{overline} or \u{underline}'
+text 0 -0.6 'Easy to change indexes ^{up} _{down} @{center}'
+text 0 -1 'It parse TeX: \int \alpha \cdot \
+\sqrt3{sin(\pi x)^2 + \gamma_{i_k}} dx'
+
+subplot 2 2 1 ''
+ text 0 0.5 '\sqrt{\frac{\alpha^{\gamma^2}+\overset 1{\big\infty}}{\sqrt3{2+b}}}' '@' -2
+text 0 -0.5 'Text can be printed\n{}on several lines'
+
+subplot 2 2 2 '':box:plot y(:,0)
+text y 'This is very very long string drawn along a curve' 'k'
+text y 'Another string drawn above a curve' 'Tr'
+
+subplot 2 2 3 '':line -1 -1 1 -1 'rA':text 0 -1 1 -1 'Horizontal'
+line -1 -1 1 1 'rA':text 0 0 1 1 'At angle' '@'
+line -1 -1 -1 1 'rA':text -1 0 -1 1 'Vertical'
+@end verbatim
+
+@pfig{text, Example of text printing}
+
+You can change font faces by loading font files by function @ref{loadfont}. Note, that this is long-run procedure. Font faces can be downloaded from @uref{http://mathgl.sourceforge.net/download.html, MathGL website} or from @uref{http://sourceforge.net/project/showfiles.php?group_id=152187&package_id=267177, here}. The sample code is:
+@verbatim
+define d 0.25
+loadfont 'STIX':text 0 1.1 'default font (STIX)'
+loadfont 'adventor':text 0 1.1-d 'adventor font'
+loadfont 'bonum':text 0 1.1-2*d 'bonum font'
+loadfont 'chorus':text 0 1.1-3*d 'chorus font'
+loadfont 'cursor':text 0 1.1-4*d 'cursor font'
+loadfont 'heros':text 0 1.1-5*d 'heros font'
+loadfont 'heroscn':text 0 1.1-6*d 'heroscn font'
+loadfont 'pagella':text 0 1.1-7*d 'pagella font'
+loadfont 'schola':text 0 1.1-8*d 'schola font'
+loadfont 'termes':text 0 1.1-9*d 'termes font'
+@end verbatim
+
+@pfig{fonts, Example of font faces}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Legend sample, Cutting sample, Text features, Advanced usage
+@subsection Legend sample
+@nav{}
+
+Legend is one of standard ways to show plot annotations. Basically you need to connect the plot style (line style, marker and color) with some text. In MathGL, you can do it by 2 methods: manually using @ref{addlegend} function; or use @samp{legend} option (see @ref{Command options}), which will use last plot style. In both cases, legend entries will be added into internal accumulator, which later used for legend drawing itself. @ref{clearlegend} function allow you to remove all saved legend entries.
+
+There are 2 features. If plot style is empty then text will be printed without indent. If you want to plot the text with indent but without plot sample then you need to use space @samp{ } as plot style. Such style @samp{ } will draw a plot sample (line with marker(s)) which is invisible line (i.e. nothing) and print the text with indent as usual one.
+
+Command @ref{legend} draw legend on the plot. The position of the legend can be selected automatic or manually. You can change the size and style of text labels, as well as setup the plot sample. The sample code demonstrating legend features is:
+@verbatim
+addlegend 'sin(\pi {x^2})' 'b'
+addlegend 'sin(\pi x)' 'g*'
+addlegend 'sin(\pi \sqrt{x})' 'rd'
+addlegend 'jsut text' ' '
+addlegend 'no indent for this' ''
+
+subplot 2 2 0 '':title 'Legend (default)':box
+legend
+
+text 0.75 0.65 'Absolute position' 'A'
+legend 3 'A#'
+
+subplot 2 2 2 '':title 'coloring':box
+legend 0 'r#':legend 1 'Wb#':legend 2 'ygr#'
+
+subplot 2 2 3 '':title 'manual position':box
+legend 0.5 1:text 0.5 0.55 'at x=0.5, y=1' 'a'
+legend 1 '#-':text 0.75 0.25 'Horizontal legend' 'a'
+@end verbatim
+
+@pfig{legend, Example of legend}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Cutting sample, , Legend sample, Advanced usage
+@subsection Cutting sample
+@nav{}
+
+The last common thing which I want to show in this section is how one can cut off points from plot. There are 4 mechanism for that.
+@itemize @bullet
+@item
+You can set one of coordinate to NAN value. All points with NAN values will be omitted.
+
+@item
+You can enable cutting at edges by @code{SetCut} function. As result all points out of bounding box will be omitted.
+
+@item
+You can set cutting box by @code{SetCutBox} function. All points inside this box will be omitted.
+
+@item
+You can define cutting formula by @code{SetCutOff} function. All points for which the value of formula is nonzero will be omitted. Note, that this is the slowest variant.
+@end itemize
+
+Below I place the code which demonstrate last 3 possibilities:
+@verbatim
+call 'prepare2d'
+call 'prepare3d'
+
+subplot 2 2 0:title 'Cut on (default)':rotate 50 60
+light on:box:surf a; zrange -1 0.5
+
+subplot 2 2 1:title 'Cut off':rotate 50 60
+box:surf a; zrange -1 0.5; cut off
+
+subplot 2 2 2:title 'Cut in box':rotate 50 60:box:alpha on
+cut 0 -1 -1 1 0 1.1:surf3 c
+cut 0 0 0 0 0 0	# restore back
+
+subplot 2 2 3:title 'Cut by formula':rotate 50 60:box
+cut '(z>(x+0.5*y-1)^2-1) & (z>(x-0.5*y-1)^2-1)':surf3 c
+@end verbatim
+
+@pfig{cut, Example of point cutting}
+
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Data handling, Data plotting, Advanced usage, Examples
+@section Data handling
+@nav{}
+
+Class @code{mglData} contains all functions for the data handling in MathGL (@pxref{Data processing}). There are several matters why I use class @code{mglData} but not a single array: it does not depend on type of data (mreal or double), sizes of data arrays are kept with data, memory working is simpler and safer.
+
+@menu
+* Array creation::
+* Change data::
+@end menu
+
+@c ------------------------------------------------------------------
+@external{}
+@node Array creation, Change data, , Data handling
+@subsection Array creation
+@nav{}
+
+One can put numbers into the data instance by several ways. Let us do it for square function:
+@itemize @bullet
+@item
+one can create array by @code{list} command
+@verbatim
+list a 0 0.04 0.16 0.36 0.64 1
+@end verbatim
+
+@item
+another way is to copy from ``inline'' array
+@verbatim
+copy a [0,0.04,0.16,0.36,0.64,1]
+@end verbatim
+
+@item
+next way is to fill the data by textual formula with the help of @code{modify} function
+@verbatim
+new a 6
+modify a 'x^2'
+@end verbatim
+
+@item
+or one may fill the array in some interval and modify it later
+@verbatim
+new a 6
+fill a 0 1
+modify a 'u^2'
+@end verbatim
+
+@item
+or fill the array using current axis range
+@verbatim
+new a 6
+fill a '(x+1)^2/4'
+@end verbatim
+or use single line
+@verbatim
+new a 6 '(x+1)^2/4'
+@end verbatim
+
+@item
+finally it can be loaded from file
+@verbatim
+new s 6 '(x+1)^2/4'
+save s 'sqr.dat'    # create file first
+read a 'sqr.dat'    # load it
+@end verbatim
+
+@item
+at this one can read only part of data
+@verbatim
+new s 6 '(x+1)^2/4'
+save s 'sqr.dat'    # create file first
+read a 'sqr.dat' 5  # load it
+@end verbatim
+@end itemize
+
+Creation of 2d- and 3d-arrays is mostly the same. One can use direct data filling by @code{list} command
+@verbatim
+list a 11 12 13 | 21 22 23 | 31 32 33
+@end verbatim
+or by inline arrays
+@verbatim
+copy a [[11,12,13],[21,22,23],[31,32,33]]
+@end verbatim
+Also data can be filled by formula
+@verbatim
+new z 30 40 'sin(pi*x)*cos(pi*y)'
+@end verbatim
+or loaded from a file.
+
+@c ------------------------------------------------------------------
+@external{}
+@node Change data, , Array creation, Data handling
+@subsection Change data
+@nav{}
+
+MathGL has functions for data processing: differentiating, integrating, smoothing and so on (for more detail, see @ref{Data processing}). Let us consider some examples. The simplest ones are integration and differentiation. The direction in which operation will be performed is specified by textual string, which may contain symbols @samp{x}, @samp{y} or @samp{z}. For example, the call of @code{diff 'x'} will differentiate data along @samp{x} direction; the call of @code{integrate 'xy'} perform the double integration of data along @samp{x} and @samp{y} directions; the call of @code{diff2 'xyz'} will apply 3d Laplace operator to data and so on. Example of this operations on 2d array a=x*y is presented in code:
+@verbatim
+ranges 0 1 0 1 0 1:new a 30 40 'x*y'
+subplot 2 2 0:title 'a(x,y)':rotate 60 40
+surf a:box
+
+subplot 2 2 1:title 'da/dx':rotate 60 40
+diff a 'x':surf a:box
+
+subplot 2 2 2:title '\int da/dx dxdy':rotate 60 40
+integrate a 'xy':surf a:box
+
+subplot 2 2 3:title '\int {d^2}a/dxdy dx':rotate 60 40
+diff2 a 'y':surf a:box
+@end verbatim
+
+@pfig{dat_diff, Example of data differentiation and integration}
+
+Data smoothing (command @ref{smooth}) is more interesting and important. This function has single argument which define type of smoothing and its direction. Now 3 methods are supported: @samp{3} -- linear averaging by 3 points, @samp{5} -- linear averaging by 5 points, and default one -- quadratic averaging by 5 points.
+
+MathGL also have some amazing functions which is not so important for data processing as useful for data plotting. There are functions for finding envelope (useful for plotting rapidly oscillating data), for data sewing (useful to removing jumps on the phase), for data resizing (interpolation). Let me demonstrate it:
+@verbatim
+subplot 2 2 0 '':title 'Envelop sample'
+new d1 1000 'exp(-8*x^2)*sin(10*pi*x)'
+axis:plot d1 'b'
+envelop d1 'x'
+plot d1 'r'
+
+subplot 2 2 1 '':title 'Smooth sample':ranges 0 1 0 1
+new y0 30 '0.4*sin(pi*x) + 0.3*cos(1.5*pi*x) - 0.4*sin(2*pi*x)+0.5*rnd'
+copy y1 y0:smooth y1 'x3':plot y1 'r';legend '"3" style'
+copy y2 y0:smooth y2 'x5':plot y2 'g';legend '"5" style'
+copy y3 y0:smooth y3 'x':plot y3 'b';legend 'default'
+plot y0 '{m7}:s';legend 'none':legend:box
+
+subplot 2 2 2:title 'Sew sample':rotate 50 60:light on:alpha on
+new d2 100 100 'mod((y^2-(1-x)^2)/2,0.1)'
+box:surf d2 'b'
+sew d2 'xy' 0.1
+surf d2 'r'
+
+subplot 2 2 3:title 'Resize sample (interpolation)'
+new x0 10 'rnd':new v0 10 'rnd'
+resize x1 x0 100:resize v1 v0 100
+plot x0 v0 'b+ ':plot x1 v1 'r-':label x0 v0 '%n'
+@end verbatim
+
+@pfig{dat_extra, Example of data smoothing}
+
+Finally one can create new data arrays on base of the existing one: extract slice, row or column of data (@ref{subdata}), summarize along a direction(s) (@ref{sum}), find distribution of data elements (@ref{hist}) and so on.
+
+@anchor{Solve sample}
+Another interesting feature of MathGL is interpolation and root-finding. There are several functions for linear and cubic spline interpolation (see @ref{Interpolation}). Also there is a function @ref{evaluate} which do interpolation of data array for values of each data element of index data. It look as indirect access to the data elements.
+
+This function have inverse function @ref{solve} which find array of indexes at which data array is equal to given value (i.e. work as root finding). But @ref{solve} function have the issue -- usually multidimensional data (2d and 3d ones) have an infinite number of indexes which give some value. This is contour lines for 2d data, or isosurface(s) for 3d data. So, @ref{solve} function will return index only in given direction, assuming that other index(es) are the same as equidistant index(es) of original data. Let me demonstrate this on the following sample.
+
+@verbatim
+zrange 0 1
+new x 20 30 '(x+2)/3*cos(pi*y)'
+new y 20 30 '(x+2)/3*sin(pi*y)'
+new z 20 30 'exp(-6*x^2-2*sin(pi*y)^2)'
+
+subplot 2 1 0:title 'Cartesian space':rotate 30 -40
+axis 'xyzU':box
+xlabel 'x':ylabel 'y'origin 1 1:grid 'xy'
+mesh x y z
+
+# section along 'x' direction
+solve u x 0.5 'x'
+var v u.nx 0 1
+evaluate yy y u v
+evaluate xx x u v
+evaluate zz z u v
+plot xx yy zz 'k2o'
+
+# 1st section along 'y' direction
+solve u1 x -0.5 'y'
+var v1 u1.nx 0 1
+evaluate yy y v1 u1
+evaluate xx x v1 u1
+evaluate zz z v1 u1
+plot xx yy zz 'b2^'
+
+# 2nd section along 'y' direction
+solve u2 x -0.5 'y' u1
+evaluate yy y v1 u2
+evaluate xx x v1 u2
+evaluate zz z v1 u2
+plot xx yy zz 'r2v'
+
+subplot 2 1 1:title 'Accompanied space'
+ranges 0 1 0 1:origin 0 0
+axis:box:xlabel 'i':ylabel 'j':grid2 z 'h'
+
+plot u v 'k2o':line 0.4 0.5 0.8 0.5 'kA'
+plot v1 u1 'b2^':line 0.5 0.15 0.5 0.3 'bA'
+plot v1 u2 'r2v':line 0.5 0.7 0.5 0.85 'rA'
+@end verbatim
+
+@pfig{solve, Example of data interpolation and root finding}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Data plotting, 1D samples, Data handling, Examples
+@section Data plotting
+@nav{}
+
+Let me now show how to plot the data. Next section will give much more examples for all plotting functions. Here I just show some basics. MathGL generally has 2 types of plotting functions. Simple variant requires a single data array for plotting, other data (coordinates) are considered uniformly distributed in axis range. Second variant requires data arrays for all coordinates. It allows one to plot rather complex multivalent curves and surfaces (in case of parametric dependencies). Usually each function have one textual argument for plot style and accept options (see @ref{Command options}).
+
+Note, that the call of drawing function adds something to picture but does not clear the previous plots (as it does in Matlab). Another difference from Matlab is that all setup (like transparency, lightning, axis borders and so on) must be specified @strong{before} plotting functions.
+
+Let start for plots for 1D data. Term ``1D data'' means that data depend on single index (parameter) like curve in parametric form @{x(i),y(i),z(i)@}, i=1...n. The textual argument allow you specify styles of line and marks (see @ref{Line styles}). If this parameter is empty @code{''} then solid line with color from palette is used (see @ref{Palette and colors}).
+
+Below I shall show the features of 1D plotting on base of @ref{plot} function. Let us start from sinus plot:
+@verbatim
+new y0 50 'sin(pi*x)'
+subplot 2 2 0
+plot y0:box
+@end verbatim
+Style of line is not specified in @ref{plot} function. So MathGL uses the solid line with first color of palette (this is blue). Next subplot shows array @var{y1} with 2 rows:
+@verbatim
+subplot 2 2 1
+new y1 50 2
+fill y1 'cos(pi*(x+y/4))*2/(y+3)'
+plot y1:box
+@end verbatim
+As previously I did not specify the style of lines. As a result, MathGL again uses solid line with next colors in palette (there are green and red). Now let us plot a circle on the same subplot. The circle is parametric curve @math{x=cos(\pi t), y=sin(\pi t)}. I will set the color of the circle (dark yellow, @samp{Y}) and put marks @samp{+} at point position:
+@verbatim
+new x 50 'cos(pi*x)'
+plot x y0 'Y+'
+@end verbatim
+Note that solid line is used because I did not specify the type of line. The same picture can be achieved by @ref{plot} and @ref{subdata} functions. Let us draw ellipse by orange dash line:
+@verbatim
+plot y1(:,0) y1(:,1) 'q|'
+@end verbatim
+
+Drawing in 3D space is mostly the same. Let us draw spiral with default line style. Now its color is 4-th color from palette (this is cyan):
+@verbatim
+subplot 2 2 2:rotate 60 40
+new z 50 'x'
+plot x y0 z:box
+@end verbatim
+Functions @ref{plot} and @ref{subdata} make 3D curve plot but for single array. Use it to put circle marks on the previous plot:
+@verbatim
+new y2 10 3 'cos(pi*(x+y/2))'
+modify y2 '2*x-1' 2
+plot y2(:,0) y2(:,1) y2(:,2) 'bo '
+@end verbatim
+Note that line style is empty @samp{ } here. Usage of other 1D plotting functions looks similar:
+@verbatim
+subplot 2 2 3:rotate 60 40
+bars x y0 z 'r':box
+@end verbatim
+
+Surfaces @ref{surf} and other 2D plots (@pxref{2D plotting}) are drown the same simpler as 1D one. The difference is that the string parameter specifies not the line style but the color scheme of the plot (see @ref{Color scheme}). Here I draw attention on 4 most interesting color schemes. There is gray scheme where color is changed from black to white (string @samp{kw}) or from white to black (string @samp{wk}). Another scheme is useful for accentuation of negative (by blue color) and positive (by red color) regions on plot (string @samp{"BbwrR"}). Last one is the popular ``jet'' scheme (string @samp{"BbcyrR"}).
+
+Now I shall show the example of a surface drawing. At first let us switch lightning on
+@verbatim
+light on
+@end verbatim
+and draw the surface, considering coordinates x,y to be uniformly distributed in interval @var{Min}*@var{Max}
+@verbatim
+new a0 50 40 '0.6*sin(pi*(x+1))*sin(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+subplot 2 2 0:rotate 60 40
+surf a0:box
+@end verbatim
+Color scheme was not specified. So previous color scheme is used. In this case it is default color scheme (``jet'') for the first plot. Next example is a sphere. The sphere is parametrically specified surface:
+@verbatim
+new x 50 40 '0.8*sin(pi*x)*cos(pi*y/2)'
+new y 50 40 '0.8*cos(pi*x)*cos(pi*y/2)'
+new z 50 40 '0.8*sin(pi*y/2)'
+subplot 2 2 1:rotate 60 40
+surf x y z 'BbwrR':box
+@end verbatim
+I set color scheme to @code{"BbwrR"} that corresponds to red top and blue bottom of the sphere.
+
+Surfaces will be plotted for each of slice of the data if @var{nz}>1. Next example draws surfaces for data arrays with @var{nz}=3:
+@verbatim
+new a1 50 40 3
+modify a1 '0.6*sin(2*pi*x)*sin(3*pi*y)+0.4*cos(3*pi*(x*y))'
+modify a1 '0.6*cos(2*pi*x)*cos(3*pi*y)+0.4*sin(3*pi*(x*y))' 1
+modify a1 '0.6*cos(2*pi*x)*cos(3*pi*y)+0.4*cos(3*pi*(x*y))' 2
+subplot 2 2 2:rotate 60 40
+alpha on
+surf a1:box
+@end verbatim
+Note, that it may entail a confusion. However, if one will use density plot then the picture will look better:
+@verbatim
+subplot 2 2 3:rotate 60 40
+dens a1:box
+@end verbatim
+
+Drawing of other 2D plots is analogous. The only peculiarity is the usage of flag @samp{#}. By default this flag switches on the drawing of a grid on plot (@ref{grid} or @ref{mesh} for plots in plain or in volume). However, for isosurfaces (including surfaces of rotation @ref{axial}) this flag switches the  face drawing off and figure becomes wired.
+@c ------------------------------------------------------------------
+@external{}
+@node 1D samples, 2D samples, Data plotting, Examples
+@section 1D samples
+@nav{}
+
+This section is devoted to visualization of 1D data arrays. 1D means the data which depend on single index (parameter) like curve in parametric form @{x(i),y(i),z(i)@}, i=1...n. Most of samples will use the same data for plotting. So, I put its initialization in separate function
+@verbatim
+func 'prepare1d'
+new y 50 3
+modify y '0.7*sin(2*pi*x)+0.5*cos(3*pi*x)+0.2*sin(pi*x)'
+modify y 'sin(2*pi*x)' 1
+modify y 'cos(2*pi*x)' 2
+new x1 50 'x'
+new x2 50 '0.05-0.03*cos(pi*x)'
+new y1 50 '0.5-0.3*cos(pi*x)'
+new y2 50 '-0.3*sin(pi*x)'
+return
+@end verbatim
+Basically, you can put this text after the script. Note, that you need to terminate main script by @ref{stop} command before defining a function.
+
+@menu
+* Plot sample::
+* Radar sample::
+* Step sample::
+* Tens sample::
+* Area sample::
+* Region sample::
+* Stem sample::
+* Bars sample::
+* Barh sample::
+* Cones sample::
+* Chart sample::
+* BoxPlot sample::
+* Candle sample::
+* OHLC sample::
+* Error sample::
+* Mark sample::
+* TextMark sample::
+* Label sample::
+* Table sample::
+* Tube sample::
+* Tape sample::
+* Torus sample::
+@end menu
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Plot sample, Radar sample, , 1D samples
+@subsection Plot sample
+@nav{}
+
+Command @ref{plot} is most standard way to visualize 1D data array. By default, @code{Plot} use colors from palette. However, you can specify manual color/palette, and even set to use new color for each points by using @samp{!} style. Another feature is @samp{ } style which draw only markers without line between points. The sample code is:
+@verbatim
+call 'prepare1d'
+subplot 2 2 0 '':title 'Plot plot (default)':box
+plot y
+
+subplot 2 2 2 '':title ''!' style; 'rgb' palette':box
+plot y 'o!rgb'
+
+subplot 2 2 3 '':title 'just markers':box
+plot y ' +'
+
+new yc 30 'sin(pi*x)':new xc 30 'cos(pi*x)':new z 30 'x'
+subplot 2 2 1:title '3d variant':rotate 50 60:box
+plot xc yc z 'rs'
+@end verbatim
+
+@pfig{plot, Example of Plot()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Radar sample, Step sample, Plot sample, 1D samples
+@subsection Radar sample
+@nav{}
+
+Command @ref{radar} plot is variant of @code{Plot} one, which make plot in polar coordinates and draw radial rays in point directions. If you just need a plot in polar coordinates then I recommend to use @ref{Curvilinear coordinates} or @code{Plot} in parabolic form with @code{x=r*cos(fi); y=r*sin(fi);}. The sample code is:
+@verbatim
+new yr 10 3 '0.4*sin(pi*(x+1.5+y/2)+0.1*rnd)'
+subplot 1 1 0 '':title 'Radar plot (with grid, "\#")'
+radar yr '#'
+@end verbatim
+
+@pfig{radar, Example of Radar()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Step sample, Tens sample, Radar sample, 1D samples
+@subsection Step sample
+@nav{}
+
+Command @ref{step} plot data as stairs. It have the same options as @code{Plot}. The sample code is:
+@verbatim
+call 'prepare1d'
+origin 0 0 0:subplot 2 2 0 '':title 'Step plot (default)':box
+step y
+
+new yc 30 'sin(pi*x)':new xc 30 'cos(pi*x)':new z 30 'x'
+subplot 2 2 1:title '3d variant':rotate 50 60:box
+step xc yc z 'r'
+
+subplot 2 2 2 '':title '"!" style':box
+step y 's!rgb'
+@end verbatim
+
+@pfig{step, Example of Step()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Tens sample, Area sample, Step sample, 1D samples
+@subsection Tens sample
+@nav{}
+
+Command @ref{tens} is variant of @ref{plot} with smooth coloring along the curves. At this, color is determined as for surfaces (see @ref{Color scheme}). The sample code is:
+@verbatim
+call 'prepare1d'
+subplot 2 2 0 '':title 'Tens plot (default)':box
+tens y(:,0) y(:,1)
+
+subplot 2 2 2 '':title ' style':box
+tens y(:,0) y(:,1) 'o '
+
+new yc 30 'sin(pi*x)':new xc 30 'cos(pi*x)':new z 30 'x'
+subplot 2 2 1:title '3d variant':rotate 50 60:box
+tens xc yc z z 's'
+@end verbatim
+
+@pfig{tens, Example of Tens()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Area sample, Region sample, Tens sample, 1D samples
+@subsection Area sample
+@nav{}
+
+Command @ref{area} fill the area between curve and axis plane. It support gradient filling if 2 colors per curve is specified. The sample code is:
+@verbatim
+call 'prepare1d'
+origin 0 0 0
+subplot 2 2 0 '':title 'Area plot (default)':box
+area y
+
+subplot 2 2 1 '':title '2 colors':box
+area y 'cbgGyr'
+
+subplot 2 2 2 '':title '"!" style':box
+area y '!'
+
+new yc 30 'sin(pi*x)':new xc 30 'cos(pi*x)':new z 30 'x'
+subplot 2 2 3:title '3d variant':rotate 50 60:box
+area xc yc z 'r':area xc -yc z 'b#'
+@end verbatim
+
+@pfig{area, Example of Area()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Region sample, Stem sample, Area sample, 1D samples
+@subsection Region sample
+@nav{}
+
+Command @ref{region} fill the area between 2 curves. It support gradient filling if 2 colors per curve is specified. Also it can fill only the region y1<y<y2 if style @samp{i} is used. The sample code is:
+@verbatim
+call 'prepare1d'
+copy y1 y(:,1):copy y2 y(:,2)
+subplot 2 2 0 '':title 'Region plot (default)':box
+region y1 y2:plot y1 'k2':plot y2 'k2'
+
+subplot 2 2 1 '':title '2 colors':box
+region y1 y2 'yr':plot y1 'k2':plot y2 'k2'
+
+subplot 2 2 2 '':title '"!" style':box
+region y1 y2 '!':plot y1 'k2':plot y2 'k2'
+
+subplot 2 2 3 '':title '"i" style':box
+region y1 y2 'ir':plot y1 'k2':plot y2 'k2'
+@end verbatim
+
+@pfig{region, Example of Region()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Stem sample, Bars sample, Region sample, 1D samples
+@subsection Stem sample
+@nav{}
+
+Command @ref{stem} draw vertical bars. It is most attractive if markers are drawn too. The sample code is:
+@verbatim
+call 'prepare1d'
+origin 0 0 0:subplot 2 2 0 '':title 'Stem plot (default)':box
+stem y
+
+new yc 30 'sin(pi*x)':new xc 30 'cos(pi*x)':new z 30 'x'
+subplot 2 2 1:title '3d variant':rotate 50 60:box
+stem xc yc z 'rx'
+
+subplot 2 2 2 '':title '"!" style':box
+stem y 'o!rgb'
+@end verbatim
+
+@pfig{stem, Example of Stem()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Bars sample, Barh sample, Stem sample, 1D samples
+@subsection Bars sample
+@nav{}
+
+Command @ref{bars} draw vertical bars. It have a lot of options: bar-above-bar (@samp{a} style), fall like (@samp{f} style), 2 colors for positive and negative values, wired bars (@samp{#} style), 3D variant. The sample code is:
+@verbatim
+new ys 10 3 '0.8*sin(pi*(x+y/4+1.25))+0.2*rnd':origin 0 0 0
+subplot 3 2 0 '':title 'Bars plot (default)':box
+bars ys
+
+subplot 3 2 1 '':title '2 colors':box
+bars ys 'cbgGyr'
+
+subplot 3 2 4 '':title '"\#" style':box
+bars ys '#'
+
+new yc 30 'sin(pi*x)':new xc 30 'cos(pi*x)':new z 30 'x'
+subplot 3 2 5:title '3d variant':rotate 50 60:box
+bars xc yc z 'r'
+
+subplot 3 2 2 '':title '"a" style':ranges -1 1 -3 3:box
+bars ys 'a'
+
+subplot 3 2 3 '':title '"f" style':box
+bars ys 'f'
+@end verbatim
+
+@pfig{bars, Example of Bars()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Barh sample, Cones sample, Bars sample, 1D samples
+@subsection Barh sample
+@nav{}
+
+Command @ref{barh} is the similar to @code{Bars} but draw horizontal bars. The sample code is:
+@verbatim
+new ys 10 3 '0.8*sin(pi*(x+y/4+1.25))+0.2*rnd':origin 0 0 0
+subplot 2 2 0 '':title 'Barh plot (default)':box
+barh ys
+
+subplot 2 2 1 '':title '2 colors':box
+barh ys 'cbgGyr'
+
+ranges -3 3 -1 1:subplot 2 2 2 '':title '"a" style':box:barh ys 'a'
+subplot 2 2 3 '': title '"f" style':box
+barh ys 'f'
+@end verbatim
+
+@pfig{barh, Example of Barh()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Cones sample, Chart sample, Bars sample, 1D samples
+@subsection Cones sample
+@nav{}
+
+Command @ref{cones} is similar to @code{Bars} but draw cones. The sample code is:
+@verbatim
+new ys 10 3 '0.8*sin(pi*(x+y/4+1.25))+0.2*rnd'
+origin 0 0 0:light on
+subplot 3 2 0:title 'Cones plot':rotate 50 60:box
+cones ys
+
+subplot 3 2 1:title '2 colors':rotate 50 60:box
+cones ys 'cbgGyr'
+
+subplot 3 2 2:title '"\#" style':rotate 50 60:box
+cones ys '#'
+
+subplot 3 2 3:title '"a" style':rotate 50 60:zrange -2 2:box
+cones ys 'a'
+
+subplot 3 2 4:title '"t" style':rotate 50 60:box
+cones ys 't'
+
+subplot 3 2 5:title '"4" style':rotate 50 60:box
+cones ys '4'
+@end verbatim
+
+@pfig{cones, Example of Cones()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Chart sample, BoxPlot sample, Cones sample, 1D samples
+@subsection Chart sample
+@nav{}
+
+Command @ref{chart} draw colored boxes with width proportional to data values. Use @samp{ } for empty box. Plot looks most attractive in polar coordinates -- well known pie chart. The sample code is:
+@verbatim
+new ch 7 2 'rnd+0.1':light on
+subplot 2 2 0:title 'Chart plot (default)':rotate 50 60:box
+chart ch
+
+subplot 2 2 1:title '"\#" style':rotate 50 60:box
+chart ch '#'
+
+subplot 2 2 2:title 'Pie chart; " " color':rotate 50 60:
+axis '(y+1)/2*cos(pi*x)' '(y+1)/2*sin(pi*x)' '':box
+chart ch 'bgr cmy#'
+
+subplot 2 2 3:title 'Ring chart; " " color':rotate 50 60:
+axis '(y+2)/3*cos(pi*x)' '(y+2)/3*sin(pi*x)' '':box
+chart ch 'bgr cmy#'
+@end verbatim
+
+@pfig{chart, Example of Chart()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node BoxPlot sample, Candle sample, Chart sample, 1D samples
+@subsection BoxPlot sample
+@nav{}
+
+Command @ref{boxplot} draw box-and-whisker diagram. The sample code is:
+@verbatim
+new a 10 7 '(2*rnd-1)^3/2'
+subplot 1 1 0 '':title 'Boxplot plot':box
+boxplot a
+@end verbatim
+
+@pfig{boxplot, Example of BoxPlot()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Candle sample, OHLC sample, BoxPlot sample, 1D samples
+@subsection Candle sample
+@nav{}
+
+Command @ref{candle} draw candlestick chart. This is a combination of a line-chart and a bar-chart, in that each bar represents the range of price movement over a given time interval. The sample code is:
+@verbatim
+new y 30 'sin(pi*x/2)^2':copy y1 y/2:copy y2 (y+1)/2
+subplot 1 1 0 '':title 'Candle plot (default)':yrange 0 1:box
+candle y y1 y2
+@end verbatim
+
+@pfig{candle, Example of Candle()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node OHLC sample, Error sample, Candle sample, 1D samples
+@subsection OHLC sample
+@nav{}
+
+Command @ref{ohlc} draw Open-High-Low-Close diagram. This diagram show vertical line for between maximal(high) and minimal(low) values, as well as horizontal lines before/after vertical line for initial(open)/final(close) values of some process. The sample code is:
+@verbatim
+new o 10 '0.5*sin(pi*x)'
+new c 10 '0.5*sin(pi*(x+2/9))'
+new l 10 '0.3*rnd-0.8'
+new h 10 '0.3*rnd+0.5'
+subplot 1 1 0 '':title 'OHLC plot':box
+ohlc o h l c
+@end verbatim
+
+@pfig{candle, Example of OHLC()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Error sample, Mark sample, OHLC sample, 1D samples
+@subsection Error sample
+@nav{}
+
+Command @ref{error} draw error boxes around the points. You can draw default boxes or semi-transparent symbol (like marker, see @ref{Line styles}). Also you can set individual color for each box. The sample code is:
+@verbatim
+call 'prepare1d'
+new y 50 '0.7*sin(pi*x-pi) + 0.5*cos(3*pi*(x+1)/2) + 0.2*sin(pi*(x+1)/2)'
+new x0 10 'x + 0.1*rnd-0.05':new ex 10 '0.1':new ey 10 '0.2'
+new y0 10 '0.7*sin(pi*x-pi) + 0.5*cos(3*pi*(x+1)/2) + 0.2*sin(pi*(x+1)/2) + 0.2*rnd-0.1'
+
+subplot 2 2 0 '':title 'Error plot (default)':box:plot y
+error x0 y0 ex ey 'k'
+
+subplot 2 2 1 '':title '"!" style; no e_x':box:plot y
+error x0 y0 ey 'o!rgb'
+
+subplot 2 2 2 '':title '"\@" style':box:plot y
+error x0 y0 ex ey '@'; alpha 0.5
+
+subplot 2 2 3:title '3d variant':rotate 50 60:axis
+for $1 0 9
+  errbox 2*rnd-1 2*rnd-1 2*rnd-1 0.2 0.2 0.2 'bo'
+next
+@end verbatim
+
+@pfig{error, Example of Error()}
+
+Additionally, you can use solid large "marks" instead of error boxes by selecting proper style.
+@verbatim
+new x0 10 'rnd':new ex 10 '0.1'
+new y0 10 'rnd':new ey 10 '0.1'
+ranges 0 1 0 1
+subplot 4 3 0 '':box:error x0 y0 ex ey '#+@'
+subplot 4 3 1 '':box:error x0 y0 ex ey '#x@'
+subplot 4 3 2 '':box:error x0 y0 ex ey '#s@'; alpha 0.5
+subplot 4 3 3 '':box:error x0 y0 ex ey 's@'
+subplot 4 3 4 '':box:error x0 y0 ex ey 'd@'
+subplot 4 3 5 '':box:error x0 y0 ex ey '#d@'; alpha 0.5
+subplot 4 3 6 '':box:error x0 y0 ex ey '+@'
+subplot 4 3 7 '':box:error x0 y0 ex ey 'x@'
+subplot 4 3 8 '':box:error x0 y0 ex ey 'o@'
+subplot 4 3 9 '':box:error x0 y0 ex ey '#o@'; alpha 0.5
+subplot 4 3 10 '':box:error x0 y0 ex ey '#.@'
+subplot 4 3 11 '':box:error x0 y0 ex ey; alpha 0.5
+@end verbatim
+
+@pfig{error2, Example of Error() with marks}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Mark sample, TextMark sample, Error sample, 1D samples
+@subsection Mark sample
+@nav{}
+
+Command @ref{mark} draw markers at points. It is mostly the same as @code{Plot} but marker size can be variable. The sample code is:
+@verbatim
+call 'prepare1d'
+subplot 1 1 0 '':title 'Mark plot (default)':box
+mark y y1 's'
+@end verbatim
+
+@pfig{mark, Example of Mark()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node TextMark sample, Label sample, Mark sample, 1D samples
+@subsection TextMark sample
+@nav{}
+
+Command @ref{textmark} like @code{Mark} but draw text instead of markers. The sample code is:
+@verbatim
+call 'prepare1d'
+subplot 1 1 0 '':title 'TextMark plot (default)':box
+textmark y y1 '\gamma' 'r'
+@end verbatim
+
+@pfig{textmark, Example of TextMark()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Label sample, Table sample, TextMark sample, 1D samples
+@subsection Label sample
+@nav{}
+
+Command @ref{label} print text at data points. The string may contain @samp{%x}, @samp{%y}, @samp{%z} for x-, y-, z-coordinates of points, @samp{%n} for point index. The sample code is:
+@verbatim
+new ys 10 '0.2*rnd-0.8*sin(pi*x)'
+subplot 1 1 0 '':title 'Label plot':box
+plot ys ' *':label ys 'y=%y'
+@end verbatim
+
+@pfig{label, Example of Label()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Table sample, Tube sample, Label sample, 1D samples
+@subsection Table sample
+@nav{}
+
+Command @ref{table} draw table with data values. The sample code is:
+@verbatim
+new ys 10 3 '0.8*sin(pi*(x+y/4+1.25))+0.2*rnd'
+subplot 2 2 0:title 'Table sample':box
+table ys 'y_1\n{}y_2\n{}y_3'
+
+subplot 2 2 1:title 'no borders, colored'
+table ys 'y_1\n{}y_2\n{}y_3' 'r|'
+
+subplot 2 2 2:title 'no font decrease'
+table ys 'y_1\n{}y_2\n{}y_3' '#'
+
+subplot 2 2 3:title 'manual width and position':box
+table 0.5 0.95 ys 'y_1\n{}y_2\n{}y_3' '#';value 0.7
+@end verbatim
+
+@pfig{table, Example of Table()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Tube sample, Tape sample, Table sample, 1D samples
+@subsection Tube sample
+@nav{}
+
+Command @ref{tube} draw tube with variable radius. The sample code is:
+@verbatim
+light on:call 'prepare1d'
+new yc 50 'sin(pi*x)':new xc 50 'cos(pi*x)':new z 50 'x':divto y1 20
+
+subplot 2 2 0 '':title 'Tube plot (default)':box
+tube y 0.05
+
+subplot 2 2 1 '':title 'variable radius':box
+tube y y1
+
+subplot 2 2 2 '':title '"\#" style':box
+tube y 0.05 '#'
+
+subplot 2 2 3:title '3d variant':rotate 50 60:box
+tube xc yc z y2 'r'
+@end verbatim
+
+@pfig{tube, Example of Tube()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Tape sample, Torus sample, Tube sample, 1D samples
+@subsection Tape sample
+@nav{}
+
+Command @ref{tape} draw tapes which rotate around the curve as normal and binormal. The sample code is:
+@verbatim
+call 'prepare1d'
+new yc 50 'sin(pi*x)':new xc 50 'cos(pi*x)':new z 50 'x'
+
+subplot 2 2 0 '':title 'Tape plot (default)':box
+tape y:plot y 'k'
+
+subplot 2 2 1:title '3d variant, 2 colors':rotate 50 60:light on:box
+plot xc yc z 'k':tape xc yc z 'rg'
+
+subplot 2 2 2:title '3d variant, x only':rotate 50 60:box
+plot xc yc z 'k':tape xc yc z 'xr':tape xc yc z 'xr#'
+
+subplot 2 2 3:title '3d variant, z only':rotate 50 60:box
+plot xc yc z 'k':tape xc yc z 'zg':tape xc yc z 'zg#'
+@end verbatim
+
+@pfig{tape, Example of Tape()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Torus sample, , Tape sample, 1D samples
+@subsection Torus sample
+@nav{}
+
+Command @ref{torus} draw surface of the curve rotation. The sample code is:
+@verbatim
+call 'prepare1d'
+subplot 2 2 0:title 'Torus plot (default)':light on:rotate 50 60:box
+torus y1 y2
+
+subplot 2 2 1:title '"x" style':light on:rotate 50 60:box
+torus y1 y2 'x'
+
+subplot 2 2 2:title '"z" style':light on:rotate 50 60:box
+torus y1 y2 'z'
+
+subplot 2 2 3:title '"\#" style':light on:rotate 50 60:box
+torus y1 y2 '#'
+@end verbatim
+
+@pfig{torus, Example of Torus()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node 2D samples, 3D samples, 1D samples, Examples
+@section 2D samples
+@nav{}
+
+This section is devoted to visualization of 2D data arrays. 2D means the data which depend on 2 indexes (parameters) like matrix z(i,j)=z(x(i),y(j)), i=1...n, j=1...m or in parametric form @{x(i,j),y(i,j),z(i,j)@}. Most of samples will use the same data for plotting. So, I put its initialization in separate function
+@verbatim
+func 'prepare2d'
+new a 50 40 '0.6*sin(pi*(x+1))*sin(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+new b 50 40 '0.6*cos(pi*(x+1))*cos(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+return
+@end verbatim
+Basically, you can put this text after the script. Note, that you need to terminate main script by @ref{stop} command before defining a function.
+
+@menu
+* Surf sample::
+* SurfC sample::
+* SurfA sample::
+* Mesh sample::
+* Fall sample::
+* Belt sample::
+* Boxs sample::
+* Tile sample::
+* TileS sample::
+* Dens sample::
+* Cont sample::
+* ContF sample::
+* ContD sample::
+* ContV sample::
+* Axial sample::
+* Grad sample::
+@end menu
+
+@c ------------------------------------------------------------------
+@external{}
+@node Surf sample, SurfC sample, , 2D samples
+@subsection Surf sample
+@nav{}
+
+Command @ref{surf} is most standard way to visualize 2D data array. @code{Surf} use color scheme for coloring (see @ref{Color scheme}). You can use @samp{#} style for drawing black meshes on the surface. The sample code is:
+@verbatim
+call 'prepare2d'
+subplot 2 2 0:title 'Surf plot (default)':rotate 50 60:light on:box:surf a
+
+subplot 2 2 1:title '"\#" style; meshnum 10':rotate 50 60:box
+surf a '#'; meshnum 10
+
+subplot 2 2 2:title '"." style':rotate 50 60:box
+surf a '.'
+
+new x 50 40 '0.8*sin(pi*x)*sin(pi*(y+1)/2)'
+new y 50 40 '0.8*cos(pi*x)*sin(pi*(y+1)/2)'
+new z 50 40 '0.8*cos(pi*(y+1)/2)'
+subplot 2 2 3:title 'parametric form':rotate 50 60:box
+surf x y z 'BbwrR'
+@end verbatim
+
+@pfig{surf, Example of Surf()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node SurfC sample, SurfA sample, Surf sample, 2D samples
+@subsection SurfC sample
+@nav{}
+
+Command @ref{surfc} is similar to @ref{surf} but its coloring is determined by another data. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'SurfC plot':rotate 50 60:light on:box
+surfc a b
+@end verbatim
+
+@pfig{surfc, Example of SurfC()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node SurfA sample, Mesh sample, SurfC sample, 2D samples
+@subsection SurfA sample
+@nav{}
+
+Command @ref{surfa} is similar to @ref{surf} but its transparency is determined by another data. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'SurfC plot':rotate 50 60:light on:alpha on:box
+surfa a b
+@end verbatim
+
+@pfig{surfa, Example of SurfA()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Mesh sample, Fall sample, SurfA sample, 2D samples
+@subsection Mesh sample
+@nav{}
+
+Command @ref{mesh} draw wired surface. You can use @ref{meshnum} for changing number of lines to be drawn. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'Mesh plot':rotate 50 60:box
+mesh a
+@end verbatim
+
+@pfig{mesh, Example of Mesh()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Fall sample, Belt sample, Mesh sample, 2D samples
+@subsection Fall sample
+@nav{}
+
+Command @ref{fall} draw waterfall surface. You can use @ref{meshnum} for changing number of lines to be drawn. Also you can use @samp{x} style for drawing lines in other direction. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'Fall plot':rotate 50 60:box
+fall a
+@end verbatim
+
+@pfig{fall, Example of Fall()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Belt sample, Boxs sample, Fall sample, 2D samples
+@subsection Belt sample
+@nav{}
+
+Command @ref{belt} draw surface by belts. You can use @samp{x} style for drawing lines in other direction. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'Belt plot':rotate 50 60:box
+belt a
+@end verbatim
+
+@pfig{belt, Example of Belt()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Boxs sample, Tile sample, Fall sample, 2D samples
+@subsection Boxs sample
+@nav{}
+
+Command @ref{boxs} draw surface by boxes. You can use @samp{#} for drawing wire plot. The sample code is:
+@verbatim
+call 'prepare2d'
+origin 0 0 0
+subplot 2 2 0:title 'Boxs plot (default)':rotate 40 60:light on:box
+boxs a
+
+subplot 2 2 1:title '"\@" style':rotate 50 60:box
+boxs a '@'
+
+subplot 2 2 2:title '"\#" style':rotate 50 60:box
+boxs a '#'
+
+subplot 2 2 3:title 'compare with Tile':rotate 50 60:box
+tile a
+@end verbatim
+
+@pfig{boxs, Example of Boxs()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Tile sample, TileS sample, Boxs sample, 2D samples
+@subsection Tile sample
+@nav{}
+
+Command @ref{tile} draw surface by tiles. The sample code is:
+@verbatim
+call 'prepare2d'
+subplot 1 1 0 '':title 'Tiles plot':box
+tile a
+@end verbatim
+
+@pfig{tile, Example of Tile()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node TileS sample, Dens sample, Tile sample, 2D samples
+@subsection TileS sample
+@nav{}
+
+Command @ref{tiles} is similar to @ref{tile} but tile sizes is determined by another data. This allows one to simulate transparency of the plot. The sample code is:
+@verbatim
+call 'prepare2d'
+subplot 1 1 0 '':title 'Tiles plot':box
+tiles a b
+@end verbatim
+
+@pfig{tiles, Example of TileS()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Dens sample, Cont sample, TileS sample, 2D samples
+@subsection Dens sample
+@nav{}
+
+Command @ref{dens} draw density plot for surface. The sample code is:
+@verbatim
+call 'prepare2d'
+subplot 2 2 0 '':title 'Dens plot (default)':box
+dens a
+
+subplot 2 2 1:title '3d variant':rotate 50 60:box
+dens a
+
+subplot 2 2 2 '':title '"\#" style; meshnum 10':box
+dens a '#'; meshnum 10
+
+new a1 30 40 3 '0.6*sin(2*pi*x+pi*(z+1)/2)*sin(3*pi*y+pi*z) +\
+ 0.4*cos(3*pi*(x*y)+pi*(z+1)^2/2)'
+subplot 2 2 3:title 'several slices':rotate 50 60:box
+dens a1
+@end verbatim
+
+@pfig{dens, Example of Dens()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Cont sample, ContF sample, Dens sample, 2D samples
+@subsection Cont sample
+@nav{}
+
+Command @ref{cont} draw contour lines for surface. You can select automatic (default) or manual levels for contours, print contour labels, draw it on the surface (default) or at plane (as @code{Dens}). The sample code is:
+@verbatim
+call 'prepare2d'
+list v -0.5 -0.15 0 0.15 0.5
+subplot 2 2 0:title 'Cont plot (default)':rotate 50 60:box
+cont a
+
+subplot 2 2 1:title 'manual levels':rotate 50 60:box
+cont v a
+
+subplot 2 2 2:title '"\_" style':rotate 50 60:box
+cont a '_'
+
+subplot 2 2 3 '':title '"t" style':box
+cont a 't'
+@end verbatim
+
+@pfig{cont, Example of Cont()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node ContF sample, ContD sample, Cont sample, 2D samples
+@subsection ContF sample
+@nav{}
+
+Command @ref{contf} draw filled contours.  You can select automatic (default) or manual levels for contours. The sample code is:
+@verbatim
+call 'prepare2d'
+list v -0.5 -0.15 0 0.15 0.5
+subplot 2 2 0:title 'ContF plot (default)':rotate 50 60:box
+contf a
+
+subplot 2 2 1:title 'manual levels':rotate 50 60:box
+contf v a
+
+subplot 2 2 2:title '"\_" style':rotate 50 60:box
+contf a '_'
+
+new a1 30 40 3 '0.6*sin(2*pi*x+pi*(z+1)/2)*sin(3*pi*y+pi*z) +\
+ 0.4*cos(3*pi*(x*y)+pi*(z+1)^2/2)'
+subplot 2 2 3:title 'several slices':rotate 50 60:box
+contf a1
+@end verbatim
+
+@pfig{contf, Example of ContF()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node ContD sample, ContV sample, ContF sample, 2D samples
+@subsection ContD sample
+@nav{}
+
+Command @ref{contd} is similar to @code{ContF} but with manual contour colors. The sample code is:
+@verbatim
+call 'prepare2d'
+list v -0.5 -0.15 0 0.15 0.5
+subplot 2 2 0:title 'ContD plot (default)':rotate 50 60:box
+contd a
+
+subplot 2 2 1:title 'manual levels':rotate 50 60:box
+contd v a
+
+subplot 2 2 2:title '"\_" style':rotate 50 60:box
+contd a '_'
+
+new a1 30 40 3 '0.6*sin(2*pi*x+pi*(z+1)/2)*sin(3*pi*y+pi*z) +\
+ 0.4*cos(3*pi*(x*y)+pi*(z+1)^2/2)'
+subplot 2 2 3:title 'several slices':rotate 50 60:box
+contd a1
+@end verbatim
+
+@pfig{contd, Example of ContD()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node ContV sample, Axial sample, ContD sample, 2D samples
+@subsection ContV sample
+@nav{}
+
+Command @ref{contv} draw vertical cylinders (belts) at contour lines. The sample code is:
+@verbatim
+call 'prepare2d'
+list v -0.5 -0.15 0 0.15 0.5
+subplot 2 2 0:title 'ContV plot (default)':rotate 50 60:box
+contv a
+
+subplot 2 2 1:title 'manual levels':rotate 50 60:box
+contv v a
+
+subplot 2 2 2:title '"\_" style':rotate 50 60:box
+contv a '_'
+
+subplot 2 2 3:title 'ContV and ContF':rotate 50 60:light on:box
+contv a:contf a:cont a 'k'
+@end verbatim
+
+@pfig{contv, Example of ContV()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Axial sample, Grad sample, ContV sample, 2D samples
+@subsection Axial sample
+@nav{}
+
+Command @ref{axial} draw surfaces of rotation for contour lines. You can draw wire surfaces (@samp{#} style) or ones rotated in other directions (@samp{x}, @samp{z} styles). The sample code is:
+@verbatim
+light on:alpha on:call 'prepare2d'
+subplot 2 2 0:title 'Axial plot (default)':rotate 50 60:box
+axial a
+
+subplot 2 2 1:title '"x" style;\".\" style':light on:rotate 50 60:box
+axial a 'x.'
+
+subplot 2 2 2:title '"z" style':light on:rotate 50 60:box
+axial a 'z'
+
+subplot 2 2 3:title '"\#" style':light on:rotate 50 60:box
+axial a '#'
+@end verbatim
+
+@pfig{axial, Example of Axial()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Grad sample, , Axial sample, 2D samples
+@subsection Grad sample
+@nav{}
+
+Command @ref{grad} draw gradient lines for matrix. The sample code is:
+@verbatim
+call 'prepare2d'
+subplot 1 1 0 '':title 'Grad plot':box
+grad a:dens a '{u8}w{q8}'
+@end verbatim
+
+@pfig{grad, Example of Grad()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node 3D samples, Vector field samples, 2D samples, Examples
+@section 3D samples
+@nav{}
+
+This section is devoted to visualization of 3D data arrays. 3D means the data which depend on 3 indexes (parameters) like tensor a(i,j,k)=a(x(i),y(j),x(k)), i=1...n, j=1...m, k=1...l or in parametric form @{x(i,j,k),y(i,j,k),z(i,j,k),a(i,j,k)@}. Most of samples will use the same data for plotting. So, I put its initialization in separate function
+@verbatim
+func 'prepare3d'
+new c 61 50 40 '-2*(x^2+y^2+z^4-z^2)+0.2'
+new d 61 50 40 '1-2*tanh((x+y)*(x+y))'
+return
+@end verbatim
+Basically, you can put this text after the script. Note, that you need to terminate main script by @ref{stop} command before defining a function.
+
+@menu
+* Surf3 sample::
+* Surf3C sample::
+* Surf3A sample::
+* Cloud sample::
+* Dens3 sample::
+* Cont3 sample::
+* ContF3 sample::
+* Dens projection sample::
+* Cont projection sample::
+* ContF projection sample::
+* TriPlot and QuadPlot::
+* Dots sample::
+@end menu
+
+@c ------------------------------------------------------------------
+@external{}
+@node Surf3 sample, Surf3C sample, , 3D samples
+@subsection Surf3 sample
+@nav{}
+
+Command @ref{surf3} is one of most suitable (for my opinion) functions to visualize 3D data. It draw the isosurface(s) -- surface(s) of constant amplitude (3D analogue of contour lines). You can draw wired isosurfaces if specify @samp{#} style. The sample code is:
+@verbatim
+call 'prepare3d'
+light on:alpha on
+subplot 2 2 1:title 'Surf3 plot':rotate 50 60:box
+surf3 c
+
+subplot 2 2 1:title '"\#" style':rotate 50 60:box
+surf3 c '#'
+
+subplot 2 2 2:title '"." style':rotate 50 60:box
+surf3 c '.'
+@end verbatim
+
+@pfig{surf3, Example of Surf3()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Surf3C sample, Surf3A sample, Surf3 sample, 3D samples
+@subsection Surf3C sample
+@nav{}
+
+Command @ref{surf3c} is similar to @ref{surf3} but its coloring is determined by another data. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Surf3 plot':rotate 50 60:light on:alpha on:box
+surf3c c d
+@end verbatim
+
+@pfig{surf3c, Example of Surf3C()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Surf3A sample, Cloud sample, Surf3C sample, 3D samples
+@subsection Surf3A sample
+@nav{}
+
+Command @ref{surf3a} is similar to @ref{surf3} but its transparency is determined by another data. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Surf3 plot':rotate 50 60:light on:alpha on:box
+surf3a c d
+@end verbatim
+
+@pfig{surf3a, Example of Surf3A()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Cloud sample, Dens3 sample, Surf3A sample, 3D samples
+@subsection Cloud sample
+@nav{}
+
+Command @ref{cloud} draw cloud-like object which is less transparent for higher data values. Similar plot can be created using many (about 10-20) @code{Surf3A(a,a)} isosurfaces. The sample code is:
+@verbatim
+call 'prepare3d'
+subplot 2 2 0:title 'Cloud plot':rotate 50 60:alpha on:box
+cloud c 'wyrRk'
+
+subplot 2 2 1:title '"i" style':rotate 50 60:box
+cloud c 'iwyrRk'
+
+subplot 2 2 2:title '"." style':rotate 50 60:box
+cloud c '.wyrRk'
+
+subplot 2 2 3:title 'meshnum 10':rotate 50 60:box
+cloud c 'wyrRk'; meshnum 10
+@end verbatim
+
+@pfig{cloud, Example of Cloud()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Dens3 sample, Cont3 sample, Cloud sample, 3D samples
+@subsection Dens3 sample
+@nav{}
+
+Command @ref{dens3} draw just usual density plot but at slices of 3D data. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Dens3 sample':rotate 50 60:alpha on:alphadef 0.7
+origin 0 0 0:box:axis '_xyz'
+dens3 c 'x':dens3 c ':y':dens3 c 'z'
+@end verbatim
+
+@pfig{densa, Example of Dens3()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Cont3 sample, ContF3 sample, Dens3 sample, 3D samples
+@subsection Cont3 sample
+@nav{}
+
+Command @ref{cont3} draw just usual contour lines but at slices of 3D data. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Cont3 sample':rotate 50 60:box
+cont3 c 'x':cont3 c:cont3 c 'z'
+@end verbatim
+
+@pfig{conta, Example of Cont3()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node ContF3 sample, Dens projection sample, Cont3 sample, 3D samples
+@subsection ContF3 sample
+@nav{}
+
+Command @ref{contf3} draw just usual filled contours but at slices of 3D data. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Cont3 sample':rotate 50 60:box:light on
+contf3 c 'x':contf3 c:contf3 c 'z'
+cont3 c 'xk':cont3 c 'k':cont3 c 'zk'
+@end verbatim
+
+@pfig{contfa, Example of ContF3()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Dens projection sample, Cont projection sample, ContF3 sample, 3D samples
+@subsection Dens projection sample
+@nav{}
+
+Functions @ref{densz}, @ref{densy}, @ref{densx} draw density plot on plane perpendicular to corresponding axis. One of possible application is drawing projections of 3D field. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Dens[XYZ] sample':rotate 50 60:box
+densx {sum c 'x'} '' -1
+densy {sum c 'y'} '' 1
+densz {sum c 'z'} '' -1
+@end verbatim
+
+@pfig{dens_xyz, Example of DensX() DensY() DensZ()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Cont projection sample, ContF projection sample, Dens projection sample, 3D samples
+@subsection Cont projection sample
+@nav{}
+
+Functions @ref{contz}, @ref{conty}, @ref{contx} draw contour lines on plane perpendicular to corresponding axis. One of possible application is drawing projections of 3D field. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'Cont[XYZ] sample':rotate 50 60:box
+contx {sum c 'x'} '' -1
+conty {sum c 'y'} '' 1
+contz {sum c 'z'} '' -1
+@end verbatim
+
+@pfig{cont_xyz, Example of ContX() ContY() ContZ()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node ContF projection sample, TriPlot and QuadPlot, Cont projection sample, 3D samples
+@subsection ContF projection sample
+@nav{}
+
+Functions @ref{contfz}, @ref{contfy}, @ref{contfx} draw filled contours on plane perpendicular to corresponding axis. One of possible application is drawing projections of 3D field. The sample code is:
+@verbatim
+call 'prepare3d'
+title 'ContF[XYZ] sample':rotate 50 60:box
+contfx {sum c 'x'} '' -1
+contfy {sum c 'y'} '' 1
+contfz {sum c 'z'} '' -1
+@end verbatim
+
+@pfig{contf_xyz, Example of ContFX() ContFY() ContFZ()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node TriPlot and QuadPlot, Axial sample, ContF projection sample, 3D samples
+@subsection TriPlot and QuadPlot
+@nav{}
+
+Command @ref{triplot} and @ref{quadplot} draw set of triangles (or quadrangles for @code{QuadPlot}) for irregular data arrays. Note, that you have to provide not only vertexes, but also the indexes of triangles or quadrangles. I.e. perform triangulation by some other library. The sample code is:
+@verbatim
+list q 0 1 2 3 | 4 5 6 7 | 0 2 4 6 | 1 3 5 7 | 0 4 1 5 | 2 6 3 7
+list xq -1 1 -1 1 -1 1 -1 1
+list yq -1 -1 1 1 -1 -1 1 1
+list zq -1 -1 -1 -1 1 1 1 1
+light on
+subplot 2 2 0:title 'QuadPlot sample':rotate 50 60
+quadplot q xq yq zq 'yr'
+quadplot q xq yq zq '#k'
+
+subplot 2 2 2:title 'QuadPlot coloring':rotate 50 60
+quadplot q xq yq zq yq 'yr'
+quadplot q xq yq zq '#k'
+
+list t 0 1 2 | 0 1 3 | 0 2 3 | 1 2 3
+list xt -1 1 0 0
+list yt -1 -1 1 0
+list zt -1 -1 -1 1
+subplot 2 2 1:title 'TriPlot sample':rotate 50 60
+triplot t xt yt zt 'b'
+triplot t xt yt zt '#k'
+
+subplot 2 2 3:title 'TriPlot coloring':rotate 50 60
+triplot t xt yt zt yt 'cb'
+triplot t xt yt zt '#k'
+tricont t xt yt zt 'B'
+@end verbatim
+
+@pfig{triplot, Example of TriPlot() and QuadPlot()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Dots sample, , TriPlot and QuadPlot, 3D samples
+@subsection Dots sample
+@nav{}
+
+Command @ref{dots} is another way to draw irregular points. @code{Dots} use color scheme for coloring (see @ref{Color scheme}). The sample code is:
+@verbatim
+new t 1000 'pi*(rnd-0.5)':new f 1000 '2*pi*rnd'
+copy x 0.9*cos(t)*cos(f)
+copy y 0.9*cos(t)*sin(f)
+copy z 0.6*sin(t)
+title 'Dots sample':rotate 50 60:box
+dots x y z
+@end verbatim
+
+@pfig{dots, Example of Dots()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Vector field samples, Hints, 3D samples, Examples
+@section Vector field samples
+@nav{}
+
+Vector field visualization (especially in 3d case) is more or less complex task. MathGL provides 3 general types of plots: vector field itself (@code{Vect}), flow threads (@code{Flow}), and flow pipes with radius proportional to field amplitude (@code{Pipe}).
+
+However, the plot may look tangly -- there are too many overlapping lines. I may suggest 2 ways to solve this problem. The first one is to change @code{SetMeshNum} for decreasing the number of hachures. The second way is to use the flow thread chart @code{Flow}, or possible many flow thread from manual position (@code{FlowP}). Unfortunately, I don't know any other methods to visualize 3d vector field. If you know any, e-mail me and I shall add it to MathGL.
+
+Most of samples will use the same data for plotting. So, I put its initialization in separate function
+@verbatim
+func 'prepare2v'
+new a 20 30 '0.6*sin(pi*(x+1))*sin(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+new b 20 30 '0.6*cos(pi*(x+1))*cos(1.5*pi*(y+1))+0.4*cos(0.75*pi*(x+1)*(y+1))'
+return
+
+func 'prepare3v'
+define $1 pow(x*x+y*y+(z-0.3)*(z-0.3)+0.03,1.5)
+define $2 pow(x*x+y*y+(z+0.3)*(z+0.3)+0.03,1.5)
+new ex 10 10 10 '0.2*x/$1-0.2*x/$2'
+new ey 10 10 10 '0.2*y/$1-0.2*y/$2'
+new ez 10 10 10 '0.2*(z-0.3)/$1-0.2*(z+0.3)/$2'
+return
+@end verbatim
+Basically, you can put this text after the script. Note, that you need to terminate main script by @ref{stop} command before defining a function.
+
+@menu
+* Vect sample::
+* Vect3 sample::
+* Traj sample::
+* Flow sample::
+* Pipe sample::
+* Dew sample::
+@end menu
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Vect sample, Vect3 sample, , Vector field samples
+@subsection Vect sample
+@nav{}
+
+Command @ref{vect} is most standard way to visualize vector fields -- it draw a lot of arrows or hachures for each data cell. It have a lot of options which can be seen on the figure (and in the sample code). @code{Vect} use color scheme for coloring (see @ref{Color scheme}). The sample code is:
+@verbatim
+call 'prepare2v'
+subplot 3 2 0 '':title 'Vect plot (default)':box
+vect a b
+
+subplot 3 2 1 '':title '"." style; "=" style':box
+vect a b '.='
+
+subplot 3 2 2 '':title '"f" style':box
+vect a b 'f'
+
+subplot 3 2 3 '':title '">" style':box
+vect a b '>'
+
+subplot 3 2 4 '':title '"<" style':box
+vect a b '<'
+
+call 'prepare3v'
+subplot 3 2 5:title '3d variant':rotate 50 60:box
+vect ex ey ez
+@end verbatim
+
+@pfig{vect, Example of Vect()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Vect3 sample, Traj sample, Vect sample, Vector field samples
+@subsection Vect3 sample
+@nav{}
+
+Command @ref{vect3} draw just usual vector field plot but at slices of 3D data. The sample code is:
+@verbatim
+origin 0 0 0:call 'prepare3v'
+subplot 2 1 0:title 'Vect3 sample':rotate 50 60
+box:axis '_xyz'
+vect3 ex ey ez 'x':vect3 ex ey ez:vect3 ex ey ez 'z'
+
+subplot 2 1 1:title '"f" style':rotate 50 60
+box:axis '_xyz'
+vect3 ex ey ez 'fx':vect3 ex ey ez 'f':vect3 ex ey ez 'fz'
+grid3 ex 'Wx':grid3 ex 'W':grid3 ex 'Wz'
+@end verbatim
+
+@pfig{vecta, Example of Vect3()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Traj sample, Flow sample, Vect3 sample, Vector field samples
+@subsection Traj sample
+@nav{}
+
+Command @ref{traj} is 1D analogue of @code{Vect}. It draw vectors from specified points. The sample code is:
+@verbatim
+call 'prepare1d'
+subplot 1 1 0 '':title 'Traj plot':box
+plot x1 y:traj x1 y y1 y2
+@end verbatim
+
+@pfig{traj, Example of Traj()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Flow sample, Pipe sample, Traj sample, Vector field samples
+@subsection Flow sample
+@nav{}
+
+Command @ref{flow} is another standard way to visualize vector fields -- it draw lines (threads) which is tangent to local vector field direction. MathGL draw threads from edges of bounding box and from central slices. Sometimes it is not most appropriate variant -- you may want to use @code{FlowP} to specify manual position of threads. @code{Flow} use color scheme for coloring (see @ref{Color scheme}). At this warm color corresponds to normal flow (like attractor), cold one corresponds to inverse flow (like source). The sample code is:
+@verbatim
+call 'prepare2v'
+subplot 2 2 0 '':title 'Flow plot (default)':box
+flow a b
+
+subplot 2 2 1 '':title '"v" style':box
+flow a b 'v'
+
+subplot 2 2 2 '':title 'from edges only':box
+flow a b '#'
+
+call 'prepare3v'
+subplot 2 2 3:title '3d variant':rotate 50 60:box
+flow ex ey ez
+@end verbatim
+
+@pfig{flow, Example of Flow()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Pipe sample, Dew sample, Flow sample, Vector field samples
+@subsection Pipe sample
+@nav{}
+
+Command @ref{pipe} is similar to @ref{flow} but draw pipes (tubes) which radius is proportional to the amplitude of vector field. @code{Pipe} use color scheme for coloring (see @ref{Color scheme}). At this warm color corresponds to normal flow (like attractor), cold one corresponds to inverse flow (like source). The sample code is:
+@verbatim
+call 'prepare2v'
+subplot 2 2 0 '':title 'Pipe plot (default)':light on:box
+pipe a b
+
+subplot 2 2 1 '':title '"i" style':box
+pipe a b 'i'
+
+subplot 2 2 2 '':title 'from edges only':box
+pipe a b '#'
+
+call 'prepare3v'
+subplot 2 2 3:title '3d variant':rotate 50 60:box
+pipe ex ey ez '' 0.1
+@end verbatim
+
+@pfig{pipe, Example of Pipe()}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Dew sample, , Pipe sample, Vector field samples
+@subsection Dew sample
+@nav{}
+
+Command @ref{dew} is similar to @code{Vect} but use drops instead of arrows. The sample code is:
+@verbatim
+call 'prepare2v'
+subplot 1 1 0 '':title 'Dew plot':light on:box
+dew a b
+@end verbatim
+
+@pfig{dew, Example of Dew()}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Hints, FAQ, Vector field samples, Examples
+@section Hints
+@nav{}
+
+In this section I've included some small hints and advices for the improving of the quality of plots and for the demonstration of some non-trivial features of MathGL library. In contrast to previous examples I showed mostly the idea but not the whole drawing function.
+
+@menu
+* ``Compound'' graphics::
+* Transparency and lighting::
+* Types of transparency::
+* Axis projection::
+* Adding fog::
+* Lighting sample::
+* Using primitives::
+* STFA sample::
+* Mapping visualization::
+* Making regular data::
+* Making histogram::
+* Nonlinear fitting hints::
+* PDE solving hints::
+* MGL parser using::
+* Using options::
+* ``Templates''::
+* Stereo image::
+* Reduce memory usage::
+@end menu
+
+@c ------------------------------------------------------------------
+@external{}
+@node ``Compound'' graphics, Transparency and lighting, , Hints
+@subsection ``Compound'' graphics
+@nav{}
+
+As I noted above, MathGL functions (except the special one, like Clf()) do  not erase the previous plotting but just add the new one. It allows one to draw ``compound'' plots easily. For example, popular Matlab command @code{surfc} can be emulated in MathGL by 2 calls:
+@verbatim
+  Surf(a);
+  Cont(a, "_");     // draw contours at bottom
+@end verbatim
+Here @var{a} is 2-dimensional data for the plotting, @code{-1} is the value of z-coordinate at which the contour should be plotted (at the bottom in this example). Analogously, one can draw density plot instead of contour lines and so on.
+
+Another nice plot is contour lines plotted directly on the surface:
+@verbatim
+  Light(true);       // switch on light for the surface
+  Surf(a, "BbcyrR"); // select 'jet' colormap for the surface
+  Cont(a, "y");      // and yellow color for contours
+@end verbatim
+The possible difficulties arise in black&white case, when the color of the surface can be close to the color of a contour line. In that case I may suggest the following code:
+@verbatim
+  Light(true);   // switch on light for the surface
+  Surf(a, "kw"); // select 'gray' colormap for the surface
+  CAxis(-1,0);   // first draw for darker surface colors
+  Cont(a, "w");  // white contours
+  CAxis(0,1);    // now draw for brighter surface colors
+  Cont(a, "k");  // black contours
+  CAxis(-1,1);   // return color range to original state
+@end verbatim
+The idea is to divide the color range on 2 parts (dark and bright) and to select the contrasting color for contour lines for each of part.
+
+Similarly, one can plot flow thread over density plot of vector field amplitude (this is another amusing plot from Matlab) and so on. The list of compound graphics can be prolonged but I hope that the general idea is clear.
+
+Just for illustration I put here following sample code:
+@verbatim
+call 'prepare2v'
+call 'prepare3d'
+new v 10:fill v -0.5 1:copy d sqrt(a^2+b^2)
+subplot 2 2 0:title 'Surf + Cont':rotate 50 60:light on:box
+surf a:cont a 'y'
+
+subplot 2 2 1 '':title 'Flow + Dens':light off:box
+flow a b 'br':dens d
+
+subplot 2 2 2:title 'Mesh + Cont':rotate 50 60:box
+mesh a:cont a '_'
+
+subplot 2 2 3:title 'Surf3 + ContF3':rotate 50 60:light on
+box:contf3 v c 'z' 0:contf3 v c 'x':contf3 v c
+cut 0 -1 -1 1 0 1.1
+contf3 v c 'z' c.nz-1:surf3 c -0.5
+@end verbatim
+
+@pfig{combined, Example of ``combined'' plots}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Transparency and lighting, Types of transparency, ``Compound'' graphics, Hints
+@subsection Transparency and lighting
+@nav{}
+
+Here I want to show how transparency and lighting both and separately change the look of a surface. So, there is code and picture for that:
+@verbatim
+call 'prepare2d'
+subplot 2 2 0:title 'default':rotate 50 60:box
+surf a
+
+subplot 2 2 1:title 'light on':rotate 50 60:box
+light on:surf a
+
+subplot 2 2 3:title 'light on; alpha on':rotate 50 60:box
+alpha on:surf a
+
+subplot 2 2 2:title 'alpha on':rotate 50 60:box
+light off:surf a
+@end verbatim
+
+@pfig{alpha, Example of transparency and lightings}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Types of transparency, Axis projection, Transparency and lighting, Hints
+@subsection Types of transparency
+@nav{}
+
+MathGL library has advanced features for setting and handling the surface transparency. The simplest way to add transparency is the using of command @ref{alpha}. As a result, all further surfaces (and isosurfaces, density plots and so on) become transparent. However, their  look can be additionally improved.
+
+The value of transparency can be different from surface to surface. To do it just use @code{SetAlphaDef} before the drawing of the surface, or use option @code{alpha} (see @ref{Command options}). If its value is close to 0 then the surface becomes more and more transparent. Contrary, if its value is close to 1 then the surface becomes practically non-transparent.
+
+Also you can change the way how the light goes through overlapped surfaces. The function @code{SetTranspType} defines it. By default the usual transparency is used (@samp{0}) -- surfaces below is less visible than the upper ones. A ``glass-like'' transparency (@samp{1}) has a different look -- each surface just decreases the background light (the surfaces are commutable in this case).
+
+A ``neon-like'' transparency (@samp{2}) has more interesting look. In this case a surface is the light source (like a lamp on the dark background) and just adds some intensity to the color. At this, the library sets automatically the black color for the background and changes the default line color to white.
+
+As example I shall show several plots for different types of transparency. The code is the same except the values of @code{SetTranspType} function:
+@verbatim
+call 'prepare2d'
+alpha on:light on
+transptype 0:clf
+subplot 2 2 0:rotate 50 60:surf a:box
+subplot 2 2 1:rotate 50 60:dens a:box
+subplot 2 2 2:rotate 50 60:cont a:box
+subplot 2 2 3:rotate 50 60:axial a:box
+@end verbatim
+
+@pfig{type0, Example of @code{SetTranspType(0)}.}
+@pfig{type1, Example of @code{SetTranspType(1)}.}
+@pfig{type2, Example of @code{SetTranspType(2)}.}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Axis projection, Adding fog, Ternary axis, Hints
+@subsection Axis projection
+@nav{}
+
+You can easily make 3D plot and draw its x-,y-,z-projections (like in CAD) by using @ref{ternary} function with arguments: 4 for Cartesian, 5 for Ternary and 6 for Quaternary coordinates. The sample code is:
+@verbatim
+ranges 0 1 0 1 0 1
+new x 50 '0.25*(1+cos(2*pi*x))'
+new y 50 '0.25*(1+sin(2*pi*x))'
+new z 50 'x'
+new a 20 30 '30*x*y*(1-x-y)^2*(x+y<1)'
+new rx 10 'rnd':new ry 10:fill ry '(1-v)*rnd' rx
+light on
+
+title 'Projection sample':ternary 4:rotate 50 60
+box:axis:grid
+plot x y z 'r2':surf a '#'
+xlabel 'X':ylabel 'Y':zlabel 'Z'
+@end verbatim
+
+@pfig{projection, Example of axis projections}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Adding fog, Lighting sample, Axis projection, Hints
+@subsection Adding fog
+@nav{}
+
+MathGL can add a fog to the image. Its switching on is rather simple -- just use @ref{fog} function. There is the only feature -- fog is applied for whole image. Not to particular subplot. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'Fog sample':rotate 50 60:light on
+fog 1
+box:surf a
+@end verbatim
+
+@pfig{fog, Example of @code{Fog()}.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Lighting sample, Using primitives, Adding fog, Hints
+@subsection Lighting sample
+@nav{}
+
+In contrast to the most of other programs, MathGL supports several (up to 10) light sources. Moreover, the color each of them can be different: white (this is usual), yellow, red, cyan, green and so on. The use of several light sources may be interesting for the highlighting of some peculiarities of the plot or just to make an amusing picture. Note, each light source can be switched on/off individually. The sample code is:
+@verbatim
+call 'prepare2d'
+title 'Several light sources':rotate 50 60:light on
+light 1 0 1 0 'c':light 2 1 0 0 'y':light 3 0 -1 0 'm'
+box:surf a 'h'
+@end verbatim
+
+@pfig{several_light, Example of several light sources.}
+
+Additionally, you can use local light sources and set to use diffise reflection instead of specular one (by default) or both kinds.
+@verbatim
+# use Quality=6 because need lighting in placed
+light on:quality 6
+call 'prepare2d'
+subplot 2 2 0:title 'Default':rotate 50 60:box:surf a
+line -1 -0.7 1.7 -1 -0.7 0.7 'BA'
+
+light 0 1 0 1 -2 -1 -1
+subplot 2 2 1:title 'Local':rotate 50 60:box:surf a
+line 1 0 1 -1 -1 0 'BAO'
+
+diffuse 0
+subplot 2 2 2:title 'no diffuse':rotate 50 60:box:surf a
+line 1 0 1 -1 -1 0 'BAO'
+
+diffuse 0.5:light 0 1 0 1 -2 -1 -1 'w' 0
+subplot 2 2 3:title 'diffusive only':rotate 50 60:box:surf a
+line 1 0 1 -1 -1 0 'BAO'
+@end verbatim
+
+@pfig{light, Example of different types of lighting.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Using primitives, STFA sample, Lighting sample, Hints
+@subsection Using primitives
+@nav{}
+
+MathGL provide a set of functions for drawing primitives (see @ref{Primitives}). Primitives are low level object, which used by most of plotting functions. Picture below demonstrate some of commonly used primitives.
+@verbatim
+subplot 2 2 0 '':title 'Line, Curve, Rhomb, Ellipse' '' -1.5
+line -1 -1 -0.5 1 'qAI'
+curve -0.6 -1 1 1 0 1 1 1 'rA'
+ball 0 -0.5 '*':ball 1 -0.1 '*'
+rhomb 0 0.4 1 0.9 0.2 'b#'
+rhomb 0 0 1 0.4 0.2 'cg@'
+ellipse 0 -0.5 1 -0.1 0.2 'u#'
+ellipse 0 -1 1 -0.6 0.2 'm@'
+
+light on
+subplot 2 2 1:title 'Face[xyz]':rotate 50 60:box
+facex 1 0 -1 1 1 'r':facey -1 -1 -1 1 1 'g':facez 1 -1 -1 -1 1 'b'
+face -1 -1 1 -1 1 1 1 -1 0 1 1 1 'bmgr'
+
+subplot 2 2 3 '':title 'Cone'
+cone -0.7 -0.3 0 -0.7 0.7 0.5 0.2 0.1 'b':text -0.7 -0.7 'no edges\n(default)'
+cone 0 -0.3 0 0 0.7 0.5 0.2 0.1 'g@':text 0 -0.7 'with edges\n('\@' style)'
+cone 0.7 -0.3 0 0.7 0.7 0.5 0.2 0.1 'ry':text 0.7 -0.7 '"arrow" with\n{}gradient'
+
+subplot 2 2 2 '':title 'Sphere and Drop'
+line -0.9 0 1 0.9 0 1
+text -0.9 -0.7 'sh=0':drop -0.9 0 0 1 0.5 'r' 0:ball -0.9 0 1 'k'
+text -0.3 -0.7 'sh=0.33':drop -0.3 0 0 1 0.5 'r' 0.33:ball -0.3 0 1 'k'
+text 0.3 -0.7 'sh=0.67':drop 0.3 0 0 1 0.5 'r' 0.67:ball 0.3 0 1 'k'
+text 0.9 -0.7 'sh=1':drop 0.9 0 0 1 0.5 'r' 1:ball 0.9 0 1 'k'
+@end verbatim
+
+@pfig{primitives, Primitives in MathGL.}
+
+Generally, you can create arbitrary new kind of plot using primitives. For example, MathGL don't provide any special functions for drawing molecules. However, you can do it using only one type of primitives @ref{drop}. The sample code is:
+@verbatim
+alpha on:light on
+subplot 2 2 0 '':title 'Methane, CH_4':rotate 60 120
+sphere 0 0 0 0.25 'k':drop 0 0 0 0 0 1 0.35 'h' 1 2:sphere 0 0 0.7 0.25 'g'
+drop 0 0 0 -0.94 0 -0.33 0.35 'h' 1 2:sphere -0.66 0 -0.23 0.25 'g'
+drop 0 0 0 0.47 0.82 -0.33 0.35 'h' 1 2:sphere 0.33 0.57 -0.23 0.25 'g'
+drop 0 0 0 0.47 -0.82 -0.33 0.35 'h' 1 2:sphere 0.33 -0.57 -0.23 0.25 'g'
+
+subplot 2 2 1 '':title 'Water, H{_2}O':rotate 60 100
+sphere 0 0 0 0.25 'r':drop 0 0 0 0.3 0.5 0 0.3 'm' 1 2:sphere 0.3 0.5 0 0.25 'g'
+drop 0 0 0 0.3 -0.5 0 0.3 'm' 1 2:sphere 0.3 -0.5 0 0.25 'g'
+
+subplot 2 2 2 '':title 'Oxygen, O_2':rotate 60 120
+drop 0 0.5 0 0 -0.3 0 0.3 'm' 1 2:sphere 0 0.5 0 0.25 'r'
+drop 0 -0.5 0 0 0.3 0 0.3 'm' 1 2:sphere 0 -0.5 0 0.25 'r'
+
+subplot 2 2 3 '':title 'Ammonia, NH_3':rotate 60 120
+sphere 0 0 0 0.25 'b':drop 0 0 0 0.33 0.57 0 0.32 'n' 1 2
+sphere 0.33 0.57 0 0.25 'g':drop 0 0 0 0.33 -0.57 0 0.32 'n' 1 2
+sphere 0.33 -0.57 0 0.25 'g':drop 0 0 0 -0.65 0 0 0.32 'n' 1 2
+sphere -0.65 0 0 0.25 'g'
+@end verbatim
+
+@pfig{molecule, Example of molecules drawing.}
+
+Moreover, some of special plots can be more easily produced by primitives rather than by specialized function. For example, Venn diagram can be produced by @code{Error} plot:
+@verbatim
+list x -0.3 0 0.3:list y 0.3 -0.3 0.3:list e 0.7 0.7 0.7
+title 'Venn-like diagram':alpha on
+error x y e e '!rgb@#o'
+@end verbatim
+You see that you have to specify and fill 3 data arrays. The same picture can be produced by just 3 calls of @ref{circle} function:
+@verbatim
+title 'Venn-like diagram':alpha on
+circle -0.3 0.3 0.7 'rr@'
+circle 0 -0.3 0.7 'gg@'
+circle 0.3 0.3 0.7 'bb@'
+@end verbatim
+Of course, the first variant is more suitable if you need to plot a lot of circles. But for few ones the usage of primitives looks easy.
+
+@pfig{venn, Example of Venn diagram.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node STFA sample, Mapping visualization, Using primitives, Hints
+@subsection STFA sample
+@nav{}
+
+Short-time Fourier Analysis (@ref{stfa}) is one of informative method for analyzing long rapidly oscillating 1D data arrays. It is used to determine the sinusoidal frequency and phase content of local sections of a signal as it changes over time.
+
+MathGL can find and draw STFA result. Just to show this feature I give following sample. Initial data arrays is 1D arrays with step-like frequency. Exactly this you can see at bottom on the STFA plot. The sample code is:
+@verbatim
+new a 2000:new b 2000
+fill a 'cos(50*pi*x)*(x<-.5)+cos(100*pi*x)*(x<0)*(x>-.5)+\
+cos(200*pi*x)*(x<.5)*(x>0)+cos(400*pi*x)*(x>.5)'
+
+subplot 1 2 0 '<_':title 'Initial signal'
+plot a:axis:xlabel '\i t'
+
+subplot 1 2 1 '<_':title 'STFA plot'
+stfa a b 64:axis:ylabel '\omega' 0:xlabel '\i t'
+@end verbatim
+
+@pfig{stfa, Example of STFA().}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Mapping visualization, Making regular data, STFA sample, Hints
+@subsection Mapping visualization
+@nav{}
+
+Sometime ago I worked with mapping and have a question about its visualization. Let me remember you that mapping is some transformation rule for one set of number to another one. The 1d mapping is just an ordinary function -- it takes a number and transforms it to another one. The 2d mapping (which I used) is a pair of functions which take 2 numbers and transform them to another 2 ones. Except general plots (like @ref{surfc}, @ref{surfa}) there is a special plot -- Arnold diagram. It shows the area which is the result of mapping of some initial area (usually square).
+
+I tried to make such plot in @ref{map}. It shows the set of points or set of faces, which final position is the result of mapping. At this, the color gives information about their initial position and the height describes Jacobian value of the transformation. Unfortunately, it looks good only for the simplest mapping but for the  real multivalent quasi-chaotic mapping it produces a confusion. So, use it if you like :).
+
+The sample code for mapping visualization is:
+@verbatim
+new a 50 40 'x':new b 50 40 'y':zrange -2 2:text 0 0 '\to'
+subplot 2 1 0:text 0 1.1 '\{x, y\}' '' -2:box
+map a b 'brgk'
+
+subplot 2 1 1:box
+text 0 1.1 '\{\frac{x^3+y^3}{2}, \frac{x-y}{2}\}' '' -2
+fill a '(x^3+y^3)/2':fill b '(x-y)/2':map a b 'brgk'
+@end verbatim
+
+@pfig{map, Example of Map().}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Making regular data, Making histogram, Mapping visualization, Hints
+@subsection Making regular data
+@nav{}
+
+Sometimes, one have only unregular data, like as data on triangular grids, or experimental results and so on. Such kind of data cannot be used as simple as regular data (like matrices). Only few functions, like @ref{dots}, can handle unregular data as is.
+
+However, one can use built in triangulation functions for interpolating unregular data points to a regular data grids. There are 2 ways. First way, one can use @ref{triangulation} function to obtain list of vertexes for triangles. Later this list can be used in functions like @ref{triplot} or @ref{tricont}. Second way consist in usage of @ref{datagrid} function, which fill regular data grid by interpolated values, assuming that coordinates of the data grid is equidistantly distributed in axis range. Note, you can use options (see @ref{Command options}) to change default axis range as well as in other plotting functions.
+@verbatim
+new x 100 '2*rnd-1':new y 100 '2*rnd-1':copy z x^2-y^2
+# first way - plot triangular surface for points
+triangulate d x y
+title 'Triangulation'
+rotate 50 60:box:light on
+triplot d x y z:triplot d x y z '#k'
+# second way - make regular data and plot it
+new g 30 30:datagrid g x y z:mesh g 'm'
+@end verbatim
+
+@pfig{triangulation, Example of triangulation.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Making histogram, Nonlinear fitting hints, Making regular data, Hints
+@subsection Making histogram
+@nav{}
+
+Using the @ref{hist} function(s) for making regular distributions is one of useful fast methods to process and plot irregular data. @code{Hist} can be used to find some momentum of set of points by specifying weight function. It is possible to create not only 1D distributions but also 2D and 3D ones. Below I place the simplest sample code which demonstrate @ref{hist} usage:
+@verbatim
+new x 10000 '2*rnd-1':new y 10000 '2*rnd-1':copy z exp(-6*(x^2+y^2))
+hist xx x z:norm xx 0 1:hist yy y z:norm yy 0 1
+multiplot 3 3 3 2 2 '':ranges -1 1 -1 1 0 1:box:dots x y z 'wyrRk'
+multiplot 3 3 0 2 1 '':ranges -1 1 0 1:box:bars xx
+multiplot 3 3 5 1 2 '':ranges 0 1 -1 1:box:barh yy
+subplot 3 3 2:text 0.5 0.5 'Hist and\n{}MultiPlot\n{}sample' 'a' -3
+@end verbatim
+
+@pfig{hist, Example of Hist().}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node Nonlinear fitting hints, PDE solving hints, Making histogram, Hints
+@subsection Nonlinear fitting hints
+@nav{}
+
+Nonlinear fitting is rather simple. All that you need is the data to fit, the approximation formula and the list of coefficients to fit (better with its initial guess values). Let me demonstrate it on the following simple example. First, let us use sin function with some random noise:
+@verbatim
+new rnd 100 '0.4*rnd+0.1+sin(2*pi*x)'
+new in 100 '0.3+sin(2*pi*x)'
+@end verbatim
+and plot it to see that data we will fit
+@verbatim
+title 'Fitting sample':yrange -2 2:box:axis:plot rnd '. '
+@end verbatim
+
+The next step is the fitting itself. For that let me specify an initial values @var{ini} for coefficients @samp{abc} and do the fitting for approximation formula @samp{a+b*sin(c*x)}
+@verbatim
+list ini 1 1 3:fit res rnd 'a+b*sin(c*x)' 'abc' ini
+@end verbatim
+Now display it
+@verbatim
+plot res 'r':plot in 'b'
+text -0.9 -1.3 'fitted:' 'r:L'
+putsfit 0 -1.8 'y = ' 'r'
+text 0 2.2 'initial: y = 0.3+sin(2\pi x)' 'b'
+@end verbatim
+
+NOTE! the fitting results may have strong dependence on initial values for coefficients due to algorithm features. The problem is that in general case there are several local "optimums" for coefficients and the program returns only first found one! There are no guaranties that it will be the best. Try for example to set @code{ini[3] = @{0, 0, 0@}} in the code above.
+
+The full sample code for nonlinear fitting is:
+@verbatim
+new rnd 100 '0.4*rnd+0.1+sin(2*pi*x)'
+new in 100 '0.3+sin(2*pi*x)'
+list ini 1 1 3:fit res rnd 'a+b*sin(c*x)' 'abc' ini
+title 'Fitting sample':yrange -2 2:box:axis:plot rnd '. '
+plot res 'r':plot in 'b'
+text -0.9 -1.3 'fitted:' 'r:L'
+putsfit 0 -1.8 'y = ' 'r'
+text 0 2.2 'initial: y = 0.3+sin(2\pi x)' 'b'
+@end verbatim
+
+@pfig{fit, Example of nonlinear fitting.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node PDE solving hints, MGL parser using, Nonlinear fitting hints, Hints
+@subsection PDE solving hints
+@nav{}
+
+Solving of Partial Differential Equations (PDE, including beam tracing) and ray tracing (or finding particle trajectory) are more or less common task. So, MathGL have several functions for that. There are @code{mglRay()} for ray tracing, @code{mglPDE()} for PDE solving, @code{mglQO2d()} for beam tracing in 2D case (see @ref{Global functions}). Note, that these functions take ``Hamiltonian'' or equations as string values. And I don't plan now to allow one to use user-defined functions. There are 2 reasons: the complexity of corresponding interface; and the basic nature of used methods which are good for samples but may not good for serious scientific calculations.
+
+The ray tracing can be done by @code{mglRay()} function. Really ray tracing equation is Hamiltonian equation for 3D space. So, the function can be also used for finding a particle trajectory (i.e. solve Hamiltonian ODE) for 1D, 2D or 3D cases. The function have a set of arguments. First of all, it is Hamiltonian which defined the media (or the equation) you are planning to use. The Hamiltonian is defined by string which may depend on coordinates @samp{x}, @samp{y}, @samp{z}, time @samp{t} (for particle dynamics) and momentums @samp{p}=@math{p_x}, @samp{q}=@math{p_y}, @samp{v}=@math{p_z}. Next, you have to define the initial conditions for coordinates and momentums at @samp{t}=0 and set the integrations step (default is 0.1) and its duration (default is 10). The Runge-Kutta method of 4-th order is used for integration.
+@verbatim
+  const char *ham = "p^2+q^2-x-1+i*0.5*(y+x)*(y>-x)";
+  mglData r = mglRay(ham, mglPoint(-0.7, -1), mglPoint(0, 0.5), 0.02, 2);
+@end verbatim
+This example calculate the reflection from linear layer (media with Hamiltonian @samp{p^2+q^2-x-1}=@math{p_x^2+p_y^2-x-1}). This is parabolic curve. The resulting array have 7 columns which contain data for @{x,y,z,p,q,v,t@}.
+
+The solution of PDE is a bit more complicated. As previous you have to specify the equation as pseudo-differential operator @math{\hat H(x, \nabla)} which is called sometime as ``Hamiltonian'' (for example, in beam tracing). As previously, it is defined by string which may depend on coordinates @samp{x}, @samp{y}, @samp{z} (but not time!), momentums @samp{p}=@math{(d/dx)/i k_0}, @samp{q}=@math{(d/dy)/i k_0} and field amplitude @samp{u}=@math{|u|}. The evolutionary coordinate is @samp{z} in all cases. So that, the equation look like @math{du/dz = ik_0 H(x,y,\hat p, \hat q, |u|)[u]}. Dependence on field amplitude @samp{u}=@math{|u|} allows one to solve nonlinear problems too. For example, for nonlinear Shrodinger equation you may set @code{ham="p^2 + q^2 - u^2"}. Also you may specify imaginary part for wave absorption, like @code{ham = "p^2 + i*x*(x>0)"}, but only if dependence on variable @samp{i} is linear (i.e. @math{H = Hre+i*Him}).
+
+Next step is specifying the initial conditions at @samp{z}=@code{Min.z}. The function need 2 arrays for real and for imaginary part. Note, that coordinates x,y,z are supposed to be in specified range [Min, Max]. So, the data arrays should have corresponding scales. Finally, you may set the integration step and parameter k0=@math{k_0}. Also keep in mind, that internally the 2 times large box is used (for suppressing numerical reflection from boundaries) and the equation should well defined even in this extended range.
+
+Final comment is concerning the possible form of pseudo-differential operator @math{H}. At this moment, simplified form of operator @math{H} is supported -- all ``mixed'' terms (like @samp{x*p}->x*d/dx) are excluded. For example, in 2D case this operator is effectively @math{H = f(p,z) + g(x,z,u)}. However commutable combinations (like @samp{x*q}->x*d/dy) are allowed for 3D case.
+
+So, for example let solve the equation for beam deflected from linear layer and absorbed later. The operator will have the form @samp{"p^2+q^2-x-1+i*0.5*(z+x)*(z>-x)"} that correspond to equation @math{ik_0 \partial_z u + \Delta u + x \cdot u + i (x+z)/2 \cdot u = 0}. This is typical equation for Electron Cyclotron (EC) absorption in magnetized plasmas. For initial conditions let me select the beam with plane phase front @math{exp(-48*(x+0.7)^2)}. The corresponding code looks like this:
+@verbatim
+new re 128 'exp(-48*(x+0.7)^2)':new im 128
+pde a 'p^2+q^2-x-1+i*0.5*(z+x)*(z>-x)' re im 0.01 30
+transpose a
+subplot 1 1 0 '<_':title 'PDE solver'
+axis:xlabel '\i x':ylabel '\i z'
+crange 0 1:dens a 'wyrRk'
+fplot '-x' 'k|'
+text 0 0.95 'Equation: ik_0\partial_zu + \Delta u + x\cdot u +\
+ i \frac{x+z}{2}\cdot u = 0\n{}absorption: (x+z)/2 for x+z>0'
+@end verbatim
+
+@pfig{pde, Example of PDE solving.}
+
+The last example is example of beam tracing. Beam tracing equation is special kind of PDE equation written in coordinates accompanied to a ray. Generally this is the same parameters and limitation as for PDE solving but the coordinates are defined by the ray and by parameter of grid width @var{w} in direction transverse the ray. So, you don't need to specify the range of coordinates. @strong{BUT} there is limitation. The accompanied coordinates are well defined only for smooth enough rays, i.e. then the ray curvature @math{K} (which is defined as @math{1/K^2 = (|\ddot r|^2 |\dot r|^2 - (\ddot r, \dot r)^2)/|\dot r|^6}) is much large then the grid width: @math{K>>w}. So, you may receive incorrect results if this condition will be broken.
+
+You may use following code for obtaining the same solution as in previous example:
+@verbatim
+define $1 'p^2+q^2-x-1+i*0.5*(y+x)*(y>-x)'
+subplot 1 1 0 '<_':title 'Beam and ray tracing'
+ray r $1 -0.7 -1 0 0 0.5 0 0.02 2:plot r(0) r(1) 'k'
+axis:xlabel '\i x':ylabel '\i z'
+new re 128 'exp(-48*x^2)':new im 128
+new xx 1:new yy 1
+qo2d a $1 re im r 1 30 xx yy
+crange 0 1:dens xx yy a 'wyrRk':fplot '-x' 'k|'
+text 0 0.85 'absorption: (x+y)/2 for x+y>0'
+text 0.7 -0.05 'central ray'
+@end verbatim
+
+@pfig{qo2d, Example of beam tracing.}
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node MGL parser using, Using options, PDE solving hints, Hints
+@subsection MGL parser using
+@nav{}
+
+MGL scripts can contain loops, conditions and user-defined functions. Below I show very simple example of its usage:
+@verbatim
+title 'MGL parser sample'
+call 'sample'
+stop
+
+func 'sample'
+new dat 100 'sin(2*pi*(x+1))'
+plot dat; xrange 0 1
+box:axis:xlabel 'x':ylabel 'y'
+for $0 -1 1 0.1
+if $0<0
+line 0 0 -1 $0 'r'
+else
+line 0 0 -1 $0 'r'
+endif
+next
+@end verbatim
+
+@pfig{parser, Example of MGL script parsing.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Using options, ``Templates'', MGL parser using, Hints
+@subsection Using options
+@nav{}
+
+@ref{Command options} allow the easy setup of the selected plot by changing global settings only for this plot. Often, options are used for specifying the range of automatic variables (coordinates). However, options allows easily change plot transparency, numbers of line or faces to be drawn, or add legend entries. The sample function for options usage is:
+@verbatim
+new a 31 41 '-pi*x*exp(-(y+1)^2-4*x^2)'
+alpha on:light on
+subplot 2 2 0:title 'Options for coordinates':rotate 40 60:box
+surf a 'r';yrange 0 1
+surf a 'b';yrange 0 -1
+
+subplot 2 2 1:title 'Option "meshnum"':rotate 40 60:box
+mesh a 'r'; yrange 0 1
+mesh a 'b';yrange 0 -1; meshnum 5
+
+subplot 2 2 2:title 'Option "alpha"':rotate 40 60:box
+surf a 'r';yrange 0 1; alpha 0.7
+surf a 'b';yrange 0 -1; alpha 0.3
+
+subplot 2 2 3 '<_':title 'Option "legend"'
+fplot 'x^3' 'r'; legend 'y = x^3'
+fplot 'cos(pi*x)' 'b'; legend 'y = cos \pi x'
+box:axis:legend 2
+@end verbatim
+
+@pfig{mirror, Example of options usage.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node ``Templates'', Nonlinear fitting hints, Using options, Hints
+@subsection ``Templates''
+@nav{}
+
+As I have noted before, the change of settings will influence only for the further plotting commands. This allows one to create ``template'' function which will contain settings and primitive drawing for often used plots. Correspondingly one may call this template-function for drawing simplification.
+
+For example, let one has a set of points (experimental or numerical) and wants to compare it with theoretical law (for example, with exponent law @math{\exp(-x/2), x \in [0, 20]}). The template-function for this task is:
+@verbatim
+void template(mglGraph *gr)
+{
+  mglData  law(100);      // create the law
+  law.Modify("exp(-10*x)");
+  gr->SetRanges(0,20, 0.0001,1);
+  gr->SetFunc(0,"lg(y)",0);
+  gr->Plot(law,"r2");
+  gr->Puts(mglPoint(10,0.2),"Theoretical law: e^x","r:L");
+  gr->Label('x',"x val."); gr->Label('y',"y val.");
+  gr->Axis(); gr->Grid("xy","g;"); gr->Box();
+}
+@end verbatim
+At this, one will only write a few lines for data drawing:
+@verbatim
+  template(gr);     // apply settings and default drawing from template
+  mglData dat("fname.dat"); // load the data
+  // and draw it (suppose that data file have 2 columns)
+  gr->Plot(dat.SubData(0),dat.SubData(1),"bx ");
+@end verbatim
+A template-function can also contain settings for font, transparency, lightning, color scheme and so on.
+
+I understand that this is obvious thing for any professional programmer, but I several times receive suggestion about ``templates'' ... So, I decide to point out it here.
+
+@c ------------------------------------------------------------------
+@external{}
+@node Stereo image, Reduce memory usage, ``Templates'', Hints
+@subsection Stereo image
+@nav{}
+
+One can easily create stereo image in MathGL. Stereo image can be produced by making two subplots with slightly different rotation angles. The corresponding code looks like this:
+@verbatim
+call 'prepare2d'
+light on
+subplot 2 1 0:rotate 50 60+1:box:surf a
+subplot 2 1 1:rotate 50 60-1:box:surf a
+@end verbatim
+
+@pfig{stereo, Example of stereo image.}
+
+@c ------------------------------------------------------------------
+@external{}
+@node Reduce memory usage, , Stereo image, Hints
+@subsection Reduce memory usage
+@nav{}
+
+By default MathGL save all primitives in memory, rearrange it and only later draw them on bitmaps. Usually, this speed up drawing, but may require a lot of memory for plots which contain a lot of faces (like @ref{cloud}, @ref{dew}). You can use @ref{quality} function for setting to use direct drawing on bitmap and bypassing keeping any primitives in memory. This function also allow you to decrease the quality of the resulting image but increase the speed of the drawing.
+
+The code for lower memory usage looks like this:
+@verbatim
+quality 6  # firstly, set to draw directly on bitmap
+for $1 0 1000
+  sphere 2*rnd-1 2*rnd-1 0.05
+next
+@end verbatim
+
+@c ==================================================================
+
+@external{}
+@node FAQ, , Hints, Examples
+@section FAQ
+@nav{}
+
+@table @strong
+@item The plot does not appear
+Check that points of the plot are located inside the bounding box and resize the bounding box using @ref{ranges} function. Check that the data have correct dimensions for selected type of plot. Sometimes the light reflection from flat surfaces (like, @ref{dens}) can look as if the plot were absent.
+
+@item I can not find some special kind of plot.
+Most ``new'' types of plots can be created by using the existing drawing functions. For example, the surface of curve rotation can be created by a special function @ref{torus}, or as a parametrically specified surface by @ref{surf}. See also, @ref{Hints}. If you can not find a specific type of plot, please e-mail me and this plot will appear in the next version of MathGL library.
+
+@item How can I print in Russian/Spanish/Arabic/Japanese, and so on?
+The standard way is to use Unicode encoding for the text output. But the MathGL library also has interface for 8-bit (char *) strings with internal conversion to Unicode. This conversion depends on the current locale OS.
+
+@item How can I exclude a point or a region of plot from the drawing?
+There are 3 general ways. First, the point with @code{nan} value as one of the coordinates (including color/alpha range) will never be plotted. Second, special functions define the condition when the points should be omitted (see @ref{Cutting}). Last, you may change the transparency of a part of the plot by the help of functions @ref{surfa}, @ref{surf3a} (see @ref{Dual plotting}). In last case the transparency is switched on smoothly.
+
+@item How many people write this library?
+Most of the library was written by one person. This is a result of nearly a year of work (mostly in the evening and on holidays): I spent half a year to write the kernel and half a year to a year on extending, improving the library and writing documentation. This process continues now :). The build system (cmake files) was written mostly by D.Kulagin, and the export to PRC/PDF was written mostly by M.Vidassov.
+
+@item How can I display a bitmap on the figure?
+You can import data by command @ref{import} and display it by @ref{dens} function. For example, for black-and-white bitmap you can use the code: @code{import bmp 'fname.png' 'wk':dens  bmp 'wk'}.
+
+
+@item How can I create 3D in PDF?
+Just use command @code{write fname.pdf}, which create PDF file if enable-pdf=ON at MathGL configure.
+
+@item How can I create TeX figure?
+Just use command @code{write fname.tex}, which create LaTeX files with figure itself @samp{@var{fname}.tex}, with MathGL colors @samp{mglcolors.tex} and main file @samp{mglmain.tex}. Last one can be used for viewing image by command like @code{pdflatex mglmain.tex}.
+
+
+@item How I can change the font family?
+First, you should download new font files from @uref{http://mathgl.sourceforge.net/download.html, here} or from @uref{http://sourceforge.net/project/showfiles.php?group_id=152187&package_id=267177, here}. Next, you should load the font files into by the following command: @code{loadfont 'fontname'}. Here @var{fontname} is the base font name like @samp{STIX}. Use @code{loadfont ''} to start using the default font.
+
+@item How can I draw tick out of a bounding box?
+Just set a negative value in @ref{ticklen}. For example, use @code{ticklen -0.1}.
+
+@item How can I prevent text rotation?
+Just use @code{rotatetext off}. Also you can use axis style @samp{U} for disable only tick labels rotation.
+
+@item How can I draw equal axis range even for rectangular image?
+Just use @code{aspect nan nan} for each subplot, or at the beginning of the drawing.
+
+@end table
+
+@external{}
