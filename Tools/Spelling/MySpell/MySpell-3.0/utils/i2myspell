@@ -1,0 +1,86 @@
+#!/bin/sh
+#
+# 	i2myspell - Ispell->MySpell affix table and dictionary converter
+#
+#	Version 1.4 (2002.3.8.)
+#
+#	(c) Copyright 2002 László Németh, All Rights Reserved
+#
+#	This program is free software; you can redistribute it and/or
+#	modify it under the terms of the BSD License (see http://www.opensource.org)
+#
+case $# in
+ 0|1) echo "i2myspell ispell->myspell affix table and dictionary converter
+generate Myspell aff file:
+1. i2myspell ispell_hash_dictionary characterset upper lower [trial_range] 
+    [compound_control_flag] [compoundmin]
+generate Myspell dic file:
+2. i2myspell -d ispell_dict_file
+
+Example: 
+1. i2myspell magyar ISO8859-2 A-ZÁÉÍÓÖÕÚÜÛ a-záéíóöõúüû íóú Y 2 > hu_HU.aff
+2. i2myspell -d magyar.dict > hu_HU.dic
+
+ispell_hash_dictionary argument will become alternate dictionary argument 
+of ispell -d flag, because i2myspell use Ispell generated affix table.
+(See Ispell -D affix dump flag.)"; exit;;
+esac
+
+export LC_ALL=C # set correct sort, because sorting with hungarian locale is wrong
+
+case $1 in
+-d)
+
+# dict file uniq
+sed 's#/# #' $2 | sort -r -k 1 | uniq | grep -v ^$ |
+awk '{ 
+    if (p!=$1) { 
+	printf "\n%s", $0; 
+	p=$1 } 
+    else { 
+	if ($2!="") printf "/%s", $2; 
+    }
+}' | sed 's#/##g
+s# #/#' >/tmp/i2my$$.1
+cat /tmp/i2my$$.1 | wc -l | tr -cd '0-9\n'
+tail +2 /tmp/i2my$$.1
+echo
+rm -f /tmp/i2my$$.1
+
+exit;;
+esac
+
+ispell -d $1 -D | # dump affix table from the ispell hash
+sed 's/ //g
+/prefixes/,/suffixes/s/flag[*]\(.\):/PFX \1 Y /
+/prefixes/,/suffixes/s/flag\(.\):/PFX \1 N /
+/suffixes/,//s/flag[*]\(.\):/SFX \1 Y /
+/suffixes/,//s/flag\(.\):/SFX \1 N /
+s/\([^ ]*\).>.\([^,]*\)$/0 \2 \1/
+s/\([^ ]*\).>.-\([^,]*\),\(.*\)$/\2 \3 \1/' |
+tee /tmp/i2my$$.1 | cut -c -7 > /tmp/i2my$$.2
+
+# myspell affix table header
+echo "SET $2"
+if [ -n "$5" ]; then echo "TRY $5"; fi;
+if [ -n "$7" ]; then echo "COMPOUNDMIN $7"; fi;
+if [ -n "$6" ]; then echo "COMPOUNDFLAG $6"; fi;
+
+cut -c 8- /tmp/i2my$$.1 | 
+tr $3 $4 |
+paste -d "" /tmp/i2my$$.2 - | 
+egrep -v '^(suffixes|prefixes|flagmarker)' |
+sort -k 2 | awk '
+    NR==1 { o1=$1; o2=$2; o3=$3; n[o2]=-1; }
+    { 
+    printf "%s %s   %-4s %-12s %-25s %s\n", $1, $2, $4, $5, $6, $7;
+    if ($2==o2) { 
+	n[$2]++; 
+    } else { 
+	printf "%s %s %s %s\n", o1, o2, o3, n[o2]+1; 
+	o1=$1; o2=$2; o3=$3;
+    }
+} END { printf "%s %s %s %s\n", o1, o2, o3, n[o2]+1; } ' | tee x |
+sed 's/  *$//' | sort -r | sed 's/\(^.*[0-9]\)$/\
+\1/'
+rm /tmp/i2my$$.*

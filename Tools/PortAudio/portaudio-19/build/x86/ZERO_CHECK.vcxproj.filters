@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Development\Miscpkg\PortAudio\portaudio-19\build\x86\CMakeFiles\b29c051659214d5f3c711e69df445d76\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{41A3036F-0E7D-3CDD-AAA3-CA9A987C33D4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

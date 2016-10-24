@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_allocation.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_converters.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_cpuload.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_debugprint.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_dither.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_front.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_process.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_ringbuffer.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_stream.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_trace.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\hostapi\wmme\pa_win_wmme.c">
+      <Filter>hostapi\wmme</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\hostapi\wasapi\pa_win_wasapi.c">
+      <Filter>hostapi\wasapi</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\hostapi\wdmks\pa_win_wdmks.c">
+      <Filter>hostapi\wdmks</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\hostapi\skeleton\pa_hostapi_skeleton.c">
+      <Filter>hostapi\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\os\win\pa_win_hostapis.c">
+      <Filter>os\win</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\os\win\pa_win_util.c">
+      <Filter>os\win</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\os\win\pa_win_waveformat.c">
+      <Filter>os\win</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\os\win\pa_win_wdmks_utils.c">
+      <Filter>os\win</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\os\win\pa_win_coinitialize.c">
+      <Filter>os\win</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\os\win\pa_x86_plain_converters.c">
+      <Filter>os\win</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\include\portaudio.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\include\pa_win_wmme.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\include\pa_win_wasapi.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\include\pa_win_wdmks.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_allocation.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_converters.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_cpuload.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_debugprint.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_dither.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_endianness.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_hostapi.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_memorybarrier.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_process.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_ringbuffer.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_stream.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_trace.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_types.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\src\common\pa_util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Miscpkg\PortAudio\portaudio-19\build\x86\options_cmake.h">
+      <Filter>cmake_generated</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Development\Miscpkg\PortAudio\portaudio-19\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="hostapi\wmme">
+      <UniqueIdentifier>{BD2B0EB5-E813-33AC-922A-0D072839DBF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hostapi\wasapi">
+      <UniqueIdentifier>{8DA20120-0BBF-39E5-A2AA-170EE3674AEC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hostapi\wdmks">
+      <UniqueIdentifier>{7982886E-1636-3809-8DBA-75670C6217AB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hostapi\skeleton">
+      <UniqueIdentifier>{A3DFB020-D409-3EBC-8507-F3DEAF4299E4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="os\win">
+      <UniqueIdentifier>{9E0907AD-3B2B-3F47-BFC8-FC228BC769D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hostapi">
+      <UniqueIdentifier>{CF3DB082-5A46-3750-AD6B-0831C637365C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{7C362E7A-80D9-361E-97CD-52AA20779F2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{5B7D9917-0C98-3578-B089-511E895F8324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmake_generated">
+      <UniqueIdentifier>{B8349D64-4147-3271-BEDE-18E537846DE5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="os">
+      <UniqueIdentifier>{C273854F-0434-3E43-BA41-AF130067BE55}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

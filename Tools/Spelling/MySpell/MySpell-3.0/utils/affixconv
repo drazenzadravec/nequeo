@@ -1,0 +1,74 @@
+#! /usr/bin/perl
+
+use strict;
+# use MDK::Common;
+
+#- Define the default affix file
+my $SourceAffixFile = "english.aff";
+
+while ( $ARGV[0] =~ /^-/ ) {
+	$_ = shift;
+	if (m/^-i=(\S+)/) {
+		$SourceAffixFile = $1;
+	}
+	else {
+		print STDERR "$0: Unknown option $_\n";
+	}
+}
+
+# Parse enought of the source affix file
+sub ReadAffixConf($) {
+	my ($file) = @_;
+	my ($e, $f);
+	my @entries;
+	my $affix = 0; # prefix<0, suffix>0
+	foreach (cat_("$file")) {
+		if (/^prefixes/) {
+			$affix = -1;
+		}
+		elsif (/^suffixes/) {
+			$affix = 1;
+		}
+		elsif (/^flag\s+(\*)?([A-Za-z])/) {
+			push @entries, $e = { flag => $2, combine => $1 ? "Y" : "N" };
+			if ($affix > 0) {
+				$e->{affix} = "SFX";
+			}
+			elsif ($affix < 0) {
+				$e->{affix} = "PFX";
+			}
+			else {
+				print STDERR "$0: Unknown affix state $affix\n";
+			}
+		}
+		elsif (/\s*([^\s]+)\s*>\s*([^\#\s]+)/) {
+			push @{$e->{entries}}, $f = { cond => $1 };
+			if ($2 =~ /^-(.*),(.*)/) {
+				$f->{strip} = $1;
+				$f->{add} = $2;
+			}
+			else {
+				$f->{strip} = "0";
+				$f->{add} = $2;
+			}
+		}
+	}
+	\@entries;
+}
+
+# Dump affix tree
+sub DumpAffixConf(\@) {
+	my $entries = shift;
+	foreach my $e (@$entries) {
+		my $n = $#{$e->{entries}} + 1;
+		printf "%s %s %s %d\n", $e->{affix}, uc $e->{flag}, $e->{combine}, $n;
+		foreach my $f (@{$e->{entries}}) {
+			printf "%s %s   %-10s     %-10s     %-10s\n",
+			$e->{affix}, uc $e->{flag}, lc $f->{strip}, lc $f->{add}, lc $f->{cond};
+		}
+		print "\n";
+	}
+}
+
+my $AffixConf = ReadAffixConf($SourceAffixFile);
+DumpAffixConf @$AffixConf;

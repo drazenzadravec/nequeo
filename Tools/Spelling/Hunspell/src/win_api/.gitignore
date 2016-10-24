@@ -1,0 +1,8 @@
+Makefile
+Debug/
+Release/
+Backup/
+*.sdf
+*.opensdf
+*.suo
+UpgradeLog.htm
