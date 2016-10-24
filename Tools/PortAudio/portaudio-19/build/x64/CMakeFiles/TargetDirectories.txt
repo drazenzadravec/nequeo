@@ -1,4 +1,0 @@
-D:/Development/Miscpkg/PortAudio/portaudio-19/build/x64/CMakeFiles/portaudio.dir
-D:/Development/Miscpkg/PortAudio/portaudio-19/build/x64/CMakeFiles/portaudio_static.dir
-D:/Development/Miscpkg/PortAudio/portaudio-19/build/x64/CMakeFiles/ALL_BUILD.dir
-D:/Development/Miscpkg/PortAudio/portaudio-19/build/x64/CMakeFiles/ZERO_CHECK.dir
