@@ -1,0 +1,12 @@
+# Cutomization file for style translation
+
+# The output sequence is simply a string of characters.  If it contains
+# whitespace, it must be quoted.  If it contains quotes, it may be quoted
+# with a different quote character.  Comment lines must start with '#'.
+
+# RTF Style		LaTeX start				LaTeX close
+
+"heading 1"		\section*{				}
+"heading 2"		\subsection*{			}
+"heading 3"		\subsubsection*{		}
+

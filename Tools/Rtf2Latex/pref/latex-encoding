@@ -1,0 +1,560 @@
+# Translate RTF to latex files using Unicode characters
+
+# If you add an entry to this file, you must also add an entry
+# to the file 'standard-names' in the source directory.  Then
+# you need to do the following
+#    make parser      --- re-create stdcharnames.h
+#    make             --- recompile rtf2latex2e
+#    make install     --- copy this file to correct location
+# While testing, you can omit the make install step by using
+# the -P option to explicitly specify the location of this file
+
+# The '%' is NOT a COMMENT sign, it indicates that rtf2latex2e should insert the 
+# following string into the preamble of the generated LaTeX file
+
+%\usepackage{ifxetex} 
+%\ifxetex
+%\usepackage{fontspec}
+%\setmainfont[Mapping=tex-text]{STIXGeneral}
+%\else
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\fi
+
+# Access to \textcopyright, \textregistered and \texttrademark
+%\usepackage{textcomp}
+
+# Field 1 is the standard character name.  Field 2 is the output sequence
+# to produce for that character.
+
+# The output sequence is simply a string of characters.  If it contains
+# whitespace, it must be quoted.  If it contains quotes, it must be quoted
+# with a different quote character.
+
+# characters in ASCII range (32-127)
+
+space		" "
+exclam		!
+quotedbl	'\texttt{"}'
+numbersign	\#
+dollar		\$
+percent		\%
+ampersand	\&
+quoteright	"'"
+parenleft	(
+parenright	)
+asterisk	*
+plus		+
+comma		,
+hyphen		-
+period		.
+slash		/
+zero		0
+one			1
+two			2
+three		3
+four		4
+five		5
+six			6
+seven		7
+eight		8
+nine		9
+colon		:
+semicolon	;
+less		\texttt{<}
+equal		=
+greater		\texttt{>}
+question	?
+at		@
+A		A
+B		B
+C		C
+D		D
+E		E
+F		F
+G		G
+H		H
+I		I
+J		J
+K		K
+L		L
+M		M
+N		N
+O		O
+P		P
+Q		Q
+R		R
+S		S
+T		T
+U		U
+V		V
+W		W
+X		X
+Y		Y
+Z		Z
+bracketleft	[
+backslash	\textbackslash{}
+bracketright	]
+asciicircum	\textasciicircum{}
+underscore	\_
+quoteleft	"`"
+a		a
+b		b
+c		c
+d		d
+e		e
+f		f
+g		g
+h		h
+i		i
+j		j
+k		k
+l		l
+m		m
+n		n
+o		o
+p		p
+q		q
+r		r
+s		s
+t		t
+u		u
+v		v
+w		w
+x		x
+y		y
+z		z
+braceleft			\{
+bar					\textbar{}
+braceright			\}
+asciitilde			\textasciitilde{}
+
+# non-ASCII
+
+AE					0xC6					# \AE
+Aacute				0xE1					# "\'{A}"
+Abreve	           	0x0102      	        # \u{A}
+Acircumflex			0xC2					# \^{A}
+Adiaeresis			0xC4					# '\"{A}'
+Agrave				0xC0					# "\`{A}"
+Aogonek	 			0x0104   				# \k{A}
+Aring				0xC5					# \AA
+Atilde				0xC3					# \~{A}
+aacute				0xC1					# "\'{a}"
+abreve				0x0103					# \u{a}
+acircumflex			0xE2					# \^{a}
+acute				"'"
+acutedbl			0x02dd					# \H{}
+adiaeresis			0xE4					# '\"{a}'
+ae					0xE						# {\ae}
+agrave				0XE0					# "\`{a}"
+aleph				\ensuremath{\aleph}
+angle				\ensuremath{\angle}
+angleleft			\ensuremath{\langle}
+angleright			\ensuremath{\rangle}
+aogonek				0x0105					# \k{a}
+apple				\textapplelogo{}
+approxequal			\ensuremath{\approx}
+aring				0xE5					# {\aa}
+arrowboth			\ensuremath{\leftrightarrow}
+arrowdown			\ensuremath{\downarrow}
+arrowhorizex		---
+arrowleft			\ensuremath{\leftarrow}
+arrowright			\ensuremath{\rightarrow}
+arrowdblboth		\ensuremath{\Leftrightarrow}
+arrowdbldown		\ensuremath{\Downarrow}
+arrowdblleft		\ensuremath{\Leftarrow}
+arrowdblright		\ensuremath{\Rightarrow}
+arrowdblup			\ensuremath{\Uparrow}
+arrowup				\ensuremath{\uparrow}
+arrowvertex			\ensuremath{\arrowvert}
+atilde				0xE3					# \~{a}
+breve				0x02D8					# \u{}
+bracevert			\ensuremath{\bracevert}
+brokenbar			\textbrokenbar{}
+bullet				0x2022					# {\textbullet}
+carriagereturn		\ensuremath{\hookleftarrow}
+Cacute				0x0106					#"\'{C}"
+Ccaron				0x010C					# \v{C}
+Ccedilla			0xC7					# \c{C}
+Cdblhorizbar		\hbox{\rm\rlap=C}
+cacute				0x0107					#"\'{c}"
+caron				0x02C7					#\v{}
+ccaron				0x010D					#\v{c}
+ccedilla			0xE7					# \c{c}
+cedilla				0xB8					# \c{}
+cent				0xA2					# \hbox{\rm\rlap/c}
+circlemultiply		\ensuremath{\otimes}
+circleplus			\ensuremath{\oplus}
+circumflex			0x02C6					#\^{}
+congruent			\ensuremath{\cong}
+copyright			0xA9
+copyrightsans		0xA9
+club				\ensuremath{\clubsuit}
+currency			0xA4					#\textcurrency{}
+Dcaron				0x010E					#\v{D}
+Dslash				0x0110					#{\DJ}
+dagger				0x2020					#{\textdagger}
+daggerdbl			0x2021					#{\textdaggerdbl}
+dcaron				0x010D					#\v{d}
+degree				0xB0					#\ensuremath{^\circ}
+diagup				\ensuremath{\diagup}
+diamond				\ensuremath{\diamondsuit}
+diaeresis			0xA8					#'\"{}'
+divide		        0xF7                    #\ensuremath{\div}
+dotaccent			\.{}
+dotlessi			0x0131					#{\i}
+dotmath             \ensuremath{\cdot}
+dslash				0x0111					#{\dj}
+Eacute				0xC9					# "\'{E}"
+Ecaron				0x011A					#\v{E}
+Ecircumflex		    0xCA					#\^{E}
+Ediaeresis			0xCB					# '\"{E}'
+Egrave				0xC8					# "\`{E}"
+Eogonek				0x0118					#\k{E}
+Eth					0xD0					#{\DH}
+eacute				0xE9					# "\'{e}"
+ecaron				0x011B					# \v{e}
+ecircumflex			0xEA					# \^{e}
+ediaeresis			0xEB					# '\"{e}'
+egrave				0xE8					# "\`{e}"
+element				\ensuremath{\in}
+ellipsis			...
+emdash				---
+emptyset			\ensuremath{\emptyset}
+endash				--
+eogonek				0x0119					#\k{e}
+equivalence			\ensuremath{\equiv}
+eth					0xF0					#{\dh}
+euro				0x20AC
+exclamdown			0xA1					#!`
+existential			\ensuremath{\exists}
+fi					fi
+fl					fl
+florin				0x0192					#\textit{f}
+forall				\ensuremath{\forall}
+fraction			/
+Gbreve				0x011E					#\u{G}
+gbreve				0x011F					#\u{g}
+germandbls			0xDF					# {\ss}
+grave				0x60					#"\`{}"
+gradient			\ensuremath{\nabla}
+greaterequal		\ensuremath{\geq}
+guillemotleft   	0xAB					# {\guillemotleft}
+guillemotright  	0xBB					# {\guillemotright}
+guilsinglleft   	0x2039					# {\guilsinglleft}
+guilsinglright  	0x203A					# {\guilsinglright}
+heart				\ensuremath{\heartsuit}
+hungarumlaut		\H{}
+Iacute				0xCD					# "\'{I}"
+Icircumflex			0xCE					# \^{I}
+Idiaeresis			0xCF					# '\"{I}'
+Idotaccent			\.{I}
+Ifraktur			\ensuremath{\mathfrak{I}}
+Igrave				0xCC					# "\`{I}"
+iacute				0xED					# "\'{\i}"
+icircumflex			0xEE					# \^{\i}
+idiaeresis			0xEF					# '\"{\i}'
+igrave				0xEC					# "\`{\i}"
+infinity			\ensuremath{\infty}
+integral			\ensuremath{\int}
+intersection		\ensuremath{\cap}
+jmath				\ensuremath{\jmath}
+Lacute				0x0139					#"\'{L}"
+Lcaron				0x013D					#\v{L}
+Lslash				0x0141					#{\L}
+lacute				0x013A					#"\'{l}"
+langle				\ensuremath{\langle}
+lcaron				0x013E					#\v{l}
+lceil				\ensuremath{\lceil}
+lessequal			\ensuremath{\leq}
+lfloor				\ensuremath{\lfloor}
+logicaland			\ensuremath{\wedge}
+logicalnot			\ensuremath{\neg}
+logicalor			\ensuremath{\vee}
+lozenge				\ensuremath{\lozenge}
+lslash				0x0142					#{\l}
+macron				\={}
+mathasterisk		\ensuremath{\ast}
+mathequal			\ensuremath{=}
+mathminus			\ensuremath{-}
+mathnumbersign		\ensuremath{\#}
+mathplus			+
+mathtilde			\ensuremath{\sim}
+mho					\ensuremath{\mho}
+midbar				\ensuremath{\mid}
+minus				\ensuremath{-}
+minute				\ensuremath{"'"}
+mu					\ensuremath{\mu}
+multiply			\ensuremath{\times}
+Nacute				0x0143					#"\'{N}"
+Ncaron				0x0147					#\v{N}
+Ntilde				0xD1					# \~{N}
+nabla				\ensuremath{\nabla}
+nacute				0x0144					#"\'{n}"
+ncaron				0x0148					#\v{n}
+nobrkhyphen			\-{}
+nobrkspace			~
+notelement			\ensuremath{\notin}
+notequal			\ensuremath{\neq}
+notsubset			\ensuremath{\not\subset}
+ntilde				0xF1					# \~{n}
+OE					0x0152					#\OE{}
+Oacute				0xD3					# "\'{O}"
+Oacutedbl			0x0150					# \H{O}
+Ocircumflex			0xD4					# \^{O}
+Odiaeresis			0xD6					#'\"{O}'
+Ograve				0xD2					# "\`{O}"
+Oslash				0xD8					# {\O}
+Otilde				0xD5					# \~{O}
+oacute				0xF3					# "\'{o}"
+oacutedbl			0x0151					# \H{o}
+ocircumflex			0xF4					# \^{o}
+odiaeresis			0xF6					# '\"{o}'
+oe					0x0153					# \oe{}
+ograve				0xF2					# "\`{o}"
+ogonek				\k{}
+onehalf         	0xBD					#\ensuremath{\frac12}
+onequarter      	0xBC					#\ensuremath{\frac14}
+ordfeminine			0xAA					#\ensuremath{^a}
+ordmasculine		0xBA					#\ensuremath{^\circ}
+otilde				0xF5					# \~{o}
+oslash				0xD9					# {\o}
+paragraph			\P{}
+partialdiff			\ensuremath{\partial}
+periodcentered		\textperiodcentered{}
+perpendicular		\ensuremath{\perp}
+perthousand			\textperthousand{}
+plusminus			\ensuremath{\pm}
+powern				\ensuremath{^n}
+powerone			\ensuremath{^1}
+powertwo			\ensuremath{^2}
+powerthree			\ensuremath{^3}
+product				\ensuremath{\prod}
+propersubset		\ensuremath{\subset}
+propersuperset		\ensuremath{\supset}
+proportional		\ensuremath{\propto}
+questiondown		0xBF					#?`
+quotedblbase		,,
+quotedblleft		``
+quotedblright		"''"
+quotesinglbase		,
+Racute				0x0154					#"\'{R}"
+Rcaron				0x0158					#\v{R}
+Rfraktur			\ensuremath{\mathfrak{R}}
+racute				0x0155					#"\'{r}"
+radical				\ensuremath{\sqrt{}}
+rangle				\ensuremath{\rangle}
+rcaron				0x0159					#\v{r}
+rceil				\ensuremath{\rceil}
+reflexsubset		\ensuremath{\notin}
+registered			\textregistered{}
+registersans		\textregistered{}
+rfloor				\ensuremath{\rfloor}
+ring				\r{}
+Sacute				0x015A					#"\'{S"
+Scaron				0x0160					#\v{S}
+Scedilla			0x015E					#\c{S}
+sacute				0x015B					#"\'{s}"
+scaron				0x0161					#\v{s}
+scedilla			0x015F					#\c{s}
+second				\ensuremath{"''"}
+section				\S{}
+spade				\ensuremath{\spadesuit}
+square  			\ensuremath{\blacksquare}
+sterling			0xA3					#{\pounds}
+subset				\ensuremath{\subset}
+subseteq			\ensuremath{\subseteq}
+supset				\ensuremath{\supset}
+supseteq			\ensuremath{\supseteq}
+suchthat			\ensuremath{\ni}
+sum					\ensuremath{\sum}
+Tcaron				0x0164					#\v{T}
+Tcedilla			0x0162					#\c{T}
+Thorn				0xDE					#{\TH}
+tcaron				0x0165					#\v{t}
+tcedilla			0x0163					#\c{t}
+thorn				0xFE					#{\th}
+therefore			\ensuremath{\therefore}
+threequarters		0xBE					#\ensuremath{\frac34}
+tilde				\~{}
+trademark			\texttrademark{}
+trademarksans		\texttrademark{}
+Uacute				0xDA					# "\'{U}"
+Uacutedbl			0x0170					# \H{U}
+Ucircumflex			0xDB					# \^{U}
+Udiaeresis			0xDC					# '\"{U}'
+Ugrave				0xD9					# "\`{U}"
+Uring				0x016E					# \r{U}
+uacute				0xFA					# "\'{u}"
+uacutedbl			0x0171					# \H{u}
+ucircumflex			0xFB					# \^{u}
+udiaeresis			0xFC					# '\"{u}'
+ugrave				0xF9					# "\`{u}"
+union				\ensuremath{\cup}
+uring				0x016F					#\r{u}
+weierstrass			\ensuremath{\wp}
+Yacute				0xDD					# "\'{Y}"
+Ydiaeresis			0x0178					#'\"{Y}'
+yacute				0xFD					# "\'{y}"
+ydiaeresis			0xFF					# '\"{y}'
+yen					0xA5					# \hbox{\rm\rlap=Y}
+Zacute				0x0179					#"\'{Z}"
+Zcaron				0x017D					#\v{Z}
+Zdotaccent			0x017B					#\.{Z}
+zacute				0x017A					#"\'{z}"
+zcaron				0x017E					#\v{z}
+zdotaccent			0x017C					#\.{z}
+
+
+# greek letters
+Alpha		\ensuremath{A}
+Beta		\ensuremath{B}
+Chi			\ensuremath{X}
+Delta		\ensuremath{\Delta}
+Epsilon		\ensuremath{E}
+Phi			\ensuremath{\Phi}
+Gamma		\ensuremath{\Gamma}
+Eta			\ensuremath{H}
+Iota		\ensuremath{I}
+Kappa		\ensuremath{K}
+Lambda		\ensuremath{\Lambda}
+Mu			\ensuremath{M}
+Nu			\ensuremath{N}
+Omicron		\ensuremath{O}
+Pi			\ensuremath{\Pi}
+Theta		\ensuremath{\Theta}
+Rho			\ensuremath{P}
+Sigma		\ensuremath{\Sigma}
+Tau			\ensuremath{T}
+Upsilon		\ensuremath{\Upsilon}
+Omega		\ensuremath{\Omega}
+Xi			\ensuremath{\Xi}
+Psi			\ensuremath{\Psi}
+Zeta		\ensuremath{Z}
+
+alpha		\ensuremath{\alpha}
+beta		\ensuremath{\beta}
+chi			\ensuremath{\chi}
+delta		\ensuremath{\delta}
+epsilon		\ensuremath{\epsilon}
+phi			\ensuremath{\phi}
+varphi		\ensuremath{\varphi}
+gamma		\ensuremath{\gamma}
+eta			\ensuremath{\eta}
+iota		\ensuremath{\iota}
+kappa		\ensuremath{\kappa}
+lambda		\ensuremath{\lambda}
+mu			\ensuremath{\mu}
+nu			\ensuremath{\nu}
+omicron		\ensuremath{o}
+pi			\ensuremath{\pi}
+varpi		\ensuremath{\varpi}
+theta		\ensuremath{\theta}
+vartheta	\ensuremath{\vartheta}
+rho			\ensuremath{\rho}
+sigma		\ensuremath{\sigma}
+varsigma	\ensuremath{\varsigma}
+tau			\ensuremath{\tau}
+upsilon		\ensuremath{\upsilon}
+omega		\ensuremath{\omega}
+xi			\ensuremath{\xi}
+psi			\ensuremath{\psi}
+varepsilon	\ensuremath{\varepsilon}
+varrho		\ensuremath{\varrho}
+zeta		\ensuremath{\zeta}
+
+CYRILLIC_CAPITAL_LETTER_DJE	0x0402
+CYRILLIC_CAPITAL_LETTER_GJE	0x0403
+CYRILLIC_SMALL_LETTER_GJE	0x0453
+CYRILLIC_CAPITAL_LETTER_LJE	0x0409
+CYRILLIC_CAPITAL_LETTER_NJE	0x040A
+CYRILLIC_CAPITAL_LETTER_KJE	0x040C
+CYRILLIC_CAPITAL_LETTER_TSHE	0x040B
+CYRILLIC_CAPITAL_LETTER_DZHE	0x040F
+CYRILLIC_SMALL_LETTER_DJE	0x0452
+CYRILLIC_SMALL_LETTER_LJE	0x0459
+CYRILLIC_SMALL_LETTER_NJE	0x045A
+CYRILLIC_SMALL_LETTER_KJE	0x045C
+CYRILLIC_SMALL_LETTER_TSHE	0x045B
+CYRILLIC_SMALL_LETTER_DZHE	0x045F
+CYRILLIC_CAPITAL_LETTER_SHORT_U	0x040E
+CYRILLIC_SMALL_LETTER_SHORT_U	0x045E
+CYRILLIC_CAPITAL_LETTER_JE	0x0408
+CYRILLIC_CAPITAL_LETTER_GHE_WITH_UPTURN	0x0490
+CYRILLIC_CAPITAL_LETTER_IO	0x0401
+CYRILLIC_CAPITAL_LETTER_UKRAINIAN_IE	0x0404
+CYRILLIC_CAPITAL_LETTER_YI	0x0407
+CYRILLIC_CAPITAL_LETTER_BYELORUSSIAN_UKRAINIAN_I	0x0406
+CYRILLIC_SMALL_LETTER_BYELORUSSIAN_UKRAINIAN_I	0x0456
+CYRILLIC_SMALL_LETTER_GHE_WITH_UPTURN	0x0491
+CYRILLIC_SMALL_LETTER_IO	0x0451
+CYRILLIC_SMALL_LETTER_UKRAINIAN_IE	0x0454
+CYRILLIC_SMALL_LETTER_JE	0x0458
+CYRILLIC_CAPITAL_LETTER_DZE	0x0405
+CYRILLIC_SMALL_LETTER_DZE	0x0455
+CYRILLIC_SMALL_LETTER_YI	0x0457
+CYRILLIC_CAPITAL_LETTER_A	0x0410
+CYRILLIC_CAPITAL_LETTER_BE	0x0411
+CYRILLIC_CAPITAL_LETTER_VE	0x0412
+CYRILLIC_CAPITAL_LETTER_GHE	0x0413
+CYRILLIC_CAPITAL_LETTER_DE	0x0414
+CYRILLIC_CAPITAL_LETTER_IE	0x0415
+CYRILLIC_CAPITAL_LETTER_ZHE	0x0416
+CYRILLIC_CAPITAL_LETTER_ZE	0x0417
+CYRILLIC_CAPITAL_LETTER_I	0x0418
+CYRILLIC_CAPITAL_LETTER_SHORT_I	0x0419
+CYRILLIC_CAPITAL_LETTER_KA	0x041A
+CYRILLIC_CAPITAL_LETTER_EL	0x041B
+CYRILLIC_CAPITAL_LETTER_EM	0x041C
+CYRILLIC_CAPITAL_LETTER_EN	0x041D
+CYRILLIC_CAPITAL_LETTER_O	0x041E
+CYRILLIC_CAPITAL_LETTER_PE	0x041F
+CYRILLIC_CAPITAL_LETTER_ER	0x0420
+CYRILLIC_CAPITAL_LETTER_ES	0x0421
+CYRILLIC_CAPITAL_LETTER_TE	0x0422
+CYRILLIC_CAPITAL_LETTER_U	0x0423
+CYRILLIC_CAPITAL_LETTER_EF	0x0424
+CYRILLIC_CAPITAL_LETTER_HA	0x0425
+CYRILLIC_CAPITAL_LETTER_TSE	0x0426
+CYRILLIC_CAPITAL_LETTER_CHE	0x0427
+CYRILLIC_CAPITAL_LETTER_SHA	0x0428
+CYRILLIC_CAPITAL_LETTER_SHCHA	0x0429
+CYRILLIC_CAPITAL_LETTER_HARD_SIGN	0x042A
+CYRILLIC_CAPITAL_LETTER_YERU	0x042B
+CYRILLIC_CAPITAL_LETTER_SOFT_SIGN	0x042C
+CYRILLIC_CAPITAL_LETTER_E	0x042D
+CYRILLIC_CAPITAL_LETTER_YU	0x042E
+CYRILLIC_CAPITAL_LETTER_YA	0x042F
+CYRILLIC_SMALL_LETTER_A	0x0430
+CYRILLIC_SMALL_LETTER_BE	0x0431
+CYRILLIC_SMALL_LETTER_VE	0x0432
+CYRILLIC_SMALL_LETTER_GHE	0x0433
+CYRILLIC_SMALL_LETTER_DE	0x0434
+CYRILLIC_SMALL_LETTER_IE	0x0435
+CYRILLIC_SMALL_LETTER_ZHE	0x0436
+CYRILLIC_SMALL_LETTER_ZE	0x0437
+CYRILLIC_SMALL_LETTER_I	0x0438
+CYRILLIC_SMALL_LETTER_SHORT_I	0x0439
+CYRILLIC_SMALL_LETTER_KA	0x043A
+CYRILLIC_SMALL_LETTER_EL	0x043B
+CYRILLIC_SMALL_LETTER_EM	0x043C
+CYRILLIC_SMALL_LETTER_EN	0x043D
+CYRILLIC_SMALL_LETTER_O	0x043E
+CYRILLIC_SMALL_LETTER_PE	0x043F
+CYRILLIC_SMALL_LETTER_ER	0x0440
+CYRILLIC_SMALL_LETTER_ES	0x0441
+CYRILLIC_SMALL_LETTER_TE	0x0442
+CYRILLIC_SMALL_LETTER_U	0x0443
+CYRILLIC_SMALL_LETTER_EF	0x0444
+CYRILLIC_SMALL_LETTER_HA	0x0445
+CYRILLIC_SMALL_LETTER_TSE	0x0446
+CYRILLIC_SMALL_LETTER_CHE	0x0447
+CYRILLIC_SMALL_LETTER_SHA	0x0448
+CYRILLIC_SMALL_LETTER_SHCHA	0x0449
+CYRILLIC_SMALL_LETTER_HARD_SIGN	0x044A
+CYRILLIC_SMALL_LETTER_YERU	0x044B
+CYRILLIC_SMALL_LETTER_SOFT_SIGN	0x044C
+CYRILLIC_SMALL_LETTER_E	0x044D
+CYRILLIC_SMALL_LETTER_YU	0x044E
+CYRILLIC_SMALL_LETTER_YA	0x044F

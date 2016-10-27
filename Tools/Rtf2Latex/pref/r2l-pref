@@ -1,0 +1,105 @@
+# Preference file for rtf2latex2e
+
+# Comments should be preceded by '#' in each line.
+
+# Here are some basic preferences you might want to set. Do not change
+# the names of the preferences, or add any. The preferences can be in 
+# any order. 'true' and 'false' values are allowed for appropriate
+# preferences.
+
+# Line that is inserted before \documentclass{}
+# Typically starts with % 
+preambleFirstText        %&pdfLaTeX
+
+# Another line, just like the one above
+# Enclose in quotes because value contains spaces
+preambleSecondText       '% !TEX encoding = UTF-8 Unicode'
+
+# This is your chance to customize the type of latex document created
+preambleDocClass         \documentclass{article}
+
+# specify the output map file to map between RTF and LaTeX characters.
+# This is the character set used for the characters in the emitted latex.
+# Examples are 
+#      latex-encoding          (default unicode), 
+#      latex-encoding.applemac (uses applemac input encoding), 
+#      latex-encoding.cp1252   (uses cp1252 input encoding)
+
+outputMapFileName	latex-encoding
+
+# Default page width in inches.  US Letter is 8.5, A4 paper is 8.3 
+# ignored if convertPageSize is false
+pageWidth	8.5
+
+# Default left margin of page in inches, ignored if convertPageSize is false
+pageLeft	1.0
+
+# Default right margin of page in inches, ignored if convertPageSize is false
+pageRight	1.0
+
+# use above sizes to set the extent of the LaTeX page
+convertPageSize	false
+
+# convert RTF heading 1, 2, & 3. For example, 'heading 2' --> \subsection{...}
+convertParagraphStyle	true
+
+# convert paragraph indenting using \parindent
+# this adds some extra markup, but does a decent job of making sure that
+# non-indented and multiply-indented paragraphs get indented properly
+convertParagraphIndent	true
+
+# convert space between paragraphs using \vspace{} 
+convertInterParagraphSpace	true
+
+# adjust latex margins according to those for each paragraph
+convertParagraphMargin	true
+
+# allow paragraphs to be centered or flush right
+convertParagraphAlignment	true
+
+# convert line spacing using \baselineskip ... eventually will use \setspace{}
+convertLineSpacing	true
+
+# convert changes in the font size.  Disabling this is not unreasonable because
+# LaTeX often makes reasonable assumptions about the font size.
+# and it is a nuisance if every paragraph is bracketed with {\Large ... }
+# because the RTF document was written in 14 point font.
+convertTextSize	true
+
+#convert text styles.  includes bold, italics, smallcaps, underline, doubleunderline
+convertTextForm	true
+
+#if true then replace tabs with spaces, otherwise replace with \tab 
+convertTextNoTab	true
+
+# translate color text formatting.  This is annoying because the entire RTF color table
+# always gets written to the LaTeX file and therefore inserts a bunch of noise at
+# in the preamble
+convertTextColor	true
+
+#convert hypertext links using url package
+convertHypertext	false
+
+# convert embedded Equation Editor objects. If false or if the conversion 
+# fails, the image associated with the equation inserted in the latex file.
+convertEquation	true
+
+# when converting an RTF file that contains embedded images, these all must
+# be extracted into the local directory.  This can create a huge number of
+# files in the current directory.  If this option is true, then a new directory
+# called 'file-latex' is created and the converted images and the converted
+# latex file are placed inside
+convertAsDirectory false
+
+# Name of environment for tables.  The default is "tabular"
+convertTableName	longtable
+
+# Macintosh only
+# Convert embedded macintosh PICT files to PDF files
+# only works for MacOS X before Lion (10.7)
+convertPict	true
+
+#
+convertTableWidths true
+convertTableAlignment false
+convertTableBorders true
