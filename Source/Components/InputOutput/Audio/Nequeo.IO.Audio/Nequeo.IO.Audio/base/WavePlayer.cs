@@ -431,6 +431,7 @@ namespace Nequeo.IO.Audio
         /// Raise playback stopped event.
         /// </summary>
         /// <param name="e"></param>
+        /// <param name="audioComplete"></param>
         private void RaisePlaybackStoppedEvent(Exception e, bool audioComplete = false)
         {
             var handler = PlaybackStopped;

@@ -1,24 +1,10 @@
-/*
-  LICENSE
-  -------
-  Copyright (C) 2007-2010 Ray Molenkamp
+/*  Company :       Nequeo Pty Ltd, http://www.Nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2008 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ */
 
-  This source code is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this source code or the software it produces.
-
-  Permission is granted to anyone to use this source code for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this source code must not be misrepresented; you must not
-     claim that you wrote the original source code.  If you use this source code
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original source code.
-  3. This notice may not be removed or altered from any source distribution.
-*/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,76 +18,110 @@ namespace Nequeo.IO.Audio.Api
     /// </summary>
     public class PropertyStore
     {
-        private IPropertyStore _Store;
+        private readonly IPropertyStore storeInterface;
 
+        /// <summary>
+        /// Property Count
+        /// </summary>
         public int Count
         {
             get
             {
-                int Result;
-                Marshal.ThrowExceptionForHR(_Store.GetCount(out Result));
-                return Result;
+                int result;
+                Marshal.ThrowExceptionForHR(storeInterface.GetCount(out result));
+                return result;
             }
         }
 
+        /// <summary>
+        /// Gets property by index
+        /// </summary>
+        /// <param name="index">Property index</param>
+        /// <returns>The property</returns>
         public PropertyStoreProperty this[int index]
         {
             get
             {
                 PropVariant result;
                 PropertyKey key = Get(index);
-                Marshal.ThrowExceptionForHR(_Store.GetValue(ref key, out result));
+                Marshal.ThrowExceptionForHR(storeInterface.GetValue(ref key, out result));
                 return new PropertyStoreProperty(key, result);
             }
         }
 
-        public bool Contains(Guid guid)
+        /// <summary>
+        /// Contains property guid
+        /// </summary>
+        /// <param name="key">Looks for a specific key</param>
+        /// <returns>True if found</returns>
+        public bool Contains(PropertyKey key)
         {
             for (int i = 0; i < Count; i++)
             {
-                PropertyKey key = Get(i);
-                if (key.fmtid == guid)
+                PropertyKey ikey = Get(i);
+                if ((ikey.formatId == key.formatId) && (ikey.propertyId == key.propertyId))
+                {
                     return true;
+                }
             }
             return false;
         }
 
-        public PropertyStoreProperty this[Guid guid]
+        /// <summary>
+        /// Indexer by guid
+        /// </summary>
+        /// <param name="key">Property Key</param>
+        /// <returns>Property or null if not found</returns>
+        public PropertyStoreProperty this[PropertyKey key]
         {
             get
             {
                 PropVariant result;
                 for (int i = 0; i < Count; i++)
                 {
-                    PropertyKey key = Get(i);
-                    if (key.fmtid == guid)
+                    PropertyKey ikey = Get(i);
+                    if ((ikey.formatId == key.formatId) && (ikey.propertyId == key.propertyId))
                     {
-                        Marshal.ThrowExceptionForHR(_Store.GetValue(ref key, out result));
-                        return new PropertyStoreProperty(key, result);
+                        Marshal.ThrowExceptionForHR(storeInterface.GetValue(ref ikey, out result));
+                        return new PropertyStoreProperty(ikey, result);
                     }
                 }
                 return null;
             }
         }
 
+        /// <summary>
+        /// Gets property key at sepecified index
+        /// </summary>
+        /// <param name="index">Index</param>
+        /// <returns>Property key</returns>
         public PropertyKey Get(int index)
         {
             PropertyKey key;
-            Marshal.ThrowExceptionForHR( _Store.GetAt(index, out key));
+            Marshal.ThrowExceptionForHR(storeInterface.GetAt(index, out key));
             return key;
         }
 
+        /// <summary>
+        /// Gets property value at specified index
+        /// </summary>
+        /// <param name="index">Index</param>
+        /// <returns>Property value</returns>
         public PropVariant GetValue(int index)
         {
             PropVariant result;
             PropertyKey key = Get(index);
-            Marshal.ThrowExceptionForHR(_Store.GetValue(ref key, out result));
+            Marshal.ThrowExceptionForHR(storeInterface.GetValue(ref key, out result));
             return result;
         }
 
+        /// <summary>
+        /// Creates a new property store
+        /// </summary>
+        /// <param name="store">IPropertyStore COM interface</param>
         internal PropertyStore(IPropertyStore store)
         {
-            _Store = store;
+            this.storeInterface = store;
         }
     }
 }

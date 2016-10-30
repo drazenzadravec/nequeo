@@ -17,7 +17,7 @@ namespace Nequeo.IO.Audio.Wave
     /// <summary>
     /// Summary description for WaveFormatEncoding.
     /// </summary>
-    internal enum WaveFormatEncoding : ushort
+    public enum WaveFormatEncoding : ushort
     {
         /// <summary>WAVE_FORMAT_UNKNOWN,	Microsoft Corporation</summary>
         Unknown = 0x0000,

@@ -31,6 +31,14 @@ namespace Nequeo.IO.Audio
         }
 
         /// <summary>
+        /// Gets the number of Wave In devices available in the system
+        /// </summary>
+        public static Int32 CountIn
+        {
+            get { return WaveInterop.waveInGetNumDevs(); }
+        }
+
+        /// <summary>
         /// Retrieves the waveOut device.
         /// </summary>
         /// <param name="deviceIndex">The device index.</param>
@@ -40,6 +48,22 @@ namespace Nequeo.IO.Audio
             DeviceDetails caps = new DeviceDetails();
             int structSize = Marshal.SizeOf(caps);
             MmException.Try(WaveInterop.waveOutGetDevCaps((IntPtr)deviceIndex, out caps, structSize), "waveOutGetDevCaps");
+            Device device = new Device();
+            device.Details = caps;
+            device.Index = deviceIndex;
+            return device;
+        }
+
+        /// <summary>
+        /// Retrieves the waveIn device.
+        /// </summary>
+        /// <param name="deviceIndex">The device index.</param>
+        /// <returns>The WaveIn device capabilities</returns>
+        public static Device GetDeviceIn(int deviceIndex)
+        {
+            DeviceDetails caps = new DeviceDetails();
+            int structSize = Marshal.SizeOf(caps);
+            MmException.Try(WaveInterop.waveInGetDevCaps((IntPtr)deviceIndex, out caps, structSize), "waveInGetDevCaps");
             Device device = new Device();
             device.Details = caps;
             device.Index = deviceIndex;

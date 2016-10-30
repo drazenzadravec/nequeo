@@ -21,6 +21,7 @@ namespace Nequeo.IO.Audio.Wave
     /// </summary>
     internal class WaveInterop
     {
+
         /// <summary>
         /// Wavw callback
         /// </summary>
@@ -304,5 +305,67 @@ namespace Nequeo.IO.Audio.Wave
         /// <returns></returns>
         [DllImport("winmm.dll", CharSet = CharSet.Ansi)]
         public static extern int mixerSetControlDetails(int hmxobj, ref VolumeStructs.MixerDetails pmxcd, int fdwDetails);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInStart(IntPtr hWaveIn);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInStop(IntPtr hWaveIn);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInReset(IntPtr hWaveIn);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInClose(IntPtr hWaveIn);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <param name="lpWaveInHdr"></param>
+        /// <param name="uSize"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInPrepareHeader(IntPtr hWaveIn, WaveHeader lpWaveInHdr, int uSize);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <param name="lpWaveInHdr"></param>
+        /// <param name="uSize"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInUnprepareHeader(IntPtr hWaveIn, WaveHeader lpWaveInHdr, int uSize);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWaveIn"></param>
+        /// <param name="pwh"></param>
+        /// <param name="cbwh"></param>
+        /// <returns></returns>
+        [DllImport("winmm.dll")]
+        public static extern MmResult waveInAddBuffer(IntPtr hWaveIn, WaveHeader pwh, int cbwh);
     }
 }

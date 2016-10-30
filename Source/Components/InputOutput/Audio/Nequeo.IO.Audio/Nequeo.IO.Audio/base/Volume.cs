@@ -45,14 +45,14 @@ namespace Nequeo.IO.Audio
         {
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Render, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "speakers")
+                if (deviceAt.FriendlyName.ToLower().Contains("speakers") || deviceAt.DataFlow == EDataFlow.Render)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -70,14 +70,14 @@ namespace Nequeo.IO.Audio
         {
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Capture, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                if (deviceAt.FriendlyName.ToLower().Contains("microphone") || deviceAt.DataFlow == EDataFlow.Capture)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -172,7 +172,7 @@ namespace Nequeo.IO.Audio
 
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Render, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
@@ -193,7 +193,7 @@ namespace Nequeo.IO.Audio
 
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Capture, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
@@ -223,7 +223,7 @@ namespace Nequeo.IO.Audio
         {
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Render, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
@@ -250,14 +250,14 @@ namespace Nequeo.IO.Audio
         {
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Capture, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                if (deviceAt.FriendlyName.ToLower().Contains("microphone") || deviceAt.DataFlow == EDataFlow.Capture)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -310,14 +310,14 @@ namespace Nequeo.IO.Audio
         {
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Capture, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                if (deviceAt.FriendlyName.ToLower().Contains("microphone") || deviceAt.DataFlow == EDataFlow.Capture)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -339,14 +339,14 @@ namespace Nequeo.IO.Audio
 
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Capture, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                if (deviceAt.FriendlyName.ToLower().Contains("microphone") || deviceAt.DataFlow == EDataFlow.Capture)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -371,14 +371,14 @@ namespace Nequeo.IO.Audio
 
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Render, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "speakers")
+                if (deviceAt.FriendlyName.ToLower().Contains("speakers") || deviceAt.DataFlow == EDataFlow.Render)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -401,14 +401,14 @@ namespace Nequeo.IO.Audio
         {
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Render, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "speakers")
+                if (deviceAt.FriendlyName.ToLower().Contains("speakers") || deviceAt.DataFlow == EDataFlow.Render)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -430,14 +430,14 @@ namespace Nequeo.IO.Audio
 
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eRender, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Render, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "speakers")
+                if (deviceAt.FriendlyName.ToLower().Contains("speakers") || deviceAt.DataFlow == EDataFlow.Render)
                 {
                     // If device found.
                     if (deviceAt != null)
@@ -462,14 +462,14 @@ namespace Nequeo.IO.Audio
 
             // Get the device.
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.eCapture, EDeviceState.DEVICE_STATE_ACTIVE);
+            MMDeviceCollection devices = DevEnum.EnumerateAudioEndPoints(EDataFlow.Capture, EDeviceState.Active);
 
             for (int i = 0; i < devices.Count; i++)
             {
                 MMDevice deviceAt = devices[i];
 
                 // Find the device.
-                if (deviceAt.FriendlyName.ToLower() == "microphone")
+                if (deviceAt.FriendlyName.ToLower().Contains("microphone") || deviceAt.DataFlow == EDataFlow.Capture)
                 {
                     // If device found.
                     if (deviceAt != null)

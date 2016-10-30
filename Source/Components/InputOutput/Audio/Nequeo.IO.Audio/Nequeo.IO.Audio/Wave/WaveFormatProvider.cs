@@ -19,7 +19,7 @@ namespace Nequeo.IO.Audio.Wave
     /// Represents a Wave file format
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 2)]
-    internal class WaveFormatProvider
+    public class WaveFormatProvider
     {
         /// <summary>format type</summary>
         protected WaveFormatEncoding waveFormatTag;
@@ -43,7 +43,7 @@ namespace Nequeo.IO.Audio.Wave
         {
 
         }
-        
+
         /// <summary>
         /// Creates a new 16 bit wave format with the specified sample
         /// rate and channel count
@@ -62,8 +62,8 @@ namespace Nequeo.IO.Audio.Wave
         /// <returns></returns>
         public int ConvertLatencyToByteSize(int milliseconds)
         {
-            int bytes = (int) ((AverageBytesPerSecond/1000.0)*milliseconds);
-            if ((bytes%BlockAlign) != 0)
+            int bytes = (int)((AverageBytesPerSecond / 1000.0) * milliseconds);
+            if ((bytes % BlockAlign) != 0)
             {
                 // Return the upper BlockAligned
                 bytes = bytes + BlockAlign - (bytes % BlockAlign);
@@ -131,7 +131,7 @@ namespace Nequeo.IO.Audio.Wave
             this.sampleRate = rate;
             this.bitsPerSample = (short)bits;
             this.extraSize = 0;
-                   
+
             this.blockAlign = (short)(channels * (bits / 8));
             this.averageBytesPerSecond = this.sampleRate * this.blockAlign;
         }
@@ -148,7 +148,7 @@ namespace Nequeo.IO.Audio.Wave
             wf.channels = (short)channels;
             wf.bitsPerSample = 32;
             wf.sampleRate = sampleRate;
-            wf.blockAlign = (short) (4*channels);
+            wf.blockAlign = (short)(4 * channels);
             wf.averageBytesPerSecond = sampleRate * wf.blockAlign;
             wf.extraSize = 0;
             return wf;
@@ -185,7 +185,7 @@ namespace Nequeo.IO.Audio.Wave
                     }
                     break;
             }
-            return waveFormat;            
+            return waveFormat;
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Nequeo.IO.Audio.Wave
         {
             int formatSize = Marshal.SizeOf(format);
             IntPtr formatPointer = Marshal.AllocHGlobal(formatSize);
-            Marshal.StructureToPtr(format, formatPointer, false);            
+            Marshal.StructureToPtr(format, formatPointer, false);
             return formatPointer;
         }
 
@@ -231,6 +231,7 @@ namespace Nequeo.IO.Audio.Wave
                 this.extraSize = br.ReadInt16();
                 if (this.extraSize != formatChunkLength - 18)
                 {
+                    
                     this.extraSize = (short)(formatChunkLength - 18);
                 }
             }
@@ -272,7 +273,7 @@ namespace Nequeo.IO.Audio.Wave
         public override bool Equals(object obj)
         {
             WaveFormatProvider other = obj as WaveFormatProvider;
-            if(other != null)
+            if (other != null)
             {
                 return waveFormatTag == other.waveFormatTag &&
                     channels == other.channels &&
@@ -290,12 +291,12 @@ namespace Nequeo.IO.Audio.Wave
         /// <returns>A hashcode</returns>
         public override int GetHashCode()
         {
-            return (int) waveFormatTag ^ 
-                (int) channels ^ 
-                sampleRate ^ 
-                averageBytesPerSecond ^ 
-                (int) blockAlign ^ 
-                (int) bitsPerSample;
+            return (int)waveFormatTag ^
+                (int)channels ^
+                sampleRate ^
+                averageBytesPerSecond ^
+                (int)blockAlign ^
+                (int)bitsPerSample;
         }
 
         /// <summary>
@@ -303,7 +304,7 @@ namespace Nequeo.IO.Audio.Wave
         /// </summary>
         public WaveFormatEncoding Encoding
         {
-            get	
+            get
             {
                 return waveFormatTag;
             }

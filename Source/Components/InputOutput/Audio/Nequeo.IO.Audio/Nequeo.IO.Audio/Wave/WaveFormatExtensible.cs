@@ -20,7 +20,7 @@ namespace Nequeo.IO.Audio.Wave
     /// http://www.microsoft.com/whdc/device/audio/multichaud.mspx
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 2)]
-    internal class WaveFormatExtensible : WaveFormatProvider
+    public class WaveFormatExtensible : WaveFormatProvider
     {
         short wValidBitsPerSample; // bits of precision, or is wSamplesPerBlock if wBitsPerSample==0
         int dwChannelMask; // which channels are present in stream

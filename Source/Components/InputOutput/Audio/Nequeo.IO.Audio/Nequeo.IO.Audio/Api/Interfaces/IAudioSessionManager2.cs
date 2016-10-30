@@ -1,24 +1,10 @@
-﻿/*
-  LICENSE
-  -------
-  Copyright (C) 2007-2010 Ray Molenkamp
+﻿/*  Company :       Nequeo Pty Ltd, http://www.Nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2008 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ */
 
-  This source code is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this source code or the software it produces.
-
-  Permission is granted to anyone to use this source code for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this source code must not be misrepresented; you must not
-     claim that you wrote the original source code.  If you use this source code
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original source code.
-  3. This notice may not be removed or altered from any source distribution.
-*/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,12 +14,34 @@ namespace Nequeo.IO.Audio.Api.Interfaces
 {
     [Guid("77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F"),
     InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    interface IAudioSessionManager2 
+    interface IAudioSessionManager
     {
+        /// <summary>
+        /// Retrieves an audio session control.
+        /// </summary>
+        /// <param name="sessionId">A new or existing session ID.</param>
+        /// <param name="streamFlags">Audio session flags.</param>
+        /// <param name="sessionControl">Receives an <see cref="IAudioSessionControl"/> interface for the audio session.</param>
+        /// <returns>An HRESULT code indicating whether the operation succeeded of failed.</returns>
         [PreserveSig]
-        int GetAudioSessionControl(ref Guid AudioSessionGuid, UInt32 StreamFlags,  IntPtr ISessionControl );
+        int GetAudioSessionControl(
+            [In, Optional] [MarshalAs(UnmanagedType.LPStruct)] Guid sessionId,
+            [In] [MarshalAs(UnmanagedType.U4)] UInt32 streamFlags,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IAudioSessionControl sessionControl);
+
+        /// <summary>
+        /// Retrieves a simple audio volume control.
+        /// </summary>
+        /// <param name="sessionId">A new or existing session ID.</param>
+        /// <param name="streamFlags">Audio session flags.</param>
+        /// <param name="audioVolume">Receives an <see cref="ISimpleAudioVolume"/> interface for the audio session.</param>
+        /// <returns>An HRESULT code indicating whether the operation succeeded of failed.</returns>
         [PreserveSig]
-        int GetSimpleAudioVolume(ref Guid AudioSessionGuid, UInt32 StreamFlags, IntPtr  /*ISimpleAudioVolume*/ SimpleAudioVolume);
+        int GetSimpleAudioVolume(
+            [In, Optional] [MarshalAs(UnmanagedType.LPStruct)] Guid sessionId,
+            [In] [MarshalAs(UnmanagedType.U4)] UInt32 streamFlags,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out ISimpleAudioVolume audioVolume);
+
         [PreserveSig]
         int GetSessionEnumerator(out IAudioSessionEnumerator SessionEnum);
         [PreserveSig]

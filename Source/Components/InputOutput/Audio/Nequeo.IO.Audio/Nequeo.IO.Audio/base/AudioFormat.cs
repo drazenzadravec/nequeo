@@ -32,4 +32,28 @@ namespace Nequeo.IO.Audio
         /// </summary>
         Aiff = 2,
     }
+
+    /// <summary>
+    /// Supported audo recording formats.
+    /// </summary>
+    public enum AudioRecordingFormat
+    {
+        /// <summary>
+        /// Allows recording using the Windows waveIn APIs.
+        /// </summary>
+        WaveIn = 0,
+        /// <summary>
+        /// Recording using waveIn api with event callbacks.
+        /// Use this for recording in non-gui applications.
+        /// </summary>
+        WaveInEvent = 1,
+        /// <summary>
+        /// Audio recording using Wasapi
+        /// </summary>
+        Wasapi = 2,
+        /// <summary>
+        /// Audio recording using Wasapi loopback.
+        /// </summary>
+        WasapiLoopback= 3,
+    }
 }

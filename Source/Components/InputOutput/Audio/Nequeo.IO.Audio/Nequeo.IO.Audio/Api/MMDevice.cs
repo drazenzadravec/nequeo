@@ -1,29 +1,16 @@
-/*
-  LICENSE
-  -------
-  Copyright (C) 2007-2010 Ray Molenkamp
+/*  Company :       Nequeo Pty Ltd, http://www.Nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2008 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ */
 
-  This source code is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this source code or the software it produces.
-
-  Permission is granted to anyone to use this source code for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this source code must not be misrepresented; you must not
-     claim that you wrote the original source code.  If you use this source code
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original source code.
-  3. This notice may not be removed or altered from any source distribution.
-*/
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Nequeo.IO.Audio.Api.Interfaces;
 using System.Runtime.InteropServices;
+
+using Nequeo.IO.Audio.Api.Interfaces;
 
 namespace Nequeo.IO.Audio.Api
 {
@@ -33,141 +20,207 @@ namespace Nequeo.IO.Audio.Api
     public class MMDevice
     {
         #region Variables
-        private IMMDevice _RealDevice;
-        private PropertyStore _PropertyStore;
-        private AudioMeterInformation _AudioMeterInformation;
-        private AudioEndpointVolume _AudioEndpointVolume;
-        private AudioSessionManager _AudioSessionManager;
-
+        private readonly IMMDevice deviceInterface;
+        private PropertyStore propertyStore;
+        private AudioMeterInformation audioMeterInformation;
+        private AudioEndpointVolume audioEndpointVolume;
+        private AudioSessionManager audioSessionManager;
         #endregion
 
         #region Guids
-        private static Guid IID_IAudioMeterInformation = typeof(IAudioMeterInformation).GUID; 
-        private static Guid IID_IAudioEndpointVolume = typeof(IAudioEndpointVolume).GUID;  
-        private static Guid IID_IAudioSessionManager = typeof(IAudioSessionManager2).GUID;
+        private static Guid IID_IAudioMeterInformation = new Guid("C02216F6-8C67-4B5B-9D00-D008E73E0064");
+        private static Guid IID_IAudioEndpointVolume = new Guid("5CDF2C82-841E-4546-9722-0CF74078229A");
+        private static Guid IID_IAudioClient = new Guid("1CB9AD4C-DBFA-4c32-B178-C2F568A703B2");
+        private static Guid IDD_IAudioSessionManager = new Guid("BFA971F1-4D5E-40BB-935E-967039BFBEE4");
         #endregion
 
         #region Init
         private void GetPropertyInformation()
         {
             IPropertyStore propstore;
-            Marshal.ThrowExceptionForHR(_RealDevice.OpenPropertyStore(EStgmAccess.STGM_READ, out propstore));
-            _PropertyStore = new PropertyStore(propstore);
+            Marshal.ThrowExceptionForHR(deviceInterface.OpenPropertyStore(StorageAccessMode.Read, out propstore));
+            propertyStore = new PropertyStore(propstore);
         }
 
-        private void GetAudioSessionManager()
+        private AudioClient GetAudioClient()
         {
             object result;
-            Marshal.ThrowExceptionForHR(_RealDevice.Activate(ref IID_IAudioSessionManager, CLSCTX.ALL, IntPtr.Zero, out result));
-            _AudioSessionManager = new AudioSessionManager(result as IAudioSessionManager2);
+            Marshal.ThrowExceptionForHR(deviceInterface.Activate(ref IID_IAudioClient, CLSCTX.ALL, IntPtr.Zero, out result));
+            return new AudioClient(result as IAudioClient);
         }
 
         private void GetAudioMeterInformation()
         {
             object result;
-            Marshal.ThrowExceptionForHR( _RealDevice.Activate(ref IID_IAudioMeterInformation, CLSCTX.ALL, IntPtr.Zero, out result));
-            _AudioMeterInformation = new AudioMeterInformation( result as IAudioMeterInformation);
+            Marshal.ThrowExceptionForHR(deviceInterface.Activate(ref IID_IAudioMeterInformation, CLSCTX.ALL, IntPtr.Zero, out result));
+            audioMeterInformation = new AudioMeterInformation(result as IAudioMeterInformation);
         }
 
         private void GetAudioEndpointVolume()
         {
             object result;
-            Marshal.ThrowExceptionForHR(_RealDevice.Activate(ref IID_IAudioEndpointVolume, CLSCTX.ALL, IntPtr.Zero, out result));
-            _AudioEndpointVolume = new AudioEndpointVolume(result as IAudioEndpointVolume);
+            Marshal.ThrowExceptionForHR(deviceInterface.Activate(ref IID_IAudioEndpointVolume, CLSCTX.ALL, IntPtr.Zero, out result));
+            audioEndpointVolume = new AudioEndpointVolume(result as IAudioEndpointVolume);
         }
 
+        private void GetAudioSessionManager()
+        {
+            object result;
+            Marshal.ThrowExceptionForHR(deviceInterface.Activate(ref IDD_IAudioSessionManager, CLSCTX.ALL, IntPtr.Zero, out result));
+            audioSessionManager = new AudioSessionManager(result as IAudioSessionManager);
+        }
         #endregion
 
         #region Properties
 
-        public AudioSessionManager AudioSessionManager
+        /// <summary>
+        /// Audio Client
+        /// </summary>
+        public AudioClient AudioClient
         {
             get
             {
-                if (_AudioSessionManager == null)
-                    GetAudioSessionManager();
-
-                return _AudioSessionManager;
+                // now makes a new one each call to allow caller to manage when to dispose
+                // n.b. should probably not be a property anymore
+                return GetAudioClient();
             }
         }
 
+        /// <summary>
+        /// Audio Meter Information
+        /// </summary>
         public AudioMeterInformation AudioMeterInformation
         {
             get
             {
-                if (_AudioMeterInformation == null)
+                if (audioMeterInformation == null)
                     GetAudioMeterInformation();
 
-                return _AudioMeterInformation;
+                return audioMeterInformation;
             }
         }
 
+        /// <summary>
+        /// Audio Endpoint Volume
+        /// </summary>
         public AudioEndpointVolume AudioEndpointVolume
         {
             get
             {
-                if (_AudioEndpointVolume == null)
+                if (audioEndpointVolume == null)
                     GetAudioEndpointVolume();
 
-                return _AudioEndpointVolume;
+                return audioEndpointVolume;
             }
         }
 
+        /// <summary>
+        /// AudioSessionManager instance
+        /// </summary>
+        public AudioSessionManager AudioSessionManager
+        {
+            get
+            {
+                if (audioSessionManager == null)
+                {
+                    GetAudioSessionManager();
+                }
+                return audioSessionManager;
+            }
+        }
+
+        /// <summary>
+        /// Properties
+        /// </summary>
         public PropertyStore Properties
         {
             get
             {
-                if (_PropertyStore == null)
+                if (propertyStore == null)
                     GetPropertyInformation();
-                return _PropertyStore;
+                return propertyStore;
             }
         }
 
+        /// <summary>
+        /// Friendly name for the endpoint
+        /// </summary>
         public string FriendlyName
         {
             get
             {
-                if (_PropertyStore == null)
-                    GetPropertyInformation();
-                if (_PropertyStore.Contains(PKEY.PKEY_DeviceInterface_FriendlyName))
+                if (propertyStore == null)
                 {
-                   return (string)_PropertyStore[PKEY.PKEY_DeviceInterface_FriendlyName].Value;
+                    GetPropertyInformation();
+                }
+                if (propertyStore.Contains(PropertyKeys.PKEY_Device_FriendlyName))
+                {
+                    return (string)propertyStore[PropertyKeys.PKEY_Device_FriendlyName].Value;
                 }
                 else
                     return "Unknown";
             }
         }
 
+        /// <summary>
+        /// Friendly name of device
+        /// </summary>
+        public string DeviceFriendlyName
+        {
+            get
+            {
+                if (propertyStore == null)
+                {
+                    GetPropertyInformation();
+                }
+                if (propertyStore.Contains(PropertyKeys.PKEY_DeviceInterface_FriendlyName))
+                {
+                    return (string)propertyStore[PropertyKeys.PKEY_DeviceInterface_FriendlyName].Value;
+                }
+                else
+                {
+                    return "Unknown";
+                }
+            }
+        }
 
+        /// <summary>
+        /// Device ID
+        /// </summary>
         public string ID
         {
             get
             {
-                string Result;
-                Marshal.ThrowExceptionForHR(_RealDevice.GetId(out Result));
-                return Result;
+                string result;
+                Marshal.ThrowExceptionForHR(deviceInterface.GetId(out result));
+                return result;
             }
         }
 
+        /// <summary>
+        /// Data Flow
+        /// </summary>
         public EDataFlow DataFlow
         {
             get
             {
-                EDataFlow Result;
-                IMMEndpoint ep =  _RealDevice as IMMEndpoint ;
-                ep.GetDataFlow(out Result);
-                return Result;
+                EDataFlow result;
+                var ep = deviceInterface as IMMEndpoint;
+                ep.GetDataFlow(out result);
+                return result;
             }
         }
 
+        /// <summary>
+        /// Device State
+        /// </summary>
         public EDeviceState State
         {
             get
             {
-                EDeviceState Result;
-                Marshal.ThrowExceptionForHR(_RealDevice.GetState(out Result));
-                return Result;
-
+                EDeviceState result;
+                Marshal.ThrowExceptionForHR(deviceInterface.GetState(out result));
+                return result;
             }
         }
         #endregion
@@ -175,9 +228,17 @@ namespace Nequeo.IO.Audio.Api
         #region Constructor
         internal MMDevice(IMMDevice realDevice)
         {
-            _RealDevice = realDevice;
+            deviceInterface = realDevice;
         }
         #endregion
+
+        /// <summary>
+        /// To string
+        /// </summary>
+        public override string ToString()
+        {
+            return FriendlyName;
+        }
 
     }
 }

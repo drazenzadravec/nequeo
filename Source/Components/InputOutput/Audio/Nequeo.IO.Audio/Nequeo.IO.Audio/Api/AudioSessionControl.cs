@@ -1,24 +1,10 @@
-﻿/*
-  LICENSE
-  -------
-  Copyright (C) 2007-2010 Ray Molenkamp
+﻿/*  Company :       Nequeo Pty Ltd, http://www.Nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2008 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ */
 
-  This source code is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this source code or the software it produces.
-
-  Permission is granted to anyone to use this source code for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this source code must not be misrepresented; you must not
-     claim that you wrote the original source code.  If you use this source code
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original source code.
-  3. This notice may not be removed or altered from any source distribution.
-*/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,128 +13,148 @@ using System.Runtime.InteropServices;
 
 namespace Nequeo.IO.Audio.Api
 {
+    /// <summary>
+    /// AudioSessionControl object for information
+    /// regarding an audio session
+    /// </summary>
     public class AudioSessionControl 
     {
-        internal IAudioSessionControl2 _AudioSessionControl;
-        internal AudioMeterInformation _AudioMeterInformation;
-        internal SimpleAudioVolume _SimpleAudioVolume;
+        private IAudioSessionControl audioSessionControlInterface;
+        private AudioSessionEventsCallback audioSessionEventCallback = null;
 
-        public AudioMeterInformation AudioMeterInformation
+        internal AudioSessionControl(IAudioSessionControl audioSessionControl)
         {
-            get
+            audioSessionControlInterface = audioSessionControl;
+        }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Finalizer
+        /// </summary>
+        ~AudioSessionControl()
+        {
+            if (audioSessionEventCallback != null)
             {
-                return _AudioMeterInformation;
+                Marshal.ThrowExceptionForHR(audioSessionControlInterface.UnregisterAudioSessionNotification(audioSessionEventCallback));
             }
+            Dispose();
         }
 
-        public SimpleAudioVolume SimpleAudioVolume
-        {
-            get
-            {
-                return _SimpleAudioVolume;
-            }
-        }
+        #endregion
 
-
-        internal AudioSessionControl(IAudioSessionControl2 realAudioSessionControl)
-        {
-            IAudioMeterInformation _meters = realAudioSessionControl as IAudioMeterInformation;
-            ISimpleAudioVolume _volume = realAudioSessionControl as ISimpleAudioVolume; 
-            if (_meters != null)
-                _AudioMeterInformation = new Nequeo.IO.Audio.Api.AudioMeterInformation(_meters);
-            if (_volume != null)
-                _SimpleAudioVolume = new SimpleAudioVolume(_volume);
-            _AudioSessionControl = realAudioSessionControl;
-            
-        }
-
-        public void RegisterAudioSessionNotification(IAudioSessionEvents eventConsumer)
-        {
-             Marshal.ThrowExceptionForHR(_AudioSessionControl.RegisterAudioSessionNotification(eventConsumer));
-        }
-
-        public void UnregisterAudioSessionNotification(IAudioSessionEvents eventConsumer)
-        {
-            Marshal.ThrowExceptionForHR(_AudioSessionControl.UnregisterAudioSessionNotification(eventConsumer));
-        }
-
+        /// <summary>
+        /// The current state of the audio session
+        /// </summary>
         public AudioSessionState State
         {
             get
             {
-                AudioSessionState res;
-                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetState(out res));
-                return res;
+                AudioSessionState state;
+
+                Marshal.ThrowExceptionForHR(audioSessionControlInterface.GetState(out state));
+
+                return state;
             }
         }
 
+        /// <summary>
+        /// The name of the audio session
+        /// </summary>
         public string DisplayName
         {
             get
             {
-                IntPtr NamePtr;
-                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetDisplayName(out NamePtr));
-                string res = Marshal.PtrToStringAuto(NamePtr);
-                Marshal.FreeCoTaskMem(NamePtr);
-                return res;
+                string displayName = String.Empty;
+
+                Marshal.ThrowExceptionForHR(audioSessionControlInterface.GetDisplayName(out displayName));
+
+                return displayName;
+            }
+            set
+            {
+                if (value != String.Empty)
+                {
+                    Marshal.ThrowExceptionForHR(audioSessionControlInterface.SetDisplayName(value, Guid.Empty));
+                }
             }
         }
 
+        /// <summary>
+        /// the path to the icon shown in the mixer
+        /// </summary>
         public string IconPath
         {
             get
             {
-                IntPtr NamePtr;
-                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetIconPath(out NamePtr));
-                string res = Marshal.PtrToStringAuto(NamePtr);
-                Marshal.FreeCoTaskMem(NamePtr);
-                return res;
-            }
-        }
+                string iconPath = String.Empty;
 
-        public string SessionIdentifier
-        {
-            get
+                Marshal.ThrowExceptionForHR(audioSessionControlInterface.GetIconPath(out iconPath));
+
+                return iconPath;
+            }
+            set
             {
-                IntPtr NamePtr;
-                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetSessionIdentifier(out NamePtr));
-                string res = Marshal.PtrToStringAuto(NamePtr);
-                Marshal.FreeCoTaskMem(NamePtr);
-                return res;
+                if (value != String.Empty)
+                {
+                    Marshal.ThrowExceptionForHR(audioSessionControlInterface.SetIconPath(value, Guid.Empty));
+                }
             }
         }
 
-        public string SessionInstanceIdentifier
+        /// <summary>
+        /// the grouping param for an audio session grouping
+        /// </summary>
+        /// <returns></returns>
+        public Guid GetGroupingParam()
         {
-            get
-            {
-                IntPtr NamePtr;
-                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetSessionInstanceIdentifier(out NamePtr));
-                string res = Marshal.PtrToStringAuto(NamePtr);
-                Marshal.FreeCoTaskMem(NamePtr);
-                return res;
-            }
+            Guid groupingId = Guid.Empty;
+
+            Marshal.ThrowExceptionForHR(audioSessionControlInterface.GetGroupingParam(out groupingId));
+
+            return groupingId;
         }
 
-        public uint ProcessID
+        /// <summary>
+        /// For chanigng the grouping param and supplying the context of said change
+        /// </summary>
+        /// <param name="groupingId"></param>
+        /// <param name="context"></param>
+        public void SetGroupingParam(Guid groupingId, Guid context)
         {
-            get
-            {
-                uint pid;
-                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetProcessId(out pid));
-                return pid;
-            }
+            Marshal.ThrowExceptionForHR(audioSessionControlInterface.SetGroupingParam(groupingId, context));
         }
 
-        public bool IsSystemIsSystemSoundsSession
+        /// <summary>
+        /// Registers an even client for callbacks
+        /// </summary>
+        /// <param name="eventClient"></param>
+        public void RegisterEventClient(IAudioSessionEventsHandler eventClient)
         {
-            get
-            {
-                return (_AudioSessionControl.IsSystemSoundsSession() == 0);  //S_OK
-            }
-
+            // we could have an array or list of listeners if we like
+            audioSessionEventCallback = new AudioSessionEventsCallback(eventClient);
+            Marshal.ThrowExceptionForHR(audioSessionControlInterface.RegisterAudioSessionNotification(audioSessionEventCallback));
         }
 
-
+        /// <summary>
+        /// Unregisters an event client from receiving callbacks
+        /// </summary>
+        /// <param name="eventClient"></param>
+        public void UnRegisterEventClient(IAudioSessionEventsHandler eventClient)
+        {
+            // if one is registered, let it go
+            if (audioSessionEventCallback != null)
+            {
+                Marshal.ThrowExceptionForHR(audioSessionControlInterface.UnregisterAudioSessionNotification(audioSessionEventCallback));
+            }
+        }
     }
 }

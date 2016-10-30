@@ -1,24 +1,10 @@
-/*
-  LICENSE
-  -------
-  Copyright (C) 2007-2010 Ray Molenkamp
+/*  Company :       Nequeo Pty Ltd, http://www.Nequeo.com.au/
+ *  Copyright :     Copyright © Nequeo Pty Ltd 2008 http://www.nequeo.com.au/
+ * 
+ *  File :          
+ *  Purpose :       
+ */
 
-  This source code is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this source code or the software it produces.
-
-  Permission is granted to anyone to use this source code for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this source code must not be misrepresented; you must not
-     claim that you wrote the original source code.  If you use this source code
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original source code.
-  3. This notice may not be removed or altered from any source distribution.
-*/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,9 +13,19 @@ namespace Nequeo.IO.Audio.Api
 {
     public enum ERole
     {
-        eConsole =0,
-        eMultimedia =1,
-        eCommunications=2,
-        ERole_enum_count=3
+        /// <summary>
+        /// Games, system notification sounds, and voice commands.
+        /// </summary>
+        Console,
+
+        /// <summary>
+        /// Music, movies, narration, and live music recording
+        /// </summary>
+        Multimedia,
+
+        /// <summary>
+        /// Voice communications (talking to another person).
+        /// </summary>
+        Communications,
     }
 }
