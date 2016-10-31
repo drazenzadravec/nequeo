@@ -30,7 +30,7 @@ namespace Nequeo.IO.Audio.Wave
         /// <summary>
         /// Reads an ID3v2 tag from a stream
         /// </summary>
-        public static Id3v2Tag ReadTag(Stream input)
+        public static Id3v2Tag ReadTag(System.IO.Stream input)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace Nequeo.IO.Audio.Wave
         /// </summary>
         /// <param name="tags"></param>
         /// <returns></returns>
-        static Stream CreateId3v2TagStream(IEnumerable<KeyValuePair<string, string>> tags)
+        static System.IO.Stream CreateId3v2TagStream(IEnumerable<KeyValuePair<string, string>> tags)
         {
             List<byte[]> frames = new List<byte[]>();
             foreach (KeyValuePair<string, string> tag in tags)
@@ -187,7 +187,7 @@ namespace Nequeo.IO.Audio.Wave
 
         #endregion
 
-        private Id3v2Tag(Stream input)
+        private Id3v2Tag(System.IO.Stream input)
         {
             tagStartPosition = input.Position;
             BinaryReader reader = new BinaryReader(input);

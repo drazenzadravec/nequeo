@@ -59,7 +59,7 @@ namespace Nequeo.IO.Audio.Wave
         /// </summary>
         /// <param name="input">input stream</param>
         /// <returns>A valid MP3 frame, or null if none found</returns>
-        public static Mp3Frame LoadFromStream(Stream input)
+        public static Mp3Frame LoadFromStream(System.IO.Stream input)
         {
             return LoadFromStream(input, true);
         }
@@ -69,7 +69,7 @@ namespace Nequeo.IO.Audio.Wave
         /// also see http://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx
         /// </remarks>
         /// <returns>A valid MP3 frame, or null if none found</returns>
-        public static Mp3Frame LoadFromStream(Stream input, bool readData)
+        public static Mp3Frame LoadFromStream(System.IO.Stream input, bool readData)
         {
             var frame = new Mp3Frame();
             frame.FileOffset = input.Position;

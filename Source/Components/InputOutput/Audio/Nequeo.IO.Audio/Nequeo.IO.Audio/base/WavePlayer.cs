@@ -40,7 +40,7 @@ namespace Nequeo.IO.Audio
         }
 
         private AudioReader _audioReader = null;
-        private Stream _audioStream = null;
+        private System.IO.Stream _audioStream = null;
         private AudioFormat _audioFormat = AudioFormat.Wav;
         private string _filename = null;
         private bool _internalStream = false;
@@ -294,7 +294,7 @@ namespace Nequeo.IO.Audio
         /// </summary>
         /// <param name="audioStream">The audio stream.</param>
         /// <param name="audioFormat">The audio format of the stream.</param>
-        public void Open(Stream audioStream, AudioFormat audioFormat)
+        public void Open(System.IO.Stream audioStream, AudioFormat audioFormat)
         {
             _internalStream = false;
             _audioStream = audioStream;

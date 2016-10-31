@@ -17,7 +17,7 @@ namespace Nequeo.IO.Audio.Wave
     /// <summary>
     /// Base class for all WaveStream classes. Derives from stream.
     /// </summary>
-    internal abstract class WaveStream : Stream, IWaveProvider
+    internal abstract class WaveStream : System.IO.Stream, IWaveProvider
     {
         /// <summary>
         /// Retrieves the WaveFormat for this stream

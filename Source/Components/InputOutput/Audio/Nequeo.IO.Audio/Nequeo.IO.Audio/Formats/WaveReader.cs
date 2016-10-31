@@ -28,7 +28,7 @@ namespace Nequeo.IO.Audio.Formats
         private readonly long dataChunkLength;
         private readonly List<RiffChunk> chunks = new List<RiffChunk>();
         private readonly object lockObject = new object();
-        private Stream waveStream;
+        private System.IO.Stream waveStream;
 
         /// <summary>Supports opening a WAV file</summary>
         /// <remarks>The WAV file format is a real mess, but we will only
@@ -48,7 +48,7 @@ namespace Nequeo.IO.Audio.Formats
         /// Creates a Wave File Reader based on an input stream
         /// </summary>
         /// <param name="inputStream">The input stream containing a WAV file including header</param>
-        public WaveReader(Stream inputStream)
+        public WaveReader(System.IO.Stream inputStream)
         {
             this.waveStream = inputStream;
             var chunkReader = new WaveFileChunkReader();

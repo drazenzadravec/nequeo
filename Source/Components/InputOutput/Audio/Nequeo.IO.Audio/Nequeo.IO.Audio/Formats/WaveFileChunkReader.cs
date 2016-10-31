@@ -37,7 +37,7 @@ namespace Nequeo.IO.Audio.Formats
             strictMode = false;
         }
 
-        public void ReadWaveHeader(Stream stream)
+        public void ReadWaveHeader(System.IO.Stream stream)
         {
             this.dataChunkPosition = -1;
             this.waveFormat = null;
@@ -135,7 +135,7 @@ namespace Nequeo.IO.Audio.Formats
             reader.ReadBytes(chunkSize - 24); // get to the end of this chunk (should parse extra stuff later)
         }
 
-        private static RiffChunk GetRiffChunk(Stream stream, Int32 chunkIdentifier, Int32 chunkLength)
+        private static RiffChunk GetRiffChunk(System.IO.Stream stream, Int32 chunkIdentifier, Int32 chunkLength)
         {
             return new RiffChunk(chunkIdentifier, chunkLength, stream.Position);
         }

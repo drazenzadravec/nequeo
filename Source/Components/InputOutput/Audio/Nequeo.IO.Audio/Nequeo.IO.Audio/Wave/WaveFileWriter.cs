@@ -15,9 +15,9 @@ namespace Nequeo.IO.Audio.Wave
     /// <summary>
     /// This class writes WAV data to a .wav file on disk
     /// </summary>
-    internal class WaveFileWriter : Stream
+    internal class WaveFileWriter : System.IO.Stream
     {
-        private Stream outStream;
+        private System.IO.Stream outStream;
         private readonly BinaryWriter writer;
         private long dataSizePos;
         private long factSampleCountPos;
@@ -69,7 +69,7 @@ namespace Nequeo.IO.Audio.Wave
         /// </summary>
         /// <param name="outStream">Stream to be written to</param>
         /// <param name="format">Wave format to use</param>
-        public WaveFileWriter(Stream outStream, WaveFormatProvider format)
+        public WaveFileWriter(System.IO.Stream outStream, WaveFormatProvider format)
         {
             this.outStream = outStream;
             this.format = format;

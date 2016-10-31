@@ -31,7 +31,7 @@ namespace Nequeo.IO.Audio.Formats
         private readonly long dataPosition;
         private readonly int dataChunkLength;
         private readonly List<AiffChunk> chunks = new List<AiffChunk>();
-        private Stream waveStream;
+        private System.IO.Stream waveStream;
         private readonly object lockObject = new object();
 
         /// <summary>Supports opening a AIF file</summary>
@@ -49,7 +49,7 @@ namespace Nequeo.IO.Audio.Formats
         /// Creates an Aiff File Reader based on an input stream
         /// </summary>
         /// <param name="inputStream">The input stream containing a AIF file including header</param>
-        public AiffReader(Stream inputStream)
+        public AiffReader(System.IO.Stream inputStream)
         {
             this.waveStream = inputStream;
             ReadAiffHeader(waveStream, out waveFormat, out dataPosition, out dataChunkLength, chunks);
@@ -64,7 +64,7 @@ namespace Nequeo.IO.Audio.Formats
         /// <param name="dataChunkPosition">The position of the data chunk</param>
         /// <param name="dataChunkLength">The length of the data chunk</param>
         /// <param name="chunks">Additional chunks found</param>
-        public static void ReadAiffHeader(Stream stream, out WaveFormatProvider format, out long dataChunkPosition, out int dataChunkLength, List<AiffChunk> chunks)
+        public static void ReadAiffHeader(System.IO.Stream stream, out WaveFormatProvider format, out long dataChunkPosition, out int dataChunkLength, List<AiffChunk> chunks)
         {
             dataChunkPosition = -1;
             format = null;

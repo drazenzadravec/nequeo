@@ -128,6 +128,13 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo.Collections, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=95250545e5d9f3b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\References\Staging\Nequeo.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.IO.Audio">
+      <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.IO.Stream, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=43b018473d802851, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Stream.dll</HintPath>
@@ -171,6 +178,10 @@
     <Compile Include="Microsoft\AzureDataMarketContainer.cs" />
     <Compile Include="Google\GoogleApi.cs" />
     <Compile Include="Google\GoogleApiContainer.cs" />
+    <Compile Include="Microsoft\Cognitive\ApiContainer.cs" />
+    <Compile Include="Microsoft\Cognitive\CognitiveApi.cs" />
+    <Compile Include="Microsoft\Cognitive\CognitiveSpeechApi.cs" />
+    <Compile Include="Microsoft\Cognitive\SpeechTranslation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

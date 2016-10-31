@@ -28,14 +28,14 @@ namespace Nequeo.IO.Audio.Formats
         /// Stream wave provider.
         /// </summary>
         /// <param name="stream">The stream containing the data.</param>
-        public StreamWaveReader(Stream stream)
+        public StreamWaveReader(System.IO.Stream stream)
         {
             _stream = stream;
 
             _waveFormat = new WaveFormatProvider(44100, 16, 2);
         }
 
-        private Stream _stream;
+        private System.IO.Stream _stream;
         private WaveFormatProvider _waveFormat;
 
         /// <summary>

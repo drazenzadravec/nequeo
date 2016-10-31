@@ -41,7 +41,7 @@ namespace Nequeo.IO.Audio
         private IWaveIn _waveIn;
         private WaveFileWriter _writer;
 
-        private Stream _audioStream = null;
+        private System.IO.Stream _audioStream = null;
         private AudioRecordingFormat _audioFormat = AudioRecordingFormat.WaveIn;
         private string _filename = null;
         private bool _internalStream = false;
@@ -49,11 +49,27 @@ namespace Nequeo.IO.Audio
         private object _waveInLock = new object();
         private bool _waveInCreated = false;
         private bool _recording = false;
+        private bool _isBufferStream = false;
+        private int _bufferMilliseconds = 100;
 
         /// <summary>
         /// Indicates recording has stopped automatically.
         /// </summary>
         public event EventHandler<StoppedEventArgs> RecordingStopped;
+
+        /// <summary>
+        /// Indicates recorded data is available 
+        /// </summary>
+        public event EventHandler<long> DataAvailable;
+
+        /// <summary>
+        /// Gets or sets milliseconds for the buffer. Recommended value is 100ms
+        /// </summary>
+        public int BufferMilliseconds
+        {
+            get{ return _bufferMilliseconds; }
+            set{ _bufferMilliseconds = value; }
+        }
 
         /// <summary>
         /// Gets or sets the microphone volume for this device 1.0 is full scale.
@@ -80,13 +96,35 @@ namespace Nequeo.IO.Audio
         /// <param name="outStream">The stream to write the audio to.</param>
         /// <param name="format">The audio wave format.</param>
         /// <param name="audioRecordingFormat">The audio recording format.</param>
-        public void Open(Stream outStream, WaveFormatProvider format = null, AudioRecordingFormat audioRecordingFormat = AudioRecordingFormat.WaveIn)
+        public void Open(Nequeo.IO.Stream.StreamBufferBase outStream, WaveFormatProvider format = null, AudioRecordingFormat audioRecordingFormat = AudioRecordingFormat.WaveIn)
         {
             // If not created.
             if (!_waveInCreated)
             {
                 _audioStream = outStream;
                 _internalStream = false;
+                _isBufferStream = true;
+
+                // Initialise.
+                Init(format, audioRecordingFormat);
+                _waveInCreated = true;
+            }
+        }
+
+        /// <summary>
+        /// Open the recorder.
+        /// </summary>
+        /// <param name="outStream">The stream to write the audio to.</param>
+        /// <param name="format">The audio wave format.</param>
+        /// <param name="audioRecordingFormat">The audio recording format.</param>
+        public void Open(System.IO.Stream outStream, WaveFormatProvider format = null, AudioRecordingFormat audioRecordingFormat = AudioRecordingFormat.WaveIn)
+        {
+            // If not created.
+            if (!_waveInCreated)
+            {
+                _audioStream = outStream;
+                _internalStream = false;
+                _isBufferStream = false;
 
                 // Initialise.
                 Init(format, audioRecordingFormat);
@@ -108,6 +146,7 @@ namespace Nequeo.IO.Audio
                 _filename = filename;
                 _audioStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Read);
                 _internalStream = true;
+                _isBufferStream = false;
 
                 // Initialise.
                 Init(format, audioRecordingFormat);
@@ -163,8 +202,14 @@ namespace Nequeo.IO.Audio
                         // If an output stream exists.
                         if (_audioStream != null)
                         {
-                            // Create the writer.
-                            _writer = new WaveFileWriter(_audioStream, _waveIn.WaveFormat);
+                            // If not using buffer.
+                            if (!_isBufferStream)
+                            {
+                                // Create the writer.
+                                _writer = new WaveFileWriter(_audioStream, _waveIn.WaveFormat);
+                            }
+
+                            // Start capturing audio.
                             _waveIn.StartRecording();
                             _recording = true;
                         }
@@ -207,13 +252,13 @@ namespace Nequeo.IO.Audio
                         break;
 
                     case AudioRecordingFormat.WaveInEvent:
-                        _waveIn = new WaveInEvent() { DeviceNumber = _device.Index };
+                        _waveIn = new WaveInEvent() { DeviceNumber = _device.Index, BufferMilliseconds = _bufferMilliseconds };
                         _waveIn.WaveFormat = new WaveFormatProvider(8000, 16, 1);
                         break;
 
                     case AudioRecordingFormat.WaveIn:
                     default:
-                        _waveIn = new WaveIn() { DeviceNumber = _device.Index };
+                        _waveIn = new WaveIn() { DeviceNumber = _device.Index, BufferMilliseconds = _bufferMilliseconds };
                         _waveIn.WaveFormat = new WaveFormatProvider(8000, 16, 1);
                         break;
                 }
@@ -233,13 +278,13 @@ namespace Nequeo.IO.Audio
                         break;
 
                     case AudioRecordingFormat.WaveInEvent:
-                        _waveIn = new WaveInEvent() { DeviceNumber = _device.Index };
+                        _waveIn = new WaveInEvent() { DeviceNumber = _device.Index, BufferMilliseconds = _bufferMilliseconds };
                         _waveIn.WaveFormat = format;
                         break;
 
                     case AudioRecordingFormat.WaveIn:
                     default:
-                        _waveIn = new WaveIn() { DeviceNumber = _device.Index };
+                        _waveIn = new WaveIn() { DeviceNumber = _device.Index, BufferMilliseconds = _bufferMilliseconds };
                         _waveIn.WaveFormat = format;
                         break;
                 }
@@ -279,10 +324,20 @@ namespace Nequeo.IO.Audio
         /// <param name="e"></param>
         private void _waveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
-            if (_writer != null)
+            // If not using buffer.
+            if (!_isBufferStream)
             {
-                // Write the audio data to the writer.
-                _writer.Write(e.Buffer, 0, e.BytesRecorded);
+                if (_writer != null)
+                {
+                    // Write the audio data to the writer.
+                    _writer.Write(e.Buffer, 0, e.BytesRecorded);
+                }
+            }
+            else
+            {
+                // Write to buffer.
+                _audioStream.Write(e.Buffer, 0, e.BytesRecorded);
+                DataAvailable?.Invoke(this, (long)e.BytesRecorded);
             }
         }
 

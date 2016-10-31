@@ -36,7 +36,7 @@ namespace Nequeo.IO.Audio.Formats
     internal class Mp3Reader : WaveStream
     {
         private readonly WaveFormatProvider waveFormat;
-        private Stream mp3Stream;
+        private System.IO.Stream mp3Stream;
         private readonly long mp3DataLength;
         private readonly long dataStartPosition;
         
@@ -86,7 +86,7 @@ namespace Nequeo.IO.Audio.Formats
         /// Will not dispose of this stream itself
         /// </summary>
         /// <param name="inputStream">The incoming stream containing MP3 data</param>
-        public Mp3Reader(Stream inputStream)
+        public Mp3Reader(System.IO.Stream inputStream)
             : this (inputStream, CreateAcmFrameDecompressor)
         {
             
@@ -98,7 +98,7 @@ namespace Nequeo.IO.Audio.Formats
         /// </summary>
         /// <param name="inputStream">The incoming stream containing MP3 data</param>
         /// <param name="frameDecompressorBuilder">Factory method to build a frame decompressor</param>
-        public Mp3Reader(Stream inputStream, FrameDecompressorBuilder frameDecompressorBuilder)
+        public Mp3Reader(System.IO.Stream inputStream, FrameDecompressorBuilder frameDecompressorBuilder)
         {
             // Calculated as a double to minimize rounding errors
 

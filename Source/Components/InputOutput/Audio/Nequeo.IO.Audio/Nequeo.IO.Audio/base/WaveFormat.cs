@@ -106,7 +106,7 @@ namespace Nequeo.IO.Audio
         /// </summary>
         /// <param name="stream">The stream to read the data from.</param>
         /// <returns>The complete structure and sound data of the .wav file.</returns>
-        public WaveStructure Read(Stream stream)
+        public WaveStructure Read(System.IO.Stream stream)
         {
             WaveStructure wave = new WaveStructure();
             BinaryReader binaryReader = null;
@@ -235,7 +235,7 @@ namespace Nequeo.IO.Audio
         /// <param name="stream">The stream to write the data to.</param>
         /// <param name="waveHeaderStructure">The complete structure and sound data of the .wav file.</param>
         /// <returns>True if the write was succesfull; else false.</returns>
-        public bool Write(Stream stream, WaveStructure waveHeaderStructure)
+        public bool Write(System.IO.Stream stream, WaveStructure waveHeaderStructure)
         {
             if (stream == null) throw new ArgumentNullException("stream");
 
@@ -304,7 +304,7 @@ namespace Nequeo.IO.Audio
         /// Play the wave sound stream asynchronously.
         /// </summary>
         /// <param name="stream">The stream .wav format to play.</param>
-        public void Play(Stream stream)
+        public void Play(System.IO.Stream stream)
         {
             if (stream == null) throw new ArgumentNullException("stream");
 
@@ -328,7 +328,7 @@ namespace Nequeo.IO.Audio
         /// Play the wave sound stream synchronously.
         /// </summary>
         /// <param name="stream">The stream .wav format to play.</param>
-        public void PlaySync(Stream stream)
+        public void PlaySync(System.IO.Stream stream)
         {
             if (stream == null) throw new ArgumentNullException("stream");
 
@@ -352,7 +352,7 @@ namespace Nequeo.IO.Audio
         /// Play the wave sound stream asynchronously.
         /// </summary>
         /// <param name="stream">The stream .wav format to play.</param>
-        public void PlayLoop(Stream stream)
+        public void PlayLoop(System.IO.Stream stream)
         {
             if (stream == null) throw new ArgumentNullException("stream");
 
@@ -376,7 +376,7 @@ namespace Nequeo.IO.Audio
         /// Play the wave sound stream synchronously.
         /// </summary>
         /// <param name="stream">The stream .wav format to play.</param>
-        public void PlaySyncLoop(Stream stream)
+        public void PlaySyncLoop(System.IO.Stream stream)
         {
             if (stream == null) throw new ArgumentNullException("stream");
 

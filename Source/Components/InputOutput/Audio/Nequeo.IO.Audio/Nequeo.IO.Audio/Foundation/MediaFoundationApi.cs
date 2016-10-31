@@ -146,7 +146,7 @@ namespace Nequeo.IO.Audio.Foundation
         /// </summary>
         /// <param name="stream">The input stream</param>
         /// <returns>A media foundation byte stream</returns>
-        public static IMFByteStream CreateByteStreamFromStream(Stream stream)
+        public static IMFByteStream CreateByteStreamFromStream(System.IO.Stream stream)
         {
             IMFByteStream byteStream = null;
             StreamWrapper streamStreamWrapper = new Nequeo.IO.StreamWrapper(stream);

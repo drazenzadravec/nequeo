@@ -29,7 +29,7 @@ namespace Nequeo.IO.Audio.Wave
         private readonly long length;
         private readonly MediaFoundationReaderSettings settings;
         private readonly string file = string.Empty;
-        private Stream _inputStream = null;
+        private System.IO.Stream _inputStream = null;
         private IMFSourceReader pReader;
 
         private long position;
@@ -78,7 +78,7 @@ namespace Nequeo.IO.Audio.Wave
         /// Creates a new MediaFoundationReader based on the supplied file
         /// </summary>
         /// <param name="inputStream">The input stream containing a WAV.</param>
-        public MediaFoundationReader(Stream inputStream)
+        public MediaFoundationReader(System.IO.Stream inputStream)
             : this(inputStream, new MediaFoundationReaderSettings())
         {
         }
@@ -88,7 +88,7 @@ namespace Nequeo.IO.Audio.Wave
         /// </summary>
         /// <param name="inputStream">The input stream containing a WAV.</param>
         /// <param name="settings">Advanced settings</param>
-        public MediaFoundationReader(Stream inputStream, MediaFoundationReaderSettings settings)
+        public MediaFoundationReader(System.IO.Stream inputStream, MediaFoundationReaderSettings settings)
         {
             MediaFoundationApi.Startup();
             this.settings = settings;

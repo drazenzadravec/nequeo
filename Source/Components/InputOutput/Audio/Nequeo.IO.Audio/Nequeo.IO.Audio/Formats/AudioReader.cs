@@ -48,7 +48,7 @@ namespace Nequeo.IO.Audio.Formats
         /// </summary>
         /// <param name="waveStream">The wave stream to open</param>
         /// <param name="audioFormat">Audio format.</param>
-        public AudioReader(Stream waveStream, AudioFormat audioFormat)
+        public AudioReader(System.IO.Stream waveStream, AudioFormat audioFormat)
         {
             lockObject = new object();
             this.waveStream = waveStream;
@@ -60,7 +60,7 @@ namespace Nequeo.IO.Audio.Formats
         }
 
         private string fileName;
-        private Stream waveStream;
+        private System.IO.Stream waveStream;
         private WaveStream readerStream; // the waveStream which we will use for all positioning
         private readonly SampleChannel sampleChannel; // sample provider that gives us most stuff we need
         private readonly int destBytesPerSample;
@@ -84,7 +84,7 @@ namespace Nequeo.IO.Audio.Formats
         /// </summary>
         /// <param name="waveStream">Wave stream.</param>
         /// <param name="audioFormat">Audio format.</param>
-        private void CreateReaderStream(Stream waveStream, AudioFormat audioFormat)
+        private void CreateReaderStream(System.IO.Stream waveStream, AudioFormat audioFormat)
         {
             // Set the position of the stream.
             waveStream.Position = 0;

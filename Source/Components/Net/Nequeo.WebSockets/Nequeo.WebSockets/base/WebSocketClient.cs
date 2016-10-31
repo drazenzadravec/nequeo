@@ -65,6 +65,16 @@ namespace Nequeo.Net.WebSockets
         /// <summary>
         /// Web socket client.
         /// </summary>
+        /// <param name="uri">The resource to connect to.</param>
+        public WebSocketClient(Uri uri)
+        {
+            _uri = uri;
+            _webSocket = new ClientWebSocket();
+        }
+
+        /// <summary>
+        /// Web socket client.
+        /// </summary>
         /// <param name="host">The remote host.</param>
         /// <param name="useSslConnection">Use a secure connection.</param>
         /// <param name="path">The remote host path.</param>
@@ -91,6 +101,7 @@ namespace Nequeo.Net.WebSockets
         private int _sendSize = 8192;
         private int _receiveSize = 8192;
 
+        private Uri _uri;
         private string _host = "localhost";
         private int _port = 80;
         private string _path = "/";
@@ -98,6 +109,19 @@ namespace Nequeo.Net.WebSockets
         private const string _secureProtocol = "wss://";
         private const string _nonSecureProtocol = "ws://";
         private bool _useSslConnection = false;
+
+        private AutoResetEvent _sentAsync = null;
+        private AutoResetEvent _receivedAsync = null;
+
+        /// <summary>
+        /// On connected event handler.
+        /// </summary>
+        public event EventHandler OnConnected;
+
+        /// <summary>
+        /// On disconnected event handler.
+        /// </summary>
+        public event EventHandler OnDisconnected;
 
         /// <summary>
         /// Gets or sets the on receive handler.
@@ -127,11 +151,78 @@ namespace Nequeo.Net.WebSockets
         }
 
         /// <summary>
-        /// Gets or sets is the client connected.
+        /// Gets or sets the resource.
+        /// </summary>
+        public Uri Uri
+        {
+            get { return _uri; }
+            set { _uri = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the auto reset event sent async signal.
+        /// </summary>
+        public AutoResetEvent SentAsyncSignal
+        {
+            get { return _sentAsync; }
+            set { _sentAsync = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the auto reset event received async signal.
+        /// </summary>
+        public AutoResetEvent ReceivedAsyncSignal
+        {
+            get { return _receivedAsync; }
+            set { _receivedAsync = value; }
+        }
+
+        /// <summary>
+        /// Gets is the client connected.
         /// </summary>
         public bool IsConnected
         {
             get { return _isConnected; }
+        }
+
+        /// <summary>
+        /// Gets the client web socket client options.
+        /// </summary>
+        public ClientWebSocketOptions Options
+        {
+            get { return _webSocket.Options; }
+        }
+
+        /// <summary>
+        /// Gets the web socket state.
+        /// </summary>
+        public WebSocketState State
+        {
+            get { return _webSocket.State; }
+        }
+
+        /// <summary>
+        /// Gets the web socket sub-protocol.
+        /// </summary>
+        public string SubProtocol
+        {
+            get { return _webSocket.SubProtocol; }
+        }
+
+        /// <summary>
+        /// Gets the web socket close status.
+        /// </summary>
+        public WebSocketCloseStatus? CloseStatus
+        {
+            get { return _webSocket.CloseStatus; }
+        }
+
+        /// <summary>
+        /// Gets the web socket close status description.
+        /// </summary>
+        public string CloseStatusDescription
+        {
+            get { return _webSocket.CloseStatusDescription; }
         }
 
         /// <summary>
@@ -209,13 +300,15 @@ namespace Nequeo.Net.WebSockets
                 string url = protocol + _host.TrimEnd('/') + ":" + _port + "/" + _path.TrimStart('/');
 
                 // Create the uri
-                Uri uri = new Uri(url);
+                if (_uri == null)
+                    _uri = new Uri(url);
 
                 // Attempt to make a connection.
-                await _webSocket.ConnectAsync(uri, cancellationToken);
+                await _webSocket.ConnectAsync(_uri, cancellationToken);
 
                 // Indicate that a connection has been made.
                 _isConnected = true;
+                OnConnected?.Invoke(this, new EventArgs());
 
                 // Start the receiver.
                 Receiver(_webSocket);
@@ -236,6 +329,7 @@ namespace Nequeo.Net.WebSockets
 
                 // Close the connection.
                 await _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, closeCancellationToken);
+                OnDisconnected?.Invoke(this, new EventArgs());
             }
         }
 
@@ -277,10 +371,46 @@ namespace Nequeo.Net.WebSockets
             if (_isConnected)
             {
                 // While the connection is open.
-                while (_webSocket.State == WebSocketState.Open)
+                if (_webSocket.State == WebSocketState.Open)
                 {
                     // Send the data.
                     await _webSocket.SendAsync(new ArraySegment<byte>(data), WebSocketMessageType.Binary, endOfMessage, cancellationToken);
+
+                    // Signal the data has been sent.
+                    _sentAsync?.Set();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Send the data asynchronously.
+        /// </summary>
+        /// <param name="data">The data to send.</param>
+        /// <param name="endOfMessage">Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.</param>
+        public void SendText(byte[] data, bool endOfMessage = true)
+        {
+            SendText(data, CancellationToken.None, endOfMessage);
+        }
+
+        /// <summary>
+        /// Send the data asynchronously.
+        /// </summary>
+        /// <param name="data">The data to send.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <param name="endOfMessage">Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.</param>
+        public async void SendText(byte[] data, CancellationToken cancellationToken, bool endOfMessage = true)
+        {
+            // If connected.
+            if (_isConnected)
+            {
+                // While the connection is open.
+                if (_webSocket.State == WebSocketState.Open)
+                {
+                    // Send the data.
+                    await _webSocket.SendAsync(new ArraySegment<byte>(data), WebSocketMessageType.Text, endOfMessage, cancellationToken);
+
+                    // Signal the data has been sent.
+                    _sentAsync?.Set();
                 }
             }
         }
@@ -303,11 +433,15 @@ namespace Nequeo.Net.WebSockets
                 // Wait for the next set of data.
                 var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), receiveCancellationToken);
 
+                // Signal the data has been received.
+                _receivedAsync?.Set();
+
                 // If the connection has closed.
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
                     // Close the connection.
                     await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, closeCancellationToken);
+                    OnDisconnected?.Invoke(this, new EventArgs());
                 }
                 else
                 {

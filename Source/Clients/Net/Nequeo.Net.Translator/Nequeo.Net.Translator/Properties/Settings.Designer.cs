@@ -46,5 +46,41 @@ namespace Nequeo.Net.Translator.Properties {
                 this["GoogleTranslatorServiceURI"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.cognitive.microsoft.com/sts/v1.0/")]
+        public string MicrosoftTranslatorServiceURI_CV1 {
+            get {
+                return ((string)(this["MicrosoftTranslatorServiceURI_CV1"]));
+            }
+            set {
+                this["MicrosoftTranslatorServiceURI_CV1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.microsofttranslator.com/v2/http.svc/")]
+        public string MicrosoftTranslatorServiceURI_CV2 {
+            get {
+                return ((string)(this["MicrosoftTranslatorServiceURI_CV2"]));
+            }
+            set {
+                this["MicrosoftTranslatorServiceURI_CV2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("wss://dev.microsofttranslator.com/speech/")]
+        public string MicrosoftTranslatorServiceURI_WSV1 {
+            get {
+                return ((string)(this["MicrosoftTranslatorServiceURI_WSV1"]));
+            }
+            set {
+                this["MicrosoftTranslatorServiceURI_WSV1"] = value;
+            }
+        }
     }
 }
