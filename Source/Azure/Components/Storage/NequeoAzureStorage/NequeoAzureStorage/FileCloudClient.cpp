@@ -402,7 +402,7 @@ Concurrency::task<void> FileCloudClient::UploadFileAsync(azure::storage::cloud_f
 /// <param name="directory">The directory reference.</param>
 /// <param name="fileName">The file name.</param>
 /// <param name="inputStream">The input stream containing the file to upload.</param>
-void FileCloudClient::FileCloudClient::UploadStreamFile(azure::storage::cloud_file_directory& directory,
+void FileCloudClient::UploadStreamFile(azure::storage::cloud_file_directory& directory,
 	const utility::string_t& fileName, Concurrency::streams::istream& inputStream)
 {
 	// Upload a file from a file.
