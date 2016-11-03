@@ -280,6 +280,68 @@ namespace Nequeo {
 				/// <returns>The approximate message count <see cref="concurrency::task"/>.</returns>
 				Concurrency::task<int> GetMessageCountAsync(const utility::string_t& queueName);
 
+				/// <summary>
+				/// Checks for the existence of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>True if a queue exists; else false.</returns>
+				bool Exists(const utility::string_t& queueName) const;
+
+				/// <summary>
+				/// Checks for the existence of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+				/// <returns>True if a queue exists; else false.</returns>
+				bool Exists(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context) const;
+
+				/// <summary>
+				/// Intitiates an asynchronous operation to check for the existence of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+				Concurrency::task<bool> ExistsAsync(const utility::string_t& queueName);
+
+				/// <summary>
+				/// Intitiates an asynchronous operation to check for the existence of the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+				/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+				Concurrency::task<bool> ExistsAsync(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context);
+
+				/// <summary>
+				/// Deletes all the messages in the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				void Clear(const utility::string_t& queueName);
+
+				/// <summary>
+				/// Deletes all the messages in the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="options">An <see cref="azure::storage::queue_request_options" /> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context" /> object that represents the context for the current operation.</param>
+				void Clear(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context);
+
+				/// <summary>
+				/// Intitiates an asynchronous operation that deletes all the messages in the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+				Concurrency::task<void> ClearAsync(const utility::string_t& queueName);
+
+				/// <summary>
+				/// Intitiates an asynchronous operation that deletes all the messages in the queue.
+				/// </summary>
+				/// <param name="queueName">The queue name.</param>
+				/// <param name="options">An <see cref="azure::storage::queue_request_options" /> object that specifies additional options for the request.</param>
+				/// <param name="context">An <see cref="azure::storage::operation_context" /> object that represents the context for the current operation.</param>
+				/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+				Concurrency::task<void> ClearAsync(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context);
+
 			private:
 				bool _disposed;
 				bool _isInitialised;

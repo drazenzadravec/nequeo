@@ -42,7 +42,8 @@ using namespace Nequeo::Azure::Storage;
 /// <param name="endpoint_suffix">The DNS endpoint suffix for the storage services, e.g., &quot;core.windows.net&quot;.</param>
 /// <param name="useHttps"><c>true</c> to use HTTPS to connect to storage service endpoints; otherwise, <c>false</c>.</param>
 AzureAccount::AzureAccount(const azure::storage::storage_credentials& credentials, const utility::string_t& endpoint_suffix, bool useHttps)
-	: _disposed(false), _credentials(credentials), _endpoint_suffix(endpoint_suffix), _useHttps(useHttps), _account(credentials, endpoint_suffix, useHttps)
+	: _disposed(false), _credentials(credentials), _endpoint_suffix(endpoint_suffix), _useHttps(useHttps), 
+	_account(credentials, endpoint_suffix, useHttps)
 {
 }
 
@@ -59,8 +60,8 @@ AzureAccount::AzureAccount(
 	const azure::storage::storage_uri& blob_endpoint,
 	const azure::storage::storage_uri& queue_endpoint,
 	const azure::storage::storage_uri& table_endpoint)
-	: _disposed(false), _credentials(credentials), _account(credentials, blob_endpoint, queue_endpoint, table_endpoint),
-	_blob_endpoint(blob_endpoint), _queue_endpoint(queue_endpoint), _table_endpoint(table_endpoint)
+	: _disposed(false), _credentials(credentials), _blob_endpoint(blob_endpoint), _queue_endpoint(queue_endpoint), _table_endpoint(table_endpoint),
+	_account(credentials, blob_endpoint, queue_endpoint, table_endpoint)
 {
 }
 
@@ -79,8 +80,8 @@ AzureAccount::AzureAccount(
 	const azure::storage::storage_uri& queue_endpoint,
 	const azure::storage::storage_uri& table_endpoint,
 	const azure::storage::storage_uri& file_endpoint)
-	: _disposed(false), _credentials(credentials), _account(credentials, blob_endpoint, queue_endpoint, table_endpoint, file_endpoint),
-	_blob_endpoint(blob_endpoint), _queue_endpoint(queue_endpoint), _table_endpoint(table_endpoint), _file_endpoint(file_endpoint)
+	: _disposed(false), _credentials(credentials), _blob_endpoint(blob_endpoint), _queue_endpoint(queue_endpoint), _table_endpoint(table_endpoint), _file_endpoint(file_endpoint),
+	_account(credentials, blob_endpoint, queue_endpoint, table_endpoint, file_endpoint)
 {
 
 }

@@ -518,3 +518,105 @@ Concurrency::task<int> QueueCloudClient::GetMessageCountAsync(const utility::str
 		return queue.approximate_message_count();
 	});
 }
+
+//// <summary>
+/// Checks for the existence of the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <returns>True if a queue exists; else false.</returns>
+bool QueueCloudClient::Exists(const utility::string_t& queueName) const
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	return queue.exists();
+}
+
+/// <summary>
+/// Checks for the existence of the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+/// <returns>True if a queue exists; else false.</returns>
+bool QueueCloudClient::Exists(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context) const
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	return queue.exists(options, context);
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation to check for the existence of the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+Concurrency::task<bool> QueueCloudClient::ExistsAsync(const utility::string_t& queueName)
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	return queue.exists_async();
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation to check for the existence of the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <param name="options">An <see cref="azure::storage::queue_request_options"/> object that specifies additional options for the request.</param>
+/// <param name="context">An <see cref="azure::storage::operation_context"/> object that represents the context for the current operation.</param>
+/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+Concurrency::task<bool> QueueCloudClient::ExistsAsync(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context)
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	return queue.exists_async(options, context);
+}
+
+/// <summary>
+/// Deletes all the messages in the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+void QueueCloudClient::Clear(const utility::string_t& queueName)
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	queue.clear();
+}
+
+/// <summary>
+/// Deletes all the messages in the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <param name="options">An <see cref="azure::storage::queue_request_options" /> object that specifies additional options for the request.</param>
+/// <param name="context">An <see cref="azure::storage::operation_context" /> object that represents the context for the current operation.</param>
+void QueueCloudClient::Clear(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context)
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	queue.clear(options, context);
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation that deletes all the messages in the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+Concurrency::task<void> QueueCloudClient::ClearAsync(const utility::string_t& queueName)
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	return queue.clear_async();
+}
+
+/// <summary>
+/// Intitiates an asynchronous operation that deletes all the messages in the queue.
+/// </summary>
+/// <param name="queueName">The queue name.</param>
+/// <param name="options">An <see cref="azure::storage::queue_request_options" /> object that specifies additional options for the request.</param>
+/// <param name="context">An <see cref="azure::storage::operation_context" /> object that represents the context for the current operation.</param>
+/// <returns>A <see cref="concurrency::task"/> object that represents the current operation.</returns>
+Concurrency::task<void> QueueCloudClient::ClearAsync(const utility::string_t& queueName, const azure::storage::queue_request_options& options, azure::storage::operation_context context)
+{
+	// Retrieve a reference to a queue.
+	azure::storage::cloud_queue queue = _client.get_queue_reference(queueName);
+	return queue.clear_async(options, context);
+}
