@@ -75,3 +75,198 @@ std::string SQSCloudAccount::GetServiceUri()
 {
 	return std::string(Aws::SQS::SQSEndpoint::ForRegion(_account._clientConfiguration.region).c_str());
 }
+///	<summary>
+///	Create the queue asynchronously.
+///	</summary>
+/// <param name="request">The queue request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::CreateQueueAsync(
+	const Aws::SQS::Model::CreateQueueRequest& request,
+	const Aws::SQS::CreateQueueResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->CreateQueueAsync(request, handler, context);
+}
+
+///	<summary>
+///	Create the queue asynchronously.
+///	</summary>
+/// <param name="queueName">The queue name.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::CreateQueueAsync(
+	const std::string& queueName,
+	const Aws::SQS::CreateQueueResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	Aws::SQS::Model::CreateQueueRequest request;
+	request.SetQueueName(Aws::String(queueName.c_str()));
+	_client->CreateQueueAsync(request, handler, context);
+}
+
+///	<summary>
+///	List the queues asynchronously.
+///	</summary>
+/// <param name="request">The queues request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::ListQueuesAsync(
+	const Aws::SQS::Model::ListQueuesRequest& request,
+	const Aws::SQS::ListQueuesResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->ListQueuesAsync(request, handler, context);
+}
+
+///	<summary>
+///	Deletes the messages in a queue asynchronously.
+///	</summary>
+/// <param name="request">The purge request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::PurgeQueueAsync(
+	const Aws::SQS::Model::PurgeQueueRequest& request,
+	const Aws::SQS::PurgeQueueResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->PurgeQueueAsync(request, handler, context);
+}
+
+///	<summary>
+///	Deletes the messages in a queue asynchronously.
+///	</summary>
+/// <param name="queueUrl">The queue URL of the queue to delete the messages from.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::PurgeQueueAsync(
+	const std::string& queueUrl,
+	const Aws::SQS::PurgeQueueResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	Aws::SQS::Model::PurgeQueueRequest request;
+	request.SetQueueUrl(Aws::String(queueUrl.c_str()));
+	_client->PurgeQueueAsync(request, handler, context);
+}
+
+///	<summary>
+///	Retrieves one or more messages asynchronously.
+///	</summary>
+/// <param name="request">The receive message request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::ReceiveMessageAsync(
+	const Aws::SQS::Model::ReceiveMessageRequest& request,
+	const Aws::SQS::ReceiveMessageResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->ReceiveMessageAsync(request, handler, context);
+}
+
+///	<summary>
+///	Retrieves one or more messages asynchronously.
+///	</summary>
+/// <param name="queueUrl">The queue URL of the queue to return.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::ReceiveMessageAsync(
+	const std::string& queueUrl,
+	const Aws::SQS::ReceiveMessageResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	Aws::SQS::Model::ReceiveMessageRequest request;
+	request.SetQueueUrl(Aws::String(queueUrl.c_str()));
+	_client->ReceiveMessageAsync(request, handler, context);
+}
+
+///	<summary>
+///	Sends a message to the specified queue asynchronously.
+///	</summary>
+/// <param name="request">The send message request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::SendMessageAsync(
+	const Aws::SQS::Model::SendMessageRequest& request,
+	const Aws::SQS::SendMessageResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->SendMessageAsync(request, handler, context);
+}
+
+///	<summary>
+///	Sends a message to the specified queue asynchronously.
+///	</summary>
+/// <param name="queueUrl">The queue URL of the queue to send.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::SendMessageAsync(
+	const std::string& queueUrl,
+	const Aws::SQS::SendMessageResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	Aws::SQS::Model::SendMessageRequest request;
+	request.SetQueueUrl(Aws::String(queueUrl.c_str()));
+	_client->SendMessageAsync(request, handler, context);
+}
+
+///	<summary>
+///	Sends up to ten messages to the specified queue asynchronously.
+///	</summary>
+/// <param name="request">The send message batch request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::SendMessageBatchAsync(
+	const Aws::SQS::Model::SendMessageBatchRequest& request,
+	const Aws::SQS::SendMessageBatchResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->SendMessageBatchAsync(request, handler, context);
+}
+
+///	<summary>
+///	Adds a permission to a queue asynchronously.
+///	</summary>
+/// <param name="request">The add permission request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::AddPermissionAsync(
+	const Aws::SQS::Model::AddPermissionRequest& request,
+	const Aws::SQS::AddPermissionResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->AddPermissionAsync(request, handler, context);
+}
+
+///	<summary>
+///	Changes the visibility timeout of a specified message in a queue to a new
+/// value. The maximum allowed timeout value you can set the value to is 12 hours.
+/// This means you can't extend the timeout of a message in an existing queue to
+/// more than a total visibility timeout of 12 hours.
+///	</summary>
+/// <param name="request">The change message visibility request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::ChangeMessageVisibilityAsync(
+	const Aws::SQS::Model::ChangeMessageVisibilityRequest& request,
+	const Aws::SQS::ChangeMessageVisibilityResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->ChangeMessageVisibilityAsync(request, handler, context);
+}
+///	<summary>
+///	This is a batch version
+/// of <a>ChangeMessageVisibility</a>.The result of the action on each message is
+/// reported individually in the response.You can send up to 10
+/// <a>ChangeMessageVisibility</a> requests with each
+/// <code>ChangeMessageVisibilityBatch</code> action.
+///	</summary>
+/// <param name="request">The change message visibility batch request.</param>
+/// <param name="handler">The function callback handler.</param>
+/// <param name="context">The user defined context.</param>
+void SQSCloudAccount::ChangeMessageVisibilityBatchAsync(
+	const Aws::SQS::Model::ChangeMessageVisibilityBatchRequest& request,
+	const Aws::SQS::ChangeMessageVisibilityBatchResponseReceivedHandler& handler,
+	const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context) const
+{
+	_client->ChangeMessageVisibilityBatchAsync(request, handler, context);
+}
