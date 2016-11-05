@@ -49,13 +49,15 @@ namespace Nequeo.Collections
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
-        public LongPriorityQueue() : base() { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public LongPriorityQueue(bool useMinHeap = true) : base(useMinHeap) { }
 
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
         /// <param name="collection">The collection whose elements are copied to the new priority queue.</param>
-        public LongPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.LongInteger, T>> collection) : base(collection) { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public LongPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.LongInteger, T>> collection, bool useMinHeap = true) : base(collection, useMinHeap) { }
     }
 
     /// <summary>
@@ -67,13 +69,15 @@ namespace Nequeo.Collections
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
-        public IntPriorityQueue() : base() { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public IntPriorityQueue(bool useMinHeap = true) : base(useMinHeap) { }
 
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
         /// <param name="collection">The collection whose elements are copied to the new priority queue.</param>
-        public IntPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.Integer, T>> collection) : base(collection) { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public IntPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.Integer, T>> collection, bool useMinHeap = true) : base(collection, useMinHeap) { }
     }
 
     /// <summary>
@@ -85,12 +89,14 @@ namespace Nequeo.Collections
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
-        public ShortPriorityQueue() : base() { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public ShortPriorityQueue(bool useMinHeap = true) : base(useMinHeap) { }
 
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
         /// <param name="collection">The collection whose elements are copied to the new priority queue.</param>
-        public ShortPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.ShortInteger, T>> collection) : base(collection) { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public ShortPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.ShortInteger, T>> collection, bool useMinHeap = true) : base(collection, useMinHeap) { }
     }
 }

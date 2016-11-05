@@ -44,21 +44,31 @@ namespace Nequeo.Collections.Concurrent
     /// <typeparam name="TValue">Specifies the type of elements in the queue.</typeparam>
     [DebuggerDisplay("Count={Count}")]
     public class ConcurrentPriorityQueue<TKey, TValue> :
-        IProducerConsumerCollection<KeyValuePair<TKey,TValue>> 
+        IProducerConsumerCollection<KeyValuePair<TKey, TValue>>
         where TKey : IComparable<TKey>
     {
         private readonly object _syncLock = new object();
+
+        private bool _useMinHeap = true;
         private readonly MinBinaryHeap _minHeap = new MinBinaryHeap();
+        private readonly MaxBinaryHeap _maxHeap = new MaxBinaryHeap();
 
         /// <summary>Initializes a new instance of the ConcurrentPriorityQueue class.</summary>
-        public ConcurrentPriorityQueue() {}
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public ConcurrentPriorityQueue(bool useMinHeap = true) { _useMinHeap = useMinHeap; }
 
         /// <summary>Initializes a new instance of the ConcurrentPriorityQueue class that contains elements copied from the specified collection.</summary>
         /// <param name="collection">The collection whose elements are copied to the new ConcurrentPriorityQueue.</param>
-        public ConcurrentPriorityQueue(IEnumerable<KeyValuePair<TKey, TValue>> collection)
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public ConcurrentPriorityQueue(IEnumerable<KeyValuePair<TKey, TValue>> collection, bool useMinHeap = true)
         {
             if (collection == null) throw new ArgumentNullException("collection");
-            foreach (var item in collection) _minHeap.Insert(item);
+            _useMinHeap = useMinHeap;
+
+            if (_useMinHeap)
+                foreach (var item in collection) _minHeap.Insert(item);
+            else
+                foreach (var item in collection) _maxHeap.Insert(item);
         }
 
         /// <summary>Adds the key/value pair to the priority queue.</summary>
@@ -73,7 +83,13 @@ namespace Nequeo.Collections.Concurrent
         /// <param name="item">The key/value pair to be added to the queue.</param>
         public void Enqueue(KeyValuePair<TKey, TValue> item)
         {
-            lock (_syncLock) _minHeap.Insert(item);
+            lock (_syncLock)
+            {
+                if (_useMinHeap)
+                    _minHeap.Insert(item);
+                else
+                    _maxHeap.Insert(item);
+            }
         }
 
         /// <summary>Attempts to remove and return the next prioritized item in the queue.</summary>
@@ -89,10 +105,21 @@ namespace Nequeo.Collections.Concurrent
             result = default(KeyValuePair<TKey, TValue>);
             lock (_syncLock)
             {
-                if (_minHeap.Count > 0)
+                if (_useMinHeap)
                 {
-                    result = _minHeap.Remove();
-                    return true;
+                    if (_minHeap.Count > 0)
+                    {
+                        result = _minHeap.Remove();
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (_maxHeap.Count > 0)
+                    {
+                        result = _maxHeap.Remove();
+                        return true;
+                    }
                 }
             }
             return false;
@@ -111,17 +138,37 @@ namespace Nequeo.Collections.Concurrent
             result = default(KeyValuePair<TKey, TValue>);
             lock (_syncLock)
             {
-                if (_minHeap.Count > 0)
+                if (_useMinHeap)
                 {
-                    result = _minHeap.Peek();
-                    return true;
+                    if (_minHeap.Count > 0)
+                    {
+                        result = _minHeap.Peek();
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (_maxHeap.Count > 0)
+                    {
+                        result = _maxHeap.Peek();
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
         /// <summary>Empties the queue.</summary>
-        public void Clear() { lock(_syncLock) _minHeap.Clear(); }
+        public void Clear()
+        {
+            lock (_syncLock)
+            {
+                if (_useMinHeap)
+                    _minHeap.Clear();
+                else
+                    _maxHeap.Clear();
+            }
+        }
 
         /// <summary>Gets whether the queue is empty.</summary>
         public bool IsEmpty { get { return Count == 0; } }
@@ -129,7 +176,16 @@ namespace Nequeo.Collections.Concurrent
         /// <summary>Gets the number of elements contained in the queue.</summary>
         public int Count
         {
-            get { lock (_syncLock) return _minHeap.Count; }
+            get
+            {
+                lock (_syncLock)
+                {
+                    if (_useMinHeap)
+                        return _minHeap.Count;
+                    else
+                        return _maxHeap.Count;
+                }
+            }
         }
 
         /// <summary>Copies the elements of the collection to an array, starting at a particular array index.</summary>
@@ -142,7 +198,13 @@ namespace Nequeo.Collections.Concurrent
         /// <remarks>The elements will not be copied to the array in any guaranteed order.</remarks>
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int index)
         {
-            lock (_syncLock) _minHeap.Items.CopyTo(array, index);
+            lock (_syncLock)
+            {
+                if (_useMinHeap)
+                    _minHeap.Items.CopyTo(array, index);
+                else
+                    _maxHeap.Items.CopyTo(array, index);
+            }
         }
 
         /// <summary>Copies the elements stored in the queue to a new array.</summary>
@@ -151,13 +213,26 @@ namespace Nequeo.Collections.Concurrent
         {
             lock (_syncLock)
             {
-                var clonedHeap = new MinBinaryHeap(_minHeap);
-                var result = new KeyValuePair<TKey, TValue>[_minHeap.Count];
-                for (int i = 0; i < result.Length; i++)
+                if (_useMinHeap)
                 {
-                    result[i] = clonedHeap.Remove();
+                    var clonedHeap = new MinBinaryHeap(_minHeap);
+                    var result = new KeyValuePair<TKey, TValue>[_minHeap.Count];
+                    for (int i = 0; i < result.Length; i++)
+                    {
+                        result[i] = clonedHeap.Remove();
+                    }
+                    return result;
                 }
-                return result;
+                else
+                {
+                    var clonedHeap = new MaxBinaryHeap(_maxHeap);
+                    var result = new KeyValuePair<TKey, TValue>[_maxHeap.Count];
+                    for (int i = 0; i < result.Length; i++)
+                    {
+                        result[i] = clonedHeap.Remove();
+                    }
+                    return result;
+                }
             }
         }
 
@@ -211,7 +286,17 @@ namespace Nequeo.Collections.Concurrent
         /// </param>
         void ICollection.CopyTo(Array array, int index)
         {
-            lock (_syncLock) ((ICollection)_minHeap.Items).CopyTo(array, index);
+            lock (_syncLock)
+            {
+                if (_useMinHeap)
+                {
+                    ((ICollection)_minHeap.Items).CopyTo(array, index);
+                }
+                else
+                {
+                    ((ICollection)_maxHeap.Items).CopyTo(array, index);
+                }
+            }
         }
 
         /// <summary>
@@ -254,7 +339,7 @@ namespace Nequeo.Collections.Concurrent
             }
 
             /// <summary>Adds an item to the heap.</summary>
-            public void Insert(KeyValuePair<TKey,TValue> entry)
+            public void Insert(KeyValuePair<TKey, TValue> entry)
             {
                 // Add the item to the list, making sure to keep track of where it was added.
                 _items.Add(entry);
@@ -343,6 +428,151 @@ namespace Nequeo.Collections.Concurrent
 
                             // If the child has a lower key than the parent, set that as a possible swap
                             if (entry2.Key.CompareTo(entry1.Key) < 0) possibleSwap = rightChildPos;
+                        }
+
+                        // Now swap current and possible swap if necessary
+                        if (current != possibleSwap)
+                        {
+                            var temp = _items[current];
+                            _items[current] = _items[possibleSwap];
+                            _items[possibleSwap] = temp;
+                        }
+                        else break; // if nothing to swap, we're done
+
+                        // Update current to the location of the swap
+                        current = possibleSwap;
+                    }
+                }
+
+                // Return the item from the heap
+                return toReturn;
+            }
+
+            /// <summary>Gets the number of objects stored in the heap.</summary>
+            public int Count { get { return _items.Count; } }
+
+            internal List<KeyValuePair<TKey, TValue>> Items { get { return _items; } }
+        }
+
+        /// <summary>Implements a binary heap that prioritizes greater values.</summary>
+        private sealed class MaxBinaryHeap
+        {
+            private readonly List<KeyValuePair<TKey, TValue>> _items;
+
+            /// <summary>Initializes an empty heap.</summary>
+            public MaxBinaryHeap()
+            {
+                _items = new List<KeyValuePair<TKey, TValue>>();
+            }
+
+            /// <summary>Initializes a heap as a copy of another heap instance.</summary>
+            /// <param name="heapToCopy">The heap to copy.</param>
+            /// <remarks>Key/Value values are not deep cloned.</remarks>
+            public MaxBinaryHeap(MaxBinaryHeap heapToCopy)
+            {
+                _items = new List<KeyValuePair<TKey, TValue>>(heapToCopy.Items);
+            }
+
+            /// <summary>Empties the heap.</summary>
+            public void Clear() { _items.Clear(); }
+
+            /// <summary>Adds an item to the heap.</summary>
+            public void Insert(TKey key, TValue value)
+            {
+                // Create the entry based on the provided key and value
+                Insert(new KeyValuePair<TKey, TValue>(key, value));
+            }
+
+            /// <summary>Adds an item to the heap.</summary>
+            public void Insert(KeyValuePair<TKey, TValue> entry)
+            {
+                // Add the item to the list, making sure to keep track of where it was added.
+                _items.Add(entry);
+                int pos = _items.Count - 1;
+
+                // If the new item is the only item, we're done.
+                if (pos == 0) return;
+
+                // Otherwise, perform log(n) operations, walking up the tree, swapping
+                // where necessary based on key values
+                while (pos > 0)
+                {
+                    // Get the next position to check
+                    int nextPos = pos / 2;
+
+                    // Extract the entry at the next position
+                    var toCheck = _items[nextPos];
+
+                    // Compare that entry to our new one.  If our entry has a larger key, move it up.
+                    // Otherwise, we're done.
+                    if (entry.Key.CompareTo(toCheck.Key) > 0)
+                    {
+                        _items[pos] = toCheck;
+                        pos = nextPos;
+                    }
+                    else break;
+                }
+
+                // Make sure we put this entry back in, just in case
+                _items[pos] = entry;
+            }
+
+            /// <summary>Returns the entry at the top of the heap.</summary>
+            public KeyValuePair<TKey, TValue> Peek()
+            {
+                // Returns the first item
+                if (_items.Count == 0) throw new InvalidOperationException("The heap is empty.");
+                return _items[0];
+            }
+
+            /// <summary>Removes the entry at the top of the heap.</summary>
+            public KeyValuePair<TKey, TValue> Remove()
+            {
+                // Get the first item and save it for later (this is what will be returned).
+                if (_items.Count == 0) throw new InvalidOperationException("The heap is empty.");
+                KeyValuePair<TKey, TValue> toReturn = _items[0];
+
+                // Remove the first item if there will only be 0 or 1 items left after doing so.  
+                if (_items.Count <= 2) _items.RemoveAt(0);
+                // A reheapify will be required for the removal
+                else
+                {
+                    // Remove the first item and move the last item to the front.
+                    _items[0] = _items[_items.Count - 1];
+                    _items.RemoveAt(_items.Count - 1);
+
+                    // Start reheapify
+                    int current = 0, possibleSwap = 0;
+
+                    // Keep going until the tree is a heap
+                    while (true)
+                    {
+                        // Get the positions of the node's children
+                        int leftChildPos = 2 * current + 1;
+                        int rightChildPos = leftChildPos + 1;
+
+                        // Should we swap with the left child?
+                        if (leftChildPos < _items.Count)
+                        {
+                            // Get the two entries to compare (node and its left child)
+                            var entry1 = _items[current];
+                            var entry2 = _items[leftChildPos];
+
+                            // If the child has a higher key than the parent, set that as a possible swap
+                            if (entry2.Key.CompareTo(entry1.Key) > 0) possibleSwap = leftChildPos;
+                        }
+                        else break; // if can't swap this, we're done
+
+                        // Should we swap with the right child?  Note that now we check with the possible swap
+                        // position (which might be current and might be left child).
+                        if (rightChildPos < _items.Count)
+                        {
+                            // Get the two entries to compare (node and its left child)
+                            var entry1 = _items[possibleSwap];
+                            var entry2 = _items[rightChildPos];
+
+                            // If the child has a higher key than the parent, set that as a possible swap
+                            if (entry2.Key.CompareTo(entry1.Key) > 0) possibleSwap = rightChildPos;
                         }
 
                         // Now swap current and possible swap if necessary

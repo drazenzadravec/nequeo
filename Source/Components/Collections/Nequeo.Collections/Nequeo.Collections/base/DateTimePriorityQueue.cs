@@ -49,13 +49,15 @@ namespace Nequeo.Collections
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
-        public DateTimePriorityQueue() : base() { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public DateTimePriorityQueue(bool useMinHeap = true) : base(useMinHeap) { }
 
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
         /// <param name="collection">The collection whose elements are copied to the new priority queue.</param>
-        public DateTimePriorityQueue(IEnumerable<KeyValuePair<System.DateTime, T>> collection) : base(collection) { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public DateTimePriorityQueue(IEnumerable<KeyValuePair<System.DateTime, T>> collection, bool useMinHeap = true) : base(collection, useMinHeap) { }
     }
 
     /// <summary>
@@ -67,12 +69,14 @@ namespace Nequeo.Collections
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
-        public DateTimeCustomPriorityQueue() : base() { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public DateTimeCustomPriorityQueue(bool useMinHeap = true) : base(useMinHeap) { }
 
         /// <summary>
         /// Provides a thread-safe priority queue data structure.
         /// </summary>
         /// <param name="collection">The collection whose elements are copied to the new priority queue.</param>
-        public DateTimeCustomPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.DateTimeCompare, T>> collection) : base(collection) { }
+        /// <param name="useMinHeap">Should the min heap or max heap be used.</param>
+        public DateTimeCustomPriorityQueue(IEnumerable<KeyValuePair<Nequeo.Comparable.DateTimeCompare, T>> collection, bool useMinHeap = true) : base(collection, useMinHeap) { }
     }
 }
