@@ -88,7 +88,13 @@
     <Compile Include="base\Observable.cs" />
     <Compile Include="base\StoreBuffer.cs" />
     <Compile Include="base\StreamBuffer.cs" />
+    <Compile Include="BinaryTrees\BinarySearchTree.cs" />
+    <Compile Include="BinaryTrees\BinaryTree.cs" />
+    <Compile Include="BinaryTrees\BinaryTreeNode.cs" />
+    <Compile Include="BinaryTrees\TraversalMethods.cs" />
     <Compile Include="Common\DelegateBasedObserver.cs" />
+    <Compile Include="Common\Node.cs" />
+    <Compile Include="Common\NodeList.cs" />
     <Compile Include="Common\Operation.cs" />
     <Compile Include="Concurrent\ConcurrentPriorityQueue.cs" />
     <Compile Include="Concurrent\ObjectPool.cs" />
@@ -104,7 +110,13 @@
     <Compile Include="Extension\IList.cs" />
     <Compile Include="Extension\IProducerConsumerCollection.cs" />
     <Compile Include="Extension\Observable.cs" />
+    <Compile Include="Graphs\Graph.cs" />
+    <Compile Include="Graphs\GraphNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sets\CustomSet.cs" />
+    <Compile Include="SkipLists\SkipList.cs" />
+    <Compile Include="SkipLists\SkipListNode.cs" />
+    <Compile Include="SkipLists\SkipListNodeList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
