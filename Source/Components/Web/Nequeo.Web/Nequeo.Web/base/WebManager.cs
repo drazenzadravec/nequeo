@@ -662,5 +662,31 @@ namespace Nequeo.Web
             // Return the query string.
             return query.TrimEnd('&');
         }
+
+        /// <summary>
+        /// Close page html. send this html to a web browser to automatically close the window.
+        /// </summary>
+        /// <param name="title">The title of the html.</param>
+        /// <param name="body">The body of the html.</param>
+        /// <returns>The page html.</returns>
+        public static string ClosePageHtml(string title = "Nequeo", string body = "You may now close this window.")
+        {
+            return String.Format(
+                @"<html>
+                    <head>
+                        <title>{0}</title>
+                    </head>
+                    <body>
+                        {1}
+                        <script type='text/javascript'>
+                            window.setTimeout(function() {
+                                window.open('', '_self', ''); 
+                                window.close(); 
+                            }, 1000);
+                            if (window.opener) { window.opener.checkToken(); }
+                        </script>
+                    </body>
+                </html>", title, body);
+        }
     }
 }

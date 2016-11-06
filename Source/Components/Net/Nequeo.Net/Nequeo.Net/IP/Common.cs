@@ -74,6 +74,25 @@ namespace Nequeo.Net.IP
             // Return the list of ip address.
             return hostEntry.AddressList;
         }
+
+        /// <summary>
+        /// Get a random unused port.
+        /// </summary>
+        /// <returns>A random unused port.</returns>
+        private static int GetRandomUnusedPort()
+        {
+            // Set port = 0, will get random unused port.
+            var listener = new TcpListener(IPAddress.Loopback, 0);
+            try
+            {
+                listener.Start();
+                return ((IPEndPoint)listener.LocalEndpoint).Port;
+            }
+            finally
+            {
+                listener.Stop();
+            }
+        }
     }
 
     /// <summary>

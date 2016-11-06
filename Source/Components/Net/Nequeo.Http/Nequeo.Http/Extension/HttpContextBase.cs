@@ -33,7 +33,10 @@
 
 using System;
 using System.Web;
+using System.Net;
+using System.IO;
 using System.Web.Routing;
+using System.Collections.Specialized;
 
 namespace Nequeo.Net.Http.Extension
 {
@@ -72,6 +75,29 @@ namespace Nequeo.Net.Http.Extension
         {
             int p = (int)Environment.OSVersion.Platform;
             return ((p == 4) || (p == 128));
+        }
+
+        /// <summary>
+        /// Write a response and close the output stream.
+        /// </summary>
+        /// <param name="instance">The http listener context instance.</param>
+        /// <param name="response">The response to write.</param>
+        /// <returns>The name value collection of the query string.</returns>
+        public static NameValueCollection WriteAndClose(this HttpListenerContext instance, string response)
+        {
+            // Get the query string.
+            NameValueCollection coll = instance.Request.QueryString;
+
+            // Write a "close" response.
+            using (var writer = new StreamWriter(instance.Response.OutputStream))
+            {
+                writer.WriteLine(response);
+                writer.Flush();
+            }
+
+            // Close the response stream.
+            instance.Response.OutputStream.Close();
+            return coll;
         }
     }
 }
