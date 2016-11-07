@@ -88,11 +88,14 @@
     <Compile Include="base\Observable.cs" />
     <Compile Include="base\StoreBuffer.cs" />
     <Compile Include="base\StreamBuffer.cs" />
+    <Compile Include="BinaryTrees\BinarySearch.cs" />
     <Compile Include="BinaryTrees\BinarySearchTree.cs" />
     <Compile Include="BinaryTrees\BinaryTree.cs" />
     <Compile Include="BinaryTrees\BinaryTreeNode.cs" />
+    <Compile Include="BinaryTrees\MaximumBinaryHeap.cs" />
     <Compile Include="BinaryTrees\TraversalMethods.cs" />
     <Compile Include="Common\DelegateBasedObserver.cs" />
+    <Compile Include="BinaryTrees\MinimumBinaryHeap.cs" />
     <Compile Include="Common\Node.cs" />
     <Compile Include="Common\NodeList.cs" />
     <Compile Include="Common\Operation.cs" />
