@@ -43,13 +43,17 @@ BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::MediaPlayerForm, CDialog)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_SIZE()
-	ON_MESSAGE(ON_WM_APP_NOTIFY, OnNotifyState)
-	ON_MESSAGE(ON_WM_APP_ERROR, OnNotifyError)
-	ON_MESSAGE(ON_WM_AUDIO_EVENT, OnVolumeChanged)
+	ON_MESSAGE(ON_WM_APP_NOTIFY, &MediaPlayerForm::OnNotifyState)
+	ON_MESSAGE(ON_WM_APP_ERROR, &MediaPlayerForm::OnNotifyError)
+	ON_MESSAGE(ON_WM_AUDIO_EVENT, &MediaPlayerForm::OnVolumeChanged)
 	ON_BN_CLICKED(IDC_BUTTONPLAY, &MediaPlayerForm::OnBnClickedButtonplay)
 	ON_BN_CLICKED(IDC_BUTTONSTOP, &MediaPlayerForm::OnBnClickedButtonstop)
 	ON_BN_CLICKED(IDC_BUTTONMUTE, &MediaPlayerForm::OnBnClickedButtonmute)
+	ON_BN_CLICKED(IDC_BUTTONPAUSE, &MediaPlayerForm::OnBnClickedButtonpause)
+	ON_BN_CLICKED(IDC_BUTTONCLOSE, &MediaPlayerForm::OnBnClickedButtonclose)
 	ON_CBN_SELCHANGE(IDC_COMBOOPEN, &MediaPlayerForm::OnCbnSelchangeComboopen)
+	ON_NOTIFY(TRBN_THUMBPOSCHANGING, IDC_SLIDERPOSITION, &MediaPlayerForm::OnTRBNThumbPosChangingSliderposition)
+	ON_NOTIFY(NM_RELEASEDCAPTURE, IDC_SLIDERPOSITION, &MediaPlayerForm::OnNMReleasedcaptureSliderposition)
 	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
@@ -62,7 +66,8 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pParent">The parent window.</param>
 			MediaPlayerForm::MediaPlayerForm(CWnd* pParent) : CDialog(MediaPlayerForm::IDD, pParent), 
-				_mediaPlayer(NULL), _repaintClient(TRUE), _volume(NULL), _toolTip(NULL), _disposed(false), _mute(false)
+				_mediaPlayer(NULL), _repaintClient(TRUE), _volume(NULL), _toolTip(NULL), _hEvent(NULL),
+				_disposed(false), _mute(false), _duration(0), _internalThread(false)
 			{
 			}
 
@@ -75,6 +80,9 @@ namespace Nequeo {
 				if (!_disposed)
 				{
 					_disposed = true;
+
+					// Stop the thread.
+					StopGetCurrentPositionThread();
 
 					if (_toolTip != NULL)
 						delete _toolTip;
@@ -125,6 +133,7 @@ namespace Nequeo {
 				CDialog::DoDataExchange(pDX);
 				DDX_Control(pDX, IDC_BUTTONMUTE, _muteButton);
 				DDX_Control(pDX, IDC_COMBOOPEN, _openURL);
+				DDX_Control(pDX, IDC_SLIDERPOSITION, _positionSlider);
 			}
 
 			/// <summary>
@@ -166,7 +175,7 @@ namespace Nequeo {
 				// Get the window handlers where the video will be player
 				// and the window the will handle the player evenets.
 				HWND hVideo = lpCreateStruct->hwndParent;
-				HWND hEvent = lpCreateStruct->hwndParent;
+				_hEvent = lpCreateStruct->hwndParent;
 
 				// All is good create the window.
 				return 0;
@@ -188,26 +197,29 @@ namespace Nequeo {
 
 				}
 
+				// Set the slder position.
+				_positionSlider.SetRange(0, 100);
+				_positionSlider.SetPos(0);
+
 				// Default is the main video.
 				HWND hVideo = NULL;
-				HWND hEvent = NULL;
+				_hEvent = *this;
 
 				// Get the play button handler.
 				CWnd *pVideoDisplay = GetDlgItem(IDC_VIDEODISPLAY);
 				if (pVideoDisplay != NULL)
 				{
 					hVideo = pVideoDisplay->m_hWnd;
-					hEvent = pVideoDisplay->m_hWnd;
 				}
 
 				// Initialize the player object.
-				HRESULT hr = MediaPlayer::CreateInstance(hVideo, hEvent, &_mediaPlayer);
+				HRESULT hr = MediaPlayer::CreateInstance(hVideo, _hEvent, &_mediaPlayer);
 
 				if (SUCCEEDED(hr))
 				{
 					// Also create the object that manages to audio session.
 					// This can fail if the machine does not have an audio end-point.
-					hr = Volume::CreateInstance(WM_AUDIO_EVENT, hEvent, &_volume);
+					hr = Volume::CreateInstance(WM_AUDIO_EVENT, _hEvent, &_volume);
 
 					if (SUCCEEDED(hr))
 					{
@@ -314,6 +326,21 @@ namespace Nequeo {
 						bWaiting = TRUE;
 						bPlayback = FALSE;
 						break;
+
+					case Closed:
+						bPlayback = FALSE;
+						break;
+
+					case Ready:
+						bWaiting = TRUE;
+						bPlayback = FALSE;
+						break;
+
+					case Ended:
+						bWaiting = FALSE;
+						bPlayback = FALSE;
+						DisableControls();
+						break;
 					}
 
 					UINT  uEnable = MF_BYCOMMAND | (bWaiting ? MF_GRAYED : MF_ENABLED);
@@ -383,6 +410,8 @@ namespace Nequeo {
 			/// </summary>
 			void MediaPlayerForm::OnBnClickedButtonplay()
 			{
+				PlayControls();
+
 				// Get the play button handler.
 				CWnd *pBtnPlay = GetDlgItem(IDC_BUTTONPLAY);
 				if (pBtnPlay != NULL)
@@ -401,6 +430,8 @@ namespace Nequeo {
 			/// </summary>
 			void MediaPlayerForm::OnBnClickedButtonstop()
 			{
+				StopControls();
+
 				// Get the stop button handler.
 				CWnd *pBtnStop = GetDlgItem(IDC_BUTTONSTOP);
 				if (pBtnStop != NULL)
@@ -410,6 +441,46 @@ namespace Nequeo {
 					{
 						// Stop the media.
 						_mediaPlayer->Stop();
+					}
+				}
+			}
+
+			/// <summary>
+			/// On pause button clicked.
+			/// </summary>
+			void MediaPlayerForm::OnBnClickedButtonpause()
+			{
+				PauseControls();
+
+				// Get the pause button handler.
+				CWnd *pBtnPause = GetDlgItem(IDC_BUTTONPAUSE);
+				if (pBtnPause != NULL)
+				{
+					// If the media player is not null.
+					if (_mediaPlayer != NULL)
+					{
+						// Stop the media.
+						_mediaPlayer->Pause();
+					}
+				}
+			}
+
+			/// <summary>
+			/// On close button clicked.
+			/// </summary>
+			void MediaPlayerForm::OnBnClickedButtonclose()
+			{
+				DisableControls();
+
+				// Get the pause button handler.
+				CWnd *pBtnClose = GetDlgItem(IDC_BUTTONCLOSE);
+				if (pBtnClose != NULL)
+				{
+					// If the media player is not null.
+					if (_mediaPlayer != NULL)
+					{
+						// Stop the media.
+						_mediaPlayer->Close();
 					}
 				}
 			}
@@ -474,6 +545,63 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// On slider thumb position changing
+			/// </summary>
+			void MediaPlayerForm::OnTRBNThumbPosChangingSliderposition(NMHDR *pNMHDR, LRESULT *pResult)
+			{
+				*pResult = 0;
+			}
+
+			/// <summary>
+			/// On slider released capture, position has changed.
+			/// </summary>
+			void MediaPlayerForm::OnNMReleasedcaptureSliderposition(NMHDR *pNMHDR, LRESULT *pResult)
+			{
+				HRESULT hr = S_OK;
+
+				// Lock this critical section.
+				AutoLockHandler lock(_critsec);
+
+				// Get the slider position.
+				int position = _positionSlider.GetPos();
+
+				// Move the media to the new position.
+				// This value must be a factor of the slider range.
+				MFTIME newPosition = (MFTIME)((double)((double)position / (double)100) * (double)_duration);
+
+				// If the media player is not null.
+				if (_mediaPlayer != NULL)
+				{
+					// Set the position.
+					hr = _mediaPlayer->SetPositionNoPending(newPosition);
+
+					// Position has been set.
+					if (SUCCEEDED(hr))
+					{
+						int positionSeconds = ((int)((double)((double)newPosition / (double)1000) / (double)100) / (double)100);
+						int positionMinutes = (int)((double)positionSeconds / (double)60);
+						int positionHours = (int)((double)positionMinutes / (double)60);
+
+						// Get the position.
+						CString stringPosition;
+						stringPosition.Format(_T("%.2d:%.2d:%.2d"), positionHours, positionMinutes, positionSeconds);
+
+						// Set the position.
+						// Get the position button handler.
+						CWnd *pPosition = GetDlgItem(IDC_DURATIONCURRENT);
+						if (pPosition != NULL)
+							pPosition->SetWindowTextW(stringPosition);
+					}
+				}
+				
+				*pResult = 0;
+
+				/*CString str;
+				str.Format(_T("Moved to: %d"), _duration);
+				AfxMessageBox(str);*/
+			}
+
+			/// <summary>
 			/// Open file.
 			/// </summary>
 			void MediaPlayerForm::OpenFile()
@@ -489,11 +617,9 @@ namespace Nequeo {
 				ofn.lpstrFilter = L"Video Media\0*.mp4;*.wmv;*.asf;*.avi\0Audio Media\0*.mp3;*.wma;*.wav\0All files\0*.*\0";
 				ofn.lpstrFile = path;
 				ofn.nMaxFile = MAX_PATH;
-				ofn.Flags = OFN_FILEMUSTEXIST;
-				dlgFile.DoModal();
 
-				// If a file has been selected.
-				if (GetOpenFileName(&ofn))
+				// If open ok.
+				if (dlgFile.DoModal() == IDOK)
 				{
 					// Get the file name.
 					LPWSTR fileName = ofn.lpstrFile;
@@ -508,7 +634,7 @@ namespace Nequeo {
 					// If the file has been opened.
 					if (SUCCEEDED(hr))
 					{
-
+						EnableControls();
 					}
 					else
 					{
@@ -548,7 +674,7 @@ namespace Nequeo {
 					// If the file has been opened.
 					if (SUCCEEDED(hr))
 					{
-
+						EnableControls();
 					}
 					else
 					{
@@ -557,7 +683,237 @@ namespace Nequeo {
 					}
 				}
 			}
+
+			/// <summary>
+			/// Enable controls.
+			/// </summary>
+			void MediaPlayerForm::EnableControls()
+			{
+				// Get the stop button handler.
+				CWnd *pBtnStop = GetDlgItem(IDC_BUTTONSTOP);
+				if (pBtnStop != NULL)
+					pBtnStop->EnableWindow(true);
+
+				// Get the pause button handler.
+				CWnd *pBtnPause = GetDlgItem(IDC_BUTTONPAUSE);
+				if (pBtnPause != NULL)
+					pBtnPause->EnableWindow(true);
+
+				// Enable the mute button.
+				_muteButton.EnableWindow(true);
+				_openURL.EnableWindow(false);
+				_positionSlider.EnableWindow(true);
+
+				MFTIME phnsDuration;
+				HRESULT hr = _mediaPlayer->GetDuration(&phnsDuration);
+
+				// Duration has been set.
+				if (SUCCEEDED(hr))
+				{
+					_duration = phnsDuration;
+					int durationSeconds = ((int)((double)((double)phnsDuration / (double)1000) / (double)100) / (double)100);
+					int durationMinutes = (int)((double)durationSeconds / (double)60);
+					int durationHours = (int)((double)durationMinutes / (double)60);
+
+					// Get the position.
+					CString stringDuration;
+					stringDuration.Format(_T("%.2d:%.2d:%.2d"), durationHours, durationMinutes, durationSeconds);
+
+					// Set the duration.
+					// Get the duration button handler.
+					CWnd *pDuration = GetDlgItem(IDC_DURATION);
+					if (pDuration != NULL)
+						pDuration->SetWindowTextW(stringDuration);
+
+					// Start a new current position thread
+					_internalThread = true;
+					_threadGetCurrentPosition = std::thread(std::bind(&MediaPlayerForm::StartGetCurrentPositionThread, this));
+					_threadGetCurrentPosition.detach();
+				}
+				else
+				{
+					// Set to no media.
+					_duration = 0;
+				}
+			}
+
+			/// <summary>
+			/// Disable controls.
+			/// </summary>
+			void MediaPlayerForm::DisableControls()
+			{
+				// Stop the thread.
+				StopGetCurrentPositionThread();
+
+				// Get the stop button handler.
+				CWnd *pBtnStop = GetDlgItem(IDC_BUTTONSTOP);
+				if (pBtnStop != NULL)
+					pBtnStop->EnableWindow(false);
+
+				// Get the pause button handler.
+				CWnd *pBtnPause = GetDlgItem(IDC_BUTTONPAUSE);
+				if (pBtnPause != NULL)
+					pBtnPause->EnableWindow(false);
+
+				// Get the play button handler.
+				CWnd *pBtnPlay = GetDlgItem(IDC_BUTTONPLAY);
+				if (pBtnPlay != NULL)
+					pBtnPlay->EnableWindow(false);
+
+				// Enable the mute button.
+				_muteButton.EnableWindow(false);
+				_openURL.EnableWindow(true);
+				_positionSlider.EnableWindow(false);
+			}
+
+			/// <summary>
+			/// Pause controls.
+			/// </summary>
+			void MediaPlayerForm::PauseControls()
+			{
+				// Get the stop button handler.
+				CWnd *pBtnStop = GetDlgItem(IDC_BUTTONSTOP);
+				if (pBtnStop != NULL)
+					pBtnStop->EnableWindow(false);
+
+				// Get the pause button handler.
+				CWnd *pBtnPause = GetDlgItem(IDC_BUTTONPAUSE);
+				if (pBtnPause != NULL)
+					pBtnPause->EnableWindow(false);
+
+				// Get the play button handler.
+				CWnd *pBtnPlay = GetDlgItem(IDC_BUTTONPLAY);
+				if (pBtnPlay != NULL)
+					pBtnPlay->EnableWindow(true);
+
+				// Enable the mute button.
+				_muteButton.EnableWindow(false);
+			}
+
+			/// <summary>
+			/// Play controls.
+			/// </summary>
+			void MediaPlayerForm::PlayControls()
+			{
+				// Get the stop button handler.
+				CWnd *pBtnStop = GetDlgItem(IDC_BUTTONSTOP);
+				if (pBtnStop != NULL)
+					pBtnStop->EnableWindow(true);
+
+				// Get the pause button handler.
+				CWnd *pBtnPause = GetDlgItem(IDC_BUTTONPAUSE);
+				if (pBtnPause != NULL)
+					pBtnPause->EnableWindow(true);
+
+				// Get the play button handler.
+				CWnd *pBtnPlay = GetDlgItem(IDC_BUTTONPLAY);
+				if (pBtnPlay != NULL)
+					pBtnPlay->EnableWindow(false);
+
+				// Enable the mute button.
+				_muteButton.EnableWindow(true);
+			}
+
+			/// <summary>
+			/// Stop controls.
+			/// </summary>
+			void MediaPlayerForm::StopControls()
+			{
+				// Get the stop button handler.
+				CWnd *pBtnStop = GetDlgItem(IDC_BUTTONSTOP);
+				if (pBtnStop != NULL)
+					pBtnStop->EnableWindow(false);
+
+				// Get the pause button handler.
+				CWnd *pBtnPause = GetDlgItem(IDC_BUTTONPAUSE);
+				if (pBtnPause != NULL)
+					pBtnPause->EnableWindow(false);
+
+				// Get the play button handler.
+				CWnd *pBtnPlay = GetDlgItem(IDC_BUTTONPLAY);
+				if (pBtnPlay != NULL)
+					pBtnPlay->EnableWindow(true);
+
+				// Enable the mute button.
+				_muteButton.EnableWindow(false);
+			}
+
+			/// <summary>
+			/// Start get current position thread.
+			/// </summary>
+			void MediaPlayerForm::StartGetCurrentPositionThread()
+			{
+				// 4 second interval.
+				Interval interval = chrono::milliseconds(4000);
+
+				// While active.
+				while (_internalThread)
+				{
+					// Sleep thread for 4 seconds.
+					std::this_thread::sleep_for(interval);
+					
+					// If the media player is not null.
+					if (_mediaPlayer != NULL)
+					{
+						// Lock this critical section.
+						AutoLockHandler lock(_critsec);
+
+						// Get the current position, and move the slider.
+						MFTIME currentPosition;
+						HRESULT hr = _mediaPlayer->GetCurrentPositionDirect(&currentPosition);
+
+						// Current position has been set.
+						if (SUCCEEDED(hr))
+						{
+							int secondsCount = 0;
+							int positionSeconds = ((int)((double)((double)currentPosition / (double)1000) / (double)100) / (double)100);
+							int positionMinutes = (int)((double)positionSeconds / (double)60);
+							int positionHours = (int)((double)positionMinutes / (double)60);
+
+							// Seconds counter.
+							if (positionMinutes > 0)
+								secondsCount = (positionSeconds - (positionMinutes * 60));
+							else
+								secondsCount = positionSeconds;
+
+							// Seconds counter.
+							if (positionHours > 0)
+							    secondsCount = (secondsCount - (positionHours * 60));
+
+							// Get the position.
+							CString stringPosition;
+							stringPosition.Format(_T("%.2d:%.2d:%.2d"), positionHours, positionMinutes, secondsCount);
+
+							// Set the position.
+							// Get the position button handler.
+							CWnd *pPosition = GetDlgItem(IDC_DURATIONCURRENT);
+							if (pPosition != NULL)
+								pPosition->SetWindowTextW(stringPosition);
+
+							// Set the slider position.
+							int sliderPosition = (int)((double)((double)currentPosition / (double)_duration) * (double)100);
+							_positionSlider.SetPos(sliderPosition);
+						}
+					}
+				}
+			}
+
+			/// <summary>
+			/// Stop get current position thread.
+			/// </summary>
+			void MediaPlayerForm::StopGetCurrentPositionThread()
+			{
+				// If an internal thread was created.
+				if (_internalThread)
+				{
+					try
+					{
+						_internalThread = false;
+						_threadGetCurrentPosition.join();
+					}
+					catch (...) {}
+				}
+			}
 		}
 	}
 }
-

@@ -111,6 +111,12 @@ namespace Nequeo {
 				HRESULT OpenURL(const WCHAR *sURL);
 
 				/// <summary>
+				/// Close the media.
+				/// </summary>
+				/// <returns>The result of the operation.</returns>
+				HRESULT Close();
+
+				/// <summary>
 				/// Start playing the media.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
@@ -169,11 +175,25 @@ namespace Nequeo {
 				HRESULT GetCurrentPosition(MFTIME *phnsPosition);
 
 				/// <summary>
+				/// Get the current media position, only use this in a thread safe controlled environment.
+				/// </summary>
+				/// <param name="phnsPosition">The media position.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT GetCurrentPositionDirect(MFTIME *phnsPosition);
+
+				/// <summary>
 				/// Set the media position.
 				/// </summary>
 				/// <param name="hnsPosition">The media position.</param>
 				/// <returns>The result of the operation.</returns>
 				HRESULT SetPosition(MFTIME hnsPosition);
+
+				/// <summary>
+				/// Try set the media position now.
+				/// </summary>
+				/// <param name="hnsPosition">The media position.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT SetPositionNoPending(MFTIME hnsPosition);
 
 				/// <summary>
 				/// Can seek.
@@ -475,6 +495,13 @@ namespace Nequeo {
 				/// <returns>The result of the operation.</returns>
 				HRESULT OnPresentationEnded(IMFMediaEvent *pEvent);
 
+				/// <summary>
+				/// Handler for MESessionEnded event.
+				/// </summary>
+				/// <param name="pEvent">The media event handler.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT OnSessionEnded(IMFMediaEvent *pEvent);
+
 			private:
 				/// <summary>
 				/// Set the media position.
@@ -507,6 +534,7 @@ namespace Nequeo {
 					CmdStart,
 					CmdPause,
 					CmdSeek,
+					CmdClose,
 				};
 
 				/// <summary>
@@ -524,6 +552,7 @@ namespace Nequeo {
 			private:
 				bool					_disposed;
 				long                    _nRefCount;			// Reference count.
+				bool					_shutDown;
 
 				IMFMediaSession			*_pSession;			// Media session.
 				IMFMediaSource			*_pSource;			// Media sources.

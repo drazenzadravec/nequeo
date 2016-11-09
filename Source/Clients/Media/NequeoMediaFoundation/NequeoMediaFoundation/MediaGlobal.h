@@ -40,6 +40,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <stdlib.h>
 #include <tchar.h>
 #include <string>
+#include <thread>
 
 #ifdef NEQUEOMEDIAFOUNDATION_EXPORTS
 #define EXPORT_NEQUEO_MEDIA_FOUNDATION_API __declspec(dllexport) 

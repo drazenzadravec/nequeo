@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentEnabler.cpp" />
+    <ClCompile Include="MediaCapture.cpp" />
     <ClCompile Include="MediaPlayer.cpp" />
     <ClCompile Include="MediaPlayerForm.cpp" />
     <ClCompile Include="OpenNetworkUriForm.cpp" />
@@ -209,6 +210,7 @@
   <ItemGroup>
     <ClInclude Include="ContentEnabler.h" />
     <ClInclude Include="CriticalSectionHandler.h" />
+    <ClInclude Include="MediaCapture.h" />
     <ClInclude Include="MediaGlobal.h" />
     <ClInclude Include="MediaPlayer.h" />
     <ClInclude Include="MediaPlayerForm.h" />
@@ -230,4 +232,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="NequeoMediaFoundation.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

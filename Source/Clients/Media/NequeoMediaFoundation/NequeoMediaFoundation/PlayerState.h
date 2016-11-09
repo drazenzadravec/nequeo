@@ -52,27 +52,35 @@ namespace Nequeo {
 				/// <summary>
 				/// Open pending.
 				/// </summary>
-				OpenPending,
+				OpenPending = 1,
 				/// <summary>
 				/// Started.
 				/// </summary>
-				Started,
+				Started = 2,
 				/// <summary>
 				/// Pause pending.
 				/// </summary>
-				PausePending,
+				PausePending = 3,
 				/// <summary>
 				/// Paused.
 				/// </summary>
-				Paused,
+				Paused = 4,
 				/// <summary>
 				/// Start pending.
 				/// </summary>
-				StartPending,
+				StartPending = 5,
 				/// <summary>
 				/// Stopped.
 				/// </summary>
-				Stopped,
+				Stopped = 6,
+				/// <summary>
+				/// Stopped.
+				/// </summary>
+				Closed = 7,
+				/// <summary>
+				/// Ended.
+				/// </summary>
+				Ended = 8,
 			};
 
 			/// <summary>

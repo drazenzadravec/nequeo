@@ -53,7 +53,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pParent">The parent window.</param>
 			OpenNetworkUriForm::OpenNetworkUriForm(CWnd* pParent) : CDialog(OpenNetworkUriForm::IDD, pParent),
-				_disposed(false), _networkURL("")
+				_disposed(false), _networkURL(""), _toolTip(NULL)
 			{
 			}
 

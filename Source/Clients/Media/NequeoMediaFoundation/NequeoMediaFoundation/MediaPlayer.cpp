@@ -61,6 +61,7 @@ namespace Nequeo {
 				_hNotifyErrorEvent(NULL),
 				_nRefCount(0),
 				_pContentProtectionManager(NULL),
+				_shutDown(false),
 				_disposed(false)
 			{
 			}
@@ -320,6 +321,11 @@ namespace Nequeo {
 						case MEEndOfPresentation:
 							hr = OnPresentationEnded(pEvent);
 							break;
+
+						case MEUnknown:
+						case MESessionEnded:
+							hr = OnSessionEnded(pEvent);
+							break;
 						}
 
 					}
@@ -390,6 +396,7 @@ namespace Nequeo {
 
 				HRESULT hr = S_OK;
 				IMFTopology *pTopology = NULL;
+				_shutDown = false;
 
 				// Create the media session.
 				hr = CreateSession();
@@ -440,13 +447,60 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Close the media.
+			/// </summary>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaPlayer::Close()
+			{
+				// If already closed.
+				if (_playerState == Closed)
+				{
+					// Closed.
+					return S_OK;
+				}
+
+				// If no session or no source.
+				if (_pSession == NULL || _pSource == NULL)
+				{
+					// Catastrophic failure
+					return E_UNEXPECTED;
+				}
+
+				AutoLockHandler lock(_critsec);
+
+				// Close the session playback.
+				HRESULT hr = _pSession->Close();
+
+				_normalState.command = CmdClose;
+				_bPending = CMD_PENDING;
+
+				// If successful closed.
+				if (SUCCEEDED(hr))
+				{
+					// Set our state to "closed"
+					_playerState = Closed;
+
+					// Notify that the state has changed.
+					NotifyState();
+				}
+				else
+				{
+					// Notify that an error has occured.
+					NotifyError(hr);
+				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
 			/// Start playing the media.
 			/// </summary>
 			/// <returns>The result of the operation.</returns>
 			HRESULT MediaPlayer::Play()
 			{
 				// If not state is paused.
-				if (_playerState != Paused || _playerState != Stopped)
+				if (_playerState != Paused && _playerState != Stopped)
 				{
 					// Unspecified error.
 					return E_FAIL;
@@ -488,7 +542,7 @@ namespace Nequeo {
 			HRESULT MediaPlayer::Pause()
 			{
 				// If not playback has started.
-				if (_playerState != Started || _playerState != Stopped)
+				if (_playerState != Started && _playerState != Stopped)
 				{
 					// Unspecified error.
 					return E_FAIL;
@@ -535,7 +589,7 @@ namespace Nequeo {
 			HRESULT MediaPlayer::Stop()
 			{
 				// If not playback has started or not paused.
-				if (_playerState != Started || _playerState != Paused)
+				if (_playerState != Started && _playerState != Paused)
 				{
 					// Unspecified error.
 					return E_FAIL;
@@ -584,14 +638,19 @@ namespace Nequeo {
 				// Initally all is good.
 				HRESULT hr = S_OK;
 
-				// Close the session.
-				hr = CloseSession();
+				// If not shutdown.
+				if (!_shutDown)
+				{
+					// Close the session.
+					hr = CloseSession();
 
-				// Shutdown the Media Foundation platform
-				MFShutdown();
+					// Shutdown the Media Foundation platform
+					MFShutdown();
 
-				// Close the close event handler.
-				CloseHandle(_hCloseEvent);
+					// Close the close event handler.
+					CloseHandle(_hCloseEvent);
+					_shutDown = true;
+				}
 
 				// Return the result.
 				return hr;
@@ -714,6 +773,35 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Get the current media position, only use this in a thread safe controlled environment.
+			/// </summary>
+			/// <param name="phnsPosition">The media position.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaPlayer::GetCurrentPositionDirect(MFTIME *phnsPosition)
+			{
+				if (phnsPosition == NULL)
+				{
+					return E_POINTER;
+				}
+
+				HRESULT hr = S_OK;
+
+				// Lock this critical section.
+				AutoLockHandler lock(_critsec);
+
+				if (_pClock == NULL)
+				{
+					return MF_E_NO_CLOCK;
+				}
+
+				// Assign the presentation clock
+				// with the current position.
+				hr = _pClock->GetTime(phnsPosition);
+
+				return hr;
+			}
+
+			/// <summary>
 			/// Set the media position.
 			/// </summary>
 			/// <param name="hnsPosition">The media position.</param>
@@ -737,6 +825,22 @@ namespace Nequeo {
 					hr = SetPositionInternal(hnsPosition);
 				}
 
+				return hr;
+			}
+
+			/// <summary>
+			/// Try set the media position now.
+			/// </summary>
+			/// <param name="hnsPosition">The media position.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaPlayer::SetPositionNoPending(MFTIME hnsPosition)
+			{
+				AutoLockHandler lock(_critsec);
+
+				HRESULT hr = S_OK;
+
+				// Set the internal position.
+				hr = SetPositionInternal(hnsPosition);
 				return hr;
 			}
 
@@ -1685,7 +1789,7 @@ namespace Nequeo {
 			HRESULT MediaPlayer::OnSessionClosed(IMFMediaEvent *pEvent)
 			{
 				// The application thread is waiting on this event, inside the 
-				// CPlayer::CloseSession method. 
+				_playerState = Closed;
 
 				// Trigger the close event handler.
 				SetEvent(_hCloseEvent);
@@ -1718,6 +1822,22 @@ namespace Nequeo {
 			HRESULT MediaPlayer::OnPresentationEnded(IMFMediaEvent *pEvent)
 			{
 				_playerState = Ready;
+
+				// Notify state changed.
+				NotifyState();
+
+				// Return all is good.
+				return S_OK;
+			}
+
+			/// <summary>
+			/// Handler for MESessionEnded event.
+			/// </summary>
+			/// <param name="pEvent">The media event handler.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaPlayer::OnSessionEnded(IMFMediaEvent *pEvent)
+			{
+				_playerState = Ended;
 
 				// Notify state changed.
 				NotifyState();

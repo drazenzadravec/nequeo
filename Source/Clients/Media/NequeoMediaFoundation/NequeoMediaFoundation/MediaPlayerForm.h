@@ -50,12 +50,12 @@ namespace Nequeo {
 				/// <summary>
 				/// Media player window enum.
 				/// </summary>
-				enum 
-				{ 
+				enum
+				{
 					/// <summary>
 					/// The id of the media player window.
 					/// </summary>
-					IDD = IDD_MEDIAPLAYERCONTROL 
+					IDD = IDD_MEDIAPLAYERCONTROL
 				};
 
 			public:
@@ -93,18 +93,61 @@ namespace Nequeo {
 				/// </summary>
 				void OpenNetworkURI();
 
+				/// <summary>
+				/// Enable controls.
+				/// </summary>
+				void EnableControls();
+
+				/// <summary>
+				/// Disable controls.
+				/// </summary>
+				void DisableControls();
+
+				/// <summary>
+				/// Pause controls.
+				/// </summary>
+				void PauseControls();
+
+				/// <summary>
+				/// Play controls.
+				/// </summary>
+				void PlayControls();
+
+				/// <summary>
+				/// Stop controls.
+				/// </summary>
+				void StopControls();
+
+				/// <summary>
+				/// Start get current position thread.
+				/// </summary>
+				void StartGetCurrentPositionThread();
+
+				/// <summary>
+				/// Stop get current position thread.
+				/// </summary>
+				void StopGetCurrentPositionThread();
+
 			private:
 				bool _disposed;
 				BOOL _repaintClient;
 				bool _mute;
+				MFTIME _duration;
+
+				bool _internalThread;
+				std::thread _threadGetCurrentPosition;
+				typedef std::chrono::milliseconds Interval;
 
 				MediaPlayer *_mediaPlayer;
 				Volume *_volume;
+				CriticalSectionHandler	_critsec;
+				HWND _hEvent;
 
 				// Mapped controls.
 				CToolTipCtrl* _toolTip;
 				CButton _muteButton;
 				CComboBox _openURL;
+				CSliderCtrl _positionSlider;
 
 			public:
 				/// <summary>
@@ -122,8 +165,12 @@ namespace Nequeo {
 				afx_msg void OnBnClickedButtonplay();
 				afx_msg void OnBnClickedButtonstop();
 				afx_msg void OnBnClickedButtonmute();
+				afx_msg void OnBnClickedButtonpause();
+				afx_msg void OnBnClickedButtonclose();
 				afx_msg void OnCbnSelchangeComboopen();
 				afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+				afx_msg void OnTRBNThumbPosChangingSliderposition(NMHDR *pNMHDR, LRESULT *pResult);
+				afx_msg void OnNMReleasedcaptureSliderposition(NMHDR *pNMHDR, LRESULT *pResult);
 			};
 		}
 	}
