@@ -103,7 +103,7 @@ namespace Nequeo {
 				/// <summary>
 				/// Enabler complete.
 				/// </summary>
-				Enabler_Complete
+				Enabler_Complete,
 			};
 
 			/// <summary>
@@ -118,7 +118,39 @@ namespace Nequeo {
 				/// <summary>
 				/// // Use non-silent.
 				/// </summary>
-				ForceNonSilent = 1
+				ForceNonSilent = 1,
+			};
+
+			/// <summary>
+			/// Media preview current state.
+			/// </summary>
+			enum PreviewState
+			{
+				/// <summary>
+				/// Ready.
+				/// </summary>
+				PreviewReady = 0,
+				
+			};
+
+			/// <summary>
+			/// Media capture current state.
+			/// </summary>
+			enum CaptureState
+			{
+				/// <summary>
+				/// Not Ready.
+				/// </summary>
+				CaptureNotReady = 0,
+				/// <summary>
+				/// Ready.
+				/// </summary>
+				CaptureReady = 1,
+				/// <summary>
+				/// Capturing.
+				/// </summary>
+				Capturing = 2,
+
 			};
 		}
 	}

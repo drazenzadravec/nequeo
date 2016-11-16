@@ -205,7 +205,7 @@ namespace Nequeo {
 				HWND hVideo = NULL;
 				_hEvent = *this;
 
-				// Get the play button handler.
+				// Get the play display handler.
 				CWnd *pVideoDisplay = GetDlgItem(IDC_VIDEODISPLAY);
 				if (pVideoDisplay != NULL)
 				{
@@ -614,7 +614,7 @@ namespace Nequeo {
 
 				CFileDialog dlgFile(TRUE);
 				OPENFILENAME& ofn = dlgFile.GetOFN();
-				ofn.lpstrFilter = L"Video Media\0*.mp4;*.wmv;*.asf;*.avi\0Audio Media\0*.mp3;*.wma;*.wav\0All files\0*.*\0";
+				ofn.lpstrFilter = L"Video Media\0*.mp4;*.m4a;*.m4v;*.mov;*.wmv;*.wma;*.asf;*.avi;*.3g2;*.3gp;*.3gp2;*.3gpp\0Audio Media\0*.mp3;*.wma;*.wav;*.aac;*.adts\0All files\0*.*\0";
 				ofn.lpstrFile = path;
 				ofn.nMaxFile = MAX_PATH;
 

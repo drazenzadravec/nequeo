@@ -35,7 +35,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "NequeoMediaPlayer.h"
 #include "MainFrm.h"
 
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -163,7 +162,7 @@ BOOL CNequeoMediaPlayerApp::InitInstance()
 	else if (nResponse == IDCANCEL)
 	{
 	}
-
+	
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.
 	return FALSE;

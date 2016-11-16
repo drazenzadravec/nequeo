@@ -96,6 +96,16 @@ const UINT WM_APP_BROWSER_DONE = WM_APP + 5; // no message parameters
 #define SAFE_ARRAY_DELETE(x) if (x != NULL) { delete [] x; x = NULL; }
 #endif
 
+// Safe release.
+template <class T> void SafeRelease(T **ppT)
+{
+	if (*ppT)
+	{
+		(*ppT)->Release();
+		*ppT = NULL;
+	}
+}
+
 // IMPORTANT: No function here can return a NULL pointer - caller assumes
 // the return value is a valid null-terminated string. You should only
 // use these functions for debugging purposes.

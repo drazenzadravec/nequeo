@@ -56,7 +56,7 @@ namespace Nequeo {
 				/// <param name="hEvent">The handle to the window to receive notifications.</param>
 				/// <param name="ppPlayer">Receives an AddRef's pointer to the MediaPlayer object. The caller must release the pointer.</param>
 				/// <returns>The result of the operation.</returns>
-				static HRESULT CreateInstance(HWND hVideo, HWND hEvent, MediaPlayer **ppPlayer);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API static HRESULT CreateInstance(HWND hVideo, HWND hEvent, MediaPlayer **ppPlayer);
 
 				/// <summary>
 				/// Add a new player ref item.
@@ -68,7 +68,7 @@ namespace Nequeo {
 				/// Release this player resources.
 				/// </summary>
 				/// <returns>The result.</returns>
-				STDMETHODIMP_(ULONG) Release();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(ULONG) Release();
 
 				/// <summary>
 				/// Get the player reference for the reference id.
@@ -101,44 +101,44 @@ namespace Nequeo {
 				/// Clear the current media values.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Clear();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Clear();
 
 				/// <summary>
 				/// Opena URL resources, can be a file, network or internet resource.
 				/// </summary>
 				/// <param name="sURL">The string of the URL.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT OpenURL(const WCHAR *sURL);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT OpenURL(const WCHAR *sURL);
 
 				/// <summary>
 				/// Close the media.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Close();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Close();
 
 				/// <summary>
 				/// Start playing the media.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Play();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Play();
 
 				/// <summary>
 				/// Pause playback of the media.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Pause();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Pause();
 
 				/// <summary>
 				/// Stop playback of the media.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Stop();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Stop();
 
 				/// <summary>
 				/// Shutdown of the media. Releases all resources held by this object.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT	Shutdown();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT	Shutdown();
 
 				/// <summary>
 				/// Repaint the video window. The application should call this method when it receives a WM_PAINT message.
@@ -165,70 +165,70 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="phnsDuration">The media duration.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT GetDuration(MFTIME *phnsDuration);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetDuration(MFTIME *phnsDuration);
 
 				/// <summary>
 				/// Get the current media position.
 				/// </summary>
 				/// <param name="phnsPosition">The media position.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT GetCurrentPosition(MFTIME *phnsPosition);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetCurrentPosition(MFTIME *phnsPosition);
 
 				/// <summary>
 				/// Get the current media position, only use this in a thread safe controlled environment.
 				/// </summary>
 				/// <param name="phnsPosition">The media position.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT GetCurrentPositionDirect(MFTIME *phnsPosition);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetCurrentPositionDirect(MFTIME *phnsPosition);
 
 				/// <summary>
 				/// Set the media position.
 				/// </summary>
 				/// <param name="hnsPosition">The media position.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT SetPosition(MFTIME hnsPosition);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetPosition(MFTIME hnsPosition);
 
 				/// <summary>
 				/// Try set the media position now.
 				/// </summary>
 				/// <param name="hnsPosition">The media position.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT SetPositionNoPending(MFTIME hnsPosition);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetPositionNoPending(MFTIME hnsPosition);
 
 				/// <summary>
 				/// Can seek.
 				/// </summary>
 				/// <param name="pbCanSeek">True if can seek; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT CanSeek(BOOL *pbCanSeek);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT CanSeek(BOOL *pbCanSeek);
 
 				/// <summary>
 				/// Queries whether the current session supports scrubbing.
 				/// </summary>
 				/// <param name="pbCanScrub">True if can scrub; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT CanScrub(BOOL *pbCanScrub);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT CanScrub(BOOL *pbCanScrub);
 
 				/// <summary>
 				/// Enables or disables scrubbing.
 				/// </summary>
 				/// <param name="bScrub">True to scrub; else false</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Scrub(BOOL bScrub);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Scrub(BOOL bScrub);
 
 				/// <summary>
 				/// Queries whether the current session supports fast-forward.
 				/// </summary>
 				/// <param name="pbCanFF">True if can fast forward; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT CanFastForward(BOOL *pbCanFF);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT CanFastForward(BOOL *pbCanFF);
 
 				/// <summary>
 				/// Queries whether the current session supports rewind (reverse play).
 				/// </summary>
 				/// <param name="pbCanRewind">True if can rewind; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT CanRewind(BOOL *pbCanRewind);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT CanRewind(BOOL *pbCanRewind);
 
 				/// <summary>
 				/// Switches to fast-forward playback, as follows:
@@ -237,7 +237,7 @@ namespace Nequeo {
 				/// Note: This method is for convenience; the application can also call SetRate.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT FastForward();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT FastForward();
 
 				/// <summary>
 				/// Switches to reverse playback, as follows:
@@ -246,14 +246,14 @@ namespace Nequeo {
 				/// Note: This method is for convenience; the application can also call SetRate.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				HRESULT Rewind();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Rewind();
 
 				/// <summary>
 				/// Sets the playback rate.
 				/// </summary>
 				/// <param name="fRate">The playback rate.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT SetRate(float fRate);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetRate(float fRate);
 
 				/// <summary>
 				/// Get an indicator specifying if a video display control has been set.
@@ -266,7 +266,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="ppManager">The content protection manger.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT GetContentProtectionManager(ContentProtectionManager **ppManager);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetContentProtectionManager(ContentProtectionManager **ppManager);
 
 				/// <summary>
 				/// Set the notify state event handler.

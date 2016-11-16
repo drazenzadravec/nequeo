@@ -53,7 +53,7 @@ namespace Nequeo {
 				/// <param name="hwndNotification">The handle to the window to receive notifications.</param>
 				/// <param name="ppVolume">Receives an AddRef's pointer to the Volume object. The caller must release the pointer.</param>
 				/// <returns>The result of the operation.</returns>
-				static HRESULT CreateInstance(UINT uNotificationMessage, HWND hwndNotification, Volume **ppVolume);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API static HRESULT CreateInstance(UINT uNotificationMessage, HWND hwndNotification, Volume **ppVolume);
 
 				/// <summary>
 				/// Get the volume reference for the reference id.
@@ -73,7 +73,7 @@ namespace Nequeo {
 				/// Release this volume resources.
 				/// </summary>
 				/// <returns>The result.</returns>
-				STDMETHODIMP_(ULONG) Release();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(ULONG) Release();
 
 				/// <summary>
 				/// On volume changed.
@@ -82,7 +82,7 @@ namespace Nequeo {
 				/// <param name="newMute">The new mute value.</param>
 				/// <param name="eventContext">The event context.</param>
 				/// <returns>The result of the operation.</returns>
-				STDMETHODIMP OnSimpleVolumeChanged(float newVolume, BOOL newMute, LPCGUID eventContext);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP OnSimpleVolumeChanged(float newVolume, BOOL newMute, LPCGUID eventContext);
 
 				/// <summary>
 				/// On display name changed.
@@ -157,42 +157,42 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="bEnable">True to enable; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT EnableNotifications(BOOL bEnable);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT EnableNotifications(BOOL bEnable);
 
 				/// <summary>
 				/// Get the volume.
 				/// </summary>
 				/// <param name="pflVolume">The current volume.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT GetVolume(float *pflVolume);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetVolume(float *pflVolume);
 
 				/// <summary>
 				/// Set the volume. Ranges from 0 (silent) to 1 (full volume).
 				/// </summary>
 				/// <param name="flVolume">The new volume.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT SetVolume(float flVolume);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetVolume(float flVolume);
 
 				/// <summary>
 				/// Get the mute state.
 				/// </summary>
 				/// <param name="pbMute">True if muted; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT GetMute(BOOL *pbMute);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetMute(BOOL *pbMute);
 
 				/// <summary>
 				/// Set the mute state.
 				/// </summary>
 				/// <param name="bMute">True if muted; else false.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT SetMute(BOOL bMute);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetMute(BOOL bMute);
 
 				/// <summary>
 				/// Set the display name.
 				/// </summary>
 				/// <param name="wszName">The display name.</param>
 				/// <returns>The result of the operation.</returns>
-				HRESULT SetDisplayName(const WCHAR *wszName);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetDisplayName(const WCHAR *wszName);
 
 			protected:
 				/// <summary>

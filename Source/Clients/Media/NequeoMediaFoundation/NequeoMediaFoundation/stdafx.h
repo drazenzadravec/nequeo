@@ -43,7 +43,11 @@
 #include <mfidl.h>
 #include <mfplay.h>
 #include <mferror.h>
+#include <mfreadwrite.h>
 #include <nserror.h>
+#include <Dbt.h>
+#include <shlwapi.h>
+#include <Wmcodecdsp.h>
 
 // EVR headers
 #include <evr.h>
@@ -56,6 +60,7 @@
 
 // Safe string functions
 #include <strsafe.h>
+#include <vector>
 
 // Resources
 #include "resource.h"

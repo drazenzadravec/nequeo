@@ -97,7 +97,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -121,7 +121,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -149,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -177,7 +177,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -194,10 +194,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentEnabler.cpp" />
+    <ClCompile Include="MediaByteStream.cpp" />
     <ClCompile Include="MediaCapture.cpp" />
     <ClCompile Include="MediaPlayer.cpp" />
     <ClCompile Include="MediaPlayerForm.cpp" />
+    <ClCompile Include="MediaPreview.cpp" />
+    <ClCompile Include="MediaPreviewForm.cpp" />
     <ClCompile Include="OpenNetworkUriForm.cpp" />
+    <ClCompile Include="ReadByteAsyncCallback.cpp" />
+    <ClCompile Include="ReadByteContainer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -206,21 +211,30 @@
     </ClCompile>
     <ClCompile Include="Volume.cpp" />
     <ClCompile Include="WebDispatch.cpp" />
+    <ClCompile Include="WriteByteAsyncCallback.cpp" />
+    <ClCompile Include="WriteByteContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentEnabler.h" />
     <ClInclude Include="CriticalSectionHandler.h" />
+    <ClInclude Include="MediaByteStream.h" />
     <ClInclude Include="MediaCapture.h" />
     <ClInclude Include="MediaGlobal.h" />
     <ClInclude Include="MediaPlayer.h" />
     <ClInclude Include="MediaPlayerForm.h" />
+    <ClInclude Include="MediaPreview.h" />
+    <ClInclude Include="MediaPreviewForm.h" />
     <ClInclude Include="OpenNetworkUriForm.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="ReadByteAsyncCallback.h" />
+    <ClInclude Include="ReadByteContainer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Volume.h" />
     <ClInclude Include="WebDispatch.h" />
+    <ClInclude Include="WriteByteAsyncCallback.h" />
+    <ClInclude Include="WriteByteContainer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NequeoMediaFoundation.def" />
