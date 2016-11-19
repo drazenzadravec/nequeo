@@ -150,6 +150,10 @@ namespace Nequeo {
 				/// Capturing.
 				/// </summary>
 				Capturing = 2,
+				/// <summary>
+				/// Not capturing.
+				/// </summary>
+				NotCapturing = 3,
 
 			};
 		}

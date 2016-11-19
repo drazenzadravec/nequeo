@@ -99,13 +99,13 @@ namespace Nequeo {
 				/// Set the read complete handler.
 				/// </summary>
 				/// <param name="handler">The function handler.</param>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API void SetReadCompleteHandler(ReadCompleteHandler handler);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(void) SetReadCompleteHandler(ReadCompleteHandler handler);
 
 				/// <summary>
 				/// Set the write complete handler.
 				/// </summary>
 				/// <param name="handler">The function handler.</param>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API void SetWriteCompleteHandler(WriteCompleteHandler handler);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(void) SetWriteCompleteHandler(WriteCompleteHandler handler);
 
 				/// <summary>
 				/// Begins an asynchronous read operation from the stream.
@@ -116,7 +116,7 @@ namespace Nequeo {
 				/// <param name="punkState">Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. 
 				/// You can use this object to hold state information. The object is returned to the caller when the callback is invoked. [in]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT BeginRead(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) BeginRead(
 					BYTE             *pb,
 					ULONG            cb,
 					IMFAsyncCallback *pCallback,
@@ -131,7 +131,7 @@ namespace Nequeo {
 				/// <param name="punkState">Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. 
 				/// You can use this object to hold state information. The object is returned to the caller when the callback is invoked. [in]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT BeginWrite(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) BeginWrite(
 					const BYTE       *pb,
 					ULONG            cb,
 					IMFAsyncCallback *pCallback,
@@ -142,7 +142,7 @@ namespace Nequeo {
 				/// This method also cancels any pending asynchronous I/O requests. 
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Close();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) Close();
 
 				/// <summary>
 				/// Completes an asynchronous read operation.
@@ -150,7 +150,7 @@ namespace Nequeo {
 				/// <param name="pResult">Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the IMFAsyncCallback::Invoke method. [in]</param>
 				/// <param name="pcbRead">Receives the number of bytes that were read. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT EndRead(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) EndRead(
 					IMFAsyncResult *pResult,
 					ULONG          *pcbRead);
 
@@ -160,7 +160,7 @@ namespace Nequeo {
 				/// <param name="pResult">Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the IMFAsyncCallback::Invoke method. [in]</param>
 				/// <param name="pcbWritten">Receives the number of bytes that were written. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT EndWrite(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) EndWrite(
 					IMFAsyncResult *pResult,
 					ULONG          *pcbWritten);
 
@@ -168,14 +168,14 @@ namespace Nequeo {
 				/// Clears any internal buffers used by the stream. If you are writing to the stream, the buffered data is written to the underlying file or device.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Flush();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) Flush();
 
 				/// <summary>
 				/// Retrieves the characteristics of the byte stream.
 				/// </summary>
 				/// <param name="pdwCapabilities">Receives a bitwise OR of zero or more flags. The following flags are defined. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetCapabilities(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) GetCapabilities(
 					DWORD *pdwCapabilities);
 
 				/// <summary>
@@ -183,7 +183,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="pqwPosition">Receives the current position, in bytes. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetCurrentPosition(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) GetCurrentPosition(
 					QWORD *pqwPosition);
 
 				/// <summary>
@@ -191,7 +191,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="pqwLength">Receives the length of the stream, in bytes. If the length is unknown, this value is -1. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetLength(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) GetLength(
 					QWORD *pqwLength);
 
 				/// <summary>
@@ -199,7 +199,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="pfEndOfStream">Receives the value TRUE if the end of the stream has been reached, or FALSE otherwise. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT IsEndOfStream(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) IsEndOfStream(
 					BOOL *pfEndOfStream);
 
 				/// <summary>
@@ -209,7 +209,7 @@ namespace Nequeo {
 				/// <param name="cb">Size of the buffer in bytes. [in]</param>
 				/// <param name="pcbRead">Receives the number of bytes that are copied into the buffer. This parameter cannot be NULL. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Read(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) Read(
 					BYTE  *pb,
 					ULONG cb,
 					ULONG *pcbRead);
@@ -222,7 +222,7 @@ namespace Nequeo {
 				/// <param name="dwSeekFlags">Specifies zero or more flags. The following flags are defined. [in]</param>
 				/// <param name="pqwCurrentPosition">Receives the new position after the seek. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Seek(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) Seek(
 					MFBYTESTREAM_SEEK_ORIGIN SeekOrigin,
 					LONGLONG                 qwSeekOffset,
 					DWORD                    dwSeekFlags,
@@ -233,7 +233,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="qwPosition">New position in the stream, as a byte offset from the start of the stream. [in]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetCurrentPosition(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) SetCurrentPosition(
 					QWORD qwPosition);
 
 				/// <summary>
@@ -241,7 +241,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="qwLength">Length of the stream in bytes. [in]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetLength(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) SetLength(
 					QWORD qwLength);
 
 				/// <summary>
@@ -251,7 +251,7 @@ namespace Nequeo {
 				/// <param name="cb">Size of the buffer in bytes. [in]</param>
 				/// <param name="pcbWritten">Receives the number of bytes that are written. [out]</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT Write(
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(HRESULT) Write(
 					const BYTE  *pb,
 					ULONG       cb,
 					ULONG       *pcbWritten);

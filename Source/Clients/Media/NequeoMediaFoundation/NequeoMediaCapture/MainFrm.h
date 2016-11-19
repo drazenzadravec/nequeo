@@ -29,41 +29,48 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "stdafx.h"
-#include "NequeoMediaPlayer.h"
+#pragma once
 #include "ChildView.h"
 
+/// Main frame.
+class CMainFrame : public CFrameWnd
+{
+	
+public:
+	CMainFrame();
+protected: 
+	DECLARE_DYNAMIC(CMainFrame)
+
+// Attributes
+public:
+
+// Operations
+public:
+
+// Overrides
+public:
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
+
+// Implementation
+public:
+	virtual ~CMainFrame();
 #ifdef _DEBUG
-#define new DEBUG_NEW
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-CChildView::CChildView()
-{
-}
+protected:  // control bar embedded members
+	CToolBar			m_wndToolBar;
+	CStatusBar			m_wndStatusBar;
+	CChildView			m_wndView;
 
-CChildView::~CChildView()
-{
-}
+// Generated message map functions
+protected:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnSetFocus(CWnd *pOldWnd);
+	DECLARE_MESSAGE_MAP()
 
-BEGIN_MESSAGE_MAP(CChildView, CWnd)
-	ON_WM_PAINT()
-END_MESSAGE_MAP()
+};
 
-BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs) 
-{
-	if (!CWnd::PreCreateWindow(cs))
-		return FALSE;
-
-	cs.dwExStyle |= WS_EX_CLIENTEDGE;
-	cs.style &= ~WS_BORDER;
-	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS, 
-		::LoadCursor(NULL, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), NULL);
-
-	return TRUE;
-}
-
-void CChildView::OnPaint() 
-{
-	CPaintDC dc(this); // device context for painting
-}
 

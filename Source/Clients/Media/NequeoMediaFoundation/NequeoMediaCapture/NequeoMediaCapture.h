@@ -29,41 +29,32 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "stdafx.h"
-#include "NequeoMediaPlayer.h"
-#include "ChildView.h"
+#pragma once
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
+#ifndef __AFXWIN_H__
+	#error "include 'stdafx.h' before including this file for PCH"
 #endif
 
-CChildView::CChildView()
+#include "resource.h"       // main symbols
+#include "MediaCaptureForm.h"
+
+// Nequeo media capture main app
+class CNequeoMediaCaptureApp : public CWinApp
 {
-}
+public:
+	CNequeoMediaCaptureApp();
 
-CChildView::~CChildView()
-{
-}
 
-BEGIN_MESSAGE_MAP(CChildView, CWnd)
-	ON_WM_PAINT()
-END_MESSAGE_MAP()
+// Overrides
+public:
+	virtual BOOL InitInstance();
+	virtual int ExitInstance();
 
-BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs) 
-{
-	if (!CWnd::PreCreateWindow(cs))
-		return FALSE;
+// Implementation
 
-	cs.dwExStyle |= WS_EX_CLIENTEDGE;
-	cs.style &= ~WS_BORDER;
-	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS, 
-		::LoadCursor(NULL, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), NULL);
+public:
+	afx_msg void OnAppAbout();
+	DECLARE_MESSAGE_MAP()
+};
 
-	return TRUE;
-}
-
-void CChildView::OnPaint() 
-{
-	CPaintDC dc(this); // device context for painting
-}
-
+extern CNequeoMediaCaptureApp theApp;

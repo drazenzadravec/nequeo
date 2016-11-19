@@ -160,6 +160,14 @@ namespace Nequeo {
 				/// </summary>
 				UINT32  bitsPerSample;
 				/// <summary>
+				/// Block align.
+				/// </summary>
+				UINT32 blockAlign;
+				/// <summary>
+				/// Bytes per second.
+				/// </summary>
+				UINT32 bytesPerSecond;
+				/// <summary>
 				/// MF transcode container type.
 				/// </summary>
 				GUID transcode;
@@ -178,6 +186,10 @@ namespace Nequeo {
 				/// Audio encoding.
 				/// </summary>
 				AudioEncodingParameters audio;
+				/// <summary>
+				/// MF transcode container type.
+				/// </summary>
+				GUID transcode;
 			};
 
 			/// <summary>
@@ -281,7 +293,7 @@ namespace Nequeo {
 				/// <param name="pByteStream">The byte stream to write the capture data to.</param>
 				/// <param name="param">The encoding parameters.</param>
 				/// <returns>The result of the operation.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT StartCaptureStream(IMFByteStream *pByteStream, EncodingParameters& param);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT StartCaptureToStream(IMFByteStream *pByteStream, EncodingParameters& param);
 
 				/// <summary>
 				/// Stop capture.
@@ -426,10 +438,27 @@ namespace Nequeo {
 				HRESULT ConfigureAudioCapture(EncodingParameters& param);
 
 				/// <summary>
+				/// Configure video and audio capture encoding.
+				/// </summary>
+				/// <param name="param">The encoding parameters.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT ConfigureVideoAudioCapture(EncodingParameters& param);
+
+				/// <summary>
 				/// End capture internal.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
 				HRESULT EndCaptureInternal();
+
+				/// <summary>
+				/// Start video and audio capture.
+				/// </summary>
+				/// <param name="pwszFileName">The path and file name to write the capture data to.</param>
+				/// <param name="pByteStream">The byte stream to write the capture data to.</param>
+				/// <param name="param">The encoding parameters.</param>
+				/// <param name="writeToFile">Write to file; else write to byte stream.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT StartVideoAudioCapture(const WCHAR *pwszFileName, IMFByteStream *pByteStream, EncodingParameters& param, bool writeToFile = true);
 
 				/// <summary>
 				/// Start video capture.
@@ -475,6 +504,7 @@ namespace Nequeo {
 				IMFSourceReader         *_pReader;
 				IMFSinkWriter           *_pVideoWriter;
 				IMFSinkWriter           *_pAudioWriter;
+				IMFSinkWriter           *_pVideoAudioWriter;
 
 				BOOL                    _bFirstSample;
 				LONGLONG                _llBaseTime;
