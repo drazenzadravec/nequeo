@@ -286,15 +286,15 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="param">The media foundation device collection.</param>
 			/// <returns>The device names.</returns>
-			std::vector<std::wstring> MediaCapture::GetDeviceNames(CaptureDeviceParam& param)
+			std::vector<std::wstring> MediaCapture::GetDeviceNames(CaptureDeviceParam *param)
 			{
 				std::vector<std::wstring> names;
 
 				// For each device.
-				for (size_t i = 0; i < param.count; i++)
+				for (size_t i = 0; i < param->count; i++)
 				{
 					// Get the name.
-					std::wstring name = GetDeviceName(param.ppDevices[i]);
+					std::wstring name = GetDeviceName(param->ppDevices[i]);
 
 					// If name exists.
 					if (name.length() > 0)

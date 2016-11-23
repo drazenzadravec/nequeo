@@ -137,6 +137,43 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// On initialize dialog.
+			/// </summary>
+			BOOL MediaPlayerForm::OnInitDialog()
+			{
+				CDialog::OnInitDialog();
+
+				// Create the ToolTip control.
+				_toolTip = new CToolTipCtrl();
+				_toolTip->Create(this);
+
+				// Assign the tool tip.
+				_toolTip->AddTool(GetDlgItem(IDC_BUTTONSTOP), _T("Stop the playback."));
+				_toolTip->AddTool(GetDlgItem(IDC_BUTTONPAUSE), _T("Pause the playback."));
+				_toolTip->AddTool(GetDlgItem(IDC_BUTTONPLAY), _T("Start playing media"));
+				_toolTip->AddTool(GetDlgItem(IDC_BUTTONCLOSE), _T("Close the media source."));
+				_toolTip->AddTool(GetDlgItem(IDC_BUTTONMUTE), _T("Mute or un-mute the volume."));
+
+				// Activate
+				_toolTip->Activate(TRUE);
+
+				// return TRUE  unless you set the focus to a control.
+				return TRUE;
+			}
+
+			/// <summary>
+			/// Pre-translate message.
+			/// </summary>
+			/// <param name="pMsg">The message.</param>
+			BOOL MediaPlayerForm::PreTranslateMessage(MSG* pMsg)
+			{
+				if (_toolTip != NULL)
+					_toolTip->RelayEvent(pMsg);
+
+				return CDialog::PreTranslateMessage(pMsg);
+			}
+
+			/// <summary>
 			/// On close window.
 			/// </summary>
 			void MediaPlayerForm::OnClose()
@@ -190,13 +227,6 @@ namespace Nequeo {
 			{
 				CDialog::OnShowWindow(bShow, nStatus);
 
-				// Create the tool tip control.
-				_toolTip = new CToolTipCtrl();
-				if (_toolTip != NULL)
-				{
-
-				}
-
 				// Set the slder position.
 				_positionSlider.SetRange(0, 100);
 				_positionSlider.SetPos(0);
@@ -226,14 +256,10 @@ namespace Nequeo {
 						// Ask for audio session events.
 						_volume->EnableNotifications(TRUE);
 					}
-
-					// All is good create the window.
-					//return 0;
 				}
 				else
 				{
 					// Destroy the window.
-					//return -1;
 				}
 			}
 

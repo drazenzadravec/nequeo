@@ -264,14 +264,14 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="device">The media foundation device.</param>
 				/// <returns>The device name.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API std::wstring GetDeviceName(IMFActivate *device);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API static std::wstring GetDeviceName(IMFActivate *device);
 
 				/// <summary>
 				/// Get the device names.
 				/// </summary>
 				/// <param name="param">The media foundation device collection.</param>
 				/// <returns>The device names.</returns>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API std::vector<std::wstring> GetDeviceNames(CaptureDeviceParam& param);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API static std::vector<std::wstring> GetDeviceNames(CaptureDeviceParam *param);
 
 				/// <summary>
 				/// Is capturing.

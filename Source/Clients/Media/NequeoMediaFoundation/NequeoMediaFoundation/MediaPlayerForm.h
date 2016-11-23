@@ -128,6 +128,17 @@ namespace Nequeo {
 				/// </summary>
 				void StopGetCurrentPositionThread();
 
+				/// <summary>
+				/// On initialize dialog.
+				/// </summary>
+				BOOL OnInitDialog() override;
+
+				/// <summary>
+				/// Pre-translate message.
+				/// </summary>
+				/// <param name="pMsg">The message.</param>
+				BOOL PreTranslateMessage(MSG* pMsg) override;
+
 			private:
 				bool _disposed;
 				BOOL _repaintClient;

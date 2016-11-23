@@ -106,6 +106,36 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Show the preview form modaless.
+			/// </summary>
+			BOOL MediaPreviewForm::ShowPreviewForm()
+			{
+				BOOL ret = 0;
+				HINSTANCE _hInstance = AfxGetResourceHandle();
+
+				__try
+				{
+					HMODULE dllModule = ::GetModuleHandle(L"NequeoMediaFoundation.dll");
+					AfxSetResourceHandle(dllModule);
+
+					// Create the window.
+					ret = CDialog::Create(MediaPreviewForm::IDD);
+						
+					// Create created.
+					if (ret)   
+						ret = CDialog::ShowWindow(SW_SHOW);
+					
+				}
+				__finally
+				{
+					AfxSetResourceHandle(_hInstance);
+				}
+
+				// Return the result.
+				return ret;
+			}
+
+			/// <summary>
 			/// Data exchange.
 			/// </summary>
 			/// <param name="pDX">Data exchange instance.</param>

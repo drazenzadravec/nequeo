@@ -84,20 +84,47 @@ namespace Nequeo {
 				virtual void DoDataExchange(CDataExchange* pDX);
 
 			private:
-				
+				/// <summary>
+				/// Enable or diable controls.
+				/// </summary>
+				void EnableControls();
+
+				/// <summary>
+				/// On initialize dialog.
+				/// </summary>
+				BOOL OnInitDialog() override;
+
+				/// <summary>
+				/// Pre-translate message.
+				/// </summary>
+				/// <param name="pMsg">The message.</param>
+				BOOL PreTranslateMessage(MSG* pMsg) override;
 
 			private:
 				bool _disposed;
 
+				int _selectedIndexVideo;
+				int _selectedIndexAudio;
+
+				int _countVideo;
+				int _countAudio;
+
 				MediaCapture *_mediaCapture;
 				Volume *_volume;
 				CriticalSectionHandler	_critsec;
+
 				HWND _hEvent;
+				HWND _hCapture;
 
 				// Mapped controls.
-				CToolTipCtrl* _toolTip;
-				CComboBox _videoDevice;
-				CComboBox _audioDevice;
+				CToolTipCtrl *_toolTip;
+				CComboBox _videoDeviceItem;
+				CComboBox _audioDeviceItem;
+
+				CaptureDeviceParam *_videoDevice;
+				CaptureDeviceParam *_audioDevice;
+
+				MediaPreviewForm *_preview;
 
 			public:
 				/// <summary>
@@ -113,6 +140,9 @@ namespace Nequeo {
 				afx_msg LRESULT OnNotifyState(WPARAM wParam, LPARAM lParam);
 				afx_msg LRESULT OnNotifyError(WPARAM wParam, LPARAM lParam);
 				afx_msg void OnBnClickedButtonVideoPreview();
+				afx_msg void OnBnClickedButtonRefreshDevices();
+				afx_msg void OnCbnSelchangeCombVideo();
+				afx_msg void OnCbnSelchangeCombAudio();
 			};
 		}
 	}

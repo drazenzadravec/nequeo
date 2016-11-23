@@ -73,6 +73,7 @@ namespace Nequeo {
 					// Indicate that dispose has been called.
 					_disposed = true;
 
+					// Close the streams.
 					Close();
 				}
 			}
@@ -187,9 +188,6 @@ namespace Nequeo {
 
 				IMFMediaSource *pSource = NULL;
 
-				// Release the current instance of the player (if any).
-				Close();
-
 				// Start a new operation.
 				_closed = false;
 
@@ -296,7 +294,6 @@ namespace Nequeo {
 					// Release the symbolic link.
 					CoTaskMemFree(_pwszSymbolicLink);
 					_pwszSymbolicLink = NULL;
-
 					_cchSymbolicLink = 0;
 				}
 

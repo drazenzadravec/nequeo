@@ -76,6 +76,11 @@ namespace Nequeo {
 				/// </summary>
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API INT_PTR DoModal() override;
 
+				/// <summary>
+				/// Show the preview form modaless.
+				/// </summary>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API BOOL ShowPreviewForm();
+
 			protected:
 				/// <summary>
 				/// Data exchange.
