@@ -43,12 +43,15 @@ BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::MediaCaptureForm, CDialog)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_SIZE()
+	ON_MESSAGE(ON_WM_VIDEO_EVENT, &MediaCaptureForm::OnNotifyVideoState)
+	ON_MESSAGE(ON_WM_AUDIO_EVENT, &MediaCaptureForm::OnNotifyAudioState)
 	ON_MESSAGE(ON_WM_APP_NOTIFY, &MediaCaptureForm::OnNotifyState)
 	ON_MESSAGE(ON_WM_APP_ERROR, &MediaCaptureForm::OnNotifyError)
 	ON_BN_CLICKED(IDC_VIDEOPREVIEW_BUTTON, &MediaCaptureForm::OnBnClickedButtonVideoPreview)
 	ON_BN_CLICKED(IDC_REFRESHDEVICE_BUTTON, &MediaCaptureForm::OnBnClickedButtonRefreshDevices)
 	ON_CBN_SELCHANGE(IDC_VIDEODEVICE_COMBO, &MediaCaptureForm::OnCbnSelchangeCombVideo)
 	ON_CBN_SELCHANGE(IDC_AUDIODEVICE_COMBO, &MediaCaptureForm::OnCbnSelchangeCombAudio)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_MEDIACAPTURE_TAB, &MediaCaptureForm::OnTcnSelchangeMediacaptureTab)
 	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
@@ -61,7 +64,8 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pParent">The parent window.</param>
 			MediaCaptureForm::MediaCaptureForm(CWnd* pParent) : CDialog(MediaCaptureForm::IDD, pParent),
-				_mediaCapture(NULL),
+				_mediaCaptureVideo(NULL),
+				_mediaCaptureAudio(NULL),
 				_volume(NULL),
 				_hEvent(NULL),
 				_hCapture(NULL),
@@ -92,11 +96,19 @@ namespace Nequeo {
 						delete _toolTip;
 
 					// If the media capture is not null.
-					if (_mediaCapture != NULL)
+					if (_mediaCaptureVideo != NULL)
 					{
 						// Release the media capture.
-						_mediaCapture->Release();
-						_mediaCapture = NULL;
+						_mediaCaptureVideo->Release();
+						_mediaCaptureVideo = NULL;
+					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureAudio != NULL)
+					{
+						// Release the media capture.
+						_mediaCaptureAudio->Release();
+						_mediaCaptureAudio = NULL;
 					}
 
 					// If volume not null.
@@ -161,6 +173,7 @@ namespace Nequeo {
 				CDialog::DoDataExchange(pDX);
 				DDX_Control(pDX, IDC_VIDEODEVICE_COMBO, _videoDeviceItem);
 				DDX_Control(pDX, IDC_AUDIODEVICE_COMBO, _audioDeviceItem);
+				DDX_Control(pDX, IDC_MEDIACAPTURE_TAB, _tab);
 			}
 
 			/// <summary>
@@ -180,6 +193,11 @@ namespace Nequeo {
 				
 				// Activate
 				_toolTip->Activate(TRUE);
+
+				// Create the tab control.
+				_tab.InsertItem(0, L"Video");
+				_tab.InsertItem(1, L"Audio");
+				_tab.Init(*this, *this);
 
 				// return TRUE  unless you set the focus to a control.
 				return TRUE;  
@@ -203,10 +221,17 @@ namespace Nequeo {
 			void MediaCaptureForm::OnClose()
 			{
 				// If the media capture is not null.
-				if (_mediaCapture != NULL)
+				if (_mediaCaptureVideo != NULL)
 				{
 					// Shut down the media capture.
-					_mediaCapture->StopCapture();
+					_mediaCaptureVideo->StopCapture();
+				}
+
+				// If the media capture is not null.
+				if (_mediaCaptureAudio != NULL)
+				{
+					// Shut down the media capture.
+					_mediaCaptureAudio->StopCapture();
 				}
 
 				CDialog::OnClose();
@@ -256,8 +281,8 @@ namespace Nequeo {
 				_hEvent = *this;
 
 				// Initialize the capture object.
-				HRESULT hr = MediaCapture::CreateInstance(_hCapture, _hEvent, &_mediaCapture);
-
+				HRESULT hrVideo = MediaCapture::CreateInstance(_hCapture, _hEvent, &_mediaCaptureVideo);
+				HRESULT hrAudio = MediaCapture::CreateInstance(_hCapture, _hEvent, &_mediaCaptureAudio);
 			}
 
 			/// <summary>
@@ -283,6 +308,57 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// On notify video state.
+			/// </summary>
+			/// <param name="wParam">The message parameter.</param>
+			/// <param name="lParam">The message parameter.</param>
+			LRESULT MediaCaptureForm::OnNotifyVideoState(WPARAM wParam, LPARAM lParam)
+			{
+				// Get the state from the parameter.
+				CaptureVideoState state = (CaptureVideoState)wParam;
+
+				// Get the video page.
+				const CaptureVideoPage& page = _tab.VideoPage();
+
+				// Return all is good.
+				return 0;
+			}
+
+			/// <summary>
+			/// On notify audio state.
+			/// </summary>
+			/// <param name="wParam">The message parameter.</param>
+			/// <param name="lParam">The message parameter.</param>
+			LRESULT MediaCaptureForm::OnNotifyAudioState(WPARAM wParam, LPARAM lParam)
+			{
+				// Get the state from the parameter.
+				CaptureAudioState state = (CaptureAudioState)wParam;
+
+				// Get the audio page.
+				const CaptureAudioPage& page = _tab.AudioPage();
+
+				CButton *pCaptureChecked = (CButton*)page.GetDlgItem(IDC_CAPTURE_AUDIO_CHECK);
+				if (pCaptureChecked != NULL)
+				{
+					// Get check box state.
+					int checked = pCaptureChecked->GetCheck();
+
+					// If un-checked.
+					if (checked == BST_UNCHECKED)
+					{
+						int y = 0;
+					}
+					else if (checked == BST_CHECKED)
+					{
+						int x = 0;
+					}
+				}
+
+				// Return all is good.
+				return 0;
+			}
+
+			/// <summary>
 			/// On notify state.
 			/// </summary>
 			/// <param name="wParam">The message parameter.</param>
@@ -293,36 +369,76 @@ namespace Nequeo {
 				CaptureState state = (CaptureState)wParam;
 
 				BOOL bWaiting = FALSE;
-				BOOL bCapturing = FALSE;
+				BOOL bCapturingVideo = FALSE;
+				BOOL bCapturingAudio = FALSE;
 
 				// If the media capture is not null.
-				if (_mediaCapture != NULL)
+				if (_mediaCaptureVideo != NULL)
 				{
 					switch (state)
 					{
 					case CaptureNotReady:
 						bWaiting = TRUE;
-						bCapturing = FALSE;
+						bCapturingVideo = FALSE;
 						break;
 
 					case CaptureReady:
 						bWaiting = FALSE;
-						bCapturing = FALSE;
+						bCapturingVideo = FALSE;
 						break;
 
-					case Capturing:
+					case CapturingVideo:
 						bWaiting = FALSE;
-						bCapturing = TRUE;
+						bCapturingVideo = TRUE;
 						break;
 
-					case NotCapturing:
+					case NotCapturingVideo:
 						bWaiting = TRUE;
-						bCapturing = FALSE;
+						bCapturingVideo = FALSE;
 						break;
 					}
 
 					// If capturing.
-					if (bCapturing == TRUE)
+					if (bCapturingVideo == TRUE)
+					{
+
+					}
+					else
+					{
+						// Not capturing.
+
+
+					}
+				}
+
+				// If the media capture is not null.
+				if (_mediaCaptureAudio != NULL)
+				{
+					switch (state)
+					{
+					case CaptureNotReady:
+						bWaiting = TRUE;
+						bCapturingAudio = FALSE;
+						break;
+
+					case CaptureReady:
+						bWaiting = FALSE;
+						bCapturingAudio = FALSE;
+						break;
+
+					case CapturingAudio:
+						bWaiting = FALSE;
+						bCapturingAudio = TRUE;
+						break;
+
+					case NotCapturingAudio:
+						bWaiting = TRUE;
+						bCapturingAudio = FALSE;
+						break;
+					}
+
+					// If capturing.
+					if (bCapturingAudio == TRUE)
 					{
 
 					}
@@ -496,6 +612,13 @@ namespace Nequeo {
 						// Enable.
 						pBtnPreview->EnableWindow(true);
 					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideo != NULL)
+					{
+						// Set the video device.
+						_mediaCaptureVideo->SetVideoDevice(_videoDevice->ppDevices[_selectedIndexVideo]);
+					}
 				}
 				else
 				{
@@ -504,6 +627,13 @@ namespace Nequeo {
 					{
 						// Disable.
 						pBtnPreview->EnableWindow(false);
+					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideo != NULL)
+					{
+						// Set the video device.
+						_mediaCaptureVideo->SetVideoDevice(NULL);
 					}
 				}
 			}
@@ -520,7 +650,21 @@ namespace Nequeo {
 				// Make sure the selection is valid.
 				if (_selectedIndexAudio > -1 && _selectedIndexAudio < _countAudio)
 				{
-					
+					// If the media capture is not null.
+					if (_mediaCaptureAudio != NULL)
+					{
+						// Set the audio device.
+						_mediaCaptureAudio->SetAudioDevice(_audioDevice->ppDevices[_selectedIndexAudio]);
+					}
+				}
+				else
+				{
+					// If the media capture is not null.
+					if (_mediaCaptureAudio != NULL)
+					{
+						// Set the audio device.
+						_mediaCaptureAudio->SetAudioDevice(NULL);
+					}
 				}
 			}
 
@@ -533,6 +677,25 @@ namespace Nequeo {
 				CWnd *pBtnPreview = GetDlgItem(IDC_VIDEOPREVIEW_BUTTON);
 				if (pBtnPreview != NULL)
 					pBtnPreview->EnableWindow(false);
+			}
+
+			/// <summary>
+			/// On tab page slection changed.
+			/// </summary>
+			void MediaCaptureForm::OnTcnSelchangeMediacaptureTab(NMHDR *pNMHDR, LRESULT *pResult)
+			{
+				// Get the selected index.
+				int selectedIndex = _tab.GetCurSel();
+
+				// Make sure the selection is valid.
+				if (selectedIndex > -1 && selectedIndex < 2)
+				{
+					// Show current hide all others.
+					_tab.ShowTabPage(selectedIndex);
+				}
+
+				// All is OK.
+				*pResult = 0;
 			}
 		}
 	}

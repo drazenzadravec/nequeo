@@ -147,14 +147,62 @@ namespace Nequeo {
 				/// </summary>
 				CaptureReady = 1,
 				/// <summary>
+				/// Capturing video.
+				/// </summary>
+				CapturingVideo = 2,
+				/// <summary>
+				/// Not capturing video.
+				/// </summary>
+				NotCapturingVideo = 3,
+				/// <summary>
+				/// Capturing audio.
+				/// </summary>
+				CapturingAudio = 4,
+				/// <summary>
+				/// Not capturing audio.
+				/// </summary>
+				NotCapturingAudio = 5,
+				/// <summary>
 				/// Capturing.
 				/// </summary>
-				Capturing = 2,
+				Capturing = 6,
 				/// <summary>
 				/// Not capturing.
 				/// </summary>
-				NotCapturing = 3,
+				NotCapturing = 7,
 
+			};
+
+			/// <summary>
+			/// Media capture audio state.
+			/// </summary>
+			enum CaptureAudioState
+			{
+				/// <summary>
+				/// Allow audio capture.
+				/// </summary>
+				AllowAudioCapture = 0,
+
+				/// <summary>
+				/// Disallow audio capture.
+				/// </summary>
+				DisallowAudioCapture = 1,
+			};
+
+			/// <summary>
+			/// Media capture video state.
+			/// </summary>
+			enum CaptureVideoState
+			{
+				/// <summary>
+				/// Allow video capture.
+				/// </summary>
+				AllowVideoCapture = 0,
+
+				/// <summary>
+				/// Disallow video capture.
+				/// </summary>
+				DisallowVideoCapture = 1,
 			};
 		}
 	}

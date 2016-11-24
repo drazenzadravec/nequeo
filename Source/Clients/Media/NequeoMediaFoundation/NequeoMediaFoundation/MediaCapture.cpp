@@ -474,9 +474,27 @@ namespace Nequeo {
 						CloseHandle(_hCloseEvent);
 					}
 
-					// Stop capturing.
-					_captureState = NotCapturing;
-					NotifyState();
+					// Has video and audio
+					if (_hasVideoCapture && _hasAudioCapture)
+					{
+						// Stop capturing.
+						_captureState = NotCapturing;
+						NotifyState();
+					}
+					// Has video capture.
+					else if (_hasVideoCapture)
+					{
+						// Stop capturing.
+						_captureState = NotCapturingVideo;
+						NotifyState();
+					}
+					// Has audio capture.
+					else if (_hasAudioCapture)
+					{
+						// Stop capturing.
+						_captureState = NotCapturingAudio;
+						NotifyState();
+					}
 				}
 
 				// Leave critical section.
@@ -495,39 +513,54 @@ namespace Nequeo {
 			HRESULT MediaCapture::StartCaptureToFile(const WCHAR *pwszFileName, EncodingParameters& param)
 			{
 				HRESULT hr = S_OK;
+				_captureState = NotCapturing;
 
-				// If not capturing.
-				if (_captureState != Capturing)
+				// If capturing video and audio.
+				if (_hasVideoCapture && _hasAudioCapture)
 				{
-					// If capturing video and audio.
-					if (_hasVideoCapture && _hasAudioCapture)
+					// If not capturing.
+					if (_captureState != Capturing)
 					{
+						_captureState = Capturing;
+
 						// Start video and audio capture.
 						hr = StartVideoAudioCapture(pwszFileName, NULL, param, true);
 					}
-					else if (_hasVideoCapture)
+				}
+				else if (_hasVideoCapture)
+				{
+					// If not capturing.
+					if (_captureState != CapturingVideo)
 					{
+						_captureState = CapturingVideo;
+
 						// Start video only capture.
 						hr = StartVideoCapture(pwszFileName, NULL, param, true);
 					}
-					else if (_hasAudioCapture)
+				}
+				else if (_hasAudioCapture)
+				{
+					// If not capturing.
+					if (_captureState != CapturingAudio)
 					{
+						_captureState = CapturingAudio;
+
 						// Start audio only capture.
 						hr = StartAudioCapture(pwszFileName, NULL, param, true);
 					}
-					else
-					{
-						// Not start notify error.
-						hr = -1;
-						NotifyError(hr);
-					}
+				}
+				else
+				{
+					// Not start notify error.
+					hr = -1;
+					NotifyError(hr);
+				}
 
-					// Start capturing.
-					if (SUCCEEDED(hr))
-					{
-						_captureState = Capturing;
-						NotifyState();
-					}
+				// Start capturing.
+				if (SUCCEEDED(hr))
+				{
+					// Send the notification.
+					NotifyState();
 				}
 
 				// Return the result.
@@ -543,39 +576,54 @@ namespace Nequeo {
 			HRESULT MediaCapture::StartCaptureToStream(IMFByteStream *pByteStream, EncodingParameters& param)
 			{
 				HRESULT hr = S_OK;
+				_captureState = NotCapturing;
 
-				// If not capturing.
-				if (_captureState != Capturing)
+				// If capturing video and audio.
+				if (_hasVideoCapture && _hasAudioCapture)
 				{
-					// If capturing video and audio.
-					if (_hasVideoCapture && _hasAudioCapture)
+					// If not capturing.
+					if (_captureState != Capturing)
 					{
+						_captureState = Capturing;
+
 						// Start video and audio capture.
 						hr = StartVideoAudioCapture(NULL, pByteStream, param, false);
 					}
-					else if (_hasVideoCapture)
+				}
+				else if (_hasVideoCapture)
+				{
+					// If not capturing.
+					if (_captureState != CapturingVideo)
 					{
+						_captureState = CapturingVideo;
+
 						// Start video only capture.
 						hr = StartVideoCapture(NULL, pByteStream, param, false);
 					}
-					else if (_hasAudioCapture)
+				}
+				else if (_hasAudioCapture)
+				{
+					// If not capturing.
+					if (_captureState != CapturingAudio)
 					{
+						_captureState = CapturingAudio;
+
 						// Start audio only capture.
 						hr = StartAudioCapture(NULL, pByteStream, param, false);
 					}
-					else
-					{
-						// Not start notify error.
-						hr = -1;
-						NotifyError(hr);
-					}
+				}
+				else
+				{
+					// Not start notify error.
+					hr = -1;
+					NotifyError(hr);
+				}
 
-					// Start capturing.
-					if (SUCCEEDED(hr))
-					{
-						_captureState = Capturing;
-						NotifyState();
-					}
+				// Start capturing.
+				if (SUCCEEDED(hr))
+				{
+					// Send the notification.
+					NotifyState();
 				}
 				
 				/* Could be usefull later.

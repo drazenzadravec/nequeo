@@ -193,6 +193,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CaptureAudioPage.cpp" />
+    <ClCompile Include="CaptureTabControl.cpp" />
+    <ClCompile Include="CaptureVideoPage.cpp" />
     <ClCompile Include="ContentEnabler.cpp" />
     <ClCompile Include="MediaByteStream.cpp" />
     <ClCompile Include="MediaCapture.cpp" />
@@ -216,6 +219,9 @@
     <ClCompile Include="WriteByteContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CaptureAudioPage.h" />
+    <ClInclude Include="CaptureTabControl.h" />
+    <ClInclude Include="CaptureVideoPage.h" />
     <ClInclude Include="ContentEnabler.h" />
     <ClInclude Include="CriticalSectionHandler.h" />
     <ClInclude Include="MediaByteStream.h" />

@@ -66,16 +66,20 @@ const UINT WM_APP_ERROR = WM_APP + 2;    // wparam = HRESULT
 // Private window message to notify the application of an audio session event.
 const UINT WM_AUDIO_EVENT = WM_APP + 3;
 
+// Private window message to notify the application of an audio session event.
+const UINT WM_VIDEO_EVENT = WM_APP + 4;
+
 // WM_APP_CONTENT_ENABLER: Signals that the application must perform a
 // content enabler action.
-const UINT WM_APP_CONTENT_ENABLER = WM_APP + 4;	// no message parameters
+const UINT WM_APP_CONTENT_ENABLER = WM_APP + 5;	// no message parameters
 
 // WM_APP_BROWSER_DONE: Signals that the user closed the browser window.
-const UINT WM_APP_BROWSER_DONE = WM_APP + 5; // no message parameters
+const UINT WM_APP_BROWSER_DONE = WM_APP + 6; // no message parameters
 
 #define ON_WM_APP_NOTIFY (WM_APP + 1)
 #define ON_WM_APP_ERROR (WM_APP + 2)
 #define ON_WM_AUDIO_EVENT (WM_APP + 3)
+#define ON_WM_VIDEO_EVENT (WM_APP + 4)
 
 // SAFE_RELEASE macro.
 // Releases a COM pointer if the pointer is not NULL, and sets the pointer to NULL.

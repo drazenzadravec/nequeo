@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "MediaCapture.h"
 #include "MediaPreviewForm.h"
 #include "Volume.h"
+#include "CaptureTabControl.h"
 
 namespace Nequeo {
 	namespace Media {
@@ -109,7 +110,9 @@ namespace Nequeo {
 				int _countVideo;
 				int _countAudio;
 
-				MediaCapture *_mediaCapture;
+				MediaCapture *_mediaCaptureVideo;
+				MediaCapture *_mediaCaptureAudio;
+
 				Volume *_volume;
 				CriticalSectionHandler	_critsec;
 
@@ -120,6 +123,7 @@ namespace Nequeo {
 				CToolTipCtrl *_toolTip;
 				CComboBox _videoDeviceItem;
 				CComboBox _audioDeviceItem;
+				CaptureTabControl _tab;
 
 				CaptureDeviceParam *_videoDevice;
 				CaptureDeviceParam *_audioDevice;
@@ -137,12 +141,15 @@ namespace Nequeo {
 				afx_msg void OnPaint();
 				afx_msg void OnSize(UINT nType, int cx, int cy);
 				afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+				afx_msg LRESULT OnNotifyVideoState(WPARAM wParam, LPARAM lParam);
+				afx_msg LRESULT OnNotifyAudioState(WPARAM wParam, LPARAM lParam);
 				afx_msg LRESULT OnNotifyState(WPARAM wParam, LPARAM lParam);
 				afx_msg LRESULT OnNotifyError(WPARAM wParam, LPARAM lParam);
 				afx_msg void OnBnClickedButtonVideoPreview();
 				afx_msg void OnBnClickedButtonRefreshDevices();
 				afx_msg void OnCbnSelchangeCombVideo();
 				afx_msg void OnCbnSelchangeCombAudio();
+				afx_msg void OnTcnSelchangeMediacaptureTab(NMHDR *pNMHDR, LRESULT *pResult);
 			};
 		}
 	}
