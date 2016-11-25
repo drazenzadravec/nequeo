@@ -39,6 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "MediaPreviewForm.h"
 #include "Volume.h"
 #include "CaptureTabControl.h"
+#include "PlayerState.h"
 
 namespace Nequeo {
 	namespace Media {
@@ -101,14 +102,33 @@ namespace Nequeo {
 				/// <param name="pMsg">The message.</param>
 				BOOL PreTranslateMessage(MSG* pMsg) override;
 
+				/// <summary>
+				/// Enable or disable capture state.
+				/// </summary>
+				/// <param name="videoState">The video state.</param>
+				/// <param name="audioState">The audio state.</param>
+				/// <param name="state">The state passed (0 = video, 1 = audio).</param>
+				void EnableCapture(CaptureVideoState videoState, CaptureAudioState audioState, unsigned int state);
+
+				/// <summary>
+				/// Enable or disable capture button.
+				/// </summary>
+				/// <param name="captureVideo">The video state.</param>
+				/// <param name="captureAudio">The audio state.</param>
+				void EnableCaptureButton(bool captureVideo, bool captureAudio);
+
 			private:
 				bool _disposed;
+				bool _capturing;
 
 				int _selectedIndexVideo;
 				int _selectedIndexAudio;
 
 				int _countVideo;
 				int _countAudio;
+
+				bool _captureVideo;
+				bool _captureAudio;
 
 				MediaCapture *_mediaCaptureVideo;
 				MediaCapture *_mediaCaptureAudio;
@@ -147,6 +167,7 @@ namespace Nequeo {
 				afx_msg LRESULT OnNotifyError(WPARAM wParam, LPARAM lParam);
 				afx_msg void OnBnClickedButtonVideoPreview();
 				afx_msg void OnBnClickedButtonRefreshDevices();
+				afx_msg void OnBnClickedButtonStartCapture();
 				afx_msg void OnCbnSelchangeCombVideo();
 				afx_msg void OnCbnSelchangeCombAudio();
 				afx_msg void OnTcnSelchangeMediacaptureTab(NMHDR *pNMHDR, LRESULT *pResult);

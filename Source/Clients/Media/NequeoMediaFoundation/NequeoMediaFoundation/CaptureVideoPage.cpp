@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 /// </summary>
 BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::CaptureVideoPage, CDialog)
 	ON_BN_CLICKED(IDC_CAPTURE_VIDEO_CHECK, &CaptureVideoPage::OnBnClickedCaptureVideoCheck)
+	ON_BN_CLICKED(IDC_CAPTURE_VIDEO_PATH_SELECT, &CaptureVideoPage::OnBnClickedButtonSelectFile)
 END_MESSAGE_MAP()
 
 namespace Nequeo {
@@ -49,10 +50,11 @@ namespace Nequeo {
 			/// <summary>
 			/// Constructor for the current class.
 			/// </summary>
-			CaptureVideoPage::CaptureVideoPage(CWnd* pParent /*=NULL*/)
+			CaptureVideoPage::CaptureVideoPage(CWnd* pParent)
 				: CDialog(CaptureVideoPage::IDD, pParent), 
 				_disposed(false),
-				_toolTip(NULL)
+				_toolTip(NULL),
+				_windowState(DisallowVideoCapture)
 			{
 			}
 
@@ -133,6 +135,28 @@ namespace Nequeo {
 				// Activate
 				_toolTip->Activate(TRUE);
 
+				// Set the default audio configuration.
+				CWnd *pBitRate = GetDlgItem(IDC_CAPTURE_VIDEO_BITRATE_TEXT);
+				CWnd *pFrameSizeW = GetDlgItem(IDC_CAPTURE_VIDEO_FRAMESIZE_W_TEXT);
+				CWnd *pFrameSizeH = GetDlgItem(IDC_CAPTURE_VIDEO_FRAMESIZE_H_TEXT);
+				CWnd *pFrameRateN = GetDlgItem(IDC_CAPTURE_VIDEO_FRAMERATE_N_TEXT);
+				CWnd *pFrameRateD = GetDlgItem(IDC_CAPTURE_VIDEO_FRAMERATE_D_TEXT);
+
+				if (pBitRate != NULL)
+					pBitRate->SetWindowTextW(L"0");
+
+				if (pFrameSizeW != NULL)
+					pFrameSizeW->SetWindowTextW(L"320");
+
+				if (pFrameSizeH != NULL)
+					pFrameSizeH->SetWindowTextW(L"240");
+
+				if (pFrameRateN != NULL)
+					pFrameRateN->SetWindowTextW(L"30");
+
+				if (pFrameRateD != NULL)
+					pFrameRateD->SetWindowTextW(L"1");
+
 				// return TRUE  unless you set the focus to a control.
 				return TRUE;
 			}
@@ -147,6 +171,48 @@ namespace Nequeo {
 					_toolTip->RelayEvent(pMsg);
 
 				return CDialog::PreTranslateMessage(pMsg);
+			}
+
+			/// <summary>
+			/// On select file button clicked.
+			/// </summary>
+			void CaptureVideoPage::OnBnClickedButtonSelectFile()
+			{
+				HRESULT hr = S_OK;
+
+				WCHAR path[MAX_PATH];
+				path[0] = L'\0';
+
+				// Show the File Save dialog.
+				CFileDialog dlgFile(FALSE);
+				OPENFILENAME& ofn = dlgFile.GetOFN();
+				ofn.lpstrFilter = L"Video Media\0*.wmv\0";
+				ofn.lpstrFile = path;
+				ofn.nMaxFile = MAX_PATH;
+
+				// If open ok.
+				if (dlgFile.DoModal() == IDOK)
+				{
+					// Get the file name.
+					LPWSTR fileName = ofn.lpstrFile;
+
+					// Set the duration.
+					// Get the duration button handler.
+					CWnd *pPath = GetDlgItem(IDC_CAPTURE_VIDEO_PATH_TEXT);
+					if (pPath != NULL)
+						pPath->SetWindowTextW(fileName);
+
+					// If the file has been created.
+					if (SUCCEEDED(hr))
+					{
+						//EnableControls();
+					}
+					else
+					{
+						// Display a message box with the error.
+						MessageBox((LPCWSTR)L"Unable to save the file.", (LPCWSTR)L"Error", MB_OK | MB_ICONERROR);
+					}
+				}
 			}
 		}
 	}

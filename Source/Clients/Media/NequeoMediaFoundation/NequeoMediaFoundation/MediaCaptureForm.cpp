@@ -49,6 +49,7 @@ BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::MediaCaptureForm, CDialog)
 	ON_MESSAGE(ON_WM_APP_ERROR, &MediaCaptureForm::OnNotifyError)
 	ON_BN_CLICKED(IDC_VIDEOPREVIEW_BUTTON, &MediaCaptureForm::OnBnClickedButtonVideoPreview)
 	ON_BN_CLICKED(IDC_REFRESHDEVICE_BUTTON, &MediaCaptureForm::OnBnClickedButtonRefreshDevices)
+	ON_BN_CLICKED(IDC_CAPTURE_START_BUTTON, &MediaCaptureForm::OnBnClickedButtonStartCapture)
 	ON_CBN_SELCHANGE(IDC_VIDEODEVICE_COMBO, &MediaCaptureForm::OnCbnSelchangeCombVideo)
 	ON_CBN_SELCHANGE(IDC_AUDIODEVICE_COMBO, &MediaCaptureForm::OnCbnSelchangeCombAudio)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_MEDIACAPTURE_TAB, &MediaCaptureForm::OnTcnSelchangeMediacaptureTab)
@@ -76,6 +77,9 @@ namespace Nequeo {
 				_selectedIndexAudio(-1),
 				_countVideo(0),
 				_countAudio(0),
+				_captureVideo(false),
+				_captureAudio(false),
+				_capturing(false),
 				_toolTip(NULL),
 				_disposed(false)
 			{
@@ -317,8 +321,8 @@ namespace Nequeo {
 				// Get the state from the parameter.
 				CaptureVideoState state = (CaptureVideoState)wParam;
 
-				// Get the video page.
-				const CaptureVideoPage& page = _tab.VideoPage();
+				// Enable capture.
+				EnableCapture(state, DisallowAudioCapture, 0);
 
 				// Return all is good.
 				return 0;
@@ -334,25 +338,8 @@ namespace Nequeo {
 				// Get the state from the parameter.
 				CaptureAudioState state = (CaptureAudioState)wParam;
 
-				// Get the audio page.
-				const CaptureAudioPage& page = _tab.AudioPage();
-
-				CButton *pCaptureChecked = (CButton*)page.GetDlgItem(IDC_CAPTURE_AUDIO_CHECK);
-				if (pCaptureChecked != NULL)
-				{
-					// Get check box state.
-					int checked = pCaptureChecked->GetCheck();
-
-					// If un-checked.
-					if (checked == BST_UNCHECKED)
-					{
-						int y = 0;
-					}
-					else if (checked == BST_CHECKED)
-					{
-						int x = 0;
-					}
-				}
+				// Enable capture.
+				EnableCapture(DisallowVideoCapture, state, 1);
 
 				// Return all is good.
 				return 0;
@@ -365,6 +352,9 @@ namespace Nequeo {
 			/// <param name="lParam">The message parameter.</param>
 			LRESULT MediaCaptureForm::OnNotifyState(WPARAM wParam, LPARAM lParam)
 			{
+				// Capture stopped.
+				_capturing = false;
+
 				// Get the state from the parameter.
 				CaptureState state = (CaptureState)wParam;
 
@@ -401,13 +391,11 @@ namespace Nequeo {
 					// If capturing.
 					if (bCapturingVideo == TRUE)
 					{
+						_videoDeviceItem.EnableWindow(false);
 
-					}
-					else
-					{
-						// Not capturing.
-
-
+						// Get the video page.
+						CaptureVideoPage& pageVideo = _tab.VideoPage();
+						pageVideo.EnableWindow(false);
 					}
 				}
 
@@ -440,14 +428,57 @@ namespace Nequeo {
 					// If capturing.
 					if (bCapturingAudio == TRUE)
 					{
+						_audioDeviceItem.EnableWindow(false);
 
+						// Get the audio page.
+						CaptureAudioPage& pageAudio = _tab.AudioPage();
+						pageAudio.EnableWindow(false);
 					}
-					else
+				}
+
+				// If capturing.
+				if (bCapturingVideo == TRUE || bCapturingAudio == TRUE)
+				{
+					_capturing = true;
+
+					// Change text.
+					// Get the start button handler.
+					CWnd *pBtnStart = GetDlgItem(IDC_CAPTURE_START_BUTTON);
+					if (pBtnStart != NULL)
 					{
-						// Not capturing.
-
-
+						// Capturing text.
+						pBtnStart->SetWindowTextW(L"Stop Capture");
 					}
+
+					// Get the refresh button handler.
+					CWnd *pRefresh = GetDlgItem(IDC_REFRESHDEVICE_BUTTON);
+					if (pRefresh != NULL) pRefresh->EnableWindow(false);
+				}
+				else
+				{
+					// Change text.
+					// Get the start button handler.
+					CWnd *pBtnStart = GetDlgItem(IDC_CAPTURE_START_BUTTON);
+					if (pBtnStart != NULL)
+					{
+						// Original text.
+						pBtnStart->SetWindowTextW(L"Start Capture");
+					}
+
+					// Get the refresh button handler.
+					CWnd *pRefresh = GetDlgItem(IDC_REFRESHDEVICE_BUTTON);
+					if (pRefresh != NULL) pRefresh->EnableWindow(true);
+
+					_videoDeviceItem.EnableWindow(true);
+					_audioDeviceItem.EnableWindow(true);
+
+					// Get the video page.
+					CaptureVideoPage& pageVideo = _tab.VideoPage();
+					pageVideo.EnableWindow(true);
+
+					// Get the audio page.
+					CaptureAudioPage& pageAudio = _tab.AudioPage();
+					pageAudio.EnableWindow(true);
 				}
 
 				// Return all is good.
@@ -478,6 +509,155 @@ namespace Nequeo {
 
 				// Return all is good.
 				return 0;
+			}
+
+			/// <summary>
+			/// On start capture button clicked.
+			/// </summary>
+			void MediaCaptureForm::OnBnClickedButtonStartCapture()
+			{
+				// If not capturing.
+				if (!_capturing)
+				{
+					// Video and audio encoding configuration.
+					EncodingParameters ep;
+
+					// If capturing video.
+					if (_captureVideo)
+					{
+						// Get the video page.
+						const CaptureVideoPage& pageVideo = _tab.VideoPage();
+
+						CString filenameVideo;
+						CString bitRate;
+						CString frameSizeW;
+						CString frameSizeH;
+						CString frameRateN;
+						CString frameRateD;
+
+						// Get the start button handler.
+						CWnd *pFilename = pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_PATH_TEXT);
+						CWnd *pBitRate = pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_BITRATE_TEXT);
+						CWnd *pFrameSizeW = pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_FRAMESIZE_W_TEXT);
+						CWnd *pFrameSizeH = pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_FRAMESIZE_H_TEXT);
+						CWnd *pFrameRateN = pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_FRAMERATE_N_TEXT);
+						CWnd *pFrameRateD = pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_FRAMERATE_D_TEXT);
+
+						if (pFilename != NULL) pFilename->GetWindowTextW(filenameVideo);
+						if (pBitRate != NULL) pBitRate->GetWindowTextW(bitRate);
+						if (pFrameSizeW != NULL) pFrameSizeW->GetWindowTextW(frameSizeW);
+						if (pFrameSizeH != NULL) pFrameSizeH->GetWindowTextW(frameSizeH);
+						if (pFrameRateN != NULL) pFrameRateN->GetWindowTextW(frameRateN);
+						if (pFrameRateD != NULL) pFrameRateD->GetWindowTextW(frameRateD);
+
+						// Set video configuration.
+						ep.video.subtype = MFVideoFormat_WMV3;
+						ep.video.bitRate = _ttoi(bitRate);
+						ep.video.frameSize.width = _ttoi(frameSizeW);
+						ep.video.frameSize.height = _ttoi(frameSizeH);
+						ep.video.frameRate.denominator = _ttoi(frameRateD);
+						ep.video.frameRate.numerator = _ttoi(frameRateN);
+						ep.video.aspectRatio.denominator = 0;
+						ep.video.aspectRatio.numerator = 0;
+
+						// If the media capture is not null.
+						if (_mediaCaptureVideo != NULL)
+						{
+							HRESULT hrvideo = S_OK;
+
+							// Start video capture.
+							hrvideo = _mediaCaptureVideo->StartCaptureToFile(filenameVideo, ep);
+							if (FAILED(hrvideo))
+							{
+								// Notify error.
+								OnNotifyError((WPARAM)hrvideo, (LPARAM)0);
+							}
+						}
+					}
+
+					// If capturing audio.
+					if (_captureAudio)
+					{
+						// Get the audio page.
+						const CaptureAudioPage& pageAudio = _tab.AudioPage();
+
+						CString filenameAudio;
+						CString sampleRate;
+						CString channels;
+						CString bitsPerSample;
+
+						// Get the start button handler.
+						CWnd *pFilename = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_PATH_TEXT);
+						CWnd *pSampleRate = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_SAMPLERATE_TEXT);
+						CWnd *pChannels = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_CHANNELS_TEXT);
+						CWnd *pBitsPerSample = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_BITSPERSAMPLE_TEXT);
+
+						if (pFilename != NULL) pFilename->GetWindowTextW(filenameAudio);
+						if (pSampleRate != NULL) pSampleRate->GetWindowTextW(sampleRate);
+						if (pChannels != NULL) pChannels->GetWindowTextW(channels);
+						if (pBitsPerSample != NULL) pBitsPerSample->GetWindowTextW(bitsPerSample);
+
+						// Set audio configuration.
+						ep.audio.subtype = MFAudioFormat_PCM;
+						ep.audio.bitsPerSample = _ttoi(bitsPerSample);
+						ep.audio.channels = _ttoi(channels);
+						ep.audio.sampleRate = _ttoi(sampleRate);
+						ep.audio.blockAlign = ep.audio.channels * (ep.audio.bitsPerSample / 8);
+						ep.audio.bytesPerSecond = ep.audio.blockAlign * ep.audio.sampleRate;
+
+						// If the media capture is not null.
+						if (_mediaCaptureAudio != NULL)
+						{
+							HRESULT hraudio = S_OK;
+
+							// Start audo capture.
+							hraudio = _mediaCaptureAudio->StartCaptureToFile(filenameAudio, ep);
+							if (FAILED(hraudio))
+							{
+								// Notify error.
+								OnNotifyError((WPARAM)hraudio, (LPARAM)0);
+							}
+						}
+					}
+				}
+				else
+				{
+					// If capturing video.
+					if (_captureVideo)
+					{
+						// If the media capture is not null.
+						if (_mediaCaptureVideo != NULL)
+						{
+							HRESULT hrvideo = S_OK;
+
+							// Start video capture.
+							hrvideo = _mediaCaptureVideo->StopCapture();
+							if (FAILED(hrvideo))
+							{
+								// Notify error.
+								OnNotifyError((WPARAM)hrvideo, (LPARAM)0);
+							}
+						}
+					}
+
+					// If capturing audio.
+					if (_captureAudio)
+					{
+						// If the media capture is not null.
+						if (_mediaCaptureAudio != NULL)
+						{
+							HRESULT hraudio = S_OK;
+
+							// Start audo capture.
+							hraudio = _mediaCaptureAudio->StopCapture();
+							if (FAILED(hraudio))
+							{
+								// Notify error.
+								OnNotifyError((WPARAM)hraudio, (LPARAM)0);
+							}
+						}
+					}
+				}
 			}
 
 			/// <summary>
@@ -636,6 +816,9 @@ namespace Nequeo {
 						_mediaCaptureVideo->SetVideoDevice(NULL);
 					}
 				}
+
+				// Enable capture.
+				EnableCapture(AllowVideoCapture, DisallowAudioCapture, 0);
 			}
 
 			/// <summary>
@@ -666,17 +849,9 @@ namespace Nequeo {
 						_mediaCaptureAudio->SetAudioDevice(NULL);
 					}
 				}
-			}
 
-			/// <summary>
-			/// Enable or disable controls.
-			/// </summary>
-			void MediaCaptureForm::EnableControls()
-			{
-				// Get the preview button handler.
-				CWnd *pBtnPreview = GetDlgItem(IDC_VIDEOPREVIEW_BUTTON);
-				if (pBtnPreview != NULL)
-					pBtnPreview->EnableWindow(false);
+				// Enable capture.
+				EnableCapture(DisallowVideoCapture, AllowAudioCapture, 1);
 			}
 
 			/// <summary>
@@ -696,6 +871,161 @@ namespace Nequeo {
 
 				// All is OK.
 				*pResult = 0;
+			}
+
+			/// <summary>
+			/// Enable or disable controls.
+			/// </summary>
+			void MediaCaptureForm::EnableControls()
+			{
+				// Get the preview button handler.
+				CWnd *pBtnPreview = GetDlgItem(IDC_VIDEOPREVIEW_BUTTON);
+				if (pBtnPreview != NULL)
+					pBtnPreview->EnableWindow(false);
+
+				_selectedIndexVideo = -1;
+				_selectedIndexAudio = -1;
+
+				_captureVideo = false;
+				_captureAudio = false;
+
+				// Get the video page.
+				const CaptureVideoPage& pageVideo = _tab.VideoPage();
+
+				// Get the audio page.
+				const CaptureAudioPage& pageAudio = _tab.AudioPage();
+
+				// Get the video and audio check button.
+				CButton *pCaptureAudioChecked = (CButton*)pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_CHECK);
+				CButton *pCaptureVideoChecked = (CButton*)pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_CHECK);
+
+				// If audio.
+				if (pCaptureAudioChecked != NULL)
+				{
+					// Set check box state.
+					pCaptureAudioChecked->SetCheck(BST_UNCHECKED);
+				}
+
+				// If video.
+				if (pCaptureVideoChecked != NULL)
+				{
+					// Set check box state.
+					pCaptureVideoChecked->SetCheck(BST_UNCHECKED);
+				}
+
+				// Enable disable capture button.
+				EnableCaptureButton(_captureVideo, _captureAudio);
+			}
+
+			/// <summary>
+			/// Enable or disable capture button.
+			/// </summary>
+			/// <param name="videoState">The video state.</param>
+			/// <param name="audioState">The audio state.</param>
+			/// <param name="state">The state passed (0 = video, 1 = audio).</param>
+			void MediaCaptureForm::EnableCapture(CaptureVideoState videoState, CaptureAudioState audioState, unsigned int state)
+			{
+				// Get the video page.
+				const CaptureVideoPage& pageVideo = _tab.VideoPage();
+
+				// Get the audio page.
+				const CaptureAudioPage& pageAudio = _tab.AudioPage();
+
+				_captureVideo = false;
+				_captureAudio = false;
+
+				// Get the video and audio check button.
+				CButton *pCaptureAudioChecked = (CButton*)pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_CHECK);
+				CButton *pCaptureVideoChecked = (CButton*)pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_CHECK);
+
+				// If audio.
+				if (pCaptureAudioChecked != NULL)
+				{
+					// Get check box state.
+					int checked = pCaptureAudioChecked->GetCheck();
+
+					// If un-checked.
+					if (checked == BST_UNCHECKED)
+					{
+						_captureAudio = false;
+					}
+					else if (checked == BST_CHECKED)
+					{
+						_captureAudio = true;
+					}
+				}
+
+				// If video.
+				if (pCaptureVideoChecked != NULL)
+				{
+					// Get check box state.
+					int checked = pCaptureVideoChecked->GetCheck();
+
+					// If un-checked.
+					if (checked == BST_UNCHECKED)
+					{
+						_captureVideo = false;
+					}
+					else if (checked == BST_CHECKED)
+					{
+						_captureVideo = true;
+					}
+				}
+
+				// If video capture disallowed.
+				if (state == 0 && videoState == DisallowVideoCapture)
+				{
+					_captureVideo = false;
+				}
+
+				// If audio capture disallowed.
+				if (state == 1 && audioState == DisallowAudioCapture)
+				{
+					_captureAudio = false;
+				}
+
+				// Make sure the selection is valid.
+				if (_selectedIndexVideo < 0 || _selectedIndexVideo >= _countVideo)
+				{
+					_captureVideo = false;
+				}
+
+				// Make sure the selection is valid.
+				if (_selectedIndexAudio < 0 || _selectedIndexAudio >= _countAudio)
+				{
+					_captureAudio = false;
+				}
+
+				// Enable disable capture button.
+				EnableCaptureButton(_captureVideo, _captureAudio);
+			}
+
+			/// <summary>
+			/// Enable or disable capture button.
+			/// </summary>
+			/// <param name="captureVideo">The video state.</param>
+			/// <param name="captureAudio">The audio state.</param>
+			void MediaCaptureForm::EnableCaptureButton(bool captureVideo, bool captureAudio)
+			{
+				_captureVideo = captureVideo;
+				_captureAudio = captureAudio;
+
+				// Get the start button handler.
+				CWnd *pBtnStart = GetDlgItem(IDC_CAPTURE_START_BUTTON);
+				if (pBtnStart != NULL)
+				{
+					// If capture video or audio
+					if (captureVideo || captureAudio)
+					{
+						// Enable start capture button.
+						pBtnStart->EnableWindow(true);
+					}
+					else
+					{
+						// Enable start capture button.
+						pBtnStart->EnableWindow(false);
+					}
+				}
 			}
 		}
 	}

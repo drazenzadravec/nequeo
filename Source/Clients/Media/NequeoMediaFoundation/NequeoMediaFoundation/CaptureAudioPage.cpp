@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 /// </summary>
 BEGIN_MESSAGE_MAP(Nequeo::Media::Foundation::CaptureAudioPage, CDialog)
 	ON_BN_CLICKED(IDC_CAPTURE_AUDIO_CHECK, &CaptureAudioPage::OnBnClickedCaptureAudioCheck)
+	ON_BN_CLICKED(IDC_CAPTURE_AUDIO_PATH_SELECT, &CaptureAudioPage::OnBnClickedButtonSelectFile)
 END_MESSAGE_MAP()
 
 namespace Nequeo {
@@ -134,6 +135,20 @@ namespace Nequeo {
 				// Activate
 				_toolTip->Activate(TRUE);
 
+				// Set the default audio configuration.
+				CWnd *pSampleRate = GetDlgItem(IDC_CAPTURE_AUDIO_SAMPLERATE_TEXT);
+				CWnd *pChannels = GetDlgItem(IDC_CAPTURE_AUDIO_CHANNELS_TEXT);
+				CWnd *pBitsPerSample = GetDlgItem(IDC_CAPTURE_AUDIO_BITSPERSAMPLE_TEXT);
+
+				if (pSampleRate != NULL)
+					pSampleRate->SetWindowTextW(L"44100");
+
+				if (pChannels != NULL)
+					pChannels->SetWindowTextW(L"2");
+
+				if (pBitsPerSample != NULL)
+					pBitsPerSample->SetWindowTextW(L"16");
+
 				// return TRUE  unless you set the focus to a control.
 				return TRUE;
 			}
@@ -148,6 +163,48 @@ namespace Nequeo {
 					_toolTip->RelayEvent(pMsg);
 
 				return CDialog::PreTranslateMessage(pMsg);
+			}
+
+			/// <summary>
+			/// On select file button clicked.
+			/// </summary>
+			void CaptureAudioPage::OnBnClickedButtonSelectFile()
+			{
+				HRESULT hr = S_OK;
+
+				WCHAR path[MAX_PATH];
+				path[0] = L'\0';
+
+				// Show the File Save dialog.
+				CFileDialog dlgFile(FALSE);
+				OPENFILENAME& ofn = dlgFile.GetOFN();
+				ofn.lpstrFilter = L"Audio Media\0*.wav\0";
+				ofn.lpstrFile = path;
+				ofn.nMaxFile = MAX_PATH;
+
+				// If open ok.
+				if (dlgFile.DoModal() == IDOK)
+				{
+					// Get the file name.
+					LPWSTR fileName = ofn.lpstrFile;
+
+					// Set the duration.
+					// Get the duration button handler.
+					CWnd *pPath = GetDlgItem(IDC_CAPTURE_AUDIO_PATH_TEXT);
+					if (pPath != NULL)
+						pPath->SetWindowTextW(fileName);
+
+					// If the file has been created.
+					if (SUCCEEDED(hr))
+					{
+						//EnableControls();
+					}
+					else
+					{
+						// Display a message box with the error.
+						MessageBox((LPCWSTR)L"Unable to save the file.", (LPCWSTR)L"Error", MB_OK | MB_ICONERROR);
+					}
+				}
 			}
 		}
 	}

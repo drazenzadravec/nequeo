@@ -81,13 +81,13 @@ namespace Nequeo {
 				/// Gets a reference to the video tab page.
 				/// </summary>
 				/// <returns>The video page reference.</returns>
-				const CaptureVideoPage& VideoPage() const;
+				CaptureVideoPage& VideoPage() const;
 
 				/// <summary>
 				/// Gets a reference to the audio tab page.
 				/// </summary>
 				/// <returns>The audio page reference.</returns>
-				const CaptureAudioPage& AudioPage() const;
+				CaptureAudioPage& AudioPage() const;
 
 			private:
 				bool _disposed;

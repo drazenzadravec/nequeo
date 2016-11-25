@@ -161,7 +161,7 @@ namespace Nequeo {
 			/// Gets a reference to the video tab page.
 			/// </summary>
 			/// <returns>The video page reference.</returns>
-			const CaptureVideoPage& CaptureTabControl::VideoPage() const
+			CaptureVideoPage& CaptureTabControl::VideoPage() const
 			{
 				return *((CaptureVideoPage*)_tabePages[0]);
 			}
@@ -170,7 +170,7 @@ namespace Nequeo {
 			/// Gets a reference to the audio tab page.
 			/// </summary>
 			/// <returns>The audio page reference.</returns>
-			const CaptureAudioPage& CaptureTabControl::AudioPage() const
+			CaptureAudioPage& CaptureTabControl::AudioPage() const
 			{
 				return *((CaptureAudioPage*)_tabePages[1]);
 			}

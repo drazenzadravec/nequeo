@@ -99,6 +99,7 @@ namespace Nequeo {
 				/// </summary>
 				DECLARE_MESSAGE_MAP()
 				afx_msg void OnBnClickedCaptureVideoCheck();
+				afx_msg void OnBnClickedButtonSelectFile();
 
 			private:
 				bool _disposed;
