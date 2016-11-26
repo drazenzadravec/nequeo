@@ -143,10 +143,10 @@ void AudioFileWriter::Close()
 				libffmpeg::avio_close(_data->FormatContext->pb);
 			}
 
-			if (_data->Packet->data != NULL)
+			if (_data->Packet != NULL)
 			{
 				// Free the packet.
-				libffmpeg::av_free_packet(_data->Packet);
+				delete _data->Packet;
 			}
 
 			// Free the context.
@@ -223,13 +223,24 @@ void AudioFileWriter::Open(String^ fileName, WaveStructure header, AudioCodec co
 			}
 		}
 
-		// if a frame has been decoded, output it
-		int data_size = libffmpeg::av_get_bytes_per_sample(_data->AudioStream->codec->sample_fmt);
-		if (data_size < 0)
-		{
-			throw gcnew System::IO::IOException("Cannot get the bytes per sample from the sample format.");
-		}
+		int data_size = 0;
 
+		// If the block size has be specified.
+		if (header.FmtBlockAlign > 0)
+		{
+			// Set the bytes per sample.
+			data_size = header.FmtBlockAlign;
+		}
+		else
+		{
+			// if a frame has been decoded, output it
+			data_size = libffmpeg::av_get_bytes_per_sample(_data->AudioStream->codec->sample_fmt);
+			if (data_size < 0)
+			{
+				throw gcnew System::IO::IOException("Cannot get the bytes per sample from the sample format.");
+			}
+		}
+		
 		// Assign the final audio parameters.
 		_channels = _data->AudioStream->codec->channels;
 		_bytesPerSample = data_size;

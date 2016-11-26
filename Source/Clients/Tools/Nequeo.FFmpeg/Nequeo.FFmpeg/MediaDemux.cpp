@@ -52,6 +52,26 @@ static libffmpeg::AVFormatContext* open_file(char* fileName)
 	}
 	return formatContext;
 }
+
+/// <summary>
+/// Open device with the specified name.
+/// </summary>
+/// <param name="deviceName">Capture device name to open.</param>
+static libffmpeg::AVFormatContext* open_device(char* deviceName)
+{
+	// Allocate the context.
+	libffmpeg::AVFormatContext* formatContext = libffmpeg::avformat_alloc_context();
+
+	// Input capture format (direct show).
+	libffmpeg::AVInputFormat* inputFormat = libffmpeg::av_find_input_format("dshow");
+
+	// Open the file.
+	if (libffmpeg::avformat_open_input(&formatContext, deviceName, inputFormat, NULL) != 0)
+	{
+		return NULL;
+	}
+	return formatContext;
+}
 #pragma managed(pop)
 
 /// <summary>
@@ -70,8 +90,9 @@ static int open_codec_context(MediaDemuxData^ data, enum libffmpeg::AVMediaType 
 /// <param name="audio">The audio data.</param>
 /// <param name="video">The video data.</param>
 /// <param name="numberSamples">The number of samples per channel.</param>
+/// <param name="bytesPerSample">The bytes per sample.</param>
 /// <returns>Data read.</returns>
-static int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples);
+static int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples, int bytesPerSample);
 
 /// <summary>
 /// Decode the packet.
@@ -112,6 +133,194 @@ MediaDemux::!MediaDemux()
 	{
 		// Release all resources.
 		Close();
+	}
+}
+
+/// <summary>
+/// Open audio video device with the specified name.
+/// </summary>
+/// <param name="captureDeviceName">Audio video device name to open (video=[video device]:audio=[audio device]).</param>
+/// <param name="captureVideo">True if capturing video.</param>
+/// <param name="captureAudio">True if capturing audio.</param>
+void MediaDemux::OpenDevice(String^ captureDeviceName, bool captureVideo, bool captureAudio)
+{
+	// convert specified managed String to UTF8 unmanaged string
+	IntPtr ptr = System::Runtime::InteropServices::Marshal::StringToHGlobalUni(captureDeviceName);
+	wchar_t* nativeFileNameUnicode = (wchar_t*)ptr.ToPointer();
+	int utf8StringSize = WideCharToMultiByte(CP_UTF8, 0, nativeFileNameUnicode, -1, NULL, 0, NULL, NULL);
+	char* nativeFileName = new char[utf8StringSize];
+	WideCharToMultiByte(CP_UTF8, 0, nativeFileNameUnicode, -1, nativeFileName, utf8StringSize, NULL, NULL);
+
+	// Register the device.
+	libffmpeg::avdevice_register_all();
+
+	int ret = 0;
+	bool success = false;
+
+	try
+	{
+		// Create the reader data packet.
+		_data = gcnew MediaDemuxData();
+		_data->NativeData = new MediaDemuxDataNative();
+		_data->Packet = new libffmpeg::AVPacket();
+
+		// open the specified device.
+		_data->FormatContext = open_device(nativeFileName);
+		if (_data->FormatContext == NULL)
+		{
+			throw gcnew MediaDemuxException("Cannot open the file.");
+		}
+
+		// retrieve stream information
+		if (libffmpeg::avformat_find_stream_info(_data->FormatContext, NULL) < 0)
+		{
+			throw gcnew MediaDemuxException("Cannot find stream information.");
+		}
+
+		// If capturing video.
+		if (captureVideo)
+		{
+			// Open the video codec context.
+			if (open_codec_context(_data, libffmpeg::AVMEDIA_TYPE_VIDEO) >= 0)
+			{
+				// Assign video stream.
+				_data->VideoStream = _data->FormatContext->streams[_data->Video_Stream_Index];
+				_data->VideoCodecContext = _data->VideoStream->codec;
+
+				// Get video details.
+				_width = _data->VideoCodecContext->width;
+				_height = _data->VideoCodecContext->height;
+				_pix_fmt = _data->VideoCodecContext->pix_fmt;
+				_frameRate = _data->VideoStream->r_frame_rate.num / _data->VideoStream->r_frame_rate.den;
+
+				// prepare scaling context to convert RGB image to video format
+				_data->VideoConvertContext = libffmpeg::sws_getContext(_data->VideoCodecContext->width, _data->VideoCodecContext->height, _data->VideoCodecContext->pix_fmt,
+					_data->VideoCodecContext->width, _data->VideoCodecContext->height, libffmpeg::AV_PIX_FMT_BGR24, SWS_BICUBIC, NULL, NULL, NULL);
+
+				if (_data->VideoConvertContext == NULL)
+				{
+					throw gcnew MediaDemuxException("Cannot initialize frames conversion context.");
+				}
+
+				// Allocate image buffer.
+				ret = libffmpeg::av_image_alloc(_data->NativeData->VideoData, _data->NativeData->VideoLineSize, _width, _height, _pix_fmt, 1);
+
+				// Could not allocate video buffer.
+				if (ret < 0)
+				{
+					throw gcnew MediaDemuxException("Could not allocate raw video buffer.");
+				}
+
+				// Set the video buffer size.
+				_data->Video_Buffer_Size = ret;
+
+				// Allocate the video frame.
+				_data->VideoFrame = libffmpeg::av_frame_alloc();
+				if (!_data->VideoFrame)
+				{
+					throw gcnew MediaDemuxException("Could not allocate frame.");
+				}
+			}
+		}
+
+		// If capturing audio.
+		if (captureAudio)
+		{
+			// Open the audio codec context.
+			if (open_codec_context(_data, libffmpeg::AVMEDIA_TYPE_AUDIO) >= 0)
+			{
+				// Assign audio stream.
+				_data->AudioStream = _data->FormatContext->streams[_data->Audio_Stream_Index];
+				_data->AudioCodecContext = _data->AudioStream->codec;
+
+				// get some properties of the audio file
+				_bytesPerSample = libffmpeg::av_get_bytes_per_sample(_data->AudioCodecContext->sample_fmt);
+				_bitsPerSample = libffmpeg::av_get_bytes_per_sample(_data->AudioCodecContext->sample_fmt) * 8;
+				_channels = _data->AudioCodecContext->channels;
+				_sampleRate = _data->AudioCodecContext->sample_rate;
+				_averageByteRate = (_data->AudioCodecContext->sample_rate * _data->AudioCodecContext->channels) * (_bitsPerSample / 8);
+				_blockAlign = (short)_data->AudioCodecContext->block_align;
+
+				// Allocate the audio frame.
+				_data->AudioFrame = libffmpeg::av_frame_alloc();
+				if (!_data->AudioFrame)
+				{
+					throw gcnew MediaDemuxException("Could not allocate frame.");
+				}
+
+				// number of samples.
+				_numberSamples = _data->AudioFrame->nb_samples;
+				_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8;
+
+				// Select the sample format.
+				switch (_data->AudioCodecContext->sample_fmt)
+				{
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_NONE:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_NONE;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_U8:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S16:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S16;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S32:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S32;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_FLT:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_FLT;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_DBL:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_DBL;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_U8P:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_U8P;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S16P:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S16P;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_S32P:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_S32P;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_FLTP:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_FLTP;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_DBLP:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_DBLP;
+					break;
+				case libffmpeg::AVSampleFormat::AV_SAMPLE_FMT_NB:
+					_sampleFormat = SampleFormat::AV_SAMPLE_FMT_NB;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
+		// if no audo or video exists in the file.
+		if (!_data->AudioStream && !_data->VideoStream)
+		{
+			throw gcnew MediaDemuxException("Could not find audio or video stream in the input.");
+		}
+
+		// Initialize packet, set data to NULL, let the demuxer fill it.
+		libffmpeg::av_init_packet(_data->Packet);
+		_data->Packet->data = NULL;
+		_data->Packet->size = 0;
+
+		// All is good.
+		success = true;
+	}
+	finally
+	{
+		System::Runtime::InteropServices::Marshal::FreeHGlobal(ptr);
+		delete[] nativeFileName;
+
+		if (!success)
+		{
+			// Close the stream.
+			Close();
+		}
 	}
 }
 
@@ -201,6 +410,7 @@ void MediaDemux::Open(String^ fileName)
 			_data->AudioCodecContext = _data->AudioStream->codec;
 
 			// get some properties of the audio file
+			_bytesPerSample = libffmpeg::av_get_bytes_per_sample(_data->AudioCodecContext->sample_fmt);
 			_bitsPerSample = libffmpeg::av_get_bytes_per_sample(_data->AudioCodecContext->sample_fmt) * 8;
 			_channels = _data->AudioCodecContext->channels;
 			_sampleRate = _data->AudioCodecContext->sample_rate;
@@ -317,7 +527,7 @@ int MediaDemux::ReadFrame(
 		do 
 		{
 			// Decode the packet data.
-			ret = decode_packet(_data, &got_frame, 0, audioData, videoData, &numberSamples);
+			ret = decode_packet(_data, &got_frame, 0, audioData, videoData, &numberSamples, _bytesPerSample);
 			_numberSamples = numberSamples;
 
 			if (ret < 0)
@@ -404,10 +614,10 @@ void MediaDemux::Close()
 			libffmpeg::sws_freeContext(_data->VideoConvertContext);
 		}
 
-		if (_data->Packet->data != NULL)
+		if (_data->Packet != NULL)
 		{
 			// Free the packet.
-			libffmpeg::av_free_packet(_data->Packet);
+			delete _data->Packet;
 		}
 
 		if (_data->NativeData != NULL)
@@ -503,8 +713,9 @@ int open_codec_context(MediaDemuxData^ data, enum libffmpeg::AVMediaType type)
 /// <param name="audio">The audio data.</param>
 /// <param name="video">The video data.</param>
 /// <param name="numberSamples">The number of samples per channel.</param>
+/// <param name="bytesPerSample">The bytes per sample.</param>
 /// <returns>Data read.</returns>
-int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples)
+int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples, int bytesPerSample)
 {
 	int ret = 0;
 
@@ -601,8 +812,18 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 		// If we have a frame.
 		if (*got_frame)
 		{
-			// The number of audio bytes read.
-			int data_size = libffmpeg::av_get_bytes_per_sample(data->AudioCodecContext->sample_fmt);
+			int data_size = 0;
+
+			if (bytesPerSample > 0)
+			{
+				// Specific bytes per sample.
+				data_size = bytesPerSample;
+			}
+			else
+			{
+				// The number of audio bytes read.
+				data_size = libffmpeg::av_get_bytes_per_sample(data->AudioCodecContext->sample_fmt);
+			}
 			
 			// Audio frame has been read.
 			data->FrameType = 0;

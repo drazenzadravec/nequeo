@@ -89,6 +89,13 @@ namespace Nequeo
 				array<unsigned char>^ ReadAudioFrame();
 
 				/// <summary>
+				/// Read next audio frame of the currently opened audio file.
+				/// </summary>
+				/// <param name="bytesPerSample">The number of bytes per sample (zero if using default).</param>
+				/// <returns>The array of audio frame data.</returns>
+				array<unsigned char>^ ReadAudioFrame(int bytesPerSample);
+
+				/// <summary>
 				/// Close currently opened audio file if any.
 				/// </summary>
 				void Close();
@@ -125,8 +132,9 @@ namespace Nequeo
 				/// Decode next audio frame of the currently opened audio file.
 				/// </summary>
 				/// <param name="bytesDecoded">The number of bytes decoded.</param>
+				/// <param name="bytesPerSample">The number of bytes per sample (zero if using default).</param>
 				/// <returns>The array of audio frame data.</returns>
-				array<unsigned char>^ DecodeAudioFrame(int bytesDecoded);
+				array<unsigned char>^ DecodeAudioFrame(int bytesDecoded, int bytesPerSample);
 			};
 		}
 	}

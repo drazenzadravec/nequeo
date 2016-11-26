@@ -311,10 +311,10 @@ void VideoFileWriter::Close( )
 				libffmpeg::avio_close( data->FormatContext->pb );
 			}
 			
-			if (data->Packet->data != NULL)
+			if (data->Packet != NULL)
 			{
 				// Free the packet.
-				libffmpeg::av_free_packet(data->Packet);
+				delete data->Packet;
 			}
 
 			// Free the context.

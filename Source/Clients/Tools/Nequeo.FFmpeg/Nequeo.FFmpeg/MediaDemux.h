@@ -80,6 +80,14 @@ namespace Nequeo
 				void Open(String^ fileName);
 
 				/// <summary>
+				/// Open audio video device with the specified name.
+				/// </summary>
+				/// <param name="captureDeviceName">Audio video device name to open (video=[video device]:audio=[audio device]).</param>
+				/// <param name="captureVideo">True if capturing video.</param>
+				/// <param name="captureAudio">True if capturing audio.</param>
+				void OpenDevice(String^ captureDeviceName, bool captureVideo, bool captureAudio);
+
+				/// <summary>
 				/// Read the next frame of the opened file.
 				/// </summary>
 				/// <param name="audio">Audio frame data.</param>
@@ -160,6 +168,21 @@ namespace Nequeo
 				{
 					int get()
 					{
+						return _bytesPerSample;
+					}
+					void set(int value)
+					{
+						_bytesPerSample = value;
+					}
+				}
+
+				/// <summary>
+				/// Gets the number of audio bits per sample in each channel.
+				/// </summary>
+				property int BitsPerSample
+				{
+					int get()
+					{
 						return _bitsPerSample;
 					}
 					void set(int value)
@@ -218,6 +241,7 @@ namespace Nequeo
 				libffmpeg::AVPixelFormat _pix_fmt;
 
 				int _bitsPerSample;
+				int _bytesPerSample;
 				int _channels;
 				int _sampleRate;
 				int _averageByteRate;

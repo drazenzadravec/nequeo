@@ -47,6 +47,11 @@ static void add_stream(libffmpeg::OutputStream *ost, libffmpeg::AVFormatContext 
 	int videoWidth, int videoHeight, int videoFrameRate, int videoBitRate, int64_t bitRate, int sampleRate, int channels, short bitsPerSample);
 
 /// <summary>
+/// Set audio codec format.
+/// </summary>
+static void add_audio_codec_format(libffmpeg::AVCodecContext *c, libffmpeg::AVCodec *codec, enum libffmpeg::AVCodecID codec_id, short bitsPerSample);
+
+/// <summary>
 /// Open the video.
 /// </summary>
 static void open_video(MediaMuxData^ data, libffmpeg::AVFormatContext *oc, libffmpeg::AVCodec *codec, libffmpeg::OutputStream *ost, libffmpeg::AVDictionary *opt_arg);
@@ -167,7 +172,7 @@ void MediaMux::Open(String^ fileName, int videoWidth, int videoHeight, int video
 	// Get the audio parameters.
 	_channels = audioHeader.Channels;
 	_sampleRate = audioHeader.SampleRate;
-	_bytesPerSample = audioHeader.BitsPerSample / 8;
+	_bytesPerSample = audioHeader.FmtBlockAlign;
 
 	// convert specified managed String to unmanaged string
 	IntPtr ptr = System::Runtime::InteropServices::Marshal::StringToHGlobalUni(fileName);
@@ -247,6 +252,16 @@ void MediaMux::Open(String^ fileName, int videoWidth, int videoHeight, int video
 
 			// Get the number of samples.
 			_numberSamples = _data->AudioStream->frame->nb_samples;
+
+			// If using internal bytes per sample.
+			if (audioHeader.FmtBlockAlign <= 0)
+			{
+				_bytesPerSample = libffmpeg::av_get_bytes_per_sample(_data->AudioStream->st->codec->sample_fmt);
+				if (_bytesPerSample < 0)
+				{
+					throw gcnew System::IO::IOException("Cannot get the bytes per sample from the sample format.");
+				}
+			}
 		}
 
 		/* open the output file, if needed */
@@ -591,7 +606,7 @@ void add_stream(libffmpeg::OutputStream *ost, libffmpeg::AVFormatContext *oc, li
 	switch ((*codec)->type) 
 	{
 	case libffmpeg::AVMEDIA_TYPE_AUDIO:
-		c->sample_fmt = (*codec)->sample_fmts ? (*codec)->sample_fmts[0] : libffmpeg::AV_SAMPLE_FMT_FLTP;
+		
 		c->bit_rate = bitRate;
 		c->sample_rate = sampleRate;
 		if ((*codec)->supported_samplerates) 
@@ -615,6 +630,9 @@ void add_stream(libffmpeg::OutputStream *ost, libffmpeg::AVFormatContext *oc, li
 			}
 		}
 		c->channels = libffmpeg::av_get_channel_layout_nb_channels(c->channel_layout);
+
+		// Set the codec format
+		add_audio_codec_format(c, *codec, codec_id, bitsPerSample);
 
 		libffmpeg::AVRational audioRational;
 		audioRational.num = 1;
@@ -663,6 +681,122 @@ void add_stream(libffmpeg::OutputStream *ost, libffmpeg::AVFormatContext *oc, li
 	/* Some formats want stream headers to be separate. */
 	if (oc->oformat->flags & AVFMT_GLOBALHEADER)
 		c->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+}
+
+	/// <summary>
+	/// Select the highest supported samplerate.
+	/// </summary>
+	/// <param name="codec">Audio codec.</param>
+	static int select_sample_rate(libffmpeg::AVCodec *codec)
+	{
+		const int *p;
+		int best_samplerate = 0;
+
+		if (!codec->supported_samplerates)
+			return 44100;
+
+		p = codec->supported_samplerates;
+		while (*p) {
+			best_samplerate = FFMAX(*p, best_samplerate);
+			p++;
+		}
+		return best_samplerate;
+	}
+
+	/// <summary>
+	/// Select layout with the highest channel count
+	/// </summary>
+	/// <param name="codec">Audio codec.</param>
+	static int select_channel_layout(libffmpeg::AVCodec *codec)
+	{
+		const uint64_t *p;
+		uint64_t best_ch_layout = 0;
+		int best_nb_channels = 0;
+
+		if (!codec->channel_layouts)
+			return AV_CH_LAYOUT_STEREO;
+
+		p = codec->channel_layouts;
+		while (*p)
+		{
+			int nb_channels = libffmpeg::av_get_channel_layout_nb_channels(*p);
+
+			if (nb_channels > best_nb_channels) {
+				best_ch_layout = *p;
+				best_nb_channels = nb_channels;
+			}
+			p++;
+		}
+
+		return best_ch_layout;
+	}
+
+/// <summary>
+/// Set audio codec format.
+/// </summary>
+void add_audio_codec_format(libffmpeg::AVCodecContext *c, libffmpeg::AVCodec *codec, enum libffmpeg::AVCodecID codec_id, short bitsPerSample)
+{
+	// Select the code id.
+	switch (codec_id)
+	{
+	case libffmpeg::AV_CODEC_ID_MP2:
+		/* select other audio parameters supported by the encoder */
+		c->sample_rate = select_sample_rate(codec);
+		c->channel_layout = select_channel_layout(codec);
+		c->channels = libffmpeg::av_get_channel_layout_nb_channels(c->channel_layout);
+
+		// Select the sample format.
+		switch (bitsPerSample)
+		{
+		case 8:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_U8;
+			break;
+		case 16:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
+			break;
+		case 32:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S32;
+			break;
+		default:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
+			break;
+		}
+
+		// Calculate the bit rate.
+		// From the sample format S16 (16/8 = 2) or (8/8 = 1)
+		c->bit_rate = ((c->sample_rate * c->channels) * (c->bits_per_coded_sample / 8)) * 8;
+		break;
+	case libffmpeg::AV_CODEC_ID_MP3:
+		// Select the sample format.
+		switch (bitsPerSample)
+		{
+		case 8:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_U8P;
+			break;
+		case 16:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16P;
+			break;
+		case 32:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S32P;
+			break;
+		default:
+			c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16P;
+			break;
+		}
+		break;
+	case libffmpeg::AV_CODEC_ID_AAC:
+		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_FLTP;
+		break;
+	case libffmpeg::AV_CODEC_ID_WMAV1:
+		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_FLTP;
+		break;
+	case libffmpeg::AV_CODEC_ID_WMAV2:
+		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_FLTP;
+		break;
+	default:
+		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_NONE;
+		break;
+	}
 }
 
 /// <summary>

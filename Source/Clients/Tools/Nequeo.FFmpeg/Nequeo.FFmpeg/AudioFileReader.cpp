@@ -238,6 +238,16 @@ WaveStructure AudioFileReader::Open(String^ fileName)
 /// <returns>The array of audio frame data.</returns>
 array<unsigned char>^ AudioFileReader::ReadAudioFrame()
 {
+	return ReadAudioFrame(0);
+}
+
+/// <summary>
+/// Read next audio frame of the currently opened audio file.
+/// </summary>
+/// <param name="bytesPerSample">The number of bytes per sample (zero if using default).</param>
+/// <returns>The array of audio frame data.</returns>
+array<unsigned char>^ AudioFileReader::ReadAudioFrame(int bytesPerSample)
+{
 	// Make sure data exists.
 	if (_data == nullptr)
 	{
@@ -272,7 +282,7 @@ array<unsigned char>^ AudioFileReader::ReadAudioFrame()
 			if (frameFinished)
 			{
 				// Return the frame.
-				return DecodeAudioFrame(bytesDecoded);
+				return DecodeAudioFrame(bytesDecoded, bytesPerSample);
 			}
 		}
 
@@ -318,7 +328,7 @@ array<unsigned char>^ AudioFileReader::ReadAudioFrame()
 	if (frameFinished)
 	{
 		// Decode the frame into a sound.
-		sound = DecodeAudioFrame(bytesDecoded);
+		sound = DecodeAudioFrame(bytesDecoded, bytesPerSample);
 	}
 
 	// Return the frame sound.
@@ -358,10 +368,10 @@ void AudioFileReader::Close()
 			libffmpeg::avformat_close_input(&avFormatContext);
 		}
 
-		if (_data->Packet->data != NULL)
+		if (_data->Packet != NULL)
 		{
 			// Free the packet.
-			libffmpeg::av_free_packet(_data->Packet);
+			delete _data->Packet;
 		}
 
 		_data = nullptr;
@@ -372,13 +382,25 @@ void AudioFileReader::Close()
 /// Decode next audio frame of the currently opened audio file.
 /// </summary>
 /// <param name="bytesDecoded">The number of bytes decoded.</param>
+/// <param name="bytesPerSample">The number of bytes per sample (zero if using default).</param>
 /// <returns>The array of audio frame data.</returns>
-array<unsigned char>^ AudioFileReader::DecodeAudioFrame(int bytesDecoded)
+array<unsigned char>^ AudioFileReader::DecodeAudioFrame(int bytesDecoded, int bytesPerSample)
 {
+	int data_size = 0;
 	array<unsigned char>^ sound = nullptr;
 
-	// if a frame has been decoded, output it
-	int data_size = libffmpeg::av_get_bytes_per_sample(_data->CodecContext->sample_fmt);
+	// If using a specific rate.
+	if (bytesPerSample > 0)
+	{
+		data_size = bytesPerSample;
+	}
+	else
+	{
+		// if a frame has been decoded, output it
+		data_size = libffmpeg::av_get_bytes_per_sample(_data->CodecContext->sample_fmt);
+	}
+	
+	// If less than zero
 	if (data_size < 0)
 	{
 		return nullptr;

@@ -47,6 +47,7 @@ namespace libffmpeg
 		#include <libavfilter/buffersink.h>
 		#include <libavfilter/buffersrc.h>
 		#include <libavutil/pixdesc.h>
+		#include <libavdevice\avdevice.h>
 
 		#include "lame.h"
 	}

@@ -212,10 +212,10 @@ void VideoFileReader::Close(  )
 			libffmpeg::sws_freeContext( data->ConvertContext );
 		}
 
-		if ( data->Packet->data != NULL )
+		if ( data->Packet != NULL )
 		{
 			// Free the packet.
-			libffmpeg::av_free_packet( data->Packet );
+			delete data->Packet;
 		}
 
 		data = nullptr;
