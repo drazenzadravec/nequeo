@@ -443,7 +443,7 @@ namespace Nequeo {
 
 				if (_streamData.size() > 0)
 				{
-					// For this implementation never end of the stream, unless not data.
+					// For this implementation never end of the stream, unless no data.
 					*pfEndOfStream = FALSE;
 				}
 				else
@@ -500,7 +500,7 @@ namespace Nequeo {
 				if (_readCompleteHandler != nullptr)
 				{
 					// Send read complete.
-					_readCompleteHandler(this, *pcbRead);
+					_readCompleteHandler(this, *pcbRead, _position);
 				}
 
 				// Leave critical section.
@@ -536,20 +536,20 @@ namespace Nequeo {
 				{
 				case MFBYTESTREAM_SEEK_ORIGIN::msoCurrent:
 					// If the buffer is less or same.
-					if (size <= (qwSeekOffset + _position))
+					if ((qwSeekOffset + _position) < size)
 						_position += qwSeekOffset;
 					else
-						_position = size;
+						_position = size - 1;
 
 					break;
 
 				case MFBYTESTREAM_SEEK_ORIGIN::msoBegin:
 				default:
 					// If the buffer is less or same.
-					if (size <= qwSeekOffset)
+					if (qwSeekOffset < size)
 						_position = qwSeekOffset;
 					else
-						_position = size;
+						_position = size - 1;
 
 					break;
 				}
@@ -663,7 +663,7 @@ namespace Nequeo {
 				if (_writeCompleteHandler != nullptr)
 				{
 					// Send write complete.
-					_writeCompleteHandler(this, *pcbWritten);
+					_writeCompleteHandler(this, *pcbWritten, _position);
 				}
 
 				// Leave critical section.

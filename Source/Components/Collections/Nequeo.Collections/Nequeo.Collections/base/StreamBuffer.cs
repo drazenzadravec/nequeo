@@ -171,8 +171,8 @@ namespace Nequeo.Collections
                 _position += (long)data.Length;
 
                 // Position can not be graeter than count.
-                if (_position > _buffer.Count)
-                    _position = _buffer.Count;
+                if (_position >= _buffer.Count)
+                    _position = _buffer.Count - 1;
             }
 
             // The number of bytes read.
@@ -195,7 +195,7 @@ namespace Nequeo.Collections
                 {
                     case System.IO.SeekOrigin.Current:
                         // If the buffer is less or same.
-                        if (_buffer.Count <= (offset + _position))
+                        if ((offset + _position) < _buffer.Count)
                         {
                             // Less or same.
                             _position += offset;
@@ -204,7 +204,7 @@ namespace Nequeo.Collections
                         else
                         {
                             // Greater than then end of stream.
-                            _position = _buffer.Count;
+                            _position = _buffer.Count - 1;
                             return _position;
                         }
 
@@ -219,14 +219,14 @@ namespace Nequeo.Collections
                         else
                         {
                             // Greater than then end of stream.
-                            _position = _buffer.Count - offset;
+                            _position = _buffer.Count - 1 - offset;
                             return _position;
                         }
 
                     case System.IO.SeekOrigin.Begin:
                     default:
                         // If the buffer is less or same.
-                        if (_buffer.Count <= offset)
+                        if (offset <_buffer.Count)
                         {
                             // Less or same.
                             _position = offset;
@@ -235,7 +235,7 @@ namespace Nequeo.Collections
                         else
                         {
                             // Greater than then end of stream.
-                            _position = _buffer.Count;
+                            _position = _buffer.Count - 1;
                             return _position;
                         }
                 }
@@ -285,9 +285,9 @@ namespace Nequeo.Collections
                 // Set the position in the stream after reading.
                 _position += (long)count;
 
-                // Position can not be graeter than count.
-                if (_position > _buffer.Count)
-                    _position = _buffer.Count;
+                // Position can not be greater than count.
+                if (_position >= _buffer.Count)
+                    _position = _buffer.Count - 1;
             }
 
             // If the position is positive.

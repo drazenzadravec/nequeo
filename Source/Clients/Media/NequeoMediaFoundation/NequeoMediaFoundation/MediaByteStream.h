@@ -49,14 +49,16 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="byteStream">The byte stream.</param>
 			/// <param name="cbRead">The number of bytes read.</param>
-			typedef void(*ReadCompleteHandler)(IMFByteStream*, ULONG);
+			/// <param name="position">The current seek position.</param>
+			typedef void(*ReadCompleteHandler)(IMFByteStream*, ULONG, QWORD);
 
 			/// <summary>
 			/// Write complete handler.
 			/// </summary>
 			/// <param name="byteStream">The byte stream.</param>
 			/// <param name="cbWritten">The number of bytes written.</param>
-			typedef void(*WriteCompleteHandler)(IMFByteStream*, ULONG);
+			/// <param name="position">The current seek position.</param>
+			typedef void(*WriteCompleteHandler)(IMFByteStream*, ULONG, QWORD);
 
 			/// <summary>
 			/// Providers the base for a media foundation byte stream.
