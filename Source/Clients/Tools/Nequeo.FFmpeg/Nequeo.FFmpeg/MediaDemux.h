@@ -234,6 +234,9 @@ namespace Nequeo
 				int _frameType;
 				MediaDemuxData^ _data;
 
+				bool _captureVideo;
+				bool _captureAudio;
+
 				int _width;
 				int _height;
 				int _frameRate;

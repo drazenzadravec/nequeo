@@ -91,8 +91,11 @@ static int open_codec_context(MediaDemuxData^ data, enum libffmpeg::AVMediaType 
 /// <param name="video">The video data.</param>
 /// <param name="numberSamples">The number of samples per channel.</param>
 /// <param name="bytesPerSample">The bytes per sample.</param>
+/// <param name="audioCount">The number of audio bytes read.</param>
+/// <param name="videoCount">The number of video bit maps.</param>
 /// <returns>Data read.</returns>
-static int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples, int bytesPerSample);
+static int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video,
+	int *numberSamples, int bytesPerSample, int *audioCount, int *videoCount);
 
 /// <summary>
 /// Decode the packet.
@@ -105,7 +108,7 @@ static int get_format_from_sample_fmt(const char **fmt, enum libffmpeg::AVSample
 /// Audio video demultiplexer and decoder.
 /// </summary>
 MediaDemux::MediaDemux() :
-	_data(nullptr), _disposed(false), _frameType(-1)
+	_data(nullptr), _disposed(false), _frameType(-1), _captureVideo(false), _captureAudio(false)
 {
 	libffmpeg::av_register_all();
 }
@@ -156,6 +159,7 @@ void MediaDemux::OpenDevice(String^ captureDeviceName, bool captureVideo, bool c
 
 	int ret = 0;
 	bool success = false;
+	_captureVideo = false;
 
 	try
 	{
@@ -210,6 +214,9 @@ void MediaDemux::OpenDevice(String^ captureDeviceName, bool captureVideo, bool c
 				{
 					throw gcnew MediaDemuxException("Could not allocate raw video buffer.");
 				}
+
+				// Allocated video data.
+				_captureVideo = true;
 
 				// Set the video buffer size.
 				_data->Video_Buffer_Size = ret;
@@ -339,6 +346,7 @@ void MediaDemux::Open(String^ fileName)
 
 	int ret = 0;
 	bool success = false;
+	_captureVideo = false;
 
 	try
 	{
@@ -390,6 +398,9 @@ void MediaDemux::Open(String^ fileName)
 			{
 				throw gcnew MediaDemuxException("Could not allocate raw video buffer.");
 			}
+
+			// Allocated video data.
+			_captureVideo = true;
 
 			// Set the video buffer size.
 			_data->Video_Buffer_Size = ret;
@@ -512,6 +523,8 @@ int MediaDemux::ReadFrame(
 	int ret = 0;
 	int got_frame;
 	int numberSamples;
+	int audioCount = 0;
+	int videoCount = 0;
 	libffmpeg::AVPacket* packet = _data->Packet;
 
 	// Read some frame data.
@@ -527,7 +540,7 @@ int MediaDemux::ReadFrame(
 		do 
 		{
 			// Decode the packet data.
-			ret = decode_packet(_data, &got_frame, 0, audioData, videoData, &numberSamples, _bytesPerSample);
+			ret = decode_packet(_data, &got_frame, 0, audioData, videoData, &numberSamples, _bytesPerSample, &audioCount, &videoCount);
 			_numberSamples = numberSamples;
 
 			if (ret < 0)
@@ -541,16 +554,51 @@ int MediaDemux::ReadFrame(
 		// Unref the current packet.
 		libffmpeg::av_packet_unref(&orig_pkt);
 
-		// Assign the collected data.
-		audio = audioData->ToArray();
-		video = videoData->ToArray();
+		// If audio exists.
+		if (audioCount > 0)
+		{
+			// Create audio container.
+			audio = gcnew array<unsigned char>(audioCount);
 
-		// Clear the data store.
-		audioData->Clear();
-		videoData->Clear();
+			// Copy the data.
+			for (int i = 0; i < audioCount; i++)
+			{
+				// Assign.
+				audio[i] = audioData[i];
+			}
 
-		audioData = nullptr;
-		videoData = nullptr;
+			// Clear the data store.
+			audioData = nullptr;
+		}
+		else
+		{
+			// No audio.
+			audio = nullptr;
+			audioData = nullptr;
+		}
+
+		// If video exists.
+		if (videoCount > 0)
+		{
+			// Create video container.
+			video = gcnew array<Bitmap^>(videoCount);
+
+			// Copy the data.
+			for (int i = 0; i < videoCount; i++)
+			{
+				// Assign.
+				video[i] = videoData[i];
+			}
+
+			// Clear the data store.
+			videoData = nullptr;
+		}
+		else
+		{
+			// No video.
+			video = nullptr;
+			videoData = nullptr;
+		}
 	}
 
 	// Return the result.
@@ -622,10 +670,14 @@ void MediaDemux::Close()
 
 		if (_data->NativeData != NULL)
 		{
-			if (_data->NativeData->VideoData != NULL)
+			// Has video data been allocated.
+			if (_captureVideo)
 			{
-				// Free the video data.
-				libffmpeg::av_free(_data->NativeData->VideoData[0]);
+				if (_data->NativeData->VideoData != NULL)
+				{
+					// Free the video data.
+					libffmpeg::av_free(_data->NativeData->VideoData[0]);
+				}
 			}
 
 			// Delete the native data.
@@ -714,8 +766,11 @@ int open_codec_context(MediaDemuxData^ data, enum libffmpeg::AVMediaType type)
 /// <param name="video">The video data.</param>
 /// <param name="numberSamples">The number of samples per channel.</param>
 /// <param name="bytesPerSample">The bytes per sample.</param>
+/// <param name="audioCount">The number of audio bytes read.</param>
+/// <param name="videoCount">The number of video bit maps.</param>
 /// <returns>Data read.</returns>
-int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video, int *numberSamples, int bytesPerSample)
+int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigned char>^ audio, List<Bitmap^>^ video,
+	int *numberSamples, int bytesPerSample, int *audioCount, int *videoCount)
 {
 	int ret = 0;
 
@@ -744,6 +799,8 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 		// If we have a frame.
 		if (*got_frame)
 		{
+			int videoIndex = 0;
+
 			// If the video is not correct.
 			if (videoFrame->width != data->VideoCodecContext->width || videoFrame->height != data->VideoCodecContext->height ||
 				videoFrame->format != data->VideoCodecContext->pix_fmt)
@@ -782,6 +839,10 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 
 			// Add the bitmap.
 			video->Add(bitmap);
+			videoIndex++;
+
+			// Video bitmaps read.
+			*videoCount = videoIndex;
 
 			// Video frame has been read.
 			data->FrameType = 1;
@@ -813,6 +874,7 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 		if (*got_frame)
 		{
 			int data_size = 0;
+			int audioIndex = 0;
 
 			if (bytesPerSample > 0)
 			{
@@ -848,10 +910,14 @@ int decode_packet(MediaDemuxData^ data, int *got_frame, int cached, List<unsigne
 						{
 							// Write the sound data.
 							audio->Add((unsigned char)(sample[j]));
+							audioIndex++;
 						}
 					}
 				}
 			}
+
+			// Audio bytes read.
+			*audioCount = audioIndex;
 		}
 
 		// If we use frame reference counting, we own the data and need

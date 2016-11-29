@@ -486,18 +486,22 @@ void MediaMux::EncodeAudioFrame(array<unsigned char>^ frame)
 		// For each channel.
 		for (int ch = 0; ch < _channels; ch++)
 		{
-			// Get the pointer to this set of data.
-			uint8_t *sample = _data->AudioStream->frame->data[ch] + (_bytesPerSample * i);
-
-			// Write the data size
-			for (int j = 0; j < _bytesPerSample; j++)
+			// If channel exists.
+			if (_data->AudioStream->frame->data[ch])
 			{
-				// Do not go beyond the last index.
-				if (frameByteIndex < frame->Length)
+				// Get the pointer to this set of data.
+				uint8_t *sample = _data->AudioStream->frame->data[ch] + (_bytesPerSample * i);
+
+				// Write the data size
+				for (int j = 0; j < _bytesPerSample; j++)
 				{
-					// Write the sound data.
-					sample[j] = (uint8_t)frame[frameByteIndex];
-					frameByteIndex++;
+					// Do not go beyond the last index.
+					if (frameByteIndex < frame->Length)
+					{
+						// Write the sound data.
+						sample[j] = (uint8_t)frame[frameByteIndex];
+						frameByteIndex++;
+					}
 				}
 			}
 		}
@@ -792,6 +796,9 @@ void add_audio_codec_format(libffmpeg::AVCodecContext *c, libffmpeg::AVCodec *co
 		break;
 	case libffmpeg::AV_CODEC_ID_WMAV2:
 		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_FLTP;
+		break;
+	case libffmpeg::AV_CODEC_ID_PCM_S16LE:
+		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
 		break;
 	default:
 		c->sample_fmt = libffmpeg::AV_SAMPLE_FMT_NONE;

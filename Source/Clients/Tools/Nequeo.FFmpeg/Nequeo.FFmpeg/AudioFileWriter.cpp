@@ -341,18 +341,22 @@ void AudioFileWriter::EncodeAudioFrame(array<unsigned char>^ frame)
 		// For each channel.
 		for (int ch = 0; ch < _channels; ch++)
 		{
-			// Get the pointer to this set of data.
-			uint8_t *sample = _data->AudioFrame->data[ch] + (_bytesPerSample * i);
-
-			// Write the data size
-			for (int j = 0; j < _bytesPerSample; j++)
+			// If channel exists.
+			if (_data->AudioFrame->data[ch])
 			{
-				// Do not go beyond the last index.
-				if (frameByteIndex < frame->Length)
+				// Get the pointer to this set of data.
+				uint8_t *sample = _data->AudioFrame->data[ch] + (_bytesPerSample * i);
+
+				// Write the data size
+				for (int j = 0; j < _bytesPerSample; j++)
 				{
-					// Write the sound data.
-					sample[j] = (uint8_t)frame[frameByteIndex];
-					frameByteIndex++;
+					// Do not go beyond the last index.
+					if (frameByteIndex < frame->Length)
+					{
+						// Write the sound data.
+						sample[j] = (uint8_t)frame[frameByteIndex];
+						frameByteIndex++;
+					}
 				}
 			}
 		}
@@ -426,7 +430,7 @@ static libffmpeg::AVFrame* alloc_sound(WriterAudioPrivateData^ data)
 	sound->channel_layout = codecContext->channel_layout;
 
 	// Allocate the picture memory.
-	size = libffmpeg::av_samples_get_buffer_size(NULL, codecContext->channels, codecContext->frame_size, codecContext->sample_fmt, 0);
+	size = libffmpeg::av_samples_get_buffer_size(NULL, codecContext->channels, sound->nb_samples, codecContext->sample_fmt, 0);
 	sound_buf = libffmpeg::av_malloc(size);
 	if (!sound_buf)
 	{
@@ -672,6 +676,9 @@ void add_audio_stream(WriterAudioPrivateData^ data, int64_t bitRate, int sampleR
 			break;
 		case libffmpeg::AV_CODEC_ID_WMAV2:
 			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_FLTP;
+			break;
+		case libffmpeg::AV_CODEC_ID_PCM_S16LE:
+			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_S16;
 			break;
 		default:
 			codecContext->sample_fmt = libffmpeg::AV_SAMPLE_FMT_NONE;

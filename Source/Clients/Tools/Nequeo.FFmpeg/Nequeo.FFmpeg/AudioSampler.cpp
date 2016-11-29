@@ -320,18 +320,22 @@ array<unsigned char>^ AudioSampler::Resample(array<unsigned char>^ frame)
 		// For each channel.
 		for (int ch = 0; ch < _channels; ch++)
 		{
-			// Get the pointer to this set of data.
-			uint8_t *sample = src_data[ch] + (_bytesPerSample * i);
-
-			// Write the data size.
-			for (int j = 0; j < _bytesPerSample; j++)
+			// If channel exists.
+			if (src_data[ch])
 			{
-				// Do not go beyond the last index.
-				if (frameByteIndex < frame->Length)
+				// Get the pointer to this set of data.
+				uint8_t *sample = src_data[ch] + (_bytesPerSample * i);
+
+				// Write the data size.
+				for (int j = 0; j < _bytesPerSample; j++)
 				{
-					// Write the sound data.
-					sample[j] = (uint8_t)frame[frameByteIndex];
-					frameByteIndex++;
+					// Do not go beyond the last index.
+					if (frameByteIndex < frame->Length)
+					{
+						// Write the sound data.
+						sample[j] = (uint8_t)frame[frameByteIndex];
+						frameByteIndex++;
+					}
 				}
 			}
 		}
