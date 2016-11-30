@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          MediaByteStream.cpp
-*  Purpose :       MediaByteStream class.
+*  File :          StoreByteStream.cpp
+*  Purpose :       StoreByteStream class.
 *
 */
 
@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#include "MediaByteStream.h"
+#include "StoreByteStream.h"
 
 #include <assert.h>
 
@@ -43,13 +43,10 @@ namespace Nequeo {
 			/// Constructor for the current class.
 			/// </summary>
 			/// <param name="initialStreamSize">The number of bytes to reserve in the stream.</param>
-			MediaByteStream::MediaByteStream(QWORD initialStreamSize) :
+			StoreByteStream::StoreByteStream(QWORD initialStreamSize) :
 				_nRefCount(1),
 				_position(0),
 				_initialStreamSize(initialStreamSize),
-				_readCompleteHandler(nullptr),
-				_writeCompleteHandler(nullptr),
-				_seekRequest(false),
 				_disposed(false)
 			{
 				// Reserve some memeory space.
@@ -62,7 +59,7 @@ namespace Nequeo {
 			/// <summary>
 			/// This destructor. Call release to cleanup resources.
 			/// </summary>
-			MediaByteStream::~MediaByteStream()
+			StoreByteStream::~StoreByteStream()
 			{
 				// If not disposed.
 				if (!_disposed)
@@ -82,7 +79,7 @@ namespace Nequeo {
 			/// Add a new player ref item.
 			/// </summary>
 			/// <returns>The result.</returns>
-			ULONG MediaByteStream::AddRef()
+			ULONG StoreByteStream::AddRef()
 			{
 				// Increment the player ref count.
 				return InterlockedIncrement(&_nRefCount);
@@ -92,7 +89,7 @@ namespace Nequeo {
 			/// Release this player resources.
 			/// </summary>
 			/// <returns>The result.</returns>
-			ULONG MediaByteStream::Release()
+			ULONG StoreByteStream::Release()
 			{
 				// Decrement the player ref count.
 				ULONG uCount = InterlockedDecrement(&_nRefCount);
@@ -114,7 +111,7 @@ namespace Nequeo {
 			/// <param name="iid">The player reference id.</param>
 			/// <param name="ppv">The current player reference.</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::QueryInterface(REFIID iid, void** ppv)
+			HRESULT StoreByteStream::QueryInterface(REFIID iid, void** ppv)
 			{
 				// If null the return invalid pointer.
 				if (!ppv)
@@ -125,28 +122,10 @@ namespace Nequeo {
 				// Attach MediaCapture to the interface.
 				static const QITAB qit[] =
 				{
-					QITABENT(MediaByteStream, IMFByteStream),
+					QITABENT(StoreByteStream, IMFByteStream),
 					{ 0 },
 				};
 				return QISearch(this, qit, iid, ppv);
-			}
-
-			/// <summary>
-			/// Set the read complete handler.
-			/// </summary>
-			/// <param name="handler">The function handler.</param>
-			void MediaByteStream::SetReadCompleteHandler(ReadCompleteHandler handler)
-			{
-				_readCompleteHandler = handler;
-			}
-
-			/// <summary>
-			/// Set the write complete handler.
-			/// </summary>
-			/// <param name="handler">The function handler.</param>
-			void MediaByteStream::SetWriteCompleteHandler(WriteCompleteHandler handler)
-			{
-				_writeCompleteHandler = handler;
 			}
 
 			/// <summary>
@@ -158,7 +137,7 @@ namespace Nequeo {
 			/// <param name="punkState">Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. 
 			/// You can use this object to hold state information. The object is returned to the caller when the callback is invoked. [in]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::BeginRead(
+			HRESULT StoreByteStream::BeginRead(
 				BYTE             *pb,
 				ULONG            cb,
 				IMFAsyncCallback *pCallback,
@@ -194,7 +173,7 @@ namespace Nequeo {
 					hr = MFPutWorkItem(MFASYNC_CALLBACK_QUEUE_STANDARD, readCallback, pResult);
 					pResult->Release();
 				}
-				
+
 				// Return the result.
 				return hr;
 			}
@@ -208,7 +187,7 @@ namespace Nequeo {
 			/// <param name="punkState">Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. 
 			/// You can use this object to hold state information. The object is returned to the caller when the callback is invoked. [in]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::BeginWrite(
+			HRESULT StoreByteStream::BeginWrite(
 				const BYTE       *pb,
 				ULONG            cb,
 				IMFAsyncCallback *pCallback,
@@ -253,9 +232,12 @@ namespace Nequeo {
 			/// This method also cancels any pending asynchronous I/O requests. 
 			/// </summary>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::Close()
+			HRESULT StoreByteStream::Close()
 			{
 				HRESULT hr = S_OK;
+
+				// Delete the stream data.
+				_streamData.clear();
 
 				// Return the result.
 				return hr;
@@ -267,7 +249,7 @@ namespace Nequeo {
 			/// <param name="pResult">Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the IMFAsyncCallback::Invoke method. [in]</param>
 			/// <param name="pcbRead">Receives the number of bytes that were read. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::EndRead(
+			HRESULT StoreByteStream::EndRead(
 				IMFAsyncResult *pResult,
 				ULONG          *pcbRead)
 			{
@@ -317,7 +299,7 @@ namespace Nequeo {
 			/// <param name="pResult">Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the IMFAsyncCallback::Invoke method. [in]</param>
 			/// <param name="pcbWritten">Receives the number of bytes that were written. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::EndWrite(
+			HRESULT StoreByteStream::EndWrite(
 				IMFAsyncResult *pResult,
 				ULONG          *pcbWritten)
 			{
@@ -365,7 +347,7 @@ namespace Nequeo {
 			/// Clears any internal buffers used by the stream. If you are writing to the stream, the buffered data is written to the underlying file or device.
 			/// </summary>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::Flush()
+			HRESULT StoreByteStream::Flush()
 			{
 				HRESULT hr = S_OK;
 
@@ -378,7 +360,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pdwCapabilities">Receives a bitwise OR of zero or more flags. The following flags are defined. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::GetCapabilities(
+			HRESULT StoreByteStream::GetCapabilities(
 				DWORD *pdwCapabilities)
 			{
 				HRESULT hr = S_OK;
@@ -395,7 +377,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pqwPosition">Receives the current position, in bytes. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::GetCurrentPosition(
+			HRESULT StoreByteStream::GetCurrentPosition(
 				QWORD *pqwPosition)
 			{
 				HRESULT hr = S_OK;
@@ -412,7 +394,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pqwLength">Receives the length of the stream, in bytes. If the length is unknown, this value is -1. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::GetLength(
+			HRESULT StoreByteStream::GetLength(
 				QWORD *pqwLength)
 			{
 				// Enter critical section.
@@ -435,7 +417,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pfEndOfStream">Receives the value TRUE if the end of the stream has been reached, or FALSE otherwise. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::IsEndOfStream(
+			HRESULT StoreByteStream::IsEndOfStream(
 				BOOL *pfEndOfStream)
 			{
 				// Enter critical section.
@@ -469,7 +451,7 @@ namespace Nequeo {
 			/// <param name="cb">Size of the buffer in bytes. [in]</param>
 			/// <param name="pcbRead">Receives the number of bytes that are copied into the buffer. This parameter cannot be NULL. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::Read(
+			HRESULT StoreByteStream::Read(
 				BYTE  *pb,
 				ULONG cb,
 				ULONG *pcbRead)
@@ -481,6 +463,7 @@ namespace Nequeo {
 				// Get the size.
 				size_t size = _streamData.size();
 				ULONG numberToRead = cb;
+				ULONG numberRead = 0;
 
 				// If reading more then exists.
 				if (cb >= (ULONG)size)
@@ -489,23 +472,34 @@ namespace Nequeo {
 					numberToRead = (ULONG)size;
 				}
 
-				// Read the data.
-				for (ULONG i = 0; i < numberToRead; i++)
+				// If not at the end of the stream.
+				// then read data.
+				if (_position < size)
 				{
-					// Write to the buffer.
-					pb[i] = _streamData[i];
+					// Read the data.
+					for (ULONG i = 0; i < numberToRead; i++)
+					{
+						// If the current position is less than
+						// the size of the stream.
+						if (_position < size)
+						{
+							// Write to the buffer.
+							pb[i] = _streamData[_position];
+
+							// Increment the current position.
+							_position++;
+							numberRead++;
+						}
+						else
+						{
+							// No more to read.
+							break;
+						}
+					}
 				}
 
-				// Set the number to read.
-				*pcbRead = numberToRead;
-
-				// If not null.
-				if (_readCompleteHandler != nullptr)
-				{
-					// Send read complete.
-					_readCompleteHandler(this, *pcbRead, _seekRequest);
-					_seekRequest = false;
-				}
+				// Set the number read.
+				*pcbRead = numberRead;
 
 				// Leave critical section.
 				LeaveCriticalSection(&_critsec);
@@ -522,7 +516,7 @@ namespace Nequeo {
 			/// <param name="dwSeekFlags">Specifies zero or more flags. The following flags are defined. [in]</param>
 			/// <param name="pqwCurrentPosition">Receives the new position after the seek. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::Seek(
+			HRESULT StoreByteStream::Seek(
 				MFBYTESTREAM_SEEK_ORIGIN SeekOrigin,
 				LONGLONG                 qwSeekOffset,
 				DWORD                    dwSeekFlags,
@@ -531,7 +525,6 @@ namespace Nequeo {
 				// Enter critical section.
 				EnterCriticalSection(&_critsec);
 				HRESULT hr = S_OK;
-				_seekRequest = true;
 
 				// Get the size.
 				size_t size = _streamData.size();
@@ -574,7 +567,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="qwPosition">New position in the stream, as a byte offset from the start of the stream. [in]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::SetCurrentPosition(
+			HRESULT StoreByteStream::SetCurrentPosition(
 				QWORD qwPosition)
 			{
 				// Enter critical section.
@@ -607,7 +600,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="qwLength">Length of the stream in bytes. [in]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::SetLength(
+			HRESULT StoreByteStream::SetLength(
 				QWORD qwLength)
 			{
 				// Enter critical section.
@@ -632,7 +625,7 @@ namespace Nequeo {
 			/// <param name="cb">Size of the buffer in bytes. [in]</param>
 			/// <param name="pcbWritten">Receives the number of bytes that are written. [out]</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT MediaByteStream::Write(
+			HRESULT StoreByteStream::Write(
 				const BYTE  *pb,
 				ULONG       cb,
 				ULONG       *pcbWritten)
@@ -644,34 +637,29 @@ namespace Nequeo {
 				// Write the bytes.
 				for (ULONG i = 0; i < cb; i++)
 				{
-					// If the number of elements is greater than capacity.
-					if (i >= _initialStreamSize)
+					// If the new position is the same as the length
+					// then add the new element.
+					if (_position >= _initialStreamSize)
 					{
 						// Add to the stream data.
 						_streamData.push_back(pb[i]);
 					}
 					else
 					{
-						// Add to index.
-						_streamData[i] = pb[i];
+						// Add to index from the current position.
+						_streamData[_position] = pb[i];
 					}
+
+					// Increment the current position.
+					_position++;
 				}
 
 				// All bytes are written.
 				*pcbWritten = cb;
 
-				// Get the size, set the new position
+				// Get the size, set the new capacity.
 				size_t size = _streamData.size();
 				_initialStreamSize = (QWORD)size;
-				_position = size;
-
-				// If not null.
-				if (_writeCompleteHandler != nullptr)
-				{
-					// Send write complete.
-					_writeCompleteHandler(this, *pcbWritten, _seekRequest);
-					_seekRequest = false;
-				}
 
 				// Leave critical section.
 				LeaveCriticalSection(&_critsec);

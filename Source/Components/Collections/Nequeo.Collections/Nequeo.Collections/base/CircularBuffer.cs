@@ -414,11 +414,16 @@ namespace Nequeo.Collections
                 }
                 else
                 {
-                    // Write the offset data.
-                    for (int i = offset; i < count + offset; i++)
+                    // If the position is the same or larger than the count
+                    // then add the items to the collection.
+                    if (position >= _collection.Count)
                     {
-                        // Add the collection.
-                        _collection.Add(data[i]);
+                        // Write the offset data.
+                        for (int i = offset; i < count + offset; i++)
+                        {
+                            // Add the collection.
+                            _collection.Add(data[i]);
+                        }
                     }
                 }
             }
@@ -499,52 +504,61 @@ namespace Nequeo.Collections
                 int index = offset;
                 int available = _collection.Count;
 
-                // If the count is less than one.
-                if (count <= 1)
+                // If the index is the same or too large.
+                if (index >= available)
                 {
-                    // If the count is less than zero.
-                    if (count <= 0)
+                    // Return no collection.
+                    readCollection = new T[0];
+                }
+                else
+                {
+                    // If the count is less than one.
+                    if (count <= 1)
                     {
-                        // Return no collection.
-                        readCollection = new T[0];
-                    }
-                    else
-                    {
-                        // If no more in the collection.
-                        if (_collection.Count <= 0)
+                        // If the count is less than zero.
+                        if (count <= 0)
                         {
-                            // Assign an empty collection.
+                            // Return no collection.
                             readCollection = new T[0];
                         }
                         else
                         {
-                            // Return one item in the collection.
-                            readCollection = new T[] { _collection[index] };
-                        }
+                            // If no more in the collection.
+                            if (_collection.Count <= 0)
+                            {
+                                // Assign an empty collection.
+                                readCollection = new T[0];
+                            }
+                            else
+                            {
+                                // Return one item in the collection.
+                                readCollection = new T[] { _collection[index] };
+                            }
 
-                        // If items are to be remove after reading.
-                        if (_removeItemsRead)
-                        {
-                            // Remove the items.
-                            if (_collection.Count > 0)
-                                _collection.RemoveAt(index);
+                            // If items are to be remove after reading.
+                            if (_removeItemsRead)
+                            {
+                                // Remove the items.
+                                if (_collection.Count > 0)
+                                    _collection.RemoveAt(index);
+                            }
                         }
-                    }
-                }
-                else
-                {
-                    // If the available items is greater than the count
-                    if (available >= count)
-                    {
-                        // Read the number (count) of items.
-                        readCollection = new T[count];
-                        ReadCollectionEx(readCollection, index, count);
                     }
                     else
                     {
-                        // Read the number (available) of items.
-                        readCollection = new T[available];
-                        ReadCollectionEx(readCollection, index, available);
+                        // If the available items is greater than the count
+                        if (available >= count)
+                        {
+                            // Read the number (count) of items.
+                            readCollection = new T[count];
+                            ReadCollectionEx(readCollection, index, count);
+                        }
+                        else
+                        {
+                            // Read the number (available) of items.
+                            readCollection = new T[available];
+                            ReadCollectionEx(readCollection, index, available);
+                        }
                     }
                 }
 
@@ -568,44 +582,53 @@ namespace Nequeo.Collections
                 int index = offset;
                 int available = _collection.Count;
 
-                // If the count is less than one.
-                if (count <= 1)
+                // If the index is the same or too large.
+                if (index >= available)
                 {
-                    // If the count is less than zero.
-                    if (count <= 0)
+                    // Return no collection.
+                    readCollection = new T[0];
+                }
+                else
+                {
+                    // If the count is less than one.
+                    if (count <= 1)
                     {
-                        // Return no collection.
-                        readCollection = new T[0];
-                    }
-                    else
-                    {
-                        // If no more in the collection.
-                        if (_collection.Count <= 0)
+                        // If the count is less than zero.
+                        if (count <= 0)
                         {
-                            // Assign an empty collection.
+                            // Return no collection.
                             readCollection = new T[0];
                         }
                         else
                         {
-                            // Return one item in the collection.
-                            readCollection = new T[] { _collection[index] };
+                            // If no more in the collection.
+                            if (_collection.Count <= 0)
+                            {
+                                // Assign an empty collection.
+                                readCollection = new T[0];
+                            }
+                            else
+                            {
+                                // Return one item in the collection.
+                                readCollection = new T[] { _collection[index] };
+                            }
                         }
-                    }
-                }
-                else
-                {
-                    // If the available items is greater than the count
-                    if (available >= count)
-                    {
-                        // Read the number (count) of items.
-                        readCollection = new T[count];
-                        PeekCollectionEx(readCollection, index, count);
                     }
                     else
                     {
-                        // Read the number (available) of items.
-                        readCollection = new T[available];
-                        PeekCollectionEx(readCollection, index, available);
+                        // If the available items is greater than the count
+                        if (available >= count)
+                        {
+                            // Read the number (count) of items.
+                            readCollection = new T[count];
+                            PeekCollectionEx(readCollection, index, count);
+                        }
+                        else
+                        {
+                            // Read the number (available) of items.
+                            readCollection = new T[available];
+                            PeekCollectionEx(readCollection, index, available);
+                        }
                     }
                 }
 

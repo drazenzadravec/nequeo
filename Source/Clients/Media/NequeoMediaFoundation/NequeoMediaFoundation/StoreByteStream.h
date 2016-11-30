@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          MediaByteStream.h
-*  Purpose :       MediaByteStream class.
+*  File :          StoreByteStream.h
+*  Purpose :       StoreByteStream class.
 *
 */
 
@@ -31,8 +31,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _MEDIABYTESTREAM_H
-#define _MEDIABYTESTREAM_H
+#ifndef _STOREBYTESTREAM_H
+#define _STOREBYTESTREAM_H
 
 #include "MediaGlobal.h"
 #include "WriteByteContainer.h"
@@ -45,37 +45,21 @@ namespace Nequeo {
 		namespace Foundation
 		{
 			/// <summary>
-			/// Read complete handler.
-			/// </summary>
-			/// <param name="byteStream">The byte stream.</param>
-			/// <param name="cbRead">The number of bytes read.</param>
-			/// <param name="seekRequest">A seek to position request has been called.</param>
-			typedef void(*ReadCompleteHandler)(IMFByteStream*, ULONG, bool);
-
-			/// <summary>
-			/// Write complete handler.
-			/// </summary>
-			/// <param name="byteStream">The byte stream.</param>
-			/// <param name="cbWritten">The number of bytes written.</param>
-			/// <param name="seekRequest">A seek to position request has been called.</param>
-			typedef void(*WriteCompleteHandler)(IMFByteStream*, ULONG, bool);
-
-			/// <summary>
 			/// Provides the base for a media foundation byte stream.
 			/// </summary>
-			class MediaByteStream : public IMFByteStream
+			class StoreByteStream : public IMFByteStream
 			{
 			public:
 				/// <summary>
 				/// Constructor for the current class.
 				/// </summary>
 				/// <param name="initialStreamSize">The number of bytes to reserve in the stream.</param>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API MediaByteStream(QWORD initialStreamSize);
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API StoreByteStream(QWORD initialStreamSize);
 
 				/// <summary>
 				/// This destructor. Call release to cleanup resources.
 				/// </summary>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API virtual ~MediaByteStream();
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API virtual ~StoreByteStream();
 
 				/// <summary>
 				/// Add a new player ref item.
@@ -96,18 +80,6 @@ namespace Nequeo {
 				/// <param name="ppv">The current player reference.</param>
 				/// <returns>The result of the operation.</returns>
 				STDMETHODIMP QueryInterface(REFIID iid, void** ppv);
-
-				/// <summary>
-				/// Set the read complete handler.
-				/// </summary>
-				/// <param name="handler">The function handler.</param>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(void) SetReadCompleteHandler(ReadCompleteHandler handler);
-
-				/// <summary>
-				/// Set the write complete handler.
-				/// </summary>
-				/// <param name="handler">The function handler.</param>
-				EXPORT_NEQUEO_MEDIA_FOUNDATION_API STDMETHODIMP_(void) SetWriteCompleteHandler(WriteCompleteHandler handler);
 
 				/// <summary>
 				/// Begins an asynchronous read operation from the stream.
@@ -261,15 +233,12 @@ namespace Nequeo {
 			private:
 				bool					_disposed;
 				long                    _nRefCount;			// Reference count.
-				bool					_seekRequest;
 
 				QWORD					_position;
 				QWORD					_initialStreamSize;
 				std::vector<BYTE>		_streamData;
 
 				CRITICAL_SECTION        _critsec;
-				ReadCompleteHandler		_readCompleteHandler;
-				WriteCompleteHandler	_writeCompleteHandler;
 			};
 		}
 	}

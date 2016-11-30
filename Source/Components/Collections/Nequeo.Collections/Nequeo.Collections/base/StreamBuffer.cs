@@ -108,7 +108,10 @@ namespace Nequeo.Collections
                 // Only if not removing items.
                 if (!_buffer.RemoveItemsRead)
                 {
-                    _position = value;
+                    if (value >= _buffer.Count)
+                        _position = _buffer.Count;
+                    else
+                        _position = value;
                 }
                 else
                 {
@@ -172,7 +175,7 @@ namespace Nequeo.Collections
 
                 // Position can not be graeter than count.
                 if (_position >= _buffer.Count)
-                    _position = _buffer.Count - 1;
+                    _position = _buffer.Count;
             }
 
             // The number of bytes read.
@@ -204,7 +207,7 @@ namespace Nequeo.Collections
                         else
                         {
                             // Greater than then end of stream.
-                            _position = _buffer.Count - 1;
+                            _position = _buffer.Count;
                             return _position;
                         }
 
@@ -219,7 +222,7 @@ namespace Nequeo.Collections
                         else
                         {
                             // Greater than then end of stream.
-                            _position = _buffer.Count - 1 - offset;
+                            _position = _buffer.Count - offset;
                             return _position;
                         }
 
@@ -235,7 +238,7 @@ namespace Nequeo.Collections
                         else
                         {
                             // Greater than then end of stream.
-                            _position = _buffer.Count - 1;
+                            _position = _buffer.Count;
                             return _position;
                         }
                 }
@@ -287,7 +290,7 @@ namespace Nequeo.Collections
 
                 // Position can not be greater than count.
                 if (_position >= _buffer.Count)
-                    _position = _buffer.Count - 1;
+                    _position = _buffer.Count;
             }
 
             // If the position is positive.

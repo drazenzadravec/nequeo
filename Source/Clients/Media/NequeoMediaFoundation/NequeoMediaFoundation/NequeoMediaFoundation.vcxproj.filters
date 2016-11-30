@@ -75,6 +75,9 @@
     <ClCompile Include="CaptureAudioPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StoreByteStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CaptureAudioPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StoreByteStream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
