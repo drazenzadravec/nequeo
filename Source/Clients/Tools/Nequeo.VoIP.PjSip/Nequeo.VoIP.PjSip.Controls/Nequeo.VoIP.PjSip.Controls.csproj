@@ -47,7 +47,8 @@
     <Reference Include="Nequeo.IO.Audio">
       <HintPath>..\..\..\..\References\Staging\Nequeo.IO.Audio.dll</HintPath>
     </Reference>
-    <Reference Include="Nequeo.PjSip.v255">
+    <Reference Include="Nequeo.PjSip.v255, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=24770b6a676fdab1, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging_x64\Nequeo.PjSip.v255.dll</HintPath>
     </Reference>
     <Reference Include="Nequeo.Primitive">
@@ -63,7 +64,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging\Nequeo.Threading.dll</HintPath>
     </Reference>
-    <Reference Include="Nequeo.VoIP.PjSip">
+    <Reference Include="Nequeo.VoIP.PjSip, Version=2016.26.1.1, Culture=neutral, PublicKeyToken=4460adb3a24a1b26, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References\Staging_x64\Client\VoIP\PjSip\Nequeo.VoIP.PjSip.dll</HintPath>
     </Reference>
     <Reference Include="System" />

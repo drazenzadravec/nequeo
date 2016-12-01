@@ -503,10 +503,13 @@ namespace Nequeo.VoIP.PjSip.UI
             {
                 try
                 {
+                    // Get the transfer number.
+                    string destination = SetSipUri(_redirectCallNumber);
                     _isConferenceCall = true;
 
                     // Transfer.
-                    _inComingCall.Call.Transfer(_redirectCallNumber);
+                    _inComingCall.Call.Answer();
+                    _inComingCall.Call.Transfer(destination);
 
                 }
                 catch { }
@@ -1258,6 +1261,7 @@ namespace Nequeo.VoIP.PjSip.UI
                             _isConferenceCall = true;
 
                             // Transfer.
+                            _inComingCall.Call.Answer();
                             _inComingCall.Call.Transfer(destination);
                         }
                         catch { }

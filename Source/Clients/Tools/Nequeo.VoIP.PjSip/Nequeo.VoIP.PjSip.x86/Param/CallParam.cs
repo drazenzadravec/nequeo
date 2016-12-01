@@ -59,6 +59,7 @@ namespace Nequeo.VoIP.PjSip.Param
             _call.OnCallMediaState += _call_OnCallMediaState;
             _call.OnDtmfDigit += _call_OnDtmfDigit;
             _call.OnCallTransferStatus += _call_OnCallTransferStatus;
+            _call.OnCallTransferRequest += _call_OnCallTransferRequest;
             _callID = call.GetId();
 
             _mediaManager = mediaManager;
@@ -117,11 +118,24 @@ namespace Nequeo.VoIP.PjSip.Param
         public event System.EventHandler<OnCallTransferStatusParam> OnCallTransferStatus;
 
         /// <summary>
+        /// Notify application of the status of previously sent call transfer request.
+        /// </summary>
+        public event System.EventHandler<OnCallTransferRequestParam> OnCallTransferRequest;
+
+        /// <summary>
         /// Gets the audio media list.
         /// </summary>
         internal List<AudioMedia> AudioMedia
         {
             get { return _audioMedias; }
+        }
+
+        /// <summary>
+        /// Get the call reference.
+        /// </summary>
+        internal Call Call
+        {
+            get { return _call; }
         }
 
         /// <summary>
@@ -584,9 +598,30 @@ namespace Nequeo.VoIP.PjSip.Param
 
             if (_call != null)
             {
-                // Answer the call.
-                _call.Answer(parm);
+                // Transfer.
                 _call.Transfer(destination, parm);
+            }
+        }
+
+        /// <summary>
+        /// Transfer replace the current call.
+        /// </summary>
+        /// <param name="call">The existing call.</param>
+        /// <param name="destination">The URI of new target to be contacted. The URI may be in name address or addr format.</param>
+        public void TransferReplaces(CallParam call, string destination)
+        {
+            // Create the call settings.
+            CallSetting setting = new CallSetting(true);
+            CallOpParam parm = new CallOpParam(true);
+            setting.AudioCount = (uint)1;
+            setting.VideoCount = (_hasVideo ? (uint)1 : (uint)0);
+            parm.Setting = setting;
+            parm.Code = StatusCode.SC_OK;
+
+            if (_call != null)
+            {
+                // Transfer.
+                _call.TransferReplaces(call.Call, parm);
             }
         }
 
@@ -1064,6 +1099,21 @@ namespace Nequeo.VoIP.PjSip.Param
             {
                 // Handle the event.
                 OnCallTransferStatus?.Invoke(this, e);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Transfer call request.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _call_OnCallTransferRequest(object sender, OnCallTransferRequestParam e)
+        {
+            try
+            {
+                // Handle the event.
+                OnCallTransferRequest?.Invoke(this, e);
             }
             catch { }
         }
