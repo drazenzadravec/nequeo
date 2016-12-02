@@ -607,8 +607,7 @@ namespace Nequeo.VoIP.PjSip.Param
         /// Transfer replace the current call.
         /// </summary>
         /// <param name="call">The existing call.</param>
-        /// <param name="destination">The URI of new target to be contacted. The URI may be in name address or addr format.</param>
-        public void TransferReplaces(CallParam call, string destination)
+        public void TransferReplaces(CallParam call)
         {
             // Create the call settings.
             CallSetting setting = new CallSetting(true);
