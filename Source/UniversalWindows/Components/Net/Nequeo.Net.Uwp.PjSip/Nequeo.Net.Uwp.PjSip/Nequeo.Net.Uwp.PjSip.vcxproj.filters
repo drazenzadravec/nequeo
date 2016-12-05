@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Account">
+      <UniqueIdentifier>{c78143c0-cb88-4496-883b-6de32ecc13a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Media">
+      <UniqueIdentifier>{8485933e-115a-4148-aeaa-02326ba13aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contact">
+      <UniqueIdentifier>{9eb9ebe4-0d47-4888-9286-5656d59074b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Call">
+      <UniqueIdentifier>{034aa826-9c4a-43fa-ac66-47b2c19d054d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Endpoint">
+      <UniqueIdentifier>{6d3d935c-5bb5-4b5c-baaa-11f1a1783f12}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Contact.cpp">
+      <Filter>Contact</Filter>
+    </ClCompile>
+    <ClCompile Include="Call.cpp">
+      <Filter>Call</Filter>
+    </ClCompile>
+    <ClCompile Include="Account.cpp">
+      <Filter>Account</Filter>
+    </ClCompile>
+    <ClCompile Include="Endpoint.cpp">
+      <Filter>Endpoint</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountInterface.cpp">
+      <Filter>Account</Filter>
+    </ClCompile>
+    <ClCompile Include="CallInterface.cpp">
+      <Filter>Call</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactInterface.cpp">
+      <Filter>Contact</Filter>
+    </ClCompile>
+    <ClCompile Include="EndpointInterface.cpp">
+      <Filter>Endpoint</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Contact.h">
+      <Filter>Contact</Filter>
+    </ClInclude>
+    <ClInclude Include="Call.h">
+      <Filter>Call</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>Account</Filter>
+    </ClInclude>
+    <ClInclude Include="Endpoint.h">
+      <Filter>Endpoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="AccountInterface.h">
+      <Filter>Account</Filter>
+    </ClInclude>
+    <ClInclude Include="CallInterface.h">
+      <Filter>Call</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactInterface.h">
+      <Filter>Contact</Filter>
+    </ClInclude>
+    <ClInclude Include="EndpointInterface.h">
+      <Filter>Endpoint</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
