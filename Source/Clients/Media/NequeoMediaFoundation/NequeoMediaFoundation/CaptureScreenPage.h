@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          CaptureTabControl.h
-*  Purpose :       CaptureTabControl class.
+*  File :          CaptureScreenPage.h
+*  Purpose :       CaptureScreenPage class.
 *
 */
 
@@ -31,87 +31,90 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#ifndef _CAPTURETABCONTROL_H
-#define _CAPTURETABCONTROL_H
-
 #include "MediaGlobal.h"
-#include "CaptureAudioPage.h"
-#include "CaptureVideoPage.h"
-#include "CaptureScreenPage.h"
+#include "PlayerState.h"
+#include "ScreenCapture.h"
 
 namespace Nequeo {
 	namespace Media {
 		namespace Foundation
 		{
 			/// <summary>
-			/// Media capture tab control
+			/// Media capture screen tab.
 			/// </summary>
-			class CaptureTabControl : public CTabCtrl
+			class CaptureScreenPage : public CDialog
 			{
-				DECLARE_DYNAMIC(CaptureTabControl)
+				DECLARE_DYNAMIC(CaptureScreenPage)
+
+				/// <summary>
+				/// Media capture screen enum.
+				/// </summary>
+				enum { IDD = IDD_MEDIACAPTURE_SCREEN_TAB };
+
 			public:
 				/// <summary>
 				/// Constructor for the current class.
 				/// </summary>
-				CaptureTabControl();
+				CaptureScreenPage(CWnd* pParent = NULL);
 
 				/// <summary>
 				/// This destructor.
 				/// </summary>
-				~CaptureTabControl();
+				virtual ~CaptureScreenPage();
 
 				/// <summary>
-				/// Initialise.
+				/// Set the event handler.
 				/// </summary>
-				/// <param name="hwndEventAudio">The audio event handler window to get notifications.</param>
-				/// <param name="hwndEventVideo">The video event handler window to get notifications.</param>
-				/// <param name="hwndEventScreen">The screen event handler window to get notifications.</param>
-				void Init(HWND hwndEventAudio, HWND hwndEventVideo, HWND hwndEventScreen);
+				/// <param name="hwndEvent">The handle to the window that gets the notification.</param>
+				void SetEventHandler(HWND hwndEvent);
 
 				/// <summary>
-				/// Set the tab rectangle.
+				/// On initialize dialog.
 				/// </summary>
-				void SetRectangle();
+				BOOL OnInitDialog() override;
 
 				/// <summary>
-				/// Set the tab rectangle.
+				/// Pre-translate message.
 				/// </summary>
-				/// <param name="index">The tab index to show all others are hidden.</param>
-				void ShowTabPage(int index);
+				/// <param name="pMsg">The message.</param>
+				BOOL PreTranslateMessage(MSG* pMsg) override;
+
+			protected:
+				/// <summary>
+				/// Notifies the application when the state changes.
+				/// </summary>
+				void NotifyState()
+				{
+					// Send state info.
+					::PostMessage(_hwndEvent, WM_AUDIO_EVENT, (WPARAM)_windowState, (LPARAM)0);
+				}
 
 				/// <summary>
-				/// Gets a reference to the video tab page.
+				/// Data exchange.
 				/// </summary>
-				/// <returns>The video page reference.</returns>
-				CaptureVideoPage& VideoPage() const;
+				/// <param name="pDX">Data exchange instance.</param>
+				virtual void DoDataExchange(CDataExchange* pDX);
 
-				/// <summary>
-				/// Gets a reference to the audio tab page.
-				/// </summary>
-				/// <returns>The audio page reference.</returns>
-				CaptureAudioPage& AudioPage() const;
-
-				/// <summary>
-				/// Gets a reference to the screen tab page.
-				/// </summary>
-				/// <returns>The screen page reference.</returns>
-				CaptureScreenPage& ScreenPage() const;
-
-			private:
-				bool _disposed;
-
-				int _tabCurrent;
-				int _numberOfPages;
-				CDialog* _tabePages[3];
-
-			public:
 				/// <summary>
 				/// Declare the message map.
 				/// </summary>
 				DECLARE_MESSAGE_MAP()
-				
+				afx_msg void OnBnClickedButtonSelectFile();
+				afx_msg void OnBnClickedButtonStartCapture();
+				afx_msg void OnBnClickedCaptureScreenCheck();
+
+			private:
+				bool _disposed;
+				int _imageIndex;
+
+				CToolTipCtrl *_toolTip;
+
+				HWND _hwndEvent;
+				HWND _hwndScalling;
+				CaptureScreenState _windowState;
+
+				void EnableControls();
 			};
 		}
 	}
 }
-#endif

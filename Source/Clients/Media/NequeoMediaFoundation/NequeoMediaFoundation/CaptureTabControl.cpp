@@ -54,8 +54,9 @@ namespace Nequeo {
 				// Create the table pages.
 				_tabePages[0] = new CaptureVideoPage();
 				_tabePages[1] = new CaptureAudioPage();
+				_tabePages[2] = new CaptureScreenPage();
 
-				_numberOfPages = 2;
+				_numberOfPages = 3;
 			}
 
 			/// <summary>
@@ -83,23 +84,28 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="hwndEventAudio">The audio event handler window to get notifications.</param>
 			/// <param name="hwndEventVideo">The video event handler window to get notifications.</param>
-			void CaptureTabControl::Init(HWND hwndEventAudio, HWND hwndEventVideo)
+			/// <param name="hwndEventScreen">The screen event handler window to get notifications.</param>
+			void CaptureTabControl::Init(HWND hwndEventAudio, HWND hwndEventVideo, HWND hwndEventScreen)
 			{
 				_tabCurrent = 0;
 
 				// Create each tab page.
 				_tabePages[0]->Create(IDD_MEDIACAPTURE_VIDEO_TAB, this);
 				_tabePages[1]->Create(IDD_MEDIACAPTURE_AUDIO_TAB, this);
+				_tabePages[2]->Create(IDD_MEDIACAPTURE_SCREEN_TAB, this);
 
 				// Show and hide.
 				_tabePages[0]->ShowWindow(SW_SHOW);
 				_tabePages[1]->ShowWindow(SW_HIDE);
+				_tabePages[2]->ShowWindow(SW_HIDE);
 
 				// Set the handlers.
 				CaptureVideoPage* videopage = (CaptureVideoPage*)_tabePages[0];
 				CaptureAudioPage* audiopage = (CaptureAudioPage*)_tabePages[1];
+				CaptureScreenPage* screenpage = (CaptureScreenPage*)_tabePages[2];
 				videopage->SetEventHandler(hwndEventVideo);
 				audiopage->SetEventHandler(hwndEventAudio);
+				screenpage->SetEventHandler(hwndEventScreen);
 
 				// Set the tab page rectangle.
 				SetRectangle();
@@ -173,6 +179,15 @@ namespace Nequeo {
 			CaptureAudioPage& CaptureTabControl::AudioPage() const
 			{
 				return *((CaptureAudioPage*)_tabePages[1]);
+			}
+
+			/// <summary>
+			/// Gets a reference to the screen tab page.
+			/// </summary>
+			/// <returns>The screen page reference.</returns>
+			CaptureScreenPage& CaptureTabControl::ScreenPage() const
+			{
+				return *((CaptureScreenPage*)_tabePages[2]);
 			}
 		}
 	}

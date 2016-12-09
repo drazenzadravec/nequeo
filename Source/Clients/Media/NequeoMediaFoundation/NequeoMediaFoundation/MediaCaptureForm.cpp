@@ -201,7 +201,8 @@ namespace Nequeo {
 				// Create the tab control.
 				_tab.InsertItem(0, L"Video");
 				_tab.InsertItem(1, L"Audio");
-				_tab.Init(*this, *this);
+				_tab.InsertItem(2, L"Screen");
+				_tab.Init(*this, *this, *this);
 
 				// return TRUE  unless you set the focus to a control.
 				return TRUE;  
@@ -863,7 +864,7 @@ namespace Nequeo {
 				int selectedIndex = _tab.GetCurSel();
 
 				// Make sure the selection is valid.
-				if (selectedIndex > -1 && selectedIndex < 2)
+				if (selectedIndex > -1 && selectedIndex < 3)
 				{
 					// Show current hide all others.
 					_tab.ShowTabPage(selectedIndex);

@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CaptureAudioPage.cpp" />
+    <ClCompile Include="CaptureScreenPage.cpp" />
     <ClCompile Include="CaptureTabControl.cpp" />
     <ClCompile Include="CaptureVideoPage.cpp" />
     <ClCompile Include="ContentEnabler.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="OpenNetworkUriForm.cpp" />
     <ClCompile Include="ReadByteAsyncCallback.cpp" />
     <ClCompile Include="ReadByteContainer.cpp" />
+    <ClCompile Include="ScreenCapture.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -221,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaptureAudioPage.h" />
+    <ClInclude Include="CaptureScreenPage.h" />
     <ClInclude Include="CaptureTabControl.h" />
     <ClInclude Include="CaptureVideoPage.h" />
     <ClInclude Include="ContentEnabler.h" />
@@ -238,6 +241,7 @@
     <ClInclude Include="ReadByteAsyncCallback.h" />
     <ClInclude Include="ReadByteContainer.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ScreenCapture.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StoreByteStream.h" />
     <ClInclude Include="targetver.h" />

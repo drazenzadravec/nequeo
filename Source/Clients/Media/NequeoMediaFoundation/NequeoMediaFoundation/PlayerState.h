@@ -204,6 +204,22 @@ namespace Nequeo {
 				/// </summary>
 				DisallowVideoCapture = 1,
 			};
+
+			/// <summary>
+			/// Media capture screen state.
+			/// </summary>
+			enum CaptureScreenState
+			{
+				/// <summary>
+				/// Allow screen capture.
+				/// </summary>
+				AllowScreenCapture = 0,
+
+				/// <summary>
+				/// Disallow screen capture.
+				/// </summary>
+				DisallowScreenCapture = 1,
+			};
 		}
 	}
 }
