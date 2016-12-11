@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{059febdb-1e09-4154-9576-94be10055fee}</ProjectGuid>
+    <Keyword>Android</Keyword>
+    <RootNamespace>NequeoAndroidPjSip</RootNamespace>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>2.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-21</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-21</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-21</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-21</AndroidAPILevel>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;PJ_M_ARMV7;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\arm64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;PJ_M_ARMV7;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\arm64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;PJ_M_ARMV7;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\arm\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NEQUEOANDROIDPJSIP_EXPORTS;PJSIP_OVERRIDE_CONFIG_VALUES;PJ_ANDROID_CONFIG;PJ_CONFIG_ANDROID;PJ_M_ARMV7;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjsip;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjlib-util;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjmedia;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\pjnath;..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\include\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>EGL;GLESv1_CM;GLESv2;GLESv3;m;pjsua2_lib;pjsua_lib;pjsip_ua;pjmedia_codec;pjmedia_videodev;pjmedia_audiodev;pjmedia;pjsip_simple;pjsip_core;pjnath;pjlib_util;pjlib;libyuv;libspeex;libsrtp;libresample;libgsmcodec;libg7221codec;libilbccodec;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\Android_2.5.5\arm\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <WholeArchiveBegin>false</WholeArchiveBegin>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="AccountInterface.h" />
+    <ClInclude Include="Call.h" />
+    <ClInclude Include="CallInterface.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="ContactInterface.h" />
+    <ClInclude Include="Endpoint.h" />
+    <ClInclude Include="EndpointInterface.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="AccountInterface.cpp" />
+    <ClCompile Include="Call.cpp" />
+    <ClCompile Include="CallInterface.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="ContactInterface.cpp" />
+    <ClCompile Include="Endpoint.cpp" />
+    <ClCompile Include="EndpointInterface.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

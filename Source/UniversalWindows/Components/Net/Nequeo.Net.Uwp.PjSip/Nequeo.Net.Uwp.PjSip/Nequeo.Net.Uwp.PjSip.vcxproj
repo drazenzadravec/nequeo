@@ -128,8 +128,8 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x86\debug;..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3_UWP\x86\debug\bin-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5_Audio_Video\x86\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -148,8 +148,8 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x86\release;..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3_UWP\x86\release\bin-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5_Audio_Video\x86\release\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -168,8 +168,8 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\arm\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\arm\debug;..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3_UWP\arm\debug\bin-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -185,8 +185,8 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\arm\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\arm\release;..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3_UWP\arm\release\bin-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -202,8 +202,8 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x64\debug;..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3_UWP\x64\debug\bin-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5_Audio_Video\x64\debug\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -222,8 +222,8 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libbaseclasses.lib;libg7221codec.lib;libgsmcodec.lib;libilbccodec.lib;libmilenage.lib;libresample.lib;libspeex.lib;libsrtp.lib;libyuv.lib;pjlib.lib;pjlib_util.lib;pjmedia.lib;pjmedia_audiodev.lib;pjmedia_codec.lib;pjmedia_videodev.lib;pjnath.lib;pjsip_core.lib;pjsip_simple.lib;pjsip_ua.lib;pjsua_lib.lib;pjsua2_lib.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\UWP_2.5.5\x64\release;..\..\..\..\..\..\ThirdPartyTools\Opus\1.1.3_UWP\x64\release\bin-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\PjSIP\2.4.5_Audio_Video\x64\release\lib;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.1.0\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

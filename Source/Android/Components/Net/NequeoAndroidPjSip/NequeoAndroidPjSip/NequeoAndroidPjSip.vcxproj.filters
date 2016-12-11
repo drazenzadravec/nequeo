@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="Account.h">
+      <Filter>Account</Filter>
+    </ClInclude>
+    <ClInclude Include="Call.h">
+      <Filter>Call</Filter>
+    </ClInclude>
+    <ClInclude Include="Contact.h">
+      <Filter>Contact</Filter>
+    </ClInclude>
+    <ClInclude Include="Endpoint.h">
+      <Filter>Endpoint</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountInterface.h">
+      <Filter>Account</Filter>
+    </ClInclude>
+    <ClInclude Include="CallInterface.h">
+      <Filter>Call</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactInterface.h">
+      <Filter>Contact</Filter>
+    </ClInclude>
+    <ClInclude Include="EndpointInterface.h">
+      <Filter>Endpoint</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Account">
+      <UniqueIdentifier>{468dd3af-e4e3-4e2c-bee0-31607493ec39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Call">
+      <UniqueIdentifier>{02071565-d886-4bc5-a20d-9cec2e5ef6c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contact">
+      <UniqueIdentifier>{13bd0975-1d61-4603-96b1-ce003afb2271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Endpoint">
+      <UniqueIdentifier>{d7cf4bf0-2188-4c85-b3fa-a176c9016275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Media">
+      <UniqueIdentifier>{39c41123-ab91-4d2e-b2c6-80c3dd923384}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Account.cpp">
+      <Filter>Account</Filter>
+    </ClCompile>
+    <ClCompile Include="Call.cpp">
+      <Filter>Call</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>Contact</Filter>
+    </ClCompile>
+    <ClCompile Include="Endpoint.cpp">
+      <Filter>Endpoint</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountInterface.cpp">
+      <Filter>Account</Filter>
+    </ClCompile>
+    <ClCompile Include="CallInterface.cpp">
+      <Filter>Call</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactInterface.cpp">
+      <Filter>Contact</Filter>
+    </ClCompile>
+    <ClCompile Include="EndpointInterface.cpp">
+      <Filter>Endpoint</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
