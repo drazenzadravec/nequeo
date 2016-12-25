@@ -49,6 +49,7 @@
 #include <Dbt.h>
 #include <shlwapi.h>
 #include <Wmcodecdsp.h>
+#include <mfcaptureengine.h>
 
 // EVR headers
 #include <evr.h>

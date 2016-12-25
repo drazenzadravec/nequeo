@@ -44,9 +44,24 @@ namespace Nequeo {
 			HRESULT ConfigureVideoEncoder(EncodingParameters&, IMFMediaType*, IMFSinkWriter*, DWORD*);
 			HRESULT ConfigureAudioSourceReader(IMFSourceReader*);
 			HRESULT ConfigureAudioEncoder(EncodingParameters&, IMFMediaType*, IMFSinkWriter*, DWORD*);
-			HRESULT ConfigureVideoAudioSourceReader(IMFSourceReader*);
+			HRESULT ConfigureVideoAudioSourceReader(IMFSourceReader*, IMFSourceReader*, EncodingParameters&);
 			HRESULT ConfigureVideoAudioEncoder(EncodingParameters&, IMFMediaType*, IMFMediaType*, IMFSinkWriter*, DWORD*, DWORD*);
 			HRESULT CopyAttribute(IMFAttributes*, IMFAttributes*, const GUID&);
+			
+
+			// Gets an interface pointer from a Media Foundation collection.
+			template <class IFACE>
+			HRESULT GetCollectionObject(IMFCollection *pCollection, DWORD index, IFACE **ppObject)
+			{
+				IUnknown *pUnk;
+				HRESULT hr = pCollection->GetElement(index, &pUnk);
+				if (SUCCEEDED(hr))
+				{
+					hr = pUnk->QueryInterface(IID_PPV_ARGS(ppObject));
+					pUnk->Release();
+				}
+				return hr;
+			}
 
 			/// <summary>
 			/// Constructor for the current class. Use static CreateInstance method to instantiate.
@@ -64,6 +79,8 @@ namespace Nequeo {
 				_hNotifyErrorEvent(NULL),
 				_captureState(CaptureNotReady),
 				_pReader(NULL),
+				_pReaderVideo(NULL),
+				_pReaderAudio(NULL),
 				_pVideoWriter(NULL),
 				_pAudioWriter(NULL),
 				_pVideoAudioWriter(NULL),
@@ -74,6 +91,10 @@ namespace Nequeo {
 				_hasVideoCapture(false),
 				_hasAudioCapture(false),
 				_hCloseEvent(NULL),
+				_streamIndexVideo(0),
+				_streamIndexAudio(0),
+				_pSourceReaderVideo(NULL),
+				_pSourceReaderAudio(NULL),
 				_started(false),
 				_disposed(false)
 			{
@@ -91,6 +112,9 @@ namespace Nequeo {
 				{
 					// Indicate that dispose has been called.
 					_disposed = true;
+
+					// Stop capture.
+					StopCapture();
 					
 					// Delete critical section.
 					DeleteCriticalSection(&_critsec);
@@ -1015,36 +1039,22 @@ namespace Nequeo {
 					);
 				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Create a video and audio collection.
-					hr = MFCreateCollection(&pCollection);
-
-					if (SUCCEEDED(hr))
-						// Add the video source to the collection.
-						hr = pCollection->AddElement(pVideoSource);
-
-					if (SUCCEEDED(hr))
-						// Add the audio source to the collection.
-						hr = pCollection->AddElement(pAudioSource);
-
-					if (SUCCEEDED(hr))
-						// Create the video and audio combined collection.
-						hr = MFCreateAggregateSource(pCollection, &pSource);
-				}
-
-				if (SUCCEEDED(hr))
-				{
-					// Open media source.
-					hr = OpenMediaSource(pSource);
-				}
-
 				// Create the sink writer 
 				if (SUCCEEDED(hr))
 				{
 					// If writing to file.
 					if (writeToFile)
 					{
+						// Get this audio device media source.
+						hr = MFCreateAttributes(&pAttributesByteStream, 1);
+
+						// Create the sink writer 
+						if (SUCCEEDED(hr))
+						{
+							// Set the MF_SINK_WRITER_DISABLE_THROTTLING.
+							hr = pAttributesByteStream->SetUINT32(MF_SINK_WRITER_DISABLE_THROTTLING, TRUE);
+						}
+
 						// Create sink writer from URL.
 						hr = MFCreateSinkWriterFromURL(
 							pwszFileName,
@@ -1082,6 +1092,33 @@ namespace Nequeo {
 					}
 				}
 
+				/*
+				if (SUCCEEDED(hr))
+				{
+				// Create a video and audio collection.
+				hr = MFCreateCollection(&pCollection);
+
+				if (SUCCEEDED(hr))
+				// Add the video source to the collection.
+				hr = pCollection->AddElement(pVideoSource);
+
+				if (SUCCEEDED(hr))
+				// Add the audio source to the collection.
+				hr = pCollection->AddElement(pAudioSource);
+
+				if (SUCCEEDED(hr))
+				// Create the video and audio combined collection.
+				hr = MFCreateAggregateSource(pCollection, &pSource);
+				}
+				*/
+
+				if (SUCCEEDED(hr))
+				{
+					// Open media source.
+					hr = OpenMediaSourceVideoAudio(pVideoSource, pAudioSource);
+				}
+
+
 				// Set up the encoding parameters.
 				if (SUCCEEDED(hr))
 				{
@@ -1094,15 +1131,28 @@ namespace Nequeo {
 					_bFirstSample = TRUE;
 					_llBaseTime = 0;
 
-					// Request the first audio frame.
-					hr = _pReader->ReadSample(
-						(DWORD)MF_SOURCE_READER_ANY_STREAM,
+					// Request the first video frame.
+					hr = _pReaderVideo->ReadSample(
+						(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
 						0,
 						NULL,
 						NULL,
 						NULL,
 						NULL
 					);
+
+					if (SUCCEEDED(hr))
+					{
+						// Request the first audio frame.
+						hr = _pReaderAudio->ReadSample(
+							(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
+							0,
+							NULL,
+							NULL,
+							NULL,
+							NULL
+						);
+					}
 				}
 
 				// Safe release.
@@ -1277,6 +1327,27 @@ namespace Nequeo {
 				SafeRelease(&_pVideoWriter);
 				SafeRelease(&_pAudioWriter);
 				SafeRelease(&_pReader);
+				SafeRelease(&_pReaderVideo);
+				SafeRelease(&_pReaderAudio);
+
+				// If the source reader is not null.
+				if (_pSourceReaderVideo != NULL)
+				{
+					// Release the source reader.
+					_pSourceReaderVideo->Release();
+					_pSourceReaderVideo = NULL;
+				}
+
+				// If the source reader is not null.
+				if (_pSourceReaderAudio != NULL)
+				{
+					// Release the source reader.
+					_pSourceReaderAudio->Release();
+					_pSourceReaderAudio = NULL;
+				}
+
+				// Close;
+				EndCaptureInternal();
 
 				// Leave critical section.
 				LeaveCriticalSection(&_critsec);
@@ -1359,7 +1430,7 @@ namespace Nequeo {
 						if (_hasVideoCapture && _hasAudioCapture)
 						{
 							// Write the sample.
-							hr = _pVideoAudioWriter->WriteSample(0, pSample);
+							hr = _pVideoAudioWriter->WriteSample(dwStreamIndex, pSample);
 						}
 						else if (_hasVideoCapture)
 						{
@@ -1382,8 +1453,18 @@ namespace Nequeo {
 				if (_hasVideoCapture && _hasAudioCapture)
 				{
 					// Read another video and audio sample.
-					hr = _pReader->ReadSample(
-						(DWORD)MF_SOURCE_READER_ANY_STREAM,
+					hr = _pReaderVideo->ReadSample(
+						(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
+						0,
+						NULL,   // actual
+						NULL,   // flags
+						NULL,   // timestamp
+						NULL    // sample
+					);
+
+					// Read another video and audio sample.
+					hr = _pReaderAudio->ReadSample(
+						(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
 						0,
 						NULL,   // actual
 						NULL,   // flags
@@ -1415,6 +1496,152 @@ namespace Nequeo {
 						NULL    // sample
 					);
 				}
+
+			done:
+				// If failed.
+				if (FAILED(hr))
+				{
+					// Send a error notification.
+					NotifyError(hr);
+				}
+
+				// Leave critical section.
+				LeaveCriticalSection(&_critsec);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// On event read sample override.
+			/// </summary>
+			/// <param name="hrStatus">The read status.</param>
+			/// <param name="dwStreamIndex">The stream index number.</param>
+			/// <param name="dwStreamFlags">The stream flag.</param>
+			/// <param name="llTimestamp">The current time stamp.</param>
+			/// <param name="pSample">The captured sample data.</param>
+			/// <param name="llRebaseTimestamp">The rebased time stamp.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaCapture::VideoSampleComplete(
+				HRESULT hrStatus,
+				DWORD dwStreamIndex,
+				DWORD dwStreamFlags,
+				LONGLONG llTimestamp,
+				IMFSample *pSample,
+				LONGLONG llRebaseTimestamp)
+			{
+				HRESULT hr = S_OK;
+
+				// Enter critical section.
+				EnterCriticalSection(&_critsec);
+
+				// If not capturing samples.
+				if (!IsCapturing())
+				{
+					// Leave critical section.
+					LeaveCriticalSection(&_critsec);
+					return hr;
+				}
+
+				// If failed.
+				if (FAILED(hrStatus))
+				{
+					hr = hrStatus;
+					goto done;
+				}
+
+				// If a sample exists.
+				if (pSample)
+				{
+					// Write the sample.
+					hr = _pVideoAudioWriter->WriteSample(_streamIndexVideo, pSample);
+				}
+
+				// If failed.
+				if (FAILED(hr)) { goto done; }
+
+				// Read another video and audio sample.
+				hr = _pReaderVideo->ReadSample(
+					(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
+					0,
+					NULL,   // actual
+					NULL,   // flags
+					NULL,   // timestamp
+					NULL    // sample
+				);
+
+			done:
+				// If failed.
+				if (FAILED(hr))
+				{
+					// Send a error notification.
+					NotifyError(hr);
+				}
+
+				// Leave critical section.
+				LeaveCriticalSection(&_critsec);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// On event read sample override.
+			/// </summary>
+			/// <param name="hrStatus">The read status.</param>
+			/// <param name="dwStreamIndex">The stream index number.</param>
+			/// <param name="dwStreamFlags">The stream flag.</param>
+			/// <param name="llTimestamp">The current time stamp.</param>
+			/// <param name="pSample">The captured sample data.</param>
+			/// <param name="llRebaseTimestamp">The rebased time stamp.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaCapture::AudioSampleComplete(
+				HRESULT hrStatus,
+				DWORD dwStreamIndex,
+				DWORD dwStreamFlags,
+				LONGLONG llTimestamp,
+				IMFSample *pSample,
+				LONGLONG llRebaseTimestamp)
+			{
+				HRESULT hr = S_OK;
+
+				// Enter critical section.
+				EnterCriticalSection(&_critsec);
+
+				// If not capturing samples.
+				if (!IsCapturing())
+				{
+					// Leave critical section.
+					LeaveCriticalSection(&_critsec);
+					return hr;
+				}
+
+				// If failed.
+				if (FAILED(hrStatus))
+				{
+					hr = hrStatus;
+					goto done;
+				}
+
+				// If a sample exists.
+				if (pSample)
+				{
+					// Write the sample.
+					hr = _pVideoAudioWriter->WriteSample(_streamIndexAudio, pSample);
+				}
+
+				// If failed.
+				if (FAILED(hr)) { goto done; }
+
+				// Read another video and audio sample.
+				hr = _pReaderAudio->ReadSample(
+					(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
+					0,
+					NULL,   // actual
+					NULL,   // flags
+					NULL,   // timestamp
+					NULL    // sample
+				);
 
 			done:
 				// If failed.
@@ -1465,6 +1692,96 @@ namespace Nequeo {
 
 				// Safe release.
 				SafeRelease(&pAttributes);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Open media source.
+			/// </summary>
+			/// <param name="pSourceVideo">The media source.</param>
+			/// <param name="pSourceAudio">The media source.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaCapture::OpenMediaSourceVideoAudio(IMFMediaSource *pSourceVideo, IMFMediaSource *pSourceAudio)
+			{
+				HRESULT hr = S_OK;
+
+				IMFAttributes *pAttributesVideo = NULL;
+				IMFAttributes *pAttributesAudio = NULL;
+
+				// Get the attributes.
+				hr = MFCreateAttributes(&pAttributesVideo, 2);
+
+				if (SUCCEEDED(hr))
+				{
+					// Create source reader.
+					hr = SourceReader::CreateInstance(&_pSourceReaderVideo);
+
+					if (SUCCEEDED(hr))
+					{
+						// Set the read sample callback.
+						_pSourceReaderVideo->SetReadSampleCompleteHandler(
+							[this](HRESULT hrStatus, DWORD dwStreamIndex, DWORD dwStreamFlags, LONGLONG llTimestamp, IMFSample *pSample, LONGLONG llRebaseTimestamp) ->HRESULT
+						{
+							return this->VideoSampleComplete(hrStatus, dwStreamIndex, dwStreamFlags, llTimestamp, pSample, llRebaseTimestamp);
+						});
+
+						// Set the reader aync callback
+						// is indicates that the read will be 
+						// sampling in async mode.
+						hr = pAttributesVideo->SetUnknown(MF_SOURCE_READER_ASYNC_CALLBACK, _pSourceReaderVideo);
+					}
+				}
+
+				if (SUCCEEDED(hr))
+				{
+					// Create a new source reader.
+					hr = MFCreateSourceReaderFromMediaSource(
+						pSourceVideo,
+						pAttributesVideo,
+						&_pReaderVideo
+					);
+				}
+
+				if (SUCCEEDED(hr))
+					// Get the attributes.
+					hr = MFCreateAttributes(&pAttributesAudio, 2);
+
+				if (SUCCEEDED(hr))
+				{
+					// Create source reader.
+					hr = SourceReader::CreateInstance(&_pSourceReaderAudio);
+
+					if (SUCCEEDED(hr))
+					{
+						// Set the sample reader.
+						_pSourceReaderAudio->SetReadSampleCompleteHandler(
+							[this](HRESULT hrStatus, DWORD dwStreamIndex, DWORD dwStreamFlags, LONGLONG llTimestamp, IMFSample *pSample, LONGLONG llRebaseTimestamp) ->HRESULT
+						{
+							return this->AudioSampleComplete(hrStatus, dwStreamIndex, dwStreamFlags, llTimestamp, pSample, llRebaseTimestamp);
+						});
+
+						// Set the reader aync callback
+						// is indicates that the read will be 
+						// sampling in async mode.
+						hr = pAttributesAudio->SetUnknown(MF_SOURCE_READER_ASYNC_CALLBACK, _pSourceReaderAudio);
+					}
+				}
+
+				if (SUCCEEDED(hr))
+				{
+					// Create a new source reader.
+					hr = MFCreateSourceReaderFromMediaSource(
+						pSourceAudio,
+						pAttributesAudio,
+						&_pReaderAudio
+					);
+				}
+
+				// Safe release.
+				SafeRelease(&pAttributesVideo);
+				SafeRelease(&pAttributesAudio);
 
 				// Return the result.
 				return hr;
@@ -1619,12 +1936,12 @@ namespace Nequeo {
 				IMFMediaType *pAudioType = NULL;
 
 				// Configure source reader.
-				hr = ConfigureVideoAudioSourceReader(_pReader);
+				hr = ConfigureVideoAudioSourceReader(_pReaderVideo, _pReaderAudio, param);
 
 				if (SUCCEEDED(hr))
 				{
 					// Get current media type.
-					hr = _pReader->GetCurrentMediaType(
+					hr = _pReaderVideo->GetCurrentMediaType(
 						(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
 						&pVideoType
 					);
@@ -1633,7 +1950,7 @@ namespace Nequeo {
 				if (SUCCEEDED(hr))
 				{
 					// Get current media type.
-					hr = _pReader->GetCurrentMediaType(
+					hr = _pReaderAudio->GetCurrentMediaType(
 						(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
 						&pAudioType
 					);
@@ -1643,6 +1960,8 @@ namespace Nequeo {
 				{
 					// Configure the encoder.
 					hr = ConfigureVideoAudioEncoder(param, pVideoType, pAudioType, _pVideoAudioWriter, &sink_stream_video, &sink_stream_audio);
+					_streamIndexVideo = sink_stream_video;
+					_streamIndexAudio = sink_stream_audio;
 				}
 
 				if (SUCCEEDED(hr))
@@ -1679,33 +1998,6 @@ namespace Nequeo {
 			{
 				HRESULT hr = S_OK;
 
-				// If the writer exists. 
-				if (_pVideoAudioWriter)
-				{
-					// Finalise the writer.
-					hr = _pVideoAudioWriter->Finalize();
-				}
-
-				// If the writer exists. 
-				if (_pVideoWriter)
-				{
-					// Finalise the writer.
-					hr = _pVideoWriter->Finalize();
-				}
-
-				// If the writer exists. 
-				if (_pAudioWriter)
-				{
-					// Finalise the writer.
-					hr = _pAudioWriter->Finalize();
-				}
-
-				// Safe release.
-				SafeRelease(&_pVideoAudioWriter);
-				SafeRelease(&_pVideoWriter);
-				SafeRelease(&_pAudioWriter);
-				SafeRelease(&_pReader);
-
 				// Has video capture.
 				if (_hasVideoCapture)
 				{
@@ -1735,8 +2027,8 @@ namespace Nequeo {
 			{
 				// The list of acceptable types.
 				GUID subtypes[] = {
-					MFVideoFormat_NV12, MFVideoFormat_YUY2, MFVideoFormat_UYVY,
-					MFVideoFormat_RGB32, MFVideoFormat_RGB24, MFVideoFormat_IYUV
+					MFVideoFormat_NV12, MFVideoFormat_YUY2, MFVideoFormat_UYVY, MFVideoFormat_WMV3,
+					MFVideoFormat_RGB32, MFVideoFormat_RGB24, MFVideoFormat_IYUV, MFVideoFormat_H264
 				};
 
 				HRESULT hr = S_OK;
@@ -1832,8 +2124,10 @@ namespace Nequeo {
 			{
 				// The list of acceptable types.
 				GUID subtypes[] = {
-					MFAudioFormat_PCM, MFAudioFormat_WMAudioV8, MFAudioFormat_WMAudioV9,
-					MFAudioFormat_MP3, MFAudioFormat_MPEG, MFAudioFormat_AAC, MFAudioFormat_ADTS
+					MFAudioFormat_Base, MFAudioFormat_PCM, MFAudioFormat_Float, MFAudioFormat_DTS, MFAudioFormat_Dolby_AC3_SPDIF, MFAudioFormat_DRM,
+					MFAudioFormat_WMAudioV8, MFAudioFormat_WMAudioV9, MFAudioFormat_WMAudio_Lossless, MFAudioFormat_WMASPDIF, MFAudioFormat_MSP1,
+					MFAudioFormat_MP3, MFAudioFormat_MPEG, MFAudioFormat_AAC, MFAudioFormat_ADTS, MFAudioFormat_AMR_NB, MFAudioFormat_AMR_WB,
+					MFAudioFormat_AMR_WP, MFAudioFormat_Dolby_AC3, MFAudioFormat_Dolby_DDPlus
 				};
 
 				HRESULT hr = S_OK;
@@ -1922,20 +2216,24 @@ namespace Nequeo {
 			/// <summary>
 			/// Configure video and audio source reader.
 			/// </summary>
-			/// <param name="pReader">The source reader.</param>
+			/// <param name="pReaderVideo">The source reader.</param>
+			/// <param name="pReaderAudio">The source reader.</param>
+			/// <param name="ep">The encoding parameters.</param>
 			/// <returns>The result of the operation.</returns>
-			HRESULT ConfigureVideoAudioSourceReader(IMFSourceReader* pReader)
+			HRESULT ConfigureVideoAudioSourceReader(IMFSourceReader* pReaderVideo, IMFSourceReader* pReaderAudio, EncodingParameters& ep)
 			{
 				// The list of acceptable types.
 				GUID subtypesAudio[] = {
-					MFAudioFormat_PCM, MFAudioFormat_WMAudioV8, MFAudioFormat_WMAudioV9,
-					MFAudioFormat_MP3, MFAudioFormat_MPEG, MFAudioFormat_AAC, MFAudioFormat_ADTS
+					MFAudioFormat_Base, MFAudioFormat_PCM, MFAudioFormat_Float, MFAudioFormat_DTS, MFAudioFormat_Dolby_AC3_SPDIF, MFAudioFormat_DRM,
+					MFAudioFormat_WMAudioV8, MFAudioFormat_WMAudioV9, MFAudioFormat_WMAudio_Lossless, MFAudioFormat_WMASPDIF, MFAudioFormat_MSP1,
+					MFAudioFormat_MP3, MFAudioFormat_MPEG, MFAudioFormat_AAC, MFAudioFormat_ADTS, MFAudioFormat_AMR_NB, MFAudioFormat_AMR_WB,
+					MFAudioFormat_AMR_WP, MFAudioFormat_Dolby_AC3, MFAudioFormat_Dolby_DDPlus
 				};
 
 				// The list of acceptable types.
 				GUID subtypesVideo[] = {
-					MFVideoFormat_NV12, MFVideoFormat_YUY2, MFVideoFormat_UYVY,
-					MFVideoFormat_RGB32, MFVideoFormat_RGB24, MFVideoFormat_IYUV
+					MFVideoFormat_NV12, MFVideoFormat_YUY2, MFVideoFormat_UYVY, MFVideoFormat_WMV3,
+					MFVideoFormat_RGB32, MFVideoFormat_RGB24, MFVideoFormat_IYUV, MFVideoFormat_H264
 				};
 
 				HRESULT hr = S_OK;
@@ -1958,7 +2256,7 @@ namespace Nequeo {
 				// camera's output format. 
 
 				// Get the media type.
-				hr = pReader->GetNativeMediaType(
+				hr = pReaderVideo->GetNativeMediaType(
 					(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
 					0,  // Type index
 					&pVideoType
@@ -1966,10 +2264,24 @@ namespace Nequeo {
 
 				if (FAILED(hr)) { goto done; }
 
+				// Set as video input.
+				hr = pVideoType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+
 				// Get the sub type.
 				hr = pVideoType->GetGUID(MF_MT_SUBTYPE, &subtypeVideo);
 
 				if (FAILED(hr)) { goto done; }
+
+				// If a subtype exists.
+				if (ep.video.subtypeReader != GUID_NULL)
+				{
+					// Set the reader subtype.
+					subtypeVideo = ep.video.subtypeReader;
+					hr = pVideoType->SetGUID(MF_MT_SUBTYPE, subtypeVideo);
+				}
+
+				// Assign the default.
+				ep.video.subtypeReader = subtypeVideo;
 
 				// For each sub type.
 				for (UINT32 i = 0; i < ARRAYSIZE(subtypesVideo); i++)
@@ -1978,7 +2290,7 @@ namespace Nequeo {
 					if (subtypeVideo == subtypesVideo[i])
 					{
 						// Set the current media type.
-						hr = pReader->SetCurrentMediaType(
+						hr = pReaderVideo->SetCurrentMediaType(
 							(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
 							NULL,
 							pVideoType
@@ -2005,7 +2317,7 @@ namespace Nequeo {
 						if (FAILED(hr)) { goto done; }
 
 						// Set the current media type.
-						hr = pReader->SetCurrentMediaType(
+						hr = pReaderVideo->SetCurrentMediaType(
 							(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
 							NULL,
 							pVideoType
@@ -2028,7 +2340,7 @@ namespace Nequeo {
 				// camera's output format. 
 
 				// Get the media type.
-				hr = pReader->GetNativeMediaType(
+				hr = pReaderAudio->GetNativeMediaType(
 					(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
 					0,  // Type index
 					&pAudioType
@@ -2036,10 +2348,24 @@ namespace Nequeo {
 
 				if (FAILED(hr)) { goto done; }
 
+				// Set as audio input.
+				hr = pAudioType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
+
 				// Get the sub type.
 				hr = pAudioType->GetGUID(MF_MT_SUBTYPE, &subtypeAudio);
 
 				if (FAILED(hr)) { goto done; }
+
+				// If a subtype exists.
+				if (ep.audio.subtypeReader != GUID_NULL)
+				{
+					// Set the reader subtype.
+					subtypeAudio = ep.audio.subtypeReader;
+					pAudioType->SetGUID(MF_MT_SUBTYPE, subtypeAudio);
+				}
+
+				// Assign the default.
+				ep.audio.subtypeReader = subtypeAudio;
 
 				// For each sub type.
 				for (UINT32 i = 0; i < ARRAYSIZE(subtypesAudio); i++)
@@ -2048,7 +2374,7 @@ namespace Nequeo {
 					if (subtypeAudio == subtypesAudio[i])
 					{
 						// Set the current media type.
-						hr = pReader->SetCurrentMediaType(
+						hr = pReaderAudio->SetCurrentMediaType(
 							(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
 							NULL,
 							pAudioType
@@ -2075,7 +2401,7 @@ namespace Nequeo {
 						if (FAILED(hr)) { goto done; }
 
 						// Set the current media type.
-						hr = pReader->SetCurrentMediaType(
+						hr = pReaderAudio->SetCurrentMediaType(
 							(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
 							NULL,
 							pAudioType
@@ -2144,7 +2470,7 @@ namespace Nequeo {
 							UINT32 bitRate;
 
 							// Get the default bit rate.
-							pType2->GetUINT32(MF_MT_AVG_BITRATE, &bitRate);
+							hr = pType2->GetUINT32(MF_MT_AVG_BITRATE, &bitRate);
 							if (SUCCEEDED(hr))
 							{
 								params.video.bitRate = bitRate;
@@ -2260,6 +2586,8 @@ namespace Nequeo {
 			{
 				HRESULT hr = S_OK;
 				IMFMediaType *pType2 = NULL;
+				IMFCollection *pAvailableTypes = NULL;
+				IMFAttributes *pAttributes = NULL;
 
 				// Get the media type.
 				hr = MFCreateMediaType(&pType2);
@@ -2276,111 +2604,182 @@ namespace Nequeo {
 					hr = pType2->SetGUID(MF_MT_SUBTYPE, params.audio.subtype);
 				}
 
-				if (SUCCEEDED(hr))
+				// Set the default colelction index for audio.
+				if (params.audio.collectionIndex >= 0)
 				{
-					// Set the sample rate.
-					if (params.audio.sampleRate > 0)
-						hr = pType2->SetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, params.audio.sampleRate);
-					else
+					hr = MFCreateAttributes(&pAttributes, 1);
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_SAMPLES_PER_SECOND);
+						// Enumerate low latency media types
+						hr = pAttributes->SetUINT32(MF_LOW_LATENCY, TRUE);
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Get a list of encoded output formats that are supported by the encoder.
+						hr = MFTranscodeGetAudioOutputAvailableTypes(params.audio.subtype, MFT_ENUM_FLAG_ALL | MFT_ENUM_FLAG_SORTANDFILTER,
+							pAttributes, &pAvailableTypes);
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Assgin the collection object.
+						hr = GetCollectionObject(pAvailableTypes, params.audio.collectionIndex, &pType2);
+					}
+
+					// Get the collection index parameters that have been set.
+					if (SUCCEEDED(hr))
+					{
+						UINT32 sampleRate;
+						UINT32 channels;
+						UINT32 bitsPerSample;
+						UINT32 blockAlign;
+						UINT32 bytesPerSecond;
+
+						// Get the default sample rate.
+						hr = pType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
 						if (SUCCEEDED(hr))
 						{
-							UINT32 sampleRate;
+							params.audio.sampleRate = sampleRate;
+						}
 
-							// Get the default sample rate.
-							pType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
-							if (SUCCEEDED(hr))
-							{
-								params.audio.sampleRate = sampleRate;
-							}
+						// Get the default channels.
+						hr = pType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.channels = channels;
+						}
+
+						// Get the default bits per sample.
+						hr = pType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.bitsPerSample = bitsPerSample;
+						}
+
+						// Get the default block align.
+						hr = pType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.blockAlign = blockAlign;
+						}
+
+						// Get the default bytes per second.
+						hr = pType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.bytesPerSecond = bytesPerSecond;
 						}
 					}
 				}
-
-				if (SUCCEEDED(hr))
+				else
 				{
-					// Set the channels.
-					if (params.audio.channels > 0)
-						hr = pType2->SetUINT32(MF_MT_AUDIO_NUM_CHANNELS, params.audio.channels);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_NUM_CHANNELS);
-						if (SUCCEEDED(hr))
+						// Set the sample rate.
+						if (params.audio.sampleRate > 0)
+							hr = pType2->SetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, params.audio.sampleRate);
+						else
 						{
-							UINT32 channels;
-
-							// Get the default channels.
-							pType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+							hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_SAMPLES_PER_SECOND);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.channels = channels;
+								UINT32 sampleRate;
+
+								// Get the default sample rate.
+								hr = pType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.sampleRate = sampleRate;
+								}
 							}
 						}
 					}
-				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Set the bits per sample.
-					if(params.audio.bitsPerSample > 0)
-						hr = pType2->SetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, params.audio.bitsPerSample);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_BITS_PER_SAMPLE);
-						if (SUCCEEDED(hr))
+						// Set the channels.
+						if (params.audio.channels > 0)
+							hr = pType2->SetUINT32(MF_MT_AUDIO_NUM_CHANNELS, params.audio.channels);
+						else
 						{
-							UINT32 bitsPerSample;
-
-							// Get the default bits per sample.
-							pType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+							hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_NUM_CHANNELS);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.bitsPerSample = bitsPerSample;
+								UINT32 channels;
+
+								// Get the default channels.
+								hr = pType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.channels = channels;
+								}
 							}
 						}
 					}
-				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Set the block align.
-					if (params.audio.blockAlign > 0)
-						hr = pType2->SetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, params.audio.blockAlign);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_BLOCK_ALIGNMENT);
-						if (SUCCEEDED(hr))
+						// Set the bits per sample.
+						if (params.audio.bitsPerSample > 0)
+							hr = pType2->SetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, params.audio.bitsPerSample);
+						else
 						{
-							UINT32 blockAlign;
-
-							// Get the default block align.
-							pType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+							hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_BITS_PER_SAMPLE);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.blockAlign = blockAlign;
+								UINT32 bitsPerSample;
+
+								// Get the default bits per sample.
+								hr = pType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.bitsPerSample = bitsPerSample;
+								}
 							}
 						}
 					}
-				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Set the bytes per second.
-					if (params.audio.bytesPerSecond > 0)
-						hr = pType2->SetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, params.audio.bytesPerSecond);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_AVG_BYTES_PER_SECOND);
-						if (SUCCEEDED(hr))
+						// Set the block align.
+						if (params.audio.blockAlign > 0)
+							hr = pType2->SetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, params.audio.blockAlign);
+						else
 						{
-							UINT32 bytesPerSecond;
-
-							// Get the default bytes per second.
-							pType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+							hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_BLOCK_ALIGNMENT);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.bytesPerSecond = bytesPerSecond;
+								UINT32 blockAlign;
+
+								// Get the default block align.
+								hr = pType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.blockAlign = blockAlign;
+								}
+							}
+						}
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Set the bytes per second.
+						if (params.audio.bytesPerSecond > 0)
+							hr = pType2->SetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, params.audio.bytesPerSecond);
+						else
+						{
+							hr = CopyAttribute(pType, pType2, MF_MT_AUDIO_AVG_BYTES_PER_SECOND);
+							if (SUCCEEDED(hr))
+							{
+								UINT32 bytesPerSecond;
+
+								// Get the default bytes per second.
+								hr = pType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.bytesPerSecond = bytesPerSecond;
+								}
 							}
 						}
 					}
@@ -2394,6 +2793,8 @@ namespace Nequeo {
 
 				// Safe release.
 				SafeRelease(&pType2);
+				SafeRelease(&pAvailableTypes);
+				SafeRelease(&pAttributes);
 
 				// Return the result.
 				return hr;
@@ -2418,6 +2819,8 @@ namespace Nequeo {
 				HRESULT hr = S_OK;
 				IMFMediaType *pVideoType2 = NULL;
 				IMFMediaType *pAudioType2 = NULL;
+				IMFCollection *pAvailableTypes = NULL;
+				IMFAttributes *pAttributes = NULL;
 
 				// Get the media type.
 				hr = MFCreateMediaType(&pVideoType2);
@@ -2461,7 +2864,7 @@ namespace Nequeo {
 							UINT32 bitRate;
 
 							// Get the default bit rate.
-							pVideoType2->GetUINT32(MF_MT_AVG_BITRATE, &bitRate);
+							hr = pVideoType2->GetUINT32(MF_MT_AVG_BITRATE, &bitRate);
 							if (SUCCEEDED(hr))
 							{
 								params.video.bitRate = bitRate;
@@ -2548,111 +2951,182 @@ namespace Nequeo {
 					hr = CopyAttribute(pVideoType, pVideoType2, MF_MT_INTERLACE_MODE);
 				}
 
-				if (SUCCEEDED(hr))
+				// Set the default colelction index for audio.
+				if (params.audio.collectionIndex >= 0)
 				{
-					// Set the sample rate.
-					if (params.audio.sampleRate > 0)
-						hr = pAudioType2->SetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, params.audio.sampleRate);
-					else
+					hr = MFCreateAttributes(&pAttributes, 1);
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_SAMPLES_PER_SECOND);
+						// Enumerate low latency media types
+						hr = pAttributes->SetUINT32(MF_LOW_LATENCY, TRUE);
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Get a list of encoded output formats that are supported by the encoder.
+						hr = MFTranscodeGetAudioOutputAvailableTypes(params.audio.subtype, MFT_ENUM_FLAG_ALL | MFT_ENUM_FLAG_SORTANDFILTER,
+							pAttributes, &pAvailableTypes);
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Assgin the collection object.
+						hr = GetCollectionObject(pAvailableTypes, params.audio.collectionIndex, &pAudioType2);
+					}
+
+					// Get the collection index parameters that have been set.
+					if (SUCCEEDED(hr))
+					{
+						UINT32 sampleRate;
+						UINT32 channels;
+						UINT32 bitsPerSample;
+						UINT32 blockAlign;
+						UINT32 bytesPerSecond;
+
+						// Get the default sample rate.
+						hr = pAudioType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
 						if (SUCCEEDED(hr))
 						{
-							UINT32 sampleRate;
+							params.audio.sampleRate = sampleRate;
+						}
 
-							// Get the default sample rate.
-							pAudioType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
-							if (SUCCEEDED(hr))
-							{
-								params.audio.sampleRate = sampleRate;
-							}
+						// Get the default channels.
+						hr = pAudioType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.channels = channels;
+						}
+
+						// Get the default bits per sample.
+						hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.bitsPerSample = bitsPerSample;
+						}
+
+						// Get the default block align.
+						hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.blockAlign = blockAlign;
+						}
+
+						// Get the default bytes per second.
+						hr = pAudioType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+						if (SUCCEEDED(hr))
+						{
+							params.audio.bytesPerSecond = bytesPerSecond;
 						}
 					}
 				}
-
-				if (SUCCEEDED(hr))
+				else
 				{
-					// Set the channels.
-					if (params.audio.channels > 0)
-						hr = pAudioType2->SetUINT32(MF_MT_AUDIO_NUM_CHANNELS, params.audio.channels);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_NUM_CHANNELS);
-						if (SUCCEEDED(hr))
+						// Set the sample rate.
+						if (params.audio.sampleRate > 0)
+							hr = pAudioType2->SetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, params.audio.sampleRate);
+						else
 						{
-							UINT32 channels;
-
-							// Get the default channels.
-							pAudioType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+							hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_SAMPLES_PER_SECOND);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.channels = channels;
+								UINT32 sampleRate;
+
+								// Get the default sample rate.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.sampleRate = sampleRate;
+								}
 							}
 						}
 					}
-				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Set the bits per sample.
-					if (params.audio.bitsPerSample > 0)
-						hr = pAudioType2->SetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, params.audio.bitsPerSample);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_BITS_PER_SAMPLE);
-						if (SUCCEEDED(hr))
+						// Set the channels.
+						if (params.audio.channels > 0)
+							hr = pAudioType2->SetUINT32(MF_MT_AUDIO_NUM_CHANNELS, params.audio.channels);
+						else
 						{
-							UINT32 bitsPerSample;
-
-							// Get the default bits per sample.
-							pAudioType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+							hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_NUM_CHANNELS);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.bitsPerSample = bitsPerSample;
+								UINT32 channels;
+
+								// Get the default channels.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.channels = channels;
+								}
 							}
 						}
 					}
-				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Set the block align.
-					if (params.audio.blockAlign > 0)
-						hr = pAudioType2->SetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, params.audio.blockAlign);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_BLOCK_ALIGNMENT);
-						if (SUCCEEDED(hr))
+						// Set the bits per sample.
+						if (params.audio.bitsPerSample > 0)
+							hr = pAudioType2->SetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, params.audio.bitsPerSample);
+						else
 						{
-							UINT32 blockAlign;
-
-							// Get the default block align.
-							pAudioType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+							hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_BITS_PER_SAMPLE);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.blockAlign = blockAlign;
+								UINT32 bitsPerSample;
+
+								// Get the default bits per sample.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.bitsPerSample = bitsPerSample;
+								}
 							}
 						}
 					}
-				}
 
-				if (SUCCEEDED(hr))
-				{
-					// Set the bytes per second.
-					if (params.audio.bytesPerSecond > 0)
-						hr = pAudioType2->SetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, params.audio.bytesPerSecond);
-					else
+					if (SUCCEEDED(hr))
 					{
-						hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_AVG_BYTES_PER_SECOND);
-						if (SUCCEEDED(hr))
+						// Set the block align.
+						if (params.audio.blockAlign > 0)
+							hr = pAudioType2->SetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, params.audio.blockAlign);
+						else
 						{
-							UINT32 bytesPerSecond;
-
-							// Get the default bytes per second.
-							pAudioType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+							hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_BLOCK_ALIGNMENT);
 							if (SUCCEEDED(hr))
 							{
-								params.audio.bytesPerSecond = bytesPerSecond;
+								UINT32 blockAlign;
+
+								// Get the default block align.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.blockAlign = blockAlign;
+								}
+							}
+						}
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Set the bytes per second.
+						if (params.audio.bytesPerSecond > 0)
+							hr = pAudioType2->SetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, params.audio.bytesPerSecond);
+						else
+						{
+							hr = CopyAttribute(pAudioType, pAudioType2, MF_MT_AUDIO_AVG_BYTES_PER_SECOND);
+							if (SUCCEEDED(hr))
+							{
+								UINT32 bytesPerSecond;
+
+								// Get the default bytes per second.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.bytesPerSecond = bytesPerSecond;
+								}
 							}
 						}
 					}
@@ -2673,6 +3147,8 @@ namespace Nequeo {
 				// Safe release.
 				SafeRelease(&pVideoType2);
 				SafeRelease(&pAudioType2);
+				SafeRelease(&pAvailableTypes);
+				SafeRelease(&pAttributes);
 
 				// Return the result.
 				return hr;

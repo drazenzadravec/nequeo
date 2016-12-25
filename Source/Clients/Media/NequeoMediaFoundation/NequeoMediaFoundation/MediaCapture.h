@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define _MEDIACAPTURE_H
 
 #include "MediaGlobal.h"
+#include "SourceReader.h"
 #include "ContentEnabler.h"
 #include "CriticalSectionHandler.h"
 
@@ -136,6 +137,10 @@ namespace Nequeo {
 				/// MF transcode container type.
 				/// </summary>
 				GUID transcode;
+				/// <summary>
+				/// Encoding reader subtype.
+				/// </summary>
+				GUID    subtypeReader;
 			};
 
 			/// <summary>
@@ -171,6 +176,14 @@ namespace Nequeo {
 				/// MF transcode container type.
 				/// </summary>
 				GUID transcode;
+				/// <summary>
+				/// Encoding reader subtype.
+				/// </summary>
+				GUID    subtypeReader;
+				/// <summary>
+				/// Set the index (starting at 0) of the configuration to use, else set to -1 to use parameters.
+				/// </summary>
+				INT32 collectionIndex;
 			};
 
 			/// <summary>
@@ -424,6 +437,14 @@ namespace Nequeo {
 				HRESULT OpenMediaSource(IMFMediaSource *pSource);
 
 				/// <summary>
+				/// Open media source.
+				/// </summary>
+				/// <param name="pSourceVideo">The media source.</param>
+				/// <param name="pSourceAudio">The media source.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT OpenMediaSourceVideoAudio(IMFMediaSource *pSourceVideo, IMFMediaSource *pSourceAudio);
+
+				/// <summary>
 				/// Configure video capture encoding.
 				/// </summary>
 				/// <param name="param">The encoding parameters.</param>
@@ -488,6 +509,10 @@ namespace Nequeo {
 				HRESULT Initialize();
 
 			private:
+				HRESULT VideoSampleComplete(HRESULT hrStatus, DWORD dwStreamIndex, DWORD dwStreamFlags, LONGLONG llTimestamp, IMFSample *pSample, LONGLONG llRebaseTimestamp);
+				HRESULT AudioSampleComplete(HRESULT hrStatus, DWORD dwStreamIndex, DWORD dwStreamFlags, LONGLONG llTimestamp, IMFSample *pSample, LONGLONG llRebaseTimestamp);
+
+			private:
 				bool					_disposed;
 				long                    _nRefCount;			// Reference count.
 				bool					_started;
@@ -502,9 +527,18 @@ namespace Nequeo {
 				bool					_hasAudioCapture;
 
 				IMFSourceReader         *_pReader;
+				IMFSourceReader         *_pReaderVideo;
+				IMFSourceReader         *_pReaderAudio;
+
+				SourceReader			*_pSourceReaderVideo;
+				SourceReader			*_pSourceReaderAudio;
+
 				IMFSinkWriter           *_pVideoWriter;
 				IMFSinkWriter           *_pAudioWriter;
 				IMFSinkWriter           *_pVideoAudioWriter;
+
+				DWORD					_streamIndexVideo;
+				DWORD					_streamIndexAudio;
 
 				BOOL                    _bFirstSample;
 				LONGLONG                _llBaseTime;

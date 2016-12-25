@@ -41,6 +41,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <tchar.h>
 #include <string>
 #include <thread>
+#include <future>
+#include <functional>
 
 #ifdef NEQUEOMEDIAFOUNDATION_EXPORTS
 #define EXPORT_NEQUEO_MEDIA_FOUNDATION_API __declspec(dllexport) 
@@ -121,6 +123,36 @@ namespace Nequeo {
 	namespace Media {
 		namespace Foundation
 		{
+			///	<summary>
+			///	Function build (_Function can be defined as : int (int, bool) return int pass int and bool parameters).
+			///	</summary>
+			/// <returns>The created function.</returns>
+			template<typename _Function>
+			std::function< _Function > FunctionBuild(const _Function& f)
+			{
+				return std::function< _Function >(std::allocator_arg_t(), std::allocator<void>(), f);
+			}
+
+			///	<summary>
+			///	Function build (_Function can be defined as : int (int, bool) return int pass int and bool parameters).
+			///	</summary>
+			/// <returns>The created function.</returns>
+			template<typename _Function>
+			std::function< _Function > FunctionBuild(const std::function< _Function >& f)
+			{
+				return std::function< _Function >(std::allocator_arg_t(), std::allocator<void>(), f);
+			}
+
+			///	<summary>
+			///	Function build (_Function can be defined as : int (int, bool) return int pass int and bool parameters).
+			///	</summary>
+			/// <returns>The created function.</returns>
+			template<typename _Function>
+			std::function< _Function > FunctionBuild(std::function< _Function >&& f)
+			{
+				return std::function< _Function >(std::allocator_arg_t(), std::allocator<void>(), f);
+			}
+
 			/// <summary>
 			/// Log enabled type.
 			/// </summary>
