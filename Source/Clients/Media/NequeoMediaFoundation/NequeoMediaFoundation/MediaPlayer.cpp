@@ -447,6 +447,72 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Opena URL resources, can be a file, network or internet resource.
+			/// </summary>
+			/// <param name="sURL">The null-terminated string that contains the URL of the byte stream. The URL is optional and can be NULL.</param>
+			/// <param name="pByteStream">The byte stream's IMFByteStream interface.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaPlayer::OpenURL(const WCHAR *sURL, IMFByteStream *pByteStream)
+			{
+				// 1. Create a new media session.
+				// 2. Create the media source.
+				// 3. Create the topology.
+				// 4. Queue the topology [asynchronous]
+				// 5. Start playback [asynchronous - does not happen in this method.]
+
+				HRESULT hr = S_OK;
+				IMFTopology *pTopology = NULL;
+				_shutDown = false;
+
+				// Create the media session.
+				hr = CreateSession();
+
+				// If successful created session.
+				if (SUCCEEDED(hr))
+				{
+					// Create the media source.
+					hr = CreateMediaSource(sURL, pByteStream);
+				}
+
+				// If successful created media source.
+				if (SUCCEEDED(hr))
+				{
+					// Create a partial topology.
+					hr = CreateTopologyFromSource(&pTopology);
+				}
+
+				// If successful created topology from source.
+				if (SUCCEEDED(hr))
+				{
+					// Set the topology on the media session.
+					hr = _pSession->SetTopology(0, pTopology);
+				}
+
+				// If successful topology on the media session.
+				if (SUCCEEDED(hr))
+				{
+					// Set our state to "open pending"
+					_playerState = OpenPending;
+
+					// Notify that the state has changed.
+					NotifyState();
+				}
+				else
+				{
+					// Notify that an error has occured.
+					NotifyError(hr);
+					_playerState = Ready;
+				}
+
+				// Release the current topology handler.
+				SAFE_RELEASE(pTopology);
+
+				// If SetTopology succeeded, the media session will queue an 
+				// MESessionTopologySet event.
+				return hr;
+			}
+
+			/// <summary>
 			/// Close the media.
 			/// </summary>
 			/// <returns>The result of the operation.</returns>
@@ -1341,6 +1407,57 @@ namespace Nequeo {
 					// Use the source resolver to create the media source.
 					hr = pSourceResolver->CreateObjectFromURL(
 						sURL,						// URL of the source.
+						MF_RESOLUTION_MEDIASOURCE,	// Create a source object.
+						NULL,						// Optional property store.
+						&ObjectType,				// Receives the created object type. 
+						&pSource);					// Receives a pointer to the media source.
+				}
+
+				// If successful media source.
+				if (SUCCEEDED(hr))
+				{
+					// Get the IMFMediaSource interface from the media source.
+					hr = pSource->QueryInterface(__uuidof(IMFMediaSource), (void**)&_pSource);
+				}
+
+				// Clean up
+				SAFE_RELEASE(pSourceResolver);
+				SAFE_RELEASE(pSource);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Create a media source from a URL, can be a file, network or internet resource.
+			/// </summary>
+			/// <param name="sURL">The null-terminated string that contains the URL of the byte stream. The URL is optional and can be NULL.</param>
+			/// <param name="pByteStream">The byte stream's IMFByteStream interface.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaPlayer::CreateMediaSource(const WCHAR *sURL, IMFByteStream *pByteStream)
+			{
+				// Initally all is good.
+				HRESULT hr = S_OK;
+
+				IMFSourceResolver* pSourceResolver = NULL;
+				IUnknown* pSource = NULL;
+
+				// If successful.
+				if (SUCCEEDED(hr))
+				{
+					// Create the source resolver.
+					hr = MFCreateSourceResolver(&pSourceResolver);
+				}
+
+				// If successful source resolver.
+				if (SUCCEEDED(hr))
+				{
+					MF_OBJECT_TYPE ObjectType = MF_OBJECT_INVALID;
+
+					// Use the source resolver to create the media source.
+					hr = pSourceResolver->CreateObjectFromByteStream(
+						pByteStream,				// Byte stream's IMFByteStream interface
+						sURL,						// URL of the source. Optional.
 						MF_RESOLUTION_MEDIASOURCE,	// Create a source object.
 						NULL,						// Optional property store.
 						&ObjectType,				// Receives the created object type. 

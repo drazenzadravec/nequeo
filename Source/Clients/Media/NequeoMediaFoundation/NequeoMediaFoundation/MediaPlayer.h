@@ -111,6 +111,14 @@ namespace Nequeo {
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT OpenURL(const WCHAR *sURL);
 
 				/// <summary>
+				/// Opena URL resources, can be a file, network or internet resource.
+				/// </summary>
+				/// <param name="sURL">The null-terminated string that contains the URL of the byte stream. The URL is optional and can be NULL.</param>
+				/// <param name="pByteStream">The byte stream's IMFByteStream interface.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT OpenURL(const WCHAR *sURL, IMFByteStream *pByteStream);
+
+				/// <summary>
 				/// Close the media.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
@@ -378,6 +386,14 @@ namespace Nequeo {
 				/// <param name="sURL">The string of the URL.</param>
 				/// <returns>The result of the operation.</returns>
 				HRESULT CreateMediaSource(const WCHAR *sURL);
+
+				/// <summary>
+				/// Create a media source from a URL, can be a file, network or internet resource.
+				/// </summary>
+				/// <param name="sURL">The null-terminated string that contains the URL of the byte stream. The URL is optional and can be NULL.</param>
+				/// <param name="pByteStream">The byte stream's IMFByteStream interface.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT CreateMediaSource(const WCHAR *sURL, IMFByteStream *pByteStream);
 
 				/// <summary>
 				/// Create a playback topology from the media source.

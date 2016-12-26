@@ -516,6 +516,7 @@ namespace Nequeo {
 				bool					_disposed;
 				long                    _nRefCount;			// Reference count.
 				bool					_started;
+				bool					_isByteStreamCapture;
 
 				HWND				    _hwndApp;
 				HWND				    _hwndEvent;			// App window to receive events.

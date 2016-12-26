@@ -96,6 +96,7 @@ namespace Nequeo {
 				_pSourceReaderVideo(NULL),
 				_pSourceReaderAudio(NULL),
 				_started(false),
+				_isByteStreamCapture(false),
 				_disposed(false)
 			{
 				// Initialize critical section.
@@ -493,6 +494,7 @@ namespace Nequeo {
 						// Shutdown the Media Foundation platform
 						MFShutdown();
 						_started = false;
+						_isByteStreamCapture = false;
 
 						// Close the close event handler.
 						CloseHandle(_hCloseEvent);
@@ -743,6 +745,9 @@ namespace Nequeo {
 						// Create the sink writer 
 						if (SUCCEEDED(hr))
 						{
+							// Capture to byte stream.
+							_isByteStreamCapture = true;
+
 							// Create sink writer from URL.
 							hr = MFCreateSinkWriterFromURL(
 								NULL,
@@ -899,6 +904,9 @@ namespace Nequeo {
 						// Create the sink writer 
 						if (SUCCEEDED(hr))
 						{
+							// Capture to byte stream.
+							_isByteStreamCapture = true;
+
 							// Create sink writer from URL.
 							hr = MFCreateSinkWriterFromURL(
 								NULL,
@@ -1081,6 +1089,9 @@ namespace Nequeo {
 						// Create the sink writer 
 						if (SUCCEEDED(hr))
 						{
+							// Capture to byte stream.
+							_isByteStreamCapture = true;
+
 							// Create sink writer from URL.
 							hr = MFCreateSinkWriterFromURL(
 								NULL,
@@ -1553,6 +1564,13 @@ namespace Nequeo {
 				// If a sample exists.
 				if (pSample)
 				{
+					// Capture to byte stream.
+					if (_isByteStreamCapture)
+					{
+						// Set the sample time stamp.
+						hr = pSample->SetSampleTime(llRebaseTimestamp);
+					}
+
 					// Write the sample.
 					hr = _pVideoAudioWriter->WriteSample(_streamIndexVideo, pSample);
 				}
@@ -1626,6 +1644,13 @@ namespace Nequeo {
 				// If a sample exists.
 				if (pSample)
 				{
+					// Capture to byte stream.
+					if (_isByteStreamCapture)
+					{
+						// Set the sample time stamp.
+						hr = pSample->SetSampleTime(llRebaseTimestamp);
+					}
+
 					// Write the sample.
 					hr = _pVideoAudioWriter->WriteSample(_streamIndexAudio, pSample);
 				}
