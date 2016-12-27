@@ -55,8 +55,9 @@ namespace Nequeo {
 				_tabePages[0] = new CaptureVideoPage();
 				_tabePages[1] = new CaptureAudioPage();
 				_tabePages[2] = new CaptureScreenPage();
+				_tabePages[3] = new CaptureVideoAudioPage();
 
-				_numberOfPages = 3;
+				_numberOfPages = 4;
 			}
 
 			/// <summary>
@@ -85,7 +86,8 @@ namespace Nequeo {
 			/// <param name="hwndEventAudio">The audio event handler window to get notifications.</param>
 			/// <param name="hwndEventVideo">The video event handler window to get notifications.</param>
 			/// <param name="hwndEventScreen">The screen event handler window to get notifications.</param>
-			void CaptureTabControl::Init(HWND hwndEventAudio, HWND hwndEventVideo, HWND hwndEventScreen)
+			/// <param name="hwndEventVideoAudio">The screen event handler window to get notifications.</param>
+			void CaptureTabControl::Init(HWND hwndEventAudio, HWND hwndEventVideo, HWND hwndEventScreen, HWND hwndEventVideoAudio)
 			{
 				_tabCurrent = 0;
 
@@ -93,19 +95,23 @@ namespace Nequeo {
 				_tabePages[0]->Create(IDD_MEDIACAPTURE_VIDEO_TAB, this);
 				_tabePages[1]->Create(IDD_MEDIACAPTURE_AUDIO_TAB, this);
 				_tabePages[2]->Create(IDD_MEDIACAPTURE_SCREEN_TAB, this);
+				_tabePages[3]->Create(IDD_MEDIACAPTURE_VIDEOAUDIO_TAB, this);
 
 				// Show and hide.
 				_tabePages[0]->ShowWindow(SW_SHOW);
 				_tabePages[1]->ShowWindow(SW_HIDE);
 				_tabePages[2]->ShowWindow(SW_HIDE);
+				_tabePages[3]->ShowWindow(SW_HIDE);
 
 				// Set the handlers.
 				CaptureVideoPage* videopage = (CaptureVideoPage*)_tabePages[0];
 				CaptureAudioPage* audiopage = (CaptureAudioPage*)_tabePages[1];
 				CaptureScreenPage* screenpage = (CaptureScreenPage*)_tabePages[2];
+				CaptureVideoAudioPage* videoaudiopage = (CaptureVideoAudioPage*)_tabePages[3];
 				videopage->SetEventHandler(hwndEventVideo);
 				audiopage->SetEventHandler(hwndEventAudio);
 				screenpage->SetEventHandler(hwndEventScreen);
+				videoaudiopage->SetEventHandler(hwndEventVideoAudio);
 
 				// Set the tab page rectangle.
 				SetRectangle();
@@ -164,6 +170,15 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Gets the number of pages.
+			/// </summary>
+			/// <returns>The number of pages.</returns>
+			int CaptureTabControl::GetNumberOfPages() const
+			{
+				return _numberOfPages;
+			}
+
+			/// <summary>
 			/// Gets a reference to the video tab page.
 			/// </summary>
 			/// <returns>The video page reference.</returns>
@@ -188,6 +203,15 @@ namespace Nequeo {
 			CaptureScreenPage& CaptureTabControl::ScreenPage() const
 			{
 				return *((CaptureScreenPage*)_tabePages[2]);
+			}
+
+			/// <summary>
+			/// Gets a reference to the video and audio tab page.
+			/// </summary>
+			/// <returns>The screen page reference.</returns>
+			CaptureVideoAudioPage& CaptureTabControl::VideoAudioPage() const
+			{
+				return *((CaptureVideoAudioPage*)_tabePages[3]);
 			}
 		}
 	}

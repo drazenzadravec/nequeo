@@ -196,6 +196,7 @@
     <ClCompile Include="CaptureAudioPage.cpp" />
     <ClCompile Include="CaptureScreenPage.cpp" />
     <ClCompile Include="CaptureTabControl.cpp" />
+    <ClCompile Include="CaptureVideoAudioPage.cpp" />
     <ClCompile Include="CaptureVideoPage.cpp" />
     <ClCompile Include="ContentEnabler.cpp" />
     <ClCompile Include="MediaByteStream.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="CaptureAudioPage.h" />
     <ClInclude Include="CaptureScreenPage.h" />
     <ClInclude Include="CaptureTabControl.h" />
+    <ClInclude Include="CaptureVideoAudioPage.h" />
     <ClInclude Include="CaptureVideoPage.h" />
     <ClInclude Include="ContentEnabler.h" />
     <ClInclude Include="CriticalSectionHandler.h" />

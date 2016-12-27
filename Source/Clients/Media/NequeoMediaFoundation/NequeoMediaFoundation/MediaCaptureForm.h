@@ -115,7 +115,8 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="captureVideo">The video state.</param>
 				/// <param name="captureAudio">The audio state.</param>
-				void EnableCaptureButton(bool captureVideo, bool captureAudio);
+				/// <param name="captureVideoAudio">The video audio state.</param>
+				void EnableCaptureButton(bool captureVideo, bool captureAudio, bool captureVideoAudio);
 
 			private:
 				bool _disposed;
@@ -129,9 +130,11 @@ namespace Nequeo {
 
 				bool _captureVideo;
 				bool _captureAudio;
+				bool _captureVideoAudio;
 
 				MediaCapture *_mediaCaptureVideo;
 				MediaCapture *_mediaCaptureAudio;
+				MediaCapture *_mediaCaptureVideoAudio;
 
 				Volume *_volume;
 				CriticalSectionHandler	_critsec;

@@ -67,6 +67,7 @@ namespace Nequeo {
 			MediaCaptureForm::MediaCaptureForm(CWnd* pParent) : CDialog(MediaCaptureForm::IDD, pParent),
 				_mediaCaptureVideo(NULL),
 				_mediaCaptureAudio(NULL),
+				_mediaCaptureVideoAudio(NULL),
 				_volume(NULL),
 				_hEvent(NULL),
 				_hCapture(NULL),
@@ -79,6 +80,7 @@ namespace Nequeo {
 				_countAudio(0),
 				_captureVideo(false),
 				_captureAudio(false),
+				_captureVideoAudio(false),
 				_capturing(false),
 				_toolTip(NULL),
 				_disposed(false)
@@ -113,6 +115,14 @@ namespace Nequeo {
 						// Release the media capture.
 						_mediaCaptureAudio->Release();
 						_mediaCaptureAudio = NULL;
+					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideoAudio != NULL)
+					{
+						// Release the media capture.
+						_mediaCaptureVideoAudio->Release();
+						_mediaCaptureVideoAudio = NULL;
 					}
 
 					// If volume not null.
@@ -202,7 +212,8 @@ namespace Nequeo {
 				_tab.InsertItem(0, L"Video");
 				_tab.InsertItem(1, L"Audio");
 				_tab.InsertItem(2, L"Screen");
-				_tab.Init(*this, *this, *this);
+				_tab.InsertItem(3, L"Video & Audio");
+				_tab.Init(*this, *this, *this, *this);
 
 				// return TRUE  unless you set the focus to a control.
 				return TRUE;  
@@ -237,6 +248,13 @@ namespace Nequeo {
 				{
 					// Shut down the media capture.
 					_mediaCaptureAudio->StopCapture();
+				}
+
+				// If the media capture is not null.
+				if (_mediaCaptureVideoAudio != NULL)
+				{
+					// Shut down the media capture.
+					_mediaCaptureVideoAudio->StopCapture();
 				}
 
 				CDialog::OnClose();
@@ -288,6 +306,7 @@ namespace Nequeo {
 				// Initialize the capture object.
 				HRESULT hrVideo = MediaCapture::CreateInstance(_hCapture, _hEvent, &_mediaCaptureVideo);
 				HRESULT hrAudio = MediaCapture::CreateInstance(_hCapture, _hEvent, &_mediaCaptureAudio);
+				HRESULT hrVideoAudio = MediaCapture::CreateInstance(_hCapture, _hEvent, &_mediaCaptureVideoAudio);
 			}
 
 			/// <summary>
@@ -362,6 +381,7 @@ namespace Nequeo {
 				BOOL bWaiting = FALSE;
 				BOOL bCapturingVideo = FALSE;
 				BOOL bCapturingAudio = FALSE;
+				BOOL bCapturingVideoAudio = FALSE;
 
 				// If the media capture is not null.
 				if (_mediaCaptureVideo != NULL)
@@ -437,8 +457,46 @@ namespace Nequeo {
 					}
 				}
 
+				// If the media capture is not null.
+				if (_mediaCaptureVideoAudio != NULL)
+				{
+					switch (state)
+					{
+					case CaptureNotReady:
+						bWaiting = TRUE;
+						bCapturingVideoAudio = FALSE;
+						break;
+
+					case CaptureReady:
+						bWaiting = FALSE;
+						bCapturingVideoAudio = FALSE;
+						break;
+
+					case Capturing:
+						bWaiting = FALSE;
+						bCapturingVideoAudio = TRUE;
+						break;
+
+					case NotCapturing:
+						bWaiting = TRUE;
+						bCapturingVideoAudio = FALSE;
+						break;
+					}
+
+					// If capturing.
+					if (bCapturingVideoAudio == TRUE)
+					{
+						_videoDeviceItem.EnableWindow(false);
+						_audioDeviceItem.EnableWindow(false);
+
+						// Get the video audio page.
+						CaptureVideoAudioPage& pageVideoAudio = _tab.VideoAudioPage();
+						pageVideoAudio.EnableWindow(false);
+					}
+				}
+
 				// If capturing.
-				if (bCapturingVideo == TRUE || bCapturingAudio == TRUE)
+				if (bCapturingVideo == TRUE || bCapturingAudio == TRUE || bCapturingVideoAudio == TRUE)
 				{
 					_capturing = true;
 
@@ -480,6 +538,10 @@ namespace Nequeo {
 					// Get the audio page.
 					CaptureAudioPage& pageAudio = _tab.AudioPage();
 					pageAudio.EnableWindow(true);
+
+					// Get the video audio page.
+					CaptureVideoAudioPage& pageVideoAudio = _tab.VideoAudioPage();
+					pageVideoAudio.EnableWindow(true);
 				}
 
 				// Return all is good.
@@ -599,6 +661,7 @@ namespace Nequeo {
 						if (pBitsPerSample != NULL) pBitsPerSample->GetWindowTextW(bitsPerSample);
 
 						// Set audio configuration.
+						ep.audio.collectionIndex = -1;
 						ep.audio.subtype = MFAudioFormat_PCM;
 						ep.audio.bitsPerSample = _ttoi(bitsPerSample);
 						ep.audio.channels = _ttoi(channels);
@@ -617,6 +680,88 @@ namespace Nequeo {
 							{
 								// Notify error.
 								OnNotifyError((WPARAM)hraudio, (LPARAM)0);
+							}
+						}
+					}
+
+					// If capturing video and audio.
+					if (_captureVideoAudio)
+					{
+						// Video and audio encoding configuration.
+						EncodingParameters epVA;
+
+						// Get the video audio page.
+						const CaptureVideoAudioPage& pageVideoAudio = _tab.VideoAudioPage();
+
+						CString filenameVideoAudio;
+						CString bitRate;
+						CString frameSizeW;
+						CString frameSizeH;
+						CString frameRateN;
+						CString frameRateD;
+						CString sampleRate;
+						CString channels;
+						CString bitsPerSample;
+						CString bytesPerSecond;
+
+						// Get the start button handler.
+						CWnd *pFilename = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_PATH_TEXT);
+						CWnd *pBitRate = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_BITRATE_TEXT);
+						CWnd *pFrameSizeW = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_WIDTH_TEXT);
+						CWnd *pFrameSizeH = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_HEIGHT_TEXT);
+						CWnd *pFrameRateN = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_RATE_N_TEXT);
+						CWnd *pFrameRateD = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_RATE_D_TEXT);
+						CWnd *pSampleRate = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_SAMPLERATE_TEXT);
+						CWnd *pChannels = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_CHANNELS_TEXT);
+						CWnd *pBitsPerSample = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_BITSPERSAMPLE_TEXT);
+						CWnd *pBytesPerSecond = pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_BYTESPERSECOND_TEXT);
+
+						if (pFilename != NULL) pFilename->GetWindowTextW(filenameVideoAudio);
+						if (pBitRate != NULL) pBitRate->GetWindowTextW(bitRate);
+						if (pFrameSizeW != NULL) pFrameSizeW->GetWindowTextW(frameSizeW);
+						if (pFrameSizeH != NULL) pFrameSizeH->GetWindowTextW(frameSizeH);
+						if (pFrameRateN != NULL) pFrameRateN->GetWindowTextW(frameRateN);
+						if (pFrameRateD != NULL) pFrameRateD->GetWindowTextW(frameRateD);
+						if (pSampleRate != NULL) pSampleRate->GetWindowTextW(sampleRate);
+						if (pChannels != NULL) pChannels->GetWindowTextW(channels);
+						if (pBitsPerSample != NULL) pBitsPerSample->GetWindowTextW(bitsPerSample);
+						if (pBytesPerSecond != NULL) pBytesPerSecond->GetWindowTextW(bytesPerSecond);
+
+						// Set encoding configuration.
+						epVA.transcode = MFTranscodeContainerType_FMPEG4;
+
+						epVA.audio.collectionIndex = -1;
+						epVA.audio.subtypeReader = { 0 };
+						epVA.audio.subtype = MFAudioFormat_AAC;
+						epVA.audio.transcode = MFTranscodeContainerType_WAVE;
+						epVA.audio.bitsPerSample = _ttoi(bitsPerSample);
+						epVA.audio.channels = _ttoi(channels);
+						epVA.audio.sampleRate = _ttoi(sampleRate);
+						epVA.audio.blockAlign = 0; // epVA.audio.channels * (epVA.audio.bitsPerSample / 8);
+						epVA.audio.bytesPerSecond = _ttoi(bytesPerSecond); // epVA.audio.blockAlign * epVA.audio.sampleRate;
+
+						epVA.video.subtype = MFVideoFormat_H264;
+						epVA.video.subtypeReader = { 0 };
+						epVA.video.transcode = MFTranscodeContainerType_FMPEG4;
+						epVA.video.bitRate = _ttoi(bitRate);
+						epVA.video.frameSize.width = _ttoi(frameSizeW);
+						epVA.video.frameSize.height = _ttoi(frameSizeH);
+						epVA.video.frameRate.denominator = _ttoi(frameRateD);
+						epVA.video.frameRate.numerator = _ttoi(frameRateN);
+						epVA.video.aspectRatio.denominator = 1;
+						epVA.video.aspectRatio.numerator = 1;
+
+						// If the media capture is not null.
+						if (_mediaCaptureVideoAudio != NULL)
+						{
+							HRESULT hrvideoaudio = S_OK;
+
+							// Start audo capture.
+							hrvideoaudio = _mediaCaptureVideoAudio->StartCaptureToFile(filenameVideoAudio, epVA);
+							if (FAILED(hrvideoaudio))
+							{
+								// Notify error.
+								OnNotifyError((WPARAM)hrvideoaudio, (LPARAM)0);
 							}
 						}
 					}
@@ -655,6 +800,24 @@ namespace Nequeo {
 							{
 								// Notify error.
 								OnNotifyError((WPARAM)hraudio, (LPARAM)0);
+							}
+						}
+					}
+
+					// If capturing video and audio.
+					if (_captureVideoAudio)
+					{
+						// If the media capture is not null.
+						if (_mediaCaptureVideoAudio != NULL)
+						{
+							HRESULT hrvideoaudio = S_OK;
+
+							// Start video capture.
+							hrvideoaudio = _mediaCaptureVideoAudio->StopCapture();
+							if (FAILED(hrvideoaudio))
+							{
+								// Notify error.
+								OnNotifyError((WPARAM)hrvideoaudio, (LPARAM)0);
 							}
 						}
 					}
@@ -800,6 +963,13 @@ namespace Nequeo {
 						// Set the video device.
 						_mediaCaptureVideo->SetVideoDevice(_videoDevice->ppDevices[_selectedIndexVideo]);
 					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideoAudio != NULL)
+					{
+						// Set the video device.
+						_mediaCaptureVideoAudio->SetVideoDevice(_videoDevice->ppDevices[_selectedIndexVideo]);
+					}
 				}
 				else
 				{
@@ -815,6 +985,13 @@ namespace Nequeo {
 					{
 						// Set the video device.
 						_mediaCaptureVideo->SetVideoDevice(NULL);
+					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideoAudio != NULL)
+					{
+						// Set the video device.
+						_mediaCaptureVideoAudio->SetVideoDevice(NULL);
 					}
 				}
 
@@ -840,6 +1017,13 @@ namespace Nequeo {
 						// Set the audio device.
 						_mediaCaptureAudio->SetAudioDevice(_audioDevice->ppDevices[_selectedIndexAudio]);
 					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideoAudio != NULL)
+					{
+						// Set the audio device.
+						_mediaCaptureVideoAudio->SetAudioDevice(_audioDevice->ppDevices[_selectedIndexAudio]);
+					}
 				}
 				else
 				{
@@ -848,6 +1032,13 @@ namespace Nequeo {
 					{
 						// Set the audio device.
 						_mediaCaptureAudio->SetAudioDevice(NULL);
+					}
+
+					// If the media capture is not null.
+					if (_mediaCaptureVideoAudio != NULL)
+					{
+						// Set the audio device.
+						_mediaCaptureVideoAudio->SetAudioDevice(NULL);
 					}
 				}
 
@@ -864,7 +1055,7 @@ namespace Nequeo {
 				int selectedIndex = _tab.GetCurSel();
 
 				// Make sure the selection is valid.
-				if (selectedIndex > -1 && selectedIndex < 3)
+				if (selectedIndex > -1 && selectedIndex < _tab.GetNumberOfPages())
 				{
 					// Show current hide all others.
 					_tab.ShowTabPage(selectedIndex);
@@ -889,6 +1080,7 @@ namespace Nequeo {
 
 				_captureVideo = false;
 				_captureAudio = false;
+				_captureVideoAudio = false;
 
 				// Get the video page.
 				const CaptureVideoPage& pageVideo = _tab.VideoPage();
@@ -896,9 +1088,13 @@ namespace Nequeo {
 				// Get the audio page.
 				const CaptureAudioPage& pageAudio = _tab.AudioPage();
 
+				// Get the video audio page.
+				const CaptureVideoAudioPage& pageVideoAudio = _tab.VideoAudioPage();
+
 				// Get the video and audio check button.
 				CButton *pCaptureAudioChecked = (CButton*)pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_CHECK);
 				CButton *pCaptureVideoChecked = (CButton*)pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_CHECK);
+				CButton *pCaptureVideoAudioChecked = (CButton*)pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_CHECK);
 
 				// If audio.
 				if (pCaptureAudioChecked != NULL)
@@ -914,8 +1110,15 @@ namespace Nequeo {
 					pCaptureVideoChecked->SetCheck(BST_UNCHECKED);
 				}
 
+				// If video.
+				if (pCaptureVideoAudioChecked != NULL)
+				{
+					// Set check box state.
+					pCaptureVideoAudioChecked->SetCheck(BST_UNCHECKED);
+				}
+
 				// Enable disable capture button.
-				EnableCaptureButton(_captureVideo, _captureAudio);
+				EnableCaptureButton(_captureVideo, _captureAudio, _captureVideoAudio);
 			}
 
 			/// <summary>
@@ -932,12 +1135,17 @@ namespace Nequeo {
 				// Get the audio page.
 				const CaptureAudioPage& pageAudio = _tab.AudioPage();
 
+				// Get the video audio page.
+				const CaptureVideoAudioPage& pageVideoAudio = _tab.VideoAudioPage();
+
 				_captureVideo = false;
 				_captureAudio = false;
+				_captureVideoAudio = false;
 
 				// Get the video and audio check button.
 				CButton *pCaptureAudioChecked = (CButton*)pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_CHECK);
 				CButton *pCaptureVideoChecked = (CButton*)pageVideo.GetDlgItem(IDC_CAPTURE_VIDEO_CHECK);
+				CButton *pCaptureVideoAudioChecked = (CButton*)pageVideoAudio.GetDlgItem(IDC_CAPTURE_VIDEOAUDIO_CHECK);
 
 				// If audio.
 				if (pCaptureAudioChecked != NULL)
@@ -973,32 +1181,53 @@ namespace Nequeo {
 					}
 				}
 
+				// If video audio.
+				if (pCaptureVideoAudioChecked != NULL)
+				{
+					// Get check box state.
+					int checked = pCaptureVideoAudioChecked->GetCheck();
+
+					// If un-checked.
+					if (checked == BST_UNCHECKED)
+					{
+						_captureVideoAudio = false;
+					}
+					else if (checked == BST_CHECKED)
+					{
+						_captureVideoAudio = true;
+					}
+				}
+
 				// If video capture disallowed.
 				if (state == 0 && videoState == DisallowVideoCapture)
 				{
 					_captureVideo = false;
+					_captureVideoAudio = false;
 				}
 
 				// If audio capture disallowed.
 				if (state == 1 && audioState == DisallowAudioCapture)
 				{
 					_captureAudio = false;
+					_captureVideoAudio = false;
 				}
 
 				// Make sure the selection is valid.
 				if (_selectedIndexVideo < 0 || _selectedIndexVideo >= _countVideo)
 				{
 					_captureVideo = false;
+					_captureVideoAudio = false;
 				}
 
 				// Make sure the selection is valid.
 				if (_selectedIndexAudio < 0 || _selectedIndexAudio >= _countAudio)
 				{
 					_captureAudio = false;
+					_captureVideoAudio = false;
 				}
 
 				// Enable disable capture button.
-				EnableCaptureButton(_captureVideo, _captureAudio);
+				EnableCaptureButton(_captureVideo, _captureAudio, _captureVideoAudio);
 			}
 
 			/// <summary>
@@ -1006,17 +1235,19 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="captureVideo">The video state.</param>
 			/// <param name="captureAudio">The audio state.</param>
-			void MediaCaptureForm::EnableCaptureButton(bool captureVideo, bool captureAudio)
+			/// <param name="captureVideoAudio">The video audio state.</param>
+			void MediaCaptureForm::EnableCaptureButton(bool captureVideo, bool captureAudio, bool captureVideoAudio)
 			{
 				_captureVideo = captureVideo;
 				_captureAudio = captureAudio;
+				_captureVideoAudio = captureVideoAudio;
 
 				// Get the start button handler.
 				CWnd *pBtnStart = GetDlgItem(IDC_CAPTURE_START_BUTTON);
 				if (pBtnStart != NULL)
 				{
 					// If capture video or audio
-					if (captureVideo || captureAudio)
+					if (captureVideo || captureAudio || captureVideoAudio)
 					{
 						// Enable start capture button.
 						pBtnStart->EnableWindow(true);

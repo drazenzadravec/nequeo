@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "CaptureAudioPage.h"
 #include "CaptureVideoPage.h"
 #include "CaptureScreenPage.h"
+#include "CaptureVideoAudioPage.h"
 
 namespace Nequeo {
 	namespace Media {
@@ -66,12 +67,19 @@ namespace Nequeo {
 				/// <param name="hwndEventAudio">The audio event handler window to get notifications.</param>
 				/// <param name="hwndEventVideo">The video event handler window to get notifications.</param>
 				/// <param name="hwndEventScreen">The screen event handler window to get notifications.</param>
-				void Init(HWND hwndEventAudio, HWND hwndEventVideo, HWND hwndEventScreen);
+				/// <param name="hwndEventVideoAudio">The screen event handler window to get notifications.</param>
+				void Init(HWND hwndEventAudio, HWND hwndEventVideo, HWND hwndEventScreen, HWND hwndEventVideoAudio);
 
 				/// <summary>
 				/// Set the tab rectangle.
 				/// </summary>
 				void SetRectangle();
+
+				/// <summary>
+				/// Gets the number of pages.
+				/// </summary>
+				/// <returns>The number of pages.</returns>
+				int GetNumberOfPages() const;
 
 				/// <summary>
 				/// Set the tab rectangle.
@@ -97,12 +105,18 @@ namespace Nequeo {
 				/// <returns>The screen page reference.</returns>
 				CaptureScreenPage& ScreenPage() const;
 
+				/// <summary>
+				/// Gets a reference to the video and audio tab page.
+				/// </summary>
+				/// <returns>The screen page reference.</returns>
+				CaptureVideoAudioPage& VideoAudioPage() const;
+
 			private:
 				bool _disposed;
 
 				int _tabCurrent;
 				int _numberOfPages;
-				CDialog* _tabePages[3];
+				CDialog* _tabePages[4];
 
 			public:
 				/// <summary>
