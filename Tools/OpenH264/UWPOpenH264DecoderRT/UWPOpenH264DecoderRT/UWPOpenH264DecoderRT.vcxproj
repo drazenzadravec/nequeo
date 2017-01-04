@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{dc027f8b-6658-449a-b2d2-55ee2a3103af}</ProjectGuid>
+    <Keyword>WindowsRuntimeComponent</Keyword>
+    <RootNamespace>UWPOpenH264DecoderRT</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenH264Decoder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenH264Decoder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenH264Decoder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenH264Decoder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenH264Decoder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenH264Decoder</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>OPENH264_EXPORTS;UWP_RT;_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\src\codec\api\svc;..\..\src\codec\common\inc;..\..\src\codec\decoder\plus\inc;..\..\src\codec\decoder\core\inc;..\..\src\codec\processing\interface;..\..\src\codec\processing\src\adaptivequantization;..\..\src\codec\processing\src\backgrounddetection;..\..\src\codec\processing\src\complexityanalysis;..\..\src\codec\processing\src\denoise;..\..\src\codec\processing\src\downsample;..\..\src\codec\processing\src\imagerotate;..\..\src\codec\processing\src\scenechangedetection;..\..\src\codec\processing\src\scrolldetection;..\..\src\codec\processing\src\vaacalc;..\..\src\codec\processing\src\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>OPENH264_EXPORTS;UWP_RT;_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\src\codec\api\svc;..\..\src\codec\common\inc;..\..\src\codec\decoder\plus\inc;..\..\src\codec\decoder\core\inc;..\..\src\codec\processing\interface;..\..\src\codec\processing\src\adaptivequantization;..\..\src\codec\processing\src\backgrounddetection;..\..\src\codec\processing\src\complexityanalysis;..\..\src\codec\processing\src\denoise;..\..\src\codec\processing\src\downsample;..\..\src\codec\processing\src\imagerotate;..\..\src\codec\processing\src\scenechangedetection;..\..\src\codec\processing\src\scrolldetection;..\..\src\codec\processing\src\vaacalc;..\..\src\codec\processing\src\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>OPENH264_EXPORTS;UWP_RT;_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\src\codec\api\svc;..\..\src\codec\common\inc;..\..\src\codec\decoder\plus\inc;..\..\src\codec\decoder\core\inc;..\..\src\codec\processing\interface;..\..\src\codec\processing\src\adaptivequantization;..\..\src\codec\processing\src\backgrounddetection;..\..\src\codec\processing\src\complexityanalysis;..\..\src\codec\processing\src\denoise;..\..\src\codec\processing\src\downsample;..\..\src\codec\processing\src\imagerotate;..\..\src\codec\processing\src\scenechangedetection;..\..\src\codec\processing\src\scrolldetection;..\..\src\codec\processing\src\vaacalc;..\..\src\codec\processing\src\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>OPENH264_EXPORTS;UWP_RT;_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\src\codec\api\svc;..\..\src\codec\common\inc;..\..\src\codec\decoder\plus\inc;..\..\src\codec\decoder\core\inc;..\..\src\codec\processing\interface;..\..\src\codec\processing\src\adaptivequantization;..\..\src\codec\processing\src\backgrounddetection;..\..\src\codec\processing\src\complexityanalysis;..\..\src\codec\processing\src\denoise;..\..\src\codec\processing\src\downsample;..\..\src\codec\processing\src\imagerotate;..\..\src\codec\processing\src\scenechangedetection;..\..\src\codec\processing\src\scrolldetection;..\..\src\codec\processing\src\vaacalc;..\..\src\codec\processing\src\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>OPENH264_EXPORTS;UWP_RT;_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\src\codec\api\svc;..\..\src\codec\common\inc;..\..\src\codec\decoder\plus\inc;..\..\src\codec\decoder\core\inc;..\..\src\codec\processing\interface;..\..\src\codec\processing\src\adaptivequantization;..\..\src\codec\processing\src\backgrounddetection;..\..\src\codec\processing\src\complexityanalysis;..\..\src\codec\processing\src\denoise;..\..\src\codec\processing\src\downsample;..\..\src\codec\processing\src\imagerotate;..\..\src\codec\processing\src\scenechangedetection;..\..\src\codec\processing\src\scrolldetection;..\..\src\codec\processing\src\vaacalc;..\..\src\codec\processing\src\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>OPENH264_EXPORTS;UWP_RT;_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\src\codec\api\svc;..\..\src\codec\common\inc;..\..\src\codec\decoder\plus\inc;..\..\src\codec\decoder\core\inc;..\..\src\codec\processing\interface;..\..\src\codec\processing\src\adaptivequantization;..\..\src\codec\processing\src\backgrounddetection;..\..\src\codec\processing\src\complexityanalysis;..\..\src\codec\processing\src\denoise;..\..\src\codec\processing\src\downsample;..\..\src\codec\processing\src\imagerotate;..\..\src\codec\processing\src\scenechangedetection;..\..\src\codec\processing\src\scrolldetection;..\..\src\codec\processing\src\vaacalc;..\..\src\codec\processing\src\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\codec\api\svc\codec_api.h" />
+    <ClInclude Include="..\..\src\codec\api\svc\codec_app_def.h" />
+    <ClInclude Include="..\..\src\codec\api\svc\codec_def.h" />
+    <ClInclude Include="..\..\src\codec\api\svc\codec_ver.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\copy_mb.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\cpu.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\cpu_core.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\crt_util_safe_x.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\deblocking_common.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\expand_pic.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\golomb_common.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\intra_pred_common.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\ls_defines.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\macros.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\mc.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\measure_time.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\memory_align.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\sad_common.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\typedefs.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\utils.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\version.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsCircleQueue.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\welsCodecTrace.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsList.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsLock.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsTask.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsTaskThread.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsThread.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsThreadLib.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\WelsThreadPool.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\wels_common_defs.h" />
+    <ClInclude Include="..\..\src\codec\common\inc\wels_const_common.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\au_parser.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\bit_stream.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\cabac_decoder.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\deblocking.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decoder.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decoder_context.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decoder_core.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decode_mb_aux.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decode_slice.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\dec_frame.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\dec_golomb.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\error_code.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\error_concealment.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\fmo.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\get_intra_predictor.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\manage_dec_ref.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\mb_cache.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\memmgr_nal_unit.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\mv_pred.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\nalu.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\nal_prefix.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\parameter_sets.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\parse_mb_syn_cabac.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\parse_mb_syn_cavlc.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\picture.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\pic_queue.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\rec_mb.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\slice.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\vlc_decoder.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\wels_common_basis.h" />
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\wels_const.h" />
+    <ClInclude Include="..\..\src\codec\decoder\plus\inc\welsDecoderExt.h" />
+    <ClInclude Include="..\..\src\codec\processing\interface\IWelsVP.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\adaptivequantization\AdaptiveQuantization.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\backgrounddetection\BackgroundDetection.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\common\common.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\common\memory.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\common\resource.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\common\typedef.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\common\util.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\common\WelsFrameWork.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\complexityanalysis\ComplexityAnalysis.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\denoise\denoise.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\downsample\downsample.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\imagerotate\imagerotate.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\scenechangedetection\SceneChangeDetection.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetection.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetectionFuncs.h" />
+    <ClInclude Include="..\..\src\codec\processing\src\vaacalc\vaacalculation.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\codec\common\src\common_tables.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\copy_mb.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\cpu.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\crt_util_safe_x.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\deblocking_common.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\expand_pic.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\intra_pred_common.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\mc.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\memory_align.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\sad_common.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\utils.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\welsCodecTrace.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\WelsTaskThread.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\WelsThread.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\WelsThreadLib.cpp" />
+    <ClCompile Include="..\..\src\codec\common\src\WelsThreadPool.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\au_parser.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\bit_stream.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\cabac_decoder.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decoder.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decoder_core.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decoder_data_tables.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decode_slice.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_deblocking.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_decode_mb_aux.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_get_intra_predictor.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_mv_pred.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\error_concealment.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\fmo.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\manage_dec_ref.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\memmgr_nal_unit.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\parse_mb_syn_cabac.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\parse_mb_syn_cavlc.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\pic_queue.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\core\src\rec_mb.cpp" />
+    <ClCompile Include="..\..\src\codec\decoder\plus\src\welsDecoderExt.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\adaptivequantization\AdaptiveQuantization.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\backgrounddetection\BackgroundDetection.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\common\memory.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\common\WelsFrameWork.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\common\WelsFrameWorkEx.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\complexityanalysis\ComplexityAnalysis.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\denoise\denoise.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\denoise\denoise_filter.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\downsample\downsample.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\downsample\downsamplefuncs.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\imagerotate\imagerotate.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\imagerotate\imagerotatefuncs.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\scenechangedetection\SceneChangeDetection.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetection.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetectionFuncs.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\vaacalc\vaacalcfuncs.cpp" />
+    <ClCompile Include="..\..\src\codec\processing\src\vaacalc\vaacalculation.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

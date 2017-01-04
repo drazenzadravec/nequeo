@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\src\codec\decoder\plus\inc\welsDecoderExt.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\api\svc\codec_api.h">
+      <Filter>Api\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\api\svc\codec_app_def.h">
+      <Filter>Api\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\api\svc\codec_def.h">
+      <Filter>Api\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\api\svc\codec_ver.h">
+      <Filter>Api\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\copy_mb.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\cpu.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\cpu_core.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\crt_util_safe_x.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\deblocking_common.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\expand_pic.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\golomb_common.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\intra_pred_common.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\ls_defines.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\macros.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\mc.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\measure_time.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\memory_align.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\sad_common.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\typedefs.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\utils.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\version.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\wels_common_defs.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\wels_const_common.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsCircleQueue.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\welsCodecTrace.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsList.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsLock.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsTask.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsTaskThread.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsThread.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsThreadLib.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\common\inc\WelsThreadPool.h">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\au_parser.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\bit_stream.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\cabac_decoder.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\deblocking.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\dec_frame.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\dec_golomb.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decode_mb_aux.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decode_slice.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decoder.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decoder_context.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\decoder_core.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\error_code.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\error_concealment.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\fmo.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\get_intra_predictor.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\manage_dec_ref.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\mb_cache.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\memmgr_nal_unit.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\mv_pred.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\nal_prefix.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\nalu.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\parameter_sets.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\parse_mb_syn_cabac.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\parse_mb_syn_cavlc.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\pic_queue.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\picture.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\rec_mb.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\slice.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\vlc_decoder.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\wels_common_basis.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\decoder\core\inc\wels_const.h">
+      <Filter>decoder\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\interface\IWelsVP.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\adaptivequantization\AdaptiveQuantization.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\backgrounddetection\BackgroundDetection.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\common\common.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\complexityanalysis\ComplexityAnalysis.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\denoise\denoise.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\downsample\downsample.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\imagerotate\imagerotate.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\common\memory.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\common\resource.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\scenechangedetection\SceneChangeDetection.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetection.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetectionFuncs.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\common\typedef.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\common\util.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\vaacalc\vaacalculation.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\codec\processing\src\common\WelsFrameWork.h">
+      <Filter>processing\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="decoder">
+      <UniqueIdentifier>{48610ea2-b5ab-421c-b659-3d27b7f11de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="decoder\Source">
+      <UniqueIdentifier>{0c4a0738-4124-42b9-8d8d-f1e602adbf71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="decoder\Header">
+      <UniqueIdentifier>{107a62c7-aaaf-44f5-9665-0882b089d99d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Api">
+      <UniqueIdentifier>{aeee8c6b-55e5-44ce-aab7-c43a36a3486b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Api\Header">
+      <UniqueIdentifier>{44f3d97e-67a5-491e-8ca0-fcb00c367ed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{7661c7ba-792c-449e-ada1-f65c2ab4c001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header">
+      <UniqueIdentifier>{30916479-b9e9-4b61-baab-a41cbf258c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source">
+      <UniqueIdentifier>{f1f568d2-c3d3-4a36-ae12-895421772d72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="processing">
+      <UniqueIdentifier>{32cc987a-763f-4ef3-8595-36fc08c3cfe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="processing\Header">
+      <UniqueIdentifier>{a0ebc759-48b9-432e-9cbc-17a08e709cb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="processing\Source">
+      <UniqueIdentifier>{1beebfaf-fc64-42ef-b809-6a16f0321e9b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\codec\decoder\plus\src\welsDecoderExt.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\au_parser.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\bit_stream.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\cabac_decoder.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decode_slice.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decoder.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decoder_core.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\decoder_data_tables.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\error_concealment.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\fmo.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\manage_dec_ref.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\memmgr_nal_unit.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\parse_mb_syn_cabac.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\parse_mb_syn_cavlc.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\pic_queue.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\rec_mb.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\common_tables.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\copy_mb.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\cpu.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\crt_util_safe_x.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\deblocking_common.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\expand_pic.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\intra_pred_common.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\mc.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\memory_align.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\sad_common.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\utils.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\welsCodecTrace.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\WelsTaskThread.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\WelsThread.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\WelsThreadLib.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\common\src\WelsThreadPool.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\adaptivequantization\AdaptiveQuantization.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\backgrounddetection\BackgroundDetection.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\common\memory.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\common\WelsFrameWork.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\common\WelsFrameWorkEx.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\complexityanalysis\ComplexityAnalysis.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\denoise\denoise.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\denoise\denoise_filter.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\downsample\downsample.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\downsample\downsamplefuncs.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\imagerotate\imagerotate.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\imagerotate\imagerotatefuncs.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\scenechangedetection\SceneChangeDetection.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetection.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\scrolldetection\ScrollDetectionFuncs.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\vaacalc\vaacalcfuncs.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\processing\src\vaacalc\vaacalculation.cpp">
+      <Filter>processing\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_deblocking.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_decode_mb_aux.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_get_intra_predictor.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\codec\decoder\core\src\dec_mv_pred.cpp">
+      <Filter>decoder\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
