@@ -47,10 +47,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <QtCore\QList>
 #include <QtCore\QString>
 #include <QtCore\QUrl>
+#include <QtCore\QFile>
 #include <QtCore\qmetatype.h>
 
 #include <QtNetwork\QSslError>
 #include <QtNetwork\qabstractsocket.h>
 #include <QtNetwork\qauthenticator.h>
+#include <QtNetwork\QSslCertificate>
+#include <QtNetwork\QSslKey>
 
-#include <QtWebSockets\qwebsocket.h>
+#include <QtWebSockets\QWebSocket>
+#include <QtWebSockets\QWebSocketServer>

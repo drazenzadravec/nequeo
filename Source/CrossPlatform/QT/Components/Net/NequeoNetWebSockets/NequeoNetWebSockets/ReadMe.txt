@@ -50,3 +50,4 @@ should add to or customize.
 
 Create moc files from headers
 moc.exe -o moc_WebSocketClient.cpp WebSocketClient.h
+moc.exe -o moc_WebSocketServer.cpp WebSocketServer.h

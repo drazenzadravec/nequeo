@@ -30,6 +30,9 @@
     <ClInclude Include="WebSocketClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WebSocketServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="moc_WebSocketClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSocketServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_WebSocketServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
