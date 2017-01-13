@@ -88,6 +88,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +136,8 @@ copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components
 copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
 copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
 copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
-copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"
+copy $(ProjectDir)\ConcurrentQueue.h "..\..\..\..\References\Release\Include\Components\Base\ConcurrentQueue.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,6 +148,7 @@ copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\B
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -193,7 +196,8 @@ copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components
 copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
 copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
 copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
-copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"
+copy $(ProjectDir)\ConcurrentQueue.h "..\..\..\..\References\Release\Include\Components\Base\ConcurrentQueue.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -207,6 +211,7 @@ copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\B
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -256,7 +261,8 @@ copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components
 copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
 copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
 copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
-copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"
+copy $(ProjectDir)\ConcurrentQueue.h "..\..\..\..\References\Release\Include\Components\Base\ConcurrentQueue.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -270,6 +276,7 @@ copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\B
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\References\Release\Include\Components;..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -319,7 +326,8 @@ copy $(ProjectDir)\Platform.h "..\..\..\..\References\Release\Include\Components
 copy $(ProjectDir)\FileSystemUtils.h "..\..\..\..\References\Release\Include\Components\Base\FileSystemUtils.h"
 copy $(ProjectDir)\GetTheLights.h "..\..\..\..\References\Release\Include\Components\Base\GetTheLights.h"
 copy $(ProjectDir)\AsyncCallerContext.h "..\..\..\..\References\Release\Include\Components\Base\AsyncCallerContext.h"
-copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"</Command>
+copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\Base\Number.h"
+copy $(ProjectDir)\ConcurrentQueue.h "..\..\..\..\References\Release\Include\Components\Base\ConcurrentQueue.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -334,6 +342,7 @@ copy $(ProjectDir)\Number.h "..\..\..\..\References\Release\Include\Components\B
     <ClInclude Include="AutoPtr.h" />
     <ClInclude Include="Base64.h" />
     <ClInclude Include="ByteOrder.h" />
+    <ClInclude Include="ConcurrentQueue.h" />
     <ClInclude Include="FastRandom.h" />
     <ClInclude Include="FileSystemUtils.h" />
     <ClInclude Include="FunctionTemplates.h" />

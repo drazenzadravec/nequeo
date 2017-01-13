@@ -41,7 +41,7 @@ namespace Live {
 	namespace Media
 	{
 		/// <summary>
-		/// Live media proxy server.
+		/// Live media server.
 		/// </summary>
 		class EXPORT_LIVE_MEDIA_SERVER_API MediaServer
 		{

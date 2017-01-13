@@ -191,6 +191,8 @@ public:
 
   EXPORT_LIVE_MEDIA_SERVER_API static unsigned responseBufferSize;
 
+  virtual ~RTSPClient();
+
 public: // Some compilers complain if this is "private:"
   // The state of a request-in-progress:
   class RequestRecord {
@@ -236,7 +238,6 @@ protected:
   RTSPClient(UsageEnvironment& env, char const* rtspURL,
 	     int verbosityLevel, char const* applicationName, portNumBits tunnelOverHTTPPortNum, int socketNumToServer);
       // called only by createNew();
-  virtual ~RTSPClient();
 
   void reset();
   void setBaseURL(char const* url);

@@ -130,6 +130,74 @@ namespace Nequeo.Reflection
     /// <summary>
     /// Application domain host.
     /// </summary>
+    public abstract class AppDomianHostMarshal<T> : AppDomianMarshal
+    {
+        /// <summary>
+        /// Application domain host.
+        /// </summary>
+        protected AppDomianHostMarshal() { }
+
+        private T _instance = default(T);
+        private AppDomain _appDomain = null;
+
+        /// <summary>
+        /// Gets the new host instance.
+        /// </summary>
+        public T Instance
+        {
+            get { return _instance; }
+            protected set { _instance = value; }
+        }
+
+        /// <summary>
+        /// Gets the application domain.
+        /// </summary>
+        public AppDomain AppDomain
+        {
+            get { return _appDomain; }
+            protected set { _appDomain = value; }
+        }
+
+        /// <summary>
+        /// Unload the application domain.
+        /// </summary>
+        public virtual void Unload()
+        {
+            AppDomain.Unload(_appDomain);
+        }
+
+        /// <summary>
+        /// Initialise the app domain.
+        /// </summary>
+        /// <param name="path">The path to the assemblies.</param>
+        /// <param name="configurationFile">The configuration file name.</param>
+        public virtual void Initialise(string path, string configurationFile = null)
+        {
+            // Setting the AppDomainSetup. It is very important to set the ApplicationBase to a folder 
+            // other than the one in which the sandboxer resides.
+            AppDomainSetup adSetup = new AppDomainSetup();
+            adSetup.ApplicationBase = Path.GetFullPath(path);
+
+            // Get the configuration file.
+            if (!String.IsNullOrEmpty(configurationFile))
+                adSetup.ConfigurationFile = configurationFile;
+
+            // Create the application loader.
+            AppDomianLoader loader = new AppDomianLoader()
+                .DomainFriendlyName(DateTime.Now.ToString(DateTimeFormatInfo.InvariantInfo).GetHashCode().ToString("x"))
+                .AppDomainSetup(adSetup);
+
+            // Create the app domain.
+            _appDomain = loader.CreateAppDomain();
+
+            // Load the domain.
+            _instance = AppDomianLoader.Load<T>(_appDomain);
+        }
+    }
+
+    /// <summary>
+    /// Application domain host.
+    /// </summary>
     public class AppDomianHost : AppDomianHost<AppDomianMarshal>
     {
         /// <summary>

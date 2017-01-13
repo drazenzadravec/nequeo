@@ -56,7 +56,7 @@ namespace Nequeo.Reflection
     /// <summary>
     /// Application domain marshal.
     /// </summary>
-    public sealed class AppDomianMarshal : MarshalByRefObject
+    public class AppDomianMarshal : MarshalByRefObject
     {
         /// <summary>
         /// Application domain marshal.

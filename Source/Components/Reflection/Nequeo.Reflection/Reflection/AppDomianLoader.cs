@@ -232,6 +232,14 @@ namespace Nequeo.Reflection
                     appDomain = AppDomain.CreateDomain(_domainFriendlyName, _securityInfo, _appDomainSetup, _permissionSet);
                 }
                 else if (_appDomainFlag ==
+                    (AppDomainFlag.AppDomainSetup |
+                     AppDomainFlag.DomainFriendlyName |
+                     AppDomainFlag.PermissionSet))
+                {
+                    // Create the domain.
+                    appDomain = AppDomain.CreateDomain(_domainFriendlyName, null, _appDomainSetup, _permissionSet);
+                }
+                else if (_appDomainFlag ==
                     (AppDomainFlag.DomainFriendlyName |
                      AppDomainFlag.FullTrustAssemblies |
                      AppDomainFlag.PermissionSet))

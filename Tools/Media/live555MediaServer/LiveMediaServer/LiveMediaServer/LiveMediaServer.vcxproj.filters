@@ -19,6 +19,9 @@
     <Filter Include="Server">
       <UniqueIdentifier>{612e9ba9-c015-4850-a41b-a669da7a0e75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{65e2d50d-49a9-4943-88e7-f07e9914ba38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -612,6 +615,9 @@
     <ClInclude Include="MP4TransportFileServerMedia.h">
       <Filter>Server</Filter>
     </ClInclude>
+    <ClInclude Include="RtspClient.h">
+      <Filter>Client</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\live\liveMedia\rtcp_from_spec.c">
@@ -1180,6 +1186,9 @@
     </ClCompile>
     <ClCompile Include="MP4TransportFileServerMedia.cpp">
       <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="RtspClient.cpp">
+      <Filter>Client</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

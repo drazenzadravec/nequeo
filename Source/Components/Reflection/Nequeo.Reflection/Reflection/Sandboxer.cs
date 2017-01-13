@@ -48,29 +48,26 @@ using System.Runtime.Remoting;
 using System.Reflection.Emit;
 using System.Linq;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace Nequeo.Reflection
 {
     /// <summary>
     /// Sandbox for executing code.
     /// </summary>
-    public class Sandbox : AppDomianHost<AppDomianMarshal>
+    public class Sandbox : AppDomianHostMarshal<Sandbox>
     {
         /// <summary>
         /// Sandbox for executing code.
         /// </summary>
-        /// <param name="basePath">The base path to the assemblies.</param>
-        /// <param name="configurationFile">The configuration file name.</param>
-        public Sandbox(string basePath, string configurationFile = null)
-            : base(basePath, configurationFile)
-        { }
+        public Sandbox() { }
 
         /// <summary>
         /// Initialise the app domain.
         /// </summary>
         /// <param name="path">The path to the assemblies.</param>
         /// <param name="configurationFile">The configuration file name.</param>
-        protected override void Initialise(string path, string configurationFile = null)
+        public override void Initialise(string path, string configurationFile = null)
         {
             // Setting the AppDomainSetup. It is very important to set the ApplicationBase to a folder 
             // other than the one in which the sandboxer resides.
@@ -87,20 +84,19 @@ namespace Nequeo.Reflection
             permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
 
             // We want the sandboxer assembly's strong name, so that we can add it to the full trust list.
-            StrongName fullTrustAssembly = typeof(AppDomianMarshal).Assembly.Evidence.GetHostEvidence<StrongName>();
+            StrongName fullTrustAssembly = typeof(Sandbox).Assembly.Evidence.GetHostEvidence<StrongName>();
 
             // Create the application loader.
             AppDomianLoader loader = new AppDomianLoader()
-                .DomainFriendlyName("SandboxModule")
+                .DomainFriendlyName(DateTime.Now.ToString(DateTimeFormatInfo.InvariantInfo).GetHashCode().ToString("x"))
                 .AppDomainSetup(adSetup)
-                .PermissionSet(permSet)
-                .StrongNames(fullTrustAssembly);
+                .PermissionSet(permSet);
 
             // Create the app domain.
             base.AppDomain = loader.CreateAppDomain();
 
             // Load the domain.
-            base.Instance = AppDomianLoader.Load<AppDomianMarshal>(base.AppDomain);
+            base.Instance = AppDomianLoader.Load<Sandbox>(base.AppDomain);
         }
     }
 }

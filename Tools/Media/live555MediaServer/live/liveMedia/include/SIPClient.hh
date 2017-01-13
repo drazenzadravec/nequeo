@@ -74,9 +74,8 @@ public:
 	EXPORT_LIVE_MEDIA_SERVER_API void setUserAgentString(char const* userAgentName);
 	// sets an alternative string to be used in SIP "User-Agent:" headers
 
-protected:
 	virtual ~SIPClient();
-
+	
 private:
 	SIPClient(UsageEnvironment& env,
 		unsigned char desiredAudioRTPPayloadFormat,
