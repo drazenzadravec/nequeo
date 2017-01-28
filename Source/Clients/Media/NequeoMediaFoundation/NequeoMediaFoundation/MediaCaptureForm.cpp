@@ -648,26 +648,55 @@ namespace Nequeo {
 						CString sampleRate;
 						CString channels;
 						CString bitsPerSample;
+						CString bytesPerSecond;
 
 						// Get the start button handler.
 						CWnd *pFilename = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_PATH_TEXT);
 						CWnd *pSampleRate = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_SAMPLERATE_TEXT);
 						CWnd *pChannels = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_CHANNELS_TEXT);
 						CWnd *pBitsPerSample = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_BITSPERSAMPLE_TEXT);
+						CWnd *pBytesPerSecond = pageAudio.GetDlgItem(IDC_CAPTURE_AUDIO_BYTESPERSECOND_TEXT);
 
 						if (pFilename != NULL) pFilename->GetWindowTextW(filenameAudio);
 						if (pSampleRate != NULL) pSampleRate->GetWindowTextW(sampleRate);
 						if (pChannels != NULL) pChannels->GetWindowTextW(channels);
 						if (pBitsPerSample != NULL) pBitsPerSample->GetWindowTextW(bitsPerSample);
+						if (pBytesPerSecond != NULL) pBytesPerSecond->GetWindowTextW(bytesPerSecond);
 
-						// Set audio configuration.
-						ep.audio.collectionIndex = -1;
-						ep.audio.subtype = MFAudioFormat_PCM;
-						ep.audio.bitsPerSample = _ttoi(bitsPerSample);
-						ep.audio.channels = _ttoi(channels);
-						ep.audio.sampleRate = _ttoi(sampleRate);
-						ep.audio.blockAlign = ep.audio.channels * (ep.audio.bitsPerSample / 8);
-						ep.audio.bytesPerSecond = ep.audio.blockAlign * ep.audio.sampleRate;
+
+						std::wstring file = filenameAudio;
+						std::wstring extension = L".wav";
+
+						// If an extension has been found.
+						if (file.find_last_of(L".") != std::wstring::npos)
+						{
+							// Get the extension.
+							extension = L"." + file.substr(file.find_last_of(L".") + 1);
+						}
+
+						// If mp3 file
+						if (extension == L".mp3" || extension == L".MP3")
+						{
+							// Wave file.
+							ep.audio.collectionIndex = -1;
+							ep.audio.subtype = MFAudioFormat_MP3;
+							ep.audio.bitsPerSample = _ttoi(bitsPerSample);
+							ep.audio.channels = _ttoi(channels);
+							ep.audio.sampleRate = _ttoi(sampleRate);
+							ep.audio.blockAlign = 0;
+							ep.audio.bytesPerSecond = _ttoi(bytesPerSecond);
+						}
+						else
+						{
+							// Wave file.
+							ep.audio.collectionIndex = -1;
+							ep.audio.subtype = MFAudioFormat_PCM;
+							ep.audio.bitsPerSample = _ttoi(bitsPerSample);
+							ep.audio.channels = _ttoi(channels);
+							ep.audio.sampleRate = _ttoi(sampleRate);
+							ep.audio.blockAlign = ep.audio.channels * (ep.audio.bitsPerSample / 8);
+							ep.audio.bytesPerSecond = (_ttoi(bytesPerSecond) > 0 ? _ttoi(bytesPerSecond) : ep.audio.blockAlign * ep.audio.sampleRate);
+						}
 
 						// If the media capture is not null.
 						if (_mediaCaptureAudio != NULL)

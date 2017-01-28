@@ -139,6 +139,7 @@ namespace Nequeo {
 				CWnd *pSampleRate = GetDlgItem(IDC_CAPTURE_AUDIO_SAMPLERATE_TEXT);
 				CWnd *pChannels = GetDlgItem(IDC_CAPTURE_AUDIO_CHANNELS_TEXT);
 				CWnd *pBitsPerSample = GetDlgItem(IDC_CAPTURE_AUDIO_BITSPERSAMPLE_TEXT);
+				CWnd *pBytesPerSecond = GetDlgItem(IDC_CAPTURE_AUDIO_BYTESPERSECOND_TEXT);
 
 				if (pSampleRate != NULL)
 					pSampleRate->SetWindowTextW(L"44100");
@@ -148,6 +149,9 @@ namespace Nequeo {
 
 				if (pBitsPerSample != NULL)
 					pBitsPerSample->SetWindowTextW(L"16");
+
+				if (pBytesPerSecond != NULL)
+					pBytesPerSecond->SetWindowTextW(L"0");
 
 				// return TRUE  unless you set the focus to a control.
 				return TRUE;

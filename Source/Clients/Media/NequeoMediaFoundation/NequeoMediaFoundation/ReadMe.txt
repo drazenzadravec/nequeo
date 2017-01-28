@@ -65,3 +65,40 @@ AppWizard uses "TODO:" to indicate parts of the source code you
 should add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+MP3 Capture Configuration
+ep.audio.collectionIndex = 0;
+ep.audio.subtypeReader = { 0 };
+ep.audio.subtype = MFAudioFormat_MP3;
+ep.audio.transcode = MFTranscodeContainerType_MP3;
+ep.audio.bitsPerSample = 0;
+ep.audio.channels = 2
+ep.audio.sampleRate = 32000;
+ep.audio.blockAlign = 1;
+ep.audio.bytesPerSecond = 40000;
+////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////
+MP4 Capture Configuration
+ep.audio.collectionIndex = -1;
+ep.audio.subtypeReader = { 0 };
+ep.audio.subtype = MFAudioFormat_AAC;
+ep.audio.transcode = MFTranscodeContainerType_WAVE;
+ep.audio.bitsPerSample = 16;
+ep.audio.channels = 2;
+ep.audio.sampleRate = 44100;
+ep.audio.blockAlign = 0;
+ep.audio.bytesPerSecond = 12000;
+
+ep.video.subtype = MFVideoFormat_H264;
+ep.video.subtypeReader = { 0 };
+ep.video.transcode = MFTranscodeContainerType_FMPEG4;
+ep.video.bitRate = 400000;
+ep.video.frameSize.width = 320;
+ep.video.frameSize.height = 240;
+ep.video.frameRate.denominator = 1;
+ep.video.frameRate.numerator = 30;
+ep.video.aspectRatio.denominator = 1;
+ep.video.aspectRatio.numerator = 1;
+////////////////////////////////////////////////////////////////////////////

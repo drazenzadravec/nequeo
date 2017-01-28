@@ -206,6 +206,7 @@
     <ClCompile Include="MediaPlayerForm.cpp" />
     <ClCompile Include="MediaPreview.cpp" />
     <ClCompile Include="MediaPreviewForm.cpp" />
+    <ClCompile Include="MediaSource.cpp" />
     <ClCompile Include="OpenNetworkUriForm.cpp" />
     <ClCompile Include="ReadByteAsyncCallback.cpp" />
     <ClCompile Include="ReadByteContainer.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="MediaPlayerForm.h" />
     <ClInclude Include="MediaPreview.h" />
     <ClInclude Include="MediaPreviewForm.h" />
+    <ClInclude Include="MediaSource.h" />
     <ClInclude Include="OpenNetworkUriForm.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ReadByteAsyncCallback.h" />

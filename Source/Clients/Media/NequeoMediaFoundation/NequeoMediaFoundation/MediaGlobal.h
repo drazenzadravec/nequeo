@@ -43,6 +43,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <thread>
 #include <future>
 #include <functional>
+#include <limits>
 
 #ifdef NEQUEOMEDIAFOUNDATION_EXPORTS
 #define EXPORT_NEQUEO_MEDIA_FOUNDATION_API __declspec(dllexport) 

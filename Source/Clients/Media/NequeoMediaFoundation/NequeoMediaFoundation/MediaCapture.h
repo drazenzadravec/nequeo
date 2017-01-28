@@ -216,7 +216,7 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="hwnd">The handle to the application owner.</param>
 				/// <param name="hEvent">The handle to the window to receive notifications.</param>
-				/// <param name="ppPlayer">Receives an AddRef's pointer to the MediaCapture object. The caller must release the pointer.</param>
+				/// <param name="ppCapture">Receives an AddRef's pointer to the MediaCapture object. The caller must release the pointer.</param>
 				/// <returns>The result of the operation.</returns>
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API static HRESULT CreateInstance(HWND hwnd, HWND hEvent, MediaCapture **ppCapture);
 

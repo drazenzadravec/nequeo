@@ -36,6 +36,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include <assert.h>
 
+#undef max
+#undef min
+
 namespace Nequeo {
 	namespace Media {
 		namespace Foundation
@@ -2680,6 +2683,16 @@ namespace Nequeo {
 						if (SUCCEEDED(hr))
 						{
 							params.audio.bitsPerSample = bitsPerSample;
+						}
+						else
+						{
+							UINT32 maxValue = std::numeric_limits<UINT32>::max();
+
+							// undefined.
+							if (bitsPerSample == maxValue)
+							{
+								params.audio.bitsPerSample = bitsPerSample;
+							}
 						}
 
 						// Get the default block align.
