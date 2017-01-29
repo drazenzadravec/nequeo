@@ -670,6 +670,116 @@ namespace Nequeo {
 				// Return the result.
 				return hr;
 			}
+
+			/// <summary>
+			/// Get the duration of the source (100-nanosecond).
+			/// </summary>
+			/// <param name="streamIndex">The stream to pull data from. The value can be any of the following.
+			/// A zero-based index of a stream (e.g. 0, 1, etc. 0 could be video, 1 could be audio).
+			/// The first video stream : MF_SOURCE_READER_FIRST_VIDEO_STREAM 0xFFFFFFFC.
+			/// The first audio stream : MF_SOURCE_READER_FIRST_AUDIO_STREAM 0xFFFFFFFD.
+			/// The media source : MF_SOURCE_READER_MEDIASOURCE 0xFFFFFFFF.
+			/// </param>
+			/// <param name="duration">The duration of the current stream index.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::GetDuration(DWORD streamIndex, MFTIME *duration)
+			{
+				HRESULT hr = S_OK;
+				*duration = 0;
+
+				// If a source reader exists.
+				if (_isSourceReader)
+				{
+					PROPVARIANT prop;
+
+					// Get the duration.
+					hr = _pSourceReader->GetPresentationAttribute(streamIndex, MF_PD_DURATION, &prop);
+
+					if (SUCCEEDED(hr))
+					{
+						// Assign the duration.
+						UINT64 durationInt = prop.uhVal.QuadPart;
+						*duration = durationInt;
+					}
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Copy the current sample data to the byte array.
+			/// </summary>
+			/// <param name="sample">The sample.</param>
+			/// <param name="data">The sample byte array.</param>
+			/// <param name="dataLength">The sample byte array size.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::SampleToBytes(IMFSample *sample, BYTE **data, DWORD *dataLength)
+			{
+				HRESULT hr = S_OK;
+				*dataLength = 0;
+
+				// If a source reader exists.
+				if (_isSourceReader)
+				{
+					// Get the complete buffer.
+					IMFMediaBuffer *pBuffer = NULL;
+					hr = sample->ConvertToContiguousBuffer(&pBuffer);
+
+					if (SUCCEEDED(hr))
+					{
+						// Get the data length.
+						DWORD length;
+						hr = pBuffer->GetCurrentLength(&length);
+
+						if (SUCCEEDED(hr))
+						{
+							// Assign the data length.
+							*dataLength = length;
+
+							// If sample data exists in the buffer.
+							if (*dataLength > 0)
+							{
+								// Lock the buffer.
+								BYTE *pData = NULL;
+								hr = pBuffer->Lock(&pData, NULL, NULL);
+
+								if (SUCCEEDED(hr))
+								{
+									// Create the byte[] that will contain
+									// the current sample data.
+									*data = new BYTE[length];
+
+									// Copy the sample buffer to the byte[] data.
+									memcpy_s(*data, length, pData, length);
+								}
+
+								// Unlock the buffer.
+								if (pData)
+								{
+									hr = pBuffer->Unlock();
+								}
+							}
+						}
+					}
+
+					// Safe release.
+					SafeRelease(&pBuffer);
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Return the result.
+				return hr;
+			}
 		}
 	}
 }

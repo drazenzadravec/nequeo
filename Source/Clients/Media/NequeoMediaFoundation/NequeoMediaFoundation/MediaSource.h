@@ -152,6 +152,28 @@ namespace Nequeo {
 				/// <returns>The result of the operation.</returns>
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SetPosition(LONGLONG position);
 
+				/// <summary>
+				/// Get the duration of the source (100-nanosecond).
+				/// </summary>
+				/// <param name="streamIndex">The stream to pull data from. The value can be any of the following.
+				/// A zero-based index of a stream (e.g. 0, 1, etc. 0 could be video, 1 could be audio).
+				/// The first video stream : MF_SOURCE_READER_FIRST_VIDEO_STREAM 0xFFFFFFFC.
+				/// The first audio stream : MF_SOURCE_READER_FIRST_AUDIO_STREAM 0xFFFFFFFD.
+				/// The media source : MF_SOURCE_READER_MEDIASOURCE 0xFFFFFFFF.
+				/// </param>
+				/// <param name="duration">The duration of the current stream index.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT GetDuration(DWORD streamIndex, MFTIME *duration);
+
+				/// <summary>
+				/// Copy the current sample data to the byte array.
+				/// </summary>
+				/// <param name="sample">The sample.</param>
+				/// <param name="data">The sample byte array.</param>
+				/// <param name="dataLength">The sample byte array size.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SampleToBytes(IMFSample *sample, BYTE **data, DWORD *dataLength);
+
 			protected:
 				/// <summary>
 				/// Constructor for the current class. Use static CreateInstance method to instantiate.
