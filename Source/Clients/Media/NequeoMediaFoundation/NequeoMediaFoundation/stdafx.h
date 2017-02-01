@@ -50,6 +50,11 @@
 #include <shlwapi.h>
 #include <Wmcodecdsp.h>
 #include <mfcaptureengine.h>
+#include <wmcodecdsp.h>
+
+// Direct2D
+#include <D2d1.h>
+#include <D2d1helper.h>
 
 // EVR headers
 #include <evr.h>
@@ -63,6 +68,7 @@
 // Safe string functions
 #include <strsafe.h>
 #include <vector>
+#include <InitGuid.h>
 
 // Resources
 #include "resource.h"

@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5180CDC6-A4AC-4E61-B4E9-2AE2E9942434}</ProjectGuid>
     <RootNamespace>NequeoMediaFoundation</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
     <Keyword>MFCDLLProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -97,7 +97,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;wmcodecdspuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -121,7 +121,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;wmcodecdspuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -149,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;wmcodecdspuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -177,7 +177,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\NequeoMediaFoundation.def</ModuleDefinitionFile>
-      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mf.lib;mfplat.lib;mfuuid.lib;strmiids.lib;mfplay.lib;mfreadwrite.lib;shlwapi.lib;wmcodecdspuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -202,6 +202,8 @@
     <ClCompile Include="MediaByteStream.cpp" />
     <ClCompile Include="MediaCapture.cpp" />
     <ClCompile Include="MediaCaptureForm.cpp" />
+    <ClCompile Include="MediaDecoder.cpp" />
+    <ClCompile Include="MediaEncoder.cpp" />
     <ClCompile Include="MediaPlayer.cpp" />
     <ClCompile Include="MediaPlayerForm.cpp" />
     <ClCompile Include="MediaPreview.cpp" />
@@ -230,11 +232,14 @@
     <ClInclude Include="CaptureTabControl.h" />
     <ClInclude Include="CaptureVideoAudioPage.h" />
     <ClInclude Include="CaptureVideoPage.h" />
+    <ClInclude Include="CodecType.h" />
     <ClInclude Include="ContentEnabler.h" />
     <ClInclude Include="CriticalSectionHandler.h" />
     <ClInclude Include="MediaByteStream.h" />
     <ClInclude Include="MediaCapture.h" />
     <ClInclude Include="MediaCaptureForm.h" />
+    <ClInclude Include="MediaDecoder.h" />
+    <ClInclude Include="MediaEncoder.h" />
     <ClInclude Include="MediaGlobal.h" />
     <ClInclude Include="MediaPlayer.h" />
     <ClInclude Include="MediaPlayerForm.h" />

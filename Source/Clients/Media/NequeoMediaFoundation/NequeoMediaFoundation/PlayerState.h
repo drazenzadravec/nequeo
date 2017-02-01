@@ -220,6 +220,25 @@ namespace Nequeo {
 				/// </summary>
 				DisallowScreenCapture = 1,
 			};
+
+			/// <summary>
+			/// Media source current state.
+			/// </summary>
+			enum MediaSourceState
+			{
+				/// <summary>
+				/// Read source.
+				/// </summary>
+				MediaClosed = 0,
+				/// <summary>
+				/// Read source.
+				/// </summary>
+				ReadSourceReady = 1,
+				/// <summary>
+				/// Read source.
+				/// </summary>
+				WriteSourceReady = 2,
+			};
 		}
 	}
 }

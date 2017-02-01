@@ -51,7 +51,6 @@ namespace Nequeo {
 			HRESULT ConfigureVideoAudioEncoder(EncodingParameters&, IMFMediaType*, IMFMediaType*, IMFSinkWriter*, DWORD*, DWORD*);
 			HRESULT CopyAttribute(IMFAttributes*, IMFAttributes*, const GUID&);
 			
-
 			// Gets an interface pointer from a Media Foundation collection.
 			template <class IFACE>
 			HRESULT GetCollectionObject(IMFCollection *pCollection, DWORD index, IFACE **ppObject)

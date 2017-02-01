@@ -43,11 +43,14 @@ namespace Nequeo {
 	namespace Media {
 		namespace Foundation
 		{
+			/// <summary>
+			/// Providers the base for a media foundation source read and writer.
+			/// </summary>
 			class MediaSource : public IUnknown
 			{
 			public:
 				/// <summary>
-				/// Static class method to create the MediaCapture object.
+				/// Static class method to create the MediaSource object.
 				/// </summary>
 				/// <param name="hwnd">The handle to the application owner.</param>
 				/// <param name="hEvent">The handle to the window to receive notifications.</param>
@@ -90,6 +93,22 @@ namespace Nequeo {
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT OpenStream(IMFByteStream *pByteStream);
 
 				/// <summary>
+				/// Open a write file stream.
+				/// </summary>
+				/// <param name="pwszFileName">The path and file name to write data to.</param>
+				/// <param name="param">The encoding parameters.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT OpenWriteFile(const WCHAR *pwszFileName, const EncodingParameters& param);
+
+				/// <summary>
+				/// Open a write byte stream.
+				/// </summary>
+				/// <param name="pByteStream">The byte stream to write data to.</param>
+				/// <param name="param">The encoding parameters.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT OpenWriteStream(IMFByteStream *pByteStream, const EncodingParameters& param);
+
+				/// <summary>
 				/// Close a media source.
 				/// </summary>
 				/// <returns>The result of the operation.</returns>
@@ -103,6 +122,14 @@ namespace Nequeo {
 				/// <param name="hasAudio">True if the source contains audio; else false.</param>
 				/// <returns>The result of the operation.</returns>
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT MediaDetails(EncodingParameters& param, bool *hasVideo, bool *hasAudio);
+
+				/// <summary>
+				/// Get the media types.
+				/// </summary>
+				/// <param name="videoType">The video type details.</param>
+				/// <param name="audioType">The audio type details.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT MediaTypes(IMFMediaType **videoType, IMFMediaType **audioType);
 
 				/// <summary>
 				/// Read the current sample.
@@ -126,6 +153,14 @@ namespace Nequeo {
 					DWORD *pdwStreamFlags, 
 					LONGLONG *pllTimestamp, 
 					IMFSample **ppSample);
+
+				/// <summary>
+				/// Write the sample for the stream to the source writer.
+				/// </summary>
+				/// <param name="streamIndex">The current sample stream index.</param>
+				/// <param name="sample">The sample.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT WriteSample(DWORD streamIndex, IMFSample *sample);
 
 				/// <summary>
 				/// Seeks to a new position in the media source.
@@ -169,10 +204,65 @@ namespace Nequeo {
 				/// Copy the current sample data to the byte array.
 				/// </summary>
 				/// <param name="sample">The sample.</param>
-				/// <param name="data">The sample byte array.</param>
+				/// <param name="data">The sample byte array (caller must release the resource).</param>
 				/// <param name="dataLength">The sample byte array size.</param>
 				/// <returns>The result of the operation.</returns>
 				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT SampleToBytes(IMFSample *sample, BYTE **data, DWORD *dataLength);
+
+				/// <summary>
+				/// Create a bitmap from the sample byte array.
+				/// </summary>
+				/// <param name="data">The decompressed sample byte array.</param>
+				/// <param name="dataLength">The sample byte array size.</param>
+				/// <param name="bitmap">The sample bitmap.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT CreateBitmap(BYTE *data, DWORD dataLength, BITMAP *bitmap);
+
+				/// <summary>
+				/// Create a bitmap from the sample byte array.
+				/// </summary>
+				/// <param name="data">The decompressed sample byte array.</param>
+				/// <param name="dataLength">The sample byte array size.</param>
+				/// <param name="pwszFileName">The path and name of the file.</param>
+				/// <param name="param">The video frame size encoding parameters.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT CreateBitmap(BYTE *data, DWORD dataLength, const WCHAR *pwszFileName, const VideoFrameSize& param);
+
+				/// <summary>
+				/// Initialise and start the source writer.
+				/// </summary>
+				/// <param name="videoType">The video type details.</param>
+				/// <param name="audioType">The audio type details.</param>
+				/// <param name="param">The encoding parameters.</param>
+				/// <param name="videoStreamIndex">The none negative video stream index; else -1 if none exists.</param>
+				/// <param name="audioStreamIndex">The none negative audio stream index; else -1 if none exists.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT StartSourceWriter(
+					IMFMediaType *videoType, 
+					IMFMediaType *audioType, 
+					EncodingParameters& param,
+					DWORD *videoStreamIndex,
+					DWORD *audioStreamIndex);
+
+				/// <summary>
+				/// Set the notify state event handler.
+				/// </summary>
+				/// <param name="stateEvent">The user defined event handler.</param>
+				void SetNotifyStateEventHandler(HANDLE stateEvent)
+				{
+					// Assign the internal event.
+					_hNotifyStateEvent = stateEvent;
+				}
+
+				/// <summary>
+				/// Set the notify error event handler.
+				/// </summary>
+				/// <param name="errorEvent">The user defined event handler.</param>
+				void SetNotifyErrorEventHandler(HANDLE errorEvent)
+				{
+					// Assign the internal event.
+					_hNotifyErrorEvent = errorEvent;
+				}
 
 			protected:
 				/// <summary>
@@ -189,13 +279,56 @@ namespace Nequeo {
 				virtual ~MediaSource();
 
 				/// <summary>
+				/// Notifies the application when the state changes.
+				/// </summary>
+				void NotifyState()
+				{
+					// If posting the state messsage.
+					if (_hNotifyStateEvent != NULL)
+					{
+						// Trigger the notify state event handler.
+						SetEvent(_hNotifyStateEvent);
+					}
+
+					PostMessage(_hwndEvent, WM_APP_NOTIFY, (WPARAM)_mediaSourceState, (LPARAM)0);
+				}
+
+				/// <summary>
+				/// Notifies the application when an error occurs.
+				/// </summary>
+				/// <param name="hr">The handler result.</param>
+				void NotifyError(HRESULT hr)
+				{
+					_mediaSourceState = MediaClosed;
+
+					// If posting the error messsage.
+					if (_hNotifyErrorEvent != NULL)
+					{
+						// Trigger the notify error event handler.
+						SetEvent(_hNotifyErrorEvent);
+					}
+
+					PostMessage(_hwndEvent, WM_APP_ERROR, (WPARAM)hr, 0);
+				}
+
+				/// <summary>
 				/// Open a media source.
 				/// </summary>
 				/// <param name="pwszFileName">The path and file name to read data from.</param>
 				/// <param name="pByteStream">The byte stream to read data from.</param>
-				/// <param name="readFromFile">Read to file; else read from byte stream.</param>
+				/// <param name="readFromFile">Read from file; else read from byte stream.</param>
 				/// <returns>The result of the operation.</returns>
 				HRESULT OpenMediaSource(const WCHAR *pwszFileName, IMFByteStream *pByteStream, bool readFromFile = true);
+
+				/// <summary>
+				/// Open a write media source.
+				/// </summary>
+				/// <param name="pwszFileName">The path and file name to write data to.</param>
+				/// <param name="pByteStream">The byte stream to write data to.</param>
+				/// <param name="param">The encoding parameters.</param>
+				/// <param name="writeToFile">Write to file; else write to byte stream.</param>
+				/// <returns>The result of the operation.</returns>
+				HRESULT OpenWriteMediaSource(const WCHAR *pwszFileName, IMFByteStream *pByteStream, const EncodingParameters& param, bool writeToFile = true);
 
 				/// <summary>
 				/// Initializes the MediaPlayer object. This method is called by the
@@ -209,13 +342,19 @@ namespace Nequeo {
 				long                    _nRefCount;			// Reference count.
 				bool					_isOpen;
 				bool					_isSourceReader;
+				bool					_isSourceWriter;
 
 				IMFSourceReader			*_pSourceReader;
+				IMFSinkWriter           *_pSourceWriter;
 
 				HWND				    _hwndApp;
 				HWND				    _hwndEvent;			// App window to receive events.
 				HANDLE				    _hCloseEvent;		// Event to wait on while closing.
 				CRITICAL_SECTION        _critsec;
+
+				HANDLE					_hNotifyStateEvent;
+				HANDLE					_hNotifyErrorEvent;
+				MediaSourceState		_mediaSourceState;
 			};
 		}
 	}

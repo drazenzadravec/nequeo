@@ -39,6 +39,23 @@ namespace Nequeo {
 	namespace Media {
 		namespace Foundation
 		{
+			HRESULT ConfigureVideoAudioSourceEncoder(EncodingParameters&, IMFMediaType*, IMFMediaType*, IMFSinkWriter*, DWORD*, DWORD*);
+			HRESULT CopyAttributeSource(IMFAttributes*, IMFAttributes*, const GUID&);
+
+			// Gets an interface pointer from a Media Foundation collection.
+			template <class IFACE>
+			HRESULT GetCollectionObjectSource(IMFCollection *pCollection, DWORD index, IFACE **ppObject)
+			{
+				IUnknown *pUnk;
+				HRESULT hr = pCollection->GetElement(index, &pUnk);
+				if (SUCCEEDED(hr))
+				{
+					hr = pUnk->QueryInterface(IID_PPV_ARGS(ppObject));
+					pUnk->Release();
+				}
+				return hr;
+			}
+
 			/// <summary>
 			/// Constructor for the current class. Use static CreateInstance method to instantiate.
 			/// </summary>
@@ -49,10 +66,15 @@ namespace Nequeo {
 				_hwndApp(hwnd),
 				_hwndEvent(hEvent),
 				_pSourceReader(NULL),
+				_pSourceWriter(NULL),
 				_hCloseEvent(NULL),
+				_hNotifyStateEvent(NULL),
+				_hNotifyErrorEvent(NULL),
+				_mediaSourceState(MediaClosed),
 				_nRefCount(1),
 				_isOpen(false),
 				_isSourceReader(false),
+				_isSourceWriter(false),
 				_disposed(false)
 			{
 				// Initialize critical section.
@@ -79,7 +101,7 @@ namespace Nequeo {
 			}
 
 			/// <summary>
-			/// Static class method to create the MediaCapture object.
+			/// Static class method to create the MediaSource object.
 			/// </summary>
 			/// <param name="hwnd">The handle to the application owner.</param>
 			/// <param name="hEvent">The handle to the window to receive notifications.</param>
@@ -94,7 +116,7 @@ namespace Nequeo {
 				// Initialse the result to all is good.
 				HRESULT hr = S_OK;
 
-				// MediaCapture constructor sets the ref count to zero.
+				// MediaSource constructor sets the ref count to zero.
 				// Create method calls AddRef.
 				// Create a new medis source instance.
 				MediaSource *pSource = new MediaSource(hwnd, hEvent, hr);
@@ -196,6 +218,14 @@ namespace Nequeo {
 					_isSourceReader = false;
 				}
 
+				// If the writer exists. 
+				if (_pSourceWriter)
+				{
+					// Finalise the writer.
+					hr = _pSourceWriter->Finalize();
+					_isSourceWriter = false;
+				}
+
 				// Is open.
 				if (_isOpen)
 				{
@@ -209,6 +239,7 @@ namespace Nequeo {
 
 				// Safe release.
 				SafeRelease(&_pSourceReader);
+				SafeRelease(&_pSourceWriter);
 
 				// Leave critical section.
 				LeaveCriticalSection(&_critsec);
@@ -226,22 +257,26 @@ namespace Nequeo {
 				// Initialse the result to all is good.
 				HRESULT hr = S_OK;
 
-				// Create a new close player event handler.
-				_hCloseEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-
-				// If event was not created.
-				if (_hCloseEvent == NULL)
+				// If not open.
+				if (!_isOpen)
 				{
-					// Get the result value.
-					hr = __HRESULT_FROM_WIN32(GetLastError());
-				}
+					// Create a new close player event handler.
+					_hCloseEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 
-				// If successful creation of the close event.
-				if (SUCCEEDED(hr))
-				{
-					// Start up Media Foundation platform.
-					hr = MFStartup(MF_VERSION);
-					_isOpen = true;
+					// If event was not created.
+					if (_hCloseEvent == NULL)
+					{
+						// Get the result value.
+						hr = __HRESULT_FROM_WIN32(GetLastError());
+					}
+
+					// If successful creation of the close event.
+					if (SUCCEEDED(hr))
+					{
+						// Start up Media Foundation platform.
+						hr = MFStartup(MF_VERSION);
+						_isOpen = true;
+					}
 				}
 
 				// Return the result.
@@ -285,7 +320,7 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="pwszFileName">The path and file name to read data from.</param>
 			/// <param name="pByteStream">The byte stream to read data from.</param>
-			/// <param name="readFromFile">Read to file; else read from byte stream.</param>
+			/// <param name="readFromFile">Read from file; else read from byte stream.</param>
 			/// <returns>The result of the operation.</returns>
 			HRESULT MediaSource::OpenMediaSource(const WCHAR *pwszFileName, IMFByteStream *pByteStream, bool readFromFile)
 			{
@@ -316,6 +351,118 @@ namespace Nequeo {
 					_isSourceReader = true;
 				else
 					_isSourceReader = false;
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Open a write file stream.
+			/// </summary>
+			/// <param name="pwszFileName">The path and file name to write data to.</param>
+			/// <param name="param">The encoding parameters.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::OpenWriteFile(const WCHAR *pwszFileName, const EncodingParameters& param)
+			{
+				HRESULT hr = S_OK;
+
+				// Open the source.
+				hr = OpenWriteMediaSource(pwszFileName, NULL, param, true);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Open a write byte stream.
+			/// </summary>
+			/// <param name="pByteStream">The byte stream to write data to.</param>
+			/// <param name="param">The encoding parameters.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::OpenWriteStream(IMFByteStream *pByteStream, const EncodingParameters& param)
+			{
+				HRESULT hr = S_OK;
+
+				// Open the source.
+				hr = OpenWriteMediaSource(NULL, pByteStream, param, false);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Open a write media source.
+			/// </summary>
+			/// <param name="pwszFileName">The path and file name to write data to.</param>
+			/// <param name="pByteStream">The byte stream to write data to.</param>
+			/// <param name="param">The encoding parameters.</param>
+			/// <param name="writeToFile">Write to file; else write to byte stream.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::OpenWriteMediaSource(const WCHAR *pwszFileName, IMFByteStream *pByteStream, const EncodingParameters& param, bool writeToFile)
+			{
+				HRESULT hr = S_OK;
+
+				IMFAttributes *pAttributesByteStream = NULL;
+
+				// Initializes the media foundation.
+				hr = Initialize();
+
+				// If writing to file.
+				if (writeToFile)
+				{
+					// Get this audio device media source.
+					hr = MFCreateAttributes(&pAttributesByteStream, 1);
+
+					// Create the sink writer 
+					if (SUCCEEDED(hr))
+					{
+						// Set the MF_SINK_WRITER_DISABLE_THROTTLING.
+						hr = pAttributesByteStream->SetUINT32(MF_SINK_WRITER_DISABLE_THROTTLING, TRUE);
+					}
+
+					// Create sink writer from URL.
+					hr = MFCreateSinkWriterFromURL(
+						pwszFileName,
+						NULL,
+						NULL,
+						&_pSourceWriter
+					);
+				}
+				else
+				{
+					// Get this audio device media source.
+					hr = MFCreateAttributes(&pAttributesByteStream, 1);
+
+					// Create the sink writer 
+					if (SUCCEEDED(hr))
+					{
+						// Set the MF_TRANSCODE_CONTAINERTYPE.
+						hr = pAttributesByteStream->SetGUID(
+							MF_TRANSCODE_CONTAINERTYPE,
+							param.transcode
+						);
+					}
+
+					// Create the sink writer 
+					if (SUCCEEDED(hr))
+					{
+						// Create sink writer from URL.
+						hr = MFCreateSinkWriterFromURL(
+							NULL,
+							pByteStream,
+							pAttributesByteStream,
+							&_pSourceWriter
+						);
+					}
+				}
+
+				if (SUCCEEDED(hr))
+					_isSourceWriter = true;
+				else
+					_isSourceWriter = false;
+
+				// Safe release.
+				SafeRelease(&pAttributesByteStream);
 
 				// Return the result.
 				return hr;
@@ -497,6 +644,49 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Get the media types.
+			/// </summary>
+			/// <param name="videoType">The video type details.</param>
+			/// <param name="audioType">The audio type details.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::MediaTypes(IMFMediaType **videoType, IMFMediaType **audioType)
+			{
+				HRESULT hr = S_OK;
+
+				// If a source reader exists.
+				if (_isSourceReader)
+				{
+					// Get the media type.
+					hr = _pSourceReader->GetNativeMediaType(
+						(DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
+						0,  // Type index
+						videoType
+					);
+
+					if (SUCCEEDED(hr))
+						hr = S_OK;
+
+					// Get the media type.
+					hr = _pSourceReader->GetNativeMediaType(
+						(DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM,
+						0,  // Type index
+						audioType
+					);
+
+					if (SUCCEEDED(hr))
+						hr = S_OK;
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
 			/// Read the current sample.
 			/// </summary>
 			/// <param name="streamIndex">The stream to pull data from. The value can be any of the following.
@@ -567,6 +757,32 @@ namespace Nequeo {
 			}
 
 			/// <summary>
+			/// Write the sample for the stream to the source writer.
+			/// </summary>
+			/// <param name="streamIndex">The current sample stream index.</param>
+			/// <param name="sample">The sample.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::WriteSample(DWORD streamIndex, IMFSample *sample)
+			{
+				HRESULT hr = S_OK;
+
+				// If a source writer exists.
+				if (_isSourceWriter)
+				{
+					// Write the sample.
+					hr = _pSourceWriter->WriteSample(streamIndex, sample);
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
 			/// Seeks to a new position in the media source.
 			/// </summary>
 			/// <param name="position">The position from which playback will be started. The units are specified by the timeFormat parameter. If the timeFormat parameter is GUID_NULL, set the variant type to VT_I8.</param>
@@ -616,6 +832,7 @@ namespace Nequeo {
 
 					// Set the position.
 					var.hVal = position;
+					var.vt = VT_I8;
 
 					// Set the new position.
 					hr = _pSourceReader->SetCurrentPosition(timeFormat, var);
@@ -654,6 +871,7 @@ namespace Nequeo {
 
 					// Set the position.
 					var.hVal.QuadPart = position;
+					var.vt = VT_I8;
 
 					// Set the new position.
 					hr = _pSourceReader->SetCurrentPosition(timeFormat, var);
@@ -716,7 +934,7 @@ namespace Nequeo {
 			/// Copy the current sample data to the byte array.
 			/// </summary>
 			/// <param name="sample">The sample.</param>
-			/// <param name="data">The sample byte array.</param>
+			/// <param name="data">The sample byte array (caller must release the resource).</param>
 			/// <param name="dataLength">The sample byte array size.</param>
 			/// <returns>The result of the operation.</returns>
 			HRESULT MediaSource::SampleToBytes(IMFSample *sample, BYTE **data, DWORD *dataLength)
@@ -724,58 +942,599 @@ namespace Nequeo {
 				HRESULT hr = S_OK;
 				*dataLength = 0;
 
-				// If a source reader exists.
-				if (_isSourceReader)
+				// Get the complete buffer.
+				IMFMediaBuffer *pBuffer = NULL;
+				hr = sample->ConvertToContiguousBuffer(&pBuffer);
+
+				if (SUCCEEDED(hr))
 				{
-					// Get the complete buffer.
-					IMFMediaBuffer *pBuffer = NULL;
-					hr = sample->ConvertToContiguousBuffer(&pBuffer);
+					// Lock the buffer.
+					DWORD length;
+					BYTE *pData = NULL;
+					hr = pBuffer->Lock(&pData, NULL, &length);
 
 					if (SUCCEEDED(hr))
 					{
-						// Get the data length.
-						DWORD length;
-						hr = pBuffer->GetCurrentLength(&length);
+						// Set the data array length.
+						*dataLength = length;
 
-						if (SUCCEEDED(hr))
+						// Create the byte[] that will contain
+						// the current sample data.
+						*data = new BYTE[length];
+
+						// Copy the sample buffer to the byte[] data.
+						memcpy_s(*data, length, pData, length);
+					}
+
+					// Unlock the buffer.
+					if (pData)
+					{
+						hr = pBuffer->Unlock();
+					}
+				}
+
+				// Safe release.
+				SafeRelease(&pBuffer);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Create a bitmap from the sample byte array.
+			/// </summary>
+			/// <param name="data">The decompressed sample byte array.</param>
+			/// <param name="dataLength">The sample byte array size.</param>
+			/// <param name="bitmap">The sample bitmap.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::CreateBitmap(BYTE *data, DWORD dataLength, BITMAP *bitmap)
+			{
+				HRESULT hr = S_OK;
+
+				// Assign the frame data.
+				bitmap->bmBits = data;
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Create a bitmap from the sample byte array.
+			/// </summary>
+			/// <param name="data">The decompressed sample byte array.</param>
+			/// <param name="dataLength">The sample byte array size.</param>
+			/// <param name="pwszFileName">The path and name of the file.</param>
+			/// <param name="param">The video frame size encoding parameters.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::CreateBitmap(BYTE *data, DWORD dataLength, const WCHAR *pwszFileName, const VideoFrameSize& param)
+			{
+				HRESULT hr = S_OK;
+
+				LONG bmpWidth = (LONG)param.width;
+				LONG bmpHeight = (LONG)param.height;
+
+				BITMAPFILEHEADER   bmfHeader;
+				BITMAPINFOHEADER   bi;
+
+				bi.biSize = sizeof(BITMAPINFOHEADER);
+				bi.biWidth = bmpWidth;
+				bi.biHeight = bmpHeight;
+				bi.biPlanes = 1;
+				bi.biBitCount = 32;
+				bi.biCompression = BI_RGB;
+				bi.biSizeImage = 0;
+				bi.biXPelsPerMeter = 0;
+				bi.biYPelsPerMeter = 0;
+				bi.biClrUsed = 0;
+				bi.biClrImportant = 0;
+
+				// A file is created, this is where we will save the screen capture.
+				HANDLE hFile = CreateFile(
+					pwszFileName,
+					GENERIC_WRITE,
+					0,
+					NULL,
+					CREATE_ALWAYS,
+					FILE_ATTRIBUTE_NORMAL, NULL);
+
+				// Add the size of the headers to the size of the bitmap to get the total file size
+				DWORD dwSizeofDIB = dataLength + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+
+				//Offset to where the actual bitmap bits start.
+				bmfHeader.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER);
+
+				// Size of the file
+				bmfHeader.bfSize = dwSizeofDIB;
+
+				// bfType must always be BM for Bitmaps
+				bmfHeader.bfType = 0x4D42; //BM   
+
+				DWORD dwBytesWritten = 0;
+				WriteFile(hFile, (LPSTR)&bmfHeader, sizeof(BITMAPFILEHEADER), &dwBytesWritten, NULL);
+				WriteFile(hFile, (LPSTR)&bi, sizeof(BITMAPINFOHEADER), &dwBytesWritten, NULL);
+				WriteFile(hFile, data, dataLength, &dwBytesWritten, NULL);
+
+				// Close the handle for the file that was created
+				CloseHandle(hFile);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Initialise and start the source writer.
+			/// </summary>
+			/// <param name="videoType">The video type details.</param>
+			/// <param name="audioType">The audio type details.</param>
+			/// <param name="param">The encoding parameters.</param>
+			/// <param name="videoStreamIndex">The none negative video stream index; else -1 if none exists.</param>
+			/// <param name="audioStreamIndex">The none negative audio stream index; else -1 if none exists.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::StartSourceWriter(
+				IMFMediaType *videoType, 
+				IMFMediaType *audioType, 
+				EncodingParameters& param,
+				DWORD *videoStreamIndex,
+				DWORD *audioStreamIndex)
+			{
+				HRESULT hr = S_OK;
+
+				*videoStreamIndex = -1;
+				*audioStreamIndex = -1;
+
+				// If a source writer exists.
+				if (_isSourceWriter)
+				{
+					DWORD sink_stream_video = 0;
+					DWORD sink_stream_audio = 0;
+
+					// Configure the media sink writer.
+					hr = ConfigureVideoAudioSourceEncoder(param, videoType, audioType, _pSourceWriter, &sink_stream_video, &sink_stream_audio);
+
+					if (SUCCEEDED(hr))
+					{
+						// Set the video stream index.
+						if (sink_stream_video >= 0)
+							*videoStreamIndex = sink_stream_video;
+
+						// Set the audio stream index.
+						if (sink_stream_audio >= 0)
+							*audioStreamIndex = sink_stream_audio;
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// If a video type exists.
+						if (videoType != NULL)
 						{
-							// Assign the data length.
-							*dataLength = length;
-
-							// If sample data exists in the buffer.
-							if (*dataLength > 0)
-							{
-								// Lock the buffer.
-								BYTE *pData = NULL;
-								hr = pBuffer->Lock(&pData, NULL, NULL);
-
-								if (SUCCEEDED(hr))
-								{
-									// Create the byte[] that will contain
-									// the current sample data.
-									*data = new BYTE[length];
-
-									// Copy the sample buffer to the byte[] data.
-									memcpy_s(*data, length, pData, length);
-								}
-
-								// Unlock the buffer.
-								if (pData)
-								{
-									hr = pBuffer->Unlock();
-								}
-							}
+							// Set the input media type.
+							hr = _pSourceWriter->SetInputMediaType(sink_stream_video, videoType, NULL);
 						}
 					}
 
-					// Safe release.
-					SafeRelease(&pBuffer);
+					if (SUCCEEDED(hr))
+					{
+						// If a audio type exists.
+						if (audioType != NULL)
+						{
+							// Set the input media type.
+							hr = _pSourceWriter->SetInputMediaType(sink_stream_audio, audioType, NULL);
+						}
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Begin writing.
+						hr = _pSourceWriter->BeginWriting();
+					}
 				}
 				else
 				{
 					// Failed.
 					hr = ((HRESULT)-1L);
 				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Configure video and audio encoder.
+			/// </summary>
+			/// <param name="params">The encoding parameters.</param>
+			/// <param name="pType">The media type.</param>
+			/// <param name="pWriter">The sink writer.</param>
+			/// <param name="pdwStreamIndex">The stream index.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT ConfigureVideoAudioSourceEncoder(
+				EncodingParameters& params,
+				IMFMediaType *pVideoType,
+				IMFMediaType *pAudioType,
+				IMFSinkWriter *pWriter,
+				DWORD *pdwVideoStreamIndex,
+				DWORD *pdwAudioStreamIndex)
+			{
+				HRESULT hr = S_OK;
+
+				IMFMediaType *pVideoType2 = NULL;
+				IMFMediaType *pAudioType2 = NULL;
+				IMFCollection *pAvailableTypes = NULL;
+				IMFAttributes *pAttributes = NULL;
+
+				// Get the media type.
+				hr = MFCreateMediaType(&pVideoType2);
+				hr = MFCreateMediaType(&pAudioType2);
+
+				*pdwVideoStreamIndex = -1;
+				*pdwAudioStreamIndex = -1;
+
+				// If a video type exists or if a audio type exists.
+				if (pVideoType != NULL || pAudioType != NULL)
+				{
+					// If a video type exists.
+					if (pVideoType != NULL)
+					{
+						if (SUCCEEDED(hr))
+						{
+							// Set the media video
+							hr = pVideoType2->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Set the subtype.
+							hr = pVideoType2->SetGUID(MF_MT_SUBTYPE, params.video.subtype);
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Set the bit rate.
+							if (params.video.bitRate > 0)
+								hr = pVideoType2->SetUINT32(MF_MT_AVG_BITRATE, params.video.bitRate);
+							else
+							{
+								hr = CopyAttributeSource(pVideoType, pVideoType2, MF_MT_AVG_BITRATE);
+								if (SUCCEEDED(hr))
+								{
+									UINT32 bitRate;
+
+									// Get the default bit rate.
+									hr = pVideoType2->GetUINT32(MF_MT_AVG_BITRATE, &bitRate);
+									if (SUCCEEDED(hr))
+									{
+										params.video.bitRate = bitRate;
+									}
+								}
+							}
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Set the frame size.
+							if (params.video.frameSize.width > 0 && params.video.frameSize.height > 0)
+								hr = MFSetAttributeSize(pVideoType2, MF_MT_FRAME_SIZE, params.video.frameSize.width, params.video.frameSize.height);
+							else
+							{
+								hr = CopyAttributeSource(pVideoType, pVideoType2, MF_MT_FRAME_SIZE);
+								if (SUCCEEDED(hr))
+								{
+									UINT32 width;
+									UINT32 height;
+
+									// Get the default frame size.
+									hr = MFGetAttributeSize(pVideoType, MF_MT_FRAME_SIZE, &width, &height);
+									if (SUCCEEDED(hr))
+									{
+										params.video.frameSize.width = width;
+										params.video.frameSize.height = height;
+									}
+								}
+							}
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Set the frame rate.
+							if (params.video.frameRate.numerator > 0 && params.video.frameRate.denominator > 0)
+								hr = MFSetAttributeRatio(pVideoType2, MF_MT_FRAME_RATE, params.video.frameRate.numerator, params.video.frameRate.denominator);
+							else
+							{
+								hr = CopyAttributeSource(pVideoType, pVideoType2, MF_MT_FRAME_RATE);
+								if (SUCCEEDED(hr))
+								{
+									UINT32 numerator;
+									UINT32 denominator;
+
+									// Get the default frame rate.
+									hr = MFGetAttributeRatio(pVideoType, MF_MT_FRAME_RATE, &numerator, &denominator);
+									if (SUCCEEDED(hr))
+									{
+										params.video.frameRate.numerator = numerator;
+										params.video.frameRate.denominator = denominator;
+									}
+								}
+							}
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Copy the apect ratio.
+							if (params.video.aspectRatio.numerator > 0 && params.video.aspectRatio.denominator > 0)
+								hr = MFSetAttributeRatio(pVideoType2, MF_MT_PIXEL_ASPECT_RATIO, params.video.aspectRatio.numerator, params.video.aspectRatio.denominator);
+							else
+							{
+								hr = CopyAttributeSource(pVideoType, pVideoType2, MF_MT_PIXEL_ASPECT_RATIO);
+								if (SUCCEEDED(hr))
+								{
+									UINT32 numerator;
+									UINT32 denominator;
+
+									// Get the default frame rate.
+									hr = MFGetAttributeRatio(pVideoType, MF_MT_PIXEL_ASPECT_RATIO, &numerator, &denominator);
+									if (SUCCEEDED(hr))
+									{
+										params.video.aspectRatio.numerator = numerator;
+										params.video.aspectRatio.denominator = denominator;
+									}
+								}
+							}
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Copy the attribute interlace mode.
+							hr = CopyAttributeSource(pVideoType, pVideoType2, MF_MT_INTERLACE_MODE);
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Write to the stream.
+							hr = pWriter->AddStream(pVideoType2, pdwVideoStreamIndex);
+						}
+					}
+
+					// If a audio type exists.
+					if (pAudioType != NULL)
+					{
+						if (SUCCEEDED(hr))
+						{
+							// Set the media audio
+							hr = pAudioType2->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Set the subtype.
+							hr = pAudioType2->SetGUID(MF_MT_SUBTYPE, params.audio.subtype);
+						}
+
+						// Set the default colelction index for audio.
+						if (params.audio.collectionIndex >= 0)
+						{
+							hr = MFCreateAttributes(&pAttributes, 1);
+							if (SUCCEEDED(hr))
+							{
+								// Enumerate low latency media types
+								hr = pAttributes->SetUINT32(MF_LOW_LATENCY, TRUE);
+							}
+
+							if (SUCCEEDED(hr))
+							{
+								// Get a list of encoded output formats that are supported by the encoder.
+								hr = MFTranscodeGetAudioOutputAvailableTypes(params.audio.subtype, MFT_ENUM_FLAG_ALL | MFT_ENUM_FLAG_SORTANDFILTER,
+									pAttributes, &pAvailableTypes);
+							}
+
+							if (SUCCEEDED(hr))
+							{
+								// Assgin the collection object.
+								hr = GetCollectionObjectSource(pAvailableTypes, params.audio.collectionIndex, &pAudioType2);
+							}
+
+							// Get the collection index parameters that have been set.
+							if (SUCCEEDED(hr))
+							{
+								UINT32 sampleRate;
+								UINT32 channels;
+								UINT32 bitsPerSample;
+								UINT32 blockAlign;
+								UINT32 bytesPerSecond;
+
+								// Get the default sample rate.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.sampleRate = sampleRate;
+								}
+
+								// Get the default channels.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.channels = channels;
+								}
+
+								// Get the default bits per sample.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.bitsPerSample = bitsPerSample;
+								}
+
+								// Get the default block align.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.blockAlign = blockAlign;
+								}
+
+								// Get the default bytes per second.
+								hr = pAudioType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+								if (SUCCEEDED(hr))
+								{
+									params.audio.bytesPerSecond = bytesPerSecond;
+								}
+							}
+						}
+						else
+						{
+							if (SUCCEEDED(hr))
+							{
+								// Set the sample rate.
+								if (params.audio.sampleRate > 0)
+									hr = pAudioType2->SetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, params.audio.sampleRate);
+								else
+								{
+									hr = CopyAttributeSource(pAudioType, pAudioType2, MF_MT_AUDIO_SAMPLES_PER_SECOND);
+									if (SUCCEEDED(hr))
+									{
+										UINT32 sampleRate;
+
+										// Get the default sample rate.
+										hr = pAudioType2->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &sampleRate);
+										if (SUCCEEDED(hr))
+										{
+											params.audio.sampleRate = sampleRate;
+										}
+									}
+								}
+							}
+
+							if (SUCCEEDED(hr))
+							{
+								// Set the channels.
+								if (params.audio.channels > 0)
+									hr = pAudioType2->SetUINT32(MF_MT_AUDIO_NUM_CHANNELS, params.audio.channels);
+								else
+								{
+									hr = CopyAttributeSource(pAudioType, pAudioType2, MF_MT_AUDIO_NUM_CHANNELS);
+									if (SUCCEEDED(hr))
+									{
+										UINT32 channels;
+
+										// Get the default channels.
+										hr = pAudioType2->GetUINT32(MF_MT_AUDIO_NUM_CHANNELS, &channels);
+										if (SUCCEEDED(hr))
+										{
+											params.audio.channels = channels;
+										}
+									}
+								}
+							}
+
+							if (SUCCEEDED(hr))
+							{
+								// Set the bits per sample.
+								if (params.audio.bitsPerSample > 0)
+									hr = pAudioType2->SetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, params.audio.bitsPerSample);
+								else
+								{
+									hr = CopyAttributeSource(pAudioType, pAudioType2, MF_MT_AUDIO_BITS_PER_SAMPLE);
+									if (SUCCEEDED(hr))
+									{
+										UINT32 bitsPerSample;
+
+										// Get the default bits per sample.
+										hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &bitsPerSample);
+										if (SUCCEEDED(hr))
+										{
+											params.audio.bitsPerSample = bitsPerSample;
+										}
+									}
+								}
+							}
+
+							if (SUCCEEDED(hr))
+							{
+								// Set the block align.
+								if (params.audio.blockAlign > 0)
+									hr = pAudioType2->SetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, params.audio.blockAlign);
+								else
+								{
+									hr = CopyAttributeSource(pAudioType, pAudioType2, MF_MT_AUDIO_BLOCK_ALIGNMENT);
+									if (SUCCEEDED(hr))
+									{
+										UINT32 blockAlign;
+
+										// Get the default block align.
+										hr = pAudioType2->GetUINT32(MF_MT_AUDIO_BLOCK_ALIGNMENT, &blockAlign);
+										if (SUCCEEDED(hr))
+										{
+											params.audio.blockAlign = blockAlign;
+										}
+									}
+								}
+							}
+
+							if (SUCCEEDED(hr))
+							{
+								// Set the bytes per second.
+								if (params.audio.bytesPerSecond > 0)
+									hr = pAudioType2->SetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, params.audio.bytesPerSecond);
+								else
+								{
+									hr = CopyAttributeSource(pAudioType, pAudioType2, MF_MT_AUDIO_AVG_BYTES_PER_SECOND);
+									if (SUCCEEDED(hr))
+									{
+										UINT32 bytesPerSecond;
+
+										// Get the default bytes per second.
+										hr = pAudioType2->GetUINT32(MF_MT_AUDIO_AVG_BYTES_PER_SECOND, &bytesPerSecond);
+										if (SUCCEEDED(hr))
+										{
+											params.audio.bytesPerSecond = bytesPerSecond;
+										}
+									}
+								}
+							}
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Write to the stream.
+							hr = pWriter->AddStream(pAudioType2, pdwAudioStreamIndex);
+						}
+					}
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Safe release.
+				SafeRelease(&pVideoType2);
+				SafeRelease(&pAudioType2);
+				SafeRelease(&pAvailableTypes);
+				SafeRelease(&pAttributes);
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Copy the attributes.
+			/// </summary>
+			/// <param name="pSrc">The attribute source.</param>
+			/// <param name="pDest">The attribute destination.</param>
+			/// <param name="key">The key GUID.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT CopyAttributeSource(IMFAttributes *pSrc, IMFAttributes *pDest, const GUID& key)
+			{
+				PROPVARIANT var;
+				PropVariantInit(&var);
+
+				HRESULT hr = S_OK;
+
+				// Get the source.
+				hr = pSrc->GetItem(key, &var);
+				if (SUCCEEDED(hr))
+				{
+					// Set into destination.
+					hr = pDest->SetItem(key, var);
+				}
+
+				PropVariantClear(&var);
 
 				// Return the result.
 				return hr;
