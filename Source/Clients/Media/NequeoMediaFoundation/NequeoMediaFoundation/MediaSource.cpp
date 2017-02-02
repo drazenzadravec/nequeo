@@ -39,6 +39,7 @@ namespace Nequeo {
 	namespace Media {
 		namespace Foundation
 		{
+			HRESULT ConfigureVideoAudioSourceEncoder(IMFMediaType*, IMFMediaType*, IMFSinkWriter*, DWORD*, DWORD*);
 			HRESULT ConfigureVideoAudioSourceEncoder(EncodingParameters&, IMFMediaType*, IMFMediaType*, IMFSinkWriter*, DWORD*, DWORD*);
 			HRESULT CopyAttributeSource(IMFAttributes*, IMFAttributes*, const GUID&);
 
@@ -1066,6 +1067,81 @@ namespace Nequeo {
 			/// </summary>
 			/// <param name="videoType">The video type details.</param>
 			/// <param name="audioType">The audio type details.</param>
+			/// <param name="videoStreamIndex">The none negative video stream index; else -1 if none exists.</param>
+			/// <param name="audioStreamIndex">The none negative audio stream index; else -1 if none exists.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT MediaSource::StartSourceWriter(
+				IMFMediaType *videoType,
+				IMFMediaType *audioType,
+				DWORD *videoStreamIndex,
+				DWORD *audioStreamIndex)
+			{
+				HRESULT hr = S_OK;
+
+				*videoStreamIndex = -1;
+				*audioStreamIndex = -1;
+
+				// If a source writer exists.
+				if (_isSourceWriter)
+				{
+					DWORD sink_stream_video = 0;
+					DWORD sink_stream_audio = 0;
+
+					// Configure the media sink writer.
+					hr = ConfigureVideoAudioSourceEncoder(videoType, audioType, _pSourceWriter, &sink_stream_video, &sink_stream_audio);
+
+					if (SUCCEEDED(hr))
+					{
+						// Set the video stream index.
+						if (sink_stream_video >= 0)
+							*videoStreamIndex = sink_stream_video;
+
+						// Set the audio stream index.
+						if (sink_stream_audio >= 0)
+							*audioStreamIndex = sink_stream_audio;
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// If a video type exists.
+						if (videoType != NULL)
+						{
+							// Set the input media type.
+							hr = _pSourceWriter->SetInputMediaType(sink_stream_video, videoType, NULL);
+						}
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// If a audio type exists.
+						if (audioType != NULL)
+						{
+							// Set the input media type.
+							hr = _pSourceWriter->SetInputMediaType(sink_stream_audio, audioType, NULL);
+						}
+					}
+
+					if (SUCCEEDED(hr))
+					{
+						// Begin writing.
+						hr = _pSourceWriter->BeginWriting();
+					}
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Initialise and start the source writer.
+			/// </summary>
+			/// <param name="videoType">The video type details.</param>
+			/// <param name="audioType">The audio type details.</param>
 			/// <param name="param">The encoding parameters.</param>
 			/// <param name="videoStreamIndex">The none negative video stream index; else -1 if none exists.</param>
 			/// <param name="audioStreamIndex">The none negative audio stream index; else -1 if none exists.</param>
@@ -1126,6 +1202,70 @@ namespace Nequeo {
 					{
 						// Begin writing.
 						hr = _pSourceWriter->BeginWriting();
+					}
+				}
+				else
+				{
+					// Failed.
+					hr = ((HRESULT)-1L);
+				}
+
+				// Return the result.
+				return hr;
+			}
+
+			/// <summary>
+			/// Configure video and audio encoder.
+			/// </summary>
+			/// <param name="pType">The media type.</param>
+			/// <param name="pWriter">The sink writer.</param>
+			/// <param name="pdwStreamIndex">The stream index.</param>
+			/// <returns>The result of the operation.</returns>
+			HRESULT ConfigureVideoAudioSourceEncoder(
+				IMFMediaType *pVideoType,
+				IMFMediaType *pAudioType,
+				IMFSinkWriter *pWriter,
+				DWORD *pdwVideoStreamIndex,
+				DWORD *pdwAudioStreamIndex)
+			{
+				HRESULT hr = S_OK;
+
+				*pdwVideoStreamIndex = -1;
+				*pdwAudioStreamIndex = -1;
+
+				// If a video type exists or if a audio type exists.
+				if (pVideoType != NULL || pAudioType != NULL)
+				{
+					// If a video type exists.
+					if (pVideoType != NULL)
+					{
+						if (SUCCEEDED(hr))
+						{
+							// Set the media video
+							hr = pVideoType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Write to the stream.
+							hr = pWriter->AddStream(pVideoType, pdwVideoStreamIndex);
+						}
+					}
+
+					// If a audio type exists.
+					if (pAudioType != NULL)
+					{
+						if (SUCCEEDED(hr))
+						{
+							// Set the media audio
+							hr = pAudioType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
+						}
+
+						if (SUCCEEDED(hr))
+						{
+							// Write to the stream.
+							hr = pWriter->AddStream(pAudioType, pdwAudioStreamIndex);
+						}
 					}
 				}
 				else

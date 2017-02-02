@@ -233,6 +233,20 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="videoType">The video type details.</param>
 				/// <param name="audioType">The audio type details.</param>
+				/// <param name="videoStreamIndex">The none negative video stream index; else -1 if none exists.</param>
+				/// <param name="audioStreamIndex">The none negative audio stream index; else -1 if none exists.</param>
+				/// <returns>The result of the operation.</returns>
+				EXPORT_NEQUEO_MEDIA_FOUNDATION_API HRESULT StartSourceWriter(
+					IMFMediaType *videoType,
+					IMFMediaType *audioType,
+					DWORD *videoStreamIndex,
+					DWORD *audioStreamIndex);
+
+				/// <summary>
+				/// Initialise and start the source writer.
+				/// </summary>
+				/// <param name="videoType">The video type details.</param>
+				/// <param name="audioType">The audio type details.</param>
 				/// <param name="param">The encoding parameters.</param>
 				/// <param name="videoStreamIndex">The none negative video stream index; else -1 if none exists.</param>
 				/// <param name="audioStreamIndex">The none negative audio stream index; else -1 if none exists.</param>
