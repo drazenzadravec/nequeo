@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoHttpUIClient", "NequeoHttpUIClient\NequeoHttpUIClient.vcxproj", "{907248D8-14F6-452A-B10C-E41AC30AE62B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoHttpUIClientWin", "NequeoHttpUIClientWin\NequeoHttpUIClientWin.vcxproj", "{FD12E716-2F86-4C7C-8834-17632DF5C6CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Debug|x64.ActiveCfg = Debug|x64
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Debug|x64.Build.0 = Debug|x64
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Debug|x86.ActiveCfg = Debug|Win32
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Debug|x86.Build.0 = Debug|Win32
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Release|x64.ActiveCfg = Release|x64
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Release|x64.Build.0 = Release|x64
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Release|x86.ActiveCfg = Release|Win32
+		{907248D8-14F6-452A-B10C-E41AC30AE62B}.Release|x86.Build.0 = Release|Win32
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Debug|x64.ActiveCfg = Debug|x64
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Debug|x64.Build.0 = Debug|x64
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Debug|x86.ActiveCfg = Debug|Win32
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Debug|x86.Build.0 = Debug|Win32
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Release|x64.ActiveCfg = Release|x64
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Release|x64.Build.0 = Release|x64
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Release|x86.ActiveCfg = Release|Win32
+		{FD12E716-2F86-4C7C-8834-17632DF5C6CF}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
