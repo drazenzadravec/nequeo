@@ -35,11 +35,44 @@
 
 using namespace System;
 using namespace System::Numerics;
+using namespace System::Collections::Generic;
 
 namespace Nequeo 
 {
 	namespace Math 
 	{
+		///	<summary>
+		///	MarshalString
+		///	</summary>
+		/// <param name="s">The string.</param>
+		/// <param name="os">The native string.</param>
+		void MarshalString(String^ s, std::string& os)
+		{
+			if (!String::IsNullOrEmpty(s))
+			{
+				using namespace Runtime::InteropServices;
+				const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+				os = chars;
+				Marshal::FreeHGlobal(IntPtr((void*)chars));
+			}
+		}
+
+		///	<summary>
+		///	MarshalString
+		///	</summary>
+		/// <param name="s">The string.</param>
+		/// <param name="os">The native string.</param>
+		void MarshalString(String^ s, std::wstring& os)
+		{
+			if (!String::IsNullOrEmpty(s))
+			{
+				using namespace Runtime::InteropServices;
+				const wchar_t* chars = (const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
+				os = chars;
+				Marshal::FreeHGlobal(IntPtr((void*)chars));
+			}
+		}
+
 		///	<summary>
 		///	Math generics.
 		///	</summary>
@@ -51,13 +84,54 @@ namespace Nequeo
 				MathGenerics();
 				virtual ~MathGenerics();
 				
+				///	<summary>
+				///	Multiply two numbers.
+				///	</summary>
+				/// <param name="one">The first number.</param>
+				/// <param name="two">The second number.</param>
+				/// <returns>The result of the operation.</returns>
 				generic <typename R>
 				R Multiply(R one, R two);
+
+				///	<summary>
+				///	Divide two numbers.
+				///	</summary>
+				/// <param name="one">The first number.</param>
+				/// <param name="two">The second number.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R Divide(R one, R two);
+
+				///	<summary>
+				///	Execute a math expression.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R Expression(System::String^ expression);
+
+				///	<summary>
+				///	Execute a math expression.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param variableName="x">The variable x name (e.g 'x').</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R Expression(System::String^ expression, R x, System::String^ variableName);
+
+				///	<summary>
+				///	Execute a math expression.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <param variables="x">The multi variable names and values.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+			    R ExpressionMulti(System::String^ expression, Dictionary<System::String^, R>^ variables);
 
 			private:
 				// Fields
 				bool m_disposed;
-
 		};
 	}
 }
