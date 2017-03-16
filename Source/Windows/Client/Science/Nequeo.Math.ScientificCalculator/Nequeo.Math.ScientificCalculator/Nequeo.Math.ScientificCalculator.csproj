@@ -40,6 +40,12 @@
     <ApplicationIcon>calculator.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nequeo">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.dll</HintPath>
+    </Reference>
+    <Reference Include="Nequeo.Linq">
+      <HintPath>..\..\..\..\..\References\Staging\Nequeo.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="Nequeo.Math">
       <HintPath>..\..\..\..\..\References\Staging_x64\Nequeo.Math.dll</HintPath>
     </Reference>
@@ -48,6 +54,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,6 +77,9 @@
     <Compile Include="UI\ResultWindow.xaml.cs">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ScientificCalculatorControl.xaml.cs">
+      <DependentUpon>ScientificCalculatorControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,6 +95,10 @@
     <Page Include="UI\ResultWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ScientificCalculatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +148,7 @@
     <Content Include="Doc\ScientificDocument.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Plus.ico" />
     <Resource Include="Doc\ScientificDocument_files\colorschememapping.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

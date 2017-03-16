@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="Nequeo.Math.ScientificCalculator.UI.ScientificCalculatorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nequeo.Math.ScientificCalculator.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="850" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Row1" Height="70" />
+            <RowDefinition Name="Row2" Height="150*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style x:Key="expressionStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="AcceptsReturn" Value="true" />
+            </Style>
+        </Grid.Resources>
+        <Grid Grid.Row="0" Margin="1,1,1,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Name="OpRow1" Height="30" />
+                <RowDefinition Name="OpRow2" Height="5" />
+                <RowDefinition Name="OpRow3" Height="30" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,1,0,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Name="CxColumn0" Width="100" />
+                    <ColumnDefinition Name="CxColumn1" Width="5" />
+                    <ColumnDefinition Name="CxColumn2" Width="200" />
+                    <ColumnDefinition Name="CxColumn3" Width="5" />
+                    <ColumnDefinition Name="CxColumn4" Width="150" />
+                    <ColumnDefinition Name="CxColumn5" Width="5" />
+                    <ColumnDefinition Name="CxColumn6" Width="150*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Variable Name(s)" />
+                <TextBox x:Name="variableNamesText" Grid.Column="2" Width="200" TextChanged="variableNamesText_TextChanged" />
+                <ComboBox x:Name="customExceuteOp" Grid.Column="4" SelectionChanged="customExceuteOp_SelectionChanged" />
+            </Grid>
+            <Grid Grid.Row="2" Margin="0,1,0,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Name="ExColumn0" Width="100" />
+                    <ColumnDefinition Name="ExColumn1" Width="5" />
+                    <ColumnDefinition Name="ExColumn2" Width="200" />
+                    <ColumnDefinition Name="ExColumn3" Width="5" />
+                    <ColumnDefinition Name="ExColumn4" Width="330" />
+                    <ColumnDefinition Name="ExColumn5" Width="5" />
+                    <ColumnDefinition Name="ExColumn6" Width="150*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Variable Value(s)" />
+                <TextBox x:Name="variableValuesText" Grid.Column="2" Width="200" TextChanged="variableValuesText_TextChanged" />
+                <Grid x:Name="gridExtractOpsIntegrate" Grid.Column="4" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="IntegrateColumn0" Width="100" />
+                        <ColumnDefinition Name="IntegrateColumn1" Width="5" />
+                        <ColumnDefinition Name="IntegrateColumn2" Width="50" />
+                        <ColumnDefinition Name="IntegrateColumn3" Width="5" />
+                        <ColumnDefinition Name="IntegrateColumn4" Width="100" />
+                        <ColumnDefinition Name="IntegrateColumn5" Width="5" />
+                        <ColumnDefinition Name="IntegrateColumn6" Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Lower Bound (a)" />
+                    <TextBox x:Name="aVariableIntegrate" Grid.Column="2" Width="50" />
+                    <Label Grid.Column="4" Content="Upper Bound (b)" />
+                    <TextBox x:Name="bVariableIntegrate" Grid.Column="6" Width="50" />
+                </Grid>
+                <Grid x:Name="gridExtractOpsDerivative" Grid.Column="4" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="DerivativeColumn0" Width="70" />
+                        <ColumnDefinition Name="DerivativeColumn1" Width="5" />
+                        <ColumnDefinition Name="DerivativeColumn2" Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Variable (x)" />
+                    <TextBox x:Name="xVariableDerivative" Grid.Column="2" Width="50" />
+                </Grid>
+                <Grid x:Name="gridExtractOpsLinearAlgebra" Grid.Column="4" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="LinearAlgebraColumn0" Width="100" />
+                        <ColumnDefinition Name="LinearAlgebraColumn1" Width="5" />
+                        <ColumnDefinition Name="LinearAlgebraColumn2" Width="50" />
+                        <ColumnDefinition Name="LinearAlgebraColumn3" Width="5" />
+                        <ColumnDefinition Name="LinearAlgebraColumn4" Width="70" />
+                        <ColumnDefinition Name="LinearAlgebraColumn5" Width="5" />
+                        <ColumnDefinition Name="LinearAlgebraColumn6" Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="A rows, columns" />
+                    <TextBox x:Name="aColumnsRowsLinearAlgebra" Grid.Column="2" Width="50" />
+                    <Label Grid.Column="4" Content="B columns" />
+                    <TextBox x:Name="bColumnsLinearAlgebra" Grid.Column="6" Width="50" />
+                </Grid>
+                <Grid x:Name="gridExtractOpsEquationRoot" Grid.Column="4" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="EquationRootColumn0" Width="100" />
+                        <ColumnDefinition Name="EquationRootColumn1" Width="5" />
+                        <ColumnDefinition Name="EquationRootColumn2" Width="50" />
+                        <ColumnDefinition Name="EquationRootColumn3" Width="5" />
+                        <ColumnDefinition Name="EquationRootColumn4" Width="100" />
+                        <ColumnDefinition Name="EquationRootColumn5" Width="5" />
+                        <ColumnDefinition Name="EquationRootColumn6" Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Lower Bound" />
+                    <TextBox x:Name="aVariableEquationRoot" Grid.Column="2" Width="50" />
+                    <Label Grid.Column="4" Content="Upper Bound" />
+                    <TextBox x:Name="bVariableEquationRoot" Grid.Column="6" Width="50" />
+                </Grid>
+                <Button x:Name="executeExpression" Grid.Column="6" Width="120" HorizontalAlignment="Right" Content="Execute Expression" IsEnabled="False" 
+                        Click="executeExpression_Click" ToolTip="Execute the expression." />
+            </Grid>
+        </Grid>
+        <TextBox x:Name="expressionWindowText" Grid.Row="1" Style="{StaticResource expressionStyle}" TextChanged="expressionWindowText_TextChanged" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+    </Grid>
+</UserControl>
