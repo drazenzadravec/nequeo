@@ -60,7 +60,7 @@ Nequeo::Math::MathGenerics<T>::~MathGenerics()
 ///	Execute a math expression.
 ///	</summary>
 /// <param name="expression">The expression.</param>
-/// <param variables="x">The multi variable names and values.</param>
+/// <param name="variables">The multi variable names and values.</param>
 /// <returns>The result of the operation.</returns>
 generic <typename T>
 generic <typename R>
@@ -94,7 +94,7 @@ R Nequeo::Math::MathGenerics<T>::ExpressionMulti(System::String^ expression, Dic
 ///	</summary>
 /// <param name="expression">The expression.</param>
 /// <param name="x">The variable value.</param>
-/// <param variableName="x">The variable x name (e.g 'x').</param>
+/// <param name="variableName">The variable x name (e.g 'x').</param>
 /// <returns>The result of the operation.</returns>
 generic <typename T>
 generic <typename R>
@@ -133,6 +133,331 @@ R Nequeo::Math::MathGenerics<T>::Expression(System::String^ expression)
 
 	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
 	return resultR;
+}
+
+///	<summary>
+///	Execute the expression find the derivative.
+///	</summary>
+/// <param name="expression">The expression.</param>
+/// <param name="x">The variable value.</param>
+/// <returns>The result of the operation.</returns>
+generic <typename T>
+generic <typename R>
+R Nequeo::Math::MathGenerics<T>::ExpressionDerivative(System::String^ expression, R x)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double result = exp.Derivative(expressionString, xValue);
+
+	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
+	return resultR;
+}
+
+///	<summary>
+///	Execute the expression find the derivative.
+///	</summary>
+/// <param name="expression">The expression.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="variableName">The variable x name (e.g 'x').</param>
+/// <param name="variables">The multi variable names and values.</param>
+/// <returns>The result of the operation.</returns>
+generic <typename T>
+generic <typename R>
+R Nequeo::Math::MathGenerics<T>::ExpressionDerivative(System::String^ expression, R x, System::String^ variableName, Dictionary<System::String^, R>^ variables)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	for each(KeyValuePair<String^, R> kvp in variables)
+	{
+		std::string varKey;
+		Nequeo::Math::MarshalString(kvp.Key, varKey);
+
+		double xValue = *safe_cast<Double^>(Convert::ChangeType(kvp.Value, double::typeid));
+		multiVars.insert({ varKey, xValue });
+	}
+
+	MapVars::size_type size = multiVars.size();
+
+	std::string expressionVars;
+	Nequeo::Math::MarshalString(variableName, expressionVars);
+
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double result = exp.Derivative(expressionString, xValue, expressionVars, multiVars);
+
+	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
+	return resultR;
+}
+
+///	<summary>
+///	Execute the expression find the second derivative.
+///	</summary>
+/// <param name="expression">The expression.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="variableName">The variable x name (e.g 'x').</param>
+/// <param name="variables">The multi variable names and values.</param>
+/// <returns>The result of the operation.</returns>
+generic <typename T>
+generic <typename R>
+R Nequeo::Math::MathGenerics<T>::ExpressionDerivativeSecond(System::String^ expression, R x, System::String^ variableName, Dictionary<System::String^, R>^ variables)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	for each(KeyValuePair<String^, R> kvp in variables)
+	{
+		std::string varKey;
+		Nequeo::Math::MarshalString(kvp.Key, varKey);
+
+		double xValue = *safe_cast<Double^>(Convert::ChangeType(kvp.Value, double::typeid));
+		multiVars.insert({ varKey, xValue });
+	}
+
+	MapVars::size_type size = multiVars.size();
+
+	std::string expressionVars;
+	Nequeo::Math::MarshalString(variableName, expressionVars);
+
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double result = exp.DerivativeSecond(expressionString, xValue, expressionVars, multiVars);
+
+	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
+	return resultR;
+}
+
+///	<summary>
+///	Execute the expression find the third derivative.
+///	</summary>
+/// <param name="expression">The expression.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="variableName">The variable x name (e.g 'x').</param>
+/// <param name="variables">The multi variable names and values.</param>
+/// <returns>The result of the operation.</returns>
+generic <typename T>
+generic <typename R>
+R Nequeo::Math::MathGenerics<T>::ExpressionDerivativeThird(System::String^ expression, R x, System::String^ variableName, Dictionary<System::String^, R>^ variables)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	for each(KeyValuePair<String^, R> kvp in variables)
+	{
+		std::string varKey;
+		Nequeo::Math::MarshalString(kvp.Key, varKey);
+
+		double xValue = *safe_cast<Double^>(Convert::ChangeType(kvp.Value, double::typeid));
+		multiVars.insert({ varKey, xValue });
+	}
+
+	MapVars::size_type size = multiVars.size();
+
+	std::string expressionVars;
+	Nequeo::Math::MarshalString(variableName, expressionVars);
+
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double result = exp.DerivativeThird(expressionString, xValue, expressionVars, multiVars);
+
+	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
+	return resultR;
+}
+
+///	<summary>
+///	Execute the expression find the integral.
+///	</summary>
+/// <param name="expression">The expression the execute.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="variableName">The variable name in the expression.</param>
+/// <param name="a">The lower bound.</param>
+/// <param name="b">The upper bound.</param>
+/// <param name="variables">The variables in the expression.</param>
+/// <returns>The result of the operation.</returns>
+generic <typename T>
+generic <typename R>
+R Nequeo::Math::MathGenerics<T>::ExpressionIntegrate(System::String^ expression, R x, System::String^ variableName, R a, R b, Dictionary<System::String^, R>^ variables)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	for each(KeyValuePair<String^, R> kvp in variables)
+	{
+		std::string varKey;
+		Nequeo::Math::MarshalString(kvp.Key, varKey);
+
+		double xValue = *safe_cast<Double^>(Convert::ChangeType(kvp.Value, double::typeid));
+		multiVars.insert({ varKey, xValue });
+	}
+
+	MapVars::size_type size = multiVars.size();
+
+	std::string expressionVars;
+	Nequeo::Math::MarshalString(variableName, expressionVars);
+
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double aValue = *safe_cast<Double^>(Convert::ChangeType(a, double::typeid));
+	double bValue = *safe_cast<Double^>(Convert::ChangeType(b, double::typeid));
+	double result = exp.Integrate(expressionString, xValue, expressionVars, aValue, bValue, multiVars);
+
+	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
+	return resultR;
+}
+
+///	<summary>
+///	Execute the expression find the integral.
+///	</summary>
+/// <param name="expression">The expression the execute.</param>
+/// <param name="a">The lower bound.</param>
+/// <param name="b">The upper bound.</param>
+/// <returns>The result of the operation.</returns>
+generic <typename T>
+generic <typename R>
+R Nequeo::Math::MathGenerics<T>::ExpressionIntegrate(System::String^ expression, R a, R b)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	double aValue = *safe_cast<Double^>(Convert::ChangeType(a, double::typeid));
+	double bValue = *safe_cast<Double^>(Convert::ChangeType(b, double::typeid));
+	double result = exp.Integrate(expressionString, aValue, bValue);
+
+	R resultR = *safe_cast<R>(Convert::ChangeType(result, R::typeid));
+	return resultR;
+}
+
+///	<summary>
+///	Execute the expression compute the result.
+///	</summary>
+/// <param name="expression">The expression the execute.</param>
+/// <param name="result">The result of the operation.</param>
+/// <returns>True if no error; else false.</returns>
+generic <typename T>
+generic <typename R>
+bool Nequeo::Math::MathGenerics<T>::ExpressionCompute(System::String^ expression,
+	[System::Runtime::InteropServices::OutAttribute] R% result)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	double resultValue = 0.0;
+	bool ret = exp.Compute(expressionString, &resultValue);
+
+	result = *safe_cast<R>(Convert::ChangeType(resultValue, R::typeid));
+	return ret;
+}
+
+///	<summary>
+///	Execute the expression compute the result.
+///	</summary>
+/// <param name="expression">The expression the execute.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="result">The result of the operation.</param>
+/// <returns>True if no error; else false.</returns>
+generic <typename T>
+generic <typename R>
+bool Nequeo::Math::MathGenerics<T>::ExpressionCompute(System::String^ expression, R x,
+	[System::Runtime::InteropServices::OutAttribute] R% result)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	double resultValue = 0.0;
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+
+	bool ret = exp.Compute(expressionString, xValue, &resultValue);
+
+	result = *safe_cast<R>(Convert::ChangeType(resultValue, R::typeid));
+	return ret;
+}
+
+///	<summary>
+///	Execute the expression compute the result.
+///	</summary>
+/// <param name="expression">The expression the execute.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="y">The variable value.</param>
+/// <param name="result">The result of the operation.</param>
+/// <returns>True if no error; else false.</returns>
+generic <typename T>
+generic <typename R>
+bool Nequeo::Math::MathGenerics<T>::ExpressionCompute(System::String^ expression, R x, R y,
+	[System::Runtime::InteropServices::OutAttribute] R% result)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	double resultValue = 0.0;
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double yValue = *safe_cast<Double^>(Convert::ChangeType(y, double::typeid));
+
+	bool ret = exp.Compute(expressionString, xValue, yValue, &resultValue);
+
+	result = *safe_cast<R>(Convert::ChangeType(resultValue, R::typeid));
+	return ret;
+}
+
+///	<summary>
+///	Execute the expression compute the result.
+///	</summary>
+/// <param name="expression">The expression the execute.</param>
+/// <param name="x">The variable value.</param>
+/// <param name="y">The variable value.</param>
+/// <param name="z">The variable value.</param>
+/// <param name="result">The result of the operation.</param>
+/// <returns>True if no error; else false.</returns>
+generic <typename T>
+generic <typename R>
+bool Nequeo::Math::MathGenerics<T>::ExpressionCompute(System::String^ expression, R x, R y, R z,
+	[System::Runtime::InteropServices::OutAttribute] R% result)
+{
+	Nequeo::Math::ToolKit::Expression exp;
+	typedef std::map<std::string, double> MapVars;
+	MapVars multiVars;
+
+	std::string expressionString;
+	Nequeo::Math::MarshalString(expression, expressionString);
+
+	double resultValue = 0.0;
+	double xValue = *safe_cast<Double^>(Convert::ChangeType(x, double::typeid));
+	double yValue = *safe_cast<Double^>(Convert::ChangeType(y, double::typeid));
+	double zValue = *safe_cast<Double^>(Convert::ChangeType(z, double::typeid));
+
+	bool ret = exp.Compute(expressionString, xValue, yValue, zValue, &resultValue);
+
+	result = *safe_cast<R>(Convert::ChangeType(resultValue, R::typeid));
+	return ret;
 }
 
 ///	<summary>

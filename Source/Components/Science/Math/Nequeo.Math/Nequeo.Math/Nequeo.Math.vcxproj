@@ -163,11 +163,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -177,11 +177,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;blasd.lib;lapackd.lib;libf2cd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;blasd.lib;lapackd.lib;libf2cd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Development\Version2012\Nequeo\References\Release_x86\Lib\CLapack;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -191,11 +191,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -205,11 +205,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;blasd.lib;lapackd.lib;libf2cd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;blasd.lib;lapackd.lib;libf2cd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Development\Version2012\Nequeo\References\Release_x64\Lib\CLapack;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -218,11 +218,11 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -231,13 +231,13 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;blas.lib;lapack.lib;libf2c.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x86\Lib\CLapack;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;blas.lib;lapack.lib;libf2c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Release;..\..\..\..\..\References\Release_x86\Lib\CLapack;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -245,11 +245,11 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -258,12 +258,12 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Nequeo.Math.ToolKit;..\Nequeo.Math.SbML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;blas.lib;lapack.lib;libf2c.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\..\References\Release_x64\Lib\CLapack;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Nequeo.Math.ToolKit.lib;Nequeo.Math.SbML.lib;blas.lib;lapack.lib;libf2c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\x64\Release;..\..\..\..\..\References\Release_x64\Lib\CLapack;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -278,6 +278,8 @@
     <ClInclude Include="CompletionPort .h" />
     <ClInclude Include="DataPoint.h" />
     <ClInclude Include="Equation.h" />
+    <ClInclude Include="InputControl.h" />
+    <ClInclude Include="InputControlEventHandler.h" />
     <ClInclude Include="MathGenerics.h" />
     <ClInclude Include="MatrixData.h" />
     <ClInclude Include="PolynomialJenkinsTraub.h" />
@@ -290,6 +292,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="DataPoint.cpp" />
     <ClCompile Include="Equation.cpp" />
+    <ClCompile Include="InputControl.cpp" />
     <ClCompile Include="MathGenerics.cpp" />
     <ClCompile Include="MatrixData.cpp" />
     <ClCompile Include="PolynomialJenkinsTraub.cpp" />

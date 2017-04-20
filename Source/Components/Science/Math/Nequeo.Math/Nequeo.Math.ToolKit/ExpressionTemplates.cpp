@@ -68,7 +68,7 @@ namespace Nequeo {
 				///	Expression template for single variable expression.
 				///	</summary>
 				template<typename T>
-				inline T ExecuteExpression(const std::string& expressionString, T x, const std::string& variableName)
+				inline T ExecuteExpression(const std::string& expressionString, T& x, const std::string& variableName)
 				{
 					// Add the vraibale.
 					exprtk::symbol_table<T> symbol_table;
@@ -120,6 +120,190 @@ namespace Nequeo {
 
 					// Execute the expresion and return the result.
 					return expression.value();
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline T ExecuteExpressionDerivative(const std::string& expressionString, T& x, const std::string& variableName, const std::map<std::string, T>& variables)
+				{
+					std::map<std::string, T>::iterator var_Iter;
+
+					// Add the vraibale.
+					exprtk::symbol_table<T> symbol_table;
+					symbol_table.add_variable(variableName, x);
+
+					// For each variable.
+					for (const auto& vars : variables)
+					{
+						std::string varName = vars.first;
+						T currentValue = vars.second;
+
+						// Add the variable.
+						symbol_table.add_constant(varName, currentValue);
+					}
+
+					symbol_table.add_constants();
+
+					// Register the expression.
+					exprtk::expression<T> expression;
+					expression.register_symbol_table(symbol_table);
+
+					// Compile the expression.
+					exprtk::parser<T> parser;
+					parser.compile(expressionString, expression);
+
+					// Execute the expresion and return the result.
+					return exprtk::derivative(expression, variableName);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline T ExecuteExpressionSecondDerivative(const std::string& expressionString, T& x, const std::string& variableName, const std::map<std::string, T>& variables)
+				{
+					std::map<std::string, T>::iterator var_Iter;
+
+					// Add the vraibale.
+					exprtk::symbol_table<T> symbol_table;
+					symbol_table.add_variable(variableName, x);
+
+					// For each variable.
+					for (const auto& vars : variables)
+					{
+						std::string varName = vars.first;
+						T currentValue = vars.second;
+
+						// Add the variable.
+						symbol_table.add_constant(varName, currentValue);
+					}
+
+					symbol_table.add_constants();
+
+					// Register the expression.
+					exprtk::expression<T> expression;
+					expression.register_symbol_table(symbol_table);
+
+					// Compile the expression.
+					exprtk::parser<T> parser;
+					parser.compile(expressionString, expression);
+
+					// Execute the expresion and return the result.
+					return exprtk::second_derivative(expression, variableName);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline T ExecuteExpressionThirdDerivative(const std::string& expressionString, T& x, const std::string& variableName, const std::map<std::string, T>& variables)
+				{
+					std::map<std::string, T>::iterator var_Iter;
+
+					// Add the vraibale.
+					exprtk::symbol_table<T> symbol_table;
+					symbol_table.add_variable(variableName, x);
+
+					// For each variable.
+					for (const auto& vars : variables)
+					{
+						std::string varName = vars.first;
+						T currentValue = vars.second;
+
+						// Add the variable.
+						symbol_table.add_constant(varName, currentValue);
+					}
+
+					symbol_table.add_constants();
+
+					// Register the expression.
+					exprtk::expression<T> expression;
+					expression.register_symbol_table(symbol_table);
+
+					// Compile the expression.
+					exprtk::parser<T> parser;
+					parser.compile(expressionString, expression);
+
+					// Execute the expresion and return the result.
+					return exprtk::third_derivative(expression, variableName);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline T ExecuteExpressionIntegrate(const std::string& expressionString, T& x, const std::string& variableName, const T& a, const T& b, const std::map<std::string, T>& variables)
+				{
+					std::map<std::string, T>::iterator var_Iter;
+
+					// Add the vraibale.
+					exprtk::symbol_table<T> symbol_table;
+					symbol_table.add_variable(variableName, x);
+
+					// For each variable.
+					for (const auto& vars : variables)
+					{
+						std::string varName = vars.first;
+						T currentValue = vars.second;
+
+						// Add the variable.
+						symbol_table.add_constant(varName, currentValue);
+					}
+
+					symbol_table.add_constants();
+
+					// Register the expression.
+					exprtk::expression<T> expression;
+					expression.register_symbol_table(symbol_table);
+
+					// Compile the expression.
+					exprtk::parser<T> parser;
+					parser.compile(expressionString, expression);
+
+					// Execute the expresion and return the result.
+					return exprtk::integrate(expression, variableName, a, b);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline bool ExecuteExpressionCompute(const std::string& expressionString, T& result)
+				{
+					// Execute the expresion and return the result.
+					return exprtk::compute(expressionString, result);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline bool ExecuteExpressionCompute(const std::string& expressionString, const T& x, T& result)
+				{
+					// Execute the expresion and return the result.
+					return exprtk::compute(expressionString, x, result);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline bool ExecuteExpressionCompute(const std::string& expressionString, const  T& x, const T& y, T& result)
+				{
+					// Execute the expresion and return the result.
+					return exprtk::compute(expressionString, x, y, result);
+				}
+
+				///	<summary>
+				///	Expression template for single variable expression.
+				///	</summary>
+				template<typename T>
+				inline bool ExecuteExpressionCompute(const std::string& expressionString, const T& x, const T& y, const T& z, T& result)
+				{
+					// Execute the expresion and return the result.
+					return exprtk::compute(expressionString, x, y, z, result);
 				}
 			};
 		}

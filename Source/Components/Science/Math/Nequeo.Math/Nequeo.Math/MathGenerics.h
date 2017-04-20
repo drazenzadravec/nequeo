@@ -37,9 +37,9 @@ using namespace System;
 using namespace System::Numerics;
 using namespace System::Collections::Generic;
 
-namespace Nequeo 
+namespace Nequeo
 {
-	namespace Math 
+	namespace Math
 	{
 		///	<summary>
 		///	MarshalString
@@ -72,7 +72,13 @@ namespace Nequeo
 				Marshal::FreeHGlobal(IntPtr((void*)chars));
 			}
 		}
+	}
+}
 
+namespace Nequeo 
+{
+	namespace Math 
+	{
 		///	<summary>
 		///	Math generics.
 		///	</summary>
@@ -115,7 +121,7 @@ namespace Nequeo
 				///	</summary>
 				/// <param name="expression">The expression.</param>
 				/// <param name="x">The variable value.</param>
-				/// <param variableName="x">The variable x name (e.g 'x').</param>
+				/// <param name="variableName">The variable x name (e.g 'x').</param>
 				/// <returns>The result of the operation.</returns>
 				generic <typename R>
 				R Expression(System::String^ expression, R x, System::String^ variableName);
@@ -124,10 +130,122 @@ namespace Nequeo
 				///	Execute a math expression.
 				///	</summary>
 				/// <param name="expression">The expression.</param>
-				/// <param variables="x">The multi variable names and values.</param>
+				/// <param name="variables">The multi variable names and values.</param>
 				/// <returns>The result of the operation.</returns>
 				generic <typename R>
 			    R ExpressionMulti(System::String^ expression, Dictionary<System::String^, R>^ variables);
+
+				///	<summary>
+				///	Execute the expression find the derivative.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <param name="x">The variable value.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R ExpressionDerivative(System::String^ expression, R x);
+
+				///	<summary>
+				///	Execute the expression find the derivative.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable x name (e.g 'x').</param>
+				/// <param name="variables">The multi variable names and values.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R ExpressionDerivative(System::String^ expression, R x, System::String^ variableName, Dictionary<System::String^, R>^ variables);
+
+				///	<summary>
+				///	Execute the expression find the second derivative.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable x name (e.g 'x').</param>
+				/// <param name="variables">The multi variable names and values.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R ExpressionDerivativeSecond(System::String^ expression, R x, System::String^ variableName, Dictionary<System::String^, R>^ variables);
+
+				///	<summary>
+				///	Execute the expression find the third derivative.
+				///	</summary>
+				/// <param name="expression">The expression.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable x name (e.g 'x').</param>
+				/// <param name="variables">The multi variable names and values.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R ExpressionDerivativeThird(System::String^ expression, R x, System::String^ variableName, Dictionary<System::String^, R>^ variables);
+
+
+				///	<summary>
+				///	Execute the expression find the integral.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable name in the expression.</param>
+				/// <param name="a">The lower bound.</param>
+				/// <param name="b">The upper bound.</param>
+				/// <param name="variables">The variables in the expression.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R ExpressionIntegrate(System::String^ expression, R x, System::String^ variableName, R a, R b, Dictionary<System::String^, R>^ variables);
+
+				///	<summary>
+				///	Execute the expression find the integral.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="a">The lower bound.</param>
+				/// <param name="b">The upper bound.</param>
+				/// <returns>The result of the operation.</returns>
+				generic <typename R>
+				R ExpressionIntegrate(System::String^ expression, R a, R b);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				generic <typename R>
+				bool ExpressionCompute(System::String^ expression,
+					[System::Runtime::InteropServices::OutAttribute] R% result);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				generic <typename R>
+				bool ExpressionCompute(System::String^ expression, R x,
+					[System::Runtime::InteropServices::OutAttribute] R% result);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="y">The variable value.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				generic <typename R>
+				bool ExpressionCompute(System::String^ expression, R x, R y,
+					[System::Runtime::InteropServices::OutAttribute] R% result);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="y">The variable value.</param>
+				/// <param name="z">The variable value.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				generic <typename R>
+				bool ExpressionCompute(System::String^ expression, R x, R y, R z,
+					[System::Runtime::InteropServices::OutAttribute] R% result);
 
 			private:
 				// Fields

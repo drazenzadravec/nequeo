@@ -33,11 +33,51 @@
 
 #include "stdafx.h"
 
+#include "ExpressionSB.h"
+
 using namespace System;
 using namespace System::Numerics;
 
-namespace Nequeo 
-{
+using namespace Nequeo::Math::SbML;
+
+namespace Nequeo {
+	namespace Math
+	{
+		///	<summary>
+		///	MarshalString
+		///	</summary>
+		/// <param name="s">The string.</param>
+		/// <param name="os">The native string.</param>
+		void MarshalStringEx(String^ s, std::string& os)
+		{
+			if (!String::IsNullOrEmpty(s))
+			{
+				using namespace Runtime::InteropServices;
+				const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+				os = chars;
+				Marshal::FreeHGlobal(IntPtr((void*)chars));
+			}
+		}
+
+		///	<summary>
+		///	MarshalString
+		///	</summary>
+		/// <param name="s">The string.</param>
+		/// <param name="os">The native string.</param>
+		void MarshalStringEx(String^ s, std::wstring& os)
+		{
+			if (!String::IsNullOrEmpty(s))
+			{
+				using namespace Runtime::InteropServices;
+				const wchar_t* chars = (const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
+				os = chars;
+				Marshal::FreeHGlobal(IntPtr((void*)chars));
+			}
+		}
+	}
+}
+
+namespace Nequeo {
 	namespace Math 
 	{
 		///	<summary>
@@ -59,6 +99,37 @@ namespace Nequeo
 					return source * value;
 				}
 				
+				///	<summary>
+				///	Get equation from MathML xml.
+				///	</summary>
+				/// <param name="source">The MathML xml.</param>
+				/// <returns>The equation.</returns>
+				[System::Runtime::CompilerServices::Extension]
+				static System::String^ FromMathML(System::String^ source)
+				{
+					std::string expressionString;
+					Nequeo::Math::MarshalStringEx(source, expressionString);
+
+					Expression mathML;
+					std::string result = mathML.FromMathML(expressionString);
+					return gcnew String(result.c_str());
+				}
+
+				///	<summary>
+				///	Get MathML xml from equation.
+				///	</summary>
+				/// <param name="source">The math equation.</param>
+				/// <returns>The MathML xml.</returns>
+				[System::Runtime::CompilerServices::Extension]
+				static System::String^ ToMathML(System::String^ source)
+				{
+					std::string expressionString;
+					Nequeo::Math::MarshalStringEx(source, expressionString);
+
+					Expression mathML;
+					std::string result = mathML.ToMathML(expressionString);
+					return gcnew String(result.c_str());
+				}
 		};
 	}
 }

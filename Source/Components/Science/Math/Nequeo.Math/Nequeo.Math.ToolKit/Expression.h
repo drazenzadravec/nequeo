@@ -75,36 +75,106 @@ namespace Nequeo {
 				///	Execute the expression.
 				///	</summary>
 				/// <param name="expression">The expression the execute.</param>
-				/// <param name="x">The variable value.</param>
-				/// <param name="variableName">The variable name in the expression.</param>
-				/// <returns>The result of the operation.</returns>
-				float Execute(const std::string& expression, float x, const std::string& variableName = "x");
-
-				///	<summary>
-				///	Execute the expression.
-				///	</summary>
-				/// <param name="expression">The expression the execute.</param>
-				/// <param name="x">The variable value.</param>
-				/// <param name="variableName">The variable name in the expression.</param>
-				/// <returns>The result of the operation.</returns>
-				long Execute(const std::string& expression, long x, const std::string& variableName = "x");
-
-				///	<summary>
-				///	Execute the expression.
-				///	</summary>
-				/// <param name="expression">The expression the execute.</param>
-				/// <param name="x">The variable value.</param>
-				/// <param name="variableName">The variable name in the expression.</param>
-				/// <returns>The result of the operation.</returns>
-				int Execute(const std::string& expression, int x, const std::string& variableName = "x");
-
-				///	<summary>
-				///	Execute the expression.
-				///	</summary>
-				/// <param name="expression">The expression the execute.</param>
 				/// <param name="variables">The variables in the expression.</param>
 				/// <returns>The result of the operation.</returns>
 				double Execute(const std::string& expression, const std::map<std::string, double>& variables);
+
+				///	<summary>
+				///	Execute the expression find the derivative.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable name in the expression.</param>
+				/// <param name="variables">The variables in the expression.</param>
+				/// <returns>The result of the operation.</returns>
+				double Derivative(const std::string& expression, double x, const std::string& variableName, const std::map<std::string, double>& variables);
+
+				///	<summary>
+				///	Execute the expression find the derivative.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <returns>The result of the operation.</returns>
+				double Derivative(const std::string& expression, double x);
+
+				///	<summary>
+				///	Execute the expression find the second derivative.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable name in the expression.</param>
+				/// <param name="variables">The variables in the expression.</param>
+				/// <returns>The result of the operation.</returns>
+				double DerivativeSecond(const std::string& expression, double x, const std::string& variableName, const std::map<std::string, double>& variables);
+
+				///	<summary>
+				///	Execute the expression find the third derivative.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable name in the expression.</param>
+				/// <param name="variables">The variables in the expression.</param>
+				/// <returns>The result of the operation.</returns>
+				double DerivativeThird(const std::string& expression, double x, const std::string& variableName, const std::map<std::string, double>& variables);
+
+				///	<summary>
+				///	Execute the expression find the integral.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="variableName">The variable name in the expression.</param>
+				/// <param name="a">The lower bound.</param>
+				/// <param name="b">The upper bound.</param>
+				/// <param name="variables">The variables in the expression.</param>
+				/// <returns>The result of the operation.</returns>
+				double Integrate(const std::string& expression, double x, const std::string& variableName, double a, double b, const std::map<std::string, double>& variables);
+
+				///	<summary>
+				///	Execute the expression find the integral.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="a">The lower bound.</param>
+				/// <param name="b">The upper bound.</param>
+				/// <returns>The result of the operation.</returns>
+				double Integrate(const std::string& expression, double a, double b);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				bool Compute(const std::string& expression, double* result);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				bool Compute(const std::string& expression, double x, double* result);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="y">The variable value.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				bool Compute(const std::string& expression, double x, double y, double* result);
+
+				///	<summary>
+				///	Execute the expression compute the result.
+				///	</summary>
+				/// <param name="expression">The expression the execute.</param>
+				/// <param name="x">The variable value.</param>
+				/// <param name="y">The variable value.</param>
+				/// <param name="z">The variable value.</param>
+				/// <param name="result">The result of the operation.</param>
+				/// <returns>True if no error; else false.</returns>
+				bool Compute(const std::string& expression, double x, double y, double z, double* result);
 
 			private:
 				bool _disposed;

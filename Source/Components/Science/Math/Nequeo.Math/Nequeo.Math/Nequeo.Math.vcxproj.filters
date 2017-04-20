@@ -45,6 +45,12 @@
     <ClInclude Include="CompletionPort .h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputControlEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -69,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PolynomialJenkinsTraub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
