@@ -950,6 +950,11 @@ namespace Nequeo {
 							hr = CreateEncoder(CLSID_CMSH264EncoderMFT);
 							break;
 
+						case Nequeo::Media::Foundation::EncoderType::H265:
+							// Create the H265 encoder.
+							hr = CreateEncoder(CLSID_CMSH265EncoderMFT);
+							break;
+
 						case Nequeo::Media::Foundation::EncoderType::AAC:
 							// Create the AAC encoder.
 							hr = CreateEncoder(CLSID_AACMFTEncoder);
@@ -1099,6 +1104,15 @@ namespace Nequeo {
 					MFSetAttributeRatio(input, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);
 					break;
 
+				case Nequeo::Media::Foundation::EncoderType::H265:
+					// Setup input media type.
+					input->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+					input->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_NV12);
+					MFSetAttributeSize(input, MF_MT_FRAME_SIZE, 640, 480);
+					MFSetAttributeRatio(input, MF_MT_FRAME_RATE, 30, 1);
+					MFSetAttributeRatio(input, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);
+					break;
+
 				case Nequeo::Media::Foundation::EncoderType::AAC:
 					// Setup input media type.
 					input->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
@@ -1148,6 +1162,19 @@ namespace Nequeo {
 					MFSetAttributeRatio(output, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);
 					output->SetUINT32(MF_MT_INTERLACE_MODE, MFVideoInterlace_MixedInterlaceOrProgressive);
 					output->SetUINT32(MF_MT_ALL_SAMPLES_INDEPENDENT, TRUE);
+					break;
+
+				case Nequeo::Media::Foundation::EncoderType::H265:
+					// Setup output media type.
+					output->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+					output->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_HEVC);
+					output->SetUINT32(MF_MT_AVG_BITRATE, 500000);
+					MFSetAttributeSize(output, MF_MT_FRAME_SIZE, 640, 480);
+					MFSetAttributeRatio(output, MF_MT_FRAME_RATE, 30, 1);
+					MFSetAttributeRatio(output, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);
+					output->SetUINT32(MF_MT_INTERLACE_MODE, MFVideoInterlace_MixedInterlaceOrProgressive);
+					output->SetUINT32(MF_MT_MPEG2_PROFILE, eAVEncH265VProfile::eAVEncH265VProfile_Main_420_8);
+					output->SetUINT32(MF_MT_MPEG2_LEVEL, eAVEncH265VLevel::eAVEncH265VLevel1);
 					break;
 
 				case Nequeo::Media::Foundation::EncoderType::AAC:

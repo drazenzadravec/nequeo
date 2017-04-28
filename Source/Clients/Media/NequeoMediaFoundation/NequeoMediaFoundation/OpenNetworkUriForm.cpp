@@ -65,8 +65,10 @@ namespace Nequeo {
 				// If not disposed.
 				if (!_disposed)
 				{
+					// Indicate that dispose has been called.
 					_disposed = true;
 
+					// Clen up the tool tip.
 					if (_toolTip != NULL)
 						delete _toolTip;
 				}
@@ -95,46 +97,36 @@ namespace Nequeo {
 				// Show the window.
 				CDialog::OnShowWindow(bShow, nStatus);
 
-				// Create the tool tip control.
+			}
+
+			/// <summary>
+			/// On initialize dialog.
+			/// </summary>
+			BOOL OpenNetworkUriForm::OnInitDialog()
+			{
+				CDialog::OnInitDialog();
+
+				// Create the ToolTip control.
 				_toolTip = new CToolTipCtrl();
+				_toolTip->Create(this);
+
+				// Activate
+				_toolTip->Activate(TRUE);
+
+				// return TRUE  unless you set the focus to a control.
+				return TRUE;
+			}
+
+			/// <summary>
+			/// Pre-translate message.
+			/// </summary>
+			/// <param name="pMsg">The message.</param>
+			BOOL OpenNetworkUriForm::PreTranslateMessage(MSG* pMsg)
+			{
 				if (_toolTip != NULL)
-				{
-					/*
-					// Assign the tool tips.
-					_toolTip->Create(this, TTS_ALWAYSTIP);
+					_toolTip->RelayEvent(pMsg);
 
-					// Get the OK button handler.
-					CWnd *pBtnOK = GetDlgItem(IDOK);
-					if (pBtnOK != NULL)
-					{
-					// Add tool tip for our particular button
-					_toolTip->AddTool(pBtnOK, IDS_OPENNETWORKURI_OK_BUTTON);
-					}
-
-					// Get the Cancel button handler.
-					CWnd *pBtnCancel = GetDlgItem(IDCANCEL);
-					if (pBtnCancel != NULL)
-					{
-					// Add tool tip for our particular button
-					_toolTip->AddTool(pBtnCancel, IDS_OPENNETWORKURI_CANCEL_BUTTON);
-					}
-
-					//activate the tool tip
-					_toolTip->Activate(TRUE);
-
-					// Set the delay.
-					_toolTip->SetDelayTime(TTDT_AUTOPOP, -1);
-					_toolTip->SetDelayTime(TTDT_INITIAL, 0);
-					_toolTip->SetDelayTime(TTDT_RESHOW, 0);
-
-					// Change the defualt settings ***
-					//_toolTip->SetTipBkColor(RGB(0,255,0));
-					//_toolTip->SetTipTextColor(RGB(255,0,0))
-
-					// When you want to show your tooltip (presumably in OnMouseMove()), use.
-					_toolTip->Pop();
-					*/
-				}
+				return CDialog::PreTranslateMessage(pMsg);
 			}
 
 			/// <summary>

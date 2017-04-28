@@ -74,6 +74,17 @@ namespace Nequeo {
 				/// <returns>The URL text.</returns>
 				string GetNetworkURL() const;
 
+				/// <summary>
+				/// On initialize dialog.
+				/// </summary>
+				BOOL OnInitDialog() override;
+
+				/// <summary>
+				/// Pre-translate message.
+				/// </summary>
+				/// <param name="pMsg">The message.</param>
+				BOOL PreTranslateMessage(MSG* pMsg) override;
+
 			protected:
 				/// <summary>
 				/// Data exchange.

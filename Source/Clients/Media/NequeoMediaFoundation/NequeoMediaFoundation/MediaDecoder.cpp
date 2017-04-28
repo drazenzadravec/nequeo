@@ -950,6 +950,11 @@ namespace Nequeo {
 							hr = CreateDecoder(CLSID_CMSH264DecoderMFT);
 							break;
 
+						case Nequeo::Media::Foundation::DecoderType::H265:
+							// Create the H265 decoder.
+							hr = CreateDecoder(CLSID_CMSH265EncoderMFT);
+							break;
+
 						case Nequeo::Media::Foundation::DecoderType::AAC:
 							// Create the AAC decoder.
 							hr = CreateDecoder(CLSID_CMSAACDecMFT);
@@ -1109,6 +1114,18 @@ namespace Nequeo {
 					input->SetUINT32(MF_MT_ALL_SAMPLES_INDEPENDENT, TRUE);
 					break;
 
+				case Nequeo::Media::Foundation::DecoderType::H265:
+					// Setup input media type.
+					input->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+					input->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_HEVC);
+					MFSetAttributeSize(input, MF_MT_FRAME_SIZE, 640, 480);
+					MFSetAttributeRatio(input, MF_MT_FRAME_RATE, 30, 1);
+					MFSetAttributeRatio(input, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);
+					input->SetUINT32(MF_MT_INTERLACE_MODE, MFVideoInterlace_MixedInterlaceOrProgressive);
+					input->SetUINT32(MF_MT_MPEG2_PROFILE, eAVEncH265VProfile::eAVEncH265VProfile_Main_420_8);
+					input->SetUINT32(MF_MT_MPEG2_LEVEL, eAVEncH265VLevel::eAVEncH265VLevel1);
+					break;
+
 				case Nequeo::Media::Foundation::DecoderType::AAC:
 					// Setup input media type.
 					input->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
@@ -1162,6 +1179,15 @@ namespace Nequeo {
 					// Setup output media type.
 					output->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
 					output->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_YUY2);
+					MFSetAttributeSize(output, MF_MT_FRAME_SIZE, 640, 480);
+					MFSetAttributeRatio(output, MF_MT_FRAME_RATE, 30, 1);
+					MFSetAttributeRatio(output, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);
+					break;
+
+				case Nequeo::Media::Foundation::DecoderType::H265:
+					// Setup output media type.
+					output->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video);
+					output->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_NV12);
 					MFSetAttributeSize(output, MF_MT_FRAME_SIZE, 640, 480);
 					MFSetAttributeRatio(output, MF_MT_FRAME_RATE, 30, 1);
 					MFSetAttributeRatio(output, MF_MT_PIXEL_ASPECT_RATIO, 1, 1);

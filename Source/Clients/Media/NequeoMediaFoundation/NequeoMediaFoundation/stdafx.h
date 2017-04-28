@@ -51,6 +51,7 @@
 #include <Wmcodecdsp.h>
 #include <mfcaptureengine.h>
 #include <wmcodecdsp.h>
+#include <codecapi.h>
 
 // Direct2D
 #include <D2d1.h>
