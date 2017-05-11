@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          GlobalNetServer.h
-*  Purpose :       GlobalNetServer.
+*  File :          MessageType.h
+*  Purpose :       Message Type.
 *
 */
 
@@ -32,20 +32,34 @@ OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 
 #include "stdafx.h"
+#include "Global.h"
 
-#ifdef _MSC_VER
-	// Disable warning C4251: <data member>: <type> needs to have dll-interface to be used.
-	#pragma warning(disable : 4251)
-#endif
-
-#ifdef NEQUEONETSERVER_EXPORTS
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllexport) 
-#else
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllimport) 
-#endif
-
-#define NEQUEO_NET_SERVER_BOOST_EXPORTS
-#include "NequeoHttpBoostServer\Global.h"
-
-#define NEQUEO_WEBSOCKET_SERVER_BOOST_EXPORTS
-#include "NequeoWebSocketBoostServer\Global.h"
+namespace Nequeo {
+	namespace Net {
+		namespace WebSocket
+		{
+			/// <summary>
+			/// Represents the frame type of the WebSocket frame as defined in section 11.8 of the WebSocket protocol spec.
+			/// </summary>
+			enum class EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API MessageType
+			{
+				/// <summary>
+				/// Text frame.
+				/// </summary>
+				Text,
+				/// <summary>
+				/// Binary frame.
+				/// </summary>
+				Binary,
+				/// <summary>
+				/// A receive has completed because a close message was received.
+				/// </summary>
+				Close,
+				/// <summary>
+				/// Ping frame.
+				/// </summary>
+				Ping,
+			};
+		}
+	}
+}

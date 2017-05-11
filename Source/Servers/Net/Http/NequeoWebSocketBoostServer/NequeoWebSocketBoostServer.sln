@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoWebSocketBoostServer", "NequeoWebSocketBoostServer\NequeoWebSocketBoostServer.vcxproj", "{04A0A295-09A6-4891-8953-8DD569ADD78C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestWebSocketServer", "TestWebSocketServer\TestWebSocketServer.vcxproj", "{DAAD9571-E241-4978-BD01-CAAABF6680CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x64.ActiveCfg = Debug|x64
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x64.Build.0 = Debug|x64
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x86.ActiveCfg = Debug|Win32
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x86.Build.0 = Debug|Win32
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x64.ActiveCfg = Release|x64
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x64.Build.0 = Release|x64
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x86.ActiveCfg = Release|Win32
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x86.Build.0 = Release|Win32
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x64.ActiveCfg = Debug|x64
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x64.Build.0 = Debug|x64
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x86.ActiveCfg = Debug|Win32
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x86.Build.0 = Debug|Win32
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x64.ActiveCfg = Release|x64
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x64.Build.0 = Release|x64
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x86.ActiveCfg = Release|Win32
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

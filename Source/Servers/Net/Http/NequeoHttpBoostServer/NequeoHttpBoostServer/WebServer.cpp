@@ -38,7 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Nequeo::Net::Http;
 
-std::atomic<int> serverCount;
+std::atomic<int> serverWebCount;
 concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalHttpServer>> serverPtr;
 concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalSecureHttpServer>> serverSecurePtr;
 
@@ -173,6 +173,7 @@ void WebServer::StartThread()
 		// Move-assign threads
 		_internalThread = true;
 		_thread = std::thread(std::bind(&WebServer::Start, this));
+		_thread.detach();
 	}
 }
 
@@ -190,8 +191,8 @@ void WebServer::Start()
 			// If not created.
 			if (_serverIndex < 0)
 			{
-				++serverCount;
-				_serverIndex = serverCount;
+				++serverWebCount;
+				_serverIndex = serverWebCount;
 
 				// HTTP-server at port using 1 thread
 				// Unless you do more heavy non-threaded processing in the resources,
@@ -211,8 +212,8 @@ void WebServer::Start()
 			// If not created.
 			if (_serverIndex < 0)
 			{
-				++serverCount;
-				_serverIndex = serverCount;
+				++serverWebCount;
+				_serverIndex = serverWebCount;
 
 				// HTTPS-server at port using 1 thread
 				// Unless you do more heavy non-threaded processing in the resources,

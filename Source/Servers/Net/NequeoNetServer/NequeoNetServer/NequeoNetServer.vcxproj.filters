@@ -45,6 +45,9 @@
     <ClInclude Include="ConfigModel.h">
       <Filter>Config</Filter>
     </ClInclude>
+    <ClInclude Include="ConfigModelWebSocket.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +63,9 @@
       <Filter>Source Files\Http</Filter>
     </ClCompile>
     <ClCompile Include="ConfigModel.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigModelWebSocket.cpp">
       <Filter>Config</Filter>
     </ClCompile>
   </ItemGroup>

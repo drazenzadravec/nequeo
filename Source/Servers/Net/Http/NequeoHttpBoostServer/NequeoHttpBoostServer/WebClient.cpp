@@ -41,7 +41,7 @@ using namespace Nequeo::Net::Http;
 static const char* WEBCLIENT_CLIENT_TAG = "NequeoWebClient";
 static const char* NETCONTEXT_CLIENT_TAG = "NequeoNetContext";
 
-std::atomic<int> clientCount;
+std::atomic<int> clientWebCount;
 concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalHttpClient>> clientPtr;
 concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalSecureHttpClient>> clientSecurePtr;
 
@@ -110,8 +110,8 @@ void WebClient::CreateNetContext()
 			// If not created.
 			if (_clientIndex < 0)
 			{
-				++clientCount;
-				_clientIndex = clientCount;
+				++clientWebCount;
+				_clientIndex = clientWebCount;
 
 				// HTTP client
 				clientPtr.insert(std::make_pair(_clientIndex, std::make_shared<InternalHttpClient>(_host + ":" + std::to_string(_port), _ipv)));
@@ -128,8 +128,8 @@ void WebClient::CreateNetContext()
 			// If not created.
 			if (_clientIndex < 0)
 			{
-				++clientCount;
-				_clientIndex = clientCount;
+				++clientWebCount;
+				_clientIndex = clientWebCount;
 
 				// HTTP client
 				clientSecurePtr.insert(std::make_pair(_clientIndex, std::make_shared<InternalSecureHttpClient>(_host + ":" + std::to_string(_port), _ipv)));
@@ -215,7 +215,7 @@ NetResponse& WebClient::Request(const std::string& method, std::iostream& conten
 	netRequest->SetMethod(method);
 	netRequest->SetPath(path);
 
-	// Go to the start of the stream.
+	// Go to the end of the stream.
 	content.seekp(0, std::ios::end);
 
 	// Get the length of the stream.
@@ -329,7 +329,7 @@ NetResponse& WebClient::Request(const NetRequest& request, std::iostream& conten
 	netRequest->SetAcceptEncoding(request.GetAcceptEncoding());
 	netRequest->SetContentType(request.GetContentType());
 
-	// Go to the start of the stream.
+	// Go to the end of the stream.
 	content.seekp(0, std::ios::end);
 
 	// Get the length of the stream.

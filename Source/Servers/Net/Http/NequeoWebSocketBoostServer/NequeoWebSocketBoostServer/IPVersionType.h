@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          GlobalNetServer.h
-*  Purpose :       GlobalNetServer.
+*  File :          IPVersionType.h
+*  Purpose :       IP Version Type.
 *
 */
 
@@ -32,20 +32,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 
 #include "stdafx.h"
+#include "Global.h"
 
-#ifdef _MSC_VER
-	// Disable warning C4251: <data member>: <type> needs to have dll-interface to be used.
-	#pragma warning(disable : 4251)
-#endif
-
-#ifdef NEQUEONETSERVER_EXPORTS
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllexport) 
-#else
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllimport) 
-#endif
-
-#define NEQUEO_NET_SERVER_BOOST_EXPORTS
-#include "NequeoHttpBoostServer\Global.h"
-
-#define NEQUEO_WEBSOCKET_SERVER_BOOST_EXPORTS
-#include "NequeoWebSocketBoostServer\Global.h"
+namespace Nequeo {
+	namespace Net {
+		namespace WebSocket
+		{
+			/// <summary>
+			/// IP version type.
+			/// </summary>
+			enum class EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API IPVersionType
+			{
+				/// <summary>
+				/// IP version 4.
+				/// </summary>
+				IPv4,
+				/// <summary>
+				/// IP version 6.
+				/// </summary>
+				IPv6
+			};
+		}
+	}
+}

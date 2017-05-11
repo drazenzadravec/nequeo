@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          GlobalNetServer.h
-*  Purpose :       GlobalNetServer.
+*  File :          WebRequest.cpp
+*  Purpose :       WebSocket web request class.
 *
 */
 
@@ -29,23 +29,27 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#pragma once
-
 #include "stdafx.h"
 
-#ifdef _MSC_VER
-	// Disable warning C4251: <data member>: <type> needs to have dll-interface to be used.
-	#pragma warning(disable : 4251)
-#endif
+#include "WebRequest.h"
 
-#ifdef NEQUEONETSERVER_EXPORTS
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllexport) 
-#else
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllimport) 
-#endif
+using namespace Nequeo::Net::WebSocket;
 
-#define NEQUEO_NET_SERVER_BOOST_EXPORTS
-#include "NequeoHttpBoostServer\Global.h"
+///	<summary>
+///	WebSocket web request.
+///	</summary>
+WebRequest::WebRequest() :
+	_disposed(false)
+{
+}
 
-#define NEQUEO_WEBSOCKET_SERVER_BOOST_EXPORTS
-#include "NequeoWebSocketBoostServer\Global.h"
+///	<summary>
+///	WebSocket web request.
+///	</summary>
+WebRequest::~WebRequest()
+{
+	if (!_disposed)
+	{
+		_disposed = true;
+	}
+}

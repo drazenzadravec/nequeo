@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          GlobalNetServer.h
-*  Purpose :       GlobalNetServer.
+*  File :          Global.h
+*  Purpose :       Global.
 *
 */
 
@@ -33,19 +33,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#ifdef _MSC_VER
-	// Disable warning C4251: <data member>: <type> needs to have dll-interface to be used.
-	#pragma warning(disable : 4251)
-#endif
-
-#ifdef NEQUEONETSERVER_EXPORTS
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllexport) 
+#ifdef _USRDLL
+	#ifdef NEQUEO_WEBSOCKET_SERVER_BOOST_EXPORTS
+		#define EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API __declspec(dllexport) 
+	#else
+		#define EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API __declspec(dllimport) 
+	#endif
 #else
-	#define EXPORT_NEQUEO_NET_SERVER_API __declspec(dllimport) 
+	#define EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API
 #endif
-
-#define NEQUEO_NET_SERVER_BOOST_EXPORTS
-#include "NequeoHttpBoostServer\Global.h"
-
-#define NEQUEO_WEBSOCKET_SERVER_BOOST_EXPORTS
-#include "NequeoWebSocketBoostServer\Global.h"
