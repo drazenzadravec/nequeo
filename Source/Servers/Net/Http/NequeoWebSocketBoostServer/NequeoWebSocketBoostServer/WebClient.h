@@ -34,7 +34,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 #include "Global.h"
 
-//#include "NetContext.h"
+#include "NetContext.h"
 #include "IPVersionType.h"
 
 #include "Threading\Executor.h"
@@ -65,9 +65,67 @@ namespace Nequeo {
 				/// </summary>
 				virtual ~WebClient();
 
+				/// <summary>
+				/// Get the net context.
+				/// </summary>
+				/// <return>The net context.</return>
+				NetContext& Context() const;
+
+				///	<summary>
+				///	Start a connection.
+				///	</summary>
+				void Connect();
+
+				///	<summary>
+				///	Disconnect.
+				///	</summary>
+				void Disconnect();
+
+				///	<summary>
+				///	Close the client.
+				///	</summary>
+				/// <param name="status">The current status.</param>
+				/// <param name="reason">The close reason.</param>
+				void Close(int status = 1000, const std::string& reason = "");
+
+				///	<summary>
+				///	Send message.
+				///	</summary>
+				/// <param name="messageType">The message type.</param>
+				/// <param name="message">The message to send.</param>
+				void Send(MessageType messageType, std::streambuf* message);
+
+			public:
+				/// <summary>
+				/// On message received function handler.
+				/// </summary>
+				/// <param name="messageType">The message type.</param>
+				/// <param name="length">The length of the message.</param>
+				/// <param name="message">The message.</param>
+				std::function<void(MessageType, size_t, std::shared_ptr<Message>&)> OnMessage;
+
+				/// <summary>
+				/// On open connection.
+				/// </summary>
+				std::function<void(void)> OnOpen;
+
+				/// <summary>
+				/// On connection error function handler.
+				/// </summary>
+				/// <param name="error">The error message.</param>
+				std::function<void(const std::string&)> OnError;
+
+				/// <summary>
+				/// On connection closed function handler.
+				/// </summary>
+				/// <param name="status">The current status.</param>
+				/// <param name="reason">The close reason.</param>
+				std::function<void(int, const std::string&)> OnClose;
+
 			private:
 				bool _disposed;
 				bool _active;
+				bool _connected;
 				bool _isSecure;
 
 				int _clientIndex;
@@ -75,7 +133,10 @@ namespace Nequeo {
 				std::string _host;
 				unsigned short _port;
 
+				std::shared_ptr<NetContext> _context;
 				std::shared_ptr<Nequeo::Threading::Executor> _executor;
+
+				void CreateNetContext();
 			};
 		}
 	}

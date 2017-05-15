@@ -147,6 +147,9 @@
     <ClInclude Include="MessageType.h" />
     <ClInclude Include="MultiServerContainer.h" />
     <ClInclude Include="MultiWebServer.h" />
+    <ClInclude Include="NetContext.h" />
+    <ClInclude Include="NetResponse.h" />
+    <ClInclude Include="NetResponseContent.h" />
     <ClInclude Include="server_ws.hpp" />
     <ClInclude Include="server_wss.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -160,6 +163,8 @@
   <ItemGroup>
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MultiWebServer.cpp" />
+    <ClCompile Include="NetContext.cpp" />
+    <ClCompile Include="NetResponse.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

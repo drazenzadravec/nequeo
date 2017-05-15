@@ -37,6 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 #include "IPVersionType.h"
 #include "crypto.hpp"
+#include "NetContext.h"
 
 #include <boost/asio.hpp>
 
@@ -113,6 +114,9 @@ namespace Nequeo {
 						std::unordered_map<std::string, std::string> header;
 						std::string remote_endpoint_address;
 						unsigned short remote_endpoint_port;
+
+						// Store web context.
+						std::shared_ptr<NetContext> netContext;
 
 					private:
 						/// <summary>

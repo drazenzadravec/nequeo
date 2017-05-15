@@ -72,6 +72,15 @@
     <ClInclude Include="WebClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NetResponseContent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetResponse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -93,6 +102,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WebClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetResponse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

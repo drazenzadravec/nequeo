@@ -361,7 +361,7 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalWebSocketServer> serve
 		// If handler exists.
 		if (connection->webContext->OnMessage)
 		{
-			MessageType messageType = MessageType::Close;
+			MessageType messageType = MessageType::Text;
 
 			// Text
 			if ((message->fin_rsv_opcode & 0x0f) == 1)
@@ -412,15 +412,19 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalWebSocketServer> serve
 				}
 
 				// Send the message.
-				server->send(connection, sendStream, 
-				[&connection](const boost::system::error_code& ec)
+				server->send(connection, sendStream,
+					[&connection](const boost::system::error_code& ec)
 				{
-					// If handler exists.
-					if (connection->webContext->OnError)
+					try
 					{
-						// Call error.
-						connection->webContext->OnError(ec.message());
+						//// If handler exists.
+						//if (connection->webContext && connection->webContext->OnError)
+						//{
+						//	// Call error.
+						//	connection->webContext->OnError(ec.message());
+						//}
 					}
+					catch (...) {}
 
 				}, opcode);
 			};
@@ -492,7 +496,7 @@ void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureWebSocketS
 		// If handler exists.
 		if (connection->webContext->OnMessage)
 		{
-			MessageType messageType = MessageType::Close;
+			MessageType messageType = MessageType::Text;
 
 			// Text
 			if ((message->fin_rsv_opcode & 0x0f) == 1)
@@ -544,14 +548,18 @@ void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureWebSocketS
 
 				// Send the message.
 				server->send(connection, sendStream,
-				[&connection](const boost::system::error_code& ec)
+					[&connection](const boost::system::error_code& ec)
 				{
-					// If handler exists.
-					if (connection->webContext->OnError)
+					try
 					{
-						// Call error.
-						connection->webContext->OnError(ec.message());
+						//// If handler exists.
+						//if (connection->webContext && connection->webContext->OnError)
+						//{
+						//	// Call error.
+						//	connection->webContext->OnError(ec.message());
+						//}
 					}
+					catch (...) {}
 
 				}, opcode);
 			};
