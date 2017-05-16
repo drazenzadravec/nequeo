@@ -35,6 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "Global.h"
 
 #include "NetContext.h"
+#include "MessageType.h"
+#include "Message.h"
 #include "IPVersionType.h"
 
 #include "Threading\Executor.h"
@@ -45,6 +47,10 @@ namespace Nequeo {
 	namespace Net {
 		namespace WebSocket
 		{
+			class WebClient;
+
+			typedef std::function<void(const WebClient*, const std::shared_ptr<const Nequeo::AsyncCallerContext>&)> ResponseHandler;
+
 			/// <summary>
 			/// WebSocket web client.
 			/// </summary>
@@ -95,6 +101,13 @@ namespace Nequeo {
 				/// <param name="message">The message to send.</param>
 				void Send(MessageType messageType, std::streambuf* message);
 
+				/// <summary>
+				/// Make a request async.
+				/// </summary>
+				/// <param name="handler">The async function handler.</param>
+				/// <param name="context">The client specific content.</param>
+				void RequestAsync(const ResponseHandler& handler, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context = nullptr);
+
 			public:
 				/// <summary>
 				/// On message received function handler.
@@ -137,6 +150,8 @@ namespace Nequeo {
 				std::shared_ptr<Nequeo::Threading::Executor> _executor;
 
 				void CreateNetContext();
+
+				void RequestAsyncInternal(const ResponseHandler& handler, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context = nullptr);
 			};
 		}
 	}

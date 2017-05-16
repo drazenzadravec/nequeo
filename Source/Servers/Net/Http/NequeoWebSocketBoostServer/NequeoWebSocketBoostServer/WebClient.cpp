@@ -519,3 +519,25 @@ void WebClient::Send(MessageType messageType, std::streambuf* message)
 		}
 	}
 }
+
+/// <summary>
+/// Make a request async.
+/// </summary>
+/// <param name="handler">The async function handler.</param>
+/// <param name="context">The client specific content.</param>
+void WebClient::RequestAsync(const ResponseHandler& handler, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context)
+{
+	// Submit to the executor as new thread.
+	_executor->Submit([this, handler, context] { this->RequestAsyncInternal(handler, context); });
+}
+
+/// <summary>
+/// Make a request async.
+/// </summary>
+/// <param name="handler">The async function handler.</param>
+/// <param name="context">The client specific content.</param>
+void WebClient::RequestAsyncInternal(const ResponseHandler& handler, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context)
+{
+	// Call the function handler.
+	handler(this, context);
+}

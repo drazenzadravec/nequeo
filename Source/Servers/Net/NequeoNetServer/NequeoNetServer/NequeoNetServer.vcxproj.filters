@@ -22,6 +22,12 @@
     <Filter Include="Config">
       <UniqueIdentifier>{9122941d-bff0-4ccd-9308-bfe47b5cf6ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\WebSocket">
+      <UniqueIdentifier>{cb1c77cb-513e-4eb2-9b7a-3ed81388f3bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WebSocket">
+      <UniqueIdentifier>{fa51339f-8fcc-4664-b809-29360d33f10f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -48,6 +54,12 @@
     <ClInclude Include="ConfigModelWebSocket.h">
       <Filter>Config</Filter>
     </ClInclude>
+    <ClInclude Include="WebSocketServer.h">
+      <Filter>Header Files\WebSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSocketClient.h">
+      <Filter>Header Files\WebSocket</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -67,6 +79,12 @@
     </ClCompile>
     <ClCompile Include="ConfigModelWebSocket.cpp">
       <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSocketServer.cpp">
+      <Filter>Source Files\WebSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSocketClient.cpp">
+      <Filter>Source Files\WebSocket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
