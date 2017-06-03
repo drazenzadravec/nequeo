@@ -163,11 +163,22 @@ namespace Nequeo.Security
 			_securityPassword.SetPassword(storeName, storePassword);
 		}
 
-		/// <summary>
-		/// Delete the password if it exists.
+        /// <summary>
+		/// Set the password if it exists else create new entry. Creates a random password.
 		/// </summary>
 		/// <param name="storeName">The name of the password loaded from the store.</param>
-		public void DeletePassword(string storeName)
+		public void SetPassword(string storeName)
+        {
+            byte[] randomPasswordData = Encoding.Default.GetBytes(new Nequeo.Cryptography.RandomPassword().Generate(32));
+            string storePassword = Encoding.Default.GetString(randomPasswordData);
+            _securityPassword.SetPassword(storeName, storePassword);
+        }
+
+        /// <summary>
+        /// Delete the password if it exists.
+        /// </summary>
+        /// <param name="storeName">The name of the password loaded from the store.</param>
+        public void DeletePassword(string storeName)
 		{
 			_securityPassword.DeletePassword(storeName);
 		}

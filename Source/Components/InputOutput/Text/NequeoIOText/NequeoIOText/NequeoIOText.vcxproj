@@ -88,6 +88,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -124,6 +125,7 @@ copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Co
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,6 +165,7 @@ copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Co
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -204,6 +207,7 @@ copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Co
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\..\..\References\Release\Include\Components;..\..\..\..\..\..\ThirdPartyTools\Text\JSON\jsoncpp\include;..\..\..\..\..\..\ThirdPartyTools\Text\XML\tinyxml2;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -249,6 +253,7 @@ copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Co
     <ClInclude Include="TextConverter.h" />
     <ClInclude Include="TextEncoding.h" />
     <ClInclude Include="TextIterator.h" />
+    <ClInclude Include="TextToSpeech.h" />
     <ClInclude Include="Unicode.h" />
     <ClInclude Include="UnicodeConverter.h" />
     <ClInclude Include="UTF16Encoding.h" />
@@ -272,6 +277,7 @@ copy $(ProjectDir)\XmlSerializer.h "..\..\..\..\..\References\Release\Include\Co
     <ClCompile Include="TextConverter.cpp" />
     <ClCompile Include="TextEncoding.cpp" />
     <ClCompile Include="TextIterator.cpp" />
+    <ClCompile Include="TextToSpeech.cpp" />
     <ClCompile Include="Unicode.cpp" />
     <ClCompile Include="UnicodeConverter.cpp" />
     <ClCompile Include="UTF16Encoding.cpp" />

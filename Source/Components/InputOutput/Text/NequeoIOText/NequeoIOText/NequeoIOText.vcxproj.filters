@@ -72,6 +72,9 @@
     <ClInclude Include="XmlSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextToSpeech.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -120,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="XmlSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextToSpeech.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

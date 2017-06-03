@@ -1,0 +1,35 @@
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string html =
+               "<html>" +
+               "<head>" +
+                   "<title></title>" +
+                   "<meta charset=\"utf-8\"/>" +
+                "</head>" +
+                "<body>" +
+                    "All good" +
+                    "<img src=\"cid:Sin.png\">" +
+                    "All good" +
+               "</body>" +
+               "</html>";
+
+            Nequeo.Net.Mail.EmailerConnectionAdapter adapter = new Nequeo.Net.Mail.EmailerConnectionAdapter("", "", "");
+            adapter.Port = 0
+            adapter.UseSSLConnection = true;
+            adapter.TimeOut = 3000000;
+
+            var from = new System.Net.Mail.MailAddress("");
+            var to = new System.Net.Mail.MailAddress("");
+            var toList = new List<System.Net.Mail.MailAddress>();
+            toList.Add(to);
+
+            var att1 = new System.Net.Mail.LinkedResource(@"C:\Temp\Image\Sin.png");
+            att1.ContentId = "Sin.png";
+            att1.ContentType = new System.Net.Mime.ContentType("image/png");
+
+            var atts = new List<System.Net.Mail.LinkedResource>();
+            atts.Add(att1);
+
+            Nequeo.Net.Mail.Emailer emailer = new Nequeo.Net.Mail.Emailer();
+            bool ret = emailer.SendEmail(adapter, from, toList, "Test Image", html, null, atts, false);
+        }

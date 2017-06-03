@@ -201,13 +201,14 @@ namespace Nequeo.Net.Mail
         /// <param name="attachments">The collection of attachments to sent.</param>
         /// <param name="priority">The priority of the email message.</param>
         /// <param name="emailType">The email format to sent as.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
         /// <exception cref="System.Exception"></exception>
         private bool SendEmailEx(EmailerConnectionAdapter emailAdapter, MailAddress from, 
             List<MailAddress> emailTo, string subject, List<MailAddress> emailCCs,
             List<MailAddress> emailBCCs, List<MailAddress> replyTo, string textMessage, string htmlMessage, 
             string richTextMessage, string xmlMessage, List<Attachment> attachments,
-            MailPriority priority, Nequeo.Net.Mail.MessageType emailType)
+            MailPriority priority, Nequeo.Net.Mail.MessageType emailType, List<LinkedResource> linkedResources)
         {
             // Assign the email adapter.
             _emailAdapter = emailAdapter;
@@ -238,6 +239,11 @@ namespace Nequeo.Net.Mail
                         // Add the html message type to the email.
                         htmlView = AlternateView.CreateAlternateViewFromString(htmlMessage, null, "text/html");
                         htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
+
+                        // Contains embebed images in html.
+                        if (linkedResources != null)
+                            foreach (LinkedResource linkedResource in linkedResources)
+                                htmlView.LinkedResources.Add(linkedResource);
                     }
 
                     // Make sure text exists.
@@ -362,7 +368,7 @@ namespace Nequeo.Net.Mail
                     MyMail.From = from;
 
                     // If a reply to email  address has been set.
-                    if(replyTo != null)
+                    if (replyTo != null)
                         foreach (MailAddress to in replyTo)
                             MyMail.ReplyToList.Add(to);
 
@@ -985,6 +991,7 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="priority">The priority of the email message.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
@@ -993,11 +1000,11 @@ namespace Nequeo.Net.Mail
         public virtual bool SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, List<MailAddress> emailCCs,
             List<MailAddress> emailBCCs, List<MailAddress> replyTo, string textMessage, string htmlMessage,
-            string richTextMessage, string xmlMessage, List<Attachment> attachments, MailPriority priority,
-            Nequeo.Net.Mail.MessageType emailType)
+            string richTextMessage, string xmlMessage, List<Attachment> attachments, List<LinkedResource> linkedResources, 
+            MailPriority priority, Nequeo.Net.Mail.MessageType emailType)
         {
             return SendEmailEx(emailAdapter, from, emailTo, subject, emailCCs, emailBCCs, replyTo,
-                textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, priority, emailType);
+                textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, priority, emailType, linkedResources);
         }
 
         /// <summary>
@@ -1015,6 +1022,7 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="priority">The priority of the email message.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <param name="callback">The callback action handler.</param>
@@ -1024,8 +1032,8 @@ namespace Nequeo.Net.Mail
         public virtual void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, List<MailAddress> emailCCs,
             List<MailAddress> emailBCCs, List<MailAddress> replyTo, string textMessage, string htmlMessage,
-            string richTextMessage, string xmlMessage, List<Attachment> attachments, MailPriority priority,
-            Nequeo.Net.Mail.MessageType emailType, 
+            string richTextMessage, string xmlMessage, List<Attachment> attachments, List<LinkedResource> linkedResources,
+            MailPriority priority, Nequeo.Net.Mail.MessageType emailType, 
             Action<Nequeo.Threading.AsyncOperationResult<bool>> callback, object state = null)
         {
             string keyName = "SendEmail_1";
@@ -1037,7 +1045,8 @@ namespace Nequeo.Net.Mail
                         emailAdapter, from,
                         emailTo, subject, emailCCs,
                         emailBCCs, replyTo, textMessage, htmlMessage,
-                        richTextMessage, xmlMessage, attachments, priority,
+                        richTextMessage, xmlMessage, attachments,
+                        linkedResources, priority,
                         emailType
                     ), keyName);
         }
@@ -1058,10 +1067,10 @@ namespace Nequeo.Net.Mail
         {
             if(isText)
                 return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
-                    message, null, null, null, null, MailPriority.Normal, Nequeo.Net.Mail.MessageType.Text);
+                    message, null, null, null, null, MailPriority.Normal, Nequeo.Net.Mail.MessageType.Text, null);
             else
                 return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
-                    null, message, null, null, null, MailPriority.Normal, Nequeo.Net.Mail.MessageType.Html);
+                    null, message, null, null, null, MailPriority.Normal, Nequeo.Net.Mail.MessageType.Html, null);
         }
 
         /// <summary>
@@ -1100,21 +1109,22 @@ namespace Nequeo.Net.Mail
         /// <param name="subject">The email subject.</param>
         /// <param name="message">The message body.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="isText">True if the message body is text else html.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
         /// <exception cref="System.Exception"></exception>
         public virtual bool SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string message,
-            List<Attachment> attachments, bool isText)
+            List<Attachment> attachments, List<LinkedResource> linkedResources, bool isText)
         {
             if (isText)
                 return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
                     message, null, null, null, attachments, MailPriority.Normal,
-                    Nequeo.Net.Mail.MessageType.Text);
+                    Nequeo.Net.Mail.MessageType.Text, null);
             else
                 return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
                     null, message, null, null, attachments, MailPriority.Normal,
-                    Nequeo.Net.Mail.MessageType.Html);
+                    Nequeo.Net.Mail.MessageType.Html, linkedResources);
         }
 
         /// <summary>
@@ -1126,13 +1136,14 @@ namespace Nequeo.Net.Mail
         /// <param name="subject">The email subject.</param>
         /// <param name="message">The message body.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="isText">True if the message body is text else html.</param>
         /// <param name="callback">The callback action handler.</param>
         /// <param name="state">The action state.</param>
         /// <exception cref="System.Exception"></exception>
         public virtual void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string message,
-            List<Attachment> attachments, bool isText,
+            List<Attachment> attachments, List<LinkedResource> linkedResources, bool isText,
             Action<Nequeo.Threading.AsyncOperationResult<bool>> callback, object state = null)
         {
             string keyName = "SendEmail_3";
@@ -1143,7 +1154,7 @@ namespace Nequeo.Net.Mail
                     (
                         emailAdapter, from,
                         emailTo, subject, message,
-                        attachments, isText
+                        attachments, linkedResources, isText
                     ), keyName);
         }
 
@@ -1163,7 +1174,7 @@ namespace Nequeo.Net.Mail
         {
             return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
                 textMessage, htmlMessage, null, null, null, MailPriority.Normal,
-                Nequeo.Net.Mail.MessageType.TextAndHtml);
+                Nequeo.Net.Mail.MessageType.TextAndHtml, null);
         }
 
         /// <summary>
@@ -1203,15 +1214,16 @@ namespace Nequeo.Net.Mail
         /// <param name="textMessage">The text version of the email.</param>
         /// <param name="htmlMessage">The html version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
         /// <exception cref="System.Exception"></exception>
         public virtual bool SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string textMessage, string htmlMessage, 
-            List<Attachment> attachments)
+            List<Attachment> attachments, List<LinkedResource> linkedResources)
         {
             return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
                 textMessage, htmlMessage, null, null, attachments, MailPriority.Normal,
-                Nequeo.Net.Mail.MessageType.TextAndHtml);
+                Nequeo.Net.Mail.MessageType.TextAndHtml, linkedResources);
         }
 
         /// <summary>
@@ -1224,12 +1236,13 @@ namespace Nequeo.Net.Mail
         /// <param name="textMessage">The text version of the email.</param>
         /// <param name="htmlMessage">The html version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="callback">The callback action handler.</param>
         /// <param name="state">The action state.</param>
         /// <exception cref="System.Exception"></exception>
         public virtual void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string textMessage, string htmlMessage,
-            List<Attachment> attachments,
+            List<Attachment> attachments, List<LinkedResource> linkedResources,
             Action<Nequeo.Threading.AsyncOperationResult<bool>> callback, object state = null)
         {
             string keyName = "SendEmail_5";
@@ -1240,7 +1253,7 @@ namespace Nequeo.Net.Mail
                     (
                         emailAdapter, from,
                         emailTo, subject, textMessage, htmlMessage,
-                        attachments
+                        attachments, linkedResources
                     ), keyName);
         }
 
@@ -1261,7 +1274,7 @@ namespace Nequeo.Net.Mail
         {
             return SendEmailEx(emailAdapter, from, emailTo, subject, null, null, null,
                 null, null, null, xmlMessage, attachments, MailPriority.Normal,
-                Nequeo.Net.Mail.MessageType.Xml);
+                Nequeo.Net.Mail.MessageType.Xml, null);
         }
 
         /// <summary>
@@ -1399,6 +1412,7 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="priority">The priority of the email message.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
@@ -1406,8 +1420,8 @@ namespace Nequeo.Net.Mail
         bool SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, List<MailAddress> emailCCs,
             List<MailAddress> emailBCCs, List<MailAddress> replyTo, string textMessage, string htmlMessage,
-            string richTextMessage, string xmlMessage, List<Attachment> attachments, MailPriority priority,
-            Nequeo.Net.Mail.MessageType emailType);
+            string richTextMessage, string xmlMessage, List<Attachment> attachments, List<LinkedResource> linkedResources,
+            MailPriority priority, Nequeo.Net.Mail.MessageType emailType);
 
         /// <summary>
         /// Sends an email in the specified mail format.
@@ -1424,6 +1438,7 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="priority">The priority of the email message.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <param name="callback">The callback action handler.</param>
@@ -1432,8 +1447,8 @@ namespace Nequeo.Net.Mail
         void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, List<MailAddress> emailCCs,
             List<MailAddress> emailBCCs, List<MailAddress> replyTo, string textMessage, string htmlMessage,
-            string richTextMessage, string xmlMessage, List<Attachment> attachments, MailPriority priority,
-            Nequeo.Net.Mail.MessageType emailType,
+            string richTextMessage, string xmlMessage, List<Attachment> attachments, List<LinkedResource> linkedResources,
+            MailPriority priority, Nequeo.Net.Mail.MessageType emailType,
             Action<Nequeo.Threading.AsyncOperationResult<bool>> callback, object state = null);
 
         /// <summary>
@@ -1475,12 +1490,13 @@ namespace Nequeo.Net.Mail
         /// <param name="subject">The email subject.</param>
         /// <param name="message">The message body.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="isText">True if the message body is text else html.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
         /// <exception cref="System.Exception"></exception>
         bool SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string message,
-            List<Attachment> attachments, bool isText);
+            List<Attachment> attachments, List<LinkedResource> linkedResources, bool isText);
 
         /// <summary>
         /// Sends an email in the specified mail format.
@@ -1491,13 +1507,14 @@ namespace Nequeo.Net.Mail
         /// <param name="subject">The email subject.</param>
         /// <param name="message">The message body.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="isText">True if the message body is text else html.</param>
         /// <param name="callback">The callback action handler.</param>
         /// <param name="state">The action state.</param>
         /// <exception cref="System.Exception"></exception>
         void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string message,
-            List<Attachment> attachments, bool isText,
+            List<Attachment> attachments, List<LinkedResource> linkedResources, bool isText,
             Action<Nequeo.Threading.AsyncOperationResult<bool>> callback, object state = null);
 
         /// <summary>
@@ -1540,11 +1557,12 @@ namespace Nequeo.Net.Mail
         /// <param name="textMessage">The text version of the email.</param>
         /// <param name="htmlMessage">The html version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
         /// <exception cref="System.Exception"></exception>
         bool SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string textMessage, string htmlMessage,
-            List<Attachment> attachments);
+            List<Attachment> attachments, List<LinkedResource> linkedResources);
 
         /// <summary>
         /// Sends an email in the specified mail format.
@@ -1556,12 +1574,13 @@ namespace Nequeo.Net.Mail
         /// <param name="textMessage">The text version of the email.</param>
         /// <param name="htmlMessage">The html version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="callback">The callback action handler.</param>
         /// <param name="state">The action state.</param>
         /// <exception cref="System.Exception"></exception>
         void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, string textMessage, string htmlMessage,
-            List<Attachment> attachments,
+            List<Attachment> attachments, List<LinkedResource> linkedResources,
             Action<Nequeo.Threading.AsyncOperationResult<bool>> callback, object state = null);
 
         /// <summary>
@@ -2050,6 +2069,7 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="priority">The priority of the email message.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <returns>True if the email was sent to the recipients else false.</returns>
@@ -2057,7 +2077,8 @@ namespace Nequeo.Net.Mail
         public void SendEmail(EmailerConnectionAdapter emailAdapter, MailAddress from,
             List<MailAddress> emailTo, string subject, List<MailAddress> emailCCs,
             List<MailAddress> emailBCCs, List<MailAddress> replyTo, string textMessage, string htmlMessage,
-            string richTextMessage, string xmlMessage, List<Attachment> attachments, MailPriority priority,
+            string richTextMessage, string xmlMessage, List<Attachment> attachments,
+            List<LinkedResource> linkedResources, MailPriority priority,
             Nequeo.Net.Mail.MessageType emailType)
         {
             // Call compose first.
@@ -2069,7 +2090,7 @@ namespace Nequeo.Net.Mail
                 Emailer.SendEmail(emailAdapter, from,
                     emailTo, subject, emailCCs,
                     emailBCCs, replyTo, textMessage, htmlMessage,
-                    richTextMessage, xmlMessage, attachments, priority,
+                    richTextMessage, xmlMessage, attachments, linkedResources, priority,
                     emailType);
             else
                 // Send the email through the action composer.
