@@ -342,7 +342,7 @@ namespace Nequeo.Net.Mail
                     if (_emailAdapter.SigningCertificate != null || _emailAdapter.EncryptionCertificate != null)
                     {
                         // Get the alternative view.
-                        Attachment viewSignEnc = CreateAlternateView(textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, emailType);
+                        Attachment viewSignEnc = CreateAlternateView(textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, linkedResources, emailType);
                         if (viewSignEnc != null)
                             MyMail.Attachments.Add(viewSignEnc);
                     }
@@ -440,11 +440,12 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <returns>The new alternate view.</returns>
         private Attachment CreateAlternateView(string textMessage, string htmlMessage,
             string richTextMessage, string xmlMessage, List<Attachment> attachments,
-            Nequeo.Net.Mail.MessageType emailType)
+            List<LinkedResource> linkedResources, Nequeo.Net.Mail.MessageType emailType)
         {
             Attachment view = null;
             MemoryStream signStream = null;
@@ -519,8 +520,8 @@ namespace Nequeo.Net.Mail
                         // Get the message.
                         ContentInfo contentText = null;
 
-                        // Sign message and attachments.
-                        if (attachments != null && attachments.Count > 0)
+                        // Sign message, attachments and linked resource.
+                        if (attachments != null || linkedResources != null)
                         {
                             byte[] completeContentInfo = new byte[0];
                             byte[] temp = completeContentInfo.Combine(message);
@@ -545,6 +546,41 @@ namespace Nequeo.Net.Mail
                                     if (bytesRead > 0)
                                     {
                                         // Combine all the attachment data.
+                                        byte[] temp1 = completeContentInfo.Combine(buffer);
+                                        completeContentInfo = temp1;
+                                    }
+                                }
+                                catch { }
+                                finally
+                                {
+                                    // Make sure the stream exists.
+                                    if (stream != null)
+                                    {
+                                        // Reset the position.
+                                        stream.Position = position;
+                                    }
+                                }
+                            }
+
+                            // For each linked resource.
+                            foreach (LinkedResource linkedResource in linkedResources)
+                            {
+                                Stream stream = null;
+                                long position = 0;
+
+                                try
+                                {
+                                    // Get the linkedResource stream.
+                                    stream = linkedResource.ContentStream;
+                                    position = stream.Position;
+                                    byte[] buffer = new byte[(int)stream.Length];
+                                    stream.Position = 0;
+
+                                    // Read all the data.
+                                    int bytesRead = stream.Read(buffer, 0, (int)stream.Length);
+                                    if (bytesRead > 0)
+                                    {
+                                        // Combine all the linkedResource data.
                                         byte[] temp1 = completeContentInfo.Combine(buffer);
                                         completeContentInfo = temp1;
                                     }
@@ -589,7 +625,7 @@ namespace Nequeo.Net.Mail
                         if (signStream != null)
                         {
                             // Get the email message and signed content.
-                            byte[] signEncText = CreateMultipartSignedEncrypt(signStream, textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, emailType);
+                            byte[] signEncText = CreateMultipartSignedEncrypt(signStream, textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, linkedResources, emailType);
 
                             // Encrypt the message along with the signature.
                             ContentInfo contentText = new ContentInfo(signEncText);
@@ -599,7 +635,7 @@ namespace Nequeo.Net.Mail
                         else
                         {
                             // Get the email message.
-                            byte[] messageText = CreateMultipartEncrypt(textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, emailType);
+                            byte[] messageText = CreateMultipartEncrypt(textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, linkedResources, emailType);
 
                             // No signer, just encrypter.
                             ContentInfo contentText = new ContentInfo(messageText);
@@ -643,17 +679,19 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <returns>The formatted message and signed data.</returns>
         private byte[] CreateMultipartSignedEncrypt(MemoryStream signStream, string textMessage, string htmlMessage,
-            string richTextMessage, string xmlMessage, List<Attachment> attachments, Nequeo.Net.Mail.MessageType emailType)
+            string richTextMessage, string xmlMessage, List<Attachment> attachments, List<LinkedResource> linkedResources, 
+            Nequeo.Net.Mail.MessageType emailType)
         {
             // Get the random number.
             string randomBounbary = new Nequeo.Invention.NumberGenerator().Random(20, 20);
 
             // Create messsage content.
             byte[] messageContent = Encoding.UTF8.GetBytes("--------------" + randomBounbary);
-            byte[] multipartMessage = CreateMultipartEncrypt(textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, emailType);
+            byte[] multipartMessage = CreateMultipartEncrypt(textMessage, htmlMessage, richTextMessage, xmlMessage, attachments, linkedResources, emailType);
 
             // Base64 encode the signed data.
             byte[] signHeader = Encoding.UTF8.GetBytes
@@ -681,11 +719,12 @@ namespace Nequeo.Net.Mail
         /// <param name="richTextMessage">The rich text version of the email.</param>
         /// <param name="xmlMessage">The xml version of the email.</param>
         /// <param name="attachments">The collection of attachments to sent.</param>
+        /// <param name="linkedResources">The collection of linked resource to sent, used for embeded images in html.</param>
         /// <param name="emailType">The email format to sent as.</param>
         /// <returns>The formatted message data.</returns>
         private byte[] CreateMultipartEncrypt(string textMessage, string htmlMessage,
             string richTextMessage, string xmlMessage, List<Attachment> attachments,
-            Nequeo.Net.Mail.MessageType emailType)
+            List<LinkedResource> linkedResources, Nequeo.Net.Mail.MessageType emailType)
         {
             // Get the random number.
             string randomBounbary = new Nequeo.Invention.NumberGenerator().Random(20, 20);
@@ -903,11 +942,61 @@ namespace Nequeo.Net.Mail
                     break;
             }
 
-            // Message and attachments.
-            if (attachments != null && attachments.Count > 0)
+            // Message, linked resources and attachments.
+            if (attachments != null || linkedResources != null)
             {
                 byte[] temp = completeContentInfo.Combine(message);
                 completeContentInfo = temp;
+
+                // For each linked resources.
+                foreach (LinkedResource linkedResource in linkedResources)
+                {
+                    Stream stream = null;
+                    long position = 0;
+
+                    try
+                    {
+                        // Get the linkedResource stream.
+                        stream = linkedResource.ContentStream;
+                        position = stream.Position;
+                        byte[] buffer = new byte[(int)stream.Length];
+                        stream.Position = 0;
+
+                        // Read all the data.
+                        int bytesRead = stream.Read(buffer, 0, (int)stream.Length);
+                        if (bytesRead > 0)
+                        {
+                            // Combine all messages.
+                            byte[] contentTypeEnd = Encoding.UTF8.GetBytes("\r\n");
+                            byte[] contentType = Encoding.UTF8.GetBytes
+                                (
+                                    "--------------" + randomBounbary + "\r\n" +
+                                     "Content-Type: " +
+                                        ((linkedResource.ContentType == null) ? "text/plain" :
+                                            (!String.IsNullOrEmpty(linkedResource.ContentType.MediaType) ? linkedResource.ContentType.MediaType : "text/plain")) +
+                                        "; name=\"" +
+                                            (!String.IsNullOrEmpty(linkedResource.ContentId) ? linkedResource.ContentId : "unknown.txt") + "\"" + "\r\n" +
+                                        "Content-Transfer-Encoding: " + Nequeo.Net.Mime.MimeEncoder.GetTransferEncoding(linkedResource.TransferEncoding) + "\r\n" +
+                                        "Content-ID: <" + (!String.IsNullOrEmpty(linkedResource.ContentId) ? linkedResource.ContentId : "unknown.txt") + ">" + "\r\n" +
+                                        "\r\n"
+                                );
+
+                            // Combine all the attachment data.
+                            byte[] temp1 = contentType.Combine(completeContentInfo, buffer, contentTypeEnd);
+                            completeContentInfo = temp1;
+                        }
+                    }
+                    catch { }
+                    finally
+                    {
+                        // Make sure the stream exists.
+                        if (stream != null)
+                        {
+                            // Reset the position.
+                            stream.Position = position;
+                        }
+                    }
+                }
 
                 // For each attachment.
                 foreach (Attachment attachment in attachments)
