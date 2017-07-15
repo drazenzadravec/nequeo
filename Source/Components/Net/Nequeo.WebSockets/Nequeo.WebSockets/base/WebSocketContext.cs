@@ -71,6 +71,7 @@ namespace Nequeo.Net.WebSockets
             webSocketContext.IsStartOfConnection = webContext.IsStartOfConnection;
             webSocketContext.IsAuthenticated = webContext.IsAuthenticated;
             webSocketContext.IsSecureConnection = webContext.IsSecureConnection;
+            webSocketContext.IsSslAuthenticated = webContext.IsSslAuthenticated;
             webSocketContext.Name = webContext.Name;
             webSocketContext.NumberOfClients = webContext.NumberOfClients;
             webSocketContext.Port = webContext.Port;

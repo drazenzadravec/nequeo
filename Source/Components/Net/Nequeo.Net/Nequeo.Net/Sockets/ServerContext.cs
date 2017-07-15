@@ -461,6 +461,11 @@ namespace Nequeo.Net.Sockets
         protected abstract bool BeginSslAuthentication();
 
         /// <summary>
+        /// End of the SSL authentication started with begin SSL authentication.
+        /// </summary>
+        protected abstract void EndSslAuthentication();
+
+        /// <summary>
         /// Triggered when a new connection 
         /// has been established and all authentication is complete and the server is
         /// ready to accept data from the client.
@@ -1129,6 +1134,9 @@ namespace Nequeo.Net.Sockets
                             // from the socket.
                             StreamIsSslAuthenticated();
                         }
+
+                        // End ssl authentication here.
+                        EndSslAuthentication();
                     }
                     else
                     {

@@ -70,6 +70,7 @@ namespace Nequeo.Net.WebSockets
         private string _connectionID = null;
         private string _sessionID = null;
         private bool _isSecureConnection = false;
+        private bool _isSslAuthenticated = false;
         private string _uniqueIdentifier = "";
         private bool _isAuthenticated = false;
         private IPrincipal _user = null;
@@ -184,6 +185,22 @@ namespace Nequeo.Net.WebSockets
                 if (_context != null)
                     _context.IsAuthenticated = _isAuthenticated;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets, has a secure negotiation and server authentication 
+        /// been established with the client. Also is the data encrypted.
+        /// </summary>
+        public bool IsSslAuthenticated
+        {
+            get
+            {
+                if (_context != null)
+                    _isSslAuthenticated = _context.IsSslAuthenticated;
+
+                return _isSslAuthenticated;
+            }
+            set { _isSslAuthenticated = value; }
         }
 
         /// <summary>

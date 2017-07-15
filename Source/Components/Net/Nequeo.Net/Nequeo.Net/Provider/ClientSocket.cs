@@ -452,6 +452,7 @@ namespace Nequeo.Net.Provider
 
                 // Assign the current context.
                 netContext.IsSecureConnection = context.IsSecureConnection;
+                netContext.IsSslAuthenticated = context.IsSslAuthenticated;
                 netContext.Port = context.Port;
                 netContext.ServiceName = context.ServiceName;
                 netContext.UniqueIdentifier = context.UniqueIdentifier;
@@ -648,6 +649,7 @@ namespace Nequeo.Net.Provider
             _context.RequestStream = _requestStream;
             _context.ResponseStream = _responseStream;
             _context.IsSecureConnection = base.UseSslConnection;
+            _context.IsSslAuthenticated = base.IsSslAuthenticated;
             _context.Port = base.Port;
             _context.SocketState = SocketState.Closed;
             _context.IsAsyncMode = false;

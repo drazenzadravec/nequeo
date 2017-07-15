@@ -113,6 +113,7 @@ namespace Nequeo.Net.Http2
             httpContext.IsStartOfConnection = webContext.IsStartOfConnection;
             httpContext.IsAuthenticated = webContext.IsAuthenticated;
             httpContext.IsSecureConnection = webContext.IsSecureConnection;
+            httpContext.IsSslAuthenticated = webContext.IsSslAuthenticated;
             httpContext.Name = webContext.Name;
             httpContext.NumberOfClients = webContext.NumberOfClients;
             httpContext.Port = webContext.Port;

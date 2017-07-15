@@ -132,6 +132,16 @@ namespace Nequeo.Net.Provider
         }
 
         /// <summary>
+        /// End of the SSL authentication started with begin SSL authentication.
+        /// </summary>
+        protected override void EndSslAuthentication()
+        {
+            // Assign the ssl authentication level.
+            if (_context != null)
+                _context.IsSslAuthenticated = base.IsSslAuthenticated;
+        }
+
+        /// <summary>
         /// This server context to the client has ended.
         /// </summary>
         protected override void Disconnected() 
@@ -715,6 +725,7 @@ namespace Nequeo.Net.Provider
             _context.RemoteEndPoint = base.GetClientIPEndPoint();
             _context.ServerEndPoint = base.GetServerIPEndPoint();
             _context.IsSecureConnection = base.UseSslConnection;
+            _context.IsSslAuthenticated = base.IsSslAuthenticated;
             _context.Port = base.Server.Port;
             _context.Name = base.Server.Name;
             _context.ServiceName = base.Server.ServiceName;

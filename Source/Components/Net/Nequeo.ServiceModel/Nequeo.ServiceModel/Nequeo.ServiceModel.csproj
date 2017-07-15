@@ -346,7 +346,9 @@
     <Compile Include="Service\Membership.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\Nequeo.ServiceModel.xsd">
       <SubType>Designer</SubType>
     </None>

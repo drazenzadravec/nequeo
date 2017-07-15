@@ -504,8 +504,6 @@ namespace Nequeo.Net.Http
                 {
                     if (_listener != null)
                         _listener.Close();
-
-                    throw;
                 }
             }
         }

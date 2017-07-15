@@ -127,6 +127,16 @@ namespace Nequeo.Net
         }
 
         /// <summary>
+        /// Gets, has a secure negotiation and server authentication 
+        /// been established with the client. Also is the data encrypted.
+        /// </summary>
+        public bool IsSslAuthenticated
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the communication port number.
         /// </summary>
         public int Port

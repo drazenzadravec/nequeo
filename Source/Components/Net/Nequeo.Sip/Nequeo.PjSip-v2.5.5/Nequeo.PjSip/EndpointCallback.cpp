@@ -75,7 +75,7 @@ void EndpointCallback::Initialise(pjsua_ipv6_use useIPv6, TransportType transpor
 		// Create endpoint data.
 		this->libCreate();
 		this->libInit(*(_epConfig.get()));
-
+		
 		// Setup TLS.
 		_transportConfig_TLS->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
 		_transportConfig_TLS->tlsConfig.verifyServer = false;

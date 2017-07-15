@@ -150,6 +150,7 @@ namespace Nequeo.Net
 
                 // Assign the current context.
                 webContext.IsSecureConnection = context.IsSecureConnection;
+                webContext.IsSslAuthenticated = context.IsSslAuthenticated;
                 webContext.RemoteEndPoint = context.RemoteEndPoint;
                 webContext.ServerEndPoint = context.ServerEndPoint;
                 webContext.Port = context.Port;
@@ -229,6 +230,16 @@ namespace Nequeo.Net
         protected override bool BeginSslAuthentication()
         {
             return base.BeginSslAuthenticate;
+        }
+
+        /// <summary>
+        /// End of the SSL authentication started with begin SSL authentication.
+        /// </summary>
+        protected override void EndSslAuthentication()
+        {
+            // Assign the ssl authentication level.
+            if (_context != null)
+                _context.IsSslAuthenticated = base.IsSslAuthenticated;
         }
 
         /// <summary>
@@ -815,6 +826,7 @@ namespace Nequeo.Net
             _context.RemoteEndPoint = base.GetClientIPEndPoint();
             _context.ServerEndPoint = base.GetServerIPEndPoint();
             _context.IsSecureConnection = base.UseSslConnection;
+            _context.IsSslAuthenticated = base.IsSslAuthenticated;
             _context.Port = base.Server.Port;
             _context.Name = base.Server.Name;
             _context.ServiceName = base.Server.ServiceName;

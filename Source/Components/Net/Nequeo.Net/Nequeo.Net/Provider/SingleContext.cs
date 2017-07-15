@@ -869,6 +869,7 @@ namespace Nequeo.Net.Provider
             _context.RemoteEndPoint = GetClientIPEndPoint();
             _context.ServerEndPoint = GetServerIPEndPoint();
             _context.IsSecureConnection = _useSslConnection;
+            _context.IsSslAuthenticated = _isSslAuthenticated;
             _context.Port = _port;
             _context.Name = _serverName;
             _context.ServiceName = _serviceName;
