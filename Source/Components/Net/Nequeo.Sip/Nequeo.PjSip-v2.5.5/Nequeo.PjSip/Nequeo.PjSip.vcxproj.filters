@@ -423,6 +423,9 @@
     <ClInclude Include="TransportInfo.h">
       <Filter>Header Files\EndPointHeader</Filter>
     </ClInclude>
+    <ClInclude Include="Configuration.h">
+      <Filter>Header Files\EndPointHeader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -720,6 +723,9 @@
       <Filter>Source Files\EndPointSource</Filter>
     </ClCompile>
     <ClCompile Include="TransportInfo.cpp">
+      <Filter>Source Files\EndPointSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration.cpp">
       <Filter>Source Files\EndPointSource</Filter>
     </ClCompile>
   </ItemGroup>

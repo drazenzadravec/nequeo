@@ -69,13 +69,38 @@ EndpointCallback::~EndpointCallback()
 /// <param name="transportType">The transport type flags.</param>
 void EndpointCallback::Initialise(pjsua_ipv6_use useIPv6, TransportType transportType)
 {
+	EndPointConfiguration configuration;
+	configuration.SetHasConfiguration(false);
+	Initialise(useIPv6, transportType, configuration);
+}
+
+/// <summary>
+/// Start the application.
+/// </summary>
+/// <param name="useIPv6">Use IPv6.</param>
+/// <param name="transportType">The transport type flags.</param>
+/// <param name="configuration">Endpoint configuration.</param>
+void EndpointCallback::Initialise(pjsua_ipv6_use useIPv6, TransportType transportType, const EndPointConfiguration& configuration)
+{
 	// If not created.
 	if (!_created)
 	{
+		// Has configuration been set, default is false.
+		if (configuration.GetHasConfiguration())
+		{
+			// Add file logging.
+			_epConfig->logConfig.msgLogging = (configuration.GetLogMessages() ? PJ_TRUE : PJ_FALSE);
+			_epConfig->logConfig.level = configuration.GetLogLevel();
+			_epConfig->logConfig.consoleLevel = configuration.GetConsoleLogLevel();
+			_epConfig->logConfig.decor = configuration.GetFileHeaderFlag();
+			_epConfig->logConfig.filename = configuration.GetFileName();
+			_epConfig->logConfig.fileFlags = configuration.GetFileWriteFlag();
+		}
+
 		// Create endpoint data.
 		this->libCreate();
 		this->libInit(*(_epConfig.get()));
-		
+
 		// Setup TLS.
 		_transportConfig_TLS->tlsConfig.method = pjsip_ssl_method::PJSIP_TLSV1_2_METHOD;
 		_transportConfig_TLS->tlsConfig.verifyServer = false;
@@ -93,12 +118,16 @@ void EndpointCallback::Initialise(pjsua_ipv6_use useIPv6, TransportType transpor
 		if ((TransportType::UDP & transportType) == TransportType::UDP)
 		{
 			// Create the client transport.
+			_transportConfig_UDP->port = configuration.GetPortUDPv4();
+			_transportConfig_UDP->portRange = configuration.GetPortRangeUDPv4();
 			int traID_UDP = this->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP, *(_transportConfig_UDP.get()));
 			_transportIDs.push_back(traID_UDP);
 
 			// If IPv6 is enabled.
 			if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
 			{
+				_transportConfig_UDP6->port = configuration.GetPortUDPv6();
+				_transportConfig_UDP6->portRange = configuration.GetPortRangeUDPv6();
 				int traID_UDP6 = this->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_UDP6, *(_transportConfig_UDP6.get()));
 				_transportIDs.push_back(traID_UDP6);
 			}
@@ -107,12 +136,16 @@ void EndpointCallback::Initialise(pjsua_ipv6_use useIPv6, TransportType transpor
 		// If TCP transport.
 		if ((TransportType::TCP & transportType) == TransportType::TCP)
 		{
+			_transportConfig_TCP->port = configuration.GetPortTCPv4();
+			_transportConfig_TCP->portRange = configuration.GetPortRangeTCPv4();
 			int traID_TCP = this->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP, *(_transportConfig_TCP.get()));
 			_transportIDs.push_back(traID_TCP);
 
 			// If IPv6 is enabled.
 			if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
 			{
+				_transportConfig_TCP6->port = configuration.GetPortTCPv6();
+				_transportConfig_TCP6->portRange = configuration.GetPortRangeTCPv6();
 				int traID_TCP6 = this->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TCP6, *(_transportConfig_TCP6.get()));
 				_transportIDs.push_back(traID_TCP6);
 			}
@@ -123,12 +156,16 @@ void EndpointCallback::Initialise(pjsua_ipv6_use useIPv6, TransportType transpor
 		{
 			// Has not been implemented must change pjlib.config.PJ_HAS_SSL_SOCK = 1
 			// then recompile the pjproject and copy all the libs then then recomiple this project.
+			_transportConfig_TLS->port = configuration.GetPortTLSv4();
+			_transportConfig_TLS->portRange = configuration.GetPortRangeTLSv4();
 			int traID_TLS = this->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS, *(_transportConfig_TLS.get()));
 			_transportIDs.push_back(traID_TLS);
 
 			// If IPv6 is enabled.
 			if (useIPv6 == pjsua_ipv6_use::PJSUA_IPV6_ENABLED)
 			{
+				_transportConfig_TLS6->port = configuration.GetPortTLSv6();
+				_transportConfig_TLS6->portRange = configuration.GetPortRangeTLSv6();
 				int traID_TLS6 = this->transportCreate(pjsip_transport_type_e::PJSIP_TRANSPORT_TLS6, *(_transportConfig_TLS6.get()));
 				_transportIDs.push_back(traID_TLS6);
 			}

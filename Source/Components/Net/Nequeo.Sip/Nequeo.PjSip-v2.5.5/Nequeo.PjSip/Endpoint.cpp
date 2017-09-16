@@ -125,12 +125,64 @@ void Endpoint::MarshalString(String^ s, std::wstring& os)
 /// <param name="transportType">The transport type flags.</param>
 void Endpoint::Initialise(IPv6_Use useIPv6, TransportType transportType)
 {
+	EndPointConfig^ config = gcnew EndPointConfig();
+	config->UseConfig = false;
+	Initialise(useIPv6, transportType, config);
+}
+
+/// <summary>
+/// Start the application.
+/// </summary>
+/// <param name="useIPv6">Use IPv6.</param>
+/// <param name="transportType">The transport type flags.</param>
+/// <param name="config">The endpoint configuration.</param>
+void Endpoint::Initialise(IPv6_Use useIPv6, TransportType transportType, EndPointConfig^ config)
+{
 	// If endpoint not created.
 	if (!_created)
 	{
 		pjsua_ipv6_use ipv6 = ConnectionMapper::GetIPv6UseEx(useIPv6);
-		_endpointCallback->Initialise(ipv6, transportType);
 
+		// If using endpoint configuration.
+		if (config->UseConfig)
+		{
+			// Get the log file name.
+			std::string logFileName;
+			MarshalString(config->LogFileName, logFileName);
+
+			// Assign configuration parameters.
+			EndPointConfiguration configuration;
+			configuration.SetHasConfiguration(true);
+			configuration.SetLogMessages(config->LogMessages);
+			configuration.SetLogLevel(config->LogLevel);
+			configuration.SetConsoleLogLevel(config->LogLevelConsole);
+			configuration.SetFileName(logFileName);
+			configuration.SetFileWriteFlag((unsigned int)config->LogFileWrite);
+			configuration.SetFileHeaderFlag((unsigned int)config->LogHeader);
+
+			// Assign the port and port range.
+			configuration.SetPortUDPv4(config->PortUDPv4);
+			configuration.SetPortUDPv6(config->PortUDPv6);
+			configuration.SetPortTCPv4(config->PortTCPv4);
+			configuration.SetPortTCPv6(config->PortTCPv6);
+			configuration.SetPortTLSv4(config->PortTLSv4);
+			configuration.SetPortTLSv6(config->PortTLSv6);
+
+			configuration.SetPortRangeUDPv4(config->PortRangeUDPv4);
+			configuration.SetPortRangeUDPv6(config->PortRangeUDPv6);
+			configuration.SetPortRangeTCPv4(config->PortRangeTCPv4);
+			configuration.SetPortRangeTCPv6(config->PortRangeTCPv6);
+			configuration.SetPortRangeTLSv4(config->PortRangeTLSv4);
+			configuration.SetPortRangeTLSv6(config->PortRangeTLSv6);
+
+			// Initialise the endpoint.
+			_endpointCallback->Initialise(ipv6, transportType, configuration);
+		}
+		else
+		{
+			// Default no logging.
+			_endpointCallback->Initialise(ipv6, transportType);
+		}
 
 		// Assign the handler and allocate memory.
 		OnNatCheckStunServersCompleteCallback^ onNatCheckStunServersCompleteCallback = gcnew OnNatCheckStunServersCompleteCallback(this, &Endpoint::OnNatCheckStunServersComplete_Handler);

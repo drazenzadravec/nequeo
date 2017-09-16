@@ -138,6 +138,14 @@ namespace Nequeo
 				void Initialise(IPv6_Use useIPv6, TransportType transportType);
 
 				/// <summary>
+				/// Start the application.
+				/// </summary>
+				/// <param name="useIPv6">Use IPv6.</param>
+				/// <param name="transportType">The transport type flags.</param>
+				/// <param name="config">The endpoint configuration.</param>
+				void Initialise(IPv6_Use useIPv6, TransportType transportType, EndPointConfig^ config);
+
+				/// <summary>
 				/// Get all supported audio codecs in the system.
 				/// </summary>
 				/// <returns>The supported audio codecs in the system.</returns>

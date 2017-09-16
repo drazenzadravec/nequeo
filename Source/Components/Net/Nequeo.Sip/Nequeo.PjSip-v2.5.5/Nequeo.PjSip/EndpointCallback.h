@@ -39,6 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "TransportType.h"
 #include "TransportState.h"
 #include "StunNatType.h"
+#include "Configuration.h"
 
 #include "pjsua2.hpp"
 #include "pjsua2\endpoint.hpp"
@@ -77,6 +78,14 @@ namespace Nequeo
 				/// <param name="useIPv6">Use IPv6.</param>
 				/// <param name="transportType">The transport type flags.</param>
 				void Initialise(pjsua_ipv6_use useIPv6, TransportType transportType);
+
+				/// <summary>
+				/// Start the application.
+				/// </summary>
+				/// <param name="useIPv6">Use IPv6.</param>
+				/// <param name="transportType">The transport type flags.</param>
+				/// <param name="configuration">Endpoint configuration.</param>
+				void Initialise(pjsua_ipv6_use useIPv6, TransportType transportType, const EndPointConfiguration& configuration);
 
 				/// <summary>
 				/// Get the audio deveice manager.

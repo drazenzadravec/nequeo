@@ -293,6 +293,7 @@
     <ClInclude Include="CallSetting.h" />
     <ClInclude Include="CallSetVideoStream.h" />
     <ClInclude Include="CodecInfo.h" />
+    <ClInclude Include="Configuration.h" />
     <ClInclude Include="ConfPortInfo.h" />
     <ClInclude Include="ConnectionMapper.h" />
     <ClInclude Include="Contact.h" />
@@ -423,6 +424,7 @@
     <ClCompile Include="CallSetting.cpp" />
     <ClCompile Include="CallSetVideoStream.cpp" />
     <ClCompile Include="CodecInfo.cpp" />
+    <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="ConfPortInfo.cpp" />
     <ClCompile Include="ConnectionMapper.cpp" />
     <ClCompile Include="Contact.cpp" />
