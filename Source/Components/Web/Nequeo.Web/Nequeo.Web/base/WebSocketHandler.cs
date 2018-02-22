@@ -54,7 +54,7 @@ namespace Nequeo.Web
         /// Called when a new web socket connection has been established.
         /// </summary>
         /// <param name="webSocketContext">The web socket context.</param>
-        public abstract void WebSocketContext(System.Web.WebSockets.AspNetWebSocketContext webSocketContext);
+        public abstract Task WebSocketContext(System.Web.WebSockets.AspNetWebSocketContext webSocketContext);
 
         /// <summary>
         /// Return resuse state option
@@ -171,14 +171,10 @@ namespace Nequeo.Web
         /// </summary>
         /// <param name="webSocketContext">The web socket context.</param>
         /// <returns>The task to execute.</returns>
-        private async Task ProcessWebSocketRequestAsync(System.Web.WebSockets.AspNetWebSocketContext webSocketContext)
+        private Task ProcessWebSocketRequestAsync(System.Web.WebSockets.AspNetWebSocketContext webSocketContext)
         {
-            await Nequeo.Threading.AsyncOperationResult<bool>.
-                RunTask(() =>
-                {
-                    // Process the request.
-                    WebSocketContext(webSocketContext);
-                });
+            // Process the request.
+            return WebSocketContext(webSocketContext);
         }
     }
 }
