@@ -164,6 +164,78 @@ namespace Nequeo {
 					_privateKeyFile = privateKeyFile;
 				}
 
+				/// <summary>
+				/// Get the private key password.
+				/// </summary>
+				/// <return>The private key password.</return>
+				inline const std::string& GetPrivateKeyPassword() const
+				{
+					return _privateKeyPassword;
+				}
+
+				/// <summary>
+				/// Set the private key password.
+				/// </summary>
+				/// <param name="privateKeyPassword">The private key password.</param>
+				inline void SetPrivateKeyPassword(const std::string& privateKeyPassword)
+				{
+					_privateKeyPassword = privateKeyPassword;
+				}
+
+				/// <summary>
+				/// Get the request timeout.
+				/// </summary>
+				/// <return>The request timeout.</return>
+				inline long GetTimeoutRequest() const
+				{
+					return _timeoutRequest;
+				}
+
+				/// <summary>
+				/// Set the request timeout.
+				/// </summary>
+				/// <param name="timeoutRequest">The request timeout.</param>
+				inline void SetTimeoutRequest(long timeoutRequest)
+				{
+					_timeoutRequest = timeoutRequest;
+				}
+
+				/// <summary>
+				/// Get the request content.
+				/// </summary>
+				/// <return>The request content.</return>
+				inline long GetTimeoutContent() const
+				{
+					return _timeoutContent;
+				}
+
+				/// <summary>
+				/// Set the request content.
+				/// </summary>
+				/// <param name="timeoutIdle">The request content.</param>
+				inline void SetTimeoutContent(long timeoutContent)
+				{
+					_timeoutContent = timeoutContent;
+				}
+
+				/// <summary>
+				/// Get the number threads to use.
+				/// </summary>
+				/// <return>The number threads.</return>
+				inline size_t GetNumberOfThreads() const
+				{
+					return _numberOfThreads;
+				}
+
+				/// <summary>
+				/// Set the number threads to use.
+				/// </summary>
+				/// <param name="numberOfThreads">The number threads.</param>
+				inline void SetNumberOfThreads(size_t numberOfThreads)
+				{
+					_numberOfThreads = numberOfThreads;
+				}
+
 			private:
 				bool _disposed;
 
@@ -173,6 +245,10 @@ namespace Nequeo {
 				std::string _endpoint;
 				std::string _publicKeyFile;
 				std::string _privateKeyFile;
+				std::string _privateKeyPassword;
+				long _timeoutRequest;
+				long _timeoutContent;
+				size_t _numberOfThreads;
 			};
 		}
 	}

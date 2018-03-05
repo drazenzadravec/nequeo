@@ -131,7 +131,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -150,7 +150,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -170,7 +170,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -189,7 +189,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -211,7 +211,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -221,8 +221,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cppnetlib-uri.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Dynamic|Win32'">
@@ -234,7 +234,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x86\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x86\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -258,7 +258,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -268,8 +268,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cppnetlib-uri.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Dynamic|x64'">
@@ -281,7 +281,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\ThirdPartyTools\Net\netlib;..\..\..\..\..\..\ThirdPartyTools\Boost\161\stage\x64\include;..\..\..\..\..\..\ThirdPartyTools\OpenSSL\1.0.2\x64\include;..\..\..\..\..\References\Release\Include\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>

@@ -44,6 +44,10 @@ namespace Nequeo {
 			enum class EXPORT_NEQUEO_NET_BOOST_SERVER_API IPVersionType
 			{
 				/// <summary>
+				/// IP version none.
+				/// </summary>
+				None,
+				/// <summary>
 				/// IP version 4.
 				/// </summary>
 				IPv4,

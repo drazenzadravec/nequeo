@@ -59,13 +59,17 @@ MultiWebServer::MultiWebServer(std::vector<MultiServerContainer>& containers) :
 			if (container.GetEndpoint().length() > 0)
 			{
 				// Construct the endpoint server.
-				std::shared_ptr<WebServer> serverEndpoint = std::make_shared<WebServer>(container.GetPort(), container.GetEndpoint(), container.GetIsSecure());
+				std::shared_ptr<WebServer> serverEndpoint = std::make_shared<WebServer>(
+					container.GetPort(), container.GetEndpoint(), container.GetIsSecure(), 
+					container.GetTimeoutRequest(), container.GetTimeoutContent(),
+					container.GetNumberOfThreads());
 
 				// If secure.
 				if (serverEndpoint->IsSecure())
 				{
 					// Set the public and private keys.
-					serverEndpoint->SetSecurePublicPrivateKeys(container.GetPublicKeyFile(), container.GetPrivateKeyFile());
+					serverEndpoint->SetSecurePublicPrivateKeys(
+						container.GetPublicKeyFile(), container.GetPrivateKeyFile(), container.GetPrivateKeyPassword());
 				}
 
 				// Add the server.
@@ -74,13 +78,17 @@ MultiWebServer::MultiWebServer(std::vector<MultiServerContainer>& containers) :
 			else
 			{
 				// Construct the ipv server.
-				std::shared_ptr<WebServer> serverIPversion = std::make_shared<WebServer>(container.GetPort(), container.GetIPversion(), container.GetIsSecure());
+				std::shared_ptr<WebServer> serverIPversion = std::make_shared<WebServer>(
+					container.GetPort(), container.GetIPversion(), container.GetIsSecure(),
+					container.GetTimeoutRequest(), container.GetTimeoutContent(),
+					container.GetNumberOfThreads());
 
 				// If secure.
 				if (serverIPversion->IsSecure())
 				{
 					// Set the public and private keys.
-					serverIPversion->SetSecurePublicPrivateKeys(container.GetPublicKeyFile(), container.GetPrivateKeyFile());
+					serverIPversion->SetSecurePublicPrivateKeys(
+						container.GetPublicKeyFile(), container.GetPrivateKeyFile(), container.GetPrivateKeyPassword());
 				}
 
 				// Add the server.

@@ -58,10 +58,13 @@ void MakeSecureWebContext(std::shared_ptr<WebContext>, std::shared_ptr<InternalS
 /// <param name="port">The listening port number.</param>
 /// <param name="ipv">The IP version to use.</param>
 /// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure) :
-	_disposed(false), _listening(false), _isSecure(isSecure), _port(port),
-	_internalThread(false), _ipv(ipv), _hasEndpoint(false), _serverName("Nequeo Web Server 16.26.1.1"),
-	_serverIndex(-1), _endpoint("")
+/// <param name="timeoutRequest">The request time out.</param>
+/// <param name="timeoutContent">The send and receive time out.</param>
+/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure, long timeoutRequest, long timeoutContent, size_t numberOfThreads) :
+	_disposed(false), _listening(false), _isSecure(isSecure), _port(port), _timeoutRequest(timeoutRequest), _timeoutContent(timeoutContent),
+	_internalThread(false), _ipv(ipv), _hasEndpoint(false), _serverName("Nequeo Web Server 16.26.1.1"), _numberOfThreads(numberOfThreads),
+	_serverIndex(-1), _endpoint(""), _privateKeyPassword("")
 {
 }
 
@@ -71,10 +74,13 @@ WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure) :
 /// <param name="port">The listening port number.</param>
 /// <param name="endpoint">The endpoint address to listen on.</param>
 /// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-WebServer::WebServer(unsigned short port, const std::string& endpoint, bool isSecure) :
-	_disposed(false), _listening(false), _isSecure(isSecure), _port(port),
-	_internalThread(false), _endpoint(endpoint), _hasEndpoint(true), _serverName("Nequeo Web Server 16.26.1.1"),
-	_serverIndex(-1)
+/// <param name="timeoutRequest">The request time out.</param>
+/// <param name="timeoutContent">The send and receive time out.</param>
+/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+WebServer::WebServer(unsigned short port, const std::string& endpoint, bool isSecure, long timeoutRequest, long timeoutContent, size_t numberOfThreads) :
+	_disposed(false), _listening(false), _isSecure(isSecure), _port(port), _timeoutRequest(timeoutRequest), _timeoutContent(timeoutContent),
+	_internalThread(false), _endpoint(endpoint), _hasEndpoint(true), _serverName("Nequeo Web Server 16.26.1.1"), _numberOfThreads(numberOfThreads),
+	_serverIndex(-1), _privateKeyPassword("")
 {
 	_ipv = IPVersionType::IPv4;
 }
@@ -185,6 +191,8 @@ void WebServer::Start()
 	// If not listening.
 	if (!_listening)
 	{
+		_listening = true;
+
 		// If not secure.
 		if (!_isSecure)
 		{
@@ -197,7 +205,7 @@ void WebServer::Start()
 				// HTTP-server at port using 1 thread
 				// Unless you do more heavy non-threaded processing in the resources,
 				// 1 thread is usually faster than several threads
-				serverPtr.insert(std::make_pair(_serverIndex, std::make_shared<InternalHttpServer>(_port, 1, _ipv)));
+				serverPtr.insert(std::make_pair(_serverIndex, std::make_shared<InternalHttpServer>(_port, _numberOfThreads, _ipv, _timeoutRequest, _timeoutContent)));
 
 				// If an enpoint exists.
 				if (_hasEndpoint)
@@ -218,7 +226,7 @@ void WebServer::Start()
 				// HTTPS-server at port using 1 thread
 				// Unless you do more heavy non-threaded processing in the resources,
 				// 1 thread is usually faster than several threads
-				serverSecurePtr.insert(std::make_pair(_serverIndex, std::make_shared<InternalSecureHttpServer>(_port, 1, _publicKeyFile, _privateKeyFile, _ipv)));
+				serverSecurePtr.insert(std::make_pair(_serverIndex, std::make_shared<InternalSecureHttpServer>(_port, _numberOfThreads, _publicKeyFile, _privateKeyFile, _ipv, _timeoutRequest, _timeoutContent, _privateKeyPassword)));
 
 				// If an enpoint exists.
 				if (_hasEndpoint)
@@ -228,8 +236,6 @@ void WebServer::Start()
 			// Start accepting;
 			AcceptSecure(this, serverSecurePtr[_serverIndex], _onWebContext);
 		}
-
-		_listening = true;
 	}
 }
 
@@ -237,12 +243,14 @@ void WebServer::Start()
 /// On web context request.
 /// </summary>
 /// <param name="publicKeyFile">The public certificate file path.</param>
-/// <param name="privateKeyFile">The private (un-encrypted) key file.</param>
-void WebServer::SetSecurePublicPrivateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile)
+/// <param name="privateKeyFile">The private (un-encrypted, encrypted - use password) key file.</param>
+/// <param name="privateKeyPassword">The private key password (decrypt encrypted private key file).</param>
+void WebServer::SetSecurePublicPrivateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile, const std::string& privateKeyPassword)
 {
 	_isSecure = true;
 	_publicKeyFile = publicKeyFile;
 	_privateKeyFile = privateKeyFile;
+	_privateKeyPassword = privateKeyPassword;
 }
 
 /// <summary>

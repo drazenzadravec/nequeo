@@ -55,7 +55,11 @@ namespace Nequeo {
 				/// <param name="port">The listening port number.</param>
 				/// <param name="ipv">The IP version to use.</param>
 				/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-				WebServer(unsigned short port, IPVersionType ipv = IPVersionType::IPv4, bool isSecure = false);
+				/// <param name="timeoutRequest">The request time out.</param>
+				/// <param name="timeoutContent">The send and receive time out.</param>
+				/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+				WebServer(unsigned short port, IPVersionType ipv = IPVersionType::IPv4, bool isSecure = false, 
+					long timeoutRequest = 5, long timeoutContent = 300, size_t numberOfThreads = 1);
 
 				/// <summary>
 				/// Http web server.
@@ -63,7 +67,11 @@ namespace Nequeo {
 				/// <param name="port">The listening port number.</param>
 				/// <param name="endpoint">The endpoint address to listen on.</param>
 				/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-				WebServer(unsigned short port, const std::string& endpoint, bool isSecure = false);
+				/// <param name="timeoutRequest">The request time out.</param>
+				/// <param name="timeoutContent">The send and receive time out.</param>
+				/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+				WebServer(unsigned short port, const std::string& endpoint, bool isSecure = false, 
+					long timeoutRequest = 5, long timeoutContent = 300, size_t numberOfThreads = 1);
 
 				/// <summary>
 				/// Http web server.
@@ -100,8 +108,12 @@ namespace Nequeo {
 				/// On web context request.
 				/// </summary>
 				/// <param name="publicKeyFile">The public certificate file path.</param>
-				/// <param name="privateKeyFile">The private (un-encrypted) key file.</param>
-				void SetSecurePublicPrivateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile);
+				/// <param name="privateKeyFile">The private (un-encrypted, encrypted - use password) key file.</param>
+				/// <param name="privateKeyPassword">The private key password (decrypt encrypted private key file).</param>
+				void SetSecurePublicPrivateKeys(
+					const std::string& publicKeyFile,
+					const std::string& privateKeyFile, 
+					const std::string& privateKeyPassword);
 
 				/// <summary>
 				/// Is the server listening.
@@ -155,9 +167,13 @@ namespace Nequeo {
 				IPVersionType _ipv;
 				std::string _serverName;
 				std::string _endpoint;
+				long _timeoutRequest;
+				long _timeoutContent;
+				size_t _numberOfThreads;
 
 				std::string _publicKeyFile;
 				std::string _privateKeyFile;
+				std::string _privateKeyPassword;
 
 				WebContextHandler _onWebContext;
 			};

@@ -36,7 +36,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "client_http.hpp"
 #include "client_https.hpp"
 
+#include "boost\network.hpp"
+
 using namespace Nequeo::Net::Http;
+using namespace boost::network;
+using namespace boost::network::http;
 
 static const char* WEBCLIENT_CLIENT_TAG = "NequeoWebClient";
 static const char* NETCONTEXT_CLIENT_TAG = "NequeoNetContext";
@@ -48,18 +52,92 @@ concurrency::concurrent_unordered_map<int, std::shared_ptr<InternalSecureHttpCli
 /// <summary>
 /// Http web client.
 /// </summary>
+/// <param name="url">The URL.</param>
+WebClient::WebClient(const std::string& url) :
+	_disposed(false), _url(url), _active(false), _clientIndex(-1), _connected(false)
+{
+	// Create a new executor.
+	_executor = Nequeo::MakeShared<Nequeo::Threading::DefaultExecutor>(WEBCLIENT_CLIENT_TAG);
+
+	// Parse the URL.
+	uri::uri instance(url);
+	_host = instance.host();
+	std::string scheme = instance.scheme();
+	std::string port = instance.port();
+
+	// If not secure.
+	if (scheme != "https")
+		_isSecure = false;
+	else
+		_isSecure = true;
+
+	// If a port exists.
+	if (port != "")
+	{
+		// Get the port
+		_port = (unsigned short)std::stoi(port);
+	}
+	else
+	{
+		// If not secure.
+		if (scheme != "https")
+			_port = 80;
+		else
+			_port = 443;
+	}
+}
+
+/// <summary>
+/// Http web client.
+/// </summary>
+/// <param name="url">The URL.</param>
+/// <param name="ipv">The IP version to use.</param>
+WebClient::WebClient(const std::string& url, IPVersionType ipv) : 
+	_disposed(false), _ipv(ipv), _url(url), _active(false), _clientIndex(-1), _connected(false)
+{
+	// Create a new executor.
+	_executor = Nequeo::MakeShared<Nequeo::Threading::DefaultExecutor>(WEBCLIENT_CLIENT_TAG);
+
+	// Parse the URL.
+	uri::uri instance(url);
+	_host = instance.host();
+	std::string scheme = instance.scheme();
+	std::string port = instance.port();
+
+	// If not secure.
+	if (scheme != "https")
+		_isSecure = false;
+	else
+		_isSecure = true;
+
+	// If a port exists.
+	if (port != "")
+	{
+		// Get the port
+		_port = (unsigned short)std::stoi(port);
+	}
+	else
+	{
+		// If not secure.
+		if (scheme != "https")
+			_port = 80;
+		else
+			_port = 443;
+	}
+}
+
+/// <summary>
+/// Http web client.
+/// </summary>
 /// <param name="host">The host (name or IP).</param>
 /// <param name="port">The host port number.</param>
 /// <param name="isSecure">Is the connection secure.</param>
 /// <param name="ipv">The IP version to use.</param>
 WebClient::WebClient(const std::string& host, unsigned short port, bool isSecure, IPVersionType ipv) :
-	_disposed(false), _active(false), _isSecure(isSecure), _clientIndex(-1), _ipv(ipv), _port(port), _host(host)
+	_disposed(false), _active(false), _isSecure(isSecure), _clientIndex(-1), _ipv(ipv), _port(port), _host(host), _connected(false)
 {
 	// Create a new executor.
 	_executor = Nequeo::MakeShared<Nequeo::Threading::DefaultExecutor>(WEBCLIENT_CLIENT_TAG);
-
-	// Create a new context.
-	CreateNetContext();
 }
 
 ///	<summary>
@@ -70,6 +148,7 @@ WebClient::~WebClient()
 	if (!_disposed)
 	{
 		_disposed = true;
+		_connected = false;
 
 		if (_clientIndex >= 0)
 		{
@@ -84,6 +163,189 @@ WebClient::~WebClient()
 
 	_active = false;
 	_clientIndex = -1;
+}
+
+/// <summary>
+/// Make a connection.
+/// </summary>
+void WebClient::Connect()
+{
+	if (!_connected)
+	{
+		// Create a new context.
+		CreateNetContext();
+		_connected = true;
+	}
+}
+
+/// <summary>
+/// Get the list of resolved IP address of the host of the URL.
+/// </summary>
+/// <return>The URL ip address.</return>
+std::vector<std::string> WebClient::GetResolvedHosts()
+{
+	std::vector<std::string> ips;
+
+	// Resolver the host.
+	boost::asio::ip::tcp::resolver::query query(_host, std::to_string(_port));
+	boost::asio::io_service io_service;
+	boost::asio::ip::tcp::endpoint endpoint;
+	boost::asio::ip::tcp::resolver resolver(io_service);
+
+	// Get the list of IPs
+	boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
+	boost::asio::ip::tcp::resolver::iterator end;
+
+	// Iterate through the list.
+	while (iter != end)
+	{
+		ips.push_back((*iter).endpoint().address().to_string());
+		++iter;
+	}
+
+	// Return the list of IPs
+	return ips;
+}
+
+/// <summary>
+/// Get the path of the URL.
+/// </summary>
+/// <return>The URL path.</return>
+std::string WebClient::GetURLPath()
+{
+	// Parse the URL.
+	uri::uri instance(_url);
+	return instance.path();
+}
+
+/// <summary>
+/// Get the query of the URL.
+/// </summary>
+/// <return>The URL query.</return>
+std::string WebClient::GetURLQuery()
+{
+	// Parse the URL.
+	uri::uri instance(_url);
+	return instance.query();
+}
+
+/// <summary>
+/// Get the host of the URL.
+/// </summary>
+/// <return>The URL host.</return>
+std::string WebClient::GetURLHost()
+{
+	// Parse the URL.
+	uri::uri instance(_url);
+	return instance.host();
+}
+
+/// <summary>
+/// Get the port of the URL.
+/// </summary>
+/// <return>The URL port.</return>
+unsigned short WebClient::GetURLPort()
+{
+	// Parse the URL.
+	uri::uri instance(_url);
+	std::string scheme = instance.scheme();
+	std::string port = instance.port();
+
+	// If a port exists.
+	if (port != "")
+	{
+		// Get the port
+		return (unsigned short)std::stoi(port);
+	}
+	else
+	{
+		// If not secure.
+		if (scheme != "https")
+			return 80;
+		else
+			return 443;
+	}
+}
+
+/// <summary>
+/// Get the ip type of the URL.
+/// </summary>
+/// <param name="ipAddress">The IP address.</param>
+/// <return>The URL ip type.</return>
+IPVersionType WebClient::GetIPVersionType(const std::string& ipAddress)
+{
+	try
+	{
+		// Resolver the host.
+		boost::asio::ip::address addr4(boost::asio::ip::address_v4::from_string(ipAddress));
+
+		// If IPv6.
+		if (addr4.is_v6())
+		{
+			// If IPv6.
+			return IPVersionType::IPv6;
+		}
+		else if (addr4.is_v4())
+		{
+			// If IPv4.
+			return IPVersionType::IPv4;
+		}
+	}
+	catch (const std::exception&) 
+	{ 
+		// Not IPv4
+	}
+
+	try
+	{
+		// Resolver the host.
+		boost::asio::ip::address addr6(boost::asio::ip::address_v6::from_string(ipAddress));
+
+		// If IPv6.
+		if (addr6.is_v6())
+		{
+			// If IPv6.
+			return IPVersionType::IPv6;
+		}
+		else if (addr6.is_v4())
+		{
+			// If IPv4.
+			return IPVersionType::IPv4;
+		}
+	}
+	catch (const std::exception&) 
+	{ 
+		// Not IPv6
+	}
+
+	// Default.
+	return IPVersionType::None;
+}
+
+/// <summary>
+/// Get the ip type of the URL.
+/// </summary>
+/// <param name="ipVersionType">The IP version.</param>
+void WebClient::SetIPVersionType(IPVersionType ipVersionType)
+{
+	_ipv = ipVersionType;
+}
+
+/// <summary>
+/// Get the is secure of the URL.
+/// </summary>
+/// <return>The URL is secure.</return>
+bool WebClient::GetURLIsSecure()
+{
+	// Parse the URL.
+	uri::uri instance(_url);
+	std::string scheme = instance.scheme();
+
+	// If not secure.
+	if (scheme != "https")
+		return false;
+	else
+		return true;
 }
 
 ///	<summary>

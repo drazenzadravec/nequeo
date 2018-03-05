@@ -38,6 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "server_http.hpp"
 
 #include <boost/asio/ssl.hpp>
+#include <boost/bind.hpp>
 
 namespace Nequeo {
 	namespace Net {
@@ -62,17 +63,18 @@ namespace Nequeo {
 					/// <param name="port">The port number the server should listen on.</param>
 					/// <param name="num_threads">The number of threads to use (set to 1 is more than statisfactory).</param>
 					/// <param name="cert_file">The certificate file path.</param>
-					/// <param name="private_key_file">The private (un-encrypted) key file.</param>
+					/// <param name="private_key_file">The private (un-encrypted, encrypted - use password) key file.</param>
 					/// <param name="timeout_request">The request time out.</param>
 					/// <param name="timeout_content">The send and receive time out.</param>
 					/// <param name="ipv">The ip version.</param>
+					/// <param name="private_key_password">The private key password (decrypt).</param>
 					/// <param name="verify_file">The verificate file path.</param>
 					Server(
 						unsigned short port, size_t num_threads, const std::string& cert_file, const std::string& private_key_file,
 						IPVersionType ipv = IPVersionType::IPv4, long timeout_request = 5, long timeout_content = 300,
-						const std::string& verify_file = std::string()) :
+						const std::string& private_key_password = std::string(), const std::string& verify_file = std::string()) :
 						ServerBase<HTTPS>::ServerBase(port, num_threads, timeout_request, timeout_content, ipv),
-						context(boost::asio::ssl::context::tlsv12) 
+						context(boost::asio::ssl::context::tlsv12), _private_key_password(private_key_password)
 					{ 
 						// 2016/08/13 only use tls12, see https://www.ssllabs.com/ssltest
 						context.use_certificate_chain_file(cert_file);
@@ -81,6 +83,10 @@ namespace Nequeo {
 						// If a vertifcation file exists.
 						if (verify_file.size() > 0)
 							context.load_verify_file(verify_file);
+
+						// If a private key certificate password exists.
+						if (private_key_password.size() > 0)
+							context.set_password_callback(boost::bind(&Server<HTTPS>::GetCertificatePassword, this));
 					}
 
 				protected:
@@ -132,6 +138,17 @@ namespace Nequeo {
 								});
 							}
 						});
+					}
+
+				private:
+					std::string _private_key_password;
+
+					///	<summary>
+					///	Get the certificate password.
+					///	</summary>
+					std::string GetCertificatePassword() const
+					{
+						return _private_key_password;
 					}
 				};
 			}

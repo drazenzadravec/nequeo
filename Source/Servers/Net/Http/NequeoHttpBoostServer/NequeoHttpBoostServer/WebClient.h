@@ -59,16 +59,34 @@ namespace Nequeo {
 				/// <summary>
 				/// Http web client.
 				/// </summary>
+				/// <param name="url">The URL.</param>
+				WebClient(const std::string& url);
+
+				/// <summary>
+				/// Http web client.
+				/// </summary>
+				/// <param name="url">The URL.</param>
+				/// <param name="ipv">The IP version to use.</param>
+				WebClient(const std::string& url, IPVersionType ipv);
+
+				/// <summary>
+				/// Http web client.
+				/// </summary>
 				/// <param name="host">The host (name or IP).</param>
 				/// <param name="port">The host port number.</param>
 				/// <param name="isSecure">Is the connection secure.</param>
 				/// <param name="ipv">The IP version to use.</param>
-				WebClient(const std::string& host, unsigned short port = 80, bool isSecure = false, IPVersionType ipv = IPVersionType::IPv4);
+				WebClient(const std::string& host, unsigned short port, bool isSecure = false, IPVersionType ipv = IPVersionType::IPv4);
 
 				/// <summary>
 				/// Http web client.
 				/// </summary>
 				virtual ~WebClient();
+
+				/// <summary>
+				/// Make a connection.
+				/// </summary>
+				void Connect();
 
 				/// <summary>
 				/// Make a request.
@@ -229,15 +247,61 @@ namespace Nequeo {
 				/// <return>The callable future.</return>
 				NetResponseCallable RequestCallable(const NetRequest& request, std::iostream& content);
 
+				/// <summary>
+				/// Get the host of the URL.
+				/// </summary>
+				/// <return>The URL host.</return>
+				std::string GetURLHost();
+
+				/// <summary>
+				/// Get the path of the URL.
+				/// </summary>
+				/// <return>The URL path.</return>
+				std::string GetURLPath();
+
+				/// <summary>
+				/// Get the query of the URL.
+				/// </summary>
+				/// <return>The URL query.</return>
+				std::string GetURLQuery();
+
+				/// <summary>
+				/// Get the port of the URL.
+				/// </summary>
+				/// <return>The URL port.</return>
+				unsigned short GetURLPort();
+
+				/// <summary>
+				/// Get the is secure of the URL.
+				/// </summary>
+				/// <return>The URL is secure.</return>
+				bool GetURLIsSecure();
+
+				/// <summary>
+				/// Get the ip type of the URL.
+				/// </summary>
+				/// <param name="ipAddress">The IP address.</param>
+				/// <return>The URL ip type.</return>
+				IPVersionType GetIPVersionType(const std::string& ipAddress);
+				void SetIPVersionType(IPVersionType ipVersionType);
+
+				/// <summary>
+				/// Get the list of resolved IP address of the host of the URL.
+				/// </summary>
+				/// <return>The URL ip address.</return>
+				std::vector<std::string> GetResolvedHosts();
+
 			private:
 				bool _disposed;
 				bool _active;
 				bool _isSecure;
+				bool _connected;
 
 				int _clientIndex;
 				IPVersionType _ipv;
 				std::string _host;
 				unsigned short _port;
+				std::string _url;
 
 				std::shared_ptr<NetContext> _context;
 				std::shared_ptr<Nequeo::Threading::Executor> _executor;
