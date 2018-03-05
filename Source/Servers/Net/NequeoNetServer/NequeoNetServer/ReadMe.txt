@@ -42,8 +42,41 @@ StdAfx.h, StdAfx.cpp
 /////////////////////////////////////////////////////////////////////////////
 Other notes:
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+WebSocket:
+	Client request JSON elements:
+		uniqueID:				A unique id for the client.
+		applicationID:			An application id (room).
+		available:				True if the client is available for contact.
+		broadcast:				True if the uniqueID is visible to clients.
+		broadcastAppID:			True if the applicationID is visible to clients.
+		contactUniqueID:		The unique id of the client contact details.
+		contactApplicationID:	The application id of the client contact details.
+
+	Client request single text:
+		time:					The current time.
+		uniqueids:				Get the list of unique ids of all clients (The client is added only if the 'broadcast' is true).
+		applicationids:			Get the list of application ids of all clients (The client is added only if the 'broadcastAppID' is true).
+		uniqueapplication:		Get the list of unique id and application id groupings.
+
+	Client response JSON elements:
+		response:				Response ok, error, close, ping.
+		error:					An error message if response is error.
+		available:				True if the contact is available.
+		contactUniqueID:		The unique id of the client contact details.
+		contactApplicationID:	The application id of the client contact details.
+		time:					The current time.
+		uniques:				An array of unique ids.
+		applications:			An array of application ids.
+
+	Example of changing client details:
+		{ "uniqueID" : "Drazen", "applicationID" : "ChatRoom", "available" : true, "broadcast" : true, "broadcastAppID" : true}
+
+	Example of sendind data to a client contact (The client is contactable only if they are available = true):
+		{ "contactUniqueID" : "Holly", "contactApplicationID" : "ChatRoom", "sentData" : "stuff" }
+
+	Example of requesting the time: just sent the text 'time'
+	Example of requesting unique ids: just sent the text 'uniqueids'	
+	Example of requesting application ids: just sent the text 'applicationids'	
 
 /////////////////////////////////////////////////////////////////////////////
 

@@ -78,11 +78,15 @@ void ConfigModel::ReadConfigFile()
 				{
 					// Assign each server details.
 					MultiServerContainer server;
+					server.SetNumberOfThreads(webservers[i]["numberofthreads"].asInt());
 					server.SetPort(webservers[i]["port"].asUInt());
 					server.SetEndpoint(webservers[i]["endpoint"].asString());
 					server.SetIsSecure(webservers[i]["issecure"].asBool());
 					server.SetPublicKeyFile(webservers[i]["publickeyfile"].asString());
 					server.SetPrivateKeyFile(webservers[i]["privatekeyfile"].asString());
+					server.SetPrivateKeyPassword(webservers[i]["privatekeypassword"].asString());
+					server.SetTimeoutRequest(webservers[i]["timeoutrequest"].asInt64());
+					server.SetTimeoutContent(webservers[i]["timeoutcontent"].asInt64());
 
 					// Get the ip version.
 					std::string ipv;

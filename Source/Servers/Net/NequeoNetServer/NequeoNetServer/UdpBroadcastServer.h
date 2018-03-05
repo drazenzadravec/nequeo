@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          HttpServer.h
-*  Purpose :       Http web server class.
+*  File :          UdpBroadcastServer.h
+*  Purpose :       Udp Broadcast Server class.
 *
 */
 
@@ -34,37 +34,31 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "stdafx.h"
 #include "GlobalNetServer.h"
 
-#include "NequeoHttpBoostServer\MultiWebServer.h"
-
 namespace Nequeo {
 	namespace Net {
-		namespace Http
+		namespace UDP
 		{
+			class UdpServer;
+			class UdpSenderEndpoint;
+
+			typedef std::function<void(const std::string&, const std::string&, unsigned int)> UdpBroadcastReceiveHandler;
+
 			/// <summary>
-			/// Http web server.
+			///  UDP Broadcast web server.
 			/// </summary>
-			class EXPORT_NEQUEO_NET_SERVER_API HttpServer
+			class EXPORT_NEQUEO_NET_SERVER_API UdpBroadcastServer
 			{
 			public:
 				/// <summary>
-				/// Http web server.
+				/// UDP Broadcast web server.
 				/// </summary>
-				/// <param name="path">The root folder path (this is where all files are located).</param>
-				HttpServer(const std::string& path);
+				/// <param name="port">The UDP listening port.</param>
+				UdpBroadcastServer(unsigned int port);
 
 				/// <summary>
-				/// Http web server.
+				/// UDP Broadcast web server.
 				/// </summary>
-				~HttpServer();
-
-				/// <summary>
-				/// Set the muilti server contatiner list.
-				/// </summary>
-				/// <param name="path">The muilti server contatiner list.</param>
-				inline void SetMultiServerContainer(const std::vector<MultiServerContainer>& containers)
-				{
-					_containers = containers;
-				}
+				~UdpBroadcastServer();
 
 				/// <summary>
 				/// Is initialise.
@@ -90,13 +84,53 @@ namespace Nequeo {
 				///	</summary>
 				void Stop();
 
+				/// <summary>
+				/// On received data.
+				/// </summary>
+				/// <param name="received">The received data handler.</param>
+				void OnReceivedData(const UdpBroadcastReceiveHandler& received);
+
+				/// <summary>
+				/// Send data to sender endpoint.
+				/// </summary>
+				/// <param name="data">The data to send.</param>
+				/// <param name="senderAddress">The sender address.</param>
+				/// <param name="senderPort">The sender port.</param>
+				void SendTo(const std::string& data, const std::string& senderAddress, unsigned int senderPort);
+
+				/// <summary>
+				/// Send no response to complete the async call.
+				/// </summary>
+				/// <param name="senderAddress">The sender address.</param>
+				void SendTo(const std::string& senderAddress);
+
+				///	<summary>
+				///	Start IPv4 server.
+				///	</summary>
+				void StartServerV4();
+
+				///	<summary>
+				///	Start IPv6 server.
+				///	</summary>
+				void StartServerV6();
+
+			private:
+				std::set<std::shared_ptr<UdpSenderEndpoint>> GetSenderEndpoints();
+
 			private:
 				bool _disposed;
 				bool _initialised;
+				std::thread _threadV4;
+				std::thread _threadV6;
 
-				std::string _path;
-				std::shared_ptr<MultiWebServer> _servers;
-				std::vector<MultiServerContainer> _containers;
+				unsigned int _port;
+				std::set<std::shared_ptr<UdpSenderEndpoint>> _senderEndpoints;
+
+				std::shared_ptr<UdpServer> _udpServerV4;
+				std::shared_ptr<UdpServer> _udpServerV6;
+
+				std::mutex _endpointMutex;
+				UdpBroadcastReceiveHandler _onReceivedData;
 			};
 		}
 	}

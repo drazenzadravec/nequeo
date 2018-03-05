@@ -1,37 +1,69 @@
 {
   "rootpath": "C:\\Temp\\Server",
+  "accesstokenverifyurl": "",
+  "clientlocationrequesturl": "",
+  "clientlocationrequestenabled": false,
+  "udpbroadcastenabled": false,
+  "udpbroadcastport": 0,
+  "udpbroadcastaddress": "",
+  "udpbroadcastmask": "",
+  "udpbroadcastcallbackport": 0,
   "webservers": [
     {
+      "numberofthreads": 1,
       "port": 80,
       "endpoint": "",
       "ipversion": "ipv4",
       "issecure": false,
       "publickeyfile": "",
-      "privatekeyfile": ""
+      "privatekeyfile": "",
+      "privatekeypassword": "",
+      "timeoutrequest": 5,
+      "timeoutidle": 0,
+      "timeoutcontent": 300,
+      "timeoutconnect": 0
     },
     {
+      "numberofthreads": 1,
       "port": 80,
       "endpoint": "",
       "ipversion": "ipv6",
       "issecure": false,
       "publickeyfile": "",
-      "privatekeyfile": ""
+      "privatekeyfile": "",
+      "privatekeypassword": "",
+      "timeoutrequest": 5,
+      "timeoutidle": 0,
+      "timeoutcontent": 300,
+      "timeoutconnect": 0
     },
     {
+      "numberofthreads": 1,
       "port": 443,
       "endpoint": "",
       "ipversion": "ipv4",
       "issecure": true,
       "publickeyfile": "",
-      "privatekeyfile": ""
+      "privatekeyfile": "",
+      "privatekeypassword": "",
+      "timeoutrequest": 5,
+      "timeoutidle": 0,
+      "timeoutcontent": 300,
+      "timeoutconnect": 0
     },
     {
+      "numberofthreads": 1,
       "port": 443,
       "endpoint": "",
       "ipversion": "ipv6",
       "issecure": true,
       "publickeyfile": "",
-      "privatekeyfile": ""
+      "privatekeyfile": "",
+      "privatekeypassword": "",
+      "timeoutrequest": 5,
+      "timeoutidle": 0,
+      "timeoutcontent": 300,
+      "timeoutconnect": 0
     }
   ]
 }

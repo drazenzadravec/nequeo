@@ -28,6 +28,12 @@
     <Filter Include="Source Files\WebSocket">
       <UniqueIdentifier>{fa51339f-8fcc-4664-b809-29360d33f10f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UDP">
+      <UniqueIdentifier>{7e4a23f3-faac-4106-9849-cee06d91dfcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UDP">
+      <UniqueIdentifier>{cc5784bd-57fd-42e0-acb5-03a8d29a538e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -60,6 +66,15 @@
     <ClInclude Include="WebSocketClient.h">
       <Filter>Header Files\WebSocket</Filter>
     </ClInclude>
+    <ClInclude Include="WebSocketJson.h">
+      <Filter>Header Files\WebSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpBroadcastClient.h">
+      <Filter>Header Files\UDP</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpBroadcastServer.h">
+      <Filter>Header Files\UDP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -85,6 +100,21 @@
     </ClCompile>
     <ClCompile Include="WebSocketClient.cpp">
       <Filter>Source Files\WebSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSocketJson.cpp">
+      <Filter>Source Files\WebSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpBroadcastClient.cpp">
+      <Filter>Source Files\UDP</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpBroadcastServer.cpp">
+      <Filter>Source Files\UDP</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpServer.cpp">
+      <Filter>Source Files\UDP</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpClient.cpp">
+      <Filter>Source Files\UDP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

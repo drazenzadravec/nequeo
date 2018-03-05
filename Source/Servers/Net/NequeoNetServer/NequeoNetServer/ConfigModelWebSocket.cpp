@@ -69,6 +69,14 @@ void ConfigModelWebSocket::ReadConfigFile()
 			{
 				// Get the json values.
 				_rootPath = jsonValue["rootpath"].asString();
+				_accessTokenVerifyURL = jsonValue["accesstokenverifyurl"].asString();
+				_clientLocationRequestURL = jsonValue["clientlocationrequesturl"].asString();
+				_clientLocationRequestEnabled = jsonValue["clientlocationrequestenabled"].asBool();
+				_udpBroadcastPort = jsonValue["udpbroadcastport"].asUInt();
+				_udpBroadcastCallbackPort = jsonValue["udpbroadcastcallbackport"].asUInt();
+				_udpBroadcastEnabled = jsonValue["udpbroadcastenabled"].asBool();
+				_udpBroadcastAddress = jsonValue["udpbroadcastaddress"].asString();
+				_udpBroadcastMask = jsonValue["udpbroadcastmask"].asString();
 
 				// Read the array of web servers.
 				const Json::Value& webservers = jsonValue["webservers"];
@@ -78,11 +86,16 @@ void ConfigModelWebSocket::ReadConfigFile()
 				{
 					// Assign each server details.
 					MultiServerContainer server;
+					server.SetNumberOfThreads(webservers[i]["numberofthreads"].asInt());
 					server.SetPort(webservers[i]["port"].asUInt());
 					server.SetEndpoint(webservers[i]["endpoint"].asString());
 					server.SetIsSecure(webservers[i]["issecure"].asBool());
 					server.SetPublicKeyFile(webservers[i]["publickeyfile"].asString());
 					server.SetPrivateKeyFile(webservers[i]["privatekeyfile"].asString());
+					server.SetPrivateKeyPassword(webservers[i]["privatekeypassword"].asString());
+					server.SetTimeoutRequest(webservers[i]["timeoutrequest"].asUInt());
+					server.SetTimeoutIdle(webservers[i]["timeoutidle"].asUInt());
+					server.SetTimeoutConnect(webservers[i]["timeoutconnect"].asUInt());
 
 					// Get the ip version.
 					std::string ipv;

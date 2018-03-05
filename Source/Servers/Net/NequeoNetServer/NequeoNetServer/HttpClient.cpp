@@ -37,6 +37,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using namespace Nequeo::Net::Http;
 
+/// <summary>
+/// Http web client.
+/// </summary>
+/// <param name="url">The URL.</param>
+/// <param name="ipv">The IP version to use.</param>
+HttpClient::HttpClient(const std::string& url, IPVersionType ipv) :
+	_disposed(false)
+{
+	_client = std::make_shared<WebClient>(url, ipv);
+}
+
 ///	<summary>
 ///	Http web client.
 ///	</summary>
@@ -55,6 +66,14 @@ HttpClient::~HttpClient()
 	{
 		_disposed = true;
 	}
+}
+
+/// <summary>
+/// Make a connection.
+/// </summary>
+void HttpClient::Connect()
+{
+	_client->Connect();
 }
 
 /// <summary>
@@ -268,4 +287,72 @@ NetResponseCallable HttpClient::RequestCallable(const NetRequest& request, const
 NetResponseCallable HttpClient::RequestCallable(const NetRequest& request, std::iostream& content)
 {
 	return _client->RequestCallable(request, content);
+}
+
+/// <summary>
+/// Get the host of the URL.
+/// </summary>
+/// <return>The URL host.</return>
+std::string HttpClient::GetURLHost()
+{
+	return _client->GetURLHost();
+}
+
+/// <summary>
+/// Get the path of the URL.
+/// </summary>
+/// <return>The URL path.</return>
+std::string HttpClient::GetURLPath()
+{
+	return _client->GetURLPath();
+}
+
+/// <summary>
+/// Get the query of the URL.
+/// </summary>
+/// <return>The URL query.</return>
+std::string HttpClient::GetURLQuery()
+{
+	return _client->GetURLQuery();
+}
+
+/// <summary>
+/// Get the port of the URL.
+/// </summary>
+/// <return>The URL port.</return>
+unsigned short HttpClient::GetURLPort()
+{
+	return _client->GetURLPort();
+}
+
+/// <summary>
+/// Get the is secure of the URL.
+/// </summary>
+/// <return>The URL is secure.</return>
+bool HttpClient::GetURLIsSecure()
+{
+	return _client->GetURLIsSecure();
+}
+
+/// <summary>
+/// Get the ip type of the URL.
+/// </summary>
+/// <param name="ipAddress">The IP address.</param>
+/// <return>The URL ip type.</return>
+IPVersionType HttpClient::GetIPVersionType(const std::string& ipAddress)
+{
+	return _client->GetIPVersionType(ipAddress);
+}
+void HttpClient::SetIPVersionType(IPVersionType ipVersionType)
+{
+	_client->SetIPVersionType(ipVersionType);
+}
+
+/// <summary>
+/// Get the list of resolved IP address of the host of the URL.
+/// </summary>
+/// <return>The URL ip address.</return>
+std::vector<std::string> HttpClient::GetResolvedHosts()
+{
+	return _client->GetResolvedHosts();
 }

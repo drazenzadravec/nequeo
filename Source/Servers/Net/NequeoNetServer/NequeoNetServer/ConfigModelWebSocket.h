@@ -50,7 +50,10 @@ namespace Nequeo {
 				/// Configuration model.
 				/// </summary>
 				/// <param name="path">The path and file name of the configuration file (json format).</param>
-				ConfigModelWebSocket(const std::string& path) : _disposed(false), _path(path) {}
+				ConfigModelWebSocket(const std::string& path) : _disposed(false), _path(path), 
+					_udpBroadcastEnabled(false), _udpBroadcastPort(0), _udpBroadcastCallbackPort(0), 
+					_udpBroadcastAddress(""), _udpBroadcastMask(""), _accessTokenVerifyURL(""),
+					_clientLocationRequestEnabled(false), _clientLocationRequestURL("") {}
 
 				/// <summary>
 				/// Configuration model.
@@ -80,11 +83,94 @@ namespace Nequeo {
 					return _rootPath;
 				}
 
+				/// <summary>
+				/// Get the UDP broadcast port.
+				/// </summary>
+				/// <return>The UDP broadcast port.</return>
+				inline const unsigned int GetUdpBroadcastPort() const
+				{
+					return _udpBroadcastPort;
+				}
+
+				/// <summary>
+				/// Get the UDP broadcast callback port.
+				/// </summary>
+				/// <return>The UDP broadcast callback port.</return>
+				inline const unsigned int GetUdpBroadcastCallbackPort() const
+				{
+					return _udpBroadcastCallbackPort;
+				}
+
+				/// <summary>
+				/// Get the UDP broadcast enabled.
+				/// </summary>
+				/// <return>The UDP broadcast enabled.</return>
+				inline const bool GetUdpBroadcastEnabled() const
+				{
+					return _udpBroadcastEnabled;
+				}
+
+				/// <summary>
+				/// Get the broadcast address.
+				/// </summary>
+				/// <return>The broadcast address.</return>
+				inline const std::string& GetUdpBroadcastAddress() const
+				{
+					return _udpBroadcastAddress;
+				}
+
+				/// <summary>
+				/// Get the broadcast mask.
+				/// </summary>
+				/// <return>The broadcast mask.</return>
+				inline const std::string& GetUdpBroadcastMask() const
+				{
+					return _udpBroadcastMask;
+				}
+
+				/// <summary>
+				/// Get the access token verify URL.
+				/// </summary>
+				/// <return>The access token verify URL.</return>
+				inline const std::string& GetAccessTokenVerifyURL() const
+				{
+					return _accessTokenVerifyURL;
+				}
+
+				/// <summary>
+				/// Get the client location request enabled.
+				/// </summary>
+				/// <return>The client location request enabled.</return>
+				inline const bool GetClientLocationRequestEnabled() const
+				{
+					return _clientLocationRequestEnabled;
+				}
+
+				/// <summary>
+				/// Get the client location request URL.
+				/// </summary>
+				/// <return>The client location request URL.</return>
+				inline const std::string& GetClientLocationRequestURL() const
+				{
+					return _clientLocationRequestURL;
+				}
+
 			private:
 				bool _disposed;
 
 				std::string _path;
 				std::string _rootPath;
+
+				bool _udpBroadcastEnabled;
+				unsigned int _udpBroadcastPort;
+				std::string _udpBroadcastAddress;
+				std::string _udpBroadcastMask;
+				unsigned int _udpBroadcastCallbackPort;
+
+				bool _clientLocationRequestEnabled;
+				std::string _accessTokenVerifyURL;
+				std::string _clientLocationRequestURL;
+
 				std::vector<MultiServerContainer> _containers;
 			};
 		}

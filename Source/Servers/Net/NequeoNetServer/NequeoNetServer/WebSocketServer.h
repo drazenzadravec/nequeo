@@ -33,8 +33,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 #include "GlobalNetServer.h"
+#include "UdpBroadcastServer.h"
+#include "UdpBroadcastClient.h"
 
 #include "NequeoWebSocketBoostServer\MultiWebServer.h"
+
+#include "Threading\Executor.h"
+#include "Threading\ThreadTask.h"
+#include "Base\AsyncCallerContext.h"
+
+using namespace Nequeo::Net::UDP;
 
 namespace Nequeo {
 	namespace Net {
@@ -67,6 +75,44 @@ namespace Nequeo {
 				}
 
 				/// <summary>
+				/// Set the UDP broadcast details.
+				/// </summary>
+				/// <param name="udpBroadcastEnabled">The UDP broadcast enabled.</param>
+				/// <param name="udpBroadcastPort">The UDP broadcast port.</param>
+				/// <param name="udpBroadcastCallbackPort">The UDP broadcast callback port.</param>
+				/// <param name="udpBroadcastAddress">The UDP broadcast address.</param>
+				/// <param name="udpBroadcastMask">The UDP broadcast mask.</param>
+				inline void SetUdpBroadcast(
+					bool udpBroadcastEnabled, 
+					unsigned int udpBroadcastPort, 
+					unsigned int udpBroadcastCallbackPort,
+					const std::string& udpBroadcastAddress,
+					const std::string& udpBroadcastMask)
+				{
+					_udpBroadcastEnabled = udpBroadcastEnabled;
+					_udpBroadcastPort = udpBroadcastPort;
+					_udpBroadcastCallbackPort = udpBroadcastCallbackPort;
+					_udpBroadcastAddress = udpBroadcastAddress;
+					_udpBroadcastMask = udpBroadcastMask;
+				}
+
+				/// <summary>
+				/// Set the access token verify URL and client location request URL.
+				/// </summary>
+				/// <param name="accessTokenVerifyURL">The access token verify URL.</param>
+				/// <param name="clientLocationRequestURL">The client location request URL.</param>
+				/// <param name="clientLocationRequestEnabled">The client location request enabled.</param>
+				inline void SetURL(
+					const std::string& accessTokenVerifyURL,
+					const std::string& clientLocationRequestURL,
+					bool clientLocationRequestEnabled)
+				{
+					_accessTokenVerifyURL = accessTokenVerifyURL;
+					_clientLocationRequestURL = clientLocationRequestURL;
+					_clientLocationRequestEnabled = clientLocationRequestEnabled;
+				}
+
+				/// <summary>
 				/// Is initialise.
 				/// </summary>
 				/// <return>True if initialise; else false.</return>
@@ -91,12 +137,37 @@ namespace Nequeo {
 				void Stop();
 
 			private:
+				void OnWebSocketContext(const WebContext*);
+				void OnUdpReceiveData(const std::string& data, const std::string& ipAddressSender, unsigned int portSender);
+				void OnUdpReceiveDataCallback(const std::string& data, const std::string& ipAddressSender, unsigned int portSender);
+				void SendCallbackDataAsync(const std::string& data, const std::string& host, unsigned int port);
+				void BroadcastDataAsync(
+					const std::string& data, unsigned int port, const std::string& address, const std::string& mask, 
+					bool udpBroadcastEnabled, bool clientLocationRequestEnabled, const std::string& clientLocationRequestURL,
+					const std::string& clientToken, const std::string& contactUniqueID);
+
+			private:
 				bool _disposed;
 				bool _initialised;
 
 				std::string _path;
+				std::string _serverID;
 				std::shared_ptr<MultiWebServer> _servers;
 				std::vector<MultiServerContainer> _containers;
+				std::shared_ptr<UdpBroadcastServer> _udpServer;
+				std::shared_ptr<UdpBroadcastServer> _udpServerCallback;
+
+				std::shared_ptr<Nequeo::Threading::Executor> _executor;
+
+				bool _udpBroadcastEnabled;
+				unsigned int _udpBroadcastPort;
+				unsigned int _udpBroadcastCallbackPort;
+				std::string _udpBroadcastAddress;
+				std::string _udpBroadcastMask;
+
+				bool _clientLocationRequestEnabled;
+				std::string _accessTokenVerifyURL;
+				std::string _clientLocationRequestURL;
 			};
 		}
 	}
