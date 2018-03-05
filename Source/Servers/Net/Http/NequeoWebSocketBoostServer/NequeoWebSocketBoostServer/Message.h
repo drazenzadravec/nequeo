@@ -45,18 +45,18 @@ namespace Nequeo {
 			/// <summary>
 			/// WebSocket message container.
 			/// </summary>
-			class EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API Message
+			class EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API WebMessage
 			{
 			public:
 				/// <summary>
 				/// WebSocket message container.
 				/// </summary>
-				Message();
+				WebMessage();
 
 				/// <summary>
 				/// WebSocket message container.
 				/// </summary>
-				virtual ~Message();
+				virtual ~WebMessage();
 
 				///	<summary>
 				///	Get the message.
@@ -81,10 +81,16 @@ namespace Nequeo {
 				/// </summary>
 				/// <param name="messageType">The message type.</param>
 				/// <param name="messsage">The message to send.</param>
-				std::function<void(MessageType, std::streambuf*)> OnSend;
+				std::function<void(MessageType, std::streambuf*, std::shared_ptr<void>)> OnSend;
+
+				/// <summary>
+				/// Internal use only.
+				/// </summary>
+				std::shared_ptr<void> connectionHandler;
 
 			private:
 				bool _disposed;
+
 			};
 		}
 	}

@@ -16,6 +16,7 @@
 #include <map>
 #include <ostream>
 #include <istream>
+#include <memory>
 #include <algorithm>
 #include <concurrent_unordered_map.h>
 #include <concurrent_vector.h>

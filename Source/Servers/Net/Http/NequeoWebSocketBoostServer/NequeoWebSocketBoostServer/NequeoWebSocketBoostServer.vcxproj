@@ -173,6 +173,7 @@
     </ClCompile>
     <ClCompile Include="WebClient.cpp" />
     <ClCompile Include="WebContext.cpp" />
+    <ClCompile Include="WebContextExtender.cpp" />
     <ClCompile Include="WebRequest.cpp" />
     <ClCompile Include="WebServer.cpp" />
   </ItemGroup>

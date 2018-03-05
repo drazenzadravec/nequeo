@@ -327,7 +327,7 @@ void WebClient::CreateNetContext()
 							messageType = MessageType::Ping;
 
 						// Make message.
-						auto webSocketMessage = std::make_shared<Message>();
+						auto webSocketMessage = std::make_shared<WebMessage>();
 						webSocketMessage->Received = message->rdbuf();
 
 						// Call message.
@@ -397,7 +397,7 @@ void WebClient::CreateNetContext()
 							messageType = MessageType::Ping;
 
 						// Make message.
-						auto webSocketMessage = std::make_shared<Message>();
+						auto webSocketMessage = std::make_shared<WebMessage>();
 						webSocketMessage->Received = message->rdbuf();
 
 						// Call message.

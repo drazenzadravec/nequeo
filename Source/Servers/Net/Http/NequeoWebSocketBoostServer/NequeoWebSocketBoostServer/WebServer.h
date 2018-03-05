@@ -56,7 +56,15 @@ namespace Nequeo {
 				/// <param name="port">The listening port number.</param>
 				/// <param name="ipv">The IP version to use.</param>
 				/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-				WebServer(unsigned short port, IPVersionType ipv = IPVersionType::IPv4, bool isSecure = false);
+				/// <param name="timeoutRequest">The request timeout (seconds).</param>
+				/// <param name="timeoutIdle">The send and receive timeout (600 seconds = 10 minutes).</param>
+				/// <param name="timeoutConnect">The time out (seconds) connect.</param>
+				/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+				WebServer(
+					unsigned short port, IPVersionType ipv = IPVersionType::IPv4, 
+					bool isSecure = false, size_t timeoutRequest = 5, 
+					size_t timeoutIdle = 0, size_t timeoutConnect = 0,
+					size_t numberOfThreads = 1);
 
 				/// <summary>
 				/// WebSocket web server.
@@ -64,7 +72,15 @@ namespace Nequeo {
 				/// <param name="port">The listening port number.</param>
 				/// <param name="endpoint">The endpoint address to listen on.</param>
 				/// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-				WebServer(unsigned short port, const std::string& endpoint, bool isSecure = false);
+				/// <param name="timeoutRequest">The request timeout (seconds).</param>
+				/// <param name="timeoutIdle">The send and receive timeout (600 seconds = 10 minutes).</param>
+				/// <param name="timeoutConnect">The time out (seconds) connect.</param>
+				/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+				WebServer(
+					unsigned short port, const std::string& endpoint, 
+					bool isSecure = false, size_t timeoutRequest = 5,
+					size_t timeoutIdle = 0, size_t timeoutConnect = 0,
+					size_t numberOfThreads = 1);
 
 				/// <summary>
 				/// WebSocket web server.
@@ -101,8 +117,12 @@ namespace Nequeo {
 				/// On web context request.
 				/// </summary>
 				/// <param name="publicKeyFile">The public certificate file path.</param>
-				/// <param name="privateKeyFile">The private (un-encrypted) key file.</param>
-				void SetSecurePublicPrivateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile);
+				/// <param name="privateKeyFile">The private (un-encrypted, encrypted - use password) key file.</param>
+				/// <param name="privateKeyPassword">The private key password (decrypt encrypted private key file).</param>
+				void SetSecurePublicPrivateKeys(
+					const std::string& publicKeyFile, 
+					const std::string& privateKeyFile, 
+					const std::string& privateKeyPassword);
 
 				/// <summary>
 				/// Is the server listening.
@@ -142,6 +162,12 @@ namespace Nequeo {
 				/// <return>The endpoint.</return>
 				const std::string& GetEndpoint() const;
 
+				/// <summary>
+				/// Get the list of all current connections.
+				/// </summary>
+				/// <return>The list of all connections.</return>
+				const std::set<std::shared_ptr<WebContext>> GetConnections() const;
+
 			private:
 				bool _disposed;
 				bool _listening;
@@ -156,9 +182,14 @@ namespace Nequeo {
 				IPVersionType _ipv;
 				std::string _serverName;
 				std::string _endpoint;
+				size_t _timeoutRequest;
+				size_t _timeoutIdle;
+				size_t _timeoutConnect;
+				size_t _numberOfThreads;
 
 				std::string _publicKeyFile;
 				std::string _privateKeyFile;
+				std::string _privateKeyPassword;
 
 				WebContextHandler _onWebContext;
 			};

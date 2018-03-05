@@ -38,7 +38,7 @@ using namespace Nequeo::Net::WebSocket;
 ///	<summary>
 ///	WebSocket message container.
 ///	</summary>
-Message::Message() :
+WebMessage::WebMessage() :
 	_disposed(false)
 {
 }
@@ -46,7 +46,7 @@ Message::Message() :
 ///	<summary>
 ///	WebSocket message container.
 ///	</summary>
-Message::~Message()
+WebMessage::~WebMessage()
 {
 	if (!_disposed)
 	{
@@ -58,7 +58,7 @@ Message::~Message()
 ///	Get the message.
 ///	</summary>
 ///	<return>The message.</return>
-std::string Message::Get()
+std::string WebMessage::Get()
 {
 	std::stringstream ss;
 	ss << Received;
@@ -70,9 +70,9 @@ std::string Message::Get()
 /// </summary>
 /// <param name="messageType">The message type.</param>
 /// <param name="message">The message to send.</param>
-void Message::Send(MessageType messageType, std::streambuf* message)
+void WebMessage::Send(MessageType messageType, std::streambuf* message)
 {
 	if (OnSend)
 		// Send the message.
-		OnSend(messageType, message);
+		OnSend(messageType, message, connectionHandler);
 }

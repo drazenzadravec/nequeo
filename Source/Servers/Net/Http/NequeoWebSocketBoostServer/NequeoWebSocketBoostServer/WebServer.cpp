@@ -57,10 +57,14 @@ void MakeSecureWebContext(std::shared_ptr<WebContext>, std::shared_ptr<InternalS
 /// <param name="port">The listening port number.</param>
 /// <param name="ipv">The IP version to use.</param>
 /// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure) :
-	_disposed(false), _listening(false), _isSecure(isSecure), _port(port),
-	_internalThread(false), _ipv(ipv), _hasEndpoint(false), _serverName("Nequeo WebSocket Web Server 16.26.1.1"),
-	_serverIndex(-1), _endpoint("")
+/// <param name="timeoutRequest">The request timeout (seconds).</param>
+/// <param name="timeoutIdle">The send and receive timeout (600 seconds = 10 minutes).</param>
+/// <param name="timeoutConnect">The time out (seconds) connect.</param>
+/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure, size_t timeoutRequest, size_t timeoutIdle, size_t timeoutConnect, size_t numberOfThreads) :
+	_disposed(false), _listening(false), _isSecure(isSecure), _port(port), _timeoutRequest(timeoutRequest), _timeoutIdle(timeoutIdle), _numberOfThreads(numberOfThreads),
+	_timeoutConnect(timeoutConnect), _internalThread(false), _ipv(ipv), _hasEndpoint(false), _serverName("Nequeo WebSocket Web Server 16.26.1.1"),
+	_serverIndex(-1), _endpoint(""), _privateKeyPassword("")
 {
 }
 
@@ -70,10 +74,14 @@ WebServer::WebServer(unsigned short port, IPVersionType ipv, bool isSecure) :
 /// <param name="port">The listening port number.</param>
 /// <param name="endpoint">The endpoint address to listen on.</param>
 /// <param name="isSecure">Is the server secure (must set the public and private key files).</param>
-WebServer::WebServer(unsigned short port, const std::string& endpoint, bool isSecure) :
-	_disposed(false), _listening(false), _isSecure(isSecure), _port(port),
-	_internalThread(false), _endpoint(endpoint), _hasEndpoint(true), _serverName("Nequeo WebSocket Web Server 16.26.1.1"),
-	_serverIndex(-1)
+/// <param name="timeoutRequest">The request timeout (seconds).</param>
+/// <param name="timeoutIdle">The send and receive timeout (600 seconds = 10 minutes).</param>
+/// <param name="timeoutConnect">The time out (seconds) connect.</param>
+/// <param name="numberOfThreads">The number of threads to use(set to 1 is more than statisfactory).</param>
+WebServer::WebServer(unsigned short port, const std::string& endpoint, bool isSecure, size_t timeoutRequest, size_t timeoutIdle, size_t timeoutConnect, size_t numberOfThreads) :
+	_disposed(false), _listening(false), _isSecure(isSecure), _port(port), _timeoutRequest(timeoutRequest), _timeoutIdle(timeoutIdle), _numberOfThreads(numberOfThreads),
+	_timeoutConnect(timeoutConnect), _internalThread(false), _endpoint(endpoint), _hasEndpoint(true), _serverName("Nequeo WebSocket Web Server 16.26.1.1"),
+	_serverIndex(-1), _privateKeyPassword("")
 {
 	_ipv = IPVersionType::IPv4;
 }
@@ -184,6 +192,8 @@ void WebServer::Start()
 	// If not listening.
 	if (!_listening)
 	{
+		_listening = true;
+
 		// If not secure.
 		if (!_isSecure)
 		{
@@ -196,7 +206,8 @@ void WebServer::Start()
 				// HTTP-server at port using 1 thread
 				// Unless you do more heavy non-threaded processing in the resources,
 				// 1 thread is usually faster than several threads
-				serverPtr.insert(std::make_pair(_serverIndex, std::make_shared<InternalWebSocketServer>(_port, 1, _ipv)));
+				serverPtr.insert(std::make_pair(_serverIndex, 
+					std::make_shared<InternalWebSocketServer>(_port, _numberOfThreads, _ipv, _timeoutRequest, _timeoutIdle, _timeoutConnect)));
 
 				// If an enpoint exists.
 				if (_hasEndpoint)
@@ -217,7 +228,8 @@ void WebServer::Start()
 				// HTTPS-server at port using 1 thread
 				// Unless you do more heavy non-threaded processing in the resources,
 				// 1 thread is usually faster than several threads
-				serverSecurePtr.insert(std::make_pair(_serverIndex, std::make_shared<InternalSecureWebSocketServer>(_port, 1, _publicKeyFile, _privateKeyFile, _ipv)));
+				serverSecurePtr.insert(std::make_pair(_serverIndex, 
+					std::make_shared<InternalSecureWebSocketServer>(_port, _numberOfThreads, _publicKeyFile, _privateKeyFile, _ipv, _timeoutRequest, _timeoutIdle, _timeoutConnect, _privateKeyPassword)));
 
 				// If an enpoint exists.
 				if (_hasEndpoint)
@@ -227,8 +239,6 @@ void WebServer::Start()
 			// Start accepting;
 			AcceptSecure(this, serverSecurePtr[_serverIndex], _onWebContext);
 		}
-
-		_listening = true;
 	}
 }
 
@@ -236,12 +246,14 @@ void WebServer::Start()
 /// On web context request.
 /// </summary>
 /// <param name="publicKeyFile">The public certificate file path.</param>
-/// <param name="privateKeyFile">The private (un-encrypted) key file.</param>
-void WebServer::SetSecurePublicPrivateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile)
+/// <param name="privateKeyFile">The private (un-encrypted, encrypted - use password) key file.</param>
+/// <param name="privateKeyPassword">The private key password (decrypt encrypted private key file).</param>
+void WebServer::SetSecurePublicPrivateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile, const std::string& privateKeyPassword)
 {
 	_isSecure = true;
 	_publicKeyFile = publicKeyFile;
 	_privateKeyFile = privateKeyFile;
+	_privateKeyPassword = privateKeyPassword;
 }
 
 /// <summary>
@@ -303,6 +315,48 @@ const std::string& WebServer::GetEndpoint() const
 	return _endpoint;
 }
 
+/// <summary>
+/// Get the list of all current connections.
+/// </summary>
+/// <return>The list of all connections.</return>
+const std::set<std::shared_ptr<WebContext>> WebServer::GetConnections() const
+{
+	std::set<std::shared_ptr<WebContext>> all_connections;
+
+	// If listening.
+	if (_listening)
+	{
+		// If not secure.
+		if (!_isSecure)
+		{
+			// Get the server ref.
+			auto server = serverPtr[_serverIndex];
+
+			// For each connection.
+			for (auto& e : server->get_connections())
+			{
+				// Get the connection ref.
+				all_connections.insert(e->webContext);
+			}
+		}
+		else
+		{
+			// Get the server ref.
+			auto server = serverSecurePtr[_serverIndex];
+
+			// For each connection.
+			for (auto& e : server->get_connections())
+			{
+				// Get the connection ref.
+				all_connections.insert(e->webContext);
+			}
+		}
+	}
+
+	// Return the connections.
+	return all_connections;
+}
+
 ///	<summary>
 ///	Accept connections for the server.
 ///	</summary>
@@ -318,7 +372,7 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalWebSocketServer> serve
 	auto& listener = server->endpoint["^/?$"];
 
 	// Open connection.
-	listener.onopen = [&webServer, &server, &handler](std::shared_ptr<InternalWebSocketServer::Connection> connection)
+	listener.onopen = [&webServer, &handler](std::shared_ptr<InternalWebSocketServer::Connection> connection)
 	{
 		// Assign web context details.
 		connection->webContext->SetIsSecure(webServer->IsSecure());
@@ -331,16 +385,20 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalWebSocketServer> serve
 
 		// Execute the web context handler.
 		handler(connection->webContext.get());
+
+		// If timeout connect cancelled.
+		connection->CancelTimeoutConnect(connection->webContext->TimeoutConnectCancelled());
 	};
 
 	// Close connection.
 	listener.onclose = [](std::shared_ptr<InternalWebSocketServer::Connection> connection, int status, const std::string& reason)
 	{
 		// If handler exists.
-		if (connection->webContext->OnClose)
+		if (connection->webContext != nullptr && connection->webContext->OnClose)
 		{
 			// Call close.
 			connection->webContext->OnClose(status, reason);
+			connection->webContext = nullptr;
 		}
 	};
 
@@ -348,18 +406,32 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalWebSocketServer> serve
 	listener.onerror = [](std::shared_ptr<InternalWebSocketServer::Connection> connection, const boost::system::error_code& ec)
 	{
 		// If handler exists.
-		if (connection->webContext->OnError)
+		if (connection->webContext != nullptr && connection->webContext->OnError)
 		{
 			// Call error.
 			connection->webContext->OnError(ec.message());
 		}
 	};
 
-	// Message.
-	listener.onmessage = [&server](std::shared_ptr<InternalWebSocketServer::Connection> connection, std::shared_ptr<InternalWebSocketServer::Message> message)
+	// Access expiry
+	listener.onaccessexpiry = [](std::shared_ptr<InternalWebSocketServer::Connection> connection, std::shared_ptr<InternalWebSocketServer::Message> message)
 	{
 		// If handler exists.
-		if (connection->webContext->OnMessage)
+		if (connection->webContext != nullptr && connection->webContext->OnAccessExpiry)
+		{
+			// Get the request and response.
+			auto webMessage = connection->webContext->Message();
+
+			// Call message.
+			connection->webContext->OnAccessExpiry(webMessage);
+		}
+	};
+
+	// Message.
+	listener.onmessage = [](std::shared_ptr<InternalWebSocketServer::Connection> connection, std::shared_ptr<InternalWebSocketServer::Message> message)
+	{
+		// If handler exists.
+		if (connection->webContext != nullptr && connection->webContext->OnMessage)
 		{
 			MessageType messageType = MessageType::Text;
 
@@ -379,58 +451,20 @@ void Accept(WebServer* webServer, std::shared_ptr<InternalWebSocketServer> serve
 			if ((message->fin_rsv_opcode & 0x0f) == 9)
 				messageType = MessageType::Ping;
 
-			// Make message.
-			auto webSocketMessage = std::make_shared<Message>();
-			webSocketMessage->Received = message->rdbuf();
-
-			// Set the send message handler.
-			webSocketMessage->OnSend = [&server, &connection](MessageType messageType, std::streambuf* message)
-			{
-				// Create send stream.
-				auto sendStream = std::make_shared<InternalWebSocketServer::SendStream>();
-				*sendStream << message;
-
-				unsigned char opcode = 129;
-
-				// Set opcode
-				switch (messageType)
-				{
-				case Nequeo::Net::WebSocket::MessageType::Text:
-					opcode = 129;
-					break;
-				case Nequeo::Net::WebSocket::MessageType::Binary:
-					opcode = 130;
-					break;
-				case Nequeo::Net::WebSocket::MessageType::Close:
-					opcode = 136;
-					break;
-				case Nequeo::Net::WebSocket::MessageType::Ping:
-					opcode = 137;
-					break;
-				default:
-					break;
-				}
-
-				// Send the message.
-				server->send(connection, sendStream,
-					[&connection](const boost::system::error_code& ec)
-				{
-					try
-					{
-						//// If handler exists.
-						//if (connection->webContext && connection->webContext->OnError)
-						//{
-						//	// Call error.
-						//	connection->webContext->OnError(ec.message());
-						//}
-					}
-					catch (...) {}
-
-				}, opcode);
-			};
+			// Get the request and response.
+			auto webMessage = connection->webContext->Message();
+			webMessage->Received = message->rdbuf();
 
 			// Call message.
-			connection->webContext->OnMessage(messageType, message->size(), webSocketMessage);
+			connection->webContext->OnMessage(messageType, message->size(), webMessage);
+			if (connection->webContext != nullptr)
+			{
+				// If timeout connect cancelled.
+				connection->CancelTimeoutConnect(connection->webContext->TimeoutConnectCancelled());
+
+				// Check to see if there is an access expiry.
+				connection->StartAccessExpiry(connection->webContext->AccessExpiry());
+			}
 		}
 	};
 
@@ -453,7 +487,7 @@ void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureWebSocketS
 	auto& listener = server->endpoint["^/?$"];
 
 	// Open connection.
-	listener.onopen = [&webServer, &server, &handler](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection)
+	listener.onopen = [&webServer, &handler](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection)
 	{
 		// Assign web context details.
 		connection->webContext->SetIsSecure(webServer->IsSecure());
@@ -472,10 +506,11 @@ void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureWebSocketS
 	listener.onclose = [](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection, int status, const std::string& reason)
 	{
 		// If handler exists.
-		if (connection->webContext->OnClose)
+		if (connection->webContext != nullptr && connection->webContext->OnClose)
 		{
 			// Call close.
 			connection->webContext->OnClose(status, reason);
+			connection->webContext = nullptr;
 		}
 	};
 
@@ -483,18 +518,32 @@ void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureWebSocketS
 	listener.onerror = [](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection, const boost::system::error_code& ec)
 	{
 		// If handler exists.
-		if (connection->webContext->OnError)
+		if (connection->webContext != nullptr && connection->webContext->OnError)
 		{
 			// Call error.
 			connection->webContext->OnError(ec.message());
 		}
 	};
 
-	// Message.
-	listener.onmessage = [&server](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection, std::shared_ptr<InternalSecureWebSocketServer::Message> message)
+	// Access expiry
+	listener.onaccessexpiry = [](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection, std::shared_ptr<InternalSecureWebSocketServer::Message> message)
 	{
 		// If handler exists.
-		if (connection->webContext->OnMessage)
+		if (connection->webContext != nullptr && connection->webContext->OnAccessExpiry)
+		{
+			// Get the request and response.
+			auto webMessage = connection->webContext->Message();
+
+			// Call message.
+			connection->webContext->OnAccessExpiry(webMessage);
+		}
+	};
+
+	// Message.
+	listener.onmessage = [](std::shared_ptr<InternalSecureWebSocketServer::Connection> connection, std::shared_ptr<InternalSecureWebSocketServer::Message> message)
+	{
+		// If handler exists.
+		if (connection->webContext != nullptr && connection->webContext->OnMessage)
 		{
 			MessageType messageType = MessageType::Text;
 
@@ -514,58 +563,20 @@ void AcceptSecure(WebServer* webServer, std::shared_ptr<InternalSecureWebSocketS
 			if ((message->fin_rsv_opcode & 0x0f) == 9)
 				messageType = MessageType::Ping;
 
-			// Make message.
-			auto webSocketMessage = std::make_shared<Message>();
-			webSocketMessage->Received = message->rdbuf();
-
-			// Set the send message handler.
-			webSocketMessage->OnSend = [&server, &connection](MessageType messageType, std::streambuf* message)
-			{
-				// Create send stream.
-				auto sendStream = std::make_shared<InternalSecureWebSocketServer::SendStream>();
-				*sendStream << message;
-
-				unsigned char opcode = 129;
-
-				// Set opcode
-				switch (messageType)
-				{
-				case Nequeo::Net::WebSocket::MessageType::Text:
-					opcode = 129;
-					break;
-				case Nequeo::Net::WebSocket::MessageType::Binary:
-					opcode = 130;
-					break;
-				case Nequeo::Net::WebSocket::MessageType::Close:
-					opcode = 136;
-					break;
-				case Nequeo::Net::WebSocket::MessageType::Ping:
-					opcode = 137;
-					break;
-				default:
-					break;
-				}
-
-				// Send the message.
-				server->send(connection, sendStream,
-					[&connection](const boost::system::error_code& ec)
-				{
-					try
-					{
-						//// If handler exists.
-						//if (connection->webContext && connection->webContext->OnError)
-						//{
-						//	// Call error.
-						//	connection->webContext->OnError(ec.message());
-						//}
-					}
-					catch (...) {}
-
-				}, opcode);
-			};
+			// Get the request and response.
+			auto webMessage = connection->webContext->Message();
+			webMessage->Received = message->rdbuf();
 
 			// Call message.
-			connection->webContext->OnMessage(messageType, message->size(), webSocketMessage);
+			connection->webContext->OnMessage(messageType, message->size(), webMessage);
+			if (connection->webContext != nullptr)
+			{
+				// If timeout connect cancelled.
+				connection->CancelTimeoutConnect(connection->webContext->TimeoutConnectCancelled());
+
+				// Check to see if there is an access expiry.
+				connection->StartAccessExpiry(connection->webContext->AccessExpiry());
+			}
 		}
 	};
 
@@ -596,10 +607,12 @@ void StopAcceptSecure(std::shared_ptr<InternalSecureWebSocketServer> server)
 ///	</summary>
 /// <param name="context">The web context.</param>
 /// <param name="connection">The connection.</param>
-void MakeWebContext(std::shared_ptr<WebContext> context, std::shared_ptr<InternalWebSocketServer::Connection> connection)
+void MakeWebContext(std::shared_ptr<WebContext> context, 
+	std::shared_ptr<InternalWebSocketServer::Connection> connection)
 {
 	// Get the request and response.
-	WebRequest* webRequest = &context->Request();
+	auto webRequest = context->Request();
+	auto webMessage = context->Message();
 
 	// Assign values.
 	webRequest->SetMethod(connection->method);
@@ -621,6 +634,50 @@ void MakeWebContext(std::shared_ptr<WebContext> context, std::shared_ptr<Interna
 
 	// Assign the header and content.
 	webRequest->SetHeaders(headers);
+
+	// Set the send message handler.
+	webMessage->OnSend = [](MessageType messageType, std::streambuf* message, std::shared_ptr<void> connectionHandler)
+	{
+		// Create send stream.
+		auto sendStream = std::make_shared<InternalWebSocketServer::SendStream>();
+		*sendStream << message;
+
+		unsigned char opcode = 129;
+
+		// Set opcode
+		switch (messageType)
+		{
+		case Nequeo::Net::WebSocket::MessageType::Text:
+			opcode = 129;
+			break;
+		case Nequeo::Net::WebSocket::MessageType::Binary:
+			opcode = 130;
+			break;
+		case Nequeo::Net::WebSocket::MessageType::Close:
+			opcode = 136;
+			break;
+		case Nequeo::Net::WebSocket::MessageType::Ping:
+			opcode = 137;
+			break;
+		default:
+			break;
+		}
+
+		// Cast back.
+		std::shared_ptr<InternalWebSocketServer::Connection> connHandler = 
+			std::static_pointer_cast<InternalWebSocketServer::Connection>(connectionHandler);
+
+		// Send the message.
+		connHandler->socketServer->send(connHandler, sendStream,
+			[&connHandler](const boost::system::error_code& ec)
+		{
+			try
+			{
+			}
+			catch (...) {}
+
+		}, opcode);
+	};
 }
 
 ///	<summary>
@@ -628,10 +685,12 @@ void MakeWebContext(std::shared_ptr<WebContext> context, std::shared_ptr<Interna
 ///	</summary>
 /// <param name="context">The web context.</param>
 /// <param name="connection">The connection.</param>
-void MakeSecureWebContext(std::shared_ptr<WebContext> context, std::shared_ptr<InternalSecureWebSocketServer::Connection> connection)
+void MakeSecureWebContext(std::shared_ptr<WebContext> context, 
+	std::shared_ptr<InternalSecureWebSocketServer::Connection> connection)
 {
 	// Get the request and response.
-	WebRequest* webRequest = &context->Request();
+	auto webRequest = context->Request();
+	auto webMessage = context->Message();
 
 	// Assign values.
 	webRequest->SetMethod(connection->method);
@@ -653,4 +712,48 @@ void MakeSecureWebContext(std::shared_ptr<WebContext> context, std::shared_ptr<I
 
 	// Assign the header and content.
 	webRequest->SetHeaders(headers);
+
+	// Set the send message handler.
+	webMessage->OnSend = [](MessageType messageType, std::streambuf* message, std::shared_ptr<void> connectionHandler)
+	{
+		// Create send stream.
+		auto sendStream = std::make_shared<InternalSecureWebSocketServer::SendStream>();
+		*sendStream << message;
+
+		unsigned char opcode = 129;
+
+		// Set opcode
+		switch (messageType)
+		{
+		case Nequeo::Net::WebSocket::MessageType::Text:
+			opcode = 129;
+			break;
+		case Nequeo::Net::WebSocket::MessageType::Binary:
+			opcode = 130;
+			break;
+		case Nequeo::Net::WebSocket::MessageType::Close:
+			opcode = 136;
+			break;
+		case Nequeo::Net::WebSocket::MessageType::Ping:
+			opcode = 137;
+			break;
+		default:
+			break;
+		}
+
+		// Cast back.
+		std::shared_ptr<InternalSecureWebSocketServer::Connection> connHandler =
+			std::static_pointer_cast<InternalSecureWebSocketServer::Connection>(connectionHandler);
+
+		// Send the message.
+		connHandler->socketServer->send(connHandler, sendStream,
+			[&connHandler](const boost::system::error_code& ec)
+		{
+			try
+			{
+			}
+			catch (...) {}
+
+		}, opcode);
+	};
 }

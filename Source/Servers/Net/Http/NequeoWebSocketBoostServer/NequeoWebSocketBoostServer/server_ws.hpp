@@ -122,16 +122,54 @@ namespace Nequeo {
 						boost::smatch path_match;
 						std::string remote_endpoint_address;
 						unsigned short remote_endpoint_port;
+						bool timeout_access_expiry_async_started;
 
 						// Store web context.
 						std::shared_ptr<WebContext> webContext;
+						SocketServerBase<socket_type>* socketServer;
+
+						std::unique_ptr<boost::asio::deadline_timer> timer_access_expiry;
+						std::unique_ptr<boost::asio::deadline_timer> timer_connect;
+
+						/// <summary>
+						/// Cancel the time out connect timer.
+						/// </summary>
+						void CancelTimeoutConnect(bool cancel)
+						{
+							// If cancel and not timeout
+							// then call cancel.
+							if (cancel && !timeout_connect_cancelled)
+							{
+								try
+								{
+									// Cancel connect timeout.
+									timeout_connect_cancelled = cancel;
+									timer_connect->cancel();
+								}
+								catch (const std::exception&) {}
+							}
+						}
+
+						/// <summary>
+						/// Start the access expiry timeout.
+						/// </summary>
+						void StartAccessExpiry(unsigned int accessExpiry)
+						{
+							// If access expiry exists.
+							if (accessExpiry > 0 && !timeout_access_expiry_started)
+							{
+								timeout_access_expiry_started = true;
+								timer_access_expiry->expires_from_now(boost::posix_time::minutes(static_cast<unsigned long>(accessExpiry)));
+							}
+						}
 
 					private:
 						/// <summary>
 						/// WebSocket server connection.
 						/// </summary>
 						/// <param name="socket">The socket type.</param>
-						Connection(socket_type *socket) : socket(socket), strand(socket->get_io_service()), closed(false) {}
+						Connection(socket_type *socket) : socket(socket), strand(socket->get_io_service()), closed(false), 
+							timeout_connect_cancelled(false), timeout_access_expiry_started(false), timeout_access_expiry_async_started(false) {}
 
 						/// <summary>
 						/// WebSocket server send data.
@@ -158,6 +196,8 @@ namespace Nequeo {
 						std::unique_ptr<socket_type> socket;
 						boost::asio::strand strand;
 						std::list<SendData> send_queue;
+						bool timeout_connect_cancelled;
+						bool timeout_access_expiry_started;
 
 						///	<summary>
 						///	Send data from queue.
@@ -291,6 +331,7 @@ namespace Nequeo {
 						std::function<void(std::shared_ptr<Connection>, std::shared_ptr<Message>)> onmessage;
 						std::function<void(std::shared_ptr<Connection>, const boost::system::error_code&)> onerror;
 						std::function<void(std::shared_ptr<Connection>, int, const std::string&)> onclose;
+						std::function<void(std::shared_ptr<Connection>, std::shared_ptr<Message>)> onaccessexpiry;
 
 						///	<summary>
 						///	Get all connections.
@@ -527,7 +568,8 @@ namespace Nequeo {
 							return;
 						}
 
-						// Send close.
+						// Sent atomic operation to true
+						// Not called again.
 						connection->closed.store(true);
 
 						// Make send stream.
@@ -537,8 +579,12 @@ namespace Nequeo {
 						send_stream->put(status % 256);
 						*send_stream << reason;
 
-						// fin_rsv_opcode=136: message close
-						send(connection, send_stream, callback, 136);
+						try
+						{
+							// fin_rsv_opcode=136: message close
+							send(connection, send_stream, callback, 136);
+						}
+						catch (const std::exception&) {}
 					}
 
 					///	<summary>
@@ -571,6 +617,7 @@ namespace Nequeo {
 
 					size_t timeout_request;
 					size_t timeout_idle;
+					size_t timeout_connect;
 
 					///	<summary>
 					///	WebSocket server.
@@ -579,11 +626,12 @@ namespace Nequeo {
 					/// <param name="num_threads">The number of threads to use (set to 1 is more than statisfactory).</param>
 					/// <param name="timeout_request">The request time out.</param>
 					/// <param name="timeout_idle">The idle time out.</param>
+					/// <param name="timeout_connect">The time out (seconds) to connect.</param>
 					/// <param name="ipv">The ip version.</param>
 					SocketServerBase(
-						unsigned short port, size_t num_threads, size_t timeout_request, size_t timeout_idle, IPVersionType ipv) :
+						unsigned short port, size_t num_threads, size_t timeout_request, size_t timeout_idle, size_t timeout_connect, IPVersionType ipv) :
 						config(port, num_threads), acceptor(io_service), _ipv(ipv), default_resource_method("DEFAULT_METHOD"), 
-						timeout_request(timeout_request), timeout_idle(timeout_idle) {}
+						timeout_request(timeout_request), timeout_idle(timeout_idle), timeout_connect(timeout_connect) {}
 
 					///	<summary>
 					///	Virtual accept method must be overriden.
@@ -607,9 +655,13 @@ namespace Nequeo {
 							// If no error.
 							if (!ec) 
 							{
-								// Shutdown and close the client socket context.
-								connection->socket->lowest_layer().shutdown(boost::asio::ip::tcp::socket::shutdown_both);
-								connection->socket->lowest_layer().close();
+								try
+								{
+									// Shutdown and close the client socket context.
+									connection->socket->lowest_layer().shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+									connection->socket->lowest_layer().close();
+								}
+								catch (const std::exception&) {}
 							}
 						});
 
@@ -636,6 +688,15 @@ namespace Nequeo {
 							// Set the time out.
 							timer = set_timeout_on_connection(connection, timeout_request);
 
+						// Find path- and method-match, and generate response
+						for (auto& endp : opt_endpoint)
+						{
+							// Timer idle initialise connection.
+							timer_idle_init(connection, *endp.second);
+							timer_connect_init(connection, *endp.second);
+							timer_access_expiry_init(connection, *endp.second);
+						}
+
 						// Read all the data from the socket
 						// to the response buffer until a '\r\n\r\n' is found.
 						boost::asio::async_read_until(*connection->socket, *read_buffer, "\r\n\r\n", [this, connection, read_buffer, timer]
@@ -652,6 +713,15 @@ namespace Nequeo {
 								std::istream stream(read_buffer.get());
 								parse_handshake(connection, stream);
 								write_handshake(connection, read_buffer);
+							}
+							else
+							{
+								try
+								{
+									// Close socket.
+									close_socket_connection(connection);
+								}
+								catch (const std::exception&) {}
 							}
 						});
 					}
@@ -738,17 +808,25 @@ namespace Nequeo {
 
 									// Capture write_buffer in lambda so it is not destroyed before async_write is finished
 									boost::asio::async_write(*connection->socket, *write_buffer, [this, connection, write_buffer, read_buffer, &endp]
-									(const boost::system::error_code& ec, size_t /*bytes_transferred*/) 
+									(const boost::system::error_code& ec, size_t /*bytes_transferred*/)
 									{
 										// If no error.
-										if (!ec) 
+										if (!ec)
 										{
-											// Open connection adn read.
+											// Open connection and read.
 											connection_open(connection, *endp.second);
 											read_message(connection, read_buffer, *endp.second);
 										}
 										else
-											connection_error(connection, *endp.second, ec);
+										{
+											//connection_error(connection, *endp.second, ec);
+											try
+											{
+												// Close socket.
+												close_socket_connection(connection);
+											}
+											catch (const std::exception&) {}
+										}
 									});
 								}
 								return;
@@ -963,6 +1041,9 @@ namespace Nequeo {
 										// Send message to enpoint.
 										timer_idle_reset(connection);
 										endpoint.onmessage(connection, message);
+
+										// Set up access expiry handler.
+										timer_access_expired_function(connection, message, endpoint);
 									}
 
 									// Next message
@@ -981,8 +1062,7 @@ namespace Nequeo {
 					/// <param name="endpoint">The connection endpoint.</param>
 					void connection_open(std::shared_ptr<Connection> connection, Endpoint& endpoint) 
 					{
-						timer_idle_init(connection);
-
+						// Add to collection.
 						endpoint.connections_mutex.lock();
 						endpoint.connections.insert(connection);
 						endpoint.connections_mutex.unlock();
@@ -1003,15 +1083,50 @@ namespace Nequeo {
 					void connection_close(std::shared_ptr<Connection> connection, Endpoint& endpoint, int status, const std::string& reason) const 
 					{
 						timer_idle_cancel(connection);
+						timer_connect_cancel(connection);
+						timer_access_expiry_cancel(connection);
 
-						endpoint.connections_mutex.lock();
-						endpoint.connections.erase(connection);
-						endpoint.connections_mutex.unlock();
+						try
+						{
+							endpoint.connections_mutex.lock();
+							endpoint.connections.erase(connection);
+							endpoint.connections_mutex.unlock();
+						}
+						catch (const std::exception&) {}
 
 						// If on close function handler.
 						if (endpoint.onclose)
+						{
 							// Call on close handler.
 							endpoint.onclose(connection, status, reason);
+						}
+
+						// Shutdown and close the client socket context.
+						close_socket_connection(connection);
+					}
+
+					///	<summary>
+					///	Close the connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					/// <param name="endpoint">The connection endpoint.</param>
+					void connection_close(std::shared_ptr<Connection> connection, Endpoint& endpoint) const
+					{
+						timer_idle_cancel(connection);
+						timer_connect_cancel(connection);
+						timer_access_expiry_cancel(connection);
+
+						try
+						{
+							// Remove
+							endpoint.connections_mutex.lock();
+							endpoint.connections.erase(connection);
+							endpoint.connections_mutex.unlock();
+						}
+						catch (const std::exception&) {}
+
+						// Shutdown and close the client socket context.
+						close_socket_connection(connection);
 					}
 
 					///	<summary>
@@ -1023,10 +1138,16 @@ namespace Nequeo {
 					void connection_error(std::shared_ptr<Connection> connection, Endpoint& endpoint, const boost::system::error_code& ec) const 
 					{
 						timer_idle_cancel(connection);
+						timer_connect_cancel(connection);
+						timer_access_expiry_cancel(connection);
 
-						endpoint.connections_mutex.lock();
-						endpoint.connections.erase(connection);
-						endpoint.connections_mutex.unlock();
+						try
+						{
+							endpoint.connections_mutex.lock();
+							endpoint.connections.erase(connection);
+							endpoint.connections_mutex.unlock();
+						}
+						catch (const std::exception&) {}
 
 						// If on error function handler.
 						if (endpoint.onerror) 
@@ -1041,25 +1162,51 @@ namespace Nequeo {
 					///	Timer idle initialise connection.
 					///	</summary>
 					/// <param name="connection">The connection.</param>
-					void timer_idle_init(std::shared_ptr<Connection> connection) 
+					/// <param name="endpoint">The connection endpoint.</param>
+					void timer_idle_init(std::shared_ptr<Connection> connection, Endpoint& endpoint)
 					{
 						if (timeout_idle > 0) 
 						{
 							connection->timer_idle = std::unique_ptr<boost::asio::deadline_timer>(new boost::asio::deadline_timer(io_service));
 							connection->timer_idle->expires_from_now(boost::posix_time::seconds(static_cast<unsigned long>(timeout_idle)));
-							timer_idle_expired_function(connection);
+							timer_idle_expired_function(connection, endpoint);
 						}
+					}
+
+					///	<summary>
+					///	Timer idle initialise connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					/// <param name="endpoint">The connection endpoint.</param>
+					void timer_connect_init(std::shared_ptr<Connection> connection, Endpoint& endpoint)
+					{
+						if (timeout_connect > 0)
+						{
+							connection->timer_connect = std::unique_ptr<boost::asio::deadline_timer>(new boost::asio::deadline_timer(io_service));
+							connection->timer_connect->expires_from_now(boost::posix_time::seconds(static_cast<unsigned long>(timeout_connect)));
+							timer_connect_expired_function(connection, endpoint);
+						}
+					}
+
+					///	<summary>
+					///	Timer access expiry timeout.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					/// <param name="endpoint">The connection endpoint.</param>
+					void timer_access_expiry_init(std::shared_ptr<Connection> connection, Endpoint& endpoint)
+					{
+						connection->timer_access_expiry = std::unique_ptr<boost::asio::deadline_timer>(new boost::asio::deadline_timer(io_service));
 					}
 
 					///	<summary>
 					///	Timer idle reset connection.
 					///	</summary>
 					/// <param name="connection">The connection.</param>
-					void timer_idle_reset(std::shared_ptr<Connection> connection) const 
+					void timer_idle_reset(std::shared_ptr<Connection> connection) const
 					{
 						if (timeout_idle > 0 && connection->timer_idle->expires_from_now(boost::posix_time::seconds(static_cast<unsigned long>(timeout_idle))) > 0) 
 						{
-							timer_idle_expired_function(connection);
+							timer_idle_expired_function_reset(connection);
 						}
 					}
 
@@ -1069,25 +1216,163 @@ namespace Nequeo {
 					/// <param name="connection">The connection.</param>
 					void timer_idle_cancel(std::shared_ptr<Connection> connection) const 
 					{
-						if (timeout_idle > 0)
-							connection->timer_idle->cancel();
+						try
+						{
+							if (timeout_idle > 0)
+								connection->timer_idle->cancel();
+						}
+						catch (const std::exception&) {}
+					}
+
+					///	<summary>
+					///	Timer connect cancel connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					void timer_connect_cancel(std::shared_ptr<Connection> connection) const
+					{
+						try
+						{
+							if (!connection->timeout_connect_cancelled)
+								connection->timer_connect->cancel();
+						}
+						catch (const std::exception&) {}
+					}
+
+					///	<summary>
+					///	Timer access expiry cancel connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					void timer_access_expiry_cancel(std::shared_ptr<Connection> connection) const
+					{
+						try
+						{
+							if (!connection->timeout_access_expiry_started)
+								connection->timer_access_expiry->cancel();
+						}
+						catch (const std::exception&) {}	
 					}
 
 					///	<summary>
 					///	Timer idle expired function connection.
 					///	</summary>
 					/// <param name="connection">The connection.</param>
-					void timer_idle_expired_function(std::shared_ptr<Connection> connection) const 
+					void timer_idle_expired_function_reset(std::shared_ptr<Connection> connection) const
 					{
 						connection->timer_idle->async_wait([this, connection](const boost::system::error_code& ec)
+						{
+							// If no error
+							if (!ec)
+							{
+								// 1000=normal closure
+								send_close(connection, 1000, "idle timeout");
+							}
+						});
+					}
+
+					///	<summary>
+					///	Timer idle expired function connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					/// <param name="endpoint">The connection endpoint.</param>
+					void timer_idle_expired_function(std::shared_ptr<Connection> connection, Endpoint& endpoint) const
+					{
+						connection->timer_idle->async_wait([this, connection, &endpoint](const boost::system::error_code& ec)
 						{
 							// If no error
 							if (!ec) 
 							{
 								// 1000=normal closure
 								send_close(connection, 1000, "idle timeout");
+
+								try
+								{
+									endpoint.connections_mutex.lock();
+									endpoint.connections.erase(connection);
+									endpoint.connections_mutex.unlock();
+
+									// Shutdown and close the client socket context.
+									close_socket_connection(connection);
+								}
+								catch (const std::exception&) {}
 							}
 						});
+					}
+
+					///	<summary>
+					///	Timer connect expired function connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					/// <param name="endpoint">The connection endpoint.</param>
+					void timer_connect_expired_function(std::shared_ptr<Connection> connection, Endpoint& endpoint) const
+					{
+						connection->timer_connect->async_wait([this, connection, &endpoint](const boost::system::error_code& ec)
+						{
+							// If no error
+							if (!ec)
+							{
+								// 1000=normal closure
+								send_close(connection, 1000, "idle timeout");
+
+								try
+								{
+									endpoint.connections_mutex.lock();
+									endpoint.connections.erase(connection);
+									endpoint.connections_mutex.unlock();
+
+									// Shutdown and close the client socket context.
+									close_socket_connection(connection);
+								}
+								catch (const std::exception&) {}
+							}
+						});
+					}
+
+					///	<summary>
+					///	Timer access expired function connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					/// <param name="message">The message.</param>
+					/// <param name="endpoint">The connection endpoint.</param>
+					void timer_access_expired_function(std::shared_ptr<Connection> connection, std::shared_ptr<Message> message, Endpoint& endpoint) const
+					{
+						// If not init.
+						if (!connection->timeout_access_expiry_async_started)
+						{
+							connection->timeout_access_expiry_async_started = true;
+							connection->timer_access_expiry->async_wait([this, connection, message, &endpoint](const boost::system::error_code& ec)
+							{
+								// If no error
+								if (!ec)
+								{
+									try
+									{
+										// If valid.
+										if (connection != nullptr && message != nullptr && endpoint.onaccessexpiry)
+										{
+											// Send access expiry.
+											endpoint.onaccessexpiry(connection, message);
+										}
+									}
+									catch (const std::exception&) {}
+								}
+							});
+						}
+					}
+
+					///	<summary>
+					///	Close the current socket connection.
+					///	</summary>
+					/// <param name="connection">The connection.</param>
+					void close_socket_connection(std::shared_ptr<Connection> connection) const
+					{
+						try
+						{
+							// Shutdown and close the client socket context.
+							connection->socket->lowest_layer().shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+							connection->socket->lowest_layer().close();
+							connection = nullptr;
+						}
+						catch (const std::exception&) {}
 					}
 				};
 
@@ -1115,10 +1400,12 @@ namespace Nequeo {
 					/// <param name="port">The port number the server should listen on.</param>
 					/// <param name="num_threads">The number of threads to use (set to 1 is more than statisfactory).</param>
 					/// <param name="timeout_request">The request time out.</param>
-					/// <param name="timeout_content">The send and receive time out.</param>
+					/// <param name="timeout_idle">The send and receive time out (600 seconds = 10 minutes).</param>
+					/// <param name="timeout_connect">The time out (seconds) to connect.</param>
 					/// <param name="ipv">The ip version.</param>
-					SocketServer(unsigned short port, size_t num_threads = 1, IPVersionType ipv = IPVersionType::IPv4, size_t timeout_request = 5, size_t timeout_idle = 0) :
-						SocketServerBase<WS>::SocketServerBase(port, num_threads, timeout_request, timeout_idle, ipv) {};
+					SocketServer(unsigned short port, size_t num_threads = 1, IPVersionType ipv = IPVersionType::IPv4, 
+						size_t timeout_request = 5, size_t timeout_idle = 0, size_t timeout_connect = 0) :
+						SocketServerBase<WS>::SocketServerBase(port, num_threads, timeout_request, timeout_idle, timeout_connect, ipv) {};
 
 				protected:
 					///	<summary>
@@ -1145,10 +1432,26 @@ namespace Nequeo {
 
 								// Create the web request and web context.
 								auto webRequest = std::make_shared<WebRequest>();
-								connection->webContext = std::make_shared<WebContext>(webRequest);
+								auto webMessage = std::make_shared<WebMessage>();
+
+								// Assign the connection.
+								connection->socketServer = this;
+								webMessage->connectionHandler = std::static_pointer_cast<void>(connection);
+								connection->webContext = std::make_shared<WebContext>(webRequest, webMessage);
 
 								// Read the request data from the client.
 								read_handshake(connection);
+							}
+							else
+							{
+								try
+								{
+									// Shutdown and close the client socket context.
+									connection->socket->lowest_layer().shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+									connection->socket->lowest_layer().close();
+									connection->webContext = nullptr;
+								}
+								catch (const std::exception&) {}
 							}
 						});
 					}

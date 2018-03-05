@@ -1,8 +1,8 @@
 /* Company :       Nequeo Pty Ltd, http://www.nequeo.com.au/
 *  Copyright :     Copyright © Nequeo Pty Ltd 2016 http://www.nequeo.com.au/
 *
-*  File :          Global.h
-*  Purpose :       Global.
+*  File :          WebContextExtender.cpp
+*  Purpose :       WebSocket web context class.
 *
 */
 
@@ -33,12 +33,62 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "stdafx.h"
 
-#ifdef _USRDLL
-	#ifdef NEQUEO_WEBSOCKET_SERVER_BOOST_EXPORTS
-		#define EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API __declspec(dllexport) 
-	#else
-		#define EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API __declspec(dllimport) 
-	#endif
-#else
-	#define EXPORT_NEQUEO_WEBSOCKET_BOOST_SERVER_API
-#endif
+#include <iostream>
+#include <boost/asio.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+
+namespace Nequeo {
+	namespace Net {
+		namespace WebSocket
+		{
+			/// <summary>
+			/// Web context extender.
+			/// </summary>
+			class WebContextExtender
+			{
+			public:
+				/// <summary>
+				/// Web context extender.
+				/// </summary>
+				WebContextExtender() :
+					_disposed(false), _initialised(false), _hasAccessExpiryBeenInit(false)
+				{
+				}
+
+				/// <summary>
+				/// Web context extender.
+				/// </summary>
+				~WebContextExtender()
+				{
+					if (!_disposed)
+					{
+						_disposed = true;
+						_initialised = false;
+						_hasAccessExpiryBeenInit = false;
+					}
+				}
+
+				///	<summary>
+				///	Init the access expiry.
+				///	</summary>
+				void InitAccessExpiry()
+				{
+					_hasAccessExpiryBeenInit = true;
+				}
+
+				///	<summary>
+				///	Has the access expiry been set.
+				///	</summary>
+				bool HasAccessExpiryBeenInit()
+				{
+					return _hasAccessExpiryBeenInit;
+				}
+			
+			private:
+				bool _disposed;
+				bool _initialised;
+				bool _hasAccessExpiryBeenInit;
+			};
+		}
+	}
+}

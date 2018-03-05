@@ -164,6 +164,96 @@ namespace Nequeo {
 					_privateKeyFile = privateKeyFile;
 				}
 
+				/// <summary>
+				/// Get the private key password.
+				/// </summary>
+				/// <return>The private key password.</return>
+				inline const std::string& GetPrivateKeyPassword() const
+				{
+					return _privateKeyPassword;
+				}
+
+				/// <summary>
+				/// Set the private key password.
+				/// </summary>
+				/// <param name="privateKeyPassword">The private key password.</param>
+				inline void SetPrivateKeyPassword(const std::string& privateKeyPassword)
+				{
+					_privateKeyPassword = privateKeyPassword;
+				}
+
+				/// <summary>
+				/// Get the request timeout.
+				/// </summary>
+				/// <return>The request timeout.</return>
+				inline size_t GetTimeoutRequest() const
+				{
+					return _timeoutRequest;
+				}
+
+				/// <summary>
+				/// Set the request timeout.
+				/// </summary>
+				/// <param name="timeoutRequest">The request timeout.</param>
+				inline void SetTimeoutRequest(size_t timeoutRequest)
+				{
+					_timeoutRequest = timeoutRequest;
+				}
+
+				/// <summary>
+				/// Get the request idle.
+				/// </summary>
+				/// <return>The request idle.</return>
+				inline size_t GetTimeoutIdle() const
+				{
+					return _timeoutIdle;
+				}
+
+				/// <summary>
+				/// Set the request idle.
+				/// </summary>
+				/// <param name="timeoutIdle">The request idle.</param>
+				inline void SetTimeoutIdle(size_t timeoutIdle)
+				{
+					_timeoutIdle = timeoutIdle;
+				}
+
+				/// <summary>
+				/// Get the request connect.
+				/// </summary>
+				/// <return>The request connect.</return>
+				inline size_t GetTimeoutConnect() const
+				{
+					return _timeoutConnect;
+				}
+
+				/// <summary>
+				/// Set the request connect.
+				/// </summary>
+				/// <param name="timeoutConnect">The request connect.</param>
+				inline void SetTimeoutConnect(size_t timeoutConnect)
+				{
+					_timeoutConnect = timeoutConnect;
+				}
+
+				/// <summary>
+				/// Get the number threads to use.
+				/// </summary>
+				/// <return>The number threads.</return>
+				inline size_t GetNumberOfThreads() const
+				{
+					return _numberOfThreads;
+				}
+
+				/// <summary>
+				/// Set the number threads to use.
+				/// </summary>
+				/// <param name="numberOfThreads">The number threads.</param>
+				inline void SetNumberOfThreads(size_t numberOfThreads)
+				{
+					_numberOfThreads = numberOfThreads;
+				}
+
 			private:
 				bool _disposed;
 
@@ -173,6 +263,11 @@ namespace Nequeo {
 				std::string _endpoint;
 				std::string _publicKeyFile;
 				std::string _privateKeyFile;
+				std::string _privateKeyPassword;
+				size_t _timeoutRequest;
+				size_t _timeoutIdle;
+				size_t _timeoutConnect;
+				size_t _numberOfThreads;
 			};
 		}
 	}

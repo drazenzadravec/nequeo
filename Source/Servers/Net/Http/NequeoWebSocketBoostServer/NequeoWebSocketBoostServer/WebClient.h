@@ -115,7 +115,7 @@ namespace Nequeo {
 				/// <param name="messageType">The message type.</param>
 				/// <param name="length">The length of the message.</param>
 				/// <param name="message">The message.</param>
-				std::function<void(MessageType, size_t, std::shared_ptr<Message>&)> OnMessage;
+				std::function<void(MessageType, size_t, std::shared_ptr<WebMessage>&)> OnMessage;
 
 				/// <summary>
 				/// On open connection.
@@ -150,7 +150,6 @@ namespace Nequeo {
 				std::shared_ptr<Nequeo::Threading::Executor> _executor;
 
 				void CreateNetContext();
-
 				void RequestAsyncInternal(const ResponseHandler& handler, const std::shared_ptr<const Nequeo::AsyncCallerContext>& context = nullptr);
 			};
 		}
