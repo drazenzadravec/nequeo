@@ -7,30 +7,50 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NequeoWebSocketBoostServer"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestWebSocketServer", "TestWebSocketServer\TestWebSocketServer.vcxproj", "{DAAD9571-E241-4978-BD01-CAAABF6680CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppWebSocket", "WebAppWebSocket\WebAppWebSocket.csproj", "{7B3F5573-3D69-4A6D-B38F-2D9560C23288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x64.ActiveCfg = Debug|x64
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x64.Build.0 = Debug|x64
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x86.ActiveCfg = Debug|Win32
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Debug|x86.Build.0 = Debug|Win32
+		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|Any CPU.ActiveCfg = Release|Win32
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x64.ActiveCfg = Release|x64
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x64.Build.0 = Release|x64
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x86.ActiveCfg = Release|Win32
 		{04A0A295-09A6-4891-8953-8DD569ADD78C}.Release|x86.Build.0 = Release|Win32
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x64.ActiveCfg = Debug|x64
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x64.Build.0 = Debug|x64
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x86.ActiveCfg = Debug|Win32
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Debug|x86.Build.0 = Debug|Win32
+		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|Any CPU.ActiveCfg = Release|Win32
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x64.ActiveCfg = Release|x64
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x64.Build.0 = Release|x64
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x86.ActiveCfg = Release|Win32
 		{DAAD9571-E241-4978-BD01-CAAABF6680CD}.Release|x86.Build.0 = Release|Win32
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Release|x64.Build.0 = Release|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B3F5573-3D69-4A6D-B38F-2D9560C23288}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
