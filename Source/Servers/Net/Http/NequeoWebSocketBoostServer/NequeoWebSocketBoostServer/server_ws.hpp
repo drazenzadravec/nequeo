@@ -875,10 +875,14 @@ namespace Nequeo {
 							// If no error.
 							if (!ec) 
 							{
+								// If no bytes are transfered but this is executed then
+								// a connection has been forced closed at some point
+								// and now is still alive and maybe looping causing
+								// CPU usage.
 								if (bytes_transferred == 0) 
 								{ 
-									//TODO: why does this happen sometimes?
-									read_message(connection, read_buffer, endpoint);
+									// At this point we should close the connection.
+									connection_error(connection, endpoint, ec);
 									return;
 								}
 
