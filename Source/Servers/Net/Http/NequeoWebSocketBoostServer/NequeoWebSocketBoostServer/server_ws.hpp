@@ -882,7 +882,7 @@ namespace Nequeo {
 								if (bytes_transferred == 0) 
 								{ 
 									// At this point we should close the connection.
-									connection_error(connection, endpoint, ec);
+									connection_close(connection, endpoint);
 									return;
 								}
 
