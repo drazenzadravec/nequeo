@@ -203,6 +203,7 @@ void WebSocketServer::OnWebSocketContext(const WebContext* context)
 		internalWebContext->SetBroadcast(false);
 		internalWebContext->SetBroadcastAppID(false);
 		internalWebContext->SetHasAccess(false);
+		internalWebContext->SetClientToken("");
 		
 		// On close.
 		internalWebContext->OnClose = [internalWebContext](int status, const std::string& reason)
@@ -467,6 +468,8 @@ void WebSocketServer::OnWebSocketContext(const WebContext* context)
 										std::string authValueToken(data.accessToken);
 										std::string authValue = authValueBearer + authValueToken;
 										request.AddHeader("Authorization", authValue);
+										request.AddHeader("UniqueID", internalWebContext->GetUniqueID());
+										request.AddHeader("ApplicationID", internalWebContext->GetApplicationID());
 
 										// Open and send the request.
 										client.Connect();
@@ -650,16 +653,17 @@ void WebSocketServer::OnWebSocketContext(const WebContext* context)
 										std::string clientLocationRequestURL = _clientLocationRequestURL;
 										std::string clientToken = internalWebContext->GetClientToken();
 										std::string contactUniqueID = data.contactUniqueID;
+										std::string contactApplicationID = data.contactApplicationID;
 
 										// Get the data and sent.
 										std::string broadcast = json.WriteJson(messageText, broadcastData);
 										_executor->Submit([this, broadcast, udpBroadcastPort, udpBroadcastAddress, udpBroadcastMask, 
 											udpBroadcastEnabled, clientLocationRequestEnabled, clientLocationRequestURL, clientToken,
-											contactUniqueID]
+											contactUniqueID, contactApplicationID]
 										{ 
 											this->BroadcastDataAsync(broadcast, udpBroadcastPort, udpBroadcastAddress, udpBroadcastMask, 
 												udpBroadcastEnabled, clientLocationRequestEnabled, clientLocationRequestURL, clientToken,
-												contactUniqueID);
+												contactUniqueID, contactApplicationID);
 										});
 									}
 								}
@@ -715,9 +719,10 @@ void WebSocketServer::OnWebSocketContext(const WebContext* context)
 /// <param name="clientLocationRequestURL">The client location request URL.</param>
 /// <param name="clientToken">The client loken.</param>
 /// <param name="contactUniqueID">The contact uniqueID.</param>
+/// <param name="contactApplicationID">The contact applicationID.</param>
 void WebSocketServer::BroadcastDataAsync(const std::string& data, unsigned int port, const std::string& address, const std::string& mask, 
 	bool udpBroadcastEnabled, bool clientLocationRequestEnabled, const std::string& clientLocationRequestURL, const std::string& clientToken,
-	const std::string& contactUniqueID)
+	const std::string& contactUniqueID, const std::string& contactApplicationID)
 {
 	try
 	{
@@ -759,6 +764,7 @@ void WebSocketServer::BroadcastDataAsync(const std::string& data, unsigned int p
 				std::string authValue = authValueBearer + authValueToken;
 				request.AddHeader("Authorization", authValue);
 				request.AddHeader("ContactUniqueID", contactUniqueID);
+				request.AddHeader("ContactApplicationID", contactApplicationID);
 
 				// Open and send the request.
 				client.Connect();

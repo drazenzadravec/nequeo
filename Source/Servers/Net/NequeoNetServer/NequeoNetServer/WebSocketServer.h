@@ -144,7 +144,7 @@ namespace Nequeo {
 				void BroadcastDataAsync(
 					const std::string& data, unsigned int port, const std::string& address, const std::string& mask, 
 					bool udpBroadcastEnabled, bool clientLocationRequestEnabled, const std::string& clientLocationRequestURL,
-					const std::string& clientToken, const std::string& contactUniqueID);
+					const std::string& clientToken, const std::string& contactUniqueID, const std::string& contactApplicationID);
 
 			private:
 				bool _disposed;
