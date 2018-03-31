@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebRTCSocket.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AccessTokenVerifyURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://10.0.0.126/webrtcsocket/accessConfig.json</Value>
+    </Setting>
+    <Setting Name="ClientLocationRequestURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://10.0.0.126/webrtcsocket/clientConfig.json</Value>
+    </Setting>
+    <Setting Name="ClientLocationRequestEnabled" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UdpBroadcastEnabled" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UdpBroadcastPort" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="UdpBroadcastAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10.0.0.1</Value>
+    </Setting>
+    <Setting Name="UdpBroadcastMask" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">255.255.255.0</Value>
+    </Setting>
+    <Setting Name="UdpBroadcastCallbackPort" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ClientTimeoutConnect" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
