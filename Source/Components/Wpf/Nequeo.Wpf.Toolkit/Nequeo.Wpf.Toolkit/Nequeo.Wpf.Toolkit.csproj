@@ -74,6 +74,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AutoCompleteTextBox\Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="BusyIndicator\Themes\Aero2.NormalColor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -396,6 +400,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCompleteTextBox\AutoCompleteTextBox.cs" />
+    <Compile Include="AutoCompleteTextBox\BindingEvaluator.cs" />
+    <Compile Include="AutoCompleteTextBox\Enumerations.cs" />
+    <Compile Include="AutoCompleteTextBox\ISuggestionProvider.cs" />
+    <Compile Include="AutoCompleteTextBox\SelectionAdapter.cs" />
+    <Compile Include="AutoCompleteTextBox\SuggestionProvider.cs" />
     <Compile Include="AutoSelectTextBox\Implementation\AutoSelectBehaviorEnum.cs" />
     <Compile Include="AutoSelectTextBox\Implementation\AutoSelectTextBox.cs" />
     <Compile Include="AutoSelectTextBox\Implementation\QueryMoveFocusEventArgs.cs" />
