@@ -756,13 +756,28 @@ namespace Nequeo.Net.Sockets
                 if (!_isClosed)
                     return;
 
-                // Get host related information.
-                if (!String.IsNullOrEmpty(_hostNameOrAddress))
-                    _hostEntry = System.Net.Dns.GetHostEntry(_hostNameOrAddress);
+                // Is the host name an IP Address.
+                IPAddress isIPAddress = null;
+                bool ret = IPAddress.TryParse(_hostNameOrAddress, out isIPAddress);
+                if (!ret)
+                {
+                    // Get host related information.
+                    if (!String.IsNullOrEmpty(_hostNameOrAddress))
+                        _hostEntry = System.Net.Dns.GetHostEntry(_hostNameOrAddress);
+                    else
+                    {
+                        _hostNameOrAddress = _address.ToString();
+                        _hostEntry = System.Net.Dns.GetHostEntry(_address);
+                    }
+                }
                 else
                 {
-                    _hostNameOrAddress = _address.ToString();
-                    _hostEntry = System.Net.Dns.GetHostEntry(_address);
+                    // Could not find host.
+                    _hostEntry = new IPHostEntry
+                    {
+                        HostName = _hostNameOrAddress,
+                        AddressList = new IPAddress[] { IPAddress.Parse(_hostNameOrAddress) }
+                    };
                 }
 
                 // Loop through the AddressList to obtain the supported 
